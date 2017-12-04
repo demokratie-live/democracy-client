@@ -1,22 +1,30 @@
 {
-	"name": "democracyclient",
-	"version": "0.0.1",
-	"private": true,
-	"scripts": {
-		"start": "node node_modules/react-native/local-cli/cli.js start",
-		"test": "jest"
-	},
-	"dependencies": {
-		"react": "16.0.0",
-		"react-native": "0.50.4"
-	},
-	"devDependencies": {
-		"babel-jest": "21.2.0",
-		"babel-preset-react-native": "4.0.0",
-		"jest": "21.2.1",
-		"react-test-renderer": "16.0.0"
-	},
-	"jest": {
-		"preset": "react-native"
-	}
+  "name": "democracyclient",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest",
+    "start:ios": "react-native run-ios",
+    "start:android": "react-native run-android",
+    "start:web": "react-scripts start",
+    "build:web": "react-scripts build",
+    "eject:web": "react-scripts eject"
+  },
+  "dependencies": {
+    "react": "16.0.0",
+    "react-dom": "^16.2.0",
+    "react-native": "0.50.4",
+    "react-native-web": "^0.1.16",
+    "react-scripts": "1.0.17"
+  },
+  "devDependencies": {
+    "babel-jest": "21.2.0",
+    "babel-preset-react-native": "4.0.0",
+    "jest": "21.2.1",
+    "react-test-renderer": "16.0.0"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
 }
