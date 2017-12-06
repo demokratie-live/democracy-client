@@ -18,7 +18,7 @@ install:
 
 script:
   - yarn eslint
-  - yarn start:web
+  - yarn build:web
   - yarn start:ios
   - yarn start:android
 
