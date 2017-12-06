@@ -19,7 +19,7 @@ install:
 script:
   - yarn eslint
   - yarn build:web
-  - cd android && gradlew assembleRelease
+  - cd android && chmod +x ./gradlew && ./gradlew assembleRelease
   - yarn start:ios
 
 after_script:
