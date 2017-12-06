@@ -4,8 +4,8 @@ node_js:
 
 env:
   - CI = false
-  global:
-    - NODE_VERSION=stable
+global:
+  - NODE_VERSION=stable
     
 
 before_install:
