@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from "react";
-import { Platform, StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, Text, View, Image } from "react-native";
 
 console.log(Platform.OS);
 
@@ -30,6 +30,10 @@ export default class App extends Component<{}> {
   render() {
     return (
       <View style={styles.container}>
+        <Image
+          source={require("./assets/images/logo.png")}
+          style={styles.image}
+        />
         <Text style={styles.welcome}>{welcomePlatform()}</Text>
         <Text style={styles.instructions}>To get started, edit App.js</Text>
         <Text style={styles.instructions}>{instructions}</Text>
@@ -54,5 +58,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#333333",
     marginBottom: 5
+  },
+  image: {
+    height: 40,
+    marginVertical: 10,
+    width: 40
   }
 });
