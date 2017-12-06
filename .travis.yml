@@ -19,8 +19,8 @@ install:
 script:
   - yarn eslint
   - yarn build:web
+  - cd android && ./gradlew assembleRelease
   - yarn start:ios
-  - yarn start:android
 
 after_script:
   - echo "BUILD FINISHED"
