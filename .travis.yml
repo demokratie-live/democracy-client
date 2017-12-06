@@ -1,11 +1,10 @@
 language: android
 before_install:
-- nvm install 6
+#- nvm install 6
 - node --version
 install:
-#- npm install
 - yarn install
-android: #1.3
+android:
   components:
   - build-tools-23.0.1
   - android-23
@@ -24,41 +23,7 @@ deploy:
   #  secure: XXX=
   file: $TRAVIS_BUILD_DIR/android/app/build/outputs/apk/app-release-unsigned.apk
   on:
-    repo: peterp/react-native-build-android-with-travis
+    repo: demokratie-live/democracy-client
     tags: true
 after_script:
   - echo "BUILD FINISHED"
-
-#language: node_js
-#node_js:
-#  - node
-#
-#env:
-#  - CI = false
-#global:
-#  - NODE_VERSION=stable
-#    
-#android: #1.3
-#  components:
-#  - build-tools-23.0.1
-#  - android-23
-#  - extra-android-m2repository
-#  - extra-google-google_play_services
-#  - extra-google-m2repository
-#  - addon-google_apis-google-16
-#before_install:
-#  - set -e
-#  - curl -o- -L https://yarnpkg.com/install.sh | bash
-#  - export PATH=$HOME/.yarn/bin:$PATH
-#  
-#install:
-#  - yarn install
-#
-#script:
-#  - yarn eslint
-#  - yarn build:web
-#  - cd android && chmod +x ./gradlew && ./gradlew assembleRelease
-#  - yarn start:ios
-#
-#after_script:
-#  - echo "BUILD FINISHED"
