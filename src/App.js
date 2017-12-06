@@ -4,9 +4,11 @@
  * @flow
  */
 
-import React, { Component } from "react";
-import { Platform, StyleSheet, Text, View, Image } from "react-native";
-import styled from "styled-components/native";
+import React from 'react';
+import { Platform } from 'react-native';
+import styled from 'styled-components/native';
+
+const logo = require('./assets/images/democracy-logo.png');
 
 const Container = styled.View`
   flex: 1;
@@ -28,31 +30,25 @@ const InstructionText = styled.Text`
 `;
 
 const instructions = Platform.select({
-  ios: `Press Cmd+R to reload,\nCmd+D or shake for dev menu`,
-  android:
-    "Double tap R on your keyboard to reload,\n" +
-    "Shake or press menu button for dev menu",
-  web: "Live Realoading is enabled"
+  ios: 'Press Cmd+R to reload,\nCmd+D or shake for dev menu',
+  android: 'Double tap R on your keyboard to reload,\nShake or press menu button for dev menu',
+  web: 'Live Realoading is enabled',
 });
 
 const welcomePlatform = () => {
   switch (Platform.OS) {
-    case "web":
-      return `Welcome to React for Web!`;
+    case 'web':
+      return 'Welcome to React for Web!';
     default:
-      return `Welcome to React Native!`;
+      return 'Welcome to React Native!';
   }
 };
 
-export default class App extends Component {
-  render() {
-    return (
-      <Container>
-        <Logo source={require("./assets/images/democracy-logo.png")} />
-        <InstructionText>{welcomePlatform()}</InstructionText>
-        <InstructionText>To get started, edit App.js</InstructionText>
-        <InstructionText>{instructions}</InstructionText>
-      </Container>
-    );
-  }
-}
+export default () => (
+  <Container>
+    <Logo source={logo} />
+    <InstructionText>{welcomePlatform()}</InstructionText>
+    <InstructionText>To get started, edit App.js</InstructionText>
+    <InstructionText>{instructions}</InstructionText>
+  </Container>
+);
