@@ -1,0 +1,26 @@
+language: node_js
+node_js:
+  - node
+
+env:
+  - CI = false
+  global:
+    - NODE_VERSION=stable
+    
+
+before_install:
+  - set -e
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
+  - export PATH=$HOME/.yarn/bin:$PATH
+  
+install:
+  - yarn install
+
+script:
+  - yarn eslint
+  - yarn start:web
+  - yarn start:ios
+  - yarn start:android
+
+after_script:
+  - echo "BUILD FINISHED"
