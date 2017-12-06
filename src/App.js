@@ -12,13 +12,13 @@ const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  background-color: #F5FCFF;
+  background-color: #f5fcff;
 `;
 
 const Logo = styled.Image`
-  height: 40;
+  height: 196;
   margin-vertical: 10;
-  width: 40;
+  width: 196;
 `;
 
 const InstructionText = styled.Text`
@@ -48,7 +48,7 @@ export default class App extends Component {
   render() {
     return (
       <Container>
-        <Logo source={require("./assets/images/logo.png")} />
+        <Logo source={require("./assets/images/democracy-logo.png")} />
         <InstructionText>{welcomePlatform()}</InstructionText>
         <InstructionText>To get started, edit App.js</InstructionText>
         <InstructionText>{instructions}</InstructionText>
