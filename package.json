@@ -13,9 +13,12 @@
     "test:eslint": "eslint ./src"
   },
   "dependencies": {
+    "prop-types": "^15.6.0",
     "react": "16.0.0",
     "react-dom": "^16.2.0",
     "react-native": "0.50.4",
+    "react-native-elements": "^0.18.4",
+    "react-native-vector-icons": "^4.4.2",
     "react-native-web": "^0.1.16",
     "react-scripts": "1.0.17",
     "styled-components": "^2.2.4"
