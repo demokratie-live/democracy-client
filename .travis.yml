@@ -27,6 +27,7 @@ matrix:
         # android
         -   os: linux
             language: android
+            jdk: oraclejdk8
             install:
                 - nvm install 8
                 #- node --version
