@@ -29,6 +29,7 @@ matrix:
                 - mkdir "$ANDROID_HOME/licenses" || true
                 - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
                 - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
+                - android update sdk --no-ui --filter build-tools-26.0.1,android-26,extra-android-m2repository
             install:
                 - nvm install 8
                 - yarn --version
