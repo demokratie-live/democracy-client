@@ -11,8 +11,6 @@ import List from './screens/List';
 
 const Container = styled.View`
   flex: 1;
-  justify-content: center;
-  align-items: center;
   background-color: #f5fcff;
 `;
 
