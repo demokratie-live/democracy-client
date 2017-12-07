@@ -48,7 +48,7 @@ matrix:
                     - 'android-sdk-license-.+'
                     - 'google-gdk-license-.+'
             script:
-                - chmod +x ./android/gradlew && yarn build:android
+                - yarn build:android
             #deploy:
             #   skip_cleanup: true
             #   provider: releases
