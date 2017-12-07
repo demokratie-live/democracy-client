@@ -24,6 +24,11 @@ matrix:
         -   os: linux
             language: android
             jdk: oraclejdk8
+            before_install:
+                - echo "$ANDROID_HOME"
+                - mkdir "$ANDROID_HOME/licenses" || true
+                - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
+                - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
             install:
                 - nvm install 8
                 - yarn --version
@@ -46,15 +51,15 @@ matrix:
                     - google-gdk-license-.+
             script:
                 - chmod +x ./android/gradlew && yarn build:android
-            deploy:
-            skip_cleanup: true
-            provider: releases
-            #api_key:
-            #  secure: XXX=
-            file: $TRAVIS_BUILD_DIR/android/app/build/outputs/apk/app-release-unsigned.apk
-            on:
-                repo: demokratie-live/democracy-client
-                tags: true
+            #deploy:
+            #   skip_cleanup: true
+            #   provider: releases
+            #   api_key:
+            #       secure: XXX=
+            #   file: $TRAVIS_BUILD_DIR/android/app/build/outputs/apk/app-release-unsigned.apk
+            #   on:
+            #       repo: demokratie-live/democracy-client
+            #       tags: true
         # ios
         #-   os: osx
         #    osx_image: xcode9
