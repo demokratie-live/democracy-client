@@ -8,8 +8,7 @@ import React from 'react';
 import { Platform } from 'react-native';
 import styled from 'styled-components/native';
 
-const logo = require("./assets/images/democracy-logo.png");
-var x = y;
+const logo = require('./assets/images/democracy-logo.png');
 
 const Container = styled.View`
   flex: 1;
