@@ -40,7 +40,7 @@ matrix:
                     - extra-google-google_play_services
                     - extra-google-m2repository
                     - addon-google_apis-google-16
-                    # license
+                licenses:
                     - android-sdk-preview-license-.+
                     - android-sdk-license-.+
                     - google-gdk-license-.+
