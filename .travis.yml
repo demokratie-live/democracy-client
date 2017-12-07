@@ -3,7 +3,7 @@ matrix:
         # test
         -   language: node_js
             install:
-                - nvm install node
+                - nvm install 8
                 - node --version
                 - yarn --version
                 - yarn install
@@ -12,7 +12,7 @@ matrix:
         # web
         -   language: node_js
             install:
-                - nvm install node
+                - nvm install 8
                 - node --version
                 - yarn --version
                 - yarn install
@@ -22,7 +22,7 @@ matrix:
         -   language: android
             os: linux
             install:
-                - nvm install node
+                - nvm install 8
                 - node --version
                 - yarn --version
                 - yarn install
@@ -50,7 +50,7 @@ matrix:
             os: osx
             #osx_image: xcode8.2
             install:
-                - nvm install node
+                - nvm install 8
                 - node --version
                 - yarn --version
                 - yarn install
