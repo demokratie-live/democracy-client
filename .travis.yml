@@ -24,6 +24,8 @@ matrix:
         -   os: linux
             language: android
             jdk: oraclejdk8
+            before_install:
+                - echo y | android update sdk --no-ui --filter build-tools-26.0.1,android-26,extra-android-m2repository
             install:
                 - nvm install 8
                 - yarn --version
@@ -34,27 +36,28 @@ matrix:
                     - platform-tools
                     # android 23
                     - build-tools-23.0.1
+                    - build-tools-26.0.1
                     - android-23
                     # extra
                     - extra-android-m2repository
                     - extra-google-google_play_services
                     - extra-google-m2repository
                     - addon-google_apis-google-16
-                    # license
-                    - android-sdk-preview-license-.+
-                    - android-sdk-license-.+
-                    - google-gdk-license-.+
+                licenses:
+                    - 'android-sdk-preview-license-.+'
+                    - 'android-sdk-license-.+'
+                    - 'google-gdk-license-.+'
             script:
                 - chmod +x ./android/gradlew && yarn build:android
-            deploy:
-            skip_cleanup: true
-            provider: releases
-            #api_key:
-            #  secure: XXX=
-            file: $TRAVIS_BUILD_DIR/android/app/build/outputs/apk/app-release-unsigned.apk
-            on:
-                repo: demokratie-live/democracy-client
-                tags: true
+            #deploy:
+            #   skip_cleanup: true
+            #   provider: releases
+            #   api_key:
+            #       secure: XXX=
+            #   file: $TRAVIS_BUILD_DIR/android/app/build/outputs/apk/app-release-unsigned.apk
+            #   on:
+            #       repo: demokratie-live/democracy-client
+            #       tags: true
         # ios
         #-   os: osx
         #    osx_image: xcode9
