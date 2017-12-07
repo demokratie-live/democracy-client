@@ -6,8 +6,6 @@ matrix:
             node_js:
                 - 8
             install:
-                #- nvm install 7
-                #- node --version
                 - yarn --version
                 - yarn install
             script:
@@ -18,8 +16,6 @@ matrix:
             node_js:
                 - 8
             install:
-                # - nvm install 8
-                # - node --version
                 - yarn --version
                 - yarn install
             script:
@@ -30,7 +26,6 @@ matrix:
             jdk: oraclejdk8
             install:
                 - nvm install 8
-                #- node --version
                 - yarn --version
                 - yarn install
             android:
@@ -61,18 +56,17 @@ matrix:
                 repo: demokratie-live/democracy-client
                 tags: true
         # ios
-        -   os: osx
-            osx_image: xcode9
-            language: objective-c
-            install:
-                - nvm install 8
-                #- node --version
-                - yarn --version
-                - yarn install
-            xcode_project: ios/democracyclient.xcodeproj
-            xcode_scheme: ios/democracyclientTests
-            script:
-                - yarn build:ios
-                #- xctool run-tests -scheme PepperoniAppTemplate -sdk iphonesimulator -launch-timeout 90  ONLY_ACTIVE_ARCH=NO
+        #-   os: osx
+        #    osx_image: xcode9
+        #    language: objective-c
+        #    install:
+        #        - nvm install 8
+        #        - yarn --version
+        #        - yarn install
+        #    xcode_project: ios/democracyclient.xcodeproj
+        #    xcode_scheme: ios/democracyclientTests
+        #    script:
+        #        - yarn build:ios
+        #        #- xctool run-tests -scheme PepperoniAppTemplate -sdk iphonesimulator -launch-timeout 90  ONLY_ACTIVE_ARCH=NO
 after_script:
   - echo "BUILD FINISHED"
