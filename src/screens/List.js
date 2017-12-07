@@ -7,10 +7,7 @@ import Row from '../components/List/Row';
 import listData from '../data/list.json';
 
 export default class ListScreen extends Component {
-  renderListData = ({ item }) => {
-    const { title, subtitle } = item;
-    return <Row title={title} subtitle={subtitle} />;
-  };
+  renderListData = ({ item }) => () => <Row {...item} />;
 
   render() {
     return (
@@ -18,7 +15,7 @@ export default class ListScreen extends Component {
         <FlatList
           data={listData}
           keyExtractor={item => item.id}
-          renderItem={({ item: { title } }) => <ListItem title={title} />}
+          renderItem={props => <ListItem component={this.renderListData(props)} />}
         />
       </List>
     );
