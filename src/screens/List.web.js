@@ -12,10 +12,10 @@ const RowWrapper = styled.li``;
 export default class ListScreen extends Component {
   renderListData = () =>
     listData.map((item) => {
-      const { title, subtitle } = item;
+      const { id } = item;
       return (
-        <RowWrapper>
-          <Row title={title} subtitle={subtitle} />
+        <RowWrapper key={id}>
+          <Row {...item} />
         </RowWrapper>
       );
     });
