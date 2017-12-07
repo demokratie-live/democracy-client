@@ -8,7 +8,7 @@ matrix:
             install:
                 #- nvm install 7
                 #- node --version
-                - yarn -version
+                - yarn --version
                 - yarn install
             script:
                 - yarn test:eslint
@@ -20,7 +20,7 @@ matrix:
             install:
                 # - nvm install 8
                 # - node --version
-                - yarn -version
+                - yarn --version
                 - yarn install
             script:
                 - yarn build:web
@@ -30,16 +30,24 @@ matrix:
             install:
                 - nvm install 8
                 #- node --version
-                - yarn -version
+                - yarn --version
                 - yarn install
             android:
                 components:
+                    - tools
+                    - platform-tools
+                    # android 23
                     - build-tools-23.0.1
                     - android-23
+                    # extra
                     - extra-android-m2repository
                     - extra-google-google_play_services
                     - extra-google-m2repository
                     - addon-google_apis-google-16
+                    # license
+                    - android-sdk-preview-license-.+
+                    - android-sdk-license-.+
+                    - google-gdk-license-.+
             script:
                 - chmod +x ./android/gradlew && yarn build:android
             deploy:
@@ -58,7 +66,7 @@ matrix:
             install:
                 - nvm install 8
                 #- node --version
-                - yarn -version
+                - yarn --version
                 - yarn install
             xcode_project: ios/democracyclient.xcodeproj
             xcode_scheme: ios/democracyclientTests
