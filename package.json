@@ -10,6 +10,7 @@
 	"build:ios": "cd ios && xcodebuild -scheme democracyclient -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO",
 	"build:android": "cd android && ./gradlew assembleRelease",
     "build:web": "react-scripts build",
+	"clean:android": "cd android && ./gradlew clean",
     "test:eslint": "eslint ./src"
   },
   "dependencies": {
