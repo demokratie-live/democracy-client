@@ -1,15 +1,26 @@
-language: node_js
-install:
-    - nvm install node
-    - node --version
-    - yarn --version
-    - yarn install
-script:
-    - yarn test:eslint
-    - yarn build:web
 matrix:
     include:
+        # test
+        -   language: node_js
+            install:
+                - nvm install node
+                - node --version
+                - yarn --version
+                - yarn install
+            script:
+                - yarn test:eslint
+        # web
+        -   language: node_js
+            install:
+                - nvm install node
+                - node --version
+                - yarn --version
+                - yarn install
+            script:
+                - yarn build:web
+        # android
         -   language: android
+            os: linux
             install:
                 - nvm install node
                 - node --version
@@ -17,14 +28,24 @@ matrix:
                 - yarn install
             android:
                 components:
-                - build-tools-23.0.1
-                - android-23
-                - extra-android-m2repository
-                - extra-google-google_play_services
-                - extra-google-m2repository
-                - addon-google_apis-google-16
+                    - build-tools-23.0.1
+                    - android-23
+                    - extra-android-m2repository
+                    - extra-google-google_play_services
+                    - extra-google-m2repository
+                    - addon-google_apis-google-16
             script:
-              - chmod +x ./android/gradlew && yarn build:android
+                - chmod +x ./android/gradlew && yarn build:android
+            deploy:
+            skip_cleanup: true
+            provider: releases
+            #api_key:
+            #  secure: XXX=
+            file: $TRAVIS_BUILD_DIR/android/app/build/outputs/apk/app-release-unsigned.apk
+            on:
+                repo: demokratie-live/democracy-client
+                tags: true
+        # ios
         -   language: objective-c
             os: osx
             #osx_image: xcode8.2
@@ -38,14 +59,5 @@ matrix:
             script:
                 - yarn build:ios
                 #- xctool run-tests -scheme PepperoniAppTemplate -sdk iphonesimulator -launch-timeout 90  ONLY_ACTIVE_ARCH=NO
-deploy:
-    skip_cleanup: true
-    provider: releases
-    #api_key:
-    #  secure: XXX=
-    file: $TRAVIS_BUILD_DIR/android/app/build/outputs/apk/app-release-unsigned.apk
-    on:
-        repo: demokratie-live/democracy-client
-        tags: true
 after_script:
   - echo "BUILD FINISHED"
