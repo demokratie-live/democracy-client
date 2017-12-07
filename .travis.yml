@@ -7,8 +7,8 @@ matrix:
                 - 8
             install:
                 #- nvm install 7
-                - node --version
-                - yarn --version
+                #- node --version
+                - yarn -version
                 - yarn install
             script:
                 - yarn test:eslint
@@ -18,9 +18,9 @@ matrix:
             node_js:
                 - 8
             install:
-                # - nvm install 7
-                - node --version
-                - yarn --version
+                # - nvm install 8
+                # - node --version
+                - yarn -version
                 - yarn install
             script:
                 - yarn build:web
@@ -28,9 +28,9 @@ matrix:
         -   os: linux
             language: android
             install:
-                #- nvm install 8
-                - node --version
-                - yarn --version
+                - nvm install 8
+                #- node --version
+                - yarn -version
                 - yarn install
             android:
                 components:
@@ -57,8 +57,8 @@ matrix:
             language: objective-c
             install:
                 - nvm install 8
-                - node --version
-                - yarn --version
+                #- node --version
+                - yarn -version
                 - yarn install
             xcode_project: ios/democracyclient.xcodeproj
             xcode_scheme: ios/democracyclientTests
