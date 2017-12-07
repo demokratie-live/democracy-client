@@ -15,7 +15,8 @@ android:
 script:
   - yarn eslint
   - yarn build:web
-  - cd android && chmod +x ./gradlew && ./gradlew assembleRelease #3
+  #- cd android && chmod +x ./gradlew && ./gradlew assembleRelease
+  - chmod +x ./android/gradlew && yarn build:android
 deploy:
   skip_cleanup: true
   provider: releases
