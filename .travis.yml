@@ -1,6 +1,6 @@
 language: node_js
 install:
-    - nvm install
+    - nvm install node
     - node --version
     - yarn --version
     - yarn install
@@ -11,7 +11,7 @@ matrix:
     include:
         -   language: android
             install:
-                - nvm install
+                - nvm install node
                 - node --version
                 - yarn --version
                 - yarn install
@@ -29,7 +29,7 @@ matrix:
             os: osx
             #osx_image: xcode8.2
             install:
-                - nvm install
+                - nvm install node
                 - node --version
                 - yarn --version
                 - yarn install
