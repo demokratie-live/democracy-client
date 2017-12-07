@@ -1,29 +1,72 @@
-language: android
-before_install:
-- nvm install 6
-- node --version
-install:
-- yarn install
-android:
-  components:
-  - build-tools-23.0.1
-  - android-23
-  - extra-android-m2repository
-  - extra-google-google_play_services
-  - extra-google-m2repository
-  - addon-google_apis-google-16
-script:
-  - yarn eslint
-  - yarn build:web
-  - cd android && chmod +x ./gradlew && ./gradlew assembleRelease #3
-deploy:
-  skip_cleanup: true
-  provider: releases
-  #api_key:
-  #  secure: XXX=
-  file: $TRAVIS_BUILD_DIR/android/app/build/outputs/apk/app-release-unsigned.apk
-  on:
-    repo: demokratie-live/democracy-client
-    tags: true
+matrix:
+    include:
+        # test
+        -   os: linux
+            language: node_js
+            node_js:
+                - 8
+            install:
+                - yarn --version
+                - yarn install
+            script:
+                - yarn test:eslint
+        # web
+        -   os: linux
+            language: node_js
+            node_js:
+                - 8
+            install:
+                - yarn --version
+                - yarn install
+            script:
+                - yarn build:web
+        # android
+        -   os: linux
+            language: android
+            jdk: oraclejdk8
+            install:
+                - nvm install 8
+                - yarn --version
+                - yarn install
+            android:
+                components:
+                    - tools
+                    - platform-tools
+                    # android 23
+                    - build-tools-23.0.1
+                    - android-23
+                    # extra
+                    - extra-android-m2repository
+                    - extra-google-google_play_services
+                    - extra-google-m2repository
+                    - addon-google_apis-google-16
+                    # license
+                    - android-sdk-preview-license-.+
+                    - android-sdk-license-.+
+                    - google-gdk-license-.+
+            script:
+                - chmod +x ./android/gradlew && yarn build:android
+            deploy:
+            skip_cleanup: true
+            provider: releases
+            #api_key:
+            #  secure: XXX=
+            file: $TRAVIS_BUILD_DIR/android/app/build/outputs/apk/app-release-unsigned.apk
+            on:
+                repo: demokratie-live/democracy-client
+                tags: true
+        # ios
+        #-   os: osx
+        #    osx_image: xcode9
+        #    language: objective-c
+        #    install:
+        #        - nvm install 8
+        #        - yarn --version
+        #        - yarn install
+        #    xcode_project: ios/democracyclient.xcodeproj
+        #    xcode_scheme: ios/democracyclientTests
+        #    script:
+        #        - yarn build:ios
+        #        #- xctool run-tests -scheme PepperoniAppTemplate -sdk iphonesimulator -launch-timeout 90  ONLY_ACTIVE_ARCH=NO
 after_script:
   - echo "BUILD FINISHED"
