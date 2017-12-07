@@ -25,12 +25,8 @@ matrix:
             language: android
             jdk: oraclejdk8
             before_install:
-                #- echo "$ANDROID_HOME"
-                #- mkdir "$ANDROID_HOME/licenses" || true
-                #- echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
-                #- echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
-                - echo y | android update sdk --no-ui --filter build-tools-26.0.1,android-26,extra-android-m2repository,android-26
-                # - $ANDROID_HOME/tools/bin/sdkmanager --licenses
+                # accept lisences
+                - echo y | android update sdk --no-ui --filter build-tools-26.0.1,android-26,extra-android-m2repository
             install:
                 - nvm install 8
                 - yarn --version
@@ -49,9 +45,9 @@ matrix:
                     - extra-google-m2repository
                     - addon-google_apis-google-16
                 licenses:
-                    - android-sdk-preview-license-.+
-                    - android-sdk-license-.+
-                    - google-gdk-license-.+
+                    - 'android-sdk-preview-license-.+'
+                    - 'android-sdk-license-.+'
+                    - 'google-gdk-license-.+'
             script:
                 - chmod +x ./android/gradlew && yarn build:android
             #deploy:
