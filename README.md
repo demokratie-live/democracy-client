@@ -2,6 +2,8 @@
 
 # Democracy-Client &nbsp; <a href="https://github.com/kriasoft/nodejs-api-starter/stargazers"><img src="https://img.shields.io/github/stars/demokratie-live/democracy-client.svg?style=social&label=Star&maxAge=3600" height="20"></a>  <a href="https://twitter.com/democracy_de"><img src="https://img.shields.io/twitter/follow/democracy_de.svg?style=social&label=Follow&maxAge=3600" height="20"></a>
 
+<img src="https://travis-ci.org/demokratie-live/democracy-client.svg?branch=master">
+
 The Client for the DEMOCRACY App. This includes iOS, Android and Web Clients generated from the same Codebase.
 
 ## Tech Stack
