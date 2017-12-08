@@ -10,9 +10,16 @@ import listData from '../data/list.json';
 class ListScreen extends Component {
   static propTypes = {
     navigator: PropTypes.shape({
-      push: PropTypes.func.isRequired,
-    }).isRequired,
+      push: PropTypes.func,
+    }),
   };
+
+  static defaultProps = {
+    navigator: {
+      push: null,
+    },
+  };
+
   renderListData = ({ item }) => itemProps => <Row {...item} {...itemProps} />;
 
   render() {
@@ -25,7 +32,7 @@ class ListScreen extends Component {
           renderItem={props => (
             <ListItem
               onPress={() =>
-                navigator.push({
+                navigator.ypush({
                   screen: 'democracy.BundestagDetailsTabScreen',
                   title: 'Abstimmung',
                 })
