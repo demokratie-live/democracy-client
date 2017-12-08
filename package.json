@@ -7,10 +7,11 @@
     "start:ios": "react-native run-ios",
     "start:android": "react-native run-android",
     "start:web": "react-scripts start",
-	"build:ios": "cd ios && xcodebuild -quiet -scheme democracyclient -configuration Release -sdk iphonesimulator",
-	"build:android": "cd android && ./gradlew assembleRelease",
+    "build:ios":
+      "cd ios && xcodebuild -quiet -scheme democracyclient -configuration Release -sdk iphonesimulator",
+    "build:android": "cd android && ./gradlew assembleRelease",
     "build:web": "react-scripts build",
-	"clean:android": "cd android && ./gradlew clean",
+    "clean:android": "cd android && ./gradlew clean",
     "test:eslint": "eslint ./src"
   },
   "dependencies": {
@@ -19,8 +20,10 @@
     "react-dom": "^16.2.0",
     "react-native": "0.50.4",
     "react-native-elements": "^0.18.4",
+    "react-native-navigation": "^1.1.300",
     "react-native-vector-icons": "^4.4.2",
     "react-native-web": "^0.1.16",
+    "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.17",
     "styled-components": "^2.2.4"
   },
