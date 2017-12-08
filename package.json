@@ -7,8 +7,8 @@
     "start:ios": "react-native run-ios",
     "start:android": "react-native run-android",
     "start:web": "react-scripts start",
-	"build:ios": "cd ios && xcodebuild -scheme democracyclient -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO",
-	"build:android": "cd android && ./gradlew assembleRelease",
+    "build:ios": "cd ios && xcodebuild -scheme democracyclient -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO",
+    "build:android": "cd android && ./gradlew assembleRelease",
     "build:web": "react-scripts build",
     "test:eslint": "eslint ./src"
   },
@@ -18,6 +18,7 @@
     "react-dom": "^16.2.0",
     "react-native": "0.50.4",
     "react-native-elements": "^0.18.4",
+    "react-native-navigation": "^1.1.300",
     "react-native-vector-icons": "^4.4.2",
     "react-native-web": "^0.1.16",
     "react-scripts": "1.0.17",

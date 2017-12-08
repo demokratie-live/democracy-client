@@ -5038,7 +5038,7 @@ lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
 
-"lodash@>=3.5 <5", lodash@^4.0.0, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.16.6, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.3.0, lodash@^4.6.1:
+lodash@4.x.x, "lodash@>=3.5 <5", lodash@^4.0.0, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.16.6, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.3.0, lodash@^4.6.1:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -6522,6 +6522,12 @@ react-native-elements@^0.18.4:
     lodash.times "^4.3.2"
     opencollective "^1.0.3"
     prop-types "^15.5.8"
+
+react-native-navigation@^1.1.300:
+  version "1.1.300"
+  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-1.1.300.tgz#0086f55a1bcd48010d43d12218de8e017f144937"
+  dependencies:
+    lodash "4.x.x"
 
 react-native-vector-icons@^4.4.2:
   version "4.4.2"
