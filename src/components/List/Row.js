@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
+import { TouchableHighlight } from 'react-native';
 
 const RowWrapper = styled.View`
   border-bottom-width: 1;
@@ -18,14 +19,16 @@ const Votes = styled.Text`
 `;
 
 const Row = ({
-  title, subtitle, date, votes,
+  title, subtitle, date, votes, onPress,
 }) => (
-  <RowWrapper>
-    <Title>{title}</Title>
-    <Subtitle>{subtitle}</Subtitle>
-    <Date>{date}</Date>
-    <Votes>{votes}</Votes>
-  </RowWrapper>
+  <TouchableHighlight onPress={onPress}>
+    <RowWrapper>
+      <Title>{title}</Title>
+      <Subtitle>{subtitle}</Subtitle>
+      <Date>{date}</Date>
+      <Votes>{votes}</Votes>
+    </RowWrapper>
+  </TouchableHighlight>
 );
 
 Row.propTypes = {
@@ -33,6 +36,7 @@ Row.propTypes = {
   subtitle: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   votes: PropTypes.number.isRequired,
+  onPress: PropTypes.func.isRequired,
 };
 
 export default Row;
