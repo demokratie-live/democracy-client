@@ -7,6 +7,8 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
 import List from './screens/List';
 
 const Container = styled.View`
@@ -15,7 +17,9 @@ const Container = styled.View`
 `;
 
 export default () => (
-  <Container>
-    <List />
-  </Container>
+  <Router>
+    <Container>
+      <Route exact path="/" component={List} />
+    </Container>
+  </Router>
 );

@@ -11,7 +11,7 @@ Navigation.startTabBasedApp({
       label: 'BTag',
       screen: 'democracy.BundestagTabScreen',
       title: 'Bundestag',
-      icon: require('./assets/icons/list.png'),
+      icon: require('./assets/icons/list.png'), // eslint-disable-line global-require
     },
   ],
 });
