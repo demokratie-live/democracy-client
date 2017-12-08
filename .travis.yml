@@ -21,7 +21,8 @@ matrix:
             script:
                 - yarn build:web
         # android
-        -   os: linux
+        -   if: branch =~ ^master OR branch =~ /^pr\..*/
+            os: linux
             language: android
             jdk: oraclejdk8
             before_install:
@@ -59,17 +60,19 @@ matrix:
             #       repo: demokratie-live/democracy-client
             #       tags: true
         # ios
-        #-   os: osx
-        #    osx_image: xcode9
-        #    language: objective-c
-        #    install:
-        #        - nvm install 8
-        #        - yarn --version
-        #        - yarn install
-        #    xcode_project: ios/democracyclient.xcodeproj
-        #    xcode_scheme: ios/democracyclientTests
-        #    script:
-        #        - yarn build:ios
-        #        #- xctool run-tests -scheme PepperoniAppTemplate -sdk iphonesimulator -launch-timeout 90  ONLY_ACTIVE_ARCH=NO
+        -   if: branch =~ ^master AND NOT type =~ ^pull_request
+            os: osx
+            osx_image: xcode9
+            language: objective-c
+            install:
+                - nvm install 8
+                - npm install -g yarn
+                - yarn --version
+                - yarn install
+            xcode_project: ios/democracyclient.xcodeproj
+            xcode_scheme: ios/democracyclientTests
+            script:
+                - yarn build:ios
+                #- xctool run-tests -scheme PepperoniAppTemplate -sdk iphonesimulator -launch-timeout 90  ONLY_ACTIVE_ARCH=NO
 after_script:
   - echo "BUILD FINISHED"
