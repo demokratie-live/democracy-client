@@ -7,7 +7,7 @@
     "start:ios": "react-native run-ios",
     "start:android": "react-native run-android",
     "start:web": "react-scripts start",
-	"build:ios": "cd ios && xcodebuild -w -scheme democracyclient -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO",
+	"build:ios": "cd ios && xcodebuild -quiet -scheme democracyclient -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO",
 	"build:android": "cd android && ./gradlew assembleRelease",
     "build:web": "react-scripts build",
 	"clean:android": "cd android && ./gradlew clean",
