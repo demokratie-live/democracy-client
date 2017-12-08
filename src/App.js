@@ -1,21 +1,17 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+import { Navigation } from 'react-native-navigation';
 
-import React from 'react';
-import styled from 'styled-components/native';
+import registerScreens from './screens';
 
-import List from './screens/List';
+registerScreens();
 
-const Container = styled.View`
-  flex: 1;
-  background-color: #f5fcff;
-`;
-
-export default () => (
-  <Container>
-    <List />
-  </Container>
-);
+// start the app
+Navigation.startTabBasedApp({
+  tabs: [
+    {
+      label: 'BTag',
+      screen: 'democracy.BundestagTabScreen',
+      title: 'Bundestag',
+      icon: require('./assets/icons/list.png'), // eslint-disable-line global-require
+    },
+  ],
+});
