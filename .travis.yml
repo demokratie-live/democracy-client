@@ -60,7 +60,7 @@ matrix:
             #       repo: demokratie-live/democracy-client
             #       tags: true
         # ios
-        -   if: branch =~ ^master
+        -   if: branch =~ ^master AND $TRAVIS_PULL_REQUEST == false
             os: osx
             osx_image: xcode9
             language: objective-c
