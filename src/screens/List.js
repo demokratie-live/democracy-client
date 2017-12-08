@@ -16,7 +16,7 @@ class ListScreen extends Component {
   renderListData = ({ item }) => itemProps => <Row {...item} {...itemProps} />;
 
   render() {
-    const { navigator: { push } } = this.props;
+    const { navigator } = this.props;
     return (
       <List style={{ flex: 1, backgroundColor: 'red' }}>
         <FlatList
@@ -25,7 +25,7 @@ class ListScreen extends Component {
           renderItem={props => (
             <ListItem
               onPress={() =>
-                push({
+                navigator.push({
                   screen: 'democracy.BundestagDetailsTabScreen',
                   title: 'Abstimmung',
                 })
