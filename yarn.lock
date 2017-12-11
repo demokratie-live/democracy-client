@@ -7357,8 +7357,8 @@ react-native-elements@^0.18.4:
     prop-types "^15.5.8"
 
 react-native-navigation@^1.1.304:
-  version "1.1.304"
-  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-1.1.304.tgz#5b94890f41a8f8b5f4e8eec24714c3c63aad5d34"
+  version "1.1.305"
+  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-1.1.305.tgz#7d568d56b2522979f627cdc451d77d9b554d1a5e"
   dependencies:
     lodash "4.x.x"
 
@@ -7387,7 +7387,7 @@ react-native-web@^0.1.16:
     prop-types "^15.6.0"
     react-timer-mixin "^0.13.3"
 
-react-native@^0.50.4:
+react-native@0.50.4:
   version "0.50.4"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.50.4.tgz#194f5da4939087b3acee712a503475f4942dca7e"
   dependencies:
@@ -7536,9 +7536,9 @@ react-transform-hmr@^1.0.4:
     global "^4.3.0"
     react-proxy "^1.1.7"
 
-react@^16.0.0:
-  version "16.2.0"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.2.0.tgz#a31bd2dab89bff65d42134fa187f24d054c273ba"
+react@16.0.0:
+  version "16.0.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.0.0.tgz#ce7df8f1941b036f02b2cca9dbd0cb1f0e855e2d"
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.1.0"

@@ -16,9 +16,9 @@
   "dependencies": {
     "npm": "^5.5.1",
     "prop-types": "^15.6.0",
-    "react": "^16.0.0",
+    "react": "16.0.0",
     "react-dom": "^16.2.0",
-    "react-native": "^0.50.4",
+    "react-native": "0.50.4",
     "react-native-elements": "^0.18.4",
     "react-native-navigation": "^1.1.304",
     "react-native-vector-icons": "^4.4.2",
