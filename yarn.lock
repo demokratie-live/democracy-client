@@ -7356,9 +7356,9 @@ react-native-elements@^0.18.4:
     opencollective "^1.0.3"
     prop-types "^15.5.8"
 
-react-native-navigation@^1.1.300:
-  version "1.1.300"
-  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-1.1.300.tgz#0086f55a1bcd48010d43d12218de8e017f144937"
+react-native-navigation@^1.1.304:
+  version "1.1.304"
+  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-1.1.304.tgz#5b94890f41a8f8b5f4e8eec24714c3c63aad5d34"
   dependencies:
     lodash "4.x.x"
 
