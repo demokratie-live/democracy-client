@@ -10,6 +10,7 @@ import styled from 'styled-components/native';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import List from './screens/List';
+import ListDetails from './screens/ListDetails/ListDetails';
 
 const Container = styled.View`
   flex: 1;
@@ -20,6 +21,7 @@ export default () => (
   <Router>
     <Container>
       <Route exact path="/" component={List} />
+      <Route exact path="/details" component={ListDetails} />
     </Container>
   </Router>
 );

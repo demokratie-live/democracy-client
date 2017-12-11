@@ -10,28 +10,35 @@ import listData from '../data/list.json';
 class ListScreen extends Component {
   static propTypes = {
     navigator: PropTypes.shape({
-      push: PropTypes.func.isRequired,
-    }).isRequired,
+      push: PropTypes.func,
+    }),
   };
+
+  static defaultProps = {
+    navigator: {
+      push: null,
+    },
+  };
+
+  pushToDetailScreen = () => {
+    const { navigator } = this.props;
+
+    navigator.push({
+      screen: 'democracy.BundestagDetailsTabScreen',
+      title: 'Abstimmung',
+    });
+  };
+
   renderListData = ({ item }) => itemProps => <Row {...item} {...itemProps} />;
 
   render() {
-    const { navigator } = this.props;
     return (
       <List style={{ flex: 1, backgroundColor: 'red' }}>
         <FlatList
           data={listData}
           keyExtractor={item => item.id}
           renderItem={props => (
-            <ListItem
-              onPress={() =>
-                navigator.push({
-                  screen: 'democracy.BundestagDetailsTabScreen',
-                  title: 'Abstimmung',
-                })
-              }
-              component={this.renderListData(props)}
-            />
+            <ListItem onPress={this.pushToDetailScreen} component={this.renderListData(props)} />
           )}
         />
       </List>
