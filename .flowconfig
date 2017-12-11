@@ -16,6 +16,12 @@
 ; Ignore polyfills
 .*/Libraries/polyfills/.*
 
+# Flow has a built-in definition for the 'react-native-web' module which we prefer to use
+.*/node_modules/react-native-web/*.
+
+# Flow has problems with broken.json files
+.*/broken.json
+
 [include]
 
 [libs]
