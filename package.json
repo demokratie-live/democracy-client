@@ -11,9 +11,16 @@
     "build:android": "cd android && ./gradlew assembleRelease",
     "build:web": "react-scripts build",
     "clean:android": "cd android && ./gradlew clean",
-    "test:eslint": "eslint ./src"
+	"test": "yarn test:eslint && yarn test:flow && yarn test:coverage",
+    "test:eslint": "eslint .",
+	"test:flow": "yarn flow",
+    "test:coverage": "yarn jest --coverage",
+	"fix:eslint": "eslint ./src --fix",
+	"coveralls": "yarn test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "dependencies": {
+    "coveralls": "^3.0.0",
+    "flow-bin": "^0.61.0",
     "npm": "^5.5.1",
     "prop-types": "^15.6.0",
     "react": "16.0.0",
