@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  process(/*src*/null, filename, /*config*/null, /*options*/null) {
+  process(src, filename/*, config, options*/) {
     return `module.exports = ${JSON.stringify(path.basename(filename))};`;
   },
 };
