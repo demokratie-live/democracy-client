@@ -1,6 +1,6 @@
 ![Screenshot](https://www.democracy-deutschland.de/files/images/forfb2.png)
 
-# Democracy-Client &nbsp; <a href="https://github.com/kriasoft/nodejs-api-starter/stargazers"><img src="https://img.shields.io/github/stars/demokratie-live/democracy-client.svg?style=social&label=Star&maxAge=3600" height="20"></a>  <a href="https://twitter.com/democracy_de"><img src="https://img.shields.io/twitter/follow/democracy_de.svg?style=social&label=Follow&maxAge=3600" height="20"></a>
+# Democracy-Client &nbsp; <a href="https://github.com/kriasoft/nodejs-api-starter/stargazers"><img src="https://img.shields.io/github/stars/demokratie-live/democracy-client.svg?style=social&label=Star&maxAge=3600" height="20"/></a>  <a href="https://twitter.com/democracy_de"><img src="https://img.shields.io/twitter/follow/democracy_de.svg?style=social&label=Follow&maxAge=3600" height="20"/></a> <a href="https://www.facebook.com/democracygermany/"><img src="http://i.imgur.com/P3YfQoD.png" height="20"/></a> &nbsp; <a href="https://discord.gg/Pdu3ZEV"><img src="https://github.com/RPM-Outpost/discord/blob/master/discord-logo-wordmark.png" height="20"/></a>
 
 [![Build Status](https://travis-ci.org/demokratie-live/democracy-client.svg?branch=master)](https://travis-ci.org/demokratie-live/democracy-client)
 
@@ -9,12 +9,16 @@ The Client for the DEMOCRACY App. This includes iOS, Android and Web Clients gen
 ## Tech Stack
 
 * [Node.js][node], [Yarn][yarn], [JavaScript][js], [Babel][babel], [Jest][jest]
-* [React][react], [ReactNative][reactnative], [ReactNativeWeb](reactnativeweb), ([Electron][electron])
+* [React][react], [ReactNative][reactnative], [ReactNativeWeb][reactnativeweb], ~~[Electron][electron]~~
+* [Wix ReactNativeNavigation][wix], [ReactRouter][react-router], 
+* [StyledComponents][styledcomponents]
+
+[More Dependecies](https://github.com/demokratie-live/democracy-client/network/dependencies)
 
 ## Prerequisites
 
 * [Node.js][node]
-* [Android Studio or SDK][android] follow the installation Instructions [here](http://facebook.github.io/react-native/docs/getting-started.html)
+* [Android Studio or Android SDK][android] follow the installation Instructions [here](http://facebook.github.io/react-native/docs/getting-started.html)
 
 ## Getting started
 
@@ -25,11 +29,28 @@ cd democracy-client
 yarn install
 ```
 
-Compile and start Version of your choosing
+### Compile and start Version of your choosing
 ```
 yarn start:web
 yarn start:android
 yarn start:ios
+```
+
+### Build only
+```
+yarn build:web
+yarn build:android
+yarn build:ios
+```
+
+### Test Project
+```
+yarn test:eslint
+```
+
+### Clean current build
+```
+yarn clean:android
 ```
 
 ## Keeping Up-to-Date
@@ -51,7 +72,9 @@ repository, otherwise your project may differ too much from the base/upstream re
 
 ## Deployment
 
-TODO
+Deployment will be done with Travis CI
+
+TODO: Do it
 
 ## Contributing
 
@@ -77,3 +100,6 @@ Made with ♥ by Team DEMOCRACY ([democracy-deutschland.de](https://www.democrac
 [android]: https://developer.android.com/studio/index.html
 [reactnativeweb]: https://github.com/necolas/react-native-web
 [jest]: http://facebook.github.io/jest/
+[wix]: https://github.com/wix/react-native-navigation
+[react-router]: https://github.com/ReactTraining/react-router
+[styledcomponents]: https://github.com/styled-components/styled-components
