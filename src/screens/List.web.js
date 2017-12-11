@@ -10,17 +10,24 @@ const List = styled.ul``;
 const RowWrapper = styled.li``;
 
 export default class ListScreen extends Component {
+  pushToDetailScreen = () => {
+    const { history } = this.props;
+
+    history.push('/details');
+  }
+
   renderListData = () =>
     listData.map((item) => {
       const { id } = item;
       return (
         <RowWrapper key={id}>
-          <Row {...item} />
+          <Row onPress={this.pushToDetailScreen} {...item} />
         </RowWrapper>
       );
     });
 
   render() {
+    console.log(this.props)
     return <List>{this.renderListData()}</List>;
   }
 }

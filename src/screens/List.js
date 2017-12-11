@@ -20,25 +20,25 @@ class ListScreen extends Component {
     },
   };
 
+  pushToDetailScreen = () => {
+    const { navigator } = this.props;
+
+    navigator.push({
+      screen: 'democracy.BundestagDetailsTabScreen',
+      title: 'Abstimmung',
+    });
+  };
+
   renderListData = ({ item }) => itemProps => <Row {...item} {...itemProps} />;
 
   render() {
-    const { navigator } = this.props;
     return (
       <List style={{ flex: 1, backgroundColor: 'red' }}>
         <FlatList
           data={listData}
           keyExtractor={item => item.id}
           renderItem={props => (
-            <ListItem
-              onPress={() =>
-                navigator.ypush({
-                  screen: 'democracy.BundestagDetailsTabScreen',
-                  title: 'Abstimmung',
-                })
-              }
-              component={this.renderListData(props)}
-            />
+            <ListItem onPress={this.pushToDetailScreen} component={this.renderListData(props)} />
           )}
         />
       </List>
