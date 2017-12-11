@@ -9,7 +9,8 @@ matrix:
                 - yarn --version
                 - yarn install
             script:
-                - yarn test:eslint
+                #- yarn test
+                - yarn coveralls
         # web
         -   os: linux
             language: node_js
