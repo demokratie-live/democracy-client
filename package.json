@@ -11,9 +11,16 @@
     "build:android": "cd android && ./gradlew assembleRelease",
     "build:web": "react-scripts build",
     "clean:android": "cd android && ./gradlew clean",
-    "test:eslint": "eslint ./src"
+	"test": "yarn test:eslint && yarn test:flow && yarn test:coverage",
+    "test:eslint": "eslint .",
+	"test:flow": "yarn flow",
+    "test:coverage": "jest --coverage",
+	"fix:eslint": "eslint ./src --fix",
+	"coveralls": "yarn test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "dependencies": {
+    "coveralls": "^3.0.0",
+    "flow-bin": "^0.61.0",
     "npm": "^5.5.1",
     "prop-types": "^15.6.0",
     "react": "16.0.0",
@@ -40,6 +47,24 @@
     "react-test-renderer": "^16.0.0"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+	"moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileTransformer.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js",
+      "\\raw!": "<rootDir>/__mocks__/fileMock.js"
+    },
+	"clearMocks": true,
+	"coverageDirectory": "./coverage/",
+    "coverageReporters": [
+      "lcov",
+      "text"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/coverage/"
+    ],
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}"
+    ]
   }
 }
