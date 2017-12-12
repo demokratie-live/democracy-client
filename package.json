@@ -14,7 +14,7 @@
 	"test": "yarn test:eslint && yarn test:flow && yarn test:coverage",
     "test:eslint": "eslint .",
 	"test:flow": "yarn flow",
-    "test:coverage": "yarn jest --coverage",
+    "test:coverage": "jest --coverage",
 	"fix:eslint": "eslint ./src --fix",
 	"coveralls": "yarn test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
