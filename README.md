@@ -2,7 +2,7 @@
 
 # Democracy-Client &nbsp; <a href="https://github.com/kriasoft/nodejs-api-starter/stargazers"><img src="https://img.shields.io/github/stars/demokratie-live/democracy-client.svg?style=social&label=Star&maxAge=3600" height="20"/></a>  <a href="https://twitter.com/democracy_de"><img src="https://img.shields.io/twitter/follow/democracy_de.svg?style=social&label=Follow&maxAge=3600" height="20"/></a> <a href="https://www.facebook.com/democracygermany/"><img src="http://i.imgur.com/P3YfQoD.png" height="20"/></a> &nbsp; <a href="https://discord.gg/Pdu3ZEV"><img src="https://github.com/RPM-Outpost/discord/blob/master/discord-logo-wordmark.png" height="20"/></a>
 
-[![Build Status](https://travis-ci.org/demokratie-live/democracy-client.svg?branch=master)](https://travis-ci.org/demokratie-live/democracy-client)[![Coverage Status](https://coveralls.io/repos/github/demokratie-live/democracy-client/badge.svg?branch=coveralls)](https://coveralls.io/github/demokratie-live/democracy-client?branch=coveralls)
+[![Build Status](https://travis-ci.org/demokratie-live/democracy-client.svg?branch=master)](https://travis-ci.org/demokratie-live/democracy-client) &nbsp; [![Coverage Status](https://coveralls.io/repos/github/demokratie-live/democracy-client/badge.svg?branch=coveralls)](https://coveralls.io/github/demokratie-live/democracy-client?branch=coveralls) &nbsp;  [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/1461/badge)](https://bestpractices.coreinfrastructure.org/projects/1461)
 
 The Client for the DEMOCRACY App. This includes iOS, Android and Web Clients generated from the same Codebase.
 

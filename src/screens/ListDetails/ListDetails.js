@@ -1,65 +1,19 @@
-import React, { Component } from 'react';
-import { View, Text, ScrollView, Button } from 'react-native';
+import React from 'react';
+import styled from 'styled-components/native';
 
-import styles from './ListDetailsStyles';
-import detailsData from '../../data/details.json';
+import Header from '../../components/ListDetails/Header';
+import Content from '../../components/ListDetails/Content';
+import VotePannel from '../../components/ListDetails/VotePannel';
 
-export default class ListDetailsScreen extends Component {
-  // renderListData = ({ item }) => () => <Row {...item} />;
+const Wrapper = styled.View`
+  flex: 1;
+  background-color: white;
+`;
 
-  onPressAgree = () => {
-    console.log('button clicked');
-  };
-
-  onPressUndecided = () => {
-    console.log('button clicked');
-  };
-
-  onPressDisagree = () => {
-    console.log('button clicked');
-  };
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <View style={styles.header_box}>
-            <Text style={styles.title}>{detailsData.title}</Text>
-            <Text style={styles.votes}>{detailsData.votes}</Text>
-          </View>
-          <Text style={styles.date}>{detailsData.date}</Text>
-        </View>
-        <ScrollView style={styles.body}>
-          <Text style={styles.fulltext}>
-            {detailsData.text}
-            {'\n'}
-            {'\n'}
-          </Text>
-        </ScrollView>
-        <View style={[styles.footer]}>
-          <Button
-            onPress={this.onPressAgree}
-            title="Yes"
-            color="#006400"
-            style={styles.buttons}
-            accessibilityLabel="Learn more about this purple button"
-          />
-          <Button
-            onPress={this.onPressUndecided}
-            title="?"
-            color="#0000FF"
-            style={styles.buttons}
-            accessibilityLabel="Learn more about this purple button"
-          />
-          <Button
-            onPress={this.onPressDisagree}
-            title="No"
-            color="#8B0000"
-            style={styles.buttons}
-            accessibilityLabel="Learn more about this purple button"
-          />
-        </View>
-      </View>
-    );
-  }
-}
+export default () => (
+  <Wrapper>
+    <Header />
+    <Content />
+    <VotePannel />
+  </Wrapper>
+);

@@ -15,9 +15,7 @@ const ListWrapper = styled(List).attrs({
   flex: 1;
 `;
 
-const FlatList = styled.FlatList`
-  background-color: yellow;
-`;
+const FlatList = styled.FlatList``;
 
 class ListScreen extends Component {
   static propTypes = {
