@@ -15,7 +15,9 @@ const VotesIcon = styled(Ionicons).attrs({
   marginBottom: -10,
 })``;
 
-const Number = styled.Text``;
+const Number = styled.Text`
+  font-size: 18;
+`;
 
 export default class Votes extends Component {
   render() {

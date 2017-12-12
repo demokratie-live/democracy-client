@@ -17,10 +17,9 @@ const HeaderMain = styled.View`
 const Title = styled.Text.attrs({
   numberOfLines: 2,
 })`
-  padding-top: 20;
-  padding-left: 10;
   flex: 1;
-  font-size: 20;
+  font-size: 17;
+  color: #333;
 `;
 
 export default class ListDetailsHeader extends Component {
