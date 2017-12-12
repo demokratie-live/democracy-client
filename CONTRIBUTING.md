@@ -33,6 +33,10 @@ Tools we use:
 * [Discord](https://discord.gg/Pdu3ZEV)
 * Meistertask - please contact us on Discord to get Access
 
+Meitertask Workflow
+
+![MeistertaskWorkflow](https://github.com/demokratie-live/democracy-assets/blob/master/plan/workflow.png)
+
 ### Daily Scrum
 
 Every Workday there is a Daily Scrum at 11:00 CET
