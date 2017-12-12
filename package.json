@@ -6,17 +6,18 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "start:ios": "react-native run-ios",
     "start:android": "react-native run-android",
-    "start:web": "node ./scripts/webpack.dev.js",
-    "build:ios": "cd ios && xcodebuild -quiet -scheme democracyclient -configuration Release -sdk iphonesimulator",
+    "start:web": "node ./scripts/start.web.js",
+    "build:ios":
+      "cd ios && xcodebuild -quiet -scheme democracyclient -configuration Release -sdk iphonesimulator",
     "build:android": "cd android && ./gradlew assembleRelease",
     "build:web": "react-scripts build",
     "clean:android": "cd android && ./gradlew clean",
-	"test": "yarn test:eslint && yarn test:flow && yarn test:coverage",
-    "test:eslint": "eslint .",
-	"test:flow": "yarn flow",
+    "test": "yarn test:eslint && yarn test:flow && yarn test:coverage",
+    "test:eslint": "eslint ./build",
+    "test:flow": "yarn flow",
     "test:coverage": "jest --coverage",
-	"fix:eslint": "eslint ./src --fix",
-	"coveralls": "yarn test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "fix:eslint": "eslint ./src --fix",
+    "coveralls": "yarn test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "dependencies": {
     "coveralls": "^3.0.0",
@@ -50,23 +51,16 @@
   },
   "jest": {
     "preset": "react-native",
-	"moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileTransformer.js",
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+        "<rootDir>/__mocks__/fileTransformer.js",
       "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js",
       "\\raw!": "<rootDir>/__mocks__/fileMock.js"
     },
-	"clearMocks": true,
-	"coverageDirectory": "./coverage/",
-    "coverageReporters": [
-      "lcov",
-      "text"
-    ],
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "/coverage/"
-    ],
-    "collectCoverageFrom": [
-      "**/*.{js,jsx}"
-    ]
+    "clearMocks": true,
+    "coverageDirectory": "./coverage/",
+    "coverageReporters": ["lcov", "text"],
+    "coveragePathIgnorePatterns": ["/node_modules/", "/coverage/"],
+    "collectCoverageFrom": ["**/*.{js,jsx}"]
   }
 }
