@@ -6,12 +6,13 @@ import { TouchableHighlight } from 'react-native';
 import Votes from '../../components/Votes';
 
 const RowWrapper = styled.View`
+  flex-direction: row;
   padding-left: 27;
   padding-right: 10;
   padding-top: 10;
   padding-bottom: 10;
   border-bottom-width: 1;
-  flex-direction: row;
+  border-bottom-color: #c8c7cc;
 `;
 
 const TextContent = styled.View`
