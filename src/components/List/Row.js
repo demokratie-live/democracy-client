@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
-import { TouchableHighlight } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
 import Votes from '../../components/Votes';
 
@@ -47,7 +47,7 @@ const Date = styled.Text`
 const Row = ({
   title, subtitle, date, votes, onPress,
 }) => (
-  <TouchableHighlight onPress={onPress}>
+  <TouchableOpacity onPress={onPress}>
     <RowWrapper>
       <TextContent>
         <Title>{title}</Title>
@@ -58,7 +58,7 @@ const Row = ({
         <Date>3:13</Date>
       </SideContent>
     </RowWrapper>
-  </TouchableHighlight>
+  </TouchableOpacity>
 );
 
 Row.propTypes = {
