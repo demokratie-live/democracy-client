@@ -13,11 +13,12 @@
     "build:web": "react-scripts build",
     "clean:android": "cd android && ./gradlew clean",
     "test": "yarn test:eslint && yarn test:flow && yarn test:coverage",
-    "test:eslint": "eslint ./build",
+    "test:eslint": "eslint .",
     "test:flow": "yarn flow",
     "test:coverage": "jest --coverage",
     "fix:eslint": "eslint ./src --fix",
-    "coveralls": "yarn test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "coveralls":
+      "yarn test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "dependencies": {
     "coveralls": "^3.0.0",
