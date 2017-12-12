@@ -6,8 +6,9 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "start:ios": "react-native run-ios",
     "start:android": "react-native run-android",
-    "start:web": "react-scripts start",
-    "build:ios": "cd ios && xcodebuild -quiet -scheme democracyclient -configuration Release -sdk iphonesimulator",
+    "start:web": "node ./scripts/webpack.dev.js",
+    "build:ios":
+      "cd ios && xcodebuild -quiet -scheme democracyclient -configuration Release -sdk iphonesimulator",
     "build:android": "cd android && ./gradlew assembleRelease",
     "build:web": "react-scripts build",
     "clean:android": "cd android && ./gradlew clean",
@@ -38,7 +39,8 @@
     "image-webpack-loader": "^3.4.2",
     "jest": "^21.2.1",
     "react-native-cli": "^2.0.1",
-    "react-test-renderer": "^16.0.0"
+    "react-test-renderer": "^16.0.0",
+    "webpack-bundle-analyzer": "^2.9.1"
   },
   "jest": {
     "preset": "react-native"

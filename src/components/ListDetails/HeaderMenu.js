@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components/native';
-import { Icon } from 'react-native-elements';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const Wrapper = styled.View`
   height: 35;
@@ -16,12 +16,12 @@ const ItemWrapper = styled.View`
   justify-content: space-between;
 `;
 
-const MarkerIcon = styled(Icon).attrs({
+const MarkerIcon = styled(MaterialIcons).attrs({
   name: 'place',
 })``;
 const MarkerText = styled.Text``;
 
-const CommentsIcon = styled(Icon).attrs({
+const CommentsIcon = styled(MaterialIcons).attrs({
   name: 'format-align-left',
 })``;
 const CommentText = styled.Text``;

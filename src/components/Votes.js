@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Icon } from 'react-native-elements';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import styled from 'styled-components/native';
 
 const Wrapper = styled.View`
@@ -8,9 +8,8 @@ const Wrapper = styled.View`
   align-items: center;
 `;
 
-const VotesIcon = styled(Icon).attrs({
+const VotesIcon = styled(Ionicons).attrs({
   name: 'ios-arrow-up',
-  type: 'ionicon',
   size: 40,
   color: 'grey',
   marginBottom: -10,
