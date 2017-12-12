@@ -29,11 +29,13 @@ const iconFontStyles = `
 const style = document.createElement('style');
 style.type = 'text/css';
 if (style.styleSheet) {
+  // $FlowFixMe
   style.styleSheet.cssText = iconFontStyles;
 } else {
+  // $FlowFixMe
   style.appendChild(document.createTextNode(iconFontStyles));
 }
-
+// $FlowFixMe
 document.head.appendChild(style);
 
 const Container = styled.View`
