@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 
 import Header from '../../components/ListDetails/Header';
@@ -10,14 +10,10 @@ const Wrapper = styled.View`
   background-color: white;
 `;
 
-export default class ListDetailsScreen extends Component {
-  render() {
-    return (
-      <Wrapper>
-        <Header />
-        <Content />
-        <VotePannel />
-      </Wrapper>
-    );
-  }
-}
+export default () => (
+  <Wrapper>
+    <Header />
+    <Content />
+    <VotePannel />
+  </Wrapper>
+);

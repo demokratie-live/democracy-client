@@ -45,7 +45,7 @@ const Date = styled.Text`
 `;
 
 const Row = ({
-  title, subtitle, date, votes, onPress,
+  title, subtitle, votes, onPress,
 }) => (
   <TouchableOpacity onPress={onPress}>
     <RowWrapper>
@@ -64,7 +64,6 @@ const Row = ({
 Row.propTypes = {
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
   votes: PropTypes.number.isRequired,
   onPress: PropTypes.func.isRequired,
 };

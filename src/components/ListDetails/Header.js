@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 
 import Votes from '../../components/Votes';
@@ -27,19 +27,15 @@ const Title = styled.Text.attrs({
   letter-spacing: -0.41;
 `;
 
-export default class ListDetailsHeader extends Component {
-  render() {
-    return (
-      <Wrapper>
-        <HeaderMain>
-          <Title>
-            der Titelder Titelder Titelder Titelder Titelder Titelder Titelder Titelder Titelder
-            Titelder Titelder Titelder Titel
-          </Title>
-          <Votes votes="123" />
-        </HeaderMain>
-        <Menu />
-      </Wrapper>
-    );
-  }
-}
+export default () => (
+  <Wrapper>
+    <HeaderMain>
+      <Title>
+        der Titelder Titelder Titelder Titelder Titelder Titelder Titelder Titelder Titelder
+        Titelder Titelder Titelder Titel
+      </Title>
+      <Votes votes={123} />
+    </HeaderMain>
+    <Menu />
+  </Wrapper>
+);

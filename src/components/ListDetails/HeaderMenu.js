@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
@@ -43,22 +43,18 @@ const Date = styled.Text`
   color: #44db5e;
 `;
 
-export default class ListDetailsHeaderMenu extends Component {
-  render() {
-    return (
-      <Wrapper>
-        <ItemWrapper>
-          <MarkerIcon />
-          <MarkerText>234</MarkerText>
-        </ItemWrapper>
-        <ItemWrapper>
-          <CommentsIcon />
-          <CommentText>74</CommentText>
-        </ItemWrapper>
-        <ItemWrapper>
-          <Date>3:21</Date>
-        </ItemWrapper>
-      </Wrapper>
-    );
-  }
-}
+export default () => (
+  <Wrapper>
+    <ItemWrapper>
+      <MarkerIcon />
+      <MarkerText>234</MarkerText>
+    </ItemWrapper>
+    <ItemWrapper>
+      <CommentsIcon />
+      <CommentText>74</CommentText>
+    </ItemWrapper>
+    <ItemWrapper>
+      <Date>3:21</Date>
+    </ItemWrapper>
+  </Wrapper>
+);

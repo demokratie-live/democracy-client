@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styled from 'styled-components/native';
 
@@ -22,14 +23,15 @@ const Number = styled.Text`
   color: #8f8e94;
 `;
 
-export default class Votes extends Component {
-  render() {
-    const { votes } = this.props;
-    return (
-      <Wrapper>
-        <VotesIcon />
-        <Number adjustsFontSizeToFit>{votes}</Number>
-      </Wrapper>
-    );
-  }
-}
+const VotePanel = ({ votes }) => (
+  <Wrapper>
+    <VotesIcon />
+    <Number adjustsFontSizeToFit>{votes}</Number>
+  </Wrapper>
+);
+
+VotePanel.propTypes = {
+  votes: PropTypes.number.isRequired,
+};
+
+export default VotePanel;
