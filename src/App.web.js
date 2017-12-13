@@ -47,7 +47,7 @@ export default () => (
   <Router>
     <Container>
       <Route exact path="/" component={List} />
-      <Route exact path="/details" component={ListDetails} />
+      <Route exact path="/details/:id" component={ListDetails} />
     </Container>
   </Router>
 );

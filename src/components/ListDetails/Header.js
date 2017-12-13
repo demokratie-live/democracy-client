@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import PropTypes from 'prop-types';
 
 import Votes from '../../components/Votes';
 import Menu from '../../components/ListDetails/HeaderMenu';
@@ -27,15 +28,30 @@ const Title = styled.Text.attrs({
   letter-spacing: -0.41;
 `;
 
-export default () => (
+const Header = ({
+  title, votes, commentsCount, places,
+}) => (
   <Wrapper>
     <HeaderMain>
-      <Title>
-        der Titelder Titelder Titelder Titelder Titelder Titelder Titelder Titelder Titelder
-        Titelder Titelder Titelder Titel
-      </Title>
-      <Votes votes={123} />
+      <Title>{title}</Title>
+      <Votes votes={votes} />
     </HeaderMain>
-    <Menu />
+    <Menu commentsCount={commentsCount} places={places} />
   </Wrapper>
 );
+
+Header.defaultProps = {
+  title: '',
+  votes: 0,
+  commentsCount: 0,
+  places: 0,
+};
+
+Header.propTypes = {
+  title: PropTypes.string,
+  votes: PropTypes.number,
+  commentsCount: PropTypes.number,
+  places: PropTypes.number,
+};
+
+export default Header;
