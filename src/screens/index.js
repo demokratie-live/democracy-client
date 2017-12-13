@@ -1,7 +1,7 @@
 import { Navigation } from 'react-native-navigation';
 
 import BundestagTabScreen from './List';
-import BundestagDetailsTabScreen from './ListDetails/ListDetails';
+import BundestagDetailsTabScreen from './ListDetails';
 
 // register all screens of the app (including internal ones)
 export default function registerScreens() {
