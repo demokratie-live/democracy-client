@@ -7941,8 +7941,8 @@ react-native-elements@^0.18.5:
     prop-types "^15.5.8"
 
 react-native-navigation@^1.1.304:
-  version "1.1.305"
-  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-1.1.305.tgz#7d568d56b2522979f627cdc451d77d9b554d1a5e"
+  version "1.1.309"
+  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-1.1.309.tgz#2830f15b87317f72f1e5606eb65beebe73a977a5"
   dependencies:
     lodash "4.x.x"
 
