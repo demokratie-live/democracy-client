@@ -30,12 +30,19 @@ class ListScreen extends Component {
     },
   };
 
-  pushToDetailScreen = () => {
+  pushToDetailScreen = item => () => {
     const { navigator } = this.props;
 
     navigator.push({
       screen: 'democracy.BundestagDetailsTabScreen',
       title: 'Abstimmung',
+      passProps: {
+        match: {
+          params: {
+            id: item.id,
+          },
+        },
+      },
     });
   };
 
@@ -48,7 +55,10 @@ class ListScreen extends Component {
           data={listData}
           keyExtractor={item => item.id}
           renderItem={props => (
-            <ListItem onPress={this.pushToDetailScreen} component={this.renderListData(props)} />
+            <ListItem
+              onPress={this.pushToDetailScreen(props.item)}
+              component={this.renderListData(props)}
+            />
           )}
         />
       </ListWrapper>

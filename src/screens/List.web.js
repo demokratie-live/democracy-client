@@ -15,10 +15,10 @@ export default class ListScreen extends Component {
     history: PropTypes.func.isRequired,
   };
 
-  pushToDetailScreen = () => {
+  pushToDetailScreen = item => () => {
     const { history } = this.props;
 
-    history.push('/details');
+    history.push(`/details/${item.id}`);
   };
 
   renderListData = () =>
@@ -26,7 +26,7 @@ export default class ListScreen extends Component {
       const { id } = item;
       return (
         <RowWrapper key={id}>
-          <Row onPress={this.pushToDetailScreen} {...item} />
+          <Row onPress={this.pushToDetailScreen(item)} {...item} />
         </RowWrapper>
       );
     });

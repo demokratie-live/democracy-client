@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
@@ -43,18 +44,30 @@ const Date = styled.Text`
   color: #44db5e;
 `;
 
-export default () => (
+const HeaderMenu = ({ commentsCount, places }) => (
   <Wrapper>
     <ItemWrapper>
       <MarkerIcon />
-      <MarkerText>234</MarkerText>
+      <MarkerText>{places}</MarkerText>
     </ItemWrapper>
     <ItemWrapper>
       <CommentsIcon />
-      <CommentText>74</CommentText>
+      <CommentText>{commentsCount}</CommentText>
     </ItemWrapper>
     <ItemWrapper>
       <Date>3:21</Date>
     </ItemWrapper>
   </Wrapper>
 );
+
+HeaderMenu.defaultProps = {
+  commentsCount: 0,
+  places: 0,
+};
+
+HeaderMenu.propTypes = {
+  commentsCount: PropTypes.number,
+  places: PropTypes.number,
+};
+
+export default HeaderMenu;
