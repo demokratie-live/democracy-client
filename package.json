@@ -60,11 +60,7 @@
     "clearMocks": true,
     "coverageDirectory": "./coverage/",
     "coverageReporters": ["lcov", "text"],
-    "coveragePathIgnorePatterns": [
-      "<rootDir>/node_modules/",
-      "<rootDir>/coverage/",
-      "<rootDir>/build/"
-    ],
+    "coveragePathIgnorePatterns": ["/node_modules/", "<rootDir>/coverage/", "<rootDir>/build/"],
     "collectCoverageFrom": ["**/*.{js,jsx}"]
   }
 }
