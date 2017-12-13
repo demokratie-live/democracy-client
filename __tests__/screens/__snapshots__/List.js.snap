@@ -1,0 +1,2024 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test components/List/Row render row 1`] = `
+<View
+  innerRef={[Function]}
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#ffffff",
+        "borderColor": "#bbb",
+        "borderTopWidth": 1,
+        "marginTop": 20,
+      },
+      Object {
+        "marginTop": 0,
+      },
+    ]
+  }
+>
+  <RCTScrollView
+    data={
+      Array [
+        Object {
+          "commentsCount": 3213,
+          "date": "2018-08-23T09:52:57.768Z",
+          "description": "Die staatliche Aufgabe erfordert es, die strafprozessualen Vorschriften laufend auf ihre Tauglichkeit, Zeitgemäßheit und Effektivität hin zu überprüfen und das bestehende Regelungsgefüge unter Wahrung der genannten Ziele des Strafverfahrens an die sich ändernden Rahmenbedingungen anzupassen. Der Erreichung dieses Ziels dienen die vorliegenden Gesetzgebungsvorschläge zur Effektivierung und Steigerung der Praxistauglichkeit des Strafverfahrens.",
+          "id": 1,
+          "places": 19999,
+          "subtitle": "Ein subtitle der auch für die dummydaten noch angepasste werden sollte",
+          "title": "Gesetz zur effektiveren und praxistauglicheren Ausgestaltung des Strafverfahrens",
+          "votes": 632,
+        },
+        Object {
+          "commentsCount": 3213,
+          "date": "2017-12-19T17:59:19.773Z",
+          "description": "Zunehmend sind Fälle von illegalen Kraftfahrzeugrennen zu beobachten, bei denen Unbeteiligte getötet oder schwer verletzt werden. Mit dem Gesetz wird ein neuer Straftatbestand für die Veranstaltung von oder für die Teilnahme an verbotenen Kraftfahrzeugrennen eingeführt, der an die Stelle der bisherigen Bußgeldtatbestände tritt.",
+          "id": 2,
+          "places": 19999,
+          "subtitle": "Ein subtitle der auch für die dummydaten noch angepasste werden sollte",
+          "title": "Strafrechtsänderungsgesetz ‒ Strafbarkeit nicht genehmigter Kraftfahrzeugrennen im Straßenverkehr",
+          "votes": 82793,
+        },
+        Object {
+          "commentsCount": 3213,
+          "date": "2018-08-23T02:46:15.826Z",
+          "description": "§ 203 des Strafgesetzbuches (StGB) stellt den Schutz von Geheimnissen vor unbefugter Offenbarung sicher, die Angehörigen bestimmter Berufsgruppen (zum Beispiel Ärzte, Rechtsanwälte, Steuerberater oder Wirtschaftsprüfer) im Rahmen ihrer beruflichen Tätigkeit anvertraut werden. Insbesondere die Digitalisierung hat es in den letzten Jahrzehnten möglich und erforderlich gemacht, in weiterem Umfang als bisher anfallende Unterstützungstätigkeiten nicht durch eigenes Personal erledigen zu lassen, sondern durch darauf spezialisierte Unternehmen oder selbständig tätige Personen. Hierzu gehören beispielsweise auch die Einrichtung, der Betrieb, die Wartung und die Anpassung informationstechnischer Anlagen. Die Heranziehung dritter, außerhalb der eigenen Sphäre stehender Personen zu diesen unterstützenden Tätigkeiten ist für Berufsgeheimnisträger aber nicht ohne rechtliches Risiko, sofern diese Personen damit von geschützten Geheimnissen Kenntnis erlangen können. Der Entwurf sieht daher eine Einschränkung der Strafbarkeit nach § 203 StGB vor. Ausdrücklich nicht der Strafbarkeit unterfallen soll zukünftig das Offenbaren von geschützten Geheimnissen gegenüber Personen, die an der beruflichen oder dienstlichen Tätigkeit des Berufsgeheimnisträgers mitwirken, soweit dies für die ordnungsgemäße Durchführung der Tätigkeit der mitwirkenden Personen erforderlich ist. Im Gegenzug sollen diese mitwirkendenden Personen in die Strafbarkeit nach § 203 StGB einbezogen werden. Darüber hinaus werden für Berufsgeheimnisträger strafbewehrte Sorgfaltspflichten normiert, die bei der Einbeziehung dritter Personen in die Berufsausübung zu beachten sind.",
+          "id": 3,
+          "places": 19999,
+          "subtitle": "Ein subtitle der auch für die dummydaten noch angepasste werden sollte",
+          "title": "Gesetz zur Neuregelung des Schutzes von Geheimnissen bei der Mitwirkung Dritter an der Berufsausübung schweigepflichtiger Personen",
+          "votes": 9678,
+        },
+        Object {
+          "commentsCount": 3213,
+          "date": "2018-08-12T20:42:42.467Z",
+          "description": "Durch das Gesetz zur Verbesserung der Zusammenarbeit im Bereich des Verfassungsschutzes (Bundestagsdrucksachen 18/4654, 18/5415) wird künftig auch in Bezug auf das Bundeszentralregister der sogenannte „Ähnlichenservice“ eingeführt. Dies hat zur Folge, dass eine Vielzahl von datenschutzrechtlich hoch sensiblen Datensätzen über Verurteilte an alle in § 41 des Bundeszentralregistergesetzes genannten unbeschränkt auskunftsberechtigten Behörden übermittelt werden, wenn ein Datensatz nicht eindeutig ermittelt werden kann. Dies ist nicht erforderlich, da der Adressatenkreis im Rahmen des „Ähnlichen-service“ nach den Intentionen des Gesetzes auf die Nachrichtendienste beschränkt werden soll.",
+          "id": 4,
+          "places": 19999,
+          "subtitle": "Ein subtitle der auch für die dummydaten noch angepasste werden sollte",
+          "title": "Sechstes Gesetz zur Änderung des Bundeszentralregistergesetzes",
+          "votes": 6845,
+        },
+        Object {
+          "commentsCount": 3213,
+          "date": "2018-01-14T00:45:02.155Z",
+          "description": "Es besteht zunehmend Bedarf, über zeitgemäße Kommunikationskanäle einen grenzüberschreitenden Zugang zu Unternehmensinformationen herzustellen, zur Überwindung von Sprachproblemen beizutragen, die Registerverfahren zu beschleunigen. Die Register der Mitgliedstaaten, die zentrale Europäische Plattform und das Europäische Justizportal bilden künftig gemeinsam das Europäische System der Registervernetzung. Im Handelsgesetzbuch sollen die Voraussetzungen dafür geschaffen werden, die Interoperabilität des Handelsregisters und des Unternehmensregisters mit der zentralen Europäischen Plattform nach der Richtlinie 2012/17/EU zu gewährleisten.",
+          "id": 5,
+          "places": 19999,
+          "subtitle": "Ein subtitle der auch für die dummydaten noch angepasste werden sollte",
+          "title": "Gesetz zur Umsetzung der Richtlinie 2012/17/EU in Bezug auf die Verknüpfung von Zentral-, Handels- und Gesellschaftsregistern in der Europäischen Union",
+          "votes": 9567,
+        },
+        Object {
+          "commentsCount": 3213,
+          "date": "2018-10-08T08:06:52.354Z",
+          "description": "Um die sozialen Netzwerke zu einer zügigeren und umfassenderen Bearbeitung von Beschwerden insbesondere von Nutzerinnen und Nutzer über Hasskriminalität und andere strafbare Inhalte anzuhalten, werden durch den Entwurf gesetzliche Compliance-Regeln für soziale Netzwerke eingeführt. Vorgesehen sind eine gesetzliche Berichtspflicht für soziale Netzwerke über den Umgang mit Hasskriminalität und anderen strafbaren Inhalten, ein wirksames Beschwerdemanagement sowie die Benennung eines inländischen Zustellungsbevollmächtigten. Verstöße gegen diese Pflichten können mit Bußgeldern gegen das Unternehmen und die Aufsichtspflichtigen geahndet werden. Außerdem wird Opfern von Persönlichkeitsrechtsverletzungen im Netz ermöglicht, aufgrund gerichtlicher Anordnung die Bestandsdaten der Verletzer von Diensteanbietern zu erhalten.",
+          "id": 6,
+          "places": 19999,
+          "subtitle": "Ein subtitle der auch für die dummydaten noch angepasste werden sollte",
+          "title": "Gesetz zur Verbesserung der Rechtsdurchsetzung in sozialen Netzwerken (Netzwerkdurchsetzungsgesetz – NetzDG)",
+          "votes": 4236,
+        },
+        Object {
+          "commentsCount": 3213,
+          "date": "2018-12-11T21:43:07.040Z",
+          "description": "Die Europäische Union hat am 12. Dezember 2012 die Verordnung (EU) Nr. 1215/2012 über die gerichtliche Zuständigkeit und die Anerkennung und Vollstreckung von Entscheidungen in Zivil- und Handelssachen (im Folgenden: Brüssel-Ia-Verordnung) verabschiedet. Die Verordnung findet ab dem 10. Januar 2015 in 27 EU-Mitgliedstaaten sowie mittelbar auch im Verhältnis zu Dänemark Anwendung. Sie ersetzt die Verordnung (EG) Nr. 44/2001 des Rates über die gerichtliche Zuständigkeit und die Anerkennung und Vollstreckung von Entscheidungen in Zivil- und Handelssachen. Dadurch entfällt insbesondere das Vollstreckbarerklärungsverfahren, das bislang der Vollstreckung ausländischer Titel vorgeschaltet ist. Die Neuregelung gilt in der Bundesrepublik Deutschland unmittelbar, bedarf jedoch einiger ergänzender Durchführungsvorschriften.",
+          "id": 7,
+          "places": 19999,
+          "subtitle": "Ein subtitle der auch für die dummydaten noch angepasste werden sollte",
+          "title": "Entwurf eines Gesetzes zur Durchführung der Verordnung (EU) Nr. 1215/2012 sowie zur Änderung sonstiger Vorschriften",
+          "votes": 3865,
+        },
+        Object {
+          "commentsCount": 3213,
+          "date": "2018-08-13T11:39:11.132Z",
+          "description": "Die Umsetzung der Richtlinie 2013/48/EU des Europäischen Parlaments und des Rates vom 22. Oktober 2013soll durch punktuelle Änderungen in der Strafprozessordnung, im Jugendgerichtsgesetz (JGG), im Gesetz über die internationale Rechtshilfe in Strafsachen und im Einführungsgesetz zum Gerichtsverfassungsgesetz erfolgen. Da das deutsche Recht den Vorgaben der vorliegenden Richtlinie weitgehend bereits entspricht, sind zu ihrer Umsetzung nur punktuelle Änderungen erforderlich.",
+          "id": 8,
+          "places": 19999,
+          "subtitle": "Ein subtitle der auch für die dummydaten noch angepasste werden sollte",
+          "title": "Zweites Gesetz zur Stärkung der Verfahrensrechte von Beschuldigten im Strafverfahren und zur Änderung des Schöffenrechts",
+          "votes": 9674,
+        },
+        Object {
+          "commentsCount": 3213,
+          "date": "2018-03-15T14:40:09.159Z",
+          "description": "description",
+          "id": 9,
+          "places": 19999,
+          "subtitle": "Ein subtitle der auch für die dummydaten noch angepasste werden sollte",
+          "title": "Gesetz zur Angleichung des Urheberrechts an die aktuellen Erfordernisse der Wissensgesellschaft (UrhWissG)",
+          "votes": 26,
+        },
+        Object {
+          "commentsCount": 3213,
+          "date": "2016-12-31T19:06:53.019Z",
+          "description": "Die staatliche Aufgabe erfordert es, die strafprozessualen Vorschriften laufend auf ihre Tauglichkeit, Zeitgemäßheit und Effektivität hin zu überprüfen und das bestehende Regelungsgefüge unter Wahrung der genannten Ziele des Strafverfahrens an die sich ändernden Rahmenbedingungen anzupassen. Der Erreichung dieses Ziels dienen die vorliegenden Gesetzgebungsvorschläge zur Effektivierung und Steigerung der Praxistauglichkeit des Strafverfahrens.",
+          "id": 10,
+          "places": 19999,
+          "subtitle": "Ein subtitle der auch für die dummydaten noch angepasste werden sollte",
+          "title": "Gesetz zur effektiveren und praxistauglicheren Ausgestaltung des Strafverfahrens",
+          "votes": 4685,
+        },
+        Object {
+          "commentsCount": 3213,
+          "date": "2017-06-01T21:23:07.167Z",
+          "description": "description",
+          "id": 11,
+          "places": 19999,
+          "subtitle": "Ein subtitle der auch für die dummydaten noch angepasste werden sollte",
+          "title": "Diskussionsentwurf zur Musterfeststellungsklage",
+          "votes": 65738,
+        },
+        Object {
+          "commentsCount": 3213,
+          "date": "2017-06-09T04:23:20.156Z",
+          "description": "description",
+          "id": 12,
+          "places": 19999,
+          "subtitle": "Ein subtitle der auch für die dummydaten noch angepasste werden sollte",
+          "title": "Gesetz zur Einführung des Rechts auf Eheschließung für Personen gleichen Geschlechts",
+          "votes": 5687354,
+        },
+      ]
+    }
+    disableVirtualization={false}
+    getItem={[Function]}
+    getItemCount={[Function]}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onContentSizeChange={[Function]}
+    onEndReachedThreshold={2}
+    onLayout={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    stickyHeaderIndices={Array []}
+    style={
+      Array [
+        Object {},
+        undefined,
+      ]
+    }
+    updateCellsBatchingPeriod={50}
+    viewabilityConfigCallbackPairs={Array []}
+    windowSize={21}
+  >
+    <View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "borderBottomColor": "#c8c7cc",
+                  "borderBottomWidth": 1,
+                  "flexDirection": "row",
+                  "paddingBottom": 10,
+                  "paddingLeft": 27,
+                  "paddingRight": 10,
+                  "paddingTop": 10,
+                },
+                undefined,
+              ]
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "flexBasis": 0,
+                    "flexGrow": 1,
+                    "flexShrink": 1,
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                numberOfLines={2}
+                style={
+                  Array [
+                    Object {
+                      "color": "#030303",
+                      "fontSize": 17,
+                      "letterSpacing": -0.41,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Gesetz zur effektiveren und praxistauglicheren Ausgestaltung des Strafverfahrens
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                numberOfLines={2}
+                style={
+                  Array [
+                    Object {
+                      "color": "#8f8e94",
+                      "fontSize": 15,
+                      "letterSpacing": -0.24,
+                      "paddingTop": 5,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Ein subtitle der auch für die dummydaten noch angepasste werden sollte
+              </Text>
+            </View>
+            <View
+              style={
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "justifyContent": "space-between",
+                    "width": 48,
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "width": 48,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "grey",
+                        "fontSize": 12,
+                      },
+                      Array [
+                        Object {
+                          "fontSize": 45,
+                          "marginBottom": -15,
+                          "marginTop": -10,
+                        },
+                        undefined,
+                      ],
+                      Object {
+                        "fontFamily": "Ionicons",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                      },
+                    ]
+                  }
+                >
+                  
+                </Text>
+                <Text
+                  accessible={true}
+                  adjustsFontSizeToFit={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#8f8e94",
+                        "fontSize": 18,
+                        "letterSpacing": -0.29,
+                      },
+                      undefined,
+                    ]
+                  }
+                >
+                  632
+                </Text>
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "green",
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                3:13
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "borderBottomColor": "#c8c7cc",
+                  "borderBottomWidth": 1,
+                  "flexDirection": "row",
+                  "paddingBottom": 10,
+                  "paddingLeft": 27,
+                  "paddingRight": 10,
+                  "paddingTop": 10,
+                },
+                undefined,
+              ]
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "flexBasis": 0,
+                    "flexGrow": 1,
+                    "flexShrink": 1,
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                numberOfLines={2}
+                style={
+                  Array [
+                    Object {
+                      "color": "#030303",
+                      "fontSize": 17,
+                      "letterSpacing": -0.41,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Strafrechtsänderungsgesetz ‒ Strafbarkeit nicht genehmigter Kraftfahrzeugrennen im Straßenverkehr
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                numberOfLines={2}
+                style={
+                  Array [
+                    Object {
+                      "color": "#8f8e94",
+                      "fontSize": 15,
+                      "letterSpacing": -0.24,
+                      "paddingTop": 5,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Ein subtitle der auch für die dummydaten noch angepasste werden sollte
+              </Text>
+            </View>
+            <View
+              style={
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "justifyContent": "space-between",
+                    "width": 48,
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "width": 48,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "grey",
+                        "fontSize": 12,
+                      },
+                      Array [
+                        Object {
+                          "fontSize": 45,
+                          "marginBottom": -15,
+                          "marginTop": -10,
+                        },
+                        undefined,
+                      ],
+                      Object {
+                        "fontFamily": "Ionicons",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                      },
+                    ]
+                  }
+                >
+                  
+                </Text>
+                <Text
+                  accessible={true}
+                  adjustsFontSizeToFit={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#8f8e94",
+                        "fontSize": 18,
+                        "letterSpacing": -0.29,
+                      },
+                      undefined,
+                    ]
+                  }
+                >
+                  82793
+                </Text>
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "green",
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                3:13
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "borderBottomColor": "#c8c7cc",
+                  "borderBottomWidth": 1,
+                  "flexDirection": "row",
+                  "paddingBottom": 10,
+                  "paddingLeft": 27,
+                  "paddingRight": 10,
+                  "paddingTop": 10,
+                },
+                undefined,
+              ]
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "flexBasis": 0,
+                    "flexGrow": 1,
+                    "flexShrink": 1,
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                numberOfLines={2}
+                style={
+                  Array [
+                    Object {
+                      "color": "#030303",
+                      "fontSize": 17,
+                      "letterSpacing": -0.41,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Gesetz zur Neuregelung des Schutzes von Geheimnissen bei der Mitwirkung Dritter an der Berufsausübung schweigepflichtiger Personen
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                numberOfLines={2}
+                style={
+                  Array [
+                    Object {
+                      "color": "#8f8e94",
+                      "fontSize": 15,
+                      "letterSpacing": -0.24,
+                      "paddingTop": 5,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Ein subtitle der auch für die dummydaten noch angepasste werden sollte
+              </Text>
+            </View>
+            <View
+              style={
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "justifyContent": "space-between",
+                    "width": 48,
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "width": 48,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "grey",
+                        "fontSize": 12,
+                      },
+                      Array [
+                        Object {
+                          "fontSize": 45,
+                          "marginBottom": -15,
+                          "marginTop": -10,
+                        },
+                        undefined,
+                      ],
+                      Object {
+                        "fontFamily": "Ionicons",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                      },
+                    ]
+                  }
+                >
+                  
+                </Text>
+                <Text
+                  accessible={true}
+                  adjustsFontSizeToFit={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#8f8e94",
+                        "fontSize": 18,
+                        "letterSpacing": -0.29,
+                      },
+                      undefined,
+                    ]
+                  }
+                >
+                  9678
+                </Text>
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "green",
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                3:13
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "borderBottomColor": "#c8c7cc",
+                  "borderBottomWidth": 1,
+                  "flexDirection": "row",
+                  "paddingBottom": 10,
+                  "paddingLeft": 27,
+                  "paddingRight": 10,
+                  "paddingTop": 10,
+                },
+                undefined,
+              ]
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "flexBasis": 0,
+                    "flexGrow": 1,
+                    "flexShrink": 1,
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                numberOfLines={2}
+                style={
+                  Array [
+                    Object {
+                      "color": "#030303",
+                      "fontSize": 17,
+                      "letterSpacing": -0.41,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Sechstes Gesetz zur Änderung des Bundeszentralregistergesetzes
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                numberOfLines={2}
+                style={
+                  Array [
+                    Object {
+                      "color": "#8f8e94",
+                      "fontSize": 15,
+                      "letterSpacing": -0.24,
+                      "paddingTop": 5,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Ein subtitle der auch für die dummydaten noch angepasste werden sollte
+              </Text>
+            </View>
+            <View
+              style={
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "justifyContent": "space-between",
+                    "width": 48,
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "width": 48,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "grey",
+                        "fontSize": 12,
+                      },
+                      Array [
+                        Object {
+                          "fontSize": 45,
+                          "marginBottom": -15,
+                          "marginTop": -10,
+                        },
+                        undefined,
+                      ],
+                      Object {
+                        "fontFamily": "Ionicons",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                      },
+                    ]
+                  }
+                >
+                  
+                </Text>
+                <Text
+                  accessible={true}
+                  adjustsFontSizeToFit={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#8f8e94",
+                        "fontSize": 18,
+                        "letterSpacing": -0.29,
+                      },
+                      undefined,
+                    ]
+                  }
+                >
+                  6845
+                </Text>
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "green",
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                3:13
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "borderBottomColor": "#c8c7cc",
+                  "borderBottomWidth": 1,
+                  "flexDirection": "row",
+                  "paddingBottom": 10,
+                  "paddingLeft": 27,
+                  "paddingRight": 10,
+                  "paddingTop": 10,
+                },
+                undefined,
+              ]
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "flexBasis": 0,
+                    "flexGrow": 1,
+                    "flexShrink": 1,
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                numberOfLines={2}
+                style={
+                  Array [
+                    Object {
+                      "color": "#030303",
+                      "fontSize": 17,
+                      "letterSpacing": -0.41,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Gesetz zur Umsetzung der Richtlinie 2012/17/EU in Bezug auf die Verknüpfung von Zentral-, Handels- und Gesellschaftsregistern in der Europäischen Union
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                numberOfLines={2}
+                style={
+                  Array [
+                    Object {
+                      "color": "#8f8e94",
+                      "fontSize": 15,
+                      "letterSpacing": -0.24,
+                      "paddingTop": 5,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Ein subtitle der auch für die dummydaten noch angepasste werden sollte
+              </Text>
+            </View>
+            <View
+              style={
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "justifyContent": "space-between",
+                    "width": 48,
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "width": 48,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "grey",
+                        "fontSize": 12,
+                      },
+                      Array [
+                        Object {
+                          "fontSize": 45,
+                          "marginBottom": -15,
+                          "marginTop": -10,
+                        },
+                        undefined,
+                      ],
+                      Object {
+                        "fontFamily": "Ionicons",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                      },
+                    ]
+                  }
+                >
+                  
+                </Text>
+                <Text
+                  accessible={true}
+                  adjustsFontSizeToFit={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#8f8e94",
+                        "fontSize": 18,
+                        "letterSpacing": -0.29,
+                      },
+                      undefined,
+                    ]
+                  }
+                >
+                  9567
+                </Text>
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "green",
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                3:13
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "borderBottomColor": "#c8c7cc",
+                  "borderBottomWidth": 1,
+                  "flexDirection": "row",
+                  "paddingBottom": 10,
+                  "paddingLeft": 27,
+                  "paddingRight": 10,
+                  "paddingTop": 10,
+                },
+                undefined,
+              ]
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "flexBasis": 0,
+                    "flexGrow": 1,
+                    "flexShrink": 1,
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                numberOfLines={2}
+                style={
+                  Array [
+                    Object {
+                      "color": "#030303",
+                      "fontSize": 17,
+                      "letterSpacing": -0.41,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Gesetz zur Verbesserung der Rechtsdurchsetzung in sozialen Netzwerken (Netzwerkdurchsetzungsgesetz – NetzDG)
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                numberOfLines={2}
+                style={
+                  Array [
+                    Object {
+                      "color": "#8f8e94",
+                      "fontSize": 15,
+                      "letterSpacing": -0.24,
+                      "paddingTop": 5,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Ein subtitle der auch für die dummydaten noch angepasste werden sollte
+              </Text>
+            </View>
+            <View
+              style={
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "justifyContent": "space-between",
+                    "width": 48,
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "width": 48,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "grey",
+                        "fontSize": 12,
+                      },
+                      Array [
+                        Object {
+                          "fontSize": 45,
+                          "marginBottom": -15,
+                          "marginTop": -10,
+                        },
+                        undefined,
+                      ],
+                      Object {
+                        "fontFamily": "Ionicons",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                      },
+                    ]
+                  }
+                >
+                  
+                </Text>
+                <Text
+                  accessible={true}
+                  adjustsFontSizeToFit={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#8f8e94",
+                        "fontSize": 18,
+                        "letterSpacing": -0.29,
+                      },
+                      undefined,
+                    ]
+                  }
+                >
+                  4236
+                </Text>
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "green",
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                3:13
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "borderBottomColor": "#c8c7cc",
+                  "borderBottomWidth": 1,
+                  "flexDirection": "row",
+                  "paddingBottom": 10,
+                  "paddingLeft": 27,
+                  "paddingRight": 10,
+                  "paddingTop": 10,
+                },
+                undefined,
+              ]
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "flexBasis": 0,
+                    "flexGrow": 1,
+                    "flexShrink": 1,
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                numberOfLines={2}
+                style={
+                  Array [
+                    Object {
+                      "color": "#030303",
+                      "fontSize": 17,
+                      "letterSpacing": -0.41,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Entwurf eines Gesetzes zur Durchführung der Verordnung (EU) Nr. 1215/2012 sowie zur Änderung sonstiger Vorschriften
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                numberOfLines={2}
+                style={
+                  Array [
+                    Object {
+                      "color": "#8f8e94",
+                      "fontSize": 15,
+                      "letterSpacing": -0.24,
+                      "paddingTop": 5,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Ein subtitle der auch für die dummydaten noch angepasste werden sollte
+              </Text>
+            </View>
+            <View
+              style={
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "justifyContent": "space-between",
+                    "width": 48,
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "width": 48,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "grey",
+                        "fontSize": 12,
+                      },
+                      Array [
+                        Object {
+                          "fontSize": 45,
+                          "marginBottom": -15,
+                          "marginTop": -10,
+                        },
+                        undefined,
+                      ],
+                      Object {
+                        "fontFamily": "Ionicons",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                      },
+                    ]
+                  }
+                >
+                  
+                </Text>
+                <Text
+                  accessible={true}
+                  adjustsFontSizeToFit={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#8f8e94",
+                        "fontSize": 18,
+                        "letterSpacing": -0.29,
+                      },
+                      undefined,
+                    ]
+                  }
+                >
+                  3865
+                </Text>
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "green",
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                3:13
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "borderBottomColor": "#c8c7cc",
+                  "borderBottomWidth": 1,
+                  "flexDirection": "row",
+                  "paddingBottom": 10,
+                  "paddingLeft": 27,
+                  "paddingRight": 10,
+                  "paddingTop": 10,
+                },
+                undefined,
+              ]
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "flexBasis": 0,
+                    "flexGrow": 1,
+                    "flexShrink": 1,
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                numberOfLines={2}
+                style={
+                  Array [
+                    Object {
+                      "color": "#030303",
+                      "fontSize": 17,
+                      "letterSpacing": -0.41,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Zweites Gesetz zur Stärkung der Verfahrensrechte von Beschuldigten im Strafverfahren und zur Änderung des Schöffenrechts
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                numberOfLines={2}
+                style={
+                  Array [
+                    Object {
+                      "color": "#8f8e94",
+                      "fontSize": 15,
+                      "letterSpacing": -0.24,
+                      "paddingTop": 5,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Ein subtitle der auch für die dummydaten noch angepasste werden sollte
+              </Text>
+            </View>
+            <View
+              style={
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "justifyContent": "space-between",
+                    "width": 48,
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "width": 48,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "grey",
+                        "fontSize": 12,
+                      },
+                      Array [
+                        Object {
+                          "fontSize": 45,
+                          "marginBottom": -15,
+                          "marginTop": -10,
+                        },
+                        undefined,
+                      ],
+                      Object {
+                        "fontFamily": "Ionicons",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                      },
+                    ]
+                  }
+                >
+                  
+                </Text>
+                <Text
+                  accessible={true}
+                  adjustsFontSizeToFit={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#8f8e94",
+                        "fontSize": 18,
+                        "letterSpacing": -0.29,
+                      },
+                      undefined,
+                    ]
+                  }
+                >
+                  9674
+                </Text>
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "green",
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                3:13
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "borderBottomColor": "#c8c7cc",
+                  "borderBottomWidth": 1,
+                  "flexDirection": "row",
+                  "paddingBottom": 10,
+                  "paddingLeft": 27,
+                  "paddingRight": 10,
+                  "paddingTop": 10,
+                },
+                undefined,
+              ]
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "flexBasis": 0,
+                    "flexGrow": 1,
+                    "flexShrink": 1,
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                numberOfLines={2}
+                style={
+                  Array [
+                    Object {
+                      "color": "#030303",
+                      "fontSize": 17,
+                      "letterSpacing": -0.41,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Gesetz zur Angleichung des Urheberrechts an die aktuellen Erfordernisse der Wissensgesellschaft (UrhWissG)
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                numberOfLines={2}
+                style={
+                  Array [
+                    Object {
+                      "color": "#8f8e94",
+                      "fontSize": 15,
+                      "letterSpacing": -0.24,
+                      "paddingTop": 5,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Ein subtitle der auch für die dummydaten noch angepasste werden sollte
+              </Text>
+            </View>
+            <View
+              style={
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "justifyContent": "space-between",
+                    "width": 48,
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "width": 48,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "grey",
+                        "fontSize": 12,
+                      },
+                      Array [
+                        Object {
+                          "fontSize": 45,
+                          "marginBottom": -15,
+                          "marginTop": -10,
+                        },
+                        undefined,
+                      ],
+                      Object {
+                        "fontFamily": "Ionicons",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                      },
+                    ]
+                  }
+                >
+                  
+                </Text>
+                <Text
+                  accessible={true}
+                  adjustsFontSizeToFit={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#8f8e94",
+                        "fontSize": 18,
+                        "letterSpacing": -0.29,
+                      },
+                      undefined,
+                    ]
+                  }
+                >
+                  26
+                </Text>
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "green",
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                3:13
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "borderBottomColor": "#c8c7cc",
+                  "borderBottomWidth": 1,
+                  "flexDirection": "row",
+                  "paddingBottom": 10,
+                  "paddingLeft": 27,
+                  "paddingRight": 10,
+                  "paddingTop": 10,
+                },
+                undefined,
+              ]
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "flexBasis": 0,
+                    "flexGrow": 1,
+                    "flexShrink": 1,
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                numberOfLines={2}
+                style={
+                  Array [
+                    Object {
+                      "color": "#030303",
+                      "fontSize": 17,
+                      "letterSpacing": -0.41,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Gesetz zur effektiveren und praxistauglicheren Ausgestaltung des Strafverfahrens
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                numberOfLines={2}
+                style={
+                  Array [
+                    Object {
+                      "color": "#8f8e94",
+                      "fontSize": 15,
+                      "letterSpacing": -0.24,
+                      "paddingTop": 5,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Ein subtitle der auch für die dummydaten noch angepasste werden sollte
+              </Text>
+            </View>
+            <View
+              style={
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "justifyContent": "space-between",
+                    "width": 48,
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "width": 48,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "grey",
+                        "fontSize": 12,
+                      },
+                      Array [
+                        Object {
+                          "fontSize": 45,
+                          "marginBottom": -15,
+                          "marginTop": -10,
+                        },
+                        undefined,
+                      ],
+                      Object {
+                        "fontFamily": "Ionicons",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                      },
+                    ]
+                  }
+                >
+                  
+                </Text>
+                <Text
+                  accessible={true}
+                  adjustsFontSizeToFit={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#8f8e94",
+                        "fontSize": 18,
+                        "letterSpacing": -0.29,
+                      },
+                      undefined,
+                    ]
+                  }
+                >
+                  4685
+                </Text>
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "green",
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                3:13
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "height": 0,
+          }
+        }
+      />
+    </View>
+  </RCTScrollView>
+</View>
+`;
