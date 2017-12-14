@@ -7,8 +7,7 @@
     "start:ios": "react-native run-ios",
     "start:android": "react-native run-android",
     "start:web": "node ./scripts/start.web.js",
-    "build:ios":
-      "cd ios && xcodebuild -quiet -scheme democracyclient -configuration Release -sdk iphonesimulator",
+    "build:ios": "cd ios && xcodebuild -quiet -scheme democracyclient -configuration Release -sdk iphonesimulator",
     "build:android": "cd android && ./gradlew assembleRelease",
     "build:web": "node ./scripts/build.web.js",
     "clean:android": "cd android && ./gradlew clean",
@@ -29,6 +28,7 @@
     "react-native": "0.51.0",
     "react-native-elements": "^0.18.5",
     "react-native-navigation": "^1.1.304",
+    "react-native-svg": "^6.0.1-rc.1",
     "react-native-vector-icons": "^4.4.2",
     "react-native-web": "^0.1.16",
     "react-router-dom": "^4.2.2",
@@ -52,15 +52,23 @@
   "jest": {
     "preset": "react-native",
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
-        "<rootDir>/__mocks__/fileTransformer.js",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileTransformer.js",
       "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js",
       "\\raw!": "<rootDir>/__mocks__/fileMock.js"
     },
     "clearMocks": true,
     "coverageDirectory": "./coverage/",
-    "coverageReporters": ["lcov", "text"],
-    "coveragePathIgnorePatterns": ["/node_modules/", "<rootDir>/coverage/", "<rootDir>/build/"],
-    "collectCoverageFrom": ["**/*.{js,jsx}"]
+    "coverageReporters": [
+      "lcov",
+      "text"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "<rootDir>/coverage/",
+      "<rootDir>/build/"
+    ],
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}"
+    ]
   }
 }
