@@ -15,7 +15,7 @@ import Svg, {
   Use,
   Defs,
   Stop,
-} from 'react-native-svg';
+} from 'svgs';
 
 export default class SvgExample extends Component {
   render() {

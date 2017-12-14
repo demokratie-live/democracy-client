@@ -24,8 +24,8 @@ public class MainApplication extends NavigationApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new SvgPackage(),
-            new VectorIconsPackage()
+            new VectorIconsPackage(),
+            new SvgPackage()
       );
     }
 
@@ -56,7 +56,8 @@ public class MainApplication extends NavigationApplication {
     // Add additional packages you require here
     // No need to add RnnPackage and MainReactPackage
     return Arrays.<ReactPackage>asList(
-            // eg. new VectorIconsPackage()
+        new VectorIconsPackage(),
+        new SvgPackage()
     );
   }
 
