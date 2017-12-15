@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { Alert } from 'react-native';
+import { Alert, Platform } from 'react-native';
 
 const Wrapper = styled.View`
   flex-direction: row;
@@ -12,7 +12,17 @@ const Wrapper = styled.View`
 `;
 
 const CircleButton = styled.TouchableOpacity.attrs({
-  onPress: () => () => Alert.alert('du hast nun abgestimmt'),
+  onPress: () => () => {
+    switch (Platform.OS) {
+      case 'web':
+        alert('du hast nun abgestimmt');
+        break;
+
+      default:
+        Alert.alert('du hast nun abgestimmt');
+        break;
+    }
+  },
 })`
   align-items: center;
   justify-content: center;
