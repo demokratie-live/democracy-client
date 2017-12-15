@@ -27,7 +27,7 @@ matrix:
             language: android
             jdk: oraclejdk8
             before_install:
-                - echo y | android update sdk --no-ui --filter build-tools-26.0.1,android-26,extra-android-m2repository
+                - echo y | android update sdk --no-ui
             install:
                 - nvm install 8
                 - yarn --version
