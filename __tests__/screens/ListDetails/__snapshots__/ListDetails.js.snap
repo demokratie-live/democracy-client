@@ -276,227 +276,311 @@ exports[`test components/List/Row render row 1`] = `
     </View>
   </View>
   <RCTScrollView
+    horizontal={true}
+    pagingEnabled={true}
     style={
       Array [
-        Object {
-          "flexBasis": 0,
-          "flexGrow": 1,
-          "flexShrink": 1,
-        },
+        Object {},
         undefined,
       ]
     }
   >
     <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
+      <View
         style={
           Array [
-            Object {},
+            Object {
+              "flexBasis": 0,
+              "flexGrow": 1,
+              "flexShrink": 1,
+              "width": 750,
+            },
             undefined,
           ]
         }
+        width={750}
       >
-        Die staatliche Aufgabe erfordert es, die strafprozessualen Vorschriften laufend auf ihre Tauglichkeit, Zeitgemäßheit und Effektivität hin zu überprüfen und das bestehende Regelungsgefüge unter Wahrung der genannten Ziele des Strafverfahrens an die sich ändernden Rahmenbedingungen anzupassen. Der Erreichung dieses Ziels dienen die vorliegenden Gesetzgebungsvorschläge zur Effektivierung und Steigerung der Praxistauglichkeit des Strafverfahrens.
-      </Text>
-    </View>
-  </RCTScrollView>
-  <View
-    style={
-      Array [
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "rgba(250, 250, 250, 0.9)",
-          "flexDirection": "row",
-          "height": 132,
-          "justifyContent": "space-around",
-        },
-        undefined,
-      ]
-    }
-  >
-    <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
-      accessible={true}
-      collapsable={undefined}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
-      isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "rgb(68, 219, 94)",
-          "borderColor": "#44db5e",
-          "borderRadius": 50,
-          "borderWidth": 1,
-          "height": 87.5,
-          "justifyContent": "center",
-          "opacity": 1,
-          "width": 87.5,
-        }
-      }
-      testID={undefined}
-      tvParallaxProperties={undefined}
-    >
-      <Text
-        accessible={true}
-        allowFontScaling={false}
-        ellipsizeMode="tail"
-        style={
-          Array [
-            Object {
-              "color": undefined,
-              "fontSize": 50,
-            },
-            Array [
-              Object {},
-              undefined,
-            ],
-            Object {
-              "fontFamily": "Ionicons",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
-          ]
-        }
-      >
-        
-      </Text>
-    </View>
-    <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
-      accessible={true}
-      collapsable={undefined}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
-      isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "rgba(0, 118, 255, 0.71)",
-          "borderColor": "rgba(0, 118, 255, 0.71)",
-          "borderRadius": 50,
-          "borderWidth": 1,
-          "height": 63.5,
-          "justifyContent": "center",
-          "opacity": 1,
-          "width": 63.5,
-        }
-      }
-      testID={undefined}
-      tvParallaxProperties={undefined}
-    >
-      <Text
-        accessible={true}
-        allowFontScaling={false}
-        ellipsizeMode="tail"
-        style={
-          Array [
-            Object {
-              "color": undefined,
-              "fontSize": 30,
-            },
+        <RCTScrollView
+          style={
             Array [
               Object {
-                "transform": Array [
-                  Object {
-                    "rotate": "90deg",
-                  },
-                ],
+                "flexBasis": 0,
+                "flexGrow": 1,
+                "flexShrink": 1,
               },
               undefined,
-            ],
-            Object {
-              "fontFamily": "Ionicons",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
-          ]
-        }
-      >
-        
-      </Text>
-    </View>
-    <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
-      accessible={true}
-      collapsable={undefined}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
-      isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "rgb(254, 56, 36)",
-          "borderColor": "#fe3824",
-          "borderRadius": 50,
-          "borderWidth": 1,
-          "height": 87.5,
-          "justifyContent": "center",
-          "opacity": 1,
-          "width": 87.5,
-        }
-      }
-      testID={undefined}
-      tvParallaxProperties={undefined}
-    >
-      <Text
-        accessible={true}
-        allowFontScaling={false}
-        ellipsizeMode="tail"
+            ]
+          }
+        >
+          <View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {},
+                  undefined,
+                ]
+              }
+            >
+              Die staatliche Aufgabe erfordert es, die strafprozessualen Vorschriften laufend auf ihre Tauglichkeit, Zeitgemäßheit und Effektivität hin zu überprüfen und das bestehende Regelungsgefüge unter Wahrung der genannten Ziele des Strafverfahrens an die sich ändernden Rahmenbedingungen anzupassen. Der Erreichung dieses Ziels dienen die vorliegenden Gesetzgebungsvorschläge zur Effektivierung und Steigerung der Praxistauglichkeit des Strafverfahrens.
+            </Text>
+          </View>
+        </RCTScrollView>
+        <View
+          style={
+            Array [
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "rgba(250, 250, 250, 0.9)",
+                "flexDirection": "row",
+                "height": 132,
+                "justifyContent": "space-around",
+              },
+              undefined,
+            ]
+          }
+        >
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hasTVPreferredFocus={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "rgb(68, 219, 94)",
+                "borderColor": "#44db5e",
+                "borderRadius": 50,
+                "borderWidth": 1,
+                "height": 87.5,
+                "justifyContent": "center",
+                "opacity": 1,
+                "width": 87.5,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={false}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": undefined,
+                    "fontSize": 50,
+                  },
+                  Array [
+                    Object {},
+                    undefined,
+                  ],
+                  Object {
+                    "fontFamily": "Ionicons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                ]
+              }
+            >
+              
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hasTVPreferredFocus={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "rgba(0, 118, 255, 0.71)",
+                "borderColor": "rgba(0, 118, 255, 0.71)",
+                "borderRadius": 50,
+                "borderWidth": 1,
+                "height": 63.5,
+                "justifyContent": "center",
+                "opacity": 1,
+                "width": 63.5,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={false}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": undefined,
+                    "fontSize": 30,
+                  },
+                  Array [
+                    Object {
+                      "transform": Array [
+                        Object {
+                          "rotate": "90deg",
+                        },
+                      ],
+                    },
+                    undefined,
+                  ],
+                  Object {
+                    "fontFamily": "Ionicons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                ]
+              }
+            >
+              
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hasTVPreferredFocus={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "rgb(254, 56, 36)",
+                "borderColor": "#fe3824",
+                "borderRadius": 50,
+                "borderWidth": 1,
+                "height": 87.5,
+                "justifyContent": "center",
+                "opacity": 1,
+                "width": 87.5,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={false}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": undefined,
+                    "fontSize": 50,
+                  },
+                  Array [
+                    Object {},
+                    undefined,
+                  ],
+                  Object {
+                    "fontFamily": "Ionicons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                ]
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
         style={
           Array [
             Object {
-              "color": undefined,
-              "fontSize": 50,
+              "flexBasis": 0,
+              "flexGrow": 1,
+              "flexShrink": 1,
+              "width": 750,
             },
-            Array [
-              Object {},
-              undefined,
-            ],
-            Object {
-              "fontFamily": "Ionicons",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
+            undefined,
           ]
         }
+        width={750}
       >
-        
-      </Text>
+        <View
+          style={
+            Array [
+              Object {
+                "alignItems": "center",
+                "flexBasis": 0,
+                "flexGrow": 1,
+                "flexShrink": 1,
+                "justifyContent": "center",
+              },
+              undefined,
+            ]
+          }
+        >
+          <svg
+            innerRef={[Function]}
+            style={Object {}}
+            viewBox="0 0 1000 1000"
+          >
+            <g
+              style={Object {}}
+              transform="translate(500, 500)"
+            >
+              <path
+                d="M0.09902291243377474,-499.9999901944627A500,500,0,0,1,427.8752106060524,-258.6944223380672L83.39272469932911,-55.18743939722067A100,100,0,0,0,4.0999970333716425,-99.9159147700022Z"
+                fill="blue"
+                style={Object {}}
+              />
+              <path
+                d="M433.0622048565918,-249.914238739507A500,500,0,0,1,499.97400019066504,-5.098934530359364L99.86991972889089,-5.098934530359187A100,100,0,0,0,88.57971894986852,-46.40725579866043Z"
+                fill="green"
+                style={Object {}}
+              />
+              <path
+                d="M-499.97400019066504,-5.098934530359153A500,500,0,0,1,-10.09833625908047,-499.89801320349187L-6.097362138142701,-99.81393777903136A100,100,0,0,0,-99.86991972889089,-5.098934530359153Z"
+                fill="red"
+                style={Object {}}
+              />
+            </g>
+          </svg>
+        </View>
+      </View>
     </View>
-  </View>
+  </RCTScrollView>
 </View>
 `;
