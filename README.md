@@ -24,7 +24,7 @@ The Client for the DEMOCRACY App. This includes iOS, Android and Web Clients gen
 
 Clone the git repo & run the project
 ```
-git clone git@github.com:demokratie-live/democracy-client.git democracy-client
+git clone git@github.com:demokratie-live/democracy-client.git
 cd democracy-client
 yarn install
 ```
@@ -52,23 +52,6 @@ yarn test:eslint
 ```
 yarn clean:android
 ```
-
-## Keeping Up-to-Date
-
-If you keep the original Git history after cloning this repo, you can always fetch and merge
-the recent updates back into your project by running:
-
-```bash
-git remote add democracy-client https://github.com/demokratie-live/democracy-client.git
-git checkout master
-git fetch democracy-client
-git merge democracy-client/master
-yarn install
-```
-
-*NOTE: Try to merge as soon as the new changes land on the master branch in Democracy Client
-repository, otherwise your project may differ too much from the base/upstream repo.*
-
 
 ## Deployment
 
