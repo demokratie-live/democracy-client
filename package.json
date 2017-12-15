@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "coveralls": "^3.0.0",
+    "d3-shape": "^1.2.0",
     "flow-bin": "^0.61.0",
     "npm": "^5.5.1",
     "prop-types": "^15.6.0",

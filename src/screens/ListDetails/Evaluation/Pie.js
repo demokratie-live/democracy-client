@@ -16,14 +16,31 @@ import Svg, {
   Defs,
   Stop,
 } from 'svgs';
+import styled from 'styled-components/native';
+import * as shape from 'd3-shape';
+
+const arcs = shape.pie()([1, 4, 2]);
+const arcGenerator = shape
+  .arc()
+  .innerRadius(0)
+  .outerRadius(100)
+  .startAngle(d => d.startAngle)
+  .endAngle(d => d.endAngle);
+console.log(arcGenerator(arcs[1]));
+
+const PieSvg = styled(Svg)`
+  flex:1
+  align-self: stretch
+`;
 
 export default class SvgExample extends Component {
+  renderPie = () =>
+    arcs.map((arc) => {
+      console.log(arc);
+      return <Path d={arcGenerator(arc)} stroke="black" />;
+    });
+
   render() {
-    return (
-      <Svg height="100" width="100">
-        <Circle cx="50" cy="50" r="45" stroke="blue" strokeWidth="2.5" fill="green" />
-        <Rect x="15" y="15" width="70" height="70" stroke="red" strokeWidth="2" fill="yellow" />
-      </Svg>
-    );
+    return <PieSvg viewBox="0 0 1000 1000">{this.renderPie()}</PieSvg>;
   }
 }
