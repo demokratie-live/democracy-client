@@ -13,7 +13,7 @@ import IoniconsFont from 'react-native-vector-icons/Fonts/Ionicons.ttf';
 import MaterialIconsFont from 'react-native-vector-icons/Fonts/MaterialIcons.ttf';
 
 import List from './screens/List';
-import ListDetails from './screens/ListDetails/ListDetails';
+import ListDetails from './screens/ListDetails';
 
 const iconFontStyles = `
 @font-face {
