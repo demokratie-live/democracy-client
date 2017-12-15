@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 
-import Pie from './Pie';
+import Pie from './../../../components/Charts/Pie';
 
 const Wrapper = styled.View`
   flex: 1;
