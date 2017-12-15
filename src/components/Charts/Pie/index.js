@@ -11,9 +11,9 @@ const arcs = shape
   .startAngle(-90 * (Math.PI / 180))
   .endAngle(90 * (Math.PI / 180))
   .value(d => d.value)([
-    { value: 2, color: 'blue' },
-    { value: 1, color: 'green' },
-    { value: 3, color: 'red' },
+    { id: 1, value: 2, color: 'blue' },
+    { id: 2, value: 1, color: 'green' },
+    { id: 3, value: 3, color: 'red' },
   ]);
 
 const Wrapper = styled.View`
@@ -29,8 +29,14 @@ const PieSvg = styled(Svg)`
 
 export default class SvgExample extends Component {
   renderPie = () =>
-    arcs.map((arc, i) => (
-      <Slice key={i} outerRadius="500" innerRadius="100" value={arc} fill={arc.data.color} />
+    arcs.map(arc => (
+      <Slice
+        key={arc.data.id}
+        outerRadius="500"
+        innerRadius="100"
+        value={arc}
+        fill={arc.data.color}
+      />
     ));
 
   render() {

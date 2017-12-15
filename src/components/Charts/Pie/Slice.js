@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Svg, { Path } from 'svgs';
+import { Path } from 'svgs';
 import * as shape from 'd3-shape';
 
 const Slice = (props) => {
