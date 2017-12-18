@@ -6,6 +6,10 @@
 
 The Client for the DEMOCRACY App. This includes iOS, Android and Web Clients generated from the same Codebase.
 
+:movie_camera: <a href="https://www.youtube.com/watch?v=oTX59JhDmXU">Video des Entwicklungsstandes 15.12.2017</a>
+
+[Entwicklertagebuch](https://github.com/demokratie-live/democracy-client/wiki/Entwicklertagebuch)
+
 ## Tech Stack
 
 * [Node.js][node], [Yarn][yarn], [JavaScript][js], [Babel][babel], [Jest][jest]
