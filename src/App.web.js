@@ -44,7 +44,7 @@ const Container = styled.View`
 `;
 
 export default () => (
-  <Router>
+  <Router basename="/democracy-client/">
     <Container>
       <Route exact path="/" component={List} />
       <Route exact path="/details/:id" component={ListDetails} />
