@@ -1,4 +1,4 @@
-process.env.NODE_ENV = 'production';
+process.env.NODE_ENV = 'development';
 const path = require('path');
 
 const webpackConfigProd = require('react-scripts/config/webpack.config.dev');

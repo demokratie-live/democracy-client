@@ -1,5 +1,6 @@
 {
   "name": "democracyclient",
+  "homepage": "https://demokratie-live.github.io/democracy-client/",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -7,7 +8,8 @@
     "start:ios": "react-native run-ios",
     "start:android": "react-native run-android",
     "start:web": "node ./scripts/start.web.js",
-    "build:ios": "cd ios && xcodebuild -quiet -scheme democracyclient -configuration Release -sdk iphonesimulator",
+    "build:ios":
+      "cd ios && xcodebuild -quiet -scheme democracyclient -configuration Release -sdk iphonesimulator",
     "build:android": "cd android && ./gradlew assembleRelease",
     "build:web": "node ./scripts/build.web.js",
     "clean:android": "cd android && ./gradlew clean",
@@ -16,7 +18,10 @@
     "test:flow": "yarn flow",
     "test:coverage": "jest --coverage",
     "fix:eslint": "eslint ./src --fix",
-    "coveralls": "yarn test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "coveralls":
+      "yarn test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "predeploy": "npm run build:web",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "coveralls": "^3.0.0",
@@ -45,6 +50,7 @@
     "eslint-config-react-app": "^2.0.1",
     "eslint-plugin-react": "^7.5.1",
     "eslint-plugin-react-native": "^3.2.0",
+    "gh-pages": "^1.1.0",
     "image-webpack-loader": "^3.4.2",
     "jest": "^22.0.3",
     "react-native-cli": "^2.0.1",
@@ -54,23 +60,15 @@
   "jest": {
     "preset": "react-native",
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileTransformer.js",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+        "<rootDir>/__mocks__/fileTransformer.js",
       "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js",
       "\\raw!": "<rootDir>/__mocks__/fileMock.js"
     },
     "clearMocks": true,
     "coverageDirectory": "./coverage/",
-    "coverageReporters": [
-      "lcov",
-      "text"
-    ],
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "<rootDir>/coverage/",
-      "<rootDir>/build/"
-    ],
-    "collectCoverageFrom": [
-      "**/*.{js,jsx}"
-    ]
+    "coverageReporters": ["lcov", "text"],
+    "coveragePathIgnorePatterns": ["/node_modules/", "<rootDir>/coverage/", "<rootDir>/build/"],
+    "collectCoverageFrom": ["**/*.{js,jsx}"]
   }
 }
