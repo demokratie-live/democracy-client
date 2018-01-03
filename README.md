@@ -25,6 +25,11 @@ The Client for the DEMOCRACY App. This includes iOS, Android and Web Clients gen
 
 * [Node.js][node]
 * [Android Studio or Android SDK][android] follow the installation Instructions [here](http://facebook.github.io/react-native/docs/getting-started.html)
+* [optional] [windows] install windows-build-tools for node
+  ```
+  npm install --global --production windows-build-tools
+  (installs python) (requireds administrator rights)
+  ```
 
 ## Getting started
 
