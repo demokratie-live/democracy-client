@@ -2,7 +2,6 @@
   "name": "democracyclient",
   "version": "0.0.1",
   "private": true,
-  "engines": { "node": "~9.3.0" },
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "start:ios": "react-native run-ios",
