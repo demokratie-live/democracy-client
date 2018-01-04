@@ -12,4 +12,5 @@ Navigation.startSingleScreenApp({
     title: 'Bundestag',
     icon: require('./assets/icons/list.png'), // eslint-disable-line global-require
   },
+  animationType: 'fade',
 });
