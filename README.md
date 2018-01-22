@@ -2,7 +2,7 @@
 
 # Democracy-Client &nbsp; <a href="https://github.com/kriasoft/nodejs-api-starter/stargazers" target="_blank"><img src="https://img.shields.io/github/stars/demokratie-live/democracy-client.svg?style=social&label=Star&maxAge=3600" height="20"/></a>  <a href="https://twitter.com/democracy_de" target="_blank"><img src="https://img.shields.io/twitter/follow/democracy_de.svg?style=social&label=Follow&maxAge=3600" height="20"/></a>  <a href="https://www.facebook.com/democracygermany/" target="_blank"><img src="https://github.com/demokratie-live/democracy-assets/blob/master/docu/facebook.png" height="20"/></a>  <a href="https://discord.gg/Pdu3ZEV" target="_blank"><img src="https://github.com/demokratie-live/democracy-assets/blob/master/docu/discord.png" height="20"/></a>
 
-[![Build Status](https://travis-ci.org/demokratie-live/democracy-client.svg?branch=master)](https://travis-ci.org/demokratie-live/democracy-client) &nbsp; [![Coverage Status](https://coveralls.io/repos/github/demokratie-live/democracy-client/badge.svg?branch=coveralls)](https://coveralls.io/github/demokratie-live/democracy-client?branch=coveralls) &nbsp;  [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/1461/badge)](https://bestpractices.coreinfrastructure.org/projects/1461)
+[![Build Status](https://travis-ci.org/demokratie-live/democracy-client.svg?branch=master)](https://travis-ci.org/demokratie-live/democracy-client) &nbsp;  [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/1461/badge)](https://bestpractices.coreinfrastructure.org/projects/1461)
 
 The Client for the DEMOCRACY App. This includes iOS, Android and Web Clients generated from the same Codebase.
 
@@ -15,9 +15,7 @@ The Client for the DEMOCRACY App. This includes iOS, Android and Web Clients gen
 ## Tech Stack
 
 * [Node.js][node], [Yarn][yarn], [JavaScript][js], [Babel][babel], [Jest][jest]
-* [React][react], [ReactNative][reactnative], [ReactNativeWeb][reactnativeweb], ~~[Electron][electron]~~
-* [Wix ReactNativeNavigation][wix], [ReactRouter][react-router], 
-* [StyledComponents][styledcomponents]
+* [ReactNative][reactnative], [Wix ReactNativeNavigation][wix], [StyledComponents][styledcomponents]
 
 [More Dependecies](https://github.com/demokratie-live/democracy-client/network/dependencies)
 
@@ -42,14 +40,12 @@ yarn install
 
 ### Compile and start Version of your choosing
 ```
-yarn start:web
 yarn start:android
 yarn start:ios
 ```
 
 ### Build only
 ```
-yarn build:web
 yarn build:android
 yarn build:ios
 ```
@@ -57,11 +53,6 @@ yarn build:ios
 ### Test Project
 ```
 yarn test:eslint
-```
-
-### Clean current build
-```
-yarn clean:android
 ```
 
 ## Deployment
@@ -77,8 +68,8 @@ Anyone and everyone is welcome to [contribute](CONTRIBUTING.md). Start by checki
 
 ## License
 
-Copyright © 2017-present DEMOCRACY Deutschland e.V.. This source code **might be** licensed under the MIT license found in the
-~~[LICENSE.txt](https://github.com/emokratie-live/democracy-client/blob/master/LICENSE.txt)~~ file.
+Copyright © 2017-present DEMOCRACY Deutschland e.V.. This source code **might be** licensed under the Apache 2.0 license found in the
+[LICENSE.txt](https://github.com/emokratie-live/democracy-client/blob/master/LICENSE.txt) file.
 
 ---
 
@@ -88,14 +79,10 @@ Made with ♥ by Team DEMOCRACY ([democracy-deutschland.de](https://www.democrac
 [yarn]: https://yarnpkg.com
 [js]: https://developer.mozilla.org/docs/Web/JavaScript
 [babel]: http://babeljs.io/
-[react]: https://reactjs.org/
 [reactnative]: http://www.reactnative.com/
-[electron]: https://electronjs.org/
 [android]: https://developer.android.com/studio/index.html
-[reactnativeweb]: https://github.com/necolas/react-native-web
 [jest]: http://facebook.github.io/jest/
 [wix]: https://github.com/wix/react-native-navigation
-[react-router]: https://github.com/ReactTraining/react-router
 [styledcomponents]: https://github.com/styled-components/styled-components
 
 
