@@ -69,7 +69,7 @@ Anyone and everyone is welcome to [contribute](CONTRIBUTING.md). Start by checki
 ## License
 
 Copyright © 2017-present DEMOCRACY Deutschland e.V.. This source code **might be** licensed under the Apache 2.0 license found in the
-[LICENSE](https://github.com/emokratie-live/democracy-client/blob/master/LICENSE.txt) file.
+[LICENSE](https://github.com/demokratie-live/democracy-client/blob/master/LICENSE) file.
 
 ---
 
