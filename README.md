@@ -52,7 +52,7 @@ yarn build:ios
 
 ### Test Project
 ```
-yarn test:eslint
+yarn test:lint
 ```
 
 ## Deployment
