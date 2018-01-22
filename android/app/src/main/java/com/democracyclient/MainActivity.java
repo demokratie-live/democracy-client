@@ -22,7 +22,8 @@ public class MainActivity extends SplashActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         view.setBackgroundColor(Color.parseColor("#4494d3"));
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
         layoutParams.gravity = Gravity.CENTER;
         imageView.setLayoutParams(layoutParams);
         imageView.setImageDrawable(ContextCompat.getDrawable(this.getApplicationContext(), R.drawable.launch_screen));
