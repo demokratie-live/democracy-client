@@ -4,13 +4,11 @@
   "private": true,
   "scripts": {
     "test": "jest",
-
+    "test:flow": "flow",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "start:android": "react-native run-android",
     "start:ios": "react-native run-ios",
-
-    "build:ios":
-      "cd ios && xcodebuild -quiet -scheme democracyclient -configuration Release -sdk iphonesimulator",
+    "build:ios": "cd ios && xcodebuild -quiet -scheme democracyclient -configuration Release -sdk iphonesimulator",
     "build:android": "cd android && ./gradlew assembleRelease"
   },
   "dependencies": {
@@ -21,6 +19,7 @@
   "devDependencies": {
     "babel-jest": "22.1.0",
     "babel-preset-react-native": "4.0.0",
+    "flow-bin": "^0.63.1",
     "jest": "22.1.4",
     "react-test-renderer": "16.2.0"
   },
