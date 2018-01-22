@@ -3,10 +3,15 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
+
+    "start": "node node_modules/react-native/local-cli/cli.js start",
     "start:android": "react-native run-android",
-    "start:ios": "react-native run-ios"
+    "start:ios": "react-native run-ios",
+
+    "build:ios":
+      "cd ios && xcodebuild -quiet -scheme democracyclient -configuration Release -sdk iphonesimulator",
+    "build:android": "cd android && ./gradlew assembleRelease"
   },
   "dependencies": {
     "react": "16.2.0",
