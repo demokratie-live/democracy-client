@@ -26,10 +26,10 @@
 ; Ignore metro
 .*/node_modules/metro/.*
 
-; Ignore node_modules
-.*/node_modules/.*
-
 [include]
+
+[untyped]
+.*/node_modules/react-native
 
 [libs]
 Libraries/react-native/react-native-interface.js
