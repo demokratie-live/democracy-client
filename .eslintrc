@@ -8,6 +8,10 @@
   "plugins": ["react", "react-native", "flowtype", "prettier", "standard"],
   "extends": ["airbnb", "prettier", "prettier/flowtype", "prettier/react"],
   "rules": {
-    "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }]
+    "react/jsx-filename-extension": [
+      "error",
+      { "extensions": [".js", ".jsx"] }
+    ],
+    "no-use-before-define": 0
   }
 }
