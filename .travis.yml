@@ -22,8 +22,8 @@ matrix:
         #    script:
         #        - yarn build:web
         # android
-        #-   if: branch =~ ^master OR branch =~ /^pr\..*/
-        -   os: linux
+        -   if: branch =~ ^master OR branch =~ /^pr\..*/
+            os: linux
             language: android
             jdk: oraclejdk8
             before_install:
@@ -63,8 +63,8 @@ matrix:
             #       repo: demokratie-live/democracy-client
             #       tags: true
         # ios
-        #-   if: branch =~ ^master AND NOT type =~ ^pull_request
-        -   os: osx
+        -   if: branch =~ ^master AND NOT type =~ ^pull_request
+            os: osx
             osx_image: xcode9
             language: objective-c
             install:
