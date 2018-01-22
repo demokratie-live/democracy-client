@@ -24,6 +24,7 @@ project.xcworkspace
 
 # Android/IntelliJ
 #
+build/
 .idea
 .gradle
 local.properties
@@ -50,6 +51,3 @@ buck-out/
 */fastlane/report.xml
 */fastlane/Preview.html
 */fastlane/screenshots
-
-coverage
-/nbproject/

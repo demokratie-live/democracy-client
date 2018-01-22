@@ -4,66 +4,20 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "start:ios": "react-native run-ios",
-    "start:android": "react-native run-android",
-    "start:web": "node ./scripts/start.web.js",
-    "build:ios":
-      "cd ios && xcodebuild -quiet -scheme democracyclient -configuration Release -sdk iphonesimulator",
-    "build:android": "cd android && ./gradlew assembleRelease",
-    "build:web": "node ./scripts/build.web.js",
-    "clean:android": "cd android && ./gradlew clean",
-    "test": "yarn test:eslint && yarn test:flow && yarn test:coverage",
-    "test:eslint": "eslint .",
-    "test:flow": "yarn flow",
-    "test:coverage": "jest --coverage",
-    "fix:eslint": "eslint ./src --fix",
-    "coveralls": "yarn test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "test": "jest"
   },
   "dependencies": {
-    "coveralls": "^3.0.0",
-    "d3-shape": "^1.2.0",
-    "flow-bin": "^0.61.0",
-    "npm": "^5.5.1",
-    "prop-types": "^15.6.0",
-    "react": "16.0.0",
-    "react-dom": "^16.2.0",
-    "react-native": "0.51.0",
-    "react-native-elements": "^0.18.5",
-    "react-native-navigation": "^1.1.304",
-    "react-native-svg": "^6.0.1-rc.1",
-    "react-native-vector-icons": "^4.4.2",
-    "react-native-web": "0.2.2",
-    "react-router-dom": "^4.2.2",
-    "react-scripts": "^1.0.17",
-    "styled-components": "^2.2.4",
-    "svgs": "^3.1.1"
+    "react": "16.2.0",
+    "react-native": "0.52.0",
+    "react-native-navigation": "wix/react-native-navigation#2545/head"
   },
   "devDependencies": {
-    "babel-eslint": "^8.0.3",
-    "babel-jest": "^22.0.3",
-    "babel-preset-react-native": "^4.0.0",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-config-react-app": "^2.0.1",
-    "eslint-plugin-react": "^7.5.1",
-    "eslint-plugin-react-native": "^3.2.0",
-    "image-webpack-loader": "^3.4.2",
-    "jest": "^22.0.3",
-    "react-native-cli": "^2.0.1",
-    "react-test-renderer": "^16.0.0",
-    "webpack-bundle-analyzer": "^2.9.1"
+    "babel-jest": "22.1.0",
+    "babel-preset-react-native": "4.0.0",
+    "jest": "22.1.4",
+    "react-test-renderer": "16.2.0"
   },
   "jest": {
-    "preset": "react-native",
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
-        "<rootDir>/__mocks__/fileTransformer.js",
-      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js",
-      "\\raw!": "<rootDir>/__mocks__/fileMock.js"
-    },
-    "clearMocks": true,
-    "coverageDirectory": "./coverage/",
-    "coverageReporters": ["lcov", "text"],
-    "coveragePathIgnorePatterns": ["/node_modules/", "<rootDir>/coverage/", "<rootDir>/build/"],
-    "collectCoverageFrom": ["**/*.{js,jsx}"]
+    "preset": "react-native"
   }
 }
