@@ -19,13 +19,9 @@ export default props => {
     <Swiper style={styles.wrapper} loop={false} onMomentumScrollEnd={onScroll}>
       <View style={styles.slide1}>
         <Text style={styles.text}>Hello Swiper</Text>
-        <Button
-          style={styles.skip}
-          onPress={onFinish}
-          title="Skip"
-          color="#841584"
-          accessibilityLabel="Skip"
-        />
+        <View style={styles.button}>
+          <Button onPress={onFinish} title="Skip" accessibilityLabel="Skip" />
+        </View>
       </View>
       <View style={styles.slide2}>
         <Text style={styles.text}>Beautiful</Text>
@@ -41,9 +37,10 @@ const styles = StyleSheet.create({
   wrapper: {},
   slide1: {
     flex: 1,
-    justifyContent: "center",
+    backgroundColor: "#9DD6EB",
+    flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#9DD6EB"
+    justifyContent: "center"
   },
   slide2: {
     flex: 1,
@@ -62,7 +59,8 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold"
   },
-  skip: {
+  button: {
+    backgroundColor: "red",
     alignSelf: "flex-end"
   }
 });
