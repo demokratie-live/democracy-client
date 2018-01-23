@@ -37,6 +37,7 @@ flow/
 flow-github/
 node_modules/react-apollo/index.js.flow
 node_modules/react-apollo/react-apollo.umd.js.flow
+node_modules/react-apollo/react-apollo.umd.js
 
 [options]
 emoji=true
