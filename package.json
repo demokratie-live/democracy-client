@@ -5,13 +5,12 @@
   "scripts": {
     "test": "eslint . && jest && flow",
     "test:jest": "jest",
-      "test:lint": "eslint .",
-      "test:flow": "flow",
+    "test:lint": "eslint .",
+    "test:flow": "flow",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "start:android": "react-native run-android",
     "start:ios": "react-native run-ios",
-    "build:ios":
-      "cd ios && xcodebuild -quiet -scheme democracyclient -configuration Release -sdk iphonesimulator",
+    "build:ios": "cd ios && xcodebuild -quiet -scheme democracyclient -configuration Release -sdk iphonesimulator",
     "build:android": "cd android && ./gradlew assembleRelease"
   },
   "dependencies": {
@@ -22,7 +21,8 @@
     "eslint-plugin-react": "^7.4.0",
     "react": "16.2.0",
     "react-native": "0.52.0",
-    "react-native-navigation": "wix/react-native-navigation#2545/head"
+    "react-native-navigation": "wix/react-native-navigation#2545/head",
+    "react-native-swiper": "^1.5.13"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
