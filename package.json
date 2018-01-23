@@ -27,11 +27,13 @@
     "eslint-plugin-react": "^7.4.0",
     "graphql": "^0.12.3",
     "graphql-tag": "^2.6.1",
+    "prop-types": "^15.6.0",
     "react": "16.2.0",
     "react-apollo": "^2.0.4",
     "react-native": "0.52.0",
     "react-native-navigation": "wix/react-native-navigation#2545/head",
-    "styled-components": "^3.0.2"
+    "styled-components": "^3.0.2",
+    "react-native-swiper": "^1.5.13"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",

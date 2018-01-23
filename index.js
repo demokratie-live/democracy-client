@@ -6,7 +6,6 @@ import client, { persistor } from "./src/graphql/client";
 import registerScreens from "./src/screens";
 
 import IS_INSTRUCTIONS_SHOWN from "./src/graphql/queries/isInstructionShown";
-import SET_INSTRUCTIONS_SHOWN from "./src/graphql/mutations/setInstructinosShown";
 
 // Reactotron.configure() // controls connection & communication settings
 //   .useReactNative() // add all built-in react native plugins
@@ -23,6 +22,7 @@ class App {
   }
 
   startApp = ({ isInstructionsShown }) => {
+    // Decide Startscreen
     if (isInstructionsShown) {
       Navigation.startSingleScreenApp({
         screen: {
@@ -32,12 +32,15 @@ class App {
         animationType: "fade"
       });
     } else {
-      // Start Introductions
-      client.mutate({
-        mutation: SET_INSTRUCTIONS_SHOWN,
-        variables: {
-          isInstructionsShown: true
-        }
+      Navigation.startSingleScreenApp({
+        screen: {
+          screen: "democracy.Instructions", // unique ID registered with Navigation.registerScreen
+          title: "Instructions", // title of the screen as appears in the nav bar (optional)
+          navigatorStyle: {
+            navBarHidden: true
+          }
+        },
+        animationType: "fade"
       });
     }
   };
