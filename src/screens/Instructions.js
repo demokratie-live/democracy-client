@@ -4,6 +4,51 @@ import * as React from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import Swiper from "react-native-swiper";
 
+const SkipButton = ({ onFinish, position }) => (
+  <View style={position}>
+    <Button
+      onPress={onFinish}
+      title="Überspringen"
+      accessibilityLabel="Überspringen"
+    />
+  </View>
+);
+
+const FinishButton = ({ onFinish, position }) => (
+  <View style={position}>
+    <Button
+      onPress={onFinish}
+      title="Los gehts!"
+      accessibilityLabel="Los gehts!"
+    />
+  </View>
+);
+
+const Slide = ({ style, styleText, text, onFinish, showFinish }) => (
+  <View style={style}>
+    <Text style={styleText}>{text}</Text>
+    {!showFinish && (
+      <SkipButton onFinish={onFinish} position={stylesSlide.skip} />
+    )}
+    {showFinish && (
+      <FinishButton onFinish={onFinish} position={stylesSlide.finish} />
+    )}
+  </View>
+);
+
+const stylesSlide = StyleSheet.create({
+  skip: {
+    position: "absolute",
+    left: 0,
+    bottom: 0
+  },
+  finish: {
+    position: "absolute",
+    right: 0,
+    bottom: 0
+  }
+});
+
 export default props => {
   const onFinish = () => {
     props.navigator.push({
@@ -17,18 +62,25 @@ export default props => {
   const renderPagination = () => {};
   return (
     <Swiper style={styles.wrapper} loop={false} onMomentumScrollEnd={onScroll}>
-      <View style={styles.slide1}>
-        <Text style={styles.text}>Hello Swiper</Text>
-        <View style={styles.button}>
-          <Button onPress={onFinish} title="Skip" accessibilityLabel="Skip" />
-        </View>
-      </View>
-      <View style={styles.slide2}>
-        <Text style={styles.text}>Beautiful</Text>
-      </View>
-      <View style={styles.slide3}>
-        <Text style={styles.text}>And simple</Text>
-      </View>
+      <Slide
+        style={styles.slide1}
+        styleText={styles.text}
+        text="Hello Swiper"
+        onFinish={onFinish}
+      />
+      <Slide
+        style={styles.slide2}
+        styleText={styles.text}
+        text="Beautiful"
+        onFinish={onFinish}
+      />
+      <Slide
+        style={styles.slide3}
+        styleText={styles.text}
+        text="And simple"
+        onFinish={onFinish}
+        showFinish
+      />
     </Swiper>
   );
 };
@@ -59,8 +111,14 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold"
   },
-  button: {
-    backgroundColor: "red",
-    alignSelf: "flex-end"
+  skip: {
+    position: "absolute",
+    left: 0,
+    bottom: 0
+  },
+  finish: {
+    position: "absolute",
+    right: 0,
+    bottom: 0
   }
 });
