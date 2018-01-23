@@ -1,20 +1,41 @@
 // @flow
 
 import * as React from "react";
-import { Platform, StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, Text, View, Button } from "react-native";
+import { graphql } from "react-apollo";
+import PropTypes from "prop-types";
+import SET_INSTRUCTIONS_SHOWN from "../graphql/mutations/setInstructinosShown";
 
-const instructions: string = Platform.select({
+const instructions = Platform.select({
   ios: `Press Cmd+R to reload,\nCmd+D or shake for dev menu`,
   android: `Double tap R on your keyboard to reload,\nShake or press menu button for dev menu`
 });
 
-export default () => (
-  <View style={styles.container}>
-    <Text style={styles.welcome}>Welcome to React Native!!</Text>
-    <Text style={styles.instructions}>To get started, edit App.js</Text>
-    <Text style={styles.instructions}>{instructions}</Text>
-  </View>
-);
+const App = ({ setInstructionsShown }) => {
+  const showIntroAgain = () => {
+    setInstructionsShown({
+      variables: {
+        isInstructionsShown: false
+      }
+    });
+  };
+  return (
+    <View style={styles.container}>
+      <Text style={styles.welcome}>Welcome to React Native!!</Text>
+      <Text style={styles.instructions}>To get started, edit App.js</Text>
+      <Text style={styles.instructions}>{instructions}</Text>
+      <Button
+        onPress={showIntroAgain}
+        title="Intro nochmal zeigen"
+        accessibilityLabel="Intro nochmal zeigen"
+      />
+    </View>
+  );
+};
+
+App.propTypes = {
+  setInstructionsShown: PropTypes.func.isRequired
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -34,3 +55,7 @@ const styles = StyleSheet.create({
     marginBottom: 5
   }
 });
+
+export default graphql(SET_INSTRUCTIONS_SHOWN, {
+  name: "setInstructionsShown"
+})(App);
