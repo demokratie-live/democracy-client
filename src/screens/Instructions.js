@@ -1,17 +1,20 @@
 // @flow
 
 import * as React from "react";
-import { Platform, StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, Button } from "react-native";
 import Swiper from "react-native-swiper";
 
 export default props => {
-  onFinish = () => {
-    props.navigator.push("example.FirstTabScreen");
+  const onFinish = () => {
+    props.navigator.push({
+      screen: "example.FirstTabScreen",
+      title: "Pushed Screen"
+    });
   };
-  onScroll = (e, state, context) => {
+  const onScroll = (e, state, context) => {
     console.log(state, context.state);
   };
-  renderPagination = () => {};
+  const renderPagination = () => {};
   return (
     <Swiper style={styles.wrapper} loop={false} onMomentumScrollEnd={onScroll}>
       <View style={styles.slide1}>
