@@ -3,6 +3,9 @@
 import * as React from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import Swiper from "react-native-swiper";
+import { graphql } from "react-apollo";
+import PropTypes from "prop-types";
+import SET_INSTRUCTIONS_SHOWN from "../graphql/mutations/setInstructinosShown";
 
 const SkipButton = ({ onFinish, position }) => (
   <View style={position}>
@@ -14,6 +17,11 @@ const SkipButton = ({ onFinish, position }) => (
   </View>
 );
 
+SkipButton.propTypes = {
+  onFinish: PropTypes.func.isRequired,
+  position: PropTypes.shape.isRequired
+};
+
 const FinishButton = ({ onFinish, position }) => (
   <View style={position}>
     <Button
@@ -23,6 +31,11 @@ const FinishButton = ({ onFinish, position }) => (
     />
   </View>
 );
+
+FinishButton.propTypes = {
+  onFinish: PropTypes.func.isRequired,
+  position: PropTypes.shape.isRequired
+};
 
 const Slide = ({ style, styleText, text, onFinish, showFinish }) => (
   <View style={style}>
@@ -35,6 +48,14 @@ const Slide = ({ style, styleText, text, onFinish, showFinish }) => (
     )}
   </View>
 );
+
+Slide.propTypes = {
+  style: PropTypes.shape.isRequired,
+  styleText: PropTypes.shape.isRequired,
+  text: PropTypes.string.isRequired,
+  onFinish: PropTypes.func.isRequired,
+  showFinish: PropTypes.bool.isRequired
+};
 
 const stylesSlide = StyleSheet.create({
   skip: {
@@ -49,19 +70,16 @@ const stylesSlide = StyleSheet.create({
   }
 });
 
-export default props => {
+const Introductions = ({ setInstructionsShown }) => {
   const onFinish = () => {
-    props.navigator.push({
-      screen: "example.FirstTabScreen",
-      title: "Pushed Screen"
+    setInstructionsShown({
+      variables: {
+        isInstructionsShown: true
+      }
     });
   };
-  const onScroll = (e, state, context) => {
-    console.log(state, context.state);
-  };
-  const renderPagination = () => {};
   return (
-    <Swiper style={styles.wrapper} loop={false} onMomentumScrollEnd={onScroll}>
+    <Swiper style={styles.wrapper} loop={false}>
       <Slide
         style={styles.slide1}
         styleText={styles.text}
@@ -83,6 +101,10 @@ export default props => {
       />
     </Swiper>
   );
+};
+
+Introductions.propTypes = {
+  setInstructionsShown: PropTypes.func.isRequired
 };
 
 const styles = StyleSheet.create({
@@ -110,15 +132,9 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 30,
     fontWeight: "bold"
-  },
-  skip: {
-    position: "absolute",
-    left: 0,
-    bottom: 0
-  },
-  finish: {
-    position: "absolute",
-    right: 0,
-    bottom: 0
   }
 });
+
+export default graphql(SET_INSTRUCTIONS_SHOWN, {
+  name: "setInstructionsShown"
+})(Introductions);
