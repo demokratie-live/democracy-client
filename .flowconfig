@@ -26,9 +26,6 @@
 ; Ignore metro
 .*/node_modules/metro/.*
 
-
-node_modules/react-apollo/react-apollo.umd.js
-
 [include]
 
 [untyped]
