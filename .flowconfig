@@ -26,6 +26,9 @@
 ; Ignore metro
 .*/node_modules/metro/.*
 
+; Ignore node_modules
+.*/node_modules/.*
+
 [include]
 
 [untyped]
