@@ -26,9 +26,6 @@
 ; Ignore metro
 .*/node_modules/metro/.*
 
-; Ignore node_modules
-.*/node_modules/.*
-
 [include]
 
 [untyped]
@@ -38,6 +35,8 @@
 Libraries/react-native/react-native-interface.js
 flow/
 flow-github/
+node_modules/react-apollo/index.js.flow
+node_modules/react-apollo/react-apollo.umd.js.flow
 
 [options]
 emoji=true
