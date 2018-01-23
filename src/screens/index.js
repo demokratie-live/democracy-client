@@ -1,9 +1,17 @@
 // @flow
 import { Navigation } from "react-native-navigation";
+import { ApolloProvider } from "react-apollo";
+
+import client from "../graphql/client";
 
 import App from "./App";
 
-// register all screens of the app (including internal ones)
 export default function registerScreens() {
-  Navigation.registerComponent("example.FirstTabScreen", () => App);
+  Navigation.registerComponent(
+    "example.FirstTabScreen",
+    () => App,
+    client.store,
+    ApolloProvider,
+    { client }
+  );
 }
