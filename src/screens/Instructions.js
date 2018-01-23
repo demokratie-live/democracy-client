@@ -18,13 +18,14 @@ export default props => {
   return (
     <Swiper style={styles.wrapper} loop={false} onMomentumScrollEnd={onScroll}>
       <View style={styles.slide1}>
+        <Text style={styles.text}>Hello Swiper</Text>
         <Button
+          style={styles.skip}
           onPress={onFinish}
           title="Skip"
           color="#841584"
           accessibilityLabel="Skip"
         />
-        <Text style={styles.text}>Hello Swiper</Text>
       </View>
       <View style={styles.slide2}>
         <Text style={styles.text}>Beautiful</Text>
@@ -60,5 +61,8 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 30,
     fontWeight: "bold"
+  },
+  skip: {
+    alignSelf: "flex-end"
   }
 });
