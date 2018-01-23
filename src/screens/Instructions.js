@@ -57,6 +57,10 @@ Slide.propTypes = {
   showFinish: PropTypes.bool.isRequired
 };
 
+Slide.defaultProps = {
+  showFinish: false
+}
+
 const stylesSlide = StyleSheet.create({
   skip: {
     position: "absolute",
