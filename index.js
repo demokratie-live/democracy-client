@@ -1,6 +1,5 @@
 // @flow
 import { Navigation } from "react-native-navigation";
-import { Platform } from "react-native";
 // import Reactotron from "reactotron-react-native";
 
 import client, { persistor } from "./src/graphql/client";
@@ -32,19 +31,25 @@ class App {
           navigatorStyle: {},
           topTabs: [
             {
-              screenId: "democracy.VoteList",
+              screenId: "democracy.VoteList.List",
               title: "Abstimmung",
-              passProps: { title: "ABSTIMMUNG" }
+              passProps: {
+                listType: "POLLS"
+              }
             },
             {
-              screenId: "democracy.VoteList",
+              screenId: "democracy.VoteList.List",
               title: "Vorbereitung",
-              passProps: { title: "VORBEREITUNG" }
+              passProps: {
+                listType: "PREPARATION"
+              }
             },
             {
-              screenId: "democracy.VoteList",
+              screenId: "democracy.VoteList.List",
               title: "What's Hot",
-              passProps: { title: "HOT" }
+              passProps: {
+                listType: "HOT"
+              }
             }
           ]
         },

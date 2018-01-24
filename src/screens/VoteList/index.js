@@ -6,6 +6,8 @@ import { graphql } from "react-apollo";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
 
+import List from "./List";
+
 import SET_INSTRUCTIONS_SHOWN from "../../graphql/mutations/setInstructinosShown";
 
 const Screen = styled.View`
@@ -15,9 +17,12 @@ const Screen = styled.View`
 
 const SegmentControlsWrapper = styled.View`
   background-color: #4494d3;
-  height: 35;
+  height: 50;
   padding-left: 10;
   padding-right: 10;
+  flex-direction: row;
+  justify-content: center;
+  padding-bottom: 10;
 `;
 
 class VoteList extends Component {
@@ -50,9 +55,14 @@ class VoteList extends Component {
   };
 
   state = {
-    selectedIndex: 0,
-    listType: "ABSTIMMUNG"
+    selectedIndex: 0
   };
+
+  lists = [
+    { key: "POLLS", title: "in Abstimmung" },
+    { key: "PREPARATION", title: "in Vorbereitung" },
+    { key: "HOT", title: "What's hot?" }
+  ];
 
   showIntroAgain = () => {
     const { setInstructionsShown } = this.props;
@@ -68,7 +78,11 @@ class VoteList extends Component {
       return (
         <SegmentControlsWrapper>
           <SegmentedControlIOS
-            values={["in Abstimmung", "in Vorbereitung", "What's hot?"]}
+            style={{
+              alignSelf: "flex-end",
+              width: "100%"
+            }}
+            values={this.lists.map(({ title }) => title)}
             selectedIndex={this.state.selectedIndex}
             tintColor="#ffffff"
             onChange={event => {
@@ -82,12 +96,20 @@ class VoteList extends Component {
     }
     return null;
   };
+
+  renderList = () => {
+    if (Platform.OS === "ios") {
+      console.log(this.state.selectedIndex);
+      return <List listType={this.lists[this.state.selectedIndex].key} />;
+    }
+    return null;
+  };
   render() {
     console.log(this.props);
     return (
       <Screen>
         {this.renderSegmentControls()}
-        <Text>!{this.props.listType}!</Text>
+        {this.renderList()}
       </Screen>
     );
   }
