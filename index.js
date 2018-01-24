@@ -26,8 +26,8 @@ class App {
     if (isInstructionsShown) {
       Navigation.startSingleScreenApp({
         screen: {
-          screen: "example.FirstTabScreen", // unique ID registered with Navigation.registerScreen
-          title: "App" // title of the screen as appears in the nav bar (optional)
+          screen: "democracy.VoteList", // unique ID registered with Navigation.registerScreen
+          title: "Bundestag" // title of the screen as appears in the nav bar (optional)
         },
         animationType: "fade"
       });

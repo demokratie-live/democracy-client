@@ -1,6 +1,6 @@
 // @flow
 
-import * as React from "react";
+import React, { Component } from "react";
 import { Platform, StyleSheet, Text, View, Button } from "react-native";
 import { graphql } from "react-apollo";
 import PropTypes from "prop-types";
@@ -11,29 +11,39 @@ const instructions = Platform.select({
   android: `Double tap R on your keyboard to reload,\nShake or press menu button for dev menu`
 });
 
-const App = ({ setInstructionsShown }) => {
-  const showIntroAgain = () => {
+class VoteList extends Component {
+  static navigatorStyle = {
+    navBarBackgroundColor: "#4494d3",
+    navBarTextColor: "#FFFFFF",
+    navBarTextFontSize: 17,
+    navBarTextFontFamily: "SFUIText-Semibold"
+  };
+
+  showIntroAgain = () => {
+    const { setInstructionsShown } = this.props;
     setInstructionsShown({
       variables: {
         isInstructionsShown: false
       }
     });
   };
-  return (
-    <View style={styles.container}>
-      <Text style={styles.welcome}>Welcome to React Native!!</Text>
-      <Text style={styles.instructions}>To get started, edit App.js</Text>
-      <Text style={styles.instructions}>{instructions}</Text>
-      <Button
-        onPress={showIntroAgain}
-        title="Intro nochmal zeigen"
-        accessibilityLabel="Intro nochmal zeigen"
-      />
-    </View>
-  );
-};
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}>Welcome to React Native!!</Text>
+        <Text style={styles.instructions}>To get started, edit App.js</Text>
+        <Text style={styles.instructions}>{instructions}</Text>
+        <Button
+          onPress={this.showIntroAgain}
+          title="Intro nochmal zeigen"
+          accessibilityLabel="Intro nochmal zeigen"
+        />
+      </View>
+    );
+  }
+}
 
-App.propTypes = {
+VoteList.propTypes = {
   setInstructionsShown: PropTypes.func.isRequired
 };
 
@@ -58,4 +68,4 @@ const styles = StyleSheet.create({
 
 export default graphql(SET_INSTRUCTIONS_SHOWN, {
   name: "setInstructionsShown"
-})(App);
+})(VoteList);
