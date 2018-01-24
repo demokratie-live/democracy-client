@@ -1,13 +1,11 @@
 // @flow
 
 import React, { Component } from "react";
-import { Platform, SegmentedControlIOS } from "react-native";
+import { Platform, Text, SegmentedControlIOS } from "react-native";
 import { graphql } from "react-apollo";
 import PropTypes from "prop-types";
-import { Navigation } from "react-native-navigation";
 import styled from "styled-components/native";
 
-import TopBar from "./TopBar";
 import SET_INSTRUCTIONS_SHOWN from "../../graphql/mutations/setInstructinosShown";
 
 const Screen = styled.View`
@@ -21,8 +19,6 @@ const SegmentControlsWrapper = styled.View`
   padding-left: 10;
   padding-right: 10;
 `;
-
-Navigation.registerComponent("democracy.VoteList.TopBar", () => TopBar);
 
 class VoteList extends Component {
   static navigatorStyle = {
@@ -54,7 +50,8 @@ class VoteList extends Component {
   };
 
   state = {
-    selectedIndex: 0
+    selectedIndex: 0,
+    listType: "ABSTIMMUNG"
   };
 
   showIntroAgain = () => {
@@ -86,7 +83,13 @@ class VoteList extends Component {
     return null;
   };
   render() {
-    return <Screen>{this.renderSegmentControls()}</Screen>;
+    console.log(this.props);
+    return (
+      <Screen>
+        {this.renderSegmentControls()}
+        <Text>!{this.props.listType}!</Text>
+      </Screen>
+    );
   }
 }
 

@@ -33,15 +33,18 @@ class App {
           topTabs: [
             {
               screenId: "democracy.VoteList",
-              title: "Abstimmung"
+              title: "Abstimmung",
+              passProps: { title: "ABSTIMMUNG" }
             },
             {
               screenId: "democracy.VoteList",
-              title: "Vorbereitung"
+              title: "Vorbereitung",
+              passProps: { title: "VORBEREITUNG" }
             },
             {
               screenId: "democracy.VoteList",
-              title: "What's Hot"
+              title: "What's Hot",
+              passProps: { title: "HOT" }
             }
           ]
         },
