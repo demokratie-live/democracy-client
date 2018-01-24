@@ -1,5 +1,6 @@
 // @flow
 import { Navigation } from "react-native-navigation";
+import { Platform } from "react-native";
 // import Reactotron from "reactotron-react-native";
 
 import client, { persistor } from "./src/graphql/client";
@@ -26,16 +27,31 @@ class App {
     if (isInstructionsShown) {
       Navigation.startSingleScreenApp({
         screen: {
-          screen: "democracy.VoteList", // unique ID registered with Navigation.registerScreen
-          title: "Bundestag" // title of the screen as appears in the nav bar (optional)
+          screen: "democracy.VoteList",
+          title: "Bundestag",
+          navigatorStyle: {},
+          topTabs: [
+            {
+              screenId: "democracy.VoteList",
+              title: "Abstimmung"
+            },
+            {
+              screenId: "democracy.VoteList",
+              title: "Vorbereitung"
+            },
+            {
+              screenId: "democracy.VoteList",
+              title: "What's Hot"
+            }
+          ]
         },
         animationType: "fade"
       });
     } else {
       Navigation.startSingleScreenApp({
         screen: {
-          screen: "democracy.Instructions", // unique ID registered with Navigation.registerScreen
-          title: "Instructions", // title of the screen as appears in the nav bar (optional)
+          screen: "democracy.Instructions",
+          title: "Instructions",
           navigatorStyle: {
             navBarHidden: true
           }
