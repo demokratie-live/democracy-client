@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components/native";
+import PropTypes from "prop-types";
 
 const Wrapper = styled.View`
   padding-vertical: 8;
@@ -13,18 +14,23 @@ const Title = styled.Text`
   color: #6d6d72;
 `;
 
-class ListSectionHeader extends Component {
-  render() {
-    const { title } = this.props;
-    if (!title) {
-      return null;
-    }
-    return (
-      <Wrapper>
-        <Title>{title.toUpperCase()}</Title>
-      </Wrapper>
-    );
+const ListSectionHeader = ({ title }) => {
+  if (!title) {
+    return null;
   }
-}
+  return (
+    <Wrapper>
+      <Title>{title.toUpperCase()}</Title>
+    </Wrapper>
+  );
+};
+
+ListSectionHeader.propTypes = {
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+};
+
+ListSectionHeader.defaultProps = {
+  title: false
+};
 
 export default ListSectionHeader;

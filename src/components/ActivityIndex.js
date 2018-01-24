@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components/native";
 
 const Wrapper = styled.View`
@@ -17,16 +18,20 @@ const Counter = styled.Text`
 const iconActive = require("../../assets/icons/disclosureIndicator-active.png");
 const iconInactive = require("../../assets/icons/disclosureIndicator.png");
 
-class ActivityIndex extends Component {
-  render() {
-    const { count, active } = this.props;
-    return (
-      <Wrapper>
-        <Icon source={active ? iconActive : iconInactive} />
-        <Counter>{count}</Counter>
-      </Wrapper>
-    );
-  }
-}
+const ActivityIndex = ({ count, active }) => (
+  <Wrapper>
+    <Icon source={active ? iconActive : iconInactive} />
+    <Counter>{count}</Counter>
+  </Wrapper>
+);
+
+ActivityIndex.propTypes = {
+  count: PropTypes.number.isRequired,
+  active: PropTypes.bool
+};
+
+ActivityIndex.defaultProps = {
+  active: false
+};
 
 export default ActivityIndex;

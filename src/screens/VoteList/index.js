@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from "react";
-import { Platform, Text, SegmentedControlIOS } from "react-native";
+import { Platform, SegmentedControlIOS } from "react-native";
 import { graphql } from "react-apollo";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
@@ -99,13 +99,11 @@ class VoteList extends Component {
 
   renderList = () => {
     if (Platform.OS === "ios") {
-      console.log(this.state.selectedIndex);
       return <List listType={this.lists[this.state.selectedIndex].key} />;
     }
     return null;
   };
   render() {
-    console.log(this.props);
     return (
       <Screen>
         {this.renderSegmentControls()}

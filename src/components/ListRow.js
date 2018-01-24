@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components/native";
+import PropTypes from "prop-types";
 
 const RowWrapper = styled.View`
   padding-vertical: 14;
@@ -8,10 +9,10 @@ const RowWrapper = styled.View`
   border-bottom-width: 1;
 `;
 
-class Row extends Component {
-  render() {
-    return <RowWrapper>{this.props.children}</RowWrapper>;
-  }
-}
+const Row = ({ children }) => <RowWrapper>{children}</RowWrapper>;
+
+Row.propTypes = {
+  children: PropTypes.node.isRequired
+};
 
 export default Row;

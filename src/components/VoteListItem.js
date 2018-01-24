@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components/native";
+import PropTypes from "prop-types";
 
 import ActivityIndex from "./ActivityIndex";
 
@@ -35,22 +36,31 @@ const Date = styled.Text`
   display: ${({ visible }) => (visible ? "flex" : "none")};
 `;
 
-class ListItem extends Component {
-  render() {
-    const { title, tags, active, date } = this.props;
-    return (
-      <ListItemWrapper>
-        <MainWrapper>
-          <Title>{title}</Title>
-          <Tags>{tags}</Tags>
-        </MainWrapper>
-        <SideWrapper>
-          <ActivityIndex count="1234" active={active} />
-          <Date visible={date}>{date}</Date>
-        </SideWrapper>
-      </ListItemWrapper>
-    );
-  }
-}
+const ListItem = ({ title, tags, active, date, activityIndex }) => (
+  <ListItemWrapper>
+    <MainWrapper>
+      <Title>{title}</Title>
+      <Tags>{tags}</Tags>
+    </MainWrapper>
+    <SideWrapper>
+      <ActivityIndex count={activityIndex} active={active} />
+      <Date visible={date}>{date}</Date>
+    </SideWrapper>
+  </ListItemWrapper>
+);
+
+ListItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  tags: PropTypes.string,
+  active: PropTypes.bool,
+  date: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  activityIndex: PropTypes.number.isRequired
+};
+
+ListItem.defaultProps = {
+  tags: "",
+  active: false,
+  date: false
+};
 
 export default ListItem;

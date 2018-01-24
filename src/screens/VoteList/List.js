@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { View, Text } from "react-native";
+import React from "react";
 import styled from "styled-components/native";
+import PropTypes from "prop-types";
 
 import ListRow from "../../components/ListRow";
 import VoteListItem from "../../components/VoteListItem";
@@ -15,31 +15,31 @@ const Wrapper = styled.View`
 
 const SectionList = styled.SectionList``;
 
-class List extends Component {
-  render() {
-    const { listType } = this.props;
-    const data = dummyDataVoteLists[listType];
-    console.log(data);
-    return (
-      <Wrapper>
-        <SectionList
-          sections={data}
-          stickySectionHeadersEnabled
-          keyExtractor={({ title }) => title}
-          onRefresh={() => console.log("refresh")}
-          refreshing={false}
-          renderSectionHeader={({ section }) => (
-            <ListSectionHeader title={section.title} />
-          )}
-          renderItem={({ item }) => (
-            <ListRow>
-              <VoteListItem {...item} />
-            </ListRow>
-          )}
-        />
-      </Wrapper>
-    );
-  }
-}
+const List = ({ listType }) => {
+  const data = dummyDataVoteLists[listType];
+  return (
+    <Wrapper>
+      <SectionList
+        sections={data}
+        stickySectionHeadersEnabled
+        keyExtractor={({ title }) => title}
+        onRefresh={() => undefined}
+        refreshing={false}
+        renderSectionHeader={({ section }) => (
+          <ListSectionHeader title={section.title} />
+        )}
+        renderItem={({ item }) => (
+          <ListRow>
+            <VoteListItem {...item} />
+          </ListRow>
+        )}
+      />
+    </Wrapper>
+  );
+};
+
+List.propTypes = {
+  listType: PropTypes.string.isRequired
+};
 
 export default List;
