@@ -13,6 +13,7 @@ const MainWrapper = styled.View`
 
 const SideWrapper = styled.View`
   align-items: center;
+  justify-content: space-between;
 `;
 
 const Title = styled.Text`
@@ -31,7 +32,7 @@ const Date = styled.Text`
   padding-top: 8;
   color: #44db5e;
   font-size: 12;
-  display: ${({ visible }) => visible ? "flex" : "none"};
+  display: ${({ visible }) => (visible ? "flex" : "none")};
 `;
 
 class ListItem extends Component {
