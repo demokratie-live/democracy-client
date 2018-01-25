@@ -43,23 +43,6 @@ class VoteList extends Component {
     selectedTopTabIndicatorHeight: 5
   };
 
-  static navigatorButtons = {
-    // rightButtons: [
-    //   {
-    //     icon: require("../../../assets/icons/search.png"),
-    //     id: "search",
-    //     buttonColor: "#ffffff"
-    //   }
-    // ],
-    leftButtons: [
-      {
-        icon: require("../../../assets/icons/grabber.png"),
-        id: "menu",
-        buttonColor: "#ffffff"
-      }
-    ]
-  };
-
   state = {
     selectedIndex: 0
   };
@@ -110,6 +93,7 @@ class VoteList extends Component {
     return null;
   };
   render() {
+    this.props.navigator.toggleTabs({ to: "hidden" });
     return (
       <Screen>
         {this.renderSegmentControls()}

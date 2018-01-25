@@ -11,7 +11,6 @@ const Icon = styled.Image``;
 const Counter = styled.Text`
   padding-top: 8;
   font-size: 18;
-  letter-spacing: -0.29;
   color: #8f8e94;
 `;
 

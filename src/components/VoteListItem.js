@@ -20,13 +20,11 @@ const SideWrapper = styled.View`
 const Title = styled.Text`
   font-size: 17;
   color: #030303;
-  letter-spacing: -0.41;
 `;
 const Tags = styled.Text`
   padding-top: 8;
   font-size: 15;
   color: #8f8e94;
-  letter-spacing: -0.24;
 `;
 
 const Date = styled.Text`
