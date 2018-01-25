@@ -78,11 +78,12 @@ class Header extends Component {
 
   render() {
     const { searchActive, searchContent } = this.state;
+    const { title } = this.props;
     if (!searchActive) {
       return (
         <Wrapper>
           <MenuIcon />
-          <Title>{"Der Titel".toUpperCase()}</Title>
+          <Title>{title.toUpperCase()}</Title>
           <SearchIcon onPress={() => this.setState({ searchActive: true })} />
         </Wrapper>
       );
@@ -118,5 +119,9 @@ class Header extends Component {
     );
   }
 }
+
+Header.defaultProops = {
+  title: ""
+};
 
 export default Header;

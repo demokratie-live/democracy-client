@@ -33,6 +33,7 @@ class VoteList extends Component {
   static navigatorStyle = {
     navBarCustomView: "democracy.VoteList.Header",
     navBarComponentAlignment: "fill",
+    navBarCustomViewInitialProps: { title: "Bundestag" },
     navBarNoBorder: true,
     navBarBackgroundColor: "#4494d3",
     navBarTextColor: "#FFFFFF",
