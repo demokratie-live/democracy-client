@@ -14,7 +14,7 @@ const cache = new InMemoryCache();
 const persistor = new CachePersistor({
   cache,
   storage: AsyncStorage,
-  debug: true
+  debug: false
 });
 
 const stateLink = withClientState({ resolvers, cache, defaults });

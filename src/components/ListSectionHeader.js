@@ -10,7 +10,6 @@ const Wrapper = styled.View`
 
 const Title = styled.Text`
   font-size: 13;
-  letter-spacing: -0.08;
   color: #6d6d72;
 `;
 

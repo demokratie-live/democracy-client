@@ -39,7 +39,11 @@ const List = ({ listType }) => {
 };
 
 List.propTypes = {
-  listType: PropTypes.string.isRequired
+  listType: PropTypes.string
+};
+
+List.defaultProps = {
+  listType: "POLLS"
 };
 
 export default List;
