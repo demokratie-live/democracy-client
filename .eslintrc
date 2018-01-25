@@ -12,6 +12,7 @@
       "error",
       { "extensions": [".js", ".jsx"] }
     ],
-    "no-use-before-define": 0
+    "no-use-before-define": 0,
+    "global-require": 0
   }
 }

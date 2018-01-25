@@ -4,13 +4,21 @@ import { ApolloProvider } from "react-apollo";
 
 import client from "../graphql/client";
 
-import App from "./App";
+import VoteList from "./VoteList";
+import VoteListList from "./VoteList/List";
 import Instructions from "./Instructions";
 
 export default function registerScreens() {
   Navigation.registerComponent(
-    "example.FirstTabScreen",
-    () => App,
+    "democracy.VoteList",
+    () => VoteList,
+    client.store,
+    ApolloProvider,
+    { client }
+  );
+  Navigation.registerComponent(
+    "democracy.VoteList.List",
+    () => VoteListList,
     client.store,
     ApolloProvider,
     { client }

@@ -26,16 +26,40 @@ class App {
     if (isInstructionsShown) {
       Navigation.startSingleScreenApp({
         screen: {
-          screen: "example.FirstTabScreen", // unique ID registered with Navigation.registerScreen
-          title: "App" // title of the screen as appears in the nav bar (optional)
+          screen: "democracy.VoteList",
+          title: "Bundestag",
+          navigatorStyle: {},
+          topTabs: [
+            {
+              screenId: "democracy.VoteList.List",
+              title: "Abstimmung",
+              passProps: {
+                listType: "POLLS"
+              }
+            },
+            {
+              screenId: "democracy.VoteList.List",
+              title: "Vorbereitung",
+              passProps: {
+                listType: "PREPARATION"
+              }
+            },
+            {
+              screenId: "democracy.VoteList.List",
+              title: "What's Hot",
+              passProps: {
+                listType: "HOT"
+              }
+            }
+          ]
         },
         animationType: "fade"
       });
     } else {
       Navigation.startSingleScreenApp({
         screen: {
-          screen: "democracy.Instructions", // unique ID registered with Navigation.registerScreen
-          title: "Instructions", // title of the screen as appears in the nav bar (optional)
+          screen: "democracy.Instructions",
+          title: "Instructions",
           navigatorStyle: {
             navBarHidden: true
           }
