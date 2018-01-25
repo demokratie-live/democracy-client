@@ -39,7 +39,8 @@ const SearchInput = styled.TextInput.attrs({
   autoFocus: true,
   placeholderTextColor:
     Platform.OS === "ios" ? "#7a797b" : "rgba(255, 255, 255, 0.38)",
-  underlineColorAndroid: "transparent"
+  underlineColorAndroid: "transparent",
+  selectionColor: Platform.OS === "ios" ? "#000" : "#fff"
 })`
   flex: 1;
   background-color: ${Platform.OS === "ios"
@@ -93,7 +94,9 @@ class Header extends Component {
       <Wrapper>
         {Platform.OS === "android" && (
           <SearchBackButtonAndroid
-            onPress={() => this.setState({ searchActive: false })}
+            onPress={() =>
+              this.setState({ searchActive: false, searchContent: "" })
+            }
           />
         )}
         <SearchInput
