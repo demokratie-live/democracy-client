@@ -5,10 +5,14 @@ import { Platform, SegmentedControlIOS } from "react-native";
 import { graphql } from "react-apollo";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
+import { Navigation } from "react-native-navigation";
 
 import List from "./List";
+import Header from "./Header";
 
 import SET_INSTRUCTIONS_SHOWN from "../../graphql/mutations/setInstructinosShown";
+
+Navigation.registerComponent("democracy.VoteList.Header", () => Header);
 
 const Screen = styled.View`
   flex: 1;
@@ -27,6 +31,8 @@ const SegmentControlsWrapper = styled.View`
 
 class VoteList extends Component {
   static navigatorStyle = {
+    navBarCustomView: "democracy.VoteList.Header",
+    navBarComponentAlignment: "fill",
     navBarNoBorder: true,
     navBarBackgroundColor: "#4494d3",
     navBarTextColor: "#FFFFFF",
@@ -38,13 +44,13 @@ class VoteList extends Component {
   };
 
   static navigatorButtons = {
-    rightButtons: [
-      {
-        icon: require("../../../assets/icons/search.png"),
-        id: "search",
-        buttonColor: "#ffffff"
-      }
-    ],
+    // rightButtons: [
+    //   {
+    //     icon: require("../../../assets/icons/search.png"),
+    //     id: "search",
+    //     buttonColor: "#ffffff"
+    //   }
+    // ],
     leftButtons: [
       {
         icon: require("../../../assets/icons/grabber.png"),
