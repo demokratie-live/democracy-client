@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Platform } from "react-native";
 import styled from "styled-components/native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import PropTypes from "prop-types";
 
 const Wrapper = styled.View`
   flex: 1;
@@ -120,7 +121,11 @@ class Header extends Component {
   }
 }
 
-Header.defaultProops = {
+Header.propTypes = {
+  title: PropTypes.string
+};
+
+Header.defaultProps = {
   title: ""
 };
 
