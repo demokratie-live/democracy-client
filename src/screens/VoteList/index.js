@@ -93,7 +93,6 @@ class VoteList extends Component {
     return null;
   };
   render() {
-    this.props.navigator.toggleTabs({ to: "hidden" });
     return (
       <Screen>
         {this.renderSegmentControls()}
