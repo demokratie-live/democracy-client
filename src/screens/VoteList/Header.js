@@ -39,7 +39,8 @@ const SearchInput = styled.TextInput.attrs({
   autoFocus: true,
   placeholderTextColor:
     Platform.OS === "ios" ? "#7a797b" : "rgba(255, 255, 255, 0.38)",
-  underlineColorAndroid: "transparent"
+  underlineColorAndroid: "transparent",
+  returnKeyType: "search"
 })`
   flex: 1;
   background-color: ${Platform.OS === "ios"
