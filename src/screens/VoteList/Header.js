@@ -40,7 +40,8 @@ const SearchInput = styled.TextInput.attrs({
   placeholderTextColor:
     Platform.OS === "ios" ? "#7a797b" : "rgba(255, 255, 255, 0.38)",
   underlineColorAndroid: "transparent",
-  selectionColor: Platform.OS === "ios" ? "#000" : "#fff"
+  selectionColor: Platform.OS === "ios" ? "#000" : "#fff",
+  returnKeyType: "search"
 })`
   flex: 1;
   background-color: ${Platform.OS === "ios"
