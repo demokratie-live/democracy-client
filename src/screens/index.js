@@ -7,6 +7,7 @@ import client from "../graphql/client";
 import VoteList from "./VoteList";
 import VoteListList from "./VoteList/List";
 import Instructions from "./Instructions";
+import Search from "./Search";
 
 export default function registerScreens() {
   Navigation.registerComponent(
@@ -26,6 +27,13 @@ export default function registerScreens() {
   Navigation.registerComponent(
     "democracy.Instructions",
     () => Instructions,
+    client.store,
+    ApolloProvider,
+    { client }
+  );
+  Navigation.registerComponent(
+    "democracy.Search",
+    () => Search,
     client.store,
     ApolloProvider,
     { client }

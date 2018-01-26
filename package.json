@@ -14,7 +14,6 @@
     "build:android": "cd android && ./gradlew assembleRelease"
   },
   "dependencies": {
-    "add": "^2.0.6",
     "apollo-cache-inmemory": "^1.1.5",
     "apollo-cache-persist": "^0.1.1",
     "apollo-client": "^2.2.0",
@@ -32,11 +31,10 @@
     "react": "16.2.0",
     "react-apollo": "^2.0.4",
     "react-native": "0.52.1",
-    "react-native-navigation": "wix/react-native-navigation#2580/head",
+    "react-native-navigation": "wix/react-native-navigation#2545/head",
     "react-native-swiper": "^1.5.13",
     "react-native-vector-icons": "^4.5.0",
-    "styled-components": "^3.0.2",
-    "yarn": "^1.3.2"
+    "styled-components": "^3.0.2"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",

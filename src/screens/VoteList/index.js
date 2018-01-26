@@ -31,9 +31,6 @@ const SegmentControlsWrapper = styled.View`
 
 class VoteList extends Component {
   static navigatorStyle = {
-    navBarCustomView: "democracy.VoteList.Header",
-    navBarComponentAlignment: "fill",
-    navBarCustomViewInitialProps: { title: "Bundestag" },
     navBarNoBorder: true,
     navBarBackgroundColor: "#4494d3",
     navBarTextColor: "#FFFFFF",
@@ -43,6 +40,18 @@ class VoteList extends Component {
     selectedTopTabIndicatorColor: "#ffffff",
     selectedTopTabIndicatorHeight: 5
   };
+
+  constructor(props) {
+    super(props);
+    this.props.navigator.setStyle({
+      navBarCustomView: "democracy.VoteList.Header",
+      navBarComponentAlignment: "fill",
+      navBarCustomViewInitialProps: {
+        title: "Bundestag",
+        navigator: this.props.navigator,
+      }
+    });
+  }
 
   state = {
     selectedIndex: 0
