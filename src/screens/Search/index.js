@@ -12,6 +12,10 @@ const Wrapper = styled.View``;
 const HelloWorld = styled.Text``;
 
 class SearchScreen extends Component {
+  static navigatorStyle = {
+    navBarBackgroundColor: "#4494d3"
+  };
+
   constructor(props) {
     super(props);
     this.props.navigator.setStyle({

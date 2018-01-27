@@ -23,7 +23,9 @@ const SearchInput = styled.TextInput.attrs({
   autoFocus: true,
   placeholderTextColor:
     Platform.OS === "ios" ? "#7a797b" : "rgba(255, 255, 255, 0.38)",
-  underlineColorAndroid: "transparent"
+  underlineColorAndroid: "transparent",
+  selectionColor: Platform.OS === "ios" ? "#000" : "#fff",
+  returnKeyType: "search"
 })`
   flex: 1;
   background-color: ${Platform.OS === "ios"
@@ -33,6 +35,7 @@ const SearchInput = styled.TextInput.attrs({
   font-size: ${Platform.OS === "ios" ? 14 : 20};
   height: ${Platform.OS === "ios" ? 28 : "auto"};
   padding-horizontal: ${Platform.OS === "ios" ? 6 : 0};
+  color: ${Platform.OS === "ios" ? "#000" : "#fff"};
 `;
 
 const SearchBackButtonAndroid = styled(Icons).attrs({
