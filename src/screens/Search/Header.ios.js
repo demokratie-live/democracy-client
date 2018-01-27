@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Platform } from "react-native";
 import styled from "styled-components/native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import PropTypes from "prop-types";
@@ -10,12 +9,6 @@ const Wrapper = styled.View`
   flex-direction: row;
   align-items: center;
 `;
-
-const Icons = styled(Ionicons.Button).attrs({
-  color: "#fff",
-  size: 30,
-  backgroundColor: "transparent"
-})``;
 
 const SearchInputWrapper = styled.View`
   flex: 1;

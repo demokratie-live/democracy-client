@@ -5,7 +5,7 @@ import { Platform, SegmentedControlIOS } from "react-native";
 import { graphql } from "react-apollo";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
-import { Navigation } from "react-native-navigation";
+import { Navigation, Navigator } from "react-native-navigation";
 
 import List from "./List";
 import Header from "./Header";
@@ -118,7 +118,8 @@ class VoteList extends Component {
 }
 
 VoteList.propTypes = {
-  setInstructionsShown: PropTypes.func.isRequired
+  setInstructionsShown: PropTypes.func.isRequired,
+  navigator: PropTypes.instanceOf(Navigator).isRequired
 };
 
 export default graphql(SET_INSTRUCTIONS_SHOWN, {

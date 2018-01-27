@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
+import { Navigator } from "react-native-navigation";
 
 import ListRow from "../../components/ListRow";
 import VoteListItem from "../../components/VoteListItem";
@@ -53,7 +54,8 @@ class List extends Component {
 }
 
 List.propTypes = {
-  listType: PropTypes.string
+  listType: PropTypes.string,
+  navigator: PropTypes.instanceOf(Navigator).isRequired
 };
 
 List.defaultProps = {
