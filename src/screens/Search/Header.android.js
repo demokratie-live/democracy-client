@@ -9,7 +9,7 @@ const Wrapper = styled.View`
   flex: 1;
   flex-direction: row;
   align-items: center;
-  margin-right: ${Platform.OS === "ios" ? 0 : 16};
+  margin-right: 16;
 `;
 
 const Icons = styled(Ionicons.Button).attrs({
@@ -21,21 +21,16 @@ const Icons = styled(Ionicons.Button).attrs({
 const SearchInput = styled.TextInput.attrs({
   clearButtonMode: "always",
   autoFocus: true,
-  placeholderTextColor:
-    Platform.OS === "ios" ? "#7a797b" : "rgba(255, 255, 255, 0.38)",
+  placeholderTextColor: "rgba(255, 255, 255, 0.38)",
   underlineColorAndroid: "transparent",
-  selectionColor: Platform.OS === "ios" ? "#000" : "#fff",
+  selectionColor: "#fff",
   returnKeyType: "search"
 })`
   flex: 1;
-  background-color: ${Platform.OS === "ios"
-    ? "rgba(255, 255, 255, 0.8)"
-    : "transparent"};
+  background-color: transparent;
   border-radius: 5.5;
-  font-size: ${Platform.OS === "ios" ? 14 : 20};
-  height: ${Platform.OS === "ios" ? 28 : "auto"};
-  padding-horizontal: ${Platform.OS === "ios" ? 6 : 0};
-  color: ${Platform.OS === "ios" ? "#000" : "#fff"};
+  font-size: 20;
+  color: #fff;
 `;
 
 const SearchBackButtonAndroid = styled(Icons).attrs({
@@ -49,13 +44,6 @@ const SearchClearButtonAndroid = styled(Icons).attrs({
 })`
   display: ${({ visible }) => (visible ? "flex" : "none")};
   padding-left: 16;
-`;
-
-const SearchBackTextIos = styled.Button.attrs({
-  color: "#fff"
-})`
-  padding-left: 8;
-  font-size: 17;
 `;
 
 class Header extends Component {
@@ -72,24 +60,17 @@ class Header extends Component {
     const { searchContent } = this.state;
     return (
       <Wrapper>
-        {Platform.OS === "android" && (
-          <SearchBackButtonAndroid onPress={this.clickBack} />
-        )}
+        <SearchBackButtonAndroid onPress={this.clickBack} />
         <SearchInput
           placeholder="Suche"
           onChangeText={text => this.setState({ searchContent: text })}
           value={searchContent}
         />
 
-        {Platform.OS === "android" && (
-          <SearchClearButtonAndroid
-            visible={searchContent}
-            onPress={() => this.setState({ searchContent: "" })}
-          />
-        )}
-        {Platform.OS === "ios" && (
-          <SearchBackTextIos title="Zurück" onPress={this.clickBack} />
-        )}
+        <SearchClearButtonAndroid
+          visible={searchContent}
+          onPress={() => this.setState({ searchContent: "" })}
+        />
       </Wrapper>
     );
   }
