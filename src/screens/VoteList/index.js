@@ -48,7 +48,7 @@ class VoteList extends Component {
       navBarComponentAlignment: "fill",
       navBarCustomViewInitialProps: {
         title: "Bundestag",
-        navigator: this.props.navigator,
+        navigator: this.props.navigator
       }
     });
   }
@@ -98,7 +98,12 @@ class VoteList extends Component {
 
   renderList = () => {
     if (Platform.OS === "ios") {
-      return <List listType={this.lists[this.state.selectedIndex].key} />;
+      return (
+        <List
+          listType={this.lists[this.state.selectedIndex].key}
+          navigator={this.props.navigator}
+        />
+      );
     }
     return null;
   };
