@@ -2,7 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
 
-const Wrapper = styled.SectionList``;
+const Wrapper = styled.SectionList.attrs({
+  stickySectionHeadersEnabled: false
+})``;
 
 const SectionItem = styled.View`
   padding-left: 16;
