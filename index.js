@@ -53,6 +53,11 @@ class App {
             }
           ]
         },
+        drawer: {
+          left: {
+            screen: "democracy.SideMenu"
+          }
+        },
         animationType: "fade"
       });
     } else {
