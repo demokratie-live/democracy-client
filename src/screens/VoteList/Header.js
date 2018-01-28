@@ -40,7 +40,8 @@ class Header extends Component {
     const { navigator } = this.props;
     navigator.push({
       screen: "democracy.Search",
-      backButtonHidden: true
+      backButtonHidden: true,
+      animationType: "none"
     });
   };
 
