@@ -7,7 +7,10 @@ import Header from "./Header";
 
 Navigation.registerComponent("democracy.Search.Header", () => Header);
 
-const Wrapper = styled.View``;
+const Wrapper = styled.View`
+  flex: 1;
+  background-color: #fff;
+`;
 
 const HelloWorld = styled.Text``;
 
