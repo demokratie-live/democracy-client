@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components/native";
 
 const Wrapper = styled.SectionList``;
@@ -40,12 +41,26 @@ const ListSection = ({ title }) => (
   </SectionItem>
 );
 
+ListSection.propTypes = {
+  title: PropTypes.string.isRequired
+};
+
 const ListItem = ({ title, active, icon }) => (
   <NavigationItem active={active}>
     <NavigationIcon source={icon} />
     <NavigationTitle>{title}</NavigationTitle>
   </NavigationItem>
 );
+
+ListItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  active: PropTypes.bool,
+  icon: PropTypes.number.isRequired
+};
+
+ListItem.defaultProps = {
+  active: false
+};
 
 const Navigation = () => {
   const navigation = [
