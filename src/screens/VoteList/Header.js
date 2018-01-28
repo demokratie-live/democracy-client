@@ -44,12 +44,17 @@ class Header extends Component {
     });
   };
 
+  clickBurgerIcon = () => {
+    const { navigator } = this.props;
+    navigator.toggleDrawer({ side: "left" });
+  };
+
   render() {
     const { title } = this.props;
 
     return (
       <Wrapper>
-        <MenuIcon />
+        <MenuIcon onPress={this.clickBurgerIcon} />
         <Title>{title.toUpperCase()}</Title>
         <SearchIcon onPress={this.clickSearchIcon} />
       </Wrapper>

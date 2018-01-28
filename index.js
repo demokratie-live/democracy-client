@@ -56,6 +56,10 @@ class App {
         drawer: {
           left: {
             screen: "democracy.SideMenu"
+          },
+          style: {
+            // ( iOS only )
+            leftDrawerWidth: 85 // optional, add this if you want a define left drawer width (50=percent)
           }
         },
         animationType: "fade"
