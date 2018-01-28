@@ -67,12 +67,12 @@ const Navigation = () => {
         },
         {
           title: "Sicherheit",
-          icon: require("../../../assets/icons/worldClock.png"),
+          icon: require("../../../assets/icons/lock.png"),
           active: true
         },
         {
           title: "Support",
-          icon: require("../../../assets/icons/worldClock.png")
+          icon: require("../../../assets/icons/speechBubble9.png")
         }
       ]
     }
