@@ -1,10 +1,16 @@
 import React from "react";
+import { Platform } from "react-native";
 import styled from "styled-components/native";
 
 import Navigation from "./Navigation";
 
 const Wrapper = styled.View`
   flex: 1;
+`;
+
+const StatusBackground = styled.View`
+  background-color: rgba(255, 255, 255, 0.25);
+  height: 20;
 `;
 
 const BackgroundWrapper = styled.View`
@@ -25,11 +31,11 @@ const BackgroundImage = styled.Image.attrs({
 const Content = styled.View`
   flex: 1;
   background-color: transparent;
-  padding-top: 36;
 `;
 
 const Head = styled.View`
   flex-direction: row;
+  padding-top: 6;
   padding-left: 16;
 `;
 
@@ -53,6 +59,7 @@ const SideMenu = () => (
       <BackgroundImage />
     </BackgroundWrapper>
     <Content>
+      {Platform.OS === "ios" && <StatusBackground />}
       <Head>
         <HeadLogo />
         <HeadTextWrapper>
