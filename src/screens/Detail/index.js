@@ -7,7 +7,7 @@ import Date from "../../components/Date";
 
 const Wrapper = styled.ScrollView`
   flex: 1;
-  background-color: purple;
+  background-color: #fff;
 `;
 
 const Intro = styled.View`
@@ -37,6 +37,21 @@ const IntroSide = styled.View`
   justify-content: space-between;
 `;
 
+const TagsWrapper = styled.View`
+  background-color: rgb(239, 239, 244);
+`;
+
+const TagsText = styled.Text`
+  color: rgb(142, 142, 147);
+  font-size: 13;
+  padding-horizontal: 18;
+  padding-vertical: 10;
+`;
+
+const Content = styled.ScrollView`
+  flex: 1;
+`;
+
 class Detail extends Component {
   static navigatorStyle = {
     navBarBackgroundColor: "#4494d3",
@@ -45,7 +60,7 @@ class Detail extends Component {
   };
 
   render() {
-    const { title, activityIndex, active, date } = this.props;
+    const { title, activityIndex, active, date, tags } = this.props;
     return (
       <Wrapper>
         <Intro>
@@ -62,6 +77,10 @@ class Detail extends Component {
             <Date date={date} />
           </IntroSide>
         </Intro>
+        <TagsWrapper>
+          <TagsText>{tags}</TagsText>
+        </TagsWrapper>
+        <Content />
       </Wrapper>
     );
   }
@@ -71,7 +90,8 @@ Detail.propTypes = {
   title: PropTypes.string.isRequired,
   activityIndex: PropTypes.number.isRequired,
   active: PropTypes.bool.isRequired,
-  date: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired
+  date: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
+  tags: PropTypes.string.isRequired
 };
 
 export default Detail;
