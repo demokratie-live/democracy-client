@@ -1,0 +1,18 @@
+import React from "react";
+import styled from "styled-components/native";
+
+const Wrapper = styled.View``;
+
+const DefTitle = styled.Text`
+  font-size: 12;
+  color: rgba(68, 148, 211, 0.9);
+`;
+
+const DefDescr = styled.Text`
+  font-size: 12;
+  color: rgb(155, 155, 155);
+`;
+
+const Details = ({}) => <Wrapper />;
+
+export default Details;

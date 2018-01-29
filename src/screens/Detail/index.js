@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 
 import ActivityIndex from "../../components/ActivityIndex";
 import Date from "../../components/Date";
+import Segment from "./Segment";
+
+import detailsData from "../../../dummy/details";
 
 const Wrapper = styled.ScrollView`
   flex: 1;
@@ -48,7 +51,7 @@ const TagsText = styled.Text`
   padding-vertical: 10;
 `;
 
-const Content = styled.ScrollView`
+const Content = styled.FlatList`
   flex: 1;
 `;
 
@@ -59,8 +62,18 @@ class Detail extends Component {
     navBarTextFontSize: 17
   };
 
+  state = {
+    currentSegmentIndex: 0
+  };
+
+  setCurrentSegment = currentSegmentIndex => () => {
+    console.log("index", currentSegmentIndex);
+    this.setState({ currentSegmentIndex });
+  };
+
   render() {
     const { title, activityIndex, active, date, tags } = this.props;
+    const { currentSegmentIndex } = this.state;
     return (
       <Wrapper>
         <Intro>
@@ -80,7 +93,17 @@ class Detail extends Component {
         <TagsWrapper>
           <TagsText>{tags}</TagsText>
         </TagsWrapper>
-        <Content />
+        <Content
+          data={detailsData}
+          keyExtractor={({ type }) => type}
+          renderItem={({ item, index }) => (
+            <Segment
+              open={currentSegmentIndex === index}
+              onPress={this.setCurrentSegment(index)}
+              {...item}
+            />
+          )}
+        />
       </Wrapper>
     );
   }
