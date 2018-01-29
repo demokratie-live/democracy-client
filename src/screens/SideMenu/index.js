@@ -25,7 +25,7 @@ const BackgroundImage = styled.Image.attrs({
   source: require("../../../assets/images/bitmap.png")
 })`
   flex: 1;
-  resize-mode: center;
+  resize-mode: stretch;
 `;
 
 const Content = styled.View`

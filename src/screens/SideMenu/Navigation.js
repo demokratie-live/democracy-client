@@ -26,10 +26,7 @@ const NavigationItem = styled.View`
   padding-left: 19;
 `;
 
-const NavigationIcon = styled.Image`
-  width: 22;
-  height: 20;
-`;
+const NavigationIcon = styled.Image``;
 
 const NavigationTitle = styled.Text`
   padding-left: 17;
