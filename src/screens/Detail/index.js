@@ -8,7 +8,7 @@ import Segment from "./Segment";
 
 import detailsData from "../../../dummy/details";
 
-const Wrapper = styled.ScrollView`
+const Wrapper = styled.View`
   flex: 1;
   background-color: #fff;
 `;
@@ -67,8 +67,11 @@ class Detail extends Component {
   };
 
   setCurrentSegment = currentSegmentIndex => () => {
-    console.log("index", currentSegmentIndex);
-    this.setState({ currentSegmentIndex });
+    if (currentSegmentIndex !== this.state.currentSegmentIndex) {
+      this.setState({ currentSegmentIndex });
+    } else {
+      this.setState({ currentSegmentIndex: -1 });
+    }
   };
 
   render() {
@@ -113,8 +116,12 @@ Detail.propTypes = {
   title: PropTypes.string.isRequired,
   activityIndex: PropTypes.number.isRequired,
   active: PropTypes.bool.isRequired,
-  date: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
+  date: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   tags: PropTypes.string.isRequired
+};
+
+Detail.defaultProps = {
+  date: false
 };
 
 export default Detail;

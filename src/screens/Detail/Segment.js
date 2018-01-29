@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
+import PropTypes from "prop-types";
 
 import DetailsSegment from "./Segments/Details";
 import DocumentsSegment from "./Segments/Documents";
@@ -37,10 +38,8 @@ const Content = styled.View`
   padding-vertical: 10;
 `;
 
-const ContentText = styled.Text``;
-
 const Segment = ({ type, title, onPress, open, data }) => {
-  const renderContent = type => {
+  const renderContent = () => {
     switch (type) {
       case "details":
         return <DetailsSegment {...data} />;
@@ -57,9 +56,17 @@ const Segment = ({ type, title, onPress, open, data }) => {
           <CollapseIcon open={open} />
         </SegmentWrapper>
       </SegmentTouch>
-      <Content open={open}>{renderContent(type)}</Content>
+      <Content open={open}>{renderContent()}</Content>
     </Wrapper>
   );
+};
+
+Segment.propTypes = {
+  type: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  onPress: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
+  data: PropTypes.shape({}).isRequired
 };
 
 export default Segment;

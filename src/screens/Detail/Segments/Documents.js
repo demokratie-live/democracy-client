@@ -1,18 +1,23 @@
 import React from "react";
 import styled from "styled-components/native";
+import PropTypes from "prop-types";
+
+import Document from "../../../components/Document";
 
 const Wrapper = styled.View``;
 
-const DefTitle = styled.Text`
-  font-size: 12;
-  color: rgba(68, 148, 211, 0.9);
-`;
+const Details = ({ documents }) => (
+  <Wrapper>
+    {documents.map(({ title }) => <Document key={title} text={title} />)}
+  </Wrapper>
+);
 
-const DefDescr = styled.Text`
-  font-size: 12;
-  color: rgb(155, 155, 155);
-`;
+Details.propTypes = {
+  documents: PropTypes.arrayOf(PropTypes.object.isRequired)
+};
 
-const Details = ({}) => <Wrapper />;
+Details.defaultProps = {
+  documents: []
+};
 
 export default Details;
