@@ -8,6 +8,7 @@ import VoteList from "./VoteList";
 import VoteListList from "./VoteList/List";
 import Instructions from "./Instructions";
 import Search from "./Search";
+import Detail from "./Detail";
 
 export default function registerScreens() {
   Navigation.registerComponent(
@@ -34,6 +35,13 @@ export default function registerScreens() {
   Navigation.registerComponent(
     "democracy.Search",
     () => Search,
+    client.store,
+    ApolloProvider,
+    { client }
+  );
+  Navigation.registerComponent(
+    "democracy.Detail",
+    () => Detail,
     client.store,
     ApolloProvider,
     { client }

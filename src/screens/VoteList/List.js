@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import { Navigator } from "react-native-navigation";
+import { TouchableHighlight } from "react-native";
 
 import ListRow from "../../components/ListRow";
 import VoteListItem from "../../components/VoteListItem";
@@ -28,6 +29,16 @@ class List extends Component {
       }
     });
   }
+
+  onItemClick = ({ item }) => () => {
+    const { navigator } = this.props;
+    navigator.push({
+      screen: "democracy.Detail",
+      title: "Abstimmung".toUpperCase(),
+      passProps: { ...item }
+    });
+  };
+
   render() {
     const { listType } = this.props;
     const data = dummyDataVoteLists[listType];
@@ -43,9 +54,14 @@ class List extends Component {
             <ListSectionHeader title={section.title} />
           )}
           renderItem={({ item }) => (
-            <ListRow>
-              <VoteListItem {...item} />
-            </ListRow>
+            <TouchableHighlight
+              onPress={this.onItemClick({ item })}
+              underlayColor="rgba(68, 148, 211, 0.1)"
+            >
+              <ListRow>
+                <VoteListItem {...item} />
+              </ListRow>
+            </TouchableHighlight>
           )}
         />
       </Wrapper>
