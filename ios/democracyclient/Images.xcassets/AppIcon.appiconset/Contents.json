@@ -3,151 +3,151 @@
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "Icon-App-20x20@2x.png",
+      "filename" : "Icon-41.png",
       "scale" : "2x"
     },
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "Icon-App-20x20@3x.png",
+      "filename" : "Icon-33.png",
       "scale" : "3x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "Icon-App-29x29@1x.png",
+      "filename" : "Icon-30.png",
       "scale" : "1x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "Icon-App-29x29@2x.png",
+      "filename" : "Icon-49.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "Icon-App-29x29@3x.png",
+      "filename" : "Icon-89.png",
       "scale" : "3x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "Icon-App-40x40@2x.png",
+      "filename" : "Icon-81.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "Icon-App-40x40@3x.png",
+      "filename" : "Icon-121.png",
       "scale" : "3x"
     },
     {
       "size" : "57x57",
       "idiom" : "iphone",
-      "filename" : "Icon-App-57x57@1x.png",
+      "filename" : "Icon-59.png",
       "scale" : "1x"
     },
     {
       "size" : "57x57",
       "idiom" : "iphone",
-      "filename" : "Icon-App-57x57@2x.png",
+      "filename" : "Icon-115.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "Icon-App-60x60@2x.png",
+      "filename" : "Icon-122.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "Icon-App-60x60@3x.png",
+      "filename" : "Icon-181.png",
       "scale" : "3x"
     },
     {
       "size" : "20x20",
       "idiom" : "ipad",
-      "filename" : "Icon-App-20x20@1x.png",
+      "filename" : "Icon-21.png",
       "scale" : "1x"
     },
     {
       "size" : "20x20",
       "idiom" : "ipad",
-      "filename" : "Icon-App-20x20@2x-1.png",
+      "filename" : "Icon-42.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "Icon-App-29x29@1x-1.png",
+      "filename" : "Icon-31.png",
       "scale" : "1x"
     },
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "Icon-App-29x29@2x-1.png",
+      "filename" : "Icon-61.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "Icon-App-40x40@1x.png",
+      "filename" : "Icon-43.png",
       "scale" : "1x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "Icon-App-40x40@2x-1.png",
+      "filename" : "Icon-82.png",
       "scale" : "2x"
     },
     {
       "size" : "50x50",
       "idiom" : "ipad",
-      "filename" : "Icon-Small-50x50@1x.png",
+      "filename" : "Icon-51.png",
       "scale" : "1x"
     },
     {
       "size" : "50x50",
       "idiom" : "ipad",
-      "filename" : "Icon-Small-50x50@2x.png",
+      "filename" : "Icon-101.png",
       "scale" : "2x"
     },
     {
       "size" : "72x72",
       "idiom" : "ipad",
-      "filename" : "Icon-App-72x72@1x.png",
+      "filename" : "Icon-73.png",
       "scale" : "1x"
     },
     {
       "size" : "72x72",
       "idiom" : "ipad",
-      "filename" : "Icon-App-72x72@2x.png",
+      "filename" : "Icon-145.png",
       "scale" : "2x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "Icon-App-76x76@1x.png",
+      "filename" : "Icon-77.png",
       "scale" : "1x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "Icon-App-76x76@2x.png",
+      "filename" : "Icon-153.png",
       "scale" : "2x"
     },
     {
       "size" : "83.5x83.5",
       "idiom" : "ipad",
-      "filename" : "Icon-App-83.5x83.5@2x.png",
+      "filename" : "Icon-168.png",
       "scale" : "2x"
     },
     {
       "size" : "1024x1024",
       "idiom" : "ios-marketing",
-      "filename" : "icon-1024@1x.png",
+      "filename" : "AppStore.png",
       "scale" : "1x"
     }
   ],
