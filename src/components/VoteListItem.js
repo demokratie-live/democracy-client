@@ -3,6 +3,7 @@ import styled from "styled-components/native";
 import PropTypes from "prop-types";
 
 import ActivityIndex from "./ActivityIndex";
+import Date from "./Date";
 
 const ListItemWrapper = styled.View`
   flex-direction: row;
@@ -27,13 +28,6 @@ const Tags = styled.Text`
   color: #8f8e94;
 `;
 
-const Date = styled.Text`
-  padding-top: 8;
-  color: #44db5e;
-  font-size: 12;
-  display: ${({ visible }) => (visible ? "flex" : "none")};
-`;
-
 const ListItem = ({ title, tags, active, date, activityIndex }) => (
   <ListItemWrapper>
     <MainWrapper>
@@ -42,7 +36,7 @@ const ListItem = ({ title, tags, active, date, activityIndex }) => (
     </MainWrapper>
     <SideWrapper>
       <ActivityIndex count={activityIndex} active={active} />
-      <Date visible={date}>{date}</Date>
+      <Date date={date} />
     </SideWrapper>
   </ListItemWrapper>
 );
