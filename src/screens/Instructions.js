@@ -67,10 +67,7 @@ Slide.propTypes = {
 
 Slide.defaultProps = {
   style: {},
-  styleText: {}
-};
-
-Slide.defaultProps = {
+  styleText: {},
   showFinish: false
 };
 
