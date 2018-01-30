@@ -18,6 +18,7 @@ const SegmentWrapper = styled.View`
   flex-direction: row;
   border-bottom-width: 1;
   border-bottom-color: rgba(68, 148, 211, 0.1);
+  align-items: center;
 `;
 
 const Title = styled.Text`
@@ -28,8 +29,8 @@ const Title = styled.Text`
 const CollapseIcon = styled.Image.attrs({
   source: ({ open }) =>
     open
-      ? require("../../../assets/icons/disclosureIndicator-active.png")
-      : require("../../../assets/icons/disclosureIndicator.png")
+      ? require("../../../assets/icons/segmentOpen.png")
+      : require("../../../assets/icons/segmentClosed.png")
 })``;
 
 const Content = styled.View`
