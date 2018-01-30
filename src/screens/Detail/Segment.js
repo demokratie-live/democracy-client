@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 import DetailsSegment from "./Segments/Details";
 import DocumentsSegment from "./Segments/Documents";
+import Voting from "./Segments/Voting";
 
 const Wrapper = styled.View``;
 
@@ -33,19 +34,24 @@ const CollapseIcon = styled.Image.attrs({
 })``;
 
 const Content = styled.View`
-  display: ${({ open }) => (open ? "flex" : "none")};
+  display: ${({ open, collapsible }) =>
+    open || !collapsible ? "flex" : "none"};
   padding-horizontal: 16;
   padding-vertical: 10;
 `;
 
-const Segment = ({ type, title, onPress, open, data }) => {
+const Segment = ({ type, title, onPress, open, data, collapsible }) => {
   const renderContent = () => {
     switch (type) {
       case "details":
         return <DetailsSegment {...data} />;
+      case "documents":
+        return <DocumentsSegment {...data} />;
+      case "voting":
+        return <Voting {...data} />;
 
       default:
-        return <DocumentsSegment {...data} />;
+        return <Title>Kein Segement definiert</Title>;
     }
   };
   return (
@@ -53,10 +59,12 @@ const Segment = ({ type, title, onPress, open, data }) => {
       <SegmentTouch onPress={onPress}>
         <SegmentWrapper>
           <Title>{title}</Title>
-          <CollapseIcon open={open} />
+          {collapsible && <CollapseIcon open={open} />}
         </SegmentWrapper>
       </SegmentTouch>
-      <Content open={open}>{renderContent()}</Content>
+      <Content open={open} collapsible={collapsible}>
+        {renderContent()}
+      </Content>
     </Wrapper>
   );
 };
@@ -66,7 +74,13 @@ Segment.propTypes = {
   title: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
-  data: PropTypes.shape({}).isRequired
+  data: PropTypes.shape({}),
+  collapsible: PropTypes.bool
+};
+
+Segment.defaultProps = {
+  data: {},
+  collapsible: true
 };
 
 export default Segment;
