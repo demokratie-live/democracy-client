@@ -19,7 +19,11 @@ const SkipButton = ({ onFinish, position }) => (
 
 SkipButton.propTypes = {
   onFinish: PropTypes.func.isRequired,
-  position: PropTypes.shape.isRequired
+  position: PropTypes.number
+};
+
+SkipButton.defaultProps = {
+  position: {}
 };
 
 const FinishButton = ({ onFinish, position }) => (
@@ -34,7 +38,11 @@ const FinishButton = ({ onFinish, position }) => (
 
 FinishButton.propTypes = {
   onFinish: PropTypes.func.isRequired,
-  position: PropTypes.shape.isRequired
+  position: PropTypes.number
+};
+
+FinishButton.defaultProps = {
+  position: {}
 };
 
 const Slide = ({ style, styleText, text, onFinish, showFinish }) => (
@@ -50,16 +58,21 @@ const Slide = ({ style, styleText, text, onFinish, showFinish }) => (
 );
 
 Slide.propTypes = {
-  style: PropTypes.shape.isRequired,
-  styleText: PropTypes.shape.isRequired,
+  style: PropTypes.number,
+  styleText: PropTypes.number,
   text: PropTypes.string.isRequired,
   onFinish: PropTypes.func.isRequired,
   showFinish: PropTypes.bool.isRequired
 };
 
 Slide.defaultProps = {
+  style: {},
+  styleText: {}
+};
+
+Slide.defaultProps = {
   showFinish: false
-}
+};
 
 const stylesSlide = StyleSheet.create({
   skip: {
