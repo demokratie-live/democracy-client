@@ -24,8 +24,8 @@ const BackgroundWrapper = styled.View`
 const BackgroundImage = styled.Image.attrs({
   source: require("../../../assets/images/bitmap.png")
 })`
-  flex: 1;
   resize-mode: stretch;
+  width: 100%;
 `;
 
 const Content = styled.View`
