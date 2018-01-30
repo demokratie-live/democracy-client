@@ -59,7 +59,9 @@ class Detail extends Component {
   static navigatorStyle = {
     navBarBackgroundColor: "#4494d3",
     navBarTextColor: "#FFFFFF",
-    navBarTextFontSize: 17
+    navBarTextFontSize: 17,
+    navBarLeftButtonColor: "#FFFFFF",
+    navBarButtonColor: "#FFFFFF"
   };
 
   state = {

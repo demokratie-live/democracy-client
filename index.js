@@ -55,7 +55,7 @@ class App {
         },
         drawer: {
           left: {
-            screen: "democracy.SideMenu",
+            screen: "democracy.SideMenu"
           },
           style: {
             // ( iOS only )
