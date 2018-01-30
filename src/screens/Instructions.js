@@ -62,7 +62,7 @@ Slide.propTypes = {
   styleText: PropTypes.number,
   text: PropTypes.string.isRequired,
   onFinish: PropTypes.func.isRequired,
-  showFinish: PropTypes.bool.isRequired
+  showFinish: PropTypes.bool
 };
 
 Slide.defaultProps = {
