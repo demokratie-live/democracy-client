@@ -19,6 +19,8 @@ The Client for the DEMOCRACY App. This includes iOS, Android and Web Clients gen
 
 [More Dependecies](https://github.com/demokratie-live/democracy-client/network/dependencies)
 
+![Projekt Struktur](https://github.com/demokratie-live/democracy-assets/blob/master/docu/api_structure_client.png)
+
 ## Prerequisites
 
 * [Node.js][node]
