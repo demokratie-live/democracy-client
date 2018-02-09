@@ -3,7 +3,7 @@ import styled from "styled-components/native";
 import PropTypes from "prop-types";
 
 import ActivityIndex from "../../components/ActivityIndex";
-import Date from "../../components/Date";
+import DateTime from "../../components/Date";
 import Segment from "./Segment";
 
 import detailsData from "../../../dummy/details";
@@ -77,8 +77,9 @@ class Detail extends Component {
   };
 
   render() {
-    const { title, activityIndex, active, date, tags } = this.props;
+    const { title, activityIndex, active, date, tags, abstract } = this.props;
     const { currentSegmentIndex } = this.state;
+    detailsData[0].data.abstract = abstract;
     return (
       <Wrapper>
         <Intro>
@@ -92,7 +93,7 @@ class Detail extends Component {
           </IntroMain>
           <IntroSide>
             <ActivityIndex count={activityIndex} active={active} />
-            <Date date={date} />
+            <DateTime date={date} />
           </IntroSide>
         </Intro>
         <TagsWrapper>
@@ -118,7 +119,11 @@ Detail.propTypes = {
   title: PropTypes.string.isRequired,
   activityIndex: PropTypes.number.isRequired,
   active: PropTypes.bool.isRequired,
-  date: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  date: PropTypes.oneOfType([
+    PropTypes.instanceOf(Date),
+    PropTypes.string,
+    PropTypes.bool
+  ]),
   tags: PropTypes.string.isRequired
 };
 

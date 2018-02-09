@@ -21,7 +21,12 @@ const stateLink = withClientState({ resolvers, cache, defaults });
 
 const client = new ApolloClient({
   cache,
-  link: ApolloLink.from([stateLink, new HttpLink()])
+  link: ApolloLink.from([
+    stateLink,
+    new HttpLink({ uri: "http://localhost:3000/graphql" })
+  ])
 });
 export default client;
+// offline cache löschen
+persistor.purge();
 export { persistor };

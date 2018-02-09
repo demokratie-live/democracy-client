@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
+import m from "moment";
 
 import ActivityIndex from "./ActivityIndex";
-import Date from "./Date";
+import DateTime from "./Date";
 
 const ListItemWrapper = styled.View`
   flex-direction: row;
@@ -36,7 +37,7 @@ const ListItem = ({ title, tags, active, date, activityIndex }) => (
     </MainWrapper>
     <SideWrapper>
       <ActivityIndex count={activityIndex} active={active} />
-      <Date date={date} />
+      <DateTime date={date} />
     </SideWrapper>
   </ListItemWrapper>
 );
@@ -45,7 +46,11 @@ ListItem.propTypes = {
   title: PropTypes.string.isRequired,
   tags: PropTypes.string,
   active: PropTypes.bool,
-  date: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  date: PropTypes.oneOfType([
+    PropTypes.instanceOf(Date),
+    PropTypes.string,
+    PropTypes.bool
+  ]),
   activityIndex: PropTypes.number.isRequired
 };
 

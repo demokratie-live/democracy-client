@@ -27,6 +27,8 @@
     "eslint-plugin-react": "^7.4.0",
     "graphql": "^0.12.3",
     "graphql-tag": "^2.6.1",
+    "lodash": "^4.17.4",
+    "moment": "^2.20.1",
     "prop-types": "^15.6.0",
     "react": "16.2.0",
     "react-apollo": "^2.0.4",

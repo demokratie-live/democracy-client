@@ -5,6 +5,7 @@ import { StyleSheet, Text, View, Button } from "react-native";
 import Swiper from "react-native-swiper";
 import { graphql } from "react-apollo";
 import PropTypes from "prop-types";
+
 import SET_INSTRUCTIONS_SHOWN from "../graphql/mutations/setInstructinosShown";
 
 const SkipButton = ({ onFinish, position }) => (

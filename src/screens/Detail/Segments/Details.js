@@ -57,7 +57,7 @@ class Details extends Component {
       documentId,
       dateCreated,
       dateVote,
-      content,
+      abstract,
       documents
     } = this.props;
     return (
@@ -82,7 +82,7 @@ class Details extends Component {
         </Head>
         <Content>
           <DefTitle>Inhalt</DefTitle>
-          <ContentText>{content}</ContentText>
+          <ContentText>{abstract}</ContentText>
           {this.renderDocuments(documents)}
         </Content>
       </Wrapper>
@@ -95,7 +95,7 @@ Details.propTypes = {
   documentId: PropTypes.string.isRequired,
   dateCreated: PropTypes.string.isRequired,
   dateVote: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
+  abstract: PropTypes.string.isRequired,
   documents: PropTypes.arrayOf(PropTypes.object.isRequired)
 };
 
