@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
-import m from "moment";
 
 import ActivityIndex from "./ActivityIndex";
 import DateTime from "./Date";

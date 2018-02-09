@@ -1,6 +1,8 @@
+/* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
 import React, { Component } from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
+import { gqlPropType } from "graphql-anywhere";
 import { Navigator } from "react-native-navigation";
 import { TouchableHighlight } from "react-native";
 import { graphql } from "react-apollo";
@@ -10,7 +12,6 @@ import ListRow from "../../components/ListRow";
 import VoteListItem from "../../components/VoteListItem";
 import ListSectionHeader from "../../components/ListSectionHeader";
 
-import dummyDataVoteLists from "../../../dummy/voteLists";
 import getProcedures from "../../graphql/queries/getProcedures";
 
 const Wrapper = styled.View`
@@ -56,11 +57,11 @@ class List extends Component {
   ];
 
   prepareData = () => {
-    const { listType, data: { procedures } } = this.props;
+    const { data: { procedures } } = this.props;
+    // const { listType, data: { procedures } } = this.props;
     if (!procedures) {
       return [];
     }
-    console.log("procedures", procedures.map(p => p._id));
     const preparedData = [
       {
         data: []
@@ -87,7 +88,8 @@ class List extends Component {
   };
 
   render() {
-    const { listType, data } = this.props;
+    const { data } = this.props;
+    // const { listType, data } = this.props;
     // const data = dummyDataVoteLists[listType];
     return (
       <Wrapper>
@@ -142,7 +144,8 @@ class List extends Component {
 
 List.propTypes = {
   listType: PropTypes.string,
-  navigator: PropTypes.instanceOf(Navigator).isRequired
+  navigator: PropTypes.instanceOf(Navigator).isRequired,
+  data: gqlPropType(getProcedures).isRequired
 };
 
 List.defaultProps = {

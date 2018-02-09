@@ -124,11 +124,13 @@ Detail.propTypes = {
     PropTypes.string,
     PropTypes.bool
   ]),
-  tags: PropTypes.string.isRequired
+  tags: PropTypes.string.isRequired,
+  abstract: PropTypes.string
 };
 
 Detail.defaultProps = {
-  date: false
+  date: false,
+  abstract: ""
 };
 
 export default Detail;
