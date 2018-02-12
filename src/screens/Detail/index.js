@@ -97,7 +97,7 @@ class Detail extends Component {
           </IntroSide>
         </Intro>
         <TagsWrapper>
-          <TagsText>{tags}</TagsText>
+          <TagsText>{tags.join(", ")}</TagsText>
         </TagsWrapper>
         <Content
           data={detailsData}
@@ -124,7 +124,7 @@ Detail.propTypes = {
     PropTypes.string,
     PropTypes.bool
   ]),
-  tags: PropTypes.string.isRequired,
+  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   abstract: PropTypes.string
 };
 

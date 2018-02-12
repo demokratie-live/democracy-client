@@ -8,6 +8,7 @@ export default gql`
       #currentStatus
       tags
       abstract
+      voteDate
     }
   }
 `;

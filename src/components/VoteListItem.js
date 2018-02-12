@@ -32,7 +32,7 @@ const ListItem = ({ title, tags, active, date, activityIndex }) => (
   <ListItemWrapper>
     <MainWrapper>
       <Title>{title}</Title>
-      <Tags>{tags}</Tags>
+      <Tags>{tags.slice(0, 3).join(", ")}</Tags>
     </MainWrapper>
     <SideWrapper>
       <ActivityIndex count={activityIndex} active={active} />
@@ -43,7 +43,7 @@ const ListItem = ({ title, tags, active, date, activityIndex }) => (
 
 ListItem.propTypes = {
   title: PropTypes.string.isRequired,
-  tags: PropTypes.string,
+  tags: PropTypes.arrayOf(PropTypes.string),
   active: PropTypes.bool,
   date: PropTypes.oneOfType([
     PropTypes.instanceOf(Date),

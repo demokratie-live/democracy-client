@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
-import { gqlPropType } from "graphql-anywhere";
+import { propType as gqlPropType } from "graphql-anywhere";
 import { Navigator } from "react-native-navigation";
 import { TouchableHighlight } from "react-native";
 import { graphql } from "react-apollo";
@@ -21,7 +21,7 @@ const Wrapper = styled.View`
 
 const SectionList = styled.SectionList``;
 
-const PAGE_SIZE = 5;
+const PAGE_SIZE = 20;
 
 class List extends Component {
   constructor(props) {
@@ -49,15 +49,15 @@ class List extends Component {
   sections = [
     {
       data: []
-    },
-    {
-      title: "Vergangen",
-      data: []
     }
+    // {
+    //   title: "Vergangen",
+    //   data: []
+    // }
   ];
 
   prepareData = () => {
-    const { data: { procedures } } = this.props;
+    const { listType, data: { procedures } } = this.props;
     // const { listType, data: { procedures } } = this.props;
     if (!procedures) {
       return [];
@@ -65,22 +65,40 @@ class List extends Component {
     const preparedData = [
       {
         data: []
-      },
-      {
+      }
+      // {
+      //   title: "Vergangen",
+      //   data: []
+      // }
+    ];
+    if (listType === "VOTING") {
+      preparedData.push({
         title: "Vergangen",
         data: []
-      }
-    ];
-    procedures.forEach(procedure => {
-      // console.log("procedure", procedure);
-
-      preparedData[0].data.push({
-        ...procedure,
-        tags: procedure.tags.slice(0, 3).join(", "),
-
-        activityIndex: 0,
-        active: false
       });
+    }
+    console.log(preparedData);
+    procedures.forEach(procedure => {
+      console.log("procedure", new Date(procedure.voteDate), new Date());
+
+      if (listType === "VOTING" && new Date(procedure.voteDate) < new Date()) {
+        preparedData[1].data.push({
+          ...procedure,
+          tags: procedure.tags,
+
+          activityIndex: 0,
+          active: false,
+          date: procedure.voteDate
+        });
+      } else {
+        preparedData[0].data.push({
+          ...procedure,
+          tags: procedure.tags,
+          activityIndex: 0,
+          active: false,
+          date: procedure.voteDate || false
+        });
+      }
     });
     // console.log("data", preparedData);
     // console.log("oldData", dummyDataVoteLists[listType]);
@@ -88,9 +106,10 @@ class List extends Component {
   };
 
   render() {
-    const { data } = this.props;
+    const { data, listType } = this.props;
     // const { listType, data } = this.props;
     // const data = dummyDataVoteLists[listType];
+    console.log("listType", listType);
     return (
       <Wrapper>
         <SectionList
@@ -113,9 +132,10 @@ class List extends Component {
             </TouchableHighlight>
           )}
           onEndReached={() => {
+            console.log("onEndReached");
             data.fetchMore({
               variables: {
-                offset: data.procedures ? data.procedures.length + 1 : PAGE_SIZE
+                offset: data.procedures ? data.procedures.length : PAGE_SIZE
               },
               updateQuery: (previousResult, { fetchMoreResult }) => {
                 // Don't do anything if there weren't any new items
@@ -144,17 +164,20 @@ class List extends Component {
 
 List.propTypes = {
   listType: PropTypes.string,
-  navigator: PropTypes.instanceOf(Navigator).isRequired,
-  data: gqlPropType(getProcedures).isRequired
+  navigator: PropTypes.instanceOf(Navigator).isRequired
+  // data: gqlPropType(getProcedures).isRequired
 };
 
 List.defaultProps = {
-  listType: "POLLS"
+  listType: "VOTING"
 };
 
 export default graphql(getProcedures, {
-  options: {
-    notifyOnNetworkStatusChange: true,
-    variables: { type: "PREPARATION" }
+  options: ({ listType }) => {
+    console.log(listType);
+    return {
+      notifyOnNetworkStatusChange: true,
+      variables: { type: listType, pageSize: PAGE_SIZE, offset: 0 }
+    };
   }
 })(List);
