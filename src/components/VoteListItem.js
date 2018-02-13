@@ -19,11 +19,11 @@ const SideWrapper = styled.View`
   justify-content: space-between;
 `;
 
-const Title = styled.Text`
+const Title = styled.Text.attrs({ numberOfLines: 2 })`
   font-size: 17;
   color: #030303;
 `;
-const Tags = styled.Text`
+const Tags = styled.Text.attrs({ numberOfLines: 2 })`
   padding-top: 8;
   font-size: 15;
   color: #8f8e94;
@@ -33,7 +33,7 @@ const ListItem = ({ title, tags, active, date, activityIndex }) => (
   <ListItemWrapper>
     <MainWrapper>
       <Title>{title}</Title>
-      <Tags>{tags.slice(0, 3).join(", ")}</Tags>
+      <Tags>{tags.join(", ")}</Tags>
     </MainWrapper>
     <SideWrapper>
       <ActivityIndex count={activityIndex} active={active} />
