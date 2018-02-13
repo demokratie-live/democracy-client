@@ -81,7 +81,11 @@ class List extends Component {
     procedures.forEach(procedure => {
       console.log("procedure", new Date(procedure.voteDate), new Date());
 
-      if (listType === "VOTING" && new Date(procedure.voteDate) < new Date()) {
+      if (
+        listType === "VOTING" &&
+        procedure.voteDate &&
+        new Date(procedure.voteDate) < new Date()
+      ) {
         preparedData[1].data.push({
           ...procedure,
           tags: procedure.tags,
