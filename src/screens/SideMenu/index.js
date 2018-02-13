@@ -36,7 +36,7 @@ const Content = styled.View`
 
 const Head = styled.View`
   flex-direction: row;
-  padding-top: 6;
+  padding-top: 16;
   padding-left: 16;
 `;
 
