@@ -22,6 +22,7 @@ const Intro = styled.View`
 
 const IntroMain = styled.View`
   flex: 1;
+  padding-right: 10;
 `;
 
 const IntroTitle = styled.Text`
