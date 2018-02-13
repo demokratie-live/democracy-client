@@ -2,7 +2,6 @@
 import React, { Component } from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
-import { propType as gqlPropType } from "graphql-anywhere";
 import { Navigator } from "react-native-navigation";
 import { TouchableHighlight } from "react-native";
 import { graphql } from "react-apollo";
@@ -77,10 +76,7 @@ class List extends Component {
         data: []
       });
     }
-    console.log(preparedData);
     procedures.forEach(procedure => {
-      console.log("procedure", new Date(procedure.voteDate), new Date());
-
       if (
         listType === "VOTING" &&
         procedure.voteDate &&
@@ -110,10 +106,9 @@ class List extends Component {
   };
 
   render() {
-    const { data, listType } = this.props;
+    const { data } = this.props;
     // const { listType, data } = this.props;
     // const data = dummyDataVoteLists[listType];
-    console.log("listType", listType);
     return (
       <Wrapper>
         <SectionList
@@ -136,7 +131,6 @@ class List extends Component {
             </TouchableHighlight>
           )}
           onEndReached={() => {
-            console.log("onEndReached");
             data.fetchMore({
               variables: {
                 offset: data.procedures ? data.procedures.length : PAGE_SIZE
@@ -168,8 +162,8 @@ class List extends Component {
 
 List.propTypes = {
   listType: PropTypes.string,
-  navigator: PropTypes.instanceOf(Navigator).isRequired
-  // data: gqlPropType(getProcedures).isRequired
+  navigator: PropTypes.instanceOf(Navigator).isRequired,
+  data: PropTypes.shape().isRequired
 };
 
 List.defaultProps = {
@@ -177,11 +171,8 @@ List.defaultProps = {
 };
 
 export default graphql(getProcedures, {
-  options: ({ listType }) => {
-    console.log(listType);
-    return {
+  options: ({ listType }) => ({
       notifyOnNetworkStatusChange: true,
       variables: { type: listType, pageSize: PAGE_SIZE, offset: 0 }
-    };
-  }
+    })
 })(List);
