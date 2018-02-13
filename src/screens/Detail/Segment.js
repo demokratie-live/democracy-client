@@ -35,7 +35,7 @@ const CollapseIcon = styled.Image.attrs({
 
 const Content = styled.View`
   display: ${({ open }) => (open ? "flex" : "none")};
-  padding-horizontal: 16;
+  padding-horizontal: 18;
   padding-vertical: 10;
 `;
 
