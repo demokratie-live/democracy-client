@@ -34,7 +34,7 @@ class App {
               screenId: "democracy.VoteList.List",
               title: "Abstimmung",
               passProps: {
-                listType: "POLLS"
+                listType: "VOTING"
               }
             },
             {
