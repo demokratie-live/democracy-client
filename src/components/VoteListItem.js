@@ -3,7 +3,7 @@ import styled from "styled-components/native";
 import PropTypes from "prop-types";
 
 import ActivityIndex from "./ActivityIndex";
-import Date from "./Date";
+import DateTime from "./Date";
 
 const ListItemWrapper = styled.View`
   flex-direction: row;
@@ -11,6 +11,7 @@ const ListItemWrapper = styled.View`
 
 const MainWrapper = styled.View`
   flex: 1;
+  padding-right: 10;
 `;
 
 const SideWrapper = styled.View`
@@ -18,11 +19,11 @@ const SideWrapper = styled.View`
   justify-content: space-between;
 `;
 
-const Title = styled.Text`
+const Title = styled.Text.attrs({ numberOfLines: 2 })`
   font-size: 17;
   color: #030303;
 `;
-const Tags = styled.Text`
+const Tags = styled.Text.attrs({ numberOfLines: 2 })`
   padding-top: 8;
   font-size: 15;
   color: #8f8e94;
@@ -32,20 +33,24 @@ const ListItem = ({ title, tags, active, date, activityIndex }) => (
   <ListItemWrapper>
     <MainWrapper>
       <Title>{title}</Title>
-      <Tags>{tags}</Tags>
+      <Tags>{tags.join(", ")}</Tags>
     </MainWrapper>
     <SideWrapper>
       <ActivityIndex count={activityIndex} active={active} />
-      <Date date={date} />
+      <DateTime date={date} />
     </SideWrapper>
   </ListItemWrapper>
 );
 
 ListItem.propTypes = {
   title: PropTypes.string.isRequired,
-  tags: PropTypes.string,
+  tags: PropTypes.arrayOf(PropTypes.string),
   active: PropTypes.bool,
-  date: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  date: PropTypes.oneOfType([
+    PropTypes.instanceOf(Date),
+    PropTypes.string,
+    PropTypes.bool
+  ]),
   activityIndex: PropTypes.number.isRequired
 };
 

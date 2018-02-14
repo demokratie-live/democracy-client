@@ -23,9 +23,12 @@ const Title = styled.Text`
 
 const Icons = styled(Ionicons.Button).attrs({
   color: "#fff",
-  size: 30,
-  backgroundColor: "transparent"
-})``;
+  size: 25,
+  backgroundColor: "transparent",
+  iconStyle: { marginRight: 0 }
+})`
+  padding: 0;
+`;
 
 const SearchIcon = styled(Icons).attrs({
   name: Platform.OS === "ios" ? "ios-search" : "md-search"
