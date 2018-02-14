@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import ActivityIndex from "../../components/ActivityIndex";
 import DateTime from "../../components/Date";
 import Segment from "./Segment";
+import Voting from "./Voting";
 
 import detailsData from "../../../dummy/details";
 
@@ -116,6 +117,7 @@ class Detail extends Component {
               />
             )}
           />
+          <Voting />
         </Content>
       </Wrapper>
     );

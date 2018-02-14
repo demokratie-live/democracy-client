@@ -35,10 +35,5 @@ export default [
         }
       ]
     }
-  },
-  {
-    title: "Abstimmung",
-    type: "voting",
-    collapsible: false
   }
 ];

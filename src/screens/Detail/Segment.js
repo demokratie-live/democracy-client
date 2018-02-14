@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 
 import DetailsSegment from "./Segments/Details";
 import DocumentsSegment from "./Segments/Documents";
-import Voting from "./Segments/Voting";
 
 const Wrapper = styled.View``;
 
@@ -48,8 +47,6 @@ const Segment = ({ type, title, onPress, open, data, collapsible }) => {
         return <DetailsSegment {...data} />;
       case "documents":
         return <DocumentsSegment {...data} />;
-      case "voting":
-        return <Voting {...data} />;
 
       default:
         return <Title>Kein Segement definiert</Title>;
