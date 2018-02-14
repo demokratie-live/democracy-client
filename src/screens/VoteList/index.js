@@ -58,7 +58,7 @@ class VoteList extends Component {
   };
 
   lists = [
-    { key: "POLLS", title: "in Abstimmung" },
+    { key: "VOTING", title: "in Abstimmung" },
     { key: "PREPARATION", title: "in Vorbereitung" },
     { key: "HOT", title: "What's hot?" }
   ];

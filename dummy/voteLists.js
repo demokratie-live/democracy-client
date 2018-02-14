@@ -1,5 +1,5 @@
 export default {
-  POLLS: [
+  VOTING: [
     {
       data: [
         {

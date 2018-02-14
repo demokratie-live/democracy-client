@@ -1,5 +1,5 @@
 import React from "react";
-import { Platform } from "react-native";
+import { Platform, StatusBar } from "react-native";
 import styled from "styled-components/native";
 
 import Navigation from "./Navigation";
@@ -8,8 +8,9 @@ const Wrapper = styled.View`
   flex: 1;
 `;
 
+// TODO status background enftfernen, wenn weiß oko ist
 const StatusBackground = styled.View`
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(255, 255, 255, 0);
   height: 20;
 `;
 
@@ -35,7 +36,7 @@ const Content = styled.View`
 
 const Head = styled.View`
   flex-direction: row;
-  padding-top: 6;
+  padding-top: 16;
   padding-left: 16;
 `;
 
@@ -55,6 +56,7 @@ const HeadText = styled.Text`
 
 const SideMenu = () => (
   <Wrapper>
+    <StatusBar barStyle="light-content" />
     <BackgroundWrapper>
       <BackgroundImage />
     </BackgroundWrapper>
