@@ -1,49 +1,19 @@
 // @flow
 
 import React, { Component } from "react";
-import { StyleSheet, View, Button } from "react-native";
 import Swiper from "react-native-swiper";
 import { graphql } from "react-apollo";
 import PropTypes from "prop-types";
+import styled from "styled-components/native";
 import Slide from "./Slide";
 
 import SET_INSTRUCTIONS_SHOWN from "../../graphql/mutations/setInstructinosShown";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  wrapper: {},
-  button: {
-    alignSelf: "flex-end",
-    position: "absolute",
-    bottom: 35
-  },
-  slide1: {
-    flex: 1,
-    backgroundColor: "#9DD6EB",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  slide2: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#97CAE5"
-  },
-  slide3: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#92BBD9"
-  },
-  text: {
-    color: "#fff",
-    fontSize: 30,
-    fontWeight: "bold"
-  }
-});
+const Container = styled.View`
+  flex: 1;
+`;
+
+const Button = styled.Button``;
 
 class Introductions extends Component {
   state = {
@@ -76,36 +46,22 @@ class Introductions extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <Container>
         <Swiper
           ref={this.refSwiper}
-          style={styles.wrapper}
           loop={false}
           onMomentumScrollEnd={this.onMomentumScrollEnd}
         >
-          <Slide
-            style={styles.slide1}
-            styleText={styles.text}
-            text="Hello Swiper"
-          />
-          <Slide
-            style={styles.slide2}
-            styleText={styles.text}
-            text="Beautiful"
-          />
-          <Slide
-            style={styles.slide3}
-            styleText={styles.text}
-            text="And simple"
-          />
+          <Slide background="#9DD6EB" text="1" />
+          <Slide background="#97CAE5" text="2" />
+          <Slide background="#92BBD9" text="3" />
         </Swiper>
         <Button
-          style={styles.button}
           onPress={this.onClick}
           title={this.state.buttonText}
           accessibilityLabel={this.state.buttonText}
         />
-      </View>
+      </Container>
     );
   }
 }

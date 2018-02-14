@@ -1,22 +1,33 @@
 import React from "react";
-import { Text, View } from "react-native";
 import PropTypes from "prop-types";
+import styled from "styled-components/native";
 
-const Slide = ({ style, styleText, text }) => (
-  <View style={style}>
-    <Text style={styleText}>{text}</Text>
-  </View>
+const Container = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background: ${({ background }) => background};
+`;
+
+const Text = styled.Text`
+  color: #fff;
+  font-size: 30;
+  font-weight: bold;
+`;
+
+const Slide = ({ background, text }) => (
+  <Container background={background}>
+    <Text>{text}</Text>
+  </Container>
 );
 
 Slide.propTypes = {
-  style: PropTypes.number,
-  styleText: PropTypes.number,
+  background: PropTypes.string,
   text: PropTypes.string.isRequired
 };
 
 Slide.defaultProps = {
-  style: {},
-  styleText: {}
+  background: ""
 };
 
 export default Slide;
