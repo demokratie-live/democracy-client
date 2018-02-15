@@ -15,9 +15,14 @@ const Container = styled.View`
 
 const Button = styled.Button``;
 
+const BUTTON_TEXTS = {
+  next: "Weiter >",
+  finish: "Los gehts!"
+};
+
 class Introductions extends Component {
   state = {
-    buttonText: "Weiter >"
+    buttonText: BUTTON_TEXTS.next
   };
 
   onClick = () => {
@@ -33,22 +38,24 @@ class Introductions extends Component {
   };
 
   onMomentumScrollEnd = () => {
-    if (this.swiper.state.index === this.swiper.state.total - 1) {
-      this.setState({ buttonText: "Los gehts!" });
-    } else {
-      this.setState({ buttonText: "Weiter >" });
+    const { buttonText } = this.state;
+    if (
+      this.swiper.state.index === this.swiper.state.total - 1 &&
+      BUTTON_TEXTS.finish !== buttonText
+    ) {
+      this.setState({ buttonText: BUTTON_TEXTS.finish });
+    } else if (BUTTON_TEXTS.next !== buttonText) {
+      this.setState({ buttonText: BUTTON_TEXTS.next });
     }
-  };
-
-  refSwiper = sw => {
-    this.swiper = sw;
   };
 
   render() {
     return (
       <Container>
         <Swiper
-          ref={this.refSwiper}
+          ref={e => {
+            this.swiper = e;
+          }}
           loop={false}
           onMomentumScrollEnd={this.onMomentumScrollEnd}
         >
