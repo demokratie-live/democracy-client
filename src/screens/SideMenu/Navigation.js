@@ -85,6 +85,10 @@ const Navigation = () => {
           active: true
         },
         {
+          title: "Tutorial",
+          icon: require("../../../assets/icons/speechBubble9.png")
+        },
+        {
           title: "Support",
           icon: require("../../../assets/icons/speechBubble9.png")
         }
