@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import ActivityIndex from "../../components/ActivityIndex";
 import DateTime from "../../components/Date";
 import Segment from "./Segment";
+import Voting from "./Voting";
 
 import detailsData from "../../../dummy/details";
 
@@ -52,7 +53,11 @@ const TagsText = styled.Text`
   padding-vertical: 10;
 `;
 
-const Content = styled.FlatList`
+const Content = styled.ScrollView`
+  flex: 1;
+`;
+
+const Details = styled.FlatList`
   flex: 1;
 `;
 
@@ -97,20 +102,23 @@ class Detail extends Component {
             <DateTime date={date} />
           </IntroSide>
         </Intro>
-        <TagsWrapper>
-          <TagsText>{tags.join(", ")}</TagsText>
-        </TagsWrapper>
-        <Content
-          data={detailsData}
-          keyExtractor={({ type }) => type}
-          renderItem={({ item, index }) => (
-            <Segment
-              open={currentSegmentIndex === index}
-              onPress={this.setCurrentSegment(index)}
-              {...item}
-            />
-          )}
-        />
+        <Content>
+          <TagsWrapper>
+            <TagsText>{tags.join(", ")}</TagsText>
+          </TagsWrapper>
+          <Details
+            data={detailsData}
+            keyExtractor={({ type }) => type}
+            renderItem={({ item, index }) => (
+              <Segment
+                open={currentSegmentIndex === index}
+                onPress={this.setCurrentSegment(index)}
+                {...item}
+              />
+            )}
+          />
+          <Voting />
+        </Content>
       </Wrapper>
     );
   }
