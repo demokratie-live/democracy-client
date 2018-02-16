@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from "react";
-import { Platform, SegmentedControlIOS } from "react-native";
+import { Platform, SegmentedControlIOS, Dimensions } from "react-native";
 import { graphql } from "react-apollo";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
@@ -11,6 +11,8 @@ import List from "./List";
 import Header from "./Header";
 
 import SET_INSTRUCTIONS_SHOWN from "../../graphql/mutations/setInstructinosShown";
+
+const { width: DEVICE_WIDTH } = Dimensions.get("window");
 
 Navigation.registerComponent("democracy.VoteList.Header", () => Header);
 
@@ -58,9 +60,13 @@ class VoteList extends Component {
   };
 
   lists = [
-    { key: "VOTING", title: "in Abstimmung" },
-    { key: "PREPARATION", title: "in Vorbereitung" },
-    { key: "HOT", title: "What's hot?" }
+    { key: "VOTING", title: "in Abstimmung", smallTitle: "Abstimmung" },
+    {
+      key: "PREPARATION",
+      title: "in Vorbereitung",
+      smallTitle: "Vorbereitung"
+    },
+    { key: "HOT", title: "What's hot?", smallTitle: "What's hot?" }
   ];
 
   showIntroAgain = () => {
@@ -81,7 +87,10 @@ class VoteList extends Component {
               alignSelf: "flex-end",
               width: "100%"
             }}
-            values={this.lists.map(({ title }) => title)}
+            values={this.lists.map(
+              ({ title, smallTitle }) =>
+                DEVICE_WIDTH > 320 ? title : smallTitle
+            )}
             selectedIndex={this.state.selectedIndex}
             tintColor="#ffffff"
             onChange={event => {
