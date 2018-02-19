@@ -54,7 +54,6 @@ class Details extends Component {
   render() {
     const {
       recources,
-      documentId,
       dateCreated,
       dateVote,
       abstract,
@@ -71,13 +70,11 @@ class Details extends Component {
           <HeadRight>
             <HeadRightTitle>
               <DefTitleRight>Vorgang</DefTitleRight>
-              <DefTitleRight>Dok.-Nr.</DefTitleRight>
               <DefTitleRight>erstellt am</DefTitleRight>
               <DefTitleRight>Abstimmung</DefTitleRight>
             </HeadRightTitle>
             <HeadRightDescr>
               <DefDescr>{procedureId}</DefDescr>
-              <DefDescr>{documentId}</DefDescr>
               <DefDescr>{dateCreated}</DefDescr>
               <DefDescr>{dateVote}</DefDescr>
             </HeadRightDescr>
@@ -95,7 +92,6 @@ class Details extends Component {
 
 Details.propTypes = {
   recources: PropTypes.string.isRequired,
-  documentId: PropTypes.string.isRequired,
   dateCreated: PropTypes.string.isRequired,
   dateVote: PropTypes.string.isRequired,
   abstract: PropTypes.string.isRequired,
