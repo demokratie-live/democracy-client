@@ -88,7 +88,8 @@ class List extends Component {
 
           activityIndex: 0,
           active: false,
-          date: procedure.voteDate
+          date: procedure.voteDate,
+          listType
         });
       } else {
         preparedData[0].data.push({
@@ -96,7 +97,8 @@ class List extends Component {
           tags: procedure.tags,
           activityIndex: 0,
           active: false,
-          date: procedure.voteDate || false
+          date: procedure.voteDate || false,
+          listType
         });
       }
     });

@@ -83,7 +83,15 @@ class Detail extends Component {
   };
 
   render() {
-    const { title, activityIndex, active, date, tags, abstract } = this.props;
+    const {
+      title,
+      activityIndex,
+      active,
+      date,
+      tags,
+      abstract,
+      listType
+    } = this.props;
     const { currentSegmentIndex } = this.state;
     detailsData[0].data.abstract = abstract;
     return (
@@ -117,7 +125,7 @@ class Detail extends Component {
               />
             )}
           />
-          <Voting />
+          {listType === "VOTING" && <Voting />}
         </Content>
       </Wrapper>
     );
@@ -134,7 +142,8 @@ Detail.propTypes = {
     PropTypes.bool
   ]),
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-  abstract: PropTypes.string
+  abstract: PropTypes.string,
+  listType: PropTypes.string.isRequired
 };
 
 Detail.defaultProps = {

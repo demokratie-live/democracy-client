@@ -95,12 +95,13 @@ Details.propTypes = {
   documentId: PropTypes.string.isRequired,
   dateCreated: PropTypes.string.isRequired,
   dateVote: PropTypes.string.isRequired,
-  abstract: PropTypes.string.isRequired,
+  abstract: PropTypes.string,
   documents: PropTypes.arrayOf(PropTypes.object.isRequired)
 };
 
 Details.defaultProps = {
-  documents: []
+  documents: [],
+  abstract: ""
 };
 
 export default Details;
