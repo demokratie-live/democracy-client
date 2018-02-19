@@ -143,7 +143,8 @@ Detail.propTypes = {
     PropTypes.bool
   ]),
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-  abstract: PropTypes.string
+  abstract: PropTypes.string,
+  procedureId: PropTypes.string.isRequired
 };
 
 Detail.defaultProps = {

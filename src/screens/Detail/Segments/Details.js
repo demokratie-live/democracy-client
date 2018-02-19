@@ -99,7 +99,8 @@ Details.propTypes = {
   dateCreated: PropTypes.string.isRequired,
   dateVote: PropTypes.string.isRequired,
   abstract: PropTypes.string.isRequired,
-  documents: PropTypes.arrayOf(PropTypes.object.isRequired)
+  documents: PropTypes.arrayOf(PropTypes.object.isRequired),
+  procedureId: PropTypes.string.isRequired
 };
 
 Details.defaultProps = {
