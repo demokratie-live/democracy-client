@@ -58,7 +58,8 @@ class Details extends Component {
       dateCreated,
       dateVote,
       abstract,
-      documents
+      documents,
+      procedureId
     } = this.props;
     return (
       <Wrapper>
@@ -69,11 +70,13 @@ class Details extends Component {
           </HeadLeft>
           <HeadRight>
             <HeadRightTitle>
+              <DefTitleRight>Vorgang</DefTitleRight>
               <DefTitleRight>Dok.-Nr.</DefTitleRight>
               <DefTitleRight>erstellt am</DefTitleRight>
               <DefTitleRight>Abstimmung</DefTitleRight>
             </HeadRightTitle>
             <HeadRightDescr>
+              <DefDescr>{procedureId}</DefDescr>
               <DefDescr>{documentId}</DefDescr>
               <DefDescr>{dateCreated}</DefDescr>
               <DefDescr>{dateVote}</DefDescr>
