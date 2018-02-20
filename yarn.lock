@@ -4318,9 +4318,9 @@ react-native-config@^0.11.5:
   version "0.11.5"
   resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-0.11.5.tgz#516cb7b6ec437c7739236ca075971db3aabdcb95"
 
-react-native-navigation@wix/react-native-navigation#2545/head:
-  version "1.1.314"
-  resolved "https://codeload.github.com/wix/react-native-navigation/tar.gz/d927e3c6bd92c820e45400e4e1e186d0d2411d3b"
+react-native-navigation@^1.1.382:
+  version "1.1.382"
+  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-1.1.382.tgz#b0606190465d9e3445aec695f23d5680d3648973"
   dependencies:
     lodash "4.x.x"
 
