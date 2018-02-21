@@ -85,7 +85,7 @@ class List extends Component {
         preparedData[1].data.push({
           ...procedure,
           tags: procedure.tags,
-
+          procedureId: procedure.procedureId,
           activityIndex: 0,
           active: false,
           date: procedure.voteDate,
@@ -95,6 +95,7 @@ class List extends Component {
         preparedData[0].data.push({
           ...procedure,
           tags: procedure.tags,
+          procedureId: procedure.procedureId,
           activityIndex: 0,
           active: false,
           date: procedure.voteDate || false,

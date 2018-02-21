@@ -90,10 +90,12 @@ class Detail extends Component {
       date,
       tags,
       abstract,
-      listType
+      listType,
+      procedureId
     } = this.props;
     const { currentSegmentIndex } = this.state;
     detailsData[0].data.abstract = abstract;
+    detailsData[0].data.procedureId = procedureId;
     return (
       <Wrapper>
         <Intro>
@@ -143,7 +145,8 @@ Detail.propTypes = {
   ]),
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   abstract: PropTypes.string,
-  listType: PropTypes.string.isRequired
+  listType: PropTypes.string.isRequired,
+  procedureId: PropTypes.string.isRequired
 };
 
 Detail.defaultProps = {

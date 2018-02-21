@@ -54,11 +54,11 @@ class Details extends Component {
   render() {
     const {
       recources,
-      documentId,
       dateCreated,
       dateVote,
       abstract,
-      documents
+      documents,
+      procedureId
     } = this.props;
     return (
       <Wrapper>
@@ -69,12 +69,12 @@ class Details extends Component {
           </HeadLeft>
           <HeadRight>
             <HeadRightTitle>
-              <DefTitleRight>Dok.-Nr.</DefTitleRight>
+              <DefTitleRight>Vorgang</DefTitleRight>
               <DefTitleRight>erstellt am</DefTitleRight>
               <DefTitleRight>Abstimmung</DefTitleRight>
             </HeadRightTitle>
             <HeadRightDescr>
-              <DefDescr>{documentId}</DefDescr>
+              <DefDescr>{procedureId}</DefDescr>
               <DefDescr>{dateCreated}</DefDescr>
               <DefDescr>{dateVote}</DefDescr>
             </HeadRightDescr>
@@ -92,11 +92,11 @@ class Details extends Component {
 
 Details.propTypes = {
   recources: PropTypes.string.isRequired,
-  documentId: PropTypes.string.isRequired,
   dateCreated: PropTypes.string.isRequired,
   dateVote: PropTypes.string.isRequired,
-  abstract: PropTypes.string,
-  documents: PropTypes.arrayOf(PropTypes.object.isRequired)
+  abstract: PropTypes.string.isRequired,
+  documents: PropTypes.arrayOf(PropTypes.object.isRequired),
+  procedureId: PropTypes.string.isRequired
 };
 
 Details.defaultProps = {

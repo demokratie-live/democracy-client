@@ -5,7 +5,7 @@ export default gql`
     procedures(offset: $offset, pageSize: $pageSize, type: $type) {
       _id
       title
-      #currentStatus
+      procedureId
       tags
       abstract
       voteDate
