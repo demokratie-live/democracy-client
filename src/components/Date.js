@@ -5,7 +5,7 @@ import m from "moment";
 
 const DateText = styled.Text`
   padding-top: 8;
-  color: ${({ date }) => (date > new Date() ? "#44db5e" : "red")};
+  color: ${({ date }) => (new Date(date) > new Date() ? "#44db5e" : "red")};
   font-size: 12;
   display: ${({ visible }) => (visible ? "flex" : "none")};
 `;
