@@ -26,6 +26,8 @@
 ; Ignore metro
 .*/node_modules/metro/.*
 
+.*/node_modules/config-chain/test/broken.json
+
 [include]
 
 [untyped]
