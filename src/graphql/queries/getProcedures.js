@@ -9,6 +9,7 @@ export default gql`
       tags
       abstract
       voteDate
+      submissionDate
     }
   }
 `;

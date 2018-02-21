@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
+import m from "moment";
+import { View } from "react-native";
 
 import Document from "../../../components/Document";
 
@@ -48,42 +50,48 @@ const ContentText = styled(DefDescr)`
 `;
 
 class Details extends Component {
-  renderDocuments = documents =>
-    documents.map(({ title }) => <Document key={title} text={title} />);
-
   render() {
     const {
       recources,
-      dateCreated,
+      submissionDate,
       dateVote,
       abstract,
-      documents,
       procedureId
     } = this.props;
     return (
       <Wrapper>
         <Head>
-          <HeadLeft>
-            <DefTitle>Sachgebiet</DefTitle>
-            <DefDescr>{recources}</DefDescr>
-          </HeadLeft>
+          {recources.length > 0 && (
+            <HeadLeft>
+              <DefTitle>Sachgebiete</DefTitle>
+              <DefDescr>{recources.join("\n")}</DefDescr>
+            </HeadLeft>
+          )}
           <HeadRight>
             <HeadRightTitle>
               <DefTitleRight>Vorgang</DefTitleRight>
               <DefTitleRight>erstellt am</DefTitleRight>
-              <DefTitleRight>Abstimmung</DefTitleRight>
+
+              {dateVote && <DefTitleRight>Abstimmung</DefTitleRight>}
             </HeadRightTitle>
             <HeadRightDescr>
               <DefDescr>{procedureId}</DefDescr>
-              <DefDescr>{dateCreated}</DefDescr>
-              <DefDescr>{dateVote}</DefDescr>
+              <DefDescr>
+                {submissionDate && m(submissionDate).format("DD.MM.YY")}
+              </DefDescr>
+              {dateVote && (
+                <DefDescr>{m(dateVote).format("DD.MM.YY")}</DefDescr>
+              )}
             </HeadRightDescr>
           </HeadRight>
         </Head>
         <Content>
-          <DefTitle>Inhalt</DefTitle>
-          <ContentText>{abstract}</ContentText>
-          {this.renderDocuments(documents)}
+          {abstract && (
+            <View>
+              <DefTitle>Inhalt</DefTitle>
+              <ContentText>{abstract}</ContentText>
+            </View>
+          )}
         </Content>
       </Wrapper>
     );
@@ -91,16 +99,18 @@ class Details extends Component {
 }
 
 Details.propTypes = {
-  recources: PropTypes.string.isRequired,
-  dateCreated: PropTypes.string.isRequired,
-  dateVote: PropTypes.string.isRequired,
-  abstract: PropTypes.string.isRequired,
+  recources: PropTypes.array.isRequired,
+  submissionDate: PropTypes.string.isRequired,
+  dateVote: PropTypes.string,
+  abstract: PropTypes.string,
   documents: PropTypes.arrayOf(PropTypes.object.isRequired),
   procedureId: PropTypes.string.isRequired
 };
 
 Details.defaultProps = {
-  documents: []
+  documents: [],
+  abstract: false,
+  dateVote: false
 };
 
 export default Details;
