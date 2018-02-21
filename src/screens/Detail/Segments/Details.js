@@ -100,8 +100,7 @@ Details.propTypes = {
 };
 
 Details.defaultProps = {
-  documents: [],
-  abstract: ""
+  documents: []
 };
 
 export default Details;
