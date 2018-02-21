@@ -43,13 +43,18 @@ const DefDescr = styled.Text`
   color: rgb(155, 155, 155);
 `;
 
-const Content = styled.View``;
+const Content = styled.View`
+  padding-top: 11;
+`;
 
 const ContentText = styled(DefDescr)`
   font-size: 11;
 `;
 
 class Details extends Component {
+  renderDocuments = documents =>
+    documents.map(({ title }) => <Document key={title} text={title} />);
+
   render() {
     const {
       recources,
