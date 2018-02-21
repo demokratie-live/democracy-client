@@ -90,6 +90,7 @@ class Detail extends Component {
       date,
       tags,
       abstract,
+      listType,
       procedureId
     } = this.props;
     const { currentSegmentIndex } = this.state;
@@ -126,7 +127,7 @@ class Detail extends Component {
               />
             )}
           />
-          <Voting />
+          {listType === "VOTING" && <Voting />}
         </Content>
       </Wrapper>
     );
@@ -144,6 +145,7 @@ Detail.propTypes = {
   ]),
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   abstract: PropTypes.string,
+  listType: PropTypes.string.isRequired,
   procedureId: PropTypes.string.isRequired
 };
 
