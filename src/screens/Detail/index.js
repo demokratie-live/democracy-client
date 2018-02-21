@@ -83,9 +83,18 @@ class Detail extends Component {
   };
 
   render() {
-    const { title, activityIndex, active, date, tags, abstract } = this.props;
+    const {
+      title,
+      activityIndex,
+      active,
+      date,
+      tags,
+      abstract,
+      procedureId
+    } = this.props;
     const { currentSegmentIndex } = this.state;
     detailsData[0].data.abstract = abstract;
+    detailsData[0].data.procedureId = procedureId;
     return (
       <Wrapper>
         <Intro>
@@ -134,7 +143,8 @@ Detail.propTypes = {
     PropTypes.bool
   ]),
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-  abstract: PropTypes.string
+  abstract: PropTypes.string,
+  procedureId: PropTypes.string.isRequired
 };
 
 Detail.defaultProps = {
