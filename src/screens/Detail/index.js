@@ -9,7 +9,7 @@ import DateTime from "../../components/Date";
 import Segment from "./Segment";
 import Voting from "./Voting";
 
-import detailsData from "../../../dummy/details";
+// import detailsData from "../../../dummy/details";
 
 const Wrapper = styled.View`
   flex: 1;
@@ -100,8 +100,19 @@ class Detail extends Component {
       submissionDate,
       importantDocuments
     } = this.props.data.procedure;
-    console.log(importantDocuments);
     const { currentSegmentIndex } = this.state;
+    const detailsData = [
+      {
+        title: "Details",
+        type: "details",
+        data: {}
+      },
+      {
+        title: "Dokumente",
+        type: "documents",
+        data: {}
+      }
+    ];
     detailsData[0].data.abstract = abstract;
     detailsData[0].data.procedureId = procedureId;
     detailsData[0].data.recources = subjectGroups;
