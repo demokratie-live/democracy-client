@@ -1,8 +1,9 @@
-import React from "react";
+import React, { Component } from "react";
+import { Linking } from "react-native";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 
-const Wrapper = styled.View`
+const Wrapper = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   padding-top: 13;
@@ -18,15 +19,33 @@ const Text = styled.Text`
   color: rgb(0, 118, 255);
 `;
 
-const Document = ({ text }) => (
-  <Wrapper>
-    <Icon />
-    <Text>{text}</Text>
-  </Wrapper>
-);
+class Document extends Component {
+  openPdf = url => () => {
+    Linking.canOpenURL(url).then(supported => {
+      if (supported) {
+        Linking.openURL(url);
+      } else {
+        // console.log(`Don't know how to open URI: ${url}`);
+      }
+    });
+  };
+
+  render() {
+    const { editor, type, number, url } = this.props;
+    return (
+      <Wrapper onPress={this.openPdf(url)}>
+        <Icon />
+        <Text>{`${type} (${editor} ${number})`}</Text>
+      </Wrapper>
+    );
+  }
+}
 
 Document.propTypes = {
-  text: PropTypes.string.isRequired
+  editor: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired
 };
 
 export default Document;

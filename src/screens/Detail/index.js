@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
 
 import ActivityIndex from "../../components/ActivityIndex";
 import DateTime from "../../components/Date";
 import Segment from "./Segment";
 import Voting from "./Voting";
 
-import detailsData from "../../../dummy/details";
+// import detailsData from "../../../dummy/details";
 
 const Wrapper = styled.View`
   flex: 1;
@@ -83,19 +85,40 @@ class Detail extends Component {
   };
 
   render() {
+    const { activityIndex, listType, procedureId } = this.props;
+    const { data: { loading } } = this.props;
+    if (loading) {
+      return null;
+    }
     const {
       title,
-      activityIndex,
-      active,
-      date,
       tags,
       abstract,
-      listType,
-      procedureId
-    } = this.props;
+      active,
+      voteDate: date,
+      subjectGroups,
+      submissionDate,
+      importantDocuments
+    } = this.props.data.procedure;
     const { currentSegmentIndex } = this.state;
+    const detailsData = [
+      {
+        title: "Details",
+        type: "details",
+        data: {}
+      },
+      {
+        title: "Dokumente",
+        type: "documents",
+        data: {}
+      }
+    ];
     detailsData[0].data.abstract = abstract;
     detailsData[0].data.procedureId = procedureId;
+    detailsData[0].data.recources = subjectGroups;
+    detailsData[0].data.submissionDate = submissionDate;
+    detailsData[0].data.dateVote = date;
+    detailsData[1].data.documents = importantDocuments;
     return (
       <Wrapper>
         <Intro>
@@ -109,13 +132,15 @@ class Detail extends Component {
           </IntroMain>
           <IntroSide>
             <ActivityIndex count={activityIndex} active={active} />
-            <DateTime date={date} />
+            {date && <DateTime date={date} />}
           </IntroSide>
         </Intro>
         <Content>
-          <TagsWrapper>
-            <TagsText>{tags.join(", ")}</TagsText>
-          </TagsWrapper>
+          {tags.length > 0 && (
+            <TagsWrapper>
+              <TagsText>{tags.join(", ")}</TagsText>
+            </TagsWrapper>
+          )}
           <Details
             data={detailsData}
             keyExtractor={({ type }) => type}
@@ -146,7 +171,8 @@ Detail.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   abstract: PropTypes.string,
   listType: PropTypes.string.isRequired,
-  procedureId: PropTypes.string.isRequired
+  procedureId: PropTypes.string.isRequired,
+  data: PropTypes.shape().isRequired
 };
 
 Detail.defaultProps = {
@@ -154,4 +180,28 @@ Detail.defaultProps = {
   abstract: ""
 };
 
-export default Detail;
+export default graphql(
+  gql`
+    query procedure($id: ID!) {
+      procedure(id: $id) {
+        title
+        tags
+        abstract
+        voteDate
+        subjectGroups
+        submissionDate
+        importantDocuments {
+          editor
+          type
+          url
+          number
+        }
+      }
+    }
+  `,
+  {
+    options: ({ procedureId }) => ({
+      variables: { id: procedureId }
+    })
+  }
+)(Detail);
