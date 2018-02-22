@@ -57,13 +57,14 @@ const ListItem = ({ title, icon, currentScreen, screenId, navigateTo }) => (
 ListItem.propTypes = {
   title: PropTypes.string.isRequired,
   icon: PropTypes.number.isRequired,
-  screenId: PropTypes.string.isRequired,
+  screenId: PropTypes.string,
   currentScreen: PropTypes.string.isRequired,
   navigateTo: PropTypes.func.isRequired
 };
 
 ListItem.defaultProps = {
-  active: false
+  active: false,
+  screenId: ""
 };
 
 const NavigationView = ({ currentScreen, navigateTo }) => {
