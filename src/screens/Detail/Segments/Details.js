@@ -92,7 +92,7 @@ const Details = ({
 );
 
 Details.propTypes = {
-  recources: PropTypes.shape().isRequired,
+  recources: PropTypes.arrayOf(PropTypes.string).isRequired,
   submissionDate: PropTypes.string.isRequired,
   dateVote: PropTypes.string,
   abstract: PropTypes.string,
