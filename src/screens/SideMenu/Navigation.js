@@ -16,7 +16,7 @@ const SectionTitle = styled.Text`
   color: #fff;
 `;
 
-const NavigationItem = styled.View`
+const NavigationItem = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
@@ -44,8 +44,11 @@ ListSection.propTypes = {
   title: PropTypes.string.isRequired
 };
 
-const ListItem = ({ title, active, icon }) => (
-  <NavigationItem active={active}>
+const ListItem = ({ title, icon, currentScreen, screenId, navigateTo }) => (
+  <NavigationItem
+    active={currentScreen === screenId}
+    onPress={() => navigateTo(screenId)}
+  >
     <NavigationIcon source={icon} />
     <NavigationTitle>{title}</NavigationTitle>
   </NavigationItem>
@@ -53,20 +56,23 @@ const ListItem = ({ title, active, icon }) => (
 
 ListItem.propTypes = {
   title: PropTypes.string.isRequired,
-  active: PropTypes.bool,
-  icon: PropTypes.number.isRequired
+  icon: PropTypes.number.isRequired,
+  screenId: PropTypes.string.isRequired,
+  currentScreen: PropTypes.string.isRequired,
+  navigateTo: PropTypes.func.isRequired
 };
 
 ListItem.defaultProps = {
   active: false
 };
 
-const Navigation = () => {
+const NavigationView = ({ currentScreen, navigateTo }) => {
   const navigation = [
     {
       title: "Listen",
       data: [
         {
+          screenId: "democracy.VoteList",
           title: "Bundestag",
           icon: require("../../../assets/icons/worldClock.png")
         }
@@ -81,10 +87,10 @@ const Navigation = () => {
         },
         {
           title: "Sicherheit",
-          icon: require("../../../assets/icons/lock.png"),
-          active: true
+          icon: require("../../../assets/icons/lock.png")
         },
         {
+          screenId: "democracy.Instructions",
           title: "Tutorial",
           icon: require("../../../assets/icons/speechBubble9.png")
         },
@@ -99,10 +105,21 @@ const Navigation = () => {
     <Wrapper
       sections={navigation}
       renderSectionHeader={({ section }) => <ListSection {...section} />}
-      renderItem={({ item }) => <ListItem {...item} />}
+      renderItem={({ item }) => (
+        <ListItem
+          {...item}
+          currentScreen={currentScreen}
+          navigateTo={navigateTo}
+        />
+      )}
       keyExtractor={({ title }) => title}
     />
   );
 };
 
-export default Navigation;
+NavigationView.propTypes = {
+  currentScreen: PropTypes.string.isRequired,
+  navigateTo: PropTypes.func.isRequired
+};
+
+export default NavigationView;

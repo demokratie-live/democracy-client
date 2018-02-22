@@ -1,8 +1,13 @@
 import React from "react";
 import { Platform, StatusBar } from "react-native";
 import styled from "styled-components/native";
+import { graphql } from "react-apollo";
+import { PropTypes } from "prop-types";
+import { Navigator } from "react-native-navigation";
 
 import Navigation from "./Navigation";
+
+import currentScreenQuery from "../../graphql/queries/currentScreen";
 
 const Wrapper = styled.View`
   flex: 1;
@@ -54,24 +59,44 @@ const HeadText = styled.Text`
   padding-left: 16;
 `;
 
-const SideMenu = () => (
-  <Wrapper>
-    <StatusBar barStyle="light-content" />
-    <BackgroundWrapper>
-      <BackgroundImage />
-    </BackgroundWrapper>
-    <Content>
-      {Platform.OS === "ios" && <StatusBackground />}
-      <Head>
-        <HeadLogo />
-        <HeadTextWrapper>
-          <HeadText>Prototyp</HeadText>
-          <HeadText>Link-registriert</HeadText>
-        </HeadTextWrapper>
-      </Head>
-      <Navigation />
-    </Content>
-  </Wrapper>
-);
+const SideMenu = ({ data: { currentScreen }, navigator }) => {
+  const navigateTo = screenId => {
+    if (screenId) {
+      if (screenId === "democracy.Instructions") {
+        navigator.showModal({
+          screen: screenId,
+          navigatorStyle: { navBarHidden: true }
+        });
+      } else {
+        navigator.resetTo({ screen: screenId });
+      }
+    }
+    navigator.toggleDrawer({ side: "left" });
+  };
+  return (
+    <Wrapper>
+      <StatusBar barStyle="light-content" />
+      <BackgroundWrapper>
+        <BackgroundImage />
+      </BackgroundWrapper>
+      <Content>
+        {Platform.OS === "ios" && <StatusBackground />}
+        <Head>
+          <HeadLogo />
+          <HeadTextWrapper>
+            <HeadText>Prototyp</HeadText>
+            <HeadText>Link-registriert</HeadText>
+          </HeadTextWrapper>
+        </Head>
+        <Navigation currentScreen={currentScreen} navigateTo={navigateTo} />
+      </Content>
+    </Wrapper>
+  );
+};
 
-export default SideMenu;
+SideMenu.propTypes = {
+  data: PropTypes.shape().isRequired,
+  navigator: PropTypes.instanceOf(Navigator).isRequired
+};
+
+export default graphql(currentScreenQuery)(SideMenu);
