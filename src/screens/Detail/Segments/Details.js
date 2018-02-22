@@ -1,10 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import m from "moment";
 import { View } from "react-native";
-
-import Document from "../../../components/Document";
 
 const Wrapper = styled.View``;
 
@@ -51,69 +49,57 @@ const ContentText = styled(DefDescr)`
   font-size: 11;
 `;
 
-class Details extends Component {
-  renderDocuments = documents =>
-    documents.map(({ title }) => <Document key={title} text={title} />);
+const Details = ({
+  recources,
+  submissionDate,
+  dateVote,
+  abstract,
+  procedureId
+}) => (
+  <Wrapper>
+    <Head>
+      {recources.length > 0 && (
+        <HeadLeft>
+          <DefTitle>Sachgebiete</DefTitle>
+          <DefDescr>{recources.join("\n")}</DefDescr>
+        </HeadLeft>
+      )}
+      <HeadRight>
+        <HeadRightTitle>
+          <DefTitleRight>Vorgang</DefTitleRight>
+          <DefTitleRight>erstellt am</DefTitleRight>
 
-  render() {
-    const {
-      recources,
-      submissionDate,
-      dateVote,
-      abstract,
-      procedureId
-    } = this.props;
-    return (
-      <Wrapper>
-        <Head>
-          {recources.length > 0 && (
-            <HeadLeft>
-              <DefTitle>Sachgebiete</DefTitle>
-              <DefDescr>{recources.join("\n")}</DefDescr>
-            </HeadLeft>
-          )}
-          <HeadRight>
-            <HeadRightTitle>
-              <DefTitleRight>Vorgang</DefTitleRight>
-              <DefTitleRight>erstellt am</DefTitleRight>
-
-              {dateVote && <DefTitleRight>Abstimmung</DefTitleRight>}
-            </HeadRightTitle>
-            <HeadRightDescr>
-              <DefDescr>{procedureId}</DefDescr>
-              <DefDescr>
-                {submissionDate && m(submissionDate).format("DD.MM.YY")}
-              </DefDescr>
-              {dateVote && (
-                <DefDescr>{m(dateVote).format("DD.MM.YY")}</DefDescr>
-              )}
-            </HeadRightDescr>
-          </HeadRight>
-        </Head>
-        <Content>
-          {abstract && (
-            <View>
-              <DefTitle>Inhalt</DefTitle>
-              <ContentText>{abstract}</ContentText>
-            </View>
-          )}
-        </Content>
-      </Wrapper>
-    );
-  }
-}
+          {dateVote && <DefTitleRight>Abstimmung</DefTitleRight>}
+        </HeadRightTitle>
+        <HeadRightDescr>
+          <DefDescr>{procedureId}</DefDescr>
+          <DefDescr>
+            {submissionDate && m(submissionDate).format("DD.MM.YY")}
+          </DefDescr>
+          {dateVote && <DefDescr>{m(dateVote).format("DD.MM.YY")}</DefDescr>}
+        </HeadRightDescr>
+      </HeadRight>
+    </Head>
+    <Content>
+      {abstract && (
+        <View>
+          <DefTitle>Inhalt</DefTitle>
+          <ContentText>{abstract}</ContentText>
+        </View>
+      )}
+    </Content>
+  </Wrapper>
+);
 
 Details.propTypes = {
-  recources: PropTypes.array.isRequired,
+  recources: PropTypes.shape().isRequired,
   submissionDate: PropTypes.string.isRequired,
   dateVote: PropTypes.string,
   abstract: PropTypes.string,
-  documents: PropTypes.arrayOf(PropTypes.object.isRequired),
   procedureId: PropTypes.string.isRequired
 };
 
 Details.defaultProps = {
-  documents: [],
   abstract: false,
   dateVote: false
 };

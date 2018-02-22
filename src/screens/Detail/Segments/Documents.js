@@ -7,10 +7,10 @@ import Document from "../../../components/Document";
 const Wrapper = styled.View``;
 
 const Details = ({ documents }) => (
-  <Wrapper>
-    {documents.map(({ title }) => <Document key={title} text={title} />)}
-  </Wrapper>
-);
+    <Wrapper>
+      {documents.map(doc => <Document key={doc.number} {...doc} />)}
+    </Wrapper>
+  );
 
 Details.propTypes = {
   documents: PropTypes.arrayOf(PropTypes.object.isRequired)

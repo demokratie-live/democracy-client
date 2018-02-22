@@ -86,7 +86,7 @@ class Detail extends Component {
 
   render() {
     const { activityIndex, listType, procedureId } = this.props;
-    const { procedure, data: { loading } } = this.props;
+    const { data: { loading } } = this.props;
     if (loading) {
       return null;
     }
@@ -97,15 +97,17 @@ class Detail extends Component {
       active,
       voteDate: date,
       subjectGroups,
-      submissionDate
+      submissionDate,
+      importantDocuments
     } = this.props.data.procedure;
-    console.log(this.props.data.procedure);
+    console.log(importantDocuments);
     const { currentSegmentIndex } = this.state;
     detailsData[0].data.abstract = abstract;
     detailsData[0].data.procedureId = procedureId;
     detailsData[0].data.recources = subjectGroups;
     detailsData[0].data.submissionDate = submissionDate;
     detailsData[0].data.dateVote = date;
+    detailsData[1].data.documents = importantDocuments;
     return (
       <Wrapper>
         <Intro>
@@ -177,6 +179,12 @@ export default graphql(
         voteDate
         subjectGroups
         submissionDate
+        importantDocuments {
+          editor
+          type
+          url
+          number
+        }
       }
     }
   `,
