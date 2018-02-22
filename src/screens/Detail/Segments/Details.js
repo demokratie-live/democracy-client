@@ -44,7 +44,7 @@ const DefDescr = styled.Text`
 const Content = styled.View``;
 
 const ContentText = styled(DefDescr)`
-  font-size: 11;
+  font-size: 13;
 `;
 
 class Details extends Component {
