@@ -20,24 +20,24 @@ const persistor = new CachePersistor({
 
 const stateLink = withClientState({ resolvers, cache, defaults });
 
-const defaultOptions = {
-  watchQuery: {
-    fetchPolicy: "cache-and-network",
-    errorPolicy: "ignore"
-  },
-  query: {
-    fetchPolicy: "cache-and-network",
-    errorPolicy: "all"
-  },
-  mutate: {
-    errorPolicy: "all"
-  }
-};
+// const defaultOptions = {
+//   watchQuery: {
+//     fetchPolicy: "cache-and-network",
+//     errorPolicy: "ignore"
+//   },
+//   query: {
+//     fetchPolicy: "network-only",
+//     errorPolicy: "all"
+//   },
+//   mutate: {
+//     errorPolicy: "all"
+//   }
+// };
 
 const client = new ApolloClient({
   cache,
-  link: ApolloLink.from([stateLink, new HttpLink({ uri: Config.GRAPHQL_URL })]),
-  defaultOptions
+  link: ApolloLink.from([stateLink, new HttpLink({ uri: Config.GRAPHQL_URL })])
+  // defaultOptions
 });
 export default client;
 // offline cache löschen
