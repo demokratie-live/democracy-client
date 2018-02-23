@@ -1,6 +1,6 @@
 {
   "name": "democracyclient",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "private": true,
   "scripts": {
     "test": "eslint . && jest && flow",
@@ -10,8 +10,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "start:android": "react-native run-android",
     "start:ios": "react-native run-ios",
-    "build:ios":
-      "cd ios && xcodebuild -quiet -scheme democracyclient -configuration Release -sdk iphonesimulator",
+    "build:ios": "cd ios && xcodebuild -quiet -scheme democracyclient -configuration Release -sdk iphonesimulator",
     "build:android": "cd android && ./gradlew assembleRelease",
     "version": "./version-ios.sh"
   },
