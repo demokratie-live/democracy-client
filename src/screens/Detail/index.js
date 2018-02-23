@@ -3,15 +3,16 @@ import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
+import { RefreshControl } from "react-native";
 
 import ActivityIndex from "../../components/ActivityIndex";
 import DateTime from "../../components/Date";
+import SegmentDetails from "./Segments/Details";
+import SegmentDocuments from "./Segments/Documents";
 import Segment from "./Segment";
 import Voting from "./Voting";
 
-// import detailsData from "../../../dummy/details";
-
-const Wrapper = styled.View`
+const Wrapper = styled.ScrollView`
   flex: 1;
   background-color: #fff;
 `;
@@ -33,7 +34,6 @@ const IntroTitle = styled.Text`
 `;
 
 const IntroButtons = styled.View`
-  flex: 1;
   justify-content: center;
   padding-top: 20;
 `;
@@ -55,11 +55,7 @@ const TagsText = styled.Text`
   padding-vertical: 10;
 `;
 
-const Content = styled.ScrollView`
-  flex: 1;
-`;
-
-const Details = styled.FlatList`
+const Content = styled.View`
   flex: 1;
 `;
 
@@ -72,22 +68,10 @@ class Detail extends Component {
     navBarButtonColor: "#FFFFFF"
   };
 
-  state = {
-    currentSegmentIndex: 0
-  };
-
-  setCurrentSegment = currentSegmentIndex => () => {
-    if (currentSegmentIndex !== this.state.currentSegmentIndex) {
-      this.setState({ currentSegmentIndex });
-    } else {
-      this.setState({ currentSegmentIndex: -1 });
-    }
-  };
-
   render() {
     const { activityIndex, listType, procedureId } = this.props;
-    const { data: { loading } } = this.props;
-    if (loading) {
+    const { data: { loading, refetch } } = this.props;
+    if (loading && !this.props.data.procedure) {
       return null;
     }
     const {
@@ -100,27 +84,12 @@ class Detail extends Component {
       submissionDate,
       importantDocuments
     } = this.props.data.procedure;
-    const { currentSegmentIndex } = this.state;
-    const detailsData = [
-      {
-        title: "Details",
-        type: "details",
-        data: {}
-      },
-      {
-        title: "Dokumente",
-        type: "documents",
-        data: {}
-      }
-    ];
-    detailsData[0].data.abstract = abstract;
-    detailsData[0].data.procedureId = procedureId;
-    detailsData[0].data.recources = subjectGroups;
-    detailsData[0].data.submissionDate = submissionDate;
-    detailsData[0].data.dateVote = date;
-    detailsData[1].data.documents = importantDocuments;
     return (
-      <Wrapper>
+      <Wrapper
+        refreshControl={
+          <RefreshControl refreshing={loading} onRefresh={refetch} />
+        }
+      >
         <Intro>
           <IntroMain>
             <IntroTitle>{title}</IntroTitle>
@@ -141,17 +110,18 @@ class Detail extends Component {
               <TagsText>{tags.join(", ")}</TagsText>
             </TagsWrapper>
           )}
-          <Details
-            data={detailsData}
-            keyExtractor={({ type }) => type}
-            renderItem={({ item, index }) => (
-              <Segment
-                open={currentSegmentIndex === index}
-                onPress={this.setCurrentSegment(index)}
-                {...item}
-              />
-            )}
-          />
+          <Segment title="Details" open>
+            <SegmentDetails
+              subjectGroups={subjectGroups}
+              submissionDate={submissionDate}
+              dateVote={date}
+              abstract={abstract}
+              procedureId={procedureId}
+            />
+          </Segment>
+          <Segment title="Dokumente">
+            <SegmentDocuments documents={importantDocuments} />
+          </Segment>
           {listType === "VOTING" && <Voting />}
         </Content>
       </Wrapper>
@@ -163,11 +133,6 @@ Detail.propTypes = {
   title: PropTypes.string.isRequired,
   activityIndex: PropTypes.number.isRequired,
   active: PropTypes.bool.isRequired,
-  date: PropTypes.oneOfType([
-    PropTypes.instanceOf(Date),
-    PropTypes.string,
-    PropTypes.bool
-  ]),
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   abstract: PropTypes.string,
   listType: PropTypes.string.isRequired,
@@ -176,7 +141,6 @@ Detail.propTypes = {
 };
 
 Detail.defaultProps = {
-  date: false,
   abstract: ""
 };
 
