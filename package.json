@@ -10,7 +10,15 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "start:android": "react-native run-android",
     "start:ios": "react-native run-ios",
-    "build:ios": "cd ios && xcodebuild -quiet -scheme democracyclient -configuration Release -sdk iphonesimulator",
+    "build:ios:clean":
+      "cd ios && xcodebuild clean -project democracyclient.xcodeproj -configuration Release -alltargets",
+    "build:ios:archive":
+      "cd ios && xcodebuild archive -project democracyclient.xcodeproj -scheme democracyclient-prod -archivePath build/archives/democracyclient.xcarchive",
+    "build:ios:ipa":
+      "cd ios && xcodebuild -allowProvisioningUpdates -exportArchive -archivePath build/archives/democracyclient.xcarchive -exportPath build/ipa/democracyclient -exportOptionsPlist democracyclient/info.plist",
+
+    "build:ios":
+      "npm run build:ios:clean && npm run build:ios:archive && build:ios:ipa",
     "build:android": "cd android && ./gradlew assembleRelease",
     "version": "./version-ios.sh"
   },
