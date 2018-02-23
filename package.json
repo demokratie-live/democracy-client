@@ -16,9 +16,8 @@
       "cd ios && xcodebuild archive -project democracyclient.xcodeproj -scheme democracyclient-prod -archivePath build/archives/democracyclient.xcarchive",
     "build:ios:ipa":
       "cd ios && xcodebuild -allowProvisioningUpdates -exportArchive -archivePath build/archives/democracyclient.xcarchive -exportPath build/ipa/democracyclient -exportOptionsPlist democracyclient/info.plist",
-
     "build:ios":
-      "npm run build:ios:clean && npm run build:ios:archive && build:ios:ipa",
+      "npm run build:ios:clean && npm run build:ios:archive && npm run build:ios:ipa",
     "build:android": "cd android && ./gradlew assembleRelease",
     "version": "./version-ios.sh"
   },
