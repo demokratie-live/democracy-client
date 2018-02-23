@@ -1,6 +1,6 @@
 {
   "name": "democracyclient",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "private": true,
   "scripts": {
     "test": "eslint . && jest && flow",
@@ -20,7 +20,7 @@
       "npm run build:ios:clean && npm run build:ios:archive && npm run build:ios:ipa",
     "build:android": "cd android && ./gradlew assembleRelease",
     "build:all": "npm run build:android && npm run build:ios",
-    "version": "./version-ios.sh"
+    "version": "version-ios.sh"
   },
   "dependencies": {
     "apollo-cache-inmemory": "^1.1.5",
