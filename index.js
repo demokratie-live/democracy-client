@@ -26,7 +26,11 @@ class App {
 
     const listener = new RNNScreenVisibilityListener({
       didAppear: args => {
-        const { screen } = args;
+        let { screen } = args;
+
+        if (screen === "democracy.VoteList.List") {
+          screen = "democracy.VoteList";
+        }
 
         client.mutate({
           mutation: setCurrentScreen,
