@@ -13,7 +13,7 @@
     "build:ios":
       "cd ios && xcodebuild -quiet -scheme democracyclient -configuration Release -sdk iphonesimulator",
     "build:android": "cd android && ./gradlew assembleRelease",
-    "version": "./scrips/version-ios.sh"
+    "version": "scrips/version-ios.sh"
   },
   "dependencies": {
     "apollo-cache-inmemory": "^1.1.5",
