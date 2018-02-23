@@ -1,9 +1,6 @@
-import React from "react";
+import React, { Component } from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
-
-import DetailsSegment from "./Segments/Details";
-import DocumentsSegment from "./Segments/Documents";
 
 const Wrapper = styled.View``;
 
@@ -36,49 +33,55 @@ const CollapseIcon = styled.Image.attrs({
 const Content = styled.View`
   display: ${({ open, collapsible }) =>
     open || !collapsible ? "flex" : "none"};
-  padding-horizontal: 16;
+  padding-horizontal: 18;
   padding-vertical: 10;
 `;
 
-const Segment = ({ type, title, onPress, open, data, collapsible }) => {
-  const renderContent = () => {
-    switch (type) {
-      case "details":
-        return <DetailsSegment {...data} />;
-      case "documents":
-        return <DocumentsSegment {...data} />;
-
-      default:
-        return <Title>Kein Segement definiert</Title>;
-    }
+class Segment extends Component {
+  state = {
+    open: false
   };
-  return (
-    <Wrapper>
-      <SegmentTouch onPress={onPress}>
-        <SegmentWrapper>
-          <Title>{title}</Title>
-          {collapsible && <CollapseIcon open={open} />}
-        </SegmentWrapper>
-      </SegmentTouch>
-      <Content open={open} collapsible={collapsible}>
-        {renderContent()}
-      </Content>
-    </Wrapper>
-  );
-};
+
+  componentWillMount() {
+    const { open } = this.props;
+    if (open) {
+      this.setState({ open });
+    }
+  }
+
+  toggle = () => {
+    this.setState({ open: !this.state.open });
+  };
+
+  render() {
+    const { title, collapsible } = this.props;
+    const { open } = this.state;
+    return (
+      <Wrapper>
+        <SegmentTouch onPress={this.toggle}>
+          <SegmentWrapper>
+            <Title>{title}</Title>
+            {collapsible && <CollapseIcon open={open} />}
+          </SegmentWrapper>
+        </SegmentTouch>
+        <Content open={open} collapsible={collapsible}>
+          {this.props.children}
+        </Content>
+      </Wrapper>
+    );
+  }
+}
 
 Segment.propTypes = {
-  type: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  onPress: PropTypes.func.isRequired,
-  open: PropTypes.bool.isRequired,
-  data: PropTypes.shape({}),
-  collapsible: PropTypes.bool
+  open: PropTypes.bool,
+  collapsible: PropTypes.bool,
+  children: PropTypes.node.isRequired
 };
 
 Segment.defaultProps = {
-  data: {},
-  collapsible: true
+  collapsible: true,
+  open: false
 };
 
 export default Segment;

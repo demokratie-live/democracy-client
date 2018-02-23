@@ -6,18 +6,18 @@ import Document from "../../../components/Document";
 
 const Wrapper = styled.View``;
 
-const Details = ({ documents }) => (
-    <Wrapper>
-      {documents.map(doc => <Document key={doc.number} {...doc} />)}
-    </Wrapper>
-  );
+const Documents = ({ documents }) => (
+  <Wrapper>
+    {documents.map(doc => <Document key={doc.number} {...doc} />)}
+  </Wrapper>
+);
 
-Details.propTypes = {
+Documents.propTypes = {
   documents: PropTypes.arrayOf(PropTypes.object.isRequired)
 };
 
-Details.defaultProps = {
+Documents.defaultProps = {
   documents: []
 };
 
-export default Details;
+export default Documents;
