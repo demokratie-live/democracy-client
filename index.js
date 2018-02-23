@@ -1,11 +1,15 @@
 // @flow
-import { Navigation } from "react-native-navigation";
+import {
+  Navigation,
+  ScreenVisibilityListener as RNNScreenVisibilityListener
+} from "react-native-navigation";
 // import Reactotron from "reactotron-react-native";
 
 import client, { persistor } from "./src/graphql/client";
 import registerScreens from "./src/screens";
 
 import IS_INSTRUCTIONS_SHOWN from "./src/graphql/queries/isInstructionShown";
+import setCurrentScreen from "./src/graphql/mutations/setCurrentScreen";
 
 // Reactotron.configure() // controls connection & communication settings
 //   .useReactNative() // add all built-in react native plugins
@@ -19,6 +23,24 @@ class App {
     observableQuery.subscribe({
       next: ({ data }) => this.startApp(data)
     });
+
+    const listener = new RNNScreenVisibilityListener({
+      didAppear: args => {
+        let { screen } = args;
+
+        if (screen === "democracy.VoteList.List") {
+          screen = "democracy.VoteList";
+        }
+
+        client.mutate({
+          mutation: setCurrentScreen,
+          variables: {
+            screen
+          }
+        });
+      }
+    });
+    listener.register();
   }
 
   startApp = ({ isInstructionsShown }) => {
