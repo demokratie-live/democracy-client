@@ -28,7 +28,7 @@ const HeadRightDescr = styled.View`
 `;
 
 const DefTitle = styled.Text`
-  font-size: 12;
+  font-size: 13;
   color: rgba(68, 148, 211, 0.9);
 `;
 
@@ -37,7 +37,7 @@ const DefTitleRight = styled(DefTitle)`
 `;
 
 const DefDescr = styled.Text`
-  font-size: 12;
+  font-size: 13;
   color: rgb(155, 155, 155);
 `;
 
