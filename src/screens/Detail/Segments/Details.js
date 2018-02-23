@@ -50,7 +50,7 @@ const ContentText = styled(DefDescr)`
 `;
 
 const Details = ({
-  recources,
+  subjectGroups,
   submissionDate,
   dateVote,
   abstract,
@@ -58,10 +58,10 @@ const Details = ({
 }) => (
   <Wrapper>
     <Head>
-      {recources.length > 0 && (
+      {subjectGroups.length > 0 && (
         <HeadLeft>
           <DefTitle>Sachgebiete</DefTitle>
-          <DefDescr>{recources.join("\n")}</DefDescr>
+          <DefDescr>{subjectGroups.join("\n")}</DefDescr>
         </HeadLeft>
       )}
       <HeadRight>
@@ -92,7 +92,7 @@ const Details = ({
 );
 
 Details.propTypes = {
-  recources: PropTypes.arrayOf(PropTypes.string).isRequired,
+  subjectGroups: PropTypes.arrayOf(PropTypes.string).isRequired,
   submissionDate: PropTypes.string.isRequired,
   dateVote: PropTypes.string,
   abstract: PropTypes.string,
