@@ -5,6 +5,8 @@ import Swiper from "react-native-swiper";
 import { graphql } from "react-apollo";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
+import { Navigator } from "react-native-navigation";
+
 import Slide from "./Slide";
 
 import SET_INSTRUCTIONS_SHOWN from "../../graphql/mutations/setInstructinosShown";
@@ -34,6 +36,7 @@ class Introductions extends Component {
           isInstructionsShown: true
         }
       });
+      this.props.navigator.dismissAllModals();
     }
   };
 
@@ -74,7 +77,8 @@ class Introductions extends Component {
 }
 
 Introductions.propTypes = {
-  setInstructionsShown: PropTypes.func.isRequired
+  setInstructionsShown: PropTypes.func.isRequired,
+  navigator: PropTypes.instanceOf(Navigator).isRequired
 };
 
 export default graphql(SET_INSTRUCTIONS_SHOWN, {
