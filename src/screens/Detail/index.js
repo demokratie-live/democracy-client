@@ -165,7 +165,8 @@ export default graphql(
   `,
   {
     options: ({ procedureId }) => ({
-      variables: { id: procedureId }
+      variables: { id: procedureId },
+      fetchPolicy: "cache-and-network"
     })
   }
 )(Detail);
