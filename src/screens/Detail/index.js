@@ -3,6 +3,7 @@ import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
+import { RefreshControl } from "react-native";
 
 import ActivityIndex from "../../components/ActivityIndex";
 import DateTime from "../../components/Date";
@@ -69,7 +70,7 @@ class Detail extends Component {
 
   render() {
     const { activityIndex, listType, procedureId } = this.props;
-    const { data: { loading } } = this.props;
+    const { data: { loading, refetch } } = this.props;
     if (loading && !this.props.data.procedure) {
       return null;
     }
@@ -84,7 +85,11 @@ class Detail extends Component {
       importantDocuments
     } = this.props.data.procedure;
     return (
-      <Wrapper>
+      <Wrapper
+        refreshControl={
+          <RefreshControl refreshing={loading} onRefresh={refetch} />
+        }
+      >
         <Intro>
           <IntroMain>
             <IntroTitle>{title}</IntroTitle>
