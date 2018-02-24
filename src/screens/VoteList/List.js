@@ -35,6 +35,12 @@ class List extends Component {
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.listType !== this.props.listType) {
+      nextProps.data.procedures = false; // eslint-disable-line
+    }
+  }
+
   onItemClick = ({ item }) => () => {
     const { navigator } = this.props;
     navigator.push({
