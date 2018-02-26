@@ -21,6 +21,11 @@ const Screen = styled.View`
   background-color: #ffffff;
 `;
 
+const ScrollView = styled.ScrollView.attrs({
+  horizontal: true,
+  pagingEnabled: true
+})``;
+
 const SegmentControlsWrapper = styled.View`
   background-color: #4494d3;
   height: 50;
@@ -57,6 +62,16 @@ class VoteList extends Component {
 
   state = {
     selectedIndex: 0
+  };
+
+  onScrollEndDrag = e => {
+    const contentOffset = e.nativeEvent.contentOffset;
+    const viewSize = e.nativeEvent.layoutMeasurement;
+
+    // Divide the horizontal offset by the width of the view to see which page is visible
+    const pageNum = Math.floor(contentOffset.x / viewSize.width);
+    console.log("scrolled to page ", pageNum);
+    this.setState({ selectedIndex: pageNum });
   };
 
   lists = [
@@ -97,6 +112,10 @@ class VoteList extends Component {
               this.setState({
                 selectedIndex: event.nativeEvent.selectedSegmentIndex
               });
+              this.scrollView.scrollTo({
+                y: 0,
+                x: event.nativeEvent.selectedSegmentIndex * DEVICE_WIDTH
+              });
             }}
           />
         </SegmentControlsWrapper>
@@ -108,10 +127,18 @@ class VoteList extends Component {
   renderList = () => {
     if (Platform.OS === "ios") {
       return (
+        <ScrollView
+          onMomentumScrollEnd={this.onScrollEndDrag}
+          innerRef={e => (this.scrollView = e)}
+        >
+          {this.lists.map(list => (
         <List
-          listType={this.lists[this.state.selectedIndex].key}
+              key={list.key}
+              listType={list.key}
           navigator={this.props.navigator}
         />
+          ))}
+        </ScrollView>
       );
     }
     return null;
