@@ -65,12 +65,11 @@ class VoteList extends Component {
   };
 
   onScrollEndDrag = e => {
-    const contentOffset = e.nativeEvent.contentOffset;
+    const { contentOffset } = e.nativeEvent;
     const viewSize = e.nativeEvent.layoutMeasurement;
 
     // Divide the horizontal offset by the width of the view to see which page is visible
     const pageNum = Math.floor(contentOffset.x / viewSize.width);
-    console.log("scrolled to page ", pageNum);
     this.setState({ selectedIndex: pageNum });
   };
 
@@ -129,14 +128,16 @@ class VoteList extends Component {
       return (
         <ScrollView
           onMomentumScrollEnd={this.onScrollEndDrag}
-          innerRef={e => (this.scrollView = e)}
+          innerRef={e => {
+            this.scrollView = e;
+          }}
         >
           {this.lists.map(list => (
-        <List
+            <List
               key={list.key}
               listType={list.key}
-          navigator={this.props.navigator}
-        />
+              navigator={this.props.navigator}
+            />
           ))}
         </ScrollView>
       );

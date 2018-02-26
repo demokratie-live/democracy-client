@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import { Platform } from "react-native";
+import { Navigator } from "react-native-navigation";
 
 import onNavigationEvent from "./onNavigationEvent";
 
@@ -44,5 +46,9 @@ class Support extends Component {
     );
   }
 }
+
+Support.propTypes = {
+  navigator: PropTypes.instanceOf(Navigator).isRequired
+};
 
 export default Support;
