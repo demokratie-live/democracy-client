@@ -9,7 +9,8 @@ const Wrapper = styled.View`
   flex: 1;
   flex-direction: row;
   align-items: center;
-  margin-right: ${Platform.OS === "ios" ? 0 : 16};
+  margin-right: ${Platform.OS === "ios" ? 2 : 16};
+  margin-left: ${Platform.OS === "ios" ? 2 : 0};
 `;
 
 const Title = styled.Text`
