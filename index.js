@@ -11,6 +11,8 @@ import registerScreens from "./src/screens";
 import IS_INSTRUCTIONS_SHOWN from "./src/graphql/queries/isInstructionShown";
 import setCurrentScreen from "./src/graphql/mutations/setCurrentScreen";
 
+import topTabs from "./src/screens/VoteList/topTabs";
+
 // Reactotron.configure() // controls connection & communication settings
 //   .useReactNative() // add all built-in react native plugins
 //   .connect(); // let's connect!
@@ -51,29 +53,7 @@ class App {
           screen: "democracy.VoteList",
           title: "Bundestag",
           navigatorStyle: {},
-          topTabs: [
-            {
-              screenId: "democracy.VoteList.List",
-              title: "Abstimmung",
-              passProps: {
-                listType: "VOTING"
-              }
-            },
-            {
-              screenId: "democracy.VoteList.List",
-              title: "Vorbereitung",
-              passProps: {
-                listType: "PREPARATION"
-              }
-            },
-            {
-              screenId: "democracy.VoteList.List",
-              title: "What's Hot",
-              passProps: {
-                listType: "HOT"
-              }
-            }
-          ]
+          topTabs
         },
         drawer: {
           left: {

@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import { Navigator } from "react-native-navigation";
-import { TouchableHighlight } from "react-native";
+import { TouchableHighlight, Dimensions } from "react-native";
 import { graphql } from "react-apollo";
 import { unionBy } from "lodash";
 
@@ -13,9 +13,14 @@ import ListSectionHeader from "../../components/ListSectionHeader";
 
 import getProcedures from "../../graphql/queries/getProcedures";
 
+import onNavigationEvent from "../onNavigationEvent";
+
+const { width: DEVICE_WIDTH } = Dimensions.get("window");
+
 const Wrapper = styled.View`
   flex: 1;
   background-color: #fff;
+  width: ${DEVICE_WIDTH};
 `;
 
 const SectionList = styled.SectionList``;
@@ -33,6 +38,7 @@ class List extends Component {
         navigator: this.props.navigator
       }
     });
+    this.props.navigator.setOnNavigatorEvent(this.onNavigationEvent);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -40,6 +46,10 @@ class List extends Component {
       nextProps.data.procedures = false; // eslint-disable-line
     }
   }
+
+  onNavigationEvent = event => {
+    onNavigationEvent({ event, navigator: this.props.navigator });
+  };
 
   onItemClick = ({ item }) => () => {
     const { navigator } = this.props;
