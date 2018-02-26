@@ -13,7 +13,10 @@ import ListSectionHeader from "../../components/ListSectionHeader";
 
 import getProcedures from "../../graphql/queries/getProcedures";
 
+import onNavigationEvent from "../onNavigationEvent";
+
 const { width: DEVICE_WIDTH } = Dimensions.get("window");
+
 const Wrapper = styled.View`
   flex: 1;
   background-color: #fff;
@@ -35,6 +38,7 @@ class List extends Component {
         navigator: this.props.navigator
       }
     });
+    this.props.navigator.setOnNavigatorEvent(onNavigationEvent.bind(this));
   }
 
   componentWillReceiveProps(nextProps) {

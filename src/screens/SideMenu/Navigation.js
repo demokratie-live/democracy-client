@@ -96,6 +96,7 @@ const NavigationView = ({ currentScreen, navigateTo }) => {
           icon: require("../../../assets/icons/speechBubble9.png")
         },
         {
+          screenId: "democracy.Support",
           title: "Support",
           icon: require("../../../assets/icons/speechBubble9.png")
         }

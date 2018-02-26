@@ -68,7 +68,7 @@ const SideMenu = ({ data: { currentScreen }, navigator }) => {
           navigatorStyle: { navBarHidden: true }
         });
       } else {
-        navigator.popToRoot({});
+        navigator.handleDeepLink({ link: screenId });
       }
     }
     navigator.toggleDrawer({ side: "left" });
