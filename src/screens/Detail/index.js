@@ -70,7 +70,7 @@ class Detail extends Component {
 
   render() {
     const { activityIndex, listType, procedureId } = this.props;
-    const { data: { loading, refetch } } = this.props;
+    const { data: { loading, networkStatus, refetch } } = this.props;
     if (loading && !this.props.data.procedure) {
       return null;
     }
@@ -87,7 +87,10 @@ class Detail extends Component {
     return (
       <Wrapper
         refreshControl={
-          <RefreshControl refreshing={loading} onRefresh={refetch} />
+          <RefreshControl
+            refreshing={networkStatus === 4}
+            onRefresh={refetch}
+          />
         }
       >
         <Intro>
