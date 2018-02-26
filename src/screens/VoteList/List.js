@@ -50,20 +50,14 @@ class List extends Component {
     });
   };
 
-  // Data
   sections = [
     {
       data: []
     }
-    // {
-    //   title: "Vergangen",
-    //   data: []
-    // }
   ];
 
   prepareData = () => {
     const { listType, data: { procedures } } = this.props;
-    // const { listType, data: { procedures } } = this.props;
     if (!procedures) {
       return [];
     }
@@ -71,10 +65,6 @@ class List extends Component {
       {
         data: []
       }
-      // {
-      //   title: "Vergangen",
-      //   data: []
-      // }
     ];
     if (listType === "VOTING") {
       preparedData.push({
@@ -109,15 +99,11 @@ class List extends Component {
         });
       }
     });
-    // console.log("data", preparedData);
-    // console.log("oldData", dummyDataVoteLists[listType]);
     return preparedData;
   };
 
   render() {
     const { data } = this.props;
-    // const { listType, data } = this.props;
-    // const data = dummyDataVoteLists[listType];
     return (
       <Wrapper>
         <SectionList
@@ -145,7 +131,6 @@ class List extends Component {
                 offset: data.procedures ? data.procedures.length : PAGE_SIZE
               },
               updateQuery: (previousResult, { fetchMoreResult }) => {
-                // Don't do anything if there weren't any new items
                 if (
                   !fetchMoreResult ||
                   fetchMoreResult.procedures.length === 0
@@ -153,7 +138,6 @@ class List extends Component {
                   return previousResult;
                 }
                 return {
-                  // Append the new feed results to the old one
                   procedures: unionBy(
                     previousResult.procedures,
                     fetchMoreResult.procedures,
