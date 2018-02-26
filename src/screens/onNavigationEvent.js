@@ -1,10 +1,20 @@
+import topTabs from "./VoteList/topTabs";
+
 export default ({ event, navigator }) => {
   console.log("onNavigationEvent", event, navigator);
+
   switch (event.type) {
     case "DeepLink":
-      navigator.resetTo({
-        screen: event.link
-      });
+      if (event.link === "democracy.VoteList") {
+        navigator.resetTo({
+          screen: event.link,
+          topTabs
+        });
+      } else {
+        navigator.resetTo({
+          screen: event.link
+        });
+      }
       break;
 
     default:
