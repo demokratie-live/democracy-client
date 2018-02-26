@@ -38,7 +38,7 @@ class List extends Component {
         navigator: this.props.navigator
       }
     });
-    this.props.navigator.setOnNavigatorEvent(onNavigationEvent.bind(this));
+    this.props.navigator.setOnNavigatorEvent(this.onNavigationEvent);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -46,6 +46,10 @@ class List extends Component {
       nextProps.data.procedures = false; // eslint-disable-line
     }
   }
+
+  onNavigationEvent = event => {
+    onNavigationEvent({ event, navigator: this.props.navigator });
+  };
 
   onItemClick = ({ item }) => () => {
     const { navigator } = this.props;
