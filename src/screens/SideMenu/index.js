@@ -60,7 +60,7 @@ const HeadText = styled.Text`
 `;
 
 const SideMenu = ({ data: { currentScreen }, navigator }) => {
-  const navigateTo = screenId => {
+  const navigateTo = ({ screenId, title }) => {
     if (screenId) {
       if (screenId === "democracy.Instructions") {
         navigator.showModal({
@@ -68,7 +68,7 @@ const SideMenu = ({ data: { currentScreen }, navigator }) => {
           navigatorStyle: { navBarHidden: true }
         });
       } else {
-        navigator.handleDeepLink({ link: screenId });
+        navigator.handleDeepLink({ link: screenId, payload: { title } });
       }
     }
     navigator.toggleDrawer({ side: "left" });
