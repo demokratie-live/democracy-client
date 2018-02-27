@@ -43,7 +43,7 @@ const IconWrapper = styled.TouchableOpacity`
   width: 65;
   height: 65;
   border-width: 2;
-  border-radius: 100;
+  border-radius: 33;
   justify-content: center;
   align-items: center;
 `;
