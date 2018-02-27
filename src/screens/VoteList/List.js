@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import { Navigator } from "react-native-navigation";
-import { TouchableHighlight, Dimensions } from "react-native";
+import { TouchableHighlight, Dimensions, Platform } from "react-native";
 import { graphql } from "react-apollo";
 import { unionBy } from "lodash";
 
@@ -15,12 +15,10 @@ import getProcedures from "../../graphql/queries/getProcedures";
 
 import onNavigationEvent from "../onNavigationEvent";
 
-const { width: DEVICE_WIDTH } = Dimensions.get("window");
-
 const Wrapper = styled.View`
   flex: 1;
   background-color: #fff;
-  width: ${DEVICE_WIDTH};
+  width: ${({ width }) => width};
 `;
 
 const SectionList = styled.SectionList``;
@@ -41,11 +39,24 @@ class List extends Component {
     this.props.navigator.setOnNavigatorEvent(this.onNavigationEvent);
   }
 
+  state = {
+    width: Platform.OS === "ios" ? Dimensions.get("window").width : "auto"
+  };
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.listType !== this.props.listType) {
       nextProps.data.procedures = false; // eslint-disable-line
     }
   }
+
+  onLayout = () => {
+    if (Platform.OS === "ios") {
+      const { width } = Dimensions.get("window");
+      if (width !== this.state.width) {
+        this.setState({ width });
+      }
+    }
+  };
 
   onNavigationEvent = event => {
     onNavigationEvent({ event, navigator: this.props.navigator });
@@ -60,15 +71,9 @@ class List extends Component {
     });
   };
 
-  sections = [
-    {
-      data: []
-    }
-  ];
-
   prepareData = () => {
     const { listType, data: { procedures } } = this.props;
-    if (!procedures) {
+    if (!procedures || procedures.length === 0) {
       return [];
     }
     const preparedData = [
@@ -115,7 +120,7 @@ class List extends Component {
   render() {
     const { data } = this.props;
     return (
-      <Wrapper>
+      <Wrapper onLayout={this.onLayout} width={this.state.width}>
         <SectionList
           sections={this.prepareData()}
           stickySectionHeadersEnabled
