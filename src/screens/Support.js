@@ -86,7 +86,7 @@ class Support extends Component {
   linking = url => () => {
     Linking.canOpenURL(url).then(supported => {
       if (supported) {
-        return Linking.openURL(url).catch(() => null);
+        Linking.openURL(url).catch(() => null);
       }
     });
   };
