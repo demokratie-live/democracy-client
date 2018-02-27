@@ -47,7 +47,7 @@ ListSection.propTypes = {
 const ListItem = ({ title, icon, currentScreen, screenId, navigateTo }) => (
   <NavigationItem
     active={currentScreen === screenId}
-    onPress={() => navigateTo(screenId)}
+    onPress={() => navigateTo({ screenId, title })}
   >
     <NavigationIcon source={icon} />
     <NavigationTitle>{title}</NavigationTitle>

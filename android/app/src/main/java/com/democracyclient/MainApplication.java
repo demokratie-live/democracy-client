@@ -3,6 +3,7 @@ package com.democracyclient;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
@@ -26,6 +27,7 @@ public class MainApplication extends NavigationApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(new MainReactPackage(),
+            new RNDeviceInfo(),
             new ReactNativeConfigPackage(),
             new VectorIconsPackage());
     }
@@ -58,6 +60,7 @@ public class MainApplication extends NavigationApplication {
     // No need to add RnnPackage and MainReactPackage
     return Arrays.<ReactPackage>asList(
     // eg. new VectorIconsPackage()
+            new RNDeviceInfo(),
             new ReactNativeConfigPackage(),
             new VectorIconsPackage()
     );
