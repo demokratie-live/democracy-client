@@ -1,7 +1,6 @@
 import topTabs from "./VoteList/topTabs";
 
 export default ({ event, navigator }) => {
-  console.log("onNavigationEvent", event);
   switch (event.type) {
     case "DeepLink":
       if (event.link === "democracy.VoteList") {

@@ -6,6 +6,7 @@ import { Navigator } from "react-native-navigation";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import DeviceInfo from "react-native-device-info";
+import Config from "react-native-config";
 
 import onNavigationEvent from "./onNavigationEvent";
 
@@ -92,7 +93,7 @@ class Support extends Component {
   };
 
   render() {
-    const phoneNumber = "telprompt:+491776471663";
+    const phoneNumber = `telprompt:${Config.PHONE_NUMBER}`;
     const email = "mailto:contact@democracy-deutschland.de";
     const github = "https://github.com/demokratie-live";
     const version = `v${DeviceInfo.getReadableVersion()
