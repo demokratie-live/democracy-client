@@ -12,8 +12,6 @@ import Header from "./Header";
 
 import SET_INSTRUCTIONS_SHOWN from "../../graphql/mutations/setInstructinosShown";
 
-const { width: DEVICE_WIDTH } = Dimensions.get("window");
-
 Navigation.registerComponent("democracy.VoteList.Header", () => Header);
 
 const Screen = styled.View`
@@ -65,13 +63,19 @@ class VoteList extends Component {
   };
 
   onScrollEndDrag = e => {
-    const { contentOffset } = e.nativeEvent;
-    const viewSize = e.nativeEvent.layoutMeasurement;
+    if (this.width === Dimensions.get("window").width) {
+      const { contentOffset } = e.nativeEvent;
+      const viewSize = e.nativeEvent.layoutMeasurement;
 
-    // Divide the horizontal offset by the width of the view to see which page is visible
-    const pageNum = Math.floor(contentOffset.x / viewSize.width);
-    this.setState({ selectedIndex: pageNum });
+      // Divide the horizontal offset by the width of the view to see which page is visible
+      const pageNum = Math.floor(contentOffset.x / viewSize.width);
+      if (this.state.selectedIndex !== pageNum) {
+        // this.setState({ selectedIndex: pageNum });
+      }
+    }
   };
+
+  width = Dimensions.get("window").width;
 
   lists = [
     { key: "VOTING", title: "in Abstimmung", smallTitle: "Abstimmung" },
@@ -102,8 +106,7 @@ class VoteList extends Component {
               width: "100%"
             }}
             values={this.lists.map(
-              ({ title, smallTitle }) =>
-                DEVICE_WIDTH > 320 ? title : smallTitle
+              ({ title, smallTitle }) => (this.width > 320 ? title : smallTitle)
             )}
             selectedIndex={this.state.selectedIndex}
             tintColor="#ffffff"
@@ -113,7 +116,7 @@ class VoteList extends Component {
               });
               this.scrollView.scrollTo({
                 y: 0,
-                x: event.nativeEvent.selectedSegmentIndex * DEVICE_WIDTH
+                x: event.nativeEvent.selectedSegmentIndex * this.width
               });
             }}
           />
@@ -127,6 +130,13 @@ class VoteList extends Component {
     if (Platform.OS === "ios") {
       return (
         <ScrollView
+          onContentSizeChange={contentWidth => {
+            this.width = contentWidth / this.lists.length;
+            this.scrollView.scrollTo({
+              y: 0,
+              x: this.state.selectedIndex * this.width
+            });
+          }}
           onMomentumScrollEnd={this.onScrollEndDrag}
           innerRef={e => {
             this.scrollView = e;
@@ -144,6 +154,7 @@ class VoteList extends Component {
     }
     return null;
   };
+
   render() {
     return (
       <Screen>
