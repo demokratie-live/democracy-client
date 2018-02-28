@@ -93,13 +93,13 @@ const NavigationView = ({ currentScreen, navigateTo }) => {
           icon: require("../../../assets/icons/lock.png")
         },
         {
-          screenId: "democracy.Support",
-          title: "Support",
-          icon: require("../../../assets/icons/speechBubble9.png")
-        },
-        {
           screenId: "democracy.Instructions",
           title: "Tutorial",
+          icon: require("../../../assets/icons/baby.png")
+        },
+        {
+          screenId: "democracy.Support",
+          title: "Support",
           icon: require("../../../assets/icons/speechBubble9.png")
         }
       ]
