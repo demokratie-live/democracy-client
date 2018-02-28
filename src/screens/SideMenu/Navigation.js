@@ -82,22 +82,23 @@ const NavigationView = ({ currentScreen, navigateTo }) => {
     {
       title: "Einstellungen",
       data: [
+        // {
+        //   title: "Benachrichtigungen",
+        //   icon: require("../../../assets/icons/paperPlane.png")
+        // },
         {
-          title: "Benachrichtigungen",
-          icon: require("../../../assets/icons/paperPlane.png")
-        },
-        {
+          screenId: "democracy.Security",
           title: "Sicherheit",
           icon: require("../../../assets/icons/lock.png")
         },
         {
-          screenId: "democracy.Instructions",
-          title: "Tutorial",
+          screenId: "democracy.Support",
+          title: "Support",
           icon: require("../../../assets/icons/speechBubble9.png")
         },
         {
-          screenId: "democracy.Support",
-          title: "Support",
+          screenId: "democracy.Instructions",
+          title: "Tutorial",
           icon: require("../../../assets/icons/speechBubble9.png")
         }
       ]
