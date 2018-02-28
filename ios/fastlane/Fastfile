@@ -19,6 +19,7 @@ end
 
 platform :ios do
   desc "Push a new beta build to TestFlight"
+  setup_travis
 
   lane :beta do
     sync_code_signing(type: "appstore")
