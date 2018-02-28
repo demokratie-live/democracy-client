@@ -21,11 +21,9 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
 
   lane :beta do
-    sync_code_signing
-    disable_automatic_code_signing(path: "democracyclient.xcodeproj");
+    sync_code_signing(type: "appstore")
     increment_build_number(xcodeproj: "democracyclient.xcodeproj")
     build_app(scheme: "democracyclient-prod")
-    enable_automatic_code_signing(path: "democracyclient.xcodeproj")
     upload_to_testflight(
       groups: '-g "Developer"'
     )
