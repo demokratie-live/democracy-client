@@ -67,11 +67,11 @@ matrix:
             osx_image: xcode9
             language: objective-c
 
-            #install:
-            #    - nvm install 8
-            #    - npm install -g yarn
-            #    - yarn --version
-            #    - yarn install
+            install:
+               - nvm install 8
+               - npm install -g yarn
+               - yarn --version
+               - yarn install
             #xcode_project: ios/democracyclient.xcodeproj
             #xcode_scheme: ios/democracyclientTests
             script:
