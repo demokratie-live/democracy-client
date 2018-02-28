@@ -64,21 +64,20 @@ matrix:
             #       tags: true
         # ios
         -   if: branch =~ ^master OR branch =~ /^pr\..*/
-            os: osx
             osx_image: xcode9
             language: objective-c
-            #install:
-            #    - nvm install 8
-            #    - npm install -g yarn
-            #    - yarn --version
-            #    - yarn install
-            #xcode_project: ios/democracyclient.xcodeproj
-            #xcode_scheme: ios/democracyclientTests
+
+            # Ensure that fastlane is at the latest version
+            before_install:
+                - bundle update
+
+            # Let fastlane set up the other dependency managers
+            before_script:
+                - bundle exec fastlane setup
+                
             script:
-                #- yarn build:ios
-                #- xctool run-tests -scheme PepperoniAppTemplate -sdk iphonesimulator -launch-timeout 90  ONLY_ACTIVE_ARCH=NO
-                - fastlane update_fastlane
                 - cd ios
-                - fastlane ios beta
+                - bundle exec fastlane validate_env_vars
+                - bundle exec fastlane ci_deploy
 after_script:
   - echo "BUILD FINISHED"
