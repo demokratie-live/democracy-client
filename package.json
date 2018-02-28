@@ -11,11 +11,11 @@
     "start:android": "react-native run-android",
     "start:ios": "react-native run-ios",
     "build:ios:clean":
-      "cd ios && xcodebuild clean -project democracyclient.xcodeproj -configuration Release -alltargets -quiet",
+      "cd ios && xcodebuild clean -project democracyclient.xcodeproj -configuration Release -alltargets -allowProvisioningUpdates -quiet",
     "build:ios:archive":
       "cd ios && xcodebuild archive -project democracyclient.xcodeproj -scheme democracyclient-prod -archivePath build/archives/democracyclient.xcarchive -allowProvisioningUpdates -quiet",
     "build:ios:ipa":
-      "cd ios && xcodebuild -allowProvisioningUpdates -exportArchive -archivePath build/archives/democracyclient.xcarchive -exportPath build/ipa/democracyclient -exportOptionsPlist democracyclient/info.plist -quiet",
+      "cd ios && xcodebuild -allowProvisioningUpdates -exportArchive -archivePath build/archives/democracyclient.xcarchive -exportPath build/ipa/democracyclient -exportOptionsPlist democracyclient/info.plist -allowProvisioningUpdates -quiet",
     "build:ios":
       "npm run build:ios:clean && npm run build:ios:archive && npm run build:ios:ipa",
     "build:android": "cd android && ./gradlew assembleRelease",
