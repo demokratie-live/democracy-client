@@ -22,7 +22,6 @@ platform :ios do
   setup_travis
 
   lane :beta do
-    sync_code_signing(type: "appstore")
     increment_build_number(xcodeproj: "democracyclient.xcodeproj")
     build_app(scheme: "democracyclient-prod")
     upload_to_testflight(

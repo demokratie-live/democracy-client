@@ -1,4 +1,4 @@
-git_url("https://bitbucket.org/democracy-detuschland/certificates")
+git_url("git@bitbucket.org:democracy-detuschland/certificates.git")
 
 type("development") # The default type, can be: appstore, adhoc, enterprise or development
 
