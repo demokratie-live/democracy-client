@@ -77,7 +77,6 @@ matrix:
             script:
                 #- yarn build:ios
                 #- xctool run-tests -scheme PepperoniAppTemplate -sdk iphonesimulator -launch-timeout 90  ONLY_ACTIVE_ARCH=NO
-                - cd ios
-                - fastlane ios build
+                - cd ios && fastlane ios build
 after_script:
   - echo "BUILD FINISHED"
