@@ -67,15 +67,17 @@ matrix:
             os: osx
             osx_image: xcode9
             language: objective-c
-            install:
-                - nvm install 8
-                - npm install -g yarn
-                - yarn --version
-                - yarn install
-            xcode_project: ios/democracyclient.xcodeproj
-            xcode_scheme: ios/democracyclientTests
+            #install:
+            #    - nvm install 8
+            #    - npm install -g yarn
+            #    - yarn --version
+            #    - yarn install
+            #xcode_project: ios/democracyclient.xcodeproj
+            #xcode_scheme: ios/democracyclientTests
             script:
-                - yarn build:ios
+                #- yarn build:ios
                 #- xctool run-tests -scheme PepperoniAppTemplate -sdk iphonesimulator -launch-timeout 90  ONLY_ACTIVE_ARCH=NO
+                - cd ios
+                - fastlane ios build
 after_script:
   - echo "BUILD FINISHED"

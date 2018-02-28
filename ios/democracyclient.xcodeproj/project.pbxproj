@@ -42,9 +42,9 @@
 		7F937BA07FF747BA8AFDC450 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4405FC48A78C474EA507571D /* SimpleLineIcons.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
-		BFBF28EFC41F43D1BD244700 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE21168EDFFA4F90B10BEC29 /* libReactNativeConfig.a */; };
 		ADFA4473E79A4134B0A72B42 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D6DF01BA014AF1A090AC45 /* libRNDeviceInfo.a */; };
 		AFA942FC485343DC840EE6D6 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ADB1777930654CFFB3852474 /* Zocial.ttf */; };
+		BFBF28EFC41F43D1BD244700 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE21168EDFFA4F90B10BEC29 /* libReactNativeConfig.a */; };
 		C347997920162AB8000A511E /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C347997820162A9D000A511E /* libReactNativeNavigation.a */; };
 		C36B46B3201C8BBF00B68A81 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46A7201C8BBF00B68A81 /* Octicons.ttf */; };
 		C36B46B5201C8BBF00B68A81 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46A8201C8BBF00B68A81 /* Feather.ttf */; };
@@ -884,6 +884,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = A4B84UJD7M;
+						ProvisioningStyle = Manual;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1502,7 +1503,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CURRENT_PROJECT_VERSION = 1;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 13;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				HEADER_SEARCH_PATHS = (
@@ -1521,6 +1524,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp";
 				PRODUCT_NAME = democracyclient;
+				PROVISIONING_PROFILE = "1e4ea79b-8ce9-40b1-b2ef-e079259a117e";
+				PROVISIONING_PROFILE_SPECIFIER = travis;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1531,7 +1536,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CURRENT_PROJECT_VERSION = 1;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1549,6 +1556,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp";
 				PRODUCT_NAME = democracyclient;
+				PROVISIONING_PROFILE = "1e4ea79b-8ce9-40b1-b2ef-e079259a117e";
+				PROVISIONING_PROFILE_SPECIFIER = travis;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
