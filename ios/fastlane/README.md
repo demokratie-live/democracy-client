@@ -15,12 +15,25 @@ Install _fastlane_ using
 or alternatively using `brew cask install fastlane`
 
 # Available Actions
+### setup_signing
+```
+fastlane setup_signing
+```
+
+
+----
+
 ## iOS
+### ios certs
+```
+fastlane ios certs
+```
+Push a new beta build to TestFlight
 ### ios beta
 ```
 fastlane ios beta
 ```
-Push a new beta build to TestFlight
+
 
 ----
 
