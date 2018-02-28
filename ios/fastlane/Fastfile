@@ -27,6 +27,7 @@ platform :ios do
       type: 'development',
       verbose: true
     )
+    end
 
   lane :beta do
     setup_travis
