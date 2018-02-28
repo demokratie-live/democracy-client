@@ -79,6 +79,7 @@ matrix:
                 #- xctool run-tests -scheme PepperoniAppTemplate -sdk iphonesimulator -launch-timeout 90  ONLY_ACTIVE_ARCH=NO
                 - fastlane update_fastlane
                 - cd ios
-                - fastlane ios beta
+                - fastlane ios test_sign
+                - security find-identity -v -p codesigning
 after_script:
   - echo "BUILD FINISHED"

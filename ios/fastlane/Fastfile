@@ -20,6 +20,14 @@ end
 platform :ios do
   desc "Push a new beta build to TestFlight"
 
+  lane :test_sign do
+    setup_travis
+    sync_code_signing(
+      readonly: true,
+      type: 'development',
+      verbose: true
+    )
+
   lane :beta do
     setup_travis
     sync_code_signing(
