@@ -9,6 +9,7 @@ const Wrapper = styled.SectionList.attrs({
 const SectionItem = styled.View`
   padding-left: 16;
   margin-top: 30;
+  margin-bottom: 16;
 `;
 
 const SectionTitle = styled.Text`
@@ -82,11 +83,12 @@ const NavigationView = ({ currentScreen, navigateTo }) => {
     {
       title: "Einstellungen",
       data: [
+        // {
+        //   title: "Benachrichtigungen",
+        //   icon: require("../../../assets/icons/paperPlane.png")
+        // },
         {
-          title: "Benachrichtigungen",
-          icon: require("../../../assets/icons/paperPlane.png")
-        },
-        {
+          screenId: "democracy.Security",
           title: "Sicherheit",
           icon: require("../../../assets/icons/lock.png")
         },
