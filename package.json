@@ -13,7 +13,7 @@
     "build:ios:clean":
       "cd ios && xcodebuild clean -project democracyclient.xcodeproj -configuration Release -alltargets -quiet",
     "build:ios:archive":
-      "cd ios && xcodebuild archive -project democracyclient.xcodeproj -scheme democracyclient-prod -archivePath build/archives/democracyclient.xcarchive -quiet",
+      "cd ios && xcodebuild archive -project democracyclient.xcodeproj -scheme democracyclient-prod -archivePath build/archives/democracyclient.xcarchive -allowProvisioningUpdates -quiet",
     "build:ios:ipa":
       "cd ios && xcodebuild -allowProvisioningUpdates -exportArchive -archivePath build/archives/democracyclient.xcarchive -exportPath build/ipa/democracyclient -exportOptionsPlist democracyclient/info.plist -quiet",
     "build:ios":
