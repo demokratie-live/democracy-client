@@ -96,7 +96,7 @@ class Support extends Component {
     const phoneNumber = `telprompt:${Config.PHONE_NUMBER}`;
     const email = "mailto:contact@democracy-deutschland.de";
     const github = "https://github.com/demokratie-live";
-    const version = `v${DeviceInfo.getReadableVersion()
+    const version = `Version: ${DeviceInfo.getReadableVersion()
       .split(".")
       .slice(0, 3)
       .join(".")}`;
