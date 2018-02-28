@@ -23,10 +23,6 @@ platform :ios do
 
   lane :beta do
     increment_build_number(xcodeproj: "democracyclient.xcodeproj")
-    import_certificate(
-      certificate_path: "certs/dist.p12",
-      certificate_password: ENV["CERTIFICATE_PASSWORD"] || "default"
-    )
     build_app(scheme: "democracyclient-prod")
     upload_to_testflight(
       groups: '-g "Developer"'
