@@ -25,7 +25,7 @@ platform :ios do
     setup_travis
     sync_code_signing(
       readonly: true,
-      type: 'development'
+      type: 'appstore'
     )
     increment_build_number(xcodeproj: "democracyclient.xcodeproj")
     build_app(scheme: "democracyclient-prod")
