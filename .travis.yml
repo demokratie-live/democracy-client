@@ -8,23 +8,15 @@ matrix:
 
             cache:
                 yarn: true
+                directories:
+                    - node_modules
 
             install:
                 - yarn --version
                 - yarn install
             script:
                 - yarn test
-                #- yarn coveralls
-        # web
-        #-   os: linux
-        #    language: node_js
-        #    node_js:
-        #        - 8
-        #    install:
-        #        - yarn --version
-        #        - yarn install
-        #    script:
-        #        - yarn build:web
+
         # android
         -   if: branch =~ ^master OR branch =~ /^pr\..*/
             os: linux
@@ -33,6 +25,8 @@ matrix:
 
             cache:
                 yarn: true
+                directories:
+                    - node_modules
 
             before_install:
                 - echo y | android update sdk --no-ui --filter build-tools-26.0.1,build-tools-26.0.2,android-26,extra-android-m2repository
@@ -70,8 +64,9 @@ matrix:
             #   on:
             #       repo: demokratie-live/democracy-client
             #       tags: true
+
         # ios
-        -   if: branch =~ ^master OR branch =~ /^pr\..*/
+        -   if: branch =~ ^master AND NOT type =~ ^pull_request
             osx_image: xcode9
             language: objective-c
 
@@ -85,11 +80,8 @@ matrix:
                - npm install -g yarn
                - yarn --version
                - yarn install
-            #xcode_project: ios/democracyclient.xcodeproj
-            #xcode_scheme: ios/democracyclientTests
+
             script:
-                #- yarn build:ios
-                #- xctool run-tests -scheme PepperoniAppTemplate -sdk iphonesimulator -launch-timeout 90  ONLY_ACTIVE_ARCH=NO
                 - fastlane update_fastlane
                 - cd ios
                 - bundle exec fastlane ios beta
