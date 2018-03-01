@@ -67,6 +67,16 @@ matrix:
             osx_image: xcode9
             language: objective-c
 
+            cache:
+                yarn: true
+                directories:
+                    - node_modules
+                bundler: true
+
+            before_install:
+                - bundle install
+                - bundle update
+
             install:
                - nvm install 8
                - npm install -g yarn
