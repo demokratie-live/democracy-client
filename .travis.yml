@@ -82,7 +82,6 @@ matrix:
                - yarn install
 
             script:
-                - fastlane update_fastlane
                 - cd ios
                 - DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS="-t DAV" bundle exec fastlane ios beta
 after_script:
