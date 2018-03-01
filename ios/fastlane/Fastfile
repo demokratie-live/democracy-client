@@ -21,7 +21,6 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
 
   lane :beta do
-    DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS="-t DAV"
     increment_build_number(
       xcodeproj: "democracyclient.xcodeproj",
       build_number: ENV["TRAVIS_BUILD_NUMBER"]
@@ -34,6 +33,7 @@ platform :ios do
       app_identifier: "de.democracy-deutschland.clientapp"
     )
     build_app(scheme: "democracyclient-prod")
+    ENV["DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS"] = "-t DAV"
     upload_to_testflight
   end
 end
