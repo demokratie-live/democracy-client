@@ -1,4 +1,4 @@
-package com.democracyclient;
+package de.democracydeutschland.app;
 
 import android.app.Application;
 

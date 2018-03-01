@@ -14,14 +14,25 @@ default_platform(:android)
 platform :android do
   desc "Runs all the tests"
   lane :test do
-    gradle(task: "test")
+    # build_android_app(
+    #   task: "test",
+    #   build_type: "Release"
+    # )
+  end
+
+  desc "Validate"
+  lane :validate do
+    supply(
+      validate_only: true
+    )
   end
 
   desc "Submit a new Beta Build to Crashlytics Beta"
-  lane :beta do
+  lane :alpha do
     gradle(task: "clean assembleRelease")
     upload_to_play_store(
-      track_promote_to: 'alpha'
+      track: 'alpha',
+      track_promote_to: 'alpha',
     )
   
     # sh "your_script.sh"
