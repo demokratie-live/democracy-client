@@ -33,7 +33,6 @@ platform :ios do
       app_identifier: "de.democracy-deutschland.clientapp"
     )
     build_app(scheme: "democracyclient-prod")
-    ENV["DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS"] = "-t DAV"
-    upload_to_testflight
+    DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS="-t DAV" upload_to_testflight
   end
 end
