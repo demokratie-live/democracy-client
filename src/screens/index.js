@@ -11,6 +11,7 @@ import Search from "./Search";
 import SideMenu from "./SideMenu";
 import Detail from "./Detail";
 import Support from "./Support";
+import Security from "./Security";
 
 export default function registerScreens() {
   Navigation.registerComponent(
@@ -58,6 +59,13 @@ export default function registerScreens() {
   Navigation.registerComponent(
     "democracy.Support",
     () => Support,
+    client.store,
+    ApolloProvider,
+    { client }
+  );
+  Navigation.registerComponent(
+    "democracy.Security",
+    () => Security,
     client.store,
     ApolloProvider,
     { client }

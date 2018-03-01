@@ -1,5 +1,5 @@
-Type: Issue #X | Meistertask | Extern
+**Type:** Issue #X | Meistertask | Extern
 
-Description:
+**Description:**
 
-How to test:
+**How to test:**
