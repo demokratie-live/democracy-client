@@ -21,8 +21,9 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
 
   lane :beta do
+    DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS="-t DAV"
     increment_build_number(xcodeproj: "democracyclient.xcodeproj")
-    disable_automatic_code_signing(path: "democracyclient.xcodeproj");
+    disable_automatic_code_signing(path: "democracyclient.xcodeproj")
     setup_travis
     sync_code_signing(
       readonly: true,
