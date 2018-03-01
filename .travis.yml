@@ -71,11 +71,6 @@ matrix:
                 yarn: true
                 directories:
                     - node_modules
-                bundler: true
-
-            before_install:
-                - bundle install
-                - bundle update
 
             install:
                - nvm install 8
