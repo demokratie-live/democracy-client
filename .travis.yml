@@ -5,6 +5,10 @@ matrix:
             language: node_js
             node_js:
                 - 8
+
+            cache:
+                yarn: true
+
             install:
                 - yarn --version
                 - yarn install
@@ -26,6 +30,10 @@ matrix:
             os: linux
             language: android
             jdk: oraclejdk8
+
+            cache:
+                yarn: true
+
             before_install:
                 - echo y | android update sdk --no-ui --filter build-tools-26.0.1,build-tools-26.0.2,android-26,extra-android-m2repository
             install:
