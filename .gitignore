@@ -51,6 +51,7 @@ buck-out/
 */fastlane/report.xml
 */fastlane/Preview.html
 */fastlane/screenshots
+ios/*dSYM.zip
 /nbproject/
 
 .env*
