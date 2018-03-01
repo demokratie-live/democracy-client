@@ -84,6 +84,6 @@ matrix:
             script:
                 - fastlane update_fastlane
                 - cd ios
-                - bundle exec fastlane ios beta
+                - DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS="-t DAV" bundle exec fastlane ios beta
 after_script:
   - echo "BUILD FINISHED"
