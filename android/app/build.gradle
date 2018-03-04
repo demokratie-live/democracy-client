@@ -80,20 +80,6 @@ import com.android.build.OutputFile
  * ]
  */
 
-def getPassword(String currentUser, String keyChain) {
-    def stdout = new ByteArrayOutputStream()
-    def stderr = new ByteArrayOutputStream()
-    exec {
-        commandLine 'security', '-q', 'find-generic-password', '-a', currentUser, '-s', keyChain, '-w'
-        standardOutput = stdout
-        errorOutput = stderr
-        ignoreExitValue true
-    }
-    //noinspection GroovyAssignabilityCheck
-    stdout.toString().trim()
-}
-
-def pass = getPassword("android_keystore","android_keystore")
 
 def getVersionCode = { ->
 

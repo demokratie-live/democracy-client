@@ -50,9 +50,9 @@ matrix:
       - extra-google-m2repository
       - addon-google_apis-google-16
       licenses:
-      - android-sdk-preview-license-.+
-      - android-sdk-license-.+
-      - google-gdk-license-.+
+                    - 'android-sdk-preview-license-.+'
+                    - 'android-sdk-license-.+'
+                    - 'google-gdk-license-.+'
     script:
     - yarn build:android
 
@@ -75,7 +75,6 @@ matrix:
     script:
     - fastlane update_fastlane
     - cd ios
-    - DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS="-t DAV" bundle exec fastlane
-      ios beta
+                - DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS="-t DAV" bundle exec fastlane ios beta
 after_script:
 - echo "BUILD FINISHED"
