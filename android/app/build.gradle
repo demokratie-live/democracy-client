@@ -132,15 +132,6 @@ android {
         javaMaxHeapSize "8g"
     }
 
-    signingConfigs {
-        release {
-            storeFile file(MYAPP_RELEASE_STORE_FILE)
-            storePassword System.getenv('ANDROID_PASS')
-            keyAlias MYAPP_RELEASE_KEY_ALIAS
-            keyPassword System.getenv('ANDROID_PASS')
-        }
-    }
-
     defaultConfig {
         applicationId "de.democracydeutschland.app"
         minSdkVersion 16
@@ -161,10 +152,8 @@ android {
     }
     buildTypes {
         release {
-            manifestPlaceholders = [excludeSystemAlertWindowPermission: "true"]
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-            signingConfig signingConfigs.release
         }
     }
     // applicationVariants are e.g. debug, release
