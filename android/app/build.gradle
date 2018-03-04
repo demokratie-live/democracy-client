@@ -83,7 +83,7 @@ import com.android.build.OutputFile
 
 def getVersionCode = { ->
 
-    def code = ENV["TRAVIS_BUILD_NUMBER"] ? ENV["TRAVIS_BUILD_NUMBER"].toInteger() : -1
+    def code = System.getenv('TRAVIS_BUILD_NUMBER') ? System.getenv('TRAVIS_BUILD_NUMBER').toInteger() : -1
     println "VersionCode is set to $code"
     return code
 }
