@@ -93,9 +93,10 @@ matrix:
       - android-sdk-license-.+
       - google-gdk-license-.+
     script:
-      - fastlane update_fastlane
+      # - fastlane update_fastlane
       - cd android
-      - fastlane android alpha
+      # - fastlane android alpha
+      - echo ./gradlew --version
 
   # ios
   - if: branch =~ ^master AND NOT type =~ ^pull_request
