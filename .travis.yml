@@ -100,8 +100,8 @@ matrix:
       - android-sdk-license-.+
       - google-gdk-license-.+
     script:
+      - yarn build:android
       - cd android
-      - ./gradlew clean
       - fastlane android alpha
 
   # ios

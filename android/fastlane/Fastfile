@@ -29,15 +29,6 @@ platform :android do
 
   desc "Submit a new Beta Build to Crashlytics Beta"
   lane :alpha do
-    gradle(
-      project_dir: './'
-      gradle_path: './'
-      task: "clean assembleRelease",
-      build_type: "Release",
-      properties: {
-        "versionCode" => ENV["TRAVIS_BUILD_NUMBER"]
-      )
-    )
     upload_to_play_store(
       track: 'alpha',
       track_promote_to: 'alpha',
