@@ -70,7 +70,7 @@ class VoteList extends Component {
       // Divide the horizontal offset by the width of the view to see which page is visible
       const pageNum = Math.floor(contentOffset.x / viewSize.width);
       if (this.state.selectedIndex !== pageNum) {
-        // this.setState({ selectedIndex: pageNum });
+        this.setState({ selectedIndex: pageNum });
       }
     }
   };
