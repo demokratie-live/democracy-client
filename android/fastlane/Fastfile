@@ -27,7 +27,15 @@ platform :android do
     )
   end
 
-  desc "Submit a new Beta Build to Crashlytics Beta"
+  desc "Test"
+  lane :alpha do
+    gradle(
+      task: "clean assemble",
+      build_type: "Release"
+    )
+  end
+
+  desc "Submit a new Alpha Build to GooglePlayStore"
   lane :alpha do
     gradle(
       task: "clean assemble",
@@ -38,9 +46,6 @@ platform :android do
       track_promote_to: 'alpha',
       apk: "./app/build/outputs/apk/app-release.apk"
     )
-  
-    # sh "your_script.sh"
-    # You can also use other beta testing services here
   end
 
   desc "Deploy a new version to the Google Play"
