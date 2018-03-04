@@ -39,10 +39,10 @@ matrix:
       - tools
       - platform-tools
                     # android 23
-      #- build-tools-23.0.1
+      - build-tools-23.0.1
       - build-tools-25.0.1
-      #- build-tools-26.0.1
-      #- build-tools-26.0.2
+      - build-tools-26.0.1
+      - build-tools-26.0.2
       - android-23
                     # extra
       - extra-android-m2repository
