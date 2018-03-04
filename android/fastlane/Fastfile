@@ -32,6 +32,7 @@ platform :android do
     upload_to_play_store(
       track: 'alpha',
       track_promote_to: 'alpha',
+      apk: "./app/build/outputs/apk/app-release.apk"
     )
   
     # sh "your_script.sh"
@@ -40,7 +41,8 @@ platform :android do
 
   desc "Deploy a new version to the Google Play"
   lane :deploy do
-    gradle(task: "clean assembleRelease")
-    upload_to_play_store
+    upload_to_play_store(
+      apk: "./app/build/outputs/apk/app-release.apk"
+    )
   end
 end
