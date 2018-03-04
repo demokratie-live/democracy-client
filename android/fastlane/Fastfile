@@ -28,7 +28,7 @@ platform :android do
   end
 
   desc "Test"
-  lane :alpha do
+  lane :test do
     gradle(
       task: "clean assemble",
       build_type: "Release"
