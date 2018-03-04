@@ -33,6 +33,9 @@ matrix:
     - openssl aes-256-cbc -K $encrypted_b05ee5be06d5_key -iv $encrypted_b05ee5be06d5_iv
       -in democracy2-release-key.keystore.enc -out ./android/app/democracy2-release-key.keystore
       -d
+    - openssl aes-256-cbc -K $encrypted_b05ee5be06d5_key -iv $encrypted_b05ee5be06d5_iv
+      -in Google_Play_Android_Developer.json.enc -out ./android/Google_Play_Android_Developer.json
+      -d
     - gem update --system
     - gem install fastlane --no-rdoc --no-ri --no-document --quiet
 
