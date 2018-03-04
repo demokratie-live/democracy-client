@@ -29,6 +29,10 @@ platform :android do
 
   desc "Submit a new Beta Build to Crashlytics Beta"
   lane :alpha do
+    gradle(
+      task: "assemble",
+      build_type: "Release"
+    )
     upload_to_play_store(
       track: 'alpha',
       track_promote_to: 'alpha',
