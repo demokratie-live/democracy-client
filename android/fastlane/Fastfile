@@ -12,14 +12,6 @@
 default_platform(:android)
 
 platform :android do
-  desc "Runs all the tests"
-  lane :test do
-    # build_android_app(
-    #   task: "test",
-    #   build_type: "Release"
-    # )
-  end
-
   desc "Validate"
   lane :validate do
     supply(
