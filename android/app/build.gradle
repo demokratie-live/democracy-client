@@ -127,11 +127,6 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.1"
     
-    dexOptions {
-        preDexLibraries false
-        javaMaxHeapSize "8g"
-    }
-
     defaultConfig {
         applicationId "de.democracydeutschland.app"
         minSdkVersion 16
