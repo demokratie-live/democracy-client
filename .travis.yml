@@ -60,10 +60,17 @@ matrix:
   - os: linux
     language: android
     jdk: oraclejdk8
+    before_cache:
+      - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+      - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
     cache:
       yarn: true
       directories:
-      - node_modules
+        - $HOME/.gradle/caches/
+        - $HOME/.gradle/wrapper/
+        - $HOME/.android/build-cache
+        - node_modules
+    cache:
     before_install:
     - openssl aes-256-cbc -K $encrypted_b05ee5be06d5_key -iv $encrypted_b05ee5be06d5_iv
       -in democracy2-release-key.keystore.enc -out ./android/app/democracy2-release-key.keystore
