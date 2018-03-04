@@ -60,7 +60,8 @@ matrix:
                     - 'android-sdk-license-.+'
                     - 'google-gdk-license-.+'
     script:
-    - yarn build:android
+    - cd android
+    - fastlane android alpha
 
   # ios
   - if: branch =~ ^master AND NOT type =~ ^pull_request
