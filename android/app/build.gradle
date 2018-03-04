@@ -95,7 +95,12 @@ def getPassword(String currentUser, String keyChain) {
 
 def pass = getPassword("android_keystore","android_keystore")
 
+def getVersionCode = { ->
 
+    def code = ENV["TRAVIS_BUILD_NUMBER"] ? ENV["TRAVIS_BUILD_NUMBER"].toInteger() : -1
+    println "VersionCode is set to $code"
+    return code
+}
 
 project.ext.react = [
     entryFile: "index.js"
@@ -140,7 +145,7 @@ android {
         applicationId "de.democracydeutschland.app"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 1
+        versionCode getVersionCode()
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         ndk {
             abiFilters "armeabi-v7a", "x86"

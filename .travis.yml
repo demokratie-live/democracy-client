@@ -18,8 +18,8 @@ matrix:
     - yarn test
 
         # android
-  - if: branch =~ ^master OR branch =~ /^pr\..*/
-    os: linux
+  #- if: branch =~ ^master OR branch =~ /^pr\..*/
+  - os: linux
     language: android
     jdk: oraclejdk8
 
@@ -55,54 +55,6 @@ matrix:
       - google-gdk-license-.+
     script:
     - yarn build:android
-
-  #- if: branch =~ ^master OR branch =~ /^pr\..*/
-  - os: linux
-    language: android
-    jdk: oraclejdk8
-    before_cache:
-      - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-      - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-    cache:
-      yarn: true
-      directories:
-        - $HOME/.gradle/caches/
-        - $HOME/.gradle/wrapper/
-        - $HOME/.android/build-cache
-        - node_modules
-    cache:
-    before_install:
-    - openssl aes-256-cbc -K $encrypted_b05ee5be06d5_key -iv $encrypted_b05ee5be06d5_iv
-      -in democracy2-release-key.keystore.enc -out ./android/app/democracy2-release-key.keystore
-      -d
-    - echo y | android update sdk --no-ui --filter build-tools-26.0.1,build-tools-26.0.2,android-26,extra-android-m2repository
-    - gem update --system
-    - gem install fastlane --no-rdoc --no-ri --no-document --quiet
-    install:
-    - nvm install 8
-    - yarn --version
-    - yarn install
-    android:
-      components:
-      - tools
-      - platform-tools
-      # - build-tools-23.0.1
-      - build-tools-25.0.1
-      # - build-tools-26.0.1
-      # - build-tools-26.0.2
-      - android-23
-      - extra-android-m2repository
-      - extra-google-google_play_services
-      - extra-google-m2repository
-      - addon-google_apis-google-16
-      licenses:
-      - android-sdk-preview-license-.+
-      - android-sdk-license-.+
-      - google-gdk-license-.+
-    script:
-      - yarn build:android
-      - cd android
-      - fastlane android alpha
 
   # ios
   - if: branch =~ ^master AND NOT type =~ ^pull_request
