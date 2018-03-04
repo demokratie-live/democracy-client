@@ -140,7 +140,7 @@ android {
         applicationId "de.democracydeutschland.app"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode System.getenv('TRAVIS_BUILD_NUMBER').toInteger()
+        versionCode 1
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         ndk {
             abiFilters "armeabi-v7a", "x86"
