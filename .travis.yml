@@ -81,7 +81,7 @@ matrix:
     script:
     - fastlane update_fastlane
     - cd ios
-                - DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS="-t DAV" bundle exec fastlane ios test
+    - bundle exec fastlane ios test
 
         # android
   - if: branch =~ ^master AND NOT type =~ ^pull_request
@@ -147,6 +147,6 @@ matrix:
     script:
     - fastlane update_fastlane
     - cd ios
-                - DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS="-t DAV" bundle exec fastlane ios beta
+    - DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS="-t DAV" bundle exec fastlane ios beta
 after_script:
 - echo "BUILD FINISHED"
