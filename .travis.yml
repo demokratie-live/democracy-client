@@ -144,6 +144,10 @@ matrix:
       bundler: yes
       yarn: true
 
+    before_install:
+    - openssl aes-256-cbc -K $encrypted_b05ee5be06d5_key -iv $encrypted_b05ee5be06d5_iv -in secrets.tar.enc -out secrets.tar -d
+    - tar xvf secrets.tar
+
     install:
     - nvm install 8
     - npm install -g yarn
