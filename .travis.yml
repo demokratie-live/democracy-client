@@ -100,6 +100,9 @@ matrix:
     - tar xvf secrets.tar
     - gem update --system
     - gem install fastlane --no-rdoc --no-ri --no-document --quiet
+    
+    env:
+    - ENVFILE=.env.production
 
     install:
     - nvm install 8
