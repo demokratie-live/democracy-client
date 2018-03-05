@@ -16,7 +16,7 @@ matrix:
     - yarn install
     script:
     - yarn test
-    - curl -H "Content-Type: application/json" -X POST -d '{"content":"Travis Test"}' https://discordapp.com/api/webhooks/420188756214153218/5cVrpefAF9vt55thL0XJ33eptuMrtKOU03vS1O4jGa99DPz0AvDIvDPXSYgNrL5xKft7
+    - "curl -H 'Content-Type: application/json'  -X POST -d '{\"content\":\"Travis Test\"}' \"https://discordapp.com/api/webhooks/420188756214153218/5cVrpefAF9vt55thL0XJ33eptuMrtKOU03vS1O4jGa99DPz0AvDIvDPXSYgNrL5xKft7\""
 
         # android test
   - if: type IN (pull_request)
