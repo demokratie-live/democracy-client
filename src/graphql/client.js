@@ -7,6 +7,7 @@ import { withClientState } from "apollo-link-state";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { CachePersistor } from "apollo-cache-persist";
 import { onError } from "apollo-link-error";
+import ConfigEnv from "react-native-config";
 
 import Config from "../config";
 
@@ -36,6 +37,7 @@ const linkError = onError(({ graphQLErrors, networkError }) => {
   if (networkError) {
     console.log(`[Network error]: ${networkError}`);
     Alert.alert(`GRAPHQL_URL: ${Config.GRAPHQL_URL}`);
+    Alert.alert(`ConfigEnv: ${JSON.stringify(ConfigEnv)}`);
   }
 });
 
