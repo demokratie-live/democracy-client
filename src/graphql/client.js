@@ -1,12 +1,13 @@
 // @flow
-import { AsyncStorage } from "react-native";
+import { AsyncStorage, Alert } from "react-native";
 import { ApolloClient } from "apollo-client";
 import { ApolloLink } from "apollo-link";
 import { HttpLink } from "apollo-link-http";
 import { withClientState } from "apollo-link-state";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { CachePersistor } from "apollo-cache-persist";
-// import { onError } from "apollo-link-error";
+import { onError } from "apollo-link-error";
+import ConfigEnv from "react-native-config";
 
 import Config from "../config";
 
@@ -21,16 +22,24 @@ const persistor = new CachePersistor({
 });
 
 const stateLink = withClientState({ resolvers, cache, defaults });
-// const linkError = onError(({ graphQLErrors, networkError }) => {
-//   if (graphQLErrors)
-//     graphQLErrors.map(({ message, locations, path }) => {
-//       console.log(
-//         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-//       );
-//     });
+const linkError = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors)
+    graphQLErrors.forEach(({ message, locations, path }) => {
+      Alert.alert(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+      );
+      Alert.alert(`GRAPHQL_URL: ${Config.GRAPHQL_URL}`);
+      console.log(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+      );
+    });
 
-//   if (networkError) console.log(`[Network error]: ${networkError}`);
-// });
+  if (networkError) {
+    console.log(`[Network error]: ${networkError}`);
+    Alert.alert(`GRAPHQL_URL: ${Config.GRAPHQL_URL}`);
+    Alert.alert(`ConfigEnv: ${JSON.stringify(ConfigEnv)}`);
+  }
+});
 
 // const defaultOptions = {
 //   watchQuery: {
@@ -49,7 +58,7 @@ const stateLink = withClientState({ resolvers, cache, defaults });
 const client = new ApolloClient({
   cache,
   link: ApolloLink.from([
-    // linkError,
+    linkError,
     stateLink,
     new HttpLink({ uri: Config.GRAPHQL_URL })
   ])
