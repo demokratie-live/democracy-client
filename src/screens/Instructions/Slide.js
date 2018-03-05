@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
-import { Platform, View, Image } from 'react-native';
+import { Dimensions, Platform, View, Image } from 'react-native';
 
 const Container = styled.View`
   flex: 1;
@@ -27,10 +27,11 @@ const Slide = () => (
       <Text style={{ color: '#9b9b9b', fontSize: 15, letterSpacing: -0.4, paddingTop: 1 }}>Alles über die deutsche Politik in einer App</Text>
     </View>
     <View style={{ justifyContent: 'center', marginTop: 28 }}>
-      <Image source={require("../../../assets/images/detail1.png")} style={{ position: 'absolute', left: -93, top: 29 }} />
-      <Image source={require("../../../assets/images/list.png")} style={{ position: 'absolute', left: -130, top: 0 }} />
-      <Image source={require("../../../assets/images/oval4.png")} style={{ position: 'absolute', left: 93, top: 167 }} />
+      <Image source={require("../../../assets/images/detail1.png")} style={{ position: 'absolute', left: -88, top: 29 }} />
+      <Image source={require("../../../assets/images/list.png")} style={{ position: 'absolute', left: -125, top: 0 }} />
+      <Image source={require("../../../assets/images/oval4.png")} style={{ position: 'absolute', left: 97, top: 167 }} />
     </View>
+    <View style={{ height: 9, width: Dimensions.get('window').width, backgroundColor: '#fff', opacity: 0.7, position: 'absolute', bottom: 0 }} />
   </Container >
 );
 
