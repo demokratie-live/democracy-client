@@ -18,7 +18,7 @@ matrix:
     - yarn test
 
         # android test
-  - if: branch =~ ^master OR branch =~ /^pr\..*/
+  - if: branch =~ /^pr\..*/
     os: linux
     language: android
     jdk: oraclejdk8
@@ -63,7 +63,7 @@ matrix:
     - fastlane android test
 
   # ios test
-  - if: branch =~ ^master OR branch =~ /^pr\..*/
+  - if: branch =~ /^pr\..*/
     osx_image: xcode9
     language: objective-c
 
@@ -83,7 +83,7 @@ matrix:
     - cd ios
     - bundle exec fastlane ios test
 
-        # android
+        # android  deploy Alpha
   - if: branch =~ ^master AND NOT type =~ ^pull_request
     os: linux
     language: android
@@ -128,7 +128,7 @@ matrix:
     - cd android
     - fastlane android alpha
 
-  # ios
+  # ios deploy Testflight
   - if: branch =~ ^master AND NOT type =~ ^pull_request
     osx_image: xcode9
     language: objective-c
