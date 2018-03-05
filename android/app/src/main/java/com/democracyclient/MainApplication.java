@@ -65,7 +65,8 @@ public class MainApplication extends NavigationApplication {
     // eg. new VectorIconsPackage()
             new RNDeviceInfo(),
             new ReactNativeConfigPackage(),
-            new VectorIconsPackage()
+            new VectorIconsPackage(),
+            new LinearGradientPackage()
     );
   }
 
