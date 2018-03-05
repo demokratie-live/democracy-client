@@ -6,7 +6,8 @@ import { Navigator } from "react-native-navigation";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import DeviceInfo from "react-native-device-info";
-import Config from "react-native-config";
+
+import Config from "../config";
 
 import onNavigationEvent from "./onNavigationEvent";
 
