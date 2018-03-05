@@ -136,11 +136,12 @@ matrix:
   #- if: branch =~ ^master AND NOT type =~ ^pull_request
   - osx_image: xcode9.2
     language: objective-c
+    xcode_project: ios/democracyclient.xcodeproj
+    xcode_scheme: ios/democracyclientTests
 
     cache:
+      bundler: yes
       yarn: true
-      directories:
-      - node_modules
 
     install:
     - nvm install 8
