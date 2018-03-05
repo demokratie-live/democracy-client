@@ -64,13 +64,13 @@ matrix:
 
   # ios test
   - if: type IN (pull_request)
-    osx_image: xcode9
+    osx_image: xcode9.2
     language: objective-c
 
     cache:
+      bundler: true
       yarn: true
-      directories:
-      - node_modules
+      cocoapods: true
 
     install:
     - nvm install 8
@@ -127,8 +127,6 @@ matrix:
     script:
     - cd android
     - fastlane android alpha
-    
-    after_script:
     - "curl -H 'Content-Type: application/json'  -X POST -d '{\"content\":\"Neue Android Alpha Version verfügbar!\"}' \"https://discordapp.com/api/webhooks/420188756214153218/5cVrpefAF9vt55thL0XJ33eptuMrtKOU03vS1O4jGa99DPz0AvDIvDPXSYgNrL5xKft7\""
 
   # ios deploy Testflight
@@ -151,8 +149,6 @@ matrix:
     - fastlane update_fastlane
     - cd ios
     - DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS="-t DAV" bundle exec fastlane ios beta
-
-    after_script:
     - "curl -H 'Content-Type: application/json'  -X POST -d '{\"content\":\"Neue Ios TestFlight Version verfügbar!\"}' \"https://discordapp.com/api/webhooks/420188756214153218/5cVrpefAF9vt55thL0XJ33eptuMrtKOU03vS1O4jGa99DPz0AvDIvDPXSYgNrL5xKft7\""
 
 after_script:
