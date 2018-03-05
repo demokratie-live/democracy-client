@@ -1,5 +1,5 @@
 // @flow
-import { AsyncStorage } from "react-native";
+import { AsyncStorage, Alert } from "react-native";
 import { ApolloClient } from "apollo-client";
 import { ApolloLink } from "apollo-link";
 import { HttpLink } from "apollo-link-http";
@@ -7,7 +7,6 @@ import { withClientState } from "apollo-link-state";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { CachePersistor } from "apollo-cache-persist";
 import { onError } from "apollo-link-error";
-import { Alert } from "react-native";
 
 import Config from "../config";
 
@@ -24,7 +23,7 @@ const persistor = new CachePersistor({
 const stateLink = withClientState({ resolvers, cache, defaults });
 const linkError = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
-    graphQLErrors.map(({ message, locations, path }) => {
+    graphQLErrors.forEach(({ message, locations, path }) => {
       Alert.alert(
         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
       );
