@@ -28,15 +28,16 @@ const BackgroundWrapper = styled.View`
 `;
 
 const BackgroundImage = styled.Image.attrs({
-  source: require("../../../assets/images/bitmap.png")
+  source: require("../../../assets/images/stars2.png")
 })`
-  resize-mode: stretch;
+  resize-mode: repeat;
   width: 100%;
+  height: 100%;
 `;
 
 const Content = styled.View`
   flex: 1;
-  background-color: transparent;
+  background-color: rgba(68, 148, 211, 0.2);
 `;
 
 const Head = styled.View`
