@@ -84,8 +84,8 @@ matrix:
     - bundle exec fastlane ios test
 
         # android  deploy Alpha
-  #- if: branch =~ ^master AND NOT type =~ ^pull_request
-  - os: linux
+  - if: branch =~ ^master AND NOT type =~ ^pull_request
+    os: linux
     language: android
     jdk: oraclejdk8
 
