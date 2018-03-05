@@ -21,8 +21,8 @@ const Slide = () => (
       <Image source={require("../../../assets/images/logo3.png")} />
     </View>
     <View style={{ alignItems: 'center' }}>
-      <Text style={{ color: '#000', fontSize: 22, fontFamily: 'HelveticaNeue-Light', letterSpacing: -0.1, paddingTop: 15 }}>Wilkommen in der Beta</Text>
-      <Text style={{ color: '#9b9b9b', fontSize: 15, fontFamily: 'HelveticaNeue-Light', letterSpacing: -0.4, paddingTop: 1 }}>Alles über die deutsche Politik in einer App</Text>
+      <Text style={{ color: '#000', fontSize: 22, fontFamily: 'HelveticaNeue', letterSpacing: -0.1, paddingTop: 15 }}>Wilkommen in der Beta</Text>
+      <Text style={{ color: '#9b9b9b', fontSize: 15, fontFamily: 'HelveticaNeue', letterSpacing: -0.4, paddingTop: 1 }}>Alles über die deutsche Politik in einer App</Text>
     </View>
     <View style={{ justifyContent: 'center', marginTop: 28 }}>
       <Image source={require("../../../assets/images/detail1.png")} style={{ position: 'absolute', left: -93, top: 29 }} />
