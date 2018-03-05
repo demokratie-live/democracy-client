@@ -80,6 +80,14 @@ import com.android.build.OutputFile
  * ]
  */
 
+
+def getVersionCode = { ->
+
+    def code = System.getenv('TRAVIS_BUILD_NUMBER') ? System.getenv('TRAVIS_BUILD_NUMBER').toInteger() : -1
+    println "VersionCode is set to $code"
+    return code
+}
+
 project.ext.react = [
     entryFile: "index.js"
 ]
@@ -104,12 +112,21 @@ def enableProguardInReleaseBuilds = false
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.1"
+    
+    signingConfigs {
+        release {
+            storeFile file(MYAPP_RELEASE_STORE_FILE)
+            storePassword System.getenv('ANDROID_PASS')
+            keyAlias MYAPP_RELEASE_KEY_ALIAS
+            keyPassword System.getenv('ANDROID_PASS')
+        }
+    }
 
     defaultConfig {
-        applicationId "com.democracyclient"
+        applicationId "de.democracydeutschland.app"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100
+        versionCode getVersionCode()
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         ndk {
             abiFilters "armeabi-v7a", "x86"
@@ -127,6 +144,7 @@ android {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
         }
     }
     // applicationVariants are e.g. debug, release
