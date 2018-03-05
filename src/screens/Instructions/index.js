@@ -78,7 +78,7 @@ class Introductions extends Component {
           <Slide background="#fff" text="2" />
           <Slide background="#fff" text="3" />
         </Swiper>
-        <TouchableOpacity onPress={this.onClick} style={{ backgroundColor: '#fff', height: 60, justifyContent: 'center' }} >
+        <TouchableOpacity onPress={this.onClick} style={{ backgroundColor: '#fcfcfc', height: 60, justifyContent: 'center' }} >
           <Text style={{ textAlign: 'center', color: '#0076ff', fontSize: 20, lineHeight: 24 }}>{this.state.buttonText}</Text>
         </TouchableOpacity>
       </Container >
