@@ -26,7 +26,7 @@ font-size: 20;
 `;
 
 const BUTTON_TEXTS = {
-  next: "Weiter >",
+  next: "Weiter",
   finish: "Los gehts!"
 };
 
