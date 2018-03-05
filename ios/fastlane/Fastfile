@@ -20,6 +20,17 @@ end
 platform :ios do
   desc "Push a new beta build to TestFlight"
 
+  lane :test do
+    disable_automatic_code_signing(path: "democracyclient.xcodeproj")
+    setup_travis
+    sync_code_signing(
+      readonly: true,
+      type: 'appstore',
+      app_identifier: "de.democracy-deutschland.clientapp"
+    )
+    build_app(scheme: "democracyclient-prod")
+  end
+
   lane :beta do
     increment_build_number(
       xcodeproj: "democracyclient.xcodeproj",
