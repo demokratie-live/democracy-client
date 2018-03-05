@@ -72,7 +72,6 @@
 		F01CDA3F2B794DE5811965BB /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D146E1606C054E768BAFE9F5 /* Feather.ttf */; };
 		F3B07CF0472D45B69BE5A04B /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4BC0D7C5F8C848B9B1421BC7 /* Entypo.ttf */; };
 		FE88B8F505FB4783B21AF2F2 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E08B1CA484314178A9A5F917 /* Ionicons.ttf */; };
-		D926AFB58E894979B58EA4A8 /* HelveticaNeue-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C348AE44233A40A7A26433DF /* HelveticaNeue-Light.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -442,8 +441,6 @@
 		D879F3E7359A4C6C82AE7CFC /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		E08B1CA484314178A9A5F917 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		E4CF3D41D8A04C95A7AAC65D /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
-		2EE7B22536564D00819770B1 /* HelveticaNeue Light.ttf */ = {isa = PBXFileReference; name = "HelveticaNeue Light.ttf"; path = "../assets/fonts/HelveticaNeue Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		C348AE44233A40A7A26433DF /* HelveticaNeue-Light.ttf */ = {isa = PBXFileReference; name = "HelveticaNeue-Light.ttf"; path = "../assets/fonts/HelveticaNeue-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -634,8 +631,6 @@
 				9BFE3F2879F84086BF621EEB /* Octicons.ttf */,
 				4405FC48A78C474EA507571D /* SimpleLineIcons.ttf */,
 				ADB1777930654CFFB3852474 /* Zocial.ttf */,
-				2EE7B22536564D00819770B1 /* HelveticaNeue Light.ttf */,
-				C348AE44233A40A7A26433DF /* HelveticaNeue-Light.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1333,8 +1328,6 @@
 				F01C6308EE1B41CC9B114027 /* Octicons.ttf in Resources */,
 				7F937BA07FF747BA8AFDC450 /* SimpleLineIcons.ttf in Resources */,
 				AFA942FC485343DC840EE6D6 /* Zocial.ttf in Resources */,
-				F50C8E5B9EBA48FF87E8658F /* HelveticaNeue Light.ttf in Resources */,
-				D926AFB58E894979B58EA4A8 /* HelveticaNeue-Light.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
