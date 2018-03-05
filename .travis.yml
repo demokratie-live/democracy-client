@@ -134,7 +134,7 @@ matrix:
 
   # ios deploy Testflight
   #- if: branch =~ ^master AND NOT type =~ ^pull_request
-  - osx_image: xcode9
+    osx_image: xcode9.2
     language: objective-c
 
     cache:
