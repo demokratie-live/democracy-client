@@ -16,6 +16,8 @@ import com.reactnativenavigation.NavigationApplication;
 import java.util.Arrays;
 import java.util.List;
 
+import com.BV.LinearGradient.LinearGradientPackage;
+
 public class MainApplication extends NavigationApplication {
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
@@ -29,7 +31,8 @@ public class MainApplication extends NavigationApplication {
       return Arrays.<ReactPackage>asList(new MainReactPackage(),
             new RNDeviceInfo(),
             new ReactNativeConfigPackage(),
-            new VectorIconsPackage());
+            new VectorIconsPackage(),
+            new LinearGradientPackage());
     }
 
     @Override
