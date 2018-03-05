@@ -32,7 +32,7 @@ const Slide = () => (
       <Image source={require("../../../assets/images/list.png")} style={{ position: 'absolute', left: -125, top: 0 }} />
       <Image source={require("../../../assets/images/oval4.png")} style={{ position: 'absolute', left: 97, top: 167 }} />
     </View>
-    <LinearGradient colors={['rgba(156, 68, 249,0.5)', 'rgba(114, 110, 248,0.5)', 'rgb(79, 206, 249)']} style={{ height: 9, width: Dimensions.get('window').width, backgroundColor: '#fff', opacity: 0.7, position: 'absolute', bottom: 0 }} />
+    <LinearGradient colors={['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 0.9)']} style={{ height: 9, width: Dimensions.get('window').width, backgroundColor: '#fff', opacity: 0.7, position: 'absolute', bottom: 0 }} />
   </Container >
 );
 
