@@ -51,7 +51,7 @@ class App {
       Navigation.startSingleScreenApp({
         screen: {
           screen: "democracy.VoteList",
-          title: "Bundestag",
+          title: "Bundestag".toUpperCase(),
           navigatorStyle: {},
           topTabs
         },

@@ -25,7 +25,6 @@ class SearchScreen extends Component {
       navBarCustomView: "democracy.Search.Header",
       navBarComponentAlignment: "fill",
       navBarCustomViewInitialProps: {
-        title: "Bundestag",
         navigator: this.props.navigator
       }
     });

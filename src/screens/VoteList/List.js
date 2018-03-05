@@ -6,6 +6,7 @@ import { Navigator } from "react-native-navigation";
 import { TouchableHighlight, Dimensions, Platform } from "react-native";
 import { graphql } from "react-apollo";
 import { unionBy } from "lodash";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 import ListRow from "../../components/ListRow";
 import VoteListItem from "../../components/VoteListItem";
@@ -26,15 +27,37 @@ const SectionList = styled.SectionList``;
 const PAGE_SIZE = 20;
 
 class List extends Component {
+  static navigatorStyle = {
+    navBarButtonColor: "#FFFFFF",
+    navBarBackgroundColor: "#4494d3",
+    navBarTextColor: "#FFFFFF",
+    navBarTextFontSize: 17
+  };
+
   constructor(props) {
     super(props);
-    this.props.navigator.setStyle({
-      navBarCustomView: "democracy.VoteList.Header",
-      navBarComponentAlignment: "fill",
-      navBarCustomViewInitialProps: {
-        title: "Bundestag",
-        navigator: this.props.navigator
-      }
+    const menuIcon = Platform.OS === "ios" ? "ios-menu" : "md-menu";
+    Ionicons.getImageSource(menuIcon, 24, "#FFFFFF").then(icon => {
+      props.navigator.setButtons({
+        leftButtons: [
+          {
+            icon,
+            id: "menu"
+          }
+        ]
+      });
+    });
+
+    const searchIcon = Platform.OS === "ios" ? "ios-search" : "md-search";
+    Ionicons.getImageSource(searchIcon, 24, "#FFFFFF").then(icon => {
+      props.navigator.setButtons({
+        rightButtons: [
+          {
+            icon,
+            id: "search"
+          }
+        ]
+      });
     });
     this.props.navigator.setOnNavigatorEvent(this.onNavigationEvent);
   }

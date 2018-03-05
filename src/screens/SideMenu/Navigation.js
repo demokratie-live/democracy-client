@@ -75,7 +75,7 @@ const NavigationView = ({ currentScreen, navigateTo }) => {
       data: [
         {
           screenId: "democracy.VoteList",
-          title: "Bundestag",
+          title: "Bundestag".toUpperCase(),
           icon: require("../../../assets/icons/worldClock.png")
         }
       ]
@@ -89,17 +89,17 @@ const NavigationView = ({ currentScreen, navigateTo }) => {
         // },
         {
           screenId: "democracy.Security",
-          title: "Sicherheit",
+          title: "Sicherheit".toUpperCase(),
           icon: require("../../../assets/icons/lock.png")
         },
         {
           screenId: "democracy.Instructions",
-          title: "Tutorial",
+          title: "Tutorial".toUpperCase(),
           icon: require("../../../assets/icons/baby.png")
         },
         {
           screenId: "democracy.Support",
-          title: "Support",
+          title: "Support".toUpperCase(),
           icon: require("../../../assets/icons/speechBubble9.png")
         }
       ]

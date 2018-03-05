@@ -24,6 +24,12 @@ export default ({ event, navigator }) => {
         case "menu":
           navigator.toggleDrawer({ side: "left" });
           break;
+        case "search":
+          navigator.push({
+            screen: "democracy.Search",
+            backButtonHidden: true
+          });
+          break;
 
         default:
           break;

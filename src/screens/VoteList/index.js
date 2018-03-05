@@ -27,8 +27,8 @@ const ScrollView = styled.ScrollView.attrs({
 const SegmentControlsWrapper = styled.View`
   background-color: #4494d3;
   height: 50;
-  padding-left: 10;
-  padding-right: 10;
+  padding-left: 16;
+  padding-right: 16;
   flex-direction: row;
   justify-content: center;
   padding-bottom: 10;
@@ -37,26 +37,14 @@ const SegmentControlsWrapper = styled.View`
 class VoteList extends Component {
   static navigatorStyle = {
     navBarNoBorder: true,
+    navBarButtonColor: "#FFFFFF",
     navBarBackgroundColor: "#4494d3",
     navBarTextColor: "#FFFFFF",
     navBarTextFontSize: 17,
-    navBarTextFontFamily: Platform.OS === "ios" ? "System" : "Roboto",
     selectedTopTabTextColor: "#ffffff",
     selectedTopTabIndicatorColor: "#ffffff",
     selectedTopTabIndicatorHeight: 5
   };
-
-  constructor(props) {
-    super(props);
-    this.props.navigator.setStyle({
-      navBarCustomView: "democracy.VoteList.Header",
-      navBarComponentAlignment: "fill",
-      navBarCustomViewInitialProps: {
-        title: "Bundestag",
-        navigator: this.props.navigator
-      }
-    });
-  }
 
   state = {
     selectedIndex: 0
