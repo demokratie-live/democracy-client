@@ -153,7 +153,7 @@ matrix:
     - fastlane update_fastlane
     - cd ios
     - DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS="-t DAV" bundle exec fastlane ios beta
-    - "curl -H 'Content-Type: application/json'  -X POST -d '{\"content\":\"Neue Ios TestFlight Version verfügbar!\"}' \"https://discordapp.com/api/webhooks/420188756214153218/5cVrpefAF9vt55thL0XJ33eptuMrtKOU03vS1O4jGa99DPz0AvDIvDPXSYgNrL5xKft7\""
+    - "curl -H 'Content-Type: application/json'  -X POST -d '{\"content\":\"Neue iOS TestFlight Version verfügbar!\"}' \"https://discordapp.com/api/webhooks/420188756214153218/5cVrpefAF9vt55thL0XJ33eptuMrtKOU03vS1O4jGa99DPz0AvDIvDPXSYgNrL5xKft7\""
 
 after_script:
 - echo "BUILD FINISHED"
