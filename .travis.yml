@@ -101,9 +101,6 @@ matrix:
     - export $(cat .env.production | grep -v ^# | xargs)
     - gem update --system
     - gem install fastlane --no-rdoc --no-ri --no-document --quiet
-    
-    env:
-    - ENVFILE=.env.production
 
     install:
     - nvm install 8
@@ -134,8 +131,8 @@ matrix:
     - "curl -H 'Content-Type: application/json'  -X POST -d '{\"content\":\"Neue Android Alpha Version verfügbar!\"}' \"https://discordapp.com/api/webhooks/420188756214153218/5cVrpefAF9vt55thL0XJ33eptuMrtKOU03vS1O4jGa99DPz0AvDIvDPXSYgNrL5xKft7\""
 
   # ios deploy Testflight
-  #- if: branch =~ ^master AND NOT type =~ ^pull_request
-  - osx_image: xcode9.2
+  - if: branch =~ ^master AND NOT type =~ ^pull_request
+    osx_image: xcode9.2
     language: objective-c
     xcode_project: ios/democracyclient.xcodeproj
     xcode_scheme: ios/democracyclientTests
