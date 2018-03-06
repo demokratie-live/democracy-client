@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Linking } from "react-native";
+import { Linking, Platform } from "react-native";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 
@@ -21,11 +21,15 @@ const Text = styled.Text`
 
 class Document extends Component {
   openPdf = url => () => {
-    Linking.canOpenURL(url).then(supported => {
+    const previewUrl =
+      Platform.OS === "ios"
+        ? url
+        : `https://docs.google.com/gview?embedded=true&url=${url}`;
+    Linking.canOpenURL(previewUrl).then(supported => {
       if (supported) {
-        Linking.openURL(url);
+        Linking.openURL(previewUrl);
       } else {
-        // console.log(`Don't know how to open URI: ${url}`);
+        // console.log(`Don't know how to open URI: ${previewUrl}`);
       }
     });
   };
