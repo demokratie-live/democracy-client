@@ -1,6 +1,6 @@
 matrix:
   include:
-        # test
+  # test
   - os: linux
     language: node_js
     node_js:
@@ -17,7 +17,7 @@ matrix:
     script:
     - yarn test
 
-        # android test
+  # android test
   - if: type IN (pull_request)
     os: linux
     language: android
@@ -25,8 +25,8 @@ matrix:
 
     cache:
       yarn: true
-      directories:
-      - node_modules
+       directories:
+       - node_modules
 
     before_install:
     - echo y | android update sdk --no-ui --filter build-tools-26.0.1,build-tools-26.0.2,android-26,extra-android-m2repository   
@@ -67,10 +67,10 @@ matrix:
     osx_image: xcode9.2
     language: objective-c
 
-    cache:
-      bundler: true
-      yarn: true
-      cocoapods: true
+    # cache:
+      # bundler: true
+      # yarn: true
+      # cocoapods: true
 
     install:
     - nvm install 8
@@ -83,7 +83,7 @@ matrix:
     - cd ios
     - bundle exec fastlane ios test
 
-        # android  deploy Alpha
+  # android  deploy Alpha
   - if: branch =~ ^master AND NOT type =~ ^pull_request
     os: linux
     language: android
@@ -110,13 +110,13 @@ matrix:
       components:
       - tools
       - platform-tools
-                    # android 23
+      # android 23
       - build-tools-23.0.1
       - build-tools-25.0.1
       - build-tools-26.0.1
       - build-tools-26.0.2
       - android-23
-                    # extra
+      # extra
       - extra-android-m2repository
       - extra-google-google_play_services
       - extra-google-m2repository
