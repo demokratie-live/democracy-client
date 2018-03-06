@@ -25,12 +25,13 @@ const ActivityIndex = ({ count, active }) => (
 );
 
 ActivityIndex.propTypes = {
-  count: PropTypes.number.isRequired,
+  count: PropTypes.number,
   active: PropTypes.bool
 };
 
 ActivityIndex.defaultProps = {
-  active: false
+  active: false,
+  count: 0
 };
 
 export default ActivityIndex;

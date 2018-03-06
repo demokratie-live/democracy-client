@@ -47,7 +47,13 @@ const SearchClearButtonAndroid = styled(Icons).attrs({
 
 class Header extends Component {
   state = {
-    searchContent: ""
+    term: ""
+  };
+
+  onChangeTerm = term => {
+    const { onChangeTerm } = this.props;
+    onChangeTerm(term);
+    this.setState({ term });
   };
 
   clickBack = () => {
@@ -56,19 +62,19 @@ class Header extends Component {
   };
 
   render() {
-    const { searchContent } = this.state;
+    const { term } = this.state;
     return (
       <Wrapper>
         <SearchBackButtonAndroid onPress={this.clickBack} />
         <SearchInput
           placeholder="Suche"
-          onChangeText={text => this.setState({ searchContent: text })}
-          value={searchContent}
+          onChangeText={this.onChangeTerm}
+          value={term}
         />
 
         <SearchClearButtonAndroid
-          visible={searchContent}
-          onPress={() => this.setState({ searchContent: "" })}
+          visible={term}
+          onPress={() => this.setState({ term: "" })}
         />
       </Wrapper>
     );
@@ -76,7 +82,8 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  navigator: PropTypes.instanceOf(Navigator)
+  navigator: PropTypes.instanceOf(Navigator),
+  onChangeTerm: PropTypes.func.isRequired
 };
 
 Header.defaultProps = {

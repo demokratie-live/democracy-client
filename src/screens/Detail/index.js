@@ -134,17 +134,20 @@ class Detail extends Component {
 
 Detail.propTypes = {
   title: PropTypes.string.isRequired,
-  activityIndex: PropTypes.number.isRequired,
-  active: PropTypes.bool.isRequired,
+  activityIndex: PropTypes.number,
+  active: PropTypes.bool,
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   abstract: PropTypes.string,
-  listType: PropTypes.string.isRequired,
+  listType: PropTypes.string,
   procedureId: PropTypes.string.isRequired,
   data: PropTypes.shape().isRequired
 };
 
 Detail.defaultProps = {
-  abstract: ""
+  abstract: "",
+  activityIndex: 0,
+  active: false,
+  listType: "search"
 };
 
 export default graphql(
