@@ -6,7 +6,6 @@ import { graphql } from "react-apollo";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import { Navigator } from "react-native-navigation";
-import { TouchableOpacity, Text } from 'react-native';
 
 import Slide from "./Slide";
 
@@ -17,12 +16,17 @@ const Container = styled.View`
   backgroundColor: #fff;
 `;
 
-const Button = styled.Button.attrs({
-  color: "#fff",
-}) `
-color: #0076ff;
-height: 60pt;
-font-size: 20;
+const Button = styled.TouchableOpacity`
+  backgroundColor: #fcfcfc;
+  height: 60;
+  justifyContent: center;
+`;
+
+const ButtonText = styled.Text`
+  textAlign: center;
+  color: #0076ff;
+  fontSize: 20;
+  lineHeight: 24;
 `;
 
 const BUTTON_TEXTS = {
@@ -69,18 +73,50 @@ class Introductions extends Component {
           }}
           loop={false}
           onMomentumScrollEnd={this.onMomentumScrollEnd}
-          paginationStyle={{ marginBottom: -15 }}
-          style={{ marginBottom: 29 }}
+          paginationStyle={{ marginBottom: -19 }}
+          style={{ marginBottom: 24 }}
           dotStyle={{ width: 5, height: 5, backgroundColor: '#4494d3', opacity: 0.5, marginTop: 12 }}
           activeDotStyle={{ width: 5, height: 5, backgroundColor: '#4494d3', marginTop: 12 }}
         >
-          <Slide background="#fff" text="1" />
-          <Slide background="#fff" text="2" />
-          <Slide background="#fff" text="3" />
+          <Slide ImgHead={require("../../../assets/tutorial/icon.logo.png")}
+            ImgCenter={require("../../../assets/tutorial/screen.list.png")}
+            ImgRight={require("../../../assets/tutorial/screen.detail.transparent.png")}
+            TxtHead="Wilkommen in der Beta"
+            TxtSub="Alles über die deutsche Politik in einer App" />
+          <Slide ImgHead={require("../../../assets/tutorial/icon.beobachte.png")}
+            ImgLeft={require("../../../assets/tutorial/screen.list.transparent.png")}
+            ImgCenter={require("../../../assets/tutorial/screen.list.png")}
+            ImgRight={require("../../../assets/tutorial/screen.detail.transparent.png")}
+            TxtHead="Beobachte"
+            TxtSub="…alle vergangenen, aktuellen und zukünftigen Abstimmungen des Bundestages" />
+          <Slide ImgHead={require("../../../assets/tutorial/icon.informiere.png")}
+            ImgLeft={require("../../../assets/tutorial/screen.list.transparent.png")}
+            ImgCenter={require("../../../assets/tutorial/screen.detail.png")}
+            ImgRight={require("../../../assets/tutorial/screen.forum.transparent.png")}
+            TxtHead="Informiere Dich"
+            TxtSub="…über die Gesetzesvorlagen entlang der offiziellen Informationen des Bundestages" />
+          <Slide ImgHead={require("../../../assets/tutorial/icon.diskutiere.png")}
+            ImgLeft={require("../../../assets/tutorial/screen.vote.transparent.png")}
+            ImgCenter={require("../../../assets/tutorial/screen.forum.png")}
+            ImgRight={require("../../../assets/tutorial/screen.vote.png")}
+            TxtHead="Diskutiere"
+            TxtSub={`…über die Für’s und Wider’s des Antrags \n und bring weiterführende Informationen ein`} />
+          <Slide ImgHead={require("../../../assets/tutorial/icon.stimme.png")}
+            ImgLeft={require("../../../assets/tutorial/screen.forum.transparent.png")}
+            ImgCenter={require("../../../assets/tutorial/screen.vote.png")}
+            ImgRight={require("../../../assets/tutorial/screen.analyse.transparent.png")}
+            TxtHead="Stimme"
+            TxtSub="…noch vor der offiziellen Bundestags-entscheidung selbst über den Antrag ab" />
+          <Slide ImgHead={require("../../../assets/tutorial/icon.analysiere.png")}
+            ImgLeft={require("../../../assets/tutorial/screen.vote.transparent.png")}
+            ImgCenter={require("../../../assets/tutorial/screen.analyse.png")}
+            ImgCircle={null}
+            TxtHead="Anlaysiere"
+            TxtSub="…das Community-Abstimmungsverhalten und vergleich es mit den Bundestagsresultaten" />
         </Swiper>
-        <TouchableOpacity onPress={this.onClick} style={{ backgroundColor: '#fcfcfc', height: 60, justifyContent: 'center' }} >
-          <Text style={{ textAlign: 'center', color: '#0076ff', fontSize: 20, lineHeight: 24 }}>{this.state.buttonText}</Text>
-        </TouchableOpacity>
+        <Button onPress={this.onClick}>
+          <ButtonText>{this.state.buttonText}</ButtonText>
+        </Button>
       </Container >
     );
   }

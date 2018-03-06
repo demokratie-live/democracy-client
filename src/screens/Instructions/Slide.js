@@ -1,43 +1,106 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
-import { Dimensions, Platform, View, Image } from 'react-native';
+import { Dimensions, Platform, Image } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 const Container = styled.View`
   flex: 1;
   align-items: center;
   background: #fff;
-  padding-top: ${Platform.OS === "ios" ? 16 : 0};
+  padding-top: ${Platform.OS === "ios" ? 21 : 5};
 `;
 
-const Text = styled.Text`
+const ContainerHead = styled.View`
+  height: 85;
+  justify-content: center;
+`;
+
+const ContainerText = styled.View`
+  align-items: center;
+`;
+
+const TextHead = styled.Text`
   color: #000;
-  font-size: 30;
-  font-weight: bold;
+  fontSize: 22;
+  letterSpacing: -0.1;
+  paddingTop: 5;
   fontFamily: ${Platform.OS === "ios" ? "HelveticaNeue-Thin" : "sans-serif-light"};
+  font-weight: bold;
 `;
 
-const Slide = () => (
+const TextSub = styled.Text`
+  color: #9b9b9b;
+  fontSize: 15;
+  letterSpacing: -0.4;
+  paddingTop: 1;
+  fontFamily: ${Platform.OS === "ios" ? "HelveticaNeue-Thin" : "sans-serif-light"};
+  font-weight: bold;
+  text-align: center;
+`;
+
+const ContainerImages = styled.View`
+  justifyContent: center;
+  marginTop: 28;
+`;
+
+const ImageLeft = styled.Image`
+  position: absolute;
+  left: -162;
+  top: 29;
+`;
+
+const ImageRight = styled.Image`
+  position: absolute;
+  left: -88;
+  top: 29;
+`;
+
+const ImageCenter = styled.Image`
+  position: absolute;
+  left: -125;
+  top: 0;
+`;
+
+const ImageCircle = styled.Image`
+  position: absolute;
+  left: 97;
+  top: 167;
+`;
+
+const Slide = ({ ImgHead, ImgRight, ImgLeft, ImgCenter, ImgCircle, TxtHead, TxtSub }) => (
   <Container>
-    <View style={{ height: 85, justifyContent: 'center' }}>
-      <Image source={require("../../../assets/images/logo3.png")} />
-    </View>
-    <View style={{ alignItems: 'center' }}>
-      <Text style={{ color: '#000', fontSize: 22, letterSpacing: -0.1, paddingTop: 15 }}>Wilkommen in der Beta</Text>
-      <Text style={{ color: '#9b9b9b', fontSize: 15, letterSpacing: -0.4, paddingTop: 1 }}>Alles über die deutsche Politik in einer App</Text>
-    </View>
-    <View style={{ justifyContent: 'center', marginTop: 28 }}>
-      <Image source={require("../../../assets/images/detail1.png")} style={{ position: 'absolute', left: -88, top: 29 }} />
-      <Image source={require("../../../assets/images/list.png")} style={{ position: 'absolute', left: -125, top: 0 }} />
-      <Image source={require("../../../assets/images/oval4.png")} style={{ position: 'absolute', left: 97, top: 167 }} />
-    </View>
-    <LinearGradient colors={['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 0.9)']} style={{ height: 9, width: Dimensions.get('window').width, backgroundColor: '#fff', opacity: 0.7, position: 'absolute', bottom: 0 }} />
+    <ContainerHead>
+      <Image source={ImgHead} />
+    </ContainerHead>
+    <ContainerText>
+      <TextHead>{TxtHead}</TextHead>
+      <TextSub>{TxtSub}</TextSub>
+    </ContainerText>
+    <ContainerImages>
+      <ImageLeft source={ImgLeft} />
+      <ImageRight source={ImgRight} />
+      <ImageCenter source={ImgCenter} />
+      <ImageCircle source={ImgCircle} />
+    </ContainerImages>
+    <LinearGradient colors={['transparent', 'rgba(255, 255, 255, 1)']} style={{ height: 15, width: Dimensions.get('window').width, position: 'absolute', bottom: 0 }} />
   </Container >
 );
 
+Slide.propTypes = {
+  ImgHead: PropTypes.number.isRequired,
+  ImgLeft: PropTypes.number,
+  ImgRight: PropTypes.number,
+  ImgCenter: PropTypes.number.isRequired,
+  ImgCircle: PropTypes.number,
+  TxtHead: PropTypes.string.isRequired,
+  TxtSub: PropTypes.string.isRequired
+}
+
 Slide.defaultProps = {
-  background: ""
+  ImgLeft: null,
+  ImgRight: null,
+  ImgCircle: require("../../../assets/tutorial/icon.touch.png")
 };
 
 export default Slide;

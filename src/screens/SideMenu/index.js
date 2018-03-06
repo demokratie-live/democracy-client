@@ -29,7 +29,7 @@ const BackgroundWrapper = styled.View`
 
 const BackgroundImage = styled.Image.attrs({
   source: require("../../../assets/images/bitmap.png")
-})`
+}) `
   resize-mode: stretch;
   width: 100%;
 `;
@@ -47,7 +47,7 @@ const Head = styled.View`
 
 const HeadLogo = styled.Image.attrs({
   source: require("../../../assets/images/logo-sidemenu.png")
-})``;
+}) ``;
 
 const HeadTextWrapper = styled.View`
   justify-content: center;
