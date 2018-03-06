@@ -96,7 +96,7 @@ const Slide = ({
       <ImageCircle source={ImgCircle} />
     </ContainerImages>
     <LinearGradient
-      colors={["transparent", "rgba(255, 255, 255, 1)"]}
+      colors={["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 1)"]}
       style={{
         height: 15,
         width: Dimensions.get("window").width,
