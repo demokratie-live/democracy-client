@@ -23,7 +23,7 @@ matrix:
     language: android
     jdk: oraclejdk8
 
-    #cache:
+    cache:
       yarn: true
 
     before_install:
