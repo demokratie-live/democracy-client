@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
-import { Dimensions, Platform, Image } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import { Dimensions, Platform, Image } from "react-native";
+import LinearGradient from "react-native-linear-gradient";
 
 const Container = styled.View`
   flex: 1;
@@ -22,26 +22,30 @@ const ContainerText = styled.View`
 
 const TextHead = styled.Text`
   color: #000;
-  fontSize: 22;
-  letterSpacing: -0.1;
-  paddingTop: 5;
-  fontFamily: ${Platform.OS === "ios" ? "HelveticaNeue-Thin" : "sans-serif-light"};
+  font-size: 22;
+  letter-spacing: -0.1;
+  padding-top: 5;
+  font-family: ${Platform.OS === "ios"
+    ? "HelveticaNeue-Thin"
+    : "sans-serif-light"};
   font-weight: bold;
 `;
 
 const TextSub = styled.Text`
   color: #9b9b9b;
-  fontSize: 15;
-  letterSpacing: -0.4;
-  paddingTop: 1;
-  fontFamily: ${Platform.OS === "ios" ? "HelveticaNeue-Thin" : "sans-serif-light"};
+  font-size: 15;
+  letter-spacing: -0.4;
+  padding-top: 1;
+  font-family: ${Platform.OS === "ios"
+    ? "HelveticaNeue-Thin"
+    : "sans-serif-light"};
   font-weight: bold;
   text-align: center;
 `;
 
 const ContainerImages = styled.View`
-  justifyContent: center;
-  marginTop: 28;
+  justify-content: center;
+  margin-top: 28;
 `;
 
 const ImageLeft = styled.Image`
@@ -68,7 +72,15 @@ const ImageCircle = styled.Image`
   top: 167;
 `;
 
-const Slide = ({ ImgHead, ImgRight, ImgLeft, ImgCenter, ImgCircle, TxtHead, TxtSub }) => (
+const Slide = ({
+  ImgHead,
+  ImgRight,
+  ImgLeft,
+  ImgCenter,
+  ImgCircle,
+  TxtHead,
+  TxtSub
+}) => (
   <Container>
     <ContainerHead>
       <Image source={ImgHead} />
@@ -83,8 +95,16 @@ const Slide = ({ ImgHead, ImgRight, ImgLeft, ImgCenter, ImgCircle, TxtHead, TxtS
       <ImageCenter source={ImgCenter} />
       <ImageCircle source={ImgCircle} />
     </ContainerImages>
-    <LinearGradient colors={['transparent', 'rgba(255, 255, 255, 1)']} style={{ height: 15, width: Dimensions.get('window').width, position: 'absolute', bottom: 0 }} />
-  </Container >
+    <LinearGradient
+      colors={["transparent", "rgba(255, 255, 255, 1)"]}
+      style={{
+        height: 15,
+        width: Dimensions.get("window").width,
+        position: "absolute",
+        bottom: 0
+      }}
+    />
+  </Container>
 );
 
 Slide.propTypes = {
@@ -95,7 +115,7 @@ Slide.propTypes = {
   ImgCircle: PropTypes.number,
   TxtHead: PropTypes.string.isRequired,
   TxtSub: PropTypes.string.isRequired
-}
+};
 
 Slide.defaultProps = {
   ImgLeft: null,
