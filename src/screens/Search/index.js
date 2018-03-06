@@ -2,8 +2,14 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import { Navigation, Navigator } from "react-native-navigation";
+import { withApollo } from "react-apollo";
+import { TouchableHighlight } from "react-native";
 
 import Header from "./Header";
+import ListRow from "../../components/ListRow";
+import VoteListItem from "../../components/VoteListItem";
+
+import searchProcedures from "../../graphql/queries/searchProcedures";
 
 Navigation.registerComponent("democracy.Search.Header", () => Header);
 
@@ -12,7 +18,17 @@ const Wrapper = styled.View`
   background-color: #fff;
 `;
 
-const HelloWorld = styled.Text``;
+const List = styled.FlatList``;
+
+const Text = styled.Text``;
+const ActivityIndicator = styled.ActivityIndicator.attrs({
+  size: "large"
+})``;
+const LoadingWrapper = styled.View`
+  flex: 1;
+  background-color: #ffffff;
+  padding-top: 18;
+`;
 
 class SearchScreen extends Component {
   static navigatorStyle = {
@@ -25,14 +41,72 @@ class SearchScreen extends Component {
       navBarCustomView: "democracy.Search.Header",
       navBarComponentAlignment: "fill",
       navBarCustomViewInitialProps: {
-        navigator: this.props.navigator
+        navigator: this.props.navigator,
+        onChangeTerm: this.onChangeTerm
       }
     });
   }
+
+  state = {
+    procedures: [],
+    term: "",
+    loading: false
+  };
+
+  onChangeTerm = async term => {
+    this.setState({ loading: true });
+    const { client: { query } } = this.props;
+    const { data: { searchProcedures: procedures } } = await query({
+      query: searchProcedures,
+      variables: { term },
+      fetchPolicy: "network-only"
+    });
+    this.setState({ procedures, term, loading: false });
+  };
+
+  onItemClick = ({ item }) => () => {
+    const { navigator } = this.props;
+    navigator.push({
+      screen: "democracy.Detail",
+      title: "Abstimmung".toUpperCase(),
+      passProps: { ...item }
+    });
+  };
+
   render() {
+    const { loading } = this.state;
+
+    if (loading) {
+      return (
+        <LoadingWrapper>
+          <ActivityIndicator />
+        </LoadingWrapper>
+      );
+    }
+
     return (
       <Wrapper>
-        <HelloWorld>SUCHE</HelloWorld>
+        <List
+          data={this.state.procedures}
+          renderItem={({ item }) => (
+            <TouchableHighlight
+              onPress={this.onItemClick({ item })}
+              underlayColor="rgba(68, 148, 211, 0.1)"
+            >
+              <ListRow>
+                <VoteListItem {...item} />
+              </ListRow>
+            </TouchableHighlight>
+          )}
+          keyExtractor={({ _id }) => _id}
+          ListEmptyComponent={() => {
+            const { term } = this.state;
+            if (term) {
+              return <Text>Keine Einträge gefunden</Text>;
+            }
+            return null;
+          }}
+        />
       </Wrapper>
     );
   }
@@ -46,4 +120,4 @@ SearchScreen.defaultProps = {
   navigator: undefined
 };
 
-export default SearchScreen;
+export default withApollo(SearchScreen);

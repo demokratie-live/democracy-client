@@ -52,13 +52,14 @@ ListItem.propTypes = {
     PropTypes.string,
     PropTypes.bool
   ]),
-  activityIndex: PropTypes.number.isRequired
+  activityIndex: PropTypes.number
 };
 
 ListItem.defaultProps = {
   tags: "",
   active: false,
-  date: false
+  date: false,
+  activityIndex: 0
 };
 
 export default ListItem;
