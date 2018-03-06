@@ -50,7 +50,13 @@ const SearchBackTextIos = styled.Button.attrs({
 
 class Header extends Component {
   state = {
-    searchContent: ""
+    term: ""
+  };
+
+  onChangeTerm = term => {
+    const { onChangeTerm } = this.props;
+    onChangeTerm(term);
+    this.setState({ term });
   };
 
   clickBack = () => {
@@ -59,15 +65,15 @@ class Header extends Component {
   };
 
   render() {
-    const { searchContent } = this.state;
+    const { term } = this.state;
     return (
       <Wrapper>
         <SearchInputWrapper>
           <SearchInputIcon />
           <SearchInput
             placeholder="Suche"
-            onChangeText={text => this.setState({ searchContent: text })}
-            value={searchContent}
+            onChangeText={this.onChangeTerm}
+            value={term}
           />
         </SearchInputWrapper>
 
@@ -78,7 +84,8 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  navigator: PropTypes.instanceOf(Navigator)
+  navigator: PropTypes.instanceOf(Navigator),
+  onChangeTerm: PropTypes.func.isRequired
 };
 
 Header.defaultProps = {

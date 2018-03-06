@@ -14,6 +14,7 @@ export const resolvers = {
         case "democracy.SideMenu":
         case "democracy.Detail":
         case "democracy.Instructions":
+        case "democracy.Search":
           break;
 
         default:
