@@ -20,7 +20,10 @@ const Wrapper = styled.View`
 
 const List = styled.FlatList``;
 
-const Text = styled.Text``;
+const Text = styled.Text`
+  font-size: 18;
+  color: grey;
+`;
 const ActivityIndicator = styled.ActivityIndicator.attrs({
   size: "large"
 })``;
@@ -28,6 +31,19 @@ const LoadingWrapper = styled.View`
   flex: 1;
   background-color: #ffffff;
   padding-top: 18;
+`;
+
+const NoResultsWrapper = styled.View`
+  flex: 1;
+  padding-top: 18;
+  align-items: center;
+`;
+
+const NoResultsImage = styled.Image.attrs({
+  source: require("../../../assets/images/search_no_results.png"),
+  opacity: 0.2
+})`
+  margin-top: 18;
 `;
 
 class SearchScreen extends Component {
@@ -102,7 +118,12 @@ class SearchScreen extends Component {
           ListEmptyComponent={() => {
             const { term } = this.state;
             if (term) {
-              return <Text>Keine Einträge gefunden</Text>;
+              return (
+                <NoResultsWrapper>
+                  <Text>Leider nichts gefunden.</Text>
+                  <NoResultsImage />
+                </NoResultsWrapper>
+              );
             }
             return null;
           }}
