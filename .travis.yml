@@ -18,7 +18,7 @@ matrix:
     - yarn test
 
         # android test
-  - if: branch =~ ^master OR branch =~ /^pr\..*/
+  - if: type IN (pull_request)
     os: linux
     language: android
     jdk: oraclejdk8
@@ -63,14 +63,14 @@ matrix:
     - fastlane android test
 
   # ios test
-  - if: branch =~ ^master OR branch =~ /^pr\..*/
-    osx_image: xcode9
+  - if: type IN (pull_request)
+    osx_image: xcode9.2
     language: objective-c
 
     cache:
+      bundler: true
       yarn: true
-      directories:
-      - node_modules
+      cocoapods: true
 
     install:
     - nvm install 8
@@ -83,7 +83,7 @@ matrix:
     - cd ios
     - bundle exec fastlane ios test
 
-        # android
+        # android  deploy Alpha
   - if: branch =~ ^master AND NOT type =~ ^pull_request
     os: linux
     language: android
@@ -98,6 +98,7 @@ matrix:
     - echo y | android update sdk --no-ui --filter build-tools-26.0.1,build-tools-26.0.2,android-26,extra-android-m2repository   
     - openssl aes-256-cbc -K $encrypted_b05ee5be06d5_key -iv $encrypted_b05ee5be06d5_iv -in secrets.tar.enc -out secrets.tar -d
     - tar xvf secrets.tar
+    - export $(cat .env.production | grep -v ^# | xargs)
     - gem update --system
     - gem install fastlane --no-rdoc --no-ri --no-document --quiet
 
@@ -127,16 +128,22 @@ matrix:
     script:
     - cd android
     - fastlane android alpha
+    - "curl -H 'Content-Type: application/json'  -X POST -d '{\"content\":\"Neue Android Alpha Version verfügbar!\"}' \"https://discordapp.com/api/webhooks/420188756214153218/5cVrpefAF9vt55thL0XJ33eptuMrtKOU03vS1O4jGa99DPz0AvDIvDPXSYgNrL5xKft7\""
 
-  # ios
+  # ios deploy Testflight
   - if: branch =~ ^master AND NOT type =~ ^pull_request
-    osx_image: xcode9
+    osx_image: xcode9.2
     language: objective-c
+    xcode_project: ios/democracyclient.xcodeproj
+    xcode_scheme: ios/democracyclientTests
 
     cache:
+      bundler: yes
       yarn: true
-      directories:
-      - node_modules
+
+    before_install:
+    - openssl aes-256-cbc -K $encrypted_b05ee5be06d5_key -iv $encrypted_b05ee5be06d5_iv -in secrets.tar.enc -out secrets.tar -d
+    - tar xvf secrets.tar
 
     install:
     - nvm install 8
@@ -148,5 +155,7 @@ matrix:
     - fastlane update_fastlane
     - cd ios
     - DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS="-t DAV" bundle exec fastlane ios beta
+    - "curl -H 'Content-Type: application/json'  -X POST -d '{\"content\":\"Neue iOS TestFlight Version verfügbar!\"}' \"https://discordapp.com/api/webhooks/420188756214153218/5cVrpefAF9vt55thL0XJ33eptuMrtKOU03vS1O4jGa99DPz0AvDIvDPXSYgNrL5xKft7\""
+
 after_script:
 - echo "BUILD FINISHED"

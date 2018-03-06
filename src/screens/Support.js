@@ -6,7 +6,8 @@ import { Navigator } from "react-native-navigation";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import DeviceInfo from "react-native-device-info";
-import Config from "react-native-config";
+
+import Config from "../config";
 
 import onNavigationEvent from "./onNavigationEvent";
 
@@ -66,7 +67,7 @@ class Support extends Component {
 
     const menuIcon = Platform.OS === "ios" ? "ios-menu" : "md-menu";
 
-    Ionicons.getImageSource(menuIcon, 22, "#FFFFFF").then(icon => {
+    Ionicons.getImageSource(menuIcon, 24, "#FFFFFF").then(icon => {
       props.navigator.setButtons({
         leftButtons: [
           {

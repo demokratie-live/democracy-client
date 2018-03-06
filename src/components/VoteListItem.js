@@ -17,6 +17,7 @@ const MainWrapper = styled.View`
 const SideWrapper = styled.View`
   align-items: center;
   justify-content: space-between;
+  min-width: 50;
 `;
 
 const Title = styled.Text.attrs({ numberOfLines: 2 })`
