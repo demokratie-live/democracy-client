@@ -90,7 +90,8 @@ class List extends Component {
     navigator.push({
       screen: "democracy.Detail",
       title: "Abstimmung".toUpperCase(),
-      passProps: { ...item }
+      passProps: { ...item },
+      backButtonTitle: ""
     });
   };
 
