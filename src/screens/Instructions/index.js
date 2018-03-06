@@ -13,20 +13,20 @@ import SET_INSTRUCTIONS_SHOWN from "../../graphql/mutations/setInstructinosShown
 
 const Container = styled.View`
   flex: 1;
-  backgroundColor: #fff;
+  background-color: #fff;
 `;
 
 const Button = styled.TouchableOpacity`
-  backgroundColor: #fcfcfc;
+  background-color: #fcfcfc;
   height: 60;
-  justifyContent: center;
+  justify-content: center;
 `;
 
 const ButtonText = styled.Text`
-  textAlign: center;
+  text-align: center;
   color: #0076ff;
-  fontSize: 20;
-  lineHeight: 24;
+  font-size: 20;
+  line-height: 24;
 `;
 
 const BUTTON_TEXTS = {
@@ -73,51 +73,75 @@ class Introductions extends Component {
           }}
           loop={false}
           onMomentumScrollEnd={this.onMomentumScrollEnd}
-          paginationStyle={{ marginBottom: -19 }}
-          style={{ marginBottom: 24 }}
-          dotStyle={{ width: 5, height: 5, backgroundColor: '#4494d3', opacity: 0.5, marginTop: 12 }}
-          activeDotStyle={{ width: 5, height: 5, backgroundColor: '#4494d3', marginTop: 12 }}
+          paginationStyle={{
+            bottom: 0
+          }}
+          dotStyle={{
+            width: 5,
+            height: 5,
+            backgroundColor: "#4494d3",
+            opacity: 0.5,
+            marginTop: 12
+          }}
+          activeDotStyle={{
+            width: 5,
+            height: 5,
+            backgroundColor: "#4494d3",
+            marginTop: 12
+          }}
         >
-          <Slide ImgHead={require("../../../assets/tutorial/icon.logo.png")}
+          <Slide
+            ImgHead={require("../../../assets/tutorial/icon.logo.png")}
             ImgCenter={require("../../../assets/tutorial/screen.list.png")}
             ImgRight={require("../../../assets/tutorial/screen.detail.transparent.png")}
             TxtHead="Wilkommen in der Beta"
-            TxtSub="Alles über die deutsche Politik in einer App" />
-          <Slide ImgHead={require("../../../assets/tutorial/icon.beobachte.png")}
+            TxtSub="Alles über die deutsche Politik in einer App"
+          />
+          <Slide
+            ImgHead={require("../../../assets/tutorial/icon.beobachte.png")}
             ImgLeft={require("../../../assets/tutorial/screen.list.transparent.png")}
             ImgCenter={require("../../../assets/tutorial/screen.list.png")}
             ImgRight={require("../../../assets/tutorial/screen.detail.transparent.png")}
             TxtHead="Beobachte"
-            TxtSub="…alle vergangenen, aktuellen und zukünftigen Abstimmungen des Bundestages" />
-          <Slide ImgHead={require("../../../assets/tutorial/icon.informiere.png")}
+            TxtSub="…alle vergangenen, aktuellen und zukünftigen Abstimmungen des Bundestages"
+          />
+          <Slide
+            ImgHead={require("../../../assets/tutorial/icon.informiere.png")}
             ImgLeft={require("../../../assets/tutorial/screen.list.transparent.png")}
             ImgCenter={require("../../../assets/tutorial/screen.detail.png")}
             ImgRight={require("../../../assets/tutorial/screen.forum.transparent.png")}
             TxtHead="Informiere Dich"
-            TxtSub="…über die Gesetzesvorlagen entlang der offiziellen Informationen des Bundestages" />
-          <Slide ImgHead={require("../../../assets/tutorial/icon.diskutiere.png")}
+            TxtSub="…über die Gesetzesvorlagen entlang der offiziellen Informationen des Bundestages"
+          />
+          <Slide
+            ImgHead={require("../../../assets/tutorial/icon.diskutiere.png")}
             ImgLeft={require("../../../assets/tutorial/screen.vote.transparent.png")}
             ImgCenter={require("../../../assets/tutorial/screen.forum.png")}
             ImgRight={require("../../../assets/tutorial/screen.vote.png")}
             TxtHead="Diskutiere"
-            TxtSub={`…über die Für’s und Wider’s des Antrags \n und bring weiterführende Informationen ein`} />
-          <Slide ImgHead={require("../../../assets/tutorial/icon.stimme.png")}
+            TxtSub={`…über die Für’s und Wider’s des Antrags \n und bring weiterführende Informationen ein`}
+          />
+          <Slide
+            ImgHead={require("../../../assets/tutorial/icon.stimme.png")}
             ImgLeft={require("../../../assets/tutorial/screen.forum.transparent.png")}
             ImgCenter={require("../../../assets/tutorial/screen.vote.png")}
             ImgRight={require("../../../assets/tutorial/screen.analyse.transparent.png")}
             TxtHead="Stimme"
-            TxtSub="…noch vor der offiziellen Bundestags-entscheidung selbst über den Antrag ab" />
-          <Slide ImgHead={require("../../../assets/tutorial/icon.analysiere.png")}
+            TxtSub="…noch vor der offiziellen Bundestags-entscheidung selbst über den Antrag ab"
+          />
+          <Slide
+            ImgHead={require("../../../assets/tutorial/icon.analysiere.png")}
             ImgLeft={require("../../../assets/tutorial/screen.vote.transparent.png")}
             ImgCenter={require("../../../assets/tutorial/screen.analyse.png")}
             ImgCircle={null}
             TxtHead="Anlaysiere"
-            TxtSub="…das Community-Abstimmungsverhalten und vergleich es mit den Bundestagsresultaten" />
+            TxtSub="…das Community-Abstimmungsverhalten und vergleich es mit den Bundestagsresultaten"
+          />
         </Swiper>
         <Button onPress={this.onClick}>
           <ButtonText>{this.state.buttonText}</ButtonText>
         </Button>
-      </Container >
+      </Container>
     );
   }
 }

@@ -97,8 +97,9 @@ const Slide = ({
     </ContainerImages>
     <LinearGradient
       colors={["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 1)"]}
+      locations={[0, 0.5]}
       style={{
-        height: 15,
+        height: 35,
         width: Dimensions.get("window").width,
         position: "absolute",
         bottom: 0
