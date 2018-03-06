@@ -67,7 +67,7 @@ class Support extends Component {
 
     const menuIcon = Platform.OS === "ios" ? "ios-menu" : "md-menu";
 
-    Ionicons.getImageSource(menuIcon, 22, "#FFFFFF").then(icon => {
+    Ionicons.getImageSource(menuIcon, 24, "#FFFFFF").then(icon => {
       props.navigator.setButtons({
         leftButtons: [
           {
