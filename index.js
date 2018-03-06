@@ -75,7 +75,10 @@ class App {
             navBarHidden: true
           }
         },
-        animationType: "fade"
+        animationType: "fade",
+        appStyle: {
+          orientation: "portrait"
+        }
       });
     }
   };
