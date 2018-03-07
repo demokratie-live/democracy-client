@@ -83,11 +83,12 @@ class Header extends Component {
 
 Header.propTypes = {
   navigator: PropTypes.instanceOf(Navigator),
-  onChangeTerm: PropTypes.func.isRequired
+  onChangeTerm: PropTypes.func
 };
 
 Header.defaultProps = {
-  navigator: undefined
+  navigator: undefined,
+  onChangeTerm: () => {}
 };
 
 export default Header;

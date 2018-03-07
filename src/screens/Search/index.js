@@ -24,9 +24,11 @@ const Text = styled.Text`
   font-size: 18;
   color: grey;
 `;
+
 const ActivityIndicator = styled.ActivityIndicator.attrs({
   size: "large"
 })``;
+
 const LoadingWrapper = styled.View`
   flex: 1;
   background-color: #ffffff;
@@ -70,14 +72,16 @@ class SearchScreen extends Component {
   };
 
   onChangeTerm = async term => {
-    this.setState({ loading: true });
+    this.setState({ loading: true, term });
     const { client: { query } } = this.props;
     const { data: { searchProcedures: procedures } } = await query({
       query: searchProcedures,
       variables: { term },
       fetchPolicy: "network-only"
     });
-    this.setState({ procedures, term, loading: false });
+    if (this.state.term === term) {
+      this.setState({ procedures, loading: false });
+    }
   };
 
   onItemClick = ({ item }) => () => {
