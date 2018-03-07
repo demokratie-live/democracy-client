@@ -74,7 +74,7 @@ class Header extends Component {
 
         <SearchClearButtonAndroid
           visible={term}
-          onPress={() => this.setState({ term: "" })}
+          onPress={() => this.onChangeTerm("")}
         />
       </Wrapper>
     );
