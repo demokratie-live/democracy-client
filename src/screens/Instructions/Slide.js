@@ -41,37 +41,44 @@ const TextSub = styled.Text`
     : "sans-serif-light"};
   font-weight: bold;
   text-align: center;
+  height: 40;
 `;
 
 const ContainerImages = styled.View`
+  flex:0;
   justify-content: center;
-  margin-top: 28;
 `;
 
 const ImageLeft = styled.Image`
   position: absolute;
-  left: -162;
-  top: 29;
+  resize-mode: contain;
+  width: ${Dimensions.get("window").width * 2 / 3};
+  left: -${Dimensions.get("window").width * 1 / 2 - 10};
+  top: ${Dimensions.get("window").height * 1 / 18};
   opacity: 0.4;
 `;
 
 const ImageRight = styled.Image`
   position: absolute;
-  left: -88;
-  top: 29;
+  resize-mode: contain;
+  width: ${Dimensions.get("window").width * 2 / 3};
+  left: -${Dimensions.get("window").width * 1 / 6 + 10};
+  top: ${Dimensions.get("window").height * 1 / 18};
   opacity: 0.4;
 `;
 
 const ImageCenter = styled.Image`
   position: absolute;
-  left: -125;
+  resize-mode: contain;
+  width: ${Dimensions.get("window").width * 2 / 3};
+  left: -${Dimensions.get("window").width * 1 / 3};
   top: 0;
 `;
 
 const ImageCircle = styled.Image`
   position: absolute;
-  left: 97;
-  top: 167;
+  left: ${Dimensions.get("window").width * 1 / 4};
+  top: ${Dimensions.get("window").width * 6 / 13};
 `;
 
 const Slide = ({

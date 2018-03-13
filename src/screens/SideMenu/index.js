@@ -29,7 +29,7 @@ const BackgroundWrapper = styled.View`
 
 const BackgroundImage = styled.Image.attrs({
   source: require("../../../assets/images/stars2.png")
-})`
+}) `
   resize-mode: ${Platform.OS === "ios" ? "repeat" : "stretch"};
   width: 100%;
   height: 100%;
@@ -66,7 +66,7 @@ const SideMenu = ({ data: { currentScreen }, navigator }) => {
       if (screenId === "democracy.Instructions") {
         navigator.showModal({
           screen: screenId,
-          navigatorStyle: { navBarHidden: true }
+          navigatorStyle: { navBarHidden: true, orientation: "portrait" }
         });
       } else {
         navigator.handleDeepLink({ link: screenId, payload: { title } });
