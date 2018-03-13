@@ -93,29 +93,29 @@ class Introductions extends Component {
           <Slide
             ImgHead={require("../../../assets/tutorial/icon.logo.png")}
             ImgCenter={require("../../../assets/tutorial/screen.list.png")}
-            ImgRight={require("../../../assets/tutorial/screen.detail.transparent.png")}
+            ImgRight={require("../../../assets/tutorial/screen.detail.png")}
             TxtHead="Wilkommen in der Beta"
             TxtSub="Alles über die deutsche Politik in einer App"
           />
           <Slide
             ImgHead={require("../../../assets/tutorial/icon.beobachte.png")}
-            ImgLeft={require("../../../assets/tutorial/screen.list.transparent.png")}
+            ImgLeft={require("../../../assets/tutorial/screen.list.png")}
             ImgCenter={require("../../../assets/tutorial/screen.list.png")}
-            ImgRight={require("../../../assets/tutorial/screen.detail.transparent.png")}
+            ImgRight={require("../../../assets/tutorial/screen.detail.png")}
             TxtHead="Beobachte"
             TxtSub="…alle vergangenen, aktuellen und zukünftigen Abstimmungen des Bundestages"
           />
           <Slide
             ImgHead={require("../../../assets/tutorial/icon.informiere.png")}
-            ImgLeft={require("../../../assets/tutorial/screen.list.transparent.png")}
+            ImgLeft={require("../../../assets/tutorial/screen.list.png")}
             ImgCenter={require("../../../assets/tutorial/screen.detail.png")}
-            ImgRight={require("../../../assets/tutorial/screen.forum.transparent.png")}
+            ImgRight={require("../../../assets/tutorial/screen.forum.png")}
             TxtHead="Informiere Dich"
             TxtSub="…über die Gesetzesvorlagen entlang der offiziellen Informationen des Bundestages"
           />
           <Slide
             ImgHead={require("../../../assets/tutorial/icon.diskutiere.png")}
-            ImgLeft={require("../../../assets/tutorial/screen.vote.transparent.png")}
+            ImgLeft={require("../../../assets/tutorial/screen.vote.png")}
             ImgCenter={require("../../../assets/tutorial/screen.forum.png")}
             ImgRight={require("../../../assets/tutorial/screen.vote.png")}
             TxtHead="Diskutiere"
@@ -123,15 +123,15 @@ class Introductions extends Component {
           />
           <Slide
             ImgHead={require("../../../assets/tutorial/icon.stimme.png")}
-            ImgLeft={require("../../../assets/tutorial/screen.forum.transparent.png")}
+            ImgLeft={require("../../../assets/tutorial/screen.forum.png")}
             ImgCenter={require("../../../assets/tutorial/screen.vote.png")}
-            ImgRight={require("../../../assets/tutorial/screen.analyse.transparent.png")}
+            ImgRight={require("../../../assets/tutorial/screen.analyse.png")}
             TxtHead="Stimme"
             TxtSub="…noch vor der offiziellen Bundestags-entscheidung selbst über den Antrag ab"
           />
           <Slide
             ImgHead={require("../../../assets/tutorial/icon.analysiere.png")}
-            ImgLeft={require("../../../assets/tutorial/screen.vote.transparent.png")}
+            ImgLeft={require("../../../assets/tutorial/screen.vote.png")}
             ImgCenter={require("../../../assets/tutorial/screen.analyse.png")}
             ImgCircle={null}
             TxtHead="Anlaysiere"

@@ -52,12 +52,14 @@ const ImageLeft = styled.Image`
   position: absolute;
   left: -162;
   top: 29;
+  opacity: 0.4;
 `;
 
 const ImageRight = styled.Image`
   position: absolute;
   left: -88;
   top: 29;
+  opacity: 0.4;
 `;
 
 const ImageCenter = styled.Image`
@@ -81,32 +83,32 @@ const Slide = ({
   TxtHead,
   TxtSub
 }) => (
-  <Container>
-    <ContainerHead>
-      <Image source={ImgHead} />
-    </ContainerHead>
-    <ContainerText>
-      <TextHead>{TxtHead}</TextHead>
-      <TextSub>{TxtSub}</TextSub>
-    </ContainerText>
-    <ContainerImages>
-      <ImageLeft source={ImgLeft} />
-      <ImageRight source={ImgRight} />
-      <ImageCenter source={ImgCenter} />
-      <ImageCircle source={ImgCircle} />
-    </ContainerImages>
-    <LinearGradient
-      colors={["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 1)"]}
-      locations={[0, 0.5]}
-      style={{
-        height: 35,
-        width: Dimensions.get("window").width,
-        position: "absolute",
-        bottom: 0
-      }}
-    />
-  </Container>
-);
+    <Container>
+      <ContainerHead>
+        <Image source={ImgHead} />
+      </ContainerHead>
+      <ContainerText>
+        <TextHead>{TxtHead}</TextHead>
+        <TextSub>{TxtSub}</TextSub>
+      </ContainerText>
+      <ContainerImages>
+        <ImageLeft source={ImgLeft} />
+        <ImageRight source={ImgRight} />
+        <ImageCenter source={ImgCenter} />
+        <ImageCircle source={ImgCircle} />
+      </ContainerImages>
+      <LinearGradient
+        colors={["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 1)"]}
+        locations={[0, 0.5]}
+        style={{
+          height: 35,
+          width: Dimensions.get("window").width,
+          position: "absolute",
+          bottom: 0
+        }}
+      />
+    </Container>
+  );
 
 Slide.propTypes = {
   ImgHead: PropTypes.number.isRequired,
