@@ -47,6 +47,12 @@ const TextSub = styled.Text`
 const ContainerImages = styled.View`
   flex:0;
   justify-content: center;
+  margin-top: ${Platform.OS === "ios" ? 16 : 0}
+`;
+
+const ContainerCenterImage = styled.View`
+  flex:0;
+  justify-content: center;
 `;
 
 const ImageLeft = styled.Image`
@@ -64,6 +70,7 @@ const ImageRight = styled.Image`
   width: ${Dimensions.get("window").width * 2 / 3};
   left: -${Dimensions.get("window").width * 1 / 6 + 10};
   top: ${Dimensions.get("window").height * 1 / 18};
+  background: #fff;
   opacity: 0.4;
 `;
 
@@ -78,7 +85,7 @@ const ImageCenter = styled.Image`
 const ImageCircle = styled.Image`
   position: absolute;
   left: ${Dimensions.get("window").width * 1 / 4};
-  top: ${Dimensions.get("window").width * 6 / 13};
+  top: ${Dimensions.get("window").height * 6 / 23};
 `;
 
 const Slide = ({
@@ -101,8 +108,10 @@ const Slide = ({
       <ContainerImages>
         <ImageLeft source={ImgLeft} />
         <ImageRight source={ImgRight} />
-        <ImageCenter source={ImgCenter} />
-        <ImageCircle source={ImgCircle} />
+        <ContainerCenterImage>
+          <ImageCenter source={ImgCenter} />
+          <ImageCircle source={ImgCircle} />
+        </ContainerCenterImage>
       </ContainerImages>
       <LinearGradient
         colors={["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 1)"]}
