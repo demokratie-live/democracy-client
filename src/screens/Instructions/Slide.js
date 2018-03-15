@@ -9,6 +9,7 @@ const Container = styled.View`
   align-items: center;
   background: #fff;
   padding-top: ${Platform.OS === "ios" ? 21 : 5};
+  padding-horizontal: 18;
 `;
 
 const ContainerHead = styled.View`
@@ -45,47 +46,39 @@ const TextSub = styled.Text`
 `;
 
 const ContainerImages = styled.View`
-  flex:0;
+  flex: 1;
+  width: 100%;
+  max-width: 600;
   justify-content: center;
-  margin-top: ${Platform.OS === "ios" ? 16 : 0}
+  align-items: center;
 `;
 
 const ContainerCenterImage = styled.View`
-  flex:0;
-  justify-content: center;
+  position: absolute;
+`;
+
+const ImageTranspContainer = styled.View`
+  position: absolute;
+  background-color: #fff;
+  border-radius: 40;
 `;
 
 const ImageLeft = styled.Image`
-  position: absolute;
-  resize-mode: contain;
-  width: ${Dimensions.get("window").width * 2 / 3};
-  left: -${Dimensions.get("window").width * 1 / 2 - 10};
-  top: ${Dimensions.get("window").height * 1 / 18};
   opacity: 0.4;
+  margin-top: 50;
 `;
 
 const ImageRight = styled.Image`
-  position: absolute;
-  resize-mode: contain;
-  width: ${Dimensions.get("window").width * 2 / 3};
-  left: -${Dimensions.get("window").width * 1 / 6 + 10};
-  top: ${Dimensions.get("window").height * 1 / 18};
-  background: #fff;
   opacity: 0.4;
+  margin-top: 50;
 `;
 
-const ImageCenter = styled.Image`
-  position: absolute;
-  resize-mode: contain;
-  width: ${Dimensions.get("window").width * 2 / 3};
-  left: -${Dimensions.get("window").width * 1 / 3};
-  top: 0;
-`;
+const ImageCenter = styled.Image``;
 
 const ImageCircle = styled.Image`
   position: absolute;
-  left: ${Dimensions.get("window").width * 1 / 4};
-  top: ${Dimensions.get("window").height * 6 / 23};
+  right: -20;
+  top: 165;
 `;
 
 const Slide = ({
@@ -97,34 +90,38 @@ const Slide = ({
   TxtHead,
   TxtSub
 }) => (
-    <Container>
-      <ContainerHead>
-        <Image source={ImgHead} />
-      </ContainerHead>
-      <ContainerText>
-        <TextHead>{TxtHead}</TextHead>
-        <TextSub>{TxtSub}</TextSub>
-      </ContainerText>
-      <ContainerImages>
+  <Container>
+    <ContainerHead>
+      <Image source={ImgHead} />
+    </ContainerHead>
+    <ContainerText>
+      <TextHead>{TxtHead}</TextHead>
+      <TextSub>{TxtSub}</TextSub>
+    </ContainerText>
+    <ContainerImages>
+      <ImageTranspContainer style={{ alignSelf: "flex-start" }}>
         <ImageLeft source={ImgLeft} />
+      </ImageTranspContainer>
+      <ImageTranspContainer style={{ alignSelf: "flex-end" }}>
         <ImageRight source={ImgRight} />
-        <ContainerCenterImage>
-          <ImageCenter source={ImgCenter} />
-          <ImageCircle source={ImgCircle} />
-        </ContainerCenterImage>
-      </ContainerImages>
-      <LinearGradient
-        colors={["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 1)"]}
-        locations={[0, 0.5]}
-        style={{
-          height: 35,
-          width: Dimensions.get("window").width,
-          position: "absolute",
-          bottom: 0
-        }}
-      />
-    </Container>
-  );
+      </ImageTranspContainer>
+      <ContainerCenterImage>
+        <ImageCenter source={ImgCenter} />
+        <ImageCircle source={ImgCircle} />
+      </ContainerCenterImage>
+    </ContainerImages>
+    <LinearGradient
+      colors={["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 1)"]}
+      locations={[0, 0.5]}
+      style={{
+        height: 35,
+        width: Dimensions.get("window").width,
+        position: "absolute",
+        bottom: 0
+      }}
+    />
+  </Container>
+);
 
 Slide.propTypes = {
   ImgHead: PropTypes.number.isRequired,
