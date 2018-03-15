@@ -19,7 +19,6 @@ matrix:
     - yarn install
     script:
     - yarn test
-    - "curl -H 'Content-Type: application/json'  -X POST -d '{\"content\":\"Test successfull!\"}' ${DISCORD_WEBHOOK}"
 
   # android test
   - if: type IN (pull_request)
