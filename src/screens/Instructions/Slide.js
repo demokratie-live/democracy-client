@@ -3,22 +3,27 @@ import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import { Dimensions, Platform, Image } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
+import DeviceInfo from "react-native-device-info";
+
 
 const Container = styled.View`
   flex: 1;
   align-items: center;
   background: #fff;
-  padding-top: ${Platform.OS === "ios" ? 21 : 5};
+  padding-top: ${() => {
+    if (DeviceInfo.getModel() === "iPhone X") {
+      return 36;
+    }
+    return Platform.OS === "ios" ? 21 : 5;
+  }};
   padding-horizontal: 18;
 `;
 
-const ContainerHead = styled.View`
-  height: 85;
-  justify-content: center;
-`;
+const ContainerHead = styled.View``;
 
 const ContainerText = styled.View`
   align-items: center;
+  z-index: 100;
 `;
 
 const TextHead = styled.Text`
@@ -42,7 +47,6 @@ const TextSub = styled.Text`
     : "sans-serif-light"};
   font-weight: bold;
   text-align: center;
-  height: 40;
 `;
 
 const ContainerImages = styled.View`
@@ -51,6 +55,7 @@ const ContainerImages = styled.View`
   max-width: 600;
   justify-content: center;
   align-items: center;
+  min-height: 518;
 `;
 
 const ContainerCenterImage = styled.View`
