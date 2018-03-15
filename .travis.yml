@@ -1,3 +1,6 @@
+env:
+  global:
+    secure: "n6fpr7pt7ZJce03YQ28aoLUMiGCs3+5ruOyd27IOj1WLnKQxBg+Bdr6Kq+kANxLwGP7xPMR9gUMjCvhmXYXFgK+qTY8LC2ZV3XBOTHO6xqEnzDQUI/i2kfT/4OR42Cnctu65p9IcA1N8kqEBd9Z9hSjqB7fMr94R5bz+A1zu50hjgHD3ro/4ov5EjF9jF5DCtSqfk0uqBBvKuMpsaMeKY6YXhLhhhmcWZmQT+uXBeloH5oU0zFIrDWbgiFygxCW8+rcoW9jfMiRDU8FI6qXj6RVHIHTiqv0XtEDEUh4TFpj3MB+2NVeUqL2BcOS7R+eLlWus04wYeuBLCr6BzdHNDLamno4iDobR5gjIpZcUGQcDeMYSDl9XKvZsWVwgfd8EqshO6L8f0JXoOZPdqeGjrTpePjeGkWHabNqgBeL+lKy8xFdoxPUhZzy6aFAXqJaxow/wXPuxY9QdJwNXsVysTUvR/pn5Ngh/q9FIxM3yMPCOX+/d4JfM4R8j6Uw4tnZK4XIlo2l8dYt4pGvMjw7ojJVGz0Kx1PNfwsimaZi9MkKBGXLE8k0+GxTUC/sa0AL5kJhLt7Xl67qwCwdRnOj9k85w8a6y4/Pf5xjA/QQ2WD3RaOj9Y1NqVG0phB+m0ZLflIXqAFEQ+kEeW6WmBYgkFaff9L3llTP2RVginOi0e8M="
 matrix:
   include:
   # test
@@ -123,7 +126,7 @@ matrix:
     script:
     - cd android
     - fastlane android alpha
-    - "curl -H 'Content-Type: application/json'  -X POST -d '{\"content\":\"Neue Android Alpha Version verfügbar!\"}' \"https://discordapp.com/api/webhooks/420188756214153218/5cVrpefAF9vt55thL0XJ33eptuMrtKOU03vS1O4jGa99DPz0AvDIvDPXSYgNrL5xKft7\""
+    - "curl -H 'Content-Type: application/json'  -X POST -d '{\"content\":\"Neue Android Alpha Version verfügbar!\"}' ${DISCORD_WEBHOOK}"
 
   # ios deploy Testflight
   - if: branch =~ ^master AND NOT type =~ ^pull_request
@@ -150,7 +153,7 @@ matrix:
     - fastlane update_fastlane
     - cd ios
     - DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS="-t DAV" bundle exec fastlane ios beta
-    - "curl -H 'Content-Type: application/json'  -X POST -d '{\"content\":\"Neue iOS TestFlight Version verfügbar!\"}' \"https://discordapp.com/api/webhooks/420188756214153218/5cVrpefAF9vt55thL0XJ33eptuMrtKOU03vS1O4jGa99DPz0AvDIvDPXSYgNrL5xKft7\""
+    - "curl -H 'Content-Type: application/json'  -X POST -d '{\"content\":\"Neue iOS TestFlight Version verfügbar!\"}' ${DISCORD_WEBHOOK}"
 
 after_script:
 - echo "BUILD FINISHED"
