@@ -89,8 +89,6 @@ matrix:
 
     cache:
       yarn: true
-      directories:
-      - node_modules
 
     before_install:
     - echo y | android update sdk --no-ui --filter build-tools-26.0.1,build-tools-26.0.2,android-26,extra-android-m2repository   
