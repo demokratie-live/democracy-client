@@ -13,12 +13,24 @@ import SET_INSTRUCTIONS_SHOWN from "../../graphql/mutations/setInstructinosShown
 
 const Container = styled.View`
   flex: 1;
+  background-color: #fff;
 `;
 
-const Button = styled.Button``;
+const Button = styled.TouchableOpacity`
+  background-color: #fcfcfc;
+  height: 60;
+  justify-content: center;
+`;
+
+const ButtonText = styled.Text`
+  text-align: center;
+  color: #0076ff;
+  font-size: 20;
+  line-height: 24;
+`;
 
 const BUTTON_TEXTS = {
-  next: "Weiter >",
+  next: "Weiter",
   finish: "Los gehts!"
 };
 
@@ -61,16 +73,74 @@ class Introductions extends Component {
           }}
           loop={false}
           onMomentumScrollEnd={this.onMomentumScrollEnd}
+          paginationStyle={{
+            bottom: 0
+          }}
+          dotStyle={{
+            width: 5,
+            height: 5,
+            backgroundColor: "#4494d3",
+            opacity: 0.5,
+            marginTop: 12
+          }}
+          activeDotStyle={{
+            width: 5,
+            height: 5,
+            backgroundColor: "#4494d3",
+            marginTop: 12
+          }}
         >
-          <Slide background="#9DD6EB" text="1" />
-          <Slide background="#97CAE5" text="2" />
-          <Slide background="#92BBD9" text="3" />
+          <Slide
+            ImgHead={require("../../../assets/tutorial/icon.logo.png")}
+            ImgCenter={require("../../../assets/tutorial/screen.list.png")}
+            ImgRight={require("../../../assets/tutorial/screen.detail.png")}
+            TxtHead="Wilkommen in der Beta"
+            TxtSub="Alles über die deutsche Politik in einer App"
+          />
+          <Slide
+            ImgHead={require("../../../assets/tutorial/icon.beobachte.png")}
+            ImgLeft={require("../../../assets/tutorial/screen.list.png")}
+            ImgCenter={require("../../../assets/tutorial/screen.list.png")}
+            ImgRight={require("../../../assets/tutorial/screen.detail.png")}
+            TxtHead="Beobachte"
+            TxtSub="…alle vergangenen, aktuellen und zukünftigen Abstimmungen des Bundestages"
+          />
+          <Slide
+            ImgHead={require("../../../assets/tutorial/icon.informiere.png")}
+            ImgLeft={require("../../../assets/tutorial/screen.list.png")}
+            ImgCenter={require("../../../assets/tutorial/screen.detail.png")}
+            ImgRight={require("../../../assets/tutorial/screen.forum.png")}
+            TxtHead="Informiere Dich"
+            TxtSub={`…über die Gesetzesvorlagen entlang der\n offiziellen Informationen des Bundestages`}
+          />
+          <Slide
+            ImgHead={require("../../../assets/tutorial/icon.diskutiere.png")}
+            ImgLeft={require("../../../assets/tutorial/screen.vote.png")}
+            ImgCenter={require("../../../assets/tutorial/screen.forum.png")}
+            ImgRight={require("../../../assets/tutorial/screen.vote.png")}
+            TxtHead="Diskutiere"
+            TxtSub={`…über die Für’s und Wider’s des Antrags \n und bring weiterführende Informationen ein`}
+          />
+          <Slide
+            ImgHead={require("../../../assets/tutorial/icon.stimme.png")}
+            ImgLeft={require("../../../assets/tutorial/screen.forum.png")}
+            ImgCenter={require("../../../assets/tutorial/screen.vote.png")}
+            ImgRight={require("../../../assets/tutorial/screen.analyse.png")}
+            TxtHead="Stimme"
+            TxtSub={`…noch vor der offiziellen Bundestags-\nentscheidung selbst über den Antrag ab`}
+          />
+          <Slide
+            ImgHead={require("../../../assets/tutorial/icon.analysiere.png")}
+            ImgLeft={require("../../../assets/tutorial/screen.vote.png")}
+            ImgCenter={require("../../../assets/tutorial/screen.analyse.png")}
+            ImgCircle={null}
+            TxtHead="Anlaysiere"
+            TxtSub={`…das Community-Abstimmungsverhalten und\nvergleich es mit den Bundestagsresultaten`}
+          />
         </Swiper>
-        <Button
-          onPress={this.onClick}
-          title={this.state.buttonText}
-          accessibilityLabel={this.state.buttonText}
-        />
+        <Button onPress={this.onClick}>
+          <ButtonText>{this.state.buttonText}</ButtonText>
+        </Button>
       </Container>
     );
   }

@@ -6060,6 +6060,12 @@ react-native-device-info@^0.17.1:
   version "0.17.1"
   resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-0.17.1.tgz#a34835d33d4d26605ff6d311e50b667d8fc9421d"
 
+react-native-linear-gradient@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.4.0.tgz#51d8ea12bb72a59bede9edc87b694b16b64cf435"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-navigation@^1.1.389:
   version "1.1.389"
   resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-1.1.389.tgz#73585c72ac3eeaff76360e19c1bb3cf77b8c1b91"
