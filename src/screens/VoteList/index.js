@@ -9,6 +9,7 @@ import { Navigation, Navigator } from "react-native-navigation";
 import Config from "react-native-config";
 import RSAKey from "react-native-rsa";
 import DeviceInfo from "react-native-device-info";
+import { sha256 } from "react-native-sha256";
 
 import List from "./List";
 import Header from "./Header";
@@ -89,11 +90,13 @@ class VoteList extends Component {
     });
   };
 
-  signIn = () => {
+  signIn = async () => {
     const rsa = new RSAKey();
     rsa.setPublicString(Config.PUBLIC_KEY); // return json encoded string
+    const uniqueID = await sha256(DeviceInfo.getUniqueID());
     const encrypted = rsa.encrypt(DeviceInfo.getUniqueID());
     console.log("encrypted", encrypted);
+    console.log("uniqueID", uniqueID);
 
     this.props.signUp({
       variables: {

@@ -32,7 +32,8 @@ public class MainApplication extends NavigationApplication {
             new RNDeviceInfo(),
             new ReactNativeConfigPackage(),
             new VectorIconsPackage(),
-            new LinearGradientPackage());
+            new LinearGradientPackage(),
+            new Sha256Package());
     }
 
     @Override
@@ -66,7 +67,8 @@ public class MainApplication extends NavigationApplication {
             new RNDeviceInfo(),
             new ReactNativeConfigPackage(),
             new VectorIconsPackage(),
-            new LinearGradientPackage()
+            new LinearGradientPackage(),
+            new Sha256Package()
     );
   }
 
