@@ -1,7 +1,12 @@
 // @flow
 
 import React, { Component } from "react";
-import { Platform, SegmentedControlIOS, Dimensions } from "react-native";
+import {
+  Platform,
+  SegmentedControlIOS,
+  Dimensions,
+  AsyncStorage
+} from "react-native";
 import { graphql, compose } from "react-apollo";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
@@ -56,6 +61,13 @@ class VoteList extends Component {
     selectedIndex: 0
   };
 
+  componentDidMount() {
+    const { me, meLoading } = this.props;
+    if (!me && !meLoading) {
+      this.signIn();
+    }
+  }
+
   onScrollEndDrag = e => {
     if (this.width === Dimensions.get("window").width) {
       const { contentOffset } = e.nativeEvent;
@@ -94,15 +106,17 @@ class VoteList extends Component {
     const rsa = new RSAKey();
     rsa.setPublicString(Config.PUBLIC_KEY); // return json encoded string
     const uniqueID = await sha256(DeviceInfo.getUniqueID());
-    const encrypted = rsa.encrypt(DeviceInfo.getUniqueID());
-    console.log("encrypted", encrypted);
-    console.log("uniqueID", uniqueID);
+    const deviceHashEncrypted = rsa.encrypt(uniqueID);
 
-    this.props.signUp({
-      variables: {
-        deviceHash: "XYZ"
-      }
-    });
+    await this.props
+      .signUp({
+        variables: {
+          deviceHashEncrypted
+        }
+      })
+      .then(({ data: { signUp: { token } } }) => {
+        AsyncStorage.setItem("authorization", token);
+      });
   };
 
   renderSegmentControls = () => {
@@ -165,11 +179,6 @@ class VoteList extends Component {
   };
 
   render() {
-    const { me } = this.props;
-    if (!me) {
-      this.signIn();
-    }
-    console.log(this.props);
     return (
       <Screen>
         {this.renderSegmentControls()}
@@ -192,6 +201,7 @@ export default compose(
     name: "signUp"
   }),
   graphql(ME, {
-    props: ({ data: { me } }) => ({ me })
+    props: ({ data: { me, loading } }) => ({ me, meLoading: loading }),
+    options: { fetchPolicy: "network-only" }
   })
 )(VoteList);

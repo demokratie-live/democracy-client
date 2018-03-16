@@ -6,6 +6,7 @@ import { HttpLink } from "apollo-link-http";
 import { withClientState } from "apollo-link-state";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { CachePersistor } from "apollo-cache-persist";
+import { setContext } from "apollo-link-context";
 // import { onError } from "apollo-link-error";
 
 import Config from "../config";
@@ -18,6 +19,18 @@ const persistor = new CachePersistor({
   cache,
   storage: AsyncStorage,
   debug: false
+});
+
+const authLink = setContext(async (_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = await AsyncStorage.getItem("authorization");
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : null
+    }
+  };
 });
 
 const stateLink = withClientState({ resolvers, cache, defaults });
@@ -51,6 +64,7 @@ const client = new ApolloClient({
   link: ApolloLink.from([
     // linkError,
     stateLink,
+    authLink,
     new HttpLink({ uri: Config.GRAPHQL_URL })
   ])
   // defaultOptions
