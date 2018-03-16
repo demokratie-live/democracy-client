@@ -2,15 +2,20 @@
 
 import React, { Component } from "react";
 import { Platform, SegmentedControlIOS, Dimensions } from "react-native";
-import { graphql } from "react-apollo";
+import { graphql, compose } from "react-apollo";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import { Navigation, Navigator } from "react-native-navigation";
+import Config from "react-native-config";
+import RSAKey from "react-native-rsa";
+import DeviceInfo from "react-native-device-info";
 
 import List from "./List";
 import Header from "./Header";
 
 import SET_INSTRUCTIONS_SHOWN from "../../graphql/mutations/setInstructinosShown";
+import ME from "../../graphql/queries/me";
+import SIGN_UP from "../../graphql/mutations/signUp";
 
 Navigation.registerComponent("democracy.VoteList.Header", () => Header);
 
@@ -84,6 +89,19 @@ class VoteList extends Component {
     });
   };
 
+  signIn = () => {
+    const rsa = new RSAKey();
+    rsa.setPublicString(Config.PUBLIC_KEY); // return json encoded string
+    const encrypted = rsa.encrypt(DeviceInfo.getUniqueID());
+    console.log("encrypted", encrypted);
+
+    this.props.signUp({
+      variables: {
+        deviceHash: "XYZ"
+      }
+    });
+  };
+
   renderSegmentControls = () => {
     if (Platform.OS === "ios") {
       return (
@@ -144,6 +162,11 @@ class VoteList extends Component {
   };
 
   render() {
+    const { me } = this.props;
+    if (!me) {
+      this.signIn();
+    }
+    console.log(this.props);
     return (
       <Screen>
         {this.renderSegmentControls()}
@@ -158,6 +181,14 @@ VoteList.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired
 };
 
-export default graphql(SET_INSTRUCTIONS_SHOWN, {
-  name: "setInstructionsShown"
-})(VoteList);
+export default compose(
+  graphql(SET_INSTRUCTIONS_SHOWN, {
+    name: "setInstructionsShown"
+  }),
+  graphql(SIGN_UP, {
+    name: "signUp"
+  }),
+  graphql(ME, {
+    props: ({ data: { me } }) => ({ me })
+  })
+)(VoteList);

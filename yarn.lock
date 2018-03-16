@@ -6072,6 +6072,10 @@ react-native-navigation@^1.1.389:
   dependencies:
     lodash "4.x.x"
 
+react-native-rsa@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-rsa/-/react-native-rsa-0.0.3.tgz#c3b5b85278e8a1a3ef22b4206a7d6aa04a26d99b"
+
 react-native-swiper@^1.5.13:
   version "1.5.13"
   resolved "https://registry.yarnpkg.com/react-native-swiper/-/react-native-swiper-1.5.13.tgz#fa695cd4ab77b9a9df2d2bfee38ea7274dd07a2e"
