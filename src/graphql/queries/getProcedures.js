@@ -10,6 +10,7 @@ export default gql`
       abstract
       voteDate
       submissionDate
+      activityIndex
     }
   }
 `;

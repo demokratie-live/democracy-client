@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
 
-const Wrapper = styled.View`
+const Wrapper = styled.TouchableOpacity`
   align-items: center;
 `;
 
@@ -17,8 +17,8 @@ const Counter = styled.Text`
 const iconActive = require("../../assets/icons/disclosureIndicator-active.png");
 const iconInactive = require("../../assets/icons/disclosureIndicator.png");
 
-const ActivityIndex = ({ count, active }) => (
-  <Wrapper>
+const ActivityIndex = ({ count, active, onPress }) => (
+  <Wrapper onPress={onPress}>
     <Icon source={active ? iconActive : iconInactive} />
     <Counter>{count}</Counter>
   </Wrapper>

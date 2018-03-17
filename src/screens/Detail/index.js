@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
-import { graphql } from "react-apollo";
-import gql from "graphql-tag";
+import { graphql, compose } from "react-apollo";
 import { RefreshControl } from "react-native";
+
+import increaseActivity from "../../graphql/mutations/increaseActivity";
+import getProcedure from "../../graphql/queries/getProcedure";
 
 import ActivityIndex from "../../components/ActivityIndex";
 import DateTime from "../../components/Date";
@@ -69,7 +71,11 @@ class Detail extends Component {
   };
 
   render() {
-    const { activityIndex, listType, procedureId } = this.props;
+    const {
+      listType,
+      procedureId,
+      increaseActivity
+    } = this.props;
     const { data: { loading, networkStatus, refetch } } = this.props;
     if (loading && !this.props.data.procedure) {
       return null;
@@ -82,8 +88,10 @@ class Detail extends Component {
       voteDate: date,
       subjectGroups,
       submissionDate,
-      importantDocuments
+      importantDocuments,
+      activityIndex
     } = this.props.data.procedure;
+    console.log("props", this.props);
     return (
       <Wrapper
         refreshControl={
@@ -103,7 +111,16 @@ class Detail extends Component {
             </IntroButtons>
           </IntroMain>
           <IntroSide>
-            <ActivityIndex count={activityIndex} active={active} />
+            <ActivityIndex
+              count={activityIndex}
+              active={active}
+              onPress={() =>
+                increaseActivity({
+                  procedureId,
+                  activityIndex
+                })
+              }
+            />
             {date && <DateTime date={date} />}
           </IntroSide>
         </Intro>
@@ -150,29 +167,57 @@ Detail.defaultProps = {
   listType: "search"
 };
 
-export default graphql(
-  gql`
-    query procedure($id: ID!) {
-      procedure(id: $id) {
-        title
-        tags
-        abstract
-        voteDate
-        subjectGroups
-        submissionDate
-        importantDocuments {
-          editor
-          type
-          url
-          number
-        }
-      }
-    }
-  `,
-  {
+export default compose(
+  graphql(getProcedure, {
     options: ({ procedureId }) => ({
       variables: { id: procedureId },
       fetchPolicy: "cache-and-network"
-    })
-  }
+    }),
+    props: ({ data }) => {
+      console.log("data", data);
+      return { data };
+    }
+  }),
+  graphql(increaseActivity, {
+    name: "increaseActivity",
+    // props: ({ mutate }) => ({
+    //   increaseActivity({ procedureId, activityIndex }) {
+    //     console.log("{ procedureId, activityIndex }", {
+    //       procedureId,
+    //       activityIndex
+    //     });
+    //     return mutate({
+    //       variables: { procedureId },
+    //       optimisticResponse: {
+    //         __typename: "Mutation",
+    //         increaseActivity: {
+    //           procedureId,
+    //           __typename: "Procedure",
+    //           activityIndex: 9
+    //         }
+    //       }
+    //     });
+    //   }
+    // }),
+    options: ({ procedureId }) => {
+      console.log(procedureId);
+      return {
+        update: (proxy, { data: proxyData }, ownProps) => {
+          console.log("proxy", proxy, proxyData, ownProps);
+          const data = proxy.readQuery({
+            query: getProcedure,
+            variables: { id: procedureId }
+          });
+          console.log("data", data);
+          data.procedure.activityIndex += 1;
+          console.log("data", data);
+          proxy.writeQuery({
+            query: getProcedure,
+            variables: { id: procedureId },
+            data
+          });
+        }
+      };
+    }
+  })
 )(Detail);

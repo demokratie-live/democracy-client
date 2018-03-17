@@ -3,7 +3,7 @@ import {
   Navigation,
   ScreenVisibilityListener as RNNScreenVisibilityListener
 } from "react-native-navigation";
-// import Reactotron from "reactotron-react-native";
+import Reactotron from "reactotron-react-native";
 
 import client, { persistor } from "./src/graphql/client";
 import registerScreens from "./src/screens";
@@ -13,9 +13,9 @@ import setCurrentScreen from "./src/graphql/mutations/setCurrentScreen";
 
 import topTabs from "./src/screens/VoteList/topTabs";
 
-// Reactotron.configure() // controls connection & communication settings
-//   .useReactNative() // add all built-in react native plugins
-//   .connect(); // let's connect!
+Reactotron.configure() // controls connection & communication settings
+  .useReactNative() // add all built-in react native plugins
+  .connect(); // let's connect!
 
 registerScreens();
 

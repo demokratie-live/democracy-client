@@ -61,7 +61,7 @@ class VoteList extends Component {
     selectedIndex: 0
   };
 
-  componentDidMount() {
+  componentDidUpdate() {
     const { me, meLoading } = this.props;
     if (!me && !meLoading) {
       this.signIn();

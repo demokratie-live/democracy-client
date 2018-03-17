@@ -13,7 +13,19 @@ import Config from "../config";
 
 import { defaults, resolvers } from "./resolvers";
 
-const cache = new InMemoryCache();
+const cache = new InMemoryCache({
+  dataIdFromObject: o => {
+    switch (o.__typename) {
+      case "Procedure":
+        return o.procedureId;
+        break;
+
+      default:
+        return o._id;
+        break;
+    }
+  }
+});
 
 const persistor = new CachePersistor({
   cache,
