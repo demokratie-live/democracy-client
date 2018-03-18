@@ -4,11 +4,7 @@ import PropTypes from "prop-types";
 import { graphql, compose } from "react-apollo";
 import { RefreshControl } from "react-native";
 
-import { defaultDataIdFromObject } from "apollo-cache-inmemory";
-
-import increaseActivity from "../../graphql/mutations/increaseActivity";
 import getProcedure from "../../graphql/queries/getProcedure";
-import getProcedures from "../../graphql/queries/getProcedures";
 
 import ActivityIndex from "../../components/ActivityIndex";
 import DateTime from "../../components/Date";
@@ -74,7 +70,7 @@ class Detail extends Component {
   };
 
   render() {
-    const { listType, procedureId, increaseActivity } = this.props;
+    const { listType, procedureId } = this.props;
     const { data: { loading, networkStatus, refetch } } = this.props;
     if (loading && !this.props.data.procedure) {
       return null;
@@ -87,8 +83,7 @@ class Detail extends Component {
       voteDate: date,
       subjectGroups,
       submissionDate,
-      importantDocuments,
-      activityIndex
+      importantDocuments
     } = this.props.data.procedure;
     return (
       <Wrapper
@@ -110,13 +105,9 @@ class Detail extends Component {
           </IntroMain>
           <IntroSide>
             <ActivityIndex
-              count={activityIndex}
+              procedureId={procedureId}
               active={active}
-              onPress={() => {
-                increaseActivity({
-                  procedureId
-                });
-              }}
+              touchable
             />
             {date && <DateTime date={date} />}
           </IntroSide>
@@ -148,7 +139,6 @@ class Detail extends Component {
 
 Detail.propTypes = {
   title: PropTypes.string.isRequired,
-  activityIndex: PropTypes.number,
   active: PropTypes.bool,
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   abstract: PropTypes.string,
@@ -159,7 +149,6 @@ Detail.propTypes = {
 
 Detail.defaultProps = {
   abstract: "",
-  activityIndex: 0,
   active: false,
   listType: "search"
 };
@@ -171,41 +160,5 @@ export default compose(
       fetchPolicy: "cache-and-network"
     }),
     props: ({ data }) => ({ data })
-  }),
-  graphql(increaseActivity, {
-    props({ ownProps: { data }, mutate }) {
-      return {
-        increaseActivity: ({ procedureId }) => {
-          const { activityIndex: prevActivityIndex } = data.procedure;
-          return mutate({
-            variables: { procedureId },
-            optimisticResponse: {
-              __typename: "Mutation",
-              increaseActivity: {
-                id: procedureId,
-                __typename: "Procedure",
-                activityIndex: prevActivityIndex + 1
-              }
-            },
-            update: (
-              proxy,
-              { data: { increaseActivity: { activityIndex } } }
-            ) => {
-              // Update detail ActivityIndex
-              const detailData = proxy.readQuery({
-                query: getProcedure,
-                variables: { id: procedureId }
-              });
-              detailData.procedure.activityIndex = activityIndex;
-              proxy.writeQuery({
-                query: getProcedure,
-                variables: { id: procedureId },
-                data: detailData
-              });
-            }
-          });
-        }
-      };
-    }
   })
 )(Detail);

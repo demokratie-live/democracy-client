@@ -15,6 +15,7 @@ import Config from "react-native-config";
 import RSAKey from "react-native-rsa";
 import DeviceInfo from "react-native-device-info";
 import { sha256 } from "react-native-sha256";
+import { propType } from "graphql-anywhere";
 
 import List from "./List";
 import Header from "./Header";
@@ -190,7 +191,14 @@ class VoteList extends Component {
 
 VoteList.propTypes = {
   setInstructionsShown: PropTypes.func.isRequired,
-  navigator: PropTypes.instanceOf(Navigator).isRequired
+  navigator: PropTypes.instanceOf(Navigator).isRequired,
+  meLoading: PropTypes.bool.isRequired,
+  signUp: PropTypes.func.isRequired,
+  me: PropTypes.oneOf(propType(ME), PropTypes.bool)
+};
+
+VoteList.defaultProps = {
+  me: false
 };
 
 export default compose(
