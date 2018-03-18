@@ -26,7 +26,8 @@ const ActivityIndex = ({ count, active, onPress }) => (
 
 ActivityIndex.propTypes = {
   count: PropTypes.number,
-  active: PropTypes.bool
+  active: PropTypes.bool,
+  procedureId: PropTypes.string.isRequired
 };
 
 ActivityIndex.defaultProps = {

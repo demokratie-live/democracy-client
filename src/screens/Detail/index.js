@@ -4,8 +4,11 @@ import PropTypes from "prop-types";
 import { graphql, compose } from "react-apollo";
 import { RefreshControl } from "react-native";
 
+import { defaultDataIdFromObject } from "apollo-cache-inmemory";
+
 import increaseActivity from "../../graphql/mutations/increaseActivity";
 import getProcedure from "../../graphql/queries/getProcedure";
+import getProcedures from "../../graphql/queries/getProcedures";
 
 import ActivityIndex from "../../components/ActivityIndex";
 import DateTime from "../../components/Date";
@@ -71,11 +74,7 @@ class Detail extends Component {
   };
 
   render() {
-    const {
-      listType,
-      procedureId,
-      increaseActivity
-    } = this.props;
+    const { listType, procedureId, increaseActivity } = this.props;
     const { data: { loading, networkStatus, refetch } } = this.props;
     if (loading && !this.props.data.procedure) {
       return null;
@@ -91,7 +90,6 @@ class Detail extends Component {
       importantDocuments,
       activityIndex
     } = this.props.data.procedure;
-    console.log("props", this.props);
     return (
       <Wrapper
         refreshControl={
@@ -114,12 +112,11 @@ class Detail extends Component {
             <ActivityIndex
               count={activityIndex}
               active={active}
-              onPress={() =>
+              onPress={() => {
                 increaseActivity({
-                  procedureId,
-                  activityIndex
-                })
-              }
+                  procedureId
+                });
+              }}
             />
             {date && <DateTime date={date} />}
           </IntroSide>
@@ -173,48 +170,39 @@ export default compose(
       variables: { id: procedureId },
       fetchPolicy: "cache-and-network"
     }),
-    props: ({ data }) => {
-      console.log("data", data);
-      return { data };
-    }
+    props: ({ data }) => ({ data })
   }),
   graphql(increaseActivity, {
-    name: "increaseActivity",
-    // props: ({ mutate }) => ({
-    //   increaseActivity({ procedureId, activityIndex }) {
-    //     console.log("{ procedureId, activityIndex }", {
-    //       procedureId,
-    //       activityIndex
-    //     });
-    //     return mutate({
-    //       variables: { procedureId },
-    //       optimisticResponse: {
-    //         __typename: "Mutation",
-    //         increaseActivity: {
-    //           procedureId,
-    //           __typename: "Procedure",
-    //           activityIndex: 9
-    //         }
-    //       }
-    //     });
-    //   }
-    // }),
-    options: ({ procedureId }) => {
-      console.log(procedureId);
+    props({ ownProps: { data }, mutate }) {
       return {
-        update: (proxy, { data: proxyData }, ownProps) => {
-          console.log("proxy", proxy, proxyData, ownProps);
-          const data = proxy.readQuery({
-            query: getProcedure,
-            variables: { id: procedureId }
-          });
-          console.log("data", data);
-          data.procedure.activityIndex += 1;
-          console.log("data", data);
-          proxy.writeQuery({
-            query: getProcedure,
-            variables: { id: procedureId },
-            data
+        increaseActivity: ({ procedureId }) => {
+          const { activityIndex: prevActivityIndex } = data.procedure;
+          return mutate({
+            variables: { procedureId },
+            optimisticResponse: {
+              __typename: "Mutation",
+              increaseActivity: {
+                id: procedureId,
+                __typename: "Procedure",
+                activityIndex: prevActivityIndex + 1
+              }
+            },
+            update: (
+              proxy,
+              { data: { increaseActivity: { activityIndex } } }
+            ) => {
+              // Update detail ActivityIndex
+              const detailData = proxy.readQuery({
+                query: getProcedure,
+                variables: { id: procedureId }
+              });
+              detailData.procedure.activityIndex = activityIndex;
+              proxy.writeQuery({
+                query: getProcedure,
+                variables: { id: procedureId },
+                data: detailData
+              });
+            }
           });
         }
       };

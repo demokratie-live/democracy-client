@@ -121,7 +121,6 @@ class List extends Component {
           ...procedure,
           tags: procedure.tags,
           procedureId: procedure.procedureId,
-          activityIndex: procedure.activityIndex,
           active: false,
           date: procedure.voteDate,
           listType
@@ -131,7 +130,6 @@ class List extends Component {
           ...procedure,
           tags: procedure.tags,
           procedureId: procedure.procedureId,
-          activityIndex: procedure.activityIndex,
           active: false,
           date: procedure.voteDate || false,
           listType
