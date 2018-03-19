@@ -3,7 +3,7 @@ import {
   Navigation,
   ScreenVisibilityListener as RNNScreenVisibilityListener
 } from "react-native-navigation";
-import { AsyncStorage } from "react-native";
+import { AsyncStorage, Alert } from "react-native";
 import RSAKey from "react-native-rsa";
 import DeviceInfo from "react-native-device-info";
 import { sha256 } from "react-native-sha256";
@@ -54,6 +54,7 @@ class App {
   startApp = async ({ isInstructionsShown }) => {
     const token = await AsyncStorage.getItem("authorization");
     if (!token) {
+      Alert.alert(Config.PUBLIC_KEY);
       const rsa = new RSAKey();
       rsa.setPublicString(Config.PUBLIC_KEY); // return json encoded string
       const uniqueID = await sha256(DeviceInfo.getUniqueID());
@@ -68,6 +69,7 @@ class App {
 
       await AsyncStorage.setItem("authorization", data.signUp.token);
     }
+    console.log("token", token);
 
     // Decide Startscreen
     if (isInstructionsShown) {

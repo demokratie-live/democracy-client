@@ -129,8 +129,8 @@ matrix:
     - "curl -H 'Content-Type: application/json'  -X POST -d '{\"content\":\"Neue Android Alpha Version verfügbar!\"}' ${DISCORD_WEBHOOK}"
 
   # ios deploy Testflight
-  - if: branch =~ ^master AND NOT type =~ ^pull_request
-    osx_image: xcode9.2
+  #- if: branch =~ ^master AND NOT type =~ ^pull_request
+  - osx_image: xcode9.2
     language: objective-c
     xcode_project: ios/democracyclient.xcodeproj
     xcode_scheme: ios/democracyclientTests
