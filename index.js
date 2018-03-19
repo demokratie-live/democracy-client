@@ -52,27 +52,22 @@ class App {
   }
 
   startApp = async ({ isInstructionsShown }) => {
-    console.log("startApp");
     const token = await AsyncStorage.getItem("authorization");
     if (!token) {
       const rsa = new RSAKey();
       rsa.setPublicString(Config.PUBLIC_KEY); // return json encoded string
       const uniqueID = await sha256(DeviceInfo.getUniqueID());
       const deviceHashEncrypted = rsa.encrypt(uniqueID);
-      console.log(SIGN_UP);
 
-      const { data } = await client
-        .mutate({
-          mutation: SIGN_UP,
-          variables: {
-            deviceHashEncrypted
-          }
-        })
-        .catch(console.log);
+      const { data } = await client.mutate({
+        mutation: SIGN_UP,
+        variables: {
+          deviceHashEncrypted
+        }
+      });
 
       await AsyncStorage.setItem("authorization", data.signUp.token);
     }
-    console.log("startApp Finish");
 
     // Decide Startscreen
     if (isInstructionsShown) {
