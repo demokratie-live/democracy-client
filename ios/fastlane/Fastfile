@@ -44,6 +44,8 @@ platform :ios do
       app_identifier: "de.democracy-deutschland.clientapp"
     )
     build_app( clean: true, scheme: "democracyclient-prod")
-    upload_to_testflight
+    upload_to_testflight(
+      groups: "Developer"
+    )
   end
 end
