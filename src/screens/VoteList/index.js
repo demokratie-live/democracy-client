@@ -194,7 +194,7 @@ VoteList.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired,
   meLoading: PropTypes.bool.isRequired,
   signUp: PropTypes.func.isRequired,
-  me: PropTypes.oneOf(propType(ME), PropTypes.bool)
+  me: PropTypes.oneOfType([propType(ME), PropTypes.bool])
 };
 
 VoteList.defaultProps = {
