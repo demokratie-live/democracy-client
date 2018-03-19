@@ -3,6 +3,11 @@ import {
   Navigation,
   ScreenVisibilityListener as RNNScreenVisibilityListener
 } from "react-native-navigation";
+import { AsyncStorage } from "react-native";
+import RSAKey from "react-native-rsa";
+import DeviceInfo from "react-native-device-info";
+import { sha256 } from "react-native-sha256";
+import Config from "react-native-config";
 // import Reactotron from "reactotron-react-native";
 
 import client, { persistor } from "./src/graphql/client";
@@ -10,6 +15,7 @@ import registerScreens from "./src/screens";
 
 import IS_INSTRUCTIONS_SHOWN from "./src/graphql/queries/isInstructionShown";
 import setCurrentScreen from "./src/graphql/mutations/setCurrentScreen";
+import SIGN_UP from "./src/graphql/mutations/signUp";
 
 import topTabs from "./src/screens/VoteList/topTabs";
 
@@ -45,7 +51,29 @@ class App {
     listener.register();
   }
 
-  startApp = ({ isInstructionsShown }) => {
+  startApp = async ({ isInstructionsShown }) => {
+    console.log("startApp");
+    const token = await AsyncStorage.getItem("authorization");
+    if (!token) {
+      const rsa = new RSAKey();
+      rsa.setPublicString(Config.PUBLIC_KEY); // return json encoded string
+      const uniqueID = await sha256(DeviceInfo.getUniqueID());
+      const deviceHashEncrypted = rsa.encrypt(uniqueID);
+      console.log(SIGN_UP);
+
+      const { data } = await client
+        .mutate({
+          mutation: SIGN_UP,
+          variables: {
+            deviceHashEncrypted
+          }
+        })
+        .catch(console.log);
+
+      await AsyncStorage.setItem("authorization", data.signUp.token);
+    }
+    console.log("startApp Finish");
+
     // Decide Startscreen
     if (isInstructionsShown) {
       Navigation.startSingleScreenApp({

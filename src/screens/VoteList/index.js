@@ -1,28 +1,16 @@
 // @flow
 
 import React, { Component } from "react";
-import {
-  Platform,
-  SegmentedControlIOS,
-  Dimensions,
-  AsyncStorage
-} from "react-native";
+import { Platform, SegmentedControlIOS, Dimensions } from "react-native";
 import { graphql, compose } from "react-apollo";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import { Navigation, Navigator } from "react-native-navigation";
-import Config from "react-native-config";
-import RSAKey from "react-native-rsa";
-import DeviceInfo from "react-native-device-info";
-import { sha256 } from "react-native-sha256";
-import { propType } from "graphql-anywhere";
 
 import List from "./List";
 import Header from "./Header";
 
 import SET_INSTRUCTIONS_SHOWN from "../../graphql/mutations/setInstructinosShown";
-import ME from "../../graphql/queries/me";
-import SIGN_UP from "../../graphql/mutations/signUp";
 
 Navigation.registerComponent("democracy.VoteList.Header", () => Header);
 
@@ -62,13 +50,6 @@ class VoteList extends Component {
     selectedIndex: 0
   };
 
-  componentDidUpdate() {
-    const { me, meLoading } = this.props;
-    if (!me && !meLoading) {
-      this.signIn();
-    }
-  }
-
   onScrollEndDrag = e => {
     if (this.width === Dimensions.get("window").width) {
       const { contentOffset } = e.nativeEvent;
@@ -101,23 +82,6 @@ class VoteList extends Component {
         isInstructionsShown: false
       }
     });
-  };
-
-  signIn = async () => {
-    const rsa = new RSAKey();
-    rsa.setPublicString(Config.PUBLIC_KEY); // return json encoded string
-    const uniqueID = await sha256(DeviceInfo.getUniqueID());
-    const deviceHashEncrypted = rsa.encrypt(uniqueID);
-
-    await this.props
-      .signUp({
-        variables: {
-          deviceHashEncrypted
-        }
-      })
-      .then(({ data: { signUp: { token } } }) => {
-        AsyncStorage.setItem("authorization", token);
-      });
   };
 
   renderSegmentControls = () => {
@@ -191,25 +155,13 @@ class VoteList extends Component {
 
 VoteList.propTypes = {
   setInstructionsShown: PropTypes.func.isRequired,
-  navigator: PropTypes.instanceOf(Navigator).isRequired,
-  meLoading: PropTypes.bool.isRequired,
-  signUp: PropTypes.func.isRequired,
-  me: PropTypes.oneOfType([propType(ME), PropTypes.bool])
+  navigator: PropTypes.instanceOf(Navigator).isRequired
 };
 
-VoteList.defaultProps = {
-  me: false
-};
+VoteList.defaultProps = {};
 
 export default compose(
   graphql(SET_INSTRUCTIONS_SHOWN, {
     name: "setInstructionsShown"
-  }),
-  graphql(SIGN_UP, {
-    name: "signUp"
-  }),
-  graphql(ME, {
-    props: ({ data: { me, loading } }) => ({ me, meLoading: loading }),
-    options: { fetchPolicy: "network-only" }
   })
 )(VoteList);

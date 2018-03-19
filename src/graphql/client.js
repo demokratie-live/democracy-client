@@ -8,7 +8,7 @@ import { withClientState } from "apollo-link-state";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { CachePersistor } from "apollo-cache-persist";
 import { setContext } from "apollo-link-context";
-// import { onError } from "apollo-link-error";
+import { onError } from "apollo-link-error";
 
 import Config from "../config";
 
@@ -45,16 +45,16 @@ const authLink = setContext(async (_, { headers }) => {
 });
 
 const stateLink = withClientState({ resolvers, cache, defaults });
-// const linkError = onError(({ graphQLErrors, networkError }) => {
-//   if (graphQLErrors)
-//     graphQLErrors.map(({ message, locations, path }) => {
-//       console.log(
-//         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-//       );
-//     });
+const linkError = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors)
+    graphQLErrors.map(({ message, locations, path }) => {
+      console.log(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+      );
+    });
 
-//   if (networkError) console.log(`[Network error]: ${networkError}`);
-// });
+  if (networkError) console.log(`[Network error]: ${networkError}`);
+});
 
 // const defaultOptions = {
 //   watchQuery: {
@@ -73,7 +73,7 @@ const stateLink = withClientState({ resolvers, cache, defaults });
 const client = new ApolloClient({
   cache,
   link: ApolloLink.from([
-    // linkError,
+    linkError,
     stateLink,
     authLink,
     new HttpLink({ uri: Config.GRAPHQL_URL })
