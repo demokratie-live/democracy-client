@@ -29,7 +29,7 @@ class ActivityIndex extends Component {
   componentWillReceiveProps() {}
   render() {
     const { active, touchable, activityIndex, increaseActivity } = this.props;
-    if (touchable) {
+    if (touchable && !active) {
       return (
         <WrapperTouchable onPress={increaseActivity}>
           <Icon source={active ? iconActive : iconInactive} />
