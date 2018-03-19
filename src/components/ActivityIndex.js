@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import { graphql, compose } from "react-apollo";
@@ -25,27 +25,26 @@ const Counter = styled.Text`
 const iconActive = require("../../assets/icons/disclosureIndicator-active.png");
 const iconInactive = require("../../assets/icons/disclosureIndicator.png");
 
-const ActivityIndex = ({
-  active,
-  touchable,
-  activityIndex,
-  increaseActivity
-}) => {
-  if (touchable) {
+class ActivityIndex extends Component {
+  componentWillReceiveProps() {}
+  render() {
+    const { active, touchable, activityIndex, increaseActivity } = this.props;
+    if (touchable) {
+      return (
+        <WrapperTouchable onPress={increaseActivity}>
+          <Icon source={active ? iconActive : iconInactive} />
+          <Counter>{activityIndex}</Counter>
+        </WrapperTouchable>
+      );
+    }
     return (
-      <WrapperTouchable onPress={increaseActivity}>
+      <Wrapper>
         <Icon source={active ? iconActive : iconInactive} />
         <Counter>{activityIndex}</Counter>
-      </WrapperTouchable>
+      </Wrapper>
     );
   }
-  return (
-    <Wrapper>
-      <Icon source={active ? iconActive : iconInactive} />
-      <Counter>{activityIndex}</Counter>
-    </Wrapper>
-  );
-};
+}
 
 ActivityIndex.propTypes = {
   procedureId: PropTypes.string.isRequired, // eslint-disable-line
@@ -62,10 +61,15 @@ ActivityIndex.defaultProps = {
 
 export default compose(
   graphql(getActivityIndex, {
-    props: ({ data: { activityIndex: { activityIndex } } }) => ({
-      activityIndex
+    props: ({ data: { activityIndex } }) => ({
+      activityIndex: activityIndex ? activityIndex.activityIndex : 0,
+      active: activityIndex ? activityIndex.active : false
+    }),
+    options: () => ({
+      fetchPolicy: "cache-and-network"
     })
   }),
+
   graphql(INCREASE_ACTIVITY, {
     props({
       ownProps: { activityIndex: prevActivityIndex, procedureId },
@@ -80,18 +84,16 @@ export default compose(
               increaseActivity: {
                 id: procedureId,
                 __typename: "ActivityIndex",
-                activityIndex: prevActivityIndex + 1
+                activityIndex: prevActivityIndex + 1,
+                active: true
               }
             },
-            update: (
-              proxy,
-              { data: { increaseActivity: { activityIndex } } }
-            ) => {
+            update: (proxy, { data: { increaseActivity } }) => {
               const data = proxy.readQuery({
                 query: getActivityIndex,
                 variables: { procedureId }
               });
-              data.activityIndex.activityIndex = activityIndex;
+              data.activityIndex = increaseActivity;
               proxy.writeQuery({
                 query: getActivityIndex,
                 variables: { procedureId },

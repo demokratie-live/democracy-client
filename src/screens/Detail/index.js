@@ -79,7 +79,6 @@ class Detail extends Component {
       title,
       tags,
       abstract,
-      active,
       voteDate: date,
       subjectGroups,
       submissionDate,
@@ -104,11 +103,7 @@ class Detail extends Component {
             </IntroButtons>
           </IntroMain>
           <IntroSide>
-            <ActivityIndex
-              procedureId={procedureId}
-              active={active}
-              touchable
-            />
+            <ActivityIndex procedureId={procedureId} touchable />
             {date && <DateTime date={date} />}
           </IntroSide>
         </Intro>
@@ -139,7 +134,6 @@ class Detail extends Component {
 
 Detail.propTypes = {
   title: PropTypes.string.isRequired,
-  active: PropTypes.bool,
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   abstract: PropTypes.string,
   listType: PropTypes.string,
@@ -149,7 +143,6 @@ Detail.propTypes = {
 
 Detail.defaultProps = {
   abstract: "",
-  active: false,
   listType: "search"
 };
 

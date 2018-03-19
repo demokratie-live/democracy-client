@@ -9,7 +9,6 @@ export default gql`
       voteDate
       subjectGroups
       submissionDate
-      activityIndex
       importantDocuments {
         editor
         type
