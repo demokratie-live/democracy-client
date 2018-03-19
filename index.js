@@ -54,7 +54,6 @@ class App {
   startApp = async ({ isInstructionsShown }) => {
     const token = await AsyncStorage.getItem("authorization");
     if (!token) {
-      Alert.alert(Config.PUBLIC_KEY);
       const rsa = new RSAKey();
       rsa.setPublicString(Config.PUBLIC_KEY); // return json encoded string
       const uniqueID = await sha256(DeviceInfo.getUniqueID());
