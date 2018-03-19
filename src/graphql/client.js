@@ -81,6 +81,8 @@ const client = new ApolloClient({
   // defaultOptions
 });
 export default client;
+
 // offline cache löschen
 // persistor.purge();
+
 export { persistor };
