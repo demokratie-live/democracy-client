@@ -3,7 +3,7 @@ import {
   Navigation,
   ScreenVisibilityListener as RNNScreenVisibilityListener
 } from "react-native-navigation";
-import { AsyncStorage, Alert } from "react-native";
+import { AsyncStorage } from "react-native";
 import RSAKey from "react-native-rsa";
 import DeviceInfo from "react-native-device-info";
 import { sha256 } from "react-native-sha256";
@@ -68,7 +68,6 @@ class App {
 
       await AsyncStorage.setItem("authorization", data.signUp.token);
     }
-    console.log("token", token);
 
     // Decide Startscreen
     if (isInstructionsShown) {
