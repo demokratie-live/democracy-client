@@ -121,8 +121,6 @@ class List extends Component {
           ...procedure,
           tags: procedure.tags,
           procedureId: procedure.procedureId,
-          activityIndex: 0,
-          active: false,
           date: procedure.voteDate,
           listType
         });
@@ -131,8 +129,6 @@ class List extends Component {
           ...procedure,
           tags: procedure.tags,
           procedureId: procedure.procedureId,
-          activityIndex: 0,
-          active: false,
           date: procedure.voteDate || false,
           listType
         });
@@ -149,7 +145,9 @@ class List extends Component {
           sections={this.prepareData()}
           stickySectionHeadersEnabled
           keyExtractor={({ _id }) => _id}
-          onRefresh={() => data.refetch()}
+          onRefresh={() => {
+            data.refetch();
+          }}
           refreshing={data.networkStatus === 4}
           renderSectionHeader={({ section }) => (
             <ListSectionHeader title={section.title} />

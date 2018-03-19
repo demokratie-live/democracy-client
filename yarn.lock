@@ -265,6 +265,12 @@ apollo-client@^2.2.0:
   optionalDependencies:
     "@types/async" "2.0.47"
 
+apollo-link-context@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/apollo-link-context/-/apollo-link-context-1.0.7.tgz#3719697a677d3af5de500b7e4cbb6c0d0bf3bef3"
+  dependencies:
+    apollo-link "^1.2.1"
+
 apollo-link-dedup@^1.0.0:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/apollo-link-dedup/-/apollo-link-dedup-1.0.6.tgz#566ab421a5f6ef41995e2e386f575600d51b1408"
@@ -309,6 +315,10 @@ apollo-link@^1.2.1:
 apollo-utilities@^1.0.0, apollo-utilities@^1.0.4, apollo-utilities@^1.0.6, apollo-utilities@^1.0.8:
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/apollo-utilities/-/apollo-utilities-1.0.8.tgz#74d797d38953d2ba35e16f880326e2abcbc8b016"
+
+apollo-utilities@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/apollo-utilities/-/apollo-utilities-1.0.10.tgz#0c35696891d4fa28d76768e0f7249d63c6da08b9"
 
 append-transform@^0.4.0:
   version "0.4.0"
@@ -6071,6 +6081,14 @@ react-native-navigation@^1.1.389:
   resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-1.1.389.tgz#73585c72ac3eeaff76360e19c1bb3cf77b8c1b91"
   dependencies:
     lodash "4.x.x"
+
+react-native-rsa@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-rsa/-/react-native-rsa-0.0.3.tgz#c3b5b85278e8a1a3ef22b4206a7d6aa04a26d99b"
+
+react-native-sha256@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-sha256/-/react-native-sha256-1.1.1.tgz#3598dba556b0bbcd12618bd101c10d130c217fc3"
 
 react-native-swiper@^1.5.13:
   version "1.5.13"

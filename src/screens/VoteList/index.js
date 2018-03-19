@@ -2,7 +2,7 @@
 
 import React, { Component } from "react";
 import { Platform, SegmentedControlIOS, Dimensions } from "react-native";
-import { graphql } from "react-apollo";
+import { graphql, compose } from "react-apollo";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import { Navigation, Navigator } from "react-native-navigation";
@@ -158,6 +158,10 @@ VoteList.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired
 };
 
-export default graphql(SET_INSTRUCTIONS_SHOWN, {
-  name: "setInstructionsShown"
-})(VoteList);
+VoteList.defaultProps = {};
+
+export default compose(
+  graphql(SET_INSTRUCTIONS_SHOWN, {
+    name: "setInstructionsShown"
+  })
+)(VoteList);

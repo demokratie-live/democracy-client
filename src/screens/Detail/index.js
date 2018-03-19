@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
-import { graphql } from "react-apollo";
-import gql from "graphql-tag";
+import { graphql, compose } from "react-apollo";
 import { RefreshControl } from "react-native";
+
+import getProcedure from "../../graphql/queries/getProcedure";
 
 import ActivityIndex from "../../components/ActivityIndex";
 import DateTime from "../../components/Date";
@@ -69,7 +70,7 @@ class Detail extends Component {
   };
 
   render() {
-    const { activityIndex, listType, procedureId } = this.props;
+    const { listType, procedureId } = this.props;
     const { data: { loading, networkStatus, refetch } } = this.props;
     if (loading && !this.props.data.procedure) {
       return null;
@@ -78,7 +79,6 @@ class Detail extends Component {
       title,
       tags,
       abstract,
-      active,
       voteDate: date,
       subjectGroups,
       submissionDate,
@@ -103,7 +103,7 @@ class Detail extends Component {
             </IntroButtons>
           </IntroMain>
           <IntroSide>
-            <ActivityIndex count={activityIndex} active={active} />
+            <ActivityIndex procedureId={procedureId} touchable />
             {date && <DateTime date={date} />}
           </IntroSide>
         </Intro>
@@ -134,8 +134,6 @@ class Detail extends Component {
 
 Detail.propTypes = {
   title: PropTypes.string.isRequired,
-  activityIndex: PropTypes.number,
-  active: PropTypes.bool,
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   abstract: PropTypes.string,
   listType: PropTypes.string,
@@ -145,34 +143,15 @@ Detail.propTypes = {
 
 Detail.defaultProps = {
   abstract: "",
-  activityIndex: 0,
-  active: false,
   listType: "search"
 };
 
-export default graphql(
-  gql`
-    query procedure($id: ID!) {
-      procedure(id: $id) {
-        title
-        tags
-        abstract
-        voteDate
-        subjectGroups
-        submissionDate
-        importantDocuments {
-          editor
-          type
-          url
-          number
-        }
-      }
-    }
-  `,
-  {
+export default compose(
+  graphql(getProcedure, {
     options: ({ procedureId }) => ({
       variables: { id: procedureId },
       fetchPolicy: "cache-and-network"
-    })
-  }
+    }),
+    props: ({ data }) => ({ data })
+  })
 )(Detail);

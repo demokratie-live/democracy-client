@@ -10,6 +10,10 @@ export default gql`
       abstract
       voteDate
       submissionDate
+      activityIndex {
+        activityIndex
+        active
+      }
     }
   }
 `;
