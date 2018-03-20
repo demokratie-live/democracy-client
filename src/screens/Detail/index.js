@@ -181,6 +181,7 @@ class Detail extends Component {
                       <VoteResultLabel>Nicht abg.</VoteResultLabel>
                     </VoteResult>
                   </VoteResults>
+                  {/* Andoid scroll fix */}
                   <View
                     style={{
                       zIndex: 9999,
