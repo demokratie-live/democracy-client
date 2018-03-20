@@ -15,6 +15,12 @@ export default gql`
         url
         number
       }
+      voteResults {
+        yes
+        no
+        abstination
+        notVote
+      }
     }
   }
 `;

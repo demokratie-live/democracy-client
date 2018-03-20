@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import { graphql, compose } from "react-apollo";
-import { RefreshControl } from "react-native";
+import { RefreshControl, View } from "react-native";
+import { VictoryPie } from "victory-native";
 
 import getProcedure from "../../graphql/queries/getProcedure";
 
@@ -60,6 +61,33 @@ const Content = styled.View`
   flex: 1;
 `;
 
+const VoteResultsWrapper = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+
+const VoteResults = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  flex: 1;
+`;
+
+const VoteResult = styled.View`
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+`;
+
+const VoteResultNumber = styled.Text`
+  color: #4a4a4a;
+  font-size: 12;
+`;
+const VoteResultLabel = styled.Text`
+  color: #d5d5d5;
+  font-size: 10;
+`;
+
 class Detail extends Component {
   static navigatorStyle = {
     navBarBackgroundColor: "#4494d3",
@@ -82,7 +110,8 @@ class Detail extends Component {
       voteDate: date,
       subjectGroups,
       submissionDate,
-      importantDocuments
+      importantDocuments,
+      voteResults
     } = this.props.data.procedure;
     return (
       <Wrapper
@@ -113,6 +142,56 @@ class Detail extends Component {
               <TagsText>{tags.join(", ")}</TagsText>
             </TagsWrapper>
           )}
+          {voteResults &&
+            voteResults.yes && (
+              <Segment title="Ergebnis" open>
+                <VoteResultsWrapper>
+                  <VictoryPie
+                    allowZoom={false}
+                    width={400}
+                    height={400}
+                    colorScale={["#99C93E", "#D43194", "#4CB0D8", "#B1B3B4"]}
+                    data={[
+                      { x: 1, y: voteResults.yes, label: " " },
+                      { x: 2, y: voteResults.no, label: " " },
+                      { x: 3, y: voteResults.abstination, label: " " },
+                      { x: 4, y: voteResults.notVote, label: " " }
+                    ]}
+                    innerRadius={68}
+                    labelRadius={100}
+                    style={{ labels: { fontSize: 20, fill: "white" } }}
+                  />
+                  <VoteResults>
+                    <VoteResult>
+                      <VoteResultNumber>{voteResults.yes}</VoteResultNumber>
+                      <VoteResultLabel>Ja</VoteResultLabel>
+                    </VoteResult>
+                    <VoteResult>
+                      <VoteResultNumber>{voteResults.no}</VoteResultNumber>
+                      <VoteResultLabel>Nein</VoteResultLabel>
+                    </VoteResult>
+                    <VoteResult>
+                      <VoteResultNumber>
+                        {voteResults.abstination}
+                      </VoteResultNumber>
+                      <VoteResultLabel>Enthalten</VoteResultLabel>
+                    </VoteResult>
+                    <VoteResult>
+                      <VoteResultNumber>{voteResults.notVote}</VoteResultNumber>
+                      <VoteResultLabel>Nicht abg.</VoteResultLabel>
+                    </VoteResult>
+                  </VoteResults>
+                  <View
+                    style={{
+                      zIndex: 9999,
+                      position: "absolute",
+                      width: "100%",
+                      height: "100%"
+                    }}
+                  />
+                </VoteResultsWrapper>
+              </Segment>
+            )}
           <Segment title="Details" open>
             <SegmentDetails
               subjectGroups={subjectGroups}
