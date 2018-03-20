@@ -45,7 +45,7 @@ platform :ios do
     )
     build_app( clean: true, scheme: "democracyclient-prod")
     upload_to_testflight(
-      groups: "Developer"
+      #groups: "Developer"
     )
   end
 end
