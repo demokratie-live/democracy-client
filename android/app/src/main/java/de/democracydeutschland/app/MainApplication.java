@@ -3,6 +3,8 @@ package de.democracydeutschland.app;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.horcrux.svg.SvgPackage;
+import com.horcrux.svg.SvgPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -30,6 +32,7 @@ public class MainApplication extends NavigationApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(new MainReactPackage(),
+            new SvgPackage(),
             new RNDeviceInfo(),
             new ReactNativeConfigPackage(),
             new VectorIconsPackage(),
@@ -66,6 +69,7 @@ public class MainApplication extends NavigationApplication {
     // No need to add RnnPackage and MainReactPackage
     return Arrays.<ReactPackage>asList(
     // eg. new VectorIconsPackage()
+            new SvgPackage(),
             new RNDeviceInfo(),
             new ReactNativeConfigPackage(),
             new VectorIconsPackage(),
