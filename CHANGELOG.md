@@ -1,6 +1,6 @@
 # Changelog
 
-### 0.2.X
+### 0.2.2
 
 * Details
   * _Bug:_ Fix overlapping Details
