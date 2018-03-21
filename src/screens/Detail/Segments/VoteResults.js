@@ -1,19 +1,18 @@
 import React from "react";
-import { View } from "react-native";
+import { View, Dimensions } from "react-native";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import { VictoryPie } from "victory-native";
 
 const VoteResultsWrapper = styled.View`
-  height: 400;
   justify-content: center;
   align-items: center;
 `;
 
 const VoteResultNumbers = styled.View`
+  padding-top: 18;
   flex-direction: row;
   justify-content: space-between;
-  flex: 1;
 `;
 
 const VoteResult = styled.View`
@@ -35,8 +34,9 @@ const VoteResults = ({ voteResults }) => (
   <VoteResultsWrapper>
     <VictoryPie
       allowZoom={false}
-      width={400}
-      height={400}
+      padding={{ top: 0, bottom: 0, left: 0, right: 0 }}
+      width={Dimensions.get("window").width - 18 * 2}
+      height={Dimensions.get("window").width - 18 * 2}
       colorScale={["#99C93E", "#D43194", "#4CB0D8", "#B1B3B4"]}
       data={[
         { x: 1, y: voteResults.yes, label: " " },
@@ -44,9 +44,7 @@ const VoteResults = ({ voteResults }) => (
         { x: 3, y: voteResults.abstination, label: " " },
         { x: 4, y: voteResults.notVote, label: " " }
       ]}
-      innerRadius={68}
-      labelRadius={100}
-      style={{ labels: { fontSize: 20, fill: "white" } }}
+      innerRadius={Dimensions.get("window").width / 5.6}
     />
     <VoteResultNumbers>
       <VoteResult>
