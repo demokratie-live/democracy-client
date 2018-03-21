@@ -30,7 +30,7 @@ const TextHead = styled.Text`
   color: #000;
   font-size: 22;
   letter-spacing: -0.1;
-  padding-top: 5;
+  padding-top: 15;
   font-family: ${Platform.OS === "ios"
     ? "HelveticaNeue-Thin"
     : "sans-serif-light"};
@@ -47,6 +47,7 @@ const TextSub = styled.Text`
     : "sans-serif-light"};
   font-weight: bold;
   text-align: center;
+  padding-bottom: 18;
 `;
 
 const ContainerImages = styled.View`
