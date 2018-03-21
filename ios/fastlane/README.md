@@ -24,9 +24,9 @@ fastlane setup_signing
 ----
 
 ## iOS
-### ios certs
+### ios test
 ```
-fastlane ios certs
+fastlane ios test
 ```
 Push a new beta build to TestFlight
 ### ios beta

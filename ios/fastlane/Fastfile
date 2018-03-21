@@ -45,7 +45,11 @@ platform :ios do
     )
     build_app( clean: true, scheme: "democracyclient-prod")
     upload_to_testflight(
-      #groups: "Developer"
+      changelog: File.read("../../CHANGELOG.md"),
+      groups: "Developer",
+      demo_account_required: false,
+      notify_external_testers: true,
+      distribute_external: true
     )
   end
 end

@@ -111,7 +111,7 @@ class Introductions extends Component {
             ImgCenter={require("../../../assets/tutorial/screen.detail.png")}
             ImgRight={require("../../../assets/tutorial/screen.forum.png")}
             TxtHead="Informiere Dich"
-            TxtSub={`…über die Gesetzesvorlagen entlang der\n offiziellen Informationen des Bundestages`}
+            TxtSub="…über die Gesetzesvorlagen entlang der offiziellen Informationen des Bundestages"
           />
           <Slide
             ImgHead={require("../../../assets/tutorial/icon.diskutiere.png")}
@@ -119,7 +119,7 @@ class Introductions extends Component {
             ImgCenter={require("../../../assets/tutorial/screen.forum.png")}
             ImgRight={require("../../../assets/tutorial/screen.vote.png")}
             TxtHead="Diskutiere"
-            TxtSub={`…über die Für’s und Wider’s des Antrags \n und bring weiterführende Informationen ein`}
+            TxtSub="…über die Für’s und Wider’s des Antrags und bring weiterführende Informationen ein"
           />
           <Slide
             ImgHead={require("../../../assets/tutorial/icon.stimme.png")}
@@ -127,7 +127,7 @@ class Introductions extends Component {
             ImgCenter={require("../../../assets/tutorial/screen.vote.png")}
             ImgRight={require("../../../assets/tutorial/screen.analyse.png")}
             TxtHead="Stimme"
-            TxtSub={`…noch vor der offiziellen Bundestags-\nentscheidung selbst über den Antrag ab`}
+            TxtSub="…noch vor der offiziellen Bundestagsentscheidung selbst über den Antrag ab"
           />
           <Slide
             ImgHead={require("../../../assets/tutorial/icon.analysiere.png")}
@@ -135,7 +135,7 @@ class Introductions extends Component {
             ImgCenter={require("../../../assets/tutorial/screen.analyse.png")}
             ImgCircle={null}
             TxtHead="Anlaysiere"
-            TxtSub={`…das Community-Abstimmungsverhalten und\nvergleich es mit den Bundestagsresultaten`}
+            TxtSub="…das Community-Abstimmungsverhalten und vergleich es mit den Bundestagsresultaten"
           />
         </Swiper>
         <Button onPress={this.onClick}>
