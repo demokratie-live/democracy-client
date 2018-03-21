@@ -1,4 +1,4 @@
-**Type:** Issue #XXX
+**Issue:** #XXX
 
 **Description:**
 
