@@ -1,6 +1,14 @@
+# Changelog
+
+### 0.2.X
+
+* Details
+  * _Bug:_ Fix overlapping Details
+  * _Bug:_ Fix width of PieChart
+
 ### 0.2.1
 
 * Tutorial
-  * Fixe Umbrüche entfernt [#160](https://github.com/demokratie-live/democracy-client/issues/160)
-  * Abstände angepasst [#159](https://github.com/demokratie-live/democracy-client/issues/159)
-  * Schrift-Dicke reduziert
+  * _Bug:_ Fixe Umbrüche entfernt [#160](https://github.com/demokratie-live/democracy-client/issues/160)
+  * _Bug:_ Abstände angepasst [#159](https://github.com/demokratie-live/democracy-client/issues/159)
+  * _Bug:_ Schrift-Dicke reduziert
