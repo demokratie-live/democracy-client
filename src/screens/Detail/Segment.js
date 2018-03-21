@@ -65,7 +65,7 @@ class Segment extends Component {
           </SegmentWrapper>
         </SegmentTouch>
         <Content open={open} collapsible={collapsible}>
-          {this.props.children}
+          {open && this.props.children}
         </Content>
       </Wrapper>
     );
