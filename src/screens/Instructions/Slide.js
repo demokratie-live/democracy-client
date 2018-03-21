@@ -5,7 +5,6 @@ import { Dimensions, Platform, Image } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import DeviceInfo from "react-native-device-info";
 
-
 const Container = styled.View`
   flex: 1;
   align-items: center;
@@ -14,7 +13,7 @@ const Container = styled.View`
     if (DeviceInfo.getModel() === "iPhone X") {
       return 36;
     }
-    return Platform.OS === "ios" ? 21 : 5;
+    return Platform.OS === "ios" ? 24 : 8;
   }};
   padding-horizontal: 18;
 `;
@@ -29,23 +28,19 @@ const ContainerText = styled.View`
 const TextHead = styled.Text`
   color: #000;
   font-size: 22;
-  letter-spacing: -0.1;
   padding-top: 15;
   font-family: ${Platform.OS === "ios"
     ? "HelveticaNeue-Thin"
     : "sans-serif-light"};
-  font-weight: bold;
 `;
 
 const TextSub = styled.Text`
   color: #9b9b9b;
   font-size: 15;
-  letter-spacing: -0.4;
   padding-top: 1;
   font-family: ${Platform.OS === "ios"
     ? "HelveticaNeue-Thin"
     : "sans-serif-light"};
-  font-weight: bold;
   text-align: center;
   padding-bottom: 18;
 `;
