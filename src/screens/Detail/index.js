@@ -104,6 +104,7 @@ class Detail extends Component {
       return null;
     }
     const {
+      _id,
       title,
       tags,
       abstract,
@@ -205,7 +206,7 @@ class Detail extends Component {
           <Segment title="Dokumente">
             <SegmentDocuments documents={importantDocuments} />
           </Segment>
-          {listType === "VOTING" && <Voting />}
+          {listType === "VOTING" && <Voting procedure={_id} />}
         </Content>
       </Wrapper>
     );

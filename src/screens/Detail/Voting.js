@@ -1,5 +1,10 @@
 import React from "react";
 import styled from "styled-components/native";
+import { graphql, compose } from "react-apollo";
+import PropTypes from "prop-types";
+
+import VOTE from "../../graphql/mutations/vote";
+import VOTED from "../../graphql/queries/voted";
 
 const SegmentWrapper = styled.View`
   padding-vertical: 10;
@@ -20,6 +25,8 @@ const VoteWrapper = styled.View`
   justify-content: space-between;
 `;
 
+const VoteButtonWrapper = styled.TouchableOpacity``;
+
 const VoteButton = styled.Image``;
 
 const Title = styled.Text`
@@ -33,21 +40,56 @@ const Content = styled.View`
   padding-vertical: 10;
 `;
 
-const Voting = () => (
-  <Wrapper>
-    <SegmentWrapper>
-      <Title>Abstimmen</Title>
-    </SegmentWrapper>
-    <Content>
-      <VoteWrapper>
-        <VoteButton source={require("../../../assets/icons/voteYes.png")} />
-        <VoteButton
-          source={require("../../../assets/icons/voteAbstention.png")}
-        />
-        <VoteButton source={require("../../../assets/icons/voteNo.png")} />
-      </VoteWrapper>
-    </Content>
-  </Wrapper>
-);
+const Voting = ({ vote, procedure, voted }) => (
+    <Wrapper>
+      <SegmentWrapper>
+        <Title>Abstimmen</Title>
+      </SegmentWrapper>
+      <Content>
+        <VoteWrapper>
+          <VoteButtonWrapper
+            disabled={voted}
+            onPress={() => vote({ variables: { procedure, selection: "YES" } })}
+          >
+            <VoteButton source={require("../../../assets/icons/voteYes.png")} />
+          </VoteButtonWrapper>
+          <VoteButtonWrapper
+            disabled={voted}
+            onPress={() =>
+              vote({ variables: { procedure, selection: "ABSTINATION" } })
+            }
+          >
+            <VoteButton
+              source={require("../../../assets/icons/voteAbstention.png")}
+            />
+          </VoteButtonWrapper>
+          <VoteButtonWrapper
+            disabled={voted}
+            onPress={() => vote({ variables: { procedure, selection: "NO" } })}
+          >
+            <VoteButton source={require("../../../assets/icons/voteNo.png")} />
+          </VoteButtonWrapper>
+        </VoteWrapper>
+      </Content>
+    </Wrapper>
+  );
 
-export default Voting;
+Voting.propTypes = {
+  vote: PropTypes.func.isRequired,
+  procedure: PropTypes.string.isRequired,
+  voted: PropTypes.bool.isRequired
+};
+
+export default compose(
+  graphql(VOTE, {
+    name: "vote"
+  }),
+  graphql(VOTED, {
+    options: {
+      fetchPolicy: "cache-and-network"
+    },
+    props: ({ data: { loading, votes } }) => ({
+      voted: loading ? true : votes.voted
+    })
+  })
+)(Voting);
