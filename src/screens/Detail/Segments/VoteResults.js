@@ -32,7 +32,7 @@ const VoteResultLabel = styled.Text`
 
 class VoteResults extends Component {
   state = {
-    width: Dimensions.get("window").width
+    width: Dimensions.get("window").width - 18 * 2
   };
 
   render() {
