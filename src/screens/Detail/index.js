@@ -118,7 +118,7 @@ class Detail extends Component {
           )}
           {voteResults &&
             voteResults.yes && (
-              <Segment title="Ergebnis" open>
+              <Segment title="Ergebnis">
                 <VoteResults voteResults={voteResults} />
               </Segment>
             )}
