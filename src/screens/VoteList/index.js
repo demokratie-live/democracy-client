@@ -1,5 +1,3 @@
-// @flow
-
 import React, { Component } from "react";
 import { Platform, SegmentedControlIOS, Dimensions } from "react-native";
 import { graphql, compose } from "react-apollo";

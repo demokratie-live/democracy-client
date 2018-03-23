@@ -1,5 +1,4 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_id", "__typename"] }] */
-// @flow
 import { AsyncStorage } from "react-native";
 import { ApolloClient } from "apollo-client";
 import { ApolloLink } from "apollo-link";
