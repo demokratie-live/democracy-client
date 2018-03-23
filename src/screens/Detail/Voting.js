@@ -95,8 +95,7 @@ const Voting = ({ vote, voted, voteLocal, votedSelection }) => (
       </VoteIconButtonWrapper>
       <VoteIconButtonWrapper
         style={{
-          borderColor: "rgba(44, 130, 228, 0.8)",
-          transform: [{ rotate: "-90deg" }]
+          borderColor: "rgba(44, 130, 228, 0.8)"
         }}
         selection="ABSTINATION"
         votedSelection={votedSelection}
@@ -106,12 +105,15 @@ const Voting = ({ vote, voted, voteLocal, votedSelection }) => (
           voteLocal("ABSTINATION");
         }}
       >
-        <VoteIconButton />
+        <VoteIconButton
+          style={{
+            transform: [{ rotate: "-90deg" }]
+          }}
+        />
       </VoteIconButtonWrapper>
       <VoteIconButtonWrapper
         style={{
-          borderColor: "rgba(236, 62, 49, 0.8)",
-          transform: [{ rotate: "180deg" }]
+          borderColor: "rgba(236, 62, 49, 0.8)"
         }}
         selection="NO"
         votedSelection={votedSelection}
@@ -121,7 +123,11 @@ const Voting = ({ vote, voted, voteLocal, votedSelection }) => (
           voteLocal("NO");
         }}
       >
-        <VoteIconButton />
+        <VoteIconButton
+          style={{
+            transform: [{ rotate: "180deg" }]
+          }}
+        />
       </VoteIconButtonWrapper>
     </VoteWrapper>
     {/* </Content> */}
