@@ -124,9 +124,11 @@ matrix:
                     - 'android-sdk-license-.+'
                     - 'google-gdk-license-.+'
     script:
-    - cd android
-    - fastlane android alpha
-    - "curl -H 'Content-Type: application/json'  -X POST -d '{\"content\":\"Neue Android Alpha Version verfügbar!\"}' ${DISCORD_WEBHOOK}"
+    - cd android && fastlane android alpha
+    after_success:
+       - "curl -H 'Content-Type: application/json'  -X POST -d \"{\\\"content\\\":\\\"SUCCESS: New Android Alpha Version $TRAVIS_BUILD_NUMBER available!\\\"}\" ${DISCORD_WEBHOOK}"
+    after_failure:
+       - "curl -H 'Content-Type: application/json'  -X POST -d \"{\\\"content\\\":\\\"FAILURE: Deploying new Android Alpha Version $TRAVIS_BUILD_NUMBER failed!\\\"}\" ${DISCORD_WEBHOOK}"
 
   # ios deploy Testflight
   - if: branch =~ ^master AND NOT type =~ ^pull_request
@@ -153,7 +155,10 @@ matrix:
     - fastlane update_fastlane
     - cd ios
     - DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS="-t DAV" bundle exec fastlane ios beta
-    - "curl -H 'Content-Type: application/json'  -X POST -d '{\"content\":\"Neue iOS TestFlight Version verfügbar!\"}' ${DISCORD_WEBHOOK}"
+    after_success:
+       - "curl -H 'Content-Type: application/json'  -X POST -d \"{\\\"content\\\":\\\"SUCCESS: New iOS TestFlight Version $TRAVIS_BUILD_NUMBER available!\\\"}\" ${DISCORD_WEBHOOK}"
+    after_failure:
+       - "curl -H 'Content-Type: application/json'  -X POST -d \"{\\\"content\\\":\\\"FAILURE: Deploying new iOS TestFlight Version $TRAVIS_BUILD_NUMBER failed!\\\"}\" ${DISCORD_WEBHOOK}"
 
 after_script:
 - echo "BUILD FINISHED"
