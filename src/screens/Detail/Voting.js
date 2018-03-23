@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components/native";
 import { graphql, compose } from "react-apollo";
 import PropTypes from "prop-types";
-import Ionicons from "react-native-vector-icons/Ionicons";
 
 import VOTE from "../../graphql/mutations/vote";
 import VOTE_LOCAL from "../../graphql/mutations/voteLocal";
