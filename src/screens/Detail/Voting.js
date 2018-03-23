@@ -8,6 +8,7 @@ import VOTE_LOCAL from "../../graphql/mutations/voteLocal";
 import VOTED from "../../graphql/queries/voted";
 import VOTES from "../../graphql/queries/votes";
 import VOTED_LOCAL from "../../graphql/queries/votedLocal";
+import GET_ACTIVITY_INDEX from "../../graphql/queries/activityIndex";
 
 const SegmentWrapper = styled.View`
   padding-vertical: 10;
@@ -168,6 +169,10 @@ export default compose(
               {
                 query: VOTES,
                 variables: { procedure }
+              },
+              {
+                query: GET_ACTIVITY_INDEX,
+                variables: { procedureId: procedure }
               }
             ]
           })
