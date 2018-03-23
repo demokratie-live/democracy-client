@@ -127,9 +127,9 @@ matrix:
     - cd android
     - fastlane android alpha
     after_success:
-    - "curl -H 'Content-Type: application/json'  -X POST -d '{\"content\":\"SUCCESS: New Android Alpha Version ${TRAVIS_BUILD_NUMBER} available!\"}' ${DISCORD_WEBHOOK}"
+    - "curl -H 'Content-Type: application/json'  -X POST -d '{\"content\":\"SUCCESS: New Android Alpha Version $TRAVIS_BUILD_NUMBER available!\"}' ${DISCORD_WEBHOOK}"
     after_failure:
-    - "curl -H 'Content-Type: application/json'  -X POST -d '{\"content\":\"ERROR: Deploying new Android Alpha Version ${TRAVIS_BUILD_NUMBER} failed!\"}' ${DISCORD_WEBHOOK}"
+    - "curl -H 'Content-Type: application/json'  -X POST -d '{\"content\":\"ERROR: Deploying new Android Alpha Version $TRAVIS_BUILD_NUMBER failed!\"}' ${DISCORD_WEBHOOK}"
 
   # ios deploy Testflight
   - if: branch =~ ^master AND NOT type =~ ^pull_request
