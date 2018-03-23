@@ -77,6 +77,7 @@ class Detail extends Component {
       return null;
     }
     const {
+      _id,
       title,
       tags,
       abstract,
@@ -115,12 +116,6 @@ class Detail extends Component {
               <TagsText>{tags.join(", ")}</TagsText>
             </TagsWrapper>
           )}
-          {voteResults &&
-            voteResults.yes && (
-              <Segment title="Ergebnis" open>
-                <VoteResults voteResults={voteResults} />
-              </Segment>
-            )}
           <Segment title="Details" open>
             <SegmentDetails
               subjectGroups={subjectGroups}
@@ -133,7 +128,8 @@ class Detail extends Component {
           <Segment title="Dokumente">
             <SegmentDocuments documents={importantDocuments} />
           </Segment>
-          {listType === "VOTING" && <Voting />}
+          <VoteResults voteResults={voteResults} procedure={_id} />
+          {listType === "VOTING" && <Voting procedure={_id} />}
         </Content>
       </Wrapper>
     );

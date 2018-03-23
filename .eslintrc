@@ -20,6 +20,7 @@
       { "extensions": [".js", ".jsx"] }
     ],
     "no-use-before-define": 0,
-    "global-require": 0
+    "global-require": 0,
+    "no-underscore-dangle": ["error", { "allow": ["_id"] }]
   }
 }

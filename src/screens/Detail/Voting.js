@@ -1,5 +1,14 @@
 import React from "react";
 import styled from "styled-components/native";
+import { graphql, compose } from "react-apollo";
+import PropTypes from "prop-types";
+
+import VOTE from "../../graphql/mutations/vote";
+import VOTE_LOCAL from "../../graphql/mutations/voteLocal";
+import VOTED from "../../graphql/queries/voted";
+import VOTES from "../../graphql/queries/votes";
+import VOTED_LOCAL from "../../graphql/queries/votedLocal";
+import GET_ACTIVITY_INDEX from "../../graphql/queries/activityIndex";
 
 const SegmentWrapper = styled.View`
   padding-vertical: 10;
@@ -18,36 +27,196 @@ const VoteWrapper = styled.View`
   flex: 1;
   flex-direction: row;
   justify-content: space-between;
+  width: 100%;
+  max-width: 500;
+  align-self: center;
+  padding-horizontal: 18;
+  padding-vertical: 11;
 `;
 
-const VoteButton = styled.Image``;
+const VoteIconButtonWrapper = styled.TouchableOpacity`
+  width: 65;
+  height: 65;
+  border-width: 2;
+  border-color: rgba(21, 192, 99, 0.8);
+  border-radius: ${65 / 2};
+  align-items: center;
+  justify-content: center;
+  background-color: ${({ disabled, selection, votedSelection }) => {
+    if (disabled && selection !== votedSelection) {
+      return "grey";
+    }
+    switch (selection) {
+      case "YES":
+        return "#15C063";
+      case "ABSTINATION":
+        return "#2C82E4";
+      case "NO":
+        return "#EC3E31";
+      default:
+        return "grey";
+    }
+  }};
+`;
+
+const VoteIconButton = styled.Image.attrs({
+  flex: 1,
+  source: require("../../../assets/icons/thumbsUp.png"),
+  resizeMode: "contain",
+  width: null,
+  height: null
+})`
+  width: 30;
+  height: 30;
+`;
 
 const Title = styled.Text`
   flex: 1;
   font-size: 17;
 `;
 
-const Content = styled.View`
-  display: flex;
-  padding-horizontal: 16;
-  padding-vertical: 10;
-`;
-
-const Voting = () => (
+const Voting = ({ vote, voted, voteLocal, votedSelection }) => (
   <Wrapper>
     <SegmentWrapper>
       <Title>Abstimmen</Title>
     </SegmentWrapper>
-    <Content>
-      <VoteWrapper>
-        <VoteButton source={require("../../../assets/icons/voteYes.png")} />
-        <VoteButton
-          source={require("../../../assets/icons/voteAbstention.png")}
+    {/* <Content> */}
+    <VoteWrapper>
+      <VoteIconButtonWrapper
+        disabled={voted}
+        selection="YES"
+        votedSelection={votedSelection}
+        onPress={() => {
+          vote("YES");
+          voteLocal("YES");
+        }}
+      >
+        <VoteIconButton />
+      </VoteIconButtonWrapper>
+      <VoteIconButtonWrapper
+        style={{
+          borderColor: "rgba(44, 130, 228, 0.8)"
+        }}
+        selection="ABSTINATION"
+        votedSelection={votedSelection}
+        disabled={voted}
+        onPress={() => {
+          vote("ABSTINATION");
+          voteLocal("ABSTINATION");
+        }}
+      >
+        <VoteIconButton
+          style={{
+            transform: [{ rotate: "-90deg" }]
+          }}
         />
-        <VoteButton source={require("../../../assets/icons/voteNo.png")} />
-      </VoteWrapper>
-    </Content>
+      </VoteIconButtonWrapper>
+      <VoteIconButtonWrapper
+        style={{
+          borderColor: "rgba(236, 62, 49, 0.8)"
+        }}
+        selection="NO"
+        votedSelection={votedSelection}
+        disabled={voted}
+        onPress={() => {
+          vote("NO");
+          voteLocal("NO");
+        }}
+      >
+        <VoteIconButton
+          style={{
+            transform: [{ rotate: "180deg" }]
+          }}
+        />
+      </VoteIconButtonWrapper>
+    </VoteWrapper>
+    {/* </Content> */}
   </Wrapper>
 );
 
-export default Voting;
+Voting.propTypes = {
+  vote: PropTypes.func.isRequired,
+  voteLocal: PropTypes.func.isRequired,
+  voted: PropTypes.bool.isRequired,
+  votedSelection: PropTypes.string
+};
+
+Voting.defaultProps = {
+  votedSelection: undefined
+};
+
+export default compose(
+  graphql(VOTE, {
+    props({ ownProps: { procedure }, mutate }) {
+      return {
+        vote: selection =>
+          mutate({
+            variables: { procedure, selection },
+            optimisticResponse: {
+              __typename: "Mutation",
+              vote: {
+                __typename: "Vote",
+                voted: true
+              }
+            },
+            update: (proxy, { data: { vote: { voted } } }) => {
+              const data = proxy.readQuery({
+                query: VOTED,
+                variables: { procedure }
+              });
+              data.votes.voted = voted;
+              proxy.writeQuery({
+                query: VOTED,
+                variables: { procedure },
+                data
+              });
+            },
+            refetchQueries: [
+              {
+                query: VOTES,
+                variables: { procedure }
+              },
+              {
+                query: GET_ACTIVITY_INDEX,
+                variables: { procedureId: procedure }
+              }
+            ]
+          })
+      };
+    }
+  }),
+  graphql(VOTED, {
+    options: {
+      fetchPolicy: "cache-and-network"
+    },
+    props: ({ data: { loading, votes } }) => ({
+      voted: loading ? true : votes.voted
+    })
+  }),
+
+  graphql(VOTE_LOCAL, {
+    name: "voteLocal",
+    props({ ownProps: { procedure }, voteLocal }) {
+      return {
+        voteLocal: selection =>
+          voteLocal({
+            variables: { procedure, selection },
+            refetchQueries: [
+              {
+                query: VOTED_LOCAL,
+                variables: { procedure }
+              }
+            ]
+          })
+      };
+    }
+  }),
+  graphql(VOTED_LOCAL, {
+    props: ({ data: { votedLocal } }) => {
+      if (votedLocal) {
+        return { votedSelection: votedLocal.selection };
+      }
+      return {};
+    }
+  })
+)(Voting);

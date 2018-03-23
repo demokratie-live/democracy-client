@@ -13,6 +13,7 @@ import { onError } from "apollo-link-error";
 import Config from "../config";
 
 import { defaults, resolvers } from "./resolvers";
+import typeDefs from "./schemas";
 
 const cache = new InMemoryCache({
   dataIdFromObject: o => {
@@ -44,7 +45,7 @@ const authLink = setContext(async (_, { headers }) => {
   };
 });
 
-const stateLink = withClientState({ resolvers, cache, defaults });
+const stateLink = withClientState({ resolvers, cache, defaults, typeDefs });
 const linkError = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
     graphQLErrors.forEach(({ message, locations, path }) => {

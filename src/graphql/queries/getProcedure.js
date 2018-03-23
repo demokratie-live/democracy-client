@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 export default gql`
   query procedure($id: ID!) {
     procedure(id: $id) {
+      _id
       title
       tags
       abstract
