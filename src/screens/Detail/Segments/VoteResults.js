@@ -16,9 +16,15 @@ const ScrollView = styled.ScrollView.attrs({
 
 const VoteResults = props => {
   const { voteResults, comunityVotes } = props;
-  return (
-    <ScrollView>
-      {comunityVotes && (
+
+  const renderCommuntiyResult = () => {
+    if (
+      comunityVotes.voteResults &&
+      (comunityVotes.voteResults.yes ||
+        comunityVotes.voteResults.no ||
+        comunityVotes.voteResults.abstination)
+    ) {
+      return (
         <PieChart
           data={_.map(
             comunityVotes.voteResults,
@@ -27,7 +33,14 @@ const VoteResults = props => {
           ).filter(e => e)}
           colorScale={["#15C063", "#EC3E31", "#2C82E4"]}
         />
-      )}
+      );
+    }
+    return null;
+  };
+
+  return (
+    <ScrollView>
+      {renderCommuntiyResult()}
       <PieChart
         data={_.map(
           voteResults,
@@ -46,13 +59,16 @@ VoteResults.propTypes = {
     abstination: PropTypes.number.isRequired,
     notVote: PropTypes.number.isRequired
   }).isRequired,
-  comunityVotes: PropTypes.shape({
-    voteResults: PropTypes.shape({
-      yes: PropTypes.number.isRequired,
-      no: PropTypes.number.isRequired,
-      abstination: PropTypes.number.isRequired
-    }).isRequired
-  }).isRequired
+  comunityVotes: PropTypes.oneOfType([
+    PropTypes.shape({
+      voteResults: PropTypes.shape({
+        yes: PropTypes.oneOfType([PropTypes.number, null]),
+        no: PropTypes.oneOfType([PropTypes.number, null]),
+        abstination: PropTypes.oneOfType([PropTypes.number, null])
+      })
+    }),
+    PropTypes.bool
+  ]).isRequired
 };
 
 VoteResults.defaultProps = {};
@@ -62,5 +78,5 @@ export default graphql(VOTES, {
     variables: { procedure },
     fetchPolicy: "cache-and-network"
   }),
-  props: ({ data }) => ({ comunityVotes: data.votes })
+  props: ({ data }) => ({ comunityVotes: data.votes || false })
 })(VoteResults);
