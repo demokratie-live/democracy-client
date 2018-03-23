@@ -38,7 +38,7 @@ const VoteIconButtonWrapper = styled.TouchableOpacity`
   width: 65;
   height: 65;
   border-width: 2;
-  border-color: #a5c96c;
+  border-color: rgba(21, 192, 99, 0.8);
   border-radius: ${65 / 2};
   align-items: center;
   justify-content: center;
@@ -48,11 +48,11 @@ const VoteIconButtonWrapper = styled.TouchableOpacity`
     }
     switch (selection) {
       case "YES":
-        return "#a2c76b";
+        return "#15C063";
       case "ABSTINATION":
-        return "#4E7ED6";
+        return "#2C82E4";
       case "NO":
-        return "#E33629";
+        return "#EC3E31";
       default:
         return "grey";
     }
@@ -90,7 +90,7 @@ const Voting = ({ vote, voted, voteLocal, votedSelection }) => (
       </VoteIconButtonWrapper>
       <VoteIconButtonWrapper
         style={{
-          borderColor: "#4E92ED",
+          borderColor: "rgba(44, 130, 228, 0.8)",
           transform: [{ rotate: "-75deg" }]
         }}
         selection="ABSTINATION"
@@ -105,7 +105,7 @@ const Voting = ({ vote, voted, voteLocal, votedSelection }) => (
       </VoteIconButtonWrapper>
       <VoteIconButtonWrapper
         style={{
-          borderColor: "#ED675B",
+          borderColor: "rgba(236, 62, 49, 0.8)",
           transform: [{ rotate: "180deg" }]
         }}
         selection="NO"
