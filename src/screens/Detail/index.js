@@ -76,7 +76,6 @@ class Detail extends Component {
     if (loading && !this.props.data.procedure) {
       return null;
     }
-    console.log(this.props);
     const {
       _id,
       title,

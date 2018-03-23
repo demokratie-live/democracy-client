@@ -13,7 +13,14 @@ export const resolvers = {
       return null;
     },
     votesLocal: (_, { procedure, selection }, { cache }) => {
-      const previous = cache.readQuery({ query: VOTES_LOCAL });
+      let previous;
+
+      try {
+        previous = cache.readQuery({ query: VOTES_LOCAL });
+      } catch (error) {
+        previous = { votesLocal: [] };
+      }
+
       const newVote = {
         procedure,
         selection,
@@ -22,7 +29,7 @@ export const resolvers = {
       const data = {
         votesLocal: previous.votesLocal.concat([newVote])
       };
-      console.log("resolver", { previous, data });
+
       cache.writeData({ data });
       return newVote;
     },
@@ -43,9 +50,12 @@ export const resolvers = {
   },
   Query: {
     votedLocal: (_, { procedure }, { cache }) => {
-      const previous = cache.readQuery({ query: VOTES_LOCAL });
-
-      console.log("Query votedLocal", procedure, previous.votesLocal);
+      let previous;
+      try {
+        previous = cache.readQuery({ query: VOTES_LOCAL });
+      } catch (error) {
+        previous = { votesLocal: [] };
+      }
       return (
         previous.votesLocal.find(vote => vote.procedure === procedure) || null
       );
