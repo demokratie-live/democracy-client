@@ -59,11 +59,16 @@ const VoteIconButtonWrapper = styled.TouchableOpacity`
   }};
 `;
 
-const VoteIconButton = styled(Ionicons).attrs({
-  color: "#fff",
-  size: 50,
-  name: "ios-thumbs-up-outline"
-})``;
+const VoteIconButton = styled.Image.attrs({
+  flex: 1,
+  source: require("../../../assets/icons/thumbsUp.png"),
+  resizeMode: "contain",
+  width: null,
+  height: null
+})`
+  width: 30;
+  height: 30;
+`;
 
 const Title = styled.Text`
   flex: 1;
@@ -91,7 +96,7 @@ const Voting = ({ vote, voted, voteLocal, votedSelection }) => (
       <VoteIconButtonWrapper
         style={{
           borderColor: "rgba(44, 130, 228, 0.8)",
-          transform: [{ rotate: "-75deg" }]
+          transform: [{ rotate: "-90deg" }]
         }}
         selection="ABSTINATION"
         votedSelection={votedSelection}
