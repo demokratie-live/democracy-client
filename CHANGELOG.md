@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.2.x
+
+* General
+  * _BUG:_ Removed Permissions [#172](https://github.com/demokratie-live/democracy-client/issues/172)
+
 ### 0.2.2
 
 * Details
