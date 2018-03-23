@@ -1,9 +1,9 @@
 # Changelog
 
-### 0.2.x
+### 0.2.4
 
 * General
-  * _BUG:_ Removed Permissions [#172](https://github.com/demokratie-live/democracy-client/issues/172)
+  * [Android] Removed unnecessary Permissions [#172](https://github.com/demokratie-live/democracy-client/issues/172)
 
 ### v0.2.3
 
