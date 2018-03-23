@@ -5,6 +5,10 @@
 * General
   * _BUG:_ Removed Permissions [#172](https://github.com/demokratie-live/democracy-client/issues/172)
 
+### v0.2.3
+
+* _Changes:_ use https server
+
 ### 0.2.2
 
 * Details
