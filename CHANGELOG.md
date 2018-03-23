@@ -1,5 +1,9 @@
 # Changelog
 
+### v0.2.3
+
+* _Changes:_ use https server
+
 ### 0.2.2
 
 * Details
