@@ -25,7 +25,7 @@ const VoteResults = props => {
             (value, label) =>
               label !== "__typename" ? { value, label } : false
           ).filter(e => e)}
-          colorScale={["#15C063", "#EC3E31", "blue"]}
+          colorScale={["#15C063", "#EC3E31", "#2C82E4"]}
         />
       )}
       <PieChart
