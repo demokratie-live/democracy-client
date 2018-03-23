@@ -5,7 +5,9 @@ import PropTypes from "prop-types";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import VOTE from "../../graphql/mutations/vote";
+import VOTE_LOCAL from "../../graphql/mutations/voteLocal";
 import VOTED from "../../graphql/queries/voted";
+import VOTED_LOCAL from "../../graphql/queries/votedLocal";
 
 const SegmentWrapper = styled.View`
   padding-vertical: 10;
@@ -32,15 +34,15 @@ const VoteWrapper = styled.View`
 `;
 
 const VoteIconButtonWrapper = styled.TouchableOpacity`
-  width: 88;
-  height: 88;
+  width: 65;
+  height: 65;
   border-width: 2;
   border-color: #a5c96c;
-  border-radius: ${88 / 2};
+  border-radius: ${65 / 2};
   align-items: center;
   justify-content: center;
-  background-color: ${({ disabled, selection }) => {
-    if (disabled) {
+  background-color: ${({ disabled, selection, votedSelection }) => {
+    if (disabled && selection !== votedSelection) {
       return "grey";
     }
     switch (selection) {
@@ -58,7 +60,7 @@ const VoteIconButtonWrapper = styled.TouchableOpacity`
 
 const VoteIconButton = styled(Ionicons).attrs({
   color: "#fff",
-  size: 60,
+  size: 50,
   name: "ios-thumbs-up-outline"
 })``;
 
@@ -67,7 +69,7 @@ const Title = styled.Text`
   font-size: 17;
 `;
 
-const Voting = ({ vote, procedure, voted }) => (
+const Voting = ({ vote, voted, voteLocal, votedSelection }) => (
   <Wrapper>
     <SegmentWrapper>
       <Title>Abstimmen</Title>
@@ -77,7 +79,11 @@ const Voting = ({ vote, procedure, voted }) => (
       <VoteIconButtonWrapper
         disabled={voted}
         selection="YES"
-        onPress={() => vote({ variables: { procedure, selection: "YES" } })}
+        votedSelection={votedSelection}
+        onPress={() => {
+          vote("YES");
+          voteLocal("YES");
+        }}
       >
         <VoteIconButton />
       </VoteIconButtonWrapper>
@@ -87,21 +93,27 @@ const Voting = ({ vote, procedure, voted }) => (
           transform: [{ rotate: "-75deg" }]
         }}
         selection="ABSTINATION"
+        votedSelection={votedSelection}
         disabled={voted}
-        onPress={() =>
-          vote({ variables: { procedure, selection: "ABSTINATION" } })
-        }
+        onPress={() => {
+          vote("ABSTINATION");
+          voteLocal("ABSTINATION");
+        }}
       >
         <VoteIconButton />
       </VoteIconButtonWrapper>
       <VoteIconButtonWrapper
-        selection="NO"
         style={{
           borderColor: "#ED675B",
           transform: [{ rotate: "180deg" }]
         }}
+        selection="NO"
+        votedSelection={votedSelection}
         disabled={voted}
-        onPress={() => vote({ variables: { procedure, selection: "No" } })}
+        onPress={() => {
+          vote("NO");
+          voteLocal("NO");
+        }}
       >
         <VoteIconButton />
       </VoteIconButtonWrapper>
@@ -112,13 +124,44 @@ const Voting = ({ vote, procedure, voted }) => (
 
 Voting.propTypes = {
   vote: PropTypes.func.isRequired,
-  procedure: PropTypes.string.isRequired,
-  voted: PropTypes.bool.isRequired
+  voteLocal: PropTypes.func.isRequired,
+  voted: PropTypes.bool.isRequired,
+  votedSelection: PropTypes.string
+};
+
+Voting.defaultProps = {
+  votedSelection: undefined
 };
 
 export default compose(
   graphql(VOTE, {
-    name: "vote"
+    props({ ownProps: { procedure }, mutate }) {
+      return {
+        vote: selection =>
+          mutate({
+            variables: { procedure, selection },
+            optimisticResponse: {
+              __typename: "Mutation",
+              vote: {
+                __typename: "Vote",
+                voted: true
+              }
+            },
+            update: (proxy, { data: { vote: { voted } } }) => {
+              const data = proxy.readQuery({
+                query: VOTED,
+                variables: { procedure }
+              });
+              data.votes.voted = voted;
+              proxy.writeQuery({
+                query: VOTED,
+                variables: { procedure },
+                data
+              });
+            }
+          })
+      };
+    }
   }),
   graphql(VOTED, {
     options: {
@@ -127,5 +170,31 @@ export default compose(
     props: ({ data: { loading, votes } }) => ({
       voted: loading ? true : votes.voted
     })
+  }),
+
+  graphql(VOTE_LOCAL, {
+    name: "voteLocal",
+    props({ ownProps: { procedure }, voteLocal }) {
+      return {
+        voteLocal: selection =>
+          voteLocal({
+            variables: { procedure, selection },
+            refetchQueries: [
+              {
+                query: VOTED_LOCAL,
+                variables: { procedure }
+              }
+            ]
+          })
+      };
+    }
+  }),
+  graphql(VOTED_LOCAL, {
+    props: ({ data: { votedLocal } }) => {
+      if (votedLocal) {
+        return { votedSelection: votedLocal.selection };
+      }
+      return {};
+    }
   })
 )(Voting);

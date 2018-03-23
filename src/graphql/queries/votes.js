@@ -1,9 +1,14 @@
 import gql from "graphql-tag";
 
 export default gql`
-  query voted($procedure: ID!) {
+  query votes($procedure: ID!) {
     votes(procedure: $procedure) {
       voted
+      voteResults {
+        yes
+        no
+        abstination
+      }
     }
   }
 `;

@@ -119,7 +119,7 @@ class Detail extends Component {
           {voteResults &&
             voteResults.yes && (
               <Segment title="Ergebnis">
-                <VoteResults voteResults={voteResults} />
+                <VoteResults voteResults={voteResults} procedure={_id} />
               </Segment>
             )}
           <Segment title="Details" open>
