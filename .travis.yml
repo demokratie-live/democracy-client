@@ -85,8 +85,8 @@ matrix:
     - bundle exec fastlane ios test
 
   # android  deploy Alpha
-  #- if: branch =~ ^master AND NOT type =~ ^pull_request
-  - os: linux
+  - if: branch =~ ^master AND NOT type =~ ^pull_request
+    os: linux
     language: android
     jdk: oraclejdk8
 
@@ -155,7 +155,10 @@ matrix:
     - fastlane update_fastlane
     - cd ios
     - DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS="-t DAV" bundle exec fastlane ios beta
-    - "curl -H 'Content-Type: application/json'  -X POST -d '{\"content\":\"Neue iOS TestFlight Version verfügbar!\"}' ${DISCORD_WEBHOOK}"
+    after_success:
+       - "curl -H 'Content-Type: application/json'  -X POST -d \"{\\\"content\\\":\\\"SUCCESS: New iOS TestFlight Version $TRAVIS_BUILD_NUMBER available!\\\"}\" ${DISCORD_WEBHOOK}"
+    after_failure:
+       - "curl -H 'Content-Type: application/json'  -X POST -d \"{\\\"content\\\":\\\"FAILURE: Deploying new iOS TestFlight Version $TRAVIS_BUILD_NUMBER failed!\\\"}\" ${DISCORD_WEBHOOK}"
 
 after_script:
 - echo "BUILD FINISHED"
