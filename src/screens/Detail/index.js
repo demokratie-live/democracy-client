@@ -76,6 +76,7 @@ class Detail extends Component {
     if (loading && !this.props.data.procedure) {
       return null;
     }
+    console.log(this.props);
     const {
       _id,
       title,
@@ -116,12 +117,6 @@ class Detail extends Component {
               <TagsText>{tags.join(", ")}</TagsText>
             </TagsWrapper>
           )}
-          {voteResults &&
-            voteResults.yes && (
-              <Segment title="Ergebnis">
-                <VoteResults voteResults={voteResults} procedure={_id} />
-              </Segment>
-            )}
           <Segment title="Details" open>
             <SegmentDetails
               subjectGroups={subjectGroups}
@@ -134,6 +129,7 @@ class Detail extends Component {
           <Segment title="Dokumente">
             <SegmentDocuments documents={importantDocuments} />
           </Segment>
+          <VoteResults voteResults={voteResults} procedure={_id} />
           {listType === "VOTING" && <Voting procedure={_id} />}
         </Content>
       </Wrapper>

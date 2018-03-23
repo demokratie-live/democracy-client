@@ -2,9 +2,10 @@ import React from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import _ from "lodash";
-import { graphql } from "react-apollo";
+import { graphql, compose } from "react-apollo";
 
 import PieChart from "./VoteResults/PieChart";
+import Segment from "../Segment";
 
 import VOTES from "../../../graphql/queries/votes";
 
@@ -18,11 +19,12 @@ const VoteResults = props => {
   const { voteResults, comunityVotes } = props;
 
   const renderCommuntiyResult = () => {
+    const { voteResults: comunnityResults } = comunityVotes;
     if (
-      comunityVotes.voteResults &&
-      (comunityVotes.voteResults.yes ||
-        comunityVotes.voteResults.no ||
-        comunityVotes.voteResults.abstination)
+      comunityVotes.voted &&
+      (comunnityResults.yes ||
+        comunnityResults.no ||
+        comunnityResults.abstination)
     ) {
       return (
         <PieChart
@@ -38,26 +40,46 @@ const VoteResults = props => {
     return null;
   };
 
-  return (
-    <ScrollView>
-      {renderCommuntiyResult()}
-      <PieChart
-        data={_.map(
-          voteResults,
-          (value, label) => (label !== "__typename" ? { value, label } : false)
-        ).filter(e => e)}
-        colorScale={["#99C93E", "#D43194", "#4CB0D8", "#B1B3B4"]}
-      />
-    </ScrollView>
-  );
+  const renderGovermentResult = () => {
+    if (
+      voteResults &&
+      (voteResults.yes ||
+        voteResults.no ||
+        voteResults.notVote ||
+        voteResults.abstination)
+    ) {
+      return (
+        <PieChart
+          data={_.map(
+            voteResults,
+            (value, label) =>
+              label !== "__typename" ? { value, label } : false
+          ).filter(e => e)}
+          colorScale={["#99C93E", "#D43194", "#4CB0D8", "#B1B3B4"]}
+        />
+      );
+    }
+    return null;
+  };
+  if (comunityVotes.voted) {
+    return (
+      <Segment title="Ergebnis" open>
+        <ScrollView>
+          {renderCommuntiyResult()}
+          {renderGovermentResult()}
+        </ScrollView>
+      </Segment>
+    );
+  }
+  return null;
 };
 
 VoteResults.propTypes = {
   voteResults: PropTypes.shape({
-    yes: PropTypes.number.isRequired,
-    no: PropTypes.number.isRequired,
-    abstination: PropTypes.number.isRequired,
-    notVote: PropTypes.number.isRequired
+    yes: PropTypes.number,
+    no: PropTypes.number,
+    abstination: PropTypes.number,
+    notVote: PropTypes.number
   }).isRequired,
   comunityVotes: PropTypes.oneOfType([
     PropTypes.shape({
@@ -73,10 +95,12 @@ VoteResults.propTypes = {
 
 VoteResults.defaultProps = {};
 
-export default graphql(VOTES, {
-  options: ({ procedure }) => ({
-    variables: { procedure },
-    fetchPolicy: "cache-and-network"
-  }),
-  props: ({ data }) => ({ comunityVotes: data.votes || false })
-})(VoteResults);
+export default compose(
+  graphql(VOTES, {
+    options: ({ procedure }) => ({
+      variables: { procedure },
+      fetchPolicy: "cache-and-network"
+    }),
+    props: ({ data }) => ({ comunityVotes: data.votes || {} })
+  })
+)(VoteResults);

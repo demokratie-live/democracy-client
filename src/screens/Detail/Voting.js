@@ -7,6 +7,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import VOTE from "../../graphql/mutations/vote";
 import VOTE_LOCAL from "../../graphql/mutations/voteLocal";
 import VOTED from "../../graphql/queries/voted";
+import VOTES from "../../graphql/queries/votes";
 import VOTED_LOCAL from "../../graphql/queries/votedLocal";
 
 const SegmentWrapper = styled.View`
@@ -158,7 +159,13 @@ export default compose(
                 variables: { procedure },
                 data
               });
-            }
+            },
+            refetchQueries: [
+              {
+                query: VOTES,
+                variables: { procedure }
+              }
+            ]
           })
       };
     }
