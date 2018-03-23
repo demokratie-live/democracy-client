@@ -27,7 +27,10 @@ export const resolvers = {
         __typename: "VoteLocalItem"
       };
       const data = {
-        votesLocal: previous.votesLocal.concat([newVote])
+        votesLocal: [
+          ...previous.votesLocal.filter(v => v.procedure !== procedure),
+          newVote
+        ]
       };
 
       cache.writeData({ data });
