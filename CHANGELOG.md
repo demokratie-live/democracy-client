@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.3.0
+
+* 🤹‍ Voting for users is now possible!
+
 ### 0.2.4
 
 * General
