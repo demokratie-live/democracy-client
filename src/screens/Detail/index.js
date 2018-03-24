@@ -129,7 +129,9 @@ class Detail extends Component {
             <SegmentDocuments documents={importantDocuments} />
           </Segment>
           <VoteResults voteResults={voteResults} procedure={_id} />
-          {listType === "VOTING" && <Voting procedure={_id} />}
+          {listType === "VOTING" && (
+            <Voting procedureObjId={_id} procedureId={procedureId} />
+          )}
         </Content>
       </Wrapper>
     );

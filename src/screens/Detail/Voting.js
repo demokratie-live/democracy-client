@@ -147,11 +147,11 @@ Voting.defaultProps = {
 
 export default compose(
   graphql(VOTE, {
-    props({ ownProps: { procedure }, mutate }) {
+    props({ ownProps: { procedureObjId, procedureId }, mutate }) {
       return {
         vote: selection =>
           mutate({
-            variables: { procedure, selection },
+            variables: { procedure: procedureObjId, selection },
             optimisticResponse: {
               __typename: "Mutation",
               vote: {
@@ -162,33 +162,44 @@ export default compose(
             update: (proxy, { data: { vote: { voted } } }) => {
               const data = proxy.readQuery({
                 query: VOTED,
-                variables: { procedure }
+                variables: { procedure: procedureObjId }
               });
               data.votes.voted = voted;
               proxy.writeQuery({
                 query: VOTED,
-                variables: { procedure },
+                variables: { procedure: procedureObjId },
                 data
               });
+              const activityData = proxy.readQuery({
+                query: GET_ACTIVITY_INDEX,
+                variables: { procedureId }
+              });
+              if (!activityData.activityIndex.active) {
+                activityData.activityIndex.active = true;
+                activityData.activityIndex.activityIndex += 1;
+                proxy.writeQuery({
+                  query: GET_ACTIVITY_INDEX,
+                  variables: { procedureId },
+                  data: activityData
+                });
+              }
             },
             refetchQueries: [
               {
                 query: VOTES,
-                variables: { procedure }
-              },
-              {
-                query: GET_ACTIVITY_INDEX,
-                variables: { procedureId: procedure }
+                variables: { procedure: procedureObjId }
               }
             ]
           })
       };
     }
   }),
+
   graphql(VOTED, {
-    options: {
+    options: ({ procedureObjId }) => ({
+      variables: { procedure: procedureObjId },
       fetchPolicy: "cache-and-network"
-    },
+    }),
     props: ({ data: { loading, votes } }) => ({
       voted: loading ? true : votes.voted
     })
@@ -196,15 +207,15 @@ export default compose(
 
   graphql(VOTE_LOCAL, {
     name: "voteLocal",
-    props({ ownProps: { procedure }, voteLocal }) {
+    props({ ownProps: { procedureObjId }, voteLocal }) {
       return {
         voteLocal: selection =>
           voteLocal({
-            variables: { procedure, selection },
+            variables: { procedure: procedureObjId, selection },
             refetchQueries: [
               {
                 query: VOTED_LOCAL,
-                variables: { procedure }
+                variables: { procedure: procedureObjId }
               }
             ]
           })
@@ -212,6 +223,9 @@ export default compose(
     }
   }),
   graphql(VOTED_LOCAL, {
+    options: ({ procedureObjId }) => ({
+      variables: { procedure: procedureObjId }
+    }),
     props: ({ data: { votedLocal } }) => {
       if (votedLocal) {
         return { votedSelection: votedLocal.selection };
