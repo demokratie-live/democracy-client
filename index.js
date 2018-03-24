@@ -1,4 +1,3 @@
-// @flow
 import {
   Navigation,
   ScreenVisibilityListener as RNNScreenVisibilityListener

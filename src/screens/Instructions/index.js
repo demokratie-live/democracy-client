@@ -1,5 +1,3 @@
-// @flow
-
 import React, { Component } from "react";
 import Swiper from "react-native-swiper";
 import { graphql } from "react-apollo";

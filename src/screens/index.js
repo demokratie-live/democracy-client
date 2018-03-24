@@ -1,4 +1,3 @@
-// @flow
 import { Navigation } from "react-native-navigation";
 import { ApolloProvider } from "react-apollo";
 
