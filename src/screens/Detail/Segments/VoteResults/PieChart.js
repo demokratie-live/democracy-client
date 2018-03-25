@@ -120,7 +120,7 @@ PieChart.propTypes = {
       label: PropTypes.string.isRequired
     })
   ).isRequired,
-
+  label: PropTypes.string.isRequired,
   colorScale: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
 };
 
