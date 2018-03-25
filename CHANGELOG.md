@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.X
+
+* Details
+  * _Add:_ Label to PieChart
+  * _Bug:_ Increase activity index directly
+
 ### 0.3.1
 
 * Support
