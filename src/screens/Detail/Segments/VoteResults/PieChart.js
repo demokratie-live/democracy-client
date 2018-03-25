@@ -9,6 +9,22 @@ const VoteResultsWrapper = styled.View`
   align-items: center;
 `;
 
+const VoteResultsPieWrapper = styled.View`
+  justify-content: center;
+  align-items: center;
+`;
+
+const VoteResultPieValue = styled.Text`
+  font-size: 17;
+  color: #4a4a4a;
+`;
+
+const VoteResultPieLabel = styled.Text`
+  font-size: 11;
+  color: #4a4a4a;
+  padding-top: 3;
+`;
+
 const VoteResultNumbers = styled.View`
   padding-top: 18;
   flex-direction: row;
@@ -46,7 +62,7 @@ class PieChart extends Component {
   };
 
   render() {
-    const { data, colorScale } = this.props;
+    const { data, colorScale, label } = this.props;
     const { width } = this.state;
     return (
       <VoteResultsWrapper
@@ -54,19 +70,36 @@ class PieChart extends Component {
           this.setState({ width: newWidth })
         }
       >
-        <VictoryPie
-          allowZoom={false}
-          padding={{ top: 0, bottom: 0, left: 0, right: 0 }}
-          width={width}
-          height={width}
-          colorScale={colorScale}
-          data={data.map((entry, index) => ({
-            x: index,
-            y: entry.value,
-            label: " "
-          }))}
-          innerRadius={width / 5.6}
-        />
+        <VoteResultsPieWrapper>
+          <VictoryPie
+            allowZoom={false}
+            padding={{ top: 0, bottom: 0, left: 0, right: 0 }}
+            width={width}
+            height={width}
+            colorScale={colorScale}
+            data={data.map((entry, index) => ({
+              x: index,
+              y: entry.value,
+              label: " "
+            }))}
+            innerRadius={width / 5.6}
+          />
+          <VoteResult style={{ position: "absolute" }}>
+            <VoteResultPieValue>
+              {data.reduce((v, { value }) => v + value, 0)}
+            </VoteResultPieValue>
+            <VoteResultPieLabel>{label}</VoteResultPieLabel>
+          </VoteResult>
+          {/* Andoid scroll fix */}
+          <View
+            style={{
+              zIndex: 9999,
+              position: "absolute",
+              width: "100%",
+              height: "100%"
+            }}
+          />
+        </VoteResultsPieWrapper>
         <VoteResultNumbers>
           {data.map(entry => (
             <VoteResult key={entry.label}>
@@ -75,15 +108,6 @@ class PieChart extends Component {
             </VoteResult>
           ))}
         </VoteResultNumbers>
-        {/* Andoid scroll fix */}
-        <View
-          style={{
-            zIndex: 9999,
-            position: "absolute",
-            width: "100%",
-            height: "100%"
-          }}
-        />
       </VoteResultsWrapper>
     );
   }
