@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.3.X
+
+* Details
+  * _Add:_ Add current State
+
 ### 0.3.4
 
 * Support
