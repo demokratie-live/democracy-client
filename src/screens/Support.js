@@ -19,7 +19,7 @@ const ScrollWrapper = styled.ScrollView`
 const Wrapper = styled.View`
   flex: 1;
   padding-vertical: 30;
-  padding-horizontal: 48;
+  padding-horizontal: 18;
   align-items: center;
 `;
 
@@ -109,9 +109,9 @@ class Support extends Component {
             {`ist eine Initiative für mehr Basisdemokratie in Deutschland.
 
 
-Indem wir die modernen und weitverbreiteten digitalen Medien nutzen, um kontinuierlich bundesweite Bürgerabstimmungen zu organisieren, überwindet politische Biteiligung die klassischen Grenzen von Ort und Zeit.
+Indem wir die modernen und weitverbreiteten digitalen Medien nutzen, um kontinuierlich bundesweite Bürgerabstimmungen zu organisieren, überwindet politische Beteiligung die klassischen Grenzen von Ort und Zeit.
 
-DEMOCRACY ist öffentliche Infrastruktur, die das Funktionieren einer lebendigen Demokratie begünstigen soll.`}
+DEMOCRACY ist eine öffentliche Infrastruktur, die das Funktionieren einer lebendigen Demokratie begünstigen soll.`}
           </Text>
           <ContactWrapper>
             <IconWrapper onPress={this.linking(phoneNumber)}>

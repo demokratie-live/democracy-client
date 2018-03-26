@@ -4,6 +4,9 @@
 
 * Details
   * _Add:_ Add current State
+* Support
+  * _Change:_ Text width
+  * _Change:_ Text
 
 ### 0.3.4
 
