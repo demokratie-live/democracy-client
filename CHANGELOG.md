@@ -2,6 +2,10 @@
 
 ### 0.3.2
 
+* _Bug:_ Remove Emoji from changelog
+
+### 0.3.2
+
 * Details
   * _Add:_ Label to PieChart
   * _Change:_ Change VoteButton style
@@ -14,7 +18,7 @@
 
 ### 0.3.0
 
-* 🤹‍ Voting for users is now possible!
+* Voting for users is now possible!
 
 ### 0.2.4
 
