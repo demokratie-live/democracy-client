@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.3.3
+
+* _Bug:_ Remove Emoji from changelog
+
 ### 0.3.2
 
 * Details
@@ -14,7 +18,7 @@
 
 ### 0.3.0
 
-* 🤹‍ Voting for users is now possible!
+* Voting for users is now possible!
 
 ### 0.2.4
 
