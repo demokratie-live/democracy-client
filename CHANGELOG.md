@@ -1,9 +1,13 @@
 # Changelog
 
-### 0.3.X
+### 0.3.4
 
 * Support
   * _Bug:_ App killing on click e-mail & github button resolved
+
+### 0.3.3
+
+* _Bug:_ Remove Emoji from changelog
 
 ### 0.3.2
 
@@ -19,7 +23,7 @@
 
 ### 0.3.0
 
-* 🤹‍ Voting for users is now possible!
+* Voting for users is now possible!
 
 ### 0.2.4
 
