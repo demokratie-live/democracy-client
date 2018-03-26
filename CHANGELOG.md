@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.3.2
+
+* Details
+  * _Add:_ Label to PieChart
+  * _Change:_ Change VoteButton style
+  * _Bug:_ Increase activity index directly
+
 ### 0.3.1
 
 * Support

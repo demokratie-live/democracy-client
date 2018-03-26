@@ -73,7 +73,7 @@ class Detail extends Component {
   render() {
     const { listType, procedureId } = this.props;
     const { data: { loading, networkStatus, refetch } } = this.props;
-    if (loading && !this.props.data.procedure) {
+    if (loading || !this.props.data.procedure) {
       return null;
     }
     const {
@@ -129,7 +129,9 @@ class Detail extends Component {
             <SegmentDocuments documents={importantDocuments} />
           </Segment>
           <VoteResults voteResults={voteResults} procedure={_id} />
-          {listType === "VOTING" && <Voting procedure={_id} />}
+          {listType === "VOTING" && (
+            <Voting procedureObjId={_id} procedureId={procedureId} />
+          )}
         </Content>
       </Wrapper>
     );

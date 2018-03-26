@@ -35,11 +35,11 @@ const VoteWrapper = styled.View`
 `;
 
 const VoteIconButtonWrapper = styled.TouchableOpacity`
-  width: 65;
-  height: 65;
-  border-width: 2;
+  width: 88;
+  height: 88;
+
   border-color: rgba(21, 192, 99, 0.8);
-  border-radius: ${65 / 2};
+  border-radius: ${88 / 2};
   align-items: center;
   justify-content: center;
   background-color: ${({ disabled, selection, votedSelection }) => {
@@ -66,8 +66,8 @@ const VoteIconButton = styled.Image.attrs({
   width: null,
   height: null
 })`
-  width: 30;
-  height: 30;
+  width: 40;
+  height: 40;
 `;
 
 const Title = styled.Text`
@@ -91,7 +91,11 @@ const Voting = ({ vote, voted, voteLocal, votedSelection }) => (
           voteLocal("YES");
         }}
       >
-        <VoteIconButton />
+        <VoteIconButton
+          style={{
+            marginBottom: 5
+          }}
+        />
       </VoteIconButtonWrapper>
       <VoteIconButtonWrapper
         style={{
@@ -107,7 +111,8 @@ const Voting = ({ vote, voted, voteLocal, votedSelection }) => (
       >
         <VoteIconButton
           style={{
-            transform: [{ rotate: "-90deg" }]
+            transform: [{ rotate: "-90deg" }],
+            marginRight: 5
           }}
         />
       </VoteIconButtonWrapper>
@@ -125,7 +130,8 @@ const Voting = ({ vote, voted, voteLocal, votedSelection }) => (
       >
         <VoteIconButton
           style={{
-            transform: [{ rotate: "180deg" }]
+            transform: [{ rotate: "180deg" }],
+            marginTop: 5
           }}
         />
       </VoteIconButtonWrapper>
@@ -147,11 +153,11 @@ Voting.defaultProps = {
 
 export default compose(
   graphql(VOTE, {
-    props({ ownProps: { procedure }, mutate }) {
+    props({ ownProps: { procedureObjId, procedureId }, mutate }) {
       return {
         vote: selection =>
           mutate({
-            variables: { procedure, selection },
+            variables: { procedure: procedureObjId, selection },
             optimisticResponse: {
               __typename: "Mutation",
               vote: {
@@ -162,33 +168,44 @@ export default compose(
             update: (proxy, { data: { vote: { voted } } }) => {
               const data = proxy.readQuery({
                 query: VOTED,
-                variables: { procedure }
+                variables: { procedure: procedureObjId }
               });
               data.votes.voted = voted;
               proxy.writeQuery({
                 query: VOTED,
-                variables: { procedure },
+                variables: { procedure: procedureObjId },
                 data
               });
+              const activityData = proxy.readQuery({
+                query: GET_ACTIVITY_INDEX,
+                variables: { procedureId }
+              });
+              if (!activityData.activityIndex.active) {
+                activityData.activityIndex.active = true;
+                activityData.activityIndex.activityIndex += 1;
+                proxy.writeQuery({
+                  query: GET_ACTIVITY_INDEX,
+                  variables: { procedureId },
+                  data: activityData
+                });
+              }
             },
             refetchQueries: [
               {
                 query: VOTES,
-                variables: { procedure }
-              },
-              {
-                query: GET_ACTIVITY_INDEX,
-                variables: { procedureId: procedure }
+                variables: { procedure: procedureObjId }
               }
             ]
           })
       };
     }
   }),
+
   graphql(VOTED, {
-    options: {
+    options: ({ procedureObjId }) => ({
+      variables: { procedure: procedureObjId },
       fetchPolicy: "cache-and-network"
-    },
+    }),
     props: ({ data: { loading, votes } }) => ({
       voted: loading ? true : votes.voted
     })
@@ -196,15 +213,15 @@ export default compose(
 
   graphql(VOTE_LOCAL, {
     name: "voteLocal",
-    props({ ownProps: { procedure }, voteLocal }) {
+    props({ ownProps: { procedureObjId }, voteLocal }) {
       return {
         voteLocal: selection =>
           voteLocal({
-            variables: { procedure, selection },
+            variables: { procedure: procedureObjId, selection },
             refetchQueries: [
               {
                 query: VOTED_LOCAL,
-                variables: { procedure }
+                variables: { procedure: procedureObjId }
               }
             ]
           })
@@ -212,6 +229,9 @@ export default compose(
     }
   }),
   graphql(VOTED_LOCAL, {
+    options: ({ procedureObjId }) => ({
+      variables: { procedure: procedureObjId }
+    }),
     props: ({ data: { votedLocal } }) => {
       if (votedLocal) {
         return { votedSelection: votedLocal.selection };
