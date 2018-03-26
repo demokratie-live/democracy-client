@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.3.4
+
+* Support
+  * _Bug:_ App killing on click e-mail & github button resolved
+
 ### 0.3.3
 
 * _Bug:_ Remove Emoji from changelog
