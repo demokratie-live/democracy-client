@@ -35,11 +35,11 @@ const VoteWrapper = styled.View`
 `;
 
 const VoteIconButtonWrapper = styled.TouchableOpacity`
-  width: 65;
-  height: 65;
-  border-width: 2;
+  width: 88;
+  height: 88;
+
   border-color: rgba(21, 192, 99, 0.8);
-  border-radius: ${65 / 2};
+  border-radius: ${88 / 2};
   align-items: center;
   justify-content: center;
   background-color: ${({ disabled, selection, votedSelection }) => {
@@ -66,8 +66,8 @@ const VoteIconButton = styled.Image.attrs({
   width: null,
   height: null
 })`
-  width: 30;
-  height: 30;
+  width: 40;
+  height: 40;
 `;
 
 const Title = styled.Text`
@@ -91,7 +91,11 @@ const Voting = ({ vote, voted, voteLocal, votedSelection }) => (
           voteLocal("YES");
         }}
       >
-        <VoteIconButton />
+        <VoteIconButton
+          style={{
+            marginBottom: 5
+          }}
+        />
       </VoteIconButtonWrapper>
       <VoteIconButtonWrapper
         style={{
@@ -107,7 +111,8 @@ const Voting = ({ vote, voted, voteLocal, votedSelection }) => (
       >
         <VoteIconButton
           style={{
-            transform: [{ rotate: "-90deg" }]
+            transform: [{ rotate: "-90deg" }],
+            marginRight: 5
           }}
         />
       </VoteIconButtonWrapper>
@@ -125,7 +130,8 @@ const Voting = ({ vote, voted, voteLocal, votedSelection }) => (
       >
         <VoteIconButton
           style={{
-            transform: [{ rotate: "180deg" }]
+            transform: [{ rotate: "180deg" }],
+            marginTop: 5
           }}
         />
       </VoteIconButtonWrapper>

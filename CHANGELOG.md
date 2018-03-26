@@ -4,6 +4,7 @@
 
 * Details
   * _Add:_ Label to PieChart
+  * _Change:_ Change VoteButton style
   * _Bug:_ Increase activity index directly
 
 ### 0.3.1
