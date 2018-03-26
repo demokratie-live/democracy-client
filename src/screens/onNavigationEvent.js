@@ -1,8 +1,13 @@
 import topTabs from "./VoteList/topTabs";
 
+let currentScreen;
 export default ({ event, navigator }) => {
   switch (event.type) {
     case "DeepLink":
+      if (event.link === currentScreen) {
+        break;
+      }
+      currentScreen = event.link;
       if (event.link === "democracy.VoteList") {
         navigator.resetTo({
           screen: event.link,
@@ -11,10 +16,11 @@ export default ({ event, navigator }) => {
           animated: false
         });
       } else {
-        navigator.resetTo({
+        navigator.push({
           screen: event.link,
           title: event.payload.title,
-          animated: false
+          animated: false,
+          backButtonHidden: true
         });
       }
       break;
