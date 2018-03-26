@@ -1,6 +1,6 @@
 # Changelog
 
-### 0.3.X
+### 0.3.2
 
 * Details
   * _Add:_ Label to PieChart
