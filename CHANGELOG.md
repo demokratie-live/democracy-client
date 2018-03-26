@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.3.X
+
+* Support
+  * _Bug:_ App killing on click e-mail & github button resolved
+
 ### 0.3.2
 
 * Details
