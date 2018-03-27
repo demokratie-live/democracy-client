@@ -1,11 +1,12 @@
 import PushNotification from "react-native-push-notification";
-import { PushNotificationIOS } from "react-native";
+import { PushNotificationIOS, AsyncStorage } from "react-native";
 
 const configure = () => {
   PushNotification.configure({
-    onRegister(token) {
+    async onRegister({ token, os }) {
       // process token
-      console.log("onRegister", token);
+      console.log("onRegister", token, os);
+      await AsyncStorage.setItem("push-token", token);
     },
 
     onNotification(notification) {
