@@ -54,7 +54,8 @@ const Details = ({
   submissionDate,
   dateVote,
   abstract,
-  procedureId
+  procedureId,
+  currentStatus
 }) => (
   <Wrapper>
     <Head>
@@ -80,6 +81,9 @@ const Details = ({
         </HeadRightDescr>
       </HeadRight>
     </Head>
+
+    <DefTitle style={{ paddingTop: 8 }}>Aktueller Stand</DefTitle>
+    <DefDescr>{currentStatus}</DefDescr>
     <Content>
       {abstract && (
         <View>
@@ -96,7 +100,8 @@ Details.propTypes = {
   submissionDate: PropTypes.string.isRequired,
   dateVote: PropTypes.string,
   abstract: PropTypes.string,
-  procedureId: PropTypes.string.isRequired
+  procedureId: PropTypes.string.isRequired,
+  currentStatus: PropTypes.string.isRequired
 };
 
 Details.defaultProps = {

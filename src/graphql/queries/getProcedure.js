@@ -10,6 +10,7 @@ export default gql`
       voteDate
       subjectGroups
       submissionDate
+      currentStatus
       importantDocuments {
         editor
         type

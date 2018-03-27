@@ -19,12 +19,12 @@ const ScrollWrapper = styled.ScrollView`
 const Wrapper = styled.View`
   flex: 1;
   padding-vertical: 30;
-  padding-horizontal: 48;
+  padding-horizontal: 18;
   align-items: center;
 `;
 
 const Logo = styled.Image.attrs({
-  source: require("../../assets/images/logo-text10X.png")
+  source: require("../../assets/images/support-logo.png")
 })``;
 
 const Text = styled.Text`
@@ -106,12 +106,11 @@ class Support extends Component {
         <Wrapper>
           <Logo />
           <Text>
-            {`ist eine Initiative für mehr Basisdemokratie in Deutschland.
+            {`Ist etwas unklar? Du möchtest bei Problemen unterstützt werden? Der DEMOCRACY Support steht Dir bei Fragen zur Seite.
 
+Um Fehler zu beheben, ist allerdings ein qualifiziertes Feedback notwendig. Deshalb gib uns möglichst viele Informationen zu den von Dir gefunden Fehlern oder Verbesserungsvor-schlägen.
 
-Indem wir die modernen und weitverbreiteten digitalen Medien nutzen, um kontinuierlich bundesweite Bürgerabstimmungen zu organisieren, überwindet politische Biteiligung die klassischen Grenzen von Ort und Zeit.
-
-DEMOCRACY ist öffentliche Infrastruktur, die das Funktionieren einer lebendigen Demokratie begünstigen soll.`}
+Übermittele uns daher immer einen Screenshot, eine kurze Fehlerbeschreibung sowie Deine Plattform (iOS/Android) und Deine Geräte-bezeichnung (z.B. iPhone SE), damit wir Dir schnellstmöglich helfen können. `}
           </Text>
           <ContactWrapper>
             <IconWrapper onPress={this.linking(phoneNumber)}>

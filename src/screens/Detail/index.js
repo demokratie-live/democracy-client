@@ -85,7 +85,8 @@ class Detail extends Component {
       subjectGroups,
       submissionDate,
       importantDocuments,
-      voteResults
+      voteResults,
+      currentStatus
     } = this.props.data.procedure;
     return (
       <Wrapper
@@ -123,6 +124,7 @@ class Detail extends Component {
               dateVote={date}
               abstract={abstract}
               procedureId={procedureId}
+              currentStatus={currentStatus}
             />
           </Segment>
           <Segment title="Dokumente">
