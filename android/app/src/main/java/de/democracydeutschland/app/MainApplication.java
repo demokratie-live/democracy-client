@@ -3,6 +3,7 @@ package de.democracydeutschland.app;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.horcrux.svg.SvgPackage;
 import com.horcrux.svg.SvgPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
@@ -21,8 +22,6 @@ import java.util.List;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.sha256lib.Sha256Package;
 
-import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
-
 public class MainApplication extends NavigationApplication {
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
@@ -34,13 +33,13 @@ public class MainApplication extends NavigationApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(new MainReactPackage(),
+            new ReactNativePushNotificationPackage(),
             new SvgPackage(),
             new RNDeviceInfo(),
             new ReactNativeConfigPackage(),
             new VectorIconsPackage(),
             new LinearGradientPackage(),
-            new Sha256Package(),
-            new ReactNativePushNotificationPackage()
+            new Sha256Package()
       );
     }
 
@@ -72,13 +71,13 @@ public class MainApplication extends NavigationApplication {
     // No need to add RnnPackage and MainReactPackage
     return Arrays.<ReactPackage>asList(
     // eg. new VectorIconsPackage()
+            new ReactNativePushNotificationPackage(),
             new SvgPackage(),
             new RNDeviceInfo(),
             new ReactNativeConfigPackage(),
             new VectorIconsPackage(),
             new LinearGradientPackage(),
-            new Sha256Package(),
-            new ReactNativePushNotificationPackage()
+            new Sha256Package()
     );
   }
 
