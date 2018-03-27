@@ -21,6 +21,8 @@ import java.util.List;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.sha256lib.Sha256Package;
 
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
+
 public class MainApplication extends NavigationApplication {
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
@@ -37,7 +39,8 @@ public class MainApplication extends NavigationApplication {
             new ReactNativeConfigPackage(),
             new VectorIconsPackage(),
             new LinearGradientPackage(),
-            new Sha256Package()
+            new Sha256Package(),
+            new ReactNativePushNotificationPackage()
       );
     }
 
@@ -74,7 +77,8 @@ public class MainApplication extends NavigationApplication {
             new ReactNativeConfigPackage(),
             new VectorIconsPackage(),
             new LinearGradientPackage(),
-            new Sha256Package()
+            new Sha256Package(),
+            new ReactNativePushNotificationPackage()
     );
   }
 
