@@ -7,6 +7,7 @@
 * Support
   * _Change:_ Text width
   * _Change:_ Text
+  * _Change:_ Image
   * _Bug:_ [Android] Do not close on back button
 * Security
   * _Bug:_ [Android] Do not close on back button
