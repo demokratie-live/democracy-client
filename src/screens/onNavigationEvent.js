@@ -7,7 +7,6 @@ export default ({ event, navigator }) => {
       if (event.link === currentScreen) {
         break;
       }
-      currentScreen = event.link;
       if (event.link === "democracy.VoteList") {
         navigator.resetTo({
           screen: event.link,
@@ -45,4 +44,5 @@ export default ({ event, navigator }) => {
     default:
       break;
   }
+  currentScreen = event.link;
 };
