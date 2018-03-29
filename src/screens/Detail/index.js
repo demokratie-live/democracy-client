@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import { graphql, compose } from "react-apollo";
-import { RefreshControl } from "react-native";
+import { RefreshControl, TouchableOpacity } from "react-native";
 
 import getProcedure from "../../graphql/queries/getProcedure";
+import TOGGLE_NOTIFICATION from "../../graphql/mutations/toggleNotification";
 
 import ActivityIndex from "../../components/ActivityIndex";
 import DateTime from "../../components/Date";
@@ -71,7 +72,7 @@ class Detail extends Component {
   };
 
   render() {
-    const { listType, procedureId } = this.props;
+    const { listType, procedureId, toggleNotification } = this.props;
     const { data: { loading, networkStatus, refetch } } = this.props;
     if (loading || !this.props.data.procedure) {
       return null;
@@ -86,7 +87,8 @@ class Detail extends Component {
       submissionDate,
       importantDocuments,
       voteResults,
-      currentStatus
+      currentStatus,
+      notify
     } = this.props.data.procedure;
     return (
       <Wrapper
@@ -101,9 +103,15 @@ class Detail extends Component {
           <IntroMain>
             <IntroTitle>{title}</IntroTitle>
             <IntroButtons>
-              <IntroButton
-                source={require("../../../assets/icons/shape.png")}
-              />
+              <TouchableOpacity onPress={toggleNotification}>
+                <IntroButton
+                  source={
+                    notify
+                      ? require("../../../assets/icons/shape-active.png")
+                      : require("../../../assets/icons/shape.png")
+                  }
+                />
+              </TouchableOpacity>
             </IntroButtons>
           </IntroMain>
           <IntroSide>
@@ -161,5 +169,37 @@ export default compose(
       fetchPolicy: "cache-and-network"
     }),
     props: ({ data }) => ({ data })
+  }),
+  graphql(TOGGLE_NOTIFICATION, {
+    props({ mutate, ownProps }) {
+      return {
+        toggleNotification: () => {
+          const { data: { procedure: { notify, procedureId } } } = ownProps;
+          mutate({
+            variables: { procedureId },
+            optimisticResponse: {
+              __typename: "Mutation",
+              toggleNotification: {
+                __typename: "Procedure",
+                notify: !notify
+              }
+            },
+            update: (cache, { data: { toggleNotification: { notify } } }) => {
+              const data = cache.readQuery({
+                query: getProcedure,
+                variables: { id: procedureId }
+              });
+              data.procedure.notify = notify;
+              cache.writeQuery({
+                query: getProcedure,
+                variables: { id: procedureId },
+                data
+              });
+              console.log(data);
+            }
+          });
+        }
+      };
+    }
   })
 )(Detail);

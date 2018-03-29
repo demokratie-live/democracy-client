@@ -267,9 +267,6 @@ export default compose(
     })
   }),
   graphql(UPDATE_NOTIFICATION_SETTINGS, {
-    options: {
-      refetchQueries: [{ query: GET_NOTIFICATION_SETTINGS }]
-    },
     props({ mutate, ownProps: { notificationSettings } }) {
       return {
         update: ({ variables }) => {

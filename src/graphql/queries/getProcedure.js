@@ -4,10 +4,12 @@ export default gql`
   query procedure($id: ID!) {
     procedure(id: $id) {
       _id
+      procedureId
       title
       tags
       abstract
       voteDate
+      notify
       subjectGroups
       submissionDate
       currentStatus
