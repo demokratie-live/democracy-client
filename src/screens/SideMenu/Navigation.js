@@ -101,6 +101,11 @@ const NavigationView = ({ currentScreen, navigateTo }) => {
           screenId: "democracy.Support",
           title: "Support".toUpperCase(),
           icon: require("../../../assets/icons/speechBubble9.png")
+        },
+        {
+          screenId: "democracy.Notifications",
+          title: "Benachrichtigungen".toUpperCase(),
+          icon: require("../../../assets/icons/speechBubble9.png")
         }
       ]
     }
