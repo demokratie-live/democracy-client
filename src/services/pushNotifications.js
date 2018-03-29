@@ -40,4 +40,4 @@ const configure = () => {
   });
 };
 
-export { configure };
+export { configure }; // eslint-disable-line
