@@ -1,5 +1,6 @@
 import PushNotification from "react-native-push-notification";
 import { PushNotificationIOS, AsyncStorage } from "react-native";
+import Config from "react-native-config";
 
 import client from "../graphql/client";
 
@@ -9,7 +10,6 @@ const configure = () => {
   PushNotification.configure({
     async onRegister({ token, os }) {
       // process token
-      console.log("onRegister", token, os);
       const tokenSucceeded = await client.mutate({
         mutation: ADD_TOKEN,
         variables: {
@@ -28,6 +28,8 @@ const configure = () => {
       console.log("onNotification", notification);
       notification.finish(PushNotificationIOS.FetchResult.NoData);
     },
+
+    senderID: Config.NOTIFICATION_ANDROID_SENDER_ID,
 
     permissions: {
       alert: true,
