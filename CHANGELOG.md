@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.3.5
+
+* Details
+  * _Add:_ Add current State
+* Support
+  * _Change:_ Text width
+  * _Change:_ Text
+  * _Change:_ Image
+  * _Bug:_ [Android] Do not close on back button
+* Security
+  * _Bug:_ [Android] Do not close on back button
+
 ### 0.3.4
 
 * Support
