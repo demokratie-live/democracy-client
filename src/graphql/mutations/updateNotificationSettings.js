@@ -2,19 +2,25 @@ import gql from "graphql-tag";
 
 export default gql`
   mutation updateNotificationSettings(
-    $disableAll: String
+    $enabled: Boolean
     $disableUntil: Date
+    $newVote: Boolean
+    $newPreperation: Boolean
     $procedures: [String]
     $tags: [String]
   ) {
     updateNotificationSettings(
-      disableAll: $disableAll
+      enabled: $enabled
       disableUntil: $disableUntil
+      newVote: $newVote
+      newPreperation: $newPreperation
       procedures: $procedures
       tags: $tags
     ) {
-      disableAll
+      enabled
       disableUntil
+      newVote
+      newPreperation
       procedures
       tags
     }

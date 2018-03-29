@@ -6,15 +6,64 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { Navigator } from "react-native-navigation";
 import { graphql, compose } from "react-apollo";
 
+import Row from "../../components/ListRow";
+import Header from "../../components/ListSectionHeader";
+
 import onNavigationEvent from "../onNavigationEvent";
 
 import GET_NOTIFICATION_SETTINGS from "../../graphql/queries/notificationSettings";
 import UPDATE_NOTIFICATION_SETTINGS from "../../graphql/mutations/updateNotificationSettings";
 
-const Wrapper = styled.ScrollView`
+const Wrapper = styled.SectionList`
   flex: 1;
   background-color: #fff;
 `;
+
+const SwitchItemWrapper = styled.View`
+  flex-direction: row;
+`;
+
+const SwitchItemTitle = styled.Text`
+  flex: 1;
+  align-self: center;
+`;
+
+const SwitchItemIcon = styled(Ionicons).attrs({
+  color: "#000",
+  size: 20,
+  backgroundColor: "transparent"
+})`
+  align-self: center;
+  padding-right: 11;
+`;
+
+const sections = [
+  {
+    key: "global",
+    data: [{ title: "Benachrichtigungen", key: "enabled", type: "switch" }]
+  },
+  {
+    title: "Kategorie",
+    key: "categories",
+    data: [
+      {
+        title: "Neu in Abstimmung",
+        key: "newVote",
+        type: "switch"
+      },
+      {
+        title: "Neu in Vorbereitung",
+        key: "newPreperation",
+        type: "switch"
+      }
+    ]
+  },
+  {
+    title: "Abonierte Benachrichtigungen",
+    key: "abos",
+    data: []
+  }
+];
 
 class Notifications extends Component {
   static navigatorStyle = {
@@ -47,10 +96,25 @@ class Notifications extends Component {
     onNavigationEvent({ event, navigator: this.props.navigator });
   };
 
-  disableAll = async () => {
-    const { update, notificationSettings: { disableAll } } = this.props;
+  onToggleSwitch = key => async () => {
+    const { update, notificationSettings } = this.props;
+    switch (key) {
+      case "enabled":
+        this.enabledToggle();
+        break;
+
+      default:
+        await update({
+          variables: { [key]: !notificationSettings[key] }
+        });
+        break;
+    }
+  };
+
+  enabledToggle = async () => {
+    const { update, notificationSettings: { enabled } } = this.props;
     let disableUntil;
-    if (!disableAll) {
+    if (enabled) {
       disableUntil = await new Promise(resolve => {
         Alert.alert(
           "Benachrichtigungen abschalten",
@@ -88,21 +152,82 @@ class Notifications extends Component {
         );
       });
     }
-    if (disableUntil !== "cancel" || disableAll)
+
+    if (disableUntil !== "cancel" || !enabled)
       await update({
-        variables: { disableAll: !disableAll, disableUntil }
+        variables: { enabled: !enabled, disableUntil }
       });
+  };
+  renderSwitch = ({ title, key }) => {
+    const { notificationSettings } = this.props;
+
+    let icon;
+    let style = {};
+    const value = notificationSettings[key];
+
+    switch (key) {
+      case "enabled":
+        icon =
+          Platform.OS === "ios" ? "ios-paper-plane-outline" : "md-paper-plane";
+        break;
+      case "newVote":
+        icon = Platform.OS === "ios" ? "ios-pie-outline" : "md-pie";
+        break;
+      case "newPreperation":
+        style = {
+          transform: [{ scaleX: -1 }],
+          paddingLeft: 11,
+          paddingRight: 0
+        };
+        icon = Platform.OS === "ios" ? "ios-undo" : "md-undo";
+        break;
+
+      default:
+        break;
+    }
+
+    return (
+      <Row>
+        <SwitchItemWrapper>
+          <SwitchItemIcon name={icon} style={style} />
+          <SwitchItemTitle>{title}</SwitchItemTitle>
+          <Switch
+            value={value}
+            onValueChange={this.onToggleSwitch(key)}
+            disabled={key !== "enabled" && !notificationSettings.enabled}
+          />
+        </SwitchItemWrapper>
+      </Row>
+    );
+  };
+
+  renderItem = args => {
+    const { item: { type, title, key } } = args;
+
+    switch (type) {
+      case "switch":
+        return this.renderSwitch({ title, key });
+
+      default:
+        break;
+    }
+
+    return null;
   };
 
   render() {
     const { loading, notificationSettings } = this.props;
     return (
-      <Wrapper>
+      <Wrapper
+        sections={sections}
+        renderItem={this.renderItem}
+        renderSectionHeader={({ section }) => <Header title={section.title} />}
+      >
         <Text>Benachrichtigungen</Text>
         <Switch
           disabled={loading}
-          value={!notificationSettings.disableAll}
-          onValueChange={this.disableAll}
+          value={notificationSettings.enabled}
+          onValueChange={this.onToggleSwitch}
         />
       </Wrapper>
     );
@@ -113,9 +238,15 @@ Notifications.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired,
   loading: PropTypes.bool.isRequired,
   notificationSettings: PropTypes.shape({
-    disableAll: PropTypes.bool.isRequired,
-    disableUntil: PropTypes.string.isRequired
-  }).isRequired
+    enabled: PropTypes.bool,
+    disableUntil: PropTypes.string
+  })
+};
+
+Notifications.defaultProps = {
+  notificationSettings: {
+    enabled: true
+  }
 };
 
 export default compose(
@@ -124,7 +255,7 @@ export default compose(
       fetchPolicy: "cache-and-network"
     },
     props: ({
-      data: { loading, notificationSettings = { disableAll: true } }
+      data: { loading, notificationSettings = { enabled: true } }
     }) => ({
       loading,
       notificationSettings

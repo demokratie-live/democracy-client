@@ -3,7 +3,9 @@ import gql from "graphql-tag";
 export default gql`
   {
     notificationSettings {
-      disableAll
+      enabled
+      newVote
+      newPreperation
       disableUntil
       procedures
       tags
