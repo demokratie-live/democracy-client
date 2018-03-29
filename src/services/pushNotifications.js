@@ -10,14 +10,16 @@ const configure = () => {
     async onRegister({ token, os }) {
       // process token
       console.log("onRegister", token, os);
-      client.mutate({
+      const tokenSucceeded = await client.mutate({
         mutation: ADD_TOKEN,
         variables: {
           token,
           os
         }
       });
-      await AsyncStorage.setItem("push-token", token);
+      if (tokenSucceeded) {
+        await AsyncStorage.setItem("push-token", token);
+      }
     },
 
     onNotification(notification) {
