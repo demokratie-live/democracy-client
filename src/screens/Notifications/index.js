@@ -1,3 +1,4 @@
+/* eslint no-underscore-dangle: ["error", { "allow": ["__typename"] }] */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
@@ -5,6 +6,7 @@ import { Platform, Text, Switch, Alert } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { Navigator } from "react-native-navigation";
 import { graphql, compose } from "react-apollo";
+import _ from "lodash";
 
 import Row from "../../components/ListRow";
 import Header from "../../components/ListSectionHeader";
@@ -109,6 +111,7 @@ class Notifications extends Component {
         });
         break;
     }
+    return false;
   };
 
   enabledToggle = async () => {
@@ -124,7 +127,9 @@ class Notifications extends Component {
               text: "Ein Jahr",
               onPress: () =>
                 resolve(
-                  new Date(new Date().setFullYear(new Date().getFullYear() + 1))
+                  new Date(
+                    new Date().setFullYear(new Date().getFullYear() + 1)
+                  ).toString()
                 )
             },
             {
@@ -132,7 +137,7 @@ class Notifications extends Component {
               onPress: () => {
                 const now = new Date();
                 now.setDate(now.getDate() + 7);
-                resolve(now);
+                resolve(now.toString());
               }
             },
             {
@@ -140,7 +145,7 @@ class Notifications extends Component {
               onPress: () => {
                 const now = new Date();
                 now.setDate(now.getDate() + 1);
-                resolve(now);
+                resolve(now.toString());
               }
             },
             {
@@ -265,6 +270,32 @@ export default compose(
     options: {
       refetchQueries: [{ query: GET_NOTIFICATION_SETTINGS }]
     },
-    name: "update"
+    props({ mutate, ownProps: { notificationSettings } }) {
+      return {
+        update: ({ variables }) => {
+          mutate({
+            variables,
+            optimisticResponse: {
+              __typename: "Mutation",
+              updateNotificationSettings: {
+                __typename: notificationSettings.__typename,
+                ...notificationSettings,
+                ..._.omitBy(variables, _.isNil)
+              }
+            },
+            update: (cache, { data: { updateNotificationSettings } }) => {
+              const data = cache.readQuery({
+                query: GET_NOTIFICATION_SETTINGS
+              });
+              data.notificationSettings = { ...updateNotificationSettings };
+              cache.writeQuery({
+                query: GET_NOTIFICATION_SETTINGS,
+                data
+              });
+            }
+          });
+        }
+      };
+    }
   })
 )(Notifications);
