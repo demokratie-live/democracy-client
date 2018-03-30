@@ -995,7 +995,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = A4B84UJD7M;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -1702,10 +1702,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = democracyclient/democracyclient.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 14;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = A4B84UJD7M;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
@@ -1725,8 +1725,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp";
 				PRODUCT_NAME = democracyclient;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "5b2dacaa-f8b7-4d7c-ba75-73c9b6785b78";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development de.democracy-deutschland.clientapp";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1739,9 +1739,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = democracyclient/democracyclient.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 14;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = A4B84UJD7M;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
@@ -1761,8 +1761,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp";
 				PRODUCT_NAME = democracyclient;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "5b2dacaa-f8b7-4d7c-ba75-73c9b6785b78";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development de.democracy-deutschland.clientapp";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
