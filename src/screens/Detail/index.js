@@ -150,7 +150,7 @@ class Detail extends Component {
 
 Detail.propTypes = {
   title: PropTypes.string.isRequired,
-  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+  tags: PropTypes.arrayOf(PropTypes.string),
   abstract: PropTypes.string,
   listType: PropTypes.string,
   procedureId: PropTypes.string.isRequired,
@@ -160,7 +160,8 @@ Detail.propTypes = {
 
 Detail.defaultProps = {
   abstract: "",
-  listType: "search"
+  listType: "search",
+  tags: []
 };
 
 export default compose(

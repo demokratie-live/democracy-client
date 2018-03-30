@@ -82,7 +82,7 @@ VoteResults.propTypes = {
     no: PropTypes.number,
     abstination: PropTypes.number,
     notVote: PropTypes.number
-  }).isRequired,
+  }),
   comunityVotes: PropTypes.oneOfType([
     PropTypes.shape({
       voteResults: PropTypes.shape({
@@ -95,7 +95,9 @@ VoteResults.propTypes = {
   ]).isRequired
 };
 
-VoteResults.defaultProps = {};
+VoteResults.defaultProps = {
+  voteResults: null
+};
 
 export default compose(
   graphql(VOTES, {

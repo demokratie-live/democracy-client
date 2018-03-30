@@ -2,11 +2,24 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
-import { Platform, Text, Switch, Alert, TouchableOpacity } from "react-native";
+import {
+  Platform,
+  Switch,
+  Alert,
+  TouchableOpacity,
+  TouchableHighlight,
+  ActivityIndicator,
+  View,
+  Text,
+  Linking,
+  Button,
+  AppState
+} from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { Navigator } from "react-native-navigation";
 import { graphql, compose } from "react-apollo";
 import _ from "lodash";
+import PushNotification from "react-native-push-notification";
 
 import Row from "../../components/ListRow";
 import Header from "../../components/ListSectionHeader";
@@ -113,6 +126,22 @@ class Notifications extends Component {
     this.props.navigator.setOnNavigatorEvent(this.onNavigationEvent);
   }
 
+  state = {
+    notificationsAllowed: null,
+    appState: AppState.currentState
+  };
+
+  componentDidMount() {
+    AppState.addEventListener("change", this.handleAppStateChange);
+    PushNotification.checkPermissions(data => {
+      this.setState({ notificationsAllowed: !!data.alert });
+    });
+  }
+
+  componentWillUnmount() {
+    AppState.removeEventListener("change", this.handleAppStateChange);
+  }
+
   onNavigationEvent = event => {
     onNavigationEvent({ event, navigator: this.props.navigator });
   };
@@ -131,6 +160,16 @@ class Notifications extends Component {
         break;
     }
     return false;
+  };
+
+  onItemClick = ({ item }) => () => {
+    const { navigator } = this.props;
+    navigator.push({
+      screen: "democracy.Detail",
+      title: "Abstimmung".toUpperCase(),
+      passProps: { ...item },
+      backButtonTitle: ""
+    });
   };
 
   enabledToggle = async () => {
@@ -182,6 +221,19 @@ class Notifications extends Component {
         variables: { enabled: !enabled, disableUntil }
       });
   };
+
+  handleAppStateChange = nextAppState => {
+    if (
+      this.state.appState.match(/inactive|background/) &&
+      nextAppState === "active"
+    ) {
+      PushNotification.checkPermissions(data => {
+        this.setState({ notificationsAllowed: !!data.alert });
+      });
+    }
+    this.setState({ appState: nextAppState });
+  };
+
   renderSwitch = ({ title, key }) => {
     const { notificationSettings } = this.props;
 
@@ -234,30 +286,62 @@ class Notifications extends Component {
 
       default:
         return (
-          <Row>
-            <ListItem {...item} date={item.voteDate}>
-              <ProcedureDetailWrapper>
-                <TouchableOpacity
-                  onPress={() =>
-                    this.props.toggleNotification({
-                      procedureId: item.procedureId
-                    })
-                  }
-                >
-                  <ProcedureNotifyIcon />
-                </TouchableOpacity>
-                <ProcedureDescription>
-                  {item.currentStatus}
-                </ProcedureDescription>
-              </ProcedureDetailWrapper>
-            </ListItem>
-          </Row>
+          <TouchableHighlight
+            onPress={this.onItemClick({ item })}
+            underlayColor="rgba(68, 148, 211, 0.1)"
+          >
+            <Row>
+              <ListItem {...item} date={item.voteDate}>
+                <ProcedureDetailWrapper>
+                  <TouchableOpacity
+                    onPress={() =>
+                      this.props.toggleNotification({
+                        procedureId: item.procedureId
+                      })
+                    }
+                  >
+                    <ProcedureNotifyIcon />
+                  </TouchableOpacity>
+                  <ProcedureDescription>
+                    {item.currentStatus}
+                  </ProcedureDescription>
+                </ProcedureDetailWrapper>
+              </ListItem>
+            </Row>
+          </TouchableHighlight>
         );
     }
   };
 
   render() {
-    const { loading, notificationSettings, notifiedProcedures } = this.props;
+    if (this.state.notificationsAllowed === null) {
+      return (
+        <View style={{ flex: 1, justifyContent: "center" }}>
+          <ActivityIndicator size="large" color="red" />
+        </View>
+      );
+    } else if (this.state.notificationsAllowed === false) {
+      return (
+        <View
+          style={{ flex: 1, justifyContent: "center", paddingHorizontal: 18 }}
+        >
+          <Text>
+            Bitte Push benachrichtigungen für die App in den Einstellungen
+            aktivieren.
+          </Text>
+          <Button
+            title="Einstellungen"
+            onPress={() =>
+              Linking.openURL(
+                "app-settings://notification/de.democracy-deutschland.clientapp"
+              )
+            }
+          />
+        </View>
+      );
+    }
+
+    const { notifiedProcedures } = this.props;
     const preparedSections = sections.map(section => {
       const { key } = section;
       const sect = { ...section };
@@ -272,14 +356,7 @@ class Notifications extends Component {
         renderItem={this.renderItem}
         renderSectionHeader={({ section }) => <Header title={section.title} />}
         keyExtractor={({ key, procedureId }) => key || procedureId}
-      >
-        <Text>Benachrichtigungen</Text>
-        <Switch
-          disabled={loading}
-          value={notificationSettings.enabled}
-          onValueChange={this.onToggleSwitch}
-        />
-      </Wrapper>
+      />
     );
   }
 }
