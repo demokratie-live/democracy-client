@@ -1722,7 +1722,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp";
 				PRODUCT_NAME = democracyclient;
-				PROVISIONING_PROFILE = "15710192-25f6-4f5b-a1f4-0a56eb3cce6c";
+				PROVISIONING_PROFILE = "470c5ebc-d27e-4c35-8d57-01a1dc61cc43";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore de.democracy-deutschland.clientapp";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1758,7 +1758,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp";
 				PRODUCT_NAME = democracyclient;
-				PROVISIONING_PROFILE = "15710192-25f6-4f5b-a1f4-0a56eb3cce6c";
+				PROVISIONING_PROFILE = "470c5ebc-d27e-4c35-8d57-01a1dc61cc43";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore de.democracy-deutschland.clientapp";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
