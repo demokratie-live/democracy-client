@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
-import { Platform, Text, Switch, Alert } from "react-native";
+import { Platform, Text, Switch, Alert, TouchableOpacity } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { Navigator } from "react-native-navigation";
 import { graphql, compose } from "react-apollo";
@@ -10,11 +10,14 @@ import _ from "lodash";
 
 import Row from "../../components/ListRow";
 import Header from "../../components/ListSectionHeader";
+import ListItem from "../../components/VoteListItem";
 
 import onNavigationEvent from "../onNavigationEvent";
 
 import GET_NOTIFICATION_SETTINGS from "../../graphql/queries/notificationSettings";
+import GET_NOTIFIED_PROCEDURES from "../../graphql/queries/notifiedProcedures";
 import UPDATE_NOTIFICATION_SETTINGS from "../../graphql/mutations/updateNotificationSettings";
+import TOGGLE_NOTIFICATION from "../../graphql/mutations/toggleNotification";
 
 const Wrapper = styled.SectionList`
   flex: 1;
@@ -37,6 +40,22 @@ const SwitchItemIcon = styled(Ionicons).attrs({
 })`
   align-self: center;
   padding-right: 11;
+`;
+
+const ProcedureDetailWrapper = styled.View`
+  flex-direction: row;
+  margin-top: 20;
+  align-items: center;
+`;
+
+const ProcedureNotifyIcon = styled.Image.attrs({
+  source: require("../../../assets/icons/shape-active.png")
+})``;
+
+const ProcedureDescription = styled.Text`
+  padding-left: 11;
+  font-size: 13;
+  color: #8f8e94;
 `;
 
 const sections = [
@@ -207,26 +226,52 @@ class Notifications extends Component {
   };
 
   renderItem = args => {
-    const { item: { type, title, key } } = args;
+    const { item, item: { type, title, key } } = args;
 
     switch (type) {
       case "switch":
         return this.renderSwitch({ title, key });
 
       default:
-        break;
+        return (
+          <Row>
+            <ListItem {...item} date={item.voteDate}>
+              <ProcedureDetailWrapper>
+                <TouchableOpacity
+                  onPress={() =>
+                    this.props.toggleNotification({
+                      procedureId: item.procedureId
+                    })
+                  }
+                >
+                  <ProcedureNotifyIcon />
+                </TouchableOpacity>
+                <ProcedureDescription>
+                  {item.currentStatus}
+                </ProcedureDescription>
+              </ProcedureDetailWrapper>
+            </ListItem>
+          </Row>
+        );
     }
-
-    return null;
   };
 
   render() {
-    const { loading, notificationSettings } = this.props;
+    const { loading, notificationSettings, notifiedProcedures } = this.props;
+    const preparedSections = sections.map(section => {
+      const { key } = section;
+      const sect = { ...section };
+      if (key === "abos") {
+        sect.data = notifiedProcedures || [];
+      }
+      return sect;
+    });
     return (
       <Wrapper
-        sections={sections}
+        sections={preparedSections}
         renderItem={this.renderItem}
         renderSectionHeader={({ section }) => <Header title={section.title} />}
+        keyExtractor={({ key, procedureId }) => key || procedureId}
       >
         <Text>Benachrichtigungen</Text>
         <Switch
@@ -245,13 +290,16 @@ Notifications.propTypes = {
   notificationSettings: PropTypes.shape({
     enabled: PropTypes.bool,
     disableUntil: PropTypes.string
-  })
+  }),
+  toggleNotification: PropTypes.func.isRequired,
+  notifiedProcedures: PropTypes.arrayOf(PropTypes.shape())
 };
 
 Notifications.defaultProps = {
   notificationSettings: {
     enabled: true
-  }
+  },
+  notifiedProcedures: []
 };
 
 export default compose(
@@ -264,6 +312,14 @@ export default compose(
     }) => ({
       loading,
       notificationSettings
+    })
+  }),
+  graphql(GET_NOTIFIED_PROCEDURES, {
+    options: {
+      fetchPolicy: "cache-and-network"
+    },
+    props: ({ data: { notifiedProcedures } }) => ({
+      notifiedProcedures
     })
   }),
   graphql(UPDATE_NOTIFICATION_SETTINGS, {
@@ -287,6 +343,38 @@ export default compose(
               data.notificationSettings = { ...updateNotificationSettings };
               cache.writeQuery({
                 query: GET_NOTIFICATION_SETTINGS,
+                data
+              });
+            }
+          });
+        }
+      };
+    }
+  }),
+
+  graphql(TOGGLE_NOTIFICATION, {
+    props({ mutate }) {
+      return {
+        toggleNotification: ({ procedureId }) => {
+          // const { data: { procedure: { notify, procedureId } } } = ownProps;
+          mutate({
+            variables: { procedureId },
+            optimisticResponse: {
+              __typename: "Mutation",
+              toggleNotification: {
+                __typename: "Procedure",
+                notify: false
+              }
+            },
+            update: cache => {
+              const data = cache.readQuery({
+                query: GET_NOTIFIED_PROCEDURES
+              });
+              data.notifiedProcedures = data.notifiedProcedures.filter(
+                ({ procedureId: pId }) => pId !== procedureId
+              );
+              cache.writeQuery({
+                query: GET_NOTIFIED_PROCEDURES,
                 data
               });
             }

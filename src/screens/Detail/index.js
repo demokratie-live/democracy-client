@@ -154,7 +154,8 @@ Detail.propTypes = {
   abstract: PropTypes.string,
   listType: PropTypes.string,
   procedureId: PropTypes.string.isRequired,
-  data: PropTypes.shape().isRequired
+  data: PropTypes.shape().isRequired,
+  toggleNotification: PropTypes.func.isRequired
 };
 
 Detail.defaultProps = {
@@ -184,12 +185,15 @@ export default compose(
                 notify: !notify
               }
             },
-            update: (cache, { data: { toggleNotification: { notify } } }) => {
+            update: (
+              cache,
+              { data: { toggleNotification: { notify: newNotify } } }
+            ) => {
               const data = cache.readQuery({
                 query: getProcedure,
                 variables: { id: procedureId }
               });
-              data.procedure.notify = notify;
+              data.procedure.notify = newNotify;
               cache.writeQuery({
                 query: getProcedure,
                 variables: { id: procedureId },
