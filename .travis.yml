@@ -69,7 +69,7 @@ matrix:
     language: objective-c
 
     before_install:
-      - bundle update fastlane
+    - fastlane update_fastlane
 
     install:
     - nvm install 8
