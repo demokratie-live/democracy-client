@@ -30,7 +30,8 @@ platform :ios do
     )
     build_app( 
       scheme: "democracyclient-prod", 
-      silent: true
+      silent: true,
+      suppress_xcode_output: true
     )
   end
 
