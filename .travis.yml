@@ -68,8 +68,8 @@ matrix:
     osx_image: xcode9.2
     language: objective-c
 
-    #before_install:
-    #  - gem "xcode-install"
+    before_install:
+      - bundle update fastlane
 
     install:
     - nvm install 8
@@ -78,7 +78,6 @@ matrix:
     - yarn install
 
     script:
-    - fastlane update_fastlane
     - cd ios
     - bundle exec fastlane ios test
 
