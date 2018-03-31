@@ -27,7 +27,8 @@ platform :ios do
     setup_travis
     sync_code_signing(
       type: 'appstore',
-      app_identifier: "de.democracy-deutschland.clientapp"
+      app_identifier: "de.democracy-deutschland.clientapp",
+      team_id: "A4B84UJD7M"
     )
     build_app( 
       scheme: "democracyclient-prod", 
