@@ -68,10 +68,8 @@ matrix:
     osx_image: xcode9.2
     language: objective-c
 
-    cache:
-      bundler: true
-      yarn: true
-      cocoapods: true
+    #before_install:
+    #  - gem "xcode-install"
 
     install:
     - nvm install 8
