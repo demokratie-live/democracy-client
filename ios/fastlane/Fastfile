@@ -28,7 +28,10 @@ platform :ios do
       type: 'appstore',
       app_identifier: "de.democracy-deutschland.clientapp"
     )
-    build_app( clean: true, scheme: "democracyclient-prod")
+    build_app( 
+      scheme: "democracyclient-prod", 
+      silent: true
+    )
   end
 
   lane :beta do
