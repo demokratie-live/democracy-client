@@ -55,7 +55,12 @@ platform :ios do
       app_identifier: "de.democracy-deutschland.clientapp",
       team_id: "A4B84UJD7M"
     )
-    build_app( clean: true, scheme: "democracyclient-prod")
+    build_app( 
+      clean: true, 
+      scheme: "democracyclient-prod", 
+      silent: true,
+      suppress_xcode_output: true
+    )
     upload_to_testflight(
       changelog: File.read("../../CHANGELOG.md"),
       groups: "Developer",
