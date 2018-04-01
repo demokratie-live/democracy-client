@@ -21,9 +21,15 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   #xcversion(version: "9.2")
   #xcode_select "/Applications/Xcode-9.2.app"
+  produce(
+    team_name: 'DEMOCRACY Deutschland e.V.',
+    enable_services: {
+      push_notification: 'on'
+    }
+  )
 
   lane :test do
-    disable_automatic_code_signing(path: "democracyclient.xcodeproj")
+    #disable_automatic_code_signing(path: "democracyclient.xcodeproj")
     setup_travis
     sync_code_signing(
       type: 'appstore',
@@ -46,7 +52,8 @@ platform :ios do
     setup_travis
     sync_code_signing(
       type: 'appstore',
-      app_identifier: "de.democracy-deutschland.clientapp"
+      app_identifier: "de.democracy-deutschland.clientapp",
+      team_id: "A4B84UJD7M"
     )
     build_app( clean: true, scheme: "democracyclient-prod")
     upload_to_testflight(
