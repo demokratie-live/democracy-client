@@ -3,6 +3,7 @@ import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import { graphql, compose } from "react-apollo";
 import { RefreshControl } from "react-native";
+import { Navigator } from "react-native-navigation";
 
 import getProcedure from "../../graphql/queries/getProcedure";
 
@@ -132,7 +133,7 @@ class Detail extends Component {
           </Segment>
           <VoteResults voteResults={voteResults} procedure={_id} />
           {listType === "VOTING" && (
-            <Voting procedureObjId={_id} procedureId={procedureId} />
+            <Voting procedureObjId={_id} procedureId={procedureId} navigator={this.props.navigator} />
           )}
         </Content>
       </Wrapper>
@@ -146,7 +147,8 @@ Detail.propTypes = {
   abstract: PropTypes.string,
   listType: PropTypes.string,
   procedureId: PropTypes.string.isRequired,
-  data: PropTypes.shape().isRequired
+  data: PropTypes.shape().isRequired,
+  navigator: PropTypes.instanceOf(Navigator).isRequired
 };
 
 Detail.defaultProps = {
