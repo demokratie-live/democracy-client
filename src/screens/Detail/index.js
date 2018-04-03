@@ -6,6 +6,7 @@ import { RefreshControl, TouchableOpacity } from "react-native";
 
 import getProcedure from "../../graphql/queries/getProcedure";
 import TOGGLE_NOTIFICATION from "../../graphql/mutations/toggleNotification";
+import GET_ACTIVITY_INDEX from "../../graphql/queries/activityIndex";
 
 import ActivityIndex from "../../components/ActivityIndex";
 import DateTime from "../../components/Date";
@@ -200,7 +201,19 @@ export default compose(
                 variables: { id: procedureId },
                 data
               });
-              console.log(data);
+              const activityData = cache.readQuery({
+                query: GET_ACTIVITY_INDEX,
+                variables: { procedureId }
+              });
+              if (!activityData.activityIndex.active) {
+                activityData.activityIndex.active = true;
+                activityData.activityIndex.activityIndex += 1;
+                cache.writeQuery({
+                  query: GET_ACTIVITY_INDEX,
+                  variables: { procedureId },
+                  data: activityData
+                });
+              }
             }
           });
         }
