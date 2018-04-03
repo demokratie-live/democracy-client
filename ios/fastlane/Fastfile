@@ -37,9 +37,7 @@ platform :ios do
       team_id: "A4B84UJD7M"
     )
     build_app( 
-      scheme: "democracyclient-prod", 
-      silent: true,
-      suppress_xcode_output: true
+      scheme: "democracyclient-prod"
     )
   end
 
@@ -57,9 +55,7 @@ platform :ios do
     )
     build_app( 
       clean: true, 
-      scheme: "democracyclient-prod", 
-      silent: true,
-      suppress_xcode_output: true
+      scheme: "democracyclient-prod"
     )
     upload_to_testflight(
       changelog: File.read("../../CHANGELOG.md"),
