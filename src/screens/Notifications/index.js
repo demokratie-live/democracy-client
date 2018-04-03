@@ -317,7 +317,7 @@ class Notifications extends Component {
     if (this.state.notificationsAllowed === null) {
       return (
         <View style={{ flex: 1, justifyContent: "center" }}>
-          <ActivityIndicator size="large" color="red" />
+          <ActivityIndicator size="large" />
         </View>
       );
     } else if (this.state.notificationsAllowed === false) {
