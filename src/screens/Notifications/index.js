@@ -127,15 +127,19 @@ class Notifications extends Component {
   }
 
   state = {
-    notificationsAllowed: null,
+    notificationsAllowed: Platform.OS === "ios" ? null : true,
     appState: AppState.currentState
   };
 
   componentDidMount() {
     AppState.addEventListener("change", this.handleAppStateChange);
-    PushNotification.checkPermissions(data => {
-      this.setState({ notificationsAllowed: !!data.alert });
-    });
+    if (Platform.OS === "ios") {
+      PushNotification.checkPermissions(data => {
+        this.setState({ notificationsAllowed: !!data.alert });
+      });
+    } else {
+      // TODO: Check android permissions
+    }
   }
 
   componentWillUnmount() {
