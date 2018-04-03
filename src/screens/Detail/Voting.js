@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components/native";
 import { graphql, compose } from "react-apollo";
 import PropTypes from "prop-types";
+import { Navigator } from "react-native-navigation";
 
 import VOTE from "../../graphql/mutations/vote";
 import VOTE_LOCAL from "../../graphql/mutations/voteLocal";
@@ -75,7 +76,7 @@ const Title = styled.Text`
   font-size: 17;
 `;
 
-const Voting = ({ vote, voted, voteLocal, votedSelection }) => (
+const Voting = ({ vote, voted, voteLocal, votedSelection, navigator }) => (
   <Wrapper>
     <SegmentWrapper>
       <Title>Abstimmen</Title>
@@ -87,8 +88,13 @@ const Voting = ({ vote, voted, voteLocal, votedSelection }) => (
         selection="YES"
         votedSelection={votedSelection}
         onPress={() => {
-          vote("YES");
-          voteLocal("YES");
+          navigator.showModal({
+            screen: "democracy.VoteVarification",
+            title: "Zur Wahlurne".toUpperCase()
+            // navigatorStyle: { navBarHidden: true, orientation: "portrait" }
+          });
+          // vote("YES");
+          // voteLocal("YES");
         }}
       >
         <VoteIconButton
@@ -144,7 +150,8 @@ Voting.propTypes = {
   vote: PropTypes.func.isRequired,
   voteLocal: PropTypes.func.isRequired,
   voted: PropTypes.bool.isRequired,
-  votedSelection: PropTypes.string
+  votedSelection: PropTypes.string,
+  navigator: PropTypes.instanceOf(Navigator).isRequired
 };
 
 Voting.defaultProps = {

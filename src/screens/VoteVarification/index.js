@@ -4,58 +4,42 @@ import styled from "styled-components/native";
 import { Platform } from "react-native";
 import { Navigator } from "react-native-navigation";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
-import DeviceInfo from "react-native-device-info";
 
-import onNavigationEvent from "./onNavigationEvent";
+import ForumEntryComponent from "../../components/ForumEntry";
 
-const ScrollWrapper = styled.ScrollView`
-  flex: 1;
-  background-color: #ffffff;
-`;
+import onNavigationEvent from "../onNavigationEvent";
 
 const Wrapper = styled.View`
   flex: 1;
+  background-color: #f6f6f6;
+`;
+
+const ScrollWrapper = styled.ScrollView`
+  flex: 1;
+  padding-horizontal: 18;
+  padding-vertical: 18;
+`;
+
+const Title = styled.Text`
+  font-size: 34;
+  padding-bottom: 18;
+`;
+
+const ForumEntry = styled(ForumEntryComponent)``;
+
+const Text = styled.Text``;
+
+const WarnTextWrapper = styled.View`
   align-items: center;
-  padding-vertical: 30;
-  padding-horizontal: 48;
+  justify-content: center;
+  padding-vertical: 22;
 `;
 
-const Logo = styled.Image.attrs({
-  source: require("../../assets/images/logo-text10X.png")
-})``;
-
-const Text = styled.Text`
-  font-size: 18;
-  padding-left: 12;
-  padding-bottom: 5;
-`;
-
-const SecurityList = styled.View`
-  padding-vertical: 44;
-`;
-
-const EntryWrapper = styled.View`
-  flex-direction: row;
-  align-items: center;
-  margin-top: 16;
-`;
-
-const CheckIcon = styled(SimpleLineIcons).attrs({
-  size: 31,
-  color: "#000000"
-})``;
-
-const ProcessImageWrapper = styled.View`
-  flex-direction: row;
-`;
-
-const ProcessImage = styled.Image``;
-
-const Version = styled.Text`
-  font-size: 15;
-  color: #8f8e94;
-  padding-vertical: 28;
+const VotingWrapper = styled.View`
+  height: 130;
+  background-color: rgba(250, 250, 250, 0.9);
+  border-top-width: 1;
+  border-top-color: #b2b2b2;
 `;
 
 class VoteVerification extends Component {
@@ -71,12 +55,12 @@ class VoteVerification extends Component {
 
     const menuIcon = Platform.OS === "ios" ? "ios-menu" : "md-menu";
 
-    Ionicons.getImageSource(menuIcon, 24, "#FFFFFF").then(icon => {
+    Ionicons.getImageSource(menuIcon, 24, "#FFFFFF").then(() => {
       props.navigator.setButtons({
         leftButtons: [
           {
-            icon,
-            id: "menu"
+            title: "Zurück",
+            id: "closeModal"
           }
         ]
       });
@@ -90,11 +74,40 @@ class VoteVerification extends Component {
   };
 
   render() {
-    const version = `Version: ${DeviceInfo.getReadableVersion()
-      .split(".")
-      .slice(0, 3)
-      .join(".")}`;
-    return <ScrollWrapper />;
+    return (
+      <Wrapper>
+        <ScrollWrapper>
+          <Title>Schon gewusst?</Title>
+          <ForumEntry>
+            <Text>
+              Hier wird in Zukunft ein Contra-Argumentstitel von einem anderen
+              Nutzer stehen und das ist auch gut so, sonst bleibst du ja
+              uninformiert.{" "}
+            </Text>
+          </ForumEntry>
+          <ForumEntry
+            image={{
+              source: {
+                uri:
+                  "https://facebook.github.io/react-native/docs/assets/favicon.png"
+              }
+            }}
+            argumentation="pro"
+          >
+            <Text>Studie bestätigt: IQ steigt durchs Argumentieren </Text>
+          </ForumEntry>
+          <ForumEntry argumentation="contra">
+            <Text>Wie Gegenargumente dein Bewusstsein erweit…</Text>
+          </ForumEntry>
+        </ScrollWrapper>
+        <WarnTextWrapper>
+          <Text style={{ textAlign: "center", fontSize: 15 }}>
+            Deine Stimme ist verbindlich und kann nicht zurückgenommen werden
+          </Text>
+        </WarnTextWrapper>
+        <VotingWrapper />
+      </Wrapper>
+    );
   }
 }
 
