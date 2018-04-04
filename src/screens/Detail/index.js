@@ -118,7 +118,7 @@ class Detail extends Component {
               <TagsText>{tags.join(", ")}</TagsText>
             </TagsWrapper>
           )}
-          <Segment title="Details" open>
+          <Segment title="Details" open={false}>
             <SegmentDetails
               subjectGroups={subjectGroups}
               submissionDate={submissionDate}
@@ -133,7 +133,11 @@ class Detail extends Component {
           </Segment>
           <VoteResults voteResults={voteResults} procedure={_id} />
           {listType === "VOTING" && (
-            <Voting procedureObjId={_id} procedureId={procedureId} navigator={this.props.navigator} />
+            <Voting
+              procedureObjId={_id}
+              procedureId={procedureId}
+              navigator={this.props.navigator}
+            />
           )}
         </Content>
       </Wrapper>
