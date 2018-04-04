@@ -51,6 +51,7 @@ class App {
   }
 
   startApp = async ({ isInstructionsShown }) => {
+    // await AsyncStorage.removeItem("authorization");
     const token = await AsyncStorage.getItem("authorization");
     if (!token) {
       const rsa = new RSAKey();
@@ -58,14 +59,18 @@ class App {
       const uniqueID = await sha256(DeviceInfo.getUniqueID());
       const deviceHashEncrypted = rsa.encrypt(uniqueID);
 
-      const { data } = await client.mutate({
-        mutation: SIGN_UP,
-        variables: {
-          deviceHashEncrypted
-        }
-      });
+      try {
+        const { data } = await client.mutate({
+          mutation: SIGN_UP,
+          variables: {
+            deviceHashEncrypted
+          }
+        });
 
-      await AsyncStorage.setItem("authorization", data.signUp.token);
+        await AsyncStorage.setItem("authorization", data.signUp.token);
+      } catch (error) {
+        // TODO: Show later a message that user is not registered
+      }
     }
 
     // Decide Startscreen

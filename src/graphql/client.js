@@ -45,16 +45,21 @@ const authLink = setContext(async (_, { headers }) => {
 });
 
 const stateLink = withClientState({ resolvers, cache, defaults, typeDefs });
-const linkError = onError(({ graphQLErrors, networkError }) => {
-  if (graphQLErrors)
-    graphQLErrors.forEach(({ message, locations, path }) => {
-      console.log(
-        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-      );
-    });
+const linkError = onError(
+  ({ graphQLErrors, networkError, response, operation }) => {
+    if (operation.operationName === "IgnoreErrorsQuery") {
+      response.errors = null;
+    }
+    if (graphQLErrors)
+      graphQLErrors.forEach(({ message, locations, path }) => {
+        console.log(
+          `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+        );
+      });
 
-  if (networkError) console.log(`[Network error]: ${networkError}`);
-});
+    if (networkError) console.log(`[Network error]: ${networkError}`);
+  }
+);
 
 // const defaultOptions = {
 //   watchQuery: {
