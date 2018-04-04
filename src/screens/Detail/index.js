@@ -118,7 +118,7 @@ class Detail extends Component {
               <TagsText>{tags.join(", ")}</TagsText>
             </TagsWrapper>
           )}
-          <Segment title="Details" open={false}>
+          <Segment title="Details" open>
             <SegmentDetails
               subjectGroups={subjectGroups}
               submissionDate={submissionDate}
