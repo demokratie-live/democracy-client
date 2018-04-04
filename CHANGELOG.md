@@ -1,5 +1,10 @@
 # Changelog
 
+### X.X.X
+
+* New
+  * [Screen] Ballot Box Screen (Schon gewusst? Screen)
+
 ### 0.3.5
 
 * Details
