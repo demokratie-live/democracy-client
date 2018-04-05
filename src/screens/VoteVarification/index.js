@@ -13,7 +13,7 @@ import onNavigationEvent from "../onNavigationEvent";
 
 const Wrapper = styled.View`
   flex: 1;
-  background-color: rgba(87, 148, 206, 0.1);
+  background-color: rgb(246, 246, 246);
 `;
 
 const ScrollWrapper = styled.ScrollView`
