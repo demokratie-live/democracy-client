@@ -68,10 +68,8 @@ matrix:
     osx_image: xcode9.2
     language: objective-c
 
-    cache:
-      bundler: true
-      yarn: true
-      cocoapods: true
+    before_install:
+    - fastlane update_fastlane
 
     install:
     - nvm install 8
@@ -80,7 +78,6 @@ matrix:
     - yarn install
 
     script:
-    - fastlane update_fastlane
     - cd ios
     - bundle exec fastlane ios test
 

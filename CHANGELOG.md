@@ -5,6 +5,10 @@
 * New
   * [Screen] Ballot Box Screen (Schon gewusst? Screen)
 
+### 0.4.0
+
+* Add Push Notifications
+
 ### 0.3.5
 
 * Details
