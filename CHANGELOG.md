@@ -1,8 +1,12 @@
 # Changelog
 
+### 0.4.1
+
+* [Bug] Fix API Url
+
 ### 0.4.0
 
-* Add Push Notifications
+* [Feature] Add Push Notifications
 
 ### 0.3.5
 
