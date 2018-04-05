@@ -70,18 +70,18 @@ class VoteVerification extends Component {
   constructor(props) {
     super(props);
 
-    const menuIcon = Platform.OS === "ios" ? "ios-menu" : "md-menu";
-
-    Ionicons.getImageSource(menuIcon, 24, "#FFFFFF").then(() => {
-      props.navigator.setButtons({
-        leftButtons: [
-          {
-            title: "Zurück",
-            id: "closeModal"
-          }
-        ]
+    if (Platform.OS === "ios") {
+      Ionicons.getImageSource("ios-arrow-back", 34, "#FFFFFF").then(icon => {
+        props.navigator.setButtons({
+          leftButtons: [
+            {
+              icon,
+              id: "closeModal"
+            }
+          ]
+        });
       });
-    });
+    }
 
     this.props.navigator.setOnNavigatorEvent(this.onNavigationEvent);
   }
