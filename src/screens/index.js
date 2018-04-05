@@ -11,6 +11,7 @@ import SideMenu from "./SideMenu";
 import Detail from "./Detail";
 import Support from "./Support";
 import Security from "./Security";
+import Notifications from "./Notifications";
 
 export default function registerScreens() {
   Navigation.registerComponent(
@@ -65,6 +66,13 @@ export default function registerScreens() {
   Navigation.registerComponent(
     "democracy.Security",
     () => Security,
+    client.store,
+    ApolloProvider,
+    { client }
+  );
+  Navigation.registerComponent(
+    "democracy.Notifications",
+    () => Notifications,
     client.store,
     ApolloProvider,
     { client }
