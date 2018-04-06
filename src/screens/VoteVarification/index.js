@@ -29,8 +29,6 @@ const Title = styled.Text`
   padding-bottom: 18;
 `;
 
-const Text = styled.Text``;
-
 const WarnWrapper = styled.View`
   position: absolute;
   left: 0;

@@ -4,32 +4,6 @@ import PropTypes from "prop-types";
 
 import ArgumentEntry from "../ArgumentEntry";
 
-const argumentationColors = {
-  pro: "#4ecd45",
-  contra: "#cd4545",
-  neutral: "lightgrey"
-};
-
-const Wrapper = styled.View`
-  padding-bottom: 11;
-  padding-horizontal: 18;
-`;
-
-const RowWrapper = styled.View`
-  border-top-left-radius: 10;
-  border-bottom-left-radius: 10;
-  border-right-width: 3;
-  border-color: ${({ argumentation }) =>
-    argumentation
-      ? argumentationColors[argumentation]
-      : argumentationColors.neutral};
-  background-color: white;
-  overflow: hidden;
-  flex-direction: row;
-  padding-horizontal: 11;
-  padding-vertical: 11;
-`;
-
 const Image = styled.Image.attrs({
   width: 82,
   height: 82
@@ -52,17 +26,7 @@ const Title = styled.Text.attrs({
 
 const Text = styled.Text``;
 
-const TextMore = styled.Text.attrs({
-  numberOfLines: 1
-})``;
-
-const EntryContent = styled.View`
-  flex: 1;
-  padding-horizontal: 11;
-  padding-vertical: 11;
-`;
-
-const Link = ({ image, children, argumentation, title, text, textMore }) => (
+const Link = ({ image, argumentation, title, text }) => (
   <ArgumentEntry argumentation={argumentation}>
     {image && <Image {...image} />}
     <Content>

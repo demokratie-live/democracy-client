@@ -26,30 +26,6 @@ const RowWrapper = styled.View`
   flex-direction: row;
 `;
 
-const Image = styled.Image.attrs({
-  width: 82,
-  height: 82
-})`
-  width: 82;
-  height: 82;
-`;
-
-const Title = styled.Text.attrs({
-  numberOfLines: 1
-})``;
-
-const Text = styled.Text``;
-
-const TextMore = styled.Text.attrs({
-  numberOfLines: 1
-})``;
-
-const EntryContent = styled.View`
-  flex: 1;
-  padding-horizontal: 11;
-  padding-vertical: 11;
-`;
-
 const Entry = ({ children, argumentation }) => (
   <Wrapper>
     <RowWrapper argumentation={argumentation}>{children}</RowWrapper>
