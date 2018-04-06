@@ -8,6 +8,25 @@ export const defaults = {
 
 export const resolvers = {
   Mutation: {
+    updateNetworkStatus: (
+      _,
+      { isConnected = true, requestError = "" },
+      { cache }
+    ) => {
+      console.log({
+        isConnected,
+        requestError
+      });
+      const data = {
+        networkStatus: {
+          __typename: "NetworkStatus",
+          isConnected,
+          requestError
+        }
+      };
+      cache.writeData({ data });
+      return null;
+    },
     isInstructionsShown: (_, { isInstructionsShown }, { cache }) => {
       cache.writeData({ data: { isInstructionsShown } });
       return null;

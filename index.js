@@ -2,7 +2,7 @@ import {
   Navigation,
   ScreenVisibilityListener as RNNScreenVisibilityListener
 } from "react-native-navigation";
-import { AsyncStorage } from "react-native";
+import { AsyncStorage, NetInfo } from "react-native";
 import RSAKey from "react-native-rsa";
 import DeviceInfo from "react-native-device-info";
 import { sha256 } from "react-native-sha256";
@@ -16,6 +16,7 @@ import { pushNotifications } from "./src/services";
 import IS_INSTRUCTIONS_SHOWN from "./src/graphql/queries/isInstructionShown";
 import setCurrentScreen from "./src/graphql/mutations/setCurrentScreen";
 import SIGN_UP from "./src/graphql/mutations/signUp";
+import UPDATE_NETWORK_STATUS from "./src/graphql/mutations/updateNetworkStatus";
 
 import topTabs from "./src/screens/VoteList/topTabs";
 
@@ -51,6 +52,18 @@ class App {
       }
     });
     listener.register();
+
+    NetInfo.addEventListener("connectionChange", connectionInfo => {
+      console.log({ connectionInfo, online: connectionInfo.type !== "none" });
+    });
+    NetInfo.isConnected.addEventListener("connectionChange", isConnected => {
+      client.mutate({
+        mutation: UPDATE_NETWORK_STATUS,
+        variables: {
+          isConnected
+        }
+      });
+    });
   }
 
   startApp = async ({ isInstructionsShown }) => {
@@ -93,6 +106,12 @@ class App {
             // ( iOS only )
             leftDrawerWidth: 85 // optional, add this if you want a define left drawer width (50=percent)
           }
+        },
+        appStyle: {
+          navBarNoBorder: true,
+          navBarButtonColor: "#FFFFFF",
+          navBarBackgroundColor: "#4494d3",
+          navBarTextColor: "#FFFFFF"
         },
         animationType: "fade"
       });

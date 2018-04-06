@@ -14,6 +14,10 @@ import Config from "../config";
 import { defaults, resolvers } from "./resolvers";
 import typeDefs from "./schemas";
 
+import UPDATE_NETWORK_STATUS from "../graphql/mutations/updateNetworkStatus";
+
+let client; // eslint-disable-line
+
 const cache = new InMemoryCache({
   dataIdFromObject: o => {
     switch (o.__typename) {
@@ -46,10 +50,26 @@ const authLink = setContext(async (_, { headers }) => {
 
 const stateLink = withClientState({ resolvers, cache, defaults, typeDefs });
 const linkError = onError(
-  ({ graphQLErrors, networkError, response, operation }) => {
+  ({ graphQLErrors, networkError, response, operation, ...rest }) => {
+    if (networkError.message === "Network request failed") {
+      client.mutate({
+        mutation: UPDATE_NETWORK_STATUS,
+        variables: {
+          requestError: "Keine Verbindung zum Server"
+        }
+      });
+    } else {
+      client.mutate({
+        mutation: UPDATE_NETWORK_STATUS,
+        variables: {
+          requestError: networkError.message
+        }
+      });
+    }
     if (operation.operationName === "IgnoreErrorsQuery") {
       response.errors = null;
     }
+    console.log({ graphQLErrors, networkError, response, operation, ...rest });
     if (graphQLErrors)
       graphQLErrors.forEach(({ message, locations, path }) => {
         console.log(
@@ -75,7 +95,7 @@ const linkError = onError(
 //   }
 // };
 
-const client = new ApolloClient({
+client = new ApolloClient({
   cache,
   link: ApolloLink.from([
     linkError,

@@ -418,6 +418,14 @@
     request-promise "^4.1.1"
     yargs "^8.0.2"
 
+"@target-corp/react-native-svg-parser@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@target-corp/react-native-svg-parser/-/react-native-svg-parser-1.0.5.tgz#93b7caf5b1fb279f5e435f93b881190c7f619608"
+  dependencies:
+    camelcase "^4.1.0"
+    css-parse-no-fs "^2.0.0"
+    xmldom "^0.1.27"
+
 "@types/async@2.0.47":
   version "2.0.47"
   resolved "https://registry.yarnpkg.com/@types/async/-/async-2.0.47.tgz#f49ba1dd1f189486beb6e1d070a850f6ab4bd521"
@@ -2206,6 +2214,10 @@ crypto-random-string@^1.0.0:
 css-color-keywords@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/css-color-keywords/-/css-color-keywords-1.0.0.tgz#fea2616dc676b2962686b3af8dbdbe180b244e05"
+
+css-parse-no-fs@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/css-parse-no-fs/-/css-parse-no-fs-2.0.0.tgz#7bcd3432bb9ebed75ccfd21c166ee849a16dd282"
 
 css-to-react-native@^2.0.3:
   version "2.1.2"
@@ -8131,7 +8143,7 @@ xmldoc@^0.4.0:
   dependencies:
     sax "~1.1.1"
 
-xmldom@0.1.x:
+xmldom@0.1.x, xmldom@^0.1.27:
   version "0.1.27"
   resolved "https://registry.yarnpkg.com/xmldom/-/xmldom-0.1.27.tgz#d501f97b3bdb403af8ef9ecc20573187aadac0e9"
 
