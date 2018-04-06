@@ -1,4 +1,4 @@
-git_url(ENV["MATCH_GIT"])
+git_url(ENV["MATCH_GIT"] || 'https://bitbucket.org/democracy-detuschland/certificates.git')
 
 type("development") # The default type, can be: appstore, adhoc, enterprise or development
 

@@ -2,6 +2,14 @@
 
 ### X.X.X
 
+### 0.4.1
+
+* [Bug] Fix API Url
+
+### 0.4.0
+
+* [Feature] Add Push Notifications
+
 ### 0.3.5
 
 * Details

@@ -1,6 +1,6 @@
 {
   "name": "democracyclient",
-  "version": "0.3.5",
+  "version": "0.4.1",
   "private": true,
   "scripts": {
     "test": "eslint . && jest && flow",
@@ -47,6 +47,7 @@
     "react-native-device-info": "^0.21.2",
     "react-native-linear-gradient": "^2.4.0",
     "react-native-navigation": "^1.1.389",
+    "react-native-push-notification": "^3.0.2",
     "react-native-rsa": "^0.0.3",
     "react-native-sha256": "^1.1.1",
     "react-native-svg": "^6.3.1",
