@@ -2,6 +2,9 @@ import React from "react";
 import styled from "styled-components/native";
 import { graphql, compose } from "react-apollo";
 import PropTypes from "prop-types";
+import { Navigator } from "react-native-navigation";
+
+import VoteButton from "../../components/VoteButton";
 
 import VOTE from "../../graphql/mutations/vote";
 import VOTE_LOCAL from "../../graphql/mutations/voteLocal";
@@ -34,117 +37,81 @@ const VoteWrapper = styled.View`
   padding-vertical: 11;
 `;
 
-const VoteIconButtonWrapper = styled.TouchableOpacity`
-  width: 88;
-  height: 88;
-
-  border-color: rgba(21, 192, 99, 0.8);
-  border-radius: ${88 / 2};
-  align-items: center;
-  justify-content: center;
-  background-color: ${({ disabled, selection, votedSelection }) => {
-    if (disabled && selection !== votedSelection) {
-      return "grey";
-    }
-    switch (selection) {
-      case "YES":
-        return "#15C063";
-      case "ABSTINATION":
-        return "#2C82E4";
-      case "NO":
-        return "#EC3E31";
-      default:
-        return "grey";
-    }
-  }};
-`;
-
-const VoteIconButton = styled.Image.attrs({
-  flex: 1,
-  source: require("../../../assets/icons/thumbsUp.png"),
-  resizeMode: "contain",
-  width: null,
-  height: null
-})`
-  width: 40;
-  height: 40;
-`;
-
 const Title = styled.Text`
   flex: 1;
   font-size: 17;
 `;
 
-const Voting = ({ vote, voted, voteLocal, votedSelection }) => (
+const Voting = ({
+  voted,
+  votedSelection,
+  navigator,
+  procedureObjId,
+  procedureId
+}) => (
   <Wrapper>
     <SegmentWrapper>
       <Title>Abstimmen</Title>
     </SegmentWrapper>
-    {/* <Content> */}
     <VoteWrapper>
-      <VoteIconButtonWrapper
-        disabled={voted}
+      <VoteButton
+        voted={voted}
         selection="YES"
         votedSelection={votedSelection}
         onPress={() => {
-          vote("YES");
-          voteLocal("YES");
+          navigator.showModal({
+            screen: "democracy.VoteVarification",
+            title: "Zur Wahlurne".toUpperCase(),
+            passProps: {
+              selection: "YES",
+              procedureObjId,
+              procedureId
+            }
+          });
         }}
-      >
-        <VoteIconButton
-          style={{
-            marginBottom: 5
-          }}
-        />
-      </VoteIconButtonWrapper>
-      <VoteIconButtonWrapper
-        style={{
-          borderColor: "rgba(44, 130, 228, 0.8)"
-        }}
+      />
+      <VoteButton
+        voted={voted}
         selection="ABSTINATION"
         votedSelection={votedSelection}
-        disabled={voted}
         onPress={() => {
-          vote("ABSTINATION");
-          voteLocal("ABSTINATION");
+          navigator.showModal({
+            screen: "democracy.VoteVarification",
+            title: "Zur Wahlurne".toUpperCase(),
+            passProps: {
+              selection: "ABSTINATION",
+              procedureObjId,
+              procedureId
+            }
+          });
         }}
-      >
-        <VoteIconButton
-          style={{
-            transform: [{ rotate: "-90deg" }],
-            marginRight: 5
-          }}
-        />
-      </VoteIconButtonWrapper>
-      <VoteIconButtonWrapper
-        style={{
-          borderColor: "rgba(236, 62, 49, 0.8)"
-        }}
+      />
+      <VoteButton
+        voted={voted}
         selection="NO"
         votedSelection={votedSelection}
-        disabled={voted}
         onPress={() => {
-          vote("NO");
-          voteLocal("NO");
+          navigator.showModal({
+            screen: "democracy.VoteVarification",
+            title: "Zur Wahlurne".toUpperCase(),
+            passProps: {
+              selection: "NO",
+              procedureObjId,
+              procedureId
+            }
+          });
         }}
-      >
-        <VoteIconButton
-          style={{
-            transform: [{ rotate: "180deg" }],
-            marginTop: 5
-          }}
-        />
-      </VoteIconButtonWrapper>
+      />
     </VoteWrapper>
-    {/* </Content> */}
   </Wrapper>
 );
 
 Voting.propTypes = {
-  vote: PropTypes.func.isRequired,
-  voteLocal: PropTypes.func.isRequired,
   voted: PropTypes.bool.isRequired,
-  votedSelection: PropTypes.string
+  votedSelection: PropTypes.string,
+  navigator: PropTypes.instanceOf(Navigator).isRequired,
+  procedureObjId: PropTypes.string.isRequired,
+  procedureId: PropTypes.string.isRequired
 };
 
 Voting.defaultProps = {

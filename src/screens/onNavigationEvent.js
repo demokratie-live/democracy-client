@@ -29,6 +29,9 @@ export default ({ event, navigator }) => {
         case "menu":
           navigator.toggleDrawer({ side: "left" });
           break;
+        case "closeModal":
+          navigator.dismissModal();
+          break;
         case "search":
           navigator.push({
             screen: "democracy.Search",

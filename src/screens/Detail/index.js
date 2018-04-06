@@ -3,6 +3,7 @@ import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import { graphql, compose } from "react-apollo";
 import { RefreshControl, TouchableOpacity } from "react-native";
+import { Navigator } from "react-native-navigation";
 
 import getProcedure from "../../graphql/queries/getProcedure";
 import TOGGLE_NOTIFICATION from "../../graphql/mutations/toggleNotification";
@@ -141,7 +142,11 @@ class Detail extends Component {
           </Segment>
           <VoteResults voteResults={voteResults} procedure={_id} />
           {listType === "VOTING" && (
-            <Voting procedureObjId={_id} procedureId={procedureId} />
+            <Voting
+              procedureObjId={_id}
+              procedureId={procedureId}
+              navigator={this.props.navigator}
+            />
           )}
         </Content>
       </Wrapper>
@@ -156,6 +161,7 @@ Detail.propTypes = {
   listType: PropTypes.string,
   procedureId: PropTypes.string.isRequired,
   data: PropTypes.shape().isRequired,
+  navigator: PropTypes.instanceOf(Navigator).isRequired,
   toggleNotification: PropTypes.func.isRequired
 };
 
