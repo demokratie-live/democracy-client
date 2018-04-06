@@ -2,6 +2,11 @@
 
 ### X.X.X
 
+### 0.5.0
+
+* New
+  * [Screen] Ballot Box ("Schon gewusst?") Screen to verify your vote selection
+
 ### 0.4.1
 
 * [Bug] Fix API Url

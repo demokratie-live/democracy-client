@@ -11,6 +11,7 @@ import SideMenu from "./SideMenu";
 import Detail from "./Detail";
 import Support from "./Support";
 import Security from "./Security";
+import VoteVarification from "./VoteVarification";
 import Notifications from "./Notifications";
 
 import NetworkStatus from "./Wrapper/NetworkStatus";
@@ -68,6 +69,13 @@ export default function registerScreens() {
   Navigation.registerComponent(
     "democracy.Security",
     () => NetworkStatus(Security),
+    client.store,
+    ApolloProvider,
+    { client }
+  );
+  Navigation.registerComponent(
+    "democracy.VoteVarification",
+    () => VoteVarification,
     client.store,
     ApolloProvider,
     { client }
