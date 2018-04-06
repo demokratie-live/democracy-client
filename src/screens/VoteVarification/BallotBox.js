@@ -111,7 +111,7 @@ class BalloutBox extends Component {
   componentDidMount() {
     Animated.timing(this.state.pan, {
       toValue: { x: 20, y: 0 },
-      duration: 300
+      duration: 1000
     }).start(event => {
       if (event.finished) {
         Animated.timing(this.state.pan, {

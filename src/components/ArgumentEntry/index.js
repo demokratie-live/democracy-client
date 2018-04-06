@@ -34,29 +34,35 @@ const Image = styled.Image.attrs({
   height: 82;
 `;
 
+const Title = styled.Text.attrs({
+  numberOfLines: 1
+})``;
+
+const Text = styled.Text``;
+
+const TextMore = styled.Text.attrs({
+  numberOfLines: 1
+})``;
+
 const EntryContent = styled.View`
   flex: 1;
   padding-horizontal: 11;
   padding-vertical: 11;
 `;
 
-const Entry = ({ image, children, argumentation }) => (
+const Entry = ({ children, argumentation }) => (
   <Wrapper>
-    <RowWrapper argumentation={argumentation}>
-      {image && <Image {...image} />}
-      <EntryContent>{children}</EntryContent>
-    </RowWrapper>
+    <RowWrapper argumentation={argumentation}>{children}</RowWrapper>
   </Wrapper>
 );
 
 Entry.propTypes = {
-  children: PropTypes.node.isRequired,
-  image: PropTypes.shape(),
+  children: PropTypes.node,
   argumentation: PropTypes.string
 };
 
 Entry.defaultProps = {
-  image: null,
+  children: null,
   argumentation: "neutral"
 };
 

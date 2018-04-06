@@ -6,10 +6,12 @@ import { Navigator } from "react-native-navigation";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import Fade from "../../components/Animations/Fade";
-import ForumEntry from "../../components/ForumEntry";
+import MessageRow from "../../components/ArgumentEntry/Message";
+import LinkRow from "../../components/ArgumentEntry/Link";
 import BallotBox from "./BallotBox";
 
 import onNavigationEvent from "../onNavigationEvent";
+import dummyEntryData from "../../../dummy/voteVerification";
 
 const Wrapper = styled.View`
   flex: 1;
@@ -100,41 +102,42 @@ class VoteVerification extends Component {
     }
   };
 
+  renderEntries = () => {
+    const { selection } = this.props;
+    return dummyEntryData[selection].map(
+      ({ type, argumentation, title, text, moreText, image, _id }) => {
+        if (type === "message") {
+          return (
+            <MessageRow
+              key={_id}
+              text={text}
+              argumentation={argumentation}
+              moreText={moreText}
+            />
+          );
+        }
+        return (
+          <LinkRow
+            key={_id}
+            image={{
+              source: image
+            }}
+            argumentation={argumentation}
+            title={title}
+            text={text}
+          />
+        );
+      }
+    );
+  };
+
   render() {
     const { selection, procedureObjId, procedureId, navigator } = this.props;
     return (
       <Wrapper>
         <ScrollWrapper onScroll={this.onScroll}>
           <Title>Schon gewusst?</Title>
-          <ForumEntry>
-            <Text>
-              Hier wird in Zukunft ein Contra-Argumentstitel von einem anderen
-              Nutzer stehen und das ist auch gut so, sonst bleibst du ja
-              uninformiert.{" "}
-            </Text>
-          </ForumEntry>
-          <ForumEntry
-            image={{
-              source: {
-                uri:
-                  "https://www.bundestag.de/image/549454/16x9/570/321/a9bde5cdc0ca1328be72904a25dc9a6b/af/kw13_ostern_bild_nachher.jpg"
-              }
-            }}
-            argumentation="pro"
-          >
-            <Text>Studie bestätigt: IQ steigt durchs Argumentieren </Text>
-          </ForumEntry>
-          <ForumEntry
-            argumentation="contra"
-            image={{
-              source: {
-                uri:
-                  "https://www.bundestag.de/image/462008/16x9/596/336/e4f4245308d9f907d264e173cc388a9/RY/plenum_teaser_sitzungsverlauf_bild.jpg"
-              }
-            }}
-          >
-            <Text>Wie Gegenargumente dein Bewusstsein erweit…</Text>
-          </ForumEntry>
+          {this.renderEntries()}
         </ScrollWrapper>
         <WarnWrapper pointerEvents="none">
           <Fade visible={this.state.showWarning}>
