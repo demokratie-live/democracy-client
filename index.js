@@ -30,9 +30,16 @@ registerScreens();
 
 class App {
   constructor() {
-    const observableQuery = client.watchQuery({ query: IS_INSTRUCTIONS_SHOWN });
+    const observableQuery = client.watchQuery({
+      query: IS_INSTRUCTIONS_SHOWN
+    });
     observableQuery.subscribe({
-      next: ({ data }) => this.startApp(data)
+      next: ({ data }) => {
+        if (this.isInstructionsShown !== data.isInstructionsShown) {
+          this.startApp(data);
+        }
+        this.isInstructionsShown = data.isInstructionsShown;
+      }
     });
 
     const listener = new RNNScreenVisibilityListener({
@@ -53,9 +60,6 @@ class App {
     });
     listener.register();
 
-    NetInfo.addEventListener("connectionChange", connectionInfo => {
-      console.log({ connectionInfo, online: connectionInfo.type !== "none" });
-    });
     NetInfo.isConnected.addEventListener("connectionChange", isConnected => {
       client.mutate({
         mutation: UPDATE_NETWORK_STATUS,
@@ -66,7 +70,18 @@ class App {
     });
   }
 
-  startApp = async ({ isInstructionsShown }) => {
+  checkToShowInstructions = async () => {
+    const { data: { isInstructionsShown } } = await client.query({
+      query: IS_INSTRUCTIONS_SHOWN,
+      options: {
+        fetchPolicy: "cache-first"
+      }
+    });
+    return isInstructionsShown;
+  };
+
+  startApp = async ({ isInstructionsShown = false } = {}) => {
+    // const isInstructionsShown = await this.checkToShowInstructions();
     // await AsyncStorage.removeItem("authorization");
     const token = await AsyncStorage.getItem("authorization");
     if (!token) {
@@ -133,6 +148,8 @@ class App {
   };
 }
 
-persistor.restore().then(() => {
+(async () => {
+  await persistor.restore();
+
   const app = new App(); // eslint-disable-line
-});
+})();

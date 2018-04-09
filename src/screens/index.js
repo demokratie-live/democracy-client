@@ -19,7 +19,7 @@ import NetworkStatus from "./Wrapper/NetworkStatus";
 export default function registerScreens() {
   Navigation.registerComponent(
     "democracy.VoteList",
-    () => NetworkStatus(VoteList),
+    () => VoteList,
     client.store,
     ApolloProvider,
     { client }

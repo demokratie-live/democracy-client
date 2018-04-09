@@ -33,7 +33,8 @@ const cache = new InMemoryCache({
 const persistor = new CachePersistor({
   cache,
   storage: AsyncStorage,
-  debug: false
+  debug: true,
+  debounce: 1000
 });
 
 const authLink = setContext(async (_, { headers }) => {
@@ -81,29 +82,29 @@ const linkError = onError(
   }
 );
 
-// const defaultOptions = {
-//   watchQuery: {
-//     fetchPolicy: "cache-and-network",
-//     errorPolicy: "ignore"
-//   },
-//   query: {
-//     fetchPolicy: "network-only",
-//     errorPolicy: "all"
-//   },
-//   mutate: {
-//     errorPolicy: "all"
-//   }
-// };
+const defaultOptions = {
+  watchQuery: {
+    fetchPolicy: "cache-and-network"
+    // errorPolicy: "ignore"
+  },
+  query: {
+    fetchPolicy: "cache-and-network"
+    // errorPolicy: "ignore"
+  },
+  mutate: {
+    errorPolicy: "ignore"
+  }
+};
 
 client = new ApolloClient({
   cache,
   link: ApolloLink.from([
     linkError,
-    stateLink,
     authLink,
+    stateLink,
     new HttpLink({ uri: Config.GRAPHQL_URL })
-  ])
-  // defaultOptions
+  ]),
+  defaultOptions
 });
 export default client;
 

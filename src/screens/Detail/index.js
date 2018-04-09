@@ -175,7 +175,6 @@ export default compose(
   graphql(getProcedure, {
     options: ({ procedureId }) => ({
       variables: { id: procedureId },
-      fetchPolicy: "cache-and-network"
     }),
     props: ({ data }) => ({ data })
   }),

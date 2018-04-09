@@ -83,27 +83,18 @@ VoteResults.propTypes = {
     abstination: PropTypes.number,
     notVote: PropTypes.number
   }),
-  comunityVotes: PropTypes.oneOfType([
-    PropTypes.shape({
-      voteResults: PropTypes.shape({
-        yes: PropTypes.oneOfType([PropTypes.number, null]),
-        no: PropTypes.oneOfType([PropTypes.number, null]),
-        abstination: PropTypes.oneOfType([PropTypes.number, null])
-      })
-    }),
-    PropTypes.bool
-  ]).isRequired
+  comunityVotes: PropTypes.oneOfType([PropTypes.shape(), PropTypes.bool])
 };
 
 VoteResults.defaultProps = {
-  voteResults: null
+  voteResults: null,
+  comunityVotes: false
 };
 
 export default compose(
   graphql(VOTES, {
     options: ({ procedure }) => ({
-      variables: { procedure },
-      fetchPolicy: "cache-and-network"
+      variables: { procedure }
     }),
     props: ({ data }) => ({ comunityVotes: data.votes || {} })
   })
