@@ -1,5 +1,9 @@
 # Changelog
 
+### X.X.X
+
+* [Feature] Add "Antrag" as new procedure type
+
 ### 0.5.1
 
 * [Bug] Handle app crash in Airplane mode
