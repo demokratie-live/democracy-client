@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.5.2
+
+* Details:
+  * [Bug] show data on refresh
+
 ### 0.5.0
 
 * New
