@@ -7,7 +7,7 @@ import { withClientState } from "apollo-link-state";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { CachePersistor } from "apollo-cache-persist";
 import { setContext } from "apollo-link-context";
-import { onError } from "apollo-link-error";
+import { createNetworkStatusNotifier } from "react-apollo-network-status";
 
 import Config from "../config";
 
@@ -49,57 +49,57 @@ const authLink = setContext(async (_, { headers }) => {
   };
 });
 
-const stateLink = withClientState({ resolvers, cache, defaults, typeDefs });
-const linkError = onError(
-  ({ graphQLErrors, networkError, response, operation, ...rest }) => {
-    if (networkError.message === "Network request failed") {
+const { link: networkStatusNotifierLink } = createNetworkStatusNotifier({
+  reducers: {
+    onSuccess: (state, { operation }) => {
+      const ignore = operation.query.definitions.some(definition =>
+        definition.selectionSet.selections.some(section =>
+          section.directives.some(
+            directive =>
+              directive.name.kind === "Name" &&
+              directive.name.value === "client"
+          )
+        )
+      );
+      if (!ignore) {
+        client.mutate({
+          mutation: UPDATE_NETWORK_STATUS,
+          variables: {
+            requestError: ""
+          }
+        });
+      }
+    },
+    onError: (state, { operation, networkError }) => {
+      console.log(operation, networkError);
       client.mutate({
         mutation: UPDATE_NETWORK_STATUS,
         variables: {
           requestError: "Keine Verbindung zum Server"
         }
       });
-    } else {
-      client.mutate({
-        mutation: UPDATE_NETWORK_STATUS,
-        variables: {
-          requestError: networkError.message
-        }
-      });
-    }
-    if (operation.operationName === "IgnoreErrorsQuery") {
-      response.errors = null;
-    }
-    console.log({ graphQLErrors, networkError, response, operation, ...rest });
-    if (graphQLErrors)
-      graphQLErrors.forEach(({ message, locations, path }) => {
-        console.log(
-          `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-        );
-      });
-
-    if (networkError) console.log(`[Network error]: ${networkError}`);
+    },
+    onRequest: () => {}
   }
-);
+});
+
+const stateLink = withClientState({ resolvers, cache, defaults, typeDefs });
 
 const defaultOptions = {
-  watchQuery: {
-    fetchPolicy: "cache-and-network"
-    // errorPolicy: "ignore"
-  },
   query: {
-    fetchPolicy: "cache-and-network"
+    // fetchPolicy: "cache-and-network"
     // errorPolicy: "ignore"
   },
   mutate: {
-    errorPolicy: "ignore"
+    // errorPolicy: "ignore"
   }
 };
 
 client = new ApolloClient({
   cache,
   link: ApolloLink.from([
-    linkError,
+    networkStatusNotifierLink,
+    // linkError,
     authLink,
     stateLink,
     new HttpLink({ uri: Config.GRAPHQL_URL })

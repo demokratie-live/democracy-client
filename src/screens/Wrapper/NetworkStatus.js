@@ -21,21 +21,30 @@ const NotificationText = styled.Text`
 `;
 
 export default ComposedComponent => {
-  const NetworkStatus = ({ isConnected, requestError, ...rest }) => (
-      <Wrapper>
-        <ComposedComponent
-          {...rest}
-          connectionError={!!(!isConnected || requestError)}
-        />
-        {(!isConnected || !!requestError) && (
-          <Notification offline={!isConnected}>
-            <NotificationText>
-              {requestError || "Keine Internetverbindung"}
-            </NotificationText>
-          </Notification>
-        )}
-      </Wrapper>
-    );
+  let NetworkStatus = props => {
+    const { isConnected, requestError } = props;
+    if (!isConnected || !!requestError) {
+      return (
+        <Notification offline={!isConnected}>
+          <NotificationText>
+            {requestError || "Keine Internetverbindung"}
+          </NotificationText>
+        </Notification>
+      );
+    }
+    return null;
+  };
+
+  NetworkStatus = graphql(GET_NETWORK_STATUS, {
+    props: ({ data: { networkStatus } }) => ({ ...networkStatus })
+  })(NetworkStatus);
+
+  const WrappingComponent = ({ ...rest }) => (
+    <Wrapper>
+      <ComposedComponent {...rest} />
+      <NetworkStatus />
+    </Wrapper>
+  );
 
   NetworkStatus.propTypes = {
     isConnected: PropTypes.bool,
@@ -47,7 +56,5 @@ export default ComposedComponent => {
     requestError: ""
   };
 
-  return graphql(GET_NETWORK_STATUS, {
-    props: ({ data: { networkStatus } }) => ({ ...networkStatus })
-  })(NetworkStatus);
+  return WrappingComponent;
 };

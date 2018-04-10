@@ -81,7 +81,6 @@ class App {
   };
 
   startApp = async ({ isInstructionsShown = false } = {}) => {
-    // const isInstructionsShown = await this.checkToShowInstructions();
     // await AsyncStorage.removeItem("authorization");
     const token = await AsyncStorage.getItem("authorization");
     if (!token) {

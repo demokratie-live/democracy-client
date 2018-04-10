@@ -25,7 +25,6 @@ const configure = () => {
     onNotification(notification) {
       // process the notification
       // required on iOS only
-      console.log("onNotification", notification);
       notification.finish(PushNotificationIOS.FetchResult.NoData);
     },
 

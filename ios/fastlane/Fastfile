@@ -58,7 +58,7 @@ platform :ios do
       scheme: "democracyclient-prod"
     )
     upload_to_testflight(
-      changelog: File.read("../../CHANGELOG.md"),
+      changelog: File.read("../../CHANGELOG.md")[0, 5000],
       groups: "Developer",
       demo_account_required: false,
       notify_external_testers: true,

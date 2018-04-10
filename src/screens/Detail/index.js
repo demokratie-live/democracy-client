@@ -174,9 +174,8 @@ Detail.defaultProps = {
 export default compose(
   graphql(getProcedure, {
     options: ({ procedureId }) => ({
-      variables: { id: procedureId },
-    }),
-    props: ({ data }) => ({ data })
+        variables: { id: procedureId }
+      })
   }),
   graphql(TOGGLE_NOTIFICATION, {
     props({ mutate, ownProps }) {
