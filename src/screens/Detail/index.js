@@ -76,7 +76,7 @@ class Detail extends Component {
   render() {
     const { procedureId, toggleNotification } = this.props;
     const { data: { loading, networkStatus, refetch } } = this.props;
-    if (loading || !this.props.data.procedure) {
+    if (loading && !this.props.data.procedure) {
       return null;
     }
     const {
