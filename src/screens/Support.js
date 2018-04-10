@@ -28,7 +28,7 @@ const Logo = styled.Image.attrs({
 })``;
 
 const Text = styled.Text`
-  text-align: center;
+  text-align: justify;
   font-size: 15;
   color: #8f8e94;
   padding-vertical: 28;
