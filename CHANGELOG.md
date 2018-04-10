@@ -4,6 +4,15 @@
 
 * [Feature] Add "Antrag" as new procedure type
 
+### 0.5.3
+
+* [Bug] show votepanel for procedures in all lists
+
+### 0.5.2
+
+* Details:
+  * [Bug][android] show data on refresh
+
 ### 0.5.1
 
 * [Bug] Handle app crash in Airplane mode

@@ -74,9 +74,9 @@ class Detail extends Component {
   };
 
   render() {
-    const { listType, procedureId, toggleNotification } = this.props;
+    const { procedureId, toggleNotification } = this.props;
     const { data: { loading, networkStatus, refetch } } = this.props;
-    if (loading || !this.props.data.procedure) {
+    if (loading && !this.props.data.procedure) {
       return null;
     }
     const {
@@ -90,6 +90,8 @@ class Detail extends Component {
       importantDocuments,
       voteResults,
       currentStatus,
+      notify,
+      listType,
       notify,
       type
     } = this.props.data.procedure;
@@ -160,7 +162,6 @@ Detail.propTypes = {
   title: PropTypes.string.isRequired,
   tags: PropTypes.arrayOf(PropTypes.string),
   abstract: PropTypes.string,
-  listType: PropTypes.string,
   procedureId: PropTypes.string.isRequired,
   data: PropTypes.shape().isRequired,
   navigator: PropTypes.instanceOf(Navigator).isRequired,
@@ -169,15 +170,14 @@ Detail.propTypes = {
 
 Detail.defaultProps = {
   abstract: "",
-  listType: "search",
   tags: []
 };
 
 export default compose(
   graphql(getProcedure, {
     options: ({ procedureId }) => ({
-        variables: { id: procedureId }
-      })
+      variables: { id: procedureId }
+    })
   }),
   graphql(TOGGLE_NOTIFICATION, {
     props({ mutate, ownProps }) {
