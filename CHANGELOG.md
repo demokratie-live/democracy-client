@@ -5,6 +5,10 @@
 * Support
   [Bug][android] fix phone & email button actions
 
+### 0.5.3
+
+* [Bug] show votepanel for procedures in all lists
+
 ### 0.5.2
 
 * Details:
