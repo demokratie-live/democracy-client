@@ -125,7 +125,11 @@ class App {
           navBarNoBorder: true,
           navBarButtonColor: "#FFFFFF",
           navBarBackgroundColor: "#4494d3",
-          navBarTextColor: "#FFFFFF"
+          navBarTextColor: "#FFFFFF",
+          navBarTextFontSize: 17,
+          selectedTopTabTextColor: "#ffffff",
+          selectedTopTabIndicatorColor: "#ffffff",
+          selectedTopTabIndicatorHeight: 5
         },
         animationType: "fade"
       });
