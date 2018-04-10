@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.5.2
+
+* Details:
+  * [Bug][android] show data on refresh
+
 ### 0.5.1
 
 * [Bug] Handle app crash in Airplane mode
