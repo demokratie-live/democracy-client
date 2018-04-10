@@ -4,6 +4,11 @@
 
 * [Feature] Add "Antrag" as new procedure type
 
+### 0.5.4
+
+* Support
+  [Bug][android] fix phone & email button actions
+
 ### 0.5.3
 
 * [Bug] show votepanel for procedures in all lists
