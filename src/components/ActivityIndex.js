@@ -64,12 +64,8 @@ export default compose(
     props: ({ data: { activityIndex } }) => ({
       activityIndex: activityIndex ? activityIndex.activityIndex : 0,
       active: activityIndex ? activityIndex.active : false
-    }),
-    options: () => ({
-      fetchPolicy: "cache-and-network"
     })
   }),
-
   graphql(INCREASE_ACTIVITY, {
     props({
       ownProps: { activityIndex: prevActivityIndex, procedureId },

@@ -1,13 +1,31 @@
 import VOTES_LOCAL from "../queries/votesLocal";
+import IS_INSTRUCTIONS_SHOWN from "../queries/isInstructionShown";
+import GET_NETWORK_STATUS from "../queries/getNetworkStatus";
 
 export const defaults = {
-  isInstructionsShown: false,
   currentScreen: "democracy.VoteList",
-  votesLocal: []
+  votesLocal: [],
+  isInstructionsShown: false,
+  networkStatus: {
+    __typename: "NetworkStatus",
+    isConnected: true,
+    requestError: ""
+  }
 };
 
 export const resolvers = {
   Mutation: {
+    updateNetworkStatus: (
+      _,
+      { isConnected = true, requestError = "" },
+      { cache }
+    ) => {
+      const data = cache.readQuery({ query: GET_NETWORK_STATUS });
+
+      data.networkStatus = { ...data.networkStatus, isConnected, requestError };
+      cache.writeData({ data: { networkStatus: data.networkStatus } });
+      return null;
+    },
     isInstructionsShown: (_, { isInstructionsShown }, { cache }) => {
       cache.writeData({ data: { isInstructionsShown } });
       return null;
@@ -52,6 +70,11 @@ export const resolvers = {
     }
   },
   Query: {
+    isInstructionsShown: (_, args, { cache }) => {
+      const previous = cache.readQuery({ query: IS_INSTRUCTIONS_SHOWN });
+      return previous.isInstructionsShown;
+    },
+
     votedLocal: (_, { procedure }, { cache }) => {
       let previous;
       try {

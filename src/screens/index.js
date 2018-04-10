@@ -14,17 +14,19 @@ import Security from "./Security";
 import VoteVarification from "./VoteVarification";
 import Notifications from "./Notifications";
 
+import NetworkStatus from "./Wrapper/NetworkStatus";
+
 export default function registerScreens() {
   Navigation.registerComponent(
     "democracy.VoteList",
-    () => VoteList,
+    () => NetworkStatus(VoteList),
     client.store,
     ApolloProvider,
     { client }
   );
   Navigation.registerComponent(
     "democracy.VoteList.List",
-    () => VoteListList,
+    () => NetworkStatus(VoteListList),
     client.store,
     ApolloProvider,
     { client }
@@ -38,35 +40,35 @@ export default function registerScreens() {
   );
   Navigation.registerComponent(
     "democracy.Search",
-    () => Search,
+    () => NetworkStatus(Search),
     client.store,
     ApolloProvider,
     { client }
   );
   Navigation.registerComponent(
     "democracy.SideMenu",
-    () => SideMenu,
+    () => NetworkStatus(SideMenu),
     client.store,
     ApolloProvider,
     { client }
   );
   Navigation.registerComponent(
     "democracy.Detail",
-    () => Detail,
+    () => NetworkStatus(Detail),
     client.store,
     ApolloProvider,
     { client }
   );
   Navigation.registerComponent(
     "democracy.Support",
-    () => Support,
+    () => NetworkStatus(Support),
     client.store,
     ApolloProvider,
     { client }
   );
   Navigation.registerComponent(
     "democracy.Security",
-    () => Security,
+    () => NetworkStatus(Security),
     client.store,
     ApolloProvider,
     { client }
@@ -80,7 +82,7 @@ export default function registerScreens() {
   );
   Navigation.registerComponent(
     "democracy.Notifications",
-    () => Notifications,
+    () => NetworkStatus(Notifications),
     client.store,
     ApolloProvider,
     { client }

@@ -2,7 +2,7 @@ import {
   Navigation,
   ScreenVisibilityListener as RNNScreenVisibilityListener
 } from "react-native-navigation";
-import { AsyncStorage } from "react-native";
+import { AsyncStorage, NetInfo } from "react-native";
 import RSAKey from "react-native-rsa";
 import DeviceInfo from "react-native-device-info";
 import { sha256 } from "react-native-sha256";
@@ -16,6 +16,7 @@ import { pushNotifications } from "./src/services";
 import IS_INSTRUCTIONS_SHOWN from "./src/graphql/queries/isInstructionShown";
 import setCurrentScreen from "./src/graphql/mutations/setCurrentScreen";
 import SIGN_UP from "./src/graphql/mutations/signUp";
+import UPDATE_NETWORK_STATUS from "./src/graphql/mutations/updateNetworkStatus";
 
 import topTabs from "./src/screens/VoteList/topTabs";
 
@@ -29,9 +30,16 @@ registerScreens();
 
 class App {
   constructor() {
-    const observableQuery = client.watchQuery({ query: IS_INSTRUCTIONS_SHOWN });
+    const observableQuery = client.watchQuery({
+      query: IS_INSTRUCTIONS_SHOWN
+    });
     observableQuery.subscribe({
-      next: ({ data }) => this.startApp(data)
+      next: ({ data }) => {
+        if (this.isInstructionsShown !== data.isInstructionsShown) {
+          this.startApp(data);
+        }
+        this.isInstructionsShown = data.isInstructionsShown;
+      }
     });
 
     const listener = new RNNScreenVisibilityListener({
@@ -51,9 +59,29 @@ class App {
       }
     });
     listener.register();
+
+    NetInfo.isConnected.addEventListener("connectionChange", isConnected => {
+      client.mutate({
+        mutation: UPDATE_NETWORK_STATUS,
+        variables: {
+          isConnected
+        }
+      });
+    });
   }
 
-  startApp = async ({ isInstructionsShown }) => {
+  checkToShowInstructions = async () => {
+    const { data: { isInstructionsShown } } = await client.query({
+      query: IS_INSTRUCTIONS_SHOWN,
+      options: {
+        fetchPolicy: "cache-first"
+      }
+    });
+    return isInstructionsShown;
+  };
+
+  startApp = async ({ isInstructionsShown = false } = {}) => {
+    // await AsyncStorage.removeItem("authorization");
     const token = await AsyncStorage.getItem("authorization");
     if (!token) {
       const rsa = new RSAKey();
@@ -61,14 +89,18 @@ class App {
       const uniqueID = await sha256(DeviceInfo.getUniqueID());
       const deviceHashEncrypted = rsa.encrypt(uniqueID);
 
-      const { data } = await client.mutate({
-        mutation: SIGN_UP,
-        variables: {
-          deviceHashEncrypted
-        }
-      });
+      try {
+        const { data } = await client.mutate({
+          mutation: SIGN_UP,
+          variables: {
+            deviceHashEncrypted
+          }
+        });
 
-      await AsyncStorage.setItem("authorization", data.signUp.token);
+        await AsyncStorage.setItem("authorization", data.signUp.token);
+      } catch (error) {
+        // TODO: Show later a message that user is not registered
+      }
     }
 
     // Decide Startscreen
@@ -88,6 +120,16 @@ class App {
             // ( iOS only )
             leftDrawerWidth: 85 // optional, add this if you want a define left drawer width (50=percent)
           }
+        },
+        appStyle: {
+          navBarNoBorder: true,
+          navBarButtonColor: "#FFFFFF",
+          navBarBackgroundColor: "#4494d3",
+          navBarTextColor: "#FFFFFF",
+          navBarTextFontSize: 17,
+          selectedTopTabTextColor: "#ffffff",
+          selectedTopTabIndicatorColor: "#ffffff",
+          selectedTopTabIndicatorHeight: 5
         },
         animationType: "fade"
       });
@@ -109,6 +151,8 @@ class App {
   };
 }
 
-persistor.restore().then(() => {
+(async () => {
+  await persistor.restore();
+
   const app = new App(); // eslint-disable-line
-});
+})();

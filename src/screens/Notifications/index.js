@@ -385,9 +385,6 @@ Notifications.defaultProps = {
 
 export default compose(
   graphql(GET_NOTIFICATION_SETTINGS, {
-    options: {
-      fetchPolicy: "cache-and-network"
-    },
     props: ({
       data: { loading, notificationSettings = { enabled: true } }
     }) => ({
@@ -396,9 +393,6 @@ export default compose(
     })
   }),
   graphql(GET_NOTIFIED_PROCEDURES, {
-    options: {
-      fetchPolicy: "cache-and-network"
-    },
     props: ({ data: { notifiedProcedures } }) => ({
       notifiedProcedures
     })

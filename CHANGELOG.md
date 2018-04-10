@@ -3,7 +3,11 @@
 ### 0.5.2
 
 * Details:
-  * [Bug] show data on refresh
+  * [Bug Android] show data on refresh
+
+### 0.5.1
+
+* [Bug] Handle app crash in Airplane mode
 
 ### 0.5.0
 

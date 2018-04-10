@@ -16,12 +16,12 @@ const ScrollView = styled.ScrollView.attrs({
 })``;
 
 const VoteResults = props => {
-  const { voteResults, comunityVotes } = props;
+  const { voteResults, communityVotes } = props;
 
   const renderCommuntiyResult = () => {
-    const { voteResults: comunnityResults } = comunityVotes;
+    const { voteResults: comunnityResults } = communityVotes;
     if (
-      comunityVotes.voted &&
+      communityVotes.voted &&
       (comunnityResults.yes ||
         comunnityResults.no ||
         comunnityResults.abstination)
@@ -29,7 +29,7 @@ const VoteResults = props => {
       return (
         <PieChart
           data={_.map(
-            comunityVotes.voteResults,
+            communityVotes.voteResults,
             (value, label) =>
               label !== "__typename" ? { value, label } : false
           ).filter(e => e)}
@@ -63,7 +63,7 @@ const VoteResults = props => {
     }
     return null;
   };
-  if (comunityVotes.voted) {
+  if (communityVotes.voted) {
     return (
       <Segment title="Ergebnis" open>
         <ScrollView>
@@ -83,28 +83,19 @@ VoteResults.propTypes = {
     abstination: PropTypes.number,
     notVote: PropTypes.number
   }),
-  comunityVotes: PropTypes.oneOfType([
-    PropTypes.shape({
-      voteResults: PropTypes.shape({
-        yes: PropTypes.oneOfType([PropTypes.number, null]),
-        no: PropTypes.oneOfType([PropTypes.number, null]),
-        abstination: PropTypes.oneOfType([PropTypes.number, null])
-      })
-    }),
-    PropTypes.bool
-  ]).isRequired
+  communityVotes: PropTypes.oneOfType([PropTypes.shape(), PropTypes.bool])
 };
 
 VoteResults.defaultProps = {
-  voteResults: null
+  voteResults: null,
+  communityVotes: false
 };
 
 export default compose(
   graphql(VOTES, {
     options: ({ procedure }) => ({
-      variables: { procedure },
-      fetchPolicy: "cache-and-network"
+      variables: { procedure }
     }),
-    props: ({ data }) => ({ comunityVotes: data.votes || {} })
+    props: ({ data }) => ({ communityVotes: data.votes || {} })
   })
 )(VoteResults);
