@@ -104,7 +104,8 @@ Details.propTypes = {
   dateVote: PropTypes.string,
   abstract: PropTypes.string,
   procedureId: PropTypes.string.isRequired,
-  currentStatus: PropTypes.string.isRequired
+  currentStatus: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired
 };
 
 Details.defaultProps = {
