@@ -55,7 +55,8 @@ const Details = ({
   dateVote,
   abstract,
   procedureId,
-  currentStatus
+  currentStatus,
+  type
 }) => (
   <Wrapper>
     <Head>
@@ -67,12 +68,14 @@ const Details = ({
       )}
       <HeadRight>
         <HeadRightTitle>
+          <DefTitleRight>Typ</DefTitleRight>
           <DefTitleRight>Vorgang</DefTitleRight>
           <DefTitleRight>erstellt am</DefTitleRight>
 
           {dateVote && <DefTitleRight>Abstimmung</DefTitleRight>}
         </HeadRightTitle>
         <HeadRightDescr>
+          <DefDescr>{type}</DefDescr>
           <DefDescr>{procedureId}</DefDescr>
           <DefDescr>
             {submissionDate && m(submissionDate).format("DD.MM.YY")}
