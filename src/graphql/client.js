@@ -79,7 +79,8 @@ const { link: networkStatusNotifierLink } = createNetworkStatusNotifier({
         }
       });
     },
-    onRequest: () => {}
+    onRequest: () => {},
+    onCancel: () => {}
   }
 });
 
@@ -87,7 +88,7 @@ const stateLink = withClientState({ resolvers, cache, defaults, typeDefs });
 
 const defaultOptions = {
   query: {
-    // fetchPolicy: "cache-and-network"
+    fetchPolicy: "cache-and-network"
     // errorPolicy: "ignore"
   },
   mutate: {

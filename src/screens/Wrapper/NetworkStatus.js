@@ -36,7 +36,7 @@ export default ComposedComponent => {
   };
 
   NetworkStatus = graphql(GET_NETWORK_STATUS, {
-    props: ({ data: { networkStatus } }) => ({ ...networkStatus })
+    props: ({ data: { networkStatus } }) => networkStatus
   })(NetworkStatus);
 
   const WrappingComponent = ({ ...rest }) => (
