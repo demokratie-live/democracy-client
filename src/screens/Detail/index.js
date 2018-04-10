@@ -91,7 +91,8 @@ class Detail extends Component {
       voteResults,
       currentStatus,
       notify,
-      listType
+      listType,
+      type
     } = this.props.data.procedure;
     return (
       <Wrapper
@@ -136,6 +137,7 @@ class Detail extends Component {
               abstract={abstract}
               procedureId={procedureId}
               currentStatus={currentStatus}
+              type={type}
             />
           </Segment>
           <Segment title="Dokumente">

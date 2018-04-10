@@ -8,6 +8,7 @@ const Wrapper = styled.View``;
 
 const Head = styled.View`
   flex-direction: row;
+  padding-right: 18;
 `;
 
 const HeadLeft = styled.View`
@@ -21,6 +22,7 @@ const HeadRight = styled.View`
 
 const HeadRightTitle = styled.View`
   flex: 1;
+  min-width: 65;
 `;
 
 const HeadRightDescr = styled.View`
@@ -55,7 +57,8 @@ const Details = ({
   dateVote,
   abstract,
   procedureId,
-  currentStatus
+  currentStatus,
+  type
 }) => (
   <Wrapper>
     <Head>
@@ -67,12 +70,14 @@ const Details = ({
       )}
       <HeadRight>
         <HeadRightTitle>
+          <DefTitleRight>Typ</DefTitleRight>
           <DefTitleRight>Vorgang</DefTitleRight>
           <DefTitleRight>erstellt am</DefTitleRight>
 
           {dateVote && <DefTitleRight>Abstimmung</DefTitleRight>}
         </HeadRightTitle>
         <HeadRightDescr>
+          <DefDescr>{type}</DefDescr>
           <DefDescr>{procedureId}</DefDescr>
           <DefDescr>
             {submissionDate && m(submissionDate).format("DD.MM.YY")}
@@ -101,7 +106,8 @@ Details.propTypes = {
   dateVote: PropTypes.string,
   abstract: PropTypes.string,
   procedureId: PropTypes.string.isRequired,
-  currentStatus: PropTypes.string.isRequired
+  currentStatus: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired
 };
 
 Details.defaultProps = {

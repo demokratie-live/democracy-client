@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.6.0
+
+* [Feature] Add "Antrag" as new procedure type
+
 ### 0.5.4
 
 * Support
