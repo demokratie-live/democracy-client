@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.5.4
+
+* Support
+  [Bug][android] fix phone & email button actions
+
 ### 0.5.2
 
 * Details:
