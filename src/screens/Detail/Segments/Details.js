@@ -8,6 +8,7 @@ const Wrapper = styled.View``;
 
 const Head = styled.View`
   flex-direction: row;
+  padding-right: 18;
 `;
 
 const HeadLeft = styled.View`
@@ -21,6 +22,7 @@ const HeadRight = styled.View`
 
 const HeadRightTitle = styled.View`
   flex: 1;
+  min-width: 65;
 `;
 
 const HeadRightDescr = styled.View`

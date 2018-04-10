@@ -92,7 +92,6 @@ class Detail extends Component {
       currentStatus,
       notify,
       listType,
-      notify,
       type
     } = this.props.data.procedure;
     return (
