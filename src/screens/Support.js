@@ -18,7 +18,7 @@ const ScrollWrapper = styled.ScrollView`
 
 const Wrapper = styled.View`
   flex: 1;
-  padding-vertical: 30;
+  padding-top: 30;
   padding-horizontal: 18;
   align-items: center;
 `;
@@ -47,6 +47,13 @@ const IconWrapper = styled.TouchableOpacity`
   border-radius: 33;
   justify-content: center;
   align-items: center;
+`;
+
+const Version = styled.Text`
+  font-size: 15;
+  color: #8f8e94;
+  padding-top: 28;
+  padding-bottom: 11;
 `;
 
 const ContactIcons = styled(FontAwesome).attrs({
@@ -123,7 +130,7 @@ Um Fehler zu beheben, ist allerdings ein qualifiziertes Feedback notwendig. Desh
               <ContactIcons name="github" />
             </IconWrapper>
           </ContactWrapper>
-          <Text style={{ paddingTop: 36 }}>{version}</Text>
+          <Version>{version}</Version>
         </Wrapper>
       </ScrollWrapper>
     );

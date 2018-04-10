@@ -1,5 +1,12 @@
 # Changelog
 
+### x.x.X
+
+* Support
+  * reduce scroll length
+* Security
+  * reduce scroll length
+
 ### 0.5.2
 
 * Details:
