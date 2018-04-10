@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.5.1
+
+* [Bug] Handle app crash in Airplane mode
+
 ### 0.5.0
 
 * New

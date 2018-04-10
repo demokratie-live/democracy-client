@@ -88,8 +88,10 @@ class BalloutBox extends Component {
               },
               friction: 5
             }).start(() => {
-              vote(selection);
-              voteLocal(selection);
+              vote(selection).then(() => {
+                voteLocal(selection);
+              });
+
               navigator.dismissAllModals({
                 animationType: "slide-down" // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
               });

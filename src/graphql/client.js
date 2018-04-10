@@ -7,12 +7,16 @@ import { withClientState } from "apollo-link-state";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { CachePersistor } from "apollo-cache-persist";
 import { setContext } from "apollo-link-context";
-import { onError } from "apollo-link-error";
+import { createNetworkStatusNotifier } from "react-apollo-network-status";
 
 import Config from "../config";
 
 import { defaults, resolvers } from "./resolvers";
 import typeDefs from "./schemas";
+
+import UPDATE_NETWORK_STATUS from "../graphql/mutations/updateNetworkStatus";
+
+let client; // eslint-disable-line
 
 const cache = new InMemoryCache({
   dataIdFromObject: o => {
@@ -29,7 +33,8 @@ const cache = new InMemoryCache({
 const persistor = new CachePersistor({
   cache,
   storage: AsyncStorage,
-  debug: false
+  debug: false,
+  debounce: 1000
 });
 
 const authLink = setContext(async (_, { headers }) => {
@@ -44,41 +49,58 @@ const authLink = setContext(async (_, { headers }) => {
   };
 });
 
-const stateLink = withClientState({ resolvers, cache, defaults, typeDefs });
-const linkError = onError(({ graphQLErrors, networkError }) => {
-  if (graphQLErrors)
-    graphQLErrors.forEach(({ message, locations, path }) => {
-      console.log(
-        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+const { link: networkStatusNotifierLink } = createNetworkStatusNotifier({
+  reducers: {
+    onSuccess: (state, { operation }) => {
+      const ignore = operation.query.definitions.some(definition =>
+        definition.selectionSet.selections.some(section =>
+          section.directives.some(
+            directive =>
+              directive.name.kind === "Name" &&
+              directive.name.value === "client"
+          )
+        )
       );
-    });
-
-  if (networkError) console.log(`[Network error]: ${networkError}`);
+      if (!ignore) {
+        client.mutate({
+          mutation: UPDATE_NETWORK_STATUS,
+          variables: {
+            requestError: ""
+          }
+        });
+      }
+    },
+    onError: () => {
+      client.mutate({
+        mutation: UPDATE_NETWORK_STATUS,
+        variables: {
+          requestError: "Keine Verbindung zum Server"
+        }
+      });
+    },
+    onRequest: () => {},
+    onCancel: () => {}
+  }
 });
 
-// const defaultOptions = {
-//   watchQuery: {
-//     fetchPolicy: "cache-and-network",
-//     errorPolicy: "ignore"
-//   },
-//   query: {
-//     fetchPolicy: "network-only",
-//     errorPolicy: "all"
-//   },
-//   mutate: {
-//     errorPolicy: "all"
-//   }
-// };
+const stateLink = withClientState({ resolvers, cache, defaults, typeDefs });
 
-const client = new ApolloClient({
+const defaultOptions = {
+  query: {
+    fetchPolicy: "cache-and-network"
+  },
+  mutate: {}
+};
+
+client = new ApolloClient({
   cache,
   link: ApolloLink.from([
-    linkError,
-    stateLink,
+    networkStatusNotifierLink,
     authLink,
+    stateLink,
     new HttpLink({ uri: Config.GRAPHQL_URL })
-  ])
-  // defaultOptions
+  ]),
+  defaultOptions
 });
 export default client;
 
