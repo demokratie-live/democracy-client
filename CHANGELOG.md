@@ -3,7 +3,7 @@
 ### 0.5.2
 
 * Details:
-  * [Bug Android] show data on refresh
+  * [Bug][android] show data on refresh
 
 ### 0.5.1
 
