@@ -33,7 +33,7 @@ const cache = new InMemoryCache({
 const persistor = new CachePersistor({
   cache,
   storage: AsyncStorage,
-  debug: true,
+  debug: false,
   debounce: 1000
 });
 
@@ -70,8 +70,7 @@ const { link: networkStatusNotifierLink } = createNetworkStatusNotifier({
         });
       }
     },
-    onError: (state, { operation, networkError }) => {
-      console.log(operation, networkError);
+    onError: () => {
       client.mutate({
         mutation: UPDATE_NETWORK_STATUS,
         variables: {
@@ -89,18 +88,14 @@ const stateLink = withClientState({ resolvers, cache, defaults, typeDefs });
 const defaultOptions = {
   query: {
     fetchPolicy: "cache-and-network"
-    // errorPolicy: "ignore"
   },
-  mutate: {
-    // errorPolicy: "ignore"
-  }
+  mutate: {}
 };
 
 client = new ApolloClient({
   cache,
   link: ApolloLink.from([
     networkStatusNotifierLink,
-    // linkError,
     authLink,
     stateLink,
     new HttpLink({ uri: Config.GRAPHQL_URL })
