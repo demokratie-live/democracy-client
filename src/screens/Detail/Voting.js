@@ -170,7 +170,8 @@ export default compose(
 
   graphql(VOTED, {
     options: ({ procedureObjId }) => ({
-      variables: { procedure: procedureObjId }
+      variables: { procedure: procedureObjId },
+      fetchPolicy: "cache-and-network"
     }),
     props: ({ data: { loading, votes } }) => ({
       voted: loading ? true : votes.voted

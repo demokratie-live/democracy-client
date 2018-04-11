@@ -49,21 +49,29 @@ class ActivityIndex extends Component {
 ActivityIndex.propTypes = {
   procedureId: PropTypes.string.isRequired, // eslint-disable-line
   increaseActivity: PropTypes.func.isRequired,
-  activityIndex: PropTypes.number.isRequired,
+  activityIndex: PropTypes.number,
   active: PropTypes.bool,
   touchable: PropTypes.bool
 };
 
 ActivityIndex.defaultProps = {
   active: false,
-  touchable: false
+  touchable: false,
+  activityIndex: 0
 };
 
 export default compose(
   graphql(getActivityIndex, {
-    props: ({ data: { activityIndex } }) => ({
-      activityIndex: activityIndex ? activityIndex.activityIndex : 0,
-      active: activityIndex ? activityIndex.active : false
+    props: props => {
+      const { data: { activityIndex } } = props;
+      return {
+        activityIndex: activityIndex ? activityIndex.activityIndex : 0,
+        active: activityIndex ? activityIndex.active : false
+      };
+    },
+    skip: ({ skipFetchData }) => skipFetchData,
+    options: () => ({
+      fetchPolicy: "cache-and-network"
     })
   }),
   graphql(INCREASE_ACTIVITY, {

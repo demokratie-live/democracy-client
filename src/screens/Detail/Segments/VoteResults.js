@@ -94,7 +94,8 @@ VoteResults.defaultProps = {
 export default compose(
   graphql(VOTES, {
     options: ({ procedure }) => ({
-      variables: { procedure }
+      variables: { procedure },
+      fetchPolicy: "cache-and-network"
     }),
     props: ({ data }) => ({ communityVotes: data.votes || {} })
   })

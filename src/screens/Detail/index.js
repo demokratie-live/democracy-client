@@ -75,8 +75,8 @@ class Detail extends Component {
 
   render() {
     const { procedureId, toggleNotification } = this.props;
-    const { data: { loading, networkStatus, refetch } } = this.props;
-    if (loading && !this.props.data.procedure) {
+    const { data: { networkStatus, refetch } } = this.props;
+    if (!this.props.data.procedure) {
       return null;
     }
     const {
@@ -175,7 +175,8 @@ Detail.defaultProps = {
 export default compose(
   graphql(getProcedure, {
     options: ({ procedureId }) => ({
-      variables: { id: procedureId }
+      variables: { id: procedureId },
+      fetchPolicy: "cache-and-network"
     })
   }),
   graphql(TOGGLE_NOTIFICATION, {

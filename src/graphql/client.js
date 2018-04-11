@@ -85,13 +85,6 @@ const { link: networkStatusNotifierLink } = createNetworkStatusNotifier({
 
 const stateLink = withClientState({ resolvers, cache, defaults, typeDefs });
 
-const defaultOptions = {
-  query: {
-    fetchPolicy: "cache-and-network"
-  },
-  mutate: {}
-};
-
 client = new ApolloClient({
   cache,
   link: ApolloLink.from([
@@ -99,8 +92,7 @@ client = new ApolloClient({
     authLink,
     stateLink,
     new HttpLink({ uri: Config.GRAPHQL_URL })
-  ]),
-  defaultOptions
+  ])
 });
 export default client;
 
