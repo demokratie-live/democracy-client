@@ -30,7 +30,14 @@ const Tags = styled.Text.attrs({ numberOfLines: 2 })`
   color: #8f8e94;
 `;
 
-const ListItem = ({ title, tags, date, procedureId, children }) => (
+const ListItem = ({
+  title,
+  tags,
+  date,
+  procedureId,
+  children,
+  activityIndex: { activityIndex, active }
+}) => (
   <ListItemWrapper>
     <MainWrapper>
       <Title>{title}</Title>
@@ -38,7 +45,12 @@ const ListItem = ({ title, tags, date, procedureId, children }) => (
       {children}
     </MainWrapper>
     <SideWrapper>
-      <ActivityIndex procedureId={procedureId} />
+      <ActivityIndex
+        procedureId={procedureId}
+        activityIndex={activityIndex}
+        active={active}
+        skipFetchData
+      />
       {date && <DateTime date={date} />}
     </SideWrapper>
   </ListItemWrapper>
@@ -53,13 +65,15 @@ ListItem.propTypes = {
     PropTypes.string,
     PropTypes.bool
   ]),
-  children: PropTypes.node
+  children: PropTypes.node,
+  activityIndex: PropTypes.shape()
 };
 
 ListItem.defaultProps = {
   tags: [],
   date: false,
-  children: null
+  children: null,
+  activityIndex: {}
 };
 
 export default ListItem;

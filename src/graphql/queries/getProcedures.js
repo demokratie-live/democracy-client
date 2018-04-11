@@ -1,5 +1,7 @@
 import gql from "graphql-tag";
 
+import ActivityIndex from "../fragments/ProcedureActivityIndex";
+
 export default gql`
   query procedures($offset: Int, $pageSize: Int, $type: ProcedureType!) {
     procedures(offset: $offset, pageSize: $pageSize, type: $type) {
@@ -10,10 +12,8 @@ export default gql`
       abstract
       voteDate
       submissionDate
-      activityIndex {
-        activityIndex
-        active
-      }
+      ...ActivityIndex
     }
   }
+  ${ActivityIndex}
 `;

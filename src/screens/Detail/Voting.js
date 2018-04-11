@@ -6,12 +6,9 @@ import { Navigator } from "react-native-navigation";
 
 import VoteButton from "../../components/VoteButton";
 
-import VOTE from "../../graphql/mutations/vote";
 import VOTE_LOCAL from "../../graphql/mutations/voteLocal";
 import VOTED from "../../graphql/queries/voted";
-import VOTES from "../../graphql/queries/votes";
 import VOTED_LOCAL from "../../graphql/queries/votedLocal";
-import GET_ACTIVITY_INDEX from "../../graphql/queries/activityIndex";
 
 const SegmentWrapper = styled.View`
   padding-vertical: 10;
@@ -119,58 +116,10 @@ Voting.defaultProps = {
 };
 
 export default compose(
-  graphql(VOTE, {
-    props({ ownProps: { procedureObjId, procedureId }, mutate }) {
-      return {
-        vote: selection =>
-          mutate({
-            variables: { procedure: procedureObjId, selection },
-            optimisticResponse: {
-              __typename: "Mutation",
-              vote: {
-                __typename: "Vote",
-                voted: true
-              }
-            },
-            update: (proxy, { data: { vote: { voted } } }) => {
-              const data = proxy.readQuery({
-                query: VOTED,
-                variables: { procedure: procedureObjId }
-              });
-              data.votes.voted = voted;
-              proxy.writeQuery({
-                query: VOTED,
-                variables: { procedure: procedureObjId },
-                data
-              });
-              const activityData = proxy.readQuery({
-                query: GET_ACTIVITY_INDEX,
-                variables: { procedureId }
-              });
-              if (!activityData.activityIndex.active) {
-                activityData.activityIndex.active = true;
-                activityData.activityIndex.activityIndex += 1;
-                proxy.writeQuery({
-                  query: GET_ACTIVITY_INDEX,
-                  variables: { procedureId },
-                  data: activityData
-                });
-              }
-            },
-            refetchQueries: [
-              {
-                query: VOTES,
-                variables: { procedure: procedureObjId }
-              }
-            ]
-          })
-      };
-    }
-  }),
-
   graphql(VOTED, {
     options: ({ procedureObjId }) => ({
-      variables: { procedure: procedureObjId }
+      variables: { procedure: procedureObjId },
+      fetchPolicy: "cache-and-network"
     }),
     props: ({ data: { loading, votes } }) => ({
       voted: loading ? true : votes.voted

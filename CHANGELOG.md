@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.6.1
+
+* [Bug] reload cached data from server
+* [Improvement] Load activityIndex within procedure queries
+
 ### 0.6.0
 
 * [Feature] Add "Antrag" as new procedure type
