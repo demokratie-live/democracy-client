@@ -86,8 +86,7 @@ class List extends Component {
   };
 
   onItemClick = ({ item }) => () => {
-    const { navigator } = this.props;
-    navigator.push({
+    this.props.navigateTo({
       screen: "democracy.Detail",
       title: "Abstimmung".toUpperCase(),
       passProps: { ...item },
