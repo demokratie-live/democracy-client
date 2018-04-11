@@ -1,5 +1,9 @@
 # Changelog
 
+### X.X.X
+* Details
+  * [Bug] shorter text for "Gesetzgebung"
+
 ### 0.6.1
 
 * [Bug] reload cached data from server
