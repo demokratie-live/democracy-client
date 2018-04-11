@@ -94,7 +94,7 @@ class Support extends Component {
   };
 
   render() {
-    const phoneNumber = `telprompt:${Config.PHONE_NUMBER}`;
+    const phoneNumber = Platform.OS === "ios" ? `telprompt:${Config.PHONE_NUMBER}` : `tel:${Config.PHONE_NUMBER}`;
     const email = `mailto:${Config.CONTACT_EMAIL}`;
     const github = Config.GITHUB_URL;
     const version = `Version: ${DeviceInfo.getReadableVersion()

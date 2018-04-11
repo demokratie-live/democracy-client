@@ -11,6 +11,7 @@ export default gql`
       voteDate
       notify
       listType
+      type
       subjectGroups
       submissionDate
       currentStatus
