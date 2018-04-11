@@ -14,7 +14,7 @@ import Security from "./Security";
 import VoteVarification from "./VoteVarification";
 import Notifications from "./Notifications";
 
-import NetworkStatus from "./HOC/NetworkStatus";
+import NetworkStatus from "../hocs/NetworkStatus";
 
 export default function registerScreens() {
   Navigation.registerComponent(

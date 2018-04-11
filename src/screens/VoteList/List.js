@@ -8,6 +8,8 @@ import { graphql } from "react-apollo";
 import { unionBy } from "lodash";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
+import prevetNavStackDuplicate from "../../hocs/preventNavStackDuplicate";
+
 import ListRow from "../../components/ListRow";
 import VoteListItem from "../../components/VoteListItem";
 import ListSectionHeader from "../../components/ListSectionHeader";
@@ -202,4 +204,4 @@ export default graphql(getProcedures, {
     notifyOnNetworkStatusChange: true,
     variables: { type: listType, pageSize: PAGE_SIZE, offset: 0 }
   })
-})(List);
+})(prevetNavStackDuplicate(List));

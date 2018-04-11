@@ -3,7 +3,6 @@ import { Platform, SegmentedControlIOS, Dimensions } from "react-native";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import { Navigation, Navigator } from "react-native-navigation";
-import prevetNavStackDuplicate from "../HOC/preventNavStackDuplicate";
 
 import List from "./List";
 import Header from "./Header";
@@ -121,6 +120,7 @@ class VoteList extends Component {
             <List
               key={list.key}
               listType={list.key}
+              navigator={this.props.navigator}
               navigateTo={this.props.navigateTo}
             />
           ))}
@@ -146,4 +146,4 @@ VoteList.propTypes = {
 
 VoteList.defaultProps = {};
 
-export default prevetNavStackDuplicate(VoteList);
+export default VoteList;
