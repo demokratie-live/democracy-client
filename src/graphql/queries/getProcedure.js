@@ -1,5 +1,7 @@
 import gql from "graphql-tag";
 
+import ActivityIndex from "../fragments/ProcedureActivityIndex";
+
 export default gql`
   query procedure($id: ID!) {
     procedure(id: $id) {
@@ -27,6 +29,8 @@ export default gql`
         abstination
         notVote
       }
+      ...ActivityIndex
     }
   }
+  ${ActivityIndex}
 `;

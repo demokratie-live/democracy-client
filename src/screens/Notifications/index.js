@@ -390,11 +390,17 @@ export default compose(
     }) => ({
       loading,
       notificationSettings
-    })
+    }),
+    options: {
+      fetchPolicy: "cache-and-network"
+    }
   }),
   graphql(GET_NOTIFIED_PROCEDURES, {
     props: ({ data: { notifiedProcedures } }) => ({
       notifiedProcedures
+    }),
+    options: () => ({
+      fetchPolicy: "cache-and-network"
     })
   }),
   graphql(UPDATE_NOTIFICATION_SETTINGS, {
@@ -412,14 +418,18 @@ export default compose(
               }
             },
             update: (cache, { data: { updateNotificationSettings } }) => {
-              const data = cache.readQuery({
-                query: GET_NOTIFICATION_SETTINGS
-              });
-              data.notificationSettings = { ...updateNotificationSettings };
-              cache.writeQuery({
-                query: GET_NOTIFICATION_SETTINGS,
-                data
-              });
+              try {
+                const data = cache.readQuery({
+                  query: GET_NOTIFICATION_SETTINGS
+                });
+                data.notificationSettings = { ...updateNotificationSettings };
+                cache.writeQuery({
+                  query: GET_NOTIFICATION_SETTINGS,
+                  data
+                });
+              } catch (error) {
+                // Error
+              }
             }
           });
         }

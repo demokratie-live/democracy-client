@@ -201,6 +201,7 @@ List.defaultProps = {
 export default graphql(getProcedures, {
   options: ({ listType }) => ({
     notifyOnNetworkStatusChange: true,
-    variables: { type: listType, pageSize: PAGE_SIZE, offset: 0 }
+    variables: { type: listType, pageSize: PAGE_SIZE, offset: 0 },
+    fetchPolicy: "cache-and-network"
   })
 })(List);
