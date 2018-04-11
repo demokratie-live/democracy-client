@@ -142,6 +142,8 @@ class VoteList extends Component {
 
 VoteList.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired,
+  // Why would this be wrong - lint says its correct
+  navigateTo: PropTypes.func.isRequired
 };
 
 VoteList.defaultProps = {};
