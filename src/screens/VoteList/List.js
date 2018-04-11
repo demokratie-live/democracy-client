@@ -192,6 +192,7 @@ class List extends Component {
 List.propTypes = {
   listType: PropTypes.string,
   navigator: PropTypes.instanceOf(Navigator).isRequired,
+  navigateTo: PropTypes.func.isRequired,
   data: PropTypes.shape().isRequired
 };
 

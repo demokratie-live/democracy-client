@@ -141,7 +141,8 @@ class VoteList extends Component {
 }
 
 VoteList.propTypes = {
-  navigator: PropTypes.instanceOf(Navigator).isRequired
+  navigator: PropTypes.instanceOf(Navigator).isRequired,
+  navigateTo: PropTypes.func.isRequired
 };
 
 VoteList.defaultProps = {};
