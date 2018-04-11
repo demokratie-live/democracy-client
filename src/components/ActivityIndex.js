@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import { graphql, compose } from "react-apollo";
 
-import getActivityIndex from "../graphql/queries/activityIndex";
 import INCREASE_ACTIVITY from "../graphql/mutations/increaseActivity";
+
+import F_ACTIVITY_INDEX from "../graphql/fragments/ProcedureActivityIndex";
 
 const Wrapper = styled.View`
   align-items: center;
@@ -61,19 +62,20 @@ ActivityIndex.defaultProps = {
 };
 
 export default compose(
-  graphql(getActivityIndex, {
-    props: props => {
-      const { data: { activityIndex } } = props;
-      return {
-        activityIndex: activityIndex ? activityIndex.activityIndex : 0,
-        active: activityIndex ? activityIndex.active : false
-      };
-    },
-    skip: ({ skipFetchData }) => skipFetchData,
-    options: () => ({
-      fetchPolicy: "cache-and-network"
-    })
-  }),
+  // graphql(getActivityIndex, {
+  //   props: props => {
+  //     console.log("getActivityIndex", props);
+  //     const { data: { activityIndex } } = props;
+  //     return {
+  //       activityIndex: activityIndex ? activityIndex.activityIndex : 0,
+  //       active: activityIndex ? activityIndex.active : false
+  //     };
+  //   },
+  //   skip: ({ skipFetchData }) => skipFetchData,
+  //   options: () => ({
+  //     fetchPolicy: "cache-and-network"
+  //   })
+  // }),
   graphql(INCREASE_ACTIVITY, {
     props({
       ownProps: { activityIndex: prevActivityIndex, procedureId },
@@ -92,17 +94,22 @@ export default compose(
                 active: true
               }
             },
-            update: (proxy, { data: { increaseActivity } }) => {
-              const data = proxy.readQuery({
-                query: getActivityIndex,
-                variables: { procedureId }
+            update: (cache, { data: { increaseActivity } }) => {
+              // ActivityIndex increasing
+              const aiFragment = cache.readFragment({
+                id: procedureId,
+                fragment: F_ACTIVITY_INDEX
               });
-              data.activityIndex = increaseActivity;
-              proxy.writeQuery({
-                query: getActivityIndex,
-                variables: { procedureId },
-                data
-              });
+              if (!aiFragment.activityIndex.active) {
+                aiFragment.activityIndex.active = increaseActivity.active;
+                aiFragment.activityIndex.activityIndex =
+                  increaseActivity.activityIndex;
+                cache.writeFragment({
+                  id: procedureId,
+                  fragment: F_ACTIVITY_INDEX,
+                  data: aiFragment
+                });
+              }
             }
           })
       };

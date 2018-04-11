@@ -7,7 +7,8 @@ import { Navigator } from "react-native-navigation";
 
 import getProcedure from "../../graphql/queries/getProcedure";
 import TOGGLE_NOTIFICATION from "../../graphql/mutations/toggleNotification";
-import GET_ACTIVITY_INDEX from "../../graphql/queries/activityIndex";
+
+import F_ACTIVITY_INDEX from "../../graphql/fragments/ProcedureActivityIndex";
 
 import ActivityIndex from "../../components/ActivityIndex";
 import DateTime from "../../components/Date";
@@ -92,8 +93,10 @@ class Detail extends Component {
       currentStatus,
       notify,
       listType,
-      type
+      type,
+      activityIndex
     } = this.props.data.procedure;
+
     return (
       <Wrapper
         refreshControl={
@@ -119,7 +122,12 @@ class Detail extends Component {
             </IntroButtons>
           </IntroMain>
           <IntroSide>
-            <ActivityIndex procedureId={procedureId} touchable />
+            <ActivityIndex
+              procedureId={procedureId}
+              touchable
+              {...activityIndex}
+              skipFetchData
+            />
             {date && <DateTime date={date} />}
           </IntroSide>
         </Intro>
@@ -201,23 +209,26 @@ export default compose(
                 query: getProcedure,
                 variables: { id: procedureId }
               });
+
               data.procedure.notify = newNotify;
               cache.writeQuery({
                 query: getProcedure,
                 variables: { id: procedureId },
                 data
               });
-              const activityData = cache.readQuery({
-                query: GET_ACTIVITY_INDEX,
-                variables: { procedureId }
+
+              // ActivityIndex
+              const aiFragment = cache.readFragment({
+                id: procedureId,
+                fragment: F_ACTIVITY_INDEX
               });
-              if (!activityData.activityIndex.active) {
-                activityData.activityIndex.active = true;
-                activityData.activityIndex.activityIndex += 1;
-                cache.writeQuery({
-                  query: GET_ACTIVITY_INDEX,
-                  variables: { procedureId },
-                  data: activityData
+              if (!aiFragment.activityIndex.active) {
+                aiFragment.activityIndex.active = true;
+                aiFragment.activityIndex.activityIndex += 1;
+                cache.writeFragment({
+                  id: procedureId,
+                  fragment: F_ACTIVITY_INDEX,
+                  data: aiFragment
                 });
               }
             }
