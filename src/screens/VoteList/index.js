@@ -121,7 +121,6 @@ class VoteList extends Component {
               key={list.key}
               listType={list.key}
               navigator={this.props.navigator}
-              navigateTo={this.props.navigateTo}
             />
           ))}
         </ScrollView>
@@ -141,9 +140,7 @@ class VoteList extends Component {
 }
 
 VoteList.propTypes = {
-  navigator: PropTypes.instanceOf(Navigator).isRequired,
-  // Why would this be wrong - lint says its correct
-  navigateTo: PropTypes.func.isRequired
+  navigator: PropTypes.instanceOf(Navigator).isRequired
 };
 
 VoteList.defaultProps = {};
