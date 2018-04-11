@@ -16,7 +16,7 @@ import ListSectionHeader from "../../components/ListSectionHeader";
 
 import getProcedures from "../../graphql/queries/getProcedures";
 
-import onNavigationEvent from "../onNavigationEvent";
+// import onNavigationEvent from "../onNavigationEvent";
 
 const Wrapper = styled.View`
   flex: 1;
@@ -83,9 +83,9 @@ class List extends Component {
     }
   };
 
-  onNavigationEvent = event => {
+  /* onNavigationEvent = event => {
     onNavigationEvent({ event, navigator: this.props.navigator });
-  };
+  }; */
 
   onItemClick = ({ item }) => () => {
     this.props.navigateTo({
