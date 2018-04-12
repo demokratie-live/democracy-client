@@ -17,7 +17,7 @@ const ScrollWrapper = styled.ScrollView`
 const Wrapper = styled.View`
   flex: 1;
   align-items: center;
-  padding-vertical: 30;
+  padding-top: 30;
   padding-horizontal: 48;
 `;
 
@@ -55,7 +55,8 @@ const ProcessImage = styled.Image``;
 const Version = styled.Text`
   font-size: 15;
   color: #8f8e94;
-  padding-vertical: 28;
+  padding-top: 28;
+  padding-bottom: 11;
 `;
 
 const SecurityEntry = ({ color, text }) => (

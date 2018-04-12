@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.6.2
+
+* Support
+  * reduce scroll length
+* Security
+  * reduce scroll length
+* Credits
+  * [New] add credits screen
+
 ### 0.6.1
 
 * [Bug] reload cached data from server
