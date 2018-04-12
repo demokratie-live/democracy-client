@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.6.3
+* Details
+  * [Bug] shorter text for "Gesetzgebung"
+  
 ### 0.6.2
 
 * Support
