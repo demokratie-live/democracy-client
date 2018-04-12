@@ -1,8 +1,17 @@
 # Changelog
 
-### X.X.X
+### 0.6.3
 * Details
   * [Bug] shorter text for "Gesetzgebung"
+  
+### 0.6.2
+
+* Support
+  * reduce scroll length
+* Security
+  * reduce scroll length
+* Credits
+  * [New] add credits screen
 
 ### 0.6.1
 
