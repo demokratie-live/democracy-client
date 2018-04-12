@@ -1,6 +1,6 @@
 # Changelog
 
-### x.x.X
+### 0.6.2
 
 * Support
   * reduce scroll length
