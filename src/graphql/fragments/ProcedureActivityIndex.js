@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 export default gql`
-  query activityIndex($procedureId: String!) {
-    activityIndex(procedureId: $procedureId) {
+  fragment ActivityIndex on Procedure {
+    activityIndex {
       activityIndex
       active
     }
