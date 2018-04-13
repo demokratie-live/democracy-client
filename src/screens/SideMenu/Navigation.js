@@ -27,7 +27,11 @@ const NavigationItem = styled.TouchableOpacity`
   padding-left: 19;
 `;
 
-const NavigationIcon = styled.Image``;
+const NavigationIcon = styled.Image.attrs({
+  resizeMode: "contain"
+})`
+  width: 24;
+`;
 
 const NavigationTitle = styled.Text`
   padding-left: 17;
@@ -106,6 +110,11 @@ const NavigationView = ({ currentScreen, navigateTo }) => {
           screenId: "democracy.Support",
           title: "Support".toUpperCase(),
           icon: require("../../../assets/icons/speechBubble9.png")
+        },
+        {
+          screenId: "democracy.Credits",
+          title: "Credits".toUpperCase(),
+          icon: require("../../../assets/icons/heart.png")
         }
       ]
     }
