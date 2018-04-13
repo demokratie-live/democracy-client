@@ -8,7 +8,6 @@ const Wrapper = styled.View``;
 
 const Head = styled.View`
   flex-direction: row;
-  padding-right: 18;
 `;
 
 const HeadLeft = styled.View`
@@ -22,7 +21,6 @@ const HeadRight = styled.View`
 
 const HeadRightTitle = styled.View`
   flex: 1;
-  min-width: 65;
 `;
 
 const HeadRightDescr = styled.View`
@@ -51,6 +49,15 @@ const ContentText = styled(DefDescr)`
   font-size: 13;
 `;
 
+const renderType = type => {
+  switch (type) {
+    case "Gesetzgebung":
+      return "Gesetz";
+    default:
+      return type;
+  }
+};
+
 const Details = ({
   subjectGroups,
   submissionDate,
@@ -77,7 +84,7 @@ const Details = ({
           {dateVote && <DefTitleRight>Abstimmung</DefTitleRight>}
         </HeadRightTitle>
         <HeadRightDescr>
-          <DefDescr>{type}</DefDescr>
+          <DefDescr>{renderType(type)}</DefDescr>
           <DefDescr>{procedureId}</DefDescr>
           <DefDescr>
             {submissionDate && m(submissionDate).format("DD.MM.YY")}
