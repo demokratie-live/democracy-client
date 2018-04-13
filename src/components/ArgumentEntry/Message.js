@@ -32,7 +32,8 @@ const Collapse = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   width: 25;
-  height: 15;
+  height: 25;
+  padding-top: 10;
 `;
 
 const CollapseImage = styled.Image.attrs({
