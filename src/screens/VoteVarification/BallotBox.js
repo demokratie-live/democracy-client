@@ -12,7 +12,7 @@ import VOTE_LOCAL from "../../graphql/mutations/voteLocal";
 import VOTED from "../../graphql/queries/voted";
 import VOTES from "../../graphql/queries/votes";
 import VOTED_LOCAL from "../../graphql/queries/votedLocal";
-import GET_ACTIVITY_INDEX from "../../graphql/queries/activityIndex";
+import F_ACTIVITY_INDEX from "../../graphql/fragments/ProcedureActivityIndex";
 
 const Wrapper = styled.View`
   flex: 1;
@@ -179,28 +179,30 @@ export default compose(
                 voted: true
               }
             },
-            update: (proxy, { data: { vote: { voted } } }) => {
-              const data = proxy.readQuery({
+            update: (cache, { data: { vote: { voted } } }) => {
+              const data = cache.readQuery({
                 query: VOTED,
                 variables: { procedure: procedureObjId }
               });
               data.votes.voted = voted;
-              proxy.writeQuery({
+              cache.writeQuery({
                 query: VOTED,
                 variables: { procedure: procedureObjId },
                 data
               });
-              const activityData = proxy.readQuery({
-                query: GET_ACTIVITY_INDEX,
-                variables: { procedureId }
+
+              // ActivityIndex
+              const aiFragment = cache.readFragment({
+                id: procedureId,
+                fragment: F_ACTIVITY_INDEX
               });
-              if (!activityData.activityIndex.active) {
-                activityData.activityIndex.active = true;
-                activityData.activityIndex.activityIndex += 1;
-                proxy.writeQuery({
-                  query: GET_ACTIVITY_INDEX,
-                  variables: { procedureId },
-                  data: activityData
+              if (!aiFragment.activityIndex.active) {
+                aiFragment.activityIndex.active = true;
+                aiFragment.activityIndex.activityIndex += 1;
+                cache.writeFragment({
+                  id: procedureId,
+                  fragment: F_ACTIVITY_INDEX,
+                  data: aiFragment
                 });
               }
             },

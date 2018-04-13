@@ -13,6 +13,7 @@ import Support from "./Support";
 import Security from "./Security";
 import VoteVarification from "./VoteVarification";
 import Notifications from "./Notifications";
+import Credits from "./Credits";
 
 import NetworkStatus from "./Wrapper/NetworkStatus";
 
@@ -83,6 +84,13 @@ export default function registerScreens() {
   Navigation.registerComponent(
     "democracy.Notifications",
     () => NetworkStatus(Notifications),
+    client.store,
+    ApolloProvider,
+    { client }
+  );
+  Navigation.registerComponent(
+    "democracy.Credits",
+    () => NetworkStatus(Credits),
     client.store,
     ApolloProvider,
     { client }

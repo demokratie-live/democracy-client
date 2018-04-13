@@ -1,5 +1,23 @@
 # Changelog
 
+### 0.6.3
+* Details
+  * [Bug] shorter text for "Gesetzgebung"
+  
+### 0.6.2
+
+* Support
+  * reduce scroll length
+* Security
+  * reduce scroll length
+* Credits
+  * [New] add credits screen
+
+### 0.6.1
+
+* [Bug] reload cached data from server
+* [Improvement] Load activityIndex within procedure queries
+
 ### 0.6.0
 
 * [Feature] Add "Antrag" as new procedure type
