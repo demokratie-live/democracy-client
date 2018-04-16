@@ -107,13 +107,18 @@ class App {
     if (!token) {
       await this.getNewToken();
     } else {
-      const me = await client
-        .query({
-          query: ME
-        })
-        .then(({ data }) => data.me);
-      if (!me) {
-        await this.getNewToken();
+      try {
+        const me = await client
+          .query({
+            query: ME,
+            fetchPolicy: "network-only"
+          })
+          .then(({ data }) => data.me);
+        if (!me) {
+          await this.getNewToken();
+        }
+      } catch (error) {
+        // TODO: handle this
       }
     }
 
