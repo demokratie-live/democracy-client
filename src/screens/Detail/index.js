@@ -134,7 +134,7 @@ class Detail extends Component {
         <Content>
           {tags.length > 0 && (
             <TagsWrapper>
-              <TagsText>{tags.join(", ")}</TagsText>
+              <TagsText>{tags && tags.join(", ")}</TagsText>
             </TagsWrapper>
           )}
           <Segment title="Details" open>
