@@ -17,6 +17,7 @@ import IS_INSTRUCTIONS_SHOWN from "./src/graphql/queries/isInstructionShown";
 import setCurrentScreen from "./src/graphql/mutations/setCurrentScreen";
 import SIGN_UP from "./src/graphql/mutations/signUp";
 import UPDATE_NETWORK_STATUS from "./src/graphql/mutations/updateNetworkStatus";
+import ME from "./src/graphql/queries/me";
 
 import topTabs from "./src/screens/VoteList/topTabs";
 
@@ -80,26 +81,39 @@ class App {
     return isInstructionsShown;
   };
 
+  getNewToken = async () => {
+    const rsa = new RSAKey();
+    rsa.setPublicString(Config.PUBLIC_KEY); // return json encoded string
+    const uniqueID = await sha256(DeviceInfo.getUniqueID());
+    const deviceHashEncrypted = rsa.encrypt(uniqueID);
+
+    try {
+      const { data } = await client.mutate({
+        mutation: SIGN_UP,
+        variables: {
+          deviceHashEncrypted
+        }
+      });
+
+      await AsyncStorage.setItem("authorization", data.signUp.token);
+    } catch (error) {
+      // TODO: Show later a message that user is not registered
+    }
+  };
+
   startApp = async ({ isInstructionsShown = false } = {}) => {
     // await AsyncStorage.removeItem("authorization");
     const token = await AsyncStorage.getItem("authorization");
     if (!token) {
-      const rsa = new RSAKey();
-      rsa.setPublicString(Config.PUBLIC_KEY); // return json encoded string
-      const uniqueID = await sha256(DeviceInfo.getUniqueID());
-      const deviceHashEncrypted = rsa.encrypt(uniqueID);
-
-      try {
-        const { data } = await client.mutate({
-          mutation: SIGN_UP,
-          variables: {
-            deviceHashEncrypted
-          }
-        });
-
-        await AsyncStorage.setItem("authorization", data.signUp.token);
-      } catch (error) {
-        // TODO: Show later a message that user is not registered
+      await this.getNewToken();
+    } else {
+      const me = await client
+        .query({
+          query: ME
+        })
+        .then(({ data }) => data.me);
+      if (!me) {
+        await this.getNewToken();
       }
     }
 
