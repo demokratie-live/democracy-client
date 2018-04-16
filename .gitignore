@@ -57,4 +57,3 @@ ios/*dSYM.zip
 .env*
 
 android/Google_Play_Android_Developer.json
-secrets.tar
