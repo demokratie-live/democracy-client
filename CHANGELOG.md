@@ -1,9 +1,15 @@
 # Changelog
 
+### 0.6.4
+
+* [Bug][android] fix crash
+
 ### 0.6.3
+
 * Details
+
   * [Bug] shorter text for "Gesetzgebung"
-  
+
 ### 0.6.2
 
 * Support

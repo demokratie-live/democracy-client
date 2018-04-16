@@ -41,7 +41,7 @@ const ListItem = ({
   <ListItemWrapper>
     <MainWrapper>
       <Title>{title}</Title>
-      {!children && <Tags>{tags.join(", ")}</Tags>}
+      {!children && <Tags>{tags && tags.join(", ")}</Tags>}
       {children}
     </MainWrapper>
     <SideWrapper>
