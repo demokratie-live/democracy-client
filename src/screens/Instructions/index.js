@@ -120,7 +120,7 @@ class Introductions extends Component {
             ImgCenter={require("../../../assets/tutorial/screen.forum.png")}
             ImgRight={require("../../../assets/tutorial/screen.vote.png")}
             TxtHead="Diskutiere"
-            TxtSub="…über die Für’s und Wider’s des Antrags und bring weiterführende Informationen ein"
+            TxtSub="…über die Für’s und Wider’s des Antrags und bringe weiterführende Informationen ein"
             nextPage={this.onClick}
           />
           <Slide
