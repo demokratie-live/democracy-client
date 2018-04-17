@@ -1,10 +1,17 @@
 # Changelog
 
+### 0.?.x
+
+* Details
+  * Add non-roll-call vote results
+
 ### 0.6.7
+
 * Vote Verification
   * border color between vote and Warning lighter
 
 ### 0.6.6
+
 * Vote Verification
   * adjusted expand-icon height
 
