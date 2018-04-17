@@ -31,8 +31,8 @@ matrix:
 
     before_install:
     - echo y | android update sdk --no-ui --filter build-tools-26.0.1,build-tools-26.0.2,android-26,extra-android-m2repository   
-    - openssl aes-256-cbc -K $encrypted_51873ec394c3_key -iv $encrypted_51873ec394c3_iv -in secrets.tar.enc -out secrets.tar -d
-    - tar xvf secrets.tar
+    # - openssl aes-256-cbc -K $encrypted_51873ec394c3_key -iv $encrypted_51873ec394c3_iv -in secrets.tar.enc -out secrets.tar -d
+    # - tar xvf secrets.tar
     - gem update --system
     - gem install fastlane --no-rdoc --no-ri --no-document --quiet
 
@@ -44,13 +44,13 @@ matrix:
       components:
       - tools
       - platform-tools
-                    # android 23
+      # android 23
       - build-tools-23.0.1
       - build-tools-25.0.1
       - build-tools-26.0.1
       - build-tools-26.0.2
       - android-23
-                    # extra
+      # extra
       - extra-android-m2repository
       - extra-google-google_play_services
       - extra-google-m2repository
