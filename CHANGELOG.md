@@ -9,6 +9,8 @@
   * Change vote results order [#234](https://github.com/demokratie-live/democracy-client/issues/234)
   * Fix positioning of vote results [#234](https://github.com/demokratie-live/democracy-client/issues/234)
   * Change title for "in Vorbeeitung" [#252](https://github.com/demokratie-live/democracy-client/issues/252)
+* Credits
+  * Change logo order [#242](https://github.com/demokratie-live/democracy-client/issues/242)
 
 ### 0.6.5
 

@@ -157,10 +157,10 @@ class Security extends Component {
               source={require("../../assets/images/logo-ip.png")}
             />
             <AdditionalThanksLogo
-              source={require("../../assets/images/logo-sn.png")}
+              source={require("../../assets/images/logo-herti.png")}
             />
             <AdditionalThanksLogo
-              source={require("../../assets/images/logo-herti.png")}
+              source={require("../../assets/images/logo-sn.png")}
             />
           </AdditionalThanksLogoWrapper>
           <Version style={{ paddingTop: 36 }}>{version}</Version>
