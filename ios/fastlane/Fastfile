@@ -41,10 +41,10 @@ platform :ios do
     )
   end
 
-  lane :beta do
+  lane :alpha do
     increment_build_number(
       xcodeproj: "democracyclient.xcodeproj",
-      build_number: ENV["TRAVIS_BUILD_NUMBER"]
+      build_number: ENV["BUILD_NUMBER"]
     )
     disable_automatic_code_signing(path: "democracyclient.xcodeproj")
     setup_travis
