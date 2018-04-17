@@ -238,21 +238,6 @@ export default compose(
                 variables: { id: procedureId },
                 data
               });
-
-              // ActivityIndex
-              const aiFragment = cache.readFragment({
-                id: procedureId,
-                fragment: F_ACTIVITY_INDEX
-              });
-              if (!aiFragment.activityIndex.active) {
-                aiFragment.activityIndex.active = true;
-                aiFragment.activityIndex.activityIndex += 1;
-                cache.writeFragment({
-                  id: procedureId,
-                  fragment: F_ACTIVITY_INDEX,
-                  data: aiFragment
-                });
-              }
             }
           });
         }
