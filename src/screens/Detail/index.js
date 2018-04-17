@@ -74,6 +74,28 @@ class Detail extends Component {
     navBarButtonColor: "#FFFFFF"
   };
 
+  componentWillReceiveProps(nextProps) {
+    const { data } = nextProps;
+    if (data.procedure && this.listType !== data.procedure.listType) {
+      this.listType = data.procedure.listType;
+      let newTitle;
+      switch (data.procedure.listType) {
+        case "VOTING":
+          newTitle = "Abstimmung";
+          break;
+
+        default:
+          newTitle = "Vorbereitung";
+          break;
+      }
+      this.props.navigator.setTitle({
+        title: newTitle.toUpperCase() // the new title of the screen as appears in the nav bar
+      });
+    }
+  }
+
+  listType = "VOTING";
+
   render() {
     const { procedureId, toggleNotification } = this.props;
     const { data: { networkStatus, refetch } } = this.props;
