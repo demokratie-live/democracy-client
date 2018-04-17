@@ -40,6 +40,19 @@ platform :android do
     )
   end
 
+  desc "Submit a new Beta Build to GooglePlayStore"
+  lane :beta do
+    gradle(
+      task: "clean assemble",
+      build_type: "Release"
+    )
+    upload_to_play_store(
+      track: 'beta',
+      track_promote_to: 'beta',
+      apk: "./app/build/outputs/apk/app-release.apk"
+    )
+  end
+
   desc "Deploy a new version to the Google Play"
   lane :deploy do
     upload_to_play_store(
