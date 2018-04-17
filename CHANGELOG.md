@@ -1,12 +1,16 @@
 # Changelog
 
+### 0.6.7
+* Vote Verification
+  * border color between vote and Warning lighter
+
 ### 0.6.6
 * Vote Verification
   * adjusted expand-icon height
 
 ### 0.6.5
 
-* [Bug] generate a new auth token by incorrct user
+* [Bug] generate a new auth token by incorrect user
 
 ### 0.6.4
 

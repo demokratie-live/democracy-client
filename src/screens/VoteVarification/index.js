@@ -56,7 +56,7 @@ const BalloutBoxWrapper = styled.View`
   height: 130;
   background-color: rgba(250, 250, 250, 0.9);
   border-top-width: 1;
-  border-top-color: #b2b2b2;
+  border-top-color: rgba(68, 148, 211, 0.1);
 `;
 
 class VoteVerification extends Component {
