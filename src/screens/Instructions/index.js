@@ -94,6 +94,7 @@ class Introductions extends Component {
             ImgRight={require("../../../assets/tutorial/screen.detail.png")}
             TxtHead="Willkommen in der Beta"
             TxtSub="Alles über die deutsche Politik in einer App"
+            nextPage={this.onClick}
           />
           <Slide
             ImgHead={require("../../../assets/tutorial/icon.beobachte.png")}
@@ -102,6 +103,7 @@ class Introductions extends Component {
             ImgRight={require("../../../assets/tutorial/screen.detail.png")}
             TxtHead="Beobachte"
             TxtSub="…alle vergangenen, aktuellen und zukünftigen Abstimmungen des Bundestages"
+            nextPage={this.onClick}
           />
           <Slide
             ImgHead={require("../../../assets/tutorial/icon.informiere.png")}
@@ -110,6 +112,7 @@ class Introductions extends Component {
             ImgRight={require("../../../assets/tutorial/screen.forum.png")}
             TxtHead="Informiere Dich"
             TxtSub="…über die Gesetzesvorlagen entlang der offiziellen Informationen des Bundestages"
+            nextPage={this.onClick}
           />
           <Slide
             ImgHead={require("../../../assets/tutorial/icon.diskutiere.png")}
@@ -118,6 +121,7 @@ class Introductions extends Component {
             ImgRight={require("../../../assets/tutorial/screen.vote.png")}
             TxtHead="Diskutiere"
             TxtSub="…über die Für’s und Wider’s des Antrags und bring weiterführende Informationen ein"
+            nextPage={this.onClick}
           />
           <Slide
             ImgHead={require("../../../assets/tutorial/icon.stimme.png")}
@@ -126,6 +130,7 @@ class Introductions extends Component {
             ImgRight={require("../../../assets/tutorial/screen.analyse.png")}
             TxtHead="Stimme"
             TxtSub="…noch vor der offiziellen Bundestagsentscheidung selbst über den Antrag ab"
+            nextPage={this.onClick}
           />
           <Slide
             ImgHead={require("../../../assets/tutorial/icon.analysiere.png")}
@@ -134,6 +139,7 @@ class Introductions extends Component {
             ImgCircle={null}
             TxtHead="Analysiere"
             TxtSub="…das Community-Abstimmungsverhalten und vergleich es mit den Bundestagsresultaten"
+            nextPage={this.onClick}
           />
         </Swiper>
         <Button onPress={this.onClick}>

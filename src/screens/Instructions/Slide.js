@@ -76,11 +76,13 @@ const ImageRight = styled.Image`
 
 const ImageCenter = styled.Image``;
 
-const ImageCircle = styled.Image`
+const ButtonCircle = styled.TouchableOpacity`
   position: absolute;
   right: -20;
   top: 165;
 `;
+
+const ImageCircle = styled.Image``;
 
 const Slide = ({
   ImgHead,
@@ -89,7 +91,8 @@ const Slide = ({
   ImgCenter,
   ImgCircle,
   TxtHead,
-  TxtSub
+  TxtSub,
+  nextPage
 }) => (
   <Container>
     <ContainerHead>
@@ -108,7 +111,9 @@ const Slide = ({
       </ImageTranspContainer>
       <ContainerCenterImage>
         <ImageCenter source={ImgCenter} />
-        <ImageCircle source={ImgCircle} />
+        <ButtonCircle onPress={nextPage}>
+          <ImageCircle source={ImgCircle} />
+        </ButtonCircle>
       </ContainerCenterImage>
     </ContainerImages>
     <LinearGradient
