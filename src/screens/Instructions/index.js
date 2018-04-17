@@ -132,7 +132,7 @@ class Introductions extends Component {
             ImgLeft={require("../../../assets/tutorial/screen.vote.png")}
             ImgCenter={require("../../../assets/tutorial/screen.analyse.png")}
             ImgCircle={null}
-            TxtHead="Anlaysiere"
+            TxtHead="Analysiere"
             TxtSub="…das Community-Abstimmungsverhalten und vergleich es mit den Bundestagsresultaten"
           />
         </Swiper>

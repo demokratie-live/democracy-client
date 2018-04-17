@@ -3,7 +3,7 @@
 ### 0.6.X
 
 * Instructions
-  * Fix spelling mistake [#243](https://github.com/demokratie-live/democracy-client/issues/243)
+  * Fix spelling mistake [#243](https://github.com/demokratie-live/democracy-client/issues/243) [#235](https://github.com/demokratie-live/democracy-client/issues/235)
 
 ### 0.6.5
 
