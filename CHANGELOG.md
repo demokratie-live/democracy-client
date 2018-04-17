@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.6.X
+
+* Instructions
+  * Fix spelling mistake [#243](https://github.com/demokratie-live/democracy-client/issues/243)
+
 ### 0.6.5
 
 * [Bug] generate a new auth token by incorrct user

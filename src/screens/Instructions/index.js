@@ -92,7 +92,7 @@ class Introductions extends Component {
             ImgHead={require("../../../assets/tutorial/icon.logo.png")}
             ImgCenter={require("../../../assets/tutorial/screen.list.png")}
             ImgRight={require("../../../assets/tutorial/screen.detail.png")}
-            TxtHead="Wilkommen in der Beta"
+            TxtHead="Willkommen in der Beta"
             TxtSub="Alles über die deutsche Politik in einer App"
           />
           <Slide
