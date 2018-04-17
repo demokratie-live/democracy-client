@@ -136,7 +136,8 @@ Slide.propTypes = {
   ImgCenter: PropTypes.number.isRequired,
   ImgCircle: PropTypes.number,
   TxtHead: PropTypes.string.isRequired,
-  TxtSub: PropTypes.string.isRequired
+  TxtSub: PropTypes.string.isRequired,
+  nextPage: PropTypes.func.isRequired
 };
 
 Slide.defaultProps = {

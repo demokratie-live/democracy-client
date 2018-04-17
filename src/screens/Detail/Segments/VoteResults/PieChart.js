@@ -66,7 +66,6 @@ class PieChart extends Component {
   render() {
     const { data, colorScale, label } = this.props;
     const { width } = this.state;
-    console.log(data);
     return (
       <VoteResultsWrapper
         onLayout={({ nativeEvent: { layout: { width: newWidth } } }) =>
