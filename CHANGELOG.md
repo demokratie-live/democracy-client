@@ -1,8 +1,8 @@
 # Changelog
 
 ### 0.6.6
-
-* [Bug] adjusted expand-icon height on "Schon Gewusst"
+* Vote Verification
+  * adjusted expand-icon height
 
 ### 0.6.5
 
