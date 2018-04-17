@@ -5,6 +5,9 @@
 * Instructions
   * Fix spelling mistake [#243](https://github.com/demokratie-live/democracy-client/issues/243) [#235](https://github.com/demokratie-live/democracy-client/issues/235) [#236](https://github.com/demokratie-live/democracy-client/issues/236)
   * Swipe on click blue circle [#237](https://github.com/demokratie-live/democracy-client/issues/237)
+* Details
+  * Change vote results order [#234](https://github.com/demokratie-live/democracy-client/issues/234)
+  * Fix positioning of vote results [#234](https://github.com/demokratie-live/democracy-client/issues/234)
 
 ### 0.6.5
 
