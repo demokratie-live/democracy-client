@@ -1,6 +1,7 @@
 env:
   global:
-    # secure: "n6fpr7pt7ZJce03YQ28aoLUMiGCs3+5ruOyd27IOj1WLnKQxBg+Bdr6Kq+kANxLwGP7xPMR9gUMjCvhmXYXFgK+qTY8LC2ZV3XBOTHO6xqEnzDQUI/i2kfT/4OR42Cnctu65p9IcA1N8kqEBd9Z9hSjqB7fMr94R5bz+A1zu50hjgHD3ro/4ov5EjF9jF5DCtSqfk0uqBBvKuMpsaMeKY6YXhLhhhmcWZmQT+uXBeloH5oU0zFIrDWbgiFygxCW8+rcoW9jfMiRDU8FI6qXj6RVHIHTiqv0XtEDEUh4TFpj3MB+2NVeUqL2BcOS7R+eLlWus04wYeuBLCr6BzdHNDLamno4iDobR5gjIpZcUGQcDeMYSDl9XKvZsWVwgfd8EqshO6L8f0JXoOZPdqeGjrTpePjeGkWHabNqgBeL+lKy8xFdoxPUhZzy6aFAXqJaxow/wXPuxY9QdJwNXsVysTUvR/pn5Ngh/q9FIxM3yMPCOX+/d4JfM4R8j6Uw4tnZK4XIlo2l8dYt4pGvMjw7ojJVGz0Kx1PNfwsimaZi9MkKBGXLE8k0+GxTUC/sa0AL5kJhLt7Xl67qwCwdRnOj9k85w8a6y4/Pf5xjA/QQ2WD3RaOj9Y1NqVG0phB+m0ZLflIXqAFEQ+kEeW6WmBYgkFaff9L3llTP2RVginOi0e8M="
+    # SECRET
+    - secure: "JSEyfY3iPkO7AuK9n5JFmyWzrk1JJ8b3Eo6bHY8FqKq4d/ZcAhOWUSO4+sTdiSnFiQETY+0jzMgimawnCCsSnkO5VKupbpg0Zw1GJ4IQ1QgX+RlWSmXGUNYuSltTDXNXlrEQZYz+qs/PdK9nQwjItNwrhot+gmRfU2BROnn834wKt9P4rxLlM2Dtwd50Tq4Jwt8SVROGqs21ivGzBjgw46Najmj7rh+k2pRpJ9eTm8BGOJew92AzuB5iagBSIEuifgZx/vU42O4musjicqBvn/+PjtY5SX7DwpwO7tEjYpU74Vrn0WZQ5YVHbcplmw5ZsDmA8HaAQ3w2SW1jCEIGDosmWbjbnWIbs6St15ofqXUUigP+wpIoP3s5JiRDEJIh9jbIV6j1lkvdgLPVGMgPqHd6Xupu+pM3if7pOY8fLO9iFygTiFI3YOkElZY9t+iSz7HEm0a7qwF+4fCpORV7K6i5elAlJIbJGd/NEAkxr36mbItxaV3cgZv20SmxEb1F9i7nr1hWMcNrvmw8E7b7qHlq7rNBtS9Cd3EbuQbCLeoP+Zom7IuN2TLLHlDW34HVGSTh01YEf7rc2gFTklVzuO+lGp52PVduVzHBFbxiKukgZ+I38jDtEJFX685wqHBiBvUe/5zImjJsv9fBhYg4w+9600SKioOOjYQRBueOPzU="
     # FASTLANE_PASSWORD (apple_id password)
     - secure: "c7KcteRj+zaWdOzWDdjCQhYYzYxwXyx6l2zMIRKE/Rk7q275uRD/lHxBEWbASAkyjqPrgtaey5iqvoWP1eH99m5nkF2UPTBfHPb0csMPB6NZYQzN5ksHsW3CGgmPlY0HWEGCgai4qAhkxW7nDU1/L5zhlMFfqum2R259RYBfW52fU4EZBXVWkn8Ho1agO+Ln6ZDHSqKZTB6izBHeZ1wGUXf0wEqgaKAqUt+IwUk1uS2ISwTL3NvnkgYxlOt5BkXv5/6P9kMilmlKzD+nvrQL+Uvz7oY2idKKDJrc0iYHTlm0bGw1sBEi4FxeSiTmuZTTPqJczzvKKWbv/Vg9kiptgyb4xE+ERU+UnvqU4XjZyjouW/te0hhVM9Qu1sUSmF7fPe6ssZnInAa8S/+oCr3Q9YXTienD/cmOSpk9mcwTupFTV8YgVL39nmgVHw4CaZBShvtubmisFuGZiDwDyeyNgZnNJOtS+bgm6o83lIV9veOIC4M9V0QwW2WhbsLEEUfeK2+J0QkDXjtEOtwtr8mgsZTwvJ2y3ttG8/Eo9+WOx3Kxfvk+ilWYfXDrM3wqIlqYQgOfj3wKU3RcQO6iujpHpn0dw2GyC8gcmMyRXTINa31wkeviycA8ti9YrBTXY9nJDrzxnuNRuFOOQva/xivJoYEH1O35dAhLYFMrn5mI46M="
 matrix:
@@ -27,17 +28,15 @@ matrix:
     os: linux
     language: android
     jdk: oraclejdk8
-
     cache:
       yarn: true
-
     before_install:
-    - echo y | android update sdk --no-ui --filter build-tools-26.0.1,build-tools-26.0.2,android-26,extra-android-m2repository   
-    # - openssl aes-256-cbc -K $encrypted_51873ec394c3_key -iv $encrypted_51873ec394c3_iv -in secrets.tar.enc -out secrets.tar -d
-    # - tar xvf secrets.tar
+    - echo y | android update sdk --no-ui --filter build-tools-26.0.1,build-tools-26.0.2,android-26,extra-android-m2repository
+    - openssl aes-256-cbc -k "$SECRET" -in .env.production.enc -out .env.production -d
+    - openssl aes-256-cbc -k "$SECRET" -in android/Google_Play_Android_Developer.json.enc -out android/Google_Play_Android_Developer.json -d
+    - openssl aes-256-cbc -k "$SECRET" -in android/app/democracy2-release-key.keystore.enc -out android/app/democracy2-release-key.keystore -d
     - gem update --system
     - gem install fastlane --no-rdoc --no-ri --no-document --quiet
-
     install:
     - nvm install 8
     - yarn --version
@@ -58,9 +57,9 @@ matrix:
       - extra-google-m2repository
       - addon-google_apis-google-16
       licenses:
-                    - 'android-sdk-preview-license-.+'
-                    - 'android-sdk-license-.+'
-                    - 'google-gdk-license-.+'
+      - 'android-sdk-preview-license-.+'
+      - 'android-sdk-license-.+'
+      - 'google-gdk-license-.+'
     script:
     - cd android
     - fastlane android test
@@ -69,16 +68,13 @@ matrix:
   - if: type IN (pull_request)
     osx_image: xcode9.2
     language: objective-c
-
     before_install:
     - fastlane update_fastlane
-
     install:
     - nvm install 8
     - npm install -g yarn
     - yarn --version
     - yarn install
-
     script:
     - cd ios
     - bundle exec fastlane ios test
