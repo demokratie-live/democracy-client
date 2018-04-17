@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.6.6
+* Vote Verification
+  * adjusted expand-icon height
+
 ### 0.6.5
 
 * [Bug] generate a new auth token by incorrct user
