@@ -12,11 +12,11 @@ const Content = styled.View`
 
 const Title = styled.Text.attrs({
   numberOfLines: 1
-})``;
+}) ``;
 
 const Text = styled.Text``;
 
-const TextMore = styled.Text.attrs({})`
+const TextMore = styled.Text.attrs({}) `
   padding-top: 7;
   color: #979797;
 `;
@@ -33,6 +33,7 @@ const Collapse = styled.TouchableOpacity`
   align-items: center;
   width: 25;
   height: 25;
+  padding-top: 10;
 `;
 
 const CollapseImage = styled.Image.attrs({
@@ -40,7 +41,7 @@ const CollapseImage = styled.Image.attrs({
     open
       ? require("../../../assets/icons/segmentOpen.png")
       : require("../../../assets/icons/segmentClosed.png")
-})``;
+}) ``;
 
 class Message extends Component {
   state = {
