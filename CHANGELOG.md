@@ -1,6 +1,6 @@
 # Changelog
 
-### 0.6.X
+### 0.6.8
 
 * Instructions
   * Fix spelling mistake [#243](https://github.com/demokratie-live/democracy-client/issues/243) [#235](https://github.com/demokratie-live/democracy-client/issues/235) [#236](https://github.com/demokratie-live/democracy-client/issues/236)
@@ -14,10 +14,12 @@
   * Change logo order [#242](https://github.com/demokratie-live/democracy-client/issues/242)
 
 ### 0.6.7
+
 * Vote Verification
   * border color between vote and Warning lighter
 
 ### 0.6.6
+
 * Vote Verification
   * adjusted expand-icon height
 
