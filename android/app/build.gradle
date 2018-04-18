@@ -1,9 +1,10 @@
 apply plugin: "com.android.application"
 
 project.ext.envConfigFiles = [
-    debug: ".env.android",
-    release: ".env.production",
-    anothercustombuild: ".env",
+    debug: ".env.debug",
+    alpharelease: ".env.alpha",
+    betarelease: ".env.beta",
+    productionrelease: ".env.production",
 ]
 
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
@@ -154,7 +155,7 @@ android {
         beta {
             applicationId "de.democracydeutschland.app.beta"
         }
-		live {}
+		production {}
     }
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
