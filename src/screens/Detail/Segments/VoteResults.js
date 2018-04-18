@@ -16,7 +16,7 @@ const ScrollView = styled.ScrollView.attrs({
 })``;
 
 const VoteResults = props => {
-  const { voteResults, communityVotes } = props;
+  const { voteResults, communityVotes, scrollTo } = props;
 
   const renderCommuntiyResult = () => {
     const { voteResults: comunnityResults } = communityVotes;
@@ -65,7 +65,7 @@ const VoteResults = props => {
   };
   if (communityVotes.voted) {
     return (
-      <Segment title="Ergebnis" open>
+      <Segment title="Ergebnis" open scrollTo={scrollTo}>
         <ScrollView>
           {renderCommuntiyResult()}
           {renderGovermentResult()}
@@ -83,6 +83,7 @@ VoteResults.propTypes = {
     abstination: PropTypes.number,
     notVote: PropTypes.number
   }),
+  scrollTo: PropTypes.func.isRequired,
   communityVotes: PropTypes.oneOfType([PropTypes.shape(), PropTypes.bool])
 };
 

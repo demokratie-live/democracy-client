@@ -174,7 +174,11 @@ class Detail extends Component {
           <Segment title="Dokumente" scrollTo={this.scrollTo}>
             <SegmentDocuments documents={importantDocuments} />
           </Segment>
-          <VoteResults voteResults={voteResults} procedure={_id} />
+          <VoteResults
+            voteResults={voteResults}
+            procedure={_id}
+            scrollTo={this.scrollTo}
+          />
           {listType === "VOTING" && (
             <Voting
               procedureObjId={_id}
