@@ -1,10 +1,17 @@
 # Changelog
 
+### 0.x.x
+
+* Details
+  * Scroll to document-segment content [#231](https://github.com/demokratie-live/democracy-client/issues/231)
+
 ### 0.6.7
+
 * Vote Verification
   * border color between vote and Warning lighter
 
 ### 0.6.6
+
 * Vote Verification
   * adjusted expand-icon height
 

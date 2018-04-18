@@ -74,6 +74,22 @@ class Detail extends Component {
     navBarButtonColor: "#FFFFFF"
   };
 
+  onLayout = ({ nativeEvent: { layout: { height } } }) => {
+    this.componentHeight = height;
+  };
+
+  scrollTo = ({ y }) => {
+    let scrollTo;
+    if (y + this.componentHeight > this.contentHeight) {
+      scrollTo = this.contentHeight - this.componentHeight;
+    } else {
+      scrollTo = y;
+    }
+    if (scrollTo > 0) {
+      this.scrollView.scrollTo({ y: scrollTo });
+    }
+  };
+
   render() {
     const { procedureId, toggleNotification } = this.props;
     const { data: { networkStatus, refetch } } = this.props;
@@ -99,6 +115,13 @@ class Detail extends Component {
 
     return (
       <Wrapper
+        onContentSizeChange={(width, height) => {
+          this.contentHeight = height;
+        }}
+        onLayout={this.onLayout}
+        innerRef={comp => {
+          this.scrollView = comp;
+        }}
         refreshControl={
           <RefreshControl
             refreshing={networkStatus === 4}
@@ -137,7 +160,7 @@ class Detail extends Component {
               <TagsText>{tags && tags.join(", ")}</TagsText>
             </TagsWrapper>
           )}
-          <Segment title="Details" open>
+          <Segment title="Details" open scrollTo={this.scrollTo}>
             <SegmentDetails
               subjectGroups={subjectGroups}
               submissionDate={submissionDate}
@@ -148,7 +171,7 @@ class Detail extends Component {
               type={type}
             />
           </Segment>
-          <Segment title="Dokumente">
+          <Segment title="Dokumente" scrollTo={this.scrollTo}>
             <SegmentDocuments documents={importantDocuments} />
           </Segment>
           <VoteResults voteResults={voteResults} procedure={_id} />
