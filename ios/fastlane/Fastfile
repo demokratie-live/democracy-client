@@ -64,7 +64,7 @@ platform :ios do
     )
     upload_to_testflight(
       changelog: File.read("../../CHANGELOG.md")[0, 5000],
-      # groups: "Developer",
+      groups: "Developer",
       app_identifier: "de.democracy-deutschland.clientapp.alpha",
       demo_account_required: false,
       notify_external_testers: true,
@@ -90,7 +90,7 @@ platform :ios do
     )
     upload_to_testflight(
       changelog: File.read("../../CHANGELOG.md")[0, 5000],
-      # groups: "Prototyp-Tester",
+      groups: "Prototyp-Tester",
       app_identifier: "de.democracy-deutschland.clientapp.beta",
       demo_account_required: false,
       notify_external_testers: true,
