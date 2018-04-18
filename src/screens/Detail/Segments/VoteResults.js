@@ -33,7 +33,7 @@ const VoteResults = props => {
             (value, label) =>
               label !== "__typename" ? { value, label } : false
           ).filter(e => e)}
-          colorScale={["#15C063", "#EC3E31", "#2C82E4"]}
+          colorScale={["#15C063", "#2C82E4", "#EC3E31"]}
           label="Abstimmungen"
         />
       );
@@ -56,7 +56,7 @@ const VoteResults = props => {
             (value, label) =>
               label !== "__typename" ? { value, label } : false
           ).filter(e => e)}
-          colorScale={["#99C93E", "#D43194", "#4CB0D8", "#B1B3B4"]}
+          colorScale={["#99C93E", "#4CB0D8", "#D43194", "#B1B3B4"]}
           label="Abgeordnete"
         />
       );
