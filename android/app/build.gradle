@@ -147,6 +147,15 @@ android {
             signingConfig signingConfigs.release
         }
     }
+	productFlavors {
+        alpha {
+            applicationId "de.democracydeutschland.app.alpha"
+        }
+        beta {
+            applicationId "de.democracydeutschland.app.beta"
+        }
+		live {}
+    }
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
