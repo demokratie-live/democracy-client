@@ -8,8 +8,6 @@ import { Navigator } from "react-native-navigation";
 import getProcedure from "../../graphql/queries/getProcedure";
 import TOGGLE_NOTIFICATION from "../../graphql/mutations/toggleNotification";
 
-import F_ACTIVITY_INDEX from "../../graphql/fragments/ProcedureActivityIndex";
-
 import ActivityIndex from "../../components/ActivityIndex";
 import DateTime from "../../components/Date";
 import SegmentDetails from "./Segments/Details";
