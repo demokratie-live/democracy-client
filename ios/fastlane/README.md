@@ -24,11 +24,21 @@ fastlane setup_signing
 ----
 
 ## iOS
+### ios prepare
+```
+fastlane ios prepare
+```
+Push a new beta build to TestFlight
 ### ios test
 ```
 fastlane ios test
 ```
-Push a new beta build to TestFlight
+
+### ios alpha
+```
+fastlane ios alpha
+```
+
 ### ios beta
 ```
 fastlane ios beta

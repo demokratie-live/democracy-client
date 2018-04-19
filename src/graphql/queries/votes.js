@@ -6,8 +6,8 @@ export default gql`
       voted
       voteResults {
         yes
-        no
         abstination
+        no
       }
     }
   }

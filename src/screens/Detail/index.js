@@ -8,8 +8,6 @@ import { Navigator } from "react-native-navigation";
 import getProcedure from "../../graphql/queries/getProcedure";
 import TOGGLE_NOTIFICATION from "../../graphql/mutations/toggleNotification";
 
-import F_ACTIVITY_INDEX from "../../graphql/fragments/ProcedureActivityIndex";
-
 import ActivityIndex from "../../components/ActivityIndex";
 import DateTime from "../../components/Date";
 import SegmentDetails from "./Segments/Details";
@@ -73,6 +71,28 @@ class Detail extends Component {
     navBarLeftButtonColor: "#FFFFFF",
     navBarButtonColor: "#FFFFFF"
   };
+
+  componentWillReceiveProps(nextProps) {
+    const { data } = nextProps;
+    if (data.procedure && this.listType !== data.procedure.listType) {
+      this.listType = data.procedure.listType;
+      let newTitle;
+      switch (data.procedure.listType) {
+        case "VOTING":
+          newTitle = "Abstimmung";
+          break;
+
+        default:
+          newTitle = "Vorbereitung";
+          break;
+      }
+      this.props.navigator.setTitle({
+        title: newTitle.toUpperCase() // the new title of the screen as appears in the nav bar
+      });
+    }
+  }
+
+  listType = "VOTING";
 
   onLayout = ({ nativeEvent: { layout: { height } } }) => {
     this.componentHeight = height;
@@ -243,21 +263,6 @@ export default compose(
                 variables: { id: procedureId },
                 data
               });
-
-              // ActivityIndex
-              const aiFragment = cache.readFragment({
-                id: procedureId,
-                fragment: F_ACTIVITY_INDEX
-              });
-              if (!aiFragment.activityIndex.active) {
-                aiFragment.activityIndex.active = true;
-                aiFragment.activityIndex.activityIndex += 1;
-                cache.writeFragment({
-                  id: procedureId,
-                  fragment: F_ACTIVITY_INDEX,
-                  data: aiFragment
-                });
-              }
             }
           });
         }
