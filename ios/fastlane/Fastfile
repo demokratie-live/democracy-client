@@ -28,6 +28,11 @@ platform :ios do
     }
   )
 
+  lane :prepare do
+    cert
+    sigh(force: true)
+  end
+
   lane :test do
     #disable_automatic_code_signing(path: "democracyclient.xcodeproj")
     setup_travis
@@ -50,16 +55,17 @@ platform :ios do
     setup_travis
     sync_code_signing(
       type: 'appstore',
-      app_identifier: "de.democracy-deutschland.clientapp",
+      app_identifier: "de.democracy-deutschland.clientapp.alpha",
       team_id: "A4B84UJD7M"
     )
     build_app( 
       clean: true, 
-      scheme: "democracyclient-prod"
+      scheme: "Alpha"
     )
     upload_to_testflight(
       changelog: File.read("../../CHANGELOG.md")[0, 5000],
       groups: "Developer",
+      app_identifier: "de.democracy-deutschland.clientapp.alpha",
       demo_account_required: false,
       notify_external_testers: true,
       distribute_external: true
@@ -67,6 +73,32 @@ platform :ios do
   end
 
   lane :beta do
+    increment_build_number(
+      xcodeproj: "democracyclient.xcodeproj",
+      build_number: ENV["BUILD_NUMBER"]
+    )
+    disable_automatic_code_signing(path: "democracyclient.xcodeproj")
+    setup_travis
+    sync_code_signing(
+      type: 'appstore',
+      app_identifier: "de.democracy-deutschland.clientapp.beta",
+      team_id: "A4B84UJD7M"
+    )
+    build_app( 
+      clean: true, 
+      scheme: "Beta"
+    )
+    upload_to_testflight(
+      changelog: File.read("../../CHANGELOG.md")[0, 5000],
+      groups: "Prototyp-Tester",
+      app_identifier: "de.democracy-deutschland.clientapp.beta",
+      demo_account_required: false,
+      notify_external_testers: true,
+      distribute_external: true
+    )
+  end
+
+  lane :production do
     increment_build_number(
       xcodeproj: "democracyclient.xcodeproj",
       build_number: ENV["BUILD_NUMBER"]
@@ -84,7 +116,7 @@ platform :ios do
     )
     upload_to_testflight(
       changelog: File.read("../../CHANGELOG.md")[0, 5000],
-      groups: "Prototyp-Tester",
+      app_identifier: "de.democracy-deutschland.clientapp",
       demo_account_required: false,
       notify_external_testers: true,
       distribute_external: true
