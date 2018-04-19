@@ -152,18 +152,18 @@ android {
     }
     productFlavors {
         alpha {
-            applicationId "de.democracydeutschland.app.alpha"
-			resValue "string", "build_config_package", "de.democracydeutschland.app"
+            //applicationId "de.democracydeutschland.app.alpha"
+            resValue "string", "build_config_package", "de.democracydeutschland.app"
             applicationIdSuffix ".alpha"
         }
-		alphadebug {
-            applicationId "de.democracydeutschland.app.alpha.debug"
-			resValue "string", "build_config_package", "de.democracydeutschland.app"
+        alphadebug {
+            //applicationId "de.democracydeutschland.app.alpha.debug"
+            resValue "string", "build_config_package", "de.democracydeutschland.app"
             applicationIdSuffix ".alpha.debug"
         }
         beta {
-            applicationId "de.democracydeutschland.app.beta"
-			resValue "string", "build_config_package", "de.democracydeutschland.app"
+            //applicationId "de.democracydeutschland.app.beta"
+            resValue "string", "build_config_package", "de.democracydeutschland.app"
             applicationIdSuffix ".beta"
         }
         production {}
