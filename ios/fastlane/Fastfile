@@ -97,4 +97,29 @@ platform :ios do
       distribute_external: true
     )
   end
+
+  lane :production do
+    increment_build_number(
+      xcodeproj: "democracyclient.xcodeproj",
+      build_number: ENV["BUILD_NUMBER"]
+    )
+    disable_automatic_code_signing(path: "democracyclient.xcodeproj")
+    setup_travis
+    sync_code_signing(
+      type: 'appstore',
+      app_identifier: "de.democracy-deutschland.clientapp",
+      team_id: "A4B84UJD7M"
+    )
+    build_app( 
+      clean: true, 
+      scheme: "democracyclient-prod"
+    )
+    upload_to_testflight(
+      changelog: File.read("../../CHANGELOG.md")[0, 5000],
+      app_identifier: "de.democracy-deutschland.clientapp",
+      demo_account_required: false,
+      notify_external_testers: true,
+      distribute_external: true
+    )
+  end
 end
