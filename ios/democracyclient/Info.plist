@@ -43,6 +43,7 @@
 	<string></string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>DemocracyFont.ttf</string>
 		<string>Ionicons.ttf</string>
 		<string>Entypo.ttf</string>
 		<string>EvilIcons.ttf</string>

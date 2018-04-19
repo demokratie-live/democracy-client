@@ -6,6 +6,8 @@
   * Scroll to document-segment content [#231](https://github.com/demokratie-live/democracy-client/issues/231)
   * Seperate vote results [#271](https://github.com/demokratie-live/democracy-client/issues/271)
   * Change PieChart label for community-votes & title [#253](https://github.com/demokratie-live/democracy-client/issues/253)
+* Lists
+  * Add voted marker [#246](https://github.com/demokratie-live/democracy-client/issues/246)
 
 ### 0.6.8
 

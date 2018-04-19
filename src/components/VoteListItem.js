@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 import ActivityIndex from "./ActivityIndex";
 import DateTime from "./Date";
 
+import DemocracyIcon from "../../iconfont/DemocracyFont";
+
 const ListItemWrapper = styled.View`
   flex-direction: row;
 `;
@@ -36,7 +38,9 @@ const ListItem = ({
   date,
   procedureId,
   children,
-  activityIndex: { activityIndex, active }
+  activityIndex: { activityIndex, active },
+  votedGoverment,
+  voted
 }) => (
   <ListItemWrapper>
     <MainWrapper>
@@ -51,7 +55,15 @@ const ListItem = ({
         active={active}
         skipFetchData
       />
-      {date && <DateTime date={date} />}
+
+      {!voted && date && <DateTime date={date} />}
+      {voted && (
+        <DemocracyIcon
+          name={`checkmark${votedGoverment ? "-double" : ""}`}
+          size={14}
+          color="#35a335"
+        />
+      )}
     </SideWrapper>
   </ListItemWrapper>
 );
@@ -66,14 +78,18 @@ ListItem.propTypes = {
     PropTypes.bool
   ]),
   children: PropTypes.node,
-  activityIndex: PropTypes.shape()
+  activityIndex: PropTypes.shape(),
+  votedGoverment: PropTypes.bool,
+  voted: PropTypes.bool
 };
 
 ListItem.defaultProps = {
   tags: [],
   date: false,
   children: null,
-  activityIndex: {}
+  activityIndex: {},
+  votedGoverment: false,
+  voted: false
 };
 
 export default ListItem;
