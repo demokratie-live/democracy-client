@@ -4,6 +4,7 @@
 
 * Details
   * Scroll to document-segment content [#231](https://github.com/demokratie-live/democracy-client/issues/231)
+  * Seperate vote results [#271](https://github.com/demokratie-live/democracy-client/issues/271)
 
 ### 0.6.8
 
