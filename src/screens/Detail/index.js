@@ -92,11 +92,11 @@ class Detail extends Component {
     }
   }
 
-  listType = "VOTING";
-
   onLayout = ({ nativeEvent: { layout: { height } } }) => {
     this.componentHeight = height;
   };
+
+  listType = "VOTING";
 
   scrollTo = ({ y }) => {
     let scrollTo;
