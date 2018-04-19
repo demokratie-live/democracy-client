@@ -34,7 +34,7 @@ const VoteResults = props => {
               label !== "__typename" ? { value, label } : false
           ).filter(e => e)}
           colorScale={["#15C063", "#2C82E4", "#EC3E31"]}
-          label="Abstimmungen"
+          label="Abstimmende"
         />
       );
     }
