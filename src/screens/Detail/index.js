@@ -195,9 +195,18 @@ class Detail extends Component {
             <SegmentDocuments documents={importantDocuments} />
           </Segment>
           <VoteResults
+            key="community"
             voteResults={voteResults}
             procedure={_id}
             scrollTo={this.scrollTo}
+            type="community"
+          />
+          <VoteResults
+            key="goverment"
+            voteResults={voteResults}
+            procedure={_id}
+            scrollTo={this.scrollTo}
+            type="goverment"
           />
           {listType === "VOTING" && (
             <Voting

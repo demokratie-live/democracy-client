@@ -16,7 +16,7 @@ const ScrollView = styled.ScrollView.attrs({
 })``;
 
 const VoteResults = props => {
-  const { voteResults, communityVotes, scrollTo } = props;
+  const { voteResults, communityVotes, scrollTo, type } = props;
 
   const renderCommuntiyResult = () => {
     const { voteResults: comunnityResults } = communityVotes;
@@ -50,28 +50,32 @@ const VoteResults = props => {
         voteResults.abstination)
     ) {
       return (
-        <PieChart
-          data={_.map(
-            voteResults,
-            (value, label) =>
-              label !== "__typename" ? { value, label } : false
-          ).filter(e => e)}
-          colorScale={["#99C93E", "#4CB0D8", "#D43194", "#B1B3B4"]}
-          label="Abgeordnete"
-        />
+        <Segment title="Bundestagsergebnis" open scrollTo={scrollTo}>
+          <ScrollView>
+            <PieChart
+              data={_.map(
+                voteResults,
+                (value, label) =>
+                  label !== "__typename" ? { value, label } : false
+              ).filter(e => e)}
+              colorScale={["#99C93E", "#4CB0D8", "#D43194", "#B1B3B4"]}
+              label="Abgeordnete"
+            />
+          </ScrollView>
+        </Segment>
       );
     }
     return null;
   };
   if (communityVotes.voted) {
-    return (
-      <Segment title="Ergebnis" open scrollTo={scrollTo}>
-        <ScrollView>
-          {renderCommuntiyResult()}
-          {renderGovermentResult()}
-        </ScrollView>
-      </Segment>
-    );
+    if (type === "community") {
+      return (
+        <Segment title="Communityergebnis" open scrollTo={scrollTo}>
+          <ScrollView>{renderCommuntiyResult()}</ScrollView>
+        </Segment>
+      );
+    }
+    return renderGovermentResult();
   }
   return null;
 };
@@ -84,7 +88,8 @@ VoteResults.propTypes = {
     notVote: PropTypes.number
   }),
   scrollTo: PropTypes.func.isRequired,
-  communityVotes: PropTypes.oneOfType([PropTypes.shape(), PropTypes.bool])
+  communityVotes: PropTypes.oneOfType([PropTypes.shape(), PropTypes.bool]),
+  type: PropTypes.string.isRequired
 };
 
 VoteResults.defaultProps = {
