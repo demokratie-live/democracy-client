@@ -25,8 +25,8 @@ export default gql`
       }
       voteResults {
         yes
-        no
         abstination
+        no
         notVote
       }
       ...ActivityIndex
