@@ -1,6 +1,6 @@
 {
   "name": "democracyclient",
-  "version": "0.6.8",
+  "version": "0.7.0",
   "private": true,
   "scripts": {
     "test": "eslint . && jest",
@@ -10,17 +10,13 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "start:android": "yarn start:android:alpha",
     "start:android:alpha": "react-native run-android --variant=alphaDebug --appIdSuffix=alpha",
-	"start:android:beta": "react-native run-android --variant=betaDebug --appIdSuffix=beta",
-	"start:android:production": "react-native run-android --variant=productionDebug",
+    "start:android:beta": "react-native run-android --variant=betaDebug --appIdSuffix=beta",
+    "start:android:production": "react-native run-android --variant=productionDebug",
     "start:ios": "react-native run-ios",
-    "build:ios:clean":
-      "cd ios && xcodebuild clean -project democracyclient.xcodeproj -configuration Release -alltargets -allowProvisioningUpdates -quiet",
-    "build:ios:archive":
-      "cd ios && xcodebuild archive -project democracyclient.xcodeproj -scheme democracyclient-prod -archivePath build/archives/democracyclient.xcarchive -allowProvisioningUpdates -quiet",
-    "build:ios:ipa":
-      "cd ios && xcodebuild -allowProvisioningUpdates -exportArchive -archivePath build/archives/democracyclient.xcarchive -exportPath build/ipa/democracyclient -exportOptionsPlist democracyclient/info.plist -allowProvisioningUpdates -quiet",
-    "build:ios":
-      "npm run build:ios:clean && npm run build:ios:archive && npm run build:ios:ipa",
+    "build:ios:clean": "cd ios && xcodebuild clean -project democracyclient.xcodeproj -configuration Release -alltargets -allowProvisioningUpdates -quiet",
+    "build:ios:archive": "cd ios && xcodebuild archive -project democracyclient.xcodeproj -scheme democracyclient-prod -archivePath build/archives/democracyclient.xcarchive -allowProvisioningUpdates -quiet",
+    "build:ios:ipa": "cd ios && xcodebuild -allowProvisioningUpdates -exportArchive -archivePath build/archives/democracyclient.xcarchive -exportPath build/ipa/democracyclient -exportOptionsPlist democracyclient/info.plist -allowProvisioningUpdates -quiet",
+    "build:ios": "npm run build:ios:clean && npm run build:ios:archive && npm run build:ios:ipa",
     "build:android": "cd android && ./gradlew assembleRelease",
     "build:all": "npm run build:android && npm run build:ios",
     "build:font": "buildfont -p ./assets/svgs/DemocracyFont/ -F DemocracyFont",
@@ -28,8 +24,14 @@
     "postinstall": "react-native-schemes-manager all"
   },
   "xcodeSchemes": {
-    "Debug": ["Beta.Debug", "Alpha.Debug"],
-    "Release": ["Beta.Release", "Alpha.Release"]
+    "Debug": [
+      "Beta.Debug",
+      "Alpha.Debug"
+    ],
+    "Release": [
+      "Beta.Release",
+      "Alpha.Release"
+    ]
   },
   "dependencies": {
     "apollo-cache-inmemory": "^1.1.5",
