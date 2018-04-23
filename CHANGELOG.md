@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.7.x
+
+* Global
+  * Replace png's with svg's for performance improvements
+
 ### 0.7.0
 
 * Details
