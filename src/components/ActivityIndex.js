@@ -16,8 +16,6 @@ const WrapperTouchable = styled.TouchableOpacity`
   align-items: center;
 `;
 
-const Icon = styled.Image``;
-
 const Counter = styled.Text`
   font-size: 18;
   color: #8f8e94;

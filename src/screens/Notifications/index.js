@@ -61,8 +61,11 @@ const ProcedureDetailWrapper = styled.View`
   align-items: center;
 `;
 
-const ProcedureNotifyIcon = styled.Image.attrs({
-  source: require("../../../assets/icons/shape-active.png")
+const NotificationButtonIcon = styled(Ionicons).attrs({
+  size: 32,
+  name: ({ active }) =>
+    active ? "ios-notifications" : "ios-notifications-outline",
+  color: ({ active }) => (active ? "rgb(255, 171, 33)" : "rgb(0, 0, 0)")
 })``;
 
 const ProcedureDescription = styled.Text`
@@ -304,7 +307,7 @@ class Notifications extends Component {
                       })
                     }
                   >
-                    <ProcedureNotifyIcon />
+                    <NotificationButtonIcon active />
                   </TouchableOpacity>
                   <ProcedureDescription>
                     {item.currentStatus}
