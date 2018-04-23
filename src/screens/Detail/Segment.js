@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 const Wrapper = styled.View``;
 
@@ -23,12 +24,13 @@ const Title = styled.Text`
   font-size: 17;
 `;
 
-const CollapseIcon = styled.Image.attrs({
-  source: ({ open }) =>
-    open
-      ? require("../../../assets/icons/segmentOpen.png")
-      : require("../../../assets/icons/segmentClosed.png")
-})``;
+const CollapseIcon = styled(Ionicons).attrs({
+  color: "rgb(151, 151, 151)",
+  name: "ios-arrow-up-outline",
+  size: 20
+})`
+  transform: ${({ open }) => (open ? "rotate(0deg)" : "rotate(180deg)")};
+`;
 
 const Content = styled.View`
   display: ${({ open, collapsible }) =>

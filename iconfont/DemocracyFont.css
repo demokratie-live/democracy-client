@@ -1,10 +1,10 @@
 @font-face {
   font-family: "DemocracyFont";
-  src: url(DemocracyFont.eot?t=1524142467549); /* IE9*/
-  src: url(DemocracyFont.eot?t=1524142467549#iefix) format("eot"), /* IE6-IE8 */
-    url(DemocracyFont.woff?t=1524142467549) format("woff"), /* chrome, firefox */
-    url(DemocracyFont.ttf?t=1524142467549) format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-    url(DemocracyFont.svg?t=1524142467549#DemocracyFont) format("svg"); /* iOS 4.1- */
+  src: url(DemocracyFont.eot?t=1524486946510); /* IE9*/
+  src: url(DemocracyFont.eot?t=1524486946510#iefix) format("eot"), /* IE6-IE8 */
+    url(DemocracyFont.woff?t=1524486946510) format("woff"), /* chrome, firefox */
+    url(DemocracyFont.ttf?t=1524486946510) format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+    url(DemocracyFont.svg?t=1524486946510#DemocracyFont) format("svg"); /* iOS 4.1- */
 }
 
 .DemocracyFont {
@@ -13,5 +13,8 @@
   -moz-osx-font-smoothing: grayscale;
   font-style: normal;
 }
-.icon-checkmark-double:before {content: "\e001";}
-.icon-checkmark:before {content: "\e002";}
+.icon-bundestag:before {content: "\e001";}
+.icon-bundestag3:before {content: "\e002";}
+.icon-bundestagX1:before {content: "\e003";}
+.icon-checkmark-double:before {content: "\e004";}
+.icon-checkmark:before {content: "\e005";}

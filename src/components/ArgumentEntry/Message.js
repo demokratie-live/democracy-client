@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 import ArgumentEntry from "../ArgumentEntry";
 
@@ -12,11 +13,11 @@ const Content = styled.View`
 
 const Title = styled.Text.attrs({
   numberOfLines: 1
-}) ``;
+})``;
 
 const Text = styled.Text``;
 
-const TextMore = styled.Text.attrs({}) `
+const TextMore = styled.Text.attrs({})`
   padding-top: 7;
   color: #979797;
 `;
@@ -36,12 +37,13 @@ const Collapse = styled.TouchableOpacity`
   padding-top: 10;
 `;
 
-const CollapseImage = styled.Image.attrs({
-  source: ({ open }) =>
-    open
-      ? require("../../../assets/icons/segmentOpen.png")
-      : require("../../../assets/icons/segmentClosed.png")
-}) ``;
+const CollapseIcon = styled(Ionicons).attrs({
+  color: "rgb(151, 151, 151)",
+  name: "ios-arrow-up-outline",
+  size: 20
+})`
+  transform: ${({ open }) => (open ? "rotate(0deg)" : "rotate(180deg)")};
+`;
 
 class Message extends Component {
   state = {
@@ -65,7 +67,7 @@ class Message extends Component {
           <Collapse
             onPress={() => this.setState({ moreTextOpened: !moreTextOpened })}
           >
-            <CollapseImage open={moreTextOpened} />
+            <CollapseIcon open={moreTextOpened} />
           </Collapse>
         </Side>
       </ArgumentEntry>

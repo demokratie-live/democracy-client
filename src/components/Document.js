@@ -2,16 +2,13 @@ import React, { Component } from "react";
 import { Linking, Platform } from "react-native";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 const Wrapper = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   padding-top: 13;
 `;
-
-const Icon = styled.Image.attrs({
-  source: require("../../assets/icons/document.png")
-})``;
 
 const Text = styled.Text`
   padding-left: 14;
@@ -38,7 +35,7 @@ class Document extends Component {
     const { editor, type, number, url } = this.props;
     return (
       <Wrapper onPress={this.openPdf(url)}>
-        <Icon />
+        <Ionicons name="ios-document-outline" size={30} />
         <Text>{`${type} (${editor} ${number})`}</Text>
       </Wrapper>
     );
