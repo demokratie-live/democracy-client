@@ -1,6 +1,6 @@
 {
   "name": "democracyclient",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "private": true,
   "scripts": {
     "test": "eslint . && jest",
@@ -19,6 +19,7 @@
     "build:ios": "npm run build:ios:clean && npm run build:ios:archive && npm run build:ios:ipa",
     "build:android": "cd android && ./gradlew assembleRelease",
     "build:all": "npm run build:android && npm run build:ios",
+    "build:font": "buildfont -p ./assets/svgs/DemocracyFont/ -F DemocracyFont",
     "version": "./version-ios.sh",
     "postinstall": "react-native-schemes-manager all"
   },
@@ -77,6 +78,7 @@
     "babel-eslint": "^8.2.1",
     "babel-jest": "22.1.0",
     "babel-preset-react-native": "4.0.0",
+    "buildfont": "^2.0.2",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-flowtype": "^2.41.0",
     "eslint-plugin-prettier": "^2.5.0",

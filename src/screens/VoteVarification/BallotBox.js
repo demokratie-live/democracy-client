@@ -13,6 +13,7 @@ import VOTED from "../../graphql/queries/voted";
 import VOTES from "../../graphql/queries/votes";
 import VOTED_LOCAL from "../../graphql/queries/votedLocal";
 import F_ACTIVITY_INDEX from "../../graphql/fragments/ProcedureActivityIndex";
+import F_VOTED from "../../graphql/fragments/ProcedureVoted";
 
 const Wrapper = styled.View`
   flex: 1;
@@ -191,7 +192,7 @@ export default compose(
                 data
               });
 
-              // ActivityIndex
+              // ActivityIndex Fragment
               const aiFragment = cache.readFragment({
                 id: procedureId,
                 fragment: F_ACTIVITY_INDEX
@@ -205,6 +206,18 @@ export default compose(
                   data: aiFragment
                 });
               }
+
+              // Voted Fragment
+              const votedFragment = cache.readFragment({
+                id: procedureId,
+                fragment: F_VOTED
+              });
+              votedFragment.voted = true;
+              cache.writeFragment({
+                id: procedureId,
+                fragment: F_VOTED,
+                data: votedFragment
+              });
             },
             refetchQueries: [
               {

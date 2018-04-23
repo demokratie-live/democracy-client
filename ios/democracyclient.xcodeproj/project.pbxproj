@@ -65,6 +65,7 @@
 		C36B46D1201C8C4000B68A81 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46B0201C8BBF00B68A81 /* SimpleLineIcons.ttf */; };
 		C36B46D2201C8C4000B68A81 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46B1201C8BBF00B68A81 /* MaterialIcons.ttf */; };
 		C3D9E668206A564000E694B8 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3D9E644206A562A00E694B8 /* libRCTPushNotification.a */; };
+		C3E792522088C96F009C4A39 /* DemocracyFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3E792512088C95E009C4A39 /* DemocracyFont.ttf */; };
 		C3EBC760204548F50040ED81 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3EBC740204547DB0040ED81 /* libRNVectorIcons.a */; };
 /* End PBXBuildFile section */
 
@@ -477,6 +478,7 @@
 		C36B46B0201C8BBF00B68A81 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
 		C36B46B1201C8BBF00B68A81 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
 		C3D9E630206A562A00E694B8 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
+		C3E792512088C95E009C4A39 /* DemocracyFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = DemocracyFont.ttf; path = ../../../iconfont/DemocracyFont.ttf; sourceTree = "<group>"; };
 		CF1A551E9AD54473AE890083 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
 		D248333CC3664928A505C5AB /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 		D879F3E7359A4C6C82AE7CFC /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
@@ -787,6 +789,7 @@
 		C36B46A6201C8BBF00B68A81 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				C3E792512088C95E009C4A39 /* DemocracyFont.ttf */,
 				C36B46A7201C8BBF00B68A81 /* Octicons.ttf */,
 				C36B46A8201C8BBF00B68A81 /* Feather.ttf */,
 				C36B46A9201C8BBF00B68A81 /* Entypo.ttf */,
@@ -1457,6 +1460,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3E792522088C96F009C4A39 /* DemocracyFont.ttf in Resources */,
 				C36B46C8201C8C4000B68A81 /* Octicons.ttf in Resources */,
 				C36B46C9201C8C4000B68A81 /* Feather.ttf in Resources */,
 				C36B46CA201C8C4000B68A81 /* Entypo.ttf in Resources */,
