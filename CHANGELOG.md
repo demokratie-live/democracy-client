@@ -1,6 +1,6 @@
 # Changelog
 
-### 0.x.x
+### 0.7.1
 
 * Details
   * Scroll to document-segment content [#231](https://github.com/demokratie-live/democracy-client/issues/231)
@@ -8,6 +8,11 @@
   * Change PieChart label for community-votes & title [#253](https://github.com/demokratie-live/democracy-client/issues/253)
 * Lists
   * Add voted marker [#246](https://github.com/demokratie-live/democracy-client/issues/246)
+
+### 0.7.0
+
+* Details
+  * Add non-roll-call vote results
 
 ### 0.6.8
 
