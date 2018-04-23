@@ -1,6 +1,6 @@
 # Changelog
 
-### 0.?.x
+### 0.7.0
 
 * Details
   * Add non-roll-call vote results
