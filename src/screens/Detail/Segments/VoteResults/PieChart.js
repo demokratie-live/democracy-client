@@ -105,7 +105,9 @@ class PieChart extends Component {
         <VoteResultNumbers>
           {data.map(entry => (
             <VoteResult key={entry.label}>
-              <VoteResultNumber>{entry.value}</VoteResultNumber>
+              <VoteResultNumber>
+                {entry.value !== null ? entry.value : "?"}
+              </VoteResultNumber>
               <VoteResultLabel>{this.getLabel(entry.label)}</VoteResultLabel>
             </VoteResult>
           ))}
@@ -118,8 +120,8 @@ class PieChart extends Component {
 PieChart.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      value: PropTypes.number.isRequired,
-      label: PropTypes.string.isRequired
+      value: PropTypes.number,
+      label: PropTypes.string
     })
   ).isRequired,
   label: PropTypes.string.isRequired,

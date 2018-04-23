@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.7.0
+
+* Details
+  * Add non-roll-call vote results
+
 ### 0.6.8
 
 * Instructions
