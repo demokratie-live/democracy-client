@@ -87,10 +87,6 @@ const NavigationView = ({ currentScreen, navigateTo }) => {
     {
       title: "Einstellungen",
       data: [
-        // {
-        //   title: "Benachrichtigungen",
-        //   icon: require("../../../assets/icons/paperPlane.png")
-        // },,
         {
           screenId: "democracy.Notifications",
           title: "Benachrichtigungen".toUpperCase(),

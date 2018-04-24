@@ -8,8 +8,6 @@ import { Navigator } from "react-native-navigation";
 import getProcedure from "../../graphql/queries/getProcedure";
 import TOGGLE_NOTIFICATION from "../../graphql/mutations/toggleNotification";
 
-import F_ACTIVITY_INDEX from "../../graphql/fragments/ProcedureActivityIndex";
-
 import ActivityIndex from "../../components/ActivityIndex";
 import DateTime from "../../components/Date";
 import SegmentDetails from "./Segments/Details";
@@ -74,6 +72,44 @@ class Detail extends Component {
     navBarButtonColor: "#FFFFFF"
   };
 
+  componentWillReceiveProps(nextProps) {
+    const { data } = nextProps;
+    if (data.procedure && this.listType !== data.procedure.listType) {
+      this.listType = data.procedure.listType;
+      let newTitle;
+      switch (data.procedure.listType) {
+        case "VOTING":
+          newTitle = "Abstimmung";
+          break;
+
+        default:
+          newTitle = "Vorbereitung";
+          break;
+      }
+      this.props.navigator.setTitle({
+        title: newTitle.toUpperCase() // the new title of the screen as appears in the nav bar
+      });
+    }
+  }
+
+  onLayout = ({ nativeEvent: { layout: { height } } }) => {
+    this.componentHeight = height;
+  };
+
+  listType = "VOTING";
+
+  scrollTo = ({ y }) => {
+    let scrollTo;
+    if (y + this.componentHeight > this.contentHeight) {
+      scrollTo = this.contentHeight - this.componentHeight;
+    } else {
+      scrollTo = y;
+    }
+    if (scrollTo > 0) {
+      this.scrollView.scrollTo({ y: scrollTo });
+    }
+  };
+
   render() {
     const { procedureId, toggleNotification } = this.props;
     const { data: { networkStatus, refetch } } = this.props;
@@ -99,6 +135,13 @@ class Detail extends Component {
 
     return (
       <Wrapper
+        onContentSizeChange={(width, height) => {
+          this.contentHeight = height;
+        }}
+        onLayout={this.onLayout}
+        innerRef={comp => {
+          this.scrollView = comp;
+        }}
         refreshControl={
           <RefreshControl
             refreshing={networkStatus === 4}
@@ -137,7 +180,7 @@ class Detail extends Component {
               <TagsText>{tags && tags.join(", ")}</TagsText>
             </TagsWrapper>
           )}
-          <Segment title="Details" open>
+          <Segment title="Details" open scrollTo={this.scrollTo}>
             <SegmentDetails
               subjectGroups={subjectGroups}
               submissionDate={submissionDate}
@@ -148,10 +191,23 @@ class Detail extends Component {
               type={type}
             />
           </Segment>
-          <Segment title="Dokumente">
+          <Segment title="Dokumente" scrollTo={this.scrollTo}>
             <SegmentDocuments documents={importantDocuments} />
           </Segment>
-          <VoteResults voteResults={voteResults} procedure={_id} />
+          <VoteResults
+            key="community"
+            voteResults={voteResults}
+            procedure={_id}
+            scrollTo={this.scrollTo}
+            type="community"
+          />
+          <VoteResults
+            key="goverment"
+            voteResults={voteResults}
+            procedure={_id}
+            scrollTo={this.scrollTo}
+            type="goverment"
+          />
           {listType === "VOTING" && (
             <Voting
               procedureObjId={_id}
@@ -216,21 +272,6 @@ export default compose(
                 variables: { id: procedureId },
                 data
               });
-
-              // ActivityIndex
-              const aiFragment = cache.readFragment({
-                id: procedureId,
-                fragment: F_ACTIVITY_INDEX
-              });
-              if (!aiFragment.activityIndex.active) {
-                aiFragment.activityIndex.active = true;
-                aiFragment.activityIndex.activityIndex += 1;
-                cache.writeFragment({
-                  id: procedureId,
-                  fragment: F_ACTIVITY_INDEX,
-                  data: aiFragment
-                });
-              }
             }
           });
         }

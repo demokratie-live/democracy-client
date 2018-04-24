@@ -26,6 +26,8 @@ const VoteResultPieLabel = styled.Text`
 `;
 
 const VoteResultNumbers = styled.View`
+  width: ${() => Dimensions.get("window").width - 18 * 2};
+  max-width: 464;
   padding-top: 18;
   flex-direction: row;
   justify-content: space-between;
@@ -34,7 +36,7 @@ const VoteResultNumbers = styled.View`
 const VoteResult = styled.View`
   justify-content: center;
   align-items: center;
-  flex: 1;
+  width: 88;
 `;
 
 const VoteResultNumber = styled.Text`
@@ -54,8 +56,8 @@ class PieChart extends Component {
   getLabel = label => {
     const labels = {
       yes: "Ja",
-      no: "Nein",
       abstination: "Enthalten",
+      no: "Nein",
       notVote: "Nicht abg."
     };
     return labels[label] || label;
@@ -103,7 +105,9 @@ class PieChart extends Component {
         <VoteResultNumbers>
           {data.map(entry => (
             <VoteResult key={entry.label}>
-              <VoteResultNumber>{entry.value}</VoteResultNumber>
+              <VoteResultNumber>
+                {entry.value !== null ? entry.value : "?"}
+              </VoteResultNumber>
               <VoteResultLabel>{this.getLabel(entry.label)}</VoteResultLabel>
             </VoteResult>
           ))}
@@ -116,8 +120,8 @@ class PieChart extends Component {
 PieChart.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      value: PropTypes.number.isRequired,
-      label: PropTypes.string.isRequired
+      value: PropTypes.number,
+      label: PropTypes.string
     })
   ).isRequired,
   label: PropTypes.string.isRequired,

@@ -1,9 +1,12 @@
 apply plugin: "com.android.application"
 
 project.ext.envConfigFiles = [
-    debug: ".env.android",
-    release: ".env.production",
-    anothercustombuild: ".env",
+    alphadebug: ".env.debug",
+    betadebug: ".env.debug",
+	productiondebug: ".env.debug",
+    alpharelease: ".env.alpha",
+    betarelease: ".env.beta",
+    productionrelease: ".env.production",
 ]
 
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
@@ -83,7 +86,7 @@ import com.android.build.OutputFile
 
 def getVersionCode = { ->
 
-    def code = System.getenv('TRAVIS_BUILD_NUMBER') ? System.getenv('TRAVIS_BUILD_NUMBER').toInteger() : -1
+    def code = System.getenv('BUILD_NUMBER') ? System.getenv('BUILD_NUMBER').toInteger() : -1
     println "VersionCode is set to $code"
     return code
 }
@@ -146,6 +149,24 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             signingConfig signingConfigs.release
         }
+    }
+    productFlavors {
+        alpha {
+            //applicationId "de.democracydeutschland.app.alpha"
+            resValue "string", "build_config_package", "de.democracydeutschland.app"
+            applicationIdSuffix ".alpha"
+        }
+        alphadebug {
+            //applicationId "de.democracydeutschland.app.alpha.debug"
+            resValue "string", "build_config_package", "de.democracydeutschland.app"
+            applicationIdSuffix ".alpha.debug"
+        }
+        beta {
+            //applicationId "de.democracydeutschland.app.beta"
+            resValue "string", "build_config_package", "de.democracydeutschland.app"
+            applicationIdSuffix ".beta"
+        }
+        production {}
     }
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->

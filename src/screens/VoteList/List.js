@@ -120,14 +120,12 @@ class List extends Component {
       ) {
         preparedData[1].data.push({
           ...procedure,
-          tags: procedure.tags,
           date: procedure.voteDate,
           listType
         });
       } else {
         preparedData[0].data.push({
           ...procedure,
-          tags: procedure.tags,
           date: procedure.voteDate || false,
           listType
         });

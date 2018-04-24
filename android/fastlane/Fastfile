@@ -30,20 +30,27 @@ platform :android do
   desc "Submit a new Alpha Build to GooglePlayStore"
   lane :alpha do
     gradle(
-      task: "clean assemble",
+      task: "clean assembleAlpha",
       build_type: "Release"
     )
     upload_to_play_store(
       track: 'alpha',
       track_promote_to: 'alpha',
-      apk: "./app/build/outputs/apk/app-release.apk"
+      apk: "./app/build/outputs/apk/app-alpha-release.apk"
     )
   end
 
-  desc "Deploy a new version to the Google Play"
-  lane :deploy do
+  desc "Submit a new Beta Build to GooglePlayStore"
+  lane :beta do
+    gradle(
+      task: "clean assembleBeta",
+      build_type: "Release"
+    )
     upload_to_play_store(
-      apk: "./app/build/outputs/apk/app-release.apk"
+      track: 'beta',
+      track_promote_to: 'beta',
+      apk: "./app/build/outputs/apk/app-beta-release.apk"
     )
   end
+
 end

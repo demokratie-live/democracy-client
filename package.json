@@ -1,6 +1,6 @@
 {
   "name": "democracyclient",
-  "version": "0.6.5",
+  "version": "0.7.1",
   "private": true,
   "scripts": {
     "test": "eslint . && jest",
@@ -8,7 +8,10 @@
     "test:lint": "eslint .",
     "test:flow": "flow",
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "start:android": "react-native run-android",
+    "start:android": "yarn start:android:alpha",
+    "start:android:alpha": "react-native run-android --variant=alphaDebug --appIdSuffix=alpha",
+    "start:android:beta": "react-native run-android --variant=betaDebug --appIdSuffix=beta",
+    "start:android:production": "react-native run-android --variant=productionDebug",
     "start:ios": "react-native run-ios",
     "build:ios:clean": "cd ios && xcodebuild clean -project democracyclient.xcodeproj -configuration Release -alltargets -allowProvisioningUpdates -quiet",
     "build:ios:archive": "cd ios && xcodebuild archive -project democracyclient.xcodeproj -scheme democracyclient-prod -archivePath build/archives/democracyclient.xcarchive -allowProvisioningUpdates -quiet",
@@ -16,7 +19,19 @@
     "build:ios": "npm run build:ios:clean && npm run build:ios:archive && npm run build:ios:ipa",
     "build:android": "cd android && ./gradlew assembleRelease",
     "build:all": "npm run build:android && npm run build:ios",
-    "version": "./version-ios.sh"
+    "build:font": "buildfont -p ./assets/svgs/DemocracyFont/ -F DemocracyFont",
+    "version": "./version-ios.sh",
+    "postinstall": "react-native-schemes-manager all"
+  },
+  "xcodeSchemes": {
+    "Debug": [
+      "Beta.Debug",
+      "Alpha.Debug"
+    ],
+    "Release": [
+      "Beta.Release",
+      "Alpha.Release"
+    ]
   },
   "dependencies": {
     "apollo-cache-inmemory": "^1.1.5",
@@ -63,6 +78,7 @@
     "babel-eslint": "^8.2.1",
     "babel-jest": "22.1.0",
     "babel-preset-react-native": "4.0.0",
+    "buildfont": "^2.0.2",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-flowtype": "^2.41.0",
     "eslint-plugin-prettier": "^2.5.0",
@@ -71,6 +87,7 @@
     "flow-bin": "^0.65.0",
     "jest": "22.1.4",
     "prettier": "^1.10.2",
+    "react-native-schemes-manager": "^1.0.4",
     "react-test-renderer": "16.2.0",
     "reactotron-react-native": "^1.14.0"
   },
