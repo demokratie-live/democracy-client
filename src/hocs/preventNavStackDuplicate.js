@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import { Platform } from "react-native";
+import { Platform } from "react-native";
 import PropTypes from "prop-types";
 import { Navigator } from "react-native-navigation";
 
@@ -11,13 +11,19 @@ export default function prevetNavStackDuplicate(ComposedComponent) {
       navigator: PropTypes.instanceOf(Navigator).isRequired
     };
     componentDidMount() {
-      this.props.navigator.setOnNavigatorEvent(event => {
-        if (/* Platform.OS === "android" && */ event.id === "didDisappear") {
-          this.navigated = null;
-        } else {
+      if (Platform.OS === "android"){
+        this.props.navigator.setOnNavigatorEvent(event => {
+          if (event.id === "didDisappear") {
+            this.navigated = null;
+          } else {
+            onNavigationEvent({ event, navigator: this.props.navigator });
+          }
+        });
+      } else {
+        this.props.navigator.setOnNavigatorEvent(event => {
           onNavigationEvent({ event, navigator: this.props.navigator });
-        }
-      });
+        });
+      }
     }
 
     navigated = null;
