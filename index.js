@@ -121,6 +121,7 @@ class App {
         // TODO: handle this
       }
     }
+    pushNotifications.sendToken();
 
     // Decide Startscreen
     if (isInstructionsShown) {

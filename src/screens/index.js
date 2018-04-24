@@ -34,7 +34,7 @@ export default function registerScreens() {
   );
   Navigation.registerComponent(
     "democracy.Instructions",
-    () => Instructions,
+    () => NetworkStatus(Instructions),
     client.store,
     ApolloProvider,
     { client }
@@ -76,7 +76,7 @@ export default function registerScreens() {
   );
   Navigation.registerComponent(
     "democracy.VoteVarification",
-    () => VoteVarification,
+    () => NetworkStatus(VoteVarification),
     client.store,
     ApolloProvider,
     { client }
