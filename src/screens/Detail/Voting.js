@@ -48,7 +48,7 @@ const Voting = ({
 }) => (
   <Wrapper>
     <SegmentWrapper>
-      <Title>Abstimmen</Title>
+      <Title>{voted ? "Abgestimmt" : "Abstimmen"} </Title>
     </SegmentWrapper>
     <VoteWrapper>
       <VoteButton

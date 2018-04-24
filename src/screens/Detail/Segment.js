@@ -49,15 +49,29 @@ class Segment extends Component {
     }
   }
 
+  onLayout = ({ nativeEvent: { layout: { y, height } } }) => {
+    const { scrollTo } = this.props;
+    if (this.fireScroll) {
+      this.fireScroll = false;
+      setTimeout(() => {
+        scrollTo({ y, height });
+      }, 100);
+    }
+  };
+
   toggle = () => {
-    this.setState({ open: !this.state.open });
+    this.setState({ open: !this.state.open }, () => {
+      if (this.state.open) {
+        this.fireScroll = true;
+      }
+    });
   };
 
   render() {
     const { title, collapsible } = this.props;
     const { open } = this.state;
     return (
-      <Wrapper>
+      <Wrapper onLayout={this.onLayout}>
         <SegmentTouch onPress={this.toggle}>
           <SegmentWrapper>
             <Title>{title}</Title>
@@ -76,7 +90,8 @@ Segment.propTypes = {
   title: PropTypes.string.isRequired,
   open: PropTypes.bool,
   collapsible: PropTypes.bool,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  scrollTo: PropTypes.func.isRequired
 };
 
 Segment.defaultProps = {

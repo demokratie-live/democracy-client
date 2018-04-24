@@ -1,6 +1,7 @@
 import gql from "graphql-tag";
 
 import ActivityIndex from "../fragments/ProcedureActivityIndex";
+import Voted from "../fragments/ProcedureVoted";
 
 export default gql`
   query procedures($offset: Int, $pageSize: Int, $type: ProcedureType!) {
@@ -11,9 +12,12 @@ export default gql`
       tags
       abstract
       voteDate
+      votedGoverment
       submissionDate
       ...ActivityIndex
+      ...Voted
     }
   }
   ${ActivityIndex}
+  ${Voted}
 `;
