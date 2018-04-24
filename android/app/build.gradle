@@ -1,9 +1,11 @@
 apply plugin: "com.android.application"
 
 project.ext.envConfigFiles = [
+    devdebug: ".env.debug",
     alphadebug: ".env.debug",
     betadebug: ".env.debug",
-	productiondebug: ".env.debug",
+    productiondebug: ".env.debug",
+    devrelease: ".env.debug",
     alpharelease: ".env.alpha",
     betarelease: ".env.beta",
     productionrelease: ".env.production",
@@ -151,18 +153,15 @@ android {
         }
     }
     productFlavors {
+        dev {
+            resValue "string", "build_config_package", "de.democracydeutschland.app"
+            applicationIdSuffix ".dev"
+        }
         alpha {
-            //applicationId "de.democracydeutschland.app.alpha"
             resValue "string", "build_config_package", "de.democracydeutschland.app"
             applicationIdSuffix ".alpha"
         }
-        alphadebug {
-            //applicationId "de.democracydeutschland.app.alpha.debug"
-            resValue "string", "build_config_package", "de.democracydeutschland.app"
-            applicationIdSuffix ".alpha.debug"
-        }
         beta {
-            //applicationId "de.democracydeutschland.app.beta"
             resValue "string", "build_config_package", "de.democracydeutschland.app"
             applicationIdSuffix ".beta"
         }
