@@ -155,14 +155,17 @@ android {
     productFlavors {
         dev {
             resValue "string", "build_config_package", "de.democracydeutschland.app"
+            resValue "string", "app_name", "DEMOCRACY Dev"
             applicationIdSuffix ".dev"
         }
         alpha {
             resValue "string", "build_config_package", "de.democracydeutschland.app"
+            resValue "string", "app_name", "DEMOCRACY Alpha"
             applicationIdSuffix ".alpha"
         }
         beta {
             resValue "string", "build_config_package", "de.democracydeutschland.app"
+            resValue "string", "app_name", "DEMOCRACY Beta"
             applicationIdSuffix ".beta"
         }
         production {}
