@@ -44,6 +44,7 @@ platform :ios do
     build_app( 
       clean: true,
       scheme: "democracyclient-prod",
+      suppress_xcode_output: true
     )
   end
 
