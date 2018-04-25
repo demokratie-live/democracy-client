@@ -16,39 +16,40 @@ import Notifications from "./Notifications";
 import Credits from "./Credits";
 
 import NetworkStatus from "./Wrapper/NetworkStatus";
+import DeepLink from "./Wrapper/DeepLink";
 
 export default function registerScreens() {
   Navigation.registerComponent(
     "democracy.VoteList",
-    () => NetworkStatus(VoteList),
+    () => DeepLink(NetworkStatus(VoteList)),
     client.store,
     ApolloProvider,
     { client }
   );
   Navigation.registerComponent(
     "democracy.VoteList.List",
-    () => NetworkStatus(VoteListList),
+    () => DeepLink(NetworkStatus(VoteListList)),
     client.store,
     ApolloProvider,
     { client }
   );
   Navigation.registerComponent(
     "democracy.Instructions",
-    () => NetworkStatus(Instructions),
+    () => Instructions,
     client.store,
     ApolloProvider,
     { client }
   );
   Navigation.registerComponent(
     "democracy.Search",
-    () => NetworkStatus(Search),
+    () => DeepLink(NetworkStatus(Search)),
     client.store,
     ApolloProvider,
     { client }
   );
   Navigation.registerComponent(
     "democracy.SideMenu",
-    () => NetworkStatus(SideMenu),
+    () => SideMenu,
     client.store,
     ApolloProvider,
     { client }
@@ -62,14 +63,14 @@ export default function registerScreens() {
   );
   Navigation.registerComponent(
     "democracy.Support",
-    () => NetworkStatus(Support),
+    () => DeepLink(NetworkStatus(Support)),
     client.store,
     ApolloProvider,
     { client }
   );
   Navigation.registerComponent(
     "democracy.Security",
-    () => NetworkStatus(Security),
+    () => DeepLink(NetworkStatus(Security)),
     client.store,
     ApolloProvider,
     { client }
@@ -83,14 +84,14 @@ export default function registerScreens() {
   );
   Navigation.registerComponent(
     "democracy.Notifications",
-    () => NetworkStatus(Notifications),
+    () => DeepLink(NetworkStatus(Notifications)),
     client.store,
     ApolloProvider,
     { client }
   );
   Navigation.registerComponent(
     "democracy.Credits",
-    () => NetworkStatus(Credits),
+    () => DeepLink(NetworkStatus(Credits)),
     client.store,
     ApolloProvider,
     { client }

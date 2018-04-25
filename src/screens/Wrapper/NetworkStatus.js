@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import { graphql } from "react-apollo";
-import { Linking } from "react-native";
 
 import GET_NETWORK_STATUS from "../../graphql/queries/getNetworkStatus";
 
@@ -40,29 +39,12 @@ export default ComposedComponent => {
     props: ({ data: { networkStatus } }) => networkStatus
   })(NetworkStatus);
 
-  class WrappingComponent extends Component {
-    constructor(props) {
-      super(props);
-
-      this.props.navigator.setOnNavigatorEvent(event => {
-        console.log(event);
-      }); // Does not work
-    }
-
-    componentDidMount() {
-      // Handle browser Links
-      // Linking.addEventListener("url", url => {});
-    }
-
-    render() {
-      return (
-        <Wrapper>
-          <ComposedComponent {...this.props} />
-          <NetworkStatus />
-        </Wrapper>
-      );
-    }
-  }
+  const WrappingComponent = ({ ...rest }) => (
+    <Wrapper>
+      <ComposedComponent {...rest} />
+      <NetworkStatus />
+    </Wrapper>
+  );
 
   NetworkStatus.propTypes = {
     isConnected: PropTypes.bool,

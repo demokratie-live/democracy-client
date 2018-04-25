@@ -69,7 +69,8 @@ class Detail extends Component {
     navBarTextColor: "#FFFFFF",
     navBarTextFontSize: 17,
     navBarLeftButtonColor: "#FFFFFF",
-    navBarButtonColor: "#FFFFFF"
+    navBarButtonColor: "#FFFFFF",
+    backButtonTitle: ""
   };
 
   componentWillReceiveProps(nextProps) {
@@ -222,9 +223,9 @@ class Detail extends Component {
 }
 
 Detail.propTypes = {
-  title: PropTypes.string.isRequired,
-  tags: PropTypes.arrayOf(PropTypes.string),
-  abstract: PropTypes.string,
+  // title: PropTypes.string.isRequired,
+  // tags: PropTypes.arrayOf(PropTypes.string),
+  // abstract: PropTypes.string,
   procedureId: PropTypes.string.isRequired,
   data: PropTypes.shape().isRequired,
   navigator: PropTypes.instanceOf(Navigator).isRequired,
@@ -232,8 +233,8 @@ Detail.propTypes = {
 };
 
 Detail.defaultProps = {
-  abstract: "",
-  tags: []
+  // abstract: "",
+  // tags: []
 };
 
 export default compose(

@@ -14,7 +14,7 @@ import ADD_TOKEN from "../graphql/mutations/addToken";
 
 let clientToken = false;
 
-const configure = () => {
+const configure = async () => {
   PushNotification.configure({
     async onRegister({ token, os }) {
       console.log({ token });
@@ -22,9 +22,13 @@ const configure = () => {
         token,
         os
       };
+      console.log("AsyncStorage.getItem", await AsyncStorage.getItem("push-token"))
+      if(!await AsyncStorage.getItem("push-token")) {
+        sendToken();
+      }
     },
 
-    onNotification(notification) {
+    onNotification = async (notification) => {
       console.log({ notification });
       // process the notification
 
@@ -32,6 +36,11 @@ const configure = () => {
         foreground,
         data: { action, title, message, procedureId }
       } = notification;
+
+      console.log(
+        "Navigation.getCurrentlyVisibleScreenId()",
+        await Navigation.getCurrentlyVisibleScreenId().then(result => {console.log(result); return result})
+      );
 
       switch (action) {
         case "procedureDetails":
@@ -84,6 +93,7 @@ const configure = () => {
 };
 
 const sendToken = async () => {
+  console.log("sendToken", !!clientToken)
   if (clientToken) {
     const { token, os } = clientToken;
     // process token
