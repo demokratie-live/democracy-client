@@ -1,10 +1,10 @@
 @font-face {
   font-family: "DemocracyFont";
-  src: url(DemocracyFont.eot?t=1524576478657); /* IE9*/
-  src: url(DemocracyFont.eot?t=1524576478657#iefix) format("eot"), /* IE6-IE8 */
-    url(DemocracyFont.woff?t=1524576478657) format("woff"), /* chrome, firefox */
-    url(DemocracyFont.ttf?t=1524576478657) format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-    url(DemocracyFont.svg?t=1524576478657#DemocracyFont) format("svg"); /* iOS 4.1- */
+  src: url(DemocracyFont.eot?t=1524665059701); /* IE9*/
+  src: url(DemocracyFont.eot?t=1524665059701#iefix) format("eot"), /* IE6-IE8 */
+    url(DemocracyFont.woff?t=1524665059701) format("woff"), /* chrome, firefox */
+    url(DemocracyFont.ttf?t=1524665059701) format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+    url(DemocracyFont.svg?t=1524665059701#DemocracyFont) format("svg"); /* iOS 4.1- */
 }
 
 .DemocracyFont {
