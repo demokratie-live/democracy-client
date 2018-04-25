@@ -16,19 +16,22 @@ let clientToken = false;
 
 const configure = async () => {
   PushNotification.configure({
-     onRegister: async({ token, os }) => {
+    onRegister: async ({ token, os }) => {
       console.log({ token });
       clientToken = {
         token,
         os
       };
-      console.log("AsyncStorage.getItem", await AsyncStorage.getItem("push-token"))
-      if(!await AsyncStorage.getItem("push-token")) {
+      console.log(
+        "AsyncStorage.getItem",
+        await AsyncStorage.getItem("push-token")
+      );
+      if (!await AsyncStorage.getItem("push-token")) {
         sendToken();
       }
     },
 
-    onNotification = async (notification) => {
+    onNotification: async notification => {
       console.log({ notification });
       // process the notification
 
@@ -39,7 +42,10 @@ const configure = async () => {
 
       console.log(
         "Navigation.getCurrentlyVisibleScreenId()",
-        await Navigation.getCurrentlyVisibleScreenId().then(result => {console.log(result); return result})
+        await Navigation.getCurrentlyVisibleScreenId().then(result => {
+          console.log(result);
+          return result;
+        })
       );
 
       switch (action) {
@@ -93,7 +99,7 @@ const configure = async () => {
 };
 
 const sendToken = async () => {
-  console.log("sendToken", !!clientToken)
+  console.log("sendToken", !!clientToken);
   if (clientToken) {
     const { token, os } = clientToken;
     // process token
