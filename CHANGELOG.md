@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.x.x
+
+* [New/Fix] Push Notifications
+
 ### 0.7.1
 
 * Details
