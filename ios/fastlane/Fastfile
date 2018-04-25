@@ -42,7 +42,8 @@ platform :ios do
       team_id: "A4B84UJD7M"
     )
     build_app( 
-      scheme: "democracyclient-prod"
+      clean: true,
+      scheme: "democracyclient-prod",
     )
   end
 
