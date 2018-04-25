@@ -11,19 +11,13 @@ export default function prevetNavStackDuplicate(ComposedComponent) {
       navigator: PropTypes.instanceOf(Navigator).isRequired
     };
     componentDidMount() {
-      if (Platform.OS === "android"){
-        this.props.navigator.setOnNavigatorEvent(event => {
-          if (event.id === "didDisappear") {
-            this.navigated = null;
-          } else {
-            onNavigationEvent({ event, navigator: this.props.navigator });
-          }
-        });
-      } else {
-        this.props.navigator.setOnNavigatorEvent(event => {
+      this.props.navigator.setOnNavigatorEvent(event => {
+        if (event.id === "didDisappear") {
+          this.navigated = null;
+        } else {
           onNavigationEvent({ event, navigator: this.props.navigator });
-        });
-      }
+        }
+      });
     }
 
     navigated = null;
@@ -33,11 +27,13 @@ export default function prevetNavStackDuplicate(ComposedComponent) {
         this.props.navigator.push(screenOptions);
       }
 
-      this.navigated = true;
+      if (Platform.OS === "android") { // Delete this when react-native-navigation fires didDissapear #289
+        this.navigated = true;
+      }
     };
 
     render() {
       return <ComposedComponent {...this.props} navigateTo={this.navigateTo} />;
-    };
+    }
   };
 }
