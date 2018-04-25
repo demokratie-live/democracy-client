@@ -19,6 +19,7 @@ end
 
 platform :ios do
   desc "Push a new beta build to TestFlight"
+  setup_travis
   #xcversion(version: "9.2")
   #xcode_select "/Applications/Xcode-9.2.app"
   produce(
@@ -35,7 +36,7 @@ platform :ios do
 
   lane :test do
     disable_automatic_code_signing(path: "democracyclient.xcodeproj")
-    setup_travis
+    
     sync_code_signing(
       type: 'appstore',
       app_identifier: "de.democracy-deutschland.clientapp",
