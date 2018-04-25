@@ -1,10 +1,5 @@
 import PushNotification from "react-native-push-notification";
-import {
-  PushNotificationIOS,
-  AsyncStorage,
-  Alert,
-  Linking
-} from "react-native";
+import { PushNotificationIOS, AsyncStorage, Alert } from "react-native";
 import Config from "react-native-config";
 import { Navigation } from "react-native-navigation";
 
@@ -17,36 +12,22 @@ let clientToken = false;
 const configure = async () => {
   PushNotification.configure({
     onRegister: async ({ token, os }) => {
-      console.log({ token });
       clientToken = {
         token,
         os
       };
-      console.log(
-        "AsyncStorage.getItem",
-        await AsyncStorage.getItem("push-token")
-      );
       if (!await AsyncStorage.getItem("push-token")) {
         sendToken();
       }
     },
 
     onNotification: async notification => {
-      console.log({ notification });
       // process the notification
 
       const {
         foreground,
         data: { action, title, message, procedureId }
       } = notification;
-
-      console.log(
-        "Navigation.getCurrentlyVisibleScreenId()",
-        await Navigation.getCurrentlyVisibleScreenId().then(result => {
-          console.log(result);
-          return result;
-        })
-      );
 
       switch (action) {
         case "procedureDetails":
@@ -99,7 +80,6 @@ const configure = async () => {
 };
 
 const sendToken = async () => {
-  console.log("sendToken", !!clientToken);
   if (clientToken) {
     const { token, os } = clientToken;
     // process token

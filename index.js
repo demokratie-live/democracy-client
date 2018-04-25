@@ -29,7 +29,6 @@ pushNotifications.configure();
 
 registerScreens();
 
-console.log('######################################### START')
 
 class App {
   constructor() {

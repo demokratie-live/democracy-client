@@ -3,17 +3,13 @@ import PropTypes from "prop-types";
 import { Linking } from "react-native";
 import { Navigator } from "react-native-navigation";
 
+import onNavigationEvent from "../onNavigationEvent";
+
 export default ComposedComponent => {
   class WrappingComponent extends Component {
-    constructor(props) {
-      super(props);
-      console.log("constructor", props);
-    }
     componentDidMount() {
-      console.log("componentDidMount");
       const { navigator } = this.props;
       navigator.setOnNavigatorEvent(event => {
-        console.log(event);
         switch (event.type) {
           case "DeepLink":
             navigator.push({
@@ -23,12 +19,12 @@ export default ComposedComponent => {
             });
             break;
           default:
+            onNavigationEvent({ event, navigator });
             break;
         }
       }); // Does not work
       // Handle browser Links
       Linking.addEventListener("url", ({ url }) => {
-        console.log("Linking.addEventListener", url);
         const params = url.substr(url.indexOf("//") + 2).split("/");
         let link;
         let payload;
