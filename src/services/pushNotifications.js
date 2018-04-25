@@ -16,7 +16,7 @@ let clientToken = false;
 
 const configure = async () => {
   PushNotification.configure({
-    async onRegister({ token, os }) {
+     onRegister: async({ token, os }) => {
       console.log({ token });
       clientToken = {
         token,
