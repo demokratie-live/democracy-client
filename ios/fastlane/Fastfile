@@ -34,7 +34,7 @@ platform :ios do
   end
 
   lane :test do
-    #disable_automatic_code_signing(path: "democracyclient.xcodeproj")
+    disable_automatic_code_signing(path: "democracyclient.xcodeproj")
     setup_travis
     sync_code_signing(
       type: 'appstore',
