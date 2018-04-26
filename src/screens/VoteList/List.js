@@ -8,13 +8,15 @@ import { graphql } from "react-apollo";
 import { unionBy } from "lodash";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
+import prevetNavStackDuplicate from "../../hocs/preventNavStackDuplicate";
+
 import ListRow from "../../components/ListRow";
 import VoteListItem from "../../components/VoteListItem";
 import ListSectionHeader from "../../components/ListSectionHeader";
 
 import getProcedures from "../../graphql/queries/getProcedures";
 
-import onNavigationEvent from "../onNavigationEvent";
+// import onNavigationEvent from "../onNavigationEvent";
 
 const Wrapper = styled.View`
   flex: 1;
@@ -81,13 +83,12 @@ class List extends Component {
     }
   };
 
-  onNavigationEvent = event => {
+  /* onNavigationEvent = event => {
     onNavigationEvent({ event, navigator: this.props.navigator });
-  };
+  }; */
 
   onItemClick = ({ item }) => () => {
-    const { navigator } = this.props;
-    navigator.push({
+    this.props.navigateTo({
       screen: "democracy.Detail",
       title: "Abstimmung".toUpperCase(),
       passProps: { ...item },
@@ -189,6 +190,7 @@ class List extends Component {
 List.propTypes = {
   listType: PropTypes.string,
   navigator: PropTypes.instanceOf(Navigator).isRequired,
+  navigateTo: PropTypes.func.isRequired,
   data: PropTypes.shape().isRequired
 };
 
@@ -202,4 +204,4 @@ export default graphql(getProcedures, {
     variables: { type: listType, pageSize: PAGE_SIZE, offset: 0 },
     fetchPolicy: "cache-and-network"
   })
-})(List);
+})(prevetNavStackDuplicate(List));

@@ -15,8 +15,8 @@ import VoteVarification from "./VoteVarification";
 import Notifications from "./Notifications";
 import Credits from "./Credits";
 
-import NetworkStatus from "./Wrapper/NetworkStatus";
-import DeepLink from "./Wrapper/DeepLink";
+import DeepLink from "../hocs/DeepLink";
+import NetworkStatus from "../hocs/NetworkStatus";
 
 export default function registerScreens() {
   Navigation.registerComponent(
