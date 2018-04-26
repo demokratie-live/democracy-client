@@ -125,6 +125,17 @@ class BalloutBox extends Component {
     this.previewAnimation();
   }
 
+  onLayout = ({ nativeEvent: { layout: { width } } }) => {
+    if (!this.state.isDraggable) {
+      Animated.spring(this.state.pan, {
+        toValue: {
+          x: width - 94 - 2 * 18,
+          y: 0
+        }
+      }).start();
+    }
+  };
+
   previewAnimation = () => {
     Animated.timing(this.state.pan, {
       toValue: { x: 50, y: 0 },
@@ -138,17 +149,6 @@ class BalloutBox extends Component {
       }
     });
   }
-
-  onLayout = ({ nativeEvent: { layout: { width } } }) => {
-    if (!this.state.isDraggable) {
-      Animated.spring(this.state.pan, {
-        toValue: {
-          x: width - 94 - 2 * 18,
-          y: 0
-        }
-      }).start();
-    }
-  };
 
   isDropArea = gesture => gesture.moveX > Dimensions.get("window").width - 100;
 
