@@ -44,6 +44,11 @@ fastlane ios alpha
 fastlane ios beta
 ```
 
+### ios production
+```
+fastlane ios production
+```
+
 
 ----
 
