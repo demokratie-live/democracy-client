@@ -11,7 +11,7 @@ import VoteListItem from "../../components/VoteListItem";
 
 import searchProcedures from "../../graphql/queries/searchProcedures";
 
-import prevetNavStackDuplicate from "../../hocs/preventNavStackDuplicate";
+import preventNavStackDuplicate from "../../hocs/preventNavStackDuplicate";
 
 Navigation.registerComponent("democracy.Search.Header", () => Header);
 
@@ -147,4 +147,4 @@ SearchScreen.defaultProps = {
   navigator: undefined
 };
 
-export default withApollo(prevetNavStackDuplicate(SearchScreen));
+export default withApollo(preventNavStackDuplicate(SearchScreen));

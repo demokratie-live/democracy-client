@@ -7,8 +7,6 @@ import { Navigator } from "react-native-navigation";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import DeviceInfo from "react-native-device-info";
 
-import onNavigationEvent from "./onNavigationEvent";
-
 const ScrollWrapper = styled.ScrollView`
   flex: 1;
   background-color: #ffffff;
@@ -107,13 +105,7 @@ class Security extends Component {
         ]
       });
     });
-
-    this.props.navigator.addOnNavigatorEvent(this.onNavigationEvent);
   }
-
-  onNavigationEvent = event => {
-    onNavigationEvent({ event, navigator: this.props.navigator });
-  };
 
   render() {
     const version = `Version: ${DeviceInfo.getReadableVersion()

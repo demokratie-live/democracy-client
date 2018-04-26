@@ -25,7 +25,6 @@ import Row from "../../components/ListRow";
 import Header from "../../components/ListSectionHeader";
 import ListItem from "../../components/VoteListItem";
 
-import onNavigationEvent from "../onNavigationEvent";
 
 import GET_NOTIFICATION_SETTINGS from "../../graphql/queries/notificationSettings";
 import GET_NOTIFIED_PROCEDURES from "../../graphql/queries/notifiedProcedures";
@@ -123,7 +122,6 @@ class Notifications extends Component {
       });
     });
 
-    this.props.navigator.addOnNavigatorEvent(this.onNavigationEvent);
   }
 
   state = {
@@ -145,10 +143,6 @@ class Notifications extends Component {
   componentWillUnmount() {
     AppState.removeEventListener("change", this.handleAppStateChange);
   }
-
-  onNavigationEvent = event => {
-    onNavigationEvent({ event, navigator: this.props.navigator });
-  };
 
   onToggleSwitch = key => async () => {
     const { update, notificationSettings } = this.props;

@@ -8,15 +8,13 @@ import { graphql } from "react-apollo";
 import { unionBy } from "lodash";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-import prevetNavStackDuplicate from "../../hocs/preventNavStackDuplicate";
+import preventNavStackDuplicate from "../../hocs/preventNavStackDuplicate";
 
 import ListRow from "../../components/ListRow";
 import VoteListItem from "../../components/VoteListItem";
 import ListSectionHeader from "../../components/ListSectionHeader";
 
 import getProcedures from "../../graphql/queries/getProcedures";
-
-// import onNavigationEvent from "../onNavigationEvent";
 
 const Wrapper = styled.View`
   flex: 1;
@@ -61,7 +59,6 @@ class List extends Component {
         ]
       });
     });
-    this.props.navigator.addOnNavigatorEvent(this.onNavigationEvent);
   }
 
   state = {
@@ -82,10 +79,6 @@ class List extends Component {
       }
     }
   };
-
-  /* onNavigationEvent = event => {
-    onNavigationEvent({ event, navigator: this.props.navigator });
-  }; */
 
   onItemClick = ({ item }) => () => {
     this.props.navigateTo({
@@ -204,4 +197,4 @@ export default graphql(getProcedures, {
     variables: { type: listType, pageSize: PAGE_SIZE, offset: 0 },
     fetchPolicy: "cache-and-network"
   })
-})(prevetNavStackDuplicate(List));
+})(preventNavStackDuplicate(List));

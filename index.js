@@ -21,6 +21,8 @@ import ME from "./src/graphql/queries/me";
 
 import topTabs from "./src/screens/VoteList/topTabs";
 
+import "./src/services/browserLinks";
+
 // Reactotron.configure() // controls connection & communication settings
 //   .useReactNative() // add all built-in react native plugins
 //   .connect(); // let's connect!
@@ -28,7 +30,6 @@ import topTabs from "./src/screens/VoteList/topTabs";
 pushNotifications.configure();
 
 registerScreens();
-
 
 class App {
   constructor() {

@@ -10,7 +10,6 @@ import MessageRow from "../../components/ArgumentEntry/Message";
 import LinkRow from "../../components/ArgumentEntry/Link";
 import BallotBox from "./BallotBox";
 
-import onNavigationEvent from "../onNavigationEvent";
 import dummyEntryData from "../../../dummy/voteVerification";
 
 const Wrapper = styled.View`
@@ -82,16 +81,10 @@ class VoteVerification extends Component {
         });
       });
     }
-
-    this.props.navigator.addOnNavigatorEvent(this.onNavigationEvent);
   }
 
   state = {
     showWarning: true
-  };
-
-  onNavigationEvent = event => {
-    onNavigationEvent({ event, navigator: this.props.navigator });
   };
 
   onScroll = () => {

@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Linking } from "react-native";
 import { Navigator } from "react-native-navigation";
 
-import onNavigationEvent from "../screens/onNavigationEvent";
+// import onNavigationEvent from "../screens/onNavigationEvent";
 
 export default ComposedComponent => {
   class WrappingComponent extends Component {
@@ -12,37 +11,40 @@ export default ComposedComponent => {
       navigator.addOnNavigatorEvent(event => {
         switch (event.type) {
           case "DeepLink":
-            navigator.push({
-              screen: event.link,
-              passProps: { ...event.payload },
-              backButtonTitle: ""
-            });
+            switch (event.payload.from) {
+              // Side Menu Events
+
+              // Push Notification & Browser Links
+              case "externalLink":
+                navigator.push({
+                  screen: event.link,
+                  passProps: { ...event.payload },
+                  backButtonTitle: ""
+                });
+                break;
+
+              default:
+                break;
+            }
+
+            break;
+
+          default:
+            break;
+        }
+
+        switch (event.type) {
+          case "DeepLink":
+            switch (event.payload.from) {
+              default:
+                break;
+            }
             break;
           default:
-            onNavigationEvent({ event, navigator });
+            // onNavigationEvent({ event, navigator });
             break;
         }
       }); // Does not work
-      // Handle browser Links
-      Linking.addEventListener("url", ({ url }) => {
-        const params = url.substr(url.indexOf("//") + 2).split("/");
-        let link;
-        let payload;
-        switch (params[0]) {
-          case "procedure":
-            link = `democracy.Detail`;
-            payload = { procedureId: params[1] };
-            break;
-          default:
-            break;
-        }
-        if (link) {
-          this.props.navigator.handleDeepLink({
-            link: `democracy.Detail`,
-            payload
-          });
-        }
-      });
     }
 
     render() {

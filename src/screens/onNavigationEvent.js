@@ -1,22 +1,28 @@
 import topTabs from "./VoteList/topTabs";
 
+let currentScreen;
 export default ({ event, navigator }) => {
   switch (event.type) {
     case "DeepLink":
-      if (event.link === "democracy.VoteList") {
-        navigator.resetTo({
-          screen: event.link,
-          title: event.payload.title,
-          topTabs,
-          animated: false
-        });
-      } else {
-        navigator.push({
-          screen: event.link,
-          title: event.payload.title,
-          animated: false,
-          backButtonHidden: true
-        });
+      if (event.link === currentScreen) {
+        break;
+      }
+      if (event.payload.from === "sideMenu") {
+        if (event.link === "democracy.VoteList") {
+          navigator.resetTo({
+            screen: event.link,
+            title: event.payload.title,
+            topTabs,
+            animated: false
+          });
+        } else {
+          navigator.push({
+            screen: event.link,
+            title: event.payload.title,
+            animated: false,
+            backButtonHidden: true
+          });
+        }
       }
       break;
 
@@ -43,4 +49,5 @@ export default ({ event, navigator }) => {
     default:
       break;
   }
+  currentScreen = event.link;
 };

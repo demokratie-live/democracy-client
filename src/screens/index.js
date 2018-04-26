@@ -17,18 +17,21 @@ import Credits from "./Credits";
 
 import DeepLink from "../hocs/DeepLink";
 import NetworkStatus from "../hocs/NetworkStatus";
+import NavBarLinks from "../hocs/NavBarLinks";
+import SideMenuLinks from "../hocs/SideMenuLinks";
 
 export default function registerScreens() {
   Navigation.registerComponent(
     "democracy.VoteList",
-    () => DeepLink(NetworkStatus(VoteList)),
+    () =>
+      DeepLink(NavBarLinks(SideMenuLinks(NetworkStatus(VoteList), "VoteList"))),
     client.store,
     ApolloProvider,
     { client }
   );
   Navigation.registerComponent(
     "democracy.VoteList.List",
-    () => DeepLink(NetworkStatus(VoteListList)),
+    () => DeepLink(NetworkStatus(VoteListList), "VoteListList"),
     client.store,
     ApolloProvider,
     { client }
@@ -42,7 +45,7 @@ export default function registerScreens() {
   );
   Navigation.registerComponent(
     "democracy.Search",
-    () => DeepLink(NetworkStatus(Search)),
+    () => NetworkStatus(Search),
     client.store,
     ApolloProvider,
     { client }
@@ -56,42 +59,42 @@ export default function registerScreens() {
   );
   Navigation.registerComponent(
     "democracy.Detail",
-    () => NetworkStatus(Detail),
+    () => NetworkStatus(Detail, "Detail"),
     client.store,
     ApolloProvider,
     { client }
   );
   Navigation.registerComponent(
     "democracy.Support",
-    () => DeepLink(NetworkStatus(Support)),
+    () => NetworkStatus(NavBarLinks(Support)),
     client.store,
     ApolloProvider,
     { client }
   );
   Navigation.registerComponent(
     "democracy.Security",
-    () => DeepLink(NetworkStatus(Security)),
+    () => NetworkStatus(NavBarLinks(Security)),
     client.store,
     ApolloProvider,
     { client }
   );
   Navigation.registerComponent(
     "democracy.VoteVarification",
-    () => NetworkStatus(VoteVarification),
+    () => NetworkStatus(NavBarLinks(VoteVarification)),
     client.store,
     ApolloProvider,
     { client }
   );
   Navigation.registerComponent(
     "democracy.Notifications",
-    () => DeepLink(NetworkStatus(Notifications)),
+    () => NetworkStatus(NavBarLinks(Notifications)),
     client.store,
     ApolloProvider,
     { client }
   );
   Navigation.registerComponent(
     "democracy.Credits",
-    () => DeepLink(NetworkStatus(Credits)),
+    () => NetworkStatus(NavBarLinks(Credits)),
     client.store,
     ApolloProvider,
     { client }
