@@ -23,7 +23,7 @@ export default function prevetNavStackDuplicate(ComposedComponent) {
     navigated = null;
 
     navigateTo = screenOptions => {
-      if (!this.navigated) {
+      if (Platform.OS === "ios" || !this.navigated) {
         this.props.navigator.push(screenOptions);
       }
 
