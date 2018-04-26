@@ -102,7 +102,9 @@ class BalloutBox extends Component {
             Animated.spring(this.state.pan, {
               toValue: { x: 0, y: 0 },
               friction: 5
-            }).start();
+            }).start(() => {
+              this.previewAnimation();
+            });
             Navigation.showInAppNotification({
               screen: "democracy.Notifications.InApp", // unique ID registered with Navigation.registerScreen
               passProps: {
@@ -120,6 +122,10 @@ class BalloutBox extends Component {
   }
 
   componentDidMount() {
+    this.previewAnimation();
+  }
+
+  previewAnimation = () => {
     Animated.timing(this.state.pan, {
       toValue: { x: 50, y: 0 },
       duration: 1500
