@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { PanResponder, Animated, Dimensions } from "react-native";
 import styled from "styled-components/native";
 import { graphql, compose } from "react-apollo";
-import { Navigator } from "react-native-navigation";
+import { Navigator, Navigation } from "react-native-navigation";
 
 import VoteButton from "../../components/VoteButton";
 
@@ -103,6 +103,14 @@ class BalloutBox extends Component {
               toValue: { x: 0, y: 0 },
               friction: 5
             }).start();
+            Navigation.showInAppNotification({
+              screen: "democracy.Notifications.InApp", // unique ID registered with Navigation.registerScreen
+              passProps: {
+                title: "Stimme abgeben",
+                description: "Ziehe deine Auswahl auf den Haken."
+              }, // simple serializable object that will pass as props to the in-app notification (optional)
+              autoDismissTimerSec: 3 // auto dismiss notification in seconds
+            });
           }
         }
       }
@@ -113,8 +121,8 @@ class BalloutBox extends Component {
 
   componentDidMount() {
     Animated.timing(this.state.pan, {
-      toValue: { x: 20, y: 0 },
-      duration: 1000
+      toValue: { x: 50, y: 0 },
+      duration: 1500
     }).start(event => {
       if (event.finished) {
         Animated.timing(this.state.pan, {

@@ -16,6 +16,7 @@ import Notifications from "./Notifications";
 import Credits from "./Credits";
 
 import NetworkStatus from "./Wrapper/NetworkStatus";
+import InAppNotification from "./Notifications/InAppNotification";
 
 export default function registerScreens() {
   Navigation.registerComponent(
@@ -91,6 +92,14 @@ export default function registerScreens() {
   Navigation.registerComponent(
     "democracy.Credits",
     () => NetworkStatus(Credits),
+    client.store,
+    ApolloProvider,
+    { client }
+  );
+
+  Navigation.registerComponent(
+    "democracy.Notifications.InApp",
+    () => InAppNotification,
     client.store,
     ApolloProvider,
     { client }
