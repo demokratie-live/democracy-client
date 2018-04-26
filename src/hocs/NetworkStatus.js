@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import { graphql } from "react-apollo";
 
-import GET_NETWORK_STATUS from "../../graphql/queries/getNetworkStatus";
+import GET_NETWORK_STATUS from "../graphql/queries/getNetworkStatus";
 
 const Wrapper = styled.View`
   flex: 1;

@@ -11,6 +11,8 @@ import VoteListItem from "../../components/VoteListItem";
 
 import searchProcedures from "../../graphql/queries/searchProcedures";
 
+import prevetNavStackDuplicate from "../../hocs/preventNavStackDuplicate";
+
 Navigation.registerComponent("democracy.Search.Header", () => Header);
 
 const Wrapper = styled.View`
@@ -85,8 +87,7 @@ class SearchScreen extends Component {
   };
 
   onItemClick = ({ item }) => () => {
-    const { navigator } = this.props;
-    navigator.push({
+    this.props.navigateTo({
       screen: "democracy.Detail",
       title: "Abstimmung".toUpperCase(),
       passProps: { ...item }
@@ -138,11 +139,12 @@ class SearchScreen extends Component {
 }
 
 SearchScreen.propTypes = {
-  navigator: PropTypes.instanceOf(Navigator)
+  navigator: PropTypes.instanceOf(Navigator),
+  navigateTo: PropTypes.func.isRequired
 };
 
 SearchScreen.defaultProps = {
   navigator: undefined
 };
 
-export default withApollo(SearchScreen);
+export default withApollo(prevetNavStackDuplicate(SearchScreen));
