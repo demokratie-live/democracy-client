@@ -37,7 +37,7 @@ platform :android do
       track: 'alpha',
       track_promote_to: 'alpha',
       apk: "./app/build/outputs/apk/app-alpha-release.apk",
-      metadata_path: "./fastlane/metadata_alpha"
+      metadata_path: "./fastlane/metadata_alpha/android"
     )
   end
 
@@ -51,7 +51,7 @@ platform :android do
       track: 'beta',
       track_promote_to: 'beta',
       apk: "./app/build/outputs/apk/app-beta-release.apk",
-      metadata_path: "./fastlane/metadata_beta"
+      metadata_path: "./fastlane/metadata_beta/android"
     )
   end
 
