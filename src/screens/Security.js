@@ -95,7 +95,7 @@ class Security extends Component {
       });
     });
 
-    this.props.navigator.setOnNavigatorEvent(this.onNavigationEvent);
+    this.props.navigator.addOnNavigatorEvent(this.onNavigationEvent);
   }
 
   onNavigationEvent = event => {

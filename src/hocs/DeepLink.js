@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 import { Linking } from "react-native";
 import { Navigator } from "react-native-navigation";
 
-import onNavigationEvent from "../onNavigationEvent";
+import onNavigationEvent from "../screens/onNavigationEvent";
 
 export default ComposedComponent => {
   class WrappingComponent extends Component {
     componentDidMount() {
       const { navigator } = this.props;
-      navigator.setOnNavigatorEvent(event => {
+      navigator.addOnNavigatorEvent(event => {
         switch (event.type) {
           case "DeepLink":
             navigator.push({
