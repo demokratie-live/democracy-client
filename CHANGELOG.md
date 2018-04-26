@@ -1,14 +1,14 @@
 ﻿# Changelog
 
+### 0.7.3
+
+* Global
+  * Replace png's with svg's for performance improvements [#238](https://github.com/demokratie-live/democracy-client/issues/238)
+
 ### 0.7.2
 
 * Lists
   * Prevent Double Navigation on Android [#183](https://github.com/demokratie-live/democracy-client/issues/183)
-
-### 0.7.x
-
-* Global
-  * Replace png's with svg's for performance improvements
 
 ### 0.7.1
 
