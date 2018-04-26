@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import { graphql, compose } from "react-apollo";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 import INCREASE_ACTIVITY from "../graphql/mutations/increaseActivity";
 
@@ -15,16 +16,21 @@ const WrapperTouchable = styled.TouchableOpacity`
   align-items: center;
 `;
 
-const Icon = styled.Image``;
-
 const Counter = styled.Text`
-  padding-top: 8;
   font-size: 18;
   color: #8f8e94;
 `;
 
-const iconActive = require("../../assets/icons/disclosureIndicator-active.png");
-const iconInactive = require("../../assets/icons/disclosureIndicator.png");
+const Arrow = styled(Ionicons).attrs({
+  size: 50,
+  name: "ios-arrow-up-outline",
+  color: ({ active }) => (active ? "rgb(68, 148, 211)" : "rgb(199, 199, 204)")
+})`
+  padding-top: 15;
+  margin-bottom: -15;
+  line-height: 20;
+  text-align-vertical: top;
+`;
 
 class ActivityIndex extends Component {
   componentWillReceiveProps() {}
@@ -33,14 +39,16 @@ class ActivityIndex extends Component {
     if (touchable && !active) {
       return (
         <WrapperTouchable onPress={increaseActivity}>
-          <Icon source={active ? iconActive : iconInactive} />
+          <Arrow active={active} />
+          {/* <Icon source={active ? iconActive : iconInactive} /> */}
           <Counter>{activityIndex}</Counter>
         </WrapperTouchable>
       );
     }
     return (
       <Wrapper>
-        <Icon source={active ? iconActive : iconInactive} />
+        <Arrow active={active} />
+        {/* <Icon source={active ? iconActive : iconInactive} /> */}
         <Counter>{activityIndex}</Counter>
       </Wrapper>
     );

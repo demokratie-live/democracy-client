@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 const Wrapper = styled.SectionList.attrs({
   stickySectionHeadersEnabled: false
@@ -33,6 +34,14 @@ const NavigationIcon = styled.Image.attrs({
   width: 24;
 `;
 
+const NavigationIoniconsIcon = styled(Ionicons).attrs({
+  size: 24,
+  color: "#fff"
+})`
+  text-align: center;
+  width: 24;
+`;
+
 const NavigationTitle = styled.Text`
   padding-left: 17;
   font-size: 17;
@@ -54,14 +63,15 @@ const ListItem = ({ title, icon, currentScreen, screenId, navigateTo }) => (
     active={currentScreen === screenId}
     onPress={() => navigateTo({ screenId, title })}
   >
-    <NavigationIcon source={icon} />
+    {icon}
+
     <NavigationTitle>{title}</NavigationTitle>
   </NavigationItem>
 );
 
 ListItem.propTypes = {
   title: PropTypes.string.isRequired,
-  icon: PropTypes.number.isRequired,
+  icon: PropTypes.node.isRequired,
   screenId: PropTypes.string,
   currentScreen: PropTypes.string.isRequired,
   navigateTo: PropTypes.func.isRequired
@@ -80,7 +90,11 @@ const NavigationView = ({ currentScreen, navigateTo }) => {
         {
           screenId: "democracy.VoteList",
           title: "Bundestag".toUpperCase(),
-          icon: require("../../../assets/icons/worldClock.png")
+          icon: (
+            <NavigationIcon
+              source={require("../../../assets/icons/worldClock.png")}
+            />
+          )
         }
       ]
     },
@@ -90,27 +104,27 @@ const NavigationView = ({ currentScreen, navigateTo }) => {
         {
           screenId: "democracy.Notifications",
           title: "Benachrichtigungen".toUpperCase(),
-          icon: require("../../../assets/icons/paperPlane.png")
+          icon: <NavigationIoniconsIcon name="ios-notifications-outline" />
         },
         {
           screenId: "democracy.Security",
           title: "Sicherheit".toUpperCase(),
-          icon: require("../../../assets/icons/lock.png")
+          icon: <NavigationIoniconsIcon name="ios-lock-outline" />
         },
         {
           screenId: "democracy.Instructions",
           title: "Tutorial".toUpperCase(),
-          icon: require("../../../assets/icons/baby.png")
+          icon: <NavigationIoniconsIcon name="ios-school-outline" />
         },
         {
           screenId: "democracy.Support",
           title: "Support".toUpperCase(),
-          icon: require("../../../assets/icons/speechBubble9.png")
+          icon: <NavigationIoniconsIcon name="ios-chatbubbles-outline" />
         },
         {
           screenId: "democracy.Credits",
           title: "Credits".toUpperCase(),
-          icon: require("../../../assets/icons/heart.png")
+          icon: <NavigationIoniconsIcon name="ios-heart-outline" />
         }
       ]
     }

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
-		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
 		00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302C01ABCB91800DB3ED1 /* libRCTImage.a */; };
 		00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
@@ -42,28 +41,12 @@
 		ADFA4473E79A4134B0A72B42 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D6DF01BA014AF1A090AC45 /* libRNDeviceInfo.a */; };
 		BFBF28EFC41F43D1BD244700 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE21168EDFFA4F90B10BEC29 /* libReactNativeConfig.a */; };
 		C347997920162AB8000A511E /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C347997820162A9D000A511E /* libReactNativeNavigation.a */; };
-		C36B46B3201C8BBF00B68A81 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46A7201C8BBF00B68A81 /* Octicons.ttf */; };
-		C36B46B5201C8BBF00B68A81 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46A8201C8BBF00B68A81 /* Feather.ttf */; };
-		C36B46B7201C8BBF00B68A81 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46A9201C8BBF00B68A81 /* Entypo.ttf */; };
-		C36B46B9201C8BBF00B68A81 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46AA201C8BBF00B68A81 /* MaterialCommunityIcons.ttf */; };
-		C36B46BB201C8BBF00B68A81 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46AB201C8BBF00B68A81 /* Foundation.ttf */; };
 		C36B46BD201C8BBF00B68A81 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46AC201C8BBF00B68A81 /* Ionicons.ttf */; };
 		C36B46BF201C8BBF00B68A81 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46AD201C8BBF00B68A81 /* FontAwesome.ttf */; };
-		C36B46C1201C8BBF00B68A81 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46AE201C8BBF00B68A81 /* Zocial.ttf */; };
-		C36B46C3201C8BBF00B68A81 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46AF201C8BBF00B68A81 /* EvilIcons.ttf */; };
 		C36B46C5201C8BBF00B68A81 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46B0201C8BBF00B68A81 /* SimpleLineIcons.ttf */; };
-		C36B46C7201C8BBF00B68A81 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46B1201C8BBF00B68A81 /* MaterialIcons.ttf */; };
-		C36B46C8201C8C4000B68A81 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46A7201C8BBF00B68A81 /* Octicons.ttf */; };
-		C36B46C9201C8C4000B68A81 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46A8201C8BBF00B68A81 /* Feather.ttf */; };
-		C36B46CA201C8C4000B68A81 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46A9201C8BBF00B68A81 /* Entypo.ttf */; };
-		C36B46CB201C8C4000B68A81 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46AA201C8BBF00B68A81 /* MaterialCommunityIcons.ttf */; };
-		C36B46CC201C8C4000B68A81 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46AB201C8BBF00B68A81 /* Foundation.ttf */; };
 		C36B46CD201C8C4000B68A81 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46AC201C8BBF00B68A81 /* Ionicons.ttf */; };
 		C36B46CE201C8C4000B68A81 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46AD201C8BBF00B68A81 /* FontAwesome.ttf */; };
-		C36B46CF201C8C4000B68A81 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46AE201C8BBF00B68A81 /* Zocial.ttf */; };
-		C36B46D0201C8C4000B68A81 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46AF201C8BBF00B68A81 /* EvilIcons.ttf */; };
 		C36B46D1201C8C4000B68A81 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46B0201C8BBF00B68A81 /* SimpleLineIcons.ttf */; };
-		C36B46D2201C8C4000B68A81 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46B1201C8BBF00B68A81 /* MaterialIcons.ttf */; };
 		C3D9E668206A564000E694B8 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3D9E644206A562A00E694B8 /* libRCTPushNotification.a */; };
 		C3E792522088C96F009C4A39 /* DemocracyFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3E792512088C95E009C4A39 /* DemocracyFont.ttf */; };
 		C3EBC760204548F50040ED81 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3EBC740204547DB0040ED81 /* libRNVectorIcons.a */; };
@@ -466,17 +449,9 @@
 		BE21168EDFFA4F90B10BEC29 /* libReactNativeConfig.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeConfig.a; sourceTree = "<group>"; };
 		C33279C3206A52A3005C473A /* democracyclient.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = democracyclient.entitlements; path = democracyclient/democracyclient.entitlements; sourceTree = "<group>"; };
 		C347993E20162A9C000A511E /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
-		C36B46A7201C8BBF00B68A81 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
-		C36B46A8201C8BBF00B68A81 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
-		C36B46A9201C8BBF00B68A81 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
-		C36B46AA201C8BBF00B68A81 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
-		C36B46AB201C8BBF00B68A81 /* Foundation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Foundation.ttf; sourceTree = "<group>"; };
 		C36B46AC201C8BBF00B68A81 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
 		C36B46AD201C8BBF00B68A81 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
-		C36B46AE201C8BBF00B68A81 /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
-		C36B46AF201C8BBF00B68A81 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
 		C36B46B0201C8BBF00B68A81 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
-		C36B46B1201C8BBF00B68A81 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
 		C3D9E630206A562A00E694B8 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		C3E792512088C95E009C4A39 /* DemocracyFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = DemocracyFont.ttf; path = ../../../iconfont/DemocracyFont.ttf; sourceTree = "<group>"; };
 		CF1A551E9AD54473AE890083 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
@@ -507,7 +482,6 @@
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
-				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
@@ -790,17 +764,9 @@
 			isa = PBXGroup;
 			children = (
 				C3E792512088C95E009C4A39 /* DemocracyFont.ttf */,
-				C36B46A7201C8BBF00B68A81 /* Octicons.ttf */,
-				C36B46A8201C8BBF00B68A81 /* Feather.ttf */,
-				C36B46A9201C8BBF00B68A81 /* Entypo.ttf */,
-				C36B46AA201C8BBF00B68A81 /* MaterialCommunityIcons.ttf */,
-				C36B46AB201C8BBF00B68A81 /* Foundation.ttf */,
 				C36B46AC201C8BBF00B68A81 /* Ionicons.ttf */,
 				C36B46AD201C8BBF00B68A81 /* FontAwesome.ttf */,
-				C36B46AE201C8BBF00B68A81 /* Zocial.ttf */,
-				C36B46AF201C8BBF00B68A81 /* EvilIcons.ttf */,
 				C36B46B0201C8BBF00B68A81 /* SimpleLineIcons.ttf */,
-				C36B46B1201C8BBF00B68A81 /* MaterialIcons.ttf */,
 			);
 			name = Fonts;
 			path = "../node_modules/react-native-vector-icons/Fonts";
@@ -1442,17 +1408,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C36B46C1201C8BBF00B68A81 /* Zocial.ttf in Resources */,
-				C36B46B5201C8BBF00B68A81 /* Feather.ttf in Resources */,
 				C36B46BF201C8BBF00B68A81 /* FontAwesome.ttf in Resources */,
-				C36B46BB201C8BBF00B68A81 /* Foundation.ttf in Resources */,
 				C36B46BD201C8BBF00B68A81 /* Ionicons.ttf in Resources */,
-				C36B46B7201C8BBF00B68A81 /* Entypo.ttf in Resources */,
-				C36B46C7201C8BBF00B68A81 /* MaterialIcons.ttf in Resources */,
-				C36B46B9201C8BBF00B68A81 /* MaterialCommunityIcons.ttf in Resources */,
 				C36B46C5201C8BBF00B68A81 /* SimpleLineIcons.ttf in Resources */,
-				C36B46C3201C8BBF00B68A81 /* EvilIcons.ttf in Resources */,
-				C36B46B3201C8BBF00B68A81 /* Octicons.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1461,17 +1419,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3E792522088C96F009C4A39 /* DemocracyFont.ttf in Resources */,
-				C36B46C8201C8C4000B68A81 /* Octicons.ttf in Resources */,
-				C36B46C9201C8C4000B68A81 /* Feather.ttf in Resources */,
-				C36B46CA201C8C4000B68A81 /* Entypo.ttf in Resources */,
-				C36B46CB201C8C4000B68A81 /* MaterialCommunityIcons.ttf in Resources */,
-				C36B46CC201C8C4000B68A81 /* Foundation.ttf in Resources */,
 				C36B46CD201C8C4000B68A81 /* Ionicons.ttf in Resources */,
 				C36B46CE201C8C4000B68A81 /* FontAwesome.ttf in Resources */,
-				C36B46CF201C8C4000B68A81 /* Zocial.ttf in Resources */,
-				C36B46D0201C8C4000B68A81 /* EvilIcons.ttf in Resources */,
 				C36B46D1201C8C4000B68A81 /* SimpleLineIcons.ttf in Resources */,
-				C36B46D2201C8C4000B68A81 /* MaterialIcons.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1667,7 +1617,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 41;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				DISPLAY_NAME = DEMOCRACY;
@@ -1706,7 +1656,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 41;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				DISPLAY_NAME = DEMOCRACY;
 				HEADER_SEARCH_PATHS = (
@@ -2039,7 +1989,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 41;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				DISPLAY_NAME = "DEMOCRACY Beta";
@@ -2243,7 +2193,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 41;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				DISPLAY_NAME = "DEMOCRACY Beta";
 				HEADER_SEARCH_PATHS = (
@@ -2450,7 +2400,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 41;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				DISPLAY_NAME = "DEMOCRACY Alpha";
@@ -2655,7 +2605,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 41;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				DISPLAY_NAME = "DEMOCRACY Alpha";
 				HEADER_SEARCH_PATHS = (

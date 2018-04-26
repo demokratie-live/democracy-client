@@ -1,5 +1,15 @@
 ﻿# Changelog
 
+### 0.7.4
+
+* Details
+  * Add labels to vote buttons [#293](https://github.com/demokratie-live/democracy-client/issues/293)
+
+### 0.7.3
+
+* Global
+  * Replace png's with svg's for performance improvements [#238](https://github.com/demokratie-live/democracy-client/issues/238)
+
 ### 0.7.2
 
 * Lists
