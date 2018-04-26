@@ -1,4 +1,9 @@
-# Changelog
+﻿# Changelog
+
+### 0.7.2
+
+* Lists
+  * Prevent Double Navigation on Android [#183](https://github.com/demokratie-live/democracy-client/issues/183)
 
 ### 0.7.1
 

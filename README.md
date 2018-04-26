@@ -6,9 +6,11 @@
 
 The Client for the DEMOCRACY App. This includes iOS, Android and Web Clients generated from the same Codebase.
 
+
+:movie_camera: <a href="https://www.youtube.com/watch?v=H6oJA4MUVW0">Video des Entwicklungsstandes 26.02.2018</a><br>
 :movie_camera: <a href="https://www.youtube.com/watch?v=oTX59JhDmXU">Video des Entwicklungsstandes 15.12.2017</a><br>
 <br>
-<a href="https://www.youtube.com/watch?v=oTX59JhDmXU"><img src="https://github.com/demokratie-live/democracy-assets/raw/master/screenshots/Developer%20Demo%20Video%20-%20480p-2.gif" width="100%"></a>
+<a href="https://www.youtube.com/watch?v=H6oJA4MUVW0"><img src="https://github.com/demokratie-live/democracy-assets/blob/master/screenshots/Developer%20Demo%20Video%20-%20480p-spring4-optimized.gif" width="100%"></a>
 
 [Entwicklertagebuch](https://github.com/demokratie-live/democracy-client/wiki/Entwicklertagebuch)
 
