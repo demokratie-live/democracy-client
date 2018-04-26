@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="18px" height="13px" viewBox="0 0 18 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="16px" height="12px" viewBox="0 0 16 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
     <title>selected</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
     <g id="Prototype" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="List_iOS_überarbeitet" transform="translate(-329.000000, -318.000000)" fill="#35A335" stroke="#FFFFFF">
-            <path d="M330,324.991949 L331.9977,322.99425 L335.3272,326.323749 L343.650949,318 L345.648649,319.9977 L335.3272,330.319149 L330,324.991949 Z" id="selected"></path>
+        <g id="List_iOS_überarbeitet" transform="translate(-330.000000, -462.000000)" fill="#35A335">
+            <polygon id="selected" points="330 468.119517 331.130891 467.030166 335.3272 471.194961 344.547133 462 345.64338 463.106676 335.3272 473.446717"></polygon>
         </g>
     </g>
 </svg>

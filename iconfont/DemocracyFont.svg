@@ -2,17 +2,17 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
 <svg xmlns="http://www.w3.org/2000/svg">
 <defs>
-  <font id="DemocracyFont" horiz-adv-x="24">
+  <font id="DemocracyFont" horiz-adv-x="21">
     <font-face font-family="DemocracyFont"
-      units-per-em="13" ascent="13"
+      units-per-em="12" ascent="12"
       descent="0" />
     <missing-glyph horiz-adv-x="0" />
     <glyph glyph-name="checkmark-double"
       unicode="&#xE001;"
-      horiz-adv-x="24" d="M7 6.0080506L8.99769983 8.00575043L12.3271995 4.67625072L20.6509488 13L22.6486486 11.00230017L12.3271995 0.6808511L7 6.0080506zM1 6.0080506L2.99769983 8.00575043L6.32719954 4.67625072L14.6509488 13L16.6486486 11.00230017L6.32719954 0.6808511L1 6.0080506z" />
+      horiz-adv-x="21" d="M8.15040609 2.71650572L9.25846572 3.85837786L10.3271995 2.80503907L19.5471326 12L20.6433798 10.89332368L10.3271995 0.5532834zM0 5.88048292L1.13089135 6.96983384L5.32719954 2.80503907L14.5471326 12L15.6433798 10.89332368L5.32719954 0.5532834z" />
     <glyph glyph-name="checkmark"
       unicode="&#xE002;"
-      horiz-adv-x="18" d="M1 6.008051L2.9977 8.00575L6.3272 4.676251L14.650949 13L16.648649 11.0023L6.3272 0.680851L1 6.008051z" />
+      horiz-adv-x="16" d="M0 5.880483L1.130891 6.969834L5.3272 2.805039L14.547133 12L15.64338 10.893324L5.3272 0.553283z" />
   </font>
 </defs>
 </svg>
