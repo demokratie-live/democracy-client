@@ -23,15 +23,14 @@ import SideMenuLinks from "../hocs/SideMenuLinks";
 export default function registerScreens() {
   Navigation.registerComponent(
     "democracy.VoteList",
-    () =>
-      DeepLink(NavBarLinks(SideMenuLinks(NetworkStatus(VoteList), "VoteList"))),
+    () => DeepLink(NavBarLinks(SideMenuLinks(NetworkStatus(VoteList)))),
     client.store,
     ApolloProvider,
     { client }
   );
   Navigation.registerComponent(
     "democracy.VoteList.List",
-    () => DeepLink(NetworkStatus(VoteListList), "VoteListList"),
+    () => DeepLink(NavBarLinks(SideMenuLinks(NetworkStatus(VoteListList)))),
     client.store,
     ApolloProvider,
     { client }
