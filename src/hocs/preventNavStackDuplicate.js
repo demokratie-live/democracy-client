@@ -11,7 +11,7 @@ export default function prevetNavStackDuplicate(ComposedComponent) {
       navigator: PropTypes.instanceOf(Navigator).isRequired
     };
     componentDidMount() {
-      this.props.navigator.setOnNavigatorEvent(event => {
+      this.props.navigator.addOnNavigatorEvent(event => {
         if (event.id === "didDisappear") {
           this.navigated = null;
         } else {
