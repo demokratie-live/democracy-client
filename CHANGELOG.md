@@ -1,9 +1,10 @@
 ﻿# Changelog
 
-### 0.7.x
+### 0.7.5
 
 * Details
   * Fix bell position [#301](https://github.com/demokratie-live/democracy-client/issues/301)
+  * Change vote button labels after voting [#302](https://github.com/demokratie-live/democracy-client/issues/302)
 
 ### 0.7.4
 
