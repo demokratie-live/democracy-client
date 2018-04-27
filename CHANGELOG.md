@@ -1,5 +1,10 @@
 ﻿# Changelog
 
+### 0.7.x
+
+* Details
+  * Change vote button labels after voting [#302](https://github.com/demokratie-live/democracy-client/issues/302)
+
 ### 0.7.4
 
 * Details
