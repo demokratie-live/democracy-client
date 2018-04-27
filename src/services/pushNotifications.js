@@ -1,7 +1,12 @@
 import PushNotification from "react-native-push-notification";
-import { PushNotificationIOS, AsyncStorage, Alert } from "react-native";
+import {
+  PushNotificationIOS,
+  AsyncStorage,
+  Alert,
+  Platform
+} from "react-native";
 import Config from "react-native-config";
-import { Navigation } from "react-native-navigation";
+import { Navigation, NativeEventsReceiver } from "react-native-navigation";
 
 import client from "../graphql/client";
 
@@ -23,11 +28,16 @@ const configure = async () => {
 
     onNotification: async notification => {
       // process the notification
+      let payloadData;
+      const { foreground } = notification;
 
-      const {
-        foreground,
-        data: { action, title, message, procedureId }
-      } = notification;
+      if (Platform.OS === "android") {
+        payloadData = JSON.parse(notification.notification.payload);
+      } else {
+        payloadData = notification.data;
+      }
+
+      const { action, title, message, procedureId } = payloadData;
 
       switch (action) {
         case "procedureDetails":
@@ -40,7 +50,7 @@ const configure = async () => {
                     link: `democracy.Detail`,
                     payload: {
                       procedureId,
-                      from: 'pushNotification'
+                      from: "pushNotification"
                     }
                   });
                 }
@@ -55,7 +65,7 @@ const configure = async () => {
               link: `democracy.Detail`,
               payload: {
                 procedureId,
-                from: 'pushNotification'
+                from: "pushNotification"
               }
             });
           }
