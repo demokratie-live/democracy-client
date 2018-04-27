@@ -16,6 +16,7 @@ export default ComposedComponent => {
 
               // Push Notification & Browser Links
               case "externalLink":
+              case "pushNotification":
                 navigator.push({
                   screen: event.link,
                   passProps: { ...event.payload },
@@ -32,19 +33,7 @@ export default ComposedComponent => {
           default:
             break;
         }
-
-        switch (event.type) {
-          case "DeepLink":
-            switch (event.payload.from) {
-              default:
-                break;
-            }
-            break;
-          default:
-            // onNavigationEvent({ event, navigator });
-            break;
-        }
-      }); // Does not work
+      });
     }
 
     render() {

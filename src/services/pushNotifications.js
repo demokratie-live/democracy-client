@@ -39,7 +39,8 @@ const configure = async () => {
                   Navigation.handleDeepLink({
                     link: `democracy.Detail`,
                     payload: {
-                      procedureId
+                      procedureId,
+                      from: 'pushNotification'
                     }
                   });
                 }
@@ -53,7 +54,8 @@ const configure = async () => {
             Navigation.handleDeepLink({
               link: `democracy.Detail`,
               payload: {
-                procedureId
+                procedureId,
+                from: 'pushNotification'
               }
             });
           }

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import { graphql, compose } from "react-apollo";
-import { RefreshControl } from "react-native";
+import { RefreshControl, ActivityIndicator } from "react-native";
 import { Navigator } from "react-native-navigation";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
@@ -126,7 +126,7 @@ class Detail extends Component {
     const { procedureId, toggleNotification } = this.props;
     const { data: { networkStatus, refetch } } = this.props;
     if (!this.props.data.procedure) {
-      return null;
+      return <ActivityIndicator size="large" />;
     }
     const {
       _id,
