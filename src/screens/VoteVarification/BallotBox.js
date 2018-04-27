@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { PanResponder, Animated, Dimensions } from "react-native";
 import styled from "styled-components/native";
 import { graphql, compose } from "react-apollo";
-import { Navigator } from "react-native-navigation";
+import { Navigator, Navigation } from "react-native-navigation";
 
 import VoteButton from "../../components/VoteButton";
 
@@ -23,7 +23,7 @@ const Wrapper = styled.View`
   background-color: #fafafa;
 `;
 
-const DropZone = styled.View`
+const DropZone = styled.TouchableOpacity`
   position: absolute;
   right: 18;
   width: 100;
@@ -75,6 +75,8 @@ class BalloutBox extends Component {
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponder: () => true,
       onPanResponderMove: (e, gestureState) => {
+        Animated.timing(this.state.pan).stop();
+        Animated.spring(this.state.pan).stop();
         if (this.state.isDraggable) {
           Animated.event([null, { dx: this.state.pan.x }])(e, gestureState);
         }
@@ -102,7 +104,12 @@ class BalloutBox extends Component {
             Animated.spring(this.state.pan, {
               toValue: { x: 0, y: 0 },
               friction: 5
-            }).start();
+            }).start(({ finished }) => {
+              if (finished) {
+                this.previewAnimation();
+              }
+            });
+            this.showNotification();
           }
         }
       }
@@ -112,17 +119,7 @@ class BalloutBox extends Component {
   }
 
   componentDidMount() {
-    Animated.timing(this.state.pan, {
-      toValue: { x: 20, y: 0 },
-      duration: 1000
-    }).start(event => {
-      if (event.finished) {
-        Animated.timing(this.state.pan, {
-          toValue: { x: 0, y: 0 },
-          duration: 300
-        }).start();
-      }
-    });
+    this.previewAnimation();
   }
 
   onLayout = ({ nativeEvent: { layout: { width } } }) => {
@@ -136,6 +133,31 @@ class BalloutBox extends Component {
     }
   };
 
+  showNotification = () => {
+    Navigation.showInAppNotification({
+      screen: "democracy.Notifications.InApp", // unique ID registered with Navigation.registerScreen
+      passProps: {
+        title: "Stimme abgeben",
+        description: "Ziehe deine Auswahl auf den Haken."
+      }, // simple serializable object that will pass as props to the in-app notification (optional)
+      autoDismissTimerSec: 3 // auto dismiss notification in seconds
+    });
+  };
+
+  previewAnimation = () => {
+    Animated.timing(this.state.pan, {
+      toValue: { x: 50, y: 0 },
+      duration: 1500
+    }).start(({ finished }) => {
+      if (finished) {
+        Animated.timing(this.state.pan, {
+          toValue: { x: 0, y: 0 },
+          duration: 300
+        }).start();
+      }
+    });
+  };
+
   isDropArea = gesture => gesture.moveX > Dimensions.get("window").width - 100;
 
   render() {
@@ -145,7 +167,7 @@ class BalloutBox extends Component {
     const { selection } = this.props;
     return (
       <Wrapper onLayout={this.onLayout}>
-        <DropZone>
+        <DropZone onPress={this.showNotification}>
           <CheckIcon />
         </DropZone>
         <LineWrapper>

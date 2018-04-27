@@ -21,6 +21,11 @@
 * Lists
   * Prevent Double Navigation on Android [#183](https://github.com/demokratie-live/democracy-client/issues/183)
 
+### 0.x.x
+
+* Voting
+  * Add notification for BallotBox [#232](https://github.com/demokratie-live/democracy-client/issues/232)
+
 ### 0.7.1
 
 * Details
