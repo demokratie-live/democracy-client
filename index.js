@@ -11,7 +11,8 @@ import Config from "react-native-config";
 
 import client, { persistor } from "./src/graphql/client";
 import registerScreens from "./src/screens";
-import { pushNotifications } from "./src/services";
+// Removed pushNotifications
+// import { pushNotifications } from "./src/services";
 
 import IS_INSTRUCTIONS_SHOWN from "./src/graphql/queries/isInstructionShown";
 import setCurrentScreen from "./src/graphql/mutations/setCurrentScreen";
