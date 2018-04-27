@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import { graphql, compose } from "react-apollo";
-import { RefreshControl, TouchableOpacity } from "react-native";
+import { RefreshControl } from "react-native";
 import { Navigator } from "react-native-navigation";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 import getProcedure from "../../graphql/queries/getProcedure";
 import TOGGLE_NOTIFICATION from "../../graphql/mutations/toggleNotification";
@@ -42,7 +43,17 @@ const IntroButtons = styled.View`
   padding-top: 20;
 `;
 
-const IntroButton = styled.Image``;
+const IntroButton = styled.TouchableOpacity`
+  align-items: center;
+  width: 32;
+`;
+
+const NotificationButtonIcon = styled(Ionicons).attrs({
+  size: 32,
+  name: ({ active }) =>
+    active ? "ios-notifications" : "ios-notifications-outline",
+  color: ({ active }) => (active ? "rgb(255, 171, 33)" : "rgb(0, 0, 0)")
+})``;
 
 const IntroSide = styled.View`
   justify-content: space-between;
@@ -153,15 +164,9 @@ class Detail extends Component {
           <IntroMain>
             <IntroTitle>{title}</IntroTitle>
             <IntroButtons>
-              <TouchableOpacity onPress={toggleNotification}>
-                <IntroButton
-                  source={
-                    notify
-                      ? require("../../../assets/icons/shape-active.png")
-                      : require("../../../assets/icons/shape.png")
-                  }
-                />
-              </TouchableOpacity>
+              <IntroButton onPress={toggleNotification}>
+                <NotificationButtonIcon active={notify} />
+              </IntroButton>
             </IntroButtons>
           </IntroMain>
           <IntroSide>
