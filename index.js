@@ -25,7 +25,8 @@ import topTabs from "./src/screens/VoteList/topTabs";
 //   .useReactNative() // add all built-in react native plugins
 //   .connect(); // let's connect!
 
-pushNotifications.configure();
+// Removed pushNotifications
+// pushNotifications.configure();
 
 registerScreens();
 

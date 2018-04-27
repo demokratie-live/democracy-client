@@ -6,6 +6,7 @@
   * Fix bell position [#301](https://github.com/demokratie-live/democracy-client/issues/301)
   * Change vote button labels after voting [#302](https://github.com/demokratie-live/democracy-client/issues/302)
   * Add notification for BallotBox [#232](https://github.com/demokratie-live/democracy-client/issues/232)
+  * Disabled pushNotifications due to non-functionality
 
 ### 0.7.4
 
