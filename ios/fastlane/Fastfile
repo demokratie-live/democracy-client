@@ -66,7 +66,7 @@ platform :ios do
       scheme: "Alpha"
     )
     upload_to_testflight(
-      changelog: File.read("../../CHANGELOG.md")[0, 5000],
+      changelog: File.read("../../CHANGELOG.md")[0, 3000],
       groups: "Developer",
       app_identifier: "de.democracy-deutschland.clientapp.alpha",
       demo_account_required: false,
@@ -92,7 +92,7 @@ platform :ios do
       scheme: "Beta"
     )
     upload_to_testflight(
-      changelog: File.read("../../CHANGELOG.md")[0, 5000],
+      changelog: File.read("../../CHANGELOG.md")[0, 3000],
       groups: "Prototyp-Tester",
       app_identifier: "de.democracy-deutschland.clientapp.beta",
       demo_account_required: false,
@@ -118,7 +118,7 @@ platform :ios do
       scheme: "democracyclient-prod"
     )
     upload_to_testflight(
-      changelog: File.read("../../CHANGELOG.md")[0, 5000],
+      changelog: File.read("../../CHANGELOG.md")[0, 3000],
       app_identifier: "de.democracy-deutschland.clientapp",
       demo_account_required: false,
       notify_external_testers: true,
