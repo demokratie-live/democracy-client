@@ -78,7 +78,7 @@ const Voting = ({
             });
           }}
         />
-        <VoteButtonLabel>Zustimmen</VoteButtonLabel>
+        <VoteButtonLabel>{!voted?'Zustimmen':'Zugestimmt'}</VoteButtonLabel>
       </VoteButtonWrapper>
       <VoteButtonWrapper>
         <VoteButton
@@ -116,7 +116,7 @@ const Voting = ({
             });
           }}
         />
-        <VoteButtonLabel>Ablehnen</VoteButtonLabel>
+        <VoteButtonLabel>{!voted?'Ablehnen':'Abgelehnt'}</VoteButtonLabel>
       </VoteButtonWrapper>
     </VoteWrapper>
   </Wrapper>

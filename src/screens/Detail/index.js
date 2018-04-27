@@ -41,6 +41,7 @@ const IntroTitle = styled.Text`
 const IntroButtons = styled.View`
   justify-content: center;
   padding-top: 20;
+  margin-left: -4;
 `;
 
 const IntroButton = styled.TouchableOpacity`
