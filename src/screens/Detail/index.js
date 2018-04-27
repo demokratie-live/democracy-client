@@ -126,7 +126,7 @@ class Detail extends Component {
     const { procedureId, toggleNotification } = this.props;
     const { data: { networkStatus, refetch } } = this.props;
     if (!this.props.data.procedure) {
-      return <ActivityIndicator size="large" />;
+      return <ActivityIndicator size="large" style={{ paddingTop: 18 }} />;
     }
     const {
       _id,
