@@ -1,5 +1,10 @@
 ﻿# Changelog
 
+### 0.7.x
+
+* Details
+  * Fix bell position [#301](https://github.com/demokratie-live/democracy-client/issues/301)
+
 ### 0.7.4
 
 * Details
