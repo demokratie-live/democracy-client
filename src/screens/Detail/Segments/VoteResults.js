@@ -13,7 +13,7 @@ const ScrollView = styled.ScrollView.attrs({
   horizontal: true,
   pagingEnabled: true,
   showsHorizontalScrollIndicator: true
-})``;
+}) ``;
 
 const VoteResults = props => {
   const { voteResults, communityVotes, scrollTo, type } = props;
@@ -41,7 +41,7 @@ const VoteResults = props => {
     return null;
   };
 
-  const renderGovermentResult = () => {
+  const renderGovernmentResult = () => {
     if (
       voteResults &&
       (voteResults.yes ||
@@ -75,7 +75,7 @@ const VoteResults = props => {
         </Segment>
       );
     }
-    return renderGovermentResult();
+    return renderGovernmentResult();
   }
   return null;
 };
