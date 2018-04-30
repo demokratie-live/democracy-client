@@ -14,6 +14,7 @@ export default gql`
       voteDate
       votedGovernment
       submissionDate
+      completed
       ...ActivityIndex
       ...Voted
     }

@@ -115,7 +115,7 @@ class List extends Component {
     procedures.forEach(procedure => {
       if (
         listType === "VOTING" &&
-        procedure.votedGovernment
+        procedure.completed
       ) {
         preparedData[1].data.push({
           ...procedure,
