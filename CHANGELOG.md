@@ -3,7 +3,7 @@
 ### 0.7.x
 
 * Lists
-  * Show Current/Past Votes based upon votedGovernment [#306](https://github.com/demokratie-live/democracy-client/issues/306)
+  * Show Current/Past Votes based upon completed field, unified procedureState lists to determin inapp state [#306](https://github.com/demokratie-live/democracy-client/issues/306)
 
 ### 0.7.5
 
