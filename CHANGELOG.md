@@ -1,5 +1,10 @@
 ﻿# Changelog
 
+### 0.7.x
+
+* Lists
+  * Show Current/Past Votes based upon votedGovernment [#306](https://github.com/demokratie-live/democracy-client/issues/306)
+
 ### 0.7.5
 
 * Details
