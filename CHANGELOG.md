@@ -1,5 +1,10 @@
 ﻿# Changelog
 
+### 0.7.x
+
+* Support
+  * Warn User if Mail/Tel/Web Operation cannot be performed [#219](https://github.com/demokratie-live/democracy-client/issues/219)
+
 ### 0.7.5
 
 * Details
