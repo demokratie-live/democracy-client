@@ -28,25 +28,25 @@ const HeadRightDescr = styled.View`
 `;
 
 const DefTitle = styled.Text`
-  font-size: 13;
+  font-size: 14;
   color: rgba(68, 148, 211, 0.9);
 `;
 
-const DefTitleRight = styled(DefTitle)`
+const DefTitleRight = styled(DefTitle) `
   text-align: right;
 `;
 
 const DefDescr = styled.Text`
-  font-size: 13;
-  color: rgb(155, 155, 155);
+  font-size: 14;
+  color: rgb(150, 150, 150);
 `;
 
 const Content = styled.View`
   padding-top: 11;
 `;
 
-const ContentText = styled(DefDescr)`
-  font-size: 13;
+const ContentText = styled(DefDescr) `
+  font-size: 14;
 `;
 
 const renderType = type => {
@@ -67,45 +67,45 @@ const Details = ({
   currentStatus,
   type
 }) => (
-  <Wrapper>
-    <Head>
-      {subjectGroups.length > 0 && (
-        <HeadLeft>
-          <DefTitle>Sachgebiete</DefTitle>
-          <DefDescr>{subjectGroups.join("\n")}</DefDescr>
-        </HeadLeft>
-      )}
-      <HeadRight>
-        <HeadRightTitle>
-          <DefTitleRight>Typ</DefTitleRight>
-          <DefTitleRight>Vorgang</DefTitleRight>
-          <DefTitleRight>erstellt am</DefTitleRight>
+    <Wrapper>
+      <Head>
+        {subjectGroups.length > 0 && (
+          <HeadLeft>
+            <DefTitle>Sachgebiete</DefTitle>
+            <DefDescr>{subjectGroups.join("\n")}</DefDescr>
+          </HeadLeft>
+        )}
+        <HeadRight>
+          <HeadRightTitle>
+            <DefTitleRight>Typ</DefTitleRight>
+            <DefTitleRight>Vorgang</DefTitleRight>
+            <DefTitleRight>erstellt am</DefTitleRight>
 
-          {dateVote && <DefTitleRight>Abstimmung</DefTitleRight>}
-        </HeadRightTitle>
-        <HeadRightDescr>
-          <DefDescr>{renderType(type)}</DefDescr>
-          <DefDescr>{procedureId}</DefDescr>
-          <DefDescr>
-            {submissionDate && m(submissionDate).format("DD.MM.YY")}
-          </DefDescr>
-          {dateVote && <DefDescr>{m(dateVote).format("DD.MM.YY")}</DefDescr>}
-        </HeadRightDescr>
-      </HeadRight>
-    </Head>
+            {dateVote && <DefTitleRight>Abstimmung</DefTitleRight>}
+          </HeadRightTitle>
+          <HeadRightDescr>
+            <DefDescr>{renderType(type)}</DefDescr>
+            <DefDescr>{procedureId}</DefDescr>
+            <DefDescr>
+              {submissionDate && m(submissionDate).format("DD.MM.YY")}
+            </DefDescr>
+            {dateVote && <DefDescr>{m(dateVote).format("DD.MM.YY")}</DefDescr>}
+          </HeadRightDescr>
+        </HeadRight>
+      </Head>
 
-    <DefTitle style={{ paddingTop: 8 }}>Aktueller Stand</DefTitle>
-    <DefDescr>{currentStatus}</DefDescr>
-    <Content>
-      {abstract && (
-        <View>
-          <DefTitle>Inhalt</DefTitle>
-          <ContentText>{abstract}</ContentText>
-        </View>
-      )}
-    </Content>
-  </Wrapper>
-);
+      <DefTitle style={{ paddingTop: 8 }}>Aktueller Stand</DefTitle>
+      <DefDescr>{currentStatus}</DefDescr>
+      <Content>
+        {abstract && (
+          <View>
+            <DefTitle>Inhalt</DefTitle>
+            <ContentText>{abstract}</ContentText>
+          </View>
+        )}
+      </Content>
+    </Wrapper>
+  );
 
 Details.propTypes = {
   subjectGroups: PropTypes.arrayOf(PropTypes.string).isRequired,

@@ -8,7 +8,7 @@ const Wrapper = styled.View``;
 const SegmentTouch = styled.TouchableHighlight.attrs({
   activeOpacity: 0.5,
   underlayColor: "rgba(68, 148, 211, 0.1)"
-})``;
+}) ``;
 
 const SegmentWrapper = styled.View`
   padding-vertical: 10;
@@ -21,14 +21,14 @@ const SegmentWrapper = styled.View`
 
 const Title = styled.Text`
   flex: 1;
-  font-size: 17;
+  font-size: 18;
 `;
 
 const CollapseIcon = styled(Ionicons).attrs({
   color: "rgb(151, 151, 151)",
   name: "ios-arrow-up-outline",
   size: 20
-})`
+}) `
   transform: ${({ open }) => (open ? "rotate(0deg)" : "rotate(180deg)")};
 `;
 
