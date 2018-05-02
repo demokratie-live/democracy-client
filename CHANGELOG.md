@@ -1,5 +1,11 @@
 ﻿# Changelog
 
+### 0.7.x
+
+* Details
+  * Increased all font sizes by 1pt [#260](https://github.com/demokratie-live/democracy-client/issues/260)
+  * Increased contrast of "Inhalt" by 5pt [#223](https://github.com/demokratie-live/democracy-client/issues/223)
+
 ### 0.7.5
 
 * Details
