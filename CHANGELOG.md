@@ -4,6 +4,8 @@
 
 * Lists
   * Show Current/Past Votes based upon completed field, unified procedureState lists to determin inapp state [#306](https://github.com/demokratie-live/democracy-client/issues/306)
+* Support
+  * Warn User if Mail/Tel/Web Operation cannot be performed [#219](https://github.com/demokratie-live/democracy-client/issues/219)
 
 ### 0.7.5
 
