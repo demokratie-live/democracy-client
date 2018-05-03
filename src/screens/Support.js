@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
-import { Platform, Linking } from "react-native";
+import { Platform, Linking, Alert } from "react-native";
 import { Navigator } from "react-native-navigation";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -25,7 +25,7 @@ const Wrapper = styled.View`
 
 const Logo = styled.Image.attrs({
   source: require("../../assets/images/support-logo.png")
-})``;
+}) ``;
 
 const Text = styled.Text`
   text-align: justify;
@@ -59,7 +59,7 @@ const Version = styled.Text`
 const ContactIcons = styled(FontAwesome).attrs({
   size: 40,
   color: "#000000"
-})``;
+}) ``;
 
 class Support extends Component {
   static navigatorStyle = {
@@ -96,6 +96,14 @@ class Support extends Component {
     Linking.canOpenURL(url).then(supported => {
       if (supported) {
         Linking.openURL(url).catch(() => null);
+      } else {
+        Alert.alert('Nicht unterstützt',
+          'Diese Operation wird auf deinem Gerät zurzeit nicht unterstützt!',
+          [
+            { text: 'OK' },
+          ],
+          { cancelable: false }
+        );
       }
     });
   };
