@@ -117,7 +117,7 @@ class App {
           })
           .then(({ data }) => data.me);
         if (!me) {
-          await this.getNewToken();
+          this.getNewToken(); // experimental: do not wait here to ensure timely startup of the app
         }
       } catch (error) {
         // TODO: handle this
