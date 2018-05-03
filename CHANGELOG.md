@@ -1,6 +1,6 @@
 ﻿# Changelog
 
-### 0.7.x
+### 0.7.6
 
 * Lists
   * Show Current/Past Votes based upon completed field, unified procedureState lists to determin inapp state [#306](https://github.com/demokratie-live/democracy-client/issues/306)
