@@ -107,7 +107,7 @@ class App {
     // await AsyncStorage.removeItem("authorization");
     const token = await AsyncStorage.getItem("authorization");
     if (!token) {
-      await this.getNewToken();
+      this.getNewToken(); // experimental: do not wait here to ensure timely startup of the app
     } else {
       try {
         const me = await client
