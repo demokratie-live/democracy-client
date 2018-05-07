@@ -30,13 +30,16 @@ const VoteResultNumbers = styled.View`
   max-width: 464;
   padding-top: 18;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
 `;
 
 const VoteResult = styled.View`
   justify-content: center;
   align-items: center;
-  width: 88;
+`;
+
+const VoteResultCircleNumber = styled.View`
+  flex-direction: row;
 `;
 
 const VoteResultNumber = styled.Text`
@@ -48,10 +51,32 @@ const VoteResultLabel = styled.Text`
   font-size: 10;
 `;
 
+const VoteResultCircle = styled.View`
+  width: 10;
+  height: 10;
+  border-radius: 5;
+  background-color: ${props => props.color};
+  margin-top: 3;
+  margin-right: 5;
+`;
+
 class PieChart extends Component {
   state = {
     width: Dimensions.get("window").width - 18 * 2
   };
+
+  getColor = (label, colors) => {
+    switch (label) {
+      case 'yes':
+        return colors[0];
+      case 'abstination':
+        return colors[1];
+      case 'no':
+        return colors[2];
+      default:
+        return colors[3];
+    }
+  }
 
   getLabel = label => {
     const labels = {
@@ -82,9 +107,11 @@ class PieChart extends Component {
             data={data.map((entry, index) => ({
               x: index,
               y: entry.value,
-              label: " "
+              label: entry.percentage >= 5 ? `${entry.percentage}%` : " "
             }))}
             innerRadius={width / 5.6}
+            labelRadius={width / 3.3}
+            style={{ labels: { fill: "white", fontSize: 18 } }}
           />
           <VoteResult style={{ position: "absolute" }}>
             <VoteResultPieValue>
@@ -105,9 +132,12 @@ class PieChart extends Component {
         <VoteResultNumbers>
           {data.map(entry => (
             <VoteResult key={entry.label}>
-              <VoteResultNumber>
-                {entry.value !== null ? entry.value : "?"}
-              </VoteResultNumber>
+              <VoteResultCircleNumber>
+                <VoteResultCircle color={this.getColor(entry.label, colorScale)} />
+                <VoteResultNumber>
+                  {entry.value !== null ? entry.value : "?"}
+                </VoteResultNumber>
+              </VoteResultCircleNumber>
               <VoteResultLabel>{this.getLabel(entry.label)}</VoteResultLabel>
             </VoteResult>
           ))}
