@@ -54,7 +54,7 @@ const NotificationButtonIcon = styled(Ionicons).attrs({
   name: ({ active }) =>
     active ? "ios-notifications" : "ios-notifications-outline",
   color: ({ active }) => (active ? "rgb(255, 171, 33)" : "rgb(0, 0, 0)")
-})``;
+}) ``;
 
 const IntroSide = styled.View`
   justify-content: space-between;
@@ -212,6 +212,7 @@ class Detail extends Component {
             voteResults={voteResults}
             procedure={_id}
             scrollTo={this.scrollTo}
+            currentStatus={currentStatus}
             type="goverment"
           />
           {listType === "VOTING" && (

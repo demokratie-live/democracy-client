@@ -89,7 +89,7 @@ class PieChart extends Component {
   };
 
   render() {
-    const { data, colorScale, label } = this.props;
+    const { data, colorScale, label, showNumbers } = this.props;
     const { width } = this.state;
     return (
       <VoteResultsWrapper
@@ -114,9 +114,11 @@ class PieChart extends Component {
             style={{ labels: { fill: "white", fontSize: 18 } }}
           />
           <VoteResult style={{ position: "absolute" }}>
-            <VoteResultPieValue>
-              {data.reduce((v, { value }) => v + value, 0)}
-            </VoteResultPieValue>
+            {showNumbers === true ?
+              <VoteResultPieValue>
+                {data.reduce((v, { value }) => v + value, 0)}
+              </VoteResultPieValue>
+              : null}
             <VoteResultPieLabel>{label}</VoteResultPieLabel>
           </VoteResult>
           {/* Andoid scroll fix */}
@@ -129,19 +131,21 @@ class PieChart extends Component {
             }}
           />
         </VoteResultsPieWrapper>
-        <VoteResultNumbers>
-          {data.map(entry => (
-            <VoteResult key={entry.label}>
-              <VoteResultCircleNumber>
-                <VoteResultCircle color={this.getColor(entry.label, colorScale)} />
-                <VoteResultNumber>
-                  {entry.value !== null ? entry.value : "?"}
-                </VoteResultNumber>
-              </VoteResultCircleNumber>
-              <VoteResultLabel>{this.getLabel(entry.label)}</VoteResultLabel>
-            </VoteResult>
-          ))}
-        </VoteResultNumbers>
+        {showNumbers === true ?
+          <VoteResultNumbers>
+            {data.map(entry => (
+              <VoteResult key={entry.label}>
+                <VoteResultCircleNumber>
+                  <VoteResultCircle color={this.getColor(entry.label, colorScale)} />
+                  <VoteResultNumber>
+                    {(entry.value !== null ? entry.value : "?")}
+                  </VoteResultNumber>
+                </VoteResultCircleNumber>
+                <VoteResultLabel>{this.getLabel(entry.label)}</VoteResultLabel>
+              </VoteResult>
+            ))}
+          </VoteResultNumbers>
+          : null}
       </VoteResultsWrapper>
     );
   }
@@ -155,9 +159,12 @@ PieChart.propTypes = {
     })
   ).isRequired,
   label: PropTypes.string.isRequired,
-  colorScale: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
+  colorScale: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  showNumbers: PropTypes.bool
 };
 
-PieChart.defaultProps = {};
+PieChart.defaultProps = {
+  showNumbers: true
+};
 
 export default PieChart;
