@@ -1,4 +1,4 @@
-﻿# Changelog
+# Changelog
 
 ### 0.7.x
 
@@ -6,6 +6,16 @@
   * votepie labels has colordots, votepie percentage labels [#310](https://github.com/demokratie-live/democracy-client/issues/310)
   * colors for bundestag results same as community result
   * grey circle for zurückgezogen
+
+### 0.7.6
+
+* Lists
+  * Show Current/Past Votes based upon completed field, unified procedureState lists to determin inapp state [#306](https://github.com/demokratie-live/democracy-client/issues/306)
+* Support
+  * Warn User if Mail/Tel/Web Operation cannot be performed [#219](https://github.com/demokratie-live/democracy-client/issues/219)
+* Details
+  * Increased all font sizes by 1pt [#260](https://github.com/demokratie-live/democracy-client/issues/260)
+  * Increased contrast of "Inhalt" by 5pt [#223](https://github.com/demokratie-live/democracy-client/issues/223)
 
 ### 0.7.5
 

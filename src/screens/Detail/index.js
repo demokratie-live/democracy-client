@@ -35,7 +35,7 @@ const IntroMain = styled.View`
 `;
 
 const IntroTitle = styled.Text`
-  font-size: 17;
+  font-size: 18;
 `;
 
 const IntroButtons = styled.View`
@@ -66,7 +66,7 @@ const TagsWrapper = styled.View`
 
 const TagsText = styled.Text`
   color: rgb(142, 142, 147);
-  font-size: 13;
+  font-size: 14;
   padding-horizontal: 18;
   padding-vertical: 10;
 `;
@@ -208,7 +208,7 @@ class Detail extends Component {
             type="community"
           />
           <VoteResults
-            key="goverment"
+            key="government"
             voteResults={voteResults}
             procedure={_id}
             scrollTo={this.scrollTo}
