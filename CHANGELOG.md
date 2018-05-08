@@ -4,6 +4,8 @@
 
 * Details
   * votepie labels has colordots, votepie percentage labels [#310](https://github.com/demokratie-live/democracy-client/issues/310)
+  * colors for bundestag results same as community result
+  * grey circle for zurückgezogen
 
 ### 0.7.5
 
