@@ -33,7 +33,7 @@ const VoteIconButton = styled.Image.attrs({
   resizeMode: "contain",
   width: null,
   height: null
-})`
+}) `
   width: 40;
   height: 40;
 `;
@@ -74,7 +74,7 @@ const VoteButton = props => {
   return (
     <VoteIconButtonWrapper
       voted={voted}
-      disabled={!!(!onPress || votedSelection)}
+      disabled={!!(!onPress || voted)}
       selection={selection}
       votedSelection={votedSelection}
       onPress={onPress}

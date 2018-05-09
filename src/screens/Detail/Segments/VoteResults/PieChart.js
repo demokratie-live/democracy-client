@@ -114,11 +114,11 @@ class PieChart extends Component {
             style={{ labels: { fill: "white", fontSize: 18 } }}
           />
           <VoteResult style={{ position: "absolute" }}>
-            {showNumbers === true ?
+            {showNumbers && (
               <VoteResultPieValue>
                 {data.reduce((v, { value }) => v + value, 0)}
               </VoteResultPieValue>
-              : null}
+            )}
             <VoteResultPieLabel>{label}</VoteResultPieLabel>
           </VoteResult>
           {/* Andoid scroll fix */}
@@ -131,7 +131,7 @@ class PieChart extends Component {
             }}
           />
         </VoteResultsPieWrapper>
-        {showNumbers === true ?
+        {showNumbers && (
           <VoteResultNumbers>
             {data.map(entry => (
               <VoteResult key={entry.label}>
@@ -145,7 +145,7 @@ class PieChart extends Component {
               </VoteResult>
             ))}
           </VoteResultNumbers>
-          : null}
+        )}
       </VoteResultsWrapper>
     );
   }
