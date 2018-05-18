@@ -212,7 +212,8 @@ class Detail extends Component {
             voteResults={voteResults}
             procedure={_id}
             scrollTo={this.scrollTo}
-            type="government"
+            currentStatus={currentStatus}
+            type="goverment"
           />
           {listType === "VOTING" && (
             <Voting

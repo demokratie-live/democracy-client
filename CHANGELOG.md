@@ -1,4 +1,12 @@
-﻿# Changelog
+# Changelog
+
+### 0.7.7
+
+* Details
+  * votepie labels has colordots, votepie percentage labels [#310](https://github.com/demokratie-live/democracy-client/issues/310)
+  * lock vote buttons if user has already voted and local vote is lost
+  * colors for bundestag results same as community result
+  * grey circle for zurückgezogen
 
 ### 0.7.6
 
