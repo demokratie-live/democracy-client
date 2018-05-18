@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Dimensions } from "react-native";
+import { View, Dimensions, Platform } from "react-native";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import { VictoryPie } from "victory-native";
@@ -111,7 +111,16 @@ class PieChart extends Component {
             }))}
             innerRadius={width / 5.6}
             labelRadius={width / 3.3}
-            style={{ labels: { fill: "white", fontSize: 18 } }}
+            style={{
+              labels: {
+                fill: "white",
+                fontSize: 16,
+                fontFamily: Platform.OS === "ios"
+                  ? "HelveticaNeue-Thin"
+                  : "sans-serif-light"
+
+              }
+            }}
           />
           <VoteResult style={{ position: "absolute" }}>
             {showNumbers && (
