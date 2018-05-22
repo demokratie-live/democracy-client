@@ -119,7 +119,8 @@ Details.propTypes = {
   abstract: PropTypes.string,
   procedureId: PropTypes.string.isRequired,
   currentStatus: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired
+  type: PropTypes.string.isRequired,
+  voted: PropTypes.bool.isRequired
 };
 
 Details.defaultProps = {
