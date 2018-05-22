@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.7.x
+
+* Search
+  * Update listView after userInteractions [#312](https://github.com/demokratie-live/democracy-client/issues/312)
+
 ### 0.7.7
 
 * Details
