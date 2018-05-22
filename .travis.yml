@@ -75,7 +75,7 @@ matrix:
     osx_image: xcode9.2
     language: objective-c
     before_install:
-    - fastlane update_fastlane
+    - gem update fastlane
     install:
     - nvm install 8
     - npm install -g yarn
