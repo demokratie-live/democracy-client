@@ -42,7 +42,8 @@ matrix:
     - openssl aes-256-cbc -k "$SECRET" -in android/Google_Play_Android_Developer.json.enc -out android/Google_Play_Android_Developer.json -d
     - openssl aes-256-cbc -k "$SECRET" -in android/app/democracy2-release-key.keystore.enc -out android/app/democracy2-release-key.keystore -d
     - gem update --system
-    - gem install fastlane --no-rdoc --no-ri --no-document --quiet
+    - bundle install
+    - bundle update fastlane
     install:
     - nvm install 8
     - yarn --version
@@ -68,14 +69,15 @@ matrix:
       - 'google-gdk-license-.+'
     script:
     - cd android
-    - fastlane android test
+    - bundle exec fastlane android test
 
   # ios test
   - if: type IN (pull_request)
     osx_image: xcode9.2
     language: objective-c
     before_install:
-    - gem update fastlane
+    - bundle install
+    - bundle update fastlane
     install:
     - nvm install 8
     - npm install -g yarn
