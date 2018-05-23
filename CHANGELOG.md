@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.7.x
+
+* General
+  * improove app start performance [#281](https://github.com/demokratie-live/democracy-client/issues/281)
+
 ### 0.7.7
 
 * Details
