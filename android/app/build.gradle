@@ -183,7 +183,6 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-push-notification')
     compile project(':react-native-svg')
     compile project(':react-native-sha256')
     compile project(':react-native-device-info')
@@ -194,6 +193,7 @@ dependencies {
     compile "com.facebook.react:react-native:+"
     compile project(':react-native-navigation')
     compile project(':react-native-linear-gradient')
+	compile project(':reactnativenotifications')
 
     compile ('com.google.android.gms:play-services-gcm:10.0.1') {
         force = true;

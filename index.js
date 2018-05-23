@@ -7,11 +7,15 @@ import RSAKey from "react-native-rsa";
 import DeviceInfo from "react-native-device-info";
 import { sha256 } from "react-native-sha256";
 import Config from "react-native-config";
+import {
+  NotificationsAndroid,
+  PendingNotifications
+} from "react-native-notifications";
+
 // import Reactotron from "reactotron-react-native";
 
 import client, { persistor } from "./src/graphql/client";
 import registerScreens from "./src/screens";
-// Removed pushNotifications
 // import { pushNotifications } from "./src/services";
 
 import IS_INSTRUCTIONS_SHOWN from "./src/graphql/queries/isInstructionShown";
@@ -19,6 +23,7 @@ import setCurrentScreen from "./src/graphql/mutations/setCurrentScreen";
 import SIGN_UP from "./src/graphql/mutations/signUp";
 import UPDATE_NETWORK_STATUS from "./src/graphql/mutations/updateNetworkStatus";
 import ME from "./src/graphql/queries/me";
+import ADD_TOKEN from "./src/graphql/mutations/addToken";
 
 import topTabs from "./src/screens/VoteList/topTabs";
 
@@ -28,8 +33,43 @@ import "./src/services/browserLinks";
 //   .useReactNative() // add all built-in react native plugins
 //   .connect(); // let's connect!
 
-// Removed pushNotifications
 // pushNotifications.configure();
+
+// console.log("Push notifications refresh Token!");
+// NotificationsAndroid.refreshToken();
+// console.log("Push notifications refreshed Token!");
+
+NotificationsAndroid.setRegistrationTokenUpdateListener(async deviceToken => {
+  // TODO: Send the token to my server so it could send back push notifications...
+  console.log("Push notifications registered!", deviceToken);
+  const tokenSucceeded = await client.mutate({
+    mutation: ADD_TOKEN,
+    variables: {
+      token: deviceToken,
+      os: "android"
+    }
+  });
+  if (tokenSucceeded) {
+    await AsyncStorage.setItem("push-token", deviceToken);
+  }
+});
+
+// On Android, we allow for only one (global) listener per each event type.
+NotificationsAndroid.setNotificationReceivedListener(notification => {
+  console.log("Notification received on device", notification.getData());
+});
+NotificationsAndroid.setNotificationOpenedListener(notification => {
+  console.log("Notification opened by device user", notification.getData());
+});
+
+PendingNotifications.getInitialNotification()
+  .then(notification => {
+    console.log(
+      "Initial notification was:",
+      notification ? notification.getData() : "N/A"
+    );
+  })
+  .catch(err => console.error("getInitialNotifiation() failed", err));
 
 registerScreens();
 
@@ -125,7 +165,7 @@ class App {
         // TODO: handle this
       }
     }
-    pushNotifications.sendToken();
+    // pushNotifications.sendToken();
 
     // Decide Startscreen
     if (isInstructionsShown) {
