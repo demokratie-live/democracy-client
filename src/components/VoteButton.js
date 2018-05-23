@@ -33,13 +33,13 @@ const VoteIconButton = styled.Image.attrs({
   resizeMode: "contain",
   width: null,
   height: null
-})`
+}) `
   width: 40;
   height: 40;
 `;
 
 const VoteButton = props => {
-  const { votedSelection, onPress, selection, voted } = props;
+  const { votedSelection, onPress, selection, voted, style } = props;
   let styleWrapper;
   let styleButton;
   switch (selection) {
@@ -74,11 +74,11 @@ const VoteButton = props => {
   return (
     <VoteIconButtonWrapper
       voted={voted}
-      disabled={!!(!onPress || votedSelection)}
+      disabled={!!(!onPress || voted)}
       selection={selection}
       votedSelection={votedSelection}
       onPress={onPress}
-      style={styleWrapper}
+      style={{ ...styleWrapper, ...style }}
     >
       <VoteIconButton style={styleButton} />
     </VoteIconButtonWrapper>
@@ -89,13 +89,15 @@ VoteButton.propTypes = {
   votedSelection: PropTypes.string,
   onPress: PropTypes.func,
   selection: PropTypes.string.isRequired,
-  voted: PropTypes.bool
+  voted: PropTypes.bool,
+  style: PropTypes.shape()
 };
 
 VoteButton.defaultProps = {
   votedSelection: null,
   onPress: null,
-  voted: null
+  voted: null,
+  style: {}
 };
 
 export default VoteButton;
