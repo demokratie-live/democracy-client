@@ -130,6 +130,7 @@ class VoteList extends Component {
   };
 
   render() {
+    console.log("################# VoteList");
     return (
       <Screen>
         {this.renderSegmentControls()}

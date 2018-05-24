@@ -25,21 +25,27 @@ import PushNotifications from "../hocs/PushNotifications";
 export default function registerScreens() {
   Navigation.registerComponent(
     "democracy.VoteList",
-    () => DeepLink(NavBarLinks(SideMenuLinks(NetworkStatus(VoteList)))),
+    () =>
+      PushNotifications(
+        DeepLink(NavBarLinks(SideMenuLinks(NetworkStatus(VoteList))))
+      ),
     client.store,
     ApolloProvider,
     { client }
   );
   Navigation.registerComponent(
     "democracy.VoteList.List",
-    () => DeepLink(NavBarLinks(SideMenuLinks(NetworkStatus(VoteListList)))),
+    () =>
+      PushNotifications(
+        DeepLink(NavBarLinks(SideMenuLinks(NetworkStatus(VoteListList))))
+      ),
     client.store,
     ApolloProvider,
     { client }
   );
   Navigation.registerComponent(
     "democracy.Instructions",
-    () => PushNotifications(Instructions),
+    () => Instructions,
     client.store,
     ApolloProvider,
     { client }

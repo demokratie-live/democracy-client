@@ -4,36 +4,41 @@ import { Navigator } from "react-native-navigation";
 
 // import onNavigationEvent from "../screens/onNavigationEvent";
 
+let LISTENERS_ADDED = false;
+
 export default ComposedComponent => {
   class WrappingComponent extends Component {
     componentDidMount() {
       const { navigator } = this.props;
-      navigator.addOnNavigatorEvent(event => {
-        switch (event.type) {
-          case "DeepLink":
-            switch (event.payload.from) {
-              // Side Menu Events
+      if (!LISTENERS_ADDED) {
+        LISTENERS_ADDED = true;
+        navigator.addOnNavigatorEvent(event => {
+          switch (event.type) {
+            case "DeepLink":
+              switch (event.payload.from) {
+                // Side Menu Events
 
-              // Push Notification & Browser Links
-              case "externalLink":
-              case "pushNotification":
-                navigator.push({
-                  screen: event.link,
-                  passProps: { ...event.payload },
-                  backButtonTitle: ""
-                });
-                break;
+                // Push Notification & Browser Links
+                case "externalLink":
+                case "pushNotification":
+                  navigator.push({
+                    screen: event.link,
+                    passProps: { ...event.payload },
+                    backButtonTitle: ""
+                  });
+                  break;
 
-              default:
-                break;
-            }
+                default:
+                  break;
+              }
 
-            break;
+              break;
 
-          default:
-            break;
-        }
-      });
+            default:
+              break;
+          }
+        });
+      }
     }
 
     render() {

@@ -127,6 +127,7 @@ class List extends Component {
   };
 
   render() {
+    console.log("################# VoteListList");
     const { data } = this.props;
     return (
       <Wrapper onLayout={this.onLayout} width={this.state.width}>

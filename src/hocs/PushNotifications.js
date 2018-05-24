@@ -1,13 +1,22 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Navigator } from "react-native-navigation";
-import { DeviceEventEmitter, Platform, AsyncStorage } from "react-native";
+import {
+  DeviceEventEmitter,
+  Platform,
+  AsyncStorage,
+  Alert
+} from "react-native";
 import NotificationsIOS, {
   NotificationsAndroid,
   PendingNotifications
 } from "react-native-notifications";
 
+import client from "../graphql/client";
+
 import ADD_TOKEN from "../graphql/mutations/addToken";
+
+let LISTENERS_ADDED = false;
 
 export default ComposedComponent => {
   class WrappingComponent extends Component {
@@ -27,7 +36,9 @@ export default ComposedComponent => {
 
           NotificationsIOS.addEventListener(
             "notificationReceivedForeground",
-            this.onNotificationReceivedForeground
+            notification => {
+              this.onNotificationReceivedForeground(notification.getData());
+            }
           );
           NotificationsIOS.addEventListener(
             "notificationReceivedBackground",
@@ -39,46 +50,62 @@ export default ComposedComponent => {
           );
           break;
         case "android":
-          NotificationsAndroid.setRegistrationTokenUpdateListener(
-            async deviceToken => {
-              // TODO: Send the token to my server so it could send back push notifications...
-              console.log("Push notifications registered!", deviceToken);
-              const tokenSucceeded = await client.mutate({
-                mutation: ADD_TOKEN,
-                variables: {
-                  token: deviceToken,
-                  os: "android"
+          if (!LISTENERS_ADDED) {
+            LISTENERS_ADDED = true;
+            NotificationsAndroid.setRegistrationTokenUpdateListener(
+              async deviceToken => {
+                // TODO: Send the token to my server so it could send back push notifications...
+                console.log("Push notifications registered!", deviceToken);
+                const tokenSucceeded = await client.mutate({
+                  mutation: ADD_TOKEN,
+                  variables: {
+                    token: deviceToken,
+                    os: "android"
+                  }
+                });
+                if (tokenSucceeded) {
+                  await AsyncStorage.setItem("push-token", deviceToken);
                 }
-              });
-              if (tokenSucceeded) {
-                await AsyncStorage.setItem("push-token", deviceToken);
               }
-            }
-          );
-
-          // On Android, we allow for only one (global) listener per each event type.
-          NotificationsAndroid.setNotificationReceivedListener(notification => {
-            console.log(
-              "Notification received on device 1",
-              notification.getData()
             );
-          });
-          NotificationsAndroid.setNotificationOpenedListener(notification => {
-            console.log(
-              "Notification opened by device user 1",
-              notification.getData()
-            );
-          });
 
-          PendingNotifications.getInitialNotification()
-            .then(notification => {
+            // On Android, we allow for only one (global) listener per each event type.
+            NotificationsAndroid.setNotificationReceivedListener(
+              notification => {
+                console.log(
+                  "Notification received on device 1",
+                  notification.getData().payload
+                );
+                const { title, message, procedureId } = JSON.parse(
+                  notification.getData().payload
+                );
+
+                this.onNotificationReceivedForeground({
+                  title,
+                  message,
+                  procedureId
+                });
+              }
+            );
+            NotificationsAndroid.setNotificationOpenedListener(notification => {
               console.log(
-                "Initial notification was:",
-                notification ? notification.getData() : "N/A"
+                "Notification opened by device user 1",
+                notification.getData()
               );
-            })
-            .catch(err => console.error("getInitialNotifiation() failed", err));
+            });
 
+            PendingNotifications.getInitialNotification()
+              .then(notification => {
+                console.log(
+                  "Initial notification was:",
+                  notification ? notification.getData() : "N/A"
+                );
+              })
+              .catch(err =>
+                console.error("getInitialNotifiation() failed", err)
+              );
+          }
+          break;
         default:
           break;
       }
@@ -128,6 +155,28 @@ export default ComposedComponent => {
 
     onNotificationReceivedForeground = notification => {
       console.log("Notification Received - Foreground", notification);
+
+      const { navigator } = this.props;
+      const { title, message, procedureId } = notification;
+
+      Alert.alert(title, message, [
+        {
+          text: "Anschauen",
+          onPress: () => {
+            navigator.handleDeepLink({
+              link: `democracy.Detail`,
+              payload: {
+                procedureId: `${procedureId}`,
+                from: "pushNotification"
+              }
+            });
+          }
+        },
+        {
+          text: "Ok",
+          style: "cancel"
+        }
+      ]);
     };
 
     onNotificationReceivedBackground = notification => {
