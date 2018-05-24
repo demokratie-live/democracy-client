@@ -6717,10 +6717,6 @@ react-native-notifications@^1.1.19:
     core-js "^1.0.0"
     uuid "^2.0.3"
 
-react-native-push-notification@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/react-native-push-notification/-/react-native-push-notification-3.0.2.tgz#3fa7d654cfd915436597b0dd5ba8b0f898c4b0f5"
-
 react-native-rsa@^0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/react-native-rsa/-/react-native-rsa-0.0.3.tgz#c3b5b85278e8a1a3ef22b4206a7d6aa04a26d99b"

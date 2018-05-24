@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.x.x
+
+* [New/Fix] Push Notifications
+
 ### 0.7.7
 
 * Details
@@ -40,10 +44,6 @@
 
 * Lists
   * Prevent Double Navigation on Android [#183](https://github.com/demokratie-live/democracy-client/issues/183)
-
-### 0.x.x
-
-* [New/Fix] Push Notifications
 
 ### 0.7.1
 

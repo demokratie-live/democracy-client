@@ -76,36 +76,26 @@
 // Required to register for notifications
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
 {
-  printf("DEBUG didRegisterUserNotificationSettings");
-
   [RNNotifications didRegisterUserNotificationSettings:notificationSettings];
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-  printf("DEBUG didRegisterForRemoteNotificationsWithDeviceToken");
-
   [RNNotifications didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-  printf("DEBUG didFailToRegisterForRemoteNotificationsWithError");
-
   [RNNotifications didFailToRegisterForRemoteNotificationsWithError:error];
 }
 
 // Required for the notification event.
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)notification {
-  printf("DEBUG didReceiveRemoteNotification");
-
   [RNNotifications didReceiveRemoteNotification:notification];
 }
 
 // Required for the localNotification event.
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
-  printf("DEBUG didReceiveLocalNotification");
-
   [RNNotifications didReceiveLocalNotification:notification];
 }
 

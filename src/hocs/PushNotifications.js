@@ -1,12 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Navigator } from "react-native-navigation";
-import {
-  DeviceEventEmitter,
-  Platform,
-  AsyncStorage,
-  Alert
-} from "react-native";
+import { Platform, AsyncStorage, Alert } from "react-native";
 import NotificationsIOS, {
   NotificationsAndroid,
   PendingNotifications
@@ -57,7 +52,6 @@ export default ComposedComponent => {
             NotificationsAndroid.setRegistrationTokenUpdateListener(
               async deviceToken => {
                 // TODO: Send the token to my server so it could send back push notifications...
-                console.log("Push notifications registered!", deviceToken);
                 const tokenSucceeded = await client.mutate({
                   mutation: ADD_TOKEN,
                   variables: {
@@ -86,11 +80,6 @@ export default ComposedComponent => {
               }
             );
             NotificationsAndroid.setNotificationOpenedListener(notification => {
-              console.log(
-                "Notification opened by device user 1",
-                notification.getData()
-              );
-
               const { title, message, procedureId } = JSON.parse(
                 notification.getData().payload
               );
@@ -99,10 +88,6 @@ export default ComposedComponent => {
 
             PendingNotifications.getInitialNotification()
               .then(notification => {
-                console.log(
-                  "Initial notification was:",
-                  notification ? notification.getData() : "N/A"
-                );
                 if (notification) {
                   const { title, message, procedureId } = JSON.parse(
                     notification.getData().payload
@@ -163,8 +148,6 @@ export default ComposedComponent => {
     }
 
     onNotificationReceivedForeground = notification => {
-      console.log("Notification Received - Foreground", notification);
-
       const { navigator } = this.props;
       const { title, message, procedureId } = notification;
 
@@ -193,7 +176,6 @@ export default ComposedComponent => {
     };
 
     onNotificationOpened = ({ procedureId }) => {
-      console.log("Notification opened by device user");
       const { navigator } = this.props;
       navigator.handleDeepLink({
         link: `democracy.Detail`,
@@ -204,27 +186,25 @@ export default ComposedComponent => {
       });
     };
 
-    onPushRegistered = deviceToken => {
+    onPushRegistered = async deviceToken => {
       // TODO: Send the token to my server so it could send back push notifications...
-      console.log("Device Token Received", deviceToken);
+      const tokenSucceeded = await client.mutate({
+        mutation: ADD_TOKEN,
+        variables: {
+          token: deviceToken,
+          os: "ios"
+        }
+      });
+      if (tokenSucceeded) {
+        await AsyncStorage.setItem("push-token", deviceToken);
+      }
     };
 
     onPushRegistrationFailed = error => {
-      // For example:
-      //
-      // error={
-      //   domain: 'NSCocoaErroDomain',
-      //   code: 3010,
-      //   localizedDescription: 'remote notifications are not supported in the simulator'
-      // }
       console.error(error);
     };
 
     render() {
-      console.log(
-        "DeviceEventEmitter",
-        DeviceEventEmitter.listeners("notificationReceivedForeground")
-      );
       return <ComposedComponent {...this.props} />;
     }
   }
