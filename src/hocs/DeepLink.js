@@ -16,8 +16,6 @@ export default ComposedComponent => {
           switch (event.type) {
             case "DeepLink":
               switch (event.payload.from) {
-                // Side Menu Events
-
                 // Push Notification & Browser Links
                 case "externalLink":
                 case "pushNotification":

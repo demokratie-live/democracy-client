@@ -64,6 +64,7 @@ export default ComposedComponent => {
                 }
               }
             );
+            NotificationsAndroid.refreshToken();
 
             // On Android, we allow for only one (global) listener per each event type.
             NotificationsAndroid.setNotificationReceivedListener(
