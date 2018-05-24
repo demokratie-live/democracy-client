@@ -2,7 +2,8 @@
 
 ### 0.x.x
 
-* [New/Fix] Push Notifications
+* [Feature] Push Notifications
+* [Feature] Add deep lingking
 
 ### 0.7.7
 
