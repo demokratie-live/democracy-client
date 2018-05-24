@@ -46,7 +46,9 @@ export default ComposedComponent => {
           );
           NotificationsIOS.addEventListener(
             "notificationOpened",
-            this.notificationOpeneds
+            notification => {
+              this.onNotificationOpened(notification.getData());
+            }
           );
           break;
         case "android":
@@ -72,10 +74,6 @@ export default ComposedComponent => {
             // On Android, we allow for only one (global) listener per each event type.
             NotificationsAndroid.setNotificationReceivedListener(
               notification => {
-                console.log(
-                  "Notification received on device 1",
-                  notification.getData().payload
-                );
                 const { title, message, procedureId } = JSON.parse(
                   notification.getData().payload
                 );
@@ -92,6 +90,11 @@ export default ComposedComponent => {
                 "Notification opened by device user 1",
                 notification.getData()
               );
+
+              const { title, message, procedureId } = JSON.parse(
+                notification.getData().payload
+              );
+              this.onNotificationOpened({ title, message, procedureId });
             });
 
             PendingNotifications.getInitialNotification()
@@ -100,6 +103,12 @@ export default ComposedComponent => {
                   "Initial notification was:",
                   notification ? notification.getData() : "N/A"
                 );
+                if (notification) {
+                  const { title, message, procedureId } = JSON.parse(
+                    notification.getData().payload
+                  );
+                  this.onNotificationOpened({ title, message, procedureId });
+                }
               })
               .catch(err =>
                 console.error("getInitialNotifiation() failed", err)
@@ -183,8 +192,16 @@ export default ComposedComponent => {
       console.log("Notification Received - Background", notification);
     };
 
-    onNotificationOpened = notification => {
-      console.log("Notification opened by device user", notification);
+    onNotificationOpened = ({ procedureId }) => {
+      console.log("Notification opened by device user");
+      const { navigator } = this.props;
+      navigator.handleDeepLink({
+        link: `democracy.Detail`,
+        payload: {
+          procedureId: `${procedureId}`,
+          from: "pushNotification"
+        }
+      });
     };
 
     onPushRegistered = deviceToken => {
