@@ -18,7 +18,7 @@
 #import <React/RCTRootView.h>
 
 
-#import <React/RCTPushNotificationManager.h>
+#import "RNNotifications.h"
 
 @implementation AppDelegate
 
@@ -43,8 +43,8 @@
   NSURL *jsCodeLocation;
   
   #ifdef DEBUG
-    //  jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.bundle?platform=ios&dev=true"];
-    jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+    jsCodeLocation = [NSURL URLWithString:@"http://192.168.0.24:8081/index.bundle?platform=ios&dev=true"];
+    //jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
   #else
     jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
   #endif
@@ -76,28 +76,37 @@
 // Required to register for notifications
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
 {
-  [RCTPushNotificationManager didRegisterUserNotificationSettings:notificationSettings];
+  printf("DEBUG didRegisterUserNotificationSettings");
+
+  [RNNotifications didRegisterUserNotificationSettings:notificationSettings];
 }
-// Required for the register event.
+
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-  [RCTPushNotificationManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+  printf("DEBUG didRegisterForRemoteNotificationsWithDeviceToken");
+
+  [RNNotifications didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
-// Required for the notification event. You must call the completion handler after handling the remote notification.
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
-{
-  [RCTPushNotificationManager didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+  printf("DEBUG didFailToRegisterForRemoteNotificationsWithError");
+
+  [RNNotifications didFailToRegisterForRemoteNotificationsWithError:error];
 }
-// Required for the registrationError event.
-- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
-{
-  [RCTPushNotificationManager didFailToRegisterForRemoteNotificationsWithError:error];
+
+// Required for the notification event.
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)notification {
+  printf("DEBUG didReceiveRemoteNotification");
+
+  [RNNotifications didReceiveRemoteNotification:notification];
 }
+
 // Required for the localNotification event.
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
-  [RCTPushNotificationManager didReceiveLocalNotification:notification];
+  printf("DEBUG didReceiveLocalNotification");
+
+  [RNNotifications didReceiveLocalNotification:notification];
 }
 
 @end

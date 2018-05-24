@@ -19,7 +19,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { Navigator } from "react-native-navigation";
 import { graphql, compose } from "react-apollo";
 import _ from "lodash";
-import PushNotification from "react-native-push-notification";
+// import PushNotification from "react-native-push-notification";
 
 import Row from "../../components/ListRow";
 import Header from "../../components/ListSectionHeader";
@@ -134,13 +134,13 @@ class Notifications extends Component {
 
   componentDidMount() {
     AppState.addEventListener("change", this.handleAppStateChange);
-    if (Platform.OS === "ios") {
-      PushNotification.checkPermissions(data => {
-        this.setState({ notificationsAllowed: !!data.alert });
-      });
-    } else {
-      // TODO: Check android permissions
-    }
+    // if (Platform.OS === "ios") {
+    //   PushNotification.checkPermissions(data => {
+    //     this.setState({ notificationsAllowed: !!data.alert });
+    //   });
+    // } else {
+    //   // TODO: Check android permissions
+    // }
   }
 
   componentWillUnmount() {
@@ -228,9 +228,9 @@ class Notifications extends Component {
       this.state.appState.match(/inactive|background/) &&
       nextAppState === "active"
     ) {
-      PushNotification.checkPermissions(data => {
-        this.setState({ notificationsAllowed: !!data.alert });
-      });
+      // PushNotification.checkPermissions(data => {
+      //   this.setState({ notificationsAllowed: !!data.alert });
+      // });
     }
     this.setState({ appState: nextAppState });
   };

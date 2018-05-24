@@ -20,6 +20,7 @@ import DeepLink from "../hocs/DeepLink";
 import NetworkStatus from "../hocs/NetworkStatus";
 import NavBarLinks from "../hocs/NavBarLinks";
 import SideMenuLinks from "../hocs/SideMenuLinks";
+import PushNotifications from "../hocs/PushNotifications";
 
 export default function registerScreens() {
   Navigation.registerComponent(
@@ -38,7 +39,7 @@ export default function registerScreens() {
   );
   Navigation.registerComponent(
     "democracy.Instructions",
-    () => Instructions,
+    () => PushNotifications(Instructions),
     client.store,
     ApolloProvider,
     { client }
