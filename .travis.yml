@@ -50,7 +50,7 @@ matrix:
       - 'android-sdk-license-.+'
       - 'google-gdk-license-.+'
     before_install:
-    - echo y | android update sdk --no-ui --filter build-tools-25.0.1,build-tools-26.0.1,build-tools-26.0.2,android-26,extra-android-m2repository
+    - echo y | android update sdk --no-ui --filter build-tools-25.0.1,build-tools-25.0.2,build-tools-26.0.1,build-tools-26.0.2,android-26,extra-android-m2repository
     - openssl aes-256-cbc -k "$SECRET" -in .env.alpha.enc -out .env.alpha -d
     - openssl aes-256-cbc -k "$SECRET" -in .env.beta.enc -out .env.beta -d
     - openssl aes-256-cbc -k "$SECRET" -in .env.production.enc -out .env.production -d
