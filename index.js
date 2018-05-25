@@ -9,6 +9,9 @@ import { sha256 } from "react-native-sha256";
 import Config from "react-native-config";
 // import Reactotron from "reactotron-react-native";
 
+// Migrations
+import Migrations from "./src/migrations";
+
 import client, { persistor } from "./src/graphql/client";
 import registerScreens from "./src/screens";
 // Removed pushNotifications
@@ -174,6 +177,10 @@ class App {
 
 (async () => {
   await persistor.restore();
+
+  console.log("migrations start");
+  await Migrations();
+  console.log("migrations finish");
 
   const app = new App(); // eslint-disable-line
 })();

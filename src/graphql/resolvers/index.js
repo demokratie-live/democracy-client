@@ -1,6 +1,7 @@
-import VOTES_LOCAL from "../queries/votesLocal";
 import IS_INSTRUCTIONS_SHOWN from "../queries/isInstructionShown";
 import GET_NETWORK_STATUS from "../queries/getNetworkStatus";
+
+import VotesLocal from "../../services/VotesLocal";
 
 export const defaults = {
   currentScreen: "democracy.VoteList",
@@ -30,29 +31,9 @@ export const resolvers = {
       cache.writeData({ data: { isInstructionsShown } });
       return null;
     },
-    votesLocal: (_, { procedure, selection }, { cache }) => {
-      let previous;
-
-      try {
-        previous = cache.readQuery({ query: VOTES_LOCAL });
-      } catch (error) {
-        previous = { votesLocal: [] };
-      }
-
-      const newVote = {
-        procedure,
-        selection,
-        __typename: "VoteLocalItem"
-      };
-      const data = {
-        votesLocal: [
-          ...previous.votesLocal.filter(v => v.procedure !== procedure),
-          newVote
-        ]
-      };
-
-      cache.writeData({ data });
-      return newVote;
+    votesLocal: async (_, { procedureId, selection }) => {
+      await VotesLocal.setVoteLocal({ procedureId, selection });
+      return null;
     },
     currentScreen: (_, { currentScreen }, { cache }) => {
       switch (currentScreen) {
@@ -75,16 +56,15 @@ export const resolvers = {
       return previous.isInstructionsShown;
     },
 
-    votedLocal: (_, { procedure }, { cache }) => {
-      let previous;
-      try {
-        previous = cache.readQuery({ query: VOTES_LOCAL });
-      } catch (error) {
-        previous = { votesLocal: [] };
+    votedLocal: async (_, { procedureId }) => {
+      const vote = await VotesLocal.getVoteLocal(procedureId);
+      if (vote && vote.selection) {
+        return {
+          selection: vote.selection,
+          __typename: "VotedLocal"
+        };
       }
-      return (
-        previous.votesLocal.find(vote => vote.procedure === procedure) || null
-      );
+      return null;
     }
   }
 };
