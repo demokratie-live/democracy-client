@@ -4,6 +4,8 @@
 
 * ListView
   * highlight "Vergangen" segment header [#308](https://github.com/demokratie-live/democracy-client/issues/308)
+* Details
+  * change current status if user has not voted [#328](https://github.com/demokratie-live/democracy-client/issues/328)
 
 ### 0.7.7
 
