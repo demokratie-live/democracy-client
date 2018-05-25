@@ -1,6 +1,6 @@
 # Changelog
 
-### 0.7.x
+### 0.7.8
 
 * ListView
   * highlight "Vergangen" segment header [#308](https://github.com/demokratie-live/democracy-client/issues/308)
