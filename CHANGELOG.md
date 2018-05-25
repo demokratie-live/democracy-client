@@ -9,6 +9,8 @@
   * Change pie-chart labels [#310](https://github.com/demokratie-live/democracy-client/issues/310)
 * Search
   * Update listView after userInteractions [#312](https://github.com/demokratie-live/democracy-client/issues/312)
+* General
+  * improove app start performance [#281](https://github.com/demokratie-live/democracy-client/issues/281)
 
 ### 0.7.7
 
