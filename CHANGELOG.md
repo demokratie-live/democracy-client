@@ -1,6 +1,6 @@
 # Changelog
 
-### 0.7.8
+### 0.7.9
 
 * ListView
   * highlight "Vergangen" segment header [#308](https://github.com/demokratie-live/democracy-client/issues/308)
@@ -11,6 +11,9 @@
   * Update listView after userInteractions [#312](https://github.com/demokratie-live/democracy-client/issues/312)
 * General
   * improove app start performance [#281](https://github.com/demokratie-live/democracy-client/issues/281)
+
+### 0.7.8
+* [HOTFIX] increase offline cache to prevent lost vote data [#322](https://github.com/demokratie-live/democracy-client/issues/322)
 
 ### 0.7.7
 

@@ -40,7 +40,8 @@ const persistor = new CachePersistor({
   cache,
   storage: AsyncStorage,
   debug: false,
-  debounce: 1000
+  debounce: 1000,
+  maxSize: false
 });
 
 const getNewToken = async () => {
