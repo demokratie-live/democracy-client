@@ -179,7 +179,10 @@ class App {
   await persistor.restore();
 
   console.log("migrations start");
-  await Migrations();
+  const migrations = await Migrations();
+  if (migrations.some(v => v)) {
+    await persistor.purge();
+  }
   console.log("migrations finish");
 
   const app = new App(); // eslint-disable-line

@@ -2,6 +2,7 @@ import IS_INSTRUCTIONS_SHOWN from "../queries/isInstructionShown";
 import GET_NETWORK_STATUS from "../queries/getNetworkStatus";
 
 import VotesLocal from "../../services/VotesLocal";
+import voteLocal from "../mutations/voteLocal";
 
 export const defaults = {
   currentScreen: "democracy.VoteList",
@@ -55,6 +56,8 @@ export const resolvers = {
       const previous = cache.readQuery({ query: IS_INSTRUCTIONS_SHOWN });
       return previous.isInstructionsShown;
     },
+
+    votesLocal: async () => VotesLocal.getVotesLocalList(),
 
     votedLocal: async (_, { procedureId }) => {
       const vote = await VotesLocal.getVoteLocal(procedureId);

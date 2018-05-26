@@ -11,6 +11,7 @@ export default async () => {
   const { votesLocal } = client.readQuery({
     query: VOTES_LOCAL
   });
+  console.log(votesLocal);
   if (votesLocal.length > 0) {
     const { data: { proceduresById } } = await client.query({
       query: gql`
@@ -39,11 +40,7 @@ export default async () => {
         }
       })
     );
+    return true;
   }
-  //   await new Promise(resolve => {
-  //     setTimeout(() => {
-  //       console.log("Timeout");
-  //       resolve();
-  //     }, 1);
-  //   });
+  return false;
 };

@@ -1,5 +1,6 @@
 import * as Keychain from "react-native-keychain";
 import DeviceInfo from "react-native-device-info";
+import _ from "lodash";
 
 class VotesLocal {
   static KEYCHAIN_SERVICE = `${DeviceInfo.getBundleId()}.localVotes`;
@@ -10,6 +11,14 @@ class VotesLocal {
       return JSON.parse(keychain.password);
     }
     return {};
+  };
+
+  static getVotesLocalList = async () => {
+    const votesLocal = await VotesLocal.getVotesLocal();
+    const list = [];
+    return _.forEach(votesLocal, (value, key) => {
+      list.push({ procedureId: key, selection: value });
+    });
   };
 
   static getVoteLocal = async procedureId => {
