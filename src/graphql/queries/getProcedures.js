@@ -12,8 +12,9 @@ export default gql`
       tags
       abstract
       voteDate
-      votedGoverment
+      votedGovernment
       submissionDate
+      completed
       ...ActivityIndex
       ...Voted
     }

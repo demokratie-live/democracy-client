@@ -12,7 +12,7 @@ const Wrapper = styled.TouchableOpacity`
 
 const Text = styled.Text`
   padding-left: 14;
-  font-size: 12;
+  font-size: 13;
   color: rgb(0, 118, 255);
 `;
 

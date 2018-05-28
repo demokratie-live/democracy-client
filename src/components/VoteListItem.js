@@ -22,11 +22,11 @@ const SideWrapper = styled.View`
   min-width: 50;
 `;
 
-const Title = styled.Text.attrs({ numberOfLines: 2 })`
+const Title = styled.Text.attrs({ numberOfLines: 2 }) `
   font-size: 17;
   color: #030303;
 `;
-const Tags = styled.Text.attrs({ numberOfLines: 2 })`
+const Tags = styled.Text.attrs({ numberOfLines: 2 }) `
   padding-top: 8;
   font-size: 15;
   color: #8f8e94;
@@ -39,34 +39,34 @@ const ListItem = ({
   procedureId,
   children,
   activityIndex: { activityIndex, active },
-  votedGoverment,
+  votedGovernment,
   voted
 }) => (
-  <ListItemWrapper>
-    <MainWrapper>
-      <Title>{title}</Title>
-      {!children && <Tags>{tags && tags.join(", ")}</Tags>}
-      {children}
-    </MainWrapper>
-    <SideWrapper>
-      <ActivityIndex
-        procedureId={procedureId}
-        activityIndex={activityIndex}
-        active={active}
-        skipFetchData
-      />
-
-      {!voted && date && <DateTime date={date} />}
-      {voted && (
-        <DemocracyIcon
-          name={`checkmark${votedGoverment ? "-double" : ""}`}
-          size={14}
-          color="#35a335"
+    <ListItemWrapper>
+      <MainWrapper>
+        <Title>{title}</Title>
+        {!children && <Tags>{tags && tags.join(", ")}</Tags>}
+        {children}
+      </MainWrapper>
+      <SideWrapper>
+        <ActivityIndex
+          procedureId={procedureId}
+          activityIndex={activityIndex}
+          active={active}
+          skipFetchData
         />
-      )}
-    </SideWrapper>
-  </ListItemWrapper>
-);
+
+        {!voted && date && <DateTime date={date} />}
+        {voted && (
+          <DemocracyIcon
+            name={`checkmark${votedGovernment ? "-double" : ""}`}
+            size={14}
+            color="#35a335"
+          />
+        )}
+      </SideWrapper>
+    </ListItemWrapper>
+  );
 
 ListItem.propTypes = {
   title: PropTypes.string.isRequired,
@@ -79,7 +79,7 @@ ListItem.propTypes = {
   ]),
   children: PropTypes.node,
   activityIndex: PropTypes.shape(),
-  votedGoverment: PropTypes.bool,
+  votedGovernment: PropTypes.bool,
   voted: PropTypes.bool
 };
 
@@ -88,7 +88,7 @@ ListItem.defaultProps = {
   date: false,
   children: null,
   activityIndex: {},
-  votedGoverment: false,
+  votedGovernment: false,
   voted: false
 };
 
