@@ -21,6 +21,7 @@ import java.util.List;
 
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.sha256lib.Sha256Package;
+import com.oblador.keychain.KeychainPackage;
 
 public class MainApplication extends NavigationApplication {
 
@@ -39,7 +40,8 @@ public class MainApplication extends NavigationApplication {
             new ReactNativeConfigPackage(),
             new VectorIconsPackage(),
             new LinearGradientPackage(),
-            new Sha256Package()
+            new Sha256Package(),
+            new KeychainPackage()
       );
     }
 
@@ -77,7 +79,8 @@ public class MainApplication extends NavigationApplication {
             new ReactNativeConfigPackage(),
             new VectorIconsPackage(),
             new LinearGradientPackage(),
-            new Sha256Package()
+            new Sha256Package(),
+            new KeychainPackage()
     );
   }
 
