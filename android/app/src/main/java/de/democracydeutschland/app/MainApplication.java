@@ -3,6 +3,8 @@ package de.democracydeutschland.app;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import org.wonday.pdf.RCTPdfView;
+import com.RNFetchBlob.RNFetchBlobPackage;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.horcrux.svg.SvgPackage;
 import com.horcrux.svg.SvgPackage;
@@ -33,6 +35,8 @@ public class MainApplication extends NavigationApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(new MainReactPackage(),
+            new RCTPdfView(),
+            new RNFetchBlobPackage(),
             new ReactNativePushNotificationPackage(),
             new SvgPackage(),
             new RNDeviceInfo(),
@@ -71,6 +75,8 @@ public class MainApplication extends NavigationApplication {
     // No need to add RnnPackage and MainReactPackage
     return Arrays.<ReactPackage>asList(
     // eg. new VectorIconsPackage()
+            new RCTPdfView(),
+            new RNFetchBlobPackage(),
             new ReactNativePushNotificationPackage(),
             new SvgPackage(),
             new RNDeviceInfo(),
