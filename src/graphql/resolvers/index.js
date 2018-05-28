@@ -2,7 +2,6 @@ import IS_INSTRUCTIONS_SHOWN from "../queries/isInstructionShown";
 import GET_NETWORK_STATUS from "../queries/getNetworkStatus";
 
 import VotesLocal from "../../services/VotesLocal";
-import voteLocal from "../mutations/voteLocal";
 
 export const defaults = {
   currentScreen: "democracy.VoteList",
