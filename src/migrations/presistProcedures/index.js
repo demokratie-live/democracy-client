@@ -48,7 +48,11 @@ export default async () => {
         }
       })
     );
+    console.warn("Remove this line");
+    await VotesLocal.resetVotesLocal();
     return true;
   }
+  console.warn("Remove this line");
+  await VotesLocal.resetVotesLocal();
   return false;
 };

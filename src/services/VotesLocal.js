@@ -13,6 +13,8 @@ class VotesLocal {
     return {};
   };
 
+  static resetVotesLocal = async () => Keychain.resetGenericPassword(this.KEYCHAIN_SERVICE);
+
   static getVotesLocalList = async () => {
     const votesLocal = await VotesLocal.getVotesLocal();
     const list = [];
