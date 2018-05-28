@@ -57,7 +57,10 @@ export const resolvers = {
       return previous.isInstructionsShown;
     },
 
-    votesLocal: async () => VotesLocal.getVotesLocalList(),
+    votesLocalKeyStore: async (_, args, { cache }) => {
+      console.log("resolver votesLocal", await VotesLocal.getVotesLocalList());
+      return VotesLocal.getVotesLocalList();
+    },
 
     votedLocal: async (_, { procedureId }) => {
       const vote = await VotesLocal.getVoteLocal(procedureId);

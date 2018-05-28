@@ -16,9 +16,10 @@ class VotesLocal {
   static getVotesLocalList = async () => {
     const votesLocal = await VotesLocal.getVotesLocal();
     const list = [];
-    return _.forEach(votesLocal, (value, key) => {
+    _.forEach(votesLocal, (value, key) => {
       list.push({ procedureId: key, selection: value });
     });
+    return list;
   };
 
   static getVoteLocal = async procedureId => {
