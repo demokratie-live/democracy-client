@@ -13,7 +13,8 @@ class VotesLocal {
     return {};
   };
 
-  static resetVotesLocal = async () => Keychain.resetGenericPassword(this.KEYCHAIN_SERVICE);
+  static resetVotesLocal = async () =>
+    Keychain.resetGenericPassword(this.KEYCHAIN_SERVICE);
 
   static getVotesLocalList = async () => {
     const votesLocal = await VotesLocal.getVotesLocal();
@@ -41,8 +42,7 @@ class VotesLocal {
     }
   };
 
-  static setVoteLocal = async ({ procedureId, selection }) => {
-    const votesLocal = await VotesLocal.getVotesLocal();
+  static prepareSetVoteLocal = ({ procedureId, selection }) => {
     let selectionInt;
     switch (selection) {
       case "YES":
@@ -59,9 +59,37 @@ class VotesLocal {
         selectionInt = 0;
         break;
     }
+    return { procedureId, selectionInt };
+  };
+
+  static setVoteLocal = async ({ procedureId, selection }) => {
+    const votesLocal = await VotesLocal.getVotesLocal();
+
+    const { selectionInt } = VotesLocal.prepareSetVoteLocal({
+      procedureId,
+      selection
+    });
 
     votesLocal[procedureId] = selectionInt;
 
+    await Keychain.setGenericPassword(
+      "democracyVotes",
+      JSON.stringify(votesLocal),
+      this.KEYCHAIN_SERVICE
+    );
+    console.log("setVoteLocal", await VotesLocal.getVotesLocalList());
+  };
+
+  static setVoteLocalList = async voteLocalList => {
+    const votesLocal = await VotesLocal.getVotesLocal();
+    voteLocalList.forEach(vote => {
+      const { procedureId, selectionInt } = VotesLocal.prepareSetVoteLocal(
+        vote
+      );
+      votesLocal[procedureId] = selectionInt;
+      console.log("setList");
+    });
+    console.log("saveList");
     await Keychain.setGenericPassword(
       "democracyVotes",
       JSON.stringify(votesLocal),

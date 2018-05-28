@@ -35,24 +35,20 @@ export default async () => {
       }
     });
 
-    await Promise.all(
-      proceduresById.map(async ({ _id, procedureId }) => {
-        try {
-          const { selection } = votesLocal.find(
-            ({ procedure }) => procedure === _id
-          );
-
-          return await VotesLocal.setVoteLocal({ procedureId, selection });
-        } catch (error) {
-          return undefined;
-        }
+    await VotesLocal.setVoteLocalList(
+      proceduresById.map(({ _id, procedureId }) => {
+        const { selection } = votesLocal.find(
+          ({ procedure }) => procedure === _id
+        );
+        return { procedureId, selection };
       })
     );
-    console.warn("Remove this line");
-    await VotesLocal.resetVotesLocal();
+
+    console.warn("Remove this line 1", await VotesLocal.getVotesLocalList());
+    // await VotesLocal.resetVotesLocal();
     return true;
   }
-  console.warn("Remove this line");
-  await VotesLocal.resetVotesLocal();
+  console.warn("Remove this line 2", await VotesLocal.getVotesLocalList());
+  // await VotesLocal.resetVotesLocal();
   return false;
 };

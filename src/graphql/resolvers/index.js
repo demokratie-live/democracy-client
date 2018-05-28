@@ -57,12 +57,14 @@ export const resolvers = {
       return previous.isInstructionsShown;
     },
 
-    votesLocalKeyStore: async (_, args, { cache }) => {
+    votesLocalKeyStore: async () => {
       console.log("resolver votesLocal", await VotesLocal.getVotesLocalList());
-      return VotesLocal.getVotesLocalList().then(votesLocal => votesLocal.map(vote => ({
+      return VotesLocal.getVotesLocalList().then(votesLocal =>
+        votesLocal.map(vote => ({
           ...vote,
           __typename: "voteLocalKeyStoreItem"
-        })));
+        }))
+      );
     },
 
     votedLocal: async (_, { procedureId }) => {
