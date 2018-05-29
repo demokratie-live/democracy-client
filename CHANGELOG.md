@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.7.x
+
+* [iOS] Go back by swiping from left to right [#354](https://github.com/demokratie-live/democracy-client/issues/354)
+
 ### 0.7.8
 
 * [HOTFIX] increase offline cache to prevent lost vote data [#322](https://github.com/demokratie-live/democracy-client/issues/322)
