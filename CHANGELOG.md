@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.7.x
+
+* General 
+  * Add time until goverment-vote [#358](https://github.com/demokratie-live/democracy-client/issues/358)
+
 ### 0.7.8
 
 * [HOTFIX] increase offline cache to prevent lost vote data [#322](https://github.com/demokratie-live/democracy-client/issues/322)
