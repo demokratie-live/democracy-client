@@ -10,9 +10,29 @@ const DateText = styled.Text`
   display: ${({ visible }) => (visible ? "flex" : "none")};
 `;
 
+const formatDate = date => {
+  if (date) {
+    if (new Date(date) <= new Date()) {
+      return m(date).format("DD.MM.YY");
+    }
+    const days = Math.floor(m.duration(m(date).diff(m())).asDays());
+    if (days > 1) {
+      return `${days} Tage`;
+    } else if (days === 1) {
+      return `${days} Tag`;
+    }
+    const hours = Math.floor(m.duration(m(date).diff(m())).asMinutes() / 60);
+    const minutes = Math.floor(
+      ((m.duration(m(date).diff(m())).asMinutes() / 60) % 1) * 60
+    );
+    return `${hours}:${minutes}`;
+  }
+  return null;
+};
+
 const DateTime = ({ date }) => (
   <DateText visible={date} date={date}>
-    {date && m(date).format("DD.MM.YY")}
+    {formatDate(date)}
   </DateText>
 );
 
