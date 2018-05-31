@@ -35,7 +35,7 @@ matrix:
     cache:
       yarn: true
     before_install:
-    - bundle install --gemfile=./android/GemFile
+    - bundle install --gemfile=./android/Gemfile
     - echo y | android update sdk --no-ui --filter build-tools-26.0.1,build-tools-26.0.2,android-26,extra-android-m2repository
     - openssl aes-256-cbc -k "$SECRET" -in .env.alpha.enc -out .env.alpha -d
     - openssl aes-256-cbc -k "$SECRET" -in .env.beta.enc -out .env.beta -d
