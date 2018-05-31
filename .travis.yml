@@ -40,10 +40,6 @@ matrix:
     - echo y | android update sdk --no-ui --filter build-tools-26.0.1,build-tools-26.0.2,android-26,extra-android-m2repository
     - gem update --system
     - bundle update fastlane
-    install:
-    - nvm install 8
-    - yarn --version
-    - yarn install
     android:
       components:
       - tools
@@ -65,6 +61,9 @@ matrix:
       - 'google-gdk-license-.+'
     before_script:
     - cd ..
+    - nvm install 8
+    - yarn --version
+    - yarn install
     - openssl aes-256-cbc -k "$SECRET" -in .env.alpha.enc -out .env.alpha -d
     - openssl aes-256-cbc -k "$SECRET" -in .env.beta.enc -out .env.beta -d
     - openssl aes-256-cbc -k "$SECRET" -in .env.production.enc -out .env.production -d
