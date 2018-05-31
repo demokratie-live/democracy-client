@@ -35,7 +35,8 @@ matrix:
     cache:
       yarn: true
     before_install:
-    - bundle install --gemfile=./android/Gemfile
+    - cd android
+    - bundle install
     - echo y | android update sdk --no-ui --filter build-tools-26.0.1,build-tools-26.0.2,android-26,extra-android-m2repository
     - openssl aes-256-cbc -k "$SECRET" -in .env.alpha.enc -out .env.alpha -d
     - openssl aes-256-cbc -k "$SECRET" -in .env.beta.enc -out .env.beta -d
@@ -43,7 +44,7 @@ matrix:
     - openssl aes-256-cbc -k "$SECRET" -in android/Google_Play_Android_Developer.json.enc -out android/Google_Play_Android_Developer.json -d
     - openssl aes-256-cbc -k "$SECRET" -in android/app/democracy2-release-key.keystore.enc -out android/app/democracy2-release-key.keystore -d
     - gem update --system
-    - bundle update fastlane --gemfile=./android/Gemfile
+    - bundle update fastlane
     install:
     - nvm install 8
     - yarn --version
@@ -68,8 +69,7 @@ matrix:
       - 'android-sdk-license-.+'
       - 'google-gdk-license-.+'
     script:
-    - cd android
-    - bundle exec fastlane android test --gemfile=./Gemfile
+    - bundle exec fastlane android test
 
   # ios test
   - if: type IN (pull_request)
