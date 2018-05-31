@@ -53,6 +53,7 @@ buck-out/
 */fastlane/screenshots
 ios/*dSYM.zip
 /nbproject/
+ios/vendor
 
 .env*
 
