@@ -63,16 +63,15 @@ platform :ios do
       clean: true, 
       scheme: "Alpha"
     )
+
     version = get_version_number(
       xcodeproj: "democracyclient.xcodeproj",
       target: "democracyclient"
     )
-
     changelog = read_changelog(
       changelog_path: '../CHANGELOG.md',	# Specify path to CHANGELOG.md
       section_identifier: "[" + version + "]"
     )
-
     upload_to_testflight(
       changelog: changelog,
       groups: "Developer",
@@ -100,8 +99,17 @@ platform :ios do
       clean: true, 
       scheme: "Beta"
     )
+
+    version = get_version_number(
+      xcodeproj: "democracyclient.xcodeproj",
+      target: "democracyclient"
+    )
+    changelog = read_changelog(
+      changelog_path: '../CHANGELOG.md',	# Specify path to CHANGELOG.md
+      section_identifier: "[" + version + "]"
+    )
     upload_to_testflight(
-      changelog: File.read("../../CHANGELOG.md")[0, 3000],
+      changelog: changelog,
       groups: "Prototyp-Tester",
       app_identifier: "de.democracy-deutschland.clientapp.beta",
       demo_account_required: false,
@@ -126,8 +134,17 @@ platform :ios do
       clean: true, 
       scheme: "democracyclient-prod"
     )
+
+    version = get_version_number(
+      xcodeproj: "democracyclient.xcodeproj",
+      target: "democracyclient"
+    )
+    changelog = read_changelog(
+      changelog_path: '../CHANGELOG.md',	# Specify path to CHANGELOG.md
+      section_identifier: "[" + version + "]"
+    )
     upload_to_testflight(
-      changelog: File.read("../../CHANGELOG.md")[0, 3000],
+      changelog: changelog,
       app_identifier: "de.democracy-deutschland.clientapp",
       demo_account_required: false,
       notify_external_testers: true,
