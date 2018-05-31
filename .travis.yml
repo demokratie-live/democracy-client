@@ -32,6 +32,7 @@ matrix:
     os: linux
     language: android
     jdk: oraclejdk8
+    gemfile: android/Gemfile
     cache:
       yarn: true
     before_install:
