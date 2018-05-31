@@ -38,11 +38,6 @@ matrix:
     - cd android
     - bundle install
     - echo y | android update sdk --no-ui --filter build-tools-26.0.1,build-tools-26.0.2,android-26,extra-android-m2repository
-    - openssl aes-256-cbc -k "$SECRET" -in .env.alpha.enc -out .env.alpha -d
-    - openssl aes-256-cbc -k "$SECRET" -in .env.beta.enc -out .env.beta -d
-    - openssl aes-256-cbc -k "$SECRET" -in .env.production.enc -out .env.production -d
-    - openssl aes-256-cbc -k "$SECRET" -in android/Google_Play_Android_Developer.json.enc -out android/Google_Play_Android_Developer.json -d
-    - openssl aes-256-cbc -k "$SECRET" -in android/app/democracy2-release-key.keystore.enc -out android/app/democracy2-release-key.keystore -d
     - gem update --system
     - bundle update fastlane
     install:
@@ -68,7 +63,16 @@ matrix:
       - 'android-sdk-preview-license-.+'
       - 'android-sdk-license-.+'
       - 'google-gdk-license-.+'
+    before_script:
+    - cd ..
+    - openssl aes-256-cbc -k "$SECRET" -in .env.alpha.enc -out .env.alpha -d
+    - openssl aes-256-cbc -k "$SECRET" -in .env.beta.enc -out .env.beta -d
+    - openssl aes-256-cbc -k "$SECRET" -in .env.production.enc -out .env.production -d
+    - openssl aes-256-cbc -k "$SECRET" -in android/Google_Play_Android_Developer.json.enc -out android/Google_Play_Android_Developer.json -d
+    - openssl aes-256-cbc -k "$SECRET" -in android/app/democracy2-release-key.keystore.enc -out android/app/democracy2-release-key.keystore -d
+    
     script:
+    - cd android
     - bundle exec fastlane android test
 
   # ios test
