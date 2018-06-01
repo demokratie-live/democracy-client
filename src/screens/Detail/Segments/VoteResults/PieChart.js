@@ -80,9 +80,9 @@ class PieChart extends Component {
 
   getLabel = label => {
     const labels = {
-      yes: "Ja",
-      abstination: "Enthalten",
-      no: "Nein",
+      yes: "Zustimmungen",
+      abstination: "Enthaltungen",
+      no: "Ablehnungen",
       notVote: "Nicht abg."
     };
     return labels[label] || label;
