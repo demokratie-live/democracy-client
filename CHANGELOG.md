@@ -4,11 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [0.7.9] - 2018-05-30
+## [0.x.x] - 2018-XX-XX
 ### Changed
 - Changelog format
 - [iOS] Override Alpha Versions
-- A Test
+
+## [0.7.9] - 2018-06-01
+### Changed
+- [Credits] replace lover of the month
+
+### Fixed
+- [ListView] highlight "Vergangen" segment header [#308](https://github.com/demokratie-live/democracy-client/issues/308)
+- [Details] change current status if user has not voted [#328](https://github.com/demokratie-live/democracy-client/issues/328)
+- [Details] Change pie-chart labels [#310](https://github.com/demokratie-live/democracy-client/issues/310)
+- [Search] Update listView after userInteractions [#312](https://github.com/demokratie-live/democracy-client/issues/312)
+- improve app start performance [#281](https://github.com/demokratie-live/democracy-client/issues/281)
 
 ## [0.7.8] - 2018-05-26
 ### Fixed
