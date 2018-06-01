@@ -5,6 +5,7 @@ import Pdf from "react-native-pdf";
 
 const Wrapper = styled.View`
   flex: 1;
+  background-color: white;
 `;
 
 const Document = ({ url }) => (

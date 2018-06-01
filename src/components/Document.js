@@ -39,6 +39,8 @@ class Document extends Component {
         onPress={() =>
           navigator.push({
             screen: "democracy.Pdf",
+            title: type,
+            backButtonTitle: "",
             passProps: {
               url
             }
