@@ -3,7 +3,7 @@
 ### 0.x.x
 
 * [Feature] Push Notifications
-* [Feature] Add deep lingking
+* [Feature] Add deep linking
 
 ### 0.7.9
 
