@@ -3,7 +3,7 @@
 ### 0.7.x
 
 * Credits
-  * [Changed] replace locer of the month
+  * [Changed] replace lover of the month
 
 ### 0.7.8
 
