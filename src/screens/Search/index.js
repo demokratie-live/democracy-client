@@ -75,15 +75,37 @@ class SearchScreen extends Component {
 
   onChangeTerm = async term => {
     this.setState({ loading: true, term });
-    const { client: { query } } = this.props;
-    const { data: { searchProcedures: procedures } } = await query({
-      query: searchProcedures,
-      variables: { term },
-      fetchPolicy: "network-only"
+    const { client: { watchQuery } } = this.props;
+
+    this.observableSearchQuery = this.observableSearchQuery.filter(
+      ({ term: queryTerm }) => {
+        if (queryTerm !== term) {
+          // query.unsubscribe();
+          return false;
+        }
+        return true;
+      }
+    );
+
+    this.observableSearchQuery.push({
+      term,
+      query: await watchQuery({
+        query: searchProcedures,
+        variables: { term }
+      })
     });
-    if (this.state.term === term) {
-      this.setState({ procedures, loading: false });
-    }
+
+    const { query } = this.observableSearchQuery.find(
+      ({ term: queryTerm }) => term === queryTerm
+    );
+
+    query.subscribe({
+      next: ({ data: { searchProcedures: procedures } }) => {
+        if (this.state.term === term) {
+          this.setState({ procedures, loading: false });
+        }
+      }
+    });
   };
 
   onItemClick = ({ item }) => () => {
@@ -93,6 +115,8 @@ class SearchScreen extends Component {
       passProps: { ...item }
     });
   };
+
+  observableSearchQuery = [];
 
   render() {
     const { loading } = this.state;

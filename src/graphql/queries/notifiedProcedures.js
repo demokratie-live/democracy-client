@@ -1,5 +1,7 @@
 import gql from "graphql-tag";
 
+import ActivityIndex from "../fragments/ProcedureActivityIndex";
+
 export default gql`
   query getNotifiedProcedures {
     notifiedProcedures {
@@ -8,10 +10,8 @@ export default gql`
       notify
       currentStatus
       voteDate
-      activityIndex {
-        activityIndex
-        active
-      }
+      ...ActivityIndex
     }
   }
+  ${ActivityIndex}
 `;

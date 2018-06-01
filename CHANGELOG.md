@@ -5,6 +5,24 @@
 * [Feature] Push Notifications
 * [Feature] Add deep lingking
 
+### 0.7.9
+
+* Credits
+  * [Changed] replace lover of the month
+* ListView
+  * highlight "Vergangen" segment header [#308](https://github.com/demokratie-live/democracy-client/issues/308)
+* Details
+  * change current status if user has not voted [#328](https://github.com/demokratie-live/democracy-client/issues/328)
+  * Change pie-chart labels [#310](https://github.com/demokratie-live/democracy-client/issues/310)
+* Search
+  * Update listView after userInteractions [#312](https://github.com/demokratie-live/democracy-client/issues/312)
+* General
+  * improove app start performance [#281](https://github.com/demokratie-live/democracy-client/issues/281)
+
+### 0.7.8
+
+* [HOTFIX] increase offline cache to prevent lost vote data [#322](https://github.com/demokratie-live/democracy-client/issues/322)
+
 ### 0.7.7
 
 * Details

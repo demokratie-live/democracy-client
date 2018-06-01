@@ -54,7 +54,7 @@ const NotificationButtonIcon = styled(Ionicons).attrs({
   name: ({ active }) =>
     active ? "ios-notifications" : "ios-notifications-outline",
   color: ({ active }) => (active ? "rgb(255, 171, 33)" : "rgb(0, 0, 0)")
-}) ``;
+})``;
 
 const IntroSide = styled.View`
   justify-content: space-between;
@@ -143,7 +143,8 @@ class Detail extends Component {
       notify,
       listType,
       type,
-      activityIndex
+      activityIndex,
+      voted
     } = this.props.data.procedure;
 
     return (
@@ -196,6 +197,7 @@ class Detail extends Component {
               procedureId={procedureId}
               currentStatus={currentStatus}
               type={type}
+              voted={voted}
             />
           </Segment>
           <Segment title="Dokumente" scrollTo={this.scrollTo}>
