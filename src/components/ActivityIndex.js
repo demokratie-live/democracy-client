@@ -33,7 +33,18 @@ const Arrow = styled(Ionicons).attrs({
 `;
 
 class ActivityIndex extends Component {
-  componentWillReceiveProps() {}
+
+  shouldComponentUpdate(nextProps) {
+    const { active, activityIndex } = this.props;
+    if (
+      active !== nextProps.active ||
+      activityIndex !== nextProps.activityIndex
+    ) {
+      return true;
+    }
+    return false;
+  }
+
   render() {
     const { active, touchable, activityIndex, increaseActivity } = this.props;
     if (touchable && !active) {

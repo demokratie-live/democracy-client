@@ -1,5 +1,8 @@
 import gql from "graphql-tag";
 
+import ActivityIndex from "../fragments/ProcedureActivityIndex";
+import Voted from "../fragments/ProcedureVoted";
+
 export default gql`
   query search($term: String!) {
     searchProcedures(term: $term) {
@@ -9,11 +12,13 @@ export default gql`
       tags
       abstract
       voteDate
+      votedGovernment
       submissionDate
-      activityIndex {
-        activityIndex
-        active
-      }
+      completed
+      ...ActivityIndex
+      ...Voted
     }
   }
+  ${ActivityIndex}
+  ${Voted}
 `;
