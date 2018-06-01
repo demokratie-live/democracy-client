@@ -2,11 +2,7 @@ import {
   Navigation,
   ScreenVisibilityListener as RNNScreenVisibilityListener
 } from "react-native-navigation";
-import { AsyncStorage, NetInfo } from "react-native";
-import RSAKey from "react-native-rsa";
-import DeviceInfo from "react-native-device-info";
-import { sha256 } from "react-native-sha256";
-import Config from "react-native-config";
+import { NetInfo } from "react-native";
 // import Reactotron from "reactotron-react-native";
 
 import client, { persistor } from "./src/graphql/client";
