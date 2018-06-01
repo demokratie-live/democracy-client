@@ -3,7 +3,7 @@
 ### 0.7.9
 
 * Credits
-  * [Changed] replace locer of the month
+  * [Changed] replace lover of the month
 * ListView
   * highlight "Vergangen" segment header [#308](https://github.com/demokratie-live/democracy-client/issues/308)
 * Details
