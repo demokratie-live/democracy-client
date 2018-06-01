@@ -2,6 +2,8 @@
 
 ### 0.7.9
 
+* Credits
+  * [Changed] replace locer of the month
 * ListView
   * highlight "Vergangen" segment header [#308](https://github.com/demokratie-live/democracy-client/issues/308)
 * Details
@@ -13,6 +15,7 @@
   * improove app start performance [#281](https://github.com/demokratie-live/democracy-client/issues/281)
 
 ### 0.7.8
+
 * [HOTFIX] increase offline cache to prevent lost vote data [#322](https://github.com/demokratie-live/democracy-client/issues/322)
 
 ### 0.7.7
