@@ -24,6 +24,7 @@ project.xcworkspace
 
 # Android/IntelliJ
 #
+build/
 .idea
 .gradle
 local.properties
@@ -50,6 +51,9 @@ buck-out/
 */fastlane/report.xml
 */fastlane/Preview.html
 */fastlane/screenshots
-
-coverage
+ios/*dSYM.zip
 /nbproject/
+
+.env*
+
+android/Google_Play_Android_Developer.json

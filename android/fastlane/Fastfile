@@ -1,0 +1,58 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc "Validate"
+  lane :validate do
+    supply(
+      validate_only: true
+    )
+  end
+
+  desc "Test"
+  lane :test do
+    gradle(
+      task: "clean assembleAlpha",
+      build_type: "Release"
+    )
+  end
+
+  desc "Submit a new Alpha Build to GooglePlayStore"
+  lane :alpha do
+    gradle(
+      task: "clean assembleAlpha",
+      build_type: "Release"
+    )
+    upload_to_play_store(
+      track: 'alpha',
+      track_promote_to: 'alpha',
+      apk: "./app/build/outputs/apk/app-alpha-release.apk",
+      metadata_path: "./fastlane/metadata_alpha/android"
+    )
+  end
+
+  desc "Submit a new Beta Build to GooglePlayStore"
+  lane :beta do
+    gradle(
+      task: "clean assembleBeta",
+      build_type: "Release"
+    )
+    upload_to_play_store(
+      track: 'beta',
+      track_promote_to: 'beta',
+      apk: "./app/build/outputs/apk/app-beta-release.apk",
+      metadata_path: "./fastlane/metadata_beta/android"
+    )
+  end
+
+end
