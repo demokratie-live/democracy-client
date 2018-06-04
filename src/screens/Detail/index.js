@@ -232,19 +232,13 @@ class Detail extends Component {
 }
 
 Detail.propTypes = {
-  // title: PropTypes.string.isRequired,
-  // tags: PropTypes.arrayOf(PropTypes.string),
-  // abstract: PropTypes.string,
   procedureId: PropTypes.string.isRequired,
   data: PropTypes.shape().isRequired,
   navigator: PropTypes.instanceOf(Navigator).isRequired,
   toggleNotification: PropTypes.func.isRequired
 };
 
-Detail.defaultProps = {
-  // abstract: "",
-  // tags: []
-};
+Detail.defaultProps = {};
 
 export default compose(
   graphql(getProcedure, {

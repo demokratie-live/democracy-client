@@ -22,7 +22,8 @@ export default ComposedComponent => {
                   navigator.push({
                     screen: event.link,
                     passProps: { ...event.payload },
-                    backButtonTitle: ""
+                    backButtonTitle: "",
+                    title: 'Abstimmung'.toUpperCase()
                   });
                   break;
 
