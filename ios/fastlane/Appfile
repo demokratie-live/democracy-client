@@ -1,0 +1,8 @@
+app_identifier("de.democracy-deutschland.clientapp") # The bundle identifier of your app
+apple_id("contact@democracy-deutschland.de") # Your Apple email address
+
+itc_team_id "118962308" # iTunes Connect Team ID
+team_id "A4B84UJD7M" # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile

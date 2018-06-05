@@ -1,81 +1,91 @@
+env:
+  global:
+    # SECRET
+    - secure: "JSEyfY3iPkO7AuK9n5JFmyWzrk1JJ8b3Eo6bHY8FqKq4d/ZcAhOWUSO4+sTdiSnFiQETY+0jzMgimawnCCsSnkO5VKupbpg0Zw1GJ4IQ1QgX+RlWSmXGUNYuSltTDXNXlrEQZYz+qs/PdK9nQwjItNwrhot+gmRfU2BROnn834wKt9P4rxLlM2Dtwd50Tq4Jwt8SVROGqs21ivGzBjgw46Najmj7rh+k2pRpJ9eTm8BGOJew92AzuB5iagBSIEuifgZx/vU42O4musjicqBvn/+PjtY5SX7DwpwO7tEjYpU74Vrn0WZQ5YVHbcplmw5ZsDmA8HaAQ3w2SW1jCEIGDosmWbjbnWIbs6St15ofqXUUigP+wpIoP3s5JiRDEJIh9jbIV6j1lkvdgLPVGMgPqHd6Xupu+pM3if7pOY8fLO9iFygTiFI3YOkElZY9t+iSz7HEm0a7qwF+4fCpORV7K6i5elAlJIbJGd/NEAkxr36mbItxaV3cgZv20SmxEb1F9i7nr1hWMcNrvmw8E7b7qHlq7rNBtS9Cd3EbuQbCLeoP+Zom7IuN2TLLHlDW34HVGSTh01YEf7rc2gFTklVzuO+lGp52PVduVzHBFbxiKukgZ+I38jDtEJFX685wqHBiBvUe/5zImjJsv9fBhYg4w+9600SKioOOjYQRBueOPzU="
+    # FASTLANE_PASSWORD (apple_id password)
+    - secure: "c7KcteRj+zaWdOzWDdjCQhYYzYxwXyx6l2zMIRKE/Rk7q275uRD/lHxBEWbASAkyjqPrgtaey5iqvoWP1eH99m5nkF2UPTBfHPb0csMPB6NZYQzN5ksHsW3CGgmPlY0HWEGCgai4qAhkxW7nDU1/L5zhlMFfqum2R259RYBfW52fU4EZBXVWkn8Ho1agO+Ln6ZDHSqKZTB6izBHeZ1wGUXf0wEqgaKAqUt+IwUk1uS2ISwTL3NvnkgYxlOt5BkXv5/6P9kMilmlKzD+nvrQL+Uvz7oY2idKKDJrc0iYHTlm0bGw1sBEi4FxeSiTmuZTTPqJczzvKKWbv/Vg9kiptgyb4xE+ERU+UnvqU4XjZyjouW/te0hhVM9Qu1sUSmF7fPe6ssZnInAa8S/+oCr3Q9YXTienD/cmOSpk9mcwTupFTV8YgVL39nmgVHw4CaZBShvtubmisFuGZiDwDyeyNgZnNJOtS+bgm6o83lIV9veOIC4M9V0QwW2WhbsLEEUfeK2+J0QkDXjtEOtwtr8mgsZTwvJ2y3ttG8/Eo9+WOx3Kxfvk+ilWYfXDrM3wqIlqYQgOfj3wKU3RcQO6iujpHpn0dw2GyC8gcmMyRXTINa31wkeviycA8ti9YrBTXY9nJDrzxnuNRuFOOQva/xivJoYEH1O35dAhLYFMrn5mI46M="
+    # ANDROID_PASS
+    - secure: "I4Sx4ezNAr5bi8/mVoSaxhmmMHeDEi3ydbh/R5jpgS9IjvNxGzHhgxatSGukXorWqtebyJ2aity9iYn8xq0dK1/yq5RWoAmXjOM4jpQ3wDvSsC6s0spr/YhkVfInI3C2uS8lw+6z/724VTrf0C7m8LlZ4wC68hI64cVaMZwEl9WgBYgntq+kfLfBB4x+f0HoxIeW4eAyhrlX2XeqSdz5F9hMyXYHt/81dYPbXoASN1D8Zqwo66O3assNXcB9RnQ0JaDbYDBO4rHWf0YkxJTkdtJBHuVpJcdC/SF2iEYC3gm/fH01Vh+7DsIemZ/VHccxUfFyq6jgEkRjbB98wLcfA4mUiauvmaDFvRzYsrtzW1guLdY8S+cbHkmvt+2crnlXPp1Ehtt4vhQxIEIXfP5Wh4dwMetpZCgUDKjLKPVlR2wIi6KkJeVcgyA0y1MA6WWlaEQNgQjKNxURF+P7hg9HKZJs4u+1+3+x+s1i62EGUucF8VUvVqn3Ns4DO1Ce0Zz3zaGEuHx4+1qj2QXMi7zeWY++RQtGa9LnuJRHsHokXWh/FpmfjOjj0xZJ4DCycjgBK6hwBP97Vjw9CqBIHCbouUF0CmvRscSvSpDl4PB32K4TGN1Zqkxwb6KTquLlIQCNgQgPpr4AzihBZqhBSAWttbmNrSdFFeJgXzOYykqBpnI="
+    # MATCH_GIT
+    - secure: "GfK5fk8qyuhg+O8IRahfuQis9v3thkDwmWAh2fq31mpIaFu7tzfYNeShi9NXJ5b69P64RvVESYKKBh6I55pPGuprIW1w0j1s4bRry84ml8ZucGlHvkSObEXeDHibvLv9dPSpJ3KNFD1iRkuA/Wp4tpHRAH9GNM8I7h7RsWvwLUIW1x8xLPW+/7NeFYZsT3PBi+YNzkD5a640rLiOGhf7k4xBNuvMo2gy+Zf5mB8PoA06w70Mlo+cg8wLsKz5xJU9a8GfqIe0RVnZsKoG98ayc6v+28yEcOrgYP4pClzXyhIpflQLobumkkx8neq8C5eMVNCAoGsMqc6PusUjCVmQbuhKLe35SAvwWYhYsy7fuL5eJbbuzCVnK9Cvit79PBygPIE5NoVCtc76wkpmVqHeQtFiQLebJhtNjWKl9mv1xviphc8tPsiKtIsLtpxekvO3J1GyKDv+F6pOJEFy73Ol78nSY4bFBD6olj2dE3rNiycuyWvwHNZyAId853IXMIfrX23tu3MvwfM6W+Ejh/OaC4YcdUJKc/PICbVAVfiu9B4dIX3b49+z6es6uEs+CCBKdKUve+sm/37mAqIJPdIIQh1hbF/yxWtPbKKQbUe8xca+1DId0EWwpLdJHiNZxUQLERKqMkNXTR1uE/kGfXaOvXQxsLGzM4U0sQUQorNyf6A="
+    # MATCH_PASSWORD
+    - secure: "DBRDvRv6mUCqz7mheYFfyQS0zqoR4zHbJ3+KO1dD41/7UYCuI43sTBhfuF4TInc63ysu4tTVqg22phajnJ3r2s544CaPlm6/OrbOoGW5gV6i392u5z44Yk8hZP+OBKctUw671RTY02O3binYOi4FQZoq+V2w5x7KYQnzm8nlMwd8W4B/Oq27HuxYrVV/zfD0b+vQXhoyeMZRZ/hXCuYWkkXKl68qLMZy3XiJgOVXmDzBuHZULvjDPwZQ7DCj4ngL7cn23s3SpLSH1r8hG4RrqzEY4hWgOH0aWF2CzA7SKdEDYNudMlXVlFatd8oY6V6ityNDimXzWDl5nhvd8SKprVDbEwcR2TXbkm7YaLHOZH7pXtfs6oeDhTVELKVZjhIfFgQp0OmWJg72HMwRlu8LdJgylFeZC54QcLyO3ARxQF7J+b/afQHuxHEGsM/whwlW8JXu9p+/UcfwLijYeDIf75bg+tBl4ydVM0WcKSYfMVQAJlxb7uA1ZSNsd7H/6N45mmrXgJnw6tv3GI8I/CrynTr66GhfqMHEHq7iIVp5+RD5CfDji+p0qeS4SkLfoMJcl3Es4EYXavKTUOy5NNbMvOy1Mohi/B3pLRbhHuHouFnLdFVlYq4tqnJ525aiP2r3q7cIl0AqbMvUqoJD++BUy6PCHW2fkk4g/zMvJL+wY0Y="
 matrix:
-    include:
-        # test
-        -   os: linux
-            language: node_js
-            node_js:
-                - 8
-            install:
-                - yarn --version
-                - yarn install
-            script:
-                - yarn test
-                #- yarn coveralls
-        # web
-        #-   os: linux
-        #    language: node_js
-        #    node_js:
-        #        - 8
-        #    install:
-        #        - yarn --version
-        #        - yarn install
-        #    script:
-        #        - yarn build:web
-        # android
-        -   if: branch =~ ^master OR branch =~ /^pr\..*/
-            os: linux
-            language: android
-            jdk: oraclejdk8
-            before_install:
-                - echo y | android update sdk --no-ui --filter build-tools-26.0.1,build-tools-26.0.2,android-26,extra-android-m2repository
-            install:
-                - nvm install 8
-                - yarn --version
-                - yarn install
-            android:
-                components:
-                    - tools
-                    - platform-tools
-                    # android 23
-                    - build-tools-23.0.1
-                    - build-tools-25.0.1
-                    - build-tools-26.0.1
-                    - build-tools-26.0.2
-                    - android-23
-                    # extra
-                    - extra-android-m2repository
-                    - extra-google-google_play_services
-                    - extra-google-m2repository
-                    - addon-google_apis-google-16
-                licenses:
-                    - 'android-sdk-preview-license-.+'
-                    - 'android-sdk-license-.+'
-                    - 'google-gdk-license-.+'
-            script:
-                - yarn build:android
-            #deploy:
-            #   skip_cleanup: true
-            #   provider: releases
-            #   api_key:
-            #       secure: XXX=
-            #   file: $TRAVIS_BUILD_DIR/android/app/build/outputs/apk/app-release-unsigned.apk
-            #   on:
-            #       repo: demokratie-live/democracy-client
-            #       tags: true
-        # ios
-        -   if: branch =~ ^master AND NOT type =~ ^pull_request
-            os: osx
-            osx_image: xcode9
-            language: objective-c
-            install:
-                - nvm install 8
-                - npm install -g yarn
-                - yarn --version
-                - yarn install
-            xcode_project: ios/democracyclient.xcodeproj
-            xcode_scheme: ios/democracyclientTests
-            script:
-                - yarn build:ios
-                #- xctool run-tests -scheme PepperoniAppTemplate -sdk iphonesimulator -launch-timeout 90  ONLY_ACTIVE_ARCH=NO
+  include:
+  # test
+  - os: linux
+    language: node_js
+    node_js:
+    - 8
+    cache:
+      yarn: true
+      directories:
+      - node_modules
+    install:
+    - yarn --version
+    - yarn install
+    script:
+    - yarn test
+
+  # android test
+  - if: type IN (pull_request)
+    os: linux
+    language: android
+    jdk: oraclejdk8
+    cache:
+      yarn: true
+    before_install:
+    - echo y | android update sdk --no-ui --filter build-tools-26.0.1,build-tools-26.0.2,android-26,extra-android-m2repository
+    - openssl aes-256-cbc -k "$SECRET" -in .env.alpha.enc -out .env.alpha -d
+    - openssl aes-256-cbc -k "$SECRET" -in .env.beta.enc -out .env.beta -d
+    - openssl aes-256-cbc -k "$SECRET" -in .env.production.enc -out .env.production -d
+    - openssl aes-256-cbc -k "$SECRET" -in android/Google_Play_Android_Developer.json.enc -out android/Google_Play_Android_Developer.json -d
+    - openssl aes-256-cbc -k "$SECRET" -in android/app/democracy2-release-key.keystore.enc -out android/app/democracy2-release-key.keystore -d
+    - gem update --system
+    - bundle install
+    - bundle update fastlane
+    install:
+    - nvm install 8
+    - yarn --version
+    - yarn install
+    android:
+      components:
+      - tools
+      - platform-tools
+      # android 23
+      - build-tools-23.0.1
+      - build-tools-25.0.1
+      - build-tools-26.0.1
+      - build-tools-26.0.2
+      - android-23
+      # extra
+      - extra-android-m2repository
+      - extra-google-google_play_services
+      - extra-google-m2repository
+      - addon-google_apis-google-16
+      licenses:
+      - 'android-sdk-preview-license-.+'
+      - 'android-sdk-license-.+'
+      - 'google-gdk-license-.+'
+    script:
+    - cd android
+    - bundle exec fastlane android test
+
+  # ios test
+  - if: type IN (pull_request)
+    osx_image: xcode9.2
+    language: objective-c
+    before_install:
+    - bundle install
+    - bundle update fastlane
+    install:
+    - nvm install 8
+    - npm install -g yarn
+    - yarn --version
+    - yarn install
+    script:
+    - cd ios
+    - bundle exec fastlane ios test
+
 after_script:
-  - echo "BUILD FINISHED"
+- echo "BUILD FINISHED"

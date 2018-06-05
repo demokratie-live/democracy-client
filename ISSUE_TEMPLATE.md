@@ -1,21 +1,20 @@
-Description:
+**Description:**
 
 [TEXT]
 
-Faulty Behaviour:
+**Faulty Behaviour:**
 
 [TEXT]
 
-Expected Behaviour:
+**Expected Behaviour:**
 
 [TEXT]
 
-Steps to reproduce:
-
+**Steps to reproduce:**
 - 1.
 - 2.
 - 3.
 - 4. ...
 - 5. Profit
 
-Commit: [A12B34E](URL)
+**App-Version:** [Bitte App version hier angeben]

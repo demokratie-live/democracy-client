@@ -1,0 +1,125 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+lane :setup_signing do
+  setup_travis
+
+  match(type: 'appstore')
+end
+
+platform :ios do
+  desc "Push a new beta build to TestFlight"
+  #xcversion(version: "9.2")
+  #xcode_select "/Applications/Xcode-9.2.app"
+  produce(
+    team_name: 'DEMOCRACY Deutschland e.V.',
+    enable_services: {
+      push_notification: 'on'
+    }
+  )
+
+  lane :prepare do
+    cert
+    sigh(force: true)
+  end
+
+  lane :test do
+    #disable_automatic_code_signing(path: "democracyclient.xcodeproj")
+    setup_travis
+    sync_code_signing(
+      type: 'appstore',
+      app_identifier: "de.democracy-deutschland.clientapp",
+      team_id: "A4B84UJD7M"
+    )
+    build_app( 
+      scheme: "democracyclient-prod"
+    )
+  end
+
+  lane :alpha do
+    increment_build_number(
+      xcodeproj: "democracyclient.xcodeproj",
+      build_number: ENV["BUILD_NUMBER"]
+    )
+    disable_automatic_code_signing(path: "democracyclient.xcodeproj")
+    setup_travis
+    sync_code_signing(
+      type: 'appstore',
+      app_identifier: "de.democracy-deutschland.clientapp.alpha",
+      team_id: "A4B84UJD7M"
+    )
+    build_app( 
+      clean: true, 
+      scheme: "Alpha"
+    )
+    upload_to_testflight(
+      changelog: File.read("../../CHANGELOG.md")[0, 3000],
+      groups: "Developer",
+      app_identifier: "de.democracy-deutschland.clientapp.alpha",
+      demo_account_required: false,
+      notify_external_testers: true,
+      distribute_external: true
+    )
+  end
+
+  lane :beta do
+    increment_build_number(
+      xcodeproj: "democracyclient.xcodeproj",
+      build_number: ENV["BUILD_NUMBER"]
+    )
+    disable_automatic_code_signing(path: "democracyclient.xcodeproj")
+    setup_travis
+    sync_code_signing(
+      type: 'appstore',
+      app_identifier: "de.democracy-deutschland.clientapp.beta",
+      team_id: "A4B84UJD7M"
+    )
+    build_app( 
+      clean: true, 
+      scheme: "Beta"
+    )
+    upload_to_testflight(
+      changelog: File.read("../../CHANGELOG.md")[0, 3000],
+      groups: "Prototyp-Tester",
+      app_identifier: "de.democracy-deutschland.clientapp.beta",
+      demo_account_required: false,
+      notify_external_testers: true,
+      distribute_external: true
+    )
+  end
+
+  lane :production do
+    increment_build_number(
+      xcodeproj: "democracyclient.xcodeproj",
+      build_number: ENV["BUILD_NUMBER"]
+    )
+    disable_automatic_code_signing(path: "democracyclient.xcodeproj")
+    setup_travis
+    sync_code_signing(
+      type: 'appstore',
+      app_identifier: "de.democracy-deutschland.clientapp",
+      team_id: "A4B84UJD7M"
+    )
+    build_app( 
+      clean: true, 
+      scheme: "democracyclient-prod"
+    )
+    upload_to_testflight(
+      changelog: File.read("../../CHANGELOG.md")[0, 3000],
+      app_identifier: "de.democracy-deutschland.clientapp",
+      demo_account_required: false,
+      notify_external_testers: true,
+      distribute_external: true
+    )
+  end
+end

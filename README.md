@@ -1,14 +1,16 @@
-![Screenshot](https://www.democracy-deutschland.de/files/images/forfb2.png)
+![Screenshot](https://github.com/demokratie-live/democracy-assets/blob/master/images/forfb2.png)
 
 # Democracy-Client &nbsp; <a href="https://github.com/kriasoft/nodejs-api-starter/stargazers" target="_blank"><img src="https://img.shields.io/github/stars/demokratie-live/democracy-client.svg?style=social&label=Star&maxAge=3600" height="20"/></a>  <a href="https://twitter.com/democracy_de" target="_blank"><img src="https://img.shields.io/twitter/follow/democracy_de.svg?style=social&label=Follow&maxAge=3600" height="20"/></a>  <a href="https://www.facebook.com/democracygermany/" target="_blank"><img src="https://github.com/demokratie-live/democracy-assets/blob/master/docu/facebook.png" height="20"/></a>  <a href="https://discord.gg/Pdu3ZEV" target="_blank"><img src="https://github.com/demokratie-live/democracy-assets/blob/master/docu/discord.png" height="20"/></a>
 
-[![Build Status](https://travis-ci.org/demokratie-live/democracy-client.svg?branch=master)](https://travis-ci.org/demokratie-live/democracy-client) &nbsp;  [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/1461/badge)](https://bestpractices.coreinfrastructure.org/projects/1461)
+[![Build Status](https://travis-ci.org/demokratie-live/democracy-client.svg?branch=master)](https://travis-ci.org/demokratie-live/democracy-client) &nbsp; [![BrowserStack Status](https://www.browserstack.com/app-automate/badge.svg?badge_key=ZzRuckM0N1UzSFZ3ZFd1cDh6Zzk5UT09LS11UUJiaDZVOTZ6S3ZwRURzMzgrVnhRPT0=--5cad88eae285631b741017a6d5c827260db8a86f)](https://www.browserstack.com/app-automate/public-build/ZzRuckM0N1UzSFZ3ZFd1cDh6Zzk5UT09LS11UUJiaDZVOTZ6S3ZwRURzMzgrVnhRPT0=--5cad88eae285631b741017a6d5c827260db8a86f)
 
 The Client for the DEMOCRACY App. This includes iOS, Android and Web Clients generated from the same Codebase.
 
+
+:movie_camera: <a href="https://www.youtube.com/watch?v=H6oJA4MUVW0">Video des Entwicklungsstandes 26.02.2018</a><br>
 :movie_camera: <a href="https://www.youtube.com/watch?v=oTX59JhDmXU">Video des Entwicklungsstandes 15.12.2017</a><br>
 <br>
-<a href="https://www.youtube.com/watch?v=oTX59JhDmXU"><img src="https://github.com/demokratie-live/democracy-assets/raw/master/screenshots/Developer%20Demo%20Video%20-%20480p-2.gif" width="100%"></a>
+<a href="https://www.youtube.com/watch?v=H6oJA4MUVW0"><img src="https://github.com/demokratie-live/democracy-assets/blob/master/screenshots/Developer%20Demo%20Video%20-%20480p-spring4-optimized.gif" width="100%"></a>
 
 [Entwicklertagebuch](https://github.com/demokratie-live/democracy-client/wiki/Entwicklertagebuch)
 
@@ -18,6 +20,8 @@ The Client for the DEMOCRACY App. This includes iOS, Android and Web Clients gen
 * [ReactNative][reactnative], [Wix ReactNativeNavigation][wix], [StyledComponents][styledcomponents]
 
 [More Dependecies](https://github.com/demokratie-live/democracy-client/network/dependencies)
+
+![Projekt Struktur](https://github.com/demokratie-live/democracy-assets/blob/master/docu/api_structure_client.png)
 
 ## Prerequisites
 
@@ -57,9 +61,7 @@ yarn test:lint
 
 ## Deployment
 
-Deployment will be done with Travis CI
-
-TODO: Do it
+Deployment is done with Travis CI
 
 ## Contributing
 
@@ -68,7 +70,7 @@ Anyone and everyone is welcome to [contribute](CONTRIBUTING.md). Start by checki
 
 ## License
 
-Copyright © 2017-present DEMOCRACY Deutschland e.V.. This source code **might be** licensed under the Apache 2.0 license found in the
+Copyright © 2017-present DEMOCRACY Deutschland e.V.. This source code is licensed under the Apache 2.0 license found in the
 [LICENSE](https://github.com/demokratie-live/democracy-client/blob/master/LICENSE) file.
 
 ---
@@ -84,6 +86,3 @@ Made with ♥ by Team DEMOCRACY ([democracy-deutschland.de](https://www.democrac
 [jest]: http://facebook.github.io/jest/
 [wix]: https://github.com/wix/react-native-navigation
 [styledcomponents]: https://github.com/styled-components/styled-components
-
-
-
