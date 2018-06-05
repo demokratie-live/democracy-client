@@ -1,0 +1,51 @@
+{
+  "version": "2.0.0",
+  "presentation": {
+    "reveal": "always",
+    "panel": "new"
+  },
+  "tasks": [
+    {
+      "label": "Build APK Debug",
+      "group": "build",
+      "type": "shell",
+      "windows": {
+        "command": "cd android; if($?) {./gradlew assembleDebug}"
+      },
+      "linux": {
+        "command": "cd android && ./gradlew assembleDebug"
+      },
+      "osx": {
+        "command": "cd android && ./gradlew assembleDebug"
+      }
+    },
+    {
+      "label": "Build APK Release",
+      "group": "build",
+      "type": "shell",
+      "windows": {
+        "command": "cd android; if($?) {./gradlew assembleRelease}"
+      },
+      "linux": {
+        "command": "cd android && ./gradlew assembleRelease"
+      },
+      "osx": {
+        "command": "cd android && ./gradlew assembleRelease"
+      }
+    },
+    {
+      "label": "Generate Android Bundle",
+      "group": "build",
+      "type": "shell",
+      "command":
+        "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/main.jsbundle"
+    },
+    {
+      "label": "Generate iOS Bundle",
+      "group": "build",
+      "type": "shell",
+      "command":
+        "react-native bundle --platform ios --dev false --entry-file index.js --bundle-output ios/main.jsbundle"
+    }
+  ]
+}
