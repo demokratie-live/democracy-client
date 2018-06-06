@@ -6,6 +6,7 @@ import NotificationsIOS, {
   NotificationsAndroid,
   PendingNotifications
 } from "react-native-notifications";
+import DeviceInfo from "react-native-device-info";
 
 import client from "../graphql/client";
 
@@ -27,7 +28,9 @@ export default ComposedComponent => {
             "remoteNotificationsRegistrationFailed",
             this.onPushRegistrationFailed
           );
-          NotificationsIOS.requestPermissions();
+          if (!DeviceInfo.isEmulator()) {
+            NotificationsIOS.requestPermissions();
+          }
 
           NotificationsIOS.addEventListener(
             "notificationReceivedForeground",
