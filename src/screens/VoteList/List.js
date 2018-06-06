@@ -21,7 +21,6 @@ import getProcedures from "../../graphql/queries/getProcedures";
 const Wrapper = styled.View`
   flex: 1;
   background-color: #fff;
-  width: ${({ width }) => width};
 `;
 
 const SectionList = styled.SectionList``;
@@ -65,7 +64,7 @@ class List extends Component {
   }
 
   state = {
-    width: Platform.OS === "ios" ? Dimensions.get("window").width : "auto"
+    // width: Platform.OS === "ios" ? Dimensions.get("window").width : "auto"
   };
 
   componentWillReceiveProps(nextProps) {
@@ -113,10 +112,7 @@ class List extends Component {
       });
     }
     procedures.forEach(procedure => {
-      if (
-        listType === "VOTING" &&
-        procedure.completed
-      ) {
+      if (listType === "VOTING" && procedure.completed) {
         preparedData[1].data.push({
           ...procedure,
           date: procedure.voteDate || false,
@@ -136,7 +132,7 @@ class List extends Component {
   render() {
     const { data } = this.props;
     return (
-      <Wrapper onLayout={this.onLayout} width={this.state.width}>
+      <Wrapper>
         <SectionList
           sections={this.prepareData()}
           stickySectionHeadersEnabled
