@@ -51,7 +51,8 @@ platform :ios do
   lane :alpha do
     increment_build_number(
       xcodeproj: "democracyclient.xcodeproj",
-      build_number: ENV["BUILD_NUMBER"]
+      # build_number: ENV["BUILD_NUMBER"]
+      build_number: 100957
     )
     disable_automatic_code_signing(path: "democracyclient.xcodeproj")
     setup_travis
@@ -64,13 +65,23 @@ platform :ios do
       clean: true, 
       scheme: "Alpha"
     )
+
+    version = get_version_number(
+      xcodeproj: "democracyclient.xcodeproj",
+      target: "democracyclient"
+    )
+    changelog = read_changelog(
+      changelog_path: '../CHANGELOG.md',	# Specify path to CHANGELOG.md
+      section_identifier: "[" + version + "]"
+    )
     upload_to_testflight(
-      changelog: File.read("../../CHANGELOG.md")[0, 3000],
+      changelog: changelog,
       groups: "Developer",
       app_identifier: "de.democracy-deutschland.clientapp.alpha",
       demo_account_required: false,
       notify_external_testers: true,
-      distribute_external: true
+      distribute_external: true,
+      reject_previously_submitted_build: true
     )
   end
 
@@ -90,8 +101,17 @@ platform :ios do
       clean: true, 
       scheme: "Beta"
     )
+
+    version = get_version_number(
+      xcodeproj: "democracyclient.xcodeproj",
+      target: "democracyclient"
+    )
+    changelog = read_changelog(
+      changelog_path: '../CHANGELOG.md',	# Specify path to CHANGELOG.md
+      section_identifier: "[" + version + "]"
+    )
     upload_to_testflight(
-      changelog: File.read("../../CHANGELOG.md")[0, 3000],
+      changelog: changelog,
       groups: "Prototyp-Tester",
       app_identifier: "de.democracy-deutschland.clientapp.beta",
       demo_account_required: false,
@@ -116,8 +136,17 @@ platform :ios do
       clean: true, 
       scheme: "democracyclient-prod"
     )
+
+    version = get_version_number(
+      xcodeproj: "democracyclient.xcodeproj",
+      target: "democracyclient"
+    )
+    changelog = read_changelog(
+      changelog_path: '../CHANGELOG.md',	# Specify path to CHANGELOG.md
+      section_identifier: "[" + version + "]"
+    )
     upload_to_testflight(
-      changelog: File.read("../../CHANGELOG.md")[0, 3000],
+      changelog: changelog,
       app_identifier: "de.democracy-deutschland.clientapp",
       demo_account_required: false,
       notify_external_testers: true,

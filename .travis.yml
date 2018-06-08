@@ -30,6 +30,15 @@ matrix:
     jdk: oraclejdk8
     cache:
       yarn: true
+    before_install:
+    - cd android
+    - bundle install
+    - echo y | android update sdk --no-ui --filter build-tools-25.0.0,build-tools-25.0.1,build-tools-25.0.2,build-tools-25.0.3,build-tools-26.0.1,build-tools-26.0.2,android-26,extra-android-m2repository
+    - gem update --system
+    - bundle update fastlane
+    # - sdkmanager --list || true
+    # - yes | sdkmanager "platforms;android-25"
+    # - sdkmanager --list || true
     android:
       components:
       - tools
@@ -52,23 +61,16 @@ matrix:
       - 'android-sdk-preview-license-.+'
       - 'android-sdk-license-.+'
       - 'google-gdk-license-.+'
-    before_install:
-    - echo y | android update sdk --no-ui --filter build-tools-25.0.0,build-tools-25.0.1,build-tools-25.0.2,build-tools-25.0.3,build-tools-26.0.1,build-tools-26.0.2,android-26,extra-android-m2repository
+    before_script:
+    - cd ..
+    - nvm install 8
+    - yarn --version
+    - yarn install
     - openssl aes-256-cbc -k "$SECRET" -in .env.alpha.enc -out .env.alpha -d
     - openssl aes-256-cbc -k "$SECRET" -in .env.beta.enc -out .env.beta -d
     - openssl aes-256-cbc -k "$SECRET" -in .env.production.enc -out .env.production -d
     - openssl aes-256-cbc -k "$SECRET" -in android/Google_Play_Android_Developer.json.enc -out android/Google_Play_Android_Developer.json -d
     - openssl aes-256-cbc -k "$SECRET" -in android/app/democracy2-release-key.keystore.enc -out android/app/democracy2-release-key.keystore -d
-    - gem update --system
-    - bundle install
-    - bundle update fastlane
-    - sdkmanager --list || true
-    - yes | sdkmanager "platforms;android-25"
-    - sdkmanager --list || true
-    install:
-    - nvm install 8
-    - yarn --version
-    - yarn install
     script:
     - cd android
     - bundle exec fastlane android test
@@ -78,9 +80,11 @@ matrix:
     osx_image: xcode9.2
     language: objective-c
     before_install:
+    - cd ios
     - bundle install
     - bundle update fastlane
     install:
+    - cd ..
     - nvm install 8
     - npm install -g yarn
     - yarn --version
