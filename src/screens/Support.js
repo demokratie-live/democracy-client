@@ -9,8 +9,6 @@ import DeviceInfo from "react-native-device-info";
 
 import Config from "../config";
 
-import onNavigationEvent from "./onNavigationEvent";
-
 const ScrollWrapper = styled.ScrollView`
   flex: 1;
   background-color: #ffffff;
@@ -84,13 +82,7 @@ class Support extends Component {
         ]
       });
     });
-
-    this.props.navigator.setOnNavigatorEvent(this.onNavigationEvent);
   }
-
-  onNavigationEvent = event => {
-    onNavigationEvent({ event, navigator: this.props.navigator });
-  };
 
   linking = url => () => {
     Linking.canOpenURL(url).then(supported => {
@@ -109,7 +101,10 @@ class Support extends Component {
   };
 
   render() {
-    const phoneNumber = Platform.OS === "ios" ? `telprompt:${Config.PHONE_NUMBER}` : `tel:${Config.PHONE_NUMBER}`;
+    const phoneNumber =
+      Platform.OS === "ios"
+        ? `telprompt:${Config.PHONE_NUMBER}`
+        : `tel:${Config.PHONE_NUMBER}`;
     const email = `mailto:${Config.CONTACT_EMAIL}`;
     const github = Config.GITHUB_URL;
     const version = `Version: ${DeviceInfo.getReadableVersion()

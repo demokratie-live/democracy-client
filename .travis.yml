@@ -17,10 +17,6 @@ matrix:
     language: node_js
     node_js:
     - 8
-    cache:
-      yarn: true
-      directories:
-      - node_modules
     install:
     - yarn --version
     - yarn install
@@ -34,27 +30,16 @@ matrix:
     jdk: oraclejdk8
     cache:
       yarn: true
-    before_install:
-    - echo y | android update sdk --no-ui --filter build-tools-26.0.1,build-tools-26.0.2,android-26,extra-android-m2repository
-    - openssl aes-256-cbc -k "$SECRET" -in .env.alpha.enc -out .env.alpha -d
-    - openssl aes-256-cbc -k "$SECRET" -in .env.beta.enc -out .env.beta -d
-    - openssl aes-256-cbc -k "$SECRET" -in .env.production.enc -out .env.production -d
-    - openssl aes-256-cbc -k "$SECRET" -in android/Google_Play_Android_Developer.json.enc -out android/Google_Play_Android_Developer.json -d
-    - openssl aes-256-cbc -k "$SECRET" -in android/app/democracy2-release-key.keystore.enc -out android/app/democracy2-release-key.keystore -d
-    - gem update --system
-    - bundle install
-    - bundle update fastlane
-    install:
-    - nvm install 8
-    - yarn --version
-    - yarn install
     android:
       components:
       - tools
       - platform-tools
       # android 23
       - build-tools-23.0.1
+      - build-tools-25.0.0
       - build-tools-25.0.1
+      - build-tools-25.0.2
+      - build-tools-25.0.3
       - build-tools-26.0.1
       - build-tools-26.0.2
       - android-23
@@ -67,6 +52,23 @@ matrix:
       - 'android-sdk-preview-license-.+'
       - 'android-sdk-license-.+'
       - 'google-gdk-license-.+'
+    before_install:
+    - echo y | android update sdk --no-ui --filter build-tools-25.0.0,build-tools-25.0.1,build-tools-25.0.2,build-tools-25.0.3,build-tools-26.0.1,build-tools-26.0.2,android-26,extra-android-m2repository
+    - openssl aes-256-cbc -k "$SECRET" -in .env.alpha.enc -out .env.alpha -d
+    - openssl aes-256-cbc -k "$SECRET" -in .env.beta.enc -out .env.beta -d
+    - openssl aes-256-cbc -k "$SECRET" -in .env.production.enc -out .env.production -d
+    - openssl aes-256-cbc -k "$SECRET" -in android/Google_Play_Android_Developer.json.enc -out android/Google_Play_Android_Developer.json -d
+    - openssl aes-256-cbc -k "$SECRET" -in android/app/democracy2-release-key.keystore.enc -out android/app/democracy2-release-key.keystore -d
+    - gem update --system
+    - bundle install
+    - bundle update fastlane
+    - sdkmanager --list || true
+    - yes | sdkmanager "platforms;android-25"
+    - sdkmanager --list || true
+    install:
+    - nvm install 8
+    - yarn --version
+    - yarn install
     script:
     - cd android
     - bundle exec fastlane android test

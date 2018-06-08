@@ -16,19 +16,29 @@ import Notifications from "./Notifications";
 import Credits from "./Credits";
 import InAppNotification from "./Notifications/InAppNotification";
 
+import DeepLink from "../hocs/DeepLink";
 import NetworkStatus from "../hocs/NetworkStatus";
+import NavBarLinks from "../hocs/NavBarLinks";
+import SideMenuLinks from "../hocs/SideMenuLinks";
+import PushNotifications from "../hocs/PushNotifications";
 
 export default function registerScreens() {
   Navigation.registerComponent(
     "democracy.VoteList",
-    () => NetworkStatus(VoteList),
+    () =>
+      PushNotifications(
+        DeepLink(NavBarLinks(SideMenuLinks(NetworkStatus(VoteList))))
+      ),
     client.store,
     ApolloProvider,
     { client }
   );
   Navigation.registerComponent(
     "democracy.VoteList.List",
-    () => NetworkStatus(VoteListList),
+    () =>
+      PushNotifications(
+        DeepLink(NavBarLinks(SideMenuLinks(NetworkStatus(VoteListList))))
+      ),
     client.store,
     ApolloProvider,
     { client }
@@ -49,49 +59,49 @@ export default function registerScreens() {
   );
   Navigation.registerComponent(
     "democracy.SideMenu",
-    () => NetworkStatus(SideMenu),
+    () => SideMenu,
     client.store,
     ApolloProvider,
     { client }
   );
   Navigation.registerComponent(
     "democracy.Detail",
-    () => NetworkStatus(Detail),
+    () => NetworkStatus(Detail, "Detail"),
     client.store,
     ApolloProvider,
     { client }
   );
   Navigation.registerComponent(
     "democracy.Support",
-    () => NetworkStatus(Support),
+    () => NetworkStatus(NavBarLinks(Support)),
     client.store,
     ApolloProvider,
     { client }
   );
   Navigation.registerComponent(
     "democracy.Security",
-    () => NetworkStatus(Security),
+    () => NetworkStatus(NavBarLinks(Security)),
     client.store,
     ApolloProvider,
     { client }
   );
   Navigation.registerComponent(
     "democracy.VoteVarification",
-    () => VoteVarification,
+    () => NetworkStatus(NavBarLinks(VoteVarification)),
     client.store,
     ApolloProvider,
     { client }
   );
   Navigation.registerComponent(
     "democracy.Notifications",
-    () => NetworkStatus(Notifications),
+    () => NetworkStatus(NavBarLinks(Notifications)),
     client.store,
     ApolloProvider,
     { client }
   );
   Navigation.registerComponent(
     "democracy.Credits",
-    () => NetworkStatus(Credits),
+    () => NetworkStatus(NavBarLinks(Credits)),
     client.store,
     ApolloProvider,
     { client }

@@ -7,8 +7,6 @@ import { NetInfo } from "react-native";
 
 import client, { persistor } from "./src/graphql/client";
 import registerScreens from "./src/screens";
-// Removed pushNotifications
-// import { pushNotifications } from "./src/services";
 
 import IS_INSTRUCTIONS_SHOWN from "./src/graphql/queries/isInstructionShown";
 import setCurrentScreen from "./src/graphql/mutations/setCurrentScreen";
@@ -16,12 +14,11 @@ import UPDATE_NETWORK_STATUS from "./src/graphql/mutations/updateNetworkStatus";
 
 import topTabs from "./src/screens/VoteList/topTabs";
 
+import "./src/services/browserLinks";
+
 // Reactotron.configure() // controls connection & communication settings
 //   .useReactNative() // add all built-in react native plugins
 //   .connect(); // let's connect!
-
-// Removed pushNotifications
-// pushNotifications.configure();
 
 registerScreens();
 
