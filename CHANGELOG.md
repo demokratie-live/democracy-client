@@ -5,6 +5,7 @@
 * [Feature] Push Notifications
 * [Feature] Add deep linking
 * [Feature] [Details] Add PDF-reader [#249](https://github.com/demokratie-live/democracy-client/issues/249)
+* [Changed] [iOS] Go back by swiping from left to right [#354](https://github.com/demokratie-live/democracy-client/issues/354)
 
 ### 0.7.9
 
