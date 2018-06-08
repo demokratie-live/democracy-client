@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.7.x
+
+* Details
+  * [Added] History segment of current states to Detail page
+
 ### 0.7.9
 
 * Credits
