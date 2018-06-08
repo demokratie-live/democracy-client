@@ -6,6 +6,7 @@
 * [Feature] Add deep linking
 * [Feature] [Details] Add PDF-reader [#249](https://github.com/demokratie-live/democracy-client/issues/249)
 * [Changed] [iOS] Go back by swiping from left to right [#354](https://github.com/demokratie-live/democracy-client/issues/354)
+* [Changed][list] improve performance by shouldUpdateComponent check [#362](https://github.com/demokratie-live/democracy-client/issues/362)
 
 ### 0.7.9
 
