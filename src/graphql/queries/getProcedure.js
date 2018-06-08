@@ -18,6 +18,7 @@ export default gql`
       subjectGroups
       submissionDate
       currentStatus
+      currentStatusHistory
       importantDocuments {
         editor
         type
