@@ -124,7 +124,7 @@ class Detail extends Component {
   };
 
   render() {
-    const { procedureId, toggleNotification } = this.props;
+    const { procedureId, toggleNotification, navigator } = this.props;
     const { data: { networkStatus, refetch } } = this.props;
     if (!this.props.data.procedure) {
       return <ActivityIndicator size="large" style={{ paddingTop: 18 }} />;
@@ -201,7 +201,7 @@ class Detail extends Component {
             />
           </Segment>
           <Segment title="Dokumente" scrollTo={this.scrollTo}>
-            <SegmentDocuments documents={importantDocuments} />
+            <SegmentDocuments documents={importantDocuments}  navigator={navigator} />
           </Segment>
           <VoteResults
             key="community"

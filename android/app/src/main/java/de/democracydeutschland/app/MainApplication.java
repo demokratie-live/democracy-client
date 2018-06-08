@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.facebook.react.ReactApplication;
+import org.wonday.pdf.RCTPdfView;
+import com.RNFetchBlob.RNFetchBlobPackage;
 import com.horcrux.svg.SvgPackage;
 import com.horcrux.svg.SvgPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
@@ -37,58 +39,67 @@ public class MainApplication extends NavigationApplication implements INotificat
      */
     private NotificationsLifecycleFacade notificationsLifecycleFacade;
 
-  @Override
-  public void onCreate() {
-    super.onCreate();
-    SoLoader.init(this, /* native exopackage */ false);
+    @Override
+  	public void onCreate() {
+    	super.onCreate();
+    	SoLoader.init(this, /* native exopackage */ false);
 
-    // Create an object of the custom facade impl
-    notificationsLifecycleFacade = new NotificationsLifecycleFacade();
-    // Attach it to react-native-navigation
-    setActivityCallbacks(notificationsLifecycleFacade);
-  }
+    	// Create an object of the custom facade impl
+    	notificationsLifecycleFacade = new NotificationsLifecycleFacade();
+    	// Attach it to react-native-navigation
+    	setActivityCallbacks(notificationsLifecycleFacade);
+  	}
 
-  @Override
-  public IPushNotification getPushNotification(Context context, Bundle bundle, AppLifecycleFacade defaultFacade, AppLaunchHelper defaultAppLaunchHelper) {
-    return new CustomPushNotification(
+  	@Override
+  	public IPushNotification getPushNotification(Context context, Bundle bundle, AppLifecycleFacade defaultFacade, AppLaunchHelper defaultAppLaunchHelper) {
+    	return new CustomPushNotification(
             context,
             bundle,
             notificationsLifecycleFacade, // Instead of defaultFacade!!!
             defaultAppLaunchHelper,
             new JsIOHelper()
-    );
-  }
+    	);
+  	}
     /**
      * FOR PUSH END
      */
 
-  @Override
-  public boolean isDebug() {
-    // Make sure you are using BuildConfig from your own application
-    return BuildConfig.DEBUG;
-  }
+	@Override
+  	public boolean isDebug() {
+    	// Make sure you are using BuildConfig from your own application
+    	return BuildConfig.DEBUG;
+  	}
 
-  protected List<ReactPackage> getPackages() {
-    // Add additional packages you require here
-    // No need to add RnnPackage and MainReactPackage
-    return Arrays.<ReactPackage>asList(
-            new RNNotificationsPackage(MainApplication.this),
+    // @Override
+    protected List<ReactPackage> getPackages() {
+    	// Add additional packages you require here
+    	// No need to add RnnPackage and MainReactPackage
+      	return Arrays.<ReactPackage>asList(
+      		//new MainReactPackage(),
+      		new RNNotificationsPackage(MainApplication.this),
+            new RCTPdfView(),
+            new RNFetchBlobPackage(),
             new SvgPackage(),
             new RNDeviceInfo(),
             new ReactNativeConfigPackage(),
             new VectorIconsPackage(),
             new LinearGradientPackage(),
             new Sha256Package()
-    );
-  }
+      	);
+    }
 
-  @Override
-  public List<ReactPackage> createAdditionalReactPackages() {
-    return getPackages();
-  }
+    @Override
+  	public List<ReactPackage> createAdditionalReactPackages() {
+    	return getPackages();
+  	}
 
-  @Override
-  public String getJSMainModuleName() {
-    return "index";
-  }
-}
+  	@Override
+  	public String getJSMainModuleName() {
+    	return "index";
+  	}
+
+  	/*@Override
+  	public ReactNativeHost getReactNativeHost() {
+    	return mReactNativeHost;
+  	}*/
+};
