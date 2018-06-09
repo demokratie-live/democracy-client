@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.7.x
+
+* [Added][ios] network indicator in status bar [#367](https://github.com/demokratie-live/democracy-client/issues/367)
+
 ### 0.7.9
 
 * Credits
