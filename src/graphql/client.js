@@ -1,5 +1,5 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_id", "__typename"] }] */
-import { AsyncStorage, StatusBar } from "react-native";
+import { AsyncStorage, StatusBar, Platform } from "react-native";
 import { ApolloClient } from "apollo-client";
 import { ApolloLink } from "apollo-link";
 import { HttpLink } from "apollo-link-http";
@@ -142,25 +142,33 @@ const networkActivity = {
 const { link: loadingIndicator } = createNetworkStatusNotifier({
   reducers: {
     onSuccess: () => {
-      networkActivity.onFinish += 1;
-      if (networkActivity.onFinish === networkActivity.onRequest) {
-        StatusBar.setNetworkActivityIndicatorVisible(false);
+      if (Platform.OS === "ios") {
+        networkActivity.onFinish += 1;
+        if (networkActivity.onFinish === networkActivity.onRequest) {
+          StatusBar.setNetworkActivityIndicatorVisible(false);
+        }
       }
     },
     onError: () => {
-      networkActivity.onFinish += 1;
-      if (networkActivity.onFinish === networkActivity.onRequest) {
-        StatusBar.setNetworkActivityIndicatorVisible(false);
+      if (Platform.OS === "ios") {
+        networkActivity.onFinish += 1;
+        if (networkActivity.onFinish === networkActivity.onRequest) {
+          StatusBar.setNetworkActivityIndicatorVisible(false);
+        }
       }
     },
     onRequest: () => {
-      StatusBar.setNetworkActivityIndicatorVisible(true);
-      networkActivity.onRequest += 1;
+      if (Platform.OS === "ios") {
+        StatusBar.setNetworkActivityIndicatorVisible(true);
+        networkActivity.onRequest += 1;
+      }
     },
     onCancel: () => {
-      networkActivity.onFinish += 1;
-      if (networkActivity.onFinish === networkActivity.onRequest) {
-        StatusBar.setNetworkActivityIndicatorVisible(false);
+      if (Platform.OS === "ios") {
+        networkActivity.onFinish += 1;
+        if (networkActivity.onFinish === networkActivity.onRequest) {
+          StatusBar.setNetworkActivityIndicatorVisible(false);
+        }
       }
     }
   }
