@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.7.x
+
+* ListView
+  * [Added] load more indicator [#368](https://github.com/demokratie-live/democracy-client/issues/368)
+
 ### 0.7.9
 
 * Credits

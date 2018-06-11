@@ -1,9 +1,14 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
 import React, { Component } from "react";
+import {
+  TouchableHighlight,
+  Dimensions,
+  Platform,
+  ActivityIndicator
+} from "react-native";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import { Navigator } from "react-native-navigation";
-import { TouchableHighlight, Dimensions, Platform } from "react-native";
 import { graphql } from "react-apollo";
 import { unionBy } from "lodash";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -22,6 +27,12 @@ const Wrapper = styled.View`
   flex: 1;
   background-color: #fff;
   width: ${({ width }) => width};
+`;
+
+const Loading = styled.View`
+  height: 50;
+  align-items: center;
+  justify-content: center;
 `;
 
 const SectionList = styled.SectionList``;
@@ -113,10 +124,7 @@ class List extends Component {
       });
     }
     procedures.forEach(procedure => {
-      if (
-        listType === "VOTING" &&
-        procedure.completed
-      ) {
+      if (listType === "VOTING" && procedure.completed) {
         preparedData[1].data.push({
           ...procedure,
           date: procedure.voteDate || false,
@@ -138,6 +146,13 @@ class List extends Component {
     return (
       <Wrapper onLayout={this.onLayout} width={this.state.width}>
         <SectionList
+          ListFooterComponent={() =>
+            data.loading ? (
+              <Loading>
+                <ActivityIndicator />
+              </Loading>
+            ) : null
+          }
           sections={this.prepareData()}
           stickySectionHeadersEnabled
           keyExtractor={({ _id }) => _id}
