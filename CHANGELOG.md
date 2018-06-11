@@ -1,4 +1,5 @@
 # Changelog
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
@@ -11,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [Details] Add PDF-reader [#249](https://github.com/demokratie-live/democracy-client/issues/249)
 - Add time until goverment-vote [#358](https://github.com/demokratie-live/democracy-client/issues/358)
 - [Details] History segment of current states to Detail page
+- [iOS] network indicator in status bar [#367](https://github.com/demokratie-live/democracy-client/issues/367)
 
 ### Changed
 - [ListView] improve performance by shouldUpdateComponent check [#362](https://github.com/demokratie-live/democracy-client/issues/362)
