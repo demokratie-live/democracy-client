@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Push Notifications
 - Add deep linking
 - [Details] Add PDF-reader [#249](https://github.com/demokratie-live/democracy-client/issues/249)
+- Add time until goverment-vote [#358](https://github.com/demokratie-live/democracy-client/issues/358)
 
 ### Changed
 - [ListView] improve performance by shouldUpdateComponent check [#362](https://github.com/demokratie-live/democracy-client/issues/362)
