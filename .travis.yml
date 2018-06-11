@@ -33,12 +33,21 @@ matrix:
     before_install:
     - cd android
     - bundle install
-    #- echo y | android update sdk --no-ui --filter build-tools-25.0.0,build-tools-25.0.1,build-tools-25.0.2,build-tools-25.0.3,android-25,build-tools-26.0.1,build-tools-26.0.2,android-26,extra-android-m2repository
     - gem update --system
     - bundle update fastlane
-    - sdkmanager --list || true
+    # - echo y | android update sdk --no-ui --filter build-tools-25.0.0,build-tools-25.0.1,build-tools-25.0.2,build-tools-25.0.3,android-25,build-tools-26.0.1,build-tools-26.0.2,android-26,extra-android-m2repository
+    # - sdkmanager --list || true
     # - yes | sdkmanager "platforms;android-25"
     # - sdkmanager --list || true
+    - echo yes | sdkmanager "build-tools-25.0.0"
+    - echo yes | sdkmanager "build-tools-25.0.1"
+    - echo yes | sdkmanager "build-tools-25.0.2"
+    - echo yes | sdkmanager "build-tools-25.0.3"
+    - echo yes | sdkmanager "android-25"
+    - echo yes | sdkmanager "build-tools-26.0.1"
+    - echo yes | sdkmanager "build-tools-26.0.2"
+    - echo yes | sdkmanager "android-26"
+    - echo yes | sdkmanager "extra-android-m2repository"
     android:
       components:
       - tools
