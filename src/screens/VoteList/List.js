@@ -1,7 +1,6 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
 import React, { Component } from "react";
 import {
-  TouchableHighlight,
   Dimensions,
   Platform,
   ActivityIndicator

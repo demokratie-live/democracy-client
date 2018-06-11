@@ -33,7 +33,8 @@ matrix:
     before_install:
     - cd android
     - bundle install
-    - echo y | android update sdk --no-ui --filter build-tools-25.0.0,build-tools-25.0.1,build-tools-25.0.2,build-tools-25.0.3,build-tools-26.0.1,build-tools-26.0.2,android-26,extra-android-m2repository
+    #- echo y | android update sdk --no-ui --filter build-tools-25.0.0,build-tools-25.0.1,build-tools-25.0.2,build-tools-25.0.3,android-25,build-tools-26.0.1,build-tools-26.0.2,android-26,extra-android-m2repository
+    - sdkmanager --licenses
     - gem update --system
     - bundle update fastlane
     # - sdkmanager --list || true
