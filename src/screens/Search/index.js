@@ -91,7 +91,8 @@ class SearchScreen extends Component {
       term,
       query: await watchQuery({
         query: searchProcedures,
-        variables: { term }
+        variables: { term },
+        fetchPolicy: "network-only"
       })
     });
 

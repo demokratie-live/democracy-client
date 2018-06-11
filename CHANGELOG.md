@@ -17,6 +17,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [iOS] Override Alpha Versions
 - Changelog format
 
+## [0.7.10] - 2018-06-11
+### Fixed
+- [Search] do not use cache for search results
+
 ## [0.7.9] - 2018-06-01
 ### Changed
 - [Credits] replace lover of the month
