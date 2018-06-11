@@ -115,7 +115,7 @@ class SearchScreen extends Component {
               underlayColor="rgba(68, 148, 211, 0.1)"
             >
               <ListRow>
-                <VoteListItem {...item} />
+                <VoteListItem {...item} date={item.voteDate} />
               </ListRow>
             </TouchableHighlight>
           )}
