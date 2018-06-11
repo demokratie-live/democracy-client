@@ -13,6 +13,7 @@ import ActivityIndex from "../../components/ActivityIndex";
 import DateTime from "../../components/Date";
 import SegmentDetails from "./Segments/Details";
 import SegmentDocuments from "./Segments/Documents";
+import History from "./Segments/History";
 import VoteResults from "./Segments/VoteResults";
 import Segment from "./Segment";
 import Voting from "./Voting";
@@ -140,6 +141,7 @@ class Detail extends Component {
       importantDocuments,
       voteResults,
       currentStatus,
+      currentStatusHistory,
       notify,
       listType,
       type,
@@ -203,6 +205,14 @@ class Detail extends Component {
           <Segment title="Dokumente" scrollTo={this.scrollTo}>
             <SegmentDocuments documents={importantDocuments}  navigator={navigator} />
           </Segment>
+          {currentStatusHistory.length > 0 && (
+            <Segment title="Gesetzesstand" scrollTo={this.scrollTo}>
+              <History
+                history={currentStatusHistory}
+                currentStatus={currentStatus}
+              />
+            </Segment>
+          )}
           <VoteResults
             key="community"
             voteResults={voteResults}

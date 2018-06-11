@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add deep linking
 - [Details] Add PDF-reader [#249](https://github.com/demokratie-live/democracy-client/issues/249)
 - Add time until goverment-vote [#358](https://github.com/demokratie-live/democracy-client/issues/358)
+- [Details] History segment of current states to Detail page
 
 ### Changed
 - [ListView] improve performance by shouldUpdateComponent check [#362](https://github.com/demokratie-live/democracy-client/issues/362)
