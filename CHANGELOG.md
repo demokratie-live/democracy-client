@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [iOS] network indicator in status bar [#367](https://github.com/demokratie-live/democracy-client/issues/367)
 - [ListView] load more indicator [#368](https://github.com/demokratie-live/democracy-client/issues/368)
 - [Detail] No connectoin reload button [#387](https://github.com/demokratie-live/democracy-client/issues/387)
+- [Details] Add type to vote segment header [#378](https://github.com/demokratie-live/democracy-client/issues/378)
 
 ### Changed
 - [ListView] improve performance by shouldUpdateComponent check [#362](https://github.com/demokratie-live/democracy-client/issues/362)

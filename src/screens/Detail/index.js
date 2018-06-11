@@ -253,6 +253,7 @@ class Detail extends Component {
               procedureObjId={_id}
               procedureId={procedureId}
               navigator={this.props.navigator}
+              type={type}
             />
           )}
         </Content>
