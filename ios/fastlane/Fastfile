@@ -55,7 +55,7 @@ platform :ios do
       build_number: 100957
     )
     disable_automatic_code_signing(path: "democracyclient.xcodeproj")
-    setup_travis
+
     sync_code_signing(
       type: 'appstore',
       app_identifier: "de.democracy-deutschland.clientapp.alpha",
@@ -91,7 +91,7 @@ platform :ios do
       build_number: ENV["BUILD_NUMBER"]
     )
     disable_automatic_code_signing(path: "democracyclient.xcodeproj")
-    setup_travis
+
     sync_code_signing(
       type: 'appstore',
       app_identifier: "de.democracy-deutschland.clientapp.beta",
@@ -126,7 +126,7 @@ platform :ios do
       build_number: ENV["BUILD_NUMBER"]
     )
     disable_automatic_code_signing(path: "democracyclient.xcodeproj")
-    setup_travis
+    
     sync_code_signing(
       type: 'appstore',
       app_identifier: "de.democracy-deutschland.clientapp",
