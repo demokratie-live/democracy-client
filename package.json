@@ -1,6 +1,6 @@
 {
   "name": "democracyclient",
-  "version": "0.7.9",
+  "version": "0.7.10",
   "private": true,
   "scripts": {
     "test": "eslint . && jest",
