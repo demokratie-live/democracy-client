@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.7.x
+
+* Search
+  * [Fixed] do not use cache for search results
+
 ### 0.7.9
 
 * Credits
