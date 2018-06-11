@@ -107,8 +107,9 @@ class List extends Component {
     procedures.forEach(procedure => {
       if (
         listType === "VOTING" &&
-        new Date(procedure.voteDate) < new Date() &&
-        procedure.voteDate !== null
+        ((new Date(procedure.voteDate) < new Date() &&
+          procedure.voteDate !== null) ||
+          procedure.completed)
       ) {
         preparedData[1].data.push({
           ...procedure,
