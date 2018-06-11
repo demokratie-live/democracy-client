@@ -1,6 +1,6 @@
 # Changelog
 
-### 0.7.x
+### 0.7.10
 
 * Search
   * [Fixed] do not use cache for search results
