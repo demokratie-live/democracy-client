@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.7.x
+
+* Details
+  * [Added] Add type to vote segment header [#378](https://github.com/demokratie-live/democracy-client/issues/378)
+
 ### 0.7.9
 
 * Credits
