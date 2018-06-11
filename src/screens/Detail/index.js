@@ -1,8 +1,8 @@
 import React, { Component } from "react";
+import { RefreshControl, ActivityIndicator } from "react-native";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import { graphql, compose } from "react-apollo";
-import { RefreshControl } from "react-native";
 import { Navigator } from "react-native-navigation";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
@@ -16,6 +16,15 @@ import SegmentDocuments from "./Segments/Documents";
 import VoteResults from "./Segments/VoteResults";
 import Segment from "./Segment";
 import Voting from "./Voting";
+
+const LoadingWrapper = styled.View`
+  flex: 1;
+  background-color: #fff;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Reload = styled.Button``;
 
 const Wrapper = styled.ScrollView`
   flex: 1;
@@ -124,9 +133,20 @@ class Detail extends Component {
 
   render() {
     const { procedureId, toggleNotification } = this.props;
-    const { data: { networkStatus, refetch } } = this.props;
-    if (!this.props.data.procedure) {
-      return null;
+    const { data: { networkStatus, refetch, loading, procedure } } = this.props;
+    if (!procedure && loading) {
+      return (
+        <LoadingWrapper>
+          {loading && <ActivityIndicator size="large" />}
+        </LoadingWrapper>
+      );
+    }
+    if ((!procedure || !procedure._id) && !loading) {
+      return (
+        <LoadingWrapper>
+          <Reload title="Neu Laden" onPress={()=> refetch()} />
+        </LoadingWrapper>
+      );
     }
     const {
       _id,

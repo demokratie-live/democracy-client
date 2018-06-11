@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.7.x
+
+* Detail
+  * [Added] No connectoin reload button [#387](https://github.com/demokratie-live/democracy-client/issues/387)
+
 ### 0.7.9
 
 * Credits
