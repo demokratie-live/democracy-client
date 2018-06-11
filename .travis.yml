@@ -36,7 +36,7 @@ matrix:
     #- echo y | android update sdk --no-ui --filter build-tools-25.0.0,build-tools-25.0.1,build-tools-25.0.2,build-tools-25.0.3,android-25,build-tools-26.0.1,build-tools-26.0.2,android-26,extra-android-m2repository
     - gem update --system
     - bundle update fastlane
-    # - sdkmanager --list || true
+    - sdkmanager --list || true
     # - yes | sdkmanager "platforms;android-25"
     # - sdkmanager --list || true
     android:
@@ -57,13 +57,13 @@ matrix:
       - extra-google-google_play_services
       - extra-google-m2repository
       - addon-google_apis-google-16
-      licenses:
-      - 'android-sdk-preview-license-.+'
-      - 'android-sdk-license-.+'
-      - 'google-gdk-license-.+'
-      - 'build-tools-.+'
-      - 'android-.+'
-      - 'extra-android-m2repository'
+      #licenses:
+      #- 'android-sdk-preview-license-.+'
+      #- 'android-sdk-license-.+'
+      #- 'google-gdk-license-.+'
+      #- 'build-tools-.+'
+      #- 'android-.+'
+      #- 'extra-android-m2repository'
     before_script:
     - cd ..
     - nvm install 8
