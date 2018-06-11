@@ -49,6 +49,7 @@ matrix:
       - build-tools-26.0.1
       - build-tools-26.0.2
       - android-23
+      - android-26
       # extra
       - extra-android-m2repository
       - extra-google-google_play_services
@@ -58,9 +59,6 @@ matrix:
       - 'android-sdk-preview-license-.+'
       - 'android-sdk-license-.+'
       - 'google-gdk-license-.+'
-      #- 'build-tools-.+'
-      #- 'android-.+'
-      #- 'extra-android-m2repository'
     before_script:
     - cd ..
     - nvm install 8
