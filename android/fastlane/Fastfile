@@ -35,7 +35,7 @@ platform :android do
   changelog = read_changelog(
     changelog_path: '../CHANGELOG.md',	# Specify path to CHANGELOG.md
     section_identifier: "[" + version + "]"
-  )
+  )[0, 500]
   buildNumber = ENV["BUILD_NUMBER"];
 
   lane :alpha do
