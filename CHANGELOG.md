@@ -3,7 +3,7 @@
 ### 0.7.x
 
 * Details
-  * [Added] History segment of current states to Detail page
+  * [Changed] Hide vote result in history if not voted
 
 ### 0.7.9
 

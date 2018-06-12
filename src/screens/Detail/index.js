@@ -209,6 +209,7 @@ class Detail extends Component {
               <History
                 history={currentStatusHistory}
                 currentStatus={currentStatus}
+                voted={voted}
               />
             </Segment>
           )}
