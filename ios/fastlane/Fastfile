@@ -29,13 +29,19 @@ platform :ios do
     }
   )
 
+  increment_build_number(
+    xcodeproj: "democracyclient.xcodeproj",
+    build_number: ENV["BUILD_NUMBER"]
+  )
+    
+  disable_automatic_code_signing(path: "democracyclient.xcodeproj")
+
   lane :prepare do
     cert
     sigh(force: true)
   end
 
   lane :test do
-    disable_automatic_code_signing(path: "democracyclient.xcodeproj")
     
     sync_code_signing(
       type: 'appstore',
@@ -49,12 +55,6 @@ platform :ios do
   end
 
   lane :alpha do
-    increment_build_number(
-      xcodeproj: "democracyclient.xcodeproj",
-      # build_number: ENV["BUILD_NUMBER"]
-      build_number: 100957
-    )
-    disable_automatic_code_signing(path: "democracyclient.xcodeproj")
 
     sync_code_signing(
       type: 'appstore',
@@ -86,11 +86,6 @@ platform :ios do
   end
 
   lane :beta do
-    increment_build_number(
-      xcodeproj: "democracyclient.xcodeproj",
-      build_number: ENV["BUILD_NUMBER"]
-    )
-    disable_automatic_code_signing(path: "democracyclient.xcodeproj")
 
     sync_code_signing(
       type: 'appstore',
@@ -121,11 +116,6 @@ platform :ios do
   end
 
   lane :production do
-    increment_build_number(
-      xcodeproj: "democracyclient.xcodeproj",
-      build_number: ENV["BUILD_NUMBER"]
-    )
-    disable_automatic_code_signing(path: "democracyclient.xcodeproj")
     
     sync_code_signing(
       type: 'appstore',
