@@ -33,21 +33,30 @@ const Line = styled.View`
   background-color: #979797;
 `;
 
-const Documents = ({ history, currentStatus }) => (
-  <Wrapper>
-    <Line />
-    {history.map(state => (
-      <StateWrapper key={state}>
-        <Icon currentStatus={currentStatus} state={state} />
-        <State>{state}</State>
-      </StateWrapper>
-    ))}
-  </Wrapper>
-);
+const Documents = ({ history, currentStatus, voted }) => {
+  const renderState = state => {
+    if (["Angenommen", "Abgelehnt"].indexOf(state) !== -1 && !voted) {
+      return "Abgestimmt";
+    }
+    return state;
+  };
+  return (
+    <Wrapper>
+      <Line />
+      {history.map(state => (
+        <StateWrapper key={state}>
+          <Icon currentStatus={currentStatus} state={state} />
+          <State>{renderState(state)}</State>
+        </StateWrapper>
+      ))}
+    </Wrapper>
+  );
+};
 
 Documents.propTypes = {
   history: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  currentStatus: PropTypes.string.isRequired
+  currentStatus: PropTypes.string.isRequired,
+  voted: PropTypes.bool.isRequired
 };
 
 export default Documents;

@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [iOS] Go back by swiping from left to right [#354](https://github.com/demokratie-live/democracy-client/issues/354)
 - [iOS] Override Alpha Versions
 - Changelog format
+- [Details] Hide vote result in history if not voted
 
 ## [0.7.10] - 2018-06-11
 ### Fixed
