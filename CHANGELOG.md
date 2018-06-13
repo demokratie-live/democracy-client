@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 - [Notifications] Fixed typo
+- [Details] Padstart caused a crash - use lodash padstart instead
 
 ## [0.7.10] - 2018-06-11
 ### Fixed
