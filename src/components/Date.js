@@ -28,7 +28,7 @@ class DateTime extends Component {
 
   formatDate = date => {
     if (date) {
-      if (new Date(date) <= new Date()) {
+      if (date <= new Date()) {
         return m(date).format("DD.MM.YY");
       }
       const daysDate = m(date).endOf("day");
@@ -57,12 +57,17 @@ class DateTime extends Component {
 
   render() {
     const { date } = this.props;
-    const formattedDate = this.formatDate(date);
+    const localDate = new Date(date);
+    localDate.setTime(
+      localDate.getTime() + new Date(date).getTimezoneOffset() * 1000 * 60
+    );
+    console.log({ localDate });
+    const formattedDate = this.formatDate(localDate);
 
     return (
       <DateText
-        visible={date}
-        date={date}
+        visible={localDate}
+        date={localDate}
         soon={formattedDate === "morgen" || formattedDate.indexOf(":") !== -1}
       >
         {formattedDate}
