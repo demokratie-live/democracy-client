@@ -2,7 +2,11 @@
 
 ### 0.7.x
 
-* General 
+* [Changed] change style of rest time to agenda
+
+### 0.7.x
+
+* General
   * Add time until goverment-vote [#358](https://github.com/demokratie-live/democracy-client/issues/358)
 
 ### 0.7.8
