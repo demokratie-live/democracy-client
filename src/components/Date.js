@@ -5,15 +5,16 @@ import m from "moment";
 
 const DateText = styled.Text`
   padding-top: 8;
-  color: ${({ date, tomorrow }) => {
-    if (tomorrow) {
-      return "#c67b19";
+  color: ${({ date, soon }) => {
+    if (soon) {
+      return "#f5a623";
     } else if (new Date(date) > new Date()) {
       return "#20a736";
     }
     return "red";
   }}
   font-size: 12;
+  fontWeight: ${soon => (soon ? "bold" : "normal")}
   display: ${({ visible }) => (visible ? "flex" : "none")};
 `;
 
@@ -56,14 +57,15 @@ class DateTime extends Component {
 
   render() {
     const { date } = this.props;
+    const formattedDate = this.formatDate(date);
 
     return (
       <DateText
         visible={date}
         date={date}
-        tomorrow={this.formatDate(date) === "morgen"}
+        soon={formattedDate === "morgen" || formattedDate.indexOf(":") !== -1}
       >
-        {this.formatDate(date)}
+        {formattedDate}
       </DateText>
     );
   }
