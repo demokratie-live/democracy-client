@@ -5,7 +5,14 @@ import m from "moment";
 
 const DateText = styled.Text`
   padding-top: 8;
-  color: ${({ date }) => (new Date(date) > new Date() ? "#20a736" : "red")};
+  color: ${({ date, tomorrow }) => {
+    if (tomorrow) {
+      return "#c67b19";
+    } else if (new Date(date) > new Date()) {
+      return "#20a736";
+    }
+    return "red";
+  }}
   font-size: 12;
   display: ${({ visible }) => (visible ? "flex" : "none")};
 `;
@@ -23,11 +30,13 @@ class DateTime extends Component {
       if (new Date(date) <= new Date()) {
         return m(date).format("DD.MM.YY");
       }
-      const days = Math.floor(m.duration(m(date).diff(m())).asDays());
+      const daysDate = m(date).endOf("day");
+      const days = Math.floor(m.duration(daysDate.diff(m())).asDays());
+
       if (days > 1) {
         return `${days} Tage`;
       } else if (days === 1) {
-        return `${days} Tag`;
+        return `morgen`;
       }
       // Force update Time
       if (!this.interval) {
@@ -47,8 +56,13 @@ class DateTime extends Component {
 
   render() {
     const { date } = this.props;
+
     return (
-      <DateText visible={date} date={date}>
+      <DateText
+        visible={date}
+        date={date}
+        tomorrow={this.formatDate(date) === "morgen"}
+      >
         {this.formatDate(date)}
       </DateText>
     );
