@@ -3,16 +3,15 @@ import React, { Component } from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import { Navigator } from "react-native-navigation";
-import { TouchableHighlight, Dimensions, Platform } from "react-native";
+import { Dimensions, Platform } from "react-native";
 import { graphql } from "react-apollo";
 import { unionBy } from "lodash";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import prevetNavStackDuplicate from "../../hocs/preventNavStackDuplicate";
 
-import ListRow from "../../components/ListRow";
-import VoteListItem from "../../components/VoteListItem";
 import ListSectionHeader from "../../components/ListSectionHeader";
+import ListItem from "./ListItem";
 
 import getProcedures from "../../graphql/queries/getProcedures";
 
@@ -113,10 +112,7 @@ class List extends Component {
       });
     }
     procedures.forEach(procedure => {
-      if (
-        listType === "VOTING" &&
-        procedure.completed
-      ) {
+      if (listType === "VOTING" && procedure.completed) {
         preparedData[1].data.push({
           ...procedure,
           date: procedure.voteDate || false,
@@ -133,6 +129,10 @@ class List extends Component {
     return preparedData;
   };
 
+  renderItem = onClick => ({ item }) => (
+    <ListItem item={item} onClick={onClick} />
+  );
+
   render() {
     const { data } = this.props;
     return (
@@ -145,18 +145,9 @@ class List extends Component {
             data.refetch();
           }}
           refreshing={data.networkStatus === 4}
+          renderItem={this.renderItem(this.onItemClick)}
           renderSectionHeader={({ section }) => (
             <ListSectionHeader title={section.title} />
-          )}
-          renderItem={({ item }) => (
-            <TouchableHighlight
-              onPress={this.onItemClick({ item })}
-              underlayColor="rgba(68, 148, 211, 0.1)"
-            >
-              <ListRow>
-                <VoteListItem {...item} />
-              </ListRow>
-            </TouchableHighlight>
           )}
           onEndReached={() => {
             data.fetchMore({
