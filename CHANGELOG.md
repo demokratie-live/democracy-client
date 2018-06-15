@@ -5,6 +5,11 @@
 * Details
   * [Added] History segment of current states to Detail page
 
+### 0.7.10
+
+* Search
+  * [Fixed] do not use cache for search results
+
 ### 0.7.9
 
 * Credits
