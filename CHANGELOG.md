@@ -4,6 +4,11 @@
 
 * [Changed][list] improve performance by shouldUpdateComponent check [#362](https://github.com/demokratie-live/democracy-client/issues/362)
 
+### 0.7.10
+
+* Search
+  * [Fixed] do not use cache for search results
+
 ### 0.7.9
 
 * Credits
