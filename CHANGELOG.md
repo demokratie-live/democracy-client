@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.7.x
+
+* Push
+  * [Fixed] typo fix for "Abonnierte Benachrichtigungen"
+
 ### 0.7.10
 
 * Search

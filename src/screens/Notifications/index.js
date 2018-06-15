@@ -96,7 +96,7 @@ const sections = [
     ]
   },
   {
-    title: "Abonierte Benachrichtigungen",
+    title: "Abonnierte Benachrichtigungen",
     key: "abos",
     data: []
   }
