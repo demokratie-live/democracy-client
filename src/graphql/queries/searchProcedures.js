@@ -6,17 +6,20 @@ import Voted from "../fragments/ProcedureVoted";
 export default gql`
   query search($term: String!) {
     searchProcedures(term: $term) {
-      _id
-      title
-      procedureId
-      tags
-      abstract
-      voteDate
-      votedGovernment
-      submissionDate
-      completed
-      ...ActivityIndex
-      ...Voted
+      procedures {
+        _id
+        title
+        procedureId
+        tags
+        abstract
+        voteDate
+        votedGovernment
+        submissionDate
+        completed
+        ...ActivityIndex
+        ...Voted
+      }
+      autocomplete
     }
   }
   ${ActivityIndex}

@@ -8,6 +8,7 @@ import { TouchableHighlight } from "react-native";
 import Header from "./Header";
 import ListRow from "../../components/ListRow";
 import VoteListItem from "../../components/VoteListItem";
+import ListSectionHeader from "../../components/ListSectionHeader";
 
 import searchProcedures from "../../graphql/queries/searchProcedures";
 
@@ -20,7 +21,7 @@ const Wrapper = styled.View`
   background-color: #fff;
 `;
 
-const List = styled.FlatList``;
+const List = styled.SectionList``;
 
 const Text = styled.Text`
   font-size: 18;
@@ -68,7 +69,7 @@ class SearchScreen extends Component {
   }
 
   state = {
-    procedures: [],
+    searchData: [],
     term: "",
     loading: false
   };
@@ -77,47 +78,47 @@ class SearchScreen extends Component {
     this.setState({ loading: true, term });
     const { client: { watchQuery } } = this.props;
 
-    this.observableSearchQuery = this.observableSearchQuery.filter(
-      ({ term: queryTerm }) => {
-        if (queryTerm !== term) {
-          // query.unsubscribe();
-          return false;
-        }
-        return true;
-      }
-    );
-
-    this.observableSearchQuery.push({
-      term,
-      query: await watchQuery({
+    if (!this.observableSearchQuery) {
+      this.observableSearchQuery = await watchQuery({
         query: searchProcedures,
         variables: { term },
         fetchPolicy: "network-only"
-      })
-    });
+      });
 
-    const { query } = this.observableSearchQuery.find(
-      ({ term: queryTerm }) => term === queryTerm
-    );
-
-    query.subscribe({
-      next: ({ data: { searchProcedures: procedures } }) => {
-        if (this.state.term === term) {
-          this.setState({ procedures, loading: false });
-        }
-      }
-    });
+      this.observableSearchQuery.subscribe({
+        next: result => this.handleSearchResults({ ...result, term })
+      });
+    } else {
+      this.observableSearchQuery.refetch({ term });
+      // .then(result => this.handleSearchResults({ ...result, term }));
+    }
   };
 
-  onItemClick = ({ item }) => () => {
-    this.props.navigateTo({
-      screen: "democracy.Detail",
-      title: "Abstimmung".toUpperCase(),
-      passProps: { ...item }
-    });
+  onItemClick = ({ item, section }) => () => {
+    if (section === "Ergebnisse") {
+      this.props.navigateTo({
+        screen: "democracy.Detail",
+        title: "Abstimmung".toUpperCase(),
+        passProps: { ...item }
+      });
+    } else {
+      this.onChangeTerm(item);
+    }
   };
 
-  observableSearchQuery = [];
+  handleSearchResults = ({
+    data: { loading, searchProcedures: { procedures, autocomplete } }
+  }) => {
+    if (!loading) {
+      const searchData = [
+        { title: "Vorschläge", data: autocomplete },
+        { title: "Ergebnisse", data: procedures }
+      ];
+      this.setState({ searchData, loading: false });
+    }
+  };
+
+  observableSearchQuery = null;
 
   render() {
     const { loading } = this.state;
@@ -133,18 +134,22 @@ class SearchScreen extends Component {
     return (
       <Wrapper>
         <List
-          data={this.state.procedures}
-          renderItem={({ item }) => (
+          sections={this.state.searchData}
+          renderSectionHeader={({ section: { title, data } }) =>
+            data.length > 0 ? <ListSectionHeader title={title} /> : null
+          }
+          renderItem={({ item, section: { title } }) => (
             <TouchableHighlight
-              onPress={this.onItemClick({ item })}
+              onPress={this.onItemClick({ item, section: title })}
               underlayColor="rgba(68, 148, 211, 0.1)"
             >
               <ListRow>
-                <VoteListItem {...item} date={item.voteDate} />
+                {title === "Ergebnisse" && <VoteListItem {...item} date={item.voteDate} />}
+                {title === "Vorschläge" && <Text>{item}</Text>}
               </ListRow>
             </TouchableHighlight>
           )}
-          keyExtractor={({ _id }) => _id}
+          keyExtractor={item => (typeof item === "string" ? item : item._id)}
           ListEmptyComponent={() => {
             const { term } = this.state;
             if (term) {
