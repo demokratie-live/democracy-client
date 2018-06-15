@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 import ActivityIndex from "./ActivityIndex";
 import DateTime from "./Date";
+import StatusIcon from "../components/StatusIcon";
 
 import DemocracyIcon from "../../iconfont/DemocracyFont";
 
@@ -22,11 +23,11 @@ const SideWrapper = styled.View`
   min-width: 50;
 `;
 
-const Title = styled.Text.attrs({ numberOfLines: 2 }) `
+const Title = styled.Text.attrs({ numberOfLines: 2 })`
   font-size: 17;
   color: #030303;
 `;
-const Tags = styled.Text.attrs({ numberOfLines: 2 }) `
+const Tags = styled.Text.attrs({ numberOfLines: 2 })`
   padding-top: 8;
   font-size: 15;
   color: #8f8e94;
@@ -42,31 +43,32 @@ const ListItem = ({
   votedGovernment,
   voted
 }) => (
-    <ListItemWrapper>
-      <MainWrapper>
-        <Title>{title}</Title>
-        {!children && <Tags>{tags && tags.join(", ")}</Tags>}
-        {children}
-      </MainWrapper>
-      <SideWrapper>
-        <ActivityIndex
-          procedureId={procedureId}
-          activityIndex={activityIndex}
-          active={active}
-          skipFetchData
-        />
+  <ListItemWrapper>
+    <StatusIcon push={active} unreaded={!active} />
+    <MainWrapper>
+      <Title>{title}</Title>
+      {!children && <Tags>{tags && tags.join(", ")}</Tags>}
+      {children}
+    </MainWrapper>
+    <SideWrapper>
+      <ActivityIndex
+        procedureId={procedureId}
+        activityIndex={activityIndex}
+        active={active}
+        skipFetchData
+      />
 
-        {!voted && date && <DateTime date={date} />}
-        {voted && (
-          <DemocracyIcon
-            name={`checkmark${votedGovernment ? "-double" : ""}`}
-            size={14}
-            color="#35a335"
-          />
-        )}
-      </SideWrapper>
-    </ListItemWrapper>
-  );
+      {!voted && date && <DateTime date={date} />}
+      {voted && (
+        <DemocracyIcon
+          name={`checkmark${votedGovernment ? "-double" : ""}`}
+          size={14}
+          color="#35a335"
+        />
+      )}
+    </SideWrapper>
+  </ListItemWrapper>
+);
 
 ListItem.propTypes = {
   title: PropTypes.string.isRequired,

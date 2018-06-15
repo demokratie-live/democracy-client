@@ -2,6 +2,8 @@ import VOTES_LOCAL from "../queries/votesLocal";
 import IS_INSTRUCTIONS_SHOWN from "../queries/isInstructionShown";
 import GET_NETWORK_STATUS from "../queries/getNetworkStatus";
 
+import ViewedProcedures from "../../services/ViewedProcedures";
+
 export const defaults = {
   currentScreen: "democracy.VoteList",
   votesLocal: [],
@@ -66,6 +68,13 @@ export const resolvers = {
           cache.writeData({ data: { currentScreen } });
           break;
       }
+      return null;
+    },
+    viewProcedure: async (_, { procedureId }) => {
+      await ViewedProcedures.setViewedProcedure({
+        procedureId,
+        selection: "VIEWED"
+      });
       return null;
     }
   },

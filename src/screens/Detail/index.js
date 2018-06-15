@@ -8,6 +8,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 import getProcedure from "../../graphql/queries/getProcedure";
 import TOGGLE_NOTIFICATION from "../../graphql/mutations/toggleNotification";
+import VIEW_PROCEDURE_LOCAL from "../../graphql/mutations/local/viewProcedure";
 
 import ActivityIndex from "../../components/ActivityIndex";
 import DateTime from "../../components/Date";
@@ -84,6 +85,10 @@ class Detail extends Component {
     navBarButtonColor: "#FFFFFF",
     backButtonTitle: ""
   };
+
+  componentDidMount(props) {
+    this.props.viewProcedure();
+  }
 
   componentWillReceiveProps(nextProps) {
     const { data } = nextProps;
@@ -235,7 +240,8 @@ Detail.propTypes = {
   procedureId: PropTypes.string.isRequired,
   data: PropTypes.shape().isRequired,
   navigator: PropTypes.instanceOf(Navigator).isRequired,
-  toggleNotification: PropTypes.func.isRequired
+  toggleNotification: PropTypes.func.isRequired,
+  viewProcedure: PropTypes.func.isRequired
 };
 
 Detail.defaultProps = {};
@@ -246,6 +252,18 @@ export default compose(
       variables: { id: procedureId },
       fetchPolicy: "cache-and-network"
     })
+  }),
+  graphql(VIEW_PROCEDURE_LOCAL, {
+    props({ mutate, ownProps }) {
+      return {
+        viewProcedure: () => {
+          const { procedureId } = ownProps;
+          mutate({
+            variables: { procedureId }
+          });
+        }
+      };
+    }
   }),
   graphql(TOGGLE_NOTIFICATION, {
     props({ mutate, ownProps }) {
