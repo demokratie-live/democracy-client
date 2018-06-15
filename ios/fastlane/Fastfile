@@ -12,13 +12,11 @@
 default_platform(:ios)
 
 lane :setup_signing do
-  setup_travis
-
   match(type: 'appstore')
 end
 
 platform :ios do
-  desc "Push a new beta build to TestFlight"
+  desc "Fastlane iOS"
   #xcversion(version: "9.2")
   #xcode_select "/Applications/Xcode-9.2.app"
   produce(
@@ -28,49 +26,51 @@ platform :ios do
     }
   )
 
+  setup_travis
+
+  version = get_version_number(
+    xcodeproj: "democracyclient.xcodeproj",
+    target: "democracyclient"
+  )
+
+  changelog = read_changelog(
+    changelog_path: '../CHANGELOG.md',	# Specify path to CHANGELOG.md
+    section_identifier: "[" + version + "]"
+  )[0, 3000]
+
+  increment_build_number(
+    xcodeproj: "democracyclient.xcodeproj",
+    build_number: ENV["BUILD_NUMBER"]
+  )
+
+  disable_automatic_code_signing(path: "democracyclient.xcodeproj")
+
   lane :prepare do
     cert
     sigh(force: true)
   end
 
+  # TEST
   lane :test do
-    #disable_automatic_code_signing(path: "democracyclient.xcodeproj")
-    setup_travis
-    sync_code_signing(
-      type: 'appstore',
-      app_identifier: "de.democracy-deutschland.clientapp",
-      team_id: "A4B84UJD7M"
-    )
     build_app( 
       scheme: "democracyclient-prod"
     )
   end
 
+  # ALPHA
   lane :alpha do
-    increment_build_number(
-      xcodeproj: "democracyclient.xcodeproj",
-      build_number: ENV["BUILD_NUMBER"]
-    )
-    disable_automatic_code_signing(path: "democracyclient.xcodeproj")
-    setup_travis
+
     sync_code_signing(
       type: 'appstore',
       app_identifier: "de.democracy-deutschland.clientapp.alpha",
       team_id: "A4B84UJD7M"
     )
+
     build_app( 
       clean: true, 
       scheme: "Alpha"
     )
 
-    version = get_version_number(
-      xcodeproj: "democracyclient.xcodeproj",
-      target: "democracyclient"
-    )
-    changelog = read_changelog(
-      changelog_path: '../CHANGELOG.md',	# Specify path to CHANGELOG.md
-      section_identifier: "[" + version + "]"
-    )
     upload_to_testflight(
       changelog: changelog,
       groups: "Developer",
@@ -82,13 +82,9 @@ platform :ios do
     )
   end
 
+  # BETA
   lane :beta do
-    increment_build_number(
-      xcodeproj: "democracyclient.xcodeproj",
-      build_number: ENV["BUILD_NUMBER"]
-    )
-    disable_automatic_code_signing(path: "democracyclient.xcodeproj")
-    setup_travis
+
     sync_code_signing(
       type: 'appstore',
       app_identifier: "de.democracy-deutschland.clientapp.beta",
@@ -98,15 +94,7 @@ platform :ios do
       clean: true, 
       scheme: "Beta"
     )
-
-    version = get_version_number(
-      xcodeproj: "democracyclient.xcodeproj",
-      target: "democracyclient"
-    )
-    changelog = read_changelog(
-      changelog_path: '../CHANGELOG.md',	# Specify path to CHANGELOG.md
-      section_identifier: "[" + version + "]"
-    )
+    
     upload_to_testflight(
       changelog: changelog,
       groups: "Prototyp-Tester",
@@ -117,13 +105,9 @@ platform :ios do
     )
   end
 
+  # PRODUCTION
   lane :production do
-    increment_build_number(
-      xcodeproj: "democracyclient.xcodeproj",
-      build_number: ENV["BUILD_NUMBER"]
-    )
-    disable_automatic_code_signing(path: "democracyclient.xcodeproj")
-    setup_travis
+
     sync_code_signing(
       type: 'appstore',
       app_identifier: "de.democracy-deutschland.clientapp",
@@ -133,15 +117,7 @@ platform :ios do
       clean: true, 
       scheme: "democracyclient-prod"
     )
-
-    version = get_version_number(
-      xcodeproj: "democracyclient.xcodeproj",
-      target: "democracyclient"
-    )
-    changelog = read_changelog(
-      changelog_path: '../CHANGELOG.md',	# Specify path to CHANGELOG.md
-      section_identifier: "[" + version + "]"
-    )
+    
     upload_to_testflight(
       changelog: changelog,
       app_identifier: "de.democracy-deutschland.clientapp",
