@@ -5,7 +5,7 @@ import Voted from "../fragments/ProcedureVoted";
 
 export default gql`
   query search($term: String!) {
-    searchProcedures(term: $term) {
+    searchProceduresAutocomplete(term: $term) {
       procedures {
         _id
         title
