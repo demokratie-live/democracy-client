@@ -107,7 +107,7 @@ class SearchScreen extends Component {
   };
 
   handleSearchResults = ({
-    data: { loading, searchProcedures: { procedures, autocomplete } }
+    data: { loading, searchProceduresAutocomplete: { procedures, autocomplete } }
   }) => {
     if (!loading) {
       const searchData = [
