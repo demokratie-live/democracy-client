@@ -41,10 +41,14 @@ const ListItem = ({
   children,
   activityIndex: { activityIndex, active },
   votedGovernment,
-  voted
+  voted,
+  viewedStatus
 }) => (
   <ListItemWrapper>
-    <StatusIcon push={active} unreaded={!active} />
+    <StatusIcon
+      push={viewedStatus === "PUSH"}
+      unreaded={viewedStatus === "NEW" && !voted && !active}
+    />
     <MainWrapper>
       <Title>{title}</Title>
       {!children && <Tags>{tags && tags.join(", ")}</Tags>}
@@ -82,7 +86,8 @@ ListItem.propTypes = {
   children: PropTypes.node,
   activityIndex: PropTypes.shape(),
   votedGovernment: PropTypes.bool,
-  voted: PropTypes.bool
+  voted: PropTypes.bool,
+  viewedStatus: PropTypes.string.isRequired
 };
 
 ListItem.defaultProps = {

@@ -6,108 +6,97 @@ class ViewedProcedures {
   static ITEM_KEY = `${DeviceInfo.getBundleId()}.ViewedProcedures`;
 
   static getViewedProcedures = async () => {
-    console.log("getViewedProcedures");
-    await AsyncStorage.removeItem(this.ITEM_KEY);
-    const viewdProcedures = await AsyncStorage.getItem(this.ITEM_KEY)
-      .then(err => console.log(err))
-      .catch(error => console.log(error));
+    // await AsyncStorage.removeItem(ViewedProcedures.ITEM_KEY);
+    const viewdProcedures = await AsyncStorage.getItem(
+      ViewedProcedures.ITEM_KEY
+    );
     if (viewdProcedures) {
-      //   return JSON.parse(viewdProcedures);
+      return JSON.parse(viewdProcedures);
     }
     return {};
   };
 
-  static resetViewedProcedures = async () =>
-    Keychain.resetGenericPassword(this.ITEM_KEY);
-
   static getViewedProceduresList = async () => {
-    console.log("getViewedProceduresList");
     const viewedProcedures = await ViewedProcedures.getViewedProcedures();
     const list = [];
     _.forEach(viewedProcedures, (value, key) => {
-      list.push({ procedureId: key, selection: value });
+      list.push({ procedureId: key, status: value });
     });
     return list;
   };
 
   static getViewProcedure = async procedureId => {
-    console.log("getViewProcedure");
     const viewedProcedures = await ViewedProcedures.getViewedProcedures();
     switch (viewedProcedures[procedureId]) {
-      case 0:
-        return false;
       case 1:
-        return { selection: "YES" };
-      case 2:
-        return { selection: "ABSTINATION" };
+        return { status: "VIEWED" };
       case 3:
-        return { selection: "NO" };
+        return { status: "UPDATE" };
+      case 4:
+        return { status: "PUSH" };
 
       default:
-        return null;
+        return { status: "NEW" };
     }
   };
 
-  static prepareSetViewProcedure = ({ procedureId, selection }) => {
-    console.log("prepareSetViewProcedure");
-    let selectionInt;
-    switch (selection) {
+  static prepareSetViewProcedure = ({ procedureId, status }) => {
+    let statusInt;
+    switch (status) {
       case "VIEWED":
-        selectionInt = 1;
+        statusInt = 1;
         break;
       case "NEW":
-        selectionInt = 2;
+        statusInt = 2;
         break;
       case "UPDATE":
-        selectionInt = 3;
+        statusInt = 3;
         break;
       case "PUSH":
-        selectionInt = 3;
+        statusInt = 3;
         break;
 
       default:
-        selectionInt = 0;
+        statusInt = 0;
         break;
     }
-    return { procedureId, selectionInt };
+    return { procedureId, statusInt };
   };
 
-  static setViewedProcedure = async ({ procedureId, selection }) => {
-    console.log("setViewedProcedure");
+  static setViewedProcedure = async ({ procedureId, status }) => {
     const viewedProcedures = await ViewedProcedures.getViewedProcedures();
 
-    // const { selectionInt } = ViewedProcedures.prepareSetViewProcedure({
-    //   procedureId,
-    //   selection
-    // });
-
-    // viewedProcedures[procedureId] = selectionInt;
-
-    // await AsyncStorage.setItem(this.ITEM_KEY, JSON.stringify(viewedProcedures));
-    // console.log(
-    //   "setViewProcedure",
-    //   await ViewedProcedures.getViewedProceduresList()
-    // );
-  };
-
-  static setViewProcedureList = async voteLocalList => {
-    console.log("setViewProcedureList");
-    const viewedProcedures = await ViewedProcedures.getViewedProcedures();
-    voteLocalList.forEach(vote => {
-      const {
-        procedureId,
-        selectionInt
-      } = ViewedProcedures.prepareSetViewProcedure(vote);
-      viewedProcedures[procedureId] = selectionInt;
-      console.log("setList");
+    const { statusInt } = ViewedProcedures.prepareSetViewProcedure({
+      procedureId,
+      status
     });
-    console.log("saveList");
-    await Keychain.setGenericPassword(
-      "democracyVotes",
-      JSON.stringify(viewedProcedures),
-      this.ITEM_KEY
+
+    viewedProcedures[procedureId] = statusInt;
+
+    await AsyncStorage.setItem(
+      ViewedProcedures.ITEM_KEY,
+      JSON.stringify(viewedProcedures)
     );
   };
+
+  // static setViewProcedureList = async voteLocalList => {
+  //   console.log("setViewProcedureList");
+  //   const viewedProcedures = await ViewedProcedures.getViewedProcedures();
+  //   voteLocalList.forEach(vote => {
+  //     const {
+  //       procedureId,
+  //       statusInt
+  //     } = ViewedProcedures.prepareSetViewProcedure(vote);
+  //     viewedProcedures[procedureId] = statusInt;
+  //     console.log("setList");
+  //   });
+  //   console.log("saveList");
+  //   await Keychain.setGenericPassword(
+  //     "democracyVotes",
+  //     JSON.stringify(viewedProcedures),
+  //     ViewedProcedures.ITEM_KEY
+  //   );
+  // };
 }
 
 export default ViewedProcedures;

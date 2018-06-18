@@ -2,6 +2,7 @@ import gql from "graphql-tag";
 
 import ActivityIndex from "../fragments/ProcedureActivityIndex";
 import Voted from "../fragments/ProcedureVoted";
+import Viewed from "../fragments/ProcedureViewed";
 
 export default gql`
   query procedures($offset: Int, $pageSize: Int, $type: ProcedureType!) {
@@ -17,8 +18,10 @@ export default gql`
       completed
       ...ActivityIndex
       ...Voted
+      ...Viewed
     }
   }
   ${ActivityIndex}
   ${Voted}
+  ${Viewed}
 `;

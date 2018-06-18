@@ -121,7 +121,8 @@ const { link: networkStatusNotifierLink } = createNetworkStatusNotifier({
         });
       }
     },
-    onError: () => {
+    onError: (...rest) => {
+      console.log("GraphQL ERROR: ", rest);
       client.mutate({
         mutation: UPDATE_NETWORK_STATUS,
         variables: {

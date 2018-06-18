@@ -73,7 +73,7 @@ export const resolvers = {
     viewProcedure: async (_, { procedureId }) => {
       await ViewedProcedures.setViewedProcedure({
         procedureId,
-        selection: "VIEWED"
+        status: "VIEWED"
       });
       return null;
     }
@@ -94,6 +94,12 @@ export const resolvers = {
       return (
         previous.votesLocal.find(vote => vote.procedure === procedure) || null
       );
+    }
+  },
+  Procedure: {
+    viewedStatus: async ({ procedureId }) => {
+      const { status } = await ViewedProcedures.getViewProcedure(procedureId);
+      return status;
     }
   }
 };

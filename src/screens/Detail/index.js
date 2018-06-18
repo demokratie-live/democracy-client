@@ -9,6 +9,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import getProcedure from "../../graphql/queries/getProcedure";
 import TOGGLE_NOTIFICATION from "../../graphql/mutations/toggleNotification";
 import VIEW_PROCEDURE_LOCAL from "../../graphql/mutations/local/viewProcedure";
+import F_PROCEDURE_VIEWED from "../../graphql/fragments/ProcedureViewed";
 
 import ActivityIndex from "../../components/ActivityIndex";
 import DateTime from "../../components/Date";
@@ -259,7 +260,30 @@ export default compose(
         viewProcedure: () => {
           const { procedureId } = ownProps;
           mutate({
-            variables: { procedureId }
+            variables: { procedureId },
+            optimisticResponse: {
+              __typename: "Mutation",
+              viewProcedure: {
+                id: procedureId,
+                __typename: "Procedure",
+                viewedStatus: "VIEWED"
+              }
+            },
+            update: (cache) => {
+              // set View Procedure
+              const aiFragment = cache.readFragment({
+                id: procedureId,
+                fragment: F_PROCEDURE_VIEWED
+              });
+
+              aiFragment.viewedStatus = "VIEWED";
+
+              cache.writeFragment({
+                id: procedureId,
+                fragment: F_PROCEDURE_VIEWED,
+                data: aiFragment
+              });
+            }
           });
         }
       };
