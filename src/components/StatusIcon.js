@@ -22,15 +22,12 @@ const NotificationButtonIcon = styled(Ionicons).attrs({
   color: "#1badf8"
 })``;
 
-const StatusIcon = ({ unreaded, push, procedureId, status }) => {
-  console.log("PUSHLOG: StatusIcon", { unreaded, push, status, procedureId });
-  return (
-    <Wrapper>
-      {unreaded && !push && <UnreadedIcon />}
-      {push && <NotificationButtonIcon />}
-    </Wrapper>
-  );
-};
+const StatusIcon = ({ unreaded, push }) => (
+  <Wrapper>
+    {unreaded && !push && <UnreadedIcon />}
+    {push && <NotificationButtonIcon />}
+  </Wrapper>
+);
 
 StatusIcon.propTypes = {
   unreaded: PropTypes.bool,
