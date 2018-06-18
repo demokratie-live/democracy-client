@@ -42,7 +42,9 @@ export default ComposedComponent => {
           );
           NotificationsIOS.addEventListener(
             "notificationReceivedBackground",
-            this.notificationReceivedBackground
+            notification => {
+              this.onNotificationReceivedBackground(notification.getData());
+            }
           );
           NotificationsIOS.addEventListener(
             "notificationOpened",
@@ -127,6 +129,7 @@ export default ComposedComponent => {
     componentDidMount() {
       switch (Platform.OS) {
         case "ios":
+          console.log("PUSHLOG: NotificationsIOS.consumeBackgroundQueue();");
           NotificationsIOS.consumeBackgroundQueue();
           break;
 
@@ -170,10 +173,9 @@ export default ComposedComponent => {
       console.log("PUSHLOG: onNotificationReceivedForeground", notification);
       const { navigator } = this.props;
       const { title, message, procedureId, type } = notification;
+      await this.handlePushData(notification);
 
       if (type === "procedure") {
-        await this.handlePushData(notification);
-
         Alert.alert(title, message, [
           {
             text: "Anschauen",
@@ -222,6 +224,7 @@ export default ComposedComponent => {
           os: "ios"
         }
       });
+
       if (tokenSucceeded) {
         await AsyncStorage.setItem("push-token", deviceToken);
       }
@@ -233,8 +236,8 @@ export default ComposedComponent => {
     };
 
     handlePushData = async notification => {
-      console.log("PUSHLOG: handlePushData", notification);
-      const { procedureId, type } = notification;
+      console.log("PUSHLOG: handlePushData", notification, notification.type);
+      const { procedureId, procedureIds, type } = notification;
       if (type === "procedure") {
         await ViewedProcedures.setViewedProcedure({
           procedureId,
@@ -251,6 +254,27 @@ export default ComposedComponent => {
           id: procedureId,
           fragment: F_PROCEDURE_VIEWED,
           data: aiFragment
+        });
+      } else if (type === "procedureBulk") {
+        await ViewedProcedures.setViewedProcedures({
+          procedureIds,
+          status: "PUSH"
+        });
+
+        procedureIds.forEach(id => {
+          // write graphQL cache
+          const aiFragment = client.readFragment({
+            id,
+            fragment: F_PROCEDURE_VIEWED
+          });
+          if (aiFragment) {
+            aiFragment.viewedStatus = "PUSH";
+            client.writeFragment({
+              id,
+              fragment: F_PROCEDURE_VIEWED,
+              data: aiFragment
+            });
+          }
         });
       }
     };

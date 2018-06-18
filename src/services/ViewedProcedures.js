@@ -13,16 +13,14 @@ let DATA = {};
 })();
 
 class ViewedProcedures {
-  static getViewedProcedures = async () => {
+  static getViewedProcedures = async () =>
     // await AsyncStorage.removeItem(ITEM_KEY);
-    console.log("PUSHLOG: DATA", DATA);
-    return DATA;
-    // const viewdProcedures = await AsyncStorage.getItem(ITEM_KEY);
-    // if (viewdProcedures) {
-    //   return JSON.parse(viewdProcedures);
-    // }
-    // return {};
-  };
+    DATA;
+  // const viewdProcedures = await AsyncStorage.getItem(ITEM_KEY);
+  // if (viewdProcedures) {
+  //   return JSON.parse(viewdProcedures);
+  // }
+  // return {};
 
   static getViewedProceduresList = async () => {
     const viewedProcedures = await ViewedProcedures.getViewedProcedures();
@@ -83,6 +81,25 @@ class ViewedProcedures {
 
     DATA[procedureId] = statusInt;
     viewedProcedures[procedureId] = statusInt;
+
+    console.log("PUSHLOG: setViewedProcedure 2", viewedProcedures);
+
+    await AsyncStorage.setItem(ITEM_KEY, JSON.stringify(viewedProcedures));
+  };
+
+  static setViewedProcedures = async ({ procedureIds, status }) => {
+    const viewedProcedures = await ViewedProcedures.getViewedProcedures();
+
+    console.log("PUSHLOG: setViewedProcedure 1", viewedProcedures);
+
+    const { statusInt } = ViewedProcedures.prepareSetViewProcedure({
+      status
+    });
+
+    procedureIds.forEach(procedureId => {
+      DATA[procedureId] = statusInt;
+      viewedProcedures[procedureId] = statusInt;
+    });
 
     console.log("PUSHLOG: setViewedProcedure 2", viewedProcedures);
 
