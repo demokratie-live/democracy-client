@@ -38,6 +38,7 @@ platform :android do
   )[0, 500]
   buildNumber = ENV["BUILD_NUMBER"];
 
+  # Alpha
   lane :alpha do
     File.open("./metadata_alpha/android/de-DE/changelogs/#{buildNumber}.txt", 'w') do |file|
       file.write changelog
@@ -54,6 +55,7 @@ platform :android do
     )
   end
 
+  # Beta
   desc "Submit a new Beta Build to GooglePlayStore"
   lane :beta do
     File.open("./metadata_beta/android/de-DE/changelogs/#{buildNumber}.txt", 'w') do |file|
