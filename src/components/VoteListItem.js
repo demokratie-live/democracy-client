@@ -48,6 +48,8 @@ const ListItem = ({
     <StatusIcon
       push={viewedStatus === "PUSH"}
       unreaded={viewedStatus === "NEW" && !voted && !active}
+      procedureId={procedureId}
+      status={viewedStatus}
     />
     <MainWrapper>
       <Title>{title}</Title>

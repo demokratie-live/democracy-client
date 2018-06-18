@@ -2,18 +2,26 @@ import { AsyncStorage } from "react-native";
 import DeviceInfo from "react-native-device-info";
 import _ from "lodash";
 
-class ViewedProcedures {
-  static ITEM_KEY = `${DeviceInfo.getBundleId()}.ViewedProcedures`;
+const ITEM_KEY = `${DeviceInfo.getBundleId()}.ViewedProcedures`;
+let DATA = {};
 
+(async () => {
+  const viewdProcedures = await AsyncStorage.getItem(ITEM_KEY);
+  if (viewdProcedures) {
+    DATA = JSON.parse(viewdProcedures);
+  }
+})();
+
+class ViewedProcedures {
   static getViewedProcedures = async () => {
-    // await AsyncStorage.removeItem(ViewedProcedures.ITEM_KEY);
-    const viewdProcedures = await AsyncStorage.getItem(
-      ViewedProcedures.ITEM_KEY
-    );
-    if (viewdProcedures) {
-      return JSON.parse(viewdProcedures);
-    }
-    return {};
+    // await AsyncStorage.removeItem(ITEM_KEY);
+    console.log("PUSHLOG: DATA", DATA);
+    return DATA;
+    // const viewdProcedures = await AsyncStorage.getItem(ITEM_KEY);
+    // if (viewdProcedures) {
+    //   return JSON.parse(viewdProcedures);
+    // }
+    // return {};
   };
 
   static getViewedProceduresList = async () => {
@@ -53,7 +61,7 @@ class ViewedProcedures {
         statusInt = 3;
         break;
       case "PUSH":
-        statusInt = 3;
+        statusInt = 4;
         break;
 
       default:
@@ -66,17 +74,19 @@ class ViewedProcedures {
   static setViewedProcedure = async ({ procedureId, status }) => {
     const viewedProcedures = await ViewedProcedures.getViewedProcedures();
 
+    console.log("PUSHLOG: setViewedProcedure 1", viewedProcedures);
+
     const { statusInt } = ViewedProcedures.prepareSetViewProcedure({
       procedureId,
       status
     });
 
+    DATA[procedureId] = statusInt;
     viewedProcedures[procedureId] = statusInt;
 
-    await AsyncStorage.setItem(
-      ViewedProcedures.ITEM_KEY,
-      JSON.stringify(viewedProcedures)
-    );
+    console.log("PUSHLOG: setViewedProcedure 2", viewedProcedures);
+
+    await AsyncStorage.setItem(ITEM_KEY, JSON.stringify(viewedProcedures));
   };
 
   // static setViewProcedureList = async voteLocalList => {
@@ -94,7 +104,7 @@ class ViewedProcedures {
   //   await Keychain.setGenericPassword(
   //     "democracyVotes",
   //     JSON.stringify(viewedProcedures),
-  //     ViewedProcedures.ITEM_KEY
+  //     ITEM_KEY
   //   );
   // };
 }

@@ -9,8 +9,10 @@ import NotificationsIOS, {
 import DeviceInfo from "react-native-device-info";
 
 import client from "../graphql/client";
+import ViewedProcedures from "../services/ViewedProcedures";
 
 import ADD_TOKEN from "../graphql/mutations/addToken";
+import F_PROCEDURE_VIEWED from "../graphql/fragments/ProcedureViewed";
 
 let LISTENERS_ADDED = false;
 
@@ -151,9 +153,24 @@ export default ComposedComponent => {
       }
     }
 
-    onNotificationReceivedForeground = notification => {
+    onNotificationReceivedForeground = async notification => {
+      console.log("PUSHLOG: onNotificationReceivedForeground", notification);
       const { navigator } = this.props;
       const { title, message, procedureId } = notification;
+
+      await ViewedProcedures.setViewedProcedure({ procedureId, status: "PUSH" });
+
+      // write graphQL cache
+      const aiFragment = client.readFragment({
+        id: procedureId,
+        fragment: F_PROCEDURE_VIEWED
+      });
+      aiFragment.viewedStatus = "PUSH";
+      client.writeFragment({
+        id: procedureId,
+        fragment: F_PROCEDURE_VIEWED,
+        data: aiFragment
+      });
 
       Alert.alert(title, message, [
         {
@@ -176,10 +193,12 @@ export default ComposedComponent => {
     };
 
     onNotificationReceivedBackground = notification => {
-      console.log("Notification Received - Background", notification);
+      console.log("PUSHLOG: onNotificationReceivedBackground", notification);
+      console.log("PUSHLOG: Notification Received - Background", notification);
     };
 
-    onNotificationOpened = ({ procedureId }) => {
+    onNotificationOpened = ({ procedureId }, ...rest) => {
+      console.log("PUSHLOG: onNotificationOpened", { procedureId, ...rest });
       const { navigator } = this.props;
       navigator.handleDeepLink({
         link: `democracy.Detail`,
@@ -191,6 +210,7 @@ export default ComposedComponent => {
     };
 
     onPushRegistered = async deviceToken => {
+      console.log("PUSHLOG: onPushRegistered", deviceToken);
       // TODO: Send the token to my server so it could send back push notifications...
       const tokenSucceeded = await client.mutate({
         mutation: ADD_TOKEN,
@@ -205,6 +225,7 @@ export default ComposedComponent => {
     };
 
     onPushRegistrationFailed = error => {
+      console.log("PUSHLOG: onPushRegistrationFailed", error);
       console.error(error);
     };
 
