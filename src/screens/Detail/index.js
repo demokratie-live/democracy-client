@@ -87,7 +87,7 @@ class Detail extends Component {
     backButtonTitle: ""
   };
 
-  componentDidMount(props) {
+  componentDidMount() {
     this.props.viewProcedure();
   }
 
@@ -269,7 +269,7 @@ export default compose(
                 viewedStatus: "VIEWED"
               }
             },
-            update: (cache) => {
+            update: cache => {
               // set View Procedure
               const aiFragment = cache.readFragment({
                 id: procedureId,
