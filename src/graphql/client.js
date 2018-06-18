@@ -121,7 +121,7 @@ const { link: networkStatusNotifierLink } = createNetworkStatusNotifier({
         });
       }
     },
-    onError: (...rest) => {
+    onError: () => {
       client.mutate({
         mutation: UPDATE_NETWORK_STATUS,
         variables: {
