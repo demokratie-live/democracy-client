@@ -76,12 +76,20 @@ class List extends Component {
   }
 
   state = {
-    width: Platform.OS === "ios" ? Dimensions.get("window").width : "auto"
+    width: Platform.OS === "ios" ? Dimensions.get("window").width : "auto",
+    fetchedAll: false
   };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.listType !== this.props.listType) {
       nextProps.data.procedures = false; // eslint-disable-line
+    }
+
+    if (
+      nextProps.data.procedures.length < PAGE_SIZE &&
+      !this.state.fetchedAll
+    ) {
+      this.setState({ fetchedAll: true });
     }
   }
 
@@ -143,11 +151,12 @@ class List extends Component {
 
   render() {
     const { data } = this.props;
+    const { fetchedAll } = this.state;
     return (
       <Wrapper onLayout={this.onLayout} width={this.state.width}>
         <SectionList
           ListFooterComponent={() =>
-            data.loading ? (
+            data.loading || !fetchedAll ? (
               <Loading>
                 <ActivityIndicator />
               </Loading>
@@ -157,6 +166,7 @@ class List extends Component {
           stickySectionHeadersEnabled
           keyExtractor={({ _id }) => _id}
           onRefresh={() => {
+            this.setState({ fetchedAll: false });
             data.refetch();
           }}
           refreshing={data.networkStatus === 4}
@@ -174,26 +184,29 @@ class List extends Component {
             </TouchableHighlight>
           )}
           onEndReached={() => {
-            data.fetchMore({
-              variables: {
-                offset: data.procedures ? data.procedures.length : PAGE_SIZE
-              },
-              updateQuery: (previousResult, { fetchMoreResult }) => {
-                if (
-                  !fetchMoreResult ||
-                  fetchMoreResult.procedures.length === 0
-                ) {
-                  return previousResult;
+            if (!data.loading && !fetchedAll) {
+              data.fetchMore({
+                variables: {
+                  offset: data.procedures ? data.procedures.length : PAGE_SIZE
+                },
+                updateQuery: (previousResult, { fetchMoreResult }) => {
+                  if (
+                    !fetchMoreResult ||
+                    fetchMoreResult.procedures.length === 0
+                  ) {
+                    this.setState({ fetchedAll: true });
+                    return previousResult;
+                  }
+                  return {
+                    procedures: unionBy(
+                      previousResult.procedures,
+                      fetchMoreResult.procedures,
+                      "_id"
+                    )
+                  };
                 }
-                return {
-                  procedures: unionBy(
-                    previousResult.procedures,
-                    fetchMoreResult.procedures,
-                    "_id"
-                  )
-                };
-              }
-            });
+              });
+            }
           }}
         />
       </Wrapper>
