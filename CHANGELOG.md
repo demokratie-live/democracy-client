@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - [ListView] improve performance by shouldUpdateComponent check [#362](https://github.com/demokratie-live/democracy-client/issues/362)
 - [ListView] change style of rest time to agenda
+- [ListView & Notification Settings] Style of segment headers
 - [iOS] Go back by swiping from left to right [#354](https://github.com/demokratie-live/democracy-client/issues/354)
 - [iOS] Override Alpha Versions
 - Changelog format

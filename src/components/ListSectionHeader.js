@@ -4,15 +4,13 @@ import PropTypes from "prop-types";
 
 const Wrapper = styled.View`
   padding-vertical: 8;
-  padding-horizontal: 8;
+  padding-horizontal: 16;
   background-color: #e6edf2;
-  align-items: center;
 `;
 
 const Title = styled.Text`
   font-size: 15;
   color: #6d6d72;
-  font-weight: bold;
 `;
 
 const ListSectionHeader = ({ title }) => {
