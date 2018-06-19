@@ -13,7 +13,7 @@ const ScrollView = styled.ScrollView.attrs({
   horizontal: true,
   pagingEnabled: true,
   showsHorizontalScrollIndicator: true
-}) ``;
+})``;
 
 const VoteResults = props => {
   const { voteResults, communityVotes, scrollTo, type, currentStatus } = props;
@@ -26,13 +26,18 @@ const VoteResults = props => {
         comunnityResults.no ||
         comunnityResults.abstination)
     ) {
-      const votes = comunnityResults.yes + comunnityResults.no + comunnityResults.abstination;
+      const votes =
+        comunnityResults.yes +
+        comunnityResults.no +
+        comunnityResults.abstination;
       return (
         <PieChart
           data={_.map(
             communityVotes.voteResults,
             (value, label) =>
-              label !== "__typename" ? { value, label, percentage: Math.round((value / votes) * 100) } : false
+              label !== "__typename"
+                ? { value, label, percentage: Math.round(value / votes * 100) }
+                : false
           ).filter(e => e)}
           colorScale={["#15C063", "#2C82E4", "#EC3E31"]}
           label="Abstimmende"
@@ -50,7 +55,11 @@ const VoteResults = props => {
         voteResults.notVote ||
         voteResults.abstination)
     ) {
-      const votes = voteResults.yes + voteResults.no + voteResults.notVote + voteResults.abstination;
+      const votes =
+        voteResults.yes +
+        voteResults.no +
+        voteResults.notVote +
+        voteResults.abstination;
       return (
         <Segment title="Bundestagsergebnis" open scrollTo={scrollTo}>
           <ScrollView>
@@ -58,16 +67,22 @@ const VoteResults = props => {
               data={_.map(
                 voteResults,
                 (value, label) =>
-                  label !== "__typename" ? { value, label, percentage: Math.round((value / votes) * 100) } : false
+                  label !== "__typename"
+                    ? {
+                        value,
+                        label,
+                        percentage: Math.round(value / votes * 100)
+                      }
+                    : false
               ).filter(e => e)}
-              colorScale={["#15C063", "#2C82E4", "#EC3E31", "#B1B3B4"]}
+              colorScale={["#99C93E", "#4CB0D8", "#D43194", "#B1B3B4"]}
               label="Abgeordnete"
             />
           </ScrollView>
         </Segment>
       );
     }
-    if (currentStatus === 'Zurückgezogen') {
+    if (currentStatus === "Zurückgezogen") {
       return (
         <Segment title="Bundestagsergebnis" open scrollTo={scrollTo}>
           <ScrollView>

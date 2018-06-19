@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [iOS] Override Alpha Versions
 - Changelog format
 - [Details] Hide vote result in history if not voted
+- [Details] Government PieChart colors
 
 ### Fixed
 - [Notifications] Fixed typo
