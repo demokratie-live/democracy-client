@@ -4,6 +4,10 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import PropTypes from "prop-types";
 import { Navigator } from "react-native-navigation";
 
+import client from "../../graphql/client";
+
+import finishSearch from "../../graphql/mutations/finishSearch";
+
 const Wrapper = styled.View`
   flex: 1;
   flex-direction: row;
@@ -64,6 +68,15 @@ class Header extends Component {
     navigator.pop();
   };
 
+  finishSearch = () => {
+    client.mutate({
+      mutation: finishSearch,
+      variables: {
+        term: this.state.term
+      }
+    });
+  };
+
   render() {
     const { term } = this.state;
     return (
@@ -74,6 +87,7 @@ class Header extends Component {
             placeholder="Suche"
             onChangeText={this.onChangeTerm}
             value={term}
+            onSubmitEditing={this.finishSearch}
           />
         </SearchInputWrapper>
 

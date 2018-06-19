@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import { Navigation, Navigator } from "react-native-navigation";
-import { withApollo } from "react-apollo";
+import { withApollo, graphql, compose } from "react-apollo";
 import { TouchableHighlight } from "react-native";
 
 import Header from "./Header";
@@ -11,6 +11,8 @@ import VoteListItem from "../../components/VoteListItem";
 import ListSectionHeader from "../../components/ListSectionHeader";
 
 import searchProcedures from "../../graphql/queries/searchProcedures";
+import mostSearched from "../../graphql/queries/mostSearched";
+import finishSearch from "../../graphql/mutations/finishSearch";
 
 import prevetNavStackDuplicate from "../../hocs/preventNavStackDuplicate";
 
@@ -86,11 +88,15 @@ class SearchScreen extends Component {
       });
 
       this.observableSearchQuery.subscribe({
-        next: result => this.handleSearchResults({ ...result, term })
+        next: result => {
+          console.log("handleSearchResults", result);
+          if (result.data) {
+            this.handleSearchResults({ ...result, term });
+          }
+        }
       });
     } else {
       this.observableSearchQuery.refetch({ term });
-      // .then(result => this.handleSearchResults({ ...result, term }));
     }
   };
 
@@ -102,12 +108,20 @@ class SearchScreen extends Component {
         passProps: { ...item }
       });
     } else {
+      this.props.finishSearch({
+        variables: {
+          term: item
+        }
+      });
       this.onChangeTerm(item);
     }
   };
 
   handleSearchResults = ({
-    data: { loading, searchProceduresAutocomplete: { procedures, autocomplete } }
+    data: {
+      loading,
+      searchProceduresAutocomplete: { procedures, autocomplete }
+    }
   }) => {
     if (!loading) {
       const searchData = [
@@ -121,7 +135,8 @@ class SearchScreen extends Component {
   observableSearchQuery = null;
 
   render() {
-    const { loading } = this.state;
+    const { loading, term } = this.state;
+    const { mostSearchedTerms } = this.props;
 
     if (loading) {
       return (
@@ -131,10 +146,24 @@ class SearchScreen extends Component {
       );
     }
 
+    let sectionData = [];
+    if (!term) {
+      sectionData = [
+        {
+          title: "Meistgesucht",
+          data: mostSearchedTerms
+            ? mostSearchedTerms.map(({ term }) => term)
+            : []
+        }
+      ];
+    } else {
+      sectionData = this.state.searchData;
+    }
+
     return (
       <Wrapper>
         <List
-          sections={this.state.searchData}
+          sections={sectionData}
           renderSectionHeader={({ section: { title, data } }) =>
             data.length > 0 ? <ListSectionHeader title={title} /> : null
           }
@@ -146,6 +175,7 @@ class SearchScreen extends Component {
               <ListRow>
                 {title === "Ergebnisse" && <VoteListItem {...item} />}
                 {title === "Vorschläge" && <Text>{item}</Text>}
+                {title === "Meistgesucht" && <Text>{item}</Text>}
               </ListRow>
             </TouchableHighlight>
           )}
@@ -177,4 +207,18 @@ SearchScreen.defaultProps = {
   navigator: undefined
 };
 
-export default withApollo(prevetNavStackDuplicate(SearchScreen));
+export default withApollo(
+  prevetNavStackDuplicate(
+    compose(
+      graphql(mostSearched, {
+        props: ({ data: { mostSearched: mostSearchedTerms } }) => ({
+          mostSearchedTerms
+        }),
+        options: () => ({
+          fetchPolicy: "cache-and-network"
+        })
+      }),
+      graphql(finishSearch, { name: "finishSearch" })
+    )(SearchScreen)
+  )
+);
