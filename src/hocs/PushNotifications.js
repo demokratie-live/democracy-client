@@ -205,13 +205,15 @@ export default ComposedComponent => {
     onNotificationOpened = ({ procedureId }, ...rest) => {
       console.log("PUSHLOG: onNotificationOpened", { procedureId, ...rest });
       const { navigator } = this.props;
-      navigator.handleDeepLink({
-        link: `democracy.Detail`,
-        payload: {
-          procedureId: `${procedureId}`,
-          from: "pushNotification"
-        }
-      });
+      if (procedureId) {
+        navigator.handleDeepLink({
+          link: `democracy.Detail`,
+          payload: {
+            procedureId: `${procedureId}`,
+            from: "pushNotification"
+          }
+        });
+      }
     };
 
     onPushRegistered = async deviceToken => {
