@@ -6778,9 +6778,9 @@ react-native-notifications@^1.1.19:
     core-js "^1.0.0"
     uuid "^2.0.3"
 
-react-native-pdf@^3.0.12:
-  version "3.0.12"
-  resolved "https://registry.yarnpkg.com/react-native-pdf/-/react-native-pdf-3.0.12.tgz#55f2632f595951bb357007e962cf1040dc77ad4f"
+"react-native-pdf@https://github.com/wonday/react-native-pdf#not_use_tiledlayer":
+  version "3.0.16"
+  resolved "https://github.com/wonday/react-native-pdf#463d73fb1e81aa577103af07d10ab3a63801b2da"
   dependencies:
     crypto-js "^3.1.9-1"
     prop-types "^15.5.10"

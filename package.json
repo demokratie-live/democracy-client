@@ -67,7 +67,7 @@
     "react-native-linear-gradient": "^2.4.0",
     "react-native-navigation": "1.1.443",
     "react-native-notifications": "^1.1.19",
-    "react-native-pdf": "^3.0.12",
+    "react-native-pdf": "https://github.com/wonday/react-native-pdf#not_use_tiledlayer",
     "react-native-rsa": "^0.0.3",
     "react-native-sha256": "^1.1.1",
     "react-native-svg": "^6.3.1",
