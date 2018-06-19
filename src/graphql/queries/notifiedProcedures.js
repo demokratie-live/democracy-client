@@ -1,6 +1,7 @@
 import gql from "graphql-tag";
 
 import ActivityIndex from "../fragments/ProcedureActivityIndex";
+import Viewed from "../fragments/ProcedureViewed";
 
 export default gql`
   query getNotifiedProcedures {
@@ -11,7 +12,9 @@ export default gql`
       currentStatus
       voteDate
       ...ActivityIndex
+      ...Viewed
     }
   }
   ${ActivityIndex}
+  ${Viewed}
 `;

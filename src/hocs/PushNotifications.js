@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Navigator } from "react-native-navigation";
-import { Platform, AsyncStorage, Alert } from "react-native";
+import { Navigator, Navigation } from "react-native-navigation";
+import { Platform, AsyncStorage } from "react-native";
 import NotificationsIOS, {
   NotificationsAndroid,
   PendingNotifications
@@ -176,10 +176,12 @@ export default ComposedComponent => {
       await this.handlePushData(notification);
 
       if (type === "procedure") {
-        Alert.alert(title, message, [
-          {
-            text: "Anschauen",
-            onPress: () => {
+        Navigation.showInAppNotification({
+          screen: "democracy.Notifications.InApp", // unique ID registered with Navigation.registerScreen
+          passProps: {
+            title,
+            description: message,
+            onClick: () => {
               navigator.handleDeepLink({
                 link: `democracy.Detail`,
                 payload: {
@@ -188,12 +190,18 @@ export default ComposedComponent => {
                 }
               });
             }
-          },
-          {
-            text: "Ok",
-            style: "cancel"
-          }
-        ]);
+          }, // simple serializable object that will pass as props to the in-app notification (optional)
+          autoDismissTimerSec: 3 // auto dismiss notification in seconds
+        });
+      } else if (type === "procedureBulk") {
+        Navigation.showInAppNotification({
+          screen: "democracy.Notifications.InApp", // unique ID registered with Navigation.registerScreen
+          passProps: {
+            title,
+            description: message
+          }, // simple serializable object that will pass as props to the in-app notification (optional)
+          autoDismissTimerSec: 3 // auto dismiss notification in seconds
+        });
       }
     };
 
