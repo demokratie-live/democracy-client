@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.7.x
+
+* Details
+  * [Changed] Government PieChart colors
+
 ### 0.7.10
 
 * Search
