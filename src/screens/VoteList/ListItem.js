@@ -14,7 +14,8 @@ class ListItem extends Component {
       procedureId,
       activityIndex: { activityIndex, active },
       votedGovernment,
-      voted
+      voted,
+      viewedStatus
     } = nextProps.item;
     const { item } = this.props;
 
@@ -26,7 +27,8 @@ class ListItem extends Component {
       activityIndex !== item.activityIndex.activityIndex ||
       active !== item.activityIndex.active ||
       votedGovernment !== item.votedGovernment ||
-      voted !== item.voted
+      voted !== item.voted ||
+      viewedStatus !== item.viewedStatus
     ) {
       return true;
     }
