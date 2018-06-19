@@ -1,10 +1,6 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
 import React, { Component } from "react";
-import {
-  Dimensions,
-  Platform,
-  ActivityIndicator
-} from "react-native";
+import { Dimensions, Platform, ActivityIndicator } from "react-native";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import { Navigator } from "react-native-navigation";
@@ -81,6 +77,7 @@ class List extends Component {
     }
 
     if (
+      nextProps.data.procedures &&
       nextProps.data.procedures.length < PAGE_SIZE &&
       !this.state.fetchedAll
     ) {
