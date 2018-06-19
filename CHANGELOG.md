@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.7.x
+
+* List
+  * [Changed] Style of segment headers
+
 ### 0.7.10
 
 * Search
