@@ -249,7 +249,9 @@ export default withApollo(
       }),
 
       graphql(searchTerm, {
-        props: ({ data: { searchTerm: { term } } }) => ({ searchTerm: term })
+        props: ({ data: { searchTerm } }) => searchTerm
+            ? { searchTerm: searchTerm.term }
+            : { searchTerm: "" }
       }),
 
       // Mutations

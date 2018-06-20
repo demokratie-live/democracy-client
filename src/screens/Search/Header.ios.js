@@ -116,7 +116,8 @@ Header.defaultProps = {
 export default compose(
   // Queries
   graphql(searchTerm, {
-    props: ({ data: { searchTerm: { term } } }) => ({ term })
+    props: ({ data: { searchTerm: term } }) =>
+      term ? { term: term.term } : { term: "" }
   }),
 
   // Mutations
