@@ -89,7 +89,6 @@ class SearchScreen extends Component {
 
       this.observableSearchQuery.subscribe({
         next: result => {
-          console.log("handleSearchResults", result);
           if (result.data) {
             this.handleSearchResults({ ...result, term });
           }
@@ -152,7 +151,7 @@ class SearchScreen extends Component {
         {
           title: "Meistgesucht",
           data: mostSearchedTerms
-            ? mostSearchedTerms.map(({ term }) => term)
+            ? mostSearchedTerms.map(({ term: value }) => value)
             : []
         }
       ];
@@ -181,8 +180,8 @@ class SearchScreen extends Component {
           )}
           keyExtractor={item => (typeof item === "string" ? item : item._id)}
           ListEmptyComponent={() => {
-            const { term } = this.state;
-            if (term) {
+            const { term: value } = this.state;
+            if (value) {
               return (
                 <NoResultsWrapper>
                   <Text>Leider nichts gefunden.</Text>
@@ -200,19 +199,28 @@ class SearchScreen extends Component {
 
 SearchScreen.propTypes = {
   navigator: PropTypes.instanceOf(Navigator),
-  navigateTo: PropTypes.func.isRequired
+  navigateTo: PropTypes.func.isRequired,
+  finishSearch: PropTypes.func.isRequired,
+  mostSearchedTerms: PropTypes.arrayOf(PropTypes.shape())
 };
 
 SearchScreen.defaultProps = {
-  navigator: undefined
+  navigator: undefined,
+  mostSearchedTerms: []
 };
 
 export default withApollo(
   preventNavStackDuplicate(
     compose(
       graphql(mostSearched, {
-        props: ({ data: { mostSearched: mostSearchedTerms } }) => ({
-          mostSearchedTerms
+        props: ({
+          data: {
+            mostSearched: mostSearchedTerms,
+            refetch: refetchMostSearched
+          }
+        }) => ({
+          mostSearchedTerms,
+          refetchMostSearched
         }),
         options: () => ({
           fetchPolicy: "cache-and-network"
