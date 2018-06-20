@@ -10,6 +10,10 @@ export const defaults = {
     __typename: "NetworkStatus",
     isConnected: true,
     requestError: ""
+  },
+  searchTerm: {
+    __typename: "SearchTerm",
+    term: ""
   }
 };
 
@@ -66,6 +70,16 @@ export const resolvers = {
           cache.writeData({ data: { currentScreen } });
           break;
       }
+      return null;
+    },
+    changeSearchTerm: (_, { term }, { cache }) => {
+      const data = {
+        searchTerm: {
+          __typename: "SearchTerm",
+          term
+        }
+      };
+      cache.writeData({ data });
       return null;
     }
   },

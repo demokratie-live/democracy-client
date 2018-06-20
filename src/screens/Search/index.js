@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import { Navigation, Navigator } from "react-native-navigation";
-import { withApollo, graphql, compose } from "react-apollo";
+import { withApollo, graphql, compose, ApolloProvider } from "react-apollo";
 import { TouchableHighlight } from "react-native";
 
 import Header from "./Header";
@@ -10,13 +10,23 @@ import ListRow from "../../components/ListRow";
 import VoteListItem from "../../components/VoteListItem";
 import ListSectionHeader from "../../components/ListSectionHeader";
 
+import client from "../../graphql/client";
+
 import searchProcedures from "../../graphql/queries/searchProcedures";
 import mostSearched from "../../graphql/queries/mostSearched";
 import finishSearch from "../../graphql/mutations/finishSearch";
+import searchTerm from "../../graphql/queries/local/searchTerm";
+import changeSearchTerm from "../../graphql/mutations/local/changeSearchTerm";
 
 import prevetNavStackDuplicate from "../../hocs/preventNavStackDuplicate";
 
-Navigation.registerComponent("democracy.Search.Header", () => Header);
+Navigation.registerComponent(
+  "democracy.Search.Header",
+  () => Header,
+  client.store,
+  ApolloProvider,
+  { client }
+);
 
 const Wrapper = styled.View`
   flex: 1;
@@ -72,12 +82,15 @@ class SearchScreen extends Component {
 
   state = {
     searchData: [],
-    term: "",
     loading: false
   };
 
+  componentWillReceiveProps(nextProps) {
+    this.onChangeTerm(nextProps.searchTerm);
+  }
+
   onChangeTerm = async term => {
-    this.setState({ loading: true, term });
+    this.setState({ loading: true });
     const { client: { watchQuery } } = this.props;
 
     if (!this.observableSearchQuery) {
@@ -107,6 +120,11 @@ class SearchScreen extends Component {
         passProps: { ...item }
       });
     } else {
+      const { updateSearchTerm } = this.props;
+
+      updateSearchTerm({
+        variables: { term: item }
+      });
       this.props.finishSearch({
         variables: {
           term: item
@@ -134,8 +152,8 @@ class SearchScreen extends Component {
   observableSearchQuery = null;
 
   render() {
-    const { loading, term } = this.state;
-    const { mostSearchedTerms } = this.props;
+    const { loading } = this.state;
+    const { mostSearchedTerms, searchTerm: term } = this.props;
 
     if (loading) {
       return (
@@ -201,7 +219,9 @@ SearchScreen.propTypes = {
   navigator: PropTypes.instanceOf(Navigator),
   navigateTo: PropTypes.func.isRequired,
   finishSearch: PropTypes.func.isRequired,
-  mostSearchedTerms: PropTypes.arrayOf(PropTypes.shape())
+  updateSearchTerm: PropTypes.func.isRequired,
+  mostSearchedTerms: PropTypes.arrayOf(PropTypes.shape()),
+  searchTerm: PropTypes.string.isRequired
 };
 
 SearchScreen.defaultProps = {
@@ -212,6 +232,7 @@ SearchScreen.defaultProps = {
 export default withApollo(
   prevetNavStackDuplicate(
     compose(
+      // Queries
       graphql(mostSearched, {
         props: ({
           data: {
@@ -226,7 +247,14 @@ export default withApollo(
           fetchPolicy: "cache-and-network"
         })
       }),
-      graphql(finishSearch, { name: "finishSearch" })
+
+      graphql(searchTerm, {
+        props: ({ data: { searchTerm: { term } } }) => ({ searchTerm: term })
+      }),
+
+      // Mutations
+      graphql(finishSearch, { name: "finishSearch" }),
+      graphql(changeSearchTerm, { name: "updateSearchTerm" })
     )(SearchScreen)
   )
 );

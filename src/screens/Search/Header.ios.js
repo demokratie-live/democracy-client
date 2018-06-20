@@ -3,10 +3,13 @@ import styled from "styled-components/native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import PropTypes from "prop-types";
 import { Navigator } from "react-native-navigation";
+import { graphql, compose } from "react-apollo";
 
 import client from "../../graphql/client";
 
 import finishSearch from "../../graphql/mutations/finishSearch";
+import searchTerm from "../../graphql/queries/local/searchTerm";
+import changeSearchTerm from "../../graphql/mutations/local/changeSearchTerm";
 
 const Wrapper = styled.View`
   flex: 1;
@@ -58,9 +61,12 @@ class Header extends Component {
   };
 
   onChangeTerm = term => {
-    const { onChangeTerm } = this.props;
-    onChangeTerm(term);
-    this.setState({ term });
+    const { updateSearchTerm } = this.props;
+    updateSearchTerm({
+      variables: {
+        term
+      }
+    });
   };
 
   clickBack = () => {
@@ -78,7 +84,7 @@ class Header extends Component {
   };
 
   render() {
-    const { term } = this.state;
+    const { term } = this.props;
     return (
       <Wrapper>
         <SearchInputWrapper>
@@ -99,12 +105,20 @@ class Header extends Component {
 
 Header.propTypes = {
   navigator: PropTypes.instanceOf(Navigator),
-  onChangeTerm: PropTypes.func
+  updateSearchTerm: PropTypes.func.isRequired,
+  term: PropTypes.string.isRequired
 };
 
 Header.defaultProps = {
-  navigator: undefined,
-  onChangeTerm: () => {}
+  navigator: undefined
 };
 
-export default Header;
+export default compose(
+  // Queries
+  graphql(searchTerm, {
+    props: ({ data: { searchTerm: { term } } }) => ({ term })
+  }),
+
+  // Mutations
+  graphql(changeSearchTerm, { name: "updateSearchTerm" })
+)(Header);
