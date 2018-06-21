@@ -57,8 +57,15 @@ class Header extends Component {
     term: ""
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.term !== this.state.term) {
+      this.setState({ term: nextProps.term });
+    }
+  }
+
   onChangeTerm = term => {
     const { updateSearchTerm } = this.props;
+    this.setState({ term });
     updateSearchTerm({
       variables: {
         term
@@ -81,7 +88,7 @@ class Header extends Component {
   };
 
   render() {
-    const { term } = this.props;
+    const { term } = this.state;
     return (
       <Wrapper>
         <SearchBackButtonAndroid onPress={this.clickBack} />
