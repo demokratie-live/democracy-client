@@ -5,7 +5,8 @@ import m from "moment";
 import _ from "lodash";
 
 const DateText = styled.Text`
-  padding-top: 8;
+padding-top: 8;
+padding-bottom: 2;
   color: ${({ date, soon }) => {
     if (soon) {
       return "#f5a623";
