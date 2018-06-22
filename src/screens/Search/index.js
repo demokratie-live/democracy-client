@@ -85,6 +85,13 @@ class SearchScreen extends Component {
     loading: false
   };
 
+  componentDidMount() {
+    const { updateSearchTerm } = this.props;
+    updateSearchTerm({
+      variables: { term: "" }
+    });
+  }
+
   componentWillReceiveProps(nextProps) {
     this.onChangeTerm(nextProps.searchTerm);
   }
@@ -249,9 +256,8 @@ export default withApollo(
       }),
 
       graphql(searchTerm, {
-        props: ({ data: { searchTerm } }) => searchTerm
-            ? { searchTerm: searchTerm.term }
-            : { searchTerm: "" }
+        props: ({ data: { searchTerm } }) =>
+          searchTerm ? { searchTerm: searchTerm.term } : { searchTerm: "" }
       }),
 
       // Mutations

@@ -2,6 +2,7 @@ import gql from "graphql-tag";
 
 import ActivityIndex from "../fragments/ProcedureActivityIndex";
 import Voted from "../fragments/ProcedureVoted";
+// import Viewed from "../fragments/ProcedureViewed";
 
 export default gql`
   query search($term: String!) {
@@ -18,6 +19,7 @@ export default gql`
         completed
         ...ActivityIndex
         ...Voted
+        # ...Viewed
       }
       autocomplete
     }
