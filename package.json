@@ -64,7 +64,7 @@
     "react-native-device-info": "^0.21.2",
     "react-native-linear-gradient": "^2.4.0",
     "react-native-navigation": "1.1.443",
-    "react-native-notifications": "^1.1.19",
+    "react-native-notifications": "https://github.com/demokratie-live/react-native-notifications#android-initial-all-notifications",
     "react-native-rsa": "^0.0.3",
     "react-native-sha256": "^1.1.1",
     "react-native-svg": "^6.3.1",

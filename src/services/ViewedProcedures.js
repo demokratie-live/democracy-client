@@ -72,8 +72,6 @@ class ViewedProcedures {
   static setViewedProcedure = async ({ procedureId, status }) => {
     const viewedProcedures = await ViewedProcedures.getViewedProcedures();
 
-    console.log("PUSHLOG: setViewedProcedure 1", viewedProcedures);
-
     const { statusInt } = ViewedProcedures.prepareSetViewProcedure({
       procedureId,
       status
@@ -82,15 +80,11 @@ class ViewedProcedures {
     DATA[procedureId] = statusInt;
     viewedProcedures[procedureId] = statusInt;
 
-    console.log("PUSHLOG: setViewedProcedure 2", viewedProcedures);
-
     await AsyncStorage.setItem(ITEM_KEY, JSON.stringify(viewedProcedures));
   };
 
   static setViewedProcedures = async ({ procedureIds, status }) => {
     const viewedProcedures = await ViewedProcedures.getViewedProcedures();
-
-    console.log("PUSHLOG: setViewedProcedure 1", viewedProcedures);
 
     const { statusInt } = ViewedProcedures.prepareSetViewProcedure({
       status
@@ -100,8 +94,6 @@ class ViewedProcedures {
       DATA[procedureId] = statusInt;
       viewedProcedures[procedureId] = statusInt;
     });
-
-    console.log("PUSHLOG: setViewedProcedure 2", viewedProcedures);
 
     await AsyncStorage.setItem(ITEM_KEY, JSON.stringify(viewedProcedures));
   };
