@@ -67,7 +67,6 @@ const NotificationButtonIcon = styled(Ionicons).attrs({
 })``;
 
 const ProcedureDescription = styled.Text`
-  padding-left: 11;
   font-size: 13;
   color: #8f8e94;
 `;
@@ -312,7 +311,7 @@ class Notifications extends Component {
                       })
                     }
                   >
-                    <NotificationButtonIcon active />
+                    {/* <NotificationButtonIcon active /> */}
                   </TouchableOpacity>
                   <ProcedureDescription>
                     {item.currentStatus}
