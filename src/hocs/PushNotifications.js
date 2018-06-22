@@ -103,17 +103,13 @@ export default ComposedComponent => {
             });
 
             PendingNotifications.getInitialNotification()
-              .then((notification, ...rest) => {
-                console.log(
-                  "PUSHLOG: getInitialNotification",
-                  notification,
-                  rest
-                );
-                if (notification) {
-                  const notificationData = JSON.parse(
-                    notification.getData().payload
-                  );
-                  this.onNotificationOpened(notificationData);
+              .then(notifications => {
+                console.log("PUSHLOG: getInitialNotification", notifications);
+                if (notifications) {
+                  notifications.data.forEach(notification => {
+                    const notificationData = JSON.parse(notification.payload);
+                    this.handlePushData(notificationData);
+                  });
                 }
               })
               .catch(err =>
