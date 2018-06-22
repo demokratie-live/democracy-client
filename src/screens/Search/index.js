@@ -35,6 +35,12 @@ const Wrapper = styled.View`
 
 const List = styled.SectionList``;
 
+const ListText = styled.Text`
+  font-size: 18;
+  color: grey;
+  padding-left: 8;
+`;
+
 const Text = styled.Text`
   font-size: 18;
   color: grey;
@@ -190,9 +196,11 @@ class SearchScreen extends Component {
               underlayColor="rgba(68, 148, 211, 0.1)"
             >
               <ListRow>
-                {title === "Ergebnisse" && <VoteListItem {...item} date={item.voteDate} />}
-                {title === "Vorschläge" && <Text>{item}</Text>}
-                {title === "Meistgesucht" && <Text>{item}</Text>}
+                {title === "Ergebnisse" && (
+                  <VoteListItem {...item} date={item.voteDate} />
+                )}
+                {title === "Vorschläge" && <ListText>{item}</ListText>}
+                {title === "Meistgesucht" && <ListText>{item}</ListText>}
               </ListRow>
             </TouchableHighlight>
           )}
@@ -249,9 +257,8 @@ export default withApollo(
       }),
 
       graphql(searchTerm, {
-        props: ({ data: { searchTerm } }) => searchTerm
-            ? { searchTerm: searchTerm.term }
-            : { searchTerm: "" }
+        props: ({ data: { searchTerm } }) =>
+          searchTerm ? { searchTerm: searchTerm.term } : { searchTerm: "" }
       }),
 
       // Mutations
