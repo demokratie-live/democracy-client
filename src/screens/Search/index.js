@@ -91,6 +91,13 @@ class SearchScreen extends Component {
     loading: false
   };
 
+  componentDidMount() {
+    const { updateSearchTerm } = this.props;
+    updateSearchTerm({
+      variables: { term: "" }
+    });
+  }
+
   componentWillReceiveProps(nextProps) {
     this.onChangeTerm(nextProps.searchTerm);
   }
