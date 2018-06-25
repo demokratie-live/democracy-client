@@ -59,12 +59,12 @@ const ProcedureDetailWrapper = styled.View`
   align-items: center;
 `;
 
-const NotificationButtonIcon = styled(Ionicons).attrs({
-  size: 32,
-  name: ({ active }) =>
-    active ? "ios-notifications" : "ios-notifications-outline",
-  color: ({ active }) => (active ? "rgb(255, 171, 33)" : "rgb(0, 0, 0)")
-})``;
+// const NotificationButtonIcon = styled(Ionicons).attrs({
+//   size: 32,
+//   name: ({ active }) =>
+//     active ? "ios-notifications" : "ios-notifications-outline",
+//   color: ({ active }) => (active ? "rgb(255, 171, 33)" : "rgb(0, 0, 0)")
+// })``;
 
 const ProcedureDescription = styled.Text`
   font-size: 13;
