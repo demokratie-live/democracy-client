@@ -111,7 +111,7 @@ class Security extends Component {
     const version = `Version: ${DeviceInfo.getReadableVersion()
       .split(".")
       .slice(0, 3)
-      .join(".")}`;
+      .join(".")} (${DeviceInfo.getBuildNumber()})`;
     return (
       <ScrollWrapper>
         <Wrapper>

@@ -23,7 +23,7 @@ const Wrapper = styled.View`
 
 const Logo = styled.Image.attrs({
   source: require("../../assets/images/support-logo.png")
-}) ``;
+})``;
 
 const Text = styled.Text`
   text-align: justify;
@@ -57,7 +57,7 @@ const Version = styled.Text`
 const ContactIcons = styled(FontAwesome).attrs({
   size: 40,
   color: "#000000"
-}) ``;
+})``;
 
 class Support extends Component {
   static navigatorStyle = {
@@ -89,11 +89,10 @@ class Support extends Component {
       if (supported) {
         Linking.openURL(url).catch(() => null);
       } else {
-        Alert.alert('Nicht unterstützt',
-          'Diese Operation wird auf deinem Gerät zurzeit nicht unterstützt!',
-          [
-            { text: 'OK' },
-          ],
+        Alert.alert(
+          "Nicht unterstützt",
+          "Diese Operation wird auf deinem Gerät zurzeit nicht unterstützt!",
+          [{ text: "OK" }],
           { cancelable: false }
         );
       }
@@ -107,10 +106,12 @@ class Support extends Component {
         : `tel:${Config.PHONE_NUMBER}`;
     const email = `mailto:${Config.CONTACT_EMAIL}`;
     const github = Config.GITHUB_URL;
+
     const version = `Version: ${DeviceInfo.getReadableVersion()
       .split(".")
       .slice(0, 3)
-      .join(".")}`;
+      .join(".")} (${DeviceInfo.getBuildNumber()})`;
+
     return (
       <ScrollWrapper>
         <Wrapper>
