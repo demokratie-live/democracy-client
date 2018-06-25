@@ -24,6 +24,11 @@ export default ComposedComponent => {
                 backButtonHidden: true
               });
               break;
+            case "filter":
+              navigator.showModal({
+                screen: "democracy.VoteList.Filter"
+              });
+              break;
 
             default:
               break;

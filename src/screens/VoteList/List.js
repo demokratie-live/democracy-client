@@ -54,14 +54,22 @@ class List extends Component {
     });
 
     const searchIcon = Platform.OS === "ios" ? "ios-search" : "md-search";
-    Ionicons.getImageSource(searchIcon, 24, "#FFFFFF").then(icon => {
-      props.navigator.setButtons({
-        rightButtons: [
-          {
-            icon,
-            id: "search"
-          }
-        ]
+    const filterIcon = "ios-funnel-outline";
+    Ionicons.getImageSource(searchIcon, 24, "#FFFFFF").then(iconSearch => {
+      Ionicons.getImageSource(filterIcon, 24, "#FFFFFF").then(iconFilter => {
+        console.log("iconFilter");
+        props.navigator.setButtons({
+          rightButtons: [
+            {
+              icon: iconSearch,
+              id: "search"
+            },
+            {
+              icon: iconFilter,
+              id: "filter"
+            }
+          ]
+        });
       });
     });
   }
