@@ -26,7 +26,8 @@ const ButtonText = styled.Button.attrs({
 `;
 
 class Header extends Component {
-  onSave = () => {
+  onSave = async () => {
+    await this.props.onSave();
     this.clickBack();
   };
 

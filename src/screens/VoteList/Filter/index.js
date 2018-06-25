@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { AsyncStorage } from "react-native";
 import styled from "styled-components/native";
 import { Navigation } from "react-native-navigation";
 
@@ -114,16 +115,27 @@ const Switch = styled.Switch`
   margin-bottom: 3;
 `;
 
+const STORAGE_KEY = "VoteList.Filters";
+
 class Filter extends Component {
   constructor(props) {
     super(props);
+    console.log("onChangeFilter", props);
     props.navigator.setStyle({
       navBarCustomView: "democracy.VoteList.Filter.Header",
       navBarComponentAlignment: "fill",
       navBarNoBorder: true,
       navBarCustomViewInitialProps: {
         navigator: this.props.navigator,
-        onChangeTerm: this.onChangeTerm
+        onSave: this.onSave
+      }
+    });
+
+    AsyncStorage.getItem(STORAGE_KEY).then(data => {
+      if (data) {
+        const jsonObj = JSON.parse(data);
+        console.log("ASYMC", jsonObj);
+        this.setState({ data: jsonObj });
       }
     });
   }
@@ -140,6 +152,13 @@ class Filter extends Component {
         all: true
       }
     }
+  };
+
+  onSave = async () => {
+    const jsonString = JSON.stringify(this.state.data);
+    await AsyncStorage.setItem(STORAGE_KEY, jsonString);
+    this.props.onChangeFilter(this.state.data);
+    console.log(jsonString);
   };
 
   onChange = ({ type, subType, value }) => {

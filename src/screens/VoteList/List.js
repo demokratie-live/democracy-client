@@ -31,6 +31,8 @@ const SectionList = styled.SectionList``;
 
 const PAGE_SIZE = 20;
 
+let onNavigatorEventAdded = false;
+
 class List extends Component {
   static navigatorStyle = {
     navBarButtonColor: "#FFFFFF",
@@ -72,6 +74,11 @@ class List extends Component {
         });
       });
     });
+
+    if (!onNavigatorEventAdded) {
+      this.props.navigator.addOnNavigatorEvent(this.onNavigatorEvent);
+    }
+    onNavigatorEventAdded = true;
   }
 
   state = {
@@ -92,6 +99,30 @@ class List extends Component {
       this.setState({ fetchedAll: true });
     }
   }
+
+  onNavigatorEvent = event => {
+    console.log("onNavigatorEvent", onNavigatorEventAdded);
+    if (event.type) {
+      // NavBar Events
+      switch (event.id) {
+        case "filter":
+          this.props.navigator.showModal({
+            screen: "democracy.VoteList.Filter",
+            passProps: {
+              onChangeFilter: this.onChangeFilter
+            }
+          });
+          break;
+
+        default:
+          break;
+      }
+    }
+  };
+
+  onChangeFilter = filters => {
+    console.log("onChangeFilter", { filters });
+  };
 
   onLayout = () => {
     if (Platform.OS === "ios") {
