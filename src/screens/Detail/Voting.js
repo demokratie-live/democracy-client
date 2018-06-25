@@ -149,7 +149,7 @@ export default compose(
       fetchPolicy: "cache-and-network"
     }),
     props: ({ data: { loading, votes } }) => ({
-      voted: loading ? true : votes.voted
+      voted: !loading && votes ? votes.voted : true
     })
   }),
 

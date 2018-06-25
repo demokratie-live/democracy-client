@@ -45,13 +45,17 @@ class DateTime extends Component {
       if (!this.interval) {
         this.interval = setInterval(() => {
           this.forceUpdate();
-        }, 1000 * 10);
+        }, 1000 * 30);
       }
 
       const hours = Math.floor(m.duration(m(date).diff(m())).asMinutes() / 60);
-      const minutes = _.padStart(`${Math.floor(
-        ((m.duration(m(date).diff(m())).asMinutes() / 60) % 1) * 60
-      )}`, 2, '0');
+      const minutes = _.padStart(
+        `${Math.floor(
+          ((m.duration(m(date).diff(m())).asMinutes() / 60) % 1) * 60
+        )}`,
+        2,
+        "0"
+      );
       return `${hours}:${minutes}`;
     }
     return null;
@@ -63,7 +67,7 @@ class DateTime extends Component {
     localDate.setTime(
       localDate.getTime() + new Date(date).getTimezoneOffset() * 1000 * 60
     );
-    console.log({ localDate });
+
     const formattedDate = this.formatDate(localDate);
 
     return (
