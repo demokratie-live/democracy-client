@@ -4,6 +4,7 @@ import { Navigation } from "react-native-navigation";
 
 import Header from "./Header";
 import SegmentHeader from "../../../components/ListSectionHeader";
+import Checkbox from "../../../components/Checkbox";
 
 Navigation.registerComponent("democracy.VoteList.Filter.Header", () => Header);
 
@@ -82,11 +83,11 @@ const Wrapper = styled.SectionList`
 
 const ListRowMain = styled.View`
   padding-horizontal: 18;
-  padding-top: 11;
+  padding-vertical: 11;
   justify-content: center;
 `;
 
-const ListRowSub = styled.View`
+const ListRowSub = styled.TouchableOpacity`
   padding-left: 8;
   padding-vertical: 11;
   justify-content: center;
@@ -113,13 +114,6 @@ const Switch = styled.Switch`
   margin-bottom: 3;
 `;
 
-const Checkbox = styled.View`
-  width: 24;
-  height: 24;
-  border-radius: 12;
-  background-color: #4494d3;
-`;
-
 class Filter extends Component {
   constructor(props) {
     super(props);
@@ -134,6 +128,10 @@ class Filter extends Component {
     });
   }
 
+  state = {
+    data: {}
+  };
+
   render() {
     return (
       <Wrapper
@@ -141,18 +139,37 @@ class Filter extends Component {
         renderSectionHeader={({ section: { title } }) => (
           <SegmentHeader title={title} />
         )}
-        renderItem={({ item: { title, data } }) => (
+        renderItem={({ item: { title, data }, section }) => (
           <ListRowMain>
             <Row>
               <TitleMain>{title}</TitleMain>
-              <Switch />
+              <Switch
+                onValueChange={value =>
+                  this.setState({ [`${section.title}|${title}`]: value })
+                }
+                value={this.state[`${section.title}|${title}`]}
+              />
             </Row>
             {data &&
-              data.map(({ title }) => (
-                <ListRowSub key={title}>
+              !this.state[`${section.title}|${title}`] &&
+              data.map(({ title: subtitle }) => (
+                <ListRowSub
+                  key={subtitle}
+                  onPress={() => {
+                    this.setState({
+                      [`${section.title}|${title}|${subtitle}`]: !this.state[
+                        `${section.title}|${title}|${subtitle}`
+                      ]
+                    });
+                  }}
+                >
                   <Row>
-                    <TitleSub>{title}</TitleSub>
-                    <Checkbox />
+                    <TitleSub>{subtitle}</TitleSub>
+                    <Checkbox
+                      value={
+                        this.state[`${section.title}|${title}|${subtitle}`]
+                      }
+                    />
                   </Row>
                 </ListRowSub>
               ))}
