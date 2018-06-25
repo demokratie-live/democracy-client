@@ -48,8 +48,8 @@ platform :android do
       build_type: "Release"
     )
     upload_to_play_store(
-      track: 'alpha',
-      track_promote_to: 'alpha',
+      track: 'internal',
+      track_promote_to: 'internal',
       apk: "./app/build/outputs/apk/app-internal-release.apk",
       metadata_path: "./fastlane/metadata_internal/android"
     )
