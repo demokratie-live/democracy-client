@@ -58,6 +58,31 @@ platform :ios do
     )
   end
 
+  # INTERNAL
+  lane :internal do
+
+    sync_code_signing(
+      type: 'appstore',
+      app_identifier: "de.democracy-deutschland.clientapp.internal",
+      team_id: "A4B84UJD7M"
+    )
+
+    build_app( 
+      clean: true, 
+      scheme: "Internal"
+    )
+
+    upload_to_testflight(
+      changelog: changelog,
+      groups: "Developer",
+      app_identifier: "de.democracy-deutschland.clientapp.internal",
+      demo_account_required: false,
+      notify_external_testers: true,
+      distribute_external: true,
+      reject_build_waiting_for_review: true
+    )
+  end
+
   # ALPHA
   lane :alpha do
 

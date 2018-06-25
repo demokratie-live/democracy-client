@@ -11,6 +11,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "start:android": "yarn start:android:dev",
     "start:android:dev": "react-native run-android --variant=devDebug --appIdSuffix=dev",
+    "start:android:internal": "react-native run-android --variant=internalDebug --appIdSuffix=internal",
     "start:android:alpha": "react-native run-android --variant=alphaDebug --appIdSuffix=alpha",
     "start:android:beta": "react-native run-android --variant=betaDebug --appIdSuffix=beta",
     "start:android:production": "react-native run-android --variant=productionDebug",
@@ -28,11 +29,13 @@
   "xcodeSchemes": {
     "Debug": [
       "Beta.Debug",
-      "Alpha.Debug"
+      "Alpha.Debug",
+      "Internal.Debug"
     ],
     "Release": [
       "Beta.Release",
-      "Alpha.Release"
+      "Alpha.Release",
+      "Internal.Release"
     ]
   },
   "dependencies": {
