@@ -11,11 +11,11 @@ Navigation.registerComponent("democracy.VoteList.Filter.Header", () => Header);
 const FilterData = [
   {
     title: "Vorgangstyp",
+    name: "type",
     data: [
       {
         title: "Alle Vorgangstypen",
         type: "switch",
-        name: "type",
         data: [
           {
             title: "Antrag"
@@ -49,11 +49,11 @@ const FilterData = [
   },
   {
     title: "Sachgebite",
+    name: "subjectGroups",
     data: [
       {
         title: "Alle Sachgebite",
         type: "switch",
-        name: "subjectGroups",
         data: [
           {
             title: "Arbeit und Beschäftigung",
@@ -129,7 +129,37 @@ class Filter extends Component {
   }
 
   state = {
-    data: {}
+    data: {
+      type: {
+        all: true
+      },
+      userStatus: {
+        all: true
+      },
+      subjectGroups: {
+        all: true
+      }
+    }
+  };
+
+  onChange = ({ type, subType, value }) => {
+    const { data } = this.state;
+    if (subType) {
+      this.setState({
+        data: { ...data, [type]: { ...data[type], [subType]: value } }
+      });
+    } else {
+      this.setState({
+        data: { ...data, [type]: { ...data[type], all: value } }
+      });
+    }
+  };
+
+  getValue = ({ type, subType }) => {
+    if (subType) {
+      return this.state.data[type][subType];
+    }
+    return this.state.data[type].all;
   };
 
   render() {
@@ -145,30 +175,37 @@ class Filter extends Component {
               <TitleMain>{title}</TitleMain>
               <Switch
                 onValueChange={value =>
-                  this.setState({ [`${section.title}|${title}`]: value })
+                  this.onChange({
+                    type: section.name,
+                    value: !this.getValue({ type: section.name })
+                  })
                 }
-                value={this.state[`${section.title}|${title}`]}
+                value={this.getValue({ type: section.name })}
               />
             </Row>
             {data &&
-              !this.state[`${section.title}|${title}`] &&
+              !this.getValue({ type: section.name }) &&
               data.map(({ title: subtitle }) => (
                 <ListRowSub
                   key={subtitle}
                   onPress={() => {
-                    this.setState({
-                      [`${section.title}|${title}|${subtitle}`]: !this.state[
-                        `${section.title}|${title}|${subtitle}`
-                      ]
+                    this.onChange({
+                      type: section.name,
+                      subType: subtitle,
+                      value: !this.getValue({
+                        type: section.name,
+                        subType: subtitle
+                      })
                     });
                   }}
                 >
                   <Row>
                     <TitleSub>{subtitle}</TitleSub>
                     <Checkbox
-                      value={
-                        this.state[`${section.title}|${title}|${subtitle}`]
-                      }
+                      value={this.getValue({
+                        type: section.name,
+                        subType: subtitle
+                      })}
                     />
                   </Row>
                 </ListRowSub>
