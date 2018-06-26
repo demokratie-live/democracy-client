@@ -1688,7 +1688,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 44;
+				CURRENT_PROJECT_VERSION = 46;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				DISPLAY_NAME = DEMOCRACY;
@@ -1732,7 +1732,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 44;
+				CURRENT_PROJECT_VERSION = 46;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				DISPLAY_NAME = DEMOCRACY;
 				HEADER_SEARCH_PATHS = (
@@ -2082,7 +2082,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 44;
+				CURRENT_PROJECT_VERSION = 46;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				DISPLAY_NAME = "DEMOCRACY Beta";
@@ -2301,7 +2301,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 44;
+				CURRENT_PROJECT_VERSION = 46;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				DISPLAY_NAME = "DEMOCRACY Beta";
 				HEADER_SEARCH_PATHS = (
@@ -2523,7 +2523,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 44;
+				CURRENT_PROJECT_VERSION = 46;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				DISPLAY_NAME = "DEMOCRACY Alpha";
@@ -2743,7 +2743,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 44;
+				CURRENT_PROJECT_VERSION = 46;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				DISPLAY_NAME = "DEMOCRACY Alpha";
 				HEADER_SEARCH_PATHS = (
@@ -2959,7 +2959,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 44;
+				CURRENT_PROJECT_VERSION = 46;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				DISPLAY_NAME = "DEMOCRACY Internal";
 				HEADER_SEARCH_PATHS = (
@@ -2986,8 +2986,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.internal";
 				PRODUCT_NAME = democracyclient;
-				PROVISIONING_PROFILE = "7fd6acc3-3aa8-4be6-9b3c-fdac02a9f1db";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore de.democracy-deutschland.clientapp.alpha";
+				PROVISIONING_PROFILE = "91f5606d-f407-4a91-aebb-a42e7af238d9";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore de.democracy-deutschland.clientapp.internal";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -3178,10 +3178,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID_SUFFIX = .internal;
 				CODE_SIGN_ENTITLEMENTS = democracyclient/democracyclient.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 44;
+				CURRENT_PROJECT_VERSION = 46;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				DISPLAY_NAME = "DEMOCRACY Internal";
