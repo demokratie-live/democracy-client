@@ -10,6 +10,8 @@ export default gql`
       _id
       title
       procedureId
+      type
+      subjectGroups
       tags
       abstract
       voteDate

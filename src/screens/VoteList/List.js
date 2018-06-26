@@ -1,11 +1,16 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
 import React, { Component } from "react";
-import { Dimensions, Platform, ActivityIndicator } from "react-native";
+import {
+  Dimensions,
+  Platform,
+  ActivityIndicator,
+  AsyncStorage
+} from "react-native";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import { Navigator } from "react-native-navigation";
 import { graphql } from "react-apollo";
-import { unionBy } from "lodash";
+import _, { unionBy } from "lodash";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import preventNavStackDuplicate from "../../hocs/preventNavStackDuplicate";
@@ -30,8 +35,8 @@ const Loading = styled.View`
 const SectionList = styled.SectionList``;
 
 const PAGE_SIZE = 20;
-
 let onNavigatorEventAdded = false;
+const STORAGE_KEY = "VoteList.Filters";
 
 class List extends Component {
   static navigatorStyle = {
@@ -55,35 +60,25 @@ class List extends Component {
       });
     });
 
-    const searchIcon = Platform.OS === "ios" ? "ios-search" : "md-search";
-    const filterIcon = "ios-funnel-outline";
-    Ionicons.getImageSource(searchIcon, 24, "#FFFFFF").then(iconSearch => {
-      Ionicons.getImageSource(filterIcon, 24, "#FFFFFF").then(iconFilter => {
-        console.log("iconFilter");
-        props.navigator.setButtons({
-          rightButtons: [
-            {
-              icon: iconSearch,
-              id: "search"
-            },
-            {
-              icon: iconFilter,
-              id: "filter"
-            }
-          ]
-        });
-      });
-    });
+    this.setRightButtons({ filterActive: false });
 
     if (!onNavigatorEventAdded) {
       this.props.navigator.addOnNavigatorEvent(this.onNavigatorEvent);
     }
     onNavigatorEventAdded = true;
+
+    AsyncStorage.getItem(STORAGE_KEY).then(data => {
+      if (data) {
+        const jsonObj = JSON.parse(data);
+        this.prepareFilter(jsonObj);
+      }
+    });
   }
 
   state = {
     width: Platform.OS === "ios" ? Dimensions.get("window").width : "auto",
-    fetchedAll: false
+    fetchedAll: false,
+    filters: false
   };
 
   componentWillReceiveProps(nextProps) {
@@ -101,7 +96,6 @@ class List extends Component {
   }
 
   onNavigatorEvent = event => {
-    console.log("onNavigatorEvent", onNavigatorEventAdded);
     if (event.type) {
       // NavBar Events
       switch (event.id) {
@@ -121,7 +115,7 @@ class List extends Component {
   };
 
   onChangeFilter = filters => {
-    console.log("onChangeFilter", { filters });
+    this.prepareFilter(filters);
   };
 
   onLayout = () => {
@@ -142,8 +136,81 @@ class List extends Component {
     });
   };
 
+  setRightButtons = ({ filterActive }) => {
+    const searchIcon = Platform.OS === "ios" ? "ios-search" : "md-search";
+    const filterIcon = filterActive ? "ios-funnel" : "ios-funnel-outline";
+    Ionicons.getImageSource(searchIcon, 24, "#FFFFFF").then(iconSearch => {
+      Ionicons.getImageSource(filterIcon, 24, "#FFFFFF").then(iconFilter => {
+        this.props.navigator.setButtons({
+          rightButtons: [
+            {
+              icon: iconSearch,
+              id: "search"
+            },
+            {
+              icon: iconFilter,
+              id: "filter"
+            }
+          ]
+        });
+      });
+    });
+  };
+
+  prepareFilter = filterObj => {
+    const filters = Object.keys(filterObj).reduce(
+      (prev, key) => ({
+        ...prev,
+        [key]: Object.keys(filterObj[key]).reduce((prevSub, keySub) => {
+          if (filterObj[key][keySub]) {
+            return { ...prevSub, [keySub]: filterObj[key][keySub] };
+          }
+          return prevSub;
+        }, {})
+      }),
+      {}
+    );
+    this.setState({ filters });
+  };
+
+  filterProcedures = ({ type, subjectGroups, voted, viewedStatus }) => {
+    const { filters } = this.state;
+    if (
+      !filters ||
+      (filters.type.all && filters.subjectGroups.all && filters.userStatus.all)
+    ) {
+      return true;
+    }
+    let doFilter = true;
+    if (!filters.type.all) {
+      if (!_.has(filters.type, type)) {
+        doFilter = false;
+      }
+    }
+    if (!filters.subjectGroups.all) {
+      if (
+        !Object.keys(filters.subjectGroups).some(g =>
+          subjectGroups.some(sg => g === sg)
+        )
+      ) {
+        doFilter = false;
+      }
+    }
+    if (!filters.userStatus.all) {
+      if (filters.userStatus["Nicht Abgestimmt"] && voted) {
+        doFilter = false;
+      }
+      if (filters.userStatus.Push && viewedStatus !== "PUSH") {
+        doFilter = false;
+      }
+    }
+    return doFilter;
+  };
+
   prepareData = () => {
     const { listType, data: { procedures } } = this.props;
+    const { filters } = this.state;
+    console.log(filters);
     if (!procedures || procedures.length === 0) {
       return [];
     }
@@ -159,6 +226,9 @@ class List extends Component {
       });
     }
     procedures.forEach(procedure => {
+      if (!this.filterProcedures(procedure)) {
+        return;
+      }
       if (
         listType === "VOTING" &&
         ((new Date(procedure.voteDate) < new Date() &&
@@ -188,6 +258,7 @@ class List extends Component {
   render() {
     const { data } = this.props;
     const { fetchedAll } = this.state;
+    console.log(this.props.listType);
     return (
       <Wrapper onLayout={this.onLayout} width={this.state.width}>
         <SectionList
