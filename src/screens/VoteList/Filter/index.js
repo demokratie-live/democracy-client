@@ -180,6 +180,7 @@ const FilterData = [
 
 const Wrapper = styled.SectionList`
   flex: 1;
+  background-color: #fff;
 `;
 
 const ListRowMain = styled.View`

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Platform } from "react-native";
 import styled from "styled-components/native";
 import { Navigation } from "react-native-navigation";
 
@@ -11,6 +12,7 @@ const Wrapper = styled.View`
 
 const HeaderElement = styled.View`
   flex: 1;
+  padding-right: ${Platform.OS === "android" ? 11 : 0};
 `;
 
 const TitleText = styled.Text.attrs({})`
@@ -19,10 +21,11 @@ const TitleText = styled.Text.attrs({})`
   font-weight: bold;
 `;
 
-const ButtonText = styled.Button.attrs({
-  color: "#fff"
-})`
+const Button = styled.TouchableOpacity``;
+
+const ButtonText = styled.Text`
   font-size: 17;
+  color: #fff;
 `;
 
 class Header extends Component {
@@ -40,14 +43,20 @@ class Header extends Component {
   render() {
     return (
       <Wrapper>
-        <HeaderElement style={{ alignItems: "flex-start" }}>
-          <ButtonText title="Zurück" onPress={this.clickBack} />
-        </HeaderElement>
+        {Platform.OS === "ios" && (
+          <HeaderElement style={{ alignItems: "flex-start" }}>
+            <Button onPress={this.clickBack}>
+              <ButtonText>Zurück</ButtonText>
+            </Button>
+          </HeaderElement>
+        )}
         <HeaderElement style={{ alignItems: "center" }}>
           <TitleText>FILTER</TitleText>
         </HeaderElement>
         <HeaderElement style={{ alignItems: "flex-end" }}>
-          <ButtonText title="Speichern" onPress={this.onSave} />
+          <Button onPress={this.onSave}>
+            <ButtonText>Speichern</ButtonText>
+          </Button>
         </HeaderElement>
       </Wrapper>
     );
