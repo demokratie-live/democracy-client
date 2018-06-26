@@ -9,7 +9,7 @@ import {
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import { Navigator } from "react-native-navigation";
-import { graphql } from "react-apollo";
+import { graphql, compose } from "react-apollo";
 import _, { unionBy } from "lodash";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
@@ -19,6 +19,7 @@ import ListSectionHeader from "../../components/ListSectionHeader";
 import ListItem from "./ListItem";
 
 import getProcedures from "../../graphql/queries/getProcedures";
+import GET_FILTERS from "../../graphql/queries/local/filters";
 
 const Wrapper = styled.View`
   flex: 1;
@@ -93,6 +94,10 @@ class List extends Component {
     ) {
       this.setState({ fetchedAll: true });
     }
+
+    if (nextProps.filters !== this.props.filters) {
+      this.prepareFilter(JSON.parse(nextProps.filters));
+    }
   }
 
   onNavigatorEvent = event => {
@@ -101,10 +106,7 @@ class List extends Component {
       switch (event.id) {
         case "filter":
           this.props.navigator.showModal({
-            screen: "democracy.VoteList.Filter",
-            passProps: {
-              onChangeFilter: this.onChangeFilter
-            }
+            screen: "democracy.VoteList.Filter"
           });
           break;
 
@@ -170,6 +172,14 @@ class List extends Component {
       }),
       {}
     );
+    if (
+      !filters ||
+      (filters.type.all && filters.subjectGroups.all && filters.userStatus.all)
+    ) {
+      this.setRightButtons({ filterActive: false });
+    } else {
+      this.setRightButtons({ filterActive: true });
+    }
     this.setState({ filters });
   };
 
@@ -316,17 +326,25 @@ List.propTypes = {
   listType: PropTypes.string,
   navigator: PropTypes.instanceOf(Navigator).isRequired,
   navigateTo: PropTypes.func.isRequired,
-  data: PropTypes.shape().isRequired
+  data: PropTypes.shape().isRequired,
+  filters: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired
 };
 
 List.defaultProps = {
   listType: "VOTING"
 };
 
-export default graphql(getProcedures, {
-  options: ({ listType }) => ({
-    notifyOnNetworkStatusChange: true,
-    variables: { type: listType, pageSize: PAGE_SIZE, offset: 0 },
-    fetchPolicy: "cache-and-network"
+export default compose(
+  graphql(getProcedures, {
+    options: ({ listType }) => ({
+      notifyOnNetworkStatusChange: true,
+      variables: { type: listType, pageSize: PAGE_SIZE, offset: 0 },
+      fetchPolicy: "cache-and-network"
+    })
+  }),
+  graphql(GET_FILTERS, {
+    props: ({ data: { filters } }) => ({
+      filters: filters && filters.filters ? filters.filters : false
+    })
   })
-})(preventNavStackDuplicate(List));
+)(preventNavStackDuplicate(List));

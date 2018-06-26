@@ -2,10 +2,14 @@ import React, { Component } from "react";
 import { AsyncStorage } from "react-native";
 import styled from "styled-components/native";
 import { Navigation } from "react-native-navigation";
+import { graphql } from "react-apollo";
 
 import Header from "./Header";
 import SegmentHeader from "../../../components/ListSectionHeader";
 import Checkbox from "../../../components/Checkbox";
+
+import SET_FILTERS from "../../../graphql/mutations/local/setFilters";
+import GET_FILTERS from "../../../graphql/queries/local/filters";
 
 Navigation.registerComponent("democracy.VoteList.Filter.Header", () => Header);
 
@@ -157,8 +161,12 @@ class Filter extends Component {
   onSave = async () => {
     const jsonString = JSON.stringify(this.state.data);
     await AsyncStorage.setItem(STORAGE_KEY, jsonString);
-    this.props.onChangeFilter(this.state.data);
+    // this.props.onChangeFilter(this.state.data);
     console.log(jsonString);
+    this.props.setFilters({
+      variables: { filters: jsonString },
+      refetchQueries: [{ query: GET_FILTERS }]
+    });
   };
 
   onChange = ({ type, subType, value }) => {
@@ -237,4 +245,4 @@ class Filter extends Component {
   }
 }
 
-export default Filter;
+export default graphql(SET_FILTERS, { name: "setFilters" })(Filter);

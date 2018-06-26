@@ -1,3 +1,5 @@
+import { AsyncStorage } from "react-native";
+
 import VOTES_LOCAL from "../queries/votesLocal";
 import IS_INSTRUCTIONS_SHOWN from "../queries/isInstructionShown";
 import GET_NETWORK_STATUS from "../queries/getNetworkStatus";
@@ -90,9 +92,17 @@ export const resolvers = {
       };
       cache.writeData({ data });
       return null;
+    },
+    setFilters: async (_, { filters }) => {
+      await AsyncStorage.setItem("Filters", filters);
+      return null;
     }
   },
   Query: {
+    filters: async () => ({
+      filters: AsyncStorage.getItem("Filters"),
+      __typename: "Filters"
+    }),
     isInstructionsShown: (_, args, { cache }) => {
       const previous = cache.readQuery({ query: IS_INSTRUCTIONS_SHOWN });
       return previous.isInstructionsShown;
