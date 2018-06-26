@@ -36,7 +36,6 @@ const Loading = styled.View`
 const SectionList = styled.SectionList``;
 
 const PAGE_SIZE = 20;
-let onNavigatorEventAdded = false;
 const STORAGE_KEY = "VoteList.Filters";
 
 class List extends Component {
@@ -60,13 +59,16 @@ class List extends Component {
         ]
       });
     });
+  }
 
+  state = {
+    width: Platform.OS === "ios" ? Dimensions.get("window").width : "auto",
+    fetchedAll: false,
+    filters: false
+  };
+
+  componentDidMount() {
     this.setRightButtons({ filterActive: false });
-
-    if (!onNavigatorEventAdded) {
-      this.props.navigator.addOnNavigatorEvent(this.onNavigatorEvent);
-    }
-    onNavigatorEventAdded = true;
 
     AsyncStorage.getItem(STORAGE_KEY).then(data => {
       if (data) {
@@ -75,12 +77,6 @@ class List extends Component {
       }
     });
   }
-
-  state = {
-    width: Platform.OS === "ios" ? Dimensions.get("window").width : "auto",
-    fetchedAll: false,
-    filters: false
-  };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.listType !== this.props.listType) {
@@ -99,22 +95,6 @@ class List extends Component {
       this.prepareFilter(JSON.parse(nextProps.filters));
     }
   }
-
-  onNavigatorEvent = event => {
-    if (event.type) {
-      // NavBar Events
-      switch (event.id) {
-        case "filter":
-          this.props.navigator.showModal({
-            screen: "democracy.VoteList.Filter"
-          });
-          break;
-
-        default:
-          break;
-      }
-    }
-  };
 
   onChangeFilter = filters => {
     this.prepareFilter(filters);
@@ -219,8 +199,7 @@ class List extends Component {
 
   prepareData = () => {
     const { listType, data: { procedures } } = this.props;
-    const { filters } = this.state;
-    console.log(filters);
+
     if (!procedures || procedures.length === 0) {
       return [];
     }
@@ -268,7 +247,7 @@ class List extends Component {
   render() {
     const { data } = this.props;
     const { fetchedAll } = this.state;
-    console.log(this.props.listType);
+
     return (
       <Wrapper onLayout={this.onLayout} width={this.state.width}>
         <SectionList
