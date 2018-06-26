@@ -73,7 +73,103 @@ const FilterData = [
             type: "checkbox"
           },
           {
-            title: "Medien, Kommunikation und Informationstechnologie",
+            title: "Außenwirtschaft",
+            type: "checkbox"
+          },
+          {
+            title: "Bildung und Erziehung",
+            type: "checkbox"
+          },
+          {
+            title: "Bundestag",
+            type: "checkbox"
+          },
+          {
+            title: "Energie",
+            type: "checkbox"
+          },
+          {
+            title: "Entwicklungspolitik",
+            type: "checkbox"
+          },
+          {
+            title: "Europapolitik und Europäische Union",
+            type: "checkbox"
+          },
+          {
+            title: "Gesellschaftspolitik, soziale Gruppen",
+            type: "checkbox"
+          },
+          {
+            title: "Gesundheit",
+            type: "checkbox"
+          },
+          {
+            title: "Innere Sicherheit",
+            type: "checkbox"
+          },
+          {
+            title: "Kultur",
+            type: "checkbox"
+          },
+          {
+            title: "Landwirtschaft und Ernährung",
+            type: "checkbox"
+          },
+          {
+            title: "Medien, Kommunikation und Informationstechnik",
+            type: "checkbox"
+          },
+          {
+            title: "Neue Bundesländer",
+            type: "checkbox"
+          },
+          {
+            title: "Öffentliche Finanzen, Steuern und Abgaben",
+            type: "checkbox"
+          },
+          {
+            title: "Politisches Leben, Parteien",
+            type: "checkbox"
+          },
+          {
+            title: "Raumordnung, Bau- und Wohnungswesen",
+            type: "checkbox"
+          },
+          {
+            title: "Recht",
+            type: "checkbox"
+          },
+          {
+            title: "Soziale Sicherung",
+            type: "checkbox"
+          },
+          {
+            title: "Sport, Freizeit und Tourismus",
+            type: "checkbox"
+          },
+          {
+            title: "Staat und Verwaltung",
+            type: "checkbox"
+          },
+          {
+            title: "Umwelt",
+            type: "checkbox"
+          },
+          {
+            title: "Verkehr",
+            type: "checkbox"
+          },
+          {
+            title: "Verteidigung",
+            type: "checkbox"
+          },
+          {
+            title: "Wirtschaft",
+            type: "checkbox"
+          },
+          {
+            title: "Wissenschaft, Forschung und Technologie",
             type: "checkbox"
           }
         ]
