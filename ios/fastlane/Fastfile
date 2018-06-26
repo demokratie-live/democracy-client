@@ -52,9 +52,16 @@ platform :ios do
 
   # TEST
   lane :test do
+
+    sync_code_signing(
+      type: 'development',
+      app_identifier: "de.democracy-deutschland.clientapp.internal",
+      team_id: "A4B84UJD7M"
+    )
+
     build_app( 
       clean: true,
-      scheme: "democracyclient-prod",
+      scheme: "Internal",
     )
   end
 
