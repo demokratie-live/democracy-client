@@ -75,7 +75,7 @@ const AdditionalThanksLogo = styled.Image``;
 
 const Lover = () => (
   <LoverWrapper>
-    <Text>Christian Vatter – VERLIEBTE/R des Monats Juni</Text>
+    <Text>Sabine Brunckhorst – VERLIEBTE/R des Monats Juli</Text>
     <LoverImageWrapper>
       <LoverImage />
     </LoverImageWrapper>
