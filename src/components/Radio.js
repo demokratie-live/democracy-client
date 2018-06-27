@@ -1,39 +1,37 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
-import Ionicons from "react-native-vector-icons/Ionicons";
 
 const Wrapper = styled.View`
   width: 24;
   height: 24;
   border-radius: 12;
   background-color: #4494d3;
+  align-items: center;
+  justify-content: center;
 `;
 
-const Checkmark = styled(Ionicons).attrs({
-  color: ({ value }) => (value ? "#fff" : "#4494d3"),
-  size: 40,
-  backgroundColor: "transparent",
-  name: "ios-checkmark"
-})`
-  margin-top: -8;
-  margin-left: 4;
+const Checkmark = styled.View`
+  width: 12;
+  height: 12;
+  border-radius: 6;
+  background-color: ${({ value }) => (value ? "#fff" : "#4494d3")};
 `;
 
-const Checkbox = ({ value, onPress }) => (
+const Radio = ({ value, onPress }) => (
   <Wrapper onPress={onPress}>
     <Checkmark value={value} />
   </Wrapper>
 );
 
-Checkbox.propTypes = {
+Radio.propTypes = {
   value: PropTypes.bool,
   onPress: PropTypes.func
 };
 
-Checkbox.defaultProps = {
+Radio.defaultProps = {
   value: false,
   onPress: undefined
 };
 
-export default Checkbox;
+export default Radio;

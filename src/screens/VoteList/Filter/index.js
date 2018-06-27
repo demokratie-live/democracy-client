@@ -1,12 +1,14 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { AsyncStorage } from "react-native";
 import styled from "styled-components/native";
-import { Navigation } from "react-native-navigation";
+import { Navigation, Navigator } from "react-native-navigation";
 import { graphql } from "react-apollo";
 
 import Header from "./Header";
 import SegmentHeader from "../../../components/ListSectionHeader";
 import Checkbox from "../../../components/Checkbox";
+import Radio from "../../../components/Radio";
 
 import SET_FILTERS from "../../../graphql/mutations/local/setFilters";
 import GET_FILTERS from "../../../graphql/queries/local/filters";
@@ -23,10 +25,12 @@ const FilterData = [
         type: "switch",
         data: [
           {
-            title: "Antrag"
+            title: "Antrag",
+            type: "radio"
           },
           {
-            title: "Gesetzgebung"
+            title: "Gesetzgebung",
+            type: "radio"
           }
         ]
       }
@@ -221,7 +225,6 @@ const STORAGE_KEY = "VoteList.Filters";
 class Filter extends Component {
   constructor(props) {
     super(props);
-    console.log("onChangeFilter", props);
     props.navigator.setStyle({
       navBarCustomView: "democracy.VoteList.Filter.Header",
       navBarComponentAlignment: "fill",
@@ -235,7 +238,6 @@ class Filter extends Component {
     AsyncStorage.getItem(STORAGE_KEY).then(data => {
       if (data) {
         const jsonObj = JSON.parse(data);
-        console.log("ASYMC", jsonObj);
         this.setState({ data: jsonObj });
       }
     });
@@ -258,20 +260,32 @@ class Filter extends Component {
   onSave = async () => {
     const jsonString = JSON.stringify(this.state.data);
     await AsyncStorage.setItem(STORAGE_KEY, jsonString);
-    // this.props.onChangeFilter(this.state.data);
-    console.log(jsonString);
     this.props.setFilters({
       variables: { filters: jsonString },
       refetchQueries: [{ query: GET_FILTERS }]
     });
   };
 
-  onChange = ({ type, subType, value }) => {
+  onChange = ({ type, subType, value, element }) => {
     const { data } = this.state;
     if (subType) {
-      this.setState({
-        data: { ...data, [type]: { ...data[type], [subType]: value } }
-      });
+      if (element === "radio") {
+        const subTypes = Object.keys(data[type]).reduce((prev, key) => {
+          if (key === "all") {
+            return prev;
+          }
+          return { ...prev, [key]: false };
+        }, {});
+        if (value) {
+          this.setState({
+            data: { ...data, [type]: { ...subTypes, [subType]: value } }
+          });
+        }
+      } else {
+        this.setState({
+          data: { ...data, [type]: { ...data[type], [subType]: value } }
+        });
+      }
     } else {
       this.setState({
         data: { ...data, [type]: { ...data[type], all: value } }
@@ -298,7 +312,7 @@ class Filter extends Component {
             <Row>
               <TitleMain>{title}</TitleMain>
               <Switch
-                onValueChange={value =>
+                onValueChange={() =>
                   this.onChange({
                     type: section.name,
                     value: !this.getValue({ type: section.name })
@@ -309,13 +323,14 @@ class Filter extends Component {
             </Row>
             {data &&
               !this.getValue({ type: section.name }) &&
-              data.map(({ title: subtitle }) => (
+              data.map(({ title: subtitle, type: subType }) => (
                 <ListRowSub
                   key={subtitle}
                   onPress={() => {
                     this.onChange({
                       type: section.name,
                       subType: subtitle,
+                      element: subType,
                       value: !this.getValue({
                         type: section.name,
                         subType: subtitle
@@ -325,12 +340,22 @@ class Filter extends Component {
                 >
                   <Row>
                     <TitleSub>{subtitle}</TitleSub>
-                    <Checkbox
-                      value={this.getValue({
-                        type: section.name,
-                        subType: subtitle
-                      })}
-                    />
+                    {subType === "checkbox" && (
+                      <Checkbox
+                        value={this.getValue({
+                          type: section.name,
+                          subType: subtitle
+                        })}
+                      />
+                    )}
+                    {subType === "radio" && (
+                      <Radio
+                        value={this.getValue({
+                          type: section.name,
+                          subType: subtitle
+                        })}
+                      />
+                    )}
                   </Row>
                 </ListRowSub>
               ))}
@@ -341,5 +366,10 @@ class Filter extends Component {
     );
   }
 }
+
+Filter.propTypes = {
+  navigator: PropTypes.instanceOf(Navigator).isRequired,
+  setFilters: PropTypes.func.isRequired
+};
 
 export default graphql(SET_FILTERS, { name: "setFilters" })(Filter);
