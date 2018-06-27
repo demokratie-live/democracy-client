@@ -1074,12 +1074,12 @@
 					ProjectRef = CF1A551E9AD54473AE890083 /* RNDeviceInfo.xcodeproj */;
 				},
 				{
-					ProductGroup = C3BBBEB720B5AA0D00085C5D /* Products */;
-					ProjectRef = C3BBBEB620B5AA0D00085C5D /* RNNotifications.xcodeproj */;
-				},
-				{
 					ProductGroup = C38760BF20BC30CB00536865 /* Products */;
 					ProjectRef = 35BD36787F684CB0B4E99503 /* RNFetchBlob.xcodeproj */;
+				},
+				{
+					ProductGroup = C3BBBEB720B5AA0D00085C5D /* Products */;
+					ProjectRef = C3BBBEB620B5AA0D00085C5D /* RNNotifications.xcodeproj */;
 				},
 				{
 					ProductGroup = C3F4D96E206156EB00D8F965 /* Products */;
