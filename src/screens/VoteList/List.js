@@ -4,7 +4,9 @@ import {
   Dimensions,
   Platform,
   ActivityIndicator,
-  AsyncStorage
+  AsyncStorage,
+  TouchableOpacity,
+  Picker
 } from "react-native";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
@@ -32,6 +34,15 @@ const Loading = styled.View`
   align-items: center;
   justify-content: center;
 `;
+
+const PickerWrapper = styled.View``;
+
+const PickerHeader = styled.View`
+  background-color: #f9f9f9;
+  align-items: flex-end;
+`;
+
+const PickerFinishButton = styled.Button``;
 
 const SectionList = styled.SectionList``;
 
@@ -64,7 +75,9 @@ class List extends Component {
   state = {
     width: Platform.OS === "ios" ? Dimensions.get("window").width : "auto",
     fetchedAll: false,
-    filters: false
+    filters: false,
+    sort: "time",
+    sorterOpened: false
   };
 
   componentDidMount() {
@@ -199,27 +212,35 @@ class List extends Component {
 
   prepareData = () => {
     const { listType, data: { procedures } } = this.props;
+    const { sort } = this.state;
 
     if (!procedures || procedures.length === 0) {
       return [];
     }
     const preparedData = [
       {
-        data: []
+        data: [{ type: "sort" }]
       }
     ];
-    if (listType === "VOTING") {
+    if (listType === "VOTING" && sort === "time") {
       preparedData.push({
         title: "Vergangen",
         data: []
       });
     }
-    procedures.forEach(procedure => {
+    const proceduresSorted = [...procedures];
+    if (sort === "activityIndex") {
+      proceduresSorted.sort(
+        (a, b) => b.activityIndex.activityIndex - a.activityIndex.activityIndex
+      );
+    }
+    proceduresSorted.forEach(procedure => {
       if (!this.filterProcedures(procedure)) {
         return;
       }
       if (
         listType === "VOTING" &&
+        sort === "time" &&
         ((new Date(procedure.voteDate) < new Date() &&
           procedure.voteDate !== null) ||
           procedure.completed)
@@ -240,17 +261,42 @@ class List extends Component {
     return preparedData;
   };
 
-  renderItem = onClick => ({ item }) => (
-    <ListItem item={item} onClick={onClick} />
-  );
+  renderItem = onClick => ({ item }) => {
+    if (item.type === "sort") {
+      if (Platform.OS === "ios") {
+        return (
+          <TouchableOpacity
+            onPress={() => this.setState({ sorterOpened: true })}
+          >
+            <ListSectionHeader title="Nach Restzeit sortieren" />
+          </TouchableOpacity>
+        );
+      }
+      return (
+        <Picker
+          selectedValue={this.state.sort}
+          style={{ paddingLeft: 18, height: 35, backgroundColor: "#e6edf2" }}
+          onValueChange={itemValue => this.setState({ sort: itemValue })}
+        >
+          <Picker.Item label="nach Restzeit sortieren" value="time" />
+          <Picker.Item
+            label="nach Aktivitätsindex sortieren"
+            value="activityIndex"
+          />
+        </Picker>
+      );
+    }
+    return <ListItem item={item} onClick={onClick} />;
+  };
 
   render() {
     const { data } = this.props;
-    const { fetchedAll } = this.state;
+    const { fetchedAll, sorterOpened, sort } = this.state;
 
     return (
       <Wrapper onLayout={this.onLayout} width={this.state.width}>
         <SectionList
+          contentOffset={{ y: 35 }}
           ListFooterComponent={() =>
             data.loading || !fetchedAll ? (
               <Loading>
@@ -296,6 +342,28 @@ class List extends Component {
             }
           }}
         />
+        {Platform.OS === "ios" &&
+          sorterOpened && (
+            <PickerWrapper>
+              <PickerHeader>
+                <PickerFinishButton
+                  title="Fertig"
+                  onPress={() => this.setState({ sorterOpened: false })}
+                />
+              </PickerHeader>
+              <Picker
+                selectedValue={sort}
+                style={{ height: 200 }}
+                onValueChange={itemValue => this.setState({ sort: itemValue })}
+              >
+                <Picker.Item label="nach Restzeit sortieren" value="time" />
+                <Picker.Item
+                  label="nach Aktivitätsindex sortieren"
+                  value="activityIndex"
+                />
+              </Picker>
+            </PickerWrapper>
+          )}
       </Wrapper>
     );
   }
