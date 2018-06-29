@@ -79,6 +79,7 @@ matrix:
     language: objective-c
     before_install:
     - cd ios
+    - gem update --system
     - bundle install
     - bundle update fastlane
     install:
