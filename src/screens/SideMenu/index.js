@@ -69,7 +69,10 @@ const SideMenu = ({ data: { currentScreen }, navigator }) => {
           navigatorStyle: { navBarHidden: true, orientation: "portrait" }
         });
       } else {
-        navigator.handleDeepLink({ link: screenId, payload: { title } });
+        navigator.handleDeepLink({
+          link: screenId,
+          payload: { title, from: "sideMenu" }
+        });
       }
     }
     navigator.toggleDrawer({ side: "left" });

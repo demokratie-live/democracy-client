@@ -1,5 +1,5 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_id", "__typename"] }] */
-import { AsyncStorage } from "react-native";
+import { AsyncStorage, StatusBar, Platform } from "react-native";
 import { ApolloClient } from "apollo-client";
 import { ApolloLink } from "apollo-link";
 import { HttpLink } from "apollo-link-http";
@@ -134,11 +134,52 @@ const { link: networkStatusNotifierLink } = createNetworkStatusNotifier({
   }
 });
 
+const networkActivity = {
+  onRequest: 0,
+  onFinish: 0
+};
+
+const { link: loadingIndicator } = createNetworkStatusNotifier({
+  reducers: {
+    onSuccess: () => {
+      if (Platform.OS === "ios") {
+        networkActivity.onFinish += 1;
+        if (networkActivity.onFinish === networkActivity.onRequest) {
+          StatusBar.setNetworkActivityIndicatorVisible(false);
+        }
+      }
+    },
+    onError: () => {
+      if (Platform.OS === "ios") {
+        networkActivity.onFinish += 1;
+        if (networkActivity.onFinish === networkActivity.onRequest) {
+          StatusBar.setNetworkActivityIndicatorVisible(false);
+        }
+      }
+    },
+    onRequest: () => {
+      if (Platform.OS === "ios") {
+        StatusBar.setNetworkActivityIndicatorVisible(true);
+        networkActivity.onRequest += 1;
+      }
+    },
+    onCancel: () => {
+      if (Platform.OS === "ios") {
+        networkActivity.onFinish += 1;
+        if (networkActivity.onFinish === networkActivity.onRequest) {
+          StatusBar.setNetworkActivityIndicatorVisible(false);
+        }
+      }
+    }
+  }
+});
+
 const stateLink = withClientState({ resolvers, cache, defaults, typeDefs });
 
 client = new ApolloClient({
   cache,
   link: ApolloLink.from([
+    loadingIndicator,
     networkStatusNotifierLink,
     authLink,
     stateLink,

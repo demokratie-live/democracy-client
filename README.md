@@ -1,11 +1,10 @@
 ![Screenshot](https://github.com/demokratie-live/democracy-assets/blob/master/images/forfb2.png)
 
-# Democracy-Client &nbsp; <a href="https://github.com/kriasoft/nodejs-api-starter/stargazers" target="_blank"><img src="https://img.shields.io/github/stars/demokratie-live/democracy-client.svg?style=social&label=Star&maxAge=3600" height="20"/></a>  <a href="https://twitter.com/democracy_de" target="_blank"><img src="https://img.shields.io/twitter/follow/democracy_de.svg?style=social&label=Follow&maxAge=3600" height="20"/></a>  <a href="https://www.facebook.com/democracygermany/" target="_blank"><img src="https://github.com/demokratie-live/democracy-assets/blob/master/docu/facebook.png" height="20"/></a>  <a href="https://discord.gg/Pdu3ZEV" target="_blank"><img src="https://github.com/demokratie-live/democracy-assets/blob/master/docu/discord.png" height="20"/></a>
+# Democracy-Client &nbsp; <a href="https://github.com/kriasoft/nodejs-api-starter/stargazers" target="_blank"><img src="https://img.shields.io/github/stars/demokratie-live/democracy-client.svg?style=social&label=Star&maxAge=3600" height="20"/></a> <a href="https://twitter.com/democracy_de" target="_blank"><img src="https://img.shields.io/twitter/follow/democracy_de.svg?style=social&label=Follow&maxAge=3600" height="20"/></a> <a href="https://www.facebook.com/democracygermany/" target="_blank"><img src="https://github.com/demokratie-live/democracy-assets/blob/master/docu/facebook.png" height="20"/></a> <a href="https://discord.gg/Pdu3ZEV" target="_blank"><img src="https://github.com/demokratie-live/democracy-assets/blob/master/docu/discord.png" height="20"/></a>
 
 [![Build Status](https://travis-ci.org/demokratie-live/democracy-client.svg?branch=master)](https://travis-ci.org/demokratie-live/democracy-client) &nbsp; [![BrowserStack Status](https://www.browserstack.com/app-automate/badge.svg?badge_key=ZzRuckM0N1UzSFZ3ZFd1cDh6Zzk5UT09LS11UUJiaDZVOTZ6S3ZwRURzMzgrVnhRPT0=--5cad88eae285631b741017a6d5c827260db8a86f)](https://www.browserstack.com/app-automate/public-build/ZzRuckM0N1UzSFZ3ZFd1cDh6Zzk5UT09LS11UUJiaDZVOTZ6S3ZwRURzMzgrVnhRPT0=--5cad88eae285631b741017a6d5c827260db8a86f)
 
-The Client for the DEMOCRACY App. This includes iOS, Android and Web Clients generated from the same Codebase.
-
+The Client for the DEMOCRACY App. This includes iOS and Android generated from the same Codebase.
 
 :movie_camera: <a href="https://www.youtube.com/watch?v=H6oJA4MUVW0">Video des Entwicklungsstandes 26.02.2018</a><br>
 :movie_camera: <a href="https://www.youtube.com/watch?v=oTX59JhDmXU">Video des Entwicklungsstandes 15.12.2017</a><br>
@@ -27,7 +26,7 @@ The Client for the DEMOCRACY App. This includes iOS, Android and Web Clients gen
 
 * [Node.js][node]
 * [Android Studio or Android SDK][android] follow the installation Instructions [here](http://facebook.github.io/react-native/docs/getting-started.html)
-* [optional] [windows] install windows-build-tools for node
+* [optional][windows] install windows-build-tools for node
   ```
   npm install --global --production windows-build-tools
   (installs python) (requireds administrator rights)

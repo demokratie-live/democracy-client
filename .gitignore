@@ -53,7 +53,10 @@ buck-out/
 */fastlane/screenshots
 ios/*dSYM.zip
 /nbproject/
+ios/vendor
 
 .env*
 
 android/Google_Play_Android_Developer.json
+android/.bundle
+android/vendor

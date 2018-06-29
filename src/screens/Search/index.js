@@ -2,25 +2,44 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import { Navigation, Navigator } from "react-native-navigation";
-import { withApollo } from "react-apollo";
+import { withApollo, graphql, compose, ApolloProvider } from "react-apollo";
 import { TouchableHighlight } from "react-native";
 
 import Header from "./Header";
 import ListRow from "../../components/ListRow";
 import VoteListItem from "../../components/VoteListItem";
+import ListSectionHeader from "../../components/ListSectionHeader";
+
+import client from "../../graphql/client";
 
 import searchProcedures from "../../graphql/queries/searchProcedures";
+import mostSearched from "../../graphql/queries/mostSearched";
+import finishSearch from "../../graphql/mutations/finishSearch";
+import searchTerm from "../../graphql/queries/local/searchTerm";
+import changeSearchTerm from "../../graphql/mutations/local/changeSearchTerm";
 
-import prevetNavStackDuplicate from "../../hocs/preventNavStackDuplicate";
+import preventNavStackDuplicate from "../../hocs/preventNavStackDuplicate";
 
-Navigation.registerComponent("democracy.Search.Header", () => Header);
+Navigation.registerComponent(
+  "democracy.Search.Header",
+  () => Header,
+  client.store,
+  ApolloProvider,
+  { client }
+);
 
 const Wrapper = styled.View`
   flex: 1;
   background-color: #fff;
 `;
 
-const List = styled.FlatList``;
+const List = styled.SectionList``;
+
+const ListText = styled.Text`
+  font-size: 18;
+  color: grey;
+  padding-left: 8;
+`;
 
 const Text = styled.Text`
   font-size: 18;
@@ -68,59 +87,86 @@ class SearchScreen extends Component {
   }
 
   state = {
-    procedures: [],
-    term: "",
+    searchData: [],
     loading: false
   };
 
+  componentDidMount() {
+    const { updateSearchTerm } = this.props;
+    updateSearchTerm({
+      variables: { term: "" }
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.onChangeTerm(nextProps.searchTerm);
+  }
+
   onChangeTerm = async term => {
-    this.setState({ loading: true, term });
+    this.setState({ loading: true });
     const { client: { watchQuery } } = this.props;
 
-    this.observableSearchQuery = this.observableSearchQuery.filter(
-      ({ term: queryTerm }) => {
-        if (queryTerm !== term) {
-          // query.unsubscribe();
-          return false;
-        }
-        return true;
-      }
-    );
-
-    this.observableSearchQuery.push({
-      term,
-      query: await watchQuery({
+    if (!this.observableSearchQuery) {
+      this.observableSearchQuery = await watchQuery({
         query: searchProcedures,
         variables: { term },
         fetchPolicy: "network-only"
-      })
-    });
+      });
 
-    const { query } = this.observableSearchQuery.find(
-      ({ term: queryTerm }) => term === queryTerm
-    );
-
-    query.subscribe({
-      next: ({ data: { searchProcedures: procedures } }) => {
-        if (this.state.term === term) {
-          this.setState({ procedures, loading: false });
+      this.observableSearchQuery.subscribe({
+        next: result => {
+          if (result.data) {
+            this.handleSearchResults({ ...result, term });
+          }
         }
-      }
-    });
+      });
+    } else {
+      this.observableSearchQuery.refetch({ term });
+    }
   };
 
-  onItemClick = ({ item }) => () => {
-    this.props.navigateTo({
-      screen: "democracy.Detail",
-      title: "Abstimmung".toUpperCase(),
-      passProps: { ...item }
-    });
+  onItemClick = ({ item, section }) => () => {
+    if (section === "Ergebnisse") {
+      this.props.navigateTo({
+        screen: "democracy.Detail",
+        title: "Abstimmung".toUpperCase(),
+        passProps: { ...item }
+      });
+    } else {
+      const { updateSearchTerm } = this.props;
+
+      updateSearchTerm({
+        variables: { term: item }
+      });
+      this.props.finishSearch({
+        variables: {
+          term: item
+        }
+      });
+      this.onChangeTerm(item);
+    }
   };
 
-  observableSearchQuery = [];
+  handleSearchResults = ({
+    data: {
+      loading,
+      searchProceduresAutocomplete: { procedures, autocomplete }
+    }
+  }) => {
+    if (!loading) {
+      const searchData = [
+        { title: "Vorschläge", data: autocomplete },
+        { title: "Ergebnisse", data: procedures }
+      ];
+      this.setState({ searchData, loading: false });
+    }
+  };
+
+  observableSearchQuery = null;
 
   render() {
     const { loading } = this.state;
+    const { mostSearchedTerms, searchTerm: term } = this.props;
 
     if (loading) {
       return (
@@ -130,24 +176,45 @@ class SearchScreen extends Component {
       );
     }
 
+    let sectionData = [];
+    if (!term) {
+      sectionData = [
+        {
+          title: "Meistgesucht",
+          data: mostSearchedTerms
+            ? mostSearchedTerms.map(({ term: value }) => value)
+            : []
+        }
+      ];
+    } else {
+      sectionData = this.state.searchData;
+    }
+
     return (
       <Wrapper>
         <List
-          data={this.state.procedures}
-          renderItem={({ item }) => (
+          sections={sectionData}
+          renderSectionHeader={({ section: { title, data } }) =>
+            data.length > 0 ? <ListSectionHeader title={title} /> : null
+          }
+          renderItem={({ item, section: { title } }) => (
             <TouchableHighlight
-              onPress={this.onItemClick({ item })}
+              onPress={this.onItemClick({ item, section: title })}
               underlayColor="rgba(68, 148, 211, 0.1)"
             >
               <ListRow>
-                <VoteListItem {...item} />
+                {title === "Ergebnisse" && (
+                  <VoteListItem {...item} date={item.voteDate} />
+                )}
+                {title === "Vorschläge" && <ListText>{item}</ListText>}
+                {title === "Meistgesucht" && <ListText>{item}</ListText>}
               </ListRow>
             </TouchableHighlight>
           )}
-          keyExtractor={({ _id }) => _id}
+          keyExtractor={item => (typeof item === "string" ? item : item._id)}
           ListEmptyComponent={() => {
-            const { term } = this.state;
-            if (term) {
+            const { term: value } = this.state;
+            if (value) {
               return (
                 <NoResultsWrapper>
                   <Text>Leider nichts gefunden.</Text>
@@ -165,11 +232,47 @@ class SearchScreen extends Component {
 
 SearchScreen.propTypes = {
   navigator: PropTypes.instanceOf(Navigator),
-  navigateTo: PropTypes.func.isRequired
+  navigateTo: PropTypes.func.isRequired,
+  finishSearch: PropTypes.func.isRequired,
+  updateSearchTerm: PropTypes.func.isRequired,
+  mostSearchedTerms: PropTypes.arrayOf(PropTypes.shape()),
+  searchTerm: PropTypes.string.isRequired
 };
 
 SearchScreen.defaultProps = {
-  navigator: undefined
+  navigator: undefined,
+  mostSearchedTerms: []
 };
 
-export default withApollo(prevetNavStackDuplicate(SearchScreen));
+export default withApollo(
+  preventNavStackDuplicate(
+    compose(
+      // Queries
+      graphql(mostSearched, {
+        props: ({
+          data: {
+            mostSearched: mostSearchedTerms,
+            refetch: refetchMostSearched
+          }
+        }) => ({
+          mostSearchedTerms,
+          refetchMostSearched
+        }),
+        options: () => ({
+          fetchPolicy: "cache-and-network"
+        })
+      }),
+
+      graphql(searchTerm, {
+        props: ({ data: { searchTerm: searchTermData } }) =>
+          searchTermData
+            ? { searchTerm: searchTermData.term }
+            : { searchTerm: "" }
+      }),
+
+      // Mutations
+      graphql(finishSearch, { name: "finishSearch" }),
+      graphql(changeSearchTerm, { name: "updateSearchTerm" })
+    )(SearchScreen)
+  )
+);

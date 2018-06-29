@@ -1,13 +1,15 @@
 import React, { Component } from "react";
+import { RefreshControl, ActivityIndicator } from "react-native";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import { graphql, compose } from "react-apollo";
-import { RefreshControl } from "react-native";
 import { Navigator } from "react-native-navigation";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import getProcedure from "../../graphql/queries/getProcedure";
 import TOGGLE_NOTIFICATION from "../../graphql/mutations/toggleNotification";
+import VIEW_PROCEDURE_LOCAL from "../../graphql/mutations/local/viewProcedure";
+import F_PROCEDURE_VIEWED from "../../graphql/fragments/ProcedureViewed";
 
 import ActivityIndex from "../../components/ActivityIndex";
 import DateTime from "../../components/Date";
@@ -17,6 +19,15 @@ import History from "./Segments/History";
 import VoteResults from "./Segments/VoteResults";
 import Segment from "./Segment";
 import Voting from "./Voting";
+
+const LoadingWrapper = styled.View`
+  flex: 1;
+  background-color: #fff;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Reload = styled.Button``;
 
 const Wrapper = styled.ScrollView`
   flex: 1;
@@ -82,8 +93,13 @@ class Detail extends Component {
     navBarTextColor: "#FFFFFF",
     navBarTextFontSize: 17,
     navBarLeftButtonColor: "#FFFFFF",
-    navBarButtonColor: "#FFFFFF"
+    navBarButtonColor: "#FFFFFF",
+    backButtonTitle: ""
   };
+
+  componentDidMount() {
+    this.props.viewProcedure();
+  }
 
   componentWillReceiveProps(nextProps) {
     const { data } = nextProps;
@@ -124,10 +140,21 @@ class Detail extends Component {
   };
 
   render() {
-    const { procedureId, toggleNotification } = this.props;
-    const { data: { networkStatus, refetch } } = this.props;
-    if (!this.props.data.procedure) {
-      return null;
+    const { procedureId, toggleNotification, navigator } = this.props;
+    const { data: { networkStatus, refetch, loading, procedure } } = this.props;
+    if (!procedure && loading) {
+      return (
+        <LoadingWrapper>
+          {loading && <ActivityIndicator size="large" />}
+        </LoadingWrapper>
+      );
+    }
+    if ((!procedure || !procedure._id) && !loading) {
+      return (
+        <LoadingWrapper>
+          <Reload title="Neu Laden" onPress={()=> refetch()} />
+        </LoadingWrapper>
+      );
     }
     const {
       _id,
@@ -202,7 +229,7 @@ class Detail extends Component {
             />
           </Segment>
           <Segment title="Dokumente" scrollTo={this.scrollTo}>
-            <SegmentDocuments documents={importantDocuments} />
+            <SegmentDocuments documents={importantDocuments}  navigator={navigator} />
           </Segment>
           {currentStatusHistory.length > 0 && (
             <Segment title="Gesetzesstand" scrollTo={this.scrollTo}>
@@ -233,6 +260,7 @@ class Detail extends Component {
               procedureObjId={_id}
               procedureId={procedureId}
               navigator={this.props.navigator}
+              type={type}
             />
           )}
         </Content>
@@ -242,19 +270,14 @@ class Detail extends Component {
 }
 
 Detail.propTypes = {
-  title: PropTypes.string.isRequired,
-  tags: PropTypes.arrayOf(PropTypes.string),
-  abstract: PropTypes.string,
   procedureId: PropTypes.string.isRequired,
   data: PropTypes.shape().isRequired,
   navigator: PropTypes.instanceOf(Navigator).isRequired,
-  toggleNotification: PropTypes.func.isRequired
+  toggleNotification: PropTypes.func.isRequired,
+  viewProcedure: PropTypes.func.isRequired
 };
 
-Detail.defaultProps = {
-  abstract: "",
-  tags: []
-};
+Detail.defaultProps = {};
 
 export default compose(
   graphql(getProcedure, {
@@ -262,6 +285,41 @@ export default compose(
       variables: { id: procedureId },
       fetchPolicy: "cache-and-network"
     })
+  }),
+  graphql(VIEW_PROCEDURE_LOCAL, {
+    props({ mutate, ownProps }) {
+      return {
+        viewProcedure: () => {
+          const { procedureId } = ownProps;
+          mutate({
+            variables: { procedureId },
+            optimisticResponse: {
+              __typename: "Mutation",
+              viewProcedure: {
+                id: procedureId,
+                __typename: "Procedure",
+                viewedStatus: "VIEWED"
+              }
+            },
+            update: cache => {
+              // set View Procedure
+              const aiFragment = cache.readFragment({
+                id: procedureId,
+                fragment: F_PROCEDURE_VIEWED
+              });
+
+              aiFragment.viewedStatus = "VIEWED";
+
+              cache.writeFragment({
+                id: procedureId,
+                fragment: F_PROCEDURE_VIEWED,
+                data: aiFragment
+              });
+            }
+          });
+        }
+      };
+    }
   }),
   graphql(TOGGLE_NOTIFICATION, {
     props({ mutate, ownProps }) {
