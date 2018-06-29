@@ -19,13 +19,11 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { Navigator } from "react-native-navigation";
 import { graphql, compose } from "react-apollo";
 import _ from "lodash";
-import PushNotification from "react-native-push-notification";
+import NotificationsIOS from "react-native-notifications";
 
 import Row from "../../components/ListRow";
 import Header from "../../components/ListSectionHeader";
 import ListItem from "../../components/VoteListItem";
-
-import onNavigationEvent from "../onNavigationEvent";
 
 import GET_NOTIFICATION_SETTINGS from "../../graphql/queries/notificationSettings";
 import GET_NOTIFIED_PROCEDURES from "../../graphql/queries/notifiedProcedures";
@@ -61,15 +59,14 @@ const ProcedureDetailWrapper = styled.View`
   align-items: center;
 `;
 
-const NotificationButtonIcon = styled(Ionicons).attrs({
-  size: 32,
-  name: ({ active }) =>
-    active ? "ios-notifications" : "ios-notifications-outline",
-  color: ({ active }) => (active ? "rgb(255, 171, 33)" : "rgb(0, 0, 0)")
-})``;
+// const NotificationButtonIcon = styled(Ionicons).attrs({
+//   size: 32,
+//   name: ({ active }) =>
+//     active ? "ios-notifications" : "ios-notifications-outline",
+//   color: ({ active }) => (active ? "rgb(255, 171, 33)" : "rgb(0, 0, 0)")
+// })``;
 
 const ProcedureDescription = styled.Text`
-  padding-left: 11;
   font-size: 13;
   color: #8f8e94;
 `;
@@ -96,7 +93,7 @@ const sections = [
     ]
   },
   {
-    title: "Abonierte Benachrichtigungen",
+    title: "Abonnierte Benachrichtigungen",
     key: "abos",
     data: []
   }
@@ -125,8 +122,6 @@ class Notifications extends Component {
         ]
       });
     });
-
-    this.props.navigator.setOnNavigatorEvent(this.onNavigationEvent);
   }
 
   state = {
@@ -136,9 +131,15 @@ class Notifications extends Component {
 
   componentDidMount() {
     AppState.addEventListener("change", this.handleAppStateChange);
+
     if (Platform.OS === "ios") {
-      PushNotification.checkPermissions(data => {
-        this.setState({ notificationsAllowed: !!data.alert });
+      NotificationsIOS.checkPermissions().then(currentPermissions => {
+        this.setState({
+          notificationsAllowed:
+            !!currentPermissions.badge ||
+            !!currentPermissions.sound ||
+            !!currentPermissions.alert
+        });
       });
     } else {
       // TODO: Check android permissions
@@ -148,10 +149,6 @@ class Notifications extends Component {
   componentWillUnmount() {
     AppState.removeEventListener("change", this.handleAppStateChange);
   }
-
-  onNavigationEvent = event => {
-    onNavigationEvent({ event, navigator: this.props.navigator });
-  };
 
   onToggleSwitch = key => async () => {
     const { update, notificationSettings } = this.props;
@@ -234,9 +231,16 @@ class Notifications extends Component {
       this.state.appState.match(/inactive|background/) &&
       nextAppState === "active"
     ) {
-      PushNotification.checkPermissions(data => {
-        this.setState({ notificationsAllowed: !!data.alert });
-      });
+      if (Platform.OS === "ios") {
+        NotificationsIOS.checkPermissions().then(currentPermissions => {
+          this.setState({
+            notificationsAllowed:
+              !!currentPermissions.badge ||
+              !!currentPermissions.sound ||
+              !!currentPermissions.alert
+          });
+        });
+      }
     }
     this.setState({ appState: nextAppState });
   };
@@ -307,7 +311,7 @@ class Notifications extends Component {
                       })
                     }
                   >
-                    <NotificationButtonIcon active />
+                    {/* <NotificationButtonIcon active /> */}
                   </TouchableOpacity>
                   <ProcedureDescription>
                     {item.currentStatus}

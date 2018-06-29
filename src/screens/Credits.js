@@ -7,8 +7,6 @@ import { Navigator } from "react-native-navigation";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import DeviceInfo from "react-native-device-info";
 
-import onNavigationEvent from "./onNavigationEvent";
-
 const ScrollWrapper = styled.ScrollView`
   flex: 1;
   background-color: #ffffff;
@@ -77,7 +75,7 @@ const AdditionalThanksLogo = styled.Image``;
 
 const Lover = () => (
   <LoverWrapper>
-    <Text>Christian Vatter – VERLIEBTE/R des Monats Juni</Text>
+    <Text>Sabine Brunckhorst – VERLIEBTE/R des Monats Juli</Text>
     <LoverImageWrapper>
       <LoverImage />
     </LoverImageWrapper>
@@ -107,19 +105,13 @@ class Security extends Component {
         ]
       });
     });
-
-    this.props.navigator.setOnNavigatorEvent(this.onNavigationEvent);
   }
-
-  onNavigationEvent = event => {
-    onNavigationEvent({ event, navigator: this.props.navigator });
-  };
 
   render() {
     const version = `Version: ${DeviceInfo.getReadableVersion()
       .split(".")
       .slice(0, 3)
-      .join(".")}`;
+      .join(".")} (${DeviceInfo.getBuildNumber()})`;
     return (
       <ScrollWrapper>
         <Wrapper>

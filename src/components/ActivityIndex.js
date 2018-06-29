@@ -17,12 +17,12 @@ const WrapperTouchable = styled.TouchableOpacity`
 `;
 
 const Counter = styled.Text`
-  font-size: 18;
+  font-size: ${({ listView }) => (listView ? 15 : 18)};
   color: #8f8e94;
 `;
 
 const Arrow = styled(Ionicons).attrs({
-  size: 50,
+  size: ({ listView }) => (listView ? 45 : 50),
   name: "ios-arrow-up-outline",
   color: ({ active }) => (active ? "rgb(68, 148, 211)" : "rgb(199, 199, 204)")
 })`
@@ -33,7 +33,6 @@ const Arrow = styled(Ionicons).attrs({
 `;
 
 class ActivityIndex extends Component {
-
   shouldComponentUpdate(nextProps) {
     const { active, activityIndex } = this.props;
     if (
@@ -46,21 +45,25 @@ class ActivityIndex extends Component {
   }
 
   render() {
-    const { active, touchable, activityIndex, increaseActivity } = this.props;
+    const {
+      active,
+      touchable,
+      activityIndex,
+      increaseActivity,
+      listView
+    } = this.props;
     if (touchable && !active) {
       return (
         <WrapperTouchable onPress={increaseActivity}>
-          <Arrow active={active} />
-          {/* <Icon source={active ? iconActive : iconInactive} /> */}
-          <Counter>{activityIndex}</Counter>
+          <Arrow active={active} listView={listView} />
+          <Counter listView={listView}>{activityIndex}</Counter>
         </WrapperTouchable>
       );
     }
     return (
       <Wrapper>
-        <Arrow active={active} />
-        {/* <Icon source={active ? iconActive : iconInactive} /> */}
-        <Counter>{activityIndex}</Counter>
+        <Arrow active={active} listView={listView} />
+        <Counter listView={listView}>{activityIndex}</Counter>
       </Wrapper>
     );
   }
@@ -71,30 +74,18 @@ ActivityIndex.propTypes = {
   increaseActivity: PropTypes.func.isRequired,
   activityIndex: PropTypes.number,
   active: PropTypes.bool,
-  touchable: PropTypes.bool
+  touchable: PropTypes.bool,
+  listView: PropTypes.bool
 };
 
 ActivityIndex.defaultProps = {
   active: false,
   touchable: false,
+  listView: false,
   activityIndex: 0
 };
 
 export default compose(
-  // graphql(getActivityIndex, {
-  //   props: props => {
-  //     console.log("getActivityIndex", props);
-  //     const { data: { activityIndex } } = props;
-  //     return {
-  //       activityIndex: activityIndex ? activityIndex.activityIndex : 0,
-  //       active: activityIndex ? activityIndex.active : false
-  //     };
-  //   },
-  //   skip: ({ skipFetchData }) => skipFetchData,
-  //   options: () => ({
-  //     fetchPolicy: "cache-and-network"
-  //   })
-  // }),
   graphql(INCREASE_ACTIVITY, {
     props({
       ownProps: { activityIndex: prevActivityIndex, procedureId },

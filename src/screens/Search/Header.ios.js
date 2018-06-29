@@ -3,6 +3,13 @@ import styled from "styled-components/native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import PropTypes from "prop-types";
 import { Navigator } from "react-native-navigation";
+import { graphql, compose } from "react-apollo";
+
+import client from "../../graphql/client";
+
+import finishSearch from "../../graphql/mutations/finishSearch";
+import searchTerm from "../../graphql/queries/local/searchTerm";
+import changeSearchTerm from "../../graphql/mutations/local/changeSearchTerm";
 
 const Wrapper = styled.View`
   flex: 1;
@@ -53,15 +60,34 @@ class Header extends Component {
     term: ""
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.term !== this.state.term) {
+      this.setState({ term: nextProps.term });
+    }
+  }
+
   onChangeTerm = term => {
-    const { onChangeTerm } = this.props;
-    onChangeTerm(term);
+    const { updateSearchTerm } = this.props;
     this.setState({ term });
+    updateSearchTerm({
+      variables: {
+        term
+      }
+    });
   };
 
   clickBack = () => {
     const { navigator } = this.props;
     navigator.pop();
+  };
+
+  finishSearch = () => {
+    client.mutate({
+      mutation: finishSearch,
+      variables: {
+        term: this.state.term
+      }
+    });
   };
 
   render() {
@@ -74,6 +100,7 @@ class Header extends Component {
             placeholder="Suche"
             onChangeText={this.onChangeTerm}
             value={term}
+            onSubmitEditing={this.finishSearch}
           />
         </SearchInputWrapper>
 
@@ -85,12 +112,21 @@ class Header extends Component {
 
 Header.propTypes = {
   navigator: PropTypes.instanceOf(Navigator),
-  onChangeTerm: PropTypes.func
+  updateSearchTerm: PropTypes.func.isRequired,
+  term: PropTypes.string.isRequired
 };
 
 Header.defaultProps = {
-  navigator: undefined,
-  onChangeTerm: () => {}
+  navigator: undefined
 };
 
-export default Header;
+export default compose(
+  // Queries
+  graphql(searchTerm, {
+    props: ({ data: { searchTerm: term } }) =>
+      term ? { term: term.term } : { term: "" }
+  }),
+
+  // Mutations
+  graphql(changeSearchTerm, { name: "updateSearchTerm" })
+)(Header);

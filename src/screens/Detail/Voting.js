@@ -45,8 +45,13 @@ const VoteButtonLabel = styled.Text`
 `;
 
 const Title = styled.Text`
-  flex: 1;
   font-size: 18;
+`;
+
+const TitleAddition = styled.Text`
+  font-size: 18;
+  color: grey;
+  padding-left: 5;
 `;
 
 const Voting = ({
@@ -54,80 +59,83 @@ const Voting = ({
   votedSelection,
   navigator,
   procedureObjId,
-  procedureId
+  procedureId,
+  type
 }) => (
-    <Wrapper>
-      <SegmentWrapper>
-        <Title>{voted ? "Abgestimmt" : "Abstimmen"} </Title>
-      </SegmentWrapper>
-      <VoteWrapper>
-        <VoteButtonWrapper>
-          <VoteButton
-            voted={voted}
-            selection="YES"
-            votedSelection={votedSelection}
-            onPress={() => {
-              navigator.showModal({
-                screen: "democracy.VoteVarification",
-                title: "Zur Wahlurne".toUpperCase(),
-                passProps: {
-                  selection: "YES",
-                  procedureObjId,
-                  procedureId
-                }
-              });
-            }}
-          />
-          <VoteButtonLabel>{!voted ? 'Zustimmen' : 'Zugestimmt'}</VoteButtonLabel>
-        </VoteButtonWrapper>
-        <VoteButtonWrapper>
-          <VoteButton
-            voted={voted}
-            selection="ABSTINATION"
-            votedSelection={votedSelection}
-            onPress={() => {
-              navigator.showModal({
-                screen: "democracy.VoteVarification",
-                title: "Zur Wahlurne".toUpperCase(),
-                passProps: {
-                  selection: "ABSTINATION",
-                  procedureObjId,
-                  procedureId
-                }
-              });
-            }}
-          />
-          <VoteButtonLabel>Enthalten</VoteButtonLabel>
-        </VoteButtonWrapper>
-        <VoteButtonWrapper>
-          <VoteButton
-            voted={voted}
-            selection="NO"
-            votedSelection={votedSelection}
-            onPress={() => {
-              navigator.showModal({
-                screen: "democracy.VoteVarification",
-                title: "Zur Wahlurne".toUpperCase(),
-                passProps: {
-                  selection: "NO",
-                  procedureObjId,
-                  procedureId
-                }
-              });
-            }}
-          />
-          <VoteButtonLabel>{!voted ? 'Ablehnen' : 'Abgelehnt'}</VoteButtonLabel>
-        </VoteButtonWrapper>
-      </VoteWrapper>
-    </Wrapper>
-  );
+  <Wrapper>
+    <SegmentWrapper>
+      <Title>{voted ? "Abgestimmt" : "Abstimmen"}</Title>
+      <TitleAddition>über {type}</TitleAddition>
+    </SegmentWrapper>
+    <VoteWrapper>
+      <VoteButtonWrapper>
+        <VoteButton
+          voted={voted}
+          selection="YES"
+          votedSelection={votedSelection}
+          onPress={() => {
+            navigator.showModal({
+              screen: "democracy.VoteVarification",
+              title: "Zur Wahlurne".toUpperCase(),
+              passProps: {
+                selection: "YES",
+                procedureObjId,
+                procedureId
+              }
+            });
+          }}
+        />
+        <VoteButtonLabel>{!voted ? "Zustimmen" : "Zugestimmt"}</VoteButtonLabel>
+      </VoteButtonWrapper>
+      <VoteButtonWrapper>
+        <VoteButton
+          voted={voted}
+          selection="ABSTINATION"
+          votedSelection={votedSelection}
+          onPress={() => {
+            navigator.showModal({
+              screen: "democracy.VoteVarification",
+              title: "Zur Wahlurne".toUpperCase(),
+              passProps: {
+                selection: "ABSTINATION",
+                procedureObjId,
+                procedureId
+              }
+            });
+          }}
+        />
+        <VoteButtonLabel>Enthalten</VoteButtonLabel>
+      </VoteButtonWrapper>
+      <VoteButtonWrapper>
+        <VoteButton
+          voted={voted}
+          selection="NO"
+          votedSelection={votedSelection}
+          onPress={() => {
+            navigator.showModal({
+              screen: "democracy.VoteVarification",
+              title: "Zur Wahlurne".toUpperCase(),
+              passProps: {
+                selection: "NO",
+                procedureObjId,
+                procedureId
+              }
+            });
+          }}
+        />
+        <VoteButtonLabel>{!voted ? "Ablehnen" : "Abgelehnt"}</VoteButtonLabel>
+      </VoteButtonWrapper>
+    </VoteWrapper>
+  </Wrapper>
+);
 
 Voting.propTypes = {
   voted: PropTypes.bool.isRequired,
   votedSelection: PropTypes.string,
   navigator: PropTypes.instanceOf(Navigator).isRequired,
   procedureObjId: PropTypes.string.isRequired,
-  procedureId: PropTypes.string.isRequired
+  procedureId: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired
 };
 
 Voting.defaultProps = {
@@ -141,7 +149,7 @@ export default compose(
       fetchPolicy: "cache-and-network"
     }),
     props: ({ data: { loading, votes } }) => ({
-      voted: loading ? true : votes.voted
+      voted: !loading && votes ? votes.voted : true
     })
   }),
 
