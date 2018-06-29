@@ -87,6 +87,10 @@ matrix:
     - npm install -g yarn
     - yarn --version
     - yarn install
+    before_script:
+    - openssl aes-256-cbc -k "$SECRET" -in .env.alpha.enc -out .env.alpha -d
+    - openssl aes-256-cbc -k "$SECRET" -in .env.beta.enc -out .env.beta -d
+    - openssl aes-256-cbc -k "$SECRET" -in .env.production.enc -out .env.production -d
     script:
     - cd ios
     - bundle exec fastlane ios test
