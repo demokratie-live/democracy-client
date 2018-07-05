@@ -103,6 +103,25 @@ class PieChart extends Component {
     return labels[label] || label;
   };
 
+  getPartyColor = party => {
+    switch (party) {
+      case "CDU/CSU":
+        return "#4b4b4b";
+      case "SPD":
+        return "#ed170d";
+      case "AfD":
+        return "#18a7d8";
+      case "FDP":
+        return "#ffd32c";
+      case "Die Linke":
+        return "#aa4581";
+      case "B90/Grüne":
+        return "#34ac14";
+      default:
+        return "grey";
+    }
+  };
+
   getTotals = data => {
     const totals = data.reduce(
       (prev, party) => {
@@ -137,39 +156,33 @@ class PieChart extends Component {
   };
 
   prepareChartData = data => {
-    const chartData = data.reduce(
-      (prev, party) => {
-        const { yes, abstination, no, notVoted } = party.value;
-        const total = yes + abstination + no + notVoted;
-        // yes
-        prev[0].push({
-          x: party.label,
-          y: party.value.yes / total,
-          fillColor: "#99c93e"
-        });
-        // abstination
-        prev[1].push({
-          x: party.label,
-          y: party.value.abstination / total,
-          fillColor: "#4cb0d8"
-        });
-        // no
-        prev[2].push({
-          x: party.label,
-          y: party.value.no / total,
-          fillColor: "#d43194"
-        });
-        // notVoted
-        prev[3].push({
-          x: party.label,
-          y: party.value.notVoted / total,
-          fillColor: "#b1b3b4"
-        });
-        // nix
-        return prev;
-      },
-      [[], [], [], []]
-    );
+    console.log("DATA", data);
+    const chartData = data.map(party => {
+      const { yes, abstination, no, notVoted } = party.value;
+      console.log(party.label);
+      return [
+        {
+          x: "Zustimmungen",
+          y: yes,
+          fillColor: this.getPartyColor(party.label)
+        },
+        {
+          x: "Enthaltungen",
+          y: abstination,
+          fillColor: this.getPartyColor(party.label)
+        },
+        {
+          x: "Ablehnungen",
+          y: no,
+          fillColor: this.getPartyColor(party.label)
+        },
+        {
+          x: "Nicht abg.",
+          y: notVoted,
+          fillColor: this.getPartyColor(party.label)
+        }
+      ];
+    });
     return chartData;
   };
 
@@ -192,35 +205,29 @@ class PieChart extends Component {
         }
       >
         <VoteResultsPieWrapper>
-          <VictoryChart padding={{ left: 80, top: 20, bottom: 20, right: 20 }}>
-            <VictoryStack horizontal maxDomain={{ x: 1 }}>
+          <VictoryChart padding={{ left: 50, top: 0, bottom: 25, right: 50 }}>
+            <VictoryStack>
               {dataSet.map((chartData, i) => (
                 <VictoryBar
                   // width={340}
                   key={chartData[0].y}
-                  name={`bar-${i}`}
-                  barRatio={0.8}
-                  data={chartData.reverse()}
+                  barRatio={1.5}
+                  data={chartData}
                   style={{
                     data: {
                       fill: d => {
                         if (!d.fillColor) {
-                          console.log("STYLE VictoryBar", d);
+                          // console.log("STYLE VictoryBar", d);
                         }
                         return d.fillColor;
                       }
-                    },
-                    labels: {
-                      axis: { stroke: "none" }
                     }
                   }}
                 />
               ))}
             </VictoryStack>
             <VictoryAxis
-              dependentAxis
               style={{
-                axis: { stroke: "none" },
                 tickLabels: { fontWeight: "100", padding: 5 }
               }}
             />

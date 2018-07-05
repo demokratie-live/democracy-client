@@ -8,6 +8,7 @@ import Swiper from "react-native-swiper";
 
 import PieChart from "./VoteResults/PieChart";
 import PartyChart from "./VoteResults/PartyChart";
+import BarChart from "./VoteResults/BarChart";
 import Segment from "../Segment";
 
 import VOTES from "../../../graphql/queries/votes";
@@ -82,6 +83,14 @@ const VoteResults = props => {
               label="Abgeordnete"
             />
             <PartyChart
+              data={_.map(voteResults.partyVotes, partyVotes => ({
+                value: partyVotes.deviants,
+                label: partyVotes.party
+              }))}
+              colorScale={["#99C93E", "#4CB0D8", "#D43194", "#B1B3B4"]}
+              label="Abgeordnete"
+            />
+            <BarChart
               data={_.map(voteResults.partyVotes, partyVotes => ({
                 value: partyVotes.deviants,
                 label: partyVotes.party
