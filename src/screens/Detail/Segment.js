@@ -8,7 +8,7 @@ const Wrapper = styled.View``;
 const SegmentTouch = styled.TouchableHighlight.attrs({
   activeOpacity: 0.5,
   underlayColor: "rgba(68, 148, 211, 0.1)"
-}) ``;
+})``;
 
 const SegmentWrapper = styled.View`
   padding-vertical: 10;
@@ -28,14 +28,14 @@ const CollapseIcon = styled(Ionicons).attrs({
   color: "rgb(151, 151, 151)",
   name: "ios-arrow-up-outline",
   size: 20
-}) `
+})`
   transform: ${({ open }) => (open ? "rotate(0deg)" : "rotate(180deg)")};
 `;
 
 const Content = styled.View`
   display: ${({ open, collapsible }) =>
     open || !collapsible ? "flex" : "none"};
-  padding-horizontal: 18;
+  padding-horizontal: ${({ fullWidth }) => (fullWidth ? 0 : 18)};
   padding-vertical: 10;
 `;
 
@@ -70,7 +70,7 @@ class Segment extends Component {
   };
 
   render() {
-    const { title, collapsible } = this.props;
+    const { title, collapsible, fullWidth } = this.props;
     const { open } = this.state;
     return (
       <Wrapper onLayout={this.onLayout}>
@@ -80,7 +80,7 @@ class Segment extends Component {
             {collapsible && <CollapseIcon open={open} />}
           </SegmentWrapper>
         </SegmentTouch>
-        <Content open={open} collapsible={collapsible}>
+        <Content open={open} collapsible={collapsible} fullWidth>
           {open && this.props.children}
         </Content>
       </Wrapper>
@@ -93,12 +93,14 @@ Segment.propTypes = {
   open: PropTypes.bool,
   collapsible: PropTypes.bool,
   children: PropTypes.node.isRequired,
-  scrollTo: PropTypes.func.isRequired
+  scrollTo: PropTypes.func.isRequired,
+  fullWidth: PropTypes.bool
 };
 
 Segment.defaultProps = {
   collapsible: true,
-  open: false
+  open: false,
+  fullWidth: false
 };
 
 export default Segment;

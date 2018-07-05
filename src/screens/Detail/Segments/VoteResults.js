@@ -1,10 +1,13 @@
 import React from "react";
+import { Dimensions } from "react-native";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import _ from "lodash";
 import { graphql, compose } from "react-apollo";
+import Swiper from "react-native-swiper";
 
 import PieChart from "./VoteResults/PieChart";
+import PartyChart from "./VoteResults/PartyChart";
 import Segment from "../Segment";
 
 import VOTES from "../../../graphql/queries/votes";
@@ -52,22 +55,22 @@ const VoteResults = props => {
       voteResults &&
       (voteResults.yes ||
         voteResults.no ||
-        voteResults.notVote ||
+        voteResults.notVoted ||
         voteResults.abstination)
     ) {
       const votes =
         voteResults.yes +
         voteResults.no +
-        voteResults.notVote +
+        voteResults.notVoted +
         voteResults.abstination;
       return (
-        <Segment title="Bundestagsergebnis" open scrollTo={scrollTo}>
-          <ScrollView>
+        <Segment title="Bundestagsergebnis" open scrollTo={scrollTo} fullWidth>
+          <Swiper height={Dimensions.get("window").width + 50}>
             <PieChart
               data={_.map(
                 voteResults,
                 (value, label) =>
-                  label !== "__typename"
+                  label !== "__typename" && typeof value === "number"
                     ? {
                         value,
                         label,
@@ -78,7 +81,15 @@ const VoteResults = props => {
               colorScale={["#99C93E", "#4CB0D8", "#D43194", "#B1B3B4"]}
               label="Abgeordnete"
             />
-          </ScrollView>
+            <PartyChart
+              data={_.map(voteResults.partyVotes, partyVotes => ({
+                value: partyVotes.deviants,
+                label: partyVotes.party
+              }))}
+              colorScale={["#99C93E", "#4CB0D8", "#D43194", "#B1B3B4"]}
+              label="Abgeordnete"
+            />
+          </Swiper>
         </Segment>
       );
     }
@@ -98,6 +109,7 @@ const VoteResults = props => {
     }
     return null;
   };
+
   if (communityVotes.voted) {
     if (type === "community") {
       return (
@@ -116,7 +128,7 @@ VoteResults.propTypes = {
     yes: PropTypes.number,
     no: PropTypes.number,
     abstination: PropTypes.number,
-    notVote: PropTypes.number
+    notVoted: PropTypes.number
   }),
   scrollTo: PropTypes.func.isRequired,
   communityVotes: PropTypes.oneOfType([PropTypes.shape(), PropTypes.bool]),

@@ -67,23 +67,23 @@ class PieChart extends Component {
 
   getColor = (label, colors) => {
     switch (label) {
-      case 'yes':
+      case "yes":
         return colors[0];
-      case 'abstination':
+      case "abstination":
         return colors[1];
-      case 'no':
+      case "no":
         return colors[2];
       default:
         return colors[3];
     }
-  }
+  };
 
   getLabel = label => {
     const labels = {
       yes: "Zustimmungen",
       abstination: "Enthaltungen",
       no: "Ablehnungen",
-      notVote: "Nicht abg."
+      notVoted: "Nicht abg."
     };
     return labels[label] || label;
   };
@@ -94,7 +94,7 @@ class PieChart extends Component {
     return (
       <VoteResultsWrapper
         onLayout={({ nativeEvent: { layout: { width: newWidth } } }) =>
-          this.setState({ width: newWidth })
+          this.setState({ width: newWidth - 18 * 2 })
         }
       >
         <VoteResultsPieWrapper>
@@ -115,10 +115,10 @@ class PieChart extends Component {
               labels: {
                 fill: "white",
                 fontSize: 16,
-                fontFamily: Platform.OS === "ios"
-                  ? "HelveticaNeue-Thin"
-                  : "sans-serif-light"
-
+                fontFamily:
+                  Platform.OS === "ios"
+                    ? "HelveticaNeue-Thin"
+                    : "sans-serif-light"
               }
             }}
           />
@@ -145,9 +145,11 @@ class PieChart extends Component {
             {data.map(entry => (
               <VoteResult key={entry.label}>
                 <VoteResultCircleNumber>
-                  <VoteResultCircle color={this.getColor(entry.label, colorScale)} />
+                  <VoteResultCircle
+                    color={this.getColor(entry.label, colorScale)}
+                  />
                   <VoteResultNumber>
-                    {(entry.value !== null ? entry.value : "?")}
+                    {entry.value !== null ? entry.value : "?"}
                   </VoteResultNumber>
                 </VoteResultCircleNumber>
                 <VoteResultLabel>{this.getLabel(entry.label)}</VoteResultLabel>

@@ -29,7 +29,17 @@ export default gql`
         yes
         abstination
         no
-        notVote
+        notVoted
+        partyVotes {
+          main
+          party
+          deviants {
+            yes
+            abstination
+            no
+            notVoted
+          }
+        }
       }
       ...ActivityIndex
       ...Voted
