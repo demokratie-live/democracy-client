@@ -28,7 +28,7 @@ const VoteResultPieLabel = styled.Text`
 const VoteResultNumbers = styled.View`
   width: ${() => Dimensions.get("window").width - 18 * 2};
   max-width: 464;
-  padding-top: 18;
+  padding-top: 9;
   flex-direction: row;
   justify-content: space-around;
 `;
@@ -93,16 +93,16 @@ class PieChart extends Component {
     const { width } = this.state;
     return (
       <VoteResultsWrapper
-        onLayout={({ nativeEvent: { layout: { width: newWidth } } }) =>
-          this.setState({ width: newWidth - 18 * 2 })
-        }
+      // onLayout={({ nativeEvent: { layout: { width: newWidth } } }) =>
+      //   this.setState({ width: newWidth - 18 * 2 })
+      // }
       >
         <VoteResultsPieWrapper>
           <VictoryPie
             allowZoom={false}
-            padding={{ top: 0, bottom: 0, left: 0, right: 0 }}
-            width={width}
-            height={width}
+            padding={{ left: 18, top: 0, bottom: 0, right: 18 }}
+            // width={width}
+            // height={width}
             colorScale={colorScale}
             data={data.map((entry, index) => ({
               x: index,

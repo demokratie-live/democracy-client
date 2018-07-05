@@ -9,7 +9,8 @@ import {
   VictoryAxis,
   VictorySharedEvents,
   VictoryGroup,
-  VictoryTheme
+  VictoryTheme,
+  VictoryLabel
 } from "victory-native";
 import victoryAxis from "victory-native/lib/components/victory-axis";
 
@@ -156,48 +157,46 @@ class PieChart extends Component {
   };
 
   prepareChartData = data => {
-    console.log("DATA", data);
     const chartData = data.map(party => {
       const { yes, abstination, no, notVoted } = party.value;
-      console.log(party.label);
       return [
         {
           x: "Zustimmungen",
           y: yes,
-          fillColor: this.getPartyColor(party.label)
+          fillColor: this.getPartyColor(party.label),
+          party: party.label
         },
         {
           x: "Enthaltungen",
           y: abstination,
-          fillColor: this.getPartyColor(party.label)
+          fillColor: this.getPartyColor(party.label),
+          party: party.label
         },
         {
           x: "Ablehnungen",
           y: no,
-          fillColor: this.getPartyColor(party.label)
+          fillColor: this.getPartyColor(party.label),
+          party: party.label
         },
         {
           x: "Nicht abg.",
           y: notVoted,
-          fillColor: this.getPartyColor(party.label)
+          fillColor: this.getPartyColor(party.label),
+          party: party.label
         }
       ];
     });
     return chartData;
   };
 
-  labelStyle = (...rest) => {
-    console.log(rest);
-    return {
-      color: "blue"
-    };
-  };
+  labelStyle = (...rest) => ({
+    color: "blue"
+  });
 
   render() {
     const { data, colorScale, label, showNumbers } = this.props;
     const { width } = this.state;
     const dataSet = this.prepareChartData(data);
-    console.log({ dataSet });
     return (
       <VoteResultsWrapper
         onLayout={({ nativeEvent: { layout: { width: newWidth } } }) =>
@@ -209,11 +208,18 @@ class PieChart extends Component {
             <VictoryStack>
               {dataSet.map((chartData, i) => (
                 <VictoryBar
-                  // width={340}
                   key={chartData[0].y}
                   barRatio={1.5}
                   data={chartData}
+                  labels={d => {
+                    if (d.y >= 40) {
+                      return d.party;
+                    }
+                    return "";
+                  }}
+                  labelComponent={<VictoryLabel dy={30} />}
                   style={{
+                    labels: { fill: "white" },
                     data: {
                       fill: d => {
                         if (!d.fillColor) {

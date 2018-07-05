@@ -80,7 +80,7 @@ class Segment extends Component {
             {collapsible && <CollapseIcon open={open} />}
           </SegmentWrapper>
         </SegmentTouch>
-        <Content open={open} collapsible={collapsible} fullWidth>
+        <Content open={open} collapsible={collapsible} fullWidth={fullWidth}>
           {open && this.props.children}
         </Content>
       </Wrapper>

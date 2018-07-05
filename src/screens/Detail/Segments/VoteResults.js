@@ -104,7 +104,7 @@ const VoteResults = props => {
     }
     if (currentStatus === "Zurückgezogen") {
       return (
-        <Segment title="Bundestagsergebnis" open scrollTo={scrollTo}>
+        <Segment title="Bundestagsergebnis" open scrollTo={scrollTo} fullWidth>
           <ScrollView>
             <PieChart
               data={[{ value: 1, label: " ", percentage: false }]}
@@ -122,7 +122,7 @@ const VoteResults = props => {
   if (communityVotes.voted) {
     if (type === "community") {
       return (
-        <Segment title="Communityergebnis" open scrollTo={scrollTo}>
+        <Segment title="Communityergebnis" open scrollTo={scrollTo} fullWidth>
           <ScrollView>{renderCommuntiyResult()}</ScrollView>
         </Segment>
       );

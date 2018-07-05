@@ -173,18 +173,14 @@ class PieChart extends Component {
     return chartData;
   };
 
-  labelStyle = (...rest) => {
-    console.log(rest);
-    return {
-      color: "blue"
-    };
-  };
+  labelStyle = (...rest) => ({
+    color: "blue"
+  });
 
   render() {
     const { data, colorScale, label, showNumbers } = this.props;
     const { width } = this.state;
     const dataSet = this.prepareChartData(data);
-    console.log({ dataSet });
     return (
       <VoteResultsWrapper
         onLayout={({ nativeEvent: { layout: { width: newWidth } } }) =>
@@ -205,7 +201,7 @@ class PieChart extends Component {
                     data: {
                       fill: d => {
                         if (!d.fillColor) {
-                          console.log("STYLE VictoryBar", d);
+                          // logs
                         }
                         return d.fillColor;
                       }
