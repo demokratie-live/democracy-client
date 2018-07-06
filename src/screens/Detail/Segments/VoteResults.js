@@ -51,6 +51,69 @@ const VoteResults = props => {
     return null;
   };
 
+  const renderNamedVoteDetails = () => {
+    const votes =
+      voteResults.yes +
+      voteResults.no +
+      voteResults.notVoted +
+      voteResults.abstination;
+    if (voteResults.partyVotes.length > 0) {
+      return (
+        <Swiper height={Dimensions.get("window").width + 50}>
+          <PieChart
+            data={_.map(
+              voteResults,
+              (value, label) =>
+                label !== "__typename" && typeof value === "number"
+                  ? {
+                      value,
+                      label,
+                      percentage: Math.round(value / votes * 100)
+                    }
+                  : false
+            ).filter(e => e)}
+            colorScale={["#99C93E", "#4CB0D8", "#D43194", "#B1B3B4"]}
+            label="Abgeordnete"
+          />
+          <PartyChart
+            data={_.map(voteResults.partyVotes, partyVotes => ({
+              value: partyVotes.deviants,
+              label: partyVotes.party
+            }))}
+            colorScale={["#99C93E", "#4CB0D8", "#D43194", "#B1B3B4"]}
+            label="Abgeordnete"
+          />
+
+          <BarChart
+            data={_.map(voteResults.partyVotes, partyVotes => ({
+              value: partyVotes.deviants,
+              label: partyVotes.party
+            }))}
+            colorScale={["#99C93E", "#4CB0D8", "#D43194", "#B1B3B4"]}
+            label="Abgeordnete"
+          />
+        </Swiper>
+      );
+    }
+    return (
+      <PieChart
+        data={_.map(
+          voteResults,
+          (value, label) =>
+            label !== "__typename" && typeof value === "number"
+              ? {
+                  value,
+                  label,
+                  percentage: Math.round(value / votes * 100)
+                }
+              : false
+        ).filter(e => e)}
+        colorScale={["#99C93E", "#4CB0D8", "#D43194", "#B1B3B4"]}
+        label="Abgeordnete"
+      />
+    );
+  };
+
   const renderGovernmentResult = () => {
     if (
       voteResults &&
@@ -59,46 +122,9 @@ const VoteResults = props => {
         voteResults.notVoted ||
         voteResults.abstination)
     ) {
-      const votes =
-        voteResults.yes +
-        voteResults.no +
-        voteResults.notVoted +
-        voteResults.abstination;
       return (
         <Segment title="Bundestagsergebnis" open scrollTo={scrollTo} fullWidth>
-          <Swiper height={Dimensions.get("window").width + 50}>
-            <PieChart
-              data={_.map(
-                voteResults,
-                (value, label) =>
-                  label !== "__typename" && typeof value === "number"
-                    ? {
-                        value,
-                        label,
-                        percentage: Math.round(value / votes * 100)
-                      }
-                    : false
-              ).filter(e => e)}
-              colorScale={["#99C93E", "#4CB0D8", "#D43194", "#B1B3B4"]}
-              label="Abgeordnete"
-            />
-            <PartyChart
-              data={_.map(voteResults.partyVotes, partyVotes => ({
-                value: partyVotes.deviants,
-                label: partyVotes.party
-              }))}
-              colorScale={["#99C93E", "#4CB0D8", "#D43194", "#B1B3B4"]}
-              label="Abgeordnete"
-            />
-            <BarChart
-              data={_.map(voteResults.partyVotes, partyVotes => ({
-                value: partyVotes.deviants,
-                label: partyVotes.party
-              }))}
-              colorScale={["#99C93E", "#4CB0D8", "#D43194", "#B1B3B4"]}
-              label="Abgeordnete"
-            />
-          </Swiper>
+          {renderNamedVoteDetails()}
         </Segment>
       );
     }
