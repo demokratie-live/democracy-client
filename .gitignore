@@ -56,6 +56,7 @@ ios/*dSYM.zip
 ios/vendor
 
 .env*
+!.env.*.enc
 
 android/Google_Play_Android_Developer.json
 android/.bundle

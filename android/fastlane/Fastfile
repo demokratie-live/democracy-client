@@ -38,6 +38,23 @@ platform :android do
   )[0, 500]
   buildNumber = ENV["BUILD_NUMBER"];
 
+  # Internal
+  lane :internal do
+    File.open("./metadata_internal/android/de-DE/changelogs/#{buildNumber}.txt", 'w') do |file|
+      file.write changelog
+    end
+    gradle(
+      task: "clean assembleInternal",
+      build_type: "Release"
+    )
+    upload_to_play_store(
+      track: 'internal',
+      track_promote_to: 'internal',
+      apk: "./app/build/outputs/apk/app-internal-release.apk",
+      metadata_path: "./fastlane/metadata_internal/android"
+    )
+  end
+  
   # Alpha
   lane :alpha do
     File.open("./metadata_alpha/android/de-DE/changelogs/#{buildNumber}.txt", 'w') do |file|
