@@ -9,8 +9,6 @@ import DeviceInfo from "react-native-device-info";
 
 import Config from "../config";
 
-import onNavigationEvent from "./onNavigationEvent";
-
 const ScrollWrapper = styled.ScrollView`
   flex: 1;
   background-color: #ffffff;
@@ -25,7 +23,7 @@ const Wrapper = styled.View`
 
 const Logo = styled.Image.attrs({
   source: require("../../assets/images/support-logo.png")
-}) ``;
+})``;
 
 const Text = styled.Text`
   text-align: justify;
@@ -59,7 +57,7 @@ const Version = styled.Text`
 const ContactIcons = styled(FontAwesome).attrs({
   size: 40,
   color: "#000000"
-}) ``;
+})``;
 
 class Support extends Component {
   static navigatorStyle = {
@@ -84,24 +82,17 @@ class Support extends Component {
         ]
       });
     });
-
-    this.props.navigator.setOnNavigatorEvent(this.onNavigationEvent);
   }
-
-  onNavigationEvent = event => {
-    onNavigationEvent({ event, navigator: this.props.navigator });
-  };
 
   linking = url => () => {
     Linking.canOpenURL(url).then(supported => {
       if (supported) {
         Linking.openURL(url).catch(() => null);
       } else {
-        Alert.alert('Nicht unterstützt',
-          'Diese Operation wird auf deinem Gerät zurzeit nicht unterstützt!',
-          [
-            { text: 'OK' },
-          ],
+        Alert.alert(
+          "Nicht unterstützt",
+          "Diese Operation wird auf deinem Gerät zurzeit nicht unterstützt!",
+          [{ text: "OK" }],
           { cancelable: false }
         );
       }
@@ -109,13 +100,18 @@ class Support extends Component {
   };
 
   render() {
-    const phoneNumber = Platform.OS === "ios" ? `telprompt:${Config.PHONE_NUMBER}` : `tel:${Config.PHONE_NUMBER}`;
+    const phoneNumber =
+      Platform.OS === "ios"
+        ? `telprompt:${Config.PHONE_NUMBER}`
+        : `tel:${Config.PHONE_NUMBER}`;
     const email = `mailto:${Config.CONTACT_EMAIL}`;
     const github = Config.GITHUB_URL;
+
     const version = `Version: ${DeviceInfo.getReadableVersion()
       .split(".")
       .slice(0, 3)
-      .join(".")}`;
+      .join(".")} (${DeviceInfo.getBuildNumber()})`;
+
     return (
       <ScrollWrapper>
         <Wrapper>

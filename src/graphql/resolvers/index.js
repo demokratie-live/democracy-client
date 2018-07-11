@@ -2,6 +2,7 @@ import IS_INSTRUCTIONS_SHOWN from "../queries/isInstructionShown";
 import GET_NETWORK_STATUS from "../queries/getNetworkStatus";
 
 import VotesLocal from "../../services/VotesLocal";
+import ViewedProcedures from "../../services/ViewedProcedures";
 
 export const defaults = {
   currentScreen: "democracy.VoteList",
@@ -11,6 +12,10 @@ export const defaults = {
     __typename: "NetworkStatus",
     isConnected: true,
     requestError: ""
+  },
+  searchTerm: {
+    __typename: "SearchTerm",
+    term: ""
   }
 };
 
@@ -48,6 +53,23 @@ export const resolvers = {
           break;
       }
       return null;
+    },
+    viewProcedure: async (_, { procedureId }) => {
+      await ViewedProcedures.setViewedProcedure({
+        procedureId,
+        status: "VIEWED"
+      });
+      return null;
+    },
+    changeSearchTerm: (_, { term }, { cache }) => {
+      const data = {
+        searchTerm: {
+          __typename: "SearchTerm",
+          term
+        }
+      };
+      cache.writeData({ data });
+      return null;
     }
   },
   Query: {
@@ -75,6 +97,12 @@ export const resolvers = {
         };
       }
       return null;
+    }
+  },
+  Procedure: {
+    viewedStatus: async ({ procedureId }) => {
+      const { status } = await ViewedProcedures.getViewProcedure(procedureId);
+      return status;
     }
   }
 };

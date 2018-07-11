@@ -4,8 +4,10 @@ import PropTypes from "prop-types";
 
 import ActivityIndex from "./ActivityIndex";
 import DateTime from "./Date";
+import DemocracyIconComponent from "../../iconfont/DemocracyFont";
+import StatusIcon from "../components/StatusIcon";
 
-import DemocracyIcon from "../../iconfont/DemocracyFont";
+const DemocracyIcon = styled(DemocracyIconComponent)``;
 
 const ListItemWrapper = styled.View`
   flex-direction: row;
@@ -14,6 +16,7 @@ const ListItemWrapper = styled.View`
 const MainWrapper = styled.View`
   flex: 1;
   padding-right: 10;
+  justify-content: space-between;
 `;
 
 const SideWrapper = styled.View`
@@ -22,11 +25,11 @@ const SideWrapper = styled.View`
   min-width: 50;
 `;
 
-const Title = styled.Text.attrs({ numberOfLines: 2 }) `
+const Title = styled.Text.attrs({ numberOfLines: 3 })`
   font-size: 17;
   color: #030303;
 `;
-const Tags = styled.Text.attrs({ numberOfLines: 2 }) `
+const Tags = styled.Text.attrs({ numberOfLines: 2 })`
   padding-top: 8;
   font-size: 15;
   color: #8f8e94;
@@ -40,33 +43,38 @@ const ListItem = ({
   children,
   activityIndex: { activityIndex, active },
   votedGovernment,
-  voted
+  voted,
+  viewedStatus
 }) => (
-    <ListItemWrapper>
-      <MainWrapper>
-        <Title>{title}</Title>
-        {!children && <Tags>{tags && tags.join(", ")}</Tags>}
-        {children}
-      </MainWrapper>
-      <SideWrapper>
-        <ActivityIndex
-          procedureId={procedureId}
-          activityIndex={activityIndex}
-          active={active}
-          skipFetchData
-        />
+  <ListItemWrapper>
+    <StatusIcon
+      push={viewedStatus === "PUSH"}
+      unreaded={viewedStatus === "NEW" && !voted && !active}
+    />
+    <MainWrapper>
+      <Title>{title}</Title>
+      {!children && <Tags>{tags && tags.join(", ")}</Tags>}
+      {children}
+    </MainWrapper>
+    <SideWrapper>
+      <ActivityIndex
+        procedureId={procedureId}
+        activityIndex={activityIndex}
+        active={active}
+        listView
+      />
 
-        {!voted && date && <DateTime date={date} />}
-        {voted && (
-          <DemocracyIcon
-            name={`checkmark${votedGovernment ? "-double" : ""}`}
-            size={14}
-            color="#35a335"
-          />
-        )}
-      </SideWrapper>
-    </ListItemWrapper>
-  );
+      {voted && (
+        <DemocracyIcon
+          name={`checkmark${votedGovernment ? "-double" : ""}`}
+          size={14}
+          color="#35a335"
+        />
+      )}
+      {date && <DateTime date={date} />}
+    </SideWrapper>
+  </ListItemWrapper>
+);
 
 ListItem.propTypes = {
   title: PropTypes.string.isRequired,
@@ -80,7 +88,8 @@ ListItem.propTypes = {
   children: PropTypes.node,
   activityIndex: PropTypes.shape(),
   votedGovernment: PropTypes.bool,
-  voted: PropTypes.bool
+  voted: PropTypes.bool,
+  viewedStatus: PropTypes.string.isRequired
 };
 
 ListItem.defaultProps = {

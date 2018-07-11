@@ -1,27 +1,30 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
 import React, { Component } from "react";
+import { Dimensions, Platform, ActivityIndicator } from "react-native";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import { Navigator } from "react-native-navigation";
-import { TouchableHighlight, Dimensions, Platform } from "react-native";
 import { graphql } from "react-apollo";
 import { unionBy } from "lodash";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-import prevetNavStackDuplicate from "../../hocs/preventNavStackDuplicate";
+import preventNavStackDuplicate from "../../hocs/preventNavStackDuplicate";
 
-import ListRow from "../../components/ListRow";
-import VoteListItem from "../../components/VoteListItem";
 import ListSectionHeader from "../../components/ListSectionHeader";
+import ListItem from "./ListItem";
 
 import getProcedures from "../../graphql/queries/getProcedures";
-
-// import onNavigationEvent from "../onNavigationEvent";
 
 const Wrapper = styled.View`
   flex: 1;
   background-color: #fff;
   width: ${({ width }) => width};
+`;
+
+const Loading = styled.View`
+  height: 50;
+  align-items: center;
+  justify-content: center;
 `;
 
 const SectionList = styled.SectionList``;
@@ -61,16 +64,24 @@ class List extends Component {
         ]
       });
     });
-    this.props.navigator.setOnNavigatorEvent(this.onNavigationEvent);
   }
 
   state = {
-    width: Platform.OS === "ios" ? Dimensions.get("window").width : "auto"
+    width: Platform.OS === "ios" ? Dimensions.get("window").width : "auto",
+    fetchedAll: false
   };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.listType !== this.props.listType) {
       nextProps.data.procedures = false; // eslint-disable-line
+    }
+
+    if (
+      nextProps.data.procedures &&
+      nextProps.data.procedures.length < PAGE_SIZE &&
+      !this.state.fetchedAll
+    ) {
+      this.setState({ fetchedAll: true });
     }
   }
 
@@ -82,10 +93,6 @@ class List extends Component {
       }
     }
   };
-
-  /* onNavigationEvent = event => {
-    onNavigationEvent({ event, navigator: this.props.navigator });
-  }; */
 
   onItemClick = ({ item }) => () => {
     this.props.navigateTo({
@@ -115,7 +122,9 @@ class List extends Component {
     procedures.forEach(procedure => {
       if (
         listType === "VOTING" &&
-        procedure.completed
+        ((new Date(procedure.voteDate) < new Date() &&
+          procedure.voteDate !== null) ||
+          procedure.completed)
       ) {
         preparedData[1].data.push({
           ...procedure,
@@ -133,52 +142,59 @@ class List extends Component {
     return preparedData;
   };
 
+  renderItem = onClick => ({ item }) => (
+    <ListItem item={item} onClick={onClick} />
+  );
+
   render() {
     const { data } = this.props;
+    const { fetchedAll } = this.state;
     return (
       <Wrapper onLayout={this.onLayout} width={this.state.width}>
         <SectionList
+          ListFooterComponent={() =>
+            data.loading || !fetchedAll ? (
+              <Loading>
+                <ActivityIndicator />
+              </Loading>
+            ) : null
+          }
           sections={this.prepareData()}
           stickySectionHeadersEnabled
           keyExtractor={({ _id }) => _id}
           onRefresh={() => {
+            this.setState({ fetchedAll: false });
             data.refetch();
           }}
           refreshing={data.networkStatus === 4}
+          renderItem={this.renderItem(this.onItemClick)}
           renderSectionHeader={({ section }) => (
             <ListSectionHeader title={section.title} />
           )}
-          renderItem={({ item }) => (
-            <TouchableHighlight
-              onPress={this.onItemClick({ item })}
-              underlayColor="rgba(68, 148, 211, 0.1)"
-            >
-              <ListRow>
-                <VoteListItem {...item} />
-              </ListRow>
-            </TouchableHighlight>
-          )}
           onEndReached={() => {
-            data.fetchMore({
-              variables: {
-                offset: data.procedures ? data.procedures.length : PAGE_SIZE
-              },
-              updateQuery: (previousResult, { fetchMoreResult }) => {
-                if (
-                  !fetchMoreResult ||
-                  fetchMoreResult.procedures.length === 0
-                ) {
-                  return previousResult;
+            if (!data.loading && !fetchedAll) {
+              data.fetchMore({
+                variables: {
+                  offset: data.procedures ? data.procedures.length : PAGE_SIZE
+                },
+                updateQuery: (previousResult, { fetchMoreResult }) => {
+                  if (
+                    !fetchMoreResult ||
+                    fetchMoreResult.procedures.length === 0
+                  ) {
+                    this.setState({ fetchedAll: true });
+                    return previousResult;
+                  }
+                  return {
+                    procedures: unionBy(
+                      previousResult.procedures,
+                      fetchMoreResult.procedures,
+                      "_id"
+                    )
+                  };
                 }
-                return {
-                  procedures: unionBy(
-                    previousResult.procedures,
-                    fetchMoreResult.procedures,
-                    "_id"
-                  )
-                };
-              }
-            });
+              });
+            }
           }}
         />
       </Wrapper>
@@ -203,4 +219,4 @@ export default graphql(getProcedures, {
     variables: { type: listType, pageSize: PAGE_SIZE, offset: 0 },
     fetchPolicy: "cache-and-network"
   })
-})(prevetNavStackDuplicate(List));
+})(preventNavStackDuplicate(List));

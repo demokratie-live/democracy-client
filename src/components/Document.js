@@ -3,6 +3,7 @@ import { Linking, Platform } from "react-native";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { Navigator } from "react-native-navigation";
 
 const Wrapper = styled.TouchableOpacity`
   flex-direction: row;
@@ -32,9 +33,20 @@ class Document extends Component {
   };
 
   render() {
-    const { editor, type, number, url } = this.props;
+    const { editor, type, number, url, navigator } = this.props;
     return (
-      <Wrapper onPress={this.openPdf(url)}>
+      <Wrapper
+        onPress={() =>
+          navigator.push({
+            screen: "democracy.Pdf",
+            title: type,
+            backButtonTitle: "",
+            passProps: {
+              url
+            }
+          })
+        }
+      >
         <Ionicons name="ios-document-outline" size={30} />
         <Text>{`${type} (${editor} ${number})`}</Text>
       </Wrapper>
@@ -46,7 +58,8 @@ Document.propTypes = {
   editor: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   number: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired
+  url: PropTypes.string.isRequired,
+  navigator: PropTypes.instanceOf(Navigator).isRequired
 };
 
 export default Document;

@@ -1,19 +1,30 @@
 import gql from "graphql-tag";
 
+import ActivityIndex from "../fragments/ProcedureActivityIndex";
+import Voted from "../fragments/ProcedureVoted";
+import Viewed from "../fragments/ProcedureViewed";
+
 export default gql`
   query search($term: String!) {
-    searchProcedures(term: $term) {
-      _id
-      title
-      procedureId
-      tags
-      abstract
-      voteDate
-      submissionDate
-      activityIndex {
-        activityIndex
-        active
+    searchProceduresAutocomplete(term: $term) {
+      procedures {
+        _id
+        title
+        procedureId
+        tags
+        abstract
+        voteDate
+        votedGovernment
+        submissionDate
+        completed
+        ...ActivityIndex
+        ...Voted
+        ...Viewed
       }
+      autocomplete
     }
   }
+  ${ActivityIndex}
+  ${Voted}
+  ${Viewed}
 `;
