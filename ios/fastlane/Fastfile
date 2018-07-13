@@ -54,7 +54,7 @@ platform :ios do
   lane :test do
 
     sync_code_signing(
-      type: 'development',
+      type: 'appstore',
       app_identifier: "de.democracy-deutschland.clientapp.internal",
       team_id: "A4B84UJD7M"
     )
