@@ -3,7 +3,7 @@ name: 🚀 Feature
 about: Only for well defined and described Features including design
 ---
 
-## Feature
+## 🚀 Feature
 <!-- Describe the Feature. -->
 
 ## Design & Layout
