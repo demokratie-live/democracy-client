@@ -1,4 +1,4 @@
-﻿---
+---
 name: 💬 Question
 about: If you need help understanding the DEMOCRACY app.
 ---

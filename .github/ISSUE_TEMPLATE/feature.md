@@ -1,4 +1,4 @@
-﻿---
+---
 name: 🚀 Feature
 about: Only for well defined and described Features including design
 ---
