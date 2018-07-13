@@ -1,12 +1,12 @@
----
+﻿---
 name: 🐛 Bug Report
 about: Report a reproducible bug.
 ---
 
 ## App-Version & Environment
-<!-- Open the Support screen of your app and paste the version info from the bottom into the brackets. -->
+<!-- Open the Support screen of your app and paste the version info from the bottom here. -->
 APP: []
-<!-- Specify you OS and OS Version in the brackets. -->
+<!-- Specify you OS and OS Version here. -->
 OS:  []
 
 ## Bugreport
