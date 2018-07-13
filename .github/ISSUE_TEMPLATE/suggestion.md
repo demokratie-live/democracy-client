@@ -1,4 +1,4 @@
-﻿---
+---
 name: 🗣 Suggestion
 about: For your Ideas or Requests
 ---

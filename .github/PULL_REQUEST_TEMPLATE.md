@@ -3,7 +3,8 @@
 
 ## Issues
 <!-- Which Issues does this fix, which are related? -->
-<!-- [fixes] #XXX -->
+- fixes #XXX
+- relates #XXX
 
 ## Checklist
 
