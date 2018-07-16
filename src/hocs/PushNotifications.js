@@ -172,6 +172,7 @@ export default ComposedComponent => {
       await this.handlePushData(notification);
 
       if (type === "procedure") {
+        console.log("showInAppNotification!!!!");
         Navigation.showInAppNotification({
           screen: "democracy.Notifications.InApp", // unique ID registered with Navigation.registerScreen
           passProps: {
@@ -187,7 +188,7 @@ export default ComposedComponent => {
               });
             }
           }, // simple serializable object that will pass as props to the in-app notification (optional)
-          autoDismissTimerSec: 3 // auto dismiss notification in seconds
+          autoDismissTimerSec: 5 // auto dismiss notification in seconds
         });
       } else if (type === "procedureBulk") {
         Navigation.showInAppNotification({
@@ -196,7 +197,7 @@ export default ComposedComponent => {
             title,
             description: message
           }, // simple serializable object that will pass as props to the in-app notification (optional)
-          autoDismissTimerSec: 3 // auto dismiss notification in seconds
+          autoDismissTimerSec: 5 // auto dismiss notification in seconds
         });
       }
     };
@@ -208,6 +209,17 @@ export default ComposedComponent => {
 
     onNotificationOpened = notification => {
       console.log("PUSHLOG: onNotificationOpened", notification);
+      const { procedureId, type } = notification;
+      if(type === 'procedure') {
+        const { navigator } = this.props;
+        navigator.handleDeepLink({
+          link: `democracy.Detail`,
+          payload: {
+            procedureId: `${procedureId}`,
+            from: "pushNotification"
+          }
+        });
+      }
       this.handlePushData(notification);
     };
 
@@ -246,7 +258,9 @@ export default ComposedComponent => {
           id: procedureId,
           fragment: F_PROCEDURE_VIEWED
         });
-        aiFragment.viewedStatus = "PUSH";
+        if (aiFragment) {
+          aiFragment.viewedStatus = "PUSH";
+        }
         client.writeFragment({
           id: procedureId,
           fragment: F_PROCEDURE_VIEWED,
