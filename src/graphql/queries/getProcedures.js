@@ -10,6 +10,7 @@ export default gql`
       _id
       title
       procedureId
+      currentStatus
       type
       subjectGroups
       tags

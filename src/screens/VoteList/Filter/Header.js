@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Platform } from "react-native";
 import styled from "styled-components/native";
 import { Navigation } from "react-native-navigation";
@@ -31,7 +32,6 @@ const ButtonText = styled.Text`
 class Header extends Component {
   onSave = async () => {
     await this.props.onSave();
-    this.clickBack();
   };
 
   clickBack = () => {
@@ -63,7 +63,9 @@ class Header extends Component {
   }
 }
 
-Header.propTypes = {};
+Header.propTypes = {
+  onSave: PropTypes.func.isRequired
+};
 
 Header.defaultProps = {};
 

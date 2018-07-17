@@ -12,7 +12,7 @@ import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import { Navigator } from "react-native-navigation";
 import { graphql, compose } from "react-apollo";
-import _, { unionBy } from "lodash";
+import { unionBy } from "lodash";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import preventNavStackDuplicate from "../../hocs/preventNavStackDuplicate";
@@ -153,60 +153,73 @@ class List extends Component {
   };
 
   prepareFilter = filterObj => {
-    const filters = Object.keys(filterObj).reduce(
-      (prev, key) => ({
-        ...prev,
-        [key]: Object.keys(filterObj[key]).reduce((prevSub, keySub) => {
-          if (filterObj[key][keySub]) {
-            return { ...prevSub, [keySub]: filterObj[key][keySub] };
-          }
-          return prevSub;
-        }, {})
-      }),
-      {}
-    );
-    if (
-      !filters ||
-      (filters.type.all && filters.subjectGroups.all && filters.userStatus.all)
-    ) {
-      this.setRightButtons({ filterActive: false });
-    } else {
-      this.setRightButtons({ filterActive: true });
-    }
+    const filters = Object.keys(filterObj).reduce((prev, key) => {
+      if (key === "notifications") {
+        if (filterObj.notifications.value) {
+          return { ...prev, notifications: filterObj.notifications.value };
+        }
+        return { ...prev };
+      }
+      if (!filterObj[key].every(({ value }) => value)) {
+        return { ...prev, [key]: filterObj[key].filter(({ value }) => value) };
+      }
+      return prev;
+    }, {});
     this.setState({ filters });
   };
 
-  filterProcedures = ({ type, subjectGroups, voted, viewedStatus }) => {
+  filterProcedures = ({
+    type,
+    subjectGroups,
+    voted,
+    viewedStatus,
+    currentStatus
+  }) => {
     const { filters } = this.state;
-    if (
-      !filters ||
-      (filters.type.all && filters.subjectGroups.all && filters.userStatus.all)
-    ) {
+    if (!filters || filters.length === 0) {
       return true;
     }
     let doFilter = true;
-    if (!filters.type.all) {
-      if (!_.has(filters.type, type)) {
-        doFilter = false;
+    Object.keys(filters).forEach(key => {
+      switch (key) {
+        case "notifications":
+          if (filters[key] && viewedStatus !== "PUSH") {
+            doFilter = false;
+          }
+          break;
+        case "activity":
+          if (filters[key][0].name === "voted" && !voted) {
+            doFilter = false;
+          } else if (filters[key][0].name === "notVoted" && voted) {
+            doFilter = false;
+          }
+          break;
+        case "type":
+          if (filters[key][0].title !== type) {
+            doFilter = false;
+          }
+          break;
+        case "subjectGroups": {
+          const showSubjectGroups = filters[key].map(({ title }) => title);
+          doFilter = subjectGroups.some(
+            subjectGroup =>
+              showSubjectGroups.findIndex(
+                subject => subject === subjectGroup
+              ) !== -1
+          );
+          break;
+        }
+        case "currentStatus": {
+          const states = filters[key].map(({ title }) => title);
+          doFilter = states.findIndex(state => state === currentStatus) !== -1;
+          break;
+        }
+
+        default:
+          break;
       }
-    }
-    if (!filters.subjectGroups.all) {
-      if (
-        !Object.keys(filters.subjectGroups).some(g =>
-          subjectGroups.some(sg => g === sg)
-        )
-      ) {
-        doFilter = false;
-      }
-    }
-    if (!filters.userStatus.all) {
-      if (filters.userStatus["Nicht Abgestimmt"] && voted) {
-        doFilter = false;
-      }
-      if (filters.userStatus.Push && viewedStatus !== "PUSH") {
-        doFilter = false;
-      }
-    }
+    });
+
     return doFilter;
   };
 
@@ -313,9 +326,12 @@ class List extends Component {
           }}
           refreshing={data.networkStatus === 4}
           renderItem={this.renderItem(this.onItemClick)}
-          renderSectionHeader={({ section }) => (
-            <ListSectionHeader title={section.title} />
-          )}
+          renderSectionHeader={({ section }) => {
+            if (section.data.length > 0) {
+              return <ListSectionHeader title={section.title} />;
+            }
+            return null;
+          }}
           onEndReached={() => {
             if (!data.loading && !fetchedAll) {
               data.fetchMore({

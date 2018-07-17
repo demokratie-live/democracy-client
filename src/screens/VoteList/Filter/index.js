@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { AsyncStorage } from "react-native";
+import { AsyncStorage, Alert } from "react-native";
 import styled from "styled-components/native";
 import { Navigation, Navigator } from "react-native-navigation";
 import { graphql } from "react-apollo";
@@ -8,7 +8,6 @@ import { graphql } from "react-apollo";
 import Header from "./Header";
 import SegmentHeader from "../../../components/ListSectionHeader";
 import Checkbox from "../../../components/Checkbox";
-import Radio from "../../../components/Radio";
 
 import SET_FILTERS from "../../../graphql/mutations/local/setFilters";
 import GET_FILTERS from "../../../graphql/queries/local/filters";
@@ -17,40 +16,78 @@ Navigation.registerComponent("democracy.VoteList.Filter.Header", () => Header);
 
 const FilterData = [
   {
-    title: "Vorgangstyp",
-    name: "type",
+    name: "notifications",
     data: [
       {
-        title: "Alle Vorgangstypen",
-        type: "switch",
+        title: "Benachrichtigungen",
+        name: "notifications",
+
+        value: false
+      }
+    ]
+  },
+  {
+    title: "Aktivität",
+    name: "activity",
+    data: [
+      {
+        title: "Alle Aktivitäten",
+        value: true,
         data: [
+          // {
+          //   title: "Ungelesen",
+          //   name: "unreaded",
+          //   value: true
+          // },
           {
-            title: "Antrag",
-            type: "radio"
+            title: "Nicht Abgestimmt",
+            name: "notVoted",
+            value: true
           },
           {
-            title: "Gesetzgebung",
-            type: "radio"
+            title: "Abgestimmmt",
+            name: "voted",
+            value: true
           }
         ]
       }
     ]
   },
   {
-    title: "Status",
-    name: "userStatus",
+    title: "Vorgangstyp",
+    name: "type",
     data: [
       {
-        title: "Alle",
-        type: "radio",
+        title: "Alle Vorgangstypen",
+        value: true,
         data: [
           {
-            title: "Push",
-            type: "radio"
+            title: "Antrag",
+            value: true
           },
           {
-            title: "Nicht Abgestimmt",
-            type: "radio"
+            title: "Gesetzgebung",
+            value: true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    title: "Abstimmungstyp",
+    name: "voteType",
+    data: [
+      {
+        title: "Alle Abstimmungen",
+        value: true,
+        data: [
+          {
+            title: "Namentliche Abstimmung",
+            value: true
+          },
+          {
+            title: "Nicht-namentliche Abstimmungen",
+            value: true
           }
         ]
       }
@@ -62,119 +99,187 @@ const FilterData = [
     data: [
       {
         title: "Alle Sachgebite",
-        type: "switch",
+        value: true,
         data: [
           {
             title: "Arbeit und Beschäftigung",
-            type: "checkbox"
+            value: true
           },
           {
             title: "Ausländerpolitik, Zuwanderung",
-            type: "checkbox"
+            value: true
           },
           {
             title: "Außenpolitik und internationale Beziehungen",
-            type: "checkbox"
+            value: true
           },
           {
             title: "Außenwirtschaft",
-            type: "checkbox"
+            value: true
           },
           {
             title: "Bildung und Erziehung",
-            type: "checkbox"
+            value: true
           },
           {
             title: "Bundestag",
-            type: "checkbox"
+            value: true
           },
           {
             title: "Energie",
-            type: "checkbox"
+            value: true
           },
           {
             title: "Entwicklungspolitik",
-            type: "checkbox"
+            value: true
           },
           {
             title: "Europapolitik und Europäische Union",
-            type: "checkbox"
+            value: true
           },
           {
             title: "Gesellschaftspolitik, soziale Gruppen",
-            type: "checkbox"
+            value: true
           },
           {
             title: "Gesundheit",
-            type: "checkbox"
+            value: true
           },
           {
             title: "Innere Sicherheit",
-            type: "checkbox"
+            value: true
           },
           {
             title: "Kultur",
-            type: "checkbox"
+            value: true
           },
           {
             title: "Landwirtschaft und Ernährung",
-            type: "checkbox"
+            value: true
           },
           {
             title: "Medien, Kommunikation und Informationstechnik",
-            type: "checkbox"
+            value: true
           },
           {
             title: "Neue Bundesländer",
-            type: "checkbox"
+            value: true
           },
           {
             title: "Öffentliche Finanzen, Steuern und Abgaben",
-            type: "checkbox"
+            value: true
           },
           {
             title: "Politisches Leben, Parteien",
-            type: "checkbox"
+            value: true
           },
           {
             title: "Raumordnung, Bau- und Wohnungswesen",
-            type: "checkbox"
+            value: true
           },
           {
             title: "Recht",
-            type: "checkbox"
+            value: true
           },
           {
             title: "Soziale Sicherung",
-            type: "checkbox"
+            value: true
           },
           {
             title: "Sport, Freizeit und Tourismus",
-            type: "checkbox"
+            value: true
           },
           {
             title: "Staat und Verwaltung",
-            type: "checkbox"
+            value: true
           },
           {
             title: "Umwelt",
-            type: "checkbox"
+            value: true
           },
           {
             title: "Verkehr",
-            type: "checkbox"
+            value: true
           },
           {
             title: "Verteidigung",
-            type: "checkbox"
+            value: true
           },
           {
             title: "Wirtschaft",
-            type: "checkbox"
+            value: true
           },
           {
             title: "Wissenschaft, Forschung und Technologie",
-            type: "checkbox"
+            value: true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    title: "Beratungszustand",
+    name: "currentStatus",
+    data: [
+      {
+        title: "Alle Beratungszustände",
+        value: true,
+        data: [
+          {
+            title: "Dem Bundesrat zugeleitet – Noch nicht beraten",
+            value: true
+          },
+          {
+            title: "Den Ausschüssen zugewiesen",
+            value: true
+          },
+          {
+            title: "Einbringung beschlossen",
+            value: true
+          },
+          {
+            title: "Einbringung abgelehnt",
+            value: true
+          },
+          {
+            title: "Dem Bundestag zugeleitet – Noch nicht beraten",
+            value: true
+          },
+          {
+            title: "Noch nicht beraten",
+            value: true
+          },
+          {
+            title: "Überwiesen",
+            value: true
+          },
+          {
+            title: "In der Beratung",
+            value: true
+          },
+          {
+            title: "Beschlussempfehlung liegt vor",
+            value: true
+          },
+          {
+            title: "Angenommen",
+            value: true
+          },
+          {
+            title: "Verabschiedet",
+            value: true
+          },
+          {
+            title: "Verkündet",
+            value: true
+          },
+          {
+            title: "Zurückgezogen",
+            value: true
+          },
+          {
+            title: "Für erledigt erklärt",
+            value: true
           }
         ]
       }
@@ -193,15 +298,13 @@ const ListRowMain = styled.View`
   justify-content: center;
 `;
 
-const ListRowSub = styled.TouchableOpacity`
+const ListRowSub = styled.View`
   padding-left: 8;
   padding-vertical: 11;
   justify-content: center;
-  border-top-width: 1;
-  border-top-color: rgba(0, 0, 0, 0.1);
 `;
 
-const Row = styled.View`
+const Row = styled.TouchableOpacity`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -214,10 +317,6 @@ const TitleMain = styled.Text`
 const TitleSub = styled.Text`
   flex: 0.98;
   font-size: 15;
-`;
-
-const Switch = styled.Switch`
-  margin-bottom: 3;
 `;
 
 const STORAGE_KEY = "VoteList.Filters";
@@ -236,68 +335,163 @@ class Filter extends Component {
     });
 
     AsyncStorage.getItem(STORAGE_KEY).then(data => {
-      if (data) {
-        const jsonObj = JSON.parse(data);
-        this.setState({ data: jsonObj });
-      }
+      const jsonObj = JSON.parse(data);
+      const filterData = FilterData.reduce((prev, obj) => {
+        let dataReturn = [];
+        if (obj.data[0].data) {
+          dataReturn = obj.data[0].data.map(subObj => {
+            if (jsonObj && jsonObj[obj.name]) {
+              const subObjfind = jsonObj[obj.name].find(
+                ({ name, title }) =>
+                  (name && subObj.name === name) ||
+                  (title && subObj.title === title)
+              );
+              return {
+                ...subObjfind,
+                value: subObjfind ? subObjfind.value : false
+              };
+            }
+
+            return subObj;
+          });
+        } else {
+          if (jsonObj && jsonObj[obj.name]) {
+            dataReturn = jsonObj[obj.name];
+          } else {
+            [dataReturn] = obj.data;
+          }
+          return { ...prev, [obj.name]: dataReturn };
+        }
+
+        if (dataReturn.length === 0) {
+          if (jsonObj) {
+            dataReturn = jsonObj[obj.name];
+          } else {
+            dataReturn = obj.data[0].value;
+          }
+        }
+        return { ...prev, [obj.name]: dataReturn };
+      }, {});
+      this.setState({ data: filterData });
     });
   }
 
   state = {
-    data: {
-      type: {
-        all: true
-      },
-      userStatus: {
-        all: true
-      },
-      subjectGroups: {
-        all: true
-      }
-    }
+    data: {}
   };
 
   onSave = async () => {
+    const saveError = Object.keys(this.state.data).find(filterType => {
+      if (Array.isArray(this.state.data[filterType])) {
+        return this.state.data[filterType].every(({ value }) => !value);
+      }
+      return false;
+    });
+    if (saveError) {
+      const filterTitle = FilterData.find(({ name }) => name === saveError)
+        .title;
+      let indefiniteArticle;
+      switch (saveError) {
+        case "activity":
+          indefiniteArticle = "eine";
+          break;
+        case "type":
+        case "voteType":
+        case "currentStatus":
+          indefiniteArticle = "einen";
+          break;
+        default:
+          indefiniteArticle = "ein";
+          break;
+      }
+      Alert.alert(
+        `Speichern war nicht möglich – wähle mindestens ${indefiniteArticle} ${filterTitle} aus`
+      );
+      return false;
+    }
+
     const jsonString = JSON.stringify(this.state.data);
     await AsyncStorage.setItem(STORAGE_KEY, jsonString);
     this.props.setFilters({
       variables: { filters: jsonString },
       refetchQueries: [{ query: GET_FILTERS }]
     });
+
+    Navigation.dismissModal({
+      animationType: "slide-down" // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
+    });
+    return true;
   };
 
-  onChange = ({ type, subType, value, element }) => {
+  onChange = ({ type, subType, value }) => {
     const { data } = this.state;
     if (subType) {
-      if (element === "radio") {
-        const subTypes = Object.keys(data[type]).reduce((prev, key) => {
-          if (key === "all") {
-            return prev;
-          }
-          return { ...prev, [key]: false };
-        }, {});
-        if (value) {
-          this.setState({
-            data: { ...data, [type]: { ...subTypes, [subType]: value } }
-          });
-        }
+      const index = data[type].findIndex(
+        ({ name, title }) => subType === name || subType === title
+      );
+      if (index !== -1) {
+        data[type][index].value = value;
       } else {
-        this.setState({
-          data: { ...data, [type]: { ...data[type], [subType]: value } }
-        });
+        const filterData = FilterData.find(
+          ({ name, title }) =>
+            (name && type === name) || (title && type === title)
+        );
+        const subFilterData = filterData.data[0].data.find(
+          ({ name, title }) =>
+            (name && subType === name) || (title && subType === title)
+        );
+        subFilterData.value = value;
+        data[type].push(subFilterData);
       }
-    } else {
-      this.setState({
-        data: { ...data, [type]: { ...data[type], all: value } }
-      });
+      this.setState({ data });
+      return true;
     }
+    if (typeof data[type] === "object" && !Array.isArray(data[type])) {
+      this.setState({
+        data: {
+          ...data,
+          [type]: { ...data[type], value }
+        }
+      });
+      return true;
+    }
+    this.setState({
+      data: {
+        ...data,
+        [type]: data[type].map(obj => ({ ...obj, value }))
+      }
+    });
+    return false;
   };
 
   getValue = ({ type, subType }) => {
-    if (subType) {
-      return this.state.data[type][subType];
+    if (this.state.data[type]) {
+      if (subType) {
+        const filterEntry = this.state.data[type].find(
+          ({ name, title }) => subType === name || subType === title
+        );
+        if (filterEntry) {
+          return filterEntry.value;
+        }
+        return false;
+      }
+      if (
+        typeof this.state.data[type] === "object" &&
+        !Array.isArray(this.state.data[type])
+      ) {
+        return this.state.data[type].value;
+      }
+      const someFalse = this.state.data[type].some(({ value }) => !value);
+      if (!someFalse) {
+        return true;
+      }
+      const someTrue = this.state.data[type].some(({ value }) => value);
+      if (!someTrue) {
+        return false;
+      }
+      return "mixed";
     }
-    return this.state.data[type].all;
+    return false;
   };
 
   render() {
@@ -307,60 +501,61 @@ class Filter extends Component {
         renderSectionHeader={({ section: { title } }) => (
           <SegmentHeader title={title} />
         )}
-        renderItem={({ item: { title, data }, section }) => (
-          <ListRowMain>
-            <Row>
-              <TitleMain>{title}</TitleMain>
-              <Switch
-                onValueChange={() =>
+        renderItem={({ item: { title, data }, section }) => {
+          const sectionValue = this.getValue({ type: section.name });
+          const mainCheckboxColor = sectionValue ? "#1c659f" : "#fff";
+          return (
+            <ListRowMain>
+              <Row
+                style={{
+                  paddingBottom: data && data.length > 0 ? 12 : 0,
+                  borderBottomWidth: data && data.length > 0 ? 1 : 0,
+                  borderColor: "lightgrey"
+                }}
+                onPress={() => {
                   this.onChange({
                     type: section.name,
                     value: !this.getValue({ type: section.name })
-                  })
-                }
-                value={this.getValue({ type: section.name })}
-              />
-            </Row>
-            {data &&
-              !this.getValue({ type: section.name }) &&
-              data.map(({ title: subtitle, type: subType }) => (
-                <ListRowSub
-                  key={subtitle}
-                  onPress={() => {
-                    this.onChange({
-                      type: section.name,
-                      subType: subtitle,
-                      element: subType,
-                      value: !this.getValue({
-                        type: section.name,
-                        subType: subtitle
-                      })
-                    });
-                  }}
-                >
-                  <Row>
-                    <TitleSub>{subtitle}</TitleSub>
-                    {subType === "checkbox" && (
-                      <Checkbox
-                        value={this.getValue({
-                          type: section.name,
-                          subType: subtitle
-                        })}
-                      />
-                    )}
-                    {subType === "radio" && (
-                      <Radio
-                        value={this.getValue({
-                          type: section.name,
-                          subType: subtitle
-                        })}
-                      />
-                    )}
-                  </Row>
-                </ListRowSub>
-              ))}
-          </ListRowMain>
-        )}
+                  });
+                }}
+              >
+                <TitleMain>{title}</TitleMain>
+                <Checkbox
+                  value={sectionValue === true}
+                  color={mainCheckboxColor}
+                />
+              </Row>
+              {data &&
+                data.map(
+                  ({ title: subtitle, type: subType, name: subName }) => (
+                    <ListRowSub key={subtitle}>
+                      <Row
+                        onPress={() => {
+                          this.onChange({
+                            type: section.name,
+                            subType: subName || subtitle,
+                            element: subType,
+                            value: !this.getValue({
+                              type: section.name,
+                              subType: subName || subtitle
+                            })
+                          });
+                        }}
+                      >
+                        <TitleSub>{subtitle}</TitleSub>
+                        <Checkbox
+                          value={this.getValue({
+                            type: section.name,
+                            subType: subName || subtitle
+                          })}
+                        />
+                      </Row>
+                    </ListRowSub>
+                  )
+                )}
+            </ListRowMain>
+          );
+        }}
         keyExtractor={({ title }) => title}
       />
     );
