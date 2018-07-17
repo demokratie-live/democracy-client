@@ -1682,7 +1682,7 @@
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.internal;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = democracyclient/democracyclient.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1726,7 +1726,7 @@
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.internal;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = democracyclient/democracyclient.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2076,7 +2076,7 @@
 		C3083EDC2087731D007D2450 /* Beta.Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.internal;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.beta;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = democracyclient/democracyclient.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -2295,7 +2295,7 @@
 		C3083F1220877328007D2450 /* Beta.Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.internal;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.beta;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = democracyclient/democracyclient.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2516,7 +2516,7 @@
 		C36116A320877D6F00B65489 /* Alpha.Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.internal;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.alpha;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID_SUFFIX = .alpha;
 				CODE_SIGN_ENTITLEMENTS = democracyclient/democracyclient.entitlements;
@@ -2736,7 +2736,7 @@
 		C36116A820877D7800B65489 /* Alpha.Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.internal;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.alpha;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID_SUFFIX = .alpha;
 				CODE_SIGN_ENTITLEMENTS = democracyclient/democracyclient.entitlements;
@@ -2953,7 +2953,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.internal;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage.internal;
 				BUNDLE_ID_SUFFIX = .internal;
 				CODE_SIGN_ENTITLEMENTS = democracyclient/democracyclient.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -3175,7 +3175,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.internal;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage.internal;
 				BUNDLE_ID_SUFFIX = .internal;
 				CODE_SIGN_ENTITLEMENTS = democracyclient/democracyclient.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
