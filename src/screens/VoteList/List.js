@@ -75,11 +75,11 @@ const SORTERS = {
   PREPARATION: [
     {
       key: "lastUpdateDate",
-      title: "nach Aktualisierungsdatum sortieren"
+      title: "nach Aktualisierung sortieren"
     },
     {
       key: "created",
-      title: "nach Vorgangserstellungsdatum sortieren"
+      title: "nach Vorgangsdatum sortieren"
     },
     {
       key: "activities",
