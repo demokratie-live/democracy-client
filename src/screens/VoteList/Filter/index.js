@@ -73,26 +73,26 @@ const FilterData = [
       }
     ]
   },
-  {
-    title: "Abstimmungstyp",
-    name: "voteType",
-    data: [
-      {
-        title: "Alle Abstimmungen",
-        value: true,
-        data: [
-          {
-            title: "Namentliche Abstimmung",
-            value: true
-          },
-          {
-            title: "Nicht-namentliche Abstimmungen",
-            value: true
-          }
-        ]
-      }
-    ]
-  },
+  // {
+  //   title: "Abstimmungstyp",
+  //   name: "voteType",
+  //   data: [
+  //     {
+  //       title: "Alle Abstimmungen",
+  //       value: true,
+  //       data: [
+  //         {
+  //           title: "Namentliche Abstimmung",
+  //           value: true
+  //         },
+  //         {
+  //           title: "Nicht-namentliche Abstimmungen",
+  //           value: true
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // },
   {
     title: "Sachgebite",
     name: "subjectGroups",
