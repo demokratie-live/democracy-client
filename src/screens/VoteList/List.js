@@ -5,7 +5,6 @@ import {
   Platform,
   ActivityIndicator,
   AsyncStorage,
-  TouchableOpacity,
   Picker
 } from "react-native";
 import styled from "styled-components/native";
@@ -40,6 +39,19 @@ const PickerWrapper = styled.View``;
 const PickerHeader = styled.View`
   background-color: #f9f9f9;
   align-items: flex-end;
+`;
+
+const SortRow = styled.TouchableOpacity`
+  background-color: #e6edf2;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 18;
+`;
+
+const SortIcon = styled.Text`
+  color: #6d6d72;
 `;
 
 const PickerFinishButton = styled.Button``;
@@ -316,11 +328,10 @@ class List extends Component {
           ({ key }) => key === this.state.sort
         );
         return (
-          <TouchableOpacity
-            onPress={() => this.setState({ sorterOpened: true })}
-          >
+          <SortRow onPress={() => this.setState({ sorterOpened: true })}>
             <ListSectionHeader title={curSort.title} />
-          </TouchableOpacity>
+            <SortIcon>▼</SortIcon>
+          </SortRow>
         );
       }
       return (
