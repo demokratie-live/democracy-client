@@ -94,11 +94,11 @@ const FilterData = [
   //   ]
   // },
   {
-    title: "Sachgebite",
+    title: "Sachgebiete",
     name: "subjectGroups",
     data: [
       {
-        title: "Alle Sachgebite",
+        title: "Alle Sachgebiete",
         value: true,
         data: [
           {

@@ -49,6 +49,33 @@ const SectionList = styled.SectionList``;
 const PAGE_SIZE = 20;
 const STORAGE_KEY = "VoteList.Filters";
 
+const SORTERS = {
+  VOTING: [
+    {
+      key: "voteDate",
+      title: "nach Restzeit sortieren"
+    },
+    {
+      key: "activities",
+      title: "nach Aktivitätsindex sortieren"
+    }
+  ],
+  PREPARATION: [
+    {
+      key: "lastUpdateDate",
+      title: "nach Aktualisierungsdatum sortieren"
+    },
+    {
+      key: "created",
+      title: "nach Vorgangserstellungsdatum sortieren"
+    },
+    {
+      key: "activities",
+      title: "nach Aktivitätsindex sortieren"
+    }
+  ]
+};
+
 class List extends Component {
   static navigatorStyle = {
     navBarButtonColor: "#FFFFFF",
@@ -76,7 +103,7 @@ class List extends Component {
     width: Platform.OS === "ios" ? Dimensions.get("window").width : "auto",
     fetchedAll: false,
     filters: false,
-    sort: "time",
+    sort: this.props.listType === "VOTING" ? "voteDate" : "lastUpdateDate",
     sorterOpened: false
   };
 
@@ -128,6 +155,17 @@ class List extends Component {
       title: "Abstimmung".toUpperCase(),
       passProps: { ...item },
       backButtonTitle: ""
+    });
+  };
+
+  onChangeSort = sort => {
+    const { listType, data: { refetch } } = this.props;
+    this.setState({ sort });
+    refetch({
+      listType,
+      pageSize: PAGE_SIZE,
+      offset: 0,
+      sort
     });
   };
 
@@ -225,35 +263,31 @@ class List extends Component {
 
   prepareData = () => {
     const { listType, data: { procedures } } = this.props;
-    const { sort } = this.state;
 
     if (!procedures || procedures.length === 0) {
       return [];
     }
     const preparedData = [
       {
-        data: [{ type: "sort" }]
+        data: []
       }
     ];
-    if (listType === "VOTING" && sort === "time") {
+    if (listType !== "HOT") {
+      preparedData[0].data.push({ type: "sort" });
+    }
+    if (listType === "VOTING") {
       preparedData.push({
         title: "Vergangen",
         data: []
       });
     }
     const proceduresSorted = [...procedures];
-    if (sort === "activityIndex") {
-      proceduresSorted.sort(
-        (a, b) => b.activityIndex.activityIndex - a.activityIndex.activityIndex
-      );
-    }
     proceduresSorted.forEach(procedure => {
       if (!this.filterProcedures(procedure)) {
         return;
       }
       if (
         listType === "VOTING" &&
-        sort === "time" &&
         ((new Date(procedure.voteDate) < new Date() &&
           procedure.voteDate !== null) ||
           procedure.completed)
@@ -275,13 +309,17 @@ class List extends Component {
   };
 
   renderItem = onClick => ({ item }) => {
+    const { listType } = this.props;
     if (item.type === "sort") {
       if (Platform.OS === "ios") {
+        const curSort = SORTERS[listType].find(
+          ({ key }) => key === this.state.sort
+        );
         return (
           <TouchableOpacity
             onPress={() => this.setState({ sorterOpened: true })}
           >
-            <ListSectionHeader title="Nach Restzeit sortieren" />
+            <ListSectionHeader title={curSort.title} />
           </TouchableOpacity>
         );
       }
@@ -289,13 +327,11 @@ class List extends Component {
         <Picker
           selectedValue={this.state.sort}
           style={{ paddingLeft: 18, height: 35, backgroundColor: "#e6edf2" }}
-          onValueChange={itemValue => this.setState({ sort: itemValue })}
+          onValueChange={this.onChangeSort}
         >
-          <Picker.Item label="nach Restzeit sortieren" value="time" />
-          <Picker.Item
-            label="nach Aktivitätsindex sortieren"
-            value="activityIndex"
-          />
+          {SORTERS[listType].map(({ key, title }) => (
+            <Picker.Item key={key} label={title} value={key} />
+          ))}
         </Picker>
       );
     }
@@ -303,13 +339,13 @@ class List extends Component {
   };
 
   render() {
-    const { data } = this.props;
+    const { data, listType } = this.props;
     const { fetchedAll, sorterOpened, sort } = this.state;
 
     return (
       <Wrapper onLayout={this.onLayout} width={this.state.width}>
         <SectionList
-          contentOffset={{ y: 35 }}
+          contentOffset={{ y: listType !== "HOT" ? 35 : 0 }}
           ListFooterComponent={() =>
             data.loading || !fetchedAll ? (
               <Loading>
@@ -370,13 +406,11 @@ class List extends Component {
               <Picker
                 selectedValue={sort}
                 style={{ height: 200 }}
-                onValueChange={itemValue => this.setState({ sort: itemValue })}
+                onValueChange={this.onChangeSort}
               >
-                <Picker.Item label="nach Restzeit sortieren" value="time" />
-                <Picker.Item
-                  label="nach Aktivitätsindex sortieren"
-                  value="activityIndex"
-                />
+                {SORTERS[listType].map(({ key, title }) => (
+                  <Picker.Item key={key} label={title} value={key} />
+                ))}
               </Picker>
             </PickerWrapper>
           )}
