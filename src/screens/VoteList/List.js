@@ -216,6 +216,9 @@ class List extends Component {
       return prev;
     }, {});
     this.setState({ filters });
+    this.setRightButtons({
+      filterActive: filters && Object.keys(filters).length > 0
+    });
   };
 
   filterProcedures = ({
