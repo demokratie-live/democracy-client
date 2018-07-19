@@ -14,9 +14,11 @@ import client from "../../graphql/client";
 
 import searchProcedures from "../../graphql/queries/searchProcedures";
 import mostSearched from "../../graphql/queries/mostSearched";
-import finishSearch from "../../graphql/mutations/finishSearch";
 import searchTerm from "../../graphql/queries/local/searchTerm";
+import SEARCH_HISTORY from "../../graphql/queries/local/searchHistory";
+import finishSearch from "../../graphql/mutations/finishSearch";
 import changeSearchTerm from "../../graphql/mutations/local/changeSearchTerm";
+import SEARCH_HISTORY_ADD from "../../graphql/mutations/local/searchHistoryAdd";
 
 import preventNavStackDuplicate from "../../hocs/preventNavStackDuplicate";
 
@@ -143,6 +145,11 @@ class SearchScreen extends Component {
           term: item
         }
       });
+      this.props.addToSearchHistory({
+        variables: {
+          term: item
+        }
+      });
       this.onChangeTerm(item);
     }
   };
@@ -166,7 +173,7 @@ class SearchScreen extends Component {
 
   render() {
     const { loading } = this.state;
-    const { mostSearchedTerms, searchTerm: term } = this.props;
+    const { mostSearchedTerms, searchTerm: term, searchHistory } = this.props;
 
     if (loading) {
       return (
@@ -179,6 +186,10 @@ class SearchScreen extends Component {
     let sectionData = [];
     if (!term) {
       sectionData = [
+        {
+          title: "Zuletzt gesucht",
+          data: searchHistory
+        },
         {
           title: "Meistgesucht",
           data: mostSearchedTerms
@@ -206,6 +217,7 @@ class SearchScreen extends Component {
                 {title === "Ergebnisse" && (
                   <VoteListItem {...item} date={item.voteDate} />
                 )}
+                {title === "Zuletzt gesucht" && <ListText>{item}</ListText>}
                 {title === "Vorschläge" && <ListText>{item}</ListText>}
                 {title === "Meistgesucht" && <ListText>{item}</ListText>}
               </ListRow>
@@ -269,10 +281,16 @@ export default withApollo(
             ? { searchTerm: searchTermData.term }
             : { searchTerm: "" }
       }),
+      graphql(SEARCH_HISTORY, {
+        props: ({ data: { searchHistory } }) => ({
+          searchHistory: searchHistory.map(({ term }) => term)
+        })
+      }),
 
       // Mutations
       graphql(finishSearch, { name: "finishSearch" }),
-      graphql(changeSearchTerm, { name: "updateSearchTerm" })
+      graphql(changeSearchTerm, { name: "updateSearchTerm" }),
+      graphql(SEARCH_HISTORY_ADD, { name: "addToSearchHistory" })
     )(SearchScreen)
   )
 );
