@@ -94,7 +94,11 @@ export const resolvers = {
       return null;
     },
     searchHistoryAdd: (_, { term }, { cache }) => {
-      const previous = cache.readQuery({ query: SEARCH_HISTORY });
+      let previous = cache.readQuery({ query: SEARCH_HISTORY });
+
+      if (!previous) {
+        previous = { searchHistory: [] };
+      }
 
       const index = previous.searchHistory.findIndex(
         ({ term: t }) => t === term
