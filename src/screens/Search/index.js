@@ -283,7 +283,9 @@ export default withApollo(
       }),
       graphql(SEARCH_HISTORY, {
         props: ({ data: { searchHistory } }) => ({
-          searchHistory: searchHistory.map(({ term }) => term)
+          searchHistory: searchHistory
+            ? searchHistory.map(({ term }) => term)
+            : []
         })
       }),
 
