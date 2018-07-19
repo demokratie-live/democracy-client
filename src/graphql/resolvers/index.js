@@ -1,4 +1,6 @@
-import IS_INSTRUCTIONS_SHOWN from "../queries/isInstructionShown";
+import { AsyncStorage } from "react-native";
+
+import IS_INSTRUCTIONS_SHOWN from "../queries/local/isInstructionShown";
 import GET_NETWORK_STATUS from "../queries/getNetworkStatus";
 
 import VotesLocal from "../../services/VotesLocal";
@@ -32,7 +34,12 @@ export const resolvers = {
       cache.writeData({ data: { networkStatus: data.networkStatus } });
       return null;
     },
-    isInstructionsShown: (_, { isInstructionsShown }, { cache }) => {
+    isInstructionsShown: async (_, { isInstructionsShown }, { cache }) => {
+      console.log({ isInstructionsShown });
+      await AsyncStorage.setItem(
+        "isInstructionsShown",
+        JSON.stringify(isInstructionsShown)
+      );
       cache.writeData({ data: { isInstructionsShown } });
       return null;
     },
@@ -73,11 +80,12 @@ export const resolvers = {
     }
   },
   Query: {
-    isInstructionsShown: (_, args, { cache }) => {
-      const previous = cache.readQuery({ query: IS_INSTRUCTIONS_SHOWN });
-      return previous.isInstructionsShown;
+    isInstructionsShown: async (_, args, { cache }) => {
+      console.log(
+        JSON.parse(await AsyncStorage.getItem("isInstructionsShown"))
+      );
+      return JSON.parse(await AsyncStorage.getItem("isInstructionsShown"));
     },
-
     votesLocalKeyStore: async () => {
       console.log("resolver votesLocal", await VotesLocal.getVotesLocalList());
       return VotesLocal.getVotesLocalList().then(votesLocal =>
