@@ -286,7 +286,7 @@ export default withApollo(
           searchHistory: searchHistory
             ? searchHistory.map(({ term }) => term)
             : []
-        })
+        }),
       }),
 
       // Mutations
