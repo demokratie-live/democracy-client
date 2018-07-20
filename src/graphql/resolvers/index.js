@@ -1,6 +1,5 @@
 import { AsyncStorage } from "react-native";
 
-import IS_INSTRUCTIONS_SHOWN from "../queries/local/isInstructionShown";
 import GET_NETWORK_STATUS from "../queries/getNetworkStatus";
 
 import VotesLocal from "../../services/VotesLocal";
@@ -35,7 +34,6 @@ export const resolvers = {
       return null;
     },
     isInstructionsShown: async (_, { isInstructionsShown }, { cache }) => {
-      console.log({ isInstructionsShown });
       await AsyncStorage.setItem(
         "isInstructionsShown",
         JSON.stringify(isInstructionsShown)
@@ -80,21 +78,14 @@ export const resolvers = {
     }
   },
   Query: {
-    isInstructionsShown: async (_, args, { cache }) => {
-      console.log(
-        JSON.parse(await AsyncStorage.getItem("isInstructionsShown"))
-      );
-      return JSON.parse(await AsyncStorage.getItem("isInstructionsShown"));
-    },
-    votesLocalKeyStore: async () => {
-      console.log("resolver votesLocal", await VotesLocal.getVotesLocalList());
-      return VotesLocal.getVotesLocalList().then(votesLocal =>
+    isInstructionsShown: async () =>
+      JSON.parse(await AsyncStorage.getItem("isInstructionsShown")),
+    votesLocalKeyStore: async () => VotesLocal.getVotesLocalList().then(votesLocal =>
         votesLocal.map(vote => ({
           ...vote,
           __typename: "voteLocalKeyStoreItem"
         }))
-      );
-    },
+      ),
 
     votedLocal: async (_, { procedureId }) => {
       const vote = await VotesLocal.getVoteLocal(procedureId);

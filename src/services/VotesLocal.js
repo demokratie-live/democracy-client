@@ -77,7 +77,6 @@ class VotesLocal {
       JSON.stringify(votesLocal),
       this.KEYCHAIN_SERVICE
     );
-    console.log("setVoteLocal", await VotesLocal.getVotesLocalList());
   };
 
   static setVoteLocalList = async voteLocalList => {
@@ -87,9 +86,7 @@ class VotesLocal {
         vote
       );
       votesLocal[procedureId] = selectionInt;
-      console.log("setList");
     });
-    console.log("saveList");
     await Keychain.setGenericPassword(
       "democracyVotes",
       JSON.stringify(votesLocal),
