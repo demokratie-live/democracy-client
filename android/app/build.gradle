@@ -201,6 +201,7 @@ dependencies {
     compile "com.facebook.react:react-native:+"
     compile project(':react-native-navigation')
     compile project(':react-native-linear-gradient')
+    compile project(':react-native-keychain')
 	compile project(':reactnativenotifications')
 
     compile ('com.google.android.gms:play-services-gcm:10.0.1') {

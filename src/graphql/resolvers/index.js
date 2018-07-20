@@ -1,7 +1,8 @@
-import VOTES_LOCAL from "../queries/votesLocal";
-import IS_INSTRUCTIONS_SHOWN from "../queries/isInstructionShown";
+import { AsyncStorage } from "react-native";
+
 import GET_NETWORK_STATUS from "../queries/getNetworkStatus";
 
+import VotesLocal from "../../services/VotesLocal";
 import ViewedProcedures from "../../services/ViewedProcedures";
 
 export const defaults = {
@@ -32,33 +33,17 @@ export const resolvers = {
       cache.writeData({ data: { networkStatus: data.networkStatus } });
       return null;
     },
-    isInstructionsShown: (_, { isInstructionsShown }, { cache }) => {
+    isInstructionsShown: async (_, { isInstructionsShown }, { cache }) => {
+      await AsyncStorage.setItem(
+        "isInstructionsShown",
+        JSON.stringify(isInstructionsShown)
+      );
       cache.writeData({ data: { isInstructionsShown } });
       return null;
     },
-    votesLocal: (_, { procedure, selection }, { cache }) => {
-      let previous;
-
-      try {
-        previous = cache.readQuery({ query: VOTES_LOCAL });
-      } catch (error) {
-        previous = { votesLocal: [] };
-      }
-
-      const newVote = {
-        procedure,
-        selection,
-        __typename: "VoteLocalItem"
-      };
-      const data = {
-        votesLocal: [
-          ...previous.votesLocal.filter(v => v.procedure !== procedure),
-          newVote
-        ]
-      };
-
-      cache.writeData({ data });
-      return newVote;
+    votesLocal: async (_, { procedureId, selection }) => {
+      await VotesLocal.setVoteLocal({ procedureId, selection });
+      return null;
     },
     currentScreen: (_, { currentScreen }, { cache }) => {
       switch (currentScreen) {
@@ -93,21 +78,24 @@ export const resolvers = {
     }
   },
   Query: {
-    isInstructionsShown: (_, args, { cache }) => {
-      const previous = cache.readQuery({ query: IS_INSTRUCTIONS_SHOWN });
-      return previous.isInstructionsShown;
-    },
+    isInstructionsShown: async () =>
+      JSON.parse(await AsyncStorage.getItem("isInstructionsShown")),
+    votesLocalKeyStore: async () => VotesLocal.getVotesLocalList().then(votesLocal =>
+        votesLocal.map(vote => ({
+          ...vote,
+          __typename: "voteLocalKeyStoreItem"
+        }))
+      ),
 
-    votedLocal: (_, { procedure }, { cache }) => {
-      let previous;
-      try {
-        previous = cache.readQuery({ query: VOTES_LOCAL });
-      } catch (error) {
-        previous = { votesLocal: [] };
+    votedLocal: async (_, { procedureId }) => {
+      const vote = await VotesLocal.getVoteLocal(procedureId);
+      if (vote && vote.selection) {
+        return {
+          selection: vote.selection,
+          __typename: "VotedLocal"
+        };
       }
-      return (
-        previous.votesLocal.find(vote => vote.procedure === procedure) || null
-      );
+      return null;
     }
   },
   Procedure: {

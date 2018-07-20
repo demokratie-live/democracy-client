@@ -48,6 +48,7 @@
 		C36B46CD201C8C4000B68A81 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46AC201C8BBF00B68A81 /* Ionicons.ttf */; };
 		C36B46CE201C8C4000B68A81 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46AD201C8BBF00B68A81 /* FontAwesome.ttf */; };
 		C36B46D1201C8C4000B68A81 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46B0201C8BBF00B68A81 /* SimpleLineIcons.ttf */; };
+		C3AE459420B80C6B007578F1 /* libRNKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3AE458E20B80C35007578F1 /* libRNKeychain.a */; };
 		C3BBBEED20B5AA3200085C5D /* libRNNotifications.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3BBBEE920B5AA0D00085C5D /* libRNNotifications.a */; };
 		C3E792522088C96F009C4A39 /* DemocracyFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3E792512088C95E009C4A39 /* DemocracyFont.ttf */; };
 		C3EBC760204548F50040ED81 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3EBC740204547DB0040ED81 /* libRNVectorIcons.a */; };
@@ -370,6 +371,20 @@
 			remoteGlobalIDString = 64AA15081EF7F30100718508;
 			remoteInfo = "BVLinearGradient-tvOS";
 		};
+		C3AE458D20B80C35007578F1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C3AE455A20B80C35007578F1 /* RNKeychain.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5D82366F1B0CE05B005A9EF3;
+			remoteInfo = RNKeychain;
+		};
+		C3AE458F20B80C35007578F1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C3AE455A20B80C35007578F1 /* RNKeychain.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6478985F1F38BF9100DA1C12;
+			remoteInfo = "RNKeychain-tvOS";
+		};
 		C3BBBEE820B5AA0D00085C5D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C3BBBEB620B5AA0D00085C5D /* RNNotifications.xcodeproj */;
@@ -464,6 +479,7 @@
 		C36B46AC201C8BBF00B68A81 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
 		C36B46AD201C8BBF00B68A81 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		C36B46B0201C8BBF00B68A81 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
+		C3AE455A20B80C35007578F1 /* RNKeychain.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNKeychain.xcodeproj; path = "../node_modules/react-native-keychain/RNKeychain.xcodeproj"; sourceTree = "<group>"; };
 		C3BBBEB620B5AA0D00085C5D /* RNNotifications.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNNotifications.xcodeproj; path = "../node_modules/react-native-notifications/RNNotifications/RNNotifications.xcodeproj"; sourceTree = "<group>"; };
 		C3E792512088C95E009C4A39 /* DemocracyFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = DemocracyFont.ttf; path = ../../../iconfont/DemocracyFont.ttf; sourceTree = "<group>"; };
 		CF1A551E9AD54473AE890083 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
@@ -487,6 +503,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3AE459420B80C6B007578F1 /* libRNKeychain.a in Frameworks */,
 				C3BBBEED20B5AA3200085C5D /* libRNNotifications.a in Frameworks */,
 				C3EBC760204548F50040ED81 /* libRNVectorIcons.a in Frameworks */,
 				C347997920162AB8000A511E /* libReactNativeNavigation.a in Frameworks */,
@@ -690,6 +707,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				C3AE455A20B80C35007578F1 /* RNKeychain.xcodeproj */,
 				C3BBBEB620B5AA0D00085C5D /* RNNotifications.xcodeproj */,
 				C347993E20162A9C000A511E /* ReactNativeNavigation.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
@@ -810,6 +828,15 @@
 			children = (
 				C3A76DBF204EE9A2008D1C29 /* libBVLinearGradient.a */,
 				C3A76DC1204EE9A2008D1C29 /* libBVLinearGradient.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C3AE455B20B80C35007578F1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C3AE458E20B80C35007578F1 /* libRNKeychain.a */,
+				C3AE459020B80C35007578F1 /* libRNKeychain.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -971,6 +998,9 @@
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
+							com.apple.Keychain = {
+								enabled = 0;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -1072,6 +1102,10 @@
 				{
 					ProductGroup = C3EBC7BF20455F7E0040ED81 /* Products */;
 					ProjectRef = CF1A551E9AD54473AE890083 /* RNDeviceInfo.xcodeproj */;
+				},
+				{
+					ProductGroup = C3AE455B20B80C35007578F1 /* Products */;
+					ProjectRef = C3AE455A20B80C35007578F1 /* RNKeychain.xcodeproj */;
 				},
 				{
 					ProductGroup = C38760BF20BC30CB00536865 /* Products */;
@@ -1400,6 +1434,20 @@
 			fileType = archive.ar;
 			path = libBVLinearGradient.a;
 			remoteRef = C3A76DC0204EE9A2008D1C29 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C3AE458E20B80C35007578F1 /* libRNKeychain.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNKeychain.a;
+			remoteRef = C3AE458D20B80C35007578F1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C3AE459020B80C35007578F1 /* libRNKeychain.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNKeychain.a;
+			remoteRef = C3AE458F20B80C35007578F1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		C3BBBEE920B5AA0D00085C5D /* libRNNotifications.a */ = {

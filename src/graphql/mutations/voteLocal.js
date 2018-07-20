@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 export default gql`
-  mutation voteLocal($procedure: ID!, $selection: VoteSelection!) {
-    votesLocal(procedure: $procedure, selection: $selection) @client
+  mutation voteLocal($procedureId: String!, $selection: VoteSelection!) {
+    votesLocal(procedureId: $procedureId, selection: $selection) @client
   }
 `;

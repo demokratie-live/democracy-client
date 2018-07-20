@@ -66,7 +66,7 @@ class BalloutBox extends Component {
 
   componentWillMount() {
     // Add a listener for the delta value change
-    const { vote, voteLocal, selection, navigator } = this.props;
+    const { vote, selection, navigator, voteLocal } = this.props;
     this.val = { x: 0, y: 0 };
     this.state.pan.addListener(value => {
       this.val = value;
@@ -185,7 +185,8 @@ BalloutBox.propTypes = {
   vote: PropTypes.func.isRequired,
   voteLocal: PropTypes.func.isRequired,
   selection: PropTypes.string.isRequired,
-  navigator: PropTypes.instanceOf(Navigator).isRequired
+  navigator: PropTypes.instanceOf(Navigator).isRequired,
+  procedureId: PropTypes.string.isRequired
 };
 
 export default compose(
@@ -254,15 +255,15 @@ export default compose(
 
   graphql(VOTE_LOCAL, {
     name: "voteLocal",
-    props({ ownProps: { procedureObjId }, voteLocal }) {
+    props({ ownProps: { procedureId }, voteLocal }) {
       return {
         voteLocal: selection =>
           voteLocal({
-            variables: { procedure: procedureObjId, selection },
+            variables: { procedureId, selection },
             refetchQueries: [
               {
                 query: VOTED_LOCAL,
-                variables: { procedure: procedureObjId }
+                variables: { procedureId }
               }
             ]
           })
