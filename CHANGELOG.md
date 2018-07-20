@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.8.1] - 2018-XX-XX
 ### Added
 - [Search] History
+- [VoteList] Filters [#375](https://github.com/demokratie-live/democracy-client/issues/375)
 
 ### Fixed
 - [Bug] Save vote-data in local keychain [#322](https://github.com/demokratie-live/democracy-client/issues/322)

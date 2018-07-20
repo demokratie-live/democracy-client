@@ -110,17 +110,28 @@ export const resolvers = {
 
       cache.writeData({ data });
       return null;
+    },
+    setFilters: async (_, { filters }) => {
+      await AsyncStorage.setItem("Filters", filters);
+      return null;
     }
   },
   Query: {
     isInstructionsShown: async () =>
       JSON.parse(await AsyncStorage.getItem("isInstructionsShown")),
-    votesLocalKeyStore: async () => VotesLocal.getVotesLocalList().then(votesLocal =>
+
+    votesLocalKeyStore: async () =>
+      VotesLocal.getVotesLocalList().then(votesLocal =>
         votesLocal.map(vote => ({
           ...vote,
           __typename: "voteLocalKeyStoreItem"
         }))
       ),
+
+    filters: async () => ({
+      filters: AsyncStorage.getItem("Filters"),
+      __typename: "Filters"
+    }),
 
     votedLocal: async (_, { procedureId }) => {
       const vote = await VotesLocal.getVoteLocal(procedureId);

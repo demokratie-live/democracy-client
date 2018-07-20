@@ -40,6 +40,11 @@ export default ({ event, navigator }) => {
             backButtonHidden: true
           });
           break;
+        case "filter":
+          this.props.navigator.showModal({
+            screen: "democracy.VoteList.Filter"
+          });
+          break;
 
         default:
           break;

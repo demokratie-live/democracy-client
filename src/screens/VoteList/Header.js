@@ -35,6 +35,10 @@ const SearchIcon = styled(Icons).attrs({
   name: Platform.OS === "ios" ? "ios-search" : "md-search"
 })``;
 
+const FilterIcon = styled(Icons).attrs({
+  name: "ios-funnel-outline"
+})``;
+
 const MenuIcon = styled(Icons).attrs({
   name: Platform.OS === "ios" ? "ios-menu" : "md-menu"
 })``;
@@ -61,6 +65,7 @@ class Header extends Component {
       <Wrapper>
         <MenuIcon onPress={this.clickBurgerIcon} />
         <Title>{title.toUpperCase()}</Title>
+        <FilterIcon />
         <SearchIcon onPress={this.clickSearchIcon} />
       </Wrapper>
     );
