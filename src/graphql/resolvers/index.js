@@ -1,6 +1,7 @@
 import { AsyncStorage } from "react-native";
 
 import GET_NETWORK_STATUS from "../queries/getNetworkStatus";
+import SEARCH_HISTORY from "../queries/local/searchHistory";
 
 import VotesLocal from "../../services/VotesLocal";
 import ViewedProcedures from "../../services/ViewedProcedures";
@@ -17,7 +18,8 @@ export const defaults = {
   searchTerm: {
     __typename: "SearchTerm",
     term: ""
-  }
+  },
+  searchHistory: []
 };
 
 export const resolvers = {
@@ -73,6 +75,39 @@ export const resolvers = {
           term
         }
       };
+      cache.writeData({ data });
+      return null;
+    },
+    searchHistoryAdd: (_, { term }, { cache }) => {
+      let previous = cache.readQuery({ query: SEARCH_HISTORY });
+
+      if (!previous) {
+        previous = { searchHistory: [] };
+      }
+
+      const index = previous.searchHistory.findIndex(
+        ({ term: t }) => t === term
+      );
+
+      let data;
+
+      if (index === -1) {
+        data = {
+          searchHistory: [
+            { term, __typename: "SearchHistoryTerm" },
+            ...previous.searchHistory
+          ].slice(0, 3)
+        };
+      } else {
+        previous.searchHistory.splice(index, 1);
+        data = {
+          searchHistory: [
+            { term, __typename: "SearchHistoryTerm" },
+            ...previous.searchHistory
+          ].slice(0, 3)
+        };
+      }
+
       cache.writeData({ data });
       return null;
     }

@@ -17,9 +17,14 @@ export default `
         status: String!
     }
 
+    type SearchTerm {
+        term: String!
+    }
+
     type Mutation {
         voteLocal(procedure: ID!, selection: VoteSelection!): VoteSelection
         viewProcedure(procedureId: String!, status: String!): ListStatus
+        searchHistoryAdd(term: String!): [SearchTerm]
     }
 
     type Query {
