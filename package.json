@@ -77,7 +77,6 @@
     "react-native-svg": "^6.3.1",
     "react-native-swiper": "^1.5.13",
     "react-native-vector-icons": "^4.5.0",
-    "serve": "^6.4.3",
     "styled-components": "^3.0.2",
     "typescript": "^2.6.2",
     "victory-native": "^0.17.2"
