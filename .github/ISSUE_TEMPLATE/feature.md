@@ -1,14 +1,14 @@
-﻿---
-name: 🛠 Feature
-about: Only for well defined Features described by developers or product owners
+---
+name: 🚀 Feature
+about: Only for well defined and described Features including design
 ---
 
-## Feature
+## 🚀 Feature
 <!-- Describe the Feature. -->
 
-## Design & Layout
+### Design & Layout
 <!-- Attach Screenshots and Drawings. -->
 <!-- Specify more details of the Feature with each Picture. -->
 
-## Schedule
+### Schedule
 <!-- Specify timeschedule of implementation and publication. -->
