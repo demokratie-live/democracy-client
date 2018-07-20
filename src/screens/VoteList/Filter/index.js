@@ -216,75 +216,75 @@ const FilterData = [
         ]
       }
     ]
-  },
-  {
-    title: "Beratungszustand",
-    name: "currentStatus",
-    data: [
-      {
-        title: "Alle Beratungszustände",
-        value: true,
-        data: [
-          {
-            title: "Dem Bundesrat zugeleitet – Noch nicht beraten",
-            value: true
-          },
-          {
-            title: "Den Ausschüssen zugewiesen",
-            value: true
-          },
-          {
-            title: "Einbringung beschlossen",
-            value: true
-          },
-          {
-            title: "Einbringung abgelehnt",
-            value: true
-          },
-          {
-            title: "Dem Bundestag zugeleitet – Noch nicht beraten",
-            value: true
-          },
-          {
-            title: "Noch nicht beraten",
-            value: true
-          },
-          {
-            title: "Überwiesen",
-            value: true
-          },
-          {
-            title: "In der Beratung",
-            value: true
-          },
-          {
-            title: "Beschlussempfehlung liegt vor",
-            value: true
-          },
-          {
-            title: "Angenommen",
-            value: true
-          },
-          {
-            title: "Verabschiedet",
-            value: true
-          },
-          {
-            title: "Verkündet",
-            value: true
-          },
-          {
-            title: "Zurückgezogen",
-            value: true
-          },
-          {
-            title: "Für erledigt erklärt",
-            value: true
-          }
-        ]
-      }
-    ]
   }
+  // {
+  //   title: "Beratungszustand",
+  //   name: "currentStatus",
+  //   data: [
+  //     {
+  //       title: "Alle Beratungszustände",
+  //       value: true,
+  //       data: [
+  //         {
+  //           title: "Dem Bundesrat zugeleitet – Noch nicht beraten",
+  //           value: true
+  //         },
+  //         {
+  //           title: "Den Ausschüssen zugewiesen",
+  //           value: true
+  //         },
+  //         {
+  //           title: "Einbringung beschlossen",
+  //           value: true
+  //         },
+  //         {
+  //           title: "Einbringung abgelehnt",
+  //           value: true
+  //         },
+  //         {
+  //           title: "Dem Bundestag zugeleitet – Noch nicht beraten",
+  //           value: true
+  //         },
+  //         {
+  //           title: "Noch nicht beraten",
+  //           value: true
+  //         },
+  //         {
+  //           title: "Überwiesen",
+  //           value: true
+  //         },
+  //         {
+  //           title: "In der Beratung",
+  //           value: true
+  //         },
+  //         {
+  //           title: "Beschlussempfehlung liegt vor",
+  //           value: true
+  //         },
+  //         {
+  //           title: "Angenommen",
+  //           value: true
+  //         },
+  //         {
+  //           title: "Verabschiedet",
+  //           value: true
+  //         },
+  //         {
+  //           title: "Verkündet",
+  //           value: true
+  //         },
+  //         {
+  //           title: "Zurückgezogen",
+  //           value: true
+  //         },
+  //         {
+  //           title: "Für erledigt erklärt",
+  //           value: true
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // }
 ];
 
 const Wrapper = styled.SectionList`
@@ -513,9 +513,10 @@ class Filter extends Component {
                   borderColor: "lightgrey"
                 }}
                 onPress={() => {
+                  const curValue = this.getValue({ type: section.name });
                   this.onChange({
                     type: section.name,
-                    value: !this.getValue({ type: section.name })
+                    value: !!(curValue === "mixed" || !curValue)
                   });
                 }}
               >

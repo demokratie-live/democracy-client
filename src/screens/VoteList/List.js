@@ -149,7 +149,19 @@ class List extends Component {
   }
 
   onChangeFilter = filters => {
-    this.prepareFilter(filters);
+    const { data: { refetch }, listType } = this.props;
+    const filterQuery = {};
+    if (filters.type) {
+      filterQuery.type = filters.type.map(({ title }) => title);
+    }
+    if (filters.subjectGroups) {
+      filterQuery.subjectGroups = filters.subjectGroups.map(
+        ({ title }) => title
+      );
+    }
+    refetch({
+      filter: filterQuery
+    });
   };
 
   onLayout = () => {
@@ -174,9 +186,6 @@ class List extends Component {
     const { listType, data: { refetch } } = this.props;
     this.setState({ sort });
     refetch({
-      listType,
-      pageSize: PAGE_SIZE,
-      offset: 0,
       sort
     });
   };
@@ -215,7 +224,14 @@ class List extends Component {
       }
       return prev;
     }, {});
-    this.setState({ filters });
+    if (
+      Object.keys(filters).length > 0 ||
+      (this.state.filters && Object.keys(this.state.filters).length)
+    ) {
+      this.setState({ filters }, () => {
+        this.onChangeFilter(this.state.filters);
+      });
+    }
     this.setRightButtons({
       filterActive: filters && Object.keys(filters).length > 0
     });

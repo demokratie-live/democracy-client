@@ -10,8 +10,15 @@ export default gql`
     $pageSize: Int
     $type: ProcedureType!
     $sort: String
+    $filter: ProcedureFilter
   ) {
-    procedures(offset: $offset, pageSize: $pageSize, type: $type, sort: $sort) {
+    procedures(
+      offset: $offset
+      pageSize: $pageSize
+      type: $type
+      sort: $sort
+      filter: $filter
+    ) {
       _id
       title
       procedureId
