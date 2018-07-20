@@ -248,12 +248,15 @@ SearchScreen.propTypes = {
   finishSearch: PropTypes.func.isRequired,
   updateSearchTerm: PropTypes.func.isRequired,
   mostSearchedTerms: PropTypes.arrayOf(PropTypes.shape()),
-  searchTerm: PropTypes.string.isRequired
+  searchTerm: PropTypes.string.isRequired,
+  addToSearchHistory: PropTypes.func.isRequired,
+  searchHistory: PropTypes.arrayOf(PropTypes.string )
 };
 
 SearchScreen.defaultProps = {
   navigator: undefined,
-  mostSearchedTerms: []
+  mostSearchedTerms: [],
+  searchHistory: []
 };
 
 export default withApollo(
@@ -286,7 +289,7 @@ export default withApollo(
           searchHistory: searchHistory
             ? searchHistory.map(({ term }) => term)
             : []
-        }),
+        })
       }),
 
       // Mutations
