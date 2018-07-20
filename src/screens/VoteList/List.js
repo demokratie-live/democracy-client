@@ -149,7 +149,7 @@ class List extends Component {
   }
 
   onChangeFilter = filters => {
-    const { data: { refetch }, listType } = this.props;
+    const { data: { refetch } } = this.props;
     const filterQuery = {};
     if (filters.type) {
       filterQuery.type = filters.type.map(({ title }) => title);
@@ -183,7 +183,7 @@ class List extends Component {
   };
 
   onChangeSort = sort => {
-    const { listType, data: { refetch } } = this.props;
+    const { data: { refetch } } = this.props;
     this.setState({ sort });
     refetch({
       sort
