@@ -15,17 +15,17 @@ import GET_FILTERS from "../../../graphql/queries/local/filters";
 Navigation.registerComponent("democracy.VoteList.Filter.Header", () => Header);
 
 const FilterData = [
-  {
-    name: "notifications",
-    data: [
-      {
-        title: "Benachrichtigungen",
-        name: "notifications",
+  // {
+  //   name: "notifications",
+  //   data: [
+  //     {
+  //       title: "Benachrichtigungen",
+  //       name: "notifications",
 
-        value: false
-      }
-    ]
-  },
+  //       value: false
+  //     }
+  //   ]
+  // },
   {
     title: "Aktivität",
     name: "activity",
