@@ -25,7 +25,7 @@ const CollapseIcon = styled(Ionicons).attrs({
   name: "ios-arrow-up-outline",
   size: 20
 })`
-  align-self: center;
+  align-self: flex-start;
   transform: ${({ open }) => (open ? "rotate(0deg)" : "rotate(180deg)")};
 `;
 

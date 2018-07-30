@@ -97,7 +97,7 @@ class SmsVerification extends Component {
         }}
         onLayout={this.onLayout}
       >
-        <Description text="Bitte gib deine aktuelle Handynummer ein" />
+        <Description text="Bitte gib Deine aktuelle Handynummer ein" />
         <PhonenumberInput
           value={phoneNumber}
           onChange={this.onChangePhoneNumber}

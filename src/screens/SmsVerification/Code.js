@@ -112,7 +112,7 @@ class Code extends Component {
         }}
         onLayout={this.onLayout}
       >
-        <Description text="Bitte gib deine aktuelle Handynummer ein" />
+        <Description text="Bitte gib Deinen Code ein" />
         <CodeInput onChange={this.onChangeCode} />
         <Button
           title={buttonTitle}
