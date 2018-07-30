@@ -75,7 +75,7 @@ const AdditionalThanksLogo = styled.Image``;
 
 const Lover = () => (
   <LoverWrapper>
-    <Text>Sabine Brunckhorst – VERLIEBTE/R des Monats Juli</Text>
+    <Text>Sascha Brendel – VERLIEBTE/R des Monats Juli</Text>
     <LoverImageWrapper>
       <LoverImage />
     </LoverImageWrapper>
