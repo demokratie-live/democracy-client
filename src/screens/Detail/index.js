@@ -152,7 +152,7 @@ class Detail extends Component {
     if ((!procedure || !procedure._id) && !loading) {
       return (
         <LoadingWrapper>
-          <Reload title="Neu Laden" onPress={()=> refetch()} />
+          <Reload title="Neu Laden" onPress={() => refetch()} />
         </LoadingWrapper>
       );
     }
@@ -229,7 +229,10 @@ class Detail extends Component {
             />
           </Segment>
           <Segment title="Dokumente" scrollTo={this.scrollTo}>
-            <SegmentDocuments documents={importantDocuments}  navigator={navigator} />
+            <SegmentDocuments
+              documents={importantDocuments}
+              navigator={navigator}
+            />
           </Segment>
           {currentStatusHistory.length > 0 && (
             <Segment title="Gesetzesstand" scrollTo={this.scrollTo}>
@@ -307,14 +310,15 @@ export default compose(
                 id: procedureId,
                 fragment: F_PROCEDURE_VIEWED
               });
+              if (aiFragment) {
+                aiFragment.viewedStatus = "VIEWED";
 
-              aiFragment.viewedStatus = "VIEWED";
-
-              cache.writeFragment({
-                id: procedureId,
-                fragment: F_PROCEDURE_VIEWED,
-                data: aiFragment
-              });
+                cache.writeFragment({
+                  id: procedureId,
+                  fragment: F_PROCEDURE_VIEWED,
+                  data: aiFragment
+                });
+              }
             }
           });
         }
