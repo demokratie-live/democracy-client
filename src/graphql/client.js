@@ -38,7 +38,7 @@ const persistor = new CachePersistor({
   storage: AsyncStorage,
   debug: false,
   debounce: 1000,
-  maxSize: false
+  // maxSize: false
 });
 
 const authLinkMiddleware = setContext(async (_, { headers }) => {

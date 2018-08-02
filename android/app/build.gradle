@@ -2,10 +2,12 @@ apply plugin: "com.android.application"
 
 project.ext.envConfigFiles = [
     devdebug: ".env.debug",
+    internaldebug: ".env.debug",
     alphadebug: ".env.debug",
     betadebug: ".env.debug",
     productiondebug: ".env.debug",
     devrelease: ".env.debug",
+    internalrelease: ".env.internal",
     alpharelease: ".env.alpha",
     betarelease: ".env.beta",
     productionrelease: ".env.production",
@@ -157,6 +159,10 @@ android {
             resValue "string", "build_config_package", "de.democracydeutschland.app"
             applicationIdSuffix ".dev"
         }
+        internal {
+            resValue "string", "build_config_package", "de.democracydeutschland.app"
+            applicationIdSuffix ".internal"
+        }
         alpha {
             resValue "string", "build_config_package", "de.democracydeutschland.app"
             applicationIdSuffix ".alpha"
@@ -195,6 +201,7 @@ dependencies {
     compile "com.facebook.react:react-native:+"
     compile project(':react-native-navigation')
     compile project(':react-native-linear-gradient')
+    compile project(':react-native-keychain')
 	compile project(':reactnativenotifications')
 
     compile ('com.google.android.gms:play-services-gcm:10.0.1') {

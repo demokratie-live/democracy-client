@@ -55,13 +55,35 @@ platform :ios do
 
     sync_code_signing(
       type: 'appstore',
-      app_identifier: "de.democracy-deutschland.clientapp",
+      app_identifier: "de.democracy-deutschland.clientapp.internal",
       team_id: "A4B84UJD7M"
     )
 
     build_app( 
       clean: true,
-      scheme: "democracyclient-prod",
+      scheme: "Internal",
+    )
+  end
+
+  # INTERNAL
+  lane :internal do
+
+    sync_code_signing(
+      type: 'appstore',
+      app_identifier: "de.democracy-deutschland.clientapp.internal",
+      team_id: "A4B84UJD7M"
+    )
+
+    build_app( 
+      clean: true, 
+      scheme: "Internal"
+    )
+
+    upload_to_testflight(
+      changelog: changelog,
+      app_identifier: "de.democracy-deutschland.clientapp.internal",
+      demo_account_required: false,
+      reject_build_waiting_for_review: true
     )
   end
 

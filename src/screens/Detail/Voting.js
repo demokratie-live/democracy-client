@@ -171,10 +171,11 @@ export default compose(
     }
   }),
   graphql(VOTED_LOCAL, {
-    options: ({ procedureObjId }) => ({
-      variables: { procedure: procedureObjId }
+    options: ({ procedureId }) => ({
+      variables: { procedureId }
     }),
-    props: ({ data: { votedLocal } }) => {
+    props: props => {
+      const { data: { votedLocal } } = props;
       if (votedLocal) {
         return { votedSelection: votedLocal.selection };
       }
