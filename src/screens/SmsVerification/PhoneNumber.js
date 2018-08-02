@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
-import { Dimensions, Keyboard, Alert } from "react-native";
+import { AsyncStorage, Dimensions, Keyboard, Alert } from "react-native";
 import { Navigator } from "react-native-navigation";
+import { graphql } from "react-apollo";
 
 import Description from "./Components/Description";
 import PhonenumberInput from "./Components/PhonenumberInput";
 import Button from "./Components/Button";
+
+import REQUEST_CODE from '../../graphql/mutations/requestCode';
 
 const ScrollView = styled.ScrollView.attrs({
   contentContainerStyle: {
@@ -58,9 +61,14 @@ class SmsVerification extends Component {
   };
 
   sendNumber = () => {
+    let { phoneNumber } = this.state;
+    if (phoneNumber.charAt(0) === '0') {
+      phoneNumber = phoneNumber.substr(1);
+    }
+    const fullPhoneNumber = `0049${phoneNumber}`;
     Alert.alert(
       "Bestätigung der Telefonnummer",
-      `+49 ${this.state.phoneNumber}\nIst diese Nummer korrekt?`,
+      `+49 ${phoneNumber}\nIst diese Nummer korrekt?`,
 
       [
         {
@@ -70,14 +78,18 @@ class SmsVerification extends Component {
         },
         {
           text: "Ja",
-          onPress: () =>
-            this.props.navigator.push({
+          onPress: async () => {
+            AsyncStorage.setItem("auth_phone",phoneNumber);
+            const res = await this.props.requestCode({variables: {newPhone: fullPhoneNumber}});
+            console.log(res);
+            return this.props.navigator.push({
               screen: "democracy.SmsVerification.Code",
               backButtonTitle: "Zurück",
               passProps: {
-                phoneNumber: this.state.phoneNumber
+                resendTime: res.data.requestCode.resendTime
               }
-            })
+            });
+          }
         }
       ]
     );
@@ -117,4 +129,4 @@ SmsVerification.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired
 };
 
-export default SmsVerification;
+export default graphql(REQUEST_CODE,{name: 'requestCode'})(SmsVerification);

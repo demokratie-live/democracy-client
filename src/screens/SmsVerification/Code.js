@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
-import { Dimensions, Keyboard, Alert } from "react-native";
+import { AsyncStorage, Dimensions, Keyboard, Alert } from "react-native";
 import { Navigator } from "react-native-navigation";
+import { graphql } from "react-apollo";
+import { sha256 } from "react-native-sha256";
 
 import Description from "./Components/Description";
 import CodeInput from "./Components/CodeInput";
 import Button from "./Components/Button";
+
+import REQUEST_VERIFICATION from '../../graphql/mutations/requestVerification';
 
 const ScrollView = styled.ScrollView.attrs({
   contentContainerStyle: {
@@ -24,7 +28,7 @@ class Code extends Component {
   state = {
     height: Dimensions.get("window").height,
     keyboardHeight: 0,
-    countdown: 10
+    countdown: this.props.resendTime
   };
 
   componentDidMount() {
@@ -57,14 +61,21 @@ class Code extends Component {
     this.setState({ height: e.nativeEvent.layout.height });
   };
 
-  onChangeCode = code => {
+  onChangeCode = async code => {
     if (code.length === 6) {
-      Alert.alert("Deine Verifikation war erfolgreich", null, [
-        {
-          text: "Ok",
-          onPress: () => this.props.navigator.dismissAllModals()
-        }
-      ]);
+      const phoneNumber = await AsyncStorage.getItem("auth_phone");
+      const phoneNumberHash = await sha256(`0049${phoneNumber}`);
+      const res = await this.props.requestVerification({variables: {code, newPhoneHash: phoneNumberHash}});
+      console.log(res);
+      if(res.data.requestVerification.succeeded){
+        AsyncStorage.setItem("auth_phoneHash", phoneNumberHash);
+        Alert.alert("Deine Verifikation war erfolgreich", null, [
+          {
+            text: "Ok",
+            onPress: () => this.props.navigator.dismissAllModals()
+          }
+        ]);
+      }
     }
   };
 
@@ -77,9 +88,11 @@ class Code extends Component {
   };
 
   sendNumber = () => {
+    const phoneNumber = AsyncStorage.getItem("auth_phone");
+    // const fullPhoneNumber = `0049${phoneNumber}`;
     Alert.alert(
       "Bestätigung der Telef  onnummer",
-      `+49 ${this.props.phoneNumber}\nIst diese Nummer korrekt?`,
+      `+49 ${phoneNumber}\nIst diese Nummer korrekt?`,
 
       [
         {
@@ -127,7 +140,11 @@ class Code extends Component {
 
 Code.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired,
-  phoneNumber: PropTypes.string.isRequired
+  resendTime: PropTypes.number
 };
 
-export default Code;
+Code. defaultProps = {
+  resendTime: 0
+}
+
+export default graphql(REQUEST_VERIFICATION,{name: 'requestVerification'})(Code);
