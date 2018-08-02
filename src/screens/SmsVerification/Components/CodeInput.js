@@ -14,6 +14,7 @@ const NumberBox = styled.View`
   border-color: #979797;
   padding-bottom: 3;
   justify-content: center;
+  height: 40;
 `;
 
 const Number = styled.TextInput.attrs({
@@ -25,6 +26,8 @@ const Number = styled.TextInput.attrs({
   flex: 1;
   font-size: 24;
   text-align: center;
+  margin-bottom: 0;
+  padding-bottom: 0;
 `;
 
 class CodeInput extends Component {
@@ -55,6 +58,7 @@ class CodeInput extends Component {
             autoFocus
             onChangeText={this.onChange}
             value={code}
+            underlineColorAndroid="transparent"
           />
         </NumberBox>
       </Wrapper>

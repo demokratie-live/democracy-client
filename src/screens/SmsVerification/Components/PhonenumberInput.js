@@ -12,10 +12,13 @@ const NumberBox = styled.View`
   border-bottom-width: 1;
   border-color: #979797;
   padding-bottom: 3;
+  height: 40;
 `;
 
 const CountryNumber = styled.Text`
   font-size: 24;
+  margin-bottom: 0;
+  padding-bottom: 0;
 `;
 
 const Number = styled.TextInput.attrs({
@@ -26,6 +29,8 @@ const Number = styled.TextInput.attrs({
 })`
   flex: 1;
   font-size: 24;
+  margin-bottom: 0;
+  padding-bottom: 0;
 `;
 
 class PhonenumberInput extends Component {
@@ -60,6 +65,7 @@ class PhonenumberInput extends Component {
             onChangeText={this.onChange}
             value={phoneNumber}
             textContentType="telephoneNumber"
+            underlineColorAndroid="transparent"
           />
         </NumberBox>
       </Wrapper>

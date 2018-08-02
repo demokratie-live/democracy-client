@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
-import { AsyncStorage, Dimensions, Keyboard, Alert } from "react-native";
+import {
+  AsyncStorage,
+  Dimensions,
+  Keyboard,
+  Alert,
+  Platform
+} from "react-native";
 import { Navigator } from "react-native-navigation";
 import { graphql } from "react-apollo";
 import { sha256 } from "react-native-sha256";
@@ -10,14 +16,16 @@ import Description from "./Components/Description";
 import CodeInput from "./Components/CodeInput";
 import Button from "./Components/Button";
 
-import REQUEST_VERIFICATION from '../../graphql/mutations/requestVerification';
+import REQUEST_VERIFICATION from "../../graphql/mutations/requestVerification";
 
 const ScrollView = styled.ScrollView.attrs({
   contentContainerStyle: {
     alignItems: "center",
     justifyContent: "center"
   }
-})``;
+})`
+  background-color: #fff;
+`;
 
 class Code extends Component {
   static navigatorStyle = {
@@ -65,9 +73,11 @@ class Code extends Component {
     if (code.length === 6) {
       const phoneNumber = await AsyncStorage.getItem("auth_phone");
       const phoneNumberHash = await sha256(`0049${phoneNumber}`);
-      const res = await this.props.requestVerification({variables: {code, newPhoneHash: phoneNumberHash}});
+      const res = await this.props.requestVerification({
+        variables: { code, newPhoneHash: phoneNumberHash }
+      });
       console.log(res);
-      if(res.data.requestVerification.succeeded){
+      if (res.data.requestVerification.succeeded) {
         AsyncStorage.setItem("auth_phoneHash", phoneNumberHash);
         Alert.alert("Deine Verifikation war erfolgreich", null, [
           {
@@ -118,7 +128,7 @@ class Code extends Component {
       <ScrollView
         keyboardShouldPersistTaps="always"
         contentContainerStyle={{
-          height,
+          height: Platform.OS === "ios" ? height : "100%",
           alignItems: "center",
           justifyContent: "space-around",
           marginHorizontal: 9
@@ -143,8 +153,10 @@ Code.propTypes = {
   resendTime: PropTypes.number
 };
 
-Code. defaultProps = {
+Code.defaultProps = {
   resendTime: 0
-}
+};
 
-export default graphql(REQUEST_VERIFICATION,{name: 'requestVerification'})(Code);
+export default graphql(REQUEST_VERIFICATION, { name: "requestVerification" })(
+  Code
+);

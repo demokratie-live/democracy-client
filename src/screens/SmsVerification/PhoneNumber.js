@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
-import { AsyncStorage, Dimensions, Keyboard, Alert } from "react-native";
+import {
+  AsyncStorage,
+  Dimensions,
+  Keyboard,
+  Alert,
+  Platform
+} from "react-native";
 import { Navigator } from "react-native-navigation";
 import { graphql } from "react-apollo";
 
@@ -9,14 +15,16 @@ import Description from "./Components/Description";
 import PhonenumberInput from "./Components/PhonenumberInput";
 import Button from "./Components/Button";
 
-import REQUEST_CODE from '../../graphql/mutations/requestCode';
+import REQUEST_CODE from "../../graphql/mutations/requestCode";
 
 const ScrollView = styled.ScrollView.attrs({
   contentContainerStyle: {
     alignItems: "center",
     justifyContent: "center"
   }
-})``;
+})`
+  background-color: #fff;
+`;
 
 class SmsVerification extends Component {
   static navigatorStyle = {
@@ -62,7 +70,7 @@ class SmsVerification extends Component {
 
   sendNumber = () => {
     let { phoneNumber } = this.state;
-    if (phoneNumber.charAt(0) === '0') {
+    if (phoneNumber.charAt(0) === "0") {
       phoneNumber = phoneNumber.substr(1);
     }
     const fullPhoneNumber = `0049${phoneNumber}`;
@@ -79,8 +87,10 @@ class SmsVerification extends Component {
         {
           text: "Ja",
           onPress: async () => {
-            AsyncStorage.setItem("auth_phone",phoneNumber);
-            const res = await this.props.requestCode({variables: {newPhone: fullPhoneNumber}});
+            AsyncStorage.setItem("auth_phone", phoneNumber);
+            const res = await this.props.requestCode({
+              variables: { newPhone: fullPhoneNumber }
+            });
             console.log(res);
             return this.props.navigator.push({
               screen: "democracy.SmsVerification.Code",
@@ -102,7 +112,7 @@ class SmsVerification extends Component {
       <ScrollView
         keyboardShouldPersistTaps="always"
         contentContainerStyle={{
-          height,
+          height: Platform.OS === "ios" ? height : "100%",
           alignItems: "center",
           justifyContent: "space-around",
           marginHorizontal: 9
@@ -129,4 +139,4 @@ SmsVerification.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired
 };
 
-export default graphql(REQUEST_CODE,{name: 'requestCode'})(SmsVerification);
+export default graphql(REQUEST_CODE, { name: "requestCode" })(SmsVerification);
