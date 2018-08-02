@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Platform } from "react-native";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
 
@@ -19,7 +20,7 @@ const NumberBox = styled.View`
 
 const Number = styled.TextInput.attrs({
   placeholder: "XXXXXX",
-  keyboardType: "number-pad",
+  keyboardType: Platform.OS === "ios" ? "number-pad" : "numeric",
   maxLength: 6,
   returnKeyType: "next"
 })`

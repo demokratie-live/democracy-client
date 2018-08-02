@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Platform } from "react-native";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
 
@@ -23,7 +24,7 @@ const CountryNumber = styled.Text`
 
 const Number = styled.TextInput.attrs({
   placeholder: "Deine Telefonnr.",
-  keyboardType: "number-pad",
+  keyboardType: Platform.OS === "ios" ? "number-pad" : "numeric",
   maxLength: 13,
   returnKeyType: "next"
 })`
