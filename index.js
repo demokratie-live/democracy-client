@@ -5,10 +5,13 @@ import {
 import { NetInfo } from "react-native";
 // import Reactotron from "reactotron-react-native";
 
+// Migrations
+import Migrations from "./src/migrations";
+
 import client, { persistor } from "./src/graphql/client";
 import registerScreens from "./src/screens";
 
-import IS_INSTRUCTIONS_SHOWN from "./src/graphql/queries/isInstructionShown";
+import IS_INSTRUCTIONS_SHOWN from "./src/graphql/queries/local/isInstructionShown";
 import setCurrentScreen from "./src/graphql/mutations/setCurrentScreen";
 import UPDATE_NETWORK_STATUS from "./src/graphql/mutations/updateNetworkStatus";
 
@@ -127,6 +130,13 @@ class App {
 
 (async () => {
   await persistor.restore();
+
+  console.log("migrations start");
+  const migrations = await Migrations();
+  if (migrations.some(v => v)) {
+    await persistor.purge();
+  }
+  console.log("migrations finish");
 
   const app = new App(); // eslint-disable-line
 })();

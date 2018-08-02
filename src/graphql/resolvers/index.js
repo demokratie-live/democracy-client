@@ -1,7 +1,9 @@
-import VOTES_LOCAL from "../queries/votesLocal";
-import IS_INSTRUCTIONS_SHOWN from "../queries/isInstructionShown";
-import GET_NETWORK_STATUS from "../queries/getNetworkStatus";
+import { AsyncStorage } from "react-native";
 
+import GET_NETWORK_STATUS from "../queries/getNetworkStatus";
+import SEARCH_HISTORY from "../queries/local/searchHistory";
+
+import VotesLocal from "../../services/VotesLocal";
 import ViewedProcedures from "../../services/ViewedProcedures";
 
 export const defaults = {
@@ -16,7 +18,8 @@ export const defaults = {
   searchTerm: {
     __typename: "SearchTerm",
     term: ""
-  }
+  },
+  searchHistory: []
 };
 
 export const resolvers = {
@@ -32,33 +35,17 @@ export const resolvers = {
       cache.writeData({ data: { networkStatus: data.networkStatus } });
       return null;
     },
-    isInstructionsShown: (_, { isInstructionsShown }, { cache }) => {
+    isInstructionsShown: async (_, { isInstructionsShown }, { cache }) => {
+      await AsyncStorage.setItem(
+        "isInstructionsShown",
+        JSON.stringify(isInstructionsShown)
+      );
       cache.writeData({ data: { isInstructionsShown } });
       return null;
     },
-    votesLocal: (_, { procedure, selection }, { cache }) => {
-      let previous;
-
-      try {
-        previous = cache.readQuery({ query: VOTES_LOCAL });
-      } catch (error) {
-        previous = { votesLocal: [] };
-      }
-
-      const newVote = {
-        procedure,
-        selection,
-        __typename: "VoteLocalItem"
-      };
-      const data = {
-        votesLocal: [
-          ...previous.votesLocal.filter(v => v.procedure !== procedure),
-          newVote
-        ]
-      };
-
-      cache.writeData({ data });
-      return newVote;
+    votesLocal: async (_, { procedureId, selection }) => {
+      await VotesLocal.setVoteLocal({ procedureId, selection });
+      return null;
     },
     currentScreen: (_, { currentScreen }, { cache }) => {
       switch (currentScreen) {
@@ -90,24 +77,71 @@ export const resolvers = {
       };
       cache.writeData({ data });
       return null;
+    },
+    searchHistoryAdd: (_, { term }, { cache }) => {
+      let previous = cache.readQuery({ query: SEARCH_HISTORY });
+
+      if (!previous) {
+        previous = { searchHistory: [] };
+      }
+
+      const index = previous.searchHistory.findIndex(
+        ({ term: t }) => t === term
+      );
+
+      let data;
+
+      if (index === -1) {
+        data = {
+          searchHistory: [
+            { term, __typename: "SearchHistoryTerm" },
+            ...previous.searchHistory
+          ].slice(0, 3)
+        };
+      } else {
+        previous.searchHistory.splice(index, 1);
+        data = {
+          searchHistory: [
+            { term, __typename: "SearchHistoryTerm" },
+            ...previous.searchHistory
+          ].slice(0, 3)
+        };
+      }
+
+      cache.writeData({ data });
+      return null;
+    },
+    setFilters: async (_, { filters }) => {
+      await AsyncStorage.setItem("Filters", filters);
+      return null;
     }
   },
   Query: {
-    isInstructionsShown: (_, args, { cache }) => {
-      const previous = cache.readQuery({ query: IS_INSTRUCTIONS_SHOWN });
-      return previous.isInstructionsShown;
-    },
+    isInstructionsShown: async () =>
+      JSON.parse(await AsyncStorage.getItem("isInstructionsShown")),
 
-    votedLocal: (_, { procedure }, { cache }) => {
-      let previous;
-      try {
-        previous = cache.readQuery({ query: VOTES_LOCAL });
-      } catch (error) {
-        previous = { votesLocal: [] };
+    votesLocalKeyStore: async () =>
+      VotesLocal.getVotesLocalList().then(votesLocal =>
+        votesLocal.map(vote => ({
+          ...vote,
+          __typename: "voteLocalKeyStoreItem"
+        }))
+      ),
+
+    filters: async () => ({
+      filters: AsyncStorage.getItem("Filters"),
+      __typename: "Filters"
+    }),
+
+    votedLocal: async (_, { procedureId }) => {
+      const vote = await VotesLocal.getVoteLocal(procedureId);
+      if (vote && vote.selection) {
+        return {
+          selection: vote.selection,
+          __typename: "VotedLocal"
+        };
       }
-      return (
-        previous.votesLocal.find(vote => vote.procedure === procedure) || null
-      );
+      return null;
     }
   },
   Procedure: {

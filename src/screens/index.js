@@ -5,6 +5,7 @@ import client from "../graphql/client";
 
 import VoteList from "./VoteList";
 import VoteListList from "./VoteList/List";
+import VoteListFilter from "./VoteList/Filter";
 import Instructions from "./Instructions";
 import Search from "./Search";
 import SideMenu from "./SideMenu";
@@ -40,6 +41,13 @@ export default function registerScreens() {
       PushNotifications(
         DeepLink(NavBarLinks(SideMenuLinks(NetworkStatus(VoteListList))))
       ),
+    client.store,
+    ApolloProvider,
+    { client }
+  );
+  Navigation.registerComponent(
+    "democracy.VoteList.Filter",
+    () => VoteListFilter,
     client.store,
     ApolloProvider,
     { client }

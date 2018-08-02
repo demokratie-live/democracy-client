@@ -24,6 +24,7 @@ import java.util.List;
 
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.sha256lib.Sha256Package;
+import com.oblador.keychain.KeychainPackage;
 
 import com.wix.reactnativenotifications.RNNotificationsPackage;
 import com.wix.reactnativenotifications.core.AppLaunchHelper;
@@ -84,8 +85,9 @@ public class MainApplication extends NavigationApplication implements INotificat
             new ReactNativeConfigPackage(),
             new VectorIconsPackage(),
             new LinearGradientPackage(),
-            new Sha256Package()
-      	);
+            new Sha256Package(),
+            new KeychainPackage()
+      );
     }
 
     @Override
