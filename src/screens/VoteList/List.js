@@ -192,9 +192,7 @@ class List extends Component {
 
   setRightButtons = ({ filterActive }) => {
     const searchIcon = Platform.OS === "ios" ? "ios-search" : "md-search";
-    const filterIcon = filterActive ? "ios-funnel" : "ios-funnel-outline";
     Ionicons.getImageSource(searchIcon, 24, "#FFFFFF").then(iconSearch => {
-      Ionicons.getImageSource(filterIcon, 24, "#FFFFFF").then(iconFilter => {
         this.props.navigator.setButtons({
           rightButtons: [
             {
@@ -202,12 +200,13 @@ class List extends Component {
               id: "search"
             },
             {
-              icon: iconFilter,
+              icon: filterActive
+                ? require("../../../assets/icons/badge-active-20.png")
+                : require("../../../assets/icons/badge-inactive-20.png"),
               id: "filter"
             }
           ]
         });
-      });
     });
   };
 
