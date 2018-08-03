@@ -72,7 +72,7 @@ class Code extends Component {
   onChangeCode = async code => {
     if (code.length === 6) {
       const phoneNumber = await AsyncStorage.getItem("auth_phone");
-      const phoneNumberHash = await sha256(`0049${phoneNumber}`);
+      const phoneNumberHash = await sha256(phoneNumber);
       const res = await this.props.requestVerification({
         variables: { code, newPhoneHash: phoneNumberHash }
       });
@@ -99,10 +99,9 @@ class Code extends Component {
 
   sendNumber = () => {
     const phoneNumber = AsyncStorage.getItem("auth_phone");
-    // const fullPhoneNumber = `0049${phoneNumber}`;
     Alert.alert(
       "Bestätigung der Telef  onnummer",
-      `+49 ${phoneNumber}\nIst diese Nummer korrekt?`,
+      `${phoneNumber}\nIst diese Nummer korrekt?`,
 
       [
         {
@@ -149,6 +148,7 @@ class Code extends Component {
 }
 
 Code.propTypes = {
+  requestVerification: PropTypes.func.isRequired,
   navigator: PropTypes.instanceOf(Navigator).isRequired,
   resendTime: PropTypes.number
 };

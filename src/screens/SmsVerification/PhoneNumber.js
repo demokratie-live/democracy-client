@@ -39,6 +39,14 @@ class SmsVerification extends Component {
   };
 
   componentDidMount() {
+    const storedPhoneNumber = AsyncStorage.getItem('auth_phone');
+    storedPhoneNumber.then((phoneNumber) => {
+      phoneNumber = phoneNumber.substr(3); //eslint-disable-line
+      this.setState({
+        phoneNumber
+      });
+    });
+
     this.keyboardDidShowListener = Keyboard.addListener(
       "keyboardDidShow",
       this.keyboardDidShow
@@ -50,6 +58,7 @@ class SmsVerification extends Component {
     this.props.navigator.setTitle({
       title: "Verifizieren".toUpperCase() // the new title of the screen as appears in the nav bar
     });
+
   }
 
   onLayout = e => {
@@ -73,10 +82,10 @@ class SmsVerification extends Component {
     if (phoneNumber.charAt(0) === "0") {
       phoneNumber = phoneNumber.substr(1);
     }
-    const fullPhoneNumber = `0049${phoneNumber}`;
+    phoneNumber = `+49${phoneNumber}`;
     Alert.alert(
       "Bestätigung der Telefonnummer",
-      `+49 ${phoneNumber}\nIst diese Nummer korrekt?`,
+      `${phoneNumber}\nIst diese Nummer korrekt?`,
 
       [
         {
@@ -89,7 +98,7 @@ class SmsVerification extends Component {
           onPress: async () => {
             AsyncStorage.setItem("auth_phone", phoneNumber);
             const res = await this.props.requestCode({
-              variables: { newPhone: fullPhoneNumber }
+              variables: { newPhone: phoneNumber }
             });
             console.log(res);
             return this.props.navigator.push({
@@ -136,6 +145,7 @@ class SmsVerification extends Component {
 }
 
 SmsVerification.propTypes = {
+  requestCode: PropTypes.func.isRequired,
   navigator: PropTypes.instanceOf(Navigator).isRequired
 };
 
