@@ -39,6 +39,12 @@ class PhonenumberInput extends Component {
     phoneNumber: this.props.value
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.value !== this.props.value) {
+      this.setState({ phoneNumber: nextProps.value });
+    }
+  }
+
   onChange = text => {
     const phoneNumber = text.replace(/[^0-9]/g, "");
     this.setState({ phoneNumber: String(phoneNumber) }, () => {
