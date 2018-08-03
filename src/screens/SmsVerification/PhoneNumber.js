@@ -98,7 +98,7 @@ class SmsVerification extends Component {
           onPress: async () => {
             AsyncStorage.setItem("auth_phone", phoneNumber);
             const res = await this.props.requestCode({
-              variables: { newPhone: phoneNumber }
+              variables: { newPhone: phoneNumber, newUser: true }
             });
             console.log(res);
             return this.props.navigator.push({

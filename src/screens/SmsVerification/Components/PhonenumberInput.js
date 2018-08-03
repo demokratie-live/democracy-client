@@ -20,6 +20,7 @@ const CountryNumber = styled.Text`
   font-size: 24;
   margin-bottom: 0;
   padding-bottom: 0;
+  padding-top: ${Platform.OS === "ios" ? 0 : 7};
 `;
 
 const Number = styled.TextInput.attrs({

@@ -36,10 +36,18 @@ class Code extends Component {
   state = {
     height: Dimensions.get("window").height,
     keyboardHeight: 0,
-    countdown: this.props.resendTime
+    countdown: this.props.resendTime,
+    phoneNumber: ''
   };
 
   componentDidMount() {
+    const storedPhoneNumber = AsyncStorage.getItem('auth_phone');
+    storedPhoneNumber.then((phoneNumber) => {
+      this.setState({
+        phoneNumber
+      });
+    });
+
     this.keyboardDidShowListener = Keyboard.addListener(
       "keyboardDidShow",
       this.keyboardDidShow
@@ -134,7 +142,7 @@ class Code extends Component {
         }}
         onLayout={this.onLayout}
       >
-        <Description text="Bitte gib Deinen Code ein" />
+        <Description text={`Bitte gib Deinen Code ein für\n${this.state.phoneNumber}`} />
         <CodeInput onChange={this.onChangeCode} />
         <Button
           title={buttonTitle}
