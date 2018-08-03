@@ -105,8 +105,8 @@ class Code extends Component {
     this.setState({ keyboardHeight: 0 });
   };
 
-  sendNumber = () => {
-    const phoneNumber = AsyncStorage.getItem("auth_phone");
+  sendNumber = async () => {
+    const phoneNumber = await AsyncStorage.getItem("auth_phone");
     Alert.alert(
       "Bestätigung der Telef  onnummer",
       `${phoneNumber}\nIst diese Nummer korrekt?`,

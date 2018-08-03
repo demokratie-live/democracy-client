@@ -15,6 +15,7 @@ export default gql`
       voteDate
       notify
       listType
+      verified
       type
       subjectGroups
       submissionDate

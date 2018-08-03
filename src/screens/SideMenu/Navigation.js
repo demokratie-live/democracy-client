@@ -125,11 +125,6 @@ const NavigationView = ({ currentScreen, navigateTo }) => {
           screenId: "democracy.Credits",
           title: "Credits".toUpperCase(),
           icon: <NavigationIoniconsIcon name="ios-heart-outline" />
-        },
-        {
-          screenId: "democracy.SmsVerification",
-          title: "DEBUG".toUpperCase(),
-          icon: <NavigationIoniconsIcon name="ios-heart-outline" />
         }
       ]
     }
