@@ -152,7 +152,7 @@ class Detail extends Component {
     if ((!procedure || !procedure._id) && !loading) {
       return (
         <LoadingWrapper>
-          <Reload title="Neu Laden" onPress={()=> refetch()} />
+          <Reload title="Neu Laden" onPress={() => refetch()} />
         </LoadingWrapper>
       );
     }
@@ -229,7 +229,10 @@ class Detail extends Component {
             />
           </Segment>
           <Segment title="Dokumente" scrollTo={this.scrollTo}>
-            <SegmentDocuments documents={importantDocuments}  navigator={navigator} />
+            <SegmentDocuments
+              documents={importantDocuments}
+              navigator={navigator}
+            />
           </Segment>
           {currentStatusHistory.length > 0 && (
             <Segment title="Gesetzesstand" scrollTo={this.scrollTo}>
@@ -272,7 +275,6 @@ class Detail extends Component {
 Detail.propTypes = {
   procedureId: PropTypes.string.isRequired,
   data: PropTypes.shape().isRequired,
-  navigator: PropTypes.instanceOf(Navigator).isRequired,
   toggleNotification: PropTypes.func.isRequired,
   viewProcedure: PropTypes.func.isRequired
 };

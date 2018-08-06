@@ -3,6 +3,7 @@ import {
   ScreenVisibilityListener as RNNScreenVisibilityListener
 } from "react-native-navigation";
 import { NetInfo } from "react-native";
+import Ionicons from "react-native-vector-icons/Ionicons";
 // import Reactotron from "reactotron-react-native";
 
 // Migrations
@@ -39,23 +40,23 @@ class App {
       }
     });
 
-    const listener = new RNNScreenVisibilityListener({
-      didAppear: args => {
-        let { screen } = args;
+    // const listener = new RNNScreenVisibilityListener({
+    //   didAppear: args => {
+    //     let { screen } = args;
 
-        if (screen === "democracy.VoteList.List") {
-          screen = "democracy.VoteList";
-        }
+    //     if (screen === "democracy.VoteList.List") {
+    //       screen = "democracy.VoteList";
+    //     }
 
-        client.mutate({
-          mutation: setCurrentScreen,
-          variables: {
-            screen
-          }
-        });
-      }
-    });
-    listener.register();
+    //     client.mutate({
+    //       mutation: setCurrentScreen,
+    //       variables: {
+    //         screen
+    //       }
+    //     });
+    //   }
+    // });
+    // listener.register();
 
     NetInfo.isConnected.addEventListener("connectionChange", isConnected => {
       client.mutate({
@@ -79,52 +80,120 @@ class App {
 
   startApp = async ({ isInstructionsShown = false } = {}) => {
     // Decide Startscreen
-    if (isInstructionsShown) {
-      Navigation.startSingleScreenApp({
-        screen: {
-          screen: "democracy.VoteList",
-          title: "Bundestag".toUpperCase(),
-          navigatorStyle: {},
-          topTabs
-        },
-        drawer: {
-          left: {
-            screen: "democracy.SideMenu",
-            disableOpenGesture: true
+
+    const menuIcon = await Ionicons.getImageSource("ios-menu", 24, "#FFFFFF");
+
+    Navigation.events().registerAppLaunchedListener(() => {
+      Navigation.setDefaultOptions({
+        topBar: {
+          title: {
+            color: "#fff"
           },
-          style: {
-            // ( iOS only )
-            leftDrawerWidth: 85 // optional, add this if you want a define left drawer width (50=percent)
+          background: {
+            color: "#4494d3"
           },
-          disableOpenGesture: true
-        },
-        appStyle: {
-          navBarNoBorder: true,
-          navBarButtonColor: "#FFFFFF",
-          navBarBackgroundColor: "#4494d3",
-          navBarTextColor: "#FFFFFF",
-          navBarTextFontSize: 17,
-          selectedTopTabTextColor: "#ffffff",
-          selectedTopTabIndicatorColor: "#ffffff",
-          selectedTopTabIndicatorHeight: 5
-        },
-        animationType: "fade"
-      });
-    } else {
-      Navigation.startSingleScreenApp({
-        screen: {
-          screen: "democracy.Instructions",
-          title: "Instructions",
-          navigatorStyle: {
-            navBarHidden: true
+          noBorder: true,
+          leftButtons: {
+            id: "buttonOne",
+            icon: menuIcon,
+            color: "#fff"
           }
-        },
-        animationType: "fade",
-        appStyle: {
-          orientation: "portrait"
         }
       });
-    }
+      Navigation.setRoot({
+        root: {
+          sideMenu: {
+            left: {
+              component: {
+                id: "leftSideComponentId",
+                name: "democracy.SideMenu"
+              },
+              visible: true,
+              enabled: true
+            },
+            center: {
+              stack: {
+                id: "mainView",
+                children: [
+                  {
+                    component: {
+                      name: "democracy.VoteList"
+                    }
+                  }
+                ],
+                options: {
+                  topBar: {
+                    title: {
+                      text: "Bundestag".toUpperCase()
+                    },
+                    backButton: {
+                      showTitle: false
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      });
+      Navigation.events().registerNavigationButtonPressedListener(event => {
+        console.log("DDBUG 6", event);
+        Navigation.mergeOptions(event.componentId, {
+          sideMenu: {
+            left: {
+              visible: true
+            }
+          }
+        });
+      });
+    });
+
+    //   if (isInstructionsShown) {
+    //     Navigation.startSingleScreenApp({
+    //       screen: {
+    //         screen: "democracy.VoteList",
+    //         title: "Bundestag".toUpperCase(),
+    //         navigatorStyle: {},
+    //         topTabs
+    //       },
+    //       drawer: {
+    //         left: {
+    //           screen: "democracy.SideMenu",
+    //           disableOpenGesture: true
+    //         },
+    //         style: {
+    //           // ( iOS only )
+    //           leftDrawerWidth: 85 // optional, add this if you want a define left drawer width (50=percent)
+    //         },
+    //         disableOpenGesture: true
+    //       },
+    //       appStyle: {
+    //         navBarNoBorder: true,
+    //         navBarButtonColor: "#FFFFFF",
+    //         navBarBackgroundColor: "#4494d3",
+    //         navBarTextColor: "#FFFFFF",
+    //         navBarTextFontSize: 17,
+    //         selectedTopTabTextColor: "#ffffff",
+    //         selectedTopTabIndicatorColor: "#ffffff",
+    //         selectedTopTabIndicatorHeight: 5
+    //       },
+    //       animationType: "fade"
+    //     });
+    //   } else {
+    //     Navigation.startSingleScreenApp({
+    //       screen: {
+    //         screen: "democracy.Instructions",
+    //         title: "Instructions",
+    //         navigatorStyle: {
+    //           navBarHidden: true
+    //         }
+    //       },
+    //       animationType: "fade",
+    //       appStyle: {
+    //         orientation: "portrait"
+    //       }
+    //     });
+    //   }
   };
 }
 

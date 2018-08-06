@@ -9,13 +9,13 @@
 
 #import "AppDelegate.h"
 
-#import "RCCManager.h"
-
 #import <React/RCTBundleURLProvider.h>
 
 #import <React/RCTLinkingManager.h>
 
 #import <React/RCTRootView.h>
+
+#import <ReactNativeNavigation/ReactNativeNavigation.h>
 
 
 #import "RNNotifications.h"
@@ -40,6 +40,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  
+  /*
   NSURL *jsCodeLocation;
   
   #ifdef DEBUG
@@ -48,11 +50,14 @@
   #else
     jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
   #endif
+  */
+  
+  NSURL *jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+  [ReactNativeNavigation bootstrap:jsCodeLocation launchOptions:launchOptions];
   
   
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   self.window.backgroundColor = [UIColor whiteColor];
-  [[RCCManager sharedInstance] initBridgeWithBundleURL:jsCodeLocation launchOptions:launchOptions];
   
   /*
 

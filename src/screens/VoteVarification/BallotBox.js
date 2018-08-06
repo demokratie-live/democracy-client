@@ -185,7 +185,6 @@ BalloutBox.propTypes = {
   vote: PropTypes.func.isRequired,
   voteLocal: PropTypes.func.isRequired,
   selection: PropTypes.string.isRequired,
-  navigator: PropTypes.instanceOf(Navigator).isRequired,
   procedureId: PropTypes.string.isRequired
 };
 

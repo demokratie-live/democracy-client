@@ -210,7 +210,7 @@ export default ComposedComponent => {
     onNotificationOpened = notification => {
       console.log("PUSHLOG: onNotificationOpened", notification);
       const { procedureId, type } = notification;
-      if(type === 'procedure') {
+      if (type === "procedure") {
         const { navigator } = this.props;
         navigator.handleDeepLink({
           link: `democracy.Detail`,
@@ -295,9 +295,7 @@ export default ComposedComponent => {
     }
   }
 
-  WrappingComponent.propTypes = {
-    navigator: PropTypes.instanceOf(Navigator).isRequired
-  };
+  WrappingComponent.propTypes = {};
 
   return WrappingComponent;
 };

@@ -132,7 +132,6 @@ const Voting = ({
 Voting.propTypes = {
   voted: PropTypes.bool.isRequired,
   votedSelection: PropTypes.string,
-  navigator: PropTypes.instanceOf(Navigator).isRequired,
   procedureObjId: PropTypes.string.isRequired,
   procedureId: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired

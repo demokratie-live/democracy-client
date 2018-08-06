@@ -3,9 +3,9 @@ import { Platform, StatusBar } from "react-native";
 import styled from "styled-components/native";
 import { graphql } from "react-apollo";
 import { PropTypes } from "prop-types";
-import { Navigator } from "react-native-navigation";
+import { Navigation } from "react-native-navigation";
 
-import Navigation from "./Navigation";
+import NavigationX from "./Navigation";
 
 import currentScreenQuery from "../../graphql/queries/currentScreen";
 
@@ -60,7 +60,11 @@ const HeadText = styled.Text`
   padding-left: 16;
 `;
 
-const SideMenu = ({ data: { currentScreen }, navigator }) => {
+const SideMenu = ({ data, data: { currentScreen }, navigator, ...rest }) => {
+  Navigation.events().registerCommandListener((name, params) => {
+    console.log("DDBUG 7", name, params);
+  });
+
   const navigateTo = ({ screenId, title }) => {
     if (screenId) {
       if (screenId === "democracy.Instructions") {
@@ -69,13 +73,27 @@ const SideMenu = ({ data: { currentScreen }, navigator }) => {
           navigatorStyle: { navBarHidden: true, orientation: "portrait" }
         });
       } else {
-        navigator.handleDeepLink({
-          link: screenId,
-          payload: { title, from: "sideMenu" }
+        // navigator.handleDeepLink({
+        //   link: screenId,
+        //   payload: { title, from: "sideMenu" }
+        // });
+
+        console.log("DDBUG", rest);
+        Navigation.setStackRoot("mainView", {
+          component: {
+            name: screenId,
+            options: {
+              sideMenu: {
+                left: {
+                  visible: false
+                }
+              }
+            }
+          }
         });
       }
     }
-    navigator.toggleDrawer({ side: "left" });
+    // navigator.toggleDrawer({ side: "left" });
   };
   return (
     <Wrapper>
@@ -92,15 +110,14 @@ const SideMenu = ({ data: { currentScreen }, navigator }) => {
             <HeadText>Link-registriert</HeadText>
           </HeadTextWrapper>
         </Head>
-        <Navigation currentScreen={currentScreen} navigateTo={navigateTo} />
+        <NavigationX currentScreen={currentScreen} navigateTo={navigateTo} />
       </Content>
     </Wrapper>
   );
 };
 
 SideMenu.propTypes = {
-  data: PropTypes.shape().isRequired,
-  navigator: PropTypes.instanceOf(Navigator).isRequired
+  data: PropTypes.shape().isRequired
 };
 
 export default graphql(currentScreenQuery)(SideMenu);

@@ -118,14 +118,11 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  navigator: PropTypes.instanceOf(Navigator),
   updateSearchTerm: PropTypes.func.isRequired,
   term: PropTypes.string.isRequired
 };
 
-Header.defaultProps = {
-  navigator: undefined
-};
+Header.defaultProps = {};
 
 export default compose(
   // Queries

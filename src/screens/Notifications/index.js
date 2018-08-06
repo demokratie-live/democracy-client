@@ -373,7 +373,6 @@ class Notifications extends Component {
 }
 
 Notifications.propTypes = {
-  navigator: PropTypes.instanceOf(Navigator).isRequired,
   loading: PropTypes.bool.isRequired,
   notificationSettings: PropTypes.shape({
     enabled: PropTypes.bool,

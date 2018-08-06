@@ -243,18 +243,16 @@ class SearchScreen extends Component {
 }
 
 SearchScreen.propTypes = {
-  navigator: PropTypes.instanceOf(Navigator),
   navigateTo: PropTypes.func.isRequired,
   finishSearch: PropTypes.func.isRequired,
   updateSearchTerm: PropTypes.func.isRequired,
   mostSearchedTerms: PropTypes.arrayOf(PropTypes.shape()),
   searchTerm: PropTypes.string.isRequired,
   addToSearchHistory: PropTypes.func.isRequired,
-  searchHistory: PropTypes.arrayOf(PropTypes.string )
+  searchHistory: PropTypes.arrayOf(PropTypes.string)
 };
 
 SearchScreen.defaultProps = {
-  navigator: undefined,
   mostSearchedTerms: [],
   searchHistory: []
 };

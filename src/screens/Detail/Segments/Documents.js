@@ -16,8 +16,7 @@ const Documents = ({ documents, navigator }) => (
 );
 
 Documents.propTypes = {
-  documents: PropTypes.arrayOf(PropTypes.object.isRequired),
-  navigator: PropTypes.instanceOf(Navigator).isRequired
+  documents: PropTypes.arrayOf(PropTypes.object.isRequired)
 };
 
 Documents.defaultProps = {

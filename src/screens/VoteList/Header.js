@@ -72,13 +72,11 @@ class Header extends Component {
   }
 }
 Header.propTypes = {
-  title: PropTypes.string,
-  navigator: PropTypes.instanceOf(Navigator)
+  title: PropTypes.string
 };
 
 Header.defaultProps = {
-  title: "",
-  navigator: undefined
+  title: ""
 };
 
 export default Header;

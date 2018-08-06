@@ -564,7 +564,6 @@ class Filter extends Component {
 }
 
 Filter.propTypes = {
-  navigator: PropTypes.instanceOf(Navigator).isRequired,
   setFilters: PropTypes.func.isRequired
 };
 

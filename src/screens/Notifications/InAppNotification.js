@@ -50,8 +50,7 @@ InAppNotification.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
   color: PropTypes.string,
-  onClick: PropTypes.func,
-  navigator: PropTypes.instanceOf(Navigator).isRequired
+  onClick: PropTypes.func
 };
 
 InAppNotification.defaultProps = {

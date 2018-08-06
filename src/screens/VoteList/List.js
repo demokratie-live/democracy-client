@@ -98,17 +98,17 @@ class List extends Component {
 
   constructor(props) {
     super(props);
-    const menuIcon = Platform.OS === "ios" ? "ios-menu" : "md-menu";
-    Ionicons.getImageSource(menuIcon, 24, "#FFFFFF").then(icon => {
-      props.navigator.setButtons({
-        leftButtons: [
-          {
-            icon,
-            id: "menu"
-          }
-        ]
-      });
-    });
+    // const menuIcon = Platform.OS === "ios" ? "ios-menu" : "md-menu";
+    // Ionicons.getImageSource(menuIcon, 24, "#FFFFFF").then(icon => {
+    //   props.navigator.setButtons({
+    //     leftButtons: [
+    //       {
+    //         icon,
+    //         id: "menu"
+    //       }
+    //     ]
+    //   });
+    // });
   }
 
   state = {
@@ -191,23 +191,23 @@ class List extends Component {
   };
 
   setRightButtons = ({ filterActive }) => {
-    const searchIcon = Platform.OS === "ios" ? "ios-search" : "md-search";
-    Ionicons.getImageSource(searchIcon, 24, "#FFFFFF").then(iconSearch => {
-        this.props.navigator.setButtons({
-          rightButtons: [
-            {
-              icon: iconSearch,
-              id: "search"
-            },
-            {
-              icon: filterActive
-                ? require("../../../assets/icons/badge-active-20.png")
-                : require("../../../assets/icons/badge-inactive-20.png"),
-              id: "filter"
-            }
-          ]
-        });
-    });
+    // const searchIcon = Platform.OS === "ios" ? "ios-search" : "md-search";
+    // Ionicons.getImageSource(searchIcon, 24, "#FFFFFF").then(iconSearch => {
+    //   this.props.navigator.setButtons({
+    //     rightButtons: [
+    //       {
+    //         icon: iconSearch,
+    //         id: "search"
+    //       },
+    //       {
+    //         icon: filterActive
+    //           ? require("../../../assets/icons/badge-active-20.png")
+    //           : require("../../../assets/icons/badge-inactive-20.png"),
+    //         id: "filter"
+    //       }
+    //     ]
+    //   });
+    // });
   };
 
   prepareFilter = filterObj => {
@@ -450,7 +450,6 @@ class List extends Component {
 
 List.propTypes = {
   listType: PropTypes.string,
-  navigator: PropTypes.instanceOf(Navigator).isRequired,
   navigateTo: PropTypes.func.isRequired,
   data: PropTypes.shape().isRequired,
   filters: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired

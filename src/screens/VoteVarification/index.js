@@ -154,7 +154,6 @@ class VoteVerification extends Component {
 }
 
 VoteVerification.propTypes = {
-  navigator: PropTypes.instanceOf(Navigator).isRequired,
   selection: PropTypes.string.isRequired,
   procedureId: PropTypes.string.isRequired,
   procedureObjId: PropTypes.string.isRequired

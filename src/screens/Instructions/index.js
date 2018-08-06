@@ -151,8 +151,7 @@ class Introductions extends Component {
 }
 
 Introductions.propTypes = {
-  setInstructionsShown: PropTypes.func.isRequired,
-  navigator: PropTypes.instanceOf(Navigator).isRequired
+  setInstructionsShown: PropTypes.func.isRequired
 };
 
 export default graphql(SET_INSTRUCTIONS_SHOWN, {

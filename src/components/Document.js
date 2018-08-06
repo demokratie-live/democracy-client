@@ -58,8 +58,7 @@ Document.propTypes = {
   editor: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   number: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
-  navigator: PropTypes.instanceOf(Navigator).isRequired
+  url: PropTypes.string.isRequired
 };
 
 export default Document;

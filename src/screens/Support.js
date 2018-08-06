@@ -141,8 +141,6 @@ Um Fehler zu beheben, ist allerdings ein qualifiziertes Feedback notwendig. Desh
   }
 }
 
-Support.propTypes = {
-  navigator: PropTypes.instanceOf(Navigator).isRequired
-};
+Support.propTypes = {};
 
 export default Support;

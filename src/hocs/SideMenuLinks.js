@@ -12,28 +12,28 @@ export default ComposedComponent => {
   class WrappingComponent extends Component {
     componentDidMount() {
       const { navigator } = this.props;
-      navigator.addOnNavigatorEvent(event => {
-        if (event.type === "DeepLink" && event.payload.from === "sideMenu") {
-          if (event.link !== currentScreen) {
-            if (event.link === "democracy.VoteList") {
-              navigator.resetTo({
-                screen: event.link,
-                title: event.payload.title,
-                topTabs,
-                animated: false
-              });
-            } else {
-              navigator.push({
-                screen: event.link,
-                title: event.payload.title,
-                animated: false,
-                backButtonHidden: true
-              });
-            }
-          }
-          currentScreen = event.link;
-        }
-      }); // Does not work
+      // navigator.addOnNavigatorEvent(event => {
+      //   if (event.type === "DeepLink" && event.payload.from === "sideMenu") {
+      //     if (event.link !== currentScreen) {
+      //       if (event.link === "democracy.VoteList") {
+      //         navigator.resetTo({
+      //           screen: event.link,
+      //           title: event.payload.title,
+      //           topTabs,
+      //           animated: false
+      //         });
+      //       } else {
+      //         navigator.push({
+      //           screen: event.link,
+      //           title: event.payload.title,
+      //           animated: false,
+      //           backButtonHidden: true
+      //         });
+      //       }
+      //     }
+      //     currentScreen = event.link;
+      //   }
+      // }); // Does not work
     }
 
     render() {
@@ -41,9 +41,7 @@ export default ComposedComponent => {
     }
   }
 
-  WrappingComponent.propTypes = {
-    navigator: PropTypes.instanceOf(Navigator).isRequired
-  };
+  WrappingComponent.propTypes = {};
 
   return WrappingComponent;
 };

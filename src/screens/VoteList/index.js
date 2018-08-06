@@ -121,6 +121,7 @@ class VoteList extends Component {
               key={list.key}
               listType={list.key}
               navigator={this.props.navigator}
+              {...this.props}
             />
           ))}
         </ScrollView>
@@ -130,6 +131,7 @@ class VoteList extends Component {
   };
 
   render() {
+    console.log("DDBUG", this.props);
     return (
       <Screen>
         {this.renderSegmentControls()}
@@ -139,9 +141,7 @@ class VoteList extends Component {
   }
 }
 
-VoteList.propTypes = {
-  navigator: PropTypes.instanceOf(Navigator).isRequired
-};
+VoteList.propTypes = {};
 
 VoteList.defaultProps = {};
 

@@ -162,8 +162,6 @@ class Security extends Component {
   }
 }
 
-Security.propTypes = {
-  navigator: PropTypes.instanceOf(Navigator).isRequired
-};
+Security.propTypes = {};
 
 export default Security;

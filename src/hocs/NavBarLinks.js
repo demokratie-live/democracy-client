@@ -8,33 +8,33 @@ export default ComposedComponent => {
   class WrappingComponent extends Component {
     componentDidMount() {
       const { navigator } = this.props;
-      navigator.addOnNavigatorEvent(event => {
-        if (event.type) {
-          // NavBar Events
-          switch (event.id) {
-            case "menu":
-              navigator.toggleDrawer({ side: "left" });
-              break;
-            case "closeModal":
-              navigator.dismissModal();
-              break;
-            case "search":
-              navigator.push({
-                screen: "democracy.Search",
-                backButtonHidden: true
-              });
-              break;
-            case "filter":
-              this.props.navigator.showModal({
-                screen: "democracy.VoteList.Filter"
-              });
-              break;
+      // navigator.addOnNavigatorEvent(event => {
+      //   if (event.type) {
+      //     // NavBar Events
+      //     switch (event.id) {
+      //       case "menu":
+      //         navigator.toggleDrawer({ side: "left" });
+      //         break;
+      //       case "closeModal":
+      //         navigator.dismissModal();
+      //         break;
+      //       case "search":
+      //         navigator.push({
+      //           screen: "democracy.Search",
+      //           backButtonHidden: true
+      //         });
+      //         break;
+      //       case "filter":
+      //         this.props.navigator.showModal({
+      //           screen: "democracy.VoteList.Filter"
+      //         });
+      //         break;
 
-            default:
-              break;
-          }
-        }
-      }); // Does not work
+      //       default:
+      //         break;
+      //     }
+      //   }
+      // }); // Does not work
     }
 
     render() {
@@ -42,9 +42,7 @@ export default ComposedComponent => {
     }
   }
 
-  WrappingComponent.propTypes = {
-    navigator: PropTypes.instanceOf(Navigator).isRequired
-  };
+  WrappingComponent.propTypes = {};
 
   return WrappingComponent;
 };

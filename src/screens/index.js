@@ -1,7 +1,10 @@
 import { Navigation } from "react-native-navigation";
 import { ApolloProvider } from "react-apollo";
 
+import "../components/NavigationIcon";
+
 import client from "../graphql/client";
+import withApollo from "../lib/withApollo";
 
 import VoteList from "./VoteList";
 import VoteListList from "./VoteList/List";
@@ -25,15 +28,12 @@ import SideMenuLinks from "../hocs/SideMenuLinks";
 import PushNotifications from "../hocs/PushNotifications";
 
 export default function registerScreens() {
-  Navigation.registerComponent(
-    "democracy.VoteList",
-    () =>
+  Navigation.registerComponent("democracy.VoteList", () =>
+    withApollo(
       PushNotifications(
         DeepLink(NavBarLinks(SideMenuLinks(NetworkStatus(VoteList))))
-      ),
-    client.store,
-    ApolloProvider,
-    { client }
+      )
+    )
   );
   Navigation.registerComponent(
     "democracy.VoteList.List",
@@ -66,26 +66,14 @@ export default function registerScreens() {
     ApolloProvider,
     { client }
   );
-  Navigation.registerComponent(
-    "democracy.SideMenu",
-    () => SideMenu,
-    client.store,
-    ApolloProvider,
-    { client }
+  Navigation.registerComponent("democracy.SideMenu", () =>
+    withApollo(SideMenu)
   );
-  Navigation.registerComponent(
-    "democracy.Detail",
-    () => NetworkStatus(Detail, "Detail"),
-    client.store,
-    ApolloProvider,
-    { client }
+  Navigation.registerComponent("democracy.Detail", () =>
+    withApollo(NetworkStatus(Detail, "Detail"))
   );
-  Navigation.registerComponent(
-    "democracy.Support",
-    () => NetworkStatus(NavBarLinks(Support)),
-    client.store,
-    ApolloProvider,
-    { client }
+  Navigation.registerComponent("democracy.Support", () =>
+    withApollo(NetworkStatus(NavBarLinks(Support)))
   );
   Navigation.registerComponent(
     "democracy.Security",
