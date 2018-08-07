@@ -69,10 +69,12 @@ class SmsVerification extends Component {
     this.setState({ phoneNumber });
   };
 
+  // TODO: One of those functions causes unmounted warning
   keyboardDidHide = () => {
     this.setState({ keyboardHeight: 0 });
   };
 
+  // TODO: One of those functions causes unmounted warning
   keyboardDidShow = e => {
     this.setState({ keyboardHeight: e.endCoordinates.height });
   };
@@ -122,7 +124,7 @@ class SmsVerification extends Component {
 
   showNotification = ({ message }) => {
     Navigation.showInAppNotification({
-      screen: "democracy.Notifications.InApp", // unique ID registered with Navigation.registerScreen
+      screen: "democracy.SmsVerification.Error", // unique ID registered with Navigation.registerScreen
       passProps: {
         title: "Verifikationsfehler",
         description: message
