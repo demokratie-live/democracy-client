@@ -16,7 +16,7 @@ import {
   AppState
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { Navigator } from "react-native-navigation";
+import { Navigation } from "react-native-navigation";
 import { graphql, compose } from "react-apollo";
 import _ from "lodash";
 import NotificationsIOS from "react-native-notifications";
@@ -100,27 +100,15 @@ const sections = [
 ];
 
 class Notifications extends Component {
-  static navigatorStyle = {
-    navBarButtonColor: "#FFFFFF",
-    navBarBackgroundColor: "#4494d3",
-    navBarTextColor: "#FFFFFF",
-    navBarTextFontSize: 17
-  };
-
   constructor(props) {
     super(props);
 
-    const menuIcon = Platform.OS === "ios" ? "ios-menu" : "md-menu";
-
-    Ionicons.getImageSource(menuIcon, 24, "#FFFFFF").then(icon => {
-      props.navigator.setButtons({
-        leftButtons: [
-          {
-            icon,
-            id: "menu"
-          }
-        ]
-      });
+    Navigation.mergeOptions(props.componentId, {
+      topBar: {
+        title: {
+          text: "Benachrichtigungen".toUpperCase()
+        }
+      }
     });
   }
 

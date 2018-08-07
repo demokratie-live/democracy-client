@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import { Platform } from "react-native";
-import { Navigator } from "react-native-navigation";
+import { Navigation } from "react-native-navigation";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import Fade from "../../components/Animations/Fade";
@@ -59,28 +59,21 @@ const BalloutBoxWrapper = styled.View`
 `;
 
 class VoteVerification extends Component {
-  static navigatorStyle = {
-    navBarButtonColor: "#FFFFFF",
-    navBarBackgroundColor: "#4494d3",
-    navBarTextColor: "#FFFFFF",
-    navBarTextFontSize: 17
-  };
-
   constructor(props) {
     super(props);
 
-    if (Platform.OS === "ios") {
-      Ionicons.getImageSource("ios-arrow-back", 34, "#FFFFFF").then(icon => {
-        props.navigator.setButtons({
-          leftButtons: [
-            {
-              icon,
-              id: "closeModal"
-            }
-          ]
-        });
-      });
-    }
+    Navigation.mergeOptions(props.componentId, {
+      topBar: {
+        leftButtons: [
+          {
+            id: "cancel",
+            text: "Abbrechen"
+          }
+        ]
+      }
+    });
+
+    Navigation.events().bindComponent(this);
   }
 
   state = {
@@ -90,6 +83,12 @@ class VoteVerification extends Component {
   onScroll = () => {
     if (this.state.showWarning) {
       this.setState({ showWarning: false });
+    }
+  };
+
+  navigationButtonPressed = ({ componentId, buttonId }) => {
+    if (buttonId === "cancel") {
+      Navigation.dismissModal(componentId);
     }
   };
 

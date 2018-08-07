@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import { Platform } from "react-native";
-import { Navigator } from "react-native-navigation";
+import { Navigation } from "react-native-navigation";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import DeviceInfo from "react-native-device-info";
 
@@ -83,27 +83,15 @@ const Lover = () => (
 );
 
 class Security extends Component {
-  static navigatorStyle = {
-    navBarButtonColor: "#FFFFFF",
-    navBarBackgroundColor: "#4494d3",
-    navBarTextColor: "#FFFFFF",
-    navBarTextFontSize: 17
-  };
-
   constructor(props) {
     super(props);
 
-    const menuIcon = Platform.OS === "ios" ? "ios-menu" : "md-menu";
-
-    Ionicons.getImageSource(menuIcon, 24, "#FFFFFF").then(icon => {
-      props.navigator.setButtons({
-        leftButtons: [
-          {
-            icon,
-            id: "menu"
-          }
-        ]
-      });
+    Navigation.mergeOptions(props.componentId, {
+      topBar: {
+        title: {
+          text: "Credits".toUpperCase()
+        }
+      }
     });
   }
 

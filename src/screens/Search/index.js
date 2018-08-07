@@ -21,13 +21,10 @@ import changeSearchTerm from "../../graphql/mutations/local/changeSearchTerm";
 import SEARCH_HISTORY_ADD from "../../graphql/mutations/local/searchHistoryAdd";
 
 import preventNavStackDuplicate from "../../hocs/preventNavStackDuplicate";
+import withApolloClient from "../../lib/withApollo";
 
-Navigation.registerComponent(
-  "democracy.Search.Header",
-  () => Header,
-  client.store,
-  ApolloProvider,
-  { client }
+Navigation.registerComponent("democracy.Search.Header", () =>
+  withApolloClient(Header)
 );
 
 const Wrapper = styled.View`
@@ -78,12 +75,24 @@ class SearchScreen extends Component {
 
   constructor(props) {
     super(props);
-    this.props.navigator.setStyle({
-      navBarCustomView: "democracy.Search.Header",
-      navBarComponentAlignment: "fill",
-      navBarCustomViewInitialProps: {
-        navigator: this.props.navigator,
-        onChangeTerm: this.onChangeTerm
+
+    Navigation.events().bindComponent(this);
+
+    Navigation.mergeOptions(props.componentId, {
+      topBar: {
+        title: {
+          component: { name: "democracy.Search.Header", alignment: "fill" }
+        },
+        backButton: {
+          visible: false
+        },
+        leftButtons: [],
+        rightButtons: [
+          {
+            id: "back",
+            text: "Zurück"
+          }
+        ]
       }
     });
   }
@@ -151,6 +160,12 @@ class SearchScreen extends Component {
         }
       });
       this.onChangeTerm(item);
+    }
+  };
+
+  navigationButtonPressed = ({ componentId, buttonId }) => {
+    if (buttonId === "back") {
+      Navigation.pop(componentId);
     }
   };
 

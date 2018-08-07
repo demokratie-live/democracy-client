@@ -68,17 +68,23 @@ const SideMenu = ({ data, data: { currentScreen }, navigator, ...rest }) => {
   const navigateTo = ({ screenId, title }) => {
     if (screenId) {
       if (screenId === "democracy.Instructions") {
-        navigator.showModal({
-          screen: screenId,
-          navigatorStyle: { navBarHidden: true, orientation: "portrait" }
+        Navigation.showModal({
+          stack: {
+            children: [
+              {
+                component: {
+                  name: screenId,
+                  options: {
+                    topBar: {
+                      visible: false
+                    }
+                  }
+                }
+              }
+            ]
+          }
         });
       } else {
-        // navigator.handleDeepLink({
-        //   link: screenId,
-        //   payload: { title, from: "sideMenu" }
-        // });
-
-        console.log("DDBUG", rest);
         Navigation.setStackRoot("mainView", {
           component: {
             name: screenId,

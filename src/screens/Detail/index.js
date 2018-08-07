@@ -3,7 +3,7 @@ import { RefreshControl, ActivityIndicator } from "react-native";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import { graphql, compose } from "react-apollo";
-import { Navigator } from "react-native-navigation";
+import { Navigation } from "react-native-navigation";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import getProcedure from "../../graphql/queries/getProcedure";
@@ -88,23 +88,23 @@ const Content = styled.View`
 `;
 
 class Detail extends Component {
-  static navigatorStyle = {
-    navBarBackgroundColor: "#4494d3",
-    navBarTextColor: "#FFFFFF",
-    navBarTextFontSize: 17,
-    navBarLeftButtonColor: "#FFFFFF",
-    navBarButtonColor: "#FFFFFF",
-    backButtonTitle: ""
-  };
+  constructor(props) {
+    super(props);
+
+    Navigation.mergeOptions(props.componentId, {
+      topBar: {
+        leftButtons: []
+      }
+    });
+  }
 
   componentDidMount() {
     this.props.viewProcedure();
   }
 
   componentWillReceiveProps(nextProps) {
-    const { data } = nextProps;
-    if (data.procedure && this.listType !== data.procedure.listType) {
-      this.listType = data.procedure.listType;
+    const { data, componentId } = nextProps;
+    if (data.procedure) {
       let newTitle;
       switch (data.procedure.listType) {
         case "VOTING":
@@ -115,8 +115,13 @@ class Detail extends Component {
           newTitle = "Vorbereitung";
           break;
       }
-      this.props.navigator.setTitle({
-        title: newTitle.toUpperCase() // the new title of the screen as appears in the nav bar
+
+      Navigation.mergeOptions(componentId, {
+        topBar: {
+          title: {
+            text: newTitle.toUpperCase()
+          }
+        }
       });
     }
   }
@@ -140,6 +145,7 @@ class Detail extends Component {
   };
 
   render() {
+    console.log("NOW props", this.props);
     const { procedureId, toggleNotification, navigator } = this.props;
     const { data: { networkStatus, refetch, loading, procedure } } = this.props;
     if (!procedure && loading) {

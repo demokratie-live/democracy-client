@@ -1,7 +1,4 @@
-import {
-  Navigation,
-  ScreenVisibilityListener as RNNScreenVisibilityListener
-} from "react-native-navigation";
+import { Navigation } from "react-native-navigation";
 import { NetInfo } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 // import Reactotron from "reactotron-react-native";
@@ -13,10 +10,7 @@ import client, { persistor } from "./src/graphql/client";
 import registerScreens from "./src/screens";
 
 import IS_INSTRUCTIONS_SHOWN from "./src/graphql/queries/local/isInstructionShown";
-import setCurrentScreen from "./src/graphql/mutations/setCurrentScreen";
 import UPDATE_NETWORK_STATUS from "./src/graphql/mutations/updateNetworkStatus";
-
-import topTabs from "./src/screens/VoteList/topTabs";
 
 import "./src/services/browserLinks";
 
@@ -39,24 +33,6 @@ class App {
         this.isInstructionsShown = data.isInstructionsShown;
       }
     });
-
-    // const listener = new RNNScreenVisibilityListener({
-    //   didAppear: args => {
-    //     let { screen } = args;
-
-    //     if (screen === "democracy.VoteList.List") {
-    //       screen = "democracy.VoteList";
-    //     }
-
-    //     client.mutate({
-    //       mutation: setCurrentScreen,
-    //       variables: {
-    //         screen
-    //       }
-    //     });
-    //   }
-    // });
-    // listener.register();
 
     NetInfo.isConnected.addEventListener("connectionChange", isConnected => {
       client.mutate({
@@ -94,10 +70,16 @@ class App {
           },
           noBorder: true,
           leftButtons: {
-            id: "buttonOne",
+            id: "menuButton",
             icon: menuIcon,
             color: "#fff"
-          }
+          },
+          backButton: {
+            visible: true,
+            color: "#fff",
+            title: "Zurück"
+          },
+          buttonColor: "#fff"
         }
       });
       Navigation.setRoot({
@@ -136,16 +118,23 @@ class App {
           }
         }
       });
-      Navigation.events().registerNavigationButtonPressedListener(event => {
-        console.log("DDBUG 6", event);
-        Navigation.mergeOptions(event.componentId, {
-          sideMenu: {
-            left: {
-              visible: true
-            }
+      Navigation.events().registerNavigationButtonPressedListener(
+        ({ componentId, buttonId }) => {
+          switch (buttonId) {
+            case "menuButton":
+              Navigation.mergeOptions(componentId, {
+                sideMenu: {
+                  left: {
+                    visible: true
+                  }
+                }
+              });
+              break;
+            default:
+              break;
           }
-        });
-      });
+        }
+      );
     });
 
     //   if (isInstructionsShown) {

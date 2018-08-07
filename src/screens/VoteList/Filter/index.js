@@ -324,15 +324,38 @@ const STORAGE_KEY = "VoteList.Filters";
 class Filter extends Component {
   constructor(props) {
     super(props);
-    props.navigator.setStyle({
-      navBarCustomView: "democracy.VoteList.Filter.Header",
-      navBarComponentAlignment: "fill",
-      navBarNoBorder: true,
-      navBarCustomViewInitialProps: {
-        navigator: this.props.navigator,
-        onSave: this.onSave
+
+    Navigation.mergeOptions(props.componentId, {
+      topBar: {
+        title: {
+          text: "Filter".toUpperCase()
+        },
+        leftButtons: [
+          {
+            id: "cancel",
+            text: "Abbrechen"
+          }
+        ],
+        rightButtons: [
+          {
+            id: "save",
+            text: "Speichern"
+          }
+        ]
       }
     });
+
+    Navigation.events().bindComponent(this);
+
+    // props.navigator.setStyle({
+    //   navBarCustomView: "democracy.VoteList.Filter.Header",
+    //   navBarComponentAlignment: "fill",
+    //   navBarNoBorder: true,
+    //   navBarCustomViewInitialProps: {
+    //     navigator: this.props.navigator,
+    //     onSave: this.onSave
+    //   }
+    // });
 
     AsyncStorage.getItem(STORAGE_KEY).then(data => {
       const jsonObj = JSON.parse(data);
@@ -417,9 +440,7 @@ class Filter extends Component {
       refetchQueries: [{ query: GET_FILTERS }]
     });
 
-    Navigation.dismissModal({
-      animationType: "slide-down" // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
-    });
+    Navigation.dismissModal(this.props.componentId);
     return true;
   };
 
@@ -492,6 +513,15 @@ class Filter extends Component {
       return "mixed";
     }
     return false;
+  };
+
+  navigationButtonPressed = ({ componentId, buttonId }) => {
+    console.log("buttonId", buttonId, componentId);
+    if (buttonId === "cancel") {
+      Navigation.dismissModal(componentId);
+    } else if (buttonId === "save") {
+      this.onSave();
+    }
   };
 
   render() {

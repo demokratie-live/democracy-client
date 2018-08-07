@@ -35,36 +35,21 @@ export default function registerScreens() {
       )
     )
   );
-  Navigation.registerComponent(
-    "democracy.VoteList.List",
-    () =>
+  Navigation.registerComponent("democracy.VoteList.List", () =>
+    withApollo(
       PushNotifications(
         DeepLink(NavBarLinks(SideMenuLinks(NetworkStatus(VoteListList))))
-      ),
-    client.store,
-    ApolloProvider,
-    { client }
+      )
+    )
   );
-  Navigation.registerComponent(
-    "democracy.VoteList.Filter",
-    () => VoteListFilter,
-    client.store,
-    ApolloProvider,
-    { client }
+  Navigation.registerComponent("democracy.VoteList.Filter", () =>
+    withApollo(VoteListFilter)
   );
-  Navigation.registerComponent(
-    "democracy.Instructions",
-    () => Instructions,
-    client.store,
-    ApolloProvider,
-    { client }
+  Navigation.registerComponent("democracy.Instructions", () =>
+    withApollo(Instructions)
   );
-  Navigation.registerComponent(
-    "democracy.Search",
-    () => NetworkStatus(Search),
-    client.store,
-    ApolloProvider,
-    { client }
+  Navigation.registerComponent("democracy.Search", () =>
+    withApollo(NetworkStatus(Search))
   );
   Navigation.registerComponent("democracy.SideMenu", () =>
     withApollo(SideMenu)
@@ -75,47 +60,21 @@ export default function registerScreens() {
   Navigation.registerComponent("democracy.Support", () =>
     withApollo(NetworkStatus(NavBarLinks(Support)))
   );
-  Navigation.registerComponent(
-    "democracy.Security",
-    () => NetworkStatus(NavBarLinks(Security)),
-    client.store,
-    ApolloProvider,
-    { client }
+  Navigation.registerComponent("democracy.Security", () =>
+    withApollo(NetworkStatus(NavBarLinks(Security)))
   );
-  Navigation.registerComponent(
-    "democracy.VoteVarification",
-    () => NetworkStatus(NavBarLinks(VoteVarification)),
-    client.store,
-    ApolloProvider,
-    { client }
+  Navigation.registerComponent("democracy.VoteVarification", () =>
+    withApollo(NetworkStatus(NavBarLinks(VoteVarification)))
   );
-  Navigation.registerComponent(
-    "democracy.Notifications",
-    () => NetworkStatus(NavBarLinks(Notifications)),
-    client.store,
-    ApolloProvider,
-    { client }
+  Navigation.registerComponent("democracy.Notifications", () =>
+    withApollo(NetworkStatus(NavBarLinks(Notifications)))
   );
-  Navigation.registerComponent(
-    "democracy.Credits",
-    () => NetworkStatus(NavBarLinks(Credits)),
-    client.store,
-    ApolloProvider,
-    { client }
+  Navigation.registerComponent("democracy.Credits", () =>
+    withApollo(NetworkStatus(NavBarLinks(Credits)))
   );
-  Navigation.registerComponent(
-    "democracy.Pdf",
-    () => Pdf,
-    client.store,
-    ApolloProvider,
-    { client }
-  );
+  Navigation.registerComponent("democracy.Pdf", () => withApollo(Pdf));
 
-  Navigation.registerComponent(
-    "democracy.Notifications.InApp",
-    () => InAppNotification,
-    client.store,
-    ApolloProvider,
-    { client }
+  Navigation.registerComponent("democracy.Notifications.InApp", () =>
+    withApollo(InAppNotification)
   );
 }

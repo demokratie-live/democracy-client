@@ -111,7 +111,7 @@ class Header extends Component {
           />
         </SearchInputWrapper>
 
-        <SearchBackTextIos title="Zurück" onPress={this.clickBack} />
+        {/* <SearchBackTextIos title="Zurück" onPress={this.clickBack} /> */}
       </Wrapper>
     );
   }

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Platform, SegmentedControlIOS, Dimensions } from "react-native";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
-import { Navigation, Navigator } from "react-native-navigation";
+import { Navigation } from "react-native-navigation";
 
 import List from "./List";
 import Header from "./Header";
@@ -30,16 +30,19 @@ const SegmentControlsWrapper = styled.View`
 `;
 
 class VoteList extends Component {
-  static navigatorStyle = {
-    navBarNoBorder: true,
-    navBarButtonColor: "#FFFFFF",
-    navBarBackgroundColor: "#4494d3",
-    navBarTextColor: "#FFFFFF",
-    navBarTextFontSize: 17,
-    selectedTopTabTextColor: "#ffffff",
-    selectedTopTabIndicatorColor: "#ffffff",
-    selectedTopTabIndicatorHeight: 5
-  };
+  constructor(props) {
+    super(props);
+
+    Navigation.mergeOptions(props.componentId, {
+      topBar: {
+        title: {
+          text: "Bundestag".toUpperCase()
+        }
+      }
+    });
+
+    Navigation.events().bindComponent(this);
+  }
 
   state = {
     selectedIndex: 0
@@ -69,6 +72,41 @@ class VoteList extends Component {
     },
     { key: "HOT", title: "What's hot?", smallTitle: "What's hot?" }
   ];
+
+  navigationButtonPressed = ({ componentId, buttonId }) => {
+    switch (buttonId) {
+      case "filterButton":
+        Navigation.showModal({
+          stack: {
+            children: [
+              {
+                component: {
+                  name: "democracy.VoteList.Filter",
+                  options: {
+                    topBar: {
+                      title: {
+                        text: "Filter"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        });
+        break;
+      case "searchButton":
+        Navigation.push(componentId, {
+          component: {
+            name: "democracy.Search"
+          }
+        });
+        break;
+
+      default:
+        break;
+    }
+  };
 
   renderSegmentControls = () => {
     if (Platform.OS === "ios") {
@@ -117,12 +155,7 @@ class VoteList extends Component {
           }}
         >
           {this.lists.map(list => (
-            <List
-              key={list.key}
-              listType={list.key}
-              navigator={this.props.navigator}
-              {...this.props}
-            />
+            <List key={list.key} listType={list.key} {...this.props} />
           ))}
         </ScrollView>
       );
@@ -131,7 +164,6 @@ class VoteList extends Component {
   };
 
   render() {
-    console.log("DDBUG", this.props);
     return (
       <Screen>
         {this.renderSegmentControls()}
@@ -141,7 +173,9 @@ class VoteList extends Component {
   }
 }
 
-VoteList.propTypes = {};
+VoteList.propTypes = {
+  componentId: PropTypes.string.isRequired
+};
 
 VoteList.defaultProps = {};
 

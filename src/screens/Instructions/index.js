@@ -3,7 +3,7 @@ import Swiper from "react-native-swiper";
 import { graphql } from "react-apollo";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
-import { Navigator } from "react-native-navigation";
+import { Navigation } from "react-native-navigation";
 
 import Slide from "./Slide";
 
@@ -46,7 +46,7 @@ class Introductions extends Component {
           isInstructionsShown: true
         }
       });
-      this.props.navigator.dismissAllModals();
+      Navigation.dismissAllModals();
     }
   };
 

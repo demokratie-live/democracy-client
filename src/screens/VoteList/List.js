@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
-import { Navigator } from "react-native-navigation";
+import { Navigation } from "react-native-navigation";
 import { graphql, compose } from "react-apollo";
 import { unionBy } from "lodash";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -190,8 +190,8 @@ class List extends Component {
     });
   };
 
-  setRightButtons = ({ filterActive }) => {
-    // const searchIcon = Platform.OS === "ios" ? "ios-search" : "md-search";
+  setRightButtons = async ({ filterActive }) => {
+    const searchIcon = Platform.OS === "ios" ? "ios-search" : "md-search";
     // Ionicons.getImageSource(searchIcon, 24, "#FFFFFF").then(iconSearch => {
     //   this.props.navigator.setButtons({
     //     rightButtons: [
@@ -208,6 +208,25 @@ class List extends Component {
     //     ]
     //   });
     // });
+
+    const iconSearch = await Ionicons.getImageSource(searchIcon, 24, "#FFFFFF");
+
+    Navigation.mergeOptions(this.props.componentId, {
+      topBar: {
+        rightButtons: [
+          {
+            id: "searchButton",
+            icon: iconSearch
+          },
+          {
+            id: "filterButton",
+            icon: filterActive
+              ? require("../../../assets/icons/badge-active-20.png")
+              : require("../../../assets/icons/badge-inactive-20.png")
+          }
+        ]
+      }
+    });
   };
 
   prepareFilter = filterObj => {

@@ -95,9 +95,7 @@ class BalloutBox extends Component {
                 voteLocal(selection);
               });
 
-              navigator.dismissAllModals({
-                animationType: "slide-down" // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
-              });
+              Navigation.dismissAllModals();
             });
             this.setState({ isDraggable: false });
           } else {
@@ -134,14 +132,32 @@ class BalloutBox extends Component {
   };
 
   showNotification = () => {
-    Navigation.showInAppNotification({
-      screen: "democracy.Notifications.InApp", // unique ID registered with Navigation.registerScreen
-      passProps: {
-        title: "Stimme abgeben",
-        description: "Ziehe deine Auswahl auf den Haken."
-      }, // simple serializable object that will pass as props to the in-app notification (optional)
-      autoDismissTimerSec: 3 // auto dismiss notification in seconds
+    Navigation.showOverlay({
+      component: {
+        id: "inAppNotification",
+        name: "democracy.Notifications.InApp",
+        passProps: {
+          title: "Stimme abgeben",
+          description: "Ziehe deine Auswahl auf den Haken."
+        },
+        options: {
+          overlay: {
+            interceptTouchOutside: true
+          }
+        }
+      }
     });
+    setTimeout(() => {
+      Navigation.dismissOverlay("inAppNotification");
+    }, 3000);
+    // Navigation.showInAppNotification({
+    //   screen: "democracy.Notifications.InApp", // unique ID registered with Navigation.registerScreen
+    //   passProps: {
+    //     title: "Stimme abgeben",
+    //     description: "Ziehe deine Auswahl auf den Haken."
+    //   }, // simple serializable object that will pass as props to the in-app notification (optional)
+    //   autoDismissTimerSec: 3 // auto dismiss notification in seconds
+    // });
   };
 
   previewAnimation = () => {
