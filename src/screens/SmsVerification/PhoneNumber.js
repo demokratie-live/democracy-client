@@ -103,6 +103,9 @@ class SmsVerification extends Component {
             if (!res.data.requestCode.succeeded) {
               this.showNotification({ message: res.data.requestCode.reason });
             }
+            // TODO: Navigate to Code Input if aut_code_expires is not yet expired
+            // Contains a Date (String)
+            // Do not do the Nvaigation here - do it on the "openVerificationScreen"
             AsyncStorage.setItem('auth_code_expires', res.data.requestCode.expireTime)
             this.props.navigator.push({
               screen: "democracy.SmsVerification.Code",

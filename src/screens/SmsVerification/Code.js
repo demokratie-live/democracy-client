@@ -147,6 +147,9 @@ class Code extends Component {
             if (!res.data.requestCode.succeeded) {
               this.showNotification({ message: res.data.requestCode.reason });
             }
+            // TODO: Navigate to Code Input if aut_code_expires is not yet expired
+            // Contains a Date (String)
+            // Do not do the Nvaigation here - do it on the "openVerificationScreen"
             AsyncStorage.setItem('auth_code_expires', res.data.requestCode.expireTime)
             this.setState({ countdown: Math.ceil((new Date(res.data.requestCode.resendTime).getTime() - (new Date()).getTime()) / 1000) });
             this.startCountdown();
