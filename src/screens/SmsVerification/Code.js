@@ -8,8 +8,8 @@ import {
   Alert,
   Platform
 } from "react-native";
-import { Navigator } from "react-native-navigation";
-import { graphql } from "react-apollo";
+import { Navigator, Navigation } from "react-native-navigation";
+import { graphql, compose } from "react-apollo";
 import { sha256 } from "react-native-sha256";
 
 import Description from "./Components/Description";
@@ -17,6 +17,7 @@ import CodeInput from "./Components/CodeInput";
 import Button from "./Components/Button";
 
 import REQUEST_VERIFICATION from "../../graphql/mutations/requestVerification";
+import REQUEST_CODE from "../../graphql/mutations/requestCode";
 
 const ScrollView = styled.ScrollView.attrs({
   contentContainerStyle: {
@@ -36,7 +37,7 @@ class Code extends Component {
   state = {
     height: Dimensions.get("window").height,
     keyboardHeight: 0,
-    countdown: this.props.resendTime,
+    countdown: Math.ceil((this.props.resendTime.getTime() - (new Date()).getTime()) / 1000),
     phoneNumber: ''
   };
 
@@ -60,17 +61,11 @@ class Code extends Component {
       title: "Verifizieren".toUpperCase() // the new title of the screen as appears in the nav bar
     });
 
-    this.countDownInterval = setInterval(() => {
-      this.setState({ countdown: this.state.countdown - 1 }, () => {
-        if (this.state.countdown <= 0) {
-          clearInterval(this.countDownInterval);
-        }
-      });
-    }, 1000);
+    this.startCountdown();
   }
 
   componentWillUnmount() {
-    clearInterval(this.countDownInterval);
+    this.stopCountdown();
   }
 
   onLayout = e => {
@@ -84,7 +79,6 @@ class Code extends Component {
       const res = await this.props.requestVerification({
         variables: { code, newPhoneHash: phoneNumberHash }
       });
-      console.log(res);
       if (res.data.requestVerification.succeeded) {
         AsyncStorage.setItem("auth_phoneHash", phoneNumberHash);
         Alert.alert("Deine Verifikation war erfolgreich", null, [
@@ -93,8 +87,35 @@ class Code extends Component {
             onPress: () => this.props.navigator.dismissAllModals()
           }
         ]);
+      } else {
+        this.showNotification({ message: res.data.requestVerification.reason });
       }
     }
+  };
+
+  startCountdown() {
+    this.countDownInterval = setInterval(() => {
+      this.setState({ countdown: this.state.countdown - 1 }, () => {
+        if (this.state.countdown <= 0) {
+          this.stopCountdown();
+        }
+      });
+    }, 1000);
+  };
+
+  stopCountdown() {
+    clearInterval(this.countDownInterval);
+  };
+
+  showNotification = ({ message }) => {
+    Navigation.showInAppNotification({
+      screen: "democracy.Notifications.InApp", // unique ID registered with Navigation.registerScreen
+      passProps: {
+        title: "Verifikationsfehler",
+        description: message
+      }, // simple serializable object that will pass as props to the in-app notification (optional)
+      autoDismissTimerSec: 5 // auto dismiss notification in seconds
+    });
   };
 
   keyboardDidShow = e => {
@@ -108,7 +129,7 @@ class Code extends Component {
   sendNumber = async () => {
     const phoneNumber = await AsyncStorage.getItem("auth_phone");
     Alert.alert(
-      "Bestätigung der Telef  onnummer",
+      "Bestätigung der Telefonnummer",
       `${phoneNumber}\nIst diese Nummer korrekt?`,
 
       [
@@ -117,7 +138,20 @@ class Code extends Component {
           onPress: () => this.props.navigator.pop(),
           style: "cancel"
         },
-        { text: "Ja", onPress: () => console.log("OK Pressed") }
+        {
+          text: "Ja",
+          onPress: async () => {
+            const res = await this.props.requestCode({
+              variables: { newPhone: phoneNumber, newUser: true }
+            });
+            if (!res.data.requestCode.succeeded) {
+              this.showNotification({ message: res.data.requestCode.reason });
+            }
+            AsyncStorage.setItem('auth_code_expires', res.data.requestCode.expireTime)
+            this.setState({ countdown: Math.ceil((new Date(res.data.requestCode.resendTime).getTime() - (new Date()).getTime()) / 1000) });
+            this.startCountdown();
+          }
+        }
       ]
     );
   };
@@ -157,14 +191,16 @@ class Code extends Component {
 
 Code.propTypes = {
   requestVerification: PropTypes.func.isRequired,
+  requestCode: PropTypes.func.isRequired,
   navigator: PropTypes.instanceOf(Navigator).isRequired,
-  resendTime: PropTypes.number
+  resendTime: PropTypes.instanceOf(Date)
 };
 
 Code.defaultProps = {
-  resendTime: 0
+  resendTime: new Date()
 };
 
-export default graphql(REQUEST_VERIFICATION, { name: "requestVerification" })(
-  Code
-);
+export default compose(
+  graphql(REQUEST_VERIFICATION, { name: "requestVerification" }),
+  graphql(REQUEST_CODE, { name: "requestCode" }),
+)(Code);

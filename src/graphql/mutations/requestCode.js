@@ -7,6 +7,7 @@ export default gql`
       allowNewUser
       succeeded
       resendTime
+      expireTime
     }
   }
 `;

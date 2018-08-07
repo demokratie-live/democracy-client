@@ -8,7 +8,7 @@ import {
   Alert,
   Platform
 } from "react-native";
-import { Navigator } from "react-native-navigation";
+import { Navigator, Navigation } from "react-native-navigation";
 import { graphql } from "react-apollo";
 
 import Description from "./Components/Description";
@@ -100,18 +100,32 @@ class SmsVerification extends Component {
             const res = await this.props.requestCode({
               variables: { newPhone: phoneNumber, newUser: true }
             });
-            console.log(res);
-            return this.props.navigator.push({
+            if (!res.data.requestCode.succeeded) {
+              this.showNotification({ message: res.data.requestCode.reason });
+            }
+            AsyncStorage.setItem('auth_code_expires', res.data.requestCode.expireTime)
+            this.props.navigator.push({
               screen: "democracy.SmsVerification.Code",
               backButtonTitle: "Zurück",
               passProps: {
-                resendTime: res.data.requestCode.resendTime
+                resendTime: new Date(res.data.requestCode.resendTime)
               }
             });
           }
         }
       ]
     );
+  };
+
+  showNotification = ({ message }) => {
+    Navigation.showInAppNotification({
+      screen: "democracy.Notifications.InApp", // unique ID registered with Navigation.registerScreen
+      passProps: {
+        title: "Verifikationsfehler",
+        description: message
+      }, // simple serializable object that will pass as props to the in-app notification (optional)
+      autoDismissTimerSec: 5 // auto dismiss notification in seconds
+    });
   };
 
   render() {
