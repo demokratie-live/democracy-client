@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { AsyncStorage } from "react-native";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import { Navigator } from "react-native-navigation";
@@ -29,14 +30,51 @@ class SmsVerification extends Component {
     orientation: "portrait"
   };
 
-  componentDidMount() {
-    this.props.navigator.setTitle({
+  constructor(props) {
+    super(props);
+
+    props.navigator.setTitle({
       title: "Verifizieren".toUpperCase() // the new title of the screen as appears in the nav bar
+    });
+
+    props.navigator.setButtons({
+      leftButtons: [
+        {
+          title: "Abbrechen",
+          id: "closeModal"
+        }
+      ]
+    });
+    props.navigator.addOnNavigatorEvent(event => {
+      if (event.type) {
+        // NavBar Events
+        switch (event.id) {
+          case "closeModal":
+            props.navigator.dismissModal();
+            break;
+
+          default:
+            break;
+        }
+      }
+    });
+  }
+
+  state = {
+    authCodeExpires: false
+  };
+
+  componentDidMount() {
+    AsyncStorage.getItem("auth_code_expires").then(authCodeExpires => {
+      if (new Date(authCodeExpires) > new Date()) {
+        this.setState({ authCodeExpires });
+      }
     });
   }
 
   render() {
     const { navigator } = this.props;
+    const { authCodeExpires } = this.state;
     return (
       <ScrollView>
         <Logo />
@@ -45,17 +83,34 @@ class SmsVerification extends Component {
         />
         <Folding
           title="Wofür braucht DEMOCRACY meine Handynummer?"
-          text={`Ergebnisintegrität bedeutet, dass genau die Stimmen gezählt werden, die von wahlberechtigten BürgerInnen abgegeben werden.\n
-Da uns von DEMOCRACY Deutschland e.V. allerdings keine Wählerkartei vorliegt, haben wir uns dafür entschieden, dass Urnenbuchproblem heuristisch zu lösen und Deine deutsche Handynummer als Schlüsselidentifikator zu verwenden. 
+          text={`Ergebnisintegrität ist eine der zentralen Anforderungen eines Wahlverfahrens und bedeutet, dass genau die Stimmen gezählt werden, die von wahlberechtigten BürgerInnen abgegeben werden.\n
+Da uns von DEMOCRACY Deutschland e.V. allerdings keine Wählerkartei vorliegt, haben wir uns dafür entschieden, das sogenannte Urnenbuchproblem heuristisch zu lösen und Deine deutsche Handynummer als Schlüsselidentifikator zu verwenden. Das Urnenbuchproblem beschäftigt sich mit der Frage, wer bei einer konkreten Wahl/Abstimmung berechtigt ist, seine Stimme abzugeben und führt die Berechtigten in eben diesem.
 
-Auf diese Weise können wir weit belastere Ergebnisse erzeugen als über eine einfache E-Mail-Verifikation. Alle Vor- und Nachteile dieses Verfahrens kannst du hier einsehen.`}
+Auf diese Weise können wir weit belastere Ergebnisse erzeugen als über eine einfache E-Mail-Verifikation. Es gilt insofern, eine deutsche Handynummer – eine Stimme. 
+
+Mehr Informationen zu diesem Verfahren kannst du hier einsehen.
+          `}
         />
         <Folding
           title="Was passiert mit meiner Nummer nach der Verifikation?"
-          text={`DEMOCRACY Deutschland e.V. übermittelt Deine Handynummer…\n
+          text={`DEMOCRACY Deutschland e.V. übermittelt Dir nach der Eingabe und Bestätigung Deiner Handynummer einen Verfizierungscode per SMS. Dafür übergibt der Verein Deine Handynummer einmalig im Klartext an den deutschen SMS-Service-Provider SMSFlatrate (smsflatrate.net, Kloppe Media, Ansbacher Str. 85, 91541 Rothenburg). Der Verein speichert Deine Handynummer daraufhin lediglich einwegverschlüsselt in seiner Datenbank; eine weitere Verwendung dieser ist insofern ausgeschlossen.\n
 
-Mehr Informationen zum verwendeten Verfahren kannst Du hier einsehen. Zu unserer Datenschutzbestimmung gelangst Du ferner hier. `}
+Mehr Informationen zum verwendeten Verfahren kannst Du in unseren Nutzungsbedingungen einsehen.
+
+Zu unserer Datenschutzbestimmung gelangst Du ferner hier.`}
         />
+        {authCodeExpires && (
+          <Button
+            onPress={() =>
+              navigator.push({
+                screen: "democracy.SmsVerification.Code",
+                backButtonTitle: "Zurück"
+              })
+            }
+            style={{ width: "100%", marginTop: 18 }}
+            title="CODE EINGEBEN"
+          />
+        )}
 
         <Button
           onPress={() =>
@@ -65,22 +120,8 @@ Mehr Informationen zum verwendeten Verfahren kannst Du hier einsehen. Zu unserer
             })
           }
           style={{ width: "100%", marginTop: 18 }}
-          title="VERIFIZIEREN"
+          title={`${authCodeExpires ? "NEU " : ""} VERIFIZIEREN`}
         />
-
-        {/* <PhonenumberInput /> */}
-        {/* <Button text="CODE ANFORDERN" onPress={() => {}} /> */}
-        {/* <Button
-          style={{
-            width: "100%",
-            position: "absolute",
-            bottom: 0,
-            backgroundColor: "#F0F0F0"
-          }}
-          textStyle={{ color: "#000" }}
-          text="Warum mit der Handynummer registrieren?"
-          onPress={() => {}}
-        /> */}
       </ScrollView>
     );
   }

@@ -37,13 +37,25 @@ class Code extends Component {
   state = {
     height: Dimensions.get("window").height,
     keyboardHeight: 0,
-    countdown: Math.ceil((this.props.resendTime.getTime() - (new Date()).getTime()) / 1000),
-    phoneNumber: ''
+    countdown: Math.ceil(
+      (this.props.resendTime.getTime() - new Date().getTime()) / 1000
+    ),
+    phoneNumber: ""
   };
 
   componentDidMount() {
-    const storedPhoneNumber = AsyncStorage.getItem('auth_phone');
-    storedPhoneNumber.then((phoneNumber) => {
+    AsyncStorage.getItem("auth_code_resend_time").then(resendTime => {
+      const countdown = Math.ceil(
+        (new Date(resendTime).getTime() - new Date().getTime()) / 1000
+      );
+      if (countdown > 0) {
+        this.setState({ countdown }, () => {
+          this.startCountdown();
+        });
+      }
+    });
+    const storedPhoneNumber = AsyncStorage.getItem("auth_phone");
+    storedPhoneNumber.then(phoneNumber => {
       this.setState({
         phoneNumber
       });
@@ -66,6 +78,8 @@ class Code extends Component {
 
   componentWillUnmount() {
     this.stopCountdown();
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
   }
 
   onLayout = e => {
@@ -94,6 +108,9 @@ class Code extends Component {
   };
 
   startCountdown() {
+    if (this.countDownInterval) {
+      this.stopCountdown();
+    }
     this.countDownInterval = setInterval(() => {
       this.setState({ countdown: this.state.countdown - 1 }, () => {
         if (this.state.countdown <= 0) {
@@ -101,11 +118,11 @@ class Code extends Component {
         }
       });
     }, 1000);
-  };
+  }
 
   stopCountdown() {
     clearInterval(this.countDownInterval);
-  };
+  }
 
   showNotification = ({ message }) => {
     Navigation.showInAppNotification({
@@ -118,12 +135,10 @@ class Code extends Component {
     });
   };
 
-  // TODO: One of those functions causes unmounted warning
   keyboardDidShow = e => {
     this.setState({ keyboardHeight: e.endCoordinates.height });
   };
 
-  // TODO: One of those functions causes unmounted warning
   keyboardDidHide = () => {
     this.setState({ keyboardHeight: 0 });
   };
@@ -143,17 +158,23 @@ class Code extends Component {
         {
           text: "Ja",
           onPress: async () => {
-            const res = await this.props.requestCode({
+            const {
+              data: {
+                requestCode: { succeeded, reason, expireTime, resendTime }
+              }
+            } = await this.props.requestCode({
               variables: { newPhone: phoneNumber, newUser: true }
             });
-            if (!res.data.requestCode.succeeded) {
-              this.showNotification({ message: res.data.requestCode.reason });
+            if (!succeeded) {
+              this.showNotification({ message: reason });
             }
-            // TODO: Navigate to Code Input if aut_code_expires is not yet expired
-            // Contains a Date (String)
-            // Do not do the Nvaigation here - do it on the "openVerificationScreen"
-            AsyncStorage.setItem('auth_code_expires', res.data.requestCode.expireTime)
-            this.setState({ countdown: Math.ceil((new Date(res.data.requestCode.resendTime).getTime() - (new Date()).getTime()) / 1000) });
+            AsyncStorage.setItem("auth_code_expires", expireTime);
+            AsyncStorage.setItem("auth_code_resend_time", resendTime);
+            this.setState({
+              countdown: Math.ceil(
+                (new Date(resendTime).getTime() - new Date().getTime()) / 1000
+              )
+            });
             this.startCountdown();
           }
         }
@@ -181,7 +202,9 @@ class Code extends Component {
         }}
         onLayout={this.onLayout}
       >
-        <Description text={`Bitte gib Deinen Code ein für\n${this.state.phoneNumber}`} />
+        <Description
+          text={`Bitte gib Deinen Code ein für\n${this.state.phoneNumber}`}
+        />
         <CodeInput onChange={this.onChangeCode} />
         <Button
           title={buttonTitle}
@@ -207,5 +230,5 @@ Code.defaultProps = {
 
 export default compose(
   graphql(REQUEST_VERIFICATION, { name: "requestVerification" }),
-  graphql(REQUEST_CODE, { name: "requestCode" }),
+  graphql(REQUEST_CODE, { name: "requestCode" })
 )(Code);

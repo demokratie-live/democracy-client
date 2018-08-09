@@ -39,8 +39,8 @@ class SmsVerification extends Component {
   };
 
   componentDidMount() {
-    const storedPhoneNumber = AsyncStorage.getItem('auth_phone');
-    storedPhoneNumber.then((phoneNumber) => {
+    const storedPhoneNumber = AsyncStorage.getItem("auth_phone");
+    storedPhoneNumber.then(phoneNumber => {
       phoneNumber = phoneNumber.substr(3); //eslint-disable-line
       this.setState({
         phoneNumber
@@ -58,7 +58,11 @@ class SmsVerification extends Component {
     this.props.navigator.setTitle({
       title: "Verifizieren".toUpperCase() // the new title of the screen as appears in the nav bar
     });
+  }
 
+  componentWillUnmount() {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
   }
 
   onLayout = e => {
@@ -92,7 +96,7 @@ class SmsVerification extends Component {
       [
         {
           text: "Bearbeiten",
-          onPress: () => console.log("Cancel Pressed"),
+          onPress: () => {},
           style: "cancel"
         },
         {
@@ -108,7 +112,10 @@ class SmsVerification extends Component {
             // TODO: Navigate to Code Input if aut_code_expires is not yet expired
             // Contains a Date (String)
             // Do not do the Nvaigation here - do it on the "openVerificationScreen"
-            AsyncStorage.setItem('auth_code_expires', res.data.requestCode.expireTime)
+            AsyncStorage.setItem(
+              "auth_code_expires",
+              res.data.requestCode.expireTime
+            );
             this.props.navigator.push({
               screen: "democracy.SmsVerification.Code",
               backButtonTitle: "Zurück",
