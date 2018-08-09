@@ -119,7 +119,11 @@ Zu unserer Datenschutzbestimmung gelangst Du ferner hier.`}
               backButtonTitle: "Zurück"
             })
           }
-          style={{ width: "100%", marginTop: 18 }}
+          style={{
+            width: "100%",
+            marginTop: 18,
+            backgroundColor: !authCodeExpires ? "#4494D3" : "#9AC5E7"
+          }}
           title={`${authCodeExpires ? "NEU " : ""} VERIFIZIEREN`}
         />
       </ScrollView>
