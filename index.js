@@ -1,5 +1,5 @@
 import { Navigation } from "react-native-navigation";
-import { NetInfo } from "react-native";
+import { NetInfo, Platform } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 // import Reactotron from "reactotron-react-native";
 
@@ -82,42 +82,98 @@ class App {
           buttonColor: "#fff"
         }
       });
-      Navigation.setRoot({
-        root: {
-          sideMenu: {
-            left: {
-              component: {
-                id: "leftSideComponentId",
-                name: "democracy.SideMenu"
+      if (Platform.OS === "ios") {
+        Navigation.setRoot({
+          root: {
+            sideMenu: {
+              left: {
+                component: {
+                  id: "leftSideComponentId",
+                  name: "democracy.SideMenu"
+                },
+                visible: true,
+                enabled: true
               },
-              visible: true,
-              enabled: true
-            },
-            center: {
-              stack: {
-                id: "mainView",
-                children: [
-                  {
-                    component: {
-                      name: "democracy.VoteList"
+              center: {
+                stack: {
+                  id: "mainView",
+                  children: [
+                    {
+                      component: {
+                        name: "democracy.VoteList"
+                      }
                     }
-                  }
-                ],
-                options: {
-                  topBar: {
-                    title: {
-                      text: "Bundestag".toUpperCase()
-                    },
-                    backButton: {
-                      showTitle: false
+                  ],
+                  options: {
+                    topBar: {
+                      title: {
+                        text: "Bundestag".toUpperCase()
+                      },
+                      backButton: {
+                        showTitle: false
+                      }
                     }
                   }
                 }
               }
             }
           }
-        }
-      });
+        });
+      } else {
+        Navigation.setRoot({
+          root: {
+            stack: {
+              children: [
+                {
+                  topTabs: {
+                    children: [
+                      {
+                        component: {
+                          name: "democracy.VoteList.List",
+                          passProps: {
+                            listType: "VOTING"
+                          },
+                          options: {
+                            topTab: {
+                              title: "Abstimmung"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        component: {
+                          name: "democracy.VoteList.List",
+                          passProps: {
+                            listType: "PREPARATION"
+                          },
+                          options: {
+                            topTab: {
+                              title: "Vorbereitung"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        component: {
+                          name: "democracy.VoteList.List",
+                          passProps: {
+                            listType: "HOT"
+                          },
+                          options: {
+                            topTab: {
+                              title: "What's Hot"
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        });
+      }
       Navigation.events().registerNavigationButtonPressedListener(
         ({ componentId, buttonId }) => {
           switch (buttonId) {

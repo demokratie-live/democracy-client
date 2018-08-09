@@ -1,6 +1,6 @@
 package de.democracydeutschland.app;
 
-import com.reactnativenavigation.controllers.SplashActivity;
+import com.reactnativenavigation.NavigationActivity;
 
 import android.support.v4.content.ContextCompat;
 import android.view.ViewGroup;
@@ -13,7 +13,8 @@ import android.widget.TextView;
 import android.view.Gravity;
 import android.util.TypedValue;
 
-public class MainActivity extends SplashActivity {
+public class MainActivity extends NavigationActivity {
+    /*
     @Override
     public LinearLayout createSplashLayout() {
         LinearLayout view = new LinearLayout(this);
@@ -31,4 +32,5 @@ public class MainActivity extends SplashActivity {
         view.addView(imageView);
         return view;
     }
+    */
 }

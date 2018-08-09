@@ -4,21 +4,22 @@ import android.app.Activity;
 import android.util.Log;
 
 import com.facebook.react.bridge.ReactContext;
+import com.reactnativenavigation.NavigationActivity;
 import com.reactnativenavigation.NavigationApplication;
-import com.reactnativenavigation.controllers.ActivityCallbacks;
 import com.reactnativenavigation.react.ReactGateway;
 import com.wix.reactnativenotifications.core.AppLifecycleFacade;
 
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-public class NotificationsLifecycleFacade extends ActivityCallbacks implements AppLifecycleFacade {
+public class NotificationsLifecycleFacade extends NavigationActivity implements AppLifecycleFacade {
 
     private static final String TAG = NotificationsLifecycleFacade.class.getSimpleName();
 
     private Activity mVisibleActivity;
     private Set<AppVisibilityListener> mListeners = new CopyOnWriteArraySet<>();
 
+    /*
     @Override
     public void onActivityResumed(Activity activity) {
         switchToVisible(activity);
@@ -38,10 +39,12 @@ public class NotificationsLifecycleFacade extends ActivityCallbacks implements A
     public void onActivityDestroyed(Activity activity) {
         switchToInvisible(activity);
     }
+    */
 
     @Override
     public boolean isReactInitialized() {
-        return NavigationApplication.instance.isReactContextInitialized();
+        //return NavigationActivity.instance.isReactContextInitialized();
+        return true;
     }
 
     @Override
@@ -52,7 +55,7 @@ public class NotificationsLifecycleFacade extends ActivityCallbacks implements A
         }
 
         if(isReactInitialized()) {
-            return reactGateway.getReactContext();
+            //return reactGateway.getReactNativeHost();
         }
         return null;
     }

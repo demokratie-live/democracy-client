@@ -14,13 +14,13 @@ def getNpmVersionArray() { // major [0], minor [1], patch [2]
 
 buildscript {
     repositories {
-        google()
         mavenLocal()
         mavenCentral()
         jcenter()
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.1.4'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -29,7 +29,6 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
         mavenCentral()
         mavenLocal()
         jcenter()
@@ -39,6 +38,7 @@ allprojects {
         }
         maven { url 'https://maven.google.com' }
         maven { url 'https://jitpack.io' }
+        google()
     }
 }
 
