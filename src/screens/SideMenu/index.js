@@ -40,7 +40,7 @@ const Content = styled.View`
   background-color: rgba(68, 148, 211, 0.2);
 `;
 
-const Head = styled.TouchableOpacity`
+const Head = styled.View`
   flex-direction: row;
   padding-top: 16;
   padding-left: 16;
@@ -86,11 +86,11 @@ const SideMenu = ({ data: { currentScreen }, navigator }) => {
       <Content>
         {Platform.OS === "ios" && <StatusBackground />}
         <Head
-          /* onPress={() => {
-            navigator.showModal({
-              screen: "democracy.SmsVerification"
-            });
-          }} */
+        /* onPress={() => {
+          navigator.showModal({
+            screen: "democracy.SmsVerification"
+          });
+        }} */
         >
           <HeadLogo />
           <HeadTextWrapper>
