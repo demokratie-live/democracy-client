@@ -92,7 +92,7 @@ const VerificationTouch = styled.TouchableOpacity`
   width: 100%;
   position: absolute;
   z-index: 100;
-`
+`;
 
 class Detail extends Component {
   static navigatorStyle = {
@@ -209,13 +209,18 @@ class Detail extends Component {
             </IntroButtons>
           </IntroMain>
           <IntroSide>
-            {verified ? null :
-              <VerificationTouch onPress={() => {
-                navigator.showModal({
-                  screen: "democracy.SmsVerification"
-                });
-              }} />
-            }
+            {verified ? null : (
+              <VerificationTouch
+                onPress={() => {
+                  navigator.showModal({
+                    screen: "democracy.SmsVerification",
+                    passProps: {
+                      procedureId
+                    }
+                  });
+                }}
+              />
+            )}
             <ActivityIndex
               procedureId={procedureId}
               touchable
@@ -244,7 +249,10 @@ class Detail extends Component {
             />
           </Segment>
           <Segment title="Dokumente" scrollTo={this.scrollTo}>
-            <SegmentDocuments documents={importantDocuments} navigator={navigator} />
+            <SegmentDocuments
+              documents={importantDocuments}
+              navigator={navigator}
+            />
           </Segment>
           {currentStatusHistory.length > 0 && (
             <Segment title="Gesetzesstand" scrollTo={this.scrollTo}>

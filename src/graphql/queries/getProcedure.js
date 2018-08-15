@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 import ActivityIndex from "../fragments/ProcedureActivityIndex";
 import Voted from "../fragments/ProcedureVoted";
 import Viewed from "../fragments/ProcedureViewed";
+import Verified from "../fragments/ProcedureVerified";
 
 export default gql`
   query procedure($id: ID!) {
@@ -15,7 +16,6 @@ export default gql`
       voteDate
       notify
       listType
-      verified
       type
       subjectGroups
       submissionDate
@@ -36,9 +36,11 @@ export default gql`
       ...ActivityIndex
       ...Voted
       ...Viewed
+      ...Verified
     }
   }
   ${ActivityIndex}
   ${Voted}
   ${Viewed}
+  ${Verified}
 `;

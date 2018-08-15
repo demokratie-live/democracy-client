@@ -18,6 +18,7 @@ import Button from "./Components/Button";
 
 import REQUEST_VERIFICATION from "../../graphql/mutations/requestVerification";
 import REQUEST_CODE from "../../graphql/mutations/requestCode";
+import F_PROCEDURE_VERIFIED from "../../graphql/fragments/ProcedureVerified";
 
 const ScrollView = styled.ScrollView.attrs({
   contentContainerStyle: {
@@ -167,9 +168,11 @@ class Code extends Component {
             });
             if (!succeeded) {
               this.showNotification({ message: reason });
+            } else {
+              AsyncStorage.setItem("auth_code_expires", expireTime);
+              AsyncStorage.setItem("auth_code_resend_time", resendTime);
             }
-            AsyncStorage.setItem("auth_code_expires", expireTime);
-            AsyncStorage.setItem("auth_code_resend_time", resendTime);
+
             this.setState({
               countdown: Math.ceil(
                 (new Date(resendTime).getTime() - new Date().getTime()) / 1000
@@ -229,6 +232,32 @@ Code.defaultProps = {
 };
 
 export default compose(
-  graphql(REQUEST_VERIFICATION, { name: "requestVerification" }),
+  graphql(REQUEST_VERIFICATION, {
+    props({ mutate, ownProps: { procedureId } }) {
+      return {
+        requestVerification: args =>
+          mutate({
+            ...args,
+            update: (cache, { data }) => {
+              if (procedureId) {
+                const aiFragment = cache.readFragment({
+                  id: procedureId,
+                  fragment: F_PROCEDURE_VERIFIED
+                });
+
+                aiFragment.verified = data.requestVerification.succeeded;
+
+                cache.writeFragment({
+                  id: procedureId,
+                  fragment: F_PROCEDURE_VERIFIED,
+                  data: aiFragment
+                });
+              }
+              return { data };
+            }
+          })
+      };
+    }
+  }),
   graphql(REQUEST_CODE, { name: "requestCode" })
 )(Code);

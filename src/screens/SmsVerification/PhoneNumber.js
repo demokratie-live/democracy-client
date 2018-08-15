@@ -108,21 +108,23 @@ class SmsVerification extends Component {
             });
             if (!res.data.requestCode.succeeded) {
               this.showNotification({ message: res.data.requestCode.reason });
+            } else {
+              // TODO: Navigate to Code Input if aut_code_expires is not yet expired
+              // Contains a Date (String)
+              // Do not do the Nvaigation here - do it on the "openVerificationScreen"
+              AsyncStorage.setItem(
+                "auth_code_expires",
+                res.data.requestCode.expireTime
+              );
+              this.props.navigator.push({
+                screen: "democracy.SmsVerification.Code",
+                backButtonTitle: "Zurück",
+                passProps: {
+                  resendTime: new Date(res.data.requestCode.resendTime),
+                  procedureId: this.props.procedureId
+                }
+              });
             }
-            // TODO: Navigate to Code Input if aut_code_expires is not yet expired
-            // Contains a Date (String)
-            // Do not do the Nvaigation here - do it on the "openVerificationScreen"
-            AsyncStorage.setItem(
-              "auth_code_expires",
-              res.data.requestCode.expireTime
-            );
-            this.props.navigator.push({
-              screen: "democracy.SmsVerification.Code",
-              backButtonTitle: "Zurück",
-              passProps: {
-                resendTime: new Date(res.data.requestCode.resendTime)
-              }
-            });
           }
         }
       ]
@@ -172,7 +174,12 @@ class SmsVerification extends Component {
 
 SmsVerification.propTypes = {
   requestCode: PropTypes.func.isRequired,
-  navigator: PropTypes.instanceOf(Navigator).isRequired
+  navigator: PropTypes.instanceOf(Navigator).isRequired,
+  procedureId: PropTypes.oneOfType(PropTypes.string, PropTypes.bool)
+};
+
+SmsVerification.defaultProps = {
+  procedureId: false
 };
 
 export default graphql(REQUEST_CODE, { name: "requestCode" })(SmsVerification);
