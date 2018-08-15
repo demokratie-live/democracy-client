@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - JWT Headerbased Authentication
 
 ### Added
-- [SMS-Verification] Layouts
+- SMS-Verification
 
 ## [0.9.0] - 2018-08-02
 ### Added
