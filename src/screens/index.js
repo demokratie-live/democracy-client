@@ -17,6 +17,10 @@ import Notifications from "./Notifications";
 import Credits from "./Credits";
 import Pdf from "../components/Pdf";
 import InAppNotification from "./Notifications/InAppNotification";
+import SmsVerification from "./SmsVerification";
+import SmsVerificationPhoneNumber from "./SmsVerification/PhoneNumber";
+import SmsVerificationCode from "./SmsVerification/Code";
+import SmsVerificationError from "./SmsVerification/Error";
 
 import DeepLink from "../hocs/DeepLink";
 import NetworkStatus from "../hocs/NetworkStatus";
@@ -126,6 +130,34 @@ export default function registerScreens() {
   Navigation.registerComponent(
     "democracy.Notifications.InApp",
     () => InAppNotification,
+    client.store,
+    ApolloProvider,
+    { client }
+  );
+  Navigation.registerComponent(
+    "democracy.SmsVerification",
+    () => SmsVerification,
+    client.store,
+    ApolloProvider,
+    { client }
+  );
+  Navigation.registerComponent(
+    "democracy.SmsVerification.PhoneNumber",
+    () => SmsVerificationPhoneNumber,
+    client.store,
+    ApolloProvider,
+    { client }
+  );
+  Navigation.registerComponent(
+    "democracy.SmsVerification.Code",
+    () => SmsVerificationCode,
+    client.store,
+    ApolloProvider,
+    { client }
+  );
+  Navigation.registerComponent(
+    "democracy.SmsVerification.Error",
+    () => SmsVerificationError,
     client.store,
     ApolloProvider,
     { client }

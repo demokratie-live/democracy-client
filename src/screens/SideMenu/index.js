@@ -85,7 +85,13 @@ const SideMenu = ({ data: { currentScreen }, navigator }) => {
       </BackgroundWrapper>
       <Content>
         {Platform.OS === "ios" && <StatusBackground />}
-        <Head>
+        <Head
+        /* onPress={() => {
+          navigator.showModal({
+            screen: "democracy.SmsVerification"
+          });
+        }} */
+        >
           <HeadLogo />
           <HeadTextWrapper>
             <HeadText>Prototyp</HeadText>

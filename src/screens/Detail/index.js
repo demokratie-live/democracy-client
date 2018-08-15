@@ -87,6 +87,13 @@ const Content = styled.View`
   flex: 1;
 `;
 
+const VerificationTouch = styled.TouchableOpacity`
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 100;
+`;
+
 class Detail extends Component {
   static navigatorStyle = {
     navBarBackgroundColor: "#4494d3",
@@ -172,7 +179,8 @@ class Detail extends Component {
       listType,
       type,
       activityIndex,
-      voted
+      voted,
+      verified
     } = this.props.data.procedure;
 
     return (
@@ -201,6 +209,18 @@ class Detail extends Component {
             </IntroButtons>
           </IntroMain>
           <IntroSide>
+            {verified ? null : (
+              <VerificationTouch
+                onPress={() => {
+                  navigator.showModal({
+                    screen: "democracy.SmsVerification",
+                    passProps: {
+                      procedureId
+                    }
+                  });
+                }}
+              />
+            )}
             <ActivityIndex
               procedureId={procedureId}
               touchable
@@ -260,6 +280,7 @@ class Detail extends Component {
           />
           {listType === "VOTING" && (
             <Voting
+              verified={verified}
               procedureObjId={_id}
               procedureId={procedureId}
               navigator={this.props.navigator}

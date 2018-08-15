@@ -54,7 +54,15 @@ const TitleAddition = styled.Text`
   padding-left: 5;
 `;
 
+const VerificationTouch = styled.TouchableOpacity`
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 100;
+`;
+
 const Voting = ({
+  verified,
   voted,
   votedSelection,
   navigator,
@@ -67,6 +75,18 @@ const Voting = ({
       <Title>{voted ? "Abgestimmt" : "Abstimmen"}</Title>
       <TitleAddition>über {type}</TitleAddition>
     </SegmentWrapper>
+    {verified ? null : (
+      <VerificationTouch
+        onPress={() => {
+          navigator.showModal({
+            screen: "democracy.SmsVerification",
+            passProps: {
+              procedureId
+            }
+          });
+        }}
+      />
+    )}
     <VoteWrapper>
       <VoteButtonWrapper>
         <VoteButton
@@ -130,6 +150,7 @@ const Voting = ({
 );
 
 Voting.propTypes = {
+  verified: PropTypes.bool.isRequired,
   voted: PropTypes.bool.isRequired,
   votedSelection: PropTypes.string,
   navigator: PropTypes.instanceOf(Navigator).isRequired,

@@ -8,10 +8,9 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { CachePersistor } from "apollo-cache-persist";
 import { setContext } from "apollo-link-context";
 import { createNetworkStatusNotifier } from "react-apollo-network-status";
-import RSAKey from "react-native-rsa";
 import DeviceInfo from "react-native-device-info";
 import { sha256 } from "react-native-sha256";
-import Config from "react-native-config";
+import jwtDecode from 'jwt-decode';
 
 import Configuration from "../config";
 
@@ -19,8 +18,6 @@ import { defaults, resolvers } from "./resolvers";
 import typeDefs from "./schemas";
 
 import UPDATE_NETWORK_STATUS from "../graphql/mutations/updateNetworkStatus";
-import ME from "../graphql/queries/me";
-import SIGN_UP from "../graphql/mutations/signUp";
 
 let client; // eslint-disable-line
 
@@ -44,58 +41,65 @@ const persistor = new CachePersistor({
   // maxSize: false
 });
 
-const getNewToken = async () => {
-  const rsa = new RSAKey();
-  rsa.setPublicString(Config.PUBLIC_KEY); // return json encoded string
-  const uniqueID = await sha256(DeviceInfo.getUniqueID());
-  const deviceHashEncrypted = rsa.encrypt(uniqueID);
-
-  try {
-    const { data } = await client.mutate({
-      mutation: SIGN_UP,
-      variables: {
-        deviceHashEncrypted
-      }
-    });
-
-    await AsyncStorage.setItem("authorization", data.signUp.token);
-  } catch (error) {
-    // TODO: Show later a message that user is not registered
-  }
-};
-
-let me = null;
-
-const authLink = setContext(async (_, { headers }) => {
+const authLinkMiddleware = setContext(async (_, { headers }) => {
   // get the authentication token from local storage if it exists
-  const token = await AsyncStorage.getItem("authorization");
-  if (_.operationName !== "me" && _.operationName !== "signUp") {
-    if (!token && _.operationName !== "signUp") {
-      await getNewToken();
-    } else if (!me) {
-      try {
-        me = await client
-          .query({
-            query: ME,
-            fetchPolicy: "network-only"
-          })
-          .then(({ data }) => data.me);
-        if (!me) {
-          await getNewToken();
+  const token = await AsyncStorage.getItem("auth_token");
+  const refreshToken = await AsyncStorage.getItem("auth_refreshToken");
+
+  if (token && refreshToken) {
+    const decodedToken = jwtDecode(token);
+    const decodedRefreshToken = jwtDecode(refreshToken);
+
+    const currentTime = Date.now() / 1000;
+    if (decodedToken.exp >= currentTime || decodedRefreshToken.exp >= currentTime) {
+      // Token valid
+      return {
+        headers: {
+          ...headers,
+          'x-token': token,
+          'x-refresh-token': refreshToken,
         }
-      } catch (error) {
-        // TODO: handle this
-      }
+      };
     }
   }
-  // return the headers to the context so httpLink can read them
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : null
-    }
+  // No (valid) Token present - login
+  const deviceHash = await sha256(DeviceInfo.getUniqueID());
+  const phoneHash = await AsyncStorage.getItem("auth_phoneHash");
+  const newHeaders = {
+    ...headers,
+    'x-device-hash': deviceHash,
   };
+  if (phoneHash) {
+    newHeaders['x-phone-hash'] = phoneHash;
+  }
+  return { headers: newHeaders };
 });
+
+const authLinkAfterware = new ApolloLink((operation, forward) =>
+  forward(operation).map(response => {
+    const res = operation.getContext().response;
+
+    // Do we have a response?
+    if (res) {
+      const { headers } = res;
+      // Do we have headers?
+      if (headers) {
+        // Extract tokens from Headers & save them
+        const token = headers.get('x-token');
+        const refreshToken = headers.get('x-refresh-token');
+        if (token) {
+          AsyncStorage.setItem("auth_token", token);
+        }
+
+        if (refreshToken) {
+          AsyncStorage.setItem("auth_refreshToken", refreshToken);
+        }
+
+      }
+    }
+    return response;
+  })
+);
 
 const { link: networkStatusNotifierLink } = createNetworkStatusNotifier({
   reducers: {
@@ -105,10 +109,10 @@ const { link: networkStatusNotifierLink } = createNetworkStatusNotifier({
           section =>
             section.directives
               ? section.directives.some(
-                  directive =>
-                    directive.name.kind === "Name" &&
-                    directive.name.value === "client"
-                )
+                directive =>
+                  directive.name.kind === "Name" &&
+                  directive.name.value === "client"
+              )
               : false
         )
       );
@@ -129,8 +133,8 @@ const { link: networkStatusNotifierLink } = createNetworkStatusNotifier({
         }
       });
     },
-    onRequest: () => {},
-    onCancel: () => {}
+    onRequest: () => { },
+    onCancel: () => { }
   }
 });
 
@@ -181,7 +185,8 @@ client = new ApolloClient({
   link: ApolloLink.from([
     loadingIndicator,
     networkStatusNotifierLink,
-    authLink,
+    authLinkMiddleware,
+    authLinkAfterware,
     stateLink,
     new HttpLink({ uri: Configuration.GRAPHQL_URL })
   ])

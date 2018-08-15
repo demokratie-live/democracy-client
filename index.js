@@ -20,8 +20,8 @@ import topTabs from "./src/screens/VoteList/topTabs";
 import "./src/services/browserLinks";
 
 // Reactotron.configure() // controls connection & communication settings
-//   .useReactNative() // add all built-in react native plugins
-//   .connect(); // let's connect!
+//  .useReactNative() // add all built-in react native plugins
+//  .connect(); // let's connect!
 
 registerScreens();
 
@@ -84,7 +84,7 @@ class App {
         screen: {
           screen: "democracy.VoteList",
           title: "Bundestag".toUpperCase(),
-          navigatorStyle: {},
+          navigatorStyle: {},// 
           topTabs
         },
         drawer: {

@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - [Credits] Lover of the month
 - [Details] Add pre points to history
+- JWT Headerbased Authentication
+
+### Added
+- SMS-Verification
 
 ## [0.9.0] - 2018-08-02
 ### Added
