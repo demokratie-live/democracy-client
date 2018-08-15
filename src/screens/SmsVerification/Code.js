@@ -18,6 +18,7 @@ import Button from "./Components/Button";
 
 import REQUEST_VERIFICATION from "../../graphql/mutations/requestVerification";
 import REQUEST_CODE from "../../graphql/mutations/requestCode";
+import GET_PROCEDURE from "../../graphql/queries/getProcedure";
 import F_PROCEDURE_VERIFIED from "../../graphql/fragments/ProcedureVerified";
 
 const ScrollView = styled.ScrollView.attrs({
@@ -254,7 +255,15 @@ export default compose(
                 });
               }
               return { data };
-            }
+            },
+            refetchQueries: [
+              {
+                query: GET_PROCEDURE,
+                variables: {
+                  id: procedureId
+                }
+              }
+            ]
           })
       };
     }
