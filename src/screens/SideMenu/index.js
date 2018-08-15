@@ -86,11 +86,11 @@ const SideMenu = ({ data: { currentScreen }, navigator }) => {
       <Content>
         {Platform.OS === "ios" && <StatusBackground />}
         <Head
-          onPress={() => {
+          /* onPress={() => {
             navigator.showModal({
               screen: "democracy.SmsVerification"
             });
-          }}
+          }} */
         >
           <HeadLogo />
           <HeadTextWrapper>
