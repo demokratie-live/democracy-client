@@ -14,8 +14,12 @@ const Icon = styled.View`
   width: 19;
   height: 19;
   border-radius: 9;
-  background-color: ${({ currentStatus, state }) =>
-    currentStatus === state ? "#609BF8" : "#81afda"};
+  background-color: ${({ currentStatus, state }) => {
+    if (state === "2. Beratung / 3. Beratung" || state === "1. Beratung") {
+      return "#9b9b9b";
+    }
+    return currentStatus === state ? "#0076ff" : "#4494d3";
+  }};
 `;
 
 const State = styled.Text`
