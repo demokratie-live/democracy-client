@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import styled from "styled-components/native";
 import { graphql, compose } from "react-apollo";
 import PropTypes from "prop-types";
@@ -61,93 +61,106 @@ const VerificationTouch = styled.TouchableOpacity`
   z-index: 100;
 `;
 
-const Voting = ({
-  verified,
-  voted,
-  votedSelection,
-  navigator,
-  procedureObjId,
-  procedureId,
-  type
-}) => (
-  <Wrapper>
-    <SegmentWrapper>
-      <Title>{voted ? "Abgestimmt" : "Abstimmen"}</Title>
-      <TitleAddition>über {type}</TitleAddition>
-    </SegmentWrapper>
-    {verified ? null : (
-      <VerificationTouch
-        onPress={() => {
-          navigator.showModal({
-            screen: "democracy.SmsVerification",
-            passProps: {
-              procedureId
-            }
-          });
-        }}
-      />
-    )}
-    <VoteWrapper>
-      <VoteButtonWrapper>
-        <VoteButton
-          voted={voted}
-          selection="YES"
-          votedSelection={votedSelection}
-          onPress={() => {
-            navigator.showModal({
-              screen: "democracy.VoteVarification",
-              title: "Zur Wahlurne".toUpperCase(),
-              passProps: {
-                selection: "YES",
-                procedureObjId,
-                procedureId
-              }
-            });
-          }}
-        />
-        <VoteButtonLabel>{!voted ? "Zustimmen" : "Zugestimmt"}</VoteButtonLabel>
-      </VoteButtonWrapper>
-      <VoteButtonWrapper>
-        <VoteButton
-          voted={voted}
-          selection="ABSTINATION"
-          votedSelection={votedSelection}
-          onPress={() => {
-            navigator.showModal({
-              screen: "democracy.VoteVarification",
-              title: "Zur Wahlurne".toUpperCase(),
-              passProps: {
-                selection: "ABSTINATION",
-                procedureObjId,
-                procedureId
-              }
-            });
-          }}
-        />
-        <VoteButtonLabel>Enthalten</VoteButtonLabel>
-      </VoteButtonWrapper>
-      <VoteButtonWrapper>
-        <VoteButton
-          voted={voted}
-          selection="NO"
-          votedSelection={votedSelection}
-          onPress={() => {
-            navigator.showModal({
-              screen: "democracy.VoteVarification",
-              title: "Zur Wahlurne".toUpperCase(),
-              passProps: {
-                selection: "NO",
-                procedureObjId,
-                procedureId
-              }
-            });
-          }}
-        />
-        <VoteButtonLabel>{!voted ? "Ablehnen" : "Abgelehnt"}</VoteButtonLabel>
-      </VoteButtonWrapper>
-    </VoteWrapper>
-  </Wrapper>
-);
+class Voting extends Component {
+  onComplete = () => {
+    this.props.refetch();
+  };
+  render() {
+    const {
+      verified,
+      voted,
+      votedSelection,
+      navigator,
+      procedureObjId,
+      procedureId,
+      type
+    } = this.props;
+    return (
+      <Wrapper>
+        <SegmentWrapper>
+          <Title>{voted ? "Abgestimmt" : "Abstimmen"}</Title>
+          <TitleAddition>über {type}</TitleAddition>
+        </SegmentWrapper>
+        {verified ? null : (
+          <VerificationTouch
+            onPress={() => {
+              navigator.showModal({
+                screen: "democracy.SmsVerification",
+                passProps: {
+                  procedureId,
+                  onComplete: this.onComplete
+                }
+              });
+            }}
+          />
+        )}
+        <VoteWrapper>
+          <VoteButtonWrapper>
+            <VoteButton
+              voted={voted}
+              selection="YES"
+              votedSelection={votedSelection}
+              onPress={() => {
+                navigator.showModal({
+                  screen: "democracy.VoteVarification",
+                  title: "Zur Wahlurne".toUpperCase(),
+                  passProps: {
+                    selection: "YES",
+                    procedureObjId,
+                    procedureId
+                  }
+                });
+              }}
+            />
+            <VoteButtonLabel>
+              {!voted ? "Zustimmen" : "Zugestimmt"}
+            </VoteButtonLabel>
+          </VoteButtonWrapper>
+          <VoteButtonWrapper>
+            <VoteButton
+              voted={voted}
+              selection="ABSTINATION"
+              votedSelection={votedSelection}
+              onPress={() => {
+                navigator.showModal({
+                  screen: "democracy.VoteVarification",
+                  title: "Zur Wahlurne".toUpperCase(),
+                  passProps: {
+                    selection: "ABSTINATION",
+                    procedureObjId,
+                    procedureId
+                  }
+                });
+              }}
+            />
+            <VoteButtonLabel>Enthalten</VoteButtonLabel>
+          </VoteButtonWrapper>
+          <VoteButtonWrapper>
+            <VoteButton
+              voted={voted}
+              selection="NO"
+              votedSelection={votedSelection}
+              onPress={() => {
+                navigator.showModal({
+                  screen: "democracy.VoteVarification",
+                  title: "Zur Wahlurne".toUpperCase(),
+                  passProps: {
+                    selection: "NO",
+                    procedureObjId,
+                    procedureId
+                  }
+                });
+              }}
+            />
+            <VoteButtonLabel>
+              {!voted ? "Ablehnen" : "Abgelehnt"}
+            </VoteButtonLabel>
+          </VoteButtonWrapper>
+        </VoteWrapper>
+      </Wrapper>
+    );
+  }
+}
 
 Voting.propTypes = {
   verified: PropTypes.bool.isRequired,
@@ -156,7 +169,8 @@ Voting.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired,
   procedureObjId: PropTypes.string.isRequired,
   procedureId: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired
+  type: PropTypes.string.isRequired,
+  refetch: PropTypes.func.isRequired
 };
 
 Voting.defaultProps = {
@@ -169,9 +183,10 @@ export default compose(
       variables: { procedure: procedureObjId },
       fetchPolicy: "cache-and-network"
     }),
-    props: ({ data: { loading, votes } }) => ({
-      voted: !loading && votes ? votes.voted : true
-    })
+    props: ({ data: { loading, votes, refetch } }) => ({
+        voted: !loading && votes ? votes.voted : true,
+        refetch
+      })
   }),
 
   graphql(VOTE_LOCAL, {

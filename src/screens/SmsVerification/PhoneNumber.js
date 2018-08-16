@@ -121,7 +121,8 @@ class SmsVerification extends Component {
                 backButtonTitle: "Zurück",
                 passProps: {
                   resendTime: new Date(res.data.requestCode.resendTime),
-                  procedureId: this.props.procedureId
+                  procedureId: this.props.procedureId,
+                  onComplete: this.props.onComplete
                 }
               });
             }
@@ -175,7 +176,8 @@ class SmsVerification extends Component {
 SmsVerification.propTypes = {
   requestCode: PropTypes.func.isRequired,
   navigator: PropTypes.instanceOf(Navigator).isRequired,
-  procedureId: PropTypes.oneOfType(PropTypes.string, PropTypes.bool)
+  procedureId: PropTypes.oneOfType(PropTypes.string, PropTypes.bool),
+  onComplete: PropTypes.func.isRequired
 };
 
 SmsVerification.defaultProps = {
