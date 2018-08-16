@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components/native";
-import { Dimensions } from "react-native";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components/native';
+import { Dimensions } from 'react-native';
 
 const Wrapper = styled.TouchableOpacity`
-  width: ${Dimensions.get("window").width};
+  width: ${Dimensions.get('window').width};
   padding-horizontal: 18;
   padding-vertical: 18;
   background-color: ${({ color }) => color};
@@ -19,7 +19,7 @@ const Description = styled.Text``;
 
 class SmsError extends Component {
   state = {
-    clicked: false
+    clicked: false,
   };
   render() {
     const { title, description, color, onClick } = this.props;
@@ -51,8 +51,8 @@ SmsError.propTypes = {
 
 SmsError.defaultProps = {
   description: false,
-  color: "orange",
-  onClick: () => { }
+  color: 'orange',
+  onClick: () => {},
 };
 
 export default SmsError;

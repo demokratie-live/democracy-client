@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components/native";
-import PropTypes from "prop-types";
+import React from 'react';
+import styled from 'styled-components/native';
+import PropTypes from 'prop-types';
 
 const Wrapper = styled.View`
   padding-vertical: 8;
@@ -25,11 +25,11 @@ const ListSectionHeader = ({ title }) => {
 };
 
 ListSectionHeader.propTypes = {
-  title: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 };
 
 ListSectionHeader.defaultProps = {
-  title: false
+  title: false,
 };
 
 export default ListSectionHeader;

@@ -1,6 +1,6 @@
-import * as Keychain from "react-native-keychain";
-import DeviceInfo from "react-native-device-info";
-import _ from "lodash";
+import * as Keychain from 'react-native-keychain';
+import DeviceInfo from 'react-native-device-info';
+import _ from 'lodash';
 
 class VotesLocal {
   static KEYCHAIN_SERVICE = `${DeviceInfo.getBundleId()}.localVotes`;
@@ -13,8 +13,7 @@ class VotesLocal {
     return {};
   };
 
-  static resetVotesLocal = async () =>
-    Keychain.resetGenericPassword(this.KEYCHAIN_SERVICE);
+  static resetVotesLocal = async () => Keychain.resetGenericPassword(this.KEYCHAIN_SERVICE);
 
   static getVotesLocalList = async () => {
     const votesLocal = await VotesLocal.getVotesLocal();
@@ -31,11 +30,11 @@ class VotesLocal {
       case 0:
         return false;
       case 1:
-        return { selection: "YES" };
+        return { selection: 'YES' };
       case 2:
-        return { selection: "ABSTINATION" };
+        return { selection: 'ABSTINATION' };
       case 3:
-        return { selection: "NO" };
+        return { selection: 'NO' };
 
       default:
         return null;
@@ -45,13 +44,13 @@ class VotesLocal {
   static prepareSetVoteLocal = ({ procedureId, selection }) => {
     let selectionInt;
     switch (selection) {
-      case "YES":
+      case 'YES':
         selectionInt = 1;
         break;
-      case "ABSTINATION":
+      case 'ABSTINATION':
         selectionInt = 2;
         break;
-      case "NO":
+      case 'NO':
         selectionInt = 3;
         break;
 
@@ -67,30 +66,28 @@ class VotesLocal {
 
     const { selectionInt } = VotesLocal.prepareSetVoteLocal({
       procedureId,
-      selection
+      selection,
     });
 
     votesLocal[procedureId] = selectionInt;
 
     await Keychain.setGenericPassword(
-      "democracyVotes",
+      'democracyVotes',
       JSON.stringify(votesLocal),
-      this.KEYCHAIN_SERVICE
+      this.KEYCHAIN_SERVICE,
     );
   };
 
   static setVoteLocalList = async voteLocalList => {
     const votesLocal = await VotesLocal.getVotesLocal();
     voteLocalList.forEach(vote => {
-      const { procedureId, selectionInt } = VotesLocal.prepareSetVoteLocal(
-        vote
-      );
+      const { procedureId, selectionInt } = VotesLocal.prepareSetVoteLocal(vote);
       votesLocal[procedureId] = selectionInt;
     });
     await Keychain.setGenericPassword(
-      "democracyVotes",
+      'democracyVotes',
       JSON.stringify(votesLocal),
-      this.KEYCHAIN_SERVICE
+      this.KEYCHAIN_SERVICE,
     );
   };
 }

@@ -1,8 +1,8 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
-import ActivityIndex from "../fragments/ProcedureActivityIndex";
-import Voted from "../fragments/ProcedureVoted";
-import Viewed from "../fragments/ProcedureViewed";
+import ActivityIndex from '../fragments/ProcedureActivityIndex';
+import Voted from '../fragments/ProcedureVoted';
+import Viewed from '../fragments/ProcedureViewed';
 
 export default gql`
   query procedures(
@@ -12,13 +12,7 @@ export default gql`
     $sort: String
     $filter: ProcedureFilter
   ) {
-    procedures(
-      offset: $offset
-      pageSize: $pageSize
-      type: $type
-      sort: $sort
-      filter: $filter
-    ) {
+    procedures(offset: $offset, pageSize: $pageSize, type: $type, sort: $sort, filter: $filter) {
       _id
       title
       procedureId

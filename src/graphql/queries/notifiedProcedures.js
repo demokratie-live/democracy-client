@@ -1,7 +1,7 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
-import ActivityIndex from "../fragments/ProcedureActivityIndex";
-import Viewed from "../fragments/ProcedureViewed";
+import ActivityIndex from '../fragments/ProcedureActivityIndex';
+import Viewed from '../fragments/ProcedureViewed';
 
 export default gql`
   query getNotifiedProcedures {

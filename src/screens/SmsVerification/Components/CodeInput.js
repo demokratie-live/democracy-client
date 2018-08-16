@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { Platform } from "react-native";
-import PropTypes from "prop-types";
-import styled from "styled-components/native";
+import React, { Component } from 'react';
+import { Platform } from 'react-native';
+import PropTypes from 'prop-types';
+import styled from 'styled-components/native';
 
 const Wrapper = styled.View`
   flex-direction: row;
@@ -19,10 +19,10 @@ const NumberBox = styled.View`
 `;
 
 const Number = styled.TextInput.attrs({
-  placeholder: "XXXXXX",
-  keyboardType: Platform.OS === "ios" ? "number-pad" : "numeric",
+  placeholder: 'XXXXXX',
+  keyboardType: Platform.OS === 'ios' ? 'number-pad' : 'numeric',
   maxLength: 6,
-  returnKeyType: "next"
+  returnKeyType: 'next',
 })`
   flex: 1;
   font-size: 24;
@@ -33,11 +33,11 @@ const Number = styled.TextInput.attrs({
 
 class CodeInput extends Component {
   state = {
-    code: this.props.value
+    code: this.props.value,
   };
 
   onChange = text => {
-    const code = text.replace(/[^0-9]/g, "");
+    const code = text.replace(/[^0-9]/g, '');
     this.setState({ code: String(code) }, () => {
       if (text !== code) {
         this.forceUpdate();
@@ -70,12 +70,12 @@ class CodeInput extends Component {
 CodeInput.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  editable: PropTypes.bool
+  editable: PropTypes.bool,
 };
 
 CodeInput.defaultProps = {
-  value: "",
-  editable: true
+  value: '',
+  editable: true,
 };
 
 export default CodeInput;

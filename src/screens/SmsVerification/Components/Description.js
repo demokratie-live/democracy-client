@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components/native";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components/native';
 
 const Box = styled.View`
   width: 100%;
@@ -23,7 +23,7 @@ const Description = ({ text }) => (
 );
 
 Description.propTypes = {
-  text: PropTypes.string.isRequired
+  text: PropTypes.string.isRequired,
 };
 
 export default Description;

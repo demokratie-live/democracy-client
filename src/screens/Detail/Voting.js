@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import styled from "styled-components/native";
-import { graphql, compose } from "react-apollo";
-import PropTypes from "prop-types";
-import { Navigator } from "react-native-navigation";
+import React, { Component } from 'react';
+import styled from 'styled-components/native';
+import { graphql, compose } from 'react-apollo';
+import PropTypes from 'prop-types';
+import { Navigator } from 'react-native-navigation';
 
-import VoteButton from "../../components/VoteButton";
+import VoteButton from '../../components/VoteButton';
 
-import VOTE_LOCAL from "../../graphql/mutations/voteLocal";
-import VOTED from "../../graphql/queries/voted";
-import VOTED_LOCAL from "../../graphql/queries/votedLocal";
+import VOTE_LOCAL from '../../graphql/mutations/voteLocal';
+import VOTED from '../../graphql/queries/voted';
+import VOTED_LOCAL from '../../graphql/queries/votedLocal';
 
 const SegmentWrapper = styled.View`
   padding-vertical: 10;
@@ -73,23 +73,23 @@ class Voting extends Component {
       navigator,
       procedureObjId,
       procedureId,
-      type
+      type,
     } = this.props;
     return (
       <Wrapper>
         <SegmentWrapper>
-          <Title>{voted ? "Abgestimmt" : "Abstimmen"}</Title>
+          <Title>{voted ? 'Abgestimmt' : 'Abstimmen'}</Title>
           <TitleAddition>über {type}</TitleAddition>
         </SegmentWrapper>
         {verified ? null : (
           <VerificationTouch
             onPress={() => {
               navigator.showModal({
-                screen: "democracy.SmsVerification",
+                screen: 'democracy.SmsVerification',
                 passProps: {
                   procedureId,
-                  onComplete: this.onComplete
-                }
+                  onComplete: this.onComplete,
+                },
               });
             }}
           />
@@ -102,19 +102,17 @@ class Voting extends Component {
               votedSelection={votedSelection}
               onPress={() => {
                 navigator.showModal({
-                  screen: "democracy.VoteVarification",
-                  title: "Zur Wahlurne".toUpperCase(),
+                  screen: 'democracy.VoteVarification',
+                  title: 'Zur Wahlurne'.toUpperCase(),
                   passProps: {
-                    selection: "YES",
+                    selection: 'YES',
                     procedureObjId,
-                    procedureId
-                  }
+                    procedureId,
+                  },
                 });
               }}
             />
-            <VoteButtonLabel>
-              {!voted ? "Zustimmen" : "Zugestimmt"}
-            </VoteButtonLabel>
+            <VoteButtonLabel>{!voted ? 'Zustimmen' : 'Zugestimmt'}</VoteButtonLabel>
           </VoteButtonWrapper>
           <VoteButtonWrapper>
             <VoteButton
@@ -123,13 +121,13 @@ class Voting extends Component {
               votedSelection={votedSelection}
               onPress={() => {
                 navigator.showModal({
-                  screen: "democracy.VoteVarification",
-                  title: "Zur Wahlurne".toUpperCase(),
+                  screen: 'democracy.VoteVarification',
+                  title: 'Zur Wahlurne'.toUpperCase(),
                   passProps: {
-                    selection: "ABSTINATION",
+                    selection: 'ABSTINATION',
                     procedureObjId,
-                    procedureId
-                  }
+                    procedureId,
+                  },
                 });
               }}
             />
@@ -142,19 +140,17 @@ class Voting extends Component {
               votedSelection={votedSelection}
               onPress={() => {
                 navigator.showModal({
-                  screen: "democracy.VoteVarification",
-                  title: "Zur Wahlurne".toUpperCase(),
+                  screen: 'democracy.VoteVarification',
+                  title: 'Zur Wahlurne'.toUpperCase(),
                   passProps: {
-                    selection: "NO",
+                    selection: 'NO',
                     procedureObjId,
-                    procedureId
-                  }
+                    procedureId,
+                  },
                 });
               }}
             />
-            <VoteButtonLabel>
-              {!voted ? "Ablehnen" : "Abgelehnt"}
-            </VoteButtonLabel>
+            <VoteButtonLabel>{!voted ? 'Ablehnen' : 'Abgelehnt'}</VoteButtonLabel>
           </VoteButtonWrapper>
         </VoteWrapper>
       </Wrapper>
@@ -170,27 +166,27 @@ Voting.propTypes = {
   procedureObjId: PropTypes.string.isRequired,
   procedureId: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  refetch: PropTypes.func.isRequired
+  refetch: PropTypes.func.isRequired,
 };
 
 Voting.defaultProps = {
-  votedSelection: undefined
+  votedSelection: undefined,
 };
 
 export default compose(
   graphql(VOTED, {
     options: ({ procedureObjId }) => ({
       variables: { procedure: procedureObjId },
-      fetchPolicy: "cache-and-network"
+      fetchPolicy: 'cache-and-network',
     }),
     props: ({ data: { loading, votes, refetch } }) => ({
-        voted: !loading && votes ? votes.voted : true,
-        refetch
-      })
+      voted: !loading && votes ? votes.voted : true,
+      refetch,
+    }),
   }),
 
   graphql(VOTE_LOCAL, {
-    name: "voteLocal",
+    name: 'voteLocal',
     props({ ownProps: { procedureObjId }, voteLocal }) {
       return {
         voteLocal: selection =>
@@ -199,16 +195,16 @@ export default compose(
             refetchQueries: [
               {
                 query: VOTED_LOCAL,
-                variables: { procedure: procedureObjId }
-              }
-            ]
-          })
+                variables: { procedure: procedureObjId },
+              },
+            ],
+          }),
       };
-    }
+    },
   }),
   graphql(VOTED_LOCAL, {
     options: ({ procedureId }) => ({
-      variables: { procedureId }
+      variables: { procedureId },
     }),
     props: props => {
       const { data: { votedLocal } } = props;
@@ -216,6 +212,6 @@ export default compose(
         return { votedSelection: votedLocal.selection };
       }
       return {};
-    }
-  })
+    },
+  }),
 )(Voting);

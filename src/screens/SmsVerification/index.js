@@ -1,24 +1,24 @@
-import React, { Component } from "react";
-import { AsyncStorage } from "react-native";
-import PropTypes from "prop-types";
-import styled from "styled-components/native";
-import { Navigator } from "react-native-navigation";
+import React, { Component } from 'react';
+import { AsyncStorage } from 'react-native';
+import PropTypes from 'prop-types';
+import styled from 'styled-components/native';
+import { Navigator } from 'react-native-navigation';
 
-import Description from "./Components/Description";
-import Button from "./Components/Button";
-import Folding from "../../components/Content/Folding";
+import Description from './Components/Description';
+import Button from './Components/Button';
+import Folding from '../../components/Content/Folding';
 
 const ScrollView = styled.ScrollView.attrs({
   contentContainerStyle: {
     paddingVertical: 11,
-    paddingHorizontal: 11
-  }
+    paddingHorizontal: 11,
+  },
 })`
   background-color: #fff;
 `;
 
 const Logo = styled.Image.attrs({
-  source: require("../../../assets/images/democracy.png")
+  source: require('../../../assets/images/democracy.png'),
 })`
   align-self: center;
   margin-vertical: 11;
@@ -27,29 +27,29 @@ const Logo = styled.Image.attrs({
 class SmsVerification extends Component {
   static navigatorStyle = {
     // navBarHidden: true,
-    orientation: "portrait"
+    orientation: 'portrait',
   };
 
   constructor(props) {
     super(props);
 
     props.navigator.setTitle({
-      title: "Verifizieren".toUpperCase() // the new title of the screen as appears in the nav bar
+      title: 'Verifizieren'.toUpperCase(), // the new title of the screen as appears in the nav bar
     });
 
     props.navigator.setButtons({
       leftButtons: [
         {
-          title: "Abbrechen",
-          id: "closeModal"
-        }
-      ]
+          title: 'Abbrechen',
+          id: 'closeModal',
+        },
+      ],
     });
     props.navigator.addOnNavigatorEvent(event => {
       if (event.type) {
         // NavBar Events
         switch (event.id) {
-          case "closeModal":
+          case 'closeModal':
             props.navigator.dismissModal();
             break;
 
@@ -61,11 +61,11 @@ class SmsVerification extends Component {
   }
 
   state = {
-    authCodeExpires: false
+    authCodeExpires: false,
   };
 
   componentDidMount() {
-    AsyncStorage.getItem("auth_code_expires").then(authCodeExpires => {
+    AsyncStorage.getItem('auth_code_expires').then(authCodeExpires => {
       if (new Date(authCodeExpires) > new Date()) {
         this.setState({ authCodeExpires });
       }
@@ -103,15 +103,15 @@ Zu unserer Datenschutzbestimmung gelangst Du ferner hier.`}
           <Button
             onPress={() =>
               navigator.push({
-                screen: "democracy.SmsVerification.Code",
-                backButtonTitle: "Zurück",
+                screen: 'democracy.SmsVerification.Code',
+                backButtonTitle: 'Zurück',
                 passProps: {
                   procedureId,
-                  onComplete
-                }
+                  onComplete,
+                },
               })
             }
-            style={{ width: "100%", marginTop: 18 }}
+            style={{ width: '100%', marginTop: 18 }}
             title="CODE EINGEBEN"
           />
         )}
@@ -119,20 +119,20 @@ Zu unserer Datenschutzbestimmung gelangst Du ferner hier.`}
         <Button
           onPress={() =>
             navigator.push({
-              screen: "democracy.SmsVerification.PhoneNumber",
-              backButtonTitle: "Zurück",
+              screen: 'democracy.SmsVerification.PhoneNumber',
+              backButtonTitle: 'Zurück',
               passProps: {
                 procedureId,
-                onComplete
-              }
+                onComplete,
+              },
             })
           }
           style={{
-            width: "100%",
+            width: '100%',
             marginTop: 18,
-            backgroundColor: !authCodeExpires ? "#4494D3" : "#9AC5E7"
+            backgroundColor: !authCodeExpires ? '#4494D3' : '#9AC5E7',
           }}
-          title={`${authCodeExpires ? "NEU " : ""} VERIFIZIEREN`}
+          title={`${authCodeExpires ? 'NEU ' : ''} VERIFIZIEREN`}
         />
       </ScrollView>
     );
@@ -142,11 +142,11 @@ Zu unserer Datenschutzbestimmung gelangst Du ferner hier.`}
 SmsVerification.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired,
   procedureId: PropTypes.oneOfType(PropTypes.string, PropTypes.bool),
-  onComplete: PropTypes.func.isRequired
+  onComplete: PropTypes.func.isRequired,
 };
 
 SmsVerification.defaultProps = {
-  procedureId: false
+  procedureId: false,
 };
 
 export default SmsVerification;

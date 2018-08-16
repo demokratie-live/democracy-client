@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import styled from "styled-components/native";
-import PropTypes from "prop-types";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import React, { Component } from 'react';
+import styled from 'styled-components/native';
+import PropTypes from 'prop-types';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import ArgumentEntry from "../ArgumentEntry";
+import ArgumentEntry from '../ArgumentEntry';
 
 const Content = styled.View`
   flex: 1;
@@ -12,7 +12,7 @@ const Content = styled.View`
 `;
 
 const Title = styled.Text.attrs({
-  numberOfLines: 1
+  numberOfLines: 1,
 })``;
 
 const Text = styled.Text``;
@@ -38,16 +38,16 @@ const Collapse = styled.TouchableOpacity`
 `;
 
 const CollapseIcon = styled(Ionicons).attrs({
-  color: "rgb(151, 151, 151)",
-  name: "ios-arrow-up-outline",
-  size: 20
+  color: 'rgb(151, 151, 151)',
+  name: 'ios-arrow-up-outline',
+  size: 20,
 })`
-  transform: ${({ open }) => (open ? "rotate(0deg)" : "rotate(180deg)")};
+  transform: ${({ open }) => (open ? 'rotate(0deg)' : 'rotate(180deg)')};
 `;
 
 class Message extends Component {
   state = {
-    moreTextOpened: false
+    moreTextOpened: false,
   };
   render() {
     const { argumentation, title, text, moreText } = this.props;
@@ -57,16 +57,10 @@ class Message extends Component {
         <Content>
           {!!title && <Title>{title}</Title>}
           <Text numberOfLines={4}>{text}</Text>
-          {!!moreText && (
-            <TextMore numberOfLines={moreTextOpened ? 0 : 1}>
-              {moreText}
-            </TextMore>
-          )}
+          {!!moreText && <TextMore numberOfLines={moreTextOpened ? 0 : 1}>{moreText}</TextMore>}
         </Content>
         <Side>
-          <Collapse
-            onPress={() => this.setState({ moreTextOpened: !moreTextOpened })}
-          >
+          <Collapse onPress={() => this.setState({ moreTextOpened: !moreTextOpened })}>
             <CollapseIcon open={moreTextOpened} />
           </Collapse>
         </Side>
@@ -79,13 +73,13 @@ Message.propTypes = {
   argumentation: PropTypes.string,
   title: PropTypes.string,
   text: PropTypes.string.isRequired,
-  moreText: PropTypes.string
+  moreText: PropTypes.string,
 };
 
 Message.defaultProps = {
-  argumentation: "neutral",
-  title: "",
-  moreText: ""
+  argumentation: 'neutral',
+  title: '',
+  moreText: '',
 };
 
 export default Message;

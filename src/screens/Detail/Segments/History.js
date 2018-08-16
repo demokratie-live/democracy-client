@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components/native";
-import PropTypes from "prop-types";
+import React from 'react';
+import styled from 'styled-components/native';
+import PropTypes from 'prop-types';
 
 const Wrapper = styled.View``;
 
@@ -15,10 +15,10 @@ const Icon = styled.View`
   height: 19;
   border-radius: 9;
   background-color: ${({ currentStatus, state }) => {
-    if (state === "2. Beratung / 3. Beratung" || state === "1. Beratung") {
-      return "#9b9b9b";
+    if (state === '2. Beratung / 3. Beratung' || state === '1. Beratung') {
+      return '#9b9b9b';
     }
-    return currentStatus === state ? "#0076ff" : "#4494d3";
+    return currentStatus === state ? '#0076ff' : '#4494d3';
   }};
 `;
 
@@ -39,8 +39,8 @@ const Line = styled.View`
 
 const Documents = ({ history, currentStatus, voted }) => {
   const renderState = state => {
-    if (["Angenommen", "Abgelehnt"].indexOf(state) !== -1 && !voted) {
-      return "Abgestimmt";
+    if (['Angenommen', 'Abgelehnt'].indexOf(state) !== -1 && !voted) {
+      return 'Abgestimmt';
     }
     return state;
   };
@@ -60,7 +60,7 @@ const Documents = ({ history, currentStatus, voted }) => {
 Documents.propTypes = {
   history: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   currentStatus: PropTypes.string.isRequired,
-  voted: PropTypes.bool.isRequired
+  voted: PropTypes.bool.isRequired,
 };
 
 export default Documents;

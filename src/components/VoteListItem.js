@@ -1,11 +1,11 @@
-import React from "react";
-import styled from "styled-components/native";
-import PropTypes from "prop-types";
+import React from 'react';
+import styled from 'styled-components/native';
+import PropTypes from 'prop-types';
 
-import ActivityIndex from "./ActivityIndex";
-import DateTime from "./Date";
-import DemocracyIconComponent from "../../iconfont/DemocracyFont";
-import StatusIcon from "../components/StatusIcon";
+import ActivityIndex from './ActivityIndex';
+import DateTime from './Date';
+import DemocracyIconComponent from '../../iconfont/DemocracyFont';
+import StatusIcon from '../components/StatusIcon';
 
 const DemocracyIcon = styled(DemocracyIconComponent)``;
 
@@ -44,16 +44,16 @@ const ListItem = ({
   activityIndex: { activityIndex, active },
   votedGovernment,
   voted,
-  viewedStatus
+  viewedStatus,
 }) => (
   <ListItemWrapper>
     <StatusIcon
-      push={viewedStatus === "PUSH"}
-      unreaded={viewedStatus === "NEW" && !voted && !active}
+      push={viewedStatus === 'PUSH'}
+      unreaded={viewedStatus === 'NEW' && !voted && !active}
     />
     <MainWrapper>
       <Title>{title}</Title>
-      {!children && <Tags>{tags && tags.join(", ")}</Tags>}
+      {!children && <Tags>{tags && tags.join(', ')}</Tags>}
       {children}
     </MainWrapper>
     <SideWrapper>
@@ -66,7 +66,7 @@ const ListItem = ({
 
       {voted && (
         <DemocracyIcon
-          name={`checkmark${votedGovernment ? "-double" : ""}`}
+          name={`checkmark${votedGovernment ? '-double' : ''}`}
           size={14}
           color="#35a335"
         />
@@ -80,16 +80,12 @@ ListItem.propTypes = {
   title: PropTypes.string.isRequired,
   procedureId: PropTypes.string.isRequired,
   tags: PropTypes.arrayOf(PropTypes.string),
-  date: PropTypes.oneOfType([
-    PropTypes.instanceOf(Date),
-    PropTypes.string,
-    PropTypes.bool
-  ]),
+  date: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string, PropTypes.bool]),
   children: PropTypes.node,
   activityIndex: PropTypes.shape(),
   votedGovernment: PropTypes.bool,
   voted: PropTypes.bool,
-  viewedStatus: PropTypes.string.isRequired
+  viewedStatus: PropTypes.string.isRequired,
 };
 
 ListItem.defaultProps = {
@@ -98,7 +94,7 @@ ListItem.defaultProps = {
   children: null,
   activityIndex: {},
   votedGovernment: false,
-  voted: false
+  voted: false,
 };
 
 export default ListItem;

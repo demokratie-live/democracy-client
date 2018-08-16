@@ -1,7 +1,7 @@
-import React, { Component, Fragment } from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components/native";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components/native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Wrapper = styled.View`
   margin-top: 11;
@@ -21,12 +21,12 @@ const Headline = styled.Text`
 `;
 
 const CollapseIcon = styled(Ionicons).attrs({
-  color: "rgb(151, 151, 151)",
-  name: "ios-arrow-up-outline",
-  size: 20
+  color: 'rgb(151, 151, 151)',
+  name: 'ios-arrow-up-outline',
+  size: 20,
 })`
   align-self: flex-start;
-  transform: ${({ open }) => (open ? "rotate(0deg)" : "rotate(180deg)")};
+  transform: ${({ open }) => (open ? 'rotate(0deg)' : 'rotate(180deg)')};
 `;
 
 const Divider = styled.View`
@@ -43,7 +43,7 @@ const Text = styled.Text`
 
 class Folding extends Component {
   state = {
-    open: false
+    open: false,
   };
 
   render() {
@@ -69,7 +69,7 @@ class Folding extends Component {
 
 Folding.propTypes = {
   title: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired
+  text: PropTypes.string.isRequired,
 };
 
 export default Folding;

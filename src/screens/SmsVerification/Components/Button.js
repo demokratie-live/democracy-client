@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components/native";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components/native';
 
 const Wrapper = styled.TouchableOpacity`
-  background-color: ${({ disabled }) => (disabled ? "#a4aab3" : "#4494d3e6  ")};
+  background-color: ${({ disabled }) => (disabled ? '#a4aab3' : '#4494d3e6  ')};
   padding-vertical: 12;
   padding-horizontal: 12;
   align-items: center;
@@ -25,13 +25,13 @@ Button.propTypes = {
   onPress: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
   style: PropTypes.shape(),
-  textStyle: PropTypes.shape()
+  textStyle: PropTypes.shape(),
 };
 
 Button.defaultProps = {
   disabled: false,
   style: {},
-  textStyle: {}
+  textStyle: {},
 };
 
 export default Button;

@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { Navigator, Navigation } from "react-native-navigation";
-import { Platform, AsyncStorage } from "react-native";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Navigator, Navigation } from 'react-native-navigation';
+import { Platform, AsyncStorage } from 'react-native';
 import NotificationsIOS, {
   NotificationsAndroid,
-  PendingNotifications
-} from "react-native-notifications";
-import DeviceInfo from "react-native-device-info";
+  PendingNotifications,
+} from 'react-native-notifications';
+import DeviceInfo from 'react-native-device-info';
 
-import client from "../graphql/client";
-import ViewedProcedures from "../services/ViewedProcedures";
+import client from '../graphql/client';
+import ViewedProcedures from '../services/ViewedProcedures';
 
-import ADD_TOKEN from "../graphql/mutations/addToken";
-import F_PROCEDURE_VIEWED from "../graphql/fragments/ProcedureViewed";
+import ADD_TOKEN from '../graphql/mutations/addToken';
+import F_PROCEDURE_VIEWED from '../graphql/fragments/ProcedureViewed';
 
 let LISTENERS_ADDED = false;
 
@@ -21,90 +21,61 @@ export default ComposedComponent => {
     constructor(props) {
       super(props);
       switch (Platform.OS) {
-        case "ios":
+        case 'ios':
+          NotificationsIOS.addEventListener('remoteNotificationsRegistered', this.onPushRegistered);
           NotificationsIOS.addEventListener(
-            "remoteNotificationsRegistered",
-            this.onPushRegistered
-          );
-          NotificationsIOS.addEventListener(
-            "remoteNotificationsRegistrationFailed",
-            this.onPushRegistrationFailed
+            'remoteNotificationsRegistrationFailed',
+            this.onPushRegistrationFailed,
           );
           if (!DeviceInfo.isEmulator()) {
             NotificationsIOS.requestPermissions();
           }
 
-          NotificationsIOS.addEventListener(
-            "notificationReceivedForeground",
-            notification => {
-              this.onNotificationReceivedForeground(notification.getData());
-            }
-          );
-          NotificationsIOS.addEventListener(
-            "notificationReceivedBackground",
-            notification => {
-              this.onNotificationReceivedBackground(notification.getData());
-            }
-          );
-          NotificationsIOS.addEventListener(
-            "notificationOpened",
-            notification => {
-              this.onNotificationOpened(notification.getData());
-            }
-          );
+          NotificationsIOS.addEventListener('notificationReceivedForeground', notification => {
+            this.onNotificationReceivedForeground(notification.getData());
+          });
+          NotificationsIOS.addEventListener('notificationReceivedBackground', notification => {
+            this.onNotificationReceivedBackground(notification.getData());
+          });
+          NotificationsIOS.addEventListener('notificationOpened', notification => {
+            this.onNotificationOpened(notification.getData());
+          });
           break;
-        case "android":
+        case 'android':
           if (!LISTENERS_ADDED) {
             LISTENERS_ADDED = true;
-            NotificationsAndroid.setRegistrationTokenUpdateListener(
-              async deviceToken => {
-                console.log(
-                  "PUSHLOG: setRegistrationTokenUpdateListener",
-                  deviceToken
-                );
-                // TODO: Send the token to my server so it could send back push notifications...
-                const tokenSucceeded = await client.mutate({
-                  mutation: ADD_TOKEN,
-                  variables: {
-                    token: deviceToken,
-                    os: "android"
-                  }
-                });
-                if (tokenSucceeded) {
-                  await AsyncStorage.setItem("push-token", deviceToken);
-                }
+            NotificationsAndroid.setRegistrationTokenUpdateListener(async deviceToken => {
+              console.log('PUSHLOG: setRegistrationTokenUpdateListener', deviceToken);
+              // TODO: Send the token to my server so it could send back push notifications...
+              const tokenSucceeded = await client.mutate({
+                mutation: ADD_TOKEN,
+                variables: {
+                  token: deviceToken,
+                  os: 'android',
+                },
+              });
+              if (tokenSucceeded) {
+                await AsyncStorage.setItem('push-token', deviceToken);
               }
-            );
+            });
             NotificationsAndroid.refreshToken();
 
             // On Android, we allow for only one (global) listener per each event type.
-            NotificationsAndroid.setNotificationReceivedListener(
-              notification => {
-                console.log(
-                  "PUSHLOG: setNotificationReceivedListener",
-                  notification
-                );
-                const notificationData = JSON.parse(
-                  notification.getData().payload
-                );
+            NotificationsAndroid.setNotificationReceivedListener(notification => {
+              console.log('PUSHLOG: setNotificationReceivedListener', notification);
+              const notificationData = JSON.parse(notification.getData().payload);
 
-                this.onNotificationReceivedForeground(notificationData);
-              }
-            );
+              this.onNotificationReceivedForeground(notificationData);
+            });
             NotificationsAndroid.setNotificationOpenedListener(notification => {
-              console.log(
-                "PUSHLOG: setNotificationOpenedListener",
-                notification
-              );
-              const notificationData = JSON.parse(
-                notification.getData().payload
-              );
+              console.log('PUSHLOG: setNotificationOpenedListener', notification);
+              const notificationData = JSON.parse(notification.getData().payload);
               this.onNotificationOpened(notificationData);
             });
 
             PendingNotifications.getInitialNotification()
               .then(notifications => {
-                console.log("PUSHLOG: getInitialNotification", notifications);
+                console.log('PUSHLOG: getInitialNotification', notifications);
                 if (notifications) {
                   notifications.data.forEach(notification => {
                     const notificationData = JSON.parse(notification.payload);
@@ -112,9 +83,7 @@ export default ComposedComponent => {
                   });
                 }
               })
-              .catch(err =>
-                console.error("getInitialNotifiation() failed", err)
-              );
+              .catch(err => console.error('getInitialNotifiation() failed', err));
           }
           break;
         default:
@@ -124,8 +93,8 @@ export default ComposedComponent => {
 
     componentDidMount() {
       switch (Platform.OS) {
-        case "ios":
-          console.log("PUSHLOG: NotificationsIOS.consumeBackgroundQueue();");
+        case 'ios':
+          console.log('PUSHLOG: NotificationsIOS.consumeBackgroundQueue();');
           NotificationsIOS.consumeBackgroundQueue();
           break;
 
@@ -136,28 +105,25 @@ export default ComposedComponent => {
 
     componentWillUnmount() {
       switch (Platform.OS) {
-        case "ios":
+        case 'ios':
           // prevent memory leaks!
           NotificationsIOS.removeEventListener(
-            "remoteNotificationsRegistered",
-            this.onPushRegistered
+            'remoteNotificationsRegistered',
+            this.onPushRegistered,
           );
           NotificationsIOS.removeEventListener(
-            "remoteNotificationsRegistrationFailed",
-            this.onPushRegistrationFailed
+            'remoteNotificationsRegistrationFailed',
+            this.onPushRegistrationFailed,
           );
           NotificationsIOS.removeEventListener(
-            "notificationReceivedForeground",
-            this.onNotificationReceivedForeground
+            'notificationReceivedForeground',
+            this.onNotificationReceivedForeground,
           );
           NotificationsIOS.removeEventListener(
-            "notificationReceivedBackground",
-            this.onNotificationReceivedBackground
+            'notificationReceivedBackground',
+            this.onNotificationReceivedBackground,
           );
-          NotificationsIOS.removeEventListener(
-            "notificationOpened",
-            this.onNotificationOpened
-          );
+          NotificationsIOS.removeEventListener('notificationOpened', this.onNotificationOpened);
           break;
 
         default:
@@ -166,15 +132,15 @@ export default ComposedComponent => {
     }
 
     onNotificationReceivedForeground = async notification => {
-      console.log("PUSHLOG: onNotificationReceivedForeground", notification);
+      console.log('PUSHLOG: onNotificationReceivedForeground', notification);
       const { navigator } = this.props;
       const { title, message, procedureId, type } = notification;
       await this.handlePushData(notification);
 
-      if (type === "procedure") {
-        console.log("showInAppNotification!!!!");
+      if (type === 'procedure') {
+        console.log('showInAppNotification!!!!');
         Navigation.showInAppNotification({
-          screen: "democracy.Notifications.InApp", // unique ID registered with Navigation.registerScreen
+          screen: 'democracy.Notifications.InApp', // unique ID registered with Navigation.registerScreen
           passProps: {
             title,
             description: message,
@@ -183,107 +149,107 @@ export default ComposedComponent => {
                 link: `democracy.Detail`,
                 payload: {
                   procedureId: `${procedureId}`,
-                  from: "pushNotification"
-                }
+                  from: 'pushNotification',
+                },
               });
-            }
+            },
           }, // simple serializable object that will pass as props to the in-app notification (optional)
-          autoDismissTimerSec: 5 // auto dismiss notification in seconds
+          autoDismissTimerSec: 5, // auto dismiss notification in seconds
         });
-      } else if (type === "procedureBulk") {
+      } else if (type === 'procedureBulk') {
         Navigation.showInAppNotification({
-          screen: "democracy.Notifications.InApp", // unique ID registered with Navigation.registerScreen
+          screen: 'democracy.Notifications.InApp', // unique ID registered with Navigation.registerScreen
           passProps: {
             title,
-            description: message
+            description: message,
           }, // simple serializable object that will pass as props to the in-app notification (optional)
-          autoDismissTimerSec: 5 // auto dismiss notification in seconds
+          autoDismissTimerSec: 5, // auto dismiss notification in seconds
         });
       }
     };
 
     onNotificationReceivedBackground = notification => {
-      console.log("PUSHLOG: onNotificationReceivedBackground", notification);
+      console.log('PUSHLOG: onNotificationReceivedBackground', notification);
       this.handlePushData(notification);
     };
 
     onNotificationOpened = notification => {
-      console.log("PUSHLOG: onNotificationOpened", notification);
+      console.log('PUSHLOG: onNotificationOpened', notification);
       const { procedureId, type } = notification;
-      if(type === 'procedure') {
+      if (type === 'procedure') {
         const { navigator } = this.props;
         navigator.handleDeepLink({
           link: `democracy.Detail`,
           payload: {
             procedureId: `${procedureId}`,
-            from: "pushNotification"
-          }
+            from: 'pushNotification',
+          },
         });
       }
       this.handlePushData(notification);
     };
 
     onPushRegistered = async deviceToken => {
-      console.log("PUSHLOG: onPushRegistered", deviceToken);
+      console.log('PUSHLOG: onPushRegistered', deviceToken);
       // TODO: Send the token to my server so it could send back push notifications...
       const tokenSucceeded = await client.mutate({
         mutation: ADD_TOKEN,
         variables: {
           token: deviceToken,
-          os: "ios"
-        }
+          os: 'ios',
+        },
       });
 
       if (tokenSucceeded) {
-        await AsyncStorage.setItem("push-token", deviceToken);
+        await AsyncStorage.setItem('push-token', deviceToken);
       }
     };
 
     onPushRegistrationFailed = error => {
-      console.log("PUSHLOG: onPushRegistrationFailed", error);
+      console.log('PUSHLOG: onPushRegistrationFailed', error);
       console.error(error);
     };
 
     handlePushData = async notification => {
-      console.log("PUSHLOG: handlePushData", notification, notification.type);
+      console.log('PUSHLOG: handlePushData', notification, notification.type);
       const { procedureId, procedureIds, type } = notification;
-      if (type === "procedure") {
+      if (type === 'procedure') {
         await ViewedProcedures.setViewedProcedure({
           procedureId,
-          status: "PUSH"
+          status: 'PUSH',
         });
 
         // write graphQL cache
         const aiFragment = client.readFragment({
           id: procedureId,
-          fragment: F_PROCEDURE_VIEWED
+          fragment: F_PROCEDURE_VIEWED,
         });
         if (aiFragment) {
-          aiFragment.viewedStatus = "PUSH";
+          aiFragment.viewedStatus = 'PUSH';
         }
         client.writeFragment({
           id: procedureId,
           fragment: F_PROCEDURE_VIEWED,
-          data: aiFragment
+          data: aiFragment,
         });
-      } else if (type === "procedureBulk") {
+      } else if (type === 'procedureBulk') {
         await ViewedProcedures.setViewedProcedures({
           procedureIds,
-          status: "PUSH"
+          status: 'PUSH',
         });
 
         procedureIds.forEach(id => {
           // write graphQL cache
           const aiFragment = client.readFragment({
             id,
-            fragment: F_PROCEDURE_VIEWED
+            fragment: F_PROCEDURE_VIEWED,
           });
           if (aiFragment) {
-            aiFragment.viewedStatus = "PUSH";
+            aiFragment.viewedStatus = 'PUSH';
             client.writeFragment({
               id,
               fragment: F_PROCEDURE_VIEWED,
-              data: aiFragment
+              data: aiFragment,
             });
           }
         });
@@ -296,7 +262,7 @@ export default ComposedComponent => {
   }
 
   WrappingComponent.propTypes = {
-    navigator: PropTypes.instanceOf(Navigator).isRequired
+    navigator: PropTypes.instanceOf(Navigator).isRequired,
   };
 
   return WrappingComponent;

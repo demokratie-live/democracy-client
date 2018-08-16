@@ -1,9 +1,9 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
-import ActivityIndex from "../fragments/ProcedureActivityIndex";
-import Voted from "../fragments/ProcedureVoted";
-import Viewed from "../fragments/ProcedureViewed";
-import Verified from "../fragments/ProcedureVerified";
+import ActivityIndex from '../fragments/ProcedureActivityIndex';
+import Voted from '../fragments/ProcedureVoted';
+import Viewed from '../fragments/ProcedureViewed';
+import Verified from '../fragments/ProcedureVerified';
 
 export default gql`
   query procedure($id: ID!) {

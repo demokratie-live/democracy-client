@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components/native";
-import { Platform, Linking, Alert } from "react-native";
-import { Navigator } from "react-native-navigation";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
-import DeviceInfo from "react-native-device-info";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components/native';
+import { Platform, Linking, Alert } from 'react-native';
+import { Navigator } from 'react-native-navigation';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import DeviceInfo from 'react-native-device-info';
 
-import Config from "../config";
+import Config from '../config';
 
 const ScrollWrapper = styled.ScrollView`
   flex: 1;
@@ -22,7 +22,7 @@ const Wrapper = styled.View`
 `;
 
 const Logo = styled.Image.attrs({
-  source: require("../../assets/images/support-logo.png")
+  source: require('../../assets/images/support-logo.png'),
 })``;
 
 const Text = styled.Text`
@@ -56,30 +56,30 @@ const Version = styled.Text`
 
 const ContactIcons = styled(FontAwesome).attrs({
   size: 40,
-  color: "#000000"
+  color: '#000000',
 })``;
 
 class Support extends Component {
   static navigatorStyle = {
-    navBarButtonColor: "#FFFFFF",
-    navBarBackgroundColor: "#4494d3",
-    navBarTextColor: "#FFFFFF",
-    navBarTextFontSize: 17
+    navBarButtonColor: '#FFFFFF',
+    navBarBackgroundColor: '#4494d3',
+    navBarTextColor: '#FFFFFF',
+    navBarTextFontSize: 17,
   };
 
   constructor(props) {
     super(props);
 
-    const menuIcon = Platform.OS === "ios" ? "ios-menu" : "md-menu";
+    const menuIcon = Platform.OS === 'ios' ? 'ios-menu' : 'md-menu';
 
-    Ionicons.getImageSource(menuIcon, 24, "#FFFFFF").then(icon => {
+    Ionicons.getImageSource(menuIcon, 24, '#FFFFFF').then(icon => {
       props.navigator.setButtons({
         leftButtons: [
           {
             icon,
-            id: "menu"
-          }
-        ]
+            id: 'menu',
+          },
+        ],
       });
     });
   }
@@ -90,10 +90,10 @@ class Support extends Component {
         Linking.openURL(url).catch(() => null);
       } else {
         Alert.alert(
-          "Nicht unterstützt",
-          "Diese Operation wird auf deinem Gerät zurzeit nicht unterstützt!",
-          [{ text: "OK" }],
-          { cancelable: false }
+          'Nicht unterstützt',
+          'Diese Operation wird auf deinem Gerät zurzeit nicht unterstützt!',
+          [{ text: 'OK' }],
+          { cancelable: false },
         );
       }
     });
@@ -101,16 +101,14 @@ class Support extends Component {
 
   render() {
     const phoneNumber =
-      Platform.OS === "ios"
-        ? `telprompt:${Config.PHONE_NUMBER}`
-        : `tel:${Config.PHONE_NUMBER}`;
+      Platform.OS === 'ios' ? `telprompt:${Config.PHONE_NUMBER}` : `tel:${Config.PHONE_NUMBER}`;
     const email = `mailto:${Config.CONTACT_EMAIL}`;
     const github = Config.GITHUB_URL;
 
     const version = `Version: ${DeviceInfo.getReadableVersion()
-      .split(".")
+      .split('.')
       .slice(0, 3)
-      .join(".")} (${DeviceInfo.getBuildNumber()})`;
+      .join('.')} (${DeviceInfo.getBuildNumber()})`;
 
     return (
       <ScrollWrapper>
@@ -142,7 +140,7 @@ Um Fehler zu beheben, ist allerdings ein qualifiziertes Feedback notwendig. Desh
 }
 
 Support.propTypes = {
-  navigator: PropTypes.instanceOf(Navigator).isRequired
+  navigator: PropTypes.instanceOf(Navigator).isRequired,
 };
 
 export default Support;

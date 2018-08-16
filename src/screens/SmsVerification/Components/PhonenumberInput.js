@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { Platform } from "react-native";
-import PropTypes from "prop-types";
-import styled from "styled-components/native";
+import React, { Component } from 'react';
+import { Platform } from 'react-native';
+import PropTypes from 'prop-types';
+import styled from 'styled-components/native';
 
 const Wrapper = styled.View`
   flex-direction: row;
@@ -20,14 +20,14 @@ const CountryNumber = styled.Text`
   font-size: 24;
   margin-bottom: 0;
   padding-bottom: 0;
-  padding-top: ${Platform.OS === "ios" ? 0 : 7};
+  padding-top: ${Platform.OS === 'ios' ? 0 : 7};
 `;
 
 const Number = styled.TextInput.attrs({
-  placeholder: "Deine Telefonnr.",
-  keyboardType: Platform.OS === "ios" ? "number-pad" : "numeric",
+  placeholder: 'Deine Telefonnr.',
+  keyboardType: Platform.OS === 'ios' ? 'number-pad' : 'numeric',
   maxLength: 13,
-  returnKeyType: "next"
+  returnKeyType: 'next',
 })`
   flex: 1;
   font-size: 24;
@@ -37,7 +37,7 @@ const Number = styled.TextInput.attrs({
 
 class PhonenumberInput extends Component {
   state = {
-    phoneNumber: this.props.value
+    phoneNumber: this.props.value,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -47,7 +47,7 @@ class PhonenumberInput extends Component {
   }
 
   onChange = text => {
-    const phoneNumber = text.replace(/[^0-9]/g, "");
+    const phoneNumber = text.replace(/[^0-9]/g, '');
     this.setState({ phoneNumber: String(phoneNumber) }, () => {
       if (text !== phoneNumber) {
         this.forceUpdate();
@@ -84,12 +84,12 @@ class PhonenumberInput extends Component {
 PhonenumberInput.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  editable: PropTypes.bool
+  editable: PropTypes.bool,
 };
 
 PhonenumberInput.defaultProps = {
-  value: "",
-  editable: true
+  value: '',
+  editable: true,
 };
 
 export default PhonenumberInput;

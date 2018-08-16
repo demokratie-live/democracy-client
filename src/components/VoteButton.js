@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components/native";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components/native';
 
 const VoteIconButtonWrapper = styled.TouchableOpacity`
   width: 88;
@@ -12,28 +12,28 @@ const VoteIconButtonWrapper = styled.TouchableOpacity`
   justify-content: center;
   background-color: ${({ selection, votedSelection, voted }) => {
     if ((voted || votedSelection) && selection !== votedSelection) {
-      return "grey";
+      return 'grey';
     }
     switch (selection) {
-      case "YES":
-        return "#15C063";
-      case "ABSTINATION":
-        return "#2C82E4";
-      case "NO":
-        return "#EC3E31";
+      case 'YES':
+        return '#15C063';
+      case 'ABSTINATION':
+        return '#2C82E4';
+      case 'NO':
+        return '#EC3E31';
       default:
-        return "grey";
+        return 'grey';
     }
   }};
 `;
 
 const VoteIconButton = styled.Image.attrs({
   flex: 1,
-  source: require("../../assets/icons/thumbsUp.png"),
-  resizeMode: "contain",
+  source: require('../../assets/icons/thumbsUp.png'),
+  resizeMode: 'contain',
   width: null,
-  height: null
-}) `
+  height: null,
+})`
   width: 40;
   height: 40;
 `;
@@ -43,28 +43,28 @@ const VoteButton = props => {
   let styleWrapper;
   let styleButton;
   switch (selection) {
-    case "YES":
+    case 'YES':
       styleButton = {
-        marginBottom: 5
+        marginBottom: 5,
       };
       break;
-    case "ABSTINATION":
+    case 'ABSTINATION':
       styleWrapper = {
-        borderColor: "rgba(44, 130, 228, 0.8)"
+        borderColor: 'rgba(44, 130, 228, 0.8)',
       };
       styleButton = {
-        transform: [{ rotate: "-90deg" }],
-        marginRight: 5
+        transform: [{ rotate: '-90deg' }],
+        marginRight: 5,
       };
 
       break;
-    case "NO":
+    case 'NO':
       styleWrapper = {
-        borderColor: "rgba(236, 62, 49, 0.8)"
+        borderColor: 'rgba(236, 62, 49, 0.8)',
       };
       styleButton = {
-        transform: [{ rotate: "180deg" }],
-        marginTop: 5
+        transform: [{ rotate: '180deg' }],
+        marginTop: 5,
       };
       break;
 
@@ -90,14 +90,14 @@ VoteButton.propTypes = {
   onPress: PropTypes.func,
   selection: PropTypes.string.isRequired,
   voted: PropTypes.bool,
-  style: PropTypes.shape()
+  style: PropTypes.shape(),
 };
 
 VoteButton.defaultProps = {
   votedSelection: null,
   onPress: null,
   voted: null,
-  style: {}
+  style: {},
 };
 
 export default VoteButton;

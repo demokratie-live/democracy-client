@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components/native";
-import { Dimensions } from "react-native";
-import { Navigator } from "react-native-navigation";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components/native';
+import { Dimensions } from 'react-native';
+import { Navigator } from 'react-native-navigation';
 
 const Wrapper = styled.TouchableOpacity`
-  width: ${Dimensions.get("window").width};
+  width: ${Dimensions.get('window').width};
   padding-horizontal: 18;
   padding-vertical: 18;
   background-color: ${({ color }) => color};
@@ -20,7 +20,7 @@ const Description = styled.Text``;
 
 class InAppNotification extends Component {
   state = {
-    clicked: false
+    clicked: false,
   };
   render() {
     const { title, description, color, onClick, navigator } = this.props;
@@ -34,7 +34,7 @@ class InAppNotification extends Component {
         onPress={() => {
           this.setState({ clicked: true });
           navigator.dismissModal({
-            animationType: "slide-down" // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
+            animationType: 'slide-down', // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
           });
           onClick();
         }}
@@ -51,13 +51,13 @@ InAppNotification.propTypes = {
   description: PropTypes.string,
   color: PropTypes.string,
   onClick: PropTypes.func,
-  navigator: PropTypes.instanceOf(Navigator).isRequired
+  navigator: PropTypes.instanceOf(Navigator).isRequired,
 };
 
 InAppNotification.defaultProps = {
   description: false,
-  color: "orange",
-  onClick: () => {}
+  color: 'orange',
+  onClick: () => {},
 };
 
 export default InAppNotification;

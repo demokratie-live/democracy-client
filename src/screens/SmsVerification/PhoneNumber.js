@@ -1,27 +1,21 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components/native";
-import {
-  AsyncStorage,
-  Dimensions,
-  Keyboard,
-  Alert,
-  Platform
-} from "react-native";
-import { Navigator, Navigation } from "react-native-navigation";
-import { graphql } from "react-apollo";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components/native';
+import { AsyncStorage, Dimensions, Keyboard, Alert, Platform } from 'react-native';
+import { Navigator, Navigation } from 'react-native-navigation';
+import { graphql } from 'react-apollo';
 
-import Description from "./Components/Description";
-import PhonenumberInput from "./Components/PhonenumberInput";
-import Button from "./Components/Button";
+import Description from './Components/Description';
+import PhonenumberInput from './Components/PhonenumberInput';
+import Button from './Components/Button';
 
-import REQUEST_CODE from "../../graphql/mutations/requestCode";
+import REQUEST_CODE from '../../graphql/mutations/requestCode';
 
 const ScrollView = styled.ScrollView.attrs({
   contentContainerStyle: {
-    alignItems: "center",
-    justifyContent: "center"
-  }
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 })`
   background-color: #fff;
 `;
@@ -29,35 +23,29 @@ const ScrollView = styled.ScrollView.attrs({
 class SmsVerification extends Component {
   static navigatorStyle = {
     // navBarHidden: true,
-    orientation: "landscape"
+    orientation: 'landscape',
   };
 
   state = {
-    height: Dimensions.get("window").height,
+    height: Dimensions.get('window').height,
     keyboardHeight: 0,
-    phoneNumber: ""
+    phoneNumber: '',
   };
 
   componentDidMount() {
-    const storedPhoneNumber = AsyncStorage.getItem("auth_phone");
+    const storedPhoneNumber = AsyncStorage.getItem('auth_phone');
     storedPhoneNumber.then(phoneNumber => {
       if (phoneNumber) {
         this.setState({
-          phoneNumber: phoneNumber.substr(3)
+          phoneNumber: phoneNumber.substr(3),
         });
       }
     });
 
-    this.keyboardDidShowListener = Keyboard.addListener(
-      "keyboardDidShow",
-      this.keyboardDidShow
-    );
-    this.keyboardDidHideListener = Keyboard.addListener(
-      "keyboardDidHide",
-      this.keyboardDidHide
-    );
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
     this.props.navigator.setTitle({
-      title: "Verifizieren".toUpperCase() // the new title of the screen as appears in the nav bar
+      title: 'Verifizieren'.toUpperCase(), // the new title of the screen as appears in the nav bar
     });
   }
 
@@ -86,26 +74,26 @@ class SmsVerification extends Component {
 
   sendNumber = () => {
     let { phoneNumber } = this.state;
-    if (phoneNumber.charAt(0) === "0") {
+    if (phoneNumber.charAt(0) === '0') {
       phoneNumber = phoneNumber.substr(1);
     }
     phoneNumber = `+49${phoneNumber}`;
     Alert.alert(
-      "Bestätigung der Telefonnummer",
+      'Bestätigung der Telefonnummer',
       `${phoneNumber}\nIst diese Nummer korrekt?`,
 
       [
         {
-          text: "Bearbeiten",
-          onPress: () => { },
-          style: "cancel"
+          text: 'Bearbeiten',
+          onPress: () => {},
+          style: 'cancel',
         },
         {
-          text: "Ja",
+          text: 'Ja',
           onPress: async () => {
-            AsyncStorage.setItem("auth_phone", phoneNumber);
+            AsyncStorage.setItem('auth_phone', phoneNumber);
             const res = await this.props.requestCode({
-              variables: { newPhone: phoneNumber, newUser: true }
+              variables: { newPhone: phoneNumber, newUser: true },
             });
             if (!res.data.requestCode.succeeded) {
               this.showNotification({ message: res.data.requestCode.reason });
@@ -113,34 +101,31 @@ class SmsVerification extends Component {
               // TODO: Navigate to Code Input if aut_code_expires is not yet expired
               // Contains a Date (String)
               // Do not do the Nvaigation here - do it on the "openVerificationScreen"
-              AsyncStorage.setItem(
-                "auth_code_expires",
-                res.data.requestCode.expireTime
-              );
+              AsyncStorage.setItem('auth_code_expires', res.data.requestCode.expireTime);
               this.props.navigator.push({
-                screen: "democracy.SmsVerification.Code",
-                backButtonTitle: "Zurück",
+                screen: 'democracy.SmsVerification.Code',
+                backButtonTitle: 'Zurück',
                 passProps: {
                   resendTime: new Date(res.data.requestCode.resendTime),
                   procedureId: this.props.procedureId,
-                  onComplete: this.props.onComplete
-                }
+                  onComplete: this.props.onComplete,
+                },
               });
             }
-          }
-        }
-      ]
+          },
+        },
+      ],
     );
   };
 
   showNotification = ({ message }) => {
     Navigation.showInAppNotification({
-      screen: "democracy.SmsVerification.Error", // unique ID registered with Navigation.registerScreen
+      screen: 'democracy.SmsVerification.Error', // unique ID registered with Navigation.registerScreen
       passProps: {
-        title: "Verifikationsfehler",
-        description: message
+        title: 'Verifikationsfehler',
+        description: message,
       }, // simple serializable object that will pass as props to the in-app notification (optional)
-      autoDismissTimerSec: 5 // auto dismiss notification in seconds
+      autoDismissTimerSec: 5, // auto dismiss notification in seconds
     });
   };
 
@@ -151,22 +136,19 @@ class SmsVerification extends Component {
       <ScrollView
         keyboardShouldPersistTaps="always"
         contentContainerStyle={{
-          height: Platform.OS === "ios" ? height : "100%",
-          alignItems: "center",
-          justifyContent: "space-around",
-          marginHorizontal: 9
+          height: Platform.OS === 'ios' ? height : '100%',
+          alignItems: 'center',
+          justifyContent: 'space-around',
+          marginHorizontal: 9,
         }}
         onLayout={this.onLayout}
       >
         <Description text="Bitte gib Deine aktuelle Handynummer ein" />
-        <PhonenumberInput
-          value={phoneNumber}
-          onChange={this.onChangePhoneNumber}
-        />
+        <PhonenumberInput value={phoneNumber} onChange={this.onChangePhoneNumber} />
         <Button
           title="CODE ANFORDERN"
           onPress={this.sendNumber}
-          style={{ width: "100%" }}
+          style={{ width: '100%' }}
           disabled={phoneNumber.length < 10}
         />
       </ScrollView>
@@ -178,11 +160,11 @@ SmsVerification.propTypes = {
   requestCode: PropTypes.func.isRequired,
   navigator: PropTypes.instanceOf(Navigator).isRequired,
   procedureId: PropTypes.oneOfType(PropTypes.string, PropTypes.bool),
-  onComplete: PropTypes.func.isRequired
+  onComplete: PropTypes.func.isRequired,
 };
 
 SmsVerification.defaultProps = {
-  procedureId: false
+  procedureId: false,
 };
 
-export default graphql(REQUEST_CODE, { name: "requestCode" })(SmsVerification);
+export default graphql(REQUEST_CODE, { name: 'requestCode' })(SmsVerification);
