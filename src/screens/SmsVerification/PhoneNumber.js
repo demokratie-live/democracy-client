@@ -41,10 +41,11 @@ class SmsVerification extends Component {
   componentDidMount() {
     const storedPhoneNumber = AsyncStorage.getItem("auth_phone");
     storedPhoneNumber.then(phoneNumber => {
-      phoneNumber = phoneNumber.substr(3); //eslint-disable-line
-      this.setState({
-        phoneNumber
-      });
+      if (phoneNumber) {
+        this.setState({
+          phoneNumber: phoneNumber.substr(3)
+        });
+      }
     });
 
     this.keyboardDidShowListener = Keyboard.addListener(
@@ -96,7 +97,7 @@ class SmsVerification extends Component {
       [
         {
           text: "Bearbeiten",
-          onPress: () => {},
+          onPress: () => { },
           style: "cancel"
         },
         {
