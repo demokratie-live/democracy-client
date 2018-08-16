@@ -73,7 +73,7 @@ class SmsVerification extends Component {
   }
 
   render() {
-    const { navigator, procedureId } = this.props;
+    const { navigator, procedureId, onComplete } = this.props;
     const { authCodeExpires } = this.state;
     return (
       <ScrollView>
@@ -106,7 +106,8 @@ Zu unserer Datenschutzbestimmung gelangst Du ferner hier.`}
                 screen: "democracy.SmsVerification.Code",
                 backButtonTitle: "Zurück",
                 passProps: {
-                  procedureId
+                  procedureId,
+                  onComplete
                 }
               })
             }
@@ -121,7 +122,8 @@ Zu unserer Datenschutzbestimmung gelangst Du ferner hier.`}
               screen: "democracy.SmsVerification.PhoneNumber",
               backButtonTitle: "Zurück",
               passProps: {
-                procedureId
+                procedureId,
+                onComplete
               }
             })
           }
@@ -139,7 +141,8 @@ Zu unserer Datenschutzbestimmung gelangst Du ferner hier.`}
 
 SmsVerification.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired,
-  procedureId: PropTypes.oneOfType(PropTypes.string, PropTypes.bool)
+  procedureId: PropTypes.oneOfType(PropTypes.string, PropTypes.bool),
+  onComplete: PropTypes.func.isRequired
 };
 
 SmsVerification.defaultProps = {

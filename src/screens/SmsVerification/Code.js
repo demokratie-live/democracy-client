@@ -97,6 +97,7 @@ class Code extends Component {
       });
       if (res.data.requestVerification.succeeded) {
         AsyncStorage.setItem("auth_phoneHash", phoneNumberHash);
+        this.props.onComplete();
         Alert.alert("Deine Verifikation war erfolgreich", null, [
           {
             text: "Ok",
@@ -224,6 +225,7 @@ class Code extends Component {
 Code.propTypes = {
   requestVerification: PropTypes.func.isRequired,
   requestCode: PropTypes.func.isRequired,
+  onComplete: PropTypes.func.isRequired,
   navigator: PropTypes.instanceOf(Navigator).isRequired,
   resendTime: PropTypes.instanceOf(Date)
 };

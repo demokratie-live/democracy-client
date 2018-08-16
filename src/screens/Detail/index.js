@@ -132,7 +132,9 @@ class Detail extends Component {
     this.componentHeight = height;
   };
 
-  listType = "VOTING";
+  onComplete = () => {
+    this.props.data.refetch();
+  };
 
   scrollTo = ({ y }) => {
     let scrollTo;
@@ -145,6 +147,8 @@ class Detail extends Component {
       this.scrollView.scrollTo({ y: scrollTo });
     }
   };
+
+  listType = "VOTING";
 
   render() {
     const { procedureId, toggleNotification, navigator } = this.props;
@@ -215,7 +219,8 @@ class Detail extends Component {
                   navigator.showModal({
                     screen: "democracy.SmsVerification",
                     passProps: {
-                      procedureId
+                      procedureId,
+                      onComplete: this.onComplete
                     }
                   });
                 }}

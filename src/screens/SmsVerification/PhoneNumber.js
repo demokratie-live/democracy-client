@@ -41,10 +41,11 @@ class SmsVerification extends Component {
   componentDidMount() {
     const storedPhoneNumber = AsyncStorage.getItem("auth_phone");
     storedPhoneNumber.then(phoneNumber => {
-      phoneNumber = phoneNumber.substr(3); //eslint-disable-line
-      this.setState({
-        phoneNumber
-      });
+      if (phoneNumber) {
+        this.setState({
+          phoneNumber: phoneNumber.substr(3)
+        });
+      }
     });
 
     this.keyboardDidShowListener = Keyboard.addListener(
@@ -96,7 +97,7 @@ class SmsVerification extends Component {
       [
         {
           text: "Bearbeiten",
-          onPress: () => {},
+          onPress: () => { },
           style: "cancel"
         },
         {
@@ -121,7 +122,8 @@ class SmsVerification extends Component {
                 backButtonTitle: "Zurück",
                 passProps: {
                   resendTime: new Date(res.data.requestCode.resendTime),
-                  procedureId: this.props.procedureId
+                  procedureId: this.props.procedureId,
+                  onComplete: this.props.onComplete
                 }
               });
             }
@@ -175,7 +177,8 @@ class SmsVerification extends Component {
 SmsVerification.propTypes = {
   requestCode: PropTypes.func.isRequired,
   navigator: PropTypes.instanceOf(Navigator).isRequired,
-  procedureId: PropTypes.oneOfType(PropTypes.string, PropTypes.bool)
+  procedureId: PropTypes.oneOfType(PropTypes.string, PropTypes.bool),
+  onComplete: PropTypes.func.isRequired
 };
 
 SmsVerification.defaultProps = {
