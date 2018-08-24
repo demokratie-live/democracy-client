@@ -80,6 +80,21 @@ class App {
   startApp = async ({ isInstructionsShown = false } = {}) => {
     // Decide Startscreen
     if (isInstructionsShown) {
+
+      Navigation.startSingleScreenApp({
+        screen: {
+          screen: 'democracy.BetaEnd',
+          navigatorStyle: {
+            navBarHidden: true,
+          },
+        },
+        animationType: 'fade',
+        appStyle: {
+          orientation: 'portrait',
+        },
+      });
+
+      /*
       Navigation.startSingleScreenApp({
         screen: {
           screen: 'democracy.VoteList',
@@ -109,7 +124,7 @@ class App {
           selectedTopTabIndicatorHeight: 5,
         },
         animationType: 'fade',
-      });
+      }); */
     } else {
       Navigation.startSingleScreenApp({
         screen: {

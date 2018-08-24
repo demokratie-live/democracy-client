@@ -21,6 +21,7 @@ import SmsVerification from './SmsVerification';
 import SmsVerificationPhoneNumber from './SmsVerification/PhoneNumber';
 import SmsVerificationCode from './SmsVerification/Code';
 import SmsVerificationError from './SmsVerification/Error';
+import BetaEnd from './BetaEnd';
 
 import DeepLink from '../hocs/DeepLink';
 import NetworkStatus from '../hocs/NetworkStatus';
@@ -148,4 +149,5 @@ export default function registerScreens() {
     ApolloProvider,
     { client },
   );
+  Navigation.registerComponent('democracy.BetaEnd', () => BetaEnd, client.store, ApolloProvider, { client });
 }
