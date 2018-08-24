@@ -28,8 +28,8 @@ const ButtonText = styled.Text`
 `;
 
 const BUTTON_TEXTS = {
-  next: 'Weiter',
-  finish: 'Los gehts!',
+  next: "Weiter",
+  finish: "Überspringen"
 };
 
 class Introductions extends Component {
@@ -41,12 +41,7 @@ class Introductions extends Component {
     if (this.swiper.state.index < this.swiper.state.total - 1) {
       this.swiper.scrollBy(1);
     } else {
-      this.props.setInstructionsShown({
-        variables: {
-          isInstructionsShown: true,
-        },
-      });
-      this.props.navigator.dismissAllModals();
+      this.close();
     }
   };
 
@@ -60,6 +55,24 @@ class Introductions extends Component {
     } else if (BUTTON_TEXTS.next !== buttonText) {
       this.setState({ buttonText: BUTTON_TEXTS.next });
     }
+  };
+
+  close = () => {
+    this.props.setInstructionsShown({
+      variables: {
+        isInstructionsShown: true,
+      },
+    });
+    this.props.navigator.dismissAllModals();
+  };
+
+  verify = () => {
+    this.props.navigator.showModal({
+      screen: 'democracy.SmsVerification',
+      passProps: {
+        onComplete: this.close,
+      },
+    });
   };
 
   render() {
@@ -92,7 +105,7 @@ class Introductions extends Component {
             ImgHead={require('../../../assets/tutorial/icon.logo.png')}
             ImgCenter={require('../../../assets/tutorial/screen.list.png')}
             ImgRight={require('../../../assets/tutorial/screen.detail.png')}
-            TxtHead="Willkommen in der Beta"
+            TxtHead="Willkommen bei DEMOCRACY"
             TxtSub="Alles über die deutsche Politik in einer App"
             nextPage={this.onClick}
           />
@@ -114,15 +127,15 @@ class Introductions extends Component {
             TxtSub="…über die Gesetzesvorlagen entlang der offiziellen Informationen des Bundestages"
             nextPage={this.onClick}
           />
-          <Slide
-            ImgHead={require('../../../assets/tutorial/icon.diskutiere.png')}
-            ImgLeft={require('../../../assets/tutorial/screen.vote.png')}
-            ImgCenter={require('../../../assets/tutorial/screen.forum.png')}
-            ImgRight={require('../../../assets/tutorial/screen.vote.png')}
+          {/* <Slide
+            ImgHead={require("../../../assets/tutorial/icon.diskutiere.png")}
+            ImgLeft={require("../../../assets/tutorial/screen.vote.png")}
+            ImgCenter={require("../../../assets/tutorial/screen.forum.png")}
+            ImgRight={require("../../../assets/tutorial/screen.vote.png")}
             TxtHead="Diskutiere"
-            TxtSub="…über die Für’s und Wider’s des Antrags und bringe weiterführende Informationen ein"
+            TxtSub="…über das Für und Wider des Antrags und bringe weiterführende Informationen ein"
             nextPage={this.onClick}
-          />
+          /> */}
           <Slide
             ImgHead={require('../../../assets/tutorial/icon.stimme.png')}
             ImgLeft={require('../../../assets/tutorial/screen.forum.png')}
@@ -136,10 +149,19 @@ class Introductions extends Component {
             ImgHead={require('../../../assets/tutorial/icon.analysiere.png')}
             ImgLeft={require('../../../assets/tutorial/screen.vote.png')}
             ImgCenter={require('../../../assets/tutorial/screen.analyse.png')}
-            ImgCircle={null}
+            ImgRight={require('../../../assets/tutorial/screen.registrieren.png')}
             TxtHead="Analysiere"
             TxtSub="…das Community-Abstimmungsverhalten und vergleich es mit den Bundestagsresultaten"
             nextPage={this.onClick}
+          />
+          <Slide
+            ImgHead={require('../../../assets/tutorial/icon.logo.png')}
+            ImgCenter={require('../../../assets/tutorial/screen.registrieren.png')}
+            ImgCircle={null}
+            TxtHead="Registrieren"
+            TxtSub="Zum Abstimmen musst Du Deine Handynummer verifizieren"
+            nextPage={this.onClick}
+            verify={this.verify}
           />
         </Swiper>
         <Button onPress={this.onClick}>
