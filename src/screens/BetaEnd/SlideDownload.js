@@ -3,6 +3,8 @@ import styled from 'styled-components/native';
 import { Platform, Linking } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 
+import Config from './../../config';
+
 const Container = styled.View`
   flex: 1;
   align-items: center;
@@ -63,7 +65,9 @@ const storeImg = () =>
     : require('../../../assets/betaend/playstore.png');
 
 const onPress = () => {
-  Linking.openURL('https://www.democracy-deutschland.de');
+  Linking.openURL(
+    Platform.OS === 'ios' ? Config.BETA_END_APPSTORE_URL : Config.BETA_END_PLAYSTORE_URL,
+  );
 };
 
 const SlideDownload = () => (

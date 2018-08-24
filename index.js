@@ -5,6 +5,8 @@ import {
 import { NetInfo } from 'react-native';
 // import Reactotron from "reactotron-react-native";
 
+import Config from './src/config';
+
 // Migrations
 import Migrations from './src/migrations';
 
@@ -77,68 +79,80 @@ class App {
     return isInstructionsShown;
   };
 
-  startApp = async ({ isInstructionsShown = false } = {}) => {
-    // Decide Startscreen
-    if (isInstructionsShown) {
+  startTutorial = () => {
+    Navigation.startSingleScreenApp({
+      screen: {
+        screen: 'democracy.Instructions',
+        title: 'Instructions',
+        navigatorStyle: {
+          navBarHidden: true,
+        },
+      },
+      animationType: 'fade',
+      appStyle: {
+        orientation: 'portrait',
+      },
+    });
+  };
 
-      Navigation.startSingleScreenApp({
-        screen: {
-          screen: 'democracy.BetaEnd',
-          navigatorStyle: {
-            navBarHidden: true,
-          },
-        },
-        animationType: 'fade',
-        appStyle: {
-          orientation: 'portrait',
-        },
-      });
+  startBetaEnd = () => {
+    Navigation.showModal({
+      screen: 'democracy.BetaEnd',
+      navigatorStyle: {
+        navBarHidden: true,
+      },
+      animationType: 'fade',
+      appStyle: {
+        orientation: 'portrait',
+      },
+    });
+  };
 
-      /*
-      Navigation.startSingleScreenApp({
-        screen: {
-          screen: 'democracy.VoteList',
-          title: 'Bundestag'.toUpperCase(),
-          navigatorStyle: {}, //
-          topTabs,
-        },
-        drawer: {
-          left: {
-            screen: 'democracy.SideMenu',
-            disableOpenGesture: true,
-          },
-          style: {
-            // ( iOS only )
-            leftDrawerWidth: 85, // optional, add this if you want a define left drawer width (50=percent)
-          },
+  startList = async () =>
+    Navigation.startSingleScreenApp({
+      screen: {
+        screen: 'democracy.VoteList',
+        title: 'Bundestag'.toUpperCase(),
+        navigatorStyle: {}, //
+        topTabs,
+      },
+      drawer: {
+        left: {
+          screen: 'democracy.SideMenu',
           disableOpenGesture: true,
         },
-        appStyle: {
-          navBarNoBorder: true,
-          navBarButtonColor: '#FFFFFF',
-          navBarBackgroundColor: '#4494d3',
-          navBarTextColor: '#FFFFFF',
-          navBarTextFontSize: 17,
-          selectedTopTabTextColor: '#ffffff',
-          selectedTopTabIndicatorColor: '#ffffff',
-          selectedTopTabIndicatorHeight: 5,
+        style: {
+          // ( iOS only )
+          leftDrawerWidth: 85, // optional, add this if you want a define left drawer width (50=percent)
         },
-        animationType: 'fade',
-      }); */
-    } else {
-      Navigation.startSingleScreenApp({
-        screen: {
-          screen: 'democracy.Instructions',
-          title: 'Instructions',
-          navigatorStyle: {
-            navBarHidden: true,
-          },
-        },
-        animationType: 'fade',
-        appStyle: {
-          orientation: 'portrait',
-        },
-      });
+        disableOpenGesture: true,
+      },
+      appStyle: {
+        navBarNoBorder: true,
+        navBarButtonColor: '#FFFFFF',
+        navBarBackgroundColor: '#4494d3',
+        navBarTextColor: '#FFFFFF',
+        navBarTextFontSize: 17,
+        selectedTopTabTextColor: '#ffffff',
+        selectedTopTabIndicatorColor: '#ffffff',
+        selectedTopTabIndicatorHeight: 5,
+      },
+      animationType: 'fade',
+    });
+
+  startApp = async ({ isInstructionsShown = false } = {}) => {
+    // Show Tutorial?
+    if (!isInstructionsShown) {
+      this.startTutorial();
+      return;
+    }
+
+    // Show List
+    await this.startList();
+
+    // Show Beta End Modal?
+    if (Config.BETA_END) {
+      this.startBetaEnd();
     }
   };
 }

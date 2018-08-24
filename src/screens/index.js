@@ -149,5 +149,7 @@ export default function registerScreens() {
     ApolloProvider,
     { client },
   );
-  Navigation.registerComponent('democracy.BetaEnd', () => BetaEnd, client.store, ApolloProvider, { client });
+  Navigation.registerComponent('democracy.BetaEnd', () => BetaEnd, client.store, ApolloProvider, {
+    client,
+  });
 }
