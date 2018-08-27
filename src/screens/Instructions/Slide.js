@@ -38,7 +38,7 @@ const TextSub = styled.Text`
   padding-top: 1;
   font-family: ${Platform.OS === 'ios' ? 'HelveticaNeue-Thin' : 'sans-serif-light'};
   text-align: center;
-  padding-bottom: 18;
+  margin-bottom: 18;
 `;
 
 const ContainerImages = styled.View`
@@ -79,11 +79,12 @@ const ButtonCircle = styled.TouchableOpacity`
   top: 165;
 `;
 const ButtonVerify = styled.TouchableOpacity`
-  bottom: 185;
-  background-color: rgb(126,211,33);
+  bottom: 175;
+  background-color: rgb(126, 211, 33);
   border-radius: 8;
   width: 180;
   height: 41;
+  position: absolute;
 `;
 
 const TextVerify = styled.Text`

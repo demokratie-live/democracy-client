@@ -28,8 +28,8 @@ const ButtonText = styled.Text`
 `;
 
 const BUTTON_TEXTS = {
-  next: "Weiter",
-  finish: "Überspringen"
+  next: 'Weiter',
+  finish: 'Überspringen',
 };
 
 class Introductions extends Component {
@@ -106,7 +106,7 @@ class Introductions extends Component {
             ImgCenter={require('../../../assets/tutorial/screen.list.png')}
             ImgRight={require('../../../assets/tutorial/screen.detail.png')}
             TxtHead="Willkommen bei DEMOCRACY"
-            TxtSub="Alles über die deutsche Politik in einer App"
+            TxtSub={`Alles über die deutsche Politik in einer App\n`}
             nextPage={this.onClick}
           />
           <Slide
@@ -122,7 +122,7 @@ class Introductions extends Component {
             ImgHead={require('../../../assets/tutorial/icon.informiere.png')}
             ImgLeft={require('../../../assets/tutorial/screen.list.png')}
             ImgCenter={require('../../../assets/tutorial/screen.detail.png')}
-            ImgRight={require('../../../assets/tutorial/screen.forum.png')}
+            ImgRight={require('../../../assets/tutorial/screen.vote.png')}
             TxtHead="Informiere Dich"
             TxtSub="…über die Gesetzesvorlagen entlang der offiziellen Informationen des Bundestages"
             nextPage={this.onClick}
@@ -138,7 +138,7 @@ class Introductions extends Component {
           /> */}
           <Slide
             ImgHead={require('../../../assets/tutorial/icon.stimme.png')}
-            ImgLeft={require('../../../assets/tutorial/screen.forum.png')}
+            ImgLeft={require('../../../assets/tutorial/screen.detail.png')}
             ImgCenter={require('../../../assets/tutorial/screen.vote.png')}
             ImgRight={require('../../../assets/tutorial/screen.analyse.png')}
             TxtHead="Stimme"
@@ -159,7 +159,7 @@ class Introductions extends Component {
             ImgCenter={require('../../../assets/tutorial/screen.registrieren.png')}
             ImgCircle={null}
             TxtHead="Registrieren"
-            TxtSub="Zum Abstimmen musst Du Deine Handynummer verifizieren"
+            TxtSub={`Zum Abstimmen musst Du Deine\nHandynummer verifizieren`}
             nextPage={this.onClick}
             verify={this.verify}
           />
