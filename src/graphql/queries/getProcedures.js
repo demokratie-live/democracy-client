@@ -5,11 +5,26 @@ import Voted from "../fragments/ProcedureVoted";
 import Viewed from "../fragments/ProcedureViewed";
 
 export default gql`
-  query procedures($offset: Int, $pageSize: Int, $type: ProcedureType!) {
-    procedures(offset: $offset, pageSize: $pageSize, type: $type) {
+  query procedures(
+    $offset: Int
+    $pageSize: Int
+    $type: ProcedureType!
+    $sort: String
+    $filter: ProcedureFilter
+  ) {
+    procedures(
+      offset: $offset
+      pageSize: $pageSize
+      type: $type
+      sort: $sort
+      filter: $filter
+    ) {
       _id
       title
       procedureId
+      currentStatus
+      type
+      subjectGroups
       tags
       abstract
       voteDate

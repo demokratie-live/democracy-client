@@ -8,6 +8,7 @@ import { graphql, compose } from "react-apollo";
 import client from "../../graphql/client";
 
 import finishSearch from "../../graphql/mutations/finishSearch";
+import SEARCH_HISTORY_ADD from "../../graphql/mutations/local/searchHistoryAdd";
 import searchTerm from "../../graphql/queries/local/searchTerm";
 import changeSearchTerm from "../../graphql/mutations/local/changeSearchTerm";
 
@@ -84,6 +85,12 @@ class Header extends Component {
   finishSearch = () => {
     client.mutate({
       mutation: finishSearch,
+      variables: {
+        term: this.state.term
+      }
+    });
+    client.mutate({
+      mutation: SEARCH_HISTORY_ADD,
       variables: {
         term: this.state.term
       }

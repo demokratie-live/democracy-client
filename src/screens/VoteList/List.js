@@ -1,10 +1,16 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
 import React, { Component } from "react";
-import { Dimensions, Platform, ActivityIndicator } from "react-native";
+import {
+  Dimensions,
+  Platform,
+  ActivityIndicator,
+  AsyncStorage,
+  Picker
+} from "react-native";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import { Navigator } from "react-native-navigation";
-import { graphql } from "react-apollo";
+import { graphql, compose } from "react-apollo";
 import { unionBy } from "lodash";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
@@ -14,6 +20,7 @@ import ListSectionHeader from "../../components/ListSectionHeader";
 import ListItem from "./ListItem";
 
 import getProcedures from "../../graphql/queries/getProcedures";
+import GET_FILTERS from "../../graphql/queries/local/filters";
 
 const Wrapper = styled.View`
   flex: 1;
@@ -27,9 +34,59 @@ const Loading = styled.View`
   justify-content: center;
 `;
 
+const PickerWrapper = styled.View``;
+
+const PickerHeader = styled.View`
+  background-color: #f9f9f9;
+  align-items: flex-end;
+`;
+
+const SortRow = styled.TouchableOpacity`
+  background-color: #e6edf2;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 18;
+`;
+
+const SortIcon = styled.Text`
+  color: #6d6d72;
+`;
+
+const PickerFinishButton = styled.Button``;
+
 const SectionList = styled.SectionList``;
 
 const PAGE_SIZE = 20;
+const STORAGE_KEY = "VoteList.Filters";
+
+const SORTERS = {
+  VOTING: [
+    {
+      key: "voteDate",
+      title: "nach Restzeit sortieren"
+    },
+    {
+      key: "activities",
+      title: "nach Aktivitätsindex sortieren"
+    }
+  ],
+  PREPARATION: [
+    {
+      key: "lastUpdateDate",
+      title: "nach Aktualisierung sortieren"
+    },
+    {
+      key: "created",
+      title: "nach Vorgangsdatum sortieren"
+    },
+    {
+      key: "activities",
+      title: "nach Aktivitätsindex sortieren"
+    }
+  ]
+};
 
 class List extends Component {
   static navigatorStyle = {
@@ -52,24 +109,26 @@ class List extends Component {
         ]
       });
     });
-
-    const searchIcon = Platform.OS === "ios" ? "ios-search" : "md-search";
-    Ionicons.getImageSource(searchIcon, 24, "#FFFFFF").then(icon => {
-      props.navigator.setButtons({
-        rightButtons: [
-          {
-            icon,
-            id: "search"
-          }
-        ]
-      });
-    });
   }
 
   state = {
     width: Platform.OS === "ios" ? Dimensions.get("window").width : "auto",
-    fetchedAll: false
+    fetchedAll: false,
+    filters: false,
+    sort: this.props.listType === "VOTING" ? "voteDate" : "lastUpdateDate",
+    sorterOpened: false
   };
+
+  componentDidMount() {
+    this.setRightButtons({ filterActive: false });
+
+    AsyncStorage.getItem(STORAGE_KEY).then(data => {
+      if (data) {
+        const jsonObj = JSON.parse(data);
+        this.prepareFilter(jsonObj);
+      }
+    });
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.listType !== this.props.listType) {
@@ -83,7 +142,27 @@ class List extends Component {
     ) {
       this.setState({ fetchedAll: true });
     }
+
+    if (nextProps.filters !== this.props.filters) {
+      this.prepareFilter(JSON.parse(nextProps.filters));
+    }
   }
+
+  onChangeFilter = filters => {
+    const { data: { refetch } } = this.props;
+    const filterQuery = {};
+    if (filters.type) {
+      filterQuery.type = filters.type.map(({ title }) => title);
+    }
+    if (filters.subjectGroups) {
+      filterQuery.subjectGroups = filters.subjectGroups.map(
+        ({ title }) => title
+      );
+    }
+    refetch({
+      filter: filterQuery
+    });
+  };
 
   onLayout = () => {
     if (Platform.OS === "ios") {
@@ -103,8 +182,118 @@ class List extends Component {
     });
   };
 
+  onChangeSort = sort => {
+    const { data: { refetch } } = this.props;
+    this.setState({ sort });
+    refetch({
+      sort
+    });
+  };
+
+  setRightButtons = ({ filterActive }) => {
+    const searchIcon = Platform.OS === "ios" ? "ios-search" : "md-search";
+    Ionicons.getImageSource(searchIcon, 24, "#FFFFFF").then(iconSearch => {
+        this.props.navigator.setButtons({
+          rightButtons: [
+            {
+              icon: iconSearch,
+              id: "search"
+            },
+            {
+              icon: filterActive
+                ? require("../../../assets/icons/badge-active-20.png")
+                : require("../../../assets/icons/badge-inactive-20.png"),
+              id: "filter"
+            }
+          ]
+        });
+    });
+  };
+
+  prepareFilter = filterObj => {
+    const filters = Object.keys(filterObj).reduce((prev, key) => {
+      if (key === "notifications") {
+        if (filterObj.notifications.value) {
+          return { ...prev, notifications: filterObj.notifications.value };
+        }
+        return { ...prev };
+      }
+      if (!filterObj[key].every(({ value }) => value)) {
+        return { ...prev, [key]: filterObj[key].filter(({ value }) => value) };
+      }
+      return prev;
+    }, {});
+    if (
+      Object.keys(filters).length > 0 ||
+      (this.state.filters && Object.keys(this.state.filters).length)
+    ) {
+      this.setState({ filters }, () => {
+        this.onChangeFilter(this.state.filters);
+      });
+    }
+    this.setRightButtons({
+      filterActive: filters && Object.keys(filters).length > 0
+    });
+  };
+
+  filterProcedures = ({
+    type,
+    subjectGroups,
+    voted,
+    viewedStatus,
+    currentStatus
+  }) => {
+    const { filters } = this.state;
+    if (!filters || filters.length === 0) {
+      return true;
+    }
+    let doFilter = true;
+    Object.keys(filters).forEach(key => {
+      switch (key) {
+        case "notifications":
+          if (filters[key] && viewedStatus !== "PUSH") {
+            doFilter = false;
+          }
+          break;
+        case "activity":
+          if (filters[key][0].name === "voted" && !voted) {
+            doFilter = false;
+          } else if (filters[key][0].name === "notVoted" && voted) {
+            doFilter = false;
+          }
+          break;
+        case "type":
+          if (filters[key][0].title !== type) {
+            doFilter = false;
+          }
+          break;
+        case "subjectGroups": {
+          const showSubjectGroups = filters[key].map(({ title }) => title);
+          doFilter = subjectGroups.some(
+            subjectGroup =>
+              showSubjectGroups.findIndex(
+                subject => subject === subjectGroup
+              ) !== -1
+          );
+          break;
+        }
+        case "currentStatus": {
+          const states = filters[key].map(({ title }) => title);
+          doFilter = states.findIndex(state => state === currentStatus) !== -1;
+          break;
+        }
+
+        default:
+          break;
+      }
+    });
+
+    return doFilter;
+  };
+
   prepareData = () => {
     const { listType, data: { procedures } } = this.props;
+
     if (!procedures || procedures.length === 0) {
       return [];
     }
@@ -113,13 +302,20 @@ class List extends Component {
         data: []
       }
     ];
+    if (listType !== "HOT") {
+      preparedData[0].data.push({ type: "sort" });
+    }
     if (listType === "VOTING") {
       preparedData.push({
         title: "Vergangen",
         data: []
       });
     }
-    procedures.forEach(procedure => {
+    const proceduresSorted = [...procedures];
+    proceduresSorted.forEach(procedure => {
+      if (!this.filterProcedures(procedure)) {
+        return;
+      }
       if (
         listType === "VOTING" &&
         ((new Date(procedure.voteDate) < new Date() &&
@@ -142,16 +338,43 @@ class List extends Component {
     return preparedData;
   };
 
-  renderItem = onClick => ({ item }) => (
-    <ListItem item={item} onClick={onClick} />
-  );
+  renderItem = onClick => ({ item }) => {
+    const { listType } = this.props;
+    if (item.type === "sort") {
+      if (Platform.OS === "ios") {
+        const curSort = SORTERS[listType].find(
+          ({ key }) => key === this.state.sort
+        );
+        return (
+          <SortRow onPress={() => this.setState({ sorterOpened: true })}>
+            <ListSectionHeader title={curSort.title} />
+            <SortIcon>▼</SortIcon>
+          </SortRow>
+        );
+      }
+      return (
+        <Picker
+          selectedValue={this.state.sort}
+          style={{ paddingLeft: 18, height: 35, backgroundColor: "#e6edf2" }}
+          onValueChange={this.onChangeSort}
+        >
+          {SORTERS[listType].map(({ key, title }) => (
+            <Picker.Item key={key} label={title} value={key} />
+          ))}
+        </Picker>
+      );
+    }
+    return <ListItem item={item} onClick={onClick} />;
+  };
 
   render() {
-    const { data } = this.props;
-    const { fetchedAll } = this.state;
+    const { data, listType } = this.props;
+    const { fetchedAll, sorterOpened, sort } = this.state;
+
     return (
       <Wrapper onLayout={this.onLayout} width={this.state.width}>
         <SectionList
+          contentOffset={{ y: listType !== "HOT" ? 35 : 0 }}
           ListFooterComponent={() =>
             data.loading || !fetchedAll ? (
               <Loading>
@@ -168,9 +391,12 @@ class List extends Component {
           }}
           refreshing={data.networkStatus === 4}
           renderItem={this.renderItem(this.onItemClick)}
-          renderSectionHeader={({ section }) => (
-            <ListSectionHeader title={section.title} />
-          )}
+          renderSectionHeader={({ section }) => {
+            if (section.data.length > 0) {
+              return <ListSectionHeader title={section.title} />;
+            }
+            return null;
+          }}
           onEndReached={() => {
             if (!data.loading && !fetchedAll) {
               data.fetchMore({
@@ -197,6 +423,26 @@ class List extends Component {
             }
           }}
         />
+        {Platform.OS === "ios" &&
+          sorterOpened && (
+            <PickerWrapper>
+              <PickerHeader>
+                <PickerFinishButton
+                  title="Fertig"
+                  onPress={() => this.setState({ sorterOpened: false })}
+                />
+              </PickerHeader>
+              <Picker
+                selectedValue={sort}
+                style={{ height: 200 }}
+                onValueChange={this.onChangeSort}
+              >
+                {SORTERS[listType].map(({ key, title }) => (
+                  <Picker.Item key={key} label={title} value={key} />
+                ))}
+              </Picker>
+            </PickerWrapper>
+          )}
       </Wrapper>
     );
   }
@@ -206,17 +452,25 @@ List.propTypes = {
   listType: PropTypes.string,
   navigator: PropTypes.instanceOf(Navigator).isRequired,
   navigateTo: PropTypes.func.isRequired,
-  data: PropTypes.shape().isRequired
+  data: PropTypes.shape().isRequired,
+  filters: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired
 };
 
 List.defaultProps = {
   listType: "VOTING"
 };
 
-export default graphql(getProcedures, {
-  options: ({ listType }) => ({
-    notifyOnNetworkStatusChange: true,
-    variables: { type: listType, pageSize: PAGE_SIZE, offset: 0 },
-    fetchPolicy: "cache-and-network"
+export default compose(
+  graphql(getProcedures, {
+    options: ({ listType }) => ({
+      notifyOnNetworkStatusChange: true,
+      variables: { type: listType, pageSize: PAGE_SIZE, offset: 0 },
+      fetchPolicy: "cache-and-network"
+    })
+  }),
+  graphql(GET_FILTERS, {
+    props: ({ data: { filters } }) => ({
+      filters: filters && filters.filters ? filters.filters : false
+    })
   })
-})(preventNavStackDuplicate(List));
+)(preventNavStackDuplicate(List));
