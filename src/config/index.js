@@ -7,4 +7,6 @@ export default {
   GITHUB_URL: process.env.GITHUB_URL || Config.GITHUB_URL || '',
   NOTIFICATION_ANDROID_SENDER_ID:
     process.env.NOTIFICATION_ANDROID_SENDER_ID || Config.NOTIFICATION_ANDROID_SENDER_ID || '',
+  URL_DONATE:
+    process.env.URL_DONATE || Config.URL_DONATE || 'https://www.democracy-deutschland.de/#!donate',
 };
