@@ -37,16 +37,15 @@ const TextHeadUnerline = styled.Text`
 `;
 
 const CenterImage = styled.Image`
-  flex: 1;
+  height: 88;
 `;
 
 const TouchableOpacity = styled.TouchableOpacity`
-  flex: 1;
-  height: 200;
+  width: 260;
   justify-content: center;
   align-items: center;
-  margin-top: 65;
-  margin-bottom: 65;
+  margin-top: 110;
+  margin-bottom: 30;
 `;
 
 const TextSub = styled.Text`

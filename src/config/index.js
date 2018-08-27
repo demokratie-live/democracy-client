@@ -7,9 +7,13 @@ export default {
   GITHUB_URL: process.env.GITHUB_URL || Config.GITHUB_URL || '',
   NOTIFICATION_ANDROID_SENDER_ID:
     process.env.NOTIFICATION_ANDROID_SENDER_ID || Config.NOTIFICATION_ANDROID_SENDER_ID || '',
-  BETA_END: process.env.BETA_END === 'true' || false,
+  BETA_END: process.env.BETA_END === 'true' || Config.BETA_END === 'true' || false,
   BETA_END_PLAYSTORE_URL:
-    process.env.BETA_END_PLAYSTORE_URL || 'https://www.democracy-deutschland.de/',
+    process.env.BETA_END_PLAYSTORE_URL ||
+    Config.BETA_END_PLAYSTORE_URL ||
+    'https://www.democracy-deutschland.de/',
   BETA_END_APPSTORE_URL:
-    process.env.BETA_END_APPSTORE_URL || 'https://www.democracy-deutschland.de/',
+    process.env.BETA_END_APPSTORE_URL ||
+    Config.BETA_END_APPSTORE_URL ||
+    'https://www.democracy-deutschland.de/',
 };
