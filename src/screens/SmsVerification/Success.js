@@ -54,6 +54,8 @@ const ButtonContainer = styled.View`
   flex: 1
   flex-direction: row;
   width: 100%;
+  padding-right: 25;
+  padding-left: 25;
 `;
 
 class SmsSuccess extends Component {
@@ -88,6 +90,7 @@ class SmsSuccess extends Component {
               width: '50%',
               height: 40,
               marginTop: 18,
+              borderRadius: 2,
               backgroundColor: '#fff',
             }}
             textStyle={{
@@ -101,6 +104,7 @@ class SmsSuccess extends Component {
               width: '50%',
               height: 40,
               marginTop: 18,
+              borderRadius: 2,
               backgroundColor: '#4494D3', // !authCodeExpires ? '#4494D3' : '#9AC5E7',
             }}
             title="SPENDEN"
