@@ -12,14 +12,11 @@ const Wrapper = styled.View`
 const NumberBox = styled.View`
   border-bottom-width: 1;
   border-color: #979797;
-  padding-bottom: 3;
-  height: 40;
+  padding-bottom: 0;
 `;
 
 const CountryNumber = styled.Text`
   font-size: 24;
-  margin-bottom: 0;
-  padding-bottom: 0;
   padding-top: ${Platform.OS === "ios" ? 0 : 7};
 `;
 
