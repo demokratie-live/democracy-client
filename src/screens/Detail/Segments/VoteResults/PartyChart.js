@@ -116,7 +116,7 @@ class PieChart extends Component {
       },
       { yes: 0, abstination: 0, no: 0, notVoted: 0 }
     );
-    return [
+    const totalsResult = [
       {
         label: "yes",
         value: totals.yes
@@ -129,11 +129,16 @@ class PieChart extends Component {
         label: "no",
         value: totals.no
       },
-      {
-        label: "notVoted",
-        value: totals.notVoted
-      }
     ];
+    if(totals.notVoted) {
+      totalsResult.push(
+        {
+          label: "notVoted",
+          value: totals.notVoted
+        })
+    }
+
+    return totalsResult;
   };
 
   prepareChartData = data => {
