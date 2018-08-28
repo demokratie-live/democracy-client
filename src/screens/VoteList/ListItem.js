@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { TouchableHighlight } from "react-native";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import { TouchableHighlight } from 'react-native';
+import PropTypes from 'prop-types';
 
-import ListRow from "../../components/ListRow";
-import VoteListItem from "../../components/VoteListItem";
+import ListRow from '../../components/ListRow';
+import VoteListItem from '../../components/VoteListItem';
 
 class ListItem extends Component {
   shouldComponentUpdate(nextProps) {
@@ -15,7 +15,7 @@ class ListItem extends Component {
       activityIndex: { activityIndex, active },
       votedGovernment,
       voted,
-      viewedStatus
+      viewedStatus,
     } = nextProps.item;
     const { item } = this.props;
 
@@ -39,10 +39,7 @@ class ListItem extends Component {
   render() {
     const { onClick, item } = this.props;
     return (
-      <TouchableHighlight
-        onPress={onClick({ item })}
-        underlayColor="rgba(68, 148, 211, 0.1)"
-      >
+      <TouchableHighlight onPress={onClick({ item })} underlayColor="rgba(68, 148, 211, 0.1)">
         <ListRow>
           <VoteListItem {...item} />
         </ListRow>
@@ -53,7 +50,7 @@ class ListItem extends Component {
 
 ListItem.propTypes = {
   item: PropTypes.shape().isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
 };
 
 export default ListItem;

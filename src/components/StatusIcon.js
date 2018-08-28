@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components/native";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components/native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Wrapper = styled.View`
   margin-right: 8;
@@ -19,13 +19,13 @@ const Wrapper = styled.View`
 
 const NotificationButtonIcon = styled(Ionicons).attrs({
   size: 20,
-  name: "ios-notifications",
-  color: "#1badf8"
+  name: 'ios-notifications',
+  color: '#1badf8',
 })``;
 
 const StatusIcon = ({
   // unreaded,
-  push
+  push,
 }) => (
   <Wrapper>
     {/* {unreaded && !push && <UnreadedIcon />} */}
@@ -35,12 +35,12 @@ const StatusIcon = ({
 
 StatusIcon.propTypes = {
   // unreaded: PropTypes.bool,
-  push: PropTypes.bool
+  push: PropTypes.bool,
 };
 
 StatusIcon.defaultProps = {
   // unreaded: false,
-  push: false
+  push: false,
 };
 
 export default StatusIcon;

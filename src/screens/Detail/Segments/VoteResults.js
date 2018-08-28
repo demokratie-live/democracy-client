@@ -16,7 +16,7 @@ import VOTES from "../../../graphql/queries/votes";
 const ScrollView = styled.ScrollView.attrs({
   horizontal: true,
   pagingEnabled: true,
-  showsHorizontalScrollIndicator: true
+  showsHorizontalScrollIndicator: true,
 })``;
 
 const VoteResults = props => {
@@ -26,24 +26,19 @@ const VoteResults = props => {
     const { voteResults: comunnityResults } = communityVotes;
     if (
       communityVotes.voted &&
-      (comunnityResults.yes ||
-        comunnityResults.no ||
-        comunnityResults.abstination)
+      (comunnityResults.yes || comunnityResults.no || comunnityResults.abstination)
     ) {
-      const votes =
-        comunnityResults.yes +
-        comunnityResults.no +
-        comunnityResults.abstination;
+      const votes = comunnityResults.yes + comunnityResults.no + comunnityResults.abstination;
       return (
         <PieChart
           data={_.map(
             communityVotes.voteResults,
             (value, label) =>
-              label !== "__typename"
+              label !== '__typename'
                 ? { value, label, percentage: Math.round(value / votes * 100) }
-                : false
+                : false,
           ).filter(e => e)}
-          colorScale={["#15C063", "#2C82E4", "#EC3E31"]}
+          colorScale={['#15C063', '#2C82E4', '#EC3E31']}
           label="Abstimmende"
         />
       );
@@ -128,13 +123,13 @@ const VoteResults = props => {
         </Segment>
       );
     }
-    if (currentStatus === "Zurückgezogen") {
+    if (currentStatus === 'Zurückgezogen') {
       return (
         <Segment title="Bundestagsergebnis" open scrollTo={scrollTo} fullWidth>
           <ScrollView>
             <PieChart
-              data={[{ value: 1, label: " ", percentage: false }]}
-              colorScale={["#B1B3B4", "", "", "#B1B3B4"]}
+              data={[{ value: 1, label: ' ', percentage: false }]}
+              colorScale={['#B1B3B4', '', '', '#B1B3B4']}
               label="Zurückgezogen"
               showNumbers={false}
             />
@@ -146,7 +141,7 @@ const VoteResults = props => {
   };
 
   if (communityVotes.voted) {
-    if (type === "community") {
+    if (type === 'community') {
       return (
         <Segment title="Communityergebnis" open scrollTo={scrollTo} fullWidth>
           <ScrollView>{renderCommuntiyResult()}</ScrollView>
@@ -168,21 +163,21 @@ VoteResults.propTypes = {
   scrollTo: PropTypes.func.isRequired,
   communityVotes: PropTypes.oneOfType([PropTypes.shape(), PropTypes.bool]),
   type: PropTypes.string.isRequired,
-  currentStatus: PropTypes.string
+  currentStatus: PropTypes.string,
 };
 
 VoteResults.defaultProps = {
   voteResults: null,
   communityVotes: null,
-  currentStatus: null
+  currentStatus: null,
 };
 
 export default compose(
   graphql(VOTES, {
     options: ({ procedure }) => ({
       variables: { procedure },
-      fetchPolicy: "cache-and-network"
+      fetchPolicy: 'cache-and-network',
     }),
-    props: ({ data }) => ({ communityVotes: data.votes || {} })
-  })
+    props: ({ data }) => ({ communityVotes: data.votes || {} }),
+  }),
 )(VoteResults);

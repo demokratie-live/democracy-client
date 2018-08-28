@@ -1,23 +1,23 @@
-import React, { Component } from "react";
-import styled from "styled-components/native";
-import PropTypes from "prop-types";
-import m from "moment";
-import _ from "lodash";
+import React, { Component } from 'react';
+import styled from 'styled-components/native';
+import PropTypes from 'prop-types';
+import m from 'moment';
+import _ from 'lodash';
 
 const DateText = styled.Text`
 padding-top: 8;
 padding-bottom: 2;
   color: ${({ date, soon }) => {
     if (soon) {
-      return "#f5a623";
+      return '#f5a623';
     } else if (new Date(date) > new Date()) {
-      return "#20a736";
+      return '#20a736';
     }
-    return "red";
+    return 'red';
   }}
   font-size: 12;
-  fontWeight: ${soon => (soon ? "bold" : "normal")}
-  display: ${({ visible }) => (visible ? "flex" : "none")};
+  fontWeight: ${soon => (soon ? 'bold' : 'normal')}
+  display: ${({ visible }) => (visible ? 'flex' : 'none')};
 `;
 
 class DateTime extends Component {
@@ -31,9 +31,9 @@ class DateTime extends Component {
   formatDate = date => {
     if (date) {
       if (date <= new Date()) {
-        return m(date).format("DD.MM.YY");
+        return m(date).format('DD.MM.YY');
       }
-      const daysDate = m(date).endOf("day");
+      const daysDate = m(date).endOf('day');
       const days = Math.floor(m.duration(daysDate.diff(m())).asDays());
 
       if (days > 1) {
@@ -50,11 +50,9 @@ class DateTime extends Component {
 
       const hours = Math.floor(m.duration(m(date).diff(m())).asMinutes() / 60);
       const minutes = _.padStart(
-        `${Math.floor(
-          ((m.duration(m(date).diff(m())).asMinutes() / 60) % 1) * 60
-        )}`,
+        `${Math.floor(((m.duration(m(date).diff(m())).asMinutes() / 60) % 1) * 60)}`,
         2,
-        "0"
+        '0',
       );
       return `${hours}:${minutes}`;
     }
@@ -64,9 +62,7 @@ class DateTime extends Component {
   render() {
     const { date } = this.props;
     const localDate = new Date(date);
-    localDate.setTime(
-      localDate.getTime() + new Date(date).getTimezoneOffset() * 1000 * 60
-    );
+    localDate.setTime(localDate.getTime() + new Date(date).getTimezoneOffset() * 1000 * 60);
 
     const formattedDate = this.formatDate(localDate);
 
@@ -74,7 +70,7 @@ class DateTime extends Component {
       <DateText
         visible={localDate}
         date={localDate}
-        soon={formattedDate === "morgen" || formattedDate.indexOf(":") !== -1}
+        soon={formattedDate === 'morgen' || formattedDate.indexOf(':') !== -1}
       >
         {formattedDate}
       </DateText>
@@ -83,11 +79,8 @@ class DateTime extends Component {
 }
 
 DateTime.propTypes = {
-  date: PropTypes.oneOfType([
-    PropTypes.instanceOf(Date),
-    PropTypes.string,
-    PropTypes.bool
-  ]).isRequired
+  date: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string, PropTypes.bool])
+    .isRequired,
 };
 
 export default DateTime;

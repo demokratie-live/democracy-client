@@ -1,7 +1,7 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
-import ActivityIndex from "../fragments/ProcedureActivityIndex";
-import Voted from "../fragments/ProcedureVoted";
+import ActivityIndex from '../fragments/ProcedureActivityIndex';
+import Voted from '../fragments/ProcedureVoted';
 
 export default gql`
   query proceduresById($offset: Int, $pageSize: Int, $ids: [String]!) {

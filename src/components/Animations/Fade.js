@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { Animated } from "react-native";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Animated } from 'react-native';
 
 class Fade extends Component {
   state = {
-    fadeAnim: new Animated.Value(1)
+    fadeAnim: new Animated.Value(1),
   };
 
   componentWillReceiveProps(nextProps) {
@@ -16,8 +16,8 @@ class Fade extends Component {
         this.state.fadeAnim, // The animated value to drive
         {
           toValue: visible ? 1 : 0, // Animate to opacity: 1 (opaque)
-          duration // Make it take a while
-        }
+          duration, // Make it take a while
+        },
       ).start();
     }
   }
@@ -25,20 +25,18 @@ class Fade extends Component {
   render() {
     const { fadeAnim } = this.state;
     const { children } = this.props;
-    return (
-      <Animated.View style={{ opacity: fadeAnim }}>{children}</Animated.View>
-    );
+    return <Animated.View style={{ opacity: fadeAnim }}>{children}</Animated.View>;
   }
 }
 
 Fade.propTypes = {
   visible: PropTypes.bool.isRequired,
   duration: PropTypes.number,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 Fade.defaultProps = {
-  duration: 500
+  duration: 500,
 };
 
 export default Fade;

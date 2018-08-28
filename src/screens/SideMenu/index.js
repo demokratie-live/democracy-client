@@ -1,13 +1,13 @@
-import React from "react";
-import { Platform, StatusBar } from "react-native";
-import styled from "styled-components/native";
-import { graphql } from "react-apollo";
-import { PropTypes } from "prop-types";
-import { Navigator } from "react-native-navigation";
+import React from 'react';
+import { Platform, StatusBar } from 'react-native';
+import styled from 'styled-components/native';
+import { graphql } from 'react-apollo';
+import { PropTypes } from 'prop-types';
+import { Navigator } from 'react-native-navigation';
 
-import Navigation from "./Navigation";
+import Navigation from './Navigation';
 
-import currentScreenQuery from "../../graphql/queries/currentScreen";
+import currentScreenQuery from '../../graphql/queries/currentScreen';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -28,9 +28,9 @@ const BackgroundWrapper = styled.View`
 `;
 
 const BackgroundImage = styled.Image.attrs({
-  source: require("../../../assets/images/stars2.png")
+  source: require('../../../assets/images/stars2.png'),
 })`
-  resize-mode: ${Platform.OS === "ios" ? "repeat" : "stretch"};
+  resize-mode: ${Platform.OS === 'ios' ? 'repeat' : 'stretch'};
   width: 100%;
   height: 100%;
 `;
@@ -47,7 +47,7 @@ const Head = styled.View`
 `;
 
 const HeadLogo = styled.Image.attrs({
-  source: require("../../../assets/images/logo-sidemenu.png")
+  source: require('../../../assets/images/logo-sidemenu.png'),
 })``;
 
 const HeadTextWrapper = styled.View`
@@ -63,19 +63,19 @@ const HeadText = styled.Text`
 const SideMenu = ({ data: { currentScreen }, navigator }) => {
   const navigateTo = ({ screenId, title }) => {
     if (screenId) {
-      if (screenId === "democracy.Instructions") {
+      if (screenId === 'democracy.Instructions') {
         navigator.showModal({
           screen: screenId,
-          navigatorStyle: { navBarHidden: true, orientation: "portrait" }
+          navigatorStyle: { navBarHidden: true, orientation: 'portrait' },
         });
       } else {
         navigator.handleDeepLink({
           link: screenId,
-          payload: { title, from: "sideMenu" }
+          payload: { title, from: 'sideMenu' },
         });
       }
     }
-    navigator.toggleDrawer({ side: "left" });
+    navigator.toggleDrawer({ side: 'left' });
   };
   return (
     <Wrapper>
@@ -84,8 +84,14 @@ const SideMenu = ({ data: { currentScreen }, navigator }) => {
         <BackgroundImage />
       </BackgroundWrapper>
       <Content>
-        {Platform.OS === "ios" && <StatusBackground />}
-        <Head>
+        {Platform.OS === 'ios' && <StatusBackground />}
+        <Head
+        /* onPress={() => {
+          navigator.showModal({
+            screen: "democracy.SmsVerification"
+          });
+        }} */
+        >
           <HeadLogo />
           <HeadTextWrapper>
             <HeadText>Prototyp</HeadText>
@@ -100,7 +106,7 @@ const SideMenu = ({ data: { currentScreen }, navigator }) => {
 
 SideMenu.propTypes = {
   data: PropTypes.shape().isRequired,
-  navigator: PropTypes.instanceOf(Navigator).isRequired
+  navigator: PropTypes.instanceOf(Navigator).isRequired,
 };
 
 export default graphql(currentScreenQuery)(SideMenu);

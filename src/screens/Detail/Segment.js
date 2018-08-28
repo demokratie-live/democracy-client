@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import styled from "styled-components/native";
-import PropTypes from "prop-types";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import React, { Component } from 'react';
+import styled from 'styled-components/native';
+import PropTypes from 'prop-types';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Wrapper = styled.View``;
 
 const SegmentTouch = styled.TouchableHighlight.attrs({
   activeOpacity: 0.5,
-  underlayColor: "rgba(68, 148, 211, 0.1)"
+  underlayColor: 'rgba(68, 148, 211, 0.1)',
 })``;
 
 const SegmentWrapper = styled.View`
@@ -25,11 +25,11 @@ const Title = styled.Text`
 `;
 
 const CollapseIcon = styled(Ionicons).attrs({
-  color: "rgb(151, 151, 151)",
-  name: "ios-arrow-up-outline",
-  size: 20
+  color: 'rgb(151, 151, 151)',
+  name: 'ios-arrow-up-outline',
+  size: 20,
 })`
-  transform: ${({ open }) => (open ? "rotate(0deg)" : "rotate(180deg)")};
+  transform: ${({ open }) => (open ? 'rotate(0deg)' : 'rotate(180deg)')};
 `;
 
 const Content = styled.View`
@@ -41,7 +41,7 @@ const Content = styled.View`
 
 class Segment extends Component {
   state = {
-    open: false
+    open: false,
   };
 
   componentWillMount() {

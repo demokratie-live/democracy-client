@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components/native";
-import PropTypes from "prop-types";
-import m from "moment";
-import { View } from "react-native";
+import React from 'react';
+import styled from 'styled-components/native';
+import PropTypes from 'prop-types';
+import m from 'moment';
+import { View } from 'react-native';
 
 const Wrapper = styled.View``;
 
@@ -51,8 +51,8 @@ const ContentText = styled(DefDescr)`
 
 const renderType = type => {
   switch (type) {
-    case "Gesetzgebung":
-      return "Gesetz";
+    case 'Gesetzgebung':
+      return 'Gesetz';
     default:
       return type;
   }
@@ -66,14 +66,14 @@ const Details = ({
   procedureId,
   currentStatus,
   type,
-  voted
+  voted,
 }) => (
   <Wrapper>
     <Head>
       {subjectGroups.length > 0 && (
         <HeadLeft>
           <DefTitle>Sachgebiete</DefTitle>
-          <DefDescr>{subjectGroups.join("\n")}</DefDescr>
+          <DefDescr>{subjectGroups.join('\n')}</DefDescr>
         </HeadLeft>
       )}
       <HeadRight>
@@ -87,19 +87,17 @@ const Details = ({
         <HeadRightDescr>
           <DefDescr>{renderType(type)}</DefDescr>
           <DefDescr>{procedureId}</DefDescr>
-          <DefDescr>
-            {submissionDate && m(submissionDate).format("DD.MM.YY")}
-          </DefDescr>
-          {dateVote && <DefDescr>{m(dateVote).format("DD.MM.YY")}</DefDescr>}
+          <DefDescr>{submissionDate && m(submissionDate).format('DD.MM.YY')}</DefDescr>
+          {dateVote && <DefDescr>{m(dateVote).format('DD.MM.YY')}</DefDescr>}
         </HeadRightDescr>
       </HeadRight>
     </Head>
 
     <DefTitle style={{ paddingTop: 8 }}>Aktueller Stand</DefTitle>
     <DefDescr>
-      {["Angenommen", "Abgelehnt"].indexOf(currentStatus) === -1 || voted
+      {['Angenommen', 'Abgelehnt'].indexOf(currentStatus) === -1 || voted
         ? currentStatus
-        : "Abgestimmt"}
+        : 'Abgestimmt'}
     </DefDescr>
     <Content>
       {abstract && (
@@ -120,12 +118,12 @@ Details.propTypes = {
   procedureId: PropTypes.string.isRequired,
   currentStatus: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  voted: PropTypes.bool.isRequired
+  voted: PropTypes.bool.isRequired,
 };
 
 Details.defaultProps = {
   abstract: false,
-  dateVote: false
+  dateVote: false,
 };
 
 export default Details;

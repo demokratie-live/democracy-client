@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export default gql`
   mutation viewProcedure($procedureId: String!, $selection: ViewSelection!) {

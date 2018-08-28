@@ -1,33 +1,33 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components/native";
-import { Navigation, Navigator } from "react-native-navigation";
-import { withApollo, graphql, compose, ApolloProvider } from "react-apollo";
-import { TouchableHighlight } from "react-native";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components/native';
+import { Navigation, Navigator } from 'react-native-navigation';
+import { withApollo, graphql, compose, ApolloProvider } from 'react-apollo';
+import { TouchableHighlight } from 'react-native';
 
-import Header from "./Header";
-import ListRow from "../../components/ListRow";
-import VoteListItem from "../../components/VoteListItem";
-import ListSectionHeader from "../../components/ListSectionHeader";
+import Header from './Header';
+import ListRow from '../../components/ListRow';
+import VoteListItem from '../../components/VoteListItem';
+import ListSectionHeader from '../../components/ListSectionHeader';
 
-import client from "../../graphql/client";
+import client from '../../graphql/client';
 
-import searchProcedures from "../../graphql/queries/searchProcedures";
-import mostSearched from "../../graphql/queries/mostSearched";
-import searchTerm from "../../graphql/queries/local/searchTerm";
-import SEARCH_HISTORY from "../../graphql/queries/local/searchHistory";
-import finishSearch from "../../graphql/mutations/finishSearch";
-import changeSearchTerm from "../../graphql/mutations/local/changeSearchTerm";
-import SEARCH_HISTORY_ADD from "../../graphql/mutations/local/searchHistoryAdd";
+import searchProcedures from '../../graphql/queries/searchProcedures';
+import mostSearched from '../../graphql/queries/mostSearched';
+import searchTerm from '../../graphql/queries/local/searchTerm';
+import SEARCH_HISTORY from '../../graphql/queries/local/searchHistory';
+import finishSearch from '../../graphql/mutations/finishSearch';
+import changeSearchTerm from '../../graphql/mutations/local/changeSearchTerm';
+import SEARCH_HISTORY_ADD from '../../graphql/mutations/local/searchHistoryAdd';
 
-import preventNavStackDuplicate from "../../hocs/preventNavStackDuplicate";
+import preventNavStackDuplicate from '../../hocs/preventNavStackDuplicate';
 
 Navigation.registerComponent(
-  "democracy.Search.Header",
+  'democracy.Search.Header',
   () => Header,
   client.store,
   ApolloProvider,
-  { client }
+  { client },
 );
 
 const Wrapper = styled.View`
@@ -49,7 +49,7 @@ const Text = styled.Text`
 `;
 
 const ActivityIndicator = styled.ActivityIndicator.attrs({
-  size: "large"
+  size: 'large',
 })``;
 
 const LoadingWrapper = styled.View`
@@ -65,38 +65,38 @@ const NoResultsWrapper = styled.View`
 `;
 
 const NoResultsImage = styled.Image.attrs({
-  source: require("../../../assets/images/search_no_results.png"),
-  opacity: 0.2
+  source: require('../../../assets/images/search_no_results.png'),
+  opacity: 0.2,
 })`
   margin-top: 18;
 `;
 
 class SearchScreen extends Component {
   static navigatorStyle = {
-    navBarBackgroundColor: "#4494d3"
+    navBarBackgroundColor: '#4494d3',
   };
 
   constructor(props) {
     super(props);
     this.props.navigator.setStyle({
-      navBarCustomView: "democracy.Search.Header",
-      navBarComponentAlignment: "fill",
+      navBarCustomView: 'democracy.Search.Header',
+      navBarComponentAlignment: 'fill',
       navBarCustomViewInitialProps: {
         navigator: this.props.navigator,
-        onChangeTerm: this.onChangeTerm
-      }
+        onChangeTerm: this.onChangeTerm,
+      },
     });
   }
 
   state = {
     searchData: [],
-    loading: false
+    loading: false,
   };
 
   componentDidMount() {
     const { updateSearchTerm } = this.props;
     updateSearchTerm({
-      variables: { term: "" }
+      variables: { term: '' },
     });
   }
 
@@ -112,7 +112,7 @@ class SearchScreen extends Component {
       this.observableSearchQuery = await watchQuery({
         query: searchProcedures,
         variables: { term },
-        fetchPolicy: "network-only"
+        fetchPolicy: 'network-only',
       });
 
       this.observableSearchQuery.subscribe({
@@ -120,7 +120,7 @@ class SearchScreen extends Component {
           if (result.data) {
             this.handleSearchResults({ ...result, term });
           }
-        }
+        },
       });
     } else {
       this.observableSearchQuery.refetch({ term });
@@ -128,42 +128,39 @@ class SearchScreen extends Component {
   };
 
   onItemClick = ({ item, section }) => () => {
-    if (section === "Ergebnisse") {
+    if (section === 'Ergebnisse') {
       this.props.navigateTo({
-        screen: "democracy.Detail",
-        title: "Abstimmung".toUpperCase(),
-        passProps: { ...item }
+        screen: 'democracy.Detail',
+        title: 'Abstimmung'.toUpperCase(),
+        passProps: { ...item },
       });
     } else {
       const { updateSearchTerm } = this.props;
 
       updateSearchTerm({
-        variables: { term: item }
+        variables: { term: item },
       });
       this.props.finishSearch({
         variables: {
-          term: item
-        }
+          term: item,
+        },
       });
       this.props.addToSearchHistory({
         variables: {
-          term: item
-        }
+          term: item,
+        },
       });
       this.onChangeTerm(item);
     }
   };
 
   handleSearchResults = ({
-    data: {
-      loading,
-      searchProceduresAutocomplete: { procedures, autocomplete }
-    }
+    data: { loading, searchProceduresAutocomplete: { procedures, autocomplete } },
   }) => {
     if (!loading) {
       const searchData = [
-        { title: "Vorschläge", data: autocomplete },
-        { title: "Ergebnisse", data: procedures }
+        { title: 'Vorschläge', data: autocomplete },
+        { title: 'Ergebnisse', data: procedures },
       ];
       this.setState({ searchData, loading: false });
     }
@@ -187,15 +184,13 @@ class SearchScreen extends Component {
     if (!term) {
       sectionData = [
         {
-          title: "Zuletzt gesucht",
-          data: searchHistory
+          title: 'Zuletzt gesucht',
+          data: searchHistory,
         },
         {
-          title: "Meistgesucht",
-          data: mostSearchedTerms
-            ? mostSearchedTerms.map(({ term: value }) => value)
-            : []
-        }
+          title: 'Meistgesucht',
+          data: mostSearchedTerms ? mostSearchedTerms.map(({ term: value }) => value) : [],
+        },
       ];
     } else {
       sectionData = this.state.searchData;
@@ -214,16 +209,14 @@ class SearchScreen extends Component {
               underlayColor="rgba(68, 148, 211, 0.1)"
             >
               <ListRow>
-                {title === "Ergebnisse" && (
-                  <VoteListItem {...item} date={item.voteDate} />
-                )}
-                {title === "Zuletzt gesucht" && <ListText>{item}</ListText>}
-                {title === "Vorschläge" && <ListText>{item}</ListText>}
-                {title === "Meistgesucht" && <ListText>{item}</ListText>}
+                {title === 'Ergebnisse' && <VoteListItem {...item} date={item.voteDate} />}
+                {title === 'Zuletzt gesucht' && <ListText>{item}</ListText>}
+                {title === 'Vorschläge' && <ListText>{item}</ListText>}
+                {title === 'Meistgesucht' && <ListText>{item}</ListText>}
               </ListRow>
             </TouchableHighlight>
           )}
-          keyExtractor={item => (typeof item === "string" ? item : item._id)}
+          keyExtractor={item => (typeof item === 'string' ? item : item._id)}
           ListEmptyComponent={() => {
             const { term: value } = this.state;
             if (value) {
@@ -250,13 +243,13 @@ SearchScreen.propTypes = {
   mostSearchedTerms: PropTypes.arrayOf(PropTypes.shape()),
   searchTerm: PropTypes.string.isRequired,
   addToSearchHistory: PropTypes.func.isRequired,
-  searchHistory: PropTypes.arrayOf(PropTypes.string )
+  searchHistory: PropTypes.arrayOf(PropTypes.string),
 };
 
 SearchScreen.defaultProps = {
   navigator: undefined,
   mostSearchedTerms: [],
-  searchHistory: []
+  searchHistory: [],
 };
 
 export default withApollo(
@@ -264,38 +257,29 @@ export default withApollo(
     compose(
       // Queries
       graphql(mostSearched, {
-        props: ({
-          data: {
-            mostSearched: mostSearchedTerms,
-            refetch: refetchMostSearched
-          }
-        }) => ({
+        props: ({ data: { mostSearched: mostSearchedTerms, refetch: refetchMostSearched } }) => ({
           mostSearchedTerms,
-          refetchMostSearched
+          refetchMostSearched,
         }),
         options: () => ({
-          fetchPolicy: "cache-and-network"
-        })
+          fetchPolicy: 'cache-and-network',
+        }),
       }),
 
       graphql(searchTerm, {
         props: ({ data: { searchTerm: searchTermData } }) =>
-          searchTermData
-            ? { searchTerm: searchTermData.term }
-            : { searchTerm: "" }
+          searchTermData ? { searchTerm: searchTermData.term } : { searchTerm: '' },
       }),
       graphql(SEARCH_HISTORY, {
         props: ({ data: { searchHistory } }) => ({
-          searchHistory: searchHistory
-            ? searchHistory.map(({ term }) => term)
-            : []
-        })
+          searchHistory: searchHistory ? searchHistory.map(({ term }) => term) : [],
+        }),
       }),
 
       // Mutations
-      graphql(finishSearch, { name: "finishSearch" }),
-      graphql(changeSearchTerm, { name: "updateSearchTerm" }),
-      graphql(SEARCH_HISTORY_ADD, { name: "addToSearchHistory" })
-    )(SearchScreen)
-  )
+      graphql(finishSearch, { name: 'finishSearch' }),
+      graphql(changeSearchTerm, { name: 'updateSearchTerm' }),
+      graphql(SEARCH_HISTORY_ADD, { name: 'addToSearchHistory' }),
+    )(SearchScreen),
+  ),
 );

@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { Navigator } from "react-native-navigation";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Navigator } from 'react-native-navigation';
 
 // import onNavigationEvent from "../screens/onNavigationEvent";
 
-import topTabs from "../screens/VoteList/topTabs";
+import topTabs from '../screens/VoteList/topTabs';
 
 let currentScreen;
 
@@ -13,21 +13,21 @@ export default ComposedComponent => {
     componentDidMount() {
       const { navigator } = this.props;
       navigator.addOnNavigatorEvent(event => {
-        if (event.type === "DeepLink" && event.payload.from === "sideMenu") {
+        if (event.type === 'DeepLink' && event.payload.from === 'sideMenu') {
           if (event.link !== currentScreen) {
-            if (event.link === "democracy.VoteList") {
+            if (event.link === 'democracy.VoteList') {
               navigator.resetTo({
                 screen: event.link,
                 title: event.payload.title,
                 topTabs,
-                animated: false
+                animated: false,
               });
             } else {
               navigator.push({
                 screen: event.link,
                 title: event.payload.title,
                 animated: false,
-                backButtonHidden: true
+                backButtonHidden: true,
               });
             }
           }
@@ -42,7 +42,7 @@ export default ComposedComponent => {
   }
 
   WrappingComponent.propTypes = {
-    navigator: PropTypes.instanceOf(Navigator).isRequired
+    navigator: PropTypes.instanceOf(Navigator).isRequired,
   };
 
   return WrappingComponent;

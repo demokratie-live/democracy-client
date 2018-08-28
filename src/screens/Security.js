@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components/native";
-import { Platform } from "react-native";
-import { Navigator } from "react-native-navigation";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
-import DeviceInfo from "react-native-device-info";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components/native';
+import { Platform } from 'react-native';
+import { Navigator } from 'react-native-navigation';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import DeviceInfo from 'react-native-device-info';
 
 const ScrollWrapper = styled.ScrollView`
   flex: 1;
@@ -20,7 +20,7 @@ const Wrapper = styled.View`
 `;
 
 const Logo = styled.Image.attrs({
-  source: require("../../assets/images/logo-text10X.png")
+  source: require('../../assets/images/logo-text10X.png'),
 })``;
 
 const Text = styled.Text`
@@ -41,7 +41,7 @@ const EntryWrapper = styled.View`
 
 const CheckIcon = styled(SimpleLineIcons).attrs({
   size: 31,
-  color: "#000000"
+  color: '#000000',
 })``;
 
 const ProcessImageWrapper = styled.View`
@@ -66,66 +66,52 @@ const SecurityEntry = ({ color, text }) => (
 
 SecurityEntry.propTypes = {
   color: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired
+  text: PropTypes.string.isRequired,
 };
 
 class Security extends Component {
   static navigatorStyle = {
-    navBarButtonColor: "#FFFFFF",
-    navBarBackgroundColor: "#4494d3",
-    navBarTextColor: "#FFFFFF",
-    navBarTextFontSize: 17
+    navBarButtonColor: '#FFFFFF',
+    navBarBackgroundColor: '#4494d3',
+    navBarTextColor: '#FFFFFF',
+    navBarTextFontSize: 17,
   };
 
   constructor(props) {
     super(props);
 
-    const menuIcon = Platform.OS === "ios" ? "ios-menu" : "md-menu";
+    const menuIcon = Platform.OS === 'ios' ? 'ios-menu' : 'md-menu';
 
-    Ionicons.getImageSource(menuIcon, 24, "#FFFFFF").then(icon => {
+    Ionicons.getImageSource(menuIcon, 24, '#FFFFFF').then(icon => {
       props.navigator.setButtons({
         leftButtons: [
           {
             icon,
-            id: "menu"
-          }
-        ]
+            id: 'menu',
+          },
+        ],
       });
     });
   }
 
   render() {
     const version = `Version: ${DeviceInfo.getReadableVersion()
-      .split(".")
+      .split('.')
       .slice(0, 3)
-      .join(".")} (${DeviceInfo.getBuildNumber()})`;
+      .join('.')} (${DeviceInfo.getBuildNumber()})`;
     return (
       <ScrollWrapper>
         <Wrapper>
           <Logo />
           <SecurityList>
-            <SecurityEntry
-              text="SSL-Verschlüsselung"
-              color="rgb(113, 211, 172)"
-            />
-            <SecurityEntry
-              text="Anonymes Abstimmen"
-              color="rgb(113, 211, 172)"
-            />
-            <SecurityEntry
-              text="Nutzerverifikation: Einladung"
-              color="rgb(234, 168, 68)"
-            />
+            <SecurityEntry text="SSL-Verschlüsselung" color="rgb(113, 211, 172)" />
+            <SecurityEntry text="Anonymes Abstimmen" color="rgb(113, 211, 172)" />
+            <SecurityEntry text="Nutzerverifikation: Einladung" color="rgb(234, 168, 68)" />
             <SecurityEntry text="SMS-Verifikation" color="rgb(143,142,148)" />
-            <SecurityEntry
-              text="Beweisbare Auszählung"
-              color="rgb(143,142,148)"
-            />
+            <SecurityEntry text="Beweisbare Auszählung" color="rgb(143,142,148)" />
           </SecurityList>
           <ProcessImageWrapper>
-            <ProcessImage
-              source={require("../../assets/images/sescurity-process.png")}
-            />
+            <ProcessImage source={require('../../assets/images/sescurity-process.png')} />
           </ProcessImageWrapper>
           <Version style={{ paddingTop: 36 }}>{version}</Version>
         </Wrapper>
@@ -135,7 +121,7 @@ class Security extends Component {
 }
 
 Security.propTypes = {
-  navigator: PropTypes.instanceOf(Navigator).isRequired
+  navigator: PropTypes.instanceOf(Navigator).isRequired,
 };
 
 export default Security;
