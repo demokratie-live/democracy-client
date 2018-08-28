@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { Platform } from "react-native";
-import styled from "styled-components/native";
-import { Navigation } from "react-native-navigation";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Platform } from 'react-native';
+import styled from 'styled-components/native';
+import { Navigation } from 'react-native-navigation';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -13,7 +13,7 @@ const Wrapper = styled.View`
 
 const HeaderElement = styled.View`
   flex: 1;
-  padding-right: ${Platform.OS === "android" ? 11 : 0};
+  padding-right: ${Platform.OS === 'android' ? 11 : 0};
 `;
 
 const TitleText = styled.Text.attrs({})`
@@ -36,24 +36,24 @@ class Header extends Component {
 
   clickBack = () => {
     Navigation.dismissModal({
-      animationType: "slide-down" // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
+      animationType: 'slide-down', // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
     });
   };
 
   render() {
     return (
       <Wrapper>
-        {Platform.OS === "ios" && (
-          <HeaderElement style={{ alignItems: "flex-start" }}>
+        {Platform.OS === 'ios' && (
+          <HeaderElement style={{ alignItems: 'flex-start' }}>
             <Button onPress={this.clickBack}>
               <ButtonText>Zurück</ButtonText>
             </Button>
           </HeaderElement>
         )}
-        <HeaderElement style={{ alignItems: "center" }}>
+        <HeaderElement style={{ alignItems: 'center' }}>
           <TitleText>FILTER</TitleText>
         </HeaderElement>
-        <HeaderElement style={{ alignItems: "flex-end" }}>
+        <HeaderElement style={{ alignItems: 'flex-end' }}>
           <Button onPress={this.onSave}>
             <ButtonText>Speichern</ButtonText>
           </Button>
@@ -64,7 +64,7 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  onSave: PropTypes.func.isRequired
+  onSave: PropTypes.func.isRequired,
 };
 
 Header.defaultProps = {};

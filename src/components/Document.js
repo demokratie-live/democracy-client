@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { Linking, Platform } from "react-native";
-import styled from "styled-components/native";
-import PropTypes from "prop-types";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import { Navigator } from "react-native-navigation";
+import React, { Component } from 'react';
+import { Linking, Platform } from 'react-native';
+import styled from 'styled-components/native';
+import PropTypes from 'prop-types';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Navigator } from 'react-native-navigation';
 
 const Wrapper = styled.TouchableOpacity`
   flex-direction: row;
@@ -20,9 +20,7 @@ const Text = styled.Text`
 class Document extends Component {
   openPdf = url => () => {
     const previewUrl =
-      Platform.OS === "ios"
-        ? url
-        : `https://docs.google.com/gview?embedded=true&url=${url}`;
+      Platform.OS === 'ios' ? url : `https://docs.google.com/gview?embedded=true&url=${url}`;
     Linking.canOpenURL(previewUrl).then(supported => {
       if (supported) {
         Linking.openURL(previewUrl);
@@ -38,12 +36,12 @@ class Document extends Component {
       <Wrapper
         onPress={() =>
           navigator.push({
-            screen: "democracy.Pdf",
+            screen: 'democracy.Pdf',
             title: type,
-            backButtonTitle: "",
+            backButtonTitle: '',
             passProps: {
-              url
-            }
+              url,
+            },
           })
         }
       >
@@ -59,7 +57,7 @@ Document.propTypes = {
   type: PropTypes.string.isRequired,
   number: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
-  navigator: PropTypes.instanceOf(Navigator).isRequired
+  navigator: PropTypes.instanceOf(Navigator).isRequired,
 };
 
 export default Document;

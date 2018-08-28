@@ -1,8 +1,8 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
-import ActivityIndex from "../fragments/ProcedureActivityIndex";
-import Voted from "../fragments/ProcedureVoted";
-import Viewed from "../fragments/ProcedureViewed";
+import ActivityIndex from '../fragments/ProcedureActivityIndex';
+import Voted from '../fragments/ProcedureVoted';
+import Viewed from '../fragments/ProcedureViewed';
 
 export default gql`
   query search($term: String!) {

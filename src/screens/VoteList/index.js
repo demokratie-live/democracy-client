@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import { Platform, SegmentedControlIOS, Dimensions } from "react-native";
-import PropTypes from "prop-types";
-import styled from "styled-components/native";
-import { Navigation, Navigator } from "react-native-navigation";
+import React, { Component } from 'react';
+import { Platform, SegmentedControlIOS, Dimensions } from 'react-native';
+import PropTypes from 'prop-types';
+import styled from 'styled-components/native';
+import { Navigation, Navigator } from 'react-native-navigation';
 
-import List from "./List";
-import Header from "./Header";
+import List from './List';
+import Header from './Header';
 
-Navigation.registerComponent("democracy.VoteList.Header", () => Header);
+Navigation.registerComponent('democracy.VoteList.Header', () => Header);
 
 const Screen = styled.View`
   flex: 1;
@@ -16,7 +16,7 @@ const Screen = styled.View`
 
 const ScrollView = styled.ScrollView.attrs({
   horizontal: true,
-  pagingEnabled: true
+  pagingEnabled: true,
 })``;
 
 const SegmentControlsWrapper = styled.View`
@@ -32,21 +32,21 @@ const SegmentControlsWrapper = styled.View`
 class VoteList extends Component {
   static navigatorStyle = {
     navBarNoBorder: true,
-    navBarButtonColor: "#FFFFFF",
-    navBarBackgroundColor: "#4494d3",
-    navBarTextColor: "#FFFFFF",
+    navBarButtonColor: '#FFFFFF',
+    navBarBackgroundColor: '#4494d3',
+    navBarTextColor: '#FFFFFF',
     navBarTextFontSize: 17,
-    selectedTopTabTextColor: "#ffffff",
-    selectedTopTabIndicatorColor: "#ffffff",
-    selectedTopTabIndicatorHeight: 5
+    selectedTopTabTextColor: '#ffffff',
+    selectedTopTabIndicatorColor: '#ffffff',
+    selectedTopTabIndicatorHeight: 5,
   };
 
   state = {
-    selectedIndex: 0
+    selectedIndex: 0,
   };
 
   onScrollEndDrag = e => {
-    if (this.width === Dimensions.get("window").width) {
+    if (this.width === Dimensions.get('window').width) {
       const { contentOffset } = e.nativeEvent;
       const viewSize = e.nativeEvent.layoutMeasurement;
 
@@ -58,39 +58,39 @@ class VoteList extends Component {
     }
   };
 
-  width = Dimensions.get("window").width;
+  width = Dimensions.get('window').width;
 
   lists = [
-    { key: "VOTING", title: "in Abstimmung", smallTitle: "Abstimmung" },
+    { key: 'VOTING', title: 'in Abstimmung', smallTitle: 'Abstimmung' },
     {
-      key: "PREPARATION",
-      title: "in Vorbereitung",
-      smallTitle: "Vorbereitung"
+      key: 'PREPARATION',
+      title: 'in Vorbereitung',
+      smallTitle: 'Vorbereitung',
     },
-    { key: "HOT", title: "What's hot?", smallTitle: "What's hot?" }
+    { key: 'HOT', title: "What's hot?", smallTitle: "What's hot?" },
   ];
 
   renderSegmentControls = () => {
-    if (Platform.OS === "ios") {
+    if (Platform.OS === 'ios') {
       return (
         <SegmentControlsWrapper>
           <SegmentedControlIOS
             style={{
-              alignSelf: "flex-end",
-              width: "100%"
+              alignSelf: 'flex-end',
+              width: '100%',
             }}
             values={this.lists.map(
-              ({ title, smallTitle }) => (this.width > 320 ? title : smallTitle)
+              ({ title, smallTitle }) => (this.width > 320 ? title : smallTitle),
             )}
             selectedIndex={this.state.selectedIndex}
             tintColor="#ffffff"
             onChange={event => {
               this.setState({
-                selectedIndex: event.nativeEvent.selectedSegmentIndex
+                selectedIndex: event.nativeEvent.selectedSegmentIndex,
               });
               this.scrollView.scrollTo({
                 y: 0,
-                x: event.nativeEvent.selectedSegmentIndex * this.width
+                x: event.nativeEvent.selectedSegmentIndex * this.width,
               });
             }}
           />
@@ -101,14 +101,14 @@ class VoteList extends Component {
   };
 
   renderList = () => {
-    if (Platform.OS === "ios") {
+    if (Platform.OS === 'ios') {
       return (
         <ScrollView
           onContentSizeChange={contentWidth => {
             this.width = contentWidth / this.lists.length;
             this.scrollView.scrollTo({
               y: 0,
-              x: this.state.selectedIndex * this.width
+              x: this.state.selectedIndex * this.width,
             });
           }}
           onMomentumScrollEnd={this.onScrollEndDrag}
@@ -117,11 +117,7 @@ class VoteList extends Component {
           }}
         >
           {this.lists.map(list => (
-            <List
-              key={list.key}
-              listType={list.key}
-              navigator={this.props.navigator}
-            />
+            <List key={list.key} listType={list.key} navigator={this.props.navigator} />
           ))}
         </ScrollView>
       );
@@ -140,7 +136,7 @@ class VoteList extends Component {
 }
 
 VoteList.propTypes = {
-  navigator: PropTypes.instanceOf(Navigator).isRequired
+  navigator: PropTypes.instanceOf(Navigator).isRequired,
 };
 
 VoteList.defaultProps = {};

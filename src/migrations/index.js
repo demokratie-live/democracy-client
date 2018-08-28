@@ -1,3 +1,3 @@
-import presistProcedures from "./presistProcedures";
+import presistProcedures from './presistProcedures';
 
 export default () => Promise.all([presistProcedures()]);

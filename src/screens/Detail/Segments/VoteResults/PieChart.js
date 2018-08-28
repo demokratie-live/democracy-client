@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { View, Dimensions, Platform } from "react-native";
-import styled from "styled-components/native";
-import PropTypes from "prop-types";
-import { VictoryPie } from "victory-native";
+import React, { Component } from 'react';
+import { View, Dimensions, Platform } from 'react-native';
+import styled from 'styled-components/native';
+import PropTypes from 'prop-types';
+import { VictoryPie } from 'victory-native';
 
 const VoteResultsWrapper = styled.View`
   justify-content: center;
@@ -26,7 +26,7 @@ const VoteResultPieLabel = styled.Text`
 `;
 
 const VoteResultNumbers = styled.View`
-  width: ${() => Dimensions.get("window").width - 18 * 2};
+  width: ${() => Dimensions.get('window').width - 18 * 2};
   max-width: 464;
   padding-top: 18;
   flex-direction: row;
@@ -62,7 +62,7 @@ const VoteResultCircle = styled.View`
 
 class PieChart extends Component {
   state = {
-    width: Dimensions.get("window").width - 18 * 2
+    width: Dimensions.get('window').width - 18 * 2,
   };
 
   getColor = (label, colors) => {
@@ -76,14 +76,14 @@ class PieChart extends Component {
       default:
         return colors[3];
     }
-  }
+  };
 
   getLabel = label => {
     const labels = {
-      yes: "Zustimmungen",
-      abstination: "Enthaltungen",
-      no: "Ablehnungen",
-      notVote: "Nicht abg."
+      yes: 'Zustimmungen',
+      abstination: 'Enthaltungen',
+      no: 'Ablehnungen',
+      notVote: 'Nicht abg.',
     };
     return labels[label] || label;
   };
@@ -107,26 +107,21 @@ class PieChart extends Component {
             data={data.map((entry, index) => ({
               x: index,
               y: entry.value,
-              label: entry.percentage >= 5 ? `${entry.percentage}%` : " "
+              label: entry.percentage >= 5 ? `${entry.percentage}%` : ' ',
             }))}
             innerRadius={width / 5.6}
             labelRadius={width / 3.3}
             style={{
               labels: {
-                fill: "white",
+                fill: 'white',
                 fontSize: 16,
-                fontFamily: Platform.OS === "ios"
-                  ? "HelveticaNeue-Thin"
-                  : "sans-serif-light"
-
-              }
+                fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue-Thin' : 'sans-serif-light',
+              },
             }}
           />
-          <VoteResult style={{ position: "absolute" }}>
+          <VoteResult style={{ position: 'absolute' }}>
             {showNumbers && (
-              <VoteResultPieValue>
-                {data.reduce((v, { value }) => v + value, 0)}
-              </VoteResultPieValue>
+              <VoteResultPieValue>{data.reduce((v, { value }) => v + value, 0)}</VoteResultPieValue>
             )}
             <VoteResultPieLabel>{label}</VoteResultPieLabel>
           </VoteResult>
@@ -134,9 +129,9 @@ class PieChart extends Component {
           <View
             style={{
               zIndex: 9999,
-              position: "absolute",
-              width: "100%",
-              height: "100%"
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
             }}
           />
         </VoteResultsPieWrapper>
@@ -146,9 +141,7 @@ class PieChart extends Component {
               <VoteResult key={entry.label}>
                 <VoteResultCircleNumber>
                   <VoteResultCircle color={this.getColor(entry.label, colorScale)} />
-                  <VoteResultNumber>
-                    {(entry.value !== null ? entry.value : "?")}
-                  </VoteResultNumber>
+                  <VoteResultNumber>{entry.value !== null ? entry.value : '?'}</VoteResultNumber>
                 </VoteResultCircleNumber>
                 <VoteResultLabel>{this.getLabel(entry.label)}</VoteResultLabel>
               </VoteResult>
@@ -164,16 +157,16 @@ PieChart.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.number,
-      label: PropTypes.string
-    })
+      label: PropTypes.string,
+    }),
   ).isRequired,
   label: PropTypes.string.isRequired,
   colorScale: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  showNumbers: PropTypes.bool
+  showNumbers: PropTypes.bool,
 };
 
 PieChart.defaultProps = {
-  showNumbers: true
+  showNumbers: true,
 };
 
 export default PieChart;

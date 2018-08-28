@@ -1,26 +1,20 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
-import React, { Component } from "react";
-import {
-  Dimensions,
-  Platform,
-  ActivityIndicator,
-  AsyncStorage,
-  Picker
-} from "react-native";
-import styled from "styled-components/native";
-import PropTypes from "prop-types";
-import { Navigator } from "react-native-navigation";
-import { graphql, compose } from "react-apollo";
-import { unionBy } from "lodash";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import React, { Component } from 'react';
+import { Dimensions, Platform, ActivityIndicator, AsyncStorage, Picker } from 'react-native';
+import styled from 'styled-components/native';
+import PropTypes from 'prop-types';
+import { Navigator } from 'react-native-navigation';
+import { graphql, compose } from 'react-apollo';
+import { unionBy } from 'lodash';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import preventNavStackDuplicate from "../../hocs/preventNavStackDuplicate";
+import preventNavStackDuplicate from '../../hocs/preventNavStackDuplicate';
 
-import ListSectionHeader from "../../components/ListSectionHeader";
-import ListItem from "./ListItem";
+import ListSectionHeader from '../../components/ListSectionHeader';
+import ListItem from './ListItem';
 
-import getProcedures from "../../graphql/queries/getProcedures";
-import GET_FILTERS from "../../graphql/queries/local/filters";
+import getProcedures from '../../graphql/queries/getProcedures';
+import GET_FILTERS from '../../graphql/queries/local/filters';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -59,64 +53,64 @@ const PickerFinishButton = styled.Button``;
 const SectionList = styled.SectionList``;
 
 const PAGE_SIZE = 20;
-const STORAGE_KEY = "VoteList.Filters";
+const STORAGE_KEY = 'VoteList.Filters';
 
 const SORTERS = {
   VOTING: [
     {
-      key: "voteDate",
-      title: "nach Restzeit sortieren"
+      key: 'voteDate',
+      title: 'nach Restzeit sortieren',
     },
     {
-      key: "activities",
-      title: "nach Aktivitätsindex sortieren"
-    }
+      key: 'activities',
+      title: 'nach Aktivitätsindex sortieren',
+    },
   ],
   PREPARATION: [
     {
-      key: "lastUpdateDate",
-      title: "nach Aktualisierung sortieren"
+      key: 'lastUpdateDate',
+      title: 'nach Aktualisierung sortieren',
     },
     {
-      key: "created",
-      title: "nach Vorgangsdatum sortieren"
+      key: 'created',
+      title: 'nach Vorgangsdatum sortieren',
     },
     {
-      key: "activities",
-      title: "nach Aktivitätsindex sortieren"
-    }
-  ]
+      key: 'activities',
+      title: 'nach Aktivitätsindex sortieren',
+    },
+  ],
 };
 
 class List extends Component {
   static navigatorStyle = {
-    navBarButtonColor: "#FFFFFF",
-    navBarBackgroundColor: "#4494d3",
-    navBarTextColor: "#FFFFFF",
-    navBarTextFontSize: 17
+    navBarButtonColor: '#FFFFFF',
+    navBarBackgroundColor: '#4494d3',
+    navBarTextColor: '#FFFFFF',
+    navBarTextFontSize: 17,
   };
 
   constructor(props) {
     super(props);
-    const menuIcon = Platform.OS === "ios" ? "ios-menu" : "md-menu";
-    Ionicons.getImageSource(menuIcon, 24, "#FFFFFF").then(icon => {
+    const menuIcon = Platform.OS === 'ios' ? 'ios-menu' : 'md-menu';
+    Ionicons.getImageSource(menuIcon, 24, '#FFFFFF').then(icon => {
       props.navigator.setButtons({
         leftButtons: [
           {
             icon,
-            id: "menu"
-          }
-        ]
+            id: 'menu',
+          },
+        ],
       });
     });
   }
 
   state = {
-    width: Platform.OS === "ios" ? Dimensions.get("window").width : "auto",
+    width: Platform.OS === 'ios' ? Dimensions.get('window').width : 'auto',
     fetchedAll: false,
     filters: false,
-    sort: this.props.listType === "VOTING" ? "voteDate" : "lastUpdateDate",
-    sorterOpened: false
+    sort: this.props.listType === 'VOTING' ? 'voteDate' : 'lastUpdateDate',
+    sorterOpened: false,
   };
 
   componentDidMount() {
@@ -155,18 +149,16 @@ class List extends Component {
       filterQuery.type = filters.type.map(({ title }) => title);
     }
     if (filters.subjectGroups) {
-      filterQuery.subjectGroups = filters.subjectGroups.map(
-        ({ title }) => title
-      );
+      filterQuery.subjectGroups = filters.subjectGroups.map(({ title }) => title);
     }
     refetch({
-      filter: filterQuery
+      filter: filterQuery,
     });
   };
 
   onLayout = () => {
-    if (Platform.OS === "ios") {
-      const { width } = Dimensions.get("window");
+    if (Platform.OS === 'ios') {
+      const { width } = Dimensions.get('window');
       if (width !== this.state.width) {
         this.setState({ width });
       }
@@ -175,10 +167,10 @@ class List extends Component {
 
   onItemClick = ({ item }) => () => {
     this.props.navigateTo({
-      screen: "democracy.Detail",
-      title: "Abstimmung".toUpperCase(),
+      screen: 'democracy.Detail',
+      title: 'Abstimmung'.toUpperCase(),
       passProps: { ...item },
-      backButtonTitle: ""
+      backButtonTitle: '',
     });
   };
 
@@ -186,33 +178,33 @@ class List extends Component {
     const { data: { refetch } } = this.props;
     this.setState({ sort });
     refetch({
-      sort
+      sort,
     });
   };
 
   setRightButtons = ({ filterActive }) => {
-    const searchIcon = Platform.OS === "ios" ? "ios-search" : "md-search";
-    Ionicons.getImageSource(searchIcon, 24, "#FFFFFF").then(iconSearch => {
-        this.props.navigator.setButtons({
-          rightButtons: [
-            {
-              icon: iconSearch,
-              id: "search"
-            },
-            {
-              icon: filterActive
-                ? require("../../../assets/icons/badge-active-20.png")
-                : require("../../../assets/icons/badge-inactive-20.png"),
-              id: "filter"
-            }
-          ]
-        });
+    const searchIcon = Platform.OS === 'ios' ? 'ios-search' : 'md-search';
+    Ionicons.getImageSource(searchIcon, 24, '#FFFFFF').then(iconSearch => {
+      this.props.navigator.setButtons({
+        rightButtons: [
+          {
+            icon: iconSearch,
+            id: 'search',
+          },
+          {
+            icon: filterActive
+              ? require('../../../assets/icons/badge-active-20.png')
+              : require('../../../assets/icons/badge-inactive-20.png'),
+            id: 'filter',
+          },
+        ],
+      });
     });
   };
 
   prepareFilter = filterObj => {
     const filters = Object.keys(filterObj).reduce((prev, key) => {
-      if (key === "notifications") {
+      if (key === 'notifications') {
         if (filterObj.notifications.value) {
           return { ...prev, notifications: filterObj.notifications.value };
         }
@@ -232,17 +224,11 @@ class List extends Component {
       });
     }
     this.setRightButtons({
-      filterActive: filters && Object.keys(filters).length > 0
+      filterActive: filters && Object.keys(filters).length > 0,
     });
   };
 
-  filterProcedures = ({
-    type,
-    subjectGroups,
-    voted,
-    viewedStatus,
-    currentStatus
-  }) => {
+  filterProcedures = ({ type, subjectGroups, voted, viewedStatus, currentStatus }) => {
     const { filters } = this.state;
     if (!filters || filters.length === 0) {
       return true;
@@ -250,34 +236,31 @@ class List extends Component {
     let doFilter = true;
     Object.keys(filters).forEach(key => {
       switch (key) {
-        case "notifications":
-          if (filters[key] && viewedStatus !== "PUSH") {
+        case 'notifications':
+          if (filters[key] && viewedStatus !== 'PUSH') {
             doFilter = false;
           }
           break;
-        case "activity":
-          if (filters[key][0].name === "voted" && !voted) {
+        case 'activity':
+          if (filters[key][0].name === 'voted' && !voted) {
             doFilter = false;
-          } else if (filters[key][0].name === "notVoted" && voted) {
+          } else if (filters[key][0].name === 'notVoted' && voted) {
             doFilter = false;
           }
           break;
-        case "type":
+        case 'type':
           if (filters[key][0].title !== type) {
             doFilter = false;
           }
           break;
-        case "subjectGroups": {
+        case 'subjectGroups': {
           const showSubjectGroups = filters[key].map(({ title }) => title);
           doFilter = subjectGroups.some(
-            subjectGroup =>
-              showSubjectGroups.findIndex(
-                subject => subject === subjectGroup
-              ) !== -1
+            subjectGroup => showSubjectGroups.findIndex(subject => subject === subjectGroup) !== -1,
           );
           break;
         }
-        case "currentStatus": {
+        case 'currentStatus': {
           const states = filters[key].map(({ title }) => title);
           doFilter = states.findIndex(state => state === currentStatus) !== -1;
           break;
@@ -299,16 +282,16 @@ class List extends Component {
     }
     const preparedData = [
       {
-        data: []
-      }
+        data: [],
+      },
     ];
-    if (listType !== "HOT") {
-      preparedData[0].data.push({ type: "sort" });
+    if (listType !== 'HOT') {
+      preparedData[0].data.push({ type: 'sort' });
     }
-    if (listType === "VOTING") {
+    if (listType === 'VOTING') {
       preparedData.push({
-        title: "Vergangen",
-        data: []
+        title: 'Vergangen',
+        data: [],
       });
     }
     const proceduresSorted = [...procedures];
@@ -317,21 +300,20 @@ class List extends Component {
         return;
       }
       if (
-        listType === "VOTING" &&
-        ((new Date(procedure.voteDate) < new Date() &&
-          procedure.voteDate !== null) ||
+        listType === 'VOTING' &&
+        ((new Date(procedure.voteDate) < new Date() && procedure.voteDate !== null) ||
           procedure.completed)
       ) {
         preparedData[1].data.push({
           ...procedure,
           date: procedure.voteDate || false,
-          listType
+          listType,
         });
       } else {
         preparedData[0].data.push({
           ...procedure,
           date: procedure.voteDate || false,
-          listType
+          listType,
         });
       }
     });
@@ -340,11 +322,9 @@ class List extends Component {
 
   renderItem = onClick => ({ item }) => {
     const { listType } = this.props;
-    if (item.type === "sort") {
-      if (Platform.OS === "ios") {
-        const curSort = SORTERS[listType].find(
-          ({ key }) => key === this.state.sort
-        );
+    if (item.type === 'sort') {
+      if (Platform.OS === 'ios') {
+        const curSort = SORTERS[listType].find(({ key }) => key === this.state.sort);
         return (
           <SortRow onPress={() => this.setState({ sorterOpened: true })}>
             <ListSectionHeader title={curSort.title} />
@@ -355,7 +335,7 @@ class List extends Component {
       return (
         <Picker
           selectedValue={this.state.sort}
-          style={{ paddingLeft: 18, height: 35, backgroundColor: "#e6edf2" }}
+          style={{ paddingLeft: 18, height: 35, backgroundColor: '#e6edf2' }}
           onValueChange={this.onChangeSort}
         >
           {SORTERS[listType].map(({ key, title }) => (
@@ -374,7 +354,7 @@ class List extends Component {
     return (
       <Wrapper onLayout={this.onLayout} width={this.state.width}>
         <SectionList
-          contentOffset={{ y: listType !== "HOT" ? 35 : 0 }}
+          contentOffset={{ y: listType !== 'HOT' ? 35 : 0 }}
           ListFooterComponent={() =>
             data.loading || !fetchedAll ? (
               <Loading>
@@ -401,13 +381,10 @@ class List extends Component {
             if (!data.loading && !fetchedAll) {
               data.fetchMore({
                 variables: {
-                  offset: data.procedures ? data.procedures.length : PAGE_SIZE
+                  offset: data.procedures ? data.procedures.length : PAGE_SIZE,
                 },
                 updateQuery: (previousResult, { fetchMoreResult }) => {
-                  if (
-                    !fetchMoreResult ||
-                    fetchMoreResult.procedures.length === 0
-                  ) {
+                  if (!fetchMoreResult || fetchMoreResult.procedures.length === 0) {
                     this.setState({ fetchedAll: true });
                     return previousResult;
                   }
@@ -415,15 +392,15 @@ class List extends Component {
                     procedures: unionBy(
                       previousResult.procedures,
                       fetchMoreResult.procedures,
-                      "_id"
-                    )
+                      '_id',
+                    ),
                   };
-                }
+                },
               });
             }
           }}
         />
-        {Platform.OS === "ios" &&
+        {Platform.OS === 'ios' &&
           sorterOpened && (
             <PickerWrapper>
               <PickerHeader>
@@ -453,11 +430,11 @@ List.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired,
   navigateTo: PropTypes.func.isRequired,
   data: PropTypes.shape().isRequired,
-  filters: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired
+  filters: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
 };
 
 List.defaultProps = {
-  listType: "VOTING"
+  listType: 'VOTING',
 };
 
 export default compose(
@@ -465,12 +442,12 @@ export default compose(
     options: ({ listType }) => ({
       notifyOnNetworkStatusChange: true,
       variables: { type: listType, pageSize: PAGE_SIZE, offset: 0 },
-      fetchPolicy: "cache-and-network"
-    })
+      fetchPolicy: 'cache-and-network',
+    }),
   }),
   graphql(GET_FILTERS, {
     props: ({ data: { filters } }) => ({
-      filters: filters && filters.filters ? filters.filters : false
-    })
-  })
+      filters: filters && filters.filters ? filters.filters : false,
+    }),
+  }),
 )(preventNavStackDuplicate(List));

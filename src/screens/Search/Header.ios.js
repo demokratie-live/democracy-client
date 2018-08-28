@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import styled from "styled-components/native";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import PropTypes from "prop-types";
-import { Navigator } from "react-native-navigation";
-import { graphql, compose } from "react-apollo";
+import React, { Component } from 'react';
+import styled from 'styled-components/native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import PropTypes from 'prop-types';
+import { Navigator } from 'react-native-navigation';
+import { graphql, compose } from 'react-apollo';
 
-import client from "../../graphql/client";
+import client from '../../graphql/client';
 
-import finishSearch from "../../graphql/mutations/finishSearch";
-import SEARCH_HISTORY_ADD from "../../graphql/mutations/local/searchHistoryAdd";
-import searchTerm from "../../graphql/queries/local/searchTerm";
-import changeSearchTerm from "../../graphql/mutations/local/changeSearchTerm";
+import finishSearch from '../../graphql/mutations/finishSearch';
+import SEARCH_HISTORY_ADD from '../../graphql/mutations/local/searchHistoryAdd';
+import searchTerm from '../../graphql/queries/local/searchTerm';
+import changeSearchTerm from '../../graphql/mutations/local/changeSearchTerm';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -28,19 +28,19 @@ const SearchInputWrapper = styled.View`
 `;
 
 const SearchInputIcon = styled(Ionicons).attrs({
-  color: "#7a797b",
+  color: '#7a797b',
   size: 16,
-  backgroundColor: "transparent",
-  name: "ios-search"
+  backgroundColor: 'transparent',
+  name: 'ios-search',
 })``;
 
 const SearchInput = styled.TextInput.attrs({
-  clearButtonMode: "always",
+  clearButtonMode: 'always',
   autoFocus: true,
-  placeholderTextColor: "#7a797b",
-  underlineColorAndroid: "transparent",
-  selectionColor: "#000",
-  returnKeyType: "search"
+  placeholderTextColor: '#7a797b',
+  underlineColorAndroid: 'transparent',
+  selectionColor: '#000',
+  returnKeyType: 'search',
 })`
   flex: 1;
   font-size: 14;
@@ -50,7 +50,7 @@ const SearchInput = styled.TextInput.attrs({
 `;
 
 const SearchBackTextIos = styled.Button.attrs({
-  color: "#fff"
+  color: '#fff',
 })`
   padding-left: 8;
   font-size: 17;
@@ -58,7 +58,7 @@ const SearchBackTextIos = styled.Button.attrs({
 
 class Header extends Component {
   state = {
-    term: ""
+    term: '',
   };
 
   componentWillReceiveProps(nextProps) {
@@ -72,8 +72,8 @@ class Header extends Component {
     this.setState({ term });
     updateSearchTerm({
       variables: {
-        term
-      }
+        term,
+      },
     });
   };
 
@@ -86,14 +86,14 @@ class Header extends Component {
     client.mutate({
       mutation: finishSearch,
       variables: {
-        term: this.state.term
-      }
+        term: this.state.term,
+      },
     });
     client.mutate({
       mutation: SEARCH_HISTORY_ADD,
       variables: {
-        term: this.state.term
-      }
+        term: this.state.term,
+      },
     });
   };
 
@@ -120,20 +120,19 @@ class Header extends Component {
 Header.propTypes = {
   navigator: PropTypes.instanceOf(Navigator),
   updateSearchTerm: PropTypes.func.isRequired,
-  term: PropTypes.string.isRequired
+  term: PropTypes.string.isRequired,
 };
 
 Header.defaultProps = {
-  navigator: undefined
+  navigator: undefined,
 };
 
 export default compose(
   // Queries
   graphql(searchTerm, {
-    props: ({ data: { searchTerm: term } }) =>
-      term ? { term: term.term } : { term: "" }
+    props: ({ data: { searchTerm: term } }) => (term ? { term: term.term } : { term: '' }),
   }),
 
   // Mutations
-  graphql(changeSearchTerm, { name: "updateSearchTerm" })
+  graphql(changeSearchTerm, { name: 'updateSearchTerm' }),
 )(Header);

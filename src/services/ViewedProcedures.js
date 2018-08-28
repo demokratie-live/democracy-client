@@ -1,6 +1,6 @@
-import { AsyncStorage } from "react-native";
-import DeviceInfo from "react-native-device-info";
-import _ from "lodash";
+import { AsyncStorage } from 'react-native';
+import DeviceInfo from 'react-native-device-info';
+import _ from 'lodash';
 
 const ITEM_KEY = `${DeviceInfo.getBundleId()}.ViewedProcedures`;
 let DATA = {};
@@ -35,30 +35,30 @@ class ViewedProcedures {
     const viewedProcedures = await ViewedProcedures.getViewedProcedures();
     switch (viewedProcedures[procedureId]) {
       case 1:
-        return { status: "VIEWED" };
+        return { status: 'VIEWED' };
       case 3:
-        return { status: "UPDATE" };
+        return { status: 'UPDATE' };
       case 4:
-        return { status: "PUSH" };
+        return { status: 'PUSH' };
 
       default:
-        return { status: "NEW" };
+        return { status: 'NEW' };
     }
   };
 
   static prepareSetViewProcedure = ({ procedureId, status }) => {
     let statusInt;
     switch (status) {
-      case "VIEWED":
+      case 'VIEWED':
         statusInt = 1;
         break;
-      case "NEW":
+      case 'NEW':
         statusInt = 2;
         break;
-      case "UPDATE":
+      case 'UPDATE':
         statusInt = 3;
         break;
-      case "PUSH":
+      case 'PUSH':
         statusInt = 4;
         break;
 
@@ -74,7 +74,7 @@ class ViewedProcedures {
 
     const { statusInt } = ViewedProcedures.prepareSetViewProcedure({
       procedureId,
-      status
+      status,
     });
 
     DATA[procedureId] = statusInt;
@@ -87,7 +87,7 @@ class ViewedProcedures {
     const viewedProcedures = await ViewedProcedures.getViewedProcedures();
 
     const { statusInt } = ViewedProcedures.prepareSetViewProcedure({
-      status
+      status,
     });
 
     procedureIds.forEach(procedureId => {

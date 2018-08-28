@@ -1,13 +1,13 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
-import client from "../../graphql/client";
-import VotesLocal from "../../services/VotesLocal";
+import client from '../../graphql/client';
+import VotesLocal from '../../services/VotesLocal';
 
-import VOTES_LOCAL from "../../graphql/queries/votesLocal";
+import VOTES_LOCAL from '../../graphql/queries/votesLocal';
 
 export default async () => {
   const { votesLocal } = client.readQuery({
-    query: VOTES_LOCAL
+    query: VOTES_LOCAL,
   });
   if (votesLocal.length > 0) {
     const { data: { proceduresById } } = await client.query({
@@ -20,17 +20,15 @@ export default async () => {
         }
       `,
       variables: {
-        ids: votesLocal.map(({ procedure }) => procedure)
-      }
+        ids: votesLocal.map(({ procedure }) => procedure),
+      },
     });
 
     await VotesLocal.setVoteLocalList(
       proceduresById.map(({ _id, procedureId }) => {
-        const { selection } = votesLocal.find(
-          ({ procedure }) => procedure === _id
-        );
+        const { selection } = votesLocal.find(({ procedure }) => procedure === _id);
         return { procedureId, selection };
-      })
+      }),
     );
     return true;
   }

@@ -1,34 +1,30 @@
-import { AsyncStorage } from "react-native";
+import { AsyncStorage } from 'react-native';
 
-import GET_NETWORK_STATUS from "../queries/getNetworkStatus";
-import SEARCH_HISTORY from "../queries/local/searchHistory";
+import GET_NETWORK_STATUS from '../queries/getNetworkStatus';
+import SEARCH_HISTORY from '../queries/local/searchHistory';
 
-import VotesLocal from "../../services/VotesLocal";
-import ViewedProcedures from "../../services/ViewedProcedures";
+import VotesLocal from '../../services/VotesLocal';
+import ViewedProcedures from '../../services/ViewedProcedures';
 
 export const defaults = {
-  currentScreen: "democracy.VoteList",
+  currentScreen: 'democracy.VoteList',
   votesLocal: [],
   isInstructionsShown: false,
   networkStatus: {
-    __typename: "NetworkStatus",
+    __typename: 'NetworkStatus',
     isConnected: true,
-    requestError: ""
+    requestError: '',
   },
   searchTerm: {
-    __typename: "SearchTerm",
-    term: ""
+    __typename: 'SearchTerm',
+    term: '',
   },
-  searchHistory: []
+  searchHistory: [],
 };
 
 export const resolvers = {
   Mutation: {
-    updateNetworkStatus: (
-      _,
-      { isConnected = true, requestError = "" },
-      { cache }
-    ) => {
+    updateNetworkStatus: (_, { isConnected = true, requestError = '' }, { cache }) => {
       const data = cache.readQuery({ query: GET_NETWORK_STATUS });
 
       data.networkStatus = { ...data.networkStatus, isConnected, requestError };
@@ -36,10 +32,7 @@ export const resolvers = {
       return null;
     },
     isInstructionsShown: async (_, { isInstructionsShown }, { cache }) => {
-      await AsyncStorage.setItem(
-        "isInstructionsShown",
-        JSON.stringify(isInstructionsShown)
-      );
+      await AsyncStorage.setItem('isInstructionsShown', JSON.stringify(isInstructionsShown));
       cache.writeData({ data: { isInstructionsShown } });
       return null;
     },
@@ -49,10 +42,10 @@ export const resolvers = {
     },
     currentScreen: (_, { currentScreen }, { cache }) => {
       switch (currentScreen) {
-        case "democracy.SideMenu":
-        case "democracy.Detail":
-        case "democracy.Instructions":
-        case "democracy.Search":
+        case 'democracy.SideMenu':
+        case 'democracy.Detail':
+        case 'democracy.Instructions':
+        case 'democracy.Search':
           break;
 
         default:
@@ -64,16 +57,16 @@ export const resolvers = {
     viewProcedure: async (_, { procedureId }) => {
       await ViewedProcedures.setViewedProcedure({
         procedureId,
-        status: "VIEWED"
+        status: 'VIEWED',
       });
       return null;
     },
     changeSearchTerm: (_, { term }, { cache }) => {
       const data = {
         searchTerm: {
-          __typename: "SearchTerm",
-          term
-        }
+          __typename: 'SearchTerm',
+          term,
+        },
       };
       cache.writeData({ data });
       return null;
@@ -85,26 +78,24 @@ export const resolvers = {
         previous = { searchHistory: [] };
       }
 
-      const index = previous.searchHistory.findIndex(
-        ({ term: t }) => t === term
-      );
+      const index = previous.searchHistory.findIndex(({ term: t }) => t === term);
 
       let data;
 
       if (index === -1) {
         data = {
           searchHistory: [
-            { term, __typename: "SearchHistoryTerm" },
-            ...previous.searchHistory
-          ].slice(0, 3)
+            { term, __typename: 'SearchHistoryTerm' },
+            ...previous.searchHistory,
+          ].slice(0, 3),
         };
       } else {
         previous.searchHistory.splice(index, 1);
         data = {
           searchHistory: [
-            { term, __typename: "SearchHistoryTerm" },
-            ...previous.searchHistory
-          ].slice(0, 3)
+            { term, __typename: 'SearchHistoryTerm' },
+            ...previous.searchHistory,
+          ].slice(0, 3),
         };
       }
 
@@ -112,25 +103,24 @@ export const resolvers = {
       return null;
     },
     setFilters: async (_, { filters }) => {
-      await AsyncStorage.setItem("Filters", filters);
+      await AsyncStorage.setItem('Filters', filters);
       return null;
-    }
+    },
   },
   Query: {
-    isInstructionsShown: async () =>
-      JSON.parse(await AsyncStorage.getItem("isInstructionsShown")),
+    isInstructionsShown: async () => JSON.parse(await AsyncStorage.getItem('isInstructionsShown')),
 
     votesLocalKeyStore: async () =>
       VotesLocal.getVotesLocalList().then(votesLocal =>
         votesLocal.map(vote => ({
           ...vote,
-          __typename: "voteLocalKeyStoreItem"
-        }))
+          __typename: 'voteLocalKeyStoreItem',
+        })),
       ),
 
     filters: async () => ({
-      filters: AsyncStorage.getItem("Filters"),
-      __typename: "Filters"
+      filters: AsyncStorage.getItem('Filters'),
+      __typename: 'Filters',
     }),
 
     votedLocal: async (_, { procedureId }) => {
@@ -138,16 +128,16 @@ export const resolvers = {
       if (vote && vote.selection) {
         return {
           selection: vote.selection,
-          __typename: "VotedLocal"
+          __typename: 'VotedLocal',
         };
       }
       return null;
-    }
+    },
   },
   Procedure: {
     viewedStatus: async ({ procedureId }) => {
       const { status } = await ViewedProcedures.getViewProcedure(procedureId);
       return status;
-    }
-  }
+    },
+  },
 };

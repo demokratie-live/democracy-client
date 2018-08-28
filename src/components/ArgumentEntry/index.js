@@ -1,11 +1,11 @@
-import React from "react";
-import styled from "styled-components/native";
-import PropTypes from "prop-types";
+import React from 'react';
+import styled from 'styled-components/native';
+import PropTypes from 'prop-types';
 
 const argumentationColors = {
-  pro: "#4ecd45",
-  contra: "#cd4545",
-  neutral: "lightgrey"
+  pro: '#4ecd45',
+  contra: '#cd4545',
+  neutral: 'lightgrey',
 };
 
 const Wrapper = styled.View`
@@ -18,9 +18,7 @@ const RowWrapper = styled.View`
   border-bottom-left-radius: 10;
   border-right-width: 3;
   border-color: ${({ argumentation }) =>
-    argumentation
-      ? argumentationColors[argumentation]
-      : argumentationColors.neutral};
+    argumentation ? argumentationColors[argumentation] : argumentationColors.neutral};
   background-color: white;
   overflow: hidden;
   flex-direction: row;
@@ -34,12 +32,12 @@ const Entry = ({ children, argumentation }) => (
 
 Entry.propTypes = {
   children: PropTypes.node,
-  argumentation: PropTypes.string
+  argumentation: PropTypes.string,
 };
 
 Entry.defaultProps = {
   children: null,
-  argumentation: "neutral"
+  argumentation: 'neutral',
 };
 
 export default Entry;

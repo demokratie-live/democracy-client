@@ -1,1 +1,4 @@
 ios/vendor
+node_modules/
+iconfont/
+android/

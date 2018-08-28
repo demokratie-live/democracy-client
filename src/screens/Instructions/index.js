@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import Swiper from "react-native-swiper";
-import { graphql } from "react-apollo";
-import PropTypes from "prop-types";
-import styled from "styled-components/native";
-import { Navigator } from "react-native-navigation";
+import React, { Component } from 'react';
+import Swiper from 'react-native-swiper';
+import { graphql } from 'react-apollo';
+import PropTypes from 'prop-types';
+import styled from 'styled-components/native';
+import { Navigator } from 'react-native-navigation';
 
-import Slide from "./Slide";
+import Slide from './Slide';
 
-import SET_INSTRUCTIONS_SHOWN from "../../graphql/mutations/setInstructinosShown";
+import SET_INSTRUCTIONS_SHOWN from '../../graphql/mutations/setInstructinosShown';
 
 const Container = styled.View`
   flex: 1;
@@ -28,13 +28,13 @@ const ButtonText = styled.Text`
 `;
 
 const BUTTON_TEXTS = {
-  next: "Weiter",
-  finish: "Los gehts!"
+  next: 'Weiter',
+  finish: 'Los gehts!',
 };
 
 class Introductions extends Component {
   state = {
-    buttonText: BUTTON_TEXTS.next
+    buttonText: BUTTON_TEXTS.next,
   };
 
   onClick = () => {
@@ -43,8 +43,8 @@ class Introductions extends Component {
     } else {
       this.props.setInstructionsShown({
         variables: {
-          isInstructionsShown: true
-        }
+          isInstructionsShown: true,
+        },
       });
       this.props.navigator.dismissAllModals();
     }
@@ -72,70 +72,70 @@ class Introductions extends Component {
           loop={false}
           onMomentumScrollEnd={this.onMomentumScrollEnd}
           paginationStyle={{
-            bottom: 0
+            bottom: 0,
           }}
           dotStyle={{
             width: 5,
             height: 5,
-            backgroundColor: "#4494d3",
+            backgroundColor: '#4494d3',
             opacity: 0.5,
-            marginTop: 12
+            marginTop: 12,
           }}
           activeDotStyle={{
             width: 5,
             height: 5,
-            backgroundColor: "#4494d3",
-            marginTop: 12
+            backgroundColor: '#4494d3',
+            marginTop: 12,
           }}
         >
           <Slide
-            ImgHead={require("../../../assets/tutorial/icon.logo.png")}
-            ImgCenter={require("../../../assets/tutorial/screen.list.png")}
-            ImgRight={require("../../../assets/tutorial/screen.detail.png")}
+            ImgHead={require('../../../assets/tutorial/icon.logo.png')}
+            ImgCenter={require('../../../assets/tutorial/screen.list.png')}
+            ImgRight={require('../../../assets/tutorial/screen.detail.png')}
             TxtHead="Willkommen in der Beta"
             TxtSub="Alles über die deutsche Politik in einer App"
             nextPage={this.onClick}
           />
           <Slide
-            ImgHead={require("../../../assets/tutorial/icon.beobachte.png")}
-            ImgLeft={require("../../../assets/tutorial/screen.list.png")}
-            ImgCenter={require("../../../assets/tutorial/screen.list.png")}
-            ImgRight={require("../../../assets/tutorial/screen.detail.png")}
+            ImgHead={require('../../../assets/tutorial/icon.beobachte.png')}
+            ImgLeft={require('../../../assets/tutorial/screen.list.png')}
+            ImgCenter={require('../../../assets/tutorial/screen.list.png')}
+            ImgRight={require('../../../assets/tutorial/screen.detail.png')}
             TxtHead="Beobachte"
             TxtSub="…alle vergangenen, aktuellen und zukünftigen Abstimmungen des Bundestages"
             nextPage={this.onClick}
           />
           <Slide
-            ImgHead={require("../../../assets/tutorial/icon.informiere.png")}
-            ImgLeft={require("../../../assets/tutorial/screen.list.png")}
-            ImgCenter={require("../../../assets/tutorial/screen.detail.png")}
-            ImgRight={require("../../../assets/tutorial/screen.forum.png")}
+            ImgHead={require('../../../assets/tutorial/icon.informiere.png')}
+            ImgLeft={require('../../../assets/tutorial/screen.list.png')}
+            ImgCenter={require('../../../assets/tutorial/screen.detail.png')}
+            ImgRight={require('../../../assets/tutorial/screen.forum.png')}
             TxtHead="Informiere Dich"
             TxtSub="…über die Gesetzesvorlagen entlang der offiziellen Informationen des Bundestages"
             nextPage={this.onClick}
           />
           <Slide
-            ImgHead={require("../../../assets/tutorial/icon.diskutiere.png")}
-            ImgLeft={require("../../../assets/tutorial/screen.vote.png")}
-            ImgCenter={require("../../../assets/tutorial/screen.forum.png")}
-            ImgRight={require("../../../assets/tutorial/screen.vote.png")}
+            ImgHead={require('../../../assets/tutorial/icon.diskutiere.png')}
+            ImgLeft={require('../../../assets/tutorial/screen.vote.png')}
+            ImgCenter={require('../../../assets/tutorial/screen.forum.png')}
+            ImgRight={require('../../../assets/tutorial/screen.vote.png')}
             TxtHead="Diskutiere"
             TxtSub="…über die Für’s und Wider’s des Antrags und bringe weiterführende Informationen ein"
             nextPage={this.onClick}
           />
           <Slide
-            ImgHead={require("../../../assets/tutorial/icon.stimme.png")}
-            ImgLeft={require("../../../assets/tutorial/screen.forum.png")}
-            ImgCenter={require("../../../assets/tutorial/screen.vote.png")}
-            ImgRight={require("../../../assets/tutorial/screen.analyse.png")}
+            ImgHead={require('../../../assets/tutorial/icon.stimme.png')}
+            ImgLeft={require('../../../assets/tutorial/screen.forum.png')}
+            ImgCenter={require('../../../assets/tutorial/screen.vote.png')}
+            ImgRight={require('../../../assets/tutorial/screen.analyse.png')}
             TxtHead="Stimme"
             TxtSub="…noch vor der offiziellen Bundestagsentscheidung selbst über den Antrag ab"
             nextPage={this.onClick}
           />
           <Slide
-            ImgHead={require("../../../assets/tutorial/icon.analysiere.png")}
-            ImgLeft={require("../../../assets/tutorial/screen.vote.png")}
-            ImgCenter={require("../../../assets/tutorial/screen.analyse.png")}
+            ImgHead={require('../../../assets/tutorial/icon.analysiere.png')}
+            ImgLeft={require('../../../assets/tutorial/screen.vote.png')}
+            ImgCenter={require('../../../assets/tutorial/screen.analyse.png')}
             ImgCircle={null}
             TxtHead="Analysiere"
             TxtSub="…das Community-Abstimmungsverhalten und vergleich es mit den Bundestagsresultaten"
@@ -152,9 +152,9 @@ class Introductions extends Component {
 
 Introductions.propTypes = {
   setInstructionsShown: PropTypes.func.isRequired,
-  navigator: PropTypes.instanceOf(Navigator).isRequired
+  navigator: PropTypes.instanceOf(Navigator).isRequired,
 };
 
 export default graphql(SET_INSTRUCTIONS_SHOWN, {
-  name: "setInstructionsShown"
+  name: 'setInstructionsShown',
 })(Introductions);

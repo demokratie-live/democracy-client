@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components/native";
-import { Platform } from "react-native";
-import { Navigator } from "react-native-navigation";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components/native';
+import { Platform } from 'react-native';
+import { Navigator } from 'react-native-navigation';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import Fade from "../../components/Animations/Fade";
-import MessageRow from "../../components/ArgumentEntry/Message";
-import LinkRow from "../../components/ArgumentEntry/Link";
-import BallotBox from "./BallotBox";
+import Fade from '../../components/Animations/Fade';
+import MessageRow from '../../components/ArgumentEntry/Message';
+import LinkRow from '../../components/ArgumentEntry/Link';
+import BallotBox from './BallotBox';
 
-import dummyEntryData from "../../../dummy/voteVerification";
+import dummyEntryData from '../../../dummy/voteVerification';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -60,31 +60,31 @@ const BalloutBoxWrapper = styled.View`
 
 class VoteVerification extends Component {
   static navigatorStyle = {
-    navBarButtonColor: "#FFFFFF",
-    navBarBackgroundColor: "#4494d3",
-    navBarTextColor: "#FFFFFF",
-    navBarTextFontSize: 17
+    navBarButtonColor: '#FFFFFF',
+    navBarBackgroundColor: '#4494d3',
+    navBarTextColor: '#FFFFFF',
+    navBarTextFontSize: 17,
   };
 
   constructor(props) {
     super(props);
 
-    if (Platform.OS === "ios") {
-      Ionicons.getImageSource("ios-arrow-back", 34, "#FFFFFF").then(icon => {
+    if (Platform.OS === 'ios') {
+      Ionicons.getImageSource('ios-arrow-back', 34, '#FFFFFF').then(icon => {
         props.navigator.setButtons({
           leftButtons: [
             {
               icon,
-              id: "closeModal"
-            }
-          ]
+              id: 'closeModal',
+            },
+          ],
         });
       });
     }
   }
 
   state = {
-    showWarning: true
+    showWarning: true,
   };
 
   onScroll = () => {
@@ -97,28 +97,23 @@ class VoteVerification extends Component {
     const { selection } = this.props;
     return dummyEntryData[selection].map(
       ({ type, argumentation, title, text, moreText, image, _id }) => {
-        if (type === "message") {
+        if (type === 'message') {
           return (
-            <MessageRow
-              key={_id}
-              text={text}
-              argumentation={argumentation}
-              moreText={moreText}
-            />
+            <MessageRow key={_id} text={text} argumentation={argumentation} moreText={moreText} />
           );
         }
         return (
           <LinkRow
             key={_id}
             image={{
-              source: image
+              source: image,
             }}
             argumentation={argumentation}
             title={title}
             text={text}
           />
         );
-      }
+      },
     );
   };
 
@@ -133,10 +128,7 @@ class VoteVerification extends Component {
         <WarnWrapper pointerEvents="none">
           <Fade visible={this.state.showWarning}>
             <WarnTextWrapper>
-              <WarnText>
-                Deine Stimme ist verbindlich und kann nicht zurückgenommen
-                werden
-              </WarnText>
+              <WarnText>Deine Stimme ist verbindlich und kann nicht zurückgenommen werden</WarnText>
             </WarnTextWrapper>
           </Fade>
         </WarnWrapper>
@@ -157,7 +149,7 @@ VoteVerification.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired,
   selection: PropTypes.string.isRequired,
   procedureId: PropTypes.string.isRequired,
-  procedureObjId: PropTypes.string.isRequired
+  procedureObjId: PropTypes.string.isRequired,
 };
 
 export default VoteVerification;

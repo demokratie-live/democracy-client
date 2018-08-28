@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { Navigator } from "react-native-navigation";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Navigator } from 'react-native-navigation';
 
 // import onNavigationEvent from "../screens/onNavigationEvent";
 
@@ -12,21 +12,21 @@ export default ComposedComponent => {
         if (event.type) {
           // NavBar Events
           switch (event.id) {
-            case "menu":
-              navigator.toggleDrawer({ side: "left" });
+            case 'menu':
+              navigator.toggleDrawer({ side: 'left' });
               break;
-            case "closeModal":
+            case 'closeModal':
               navigator.dismissModal();
               break;
-            case "search":
+            case 'search':
               navigator.push({
-                screen: "democracy.Search",
-                backButtonHidden: true
+                screen: 'democracy.Search',
+                backButtonHidden: true,
               });
               break;
-            case "filter":
+            case 'filter':
               this.props.navigator.showModal({
-                screen: "democracy.VoteList.Filter"
+                screen: 'democracy.VoteList.Filter',
               });
               break;
 
@@ -43,7 +43,7 @@ export default ComposedComponent => {
   }
 
   WrappingComponent.propTypes = {
-    navigator: PropTypes.instanceOf(Navigator).isRequired
+    navigator: PropTypes.instanceOf(Navigator).isRequired,
   };
 
   return WrappingComponent;

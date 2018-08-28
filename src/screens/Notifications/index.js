@@ -1,7 +1,7 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["__typename"] }] */
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components/native";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components/native';
 import {
   Platform,
   Switch,
@@ -13,22 +13,22 @@ import {
   Text,
   Linking,
   Button,
-  AppState
-} from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import { Navigator } from "react-native-navigation";
-import { graphql, compose } from "react-apollo";
-import _ from "lodash";
-import NotificationsIOS from "react-native-notifications";
+  AppState,
+} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Navigator } from 'react-native-navigation';
+import { graphql, compose } from 'react-apollo';
+import _ from 'lodash';
+import NotificationsIOS from 'react-native-notifications';
 
-import Row from "../../components/ListRow";
-import Header from "../../components/ListSectionHeader";
-import ListItem from "../../components/VoteListItem";
+import Row from '../../components/ListRow';
+import Header from '../../components/ListSectionHeader';
+import ListItem from '../../components/VoteListItem';
 
-import GET_NOTIFICATION_SETTINGS from "../../graphql/queries/notificationSettings";
-import GET_NOTIFIED_PROCEDURES from "../../graphql/queries/notifiedProcedures";
-import UPDATE_NOTIFICATION_SETTINGS from "../../graphql/mutations/updateNotificationSettings";
-import TOGGLE_NOTIFICATION from "../../graphql/mutations/toggleNotification";
+import GET_NOTIFICATION_SETTINGS from '../../graphql/queries/notificationSettings';
+import GET_NOTIFIED_PROCEDURES from '../../graphql/queries/notifiedProcedures';
+import UPDATE_NOTIFICATION_SETTINGS from '../../graphql/mutations/updateNotificationSettings';
+import TOGGLE_NOTIFICATION from '../../graphql/mutations/toggleNotification';
 
 const Wrapper = styled.SectionList`
   flex: 1;
@@ -45,9 +45,9 @@ const SwitchItemTitle = styled.Text`
 `;
 
 const SwitchItemIcon = styled(Ionicons).attrs({
-  color: "#000",
+  color: '#000',
   size: 20,
-  backgroundColor: "transparent"
+  backgroundColor: 'transparent',
 })`
   align-self: center;
   padding-right: 11;
@@ -73,72 +73,70 @@ const ProcedureDescription = styled.Text`
 
 const sections = [
   {
-    key: "global",
-    data: [{ title: "Benachrichtigungen", key: "enabled", type: "switch" }]
+    key: 'global',
+    data: [{ title: 'Benachrichtigungen', key: 'enabled', type: 'switch' }],
   },
   {
-    title: "Kategorie",
-    key: "categories",
+    title: 'Kategorie',
+    key: 'categories',
     data: [
       {
-        title: "Neu in Abstimmung",
-        key: "newVote",
-        type: "switch"
+        title: 'Neu in Abstimmung',
+        key: 'newVote',
+        type: 'switch',
       },
       {
-        title: "Neu in Vorbereitung",
-        key: "newPreperation",
-        type: "switch"
-      }
-    ]
+        title: 'Neu in Vorbereitung',
+        key: 'newPreperation',
+        type: 'switch',
+      },
+    ],
   },
   {
-    title: "Abonnierte Benachrichtigungen",
-    key: "abos",
-    data: []
-  }
+    title: 'Abonnierte Benachrichtigungen',
+    key: 'abos',
+    data: [],
+  },
 ];
 
 class Notifications extends Component {
   static navigatorStyle = {
-    navBarButtonColor: "#FFFFFF",
-    navBarBackgroundColor: "#4494d3",
-    navBarTextColor: "#FFFFFF",
-    navBarTextFontSize: 17
+    navBarButtonColor: '#FFFFFF',
+    navBarBackgroundColor: '#4494d3',
+    navBarTextColor: '#FFFFFF',
+    navBarTextFontSize: 17,
   };
 
   constructor(props) {
     super(props);
 
-    const menuIcon = Platform.OS === "ios" ? "ios-menu" : "md-menu";
+    const menuIcon = Platform.OS === 'ios' ? 'ios-menu' : 'md-menu';
 
-    Ionicons.getImageSource(menuIcon, 24, "#FFFFFF").then(icon => {
+    Ionicons.getImageSource(menuIcon, 24, '#FFFFFF').then(icon => {
       props.navigator.setButtons({
         leftButtons: [
           {
             icon,
-            id: "menu"
-          }
-        ]
+            id: 'menu',
+          },
+        ],
       });
     });
   }
 
   state = {
-    notificationsAllowed: Platform.OS === "ios" ? null : true,
-    appState: AppState.currentState
+    notificationsAllowed: Platform.OS === 'ios' ? null : true,
+    appState: AppState.currentState,
   };
 
   componentDidMount() {
-    AppState.addEventListener("change", this.handleAppStateChange);
+    AppState.addEventListener('change', this.handleAppStateChange);
 
-    if (Platform.OS === "ios") {
+    if (Platform.OS === 'ios') {
       NotificationsIOS.checkPermissions().then(currentPermissions => {
         this.setState({
           notificationsAllowed:
-            !!currentPermissions.badge ||
-            !!currentPermissions.sound ||
-            !!currentPermissions.alert
+            !!currentPermissions.badge || !!currentPermissions.sound || !!currentPermissions.alert,
         });
       });
     } else {
@@ -147,19 +145,19 @@ class Notifications extends Component {
   }
 
   componentWillUnmount() {
-    AppState.removeEventListener("change", this.handleAppStateChange);
+    AppState.removeEventListener('change', this.handleAppStateChange);
   }
 
   onToggleSwitch = key => async () => {
     const { update, notificationSettings } = this.props;
     switch (key) {
-      case "enabled":
+      case 'enabled':
         this.enabledToggle();
         break;
 
       default:
         await update({
-          variables: { [key]: !notificationSettings[key] }
+          variables: { [key]: !notificationSettings[key] },
         });
         break;
     }
@@ -169,10 +167,10 @@ class Notifications extends Component {
   onItemClick = ({ item }) => () => {
     const { navigator } = this.props;
     navigator.push({
-      screen: "democracy.Detail",
-      title: "Abstimmung".toUpperCase(),
+      screen: 'democracy.Detail',
+      title: 'Abstimmung'.toUpperCase(),
       passProps: { ...item },
-      backButtonTitle: ""
+      backButtonTitle: '',
     });
   };
 
@@ -182,62 +180,55 @@ class Notifications extends Component {
     if (enabled) {
       disableUntil = await new Promise(resolve => {
         Alert.alert(
-          "Benachrichtigungen abschalten",
-          "Wie lange möchtest du eine Pause von der Politik?",
+          'Benachrichtigungen abschalten',
+          'Wie lange möchtest du eine Pause von der Politik?',
           [
             {
-              text: "Ein Jahr",
+              text: 'Ein Jahr',
               onPress: () =>
-                resolve(
-                  new Date(
-                    new Date().setFullYear(new Date().getFullYear() + 1)
-                  ).toString()
-                )
+                resolve(new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toString()),
             },
             {
-              text: "Eine Woche",
+              text: 'Eine Woche',
               onPress: () => {
                 const now = new Date();
                 now.setDate(now.getDate() + 7);
                 resolve(now.toString());
-              }
+              },
             },
             {
-              text: "Einen Tag",
+              text: 'Einen Tag',
               onPress: () => {
                 const now = new Date();
                 now.setDate(now.getDate() + 1);
                 resolve(now.toString());
-              }
+              },
             },
             {
-              text: "Garnicht",
-              onPress: () => "cancel"
-            }
+              text: 'Garnicht',
+              onPress: () => 'cancel',
+            },
           ],
-          { cancelable: false }
+          { cancelable: false },
         );
       });
     }
 
-    if (disableUntil !== "cancel" || !enabled)
+    if (disableUntil !== 'cancel' || !enabled)
       await update({
-        variables: { enabled: !enabled, disableUntil }
+        variables: { enabled: !enabled, disableUntil },
       });
   };
 
   handleAppStateChange = nextAppState => {
-    if (
-      this.state.appState.match(/inactive|background/) &&
-      nextAppState === "active"
-    ) {
-      if (Platform.OS === "ios") {
+    if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
+      if (Platform.OS === 'ios') {
         NotificationsIOS.checkPermissions().then(currentPermissions => {
           this.setState({
             notificationsAllowed:
               !!currentPermissions.badge ||
               !!currentPermissions.sound ||
-              !!currentPermissions.alert
+              !!currentPermissions.alert,
           });
         });
       }
@@ -253,20 +244,19 @@ class Notifications extends Component {
     const value = notificationSettings[key];
 
     switch (key) {
-      case "enabled":
-        icon =
-          Platform.OS === "ios" ? "ios-paper-plane-outline" : "md-paper-plane";
+      case 'enabled':
+        icon = Platform.OS === 'ios' ? 'ios-paper-plane-outline' : 'md-paper-plane';
         break;
-      case "newVote":
-        icon = Platform.OS === "ios" ? "ios-pie-outline" : "md-pie";
+      case 'newVote':
+        icon = Platform.OS === 'ios' ? 'ios-pie-outline' : 'md-pie';
         break;
-      case "newPreperation":
+      case 'newPreperation':
         style = {
           transform: [{ scaleX: -1 }],
           paddingLeft: 11,
-          paddingRight: 0
+          paddingRight: 0,
         };
-        icon = Platform.OS === "ios" ? "ios-undo" : "md-undo";
+        icon = Platform.OS === 'ios' ? 'ios-undo' : 'md-undo';
         break;
 
       default:
@@ -281,7 +271,7 @@ class Notifications extends Component {
           <Switch
             value={value}
             onValueChange={this.onToggleSwitch(key)}
-            disabled={key !== "enabled" && !notificationSettings.enabled}
+            disabled={key !== 'enabled' && !notificationSettings.enabled}
           />
         </SwitchItemWrapper>
       </Row>
@@ -292,7 +282,7 @@ class Notifications extends Component {
     const { item, item: { type, title, key } } = args;
 
     switch (type) {
-      case "switch":
+      case 'switch':
         return this.renderSwitch({ title, key });
 
       default:
@@ -307,15 +297,13 @@ class Notifications extends Component {
                   <TouchableOpacity
                     onPress={() =>
                       this.props.toggleNotification({
-                        procedureId: item.procedureId
+                        procedureId: item.procedureId,
                       })
                     }
                   >
                     {/* <NotificationButtonIcon active /> */}
                   </TouchableOpacity>
-                  <ProcedureDescription>
-                    {item.currentStatus}
-                  </ProcedureDescription>
+                  <ProcedureDescription>{item.currentStatus}</ProcedureDescription>
                 </ProcedureDetailWrapper>
               </ListItem>
             </Row>
@@ -327,25 +315,18 @@ class Notifications extends Component {
   render() {
     if (this.state.notificationsAllowed === null) {
       return (
-        <View style={{ flex: 1, justifyContent: "center" }}>
+        <View style={{ flex: 1, justifyContent: 'center' }}>
           <ActivityIndicator size="large" />
         </View>
       );
     } else if (this.state.notificationsAllowed === false) {
       return (
-        <View
-          style={{ flex: 1, justifyContent: "center", paddingHorizontal: 18 }}
-        >
-          <Text>
-            Bitte Push benachrichtigungen für die App in den Einstellungen
-            aktivieren.
-          </Text>
+        <View style={{ flex: 1, justifyContent: 'center', paddingHorizontal: 18 }}>
+          <Text>Bitte Push benachrichtigungen für die App in den Einstellungen aktivieren.</Text>
           <Button
             title="Einstellungen"
             onPress={() =>
-              Linking.openURL(
-                "app-settings://notification/de.democracy-deutschland.clientapp"
-              )
+              Linking.openURL('app-settings://notification/de.democracy-deutschland.clientapp')
             }
           />
         </View>
@@ -356,7 +337,7 @@ class Notifications extends Component {
     const preparedSections = sections.map(section => {
       const { key } = section;
       const sect = { ...section };
-      if (key === "abos") {
+      if (key === 'abos') {
         sect.data = notifiedProcedures || [];
       }
       return sect;
@@ -377,38 +358,36 @@ Notifications.propTypes = {
   loading: PropTypes.bool.isRequired,
   notificationSettings: PropTypes.shape({
     enabled: PropTypes.bool,
-    disableUntil: PropTypes.string
+    disableUntil: PropTypes.string,
   }),
   toggleNotification: PropTypes.func.isRequired,
-  notifiedProcedures: PropTypes.arrayOf(PropTypes.shape())
+  notifiedProcedures: PropTypes.arrayOf(PropTypes.shape()),
 };
 
 Notifications.defaultProps = {
   notificationSettings: {
-    enabled: true
+    enabled: true,
   },
-  notifiedProcedures: []
+  notifiedProcedures: [],
 };
 
 export default compose(
   graphql(GET_NOTIFICATION_SETTINGS, {
-    props: ({
-      data: { loading, notificationSettings = { enabled: true } }
-    }) => ({
+    props: ({ data: { loading, notificationSettings = { enabled: true } } }) => ({
       loading,
-      notificationSettings
+      notificationSettings,
     }),
     options: {
-      fetchPolicy: "cache-and-network"
-    }
+      fetchPolicy: 'cache-and-network',
+    },
   }),
   graphql(GET_NOTIFIED_PROCEDURES, {
     props: ({ data: { notifiedProcedures } }) => ({
-      notifiedProcedures
+      notifiedProcedures,
     }),
     options: () => ({
-      fetchPolicy: "cache-and-network"
-    })
+      fetchPolicy: 'cache-and-network',
+    }),
   }),
   graphql(UPDATE_NOTIFICATION_SETTINGS, {
     props({ mutate, ownProps: { notificationSettings } }) {
@@ -417,31 +396,31 @@ export default compose(
           mutate({
             variables,
             optimisticResponse: {
-              __typename: "Mutation",
+              __typename: 'Mutation',
               updateNotificationSettings: {
                 __typename: notificationSettings.__typename,
                 ...notificationSettings,
-                ..._.omitBy(variables, _.isNil)
-              }
+                ..._.omitBy(variables, _.isNil),
+              },
             },
             update: (cache, { data: { updateNotificationSettings } }) => {
               try {
                 const data = cache.readQuery({
-                  query: GET_NOTIFICATION_SETTINGS
+                  query: GET_NOTIFICATION_SETTINGS,
                 });
                 data.notificationSettings = { ...updateNotificationSettings };
                 cache.writeQuery({
                   query: GET_NOTIFICATION_SETTINGS,
-                  data
+                  data,
                 });
               } catch (error) {
                 // Error
               }
-            }
+            },
           });
-        }
+        },
       };
-    }
+    },
   }),
 
   graphql(TOGGLE_NOTIFICATION, {
@@ -452,27 +431,27 @@ export default compose(
           mutate({
             variables: { procedureId },
             optimisticResponse: {
-              __typename: "Mutation",
+              __typename: 'Mutation',
               toggleNotification: {
-                __typename: "Procedure",
-                notify: false
-              }
+                __typename: 'Procedure',
+                notify: false,
+              },
             },
             update: cache => {
               const data = cache.readQuery({
-                query: GET_NOTIFIED_PROCEDURES
+                query: GET_NOTIFIED_PROCEDURES,
               });
               data.notifiedProcedures = data.notifiedProcedures.filter(
-                ({ procedureId: pId }) => pId !== procedureId
+                ({ procedureId: pId }) => pId !== procedureId,
               );
               cache.writeQuery({
                 query: GET_NOTIFIED_PROCEDURES,
-                data
+                data,
               });
-            }
+            },
           });
-        }
+        },
       };
-    }
-  })
+    },
+  }),
 )(Notifications);

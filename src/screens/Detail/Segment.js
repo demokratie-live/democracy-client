@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import styled from "styled-components/native";
-import PropTypes from "prop-types";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import React, { Component } from 'react';
+import styled from 'styled-components/native';
+import PropTypes from 'prop-types';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Wrapper = styled.View``;
 
 const SegmentTouch = styled.TouchableHighlight.attrs({
   activeOpacity: 0.5,
-  underlayColor: "rgba(68, 148, 211, 0.1)"
-}) ``;
+  underlayColor: 'rgba(68, 148, 211, 0.1)',
+})``;
 
 const SegmentWrapper = styled.View`
   padding-vertical: 10;
@@ -25,23 +25,22 @@ const Title = styled.Text`
 `;
 
 const CollapseIcon = styled(Ionicons).attrs({
-  color: "rgb(151, 151, 151)",
-  name: "ios-arrow-up-outline",
-  size: 20
-}) `
-  transform: ${({ open }) => (open ? "rotate(0deg)" : "rotate(180deg)")};
+  color: 'rgb(151, 151, 151)',
+  name: 'ios-arrow-up-outline',
+  size: 20,
+})`
+  transform: ${({ open }) => (open ? 'rotate(0deg)' : 'rotate(180deg)')};
 `;
 
 const Content = styled.View`
-  display: ${({ open, collapsible }) =>
-    open || !collapsible ? "flex" : "none"};
+  display: ${({ open, collapsible }) => (open || !collapsible ? 'flex' : 'none')};
   padding-horizontal: 18;
   padding-vertical: 10;
 `;
 
 class Segment extends Component {
   state = {
-    open: false
+    open: false,
   };
 
   componentWillMount() {
@@ -93,12 +92,12 @@ Segment.propTypes = {
   open: PropTypes.bool,
   collapsible: PropTypes.bool,
   children: PropTypes.node.isRequired,
-  scrollTo: PropTypes.func.isRequired
+  scrollTo: PropTypes.func.isRequired,
 };
 
 Segment.defaultProps = {
   collapsible: true,
-  open: false
+  open: false,
 };
 
 export default Segment;

@@ -1,24 +1,24 @@
-import React, { Component } from "react";
-import { RefreshControl, ActivityIndicator } from "react-native";
-import styled from "styled-components/native";
-import PropTypes from "prop-types";
-import { graphql, compose } from "react-apollo";
-import { Navigator } from "react-native-navigation";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import React, { Component } from 'react';
+import { RefreshControl, ActivityIndicator } from 'react-native';
+import styled from 'styled-components/native';
+import PropTypes from 'prop-types';
+import { graphql, compose } from 'react-apollo';
+import { Navigator } from 'react-native-navigation';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import getProcedure from "../../graphql/queries/getProcedure";
-import TOGGLE_NOTIFICATION from "../../graphql/mutations/toggleNotification";
-import VIEW_PROCEDURE_LOCAL from "../../graphql/mutations/local/viewProcedure";
-import F_PROCEDURE_VIEWED from "../../graphql/fragments/ProcedureViewed";
+import getProcedure from '../../graphql/queries/getProcedure';
+import TOGGLE_NOTIFICATION from '../../graphql/mutations/toggleNotification';
+import VIEW_PROCEDURE_LOCAL from '../../graphql/mutations/local/viewProcedure';
+import F_PROCEDURE_VIEWED from '../../graphql/fragments/ProcedureViewed';
 
-import ActivityIndex from "../../components/ActivityIndex";
-import DateTime from "../../components/Date";
-import SegmentDetails from "./Segments/Details";
-import SegmentDocuments from "./Segments/Documents";
-import History from "./Segments/History";
-import VoteResults from "./Segments/VoteResults";
-import Segment from "./Segment";
-import Voting from "./Voting";
+import ActivityIndex from '../../components/ActivityIndex';
+import DateTime from '../../components/Date';
+import SegmentDetails from './Segments/Details';
+import SegmentDocuments from './Segments/Documents';
+import History from './Segments/History';
+import VoteResults from './Segments/VoteResults';
+import Segment from './Segment';
+import Voting from './Voting';
 
 const LoadingWrapper = styled.View`
   flex: 1;
@@ -63,9 +63,8 @@ const IntroButton = styled.TouchableOpacity`
 
 const NotificationButtonIcon = styled(Ionicons).attrs({
   size: 32,
-  name: ({ active }) =>
-    active ? "ios-notifications" : "ios-notifications-outline",
-  color: ({ active }) => (active ? "rgb(255, 171, 33)" : "rgb(0, 0, 0)")
+  name: ({ active }) => (active ? 'ios-notifications' : 'ios-notifications-outline'),
+  color: ({ active }) => (active ? 'rgb(255, 171, 33)' : 'rgb(0, 0, 0)'),
 })``;
 
 const IntroSide = styled.View`
@@ -87,14 +86,21 @@ const Content = styled.View`
   flex: 1;
 `;
 
+const VerificationTouch = styled.TouchableOpacity`
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 100;
+`;
+
 class Detail extends Component {
   static navigatorStyle = {
-    navBarBackgroundColor: "#4494d3",
-    navBarTextColor: "#FFFFFF",
+    navBarBackgroundColor: '#4494d3',
+    navBarTextColor: '#FFFFFF',
     navBarTextFontSize: 17,
-    navBarLeftButtonColor: "#FFFFFF",
-    navBarButtonColor: "#FFFFFF",
-    backButtonTitle: ""
+    navBarLeftButtonColor: '#FFFFFF',
+    navBarButtonColor: '#FFFFFF',
+    backButtonTitle: '',
   };
 
   componentDidMount() {
@@ -107,16 +113,16 @@ class Detail extends Component {
       this.listType = data.procedure.listType;
       let newTitle;
       switch (data.procedure.listType) {
-        case "VOTING":
-          newTitle = "Abstimmung";
+        case 'VOTING':
+          newTitle = 'Abstimmung';
           break;
 
         default:
-          newTitle = "Vorbereitung";
+          newTitle = 'Vorbereitung';
           break;
       }
       this.props.navigator.setTitle({
-        title: newTitle.toUpperCase() // the new title of the screen as appears in the nav bar
+        title: newTitle.toUpperCase(), // the new title of the screen as appears in the nav bar
       });
     }
   }
@@ -125,7 +131,9 @@ class Detail extends Component {
     this.componentHeight = height;
   };
 
-  listType = "VOTING";
+  onComplete = () => {
+    this.props.data.refetch();
+  };
 
   scrollTo = ({ y }) => {
     let scrollTo;
@@ -139,20 +147,18 @@ class Detail extends Component {
     }
   };
 
+  listType = 'VOTING';
+
   render() {
     const { procedureId, toggleNotification, navigator } = this.props;
     const { data: { networkStatus, refetch, loading, procedure } } = this.props;
     if (!procedure && loading) {
-      return (
-        <LoadingWrapper>
-          {loading && <ActivityIndicator size="large" />}
-        </LoadingWrapper>
-      );
+      return <LoadingWrapper>{loading && <ActivityIndicator size="large" />}</LoadingWrapper>;
     }
     if ((!procedure || !procedure._id) && !loading) {
       return (
         <LoadingWrapper>
-          <Reload title="Neu Laden" onPress={()=> refetch()} />
+          <Reload title="Neu Laden" onPress={() => refetch()} />
         </LoadingWrapper>
       );
     }
@@ -172,7 +178,8 @@ class Detail extends Component {
       listType,
       type,
       activityIndex,
-      voted
+      voted,
+      verified,
     } = this.props.data.procedure;
 
     return (
@@ -184,12 +191,7 @@ class Detail extends Component {
         innerRef={comp => {
           this.scrollView = comp;
         }}
-        refreshControl={
-          <RefreshControl
-            refreshing={networkStatus === 4}
-            onRefresh={refetch}
-          />
-        }
+        refreshControl={<RefreshControl refreshing={networkStatus === 4} onRefresh={refetch} />}
       >
         <Intro>
           <IntroMain>
@@ -201,19 +203,27 @@ class Detail extends Component {
             </IntroButtons>
           </IntroMain>
           <IntroSide>
-            <ActivityIndex
-              procedureId={procedureId}
-              touchable
-              {...activityIndex}
-              skipFetchData
-            />
+            {verified ? null : (
+              <VerificationTouch
+                onPress={() => {
+                  navigator.showModal({
+                    screen: 'democracy.SmsVerification',
+                    passProps: {
+                      procedureId,
+                      onComplete: this.onComplete,
+                    },
+                  });
+                }}
+              />
+            )}
+            <ActivityIndex procedureId={procedureId} touchable {...activityIndex} skipFetchData />
             {date && <DateTime date={date} />}
           </IntroSide>
         </Intro>
         <Content>
           {tags.length > 0 && (
             <TagsWrapper>
-              <TagsText>{tags && tags.join(", ")}</TagsText>
+              <TagsText>{tags && tags.join(', ')}</TagsText>
             </TagsWrapper>
           )}
           <Segment title="Details" open scrollTo={this.scrollTo}>
@@ -229,15 +239,11 @@ class Detail extends Component {
             />
           </Segment>
           <Segment title="Dokumente" scrollTo={this.scrollTo}>
-            <SegmentDocuments documents={importantDocuments}  navigator={navigator} />
+            <SegmentDocuments documents={importantDocuments} navigator={navigator} />
           </Segment>
           {currentStatusHistory.length > 0 && (
             <Segment title="Gesetzesstand" scrollTo={this.scrollTo}>
-              <History
-                history={currentStatusHistory}
-                currentStatus={currentStatus}
-                voted={voted}
-              />
+              <History history={currentStatusHistory} currentStatus={currentStatus} voted={voted} />
             </Segment>
           )}
           <VoteResults
@@ -255,8 +261,9 @@ class Detail extends Component {
             currentStatus={currentStatus}
             type="goverment"
           />
-          {listType === "VOTING" && (
+          {listType === 'VOTING' && (
             <Voting
+              verified={verified}
               procedureObjId={_id}
               procedureId={procedureId}
               navigator={this.props.navigator}
@@ -274,7 +281,7 @@ Detail.propTypes = {
   data: PropTypes.shape().isRequired,
   navigator: PropTypes.instanceOf(Navigator).isRequired,
   toggleNotification: PropTypes.func.isRequired,
-  viewProcedure: PropTypes.func.isRequired
+  viewProcedure: PropTypes.func.isRequired,
 };
 
 Detail.defaultProps = {};
@@ -283,8 +290,8 @@ export default compose(
   graphql(getProcedure, {
     options: ({ procedureId }) => ({
       variables: { id: procedureId },
-      fetchPolicy: "cache-and-network"
-    })
+      fetchPolicy: 'cache-and-network',
+    }),
   }),
   graphql(VIEW_PROCEDURE_LOCAL, {
     props({ mutate, ownProps }) {
@@ -294,32 +301,33 @@ export default compose(
           mutate({
             variables: { procedureId },
             optimisticResponse: {
-              __typename: "Mutation",
+              __typename: 'Mutation',
               viewProcedure: {
                 id: procedureId,
-                __typename: "Procedure",
-                viewedStatus: "VIEWED"
-              }
+                __typename: 'Procedure',
+                viewedStatus: 'VIEWED',
+              },
             },
             update: cache => {
               // set View Procedure
               const aiFragment = cache.readFragment({
                 id: procedureId,
-                fragment: F_PROCEDURE_VIEWED
-              });
-
-              aiFragment.viewedStatus = "VIEWED";
-
-              cache.writeFragment({
-                id: procedureId,
                 fragment: F_PROCEDURE_VIEWED,
-                data: aiFragment
               });
-            }
+              if (aiFragment) {
+                aiFragment.viewedStatus = 'VIEWED';
+
+                cache.writeFragment({
+                  id: procedureId,
+                  fragment: F_PROCEDURE_VIEWED,
+                  data: aiFragment,
+                });
+              }
+            },
           });
-        }
+        },
       };
-    }
+    },
   }),
   graphql(TOGGLE_NOTIFICATION, {
     props({ mutate, ownProps }) {
@@ -329,31 +337,28 @@ export default compose(
           mutate({
             variables: { procedureId },
             optimisticResponse: {
-              __typename: "Mutation",
+              __typename: 'Mutation',
               toggleNotification: {
-                __typename: "Procedure",
-                notify: !notify
-              }
+                __typename: 'Procedure',
+                notify: !notify,
+              },
             },
-            update: (
-              cache,
-              { data: { toggleNotification: { notify: newNotify } } }
-            ) => {
+            update: (cache, { data: { toggleNotification: { notify: newNotify } } }) => {
               const data = cache.readQuery({
                 query: getProcedure,
-                variables: { id: procedureId }
+                variables: { id: procedureId },
               });
 
               data.procedure.notify = newNotify;
               cache.writeQuery({
                 query: getProcedure,
                 variables: { id: procedureId },
-                data
+                data,
               });
-            }
+            },
           });
-        }
+        },
       };
-    }
-  })
+    },
+  }),
 )(Detail);
