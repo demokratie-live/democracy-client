@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Dimensions, Platform } from "react-native";
+import {  Dimensions } from "react-native";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import {
@@ -7,12 +7,8 @@ import {
   VictoryBar,
   VictoryStack,
   VictoryAxis,
-  VictorySharedEvents,
-  VictoryGroup,
-  VictoryTheme,
   VictoryLabel
 } from "victory-native";
-import victoryAxis from "victory-native/lib/components/victory-axis";
 
 const VoteResultsWrapper = styled.View`
   justify-content: center;
@@ -22,17 +18,6 @@ const VoteResultsWrapper = styled.View`
 const VoteResultsPieWrapper = styled.View`
   justify-content: center;
   align-items: center;
-`;
-
-const VoteResultPieValue = styled.Text`
-  font-size: 17;
-  color: #4a4a4a;
-`;
-
-const VoteResultPieLabel = styled.Text`
-  font-size: 11;
-  color: #4a4a4a;
-  padding-top: 3;
 `;
 
 const VoteResultNumbers = styled.View`
@@ -70,16 +55,7 @@ const VoteResultCircle = styled.View`
   margin-right: 5;
 `;
 
-const TouchableBar = styled.TouchableOpacity`
-  background-color: red;
-`;
-
-const AxisLabel = styled.Text``;
-
 class PieChart extends Component {
-  state = {
-    width: Dimensions.get("window").width - 18 * 2
-  };
 
   getColor = (label, colors) => {
     switch (label) {
@@ -111,10 +87,12 @@ class PieChart extends Component {
       case "SPD":
         return "#ed170d";
       case "AfD":
+      case "AFD":
         return "#18a7d8";
       case "FDP":
         return "#ffd32c";
       case "Die Linke":
+      case "Linke":
         return "#aa4581";
       case "B90/Grüne":
         return "#34ac14";
@@ -187,12 +165,12 @@ class PieChart extends Component {
       ];
 
       if(notVoted) {
-result.push({
-  x: "Nicht abg.",
-  y: notVoted,
-  fillColor: this.getPartyColor(party.label),
-  party: party.label
-});
+        result.push({
+          x: "Nicht abg.",
+          y: notVoted,
+          fillColor: this.getPartyColor(party.label),
+          party: party.label
+        });
       }
 
       return result;
@@ -200,24 +178,20 @@ result.push({
     return chartData;
   };
 
-  labelStyle = (...rest) => ({
+  labelStyle = () => ({
     color: "blue"
   });
 
   render() {
-    const { data, colorScale, label, showNumbers } = this.props;
-    const { width } = this.state;
+    const { data, colorScale, showNumbers } = this.props;
     const dataSet = this.prepareChartData(data);
     return (
       <VoteResultsWrapper
-        onLayout={({ nativeEvent: { layout: { width: newWidth } } }) =>
-          this.setState({ width: newWidth - 18 * 2 })
-        }
       >
-        <VoteResultsPieWrapper>
-          <VictoryChart padding={{ left: 50, top: 0, bottom: 25, right: 50 }}>
+        <VoteResultsPieWrapper >
+          <VictoryChart padding={{ left: 50, top: 0, bottom: 25, right: 60 }}>
             <VictoryStack>
-              {dataSet.map((chartData, i) => (
+              {dataSet.map((chartData) => (
                 <VictoryBar
                   key={chartData[0].y}
                   barRatio={1.5}
@@ -274,7 +248,6 @@ result.push({
 
 PieChart.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  label: PropTypes.string.isRequired,
   colorScale: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   showNumbers: PropTypes.bool
 };

@@ -59,7 +59,7 @@ const VoteResults = props => {
       voteResults.abstination;
     if (voteResults.partyVotes.length > 0) {
       return (
-        <Swiper height={Dimensions.get("window").width + 50}>
+        <Swiper height={Dimensions.get("window").width + 80}>
           <PieChart
             data={_.map(
               voteResults,
