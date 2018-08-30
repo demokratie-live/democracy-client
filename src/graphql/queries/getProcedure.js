@@ -32,6 +32,8 @@ export default gql`
         abstination
         no
         notVoted
+        decisionText
+        namedVote
         partyVotes {
           main
           party

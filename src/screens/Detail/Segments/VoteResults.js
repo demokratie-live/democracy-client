@@ -1,23 +1,39 @@
-import React from "react";
-import { Dimensions } from "react-native";
-import styled from "styled-components/native";
-import PropTypes from "prop-types";
-import _ from "lodash";
-import { graphql, compose } from "react-apollo";
-import Swiper from "react-native-swiper";
+import React from 'react';
+import { Dimensions } from 'react-native';
+import styled from 'styled-components/native';
+import PropTypes from 'prop-types';
+import _ from 'lodash';
+import { graphql, compose } from 'react-apollo';
+import Swiper from 'react-native-swiper';
 
-import PieChart from "./VoteResults/PieChart";
-import PartyChart from "./VoteResults/PartyChart";
-import BarChart from "./VoteResults/BarChart";
-import Segment from "../Segment";
+import PieChart from './VoteResults/PieChart';
+import PartyChart from './VoteResults/PartyChart';
+import BarChart from './VoteResults/BarChart';
+import Segment from '../Segment';
 
-import VOTES from "../../../graphql/queries/votes";
+import VOTES from '../../../graphql/queries/votes';
 
 const ScrollView = styled.ScrollView.attrs({
   horizontal: true,
   pagingEnabled: true,
   showsHorizontalScrollIndicator: true,
 })``;
+
+const DecisionTextView = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding-horizontal: 25;
+`;
+
+const DecisionTextHeadline = styled.Text`
+  font-size: 17;
+`;
+
+const DecisionText = styled.Text`
+  color: rgb(142, 142, 147);
+  padding-top: 18;
+`;
 
 const VoteResults = props => {
   const { voteResults, communityVotes, scrollTo, type, currentStatus } = props;
@@ -46,64 +62,77 @@ const VoteResults = props => {
     return null;
   };
 
-  const renderNamedVoteDetails = () => {
-    const votes =
-      voteResults.yes +
-      voteResults.no +
-      voteResults.notVoted +
-      voteResults.abstination;
+  const renderGovernmentVoteDetails = () => {
+    const votes = voteResults.yes + voteResults.no + voteResults.notVoted + voteResults.abstination;
     if (voteResults.partyVotes.length > 0) {
-      return (
-        <Swiper height={Dimensions.get("window").width + 80}>
-          <PieChart
-            data={_.map(
-              voteResults,
-              (value, label) =>
-                label !== "__typename" && typeof value === "number"
-                  ? {
-                      value,
-                      label,
-                      percentage: Math.round(value / votes * 100)
-                    }
-                  : false
-            ).filter(e => e)}
-            colorScale={["#99C93E", "#4CB0D8", "#D43194", "#B1B3B4"]}
-            label="Abgeordnete"
-          />
-          <PartyChart
-            data={_.map(voteResults.partyVotes, partyVotes => ({
-              value: partyVotes.deviants,
-              label: partyVotes.party
-            }))}
-            colorScale={["#99C93E", "#4CB0D8", "#D43194", "#B1B3B4"]}
-            label="Abgeordnete"
-          />
+      const screens = [
+        <PieChart
+          key="pieChart"
+          data={_.map(
+            voteResults,
+            (value, label) =>
+              label !== '__typename' && typeof value === 'number'
+                ? {
+                    value,
+                    label,
+                    fractions: voteResults.namedVote
+                      ? null
+                      : voteResults.partyVotes.filter(({ main }) => label === main.toLowerCase())
+                          .length,
+                    percentage: Math.round(value / votes * 100),
+                  }
+                : false,
+          ).filter(e => e)}
+          colorScale={['#99C93E', '#4CB0D8', '#D43194', '#B1B3B4']}
+          label={voteResults.namedVote ? 'Abgeordnete' : 'Fraktionen'}
+          voteResults={voteResults}
+        />,
+        <PartyChart
+          key="partyChart"
+          data={_.map(voteResults.partyVotes, partyVotes => ({
+            value: partyVotes.deviants,
+            label: partyVotes.party,
+          }))}
+          colorScale={['#99C93E', '#4CB0D8', '#D43194', '#B1B3B4']}
+          label="Abgeordnete"
+          voteResults={voteResults}
+        />,
 
-          <BarChart
-            data={_.map(voteResults.partyVotes, partyVotes => ({
-              value: partyVotes.deviants,
-              label: partyVotes.party
-            }))}
-            colorScale={["#99C93E", "#4CB0D8", "#D43194", "#B1B3B4"]}
-            label="Abgeordnete"
-          />
-        </Swiper>
-      );
+        <BarChart
+          key="barChart"
+          data={_.map(voteResults.partyVotes, partyVotes => ({
+            value: partyVotes.deviants,
+            label: partyVotes.party,
+          }))}
+          colorScale={['#99C93E', '#4CB0D8', '#D43194', '#B1B3B4']}
+          label="Abgeordnete"
+          voteResults={voteResults}
+        />,
+      ];
+      if (voteResults.decisionText) {
+        screens.push(
+          <DecisionTextView key="decisionText">
+            <DecisionTextHeadline>Beschlusstext</DecisionTextHeadline>
+            <DecisionText>{voteResults.decisionText}</DecisionText>
+          </DecisionTextView>,
+        );
+      }
+      return <Swiper height={440}>{screens}</Swiper>;
     }
     return (
       <PieChart
         data={_.map(
           voteResults,
           (value, label) =>
-            label !== "__typename" && typeof value === "number"
+            label !== '__typename' && typeof value === 'number'
               ? {
                   value,
                   label,
-                  percentage: Math.round(value / votes * 100)
+                  percentage: Math.round(value / votes * 100),
                 }
-              : false
+              : false,
         ).filter(e => e)}
-        colorScale={["#99C93E", "#4CB0D8", "#D43194", "#B1B3B4"]}
+        colorScale={['#99C93E', '#4CB0D8', '#D43194', '#B1B3B4']}
         label="Abgeordnete"
       />
     );
@@ -112,14 +141,11 @@ const VoteResults = props => {
   const renderGovernmentResult = () => {
     if (
       voteResults &&
-      (voteResults.yes ||
-        voteResults.no ||
-        voteResults.notVoted ||
-        voteResults.abstination)
+      (voteResults.yes || voteResults.no || voteResults.notVoted || voteResults.abstination)
     ) {
       return (
         <Segment title="Bundestagsergebnis" open scrollTo={scrollTo} fullWidth>
-          {renderNamedVoteDetails()}
+          {renderGovernmentVoteDetails()}
         </Segment>
       );
     }
@@ -158,7 +184,7 @@ VoteResults.propTypes = {
     yes: PropTypes.number,
     no: PropTypes.number,
     abstination: PropTypes.number,
-    notVoted: PropTypes.number
+    notVoted: PropTypes.number,
   }),
   scrollTo: PropTypes.func.isRequired,
   communityVotes: PropTypes.oneOfType([PropTypes.shape(), PropTypes.bool]),
