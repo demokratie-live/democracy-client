@@ -18,7 +18,9 @@ const VoteResultsWrapper = styled.View`
   align-items: center;
 `;
 
-const VoteResultsPieWrapper = styled.View``;
+const VoteResultsPieWrapper = styled.View.attrs({
+  pointerEvents: 'none',
+})``;
 
 const VoteResultPieValue = styled.Text`
   font-size: 17;

@@ -9,7 +9,9 @@ const VoteResultsWrapper = styled.View`
   align-items: center;
 `;
 
-const VoteResultsPieWrapper = styled.View``;
+const VoteResultsPieWrapper = styled.View.attrs({
+  pointerEvents: 'none',
+})``;
 
 const VoteResultNumbers = styled.View`
   width: ${() => Dimensions.get('window').width - 18 * 2};
