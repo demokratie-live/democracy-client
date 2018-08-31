@@ -90,7 +90,7 @@ class PieChart extends Component {
     return labels[label] || label;
   };
 
-  getValue = ({ value, fractions }) => fractions || value;
+  getValue = ({ value, fractions }) => (fractions !== null ? fractions : value);
 
   render() {
     const { data, colorScale, label, showNumbers } = this.props;
