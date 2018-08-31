@@ -22,7 +22,6 @@ const ScrollView = styled.ScrollView.attrs({
 const DecisionTextView = styled.View`
   flex: 1;
   align-items: center;
-  justify-content: center;
   padding-horizontal: 25;
 `;
 
