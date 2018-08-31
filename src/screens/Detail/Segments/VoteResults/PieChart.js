@@ -90,7 +90,7 @@ class PieChart extends Component {
     return labels[label] || label;
   };
 
-  getValue = ({ value, fractions }) => (fractions !== null ? fractions : value);
+  getValue = ({ value, fractions }) => (typeof fractions === 'number' ? fractions : value);
 
   render() {
     const { data, colorScale, label, showNumbers } = this.props;
@@ -122,7 +122,8 @@ class PieChart extends Component {
             {showNumbers && (
               <VoteResultPieValue>
                 {data.reduce(
-                  (v, { value, fractions }) => (fractions !== null ? v + fractions : v + value),
+                  (v, { value, fractions }) =>
+                    typeof fractions === 'number' ? v + fractions : v + value,
                   0,
                 )}
               </VoteResultPieValue>
