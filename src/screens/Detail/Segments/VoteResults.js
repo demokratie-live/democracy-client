@@ -117,7 +117,11 @@ const VoteResults = props => {
           </DecisionTextView>,
         );
       }
-      return <Swiper height={440}>{screens}</Swiper>;
+      return (
+        <Swiper paginationStyle={{ bottom: 0 }} height={440}>
+          {screens}
+        </Swiper>
+      );
     }
     return (
       <PieChart
