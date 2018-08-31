@@ -122,7 +122,7 @@ class PieChart extends Component {
             {showNumbers && (
               <VoteResultPieValue>
                 {data.reduce(
-                  (v, { value, fractions }) => (fractions ? v + fractions : v + value),
+                  (v, { value, fractions }) => (fractions !== null ? v + fractions : v + value),
                   0,
                 )}
               </VoteResultPieValue>

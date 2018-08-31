@@ -21,8 +21,10 @@ const ScrollView = styled.ScrollView.attrs({
 
 const DecisionTextView = styled.View`
   flex: 1;
+  justify-content: center;
   align-items: center;
   padding-horizontal: 25;
+  padding-bottom: 20;
 `;
 
 const DecisionTextHeadline = styled.Text`
