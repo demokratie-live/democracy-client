@@ -3,6 +3,7 @@
   "version": "0.9.1",
   "private": true,
   "scripts": {
+    "dev": "yarn start",
     "test": "eslint . && jest",
     "test:jest": "jest",
     "test:lint": "eslint .",
