@@ -36,6 +36,14 @@ const DecisionText = styled.Text`
   padding-top: 18;
 `;
 
+const RepresentativeText = styled.Text`
+  color: rgb(142, 142, 147);
+  text-align: center;
+  font-size: 10;
+  padding-top: 8;
+  font-style: italic;
+`;
+
 const VoteResults = props => {
   const { voteResults, communityVotes, scrollTo, type, currentStatus } = props;
 
@@ -176,6 +184,9 @@ const VoteResults = props => {
       return (
         <Segment title="Communityergebnis" open scrollTo={scrollTo} fullWidth>
           <ScrollView>{renderCommuntiyResult()}</ScrollView>
+          <RepresentativeText>
+            Dieses Ergebnis wurde nicht auf seine Repräsentativität überprüft.
+          </RepresentativeText>
         </Segment>
       );
     }
