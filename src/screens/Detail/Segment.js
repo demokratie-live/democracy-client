@@ -52,7 +52,7 @@ class Segment extends Component {
 
   onLayout = ({ nativeEvent: { layout: { y, height } } }) => {
     const { scrollTo } = this.props;
-    if (this.fireScroll) {
+    if (this.fireScroll && scrollTo) {
       this.fireScroll = false;
       setTimeout(() => {
         scrollTo({ y, height });

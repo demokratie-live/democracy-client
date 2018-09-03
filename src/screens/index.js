@@ -11,10 +11,13 @@ import Search from './Search';
 import SideMenu from './SideMenu';
 import Detail from './Detail';
 import Support from './Support';
-import Security from './Security';
+import Faq from './Faq';
+import Imprint from './Imprint';
+import About from './About';
+import Donate from './Donate';
 import VoteVarification from './VoteVarification';
 import Notifications from './Notifications';
-import Credits from './Credits';
+
 import Pdf from '../components/Pdf';
 import InAppNotification from './Notifications/InAppNotification';
 import SmsVerification from './SmsVerification';
@@ -82,8 +85,29 @@ export default function registerScreens() {
     { client },
   );
   Navigation.registerComponent(
-    'democracy.Security',
-    () => NetworkStatus(NavBarLinks(Security)),
+    'democracy.Faq',
+    () => NetworkStatus(NavBarLinks(Faq)),
+    client.store,
+    ApolloProvider,
+    { client },
+  );
+  Navigation.registerComponent(
+    'democracy.Imprint',
+    () => NetworkStatus(NavBarLinks(Imprint)),
+    client.store,
+    ApolloProvider,
+    { client },
+  );
+  Navigation.registerComponent(
+    'democracy.About',
+    () => NetworkStatus(NavBarLinks(About)),
+    client.store,
+    ApolloProvider,
+    { client },
+  );
+  Navigation.registerComponent(
+    'democracy.Donate',
+    () => NetworkStatus(NavBarLinks(Donate)),
     client.store,
     ApolloProvider,
     { client },
@@ -98,13 +122,6 @@ export default function registerScreens() {
   Navigation.registerComponent(
     'democracy.Notifications',
     () => NetworkStatus(NavBarLinks(Notifications)),
-    client.store,
-    ApolloProvider,
-    { client },
-  );
-  Navigation.registerComponent(
-    'democracy.Credits',
-    () => NetworkStatus(NavBarLinks(Credits)),
     client.store,
     ApolloProvider,
     { client },
