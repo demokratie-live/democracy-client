@@ -40,7 +40,8 @@ const RepresentativeText = styled.Text`
   color: rgb(142, 142, 147);
   text-align: center;
   font-size: 10;
-  padding-top: 8;
+  padding-top: 20;
+  padding-bottom: 10;
   font-style: italic;
 `;
 
