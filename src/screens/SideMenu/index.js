@@ -6,6 +6,7 @@ import { PropTypes } from 'prop-types';
 import { Navigator } from 'react-native-navigation';
 
 import Navigation from './Navigation';
+import DonatedBox from '../Donate/DonatedBox';
 
 import currentScreenQuery from '../../graphql/queries/currentScreen';
 
@@ -60,6 +61,15 @@ const HeadText = styled.Text`
   padding-left: 16;
 `;
 
+const DonateBoxWarpper = styled.View`
+  height: 68;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+`;
+
 const SideMenu = ({ data: { currentScreen }, navigator }) => {
   const navigateTo = ({ screenId, title }) => {
     if (screenId) {
@@ -99,6 +109,14 @@ const SideMenu = ({ data: { currentScreen }, navigator }) => {
           </HeadTextWrapper>
         </Head>
         <Navigation currentScreen={currentScreen} navigateTo={navigateTo} />
+        <DonateBoxWarpper>
+          <DonatedBox
+            descriptionTextStyle={{ color: '#fff' }}
+            moneyTextStyle={{ color: '#fff' }}
+            target={10000}
+            occupied={240}
+          />
+        </DonateBoxWarpper>
       </Content>
     </Wrapper>
   );

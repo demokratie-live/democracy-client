@@ -111,7 +111,7 @@ class Donate extends Component {
             Bestand hat, bitten wir Dich an der unabhängigen Crowd-Finanzierung von DEMOCRACY per
             Dauerauftrag mitzuwirken. Pate/in können Sie schon ab 1€ monatlich werden.
           </Text>
-          <DonatedBox target={10000} occupied={7000} />
+          <DonatedBox style={{ marginTop: 21 }} target={10000} occupied={240} />
         </Wrapper>
         <Segment title="Details zum Finanzierungsbedarf">
           <Entry money="560€ von 10.830€" description="min. Finanzierungsziel/Monat" />

@@ -5,6 +5,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Wrapper = styled.SectionList.attrs({
   stickySectionHeadersEnabled: false,
+  contentContainerStyle: { paddingBottom: 70 },
 })``;
 
 const SectionItem = styled.View`
