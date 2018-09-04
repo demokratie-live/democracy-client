@@ -6474,6 +6474,10 @@ react-devtools-core@3.1.0:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
+react-fast-compare@^2.0.0:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-2.0.2.tgz#0560ba7a61a1662d9cea8cd97a0d9db7591bab1c"
+
 react-native-config@^0.11.5:
   version "0.11.5"
   resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-0.11.5.tgz#516cb7b6ec437c7739236ca075971db3aabdcb95"
@@ -7996,42 +8000,45 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-victory-chart@^25.1.0:
-  version "25.1.1"
-  resolved "https://registry.yarnpkg.com/victory-chart/-/victory-chart-25.1.1.tgz#5b5d9bde802eea774f1105af6fb723d478717532"
+victory-chart@^27.1.0:
+  version "27.1.1"
+  resolved "https://registry.yarnpkg.com/victory-chart/-/victory-chart-27.1.1.tgz#db7337c0dba1353d6a08e7116df1988edea785b0"
   dependencies:
     d3-voronoi "^1.1.2"
-    lodash "^4.17.4"
-    victory-core "^21.0.4"
+    lodash "^4.17.5"
+    react-fast-compare "^2.0.0"
+    victory-core "^24.0.0"
 
-victory-core@^21.0.2, victory-core@^21.0.4:
-  version "21.0.4"
-  resolved "https://registry.yarnpkg.com/victory-core/-/victory-core-21.0.4.tgz#5ac6d495a43e5d95249c56973290b182ec607b4a"
+victory-core@^24.0.0, victory-core@^24.0.1:
+  version "24.0.1"
+  resolved "https://registry.yarnpkg.com/victory-core/-/victory-core-24.0.1.tgz#a0b377821fe62be8dfcb0d7c35a628fee4e16616"
   dependencies:
     d3-ease "^1.0.0"
     d3-interpolate "^1.1.1"
     d3-scale "^1.0.0"
     d3-shape "^1.2.0"
     d3-timer "^1.0.0"
-    lodash "^4.17.4"
+    lodash "^4.17.5"
+    react-fast-compare "^2.0.0"
 
-victory-native@^0.17.2:
-  version "0.17.2"
-  resolved "https://registry.yarnpkg.com/victory-native/-/victory-native-0.17.2.tgz#248c9f032c84c2332d6dc196208acbc5954a639f"
+victory-native@^0.18.2:
+  version "0.18.2"
+  resolved "https://registry.yarnpkg.com/victory-native/-/victory-native-0.18.2.tgz#869b2c4320fa90a4d56f5ed74450f88c6496b0be"
   dependencies:
     lodash "^4.17.5"
     prop-types "^15.5.10"
-    victory-chart "^25.1.0"
-    victory-core "^21.0.4"
-    victory-pie "^14.0.0"
+    react-fast-compare "^2.0.0"
+    victory-chart "^27.1.0"
+    victory-core "^24.0.1"
+    victory-pie "^16.0.1"
 
-victory-pie@^14.0.0:
-  version "14.0.1"
-  resolved "https://registry.yarnpkg.com/victory-pie/-/victory-pie-14.0.1.tgz#53dff9e81696253c3da00f347d908d3ac1241c66"
+victory-pie@^16.0.1:
+  version "16.1.0"
+  resolved "https://registry.yarnpkg.com/victory-pie/-/victory-pie-16.1.0.tgz#12216935bef911c427f3316c80b15b9ca6563252"
   dependencies:
     d3-shape "^1.0.0"
-    lodash "^4.17.4"
-    victory-core "^21.0.2"
+    lodash "^4.17.5"
+    victory-core "^24.0.0"
 
 vinyl@^0.5.0:
   version "0.5.3"
