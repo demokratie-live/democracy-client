@@ -64,7 +64,6 @@ export default ComposedComponent => {
             NotificationsAndroid.setNotificationReceivedListener(notification => {
               console.log('PUSHLOG: setNotificationReceivedListener', notification);
               const notificationData = JSON.parse(notification.getData().payload);
-
               this.onNotificationReceivedForeground(notificationData);
             });
             NotificationsAndroid.setNotificationOpenedListener(notification => {
@@ -79,7 +78,11 @@ export default ComposedComponent => {
                 if (notifications) {
                   notifications.data.forEach(notification => {
                     const notificationData = JSON.parse(notification.payload);
-                    this.handlePushData(notificationData);
+                    if (notification.opened) {
+                      this.onNotificationOpened(notificationData);
+                    } else {
+                      this.handlePushData(notificationData);
+                    }
                   });
                 }
               })
@@ -152,6 +155,9 @@ export default ComposedComponent => {
                   from: 'pushNotification',
                 },
               });
+              if (Platform.OS === 'android') {
+                NotificationsAndroid.cancelAllNotifications();
+              }
             },
           }, // simple serializable object that will pass as props to the in-app notification (optional)
           autoDismissTimerSec: 5, // auto dismiss notification in seconds
