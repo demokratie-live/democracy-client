@@ -157,11 +157,11 @@ class Detail extends Component {
   };
 
   share = () => {
-    const { title } = this.props.data.procedure;
+    const { title, procedureId } = this.props.data.procedure;
     Share.share(
       {
         message: title,
-        url: 'https://democracy-deutschland.de',
+        url: `democracyapp://procedure/${procedureId}`,
         title: 'Weil Deine Stimme Zählt!',
       },
       {
