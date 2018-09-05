@@ -43,9 +43,9 @@ const Entry = ({ target, occupied, style, moneyTextStyle, descriptionTextStyle }
 Entry.propTypes = {
   target: PropTypes.number.isRequired,
   occupied: PropTypes.number.isRequired,
-  style: PropTypes.number.shape(),
-  moneyTextStyle: PropTypes.number.shape(),
-  descriptionTextStyle: PropTypes.number.shape(),
+  style: PropTypes.shape(),
+  moneyTextStyle: PropTypes.shape(),
+  descriptionTextStyle: PropTypes.shape(),
 };
 
 Entry.defaultProps = {
