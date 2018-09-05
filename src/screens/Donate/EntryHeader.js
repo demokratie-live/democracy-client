@@ -8,11 +8,7 @@ const Wrapper = styled.View`
   background-color: #efeff4;
   justify-content: center;
   padding-horizontal: 18;
-  shadowColor: #c8c7cc
-  shadow-offset: {
-    width: 0,
-    height: -0.5
-  }
+  shadow-color: #c8c7cc;
 `;
 
 const Title = styled.Text`

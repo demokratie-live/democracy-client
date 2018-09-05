@@ -113,7 +113,7 @@ class Donate extends Component {
           </Text>
           <DonatedBox style={{ marginTop: 21 }} target={10000} occupied={240} />
         </Wrapper>
-        <Segment title="Details zum Finanzierungsbedarf">
+        <Segment title="Details zum Finanzierungsbedarf" open>
           <Entry money="560€ von 10.830€" description="min. Finanzierungsziel/Monat" />
           <EntryHeader title={`Infrastrukturkosten`.toUpperCase()} style={{ marginTop: 18 }} />
           <Entry money="500€/Monat" description="Serverkosten zum Livebetrieb" />

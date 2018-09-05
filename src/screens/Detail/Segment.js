@@ -92,12 +92,13 @@ Segment.propTypes = {
   open: PropTypes.bool,
   collapsible: PropTypes.bool,
   children: PropTypes.node.isRequired,
-  scrollTo: PropTypes.func.isRequired,
+  scrollTo: PropTypes.func,
 };
 
 Segment.defaultProps = {
   collapsible: true,
   open: false,
+  scrollTo: () => {},
 };
 
 export default Segment;

@@ -22,13 +22,12 @@ const Wrapper = styled.View`
 `;
 
 const Logo = styled.Image.attrs({
-  source: require('../../assets/images/support-logo.png'),
+  source: require('../../assets/images/logo-text10X.png'),
 })``;
 
 const Text = styled.Text`
-  text-align: justify;
   font-size: 15;
-  color: #8f8e94;
+  color: #6d6d72;
   padding-vertical: 28;
 `;
 
