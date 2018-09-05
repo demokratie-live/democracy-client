@@ -1,17 +1,8 @@
 import React, { Component } from 'react';
-import { View, Dimensions, Platform } from 'react-native';
+import { Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
-import {
-  VictoryChart,
-  VictoryBar,
-  VictoryStack,
-  VictoryAxis,
-  VictorySharedEvents,
-  VictoryGroup,
-  VictoryTheme,
-} from 'victory-native';
-import victoryAxis from 'victory-native/lib/components/victory-axis';
+import { VictoryChart, VictoryBar, VictoryStack, VictoryAxis } from 'victory-native';
 
 const VoteResultsWrapper = styled.View`
   flex: 1;
@@ -21,17 +12,6 @@ const VoteResultsWrapper = styled.View`
 const VoteResultsPieWrapper = styled.View.attrs({
   pointerEvents: 'none',
 })``;
-
-const VoteResultPieValue = styled.Text`
-  font-size: 17;
-  color: #4a4a4a;
-`;
-
-const VoteResultPieLabel = styled.Text`
-  font-size: 11;
-  color: #4a4a4a;
-  padding-top: 3;
-`;
 
 const VoteResultNumbers = styled.View`
   width: ${() => Dimensions.get('window').width - 18 * 2};
@@ -68,17 +48,7 @@ const VoteResultCircle = styled.View`
   margin-right: 5;
 `;
 
-const TouchableBar = styled.TouchableOpacity`
-  background-color: red;
-`;
-
-const AxisLabel = styled.Text``;
-
 class PartyChart extends Component {
-  state = {
-    width: Dimensions.get('window').width - 18 * 2,
-  };
-
   getColor = (label, colors) => {
     switch (label) {
       case 'yes':
@@ -186,20 +156,15 @@ class PartyChart extends Component {
     return chartData;
   };
 
-  labelStyle = (...rest) => ({
+  labelStyle = () => ({
     color: 'blue',
   });
 
   render() {
-    const { data, colorScale, label, showNumbers } = this.props;
-    const { width } = this.state;
+    const { data, colorScale, showNumbers } = this.props;
     const dataSet = this.prepareChartData(data);
     return (
-      <VoteResultsWrapper
-        onLayout={({ nativeEvent: { layout: { width: newWidth } } }) =>
-          this.setState({ width: newWidth - 18 * 2 })
-        }
-      >
+      <VoteResultsWrapper>
         <VoteResultsPieWrapper>
           <VictoryChart height={350} padding={{ left: 95, top: 20, bottom: 20, right: 20 }}>
             <VictoryStack horizontal maxDomain={{ x: 1 }}>
@@ -255,9 +220,9 @@ class PartyChart extends Component {
 
 PartyChart.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  label: PropTypes.string.isRequired,
   colorScale: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   showNumbers: PropTypes.bool,
+  voteResults: PropTypes.shape().isRequired,
 };
 
 PartyChart.defaultProps = {
