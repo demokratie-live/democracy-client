@@ -158,15 +158,18 @@ class Detail extends Component {
 
   share = () => {
     const { title, procedureId } = this.props.data.procedure;
+
+    const url = `democracyapp://procedure/${procedureId}`;
+    const message = Platform.OS === 'ios'?title: `${title} – ${url}`
     Share.share(
       {
-        message: title,
-        url: `democracyapp://procedure/${procedureId}`,
+        message,
+        url,
         title: 'Weil Deine Stimme Zählt!',
       },
       {
         // Android only:
-        dialogTitle: 'Share BAM goodness',
+        dialogTitle: title,
       },
     );
   };
