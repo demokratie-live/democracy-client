@@ -252,6 +252,7 @@ BarChart.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   colorScale: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   showNumbers: PropTypes.bool,
+  voteResults: PropTypes.shape().isRequired,
 };
 
 BarChart.defaultProps = {

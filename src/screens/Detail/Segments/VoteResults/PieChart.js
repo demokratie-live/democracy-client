@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Dimensions, Platform } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import { VictoryPie } from 'victory-native';

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import _ from 'lodash';

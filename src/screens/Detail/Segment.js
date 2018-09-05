@@ -33,8 +33,7 @@ const CollapseIcon = styled(Ionicons).attrs({
 `;
 
 const Content = styled.View`
-  display: ${({ open, collapsible }) =>
-    open || !collapsible ? "flex" : "none"};
+  display: ${({ open, collapsible }) => (open || !collapsible ? 'flex' : 'none')};
   padding-horizontal: ${({ fullWidth }) => (fullWidth ? 0 : 18)};
   padding-vertical: 10;
 `;
@@ -94,13 +93,13 @@ Segment.propTypes = {
   collapsible: PropTypes.bool,
   children: PropTypes.node.isRequired,
   scrollTo: PropTypes.func.isRequired,
-  fullWidth: PropTypes.bool
+  fullWidth: PropTypes.bool,
 };
 
 Segment.defaultProps = {
   collapsible: true,
   open: false,
-  fullWidth: false
+  fullWidth: false,
 };
 
 export default Segment;
