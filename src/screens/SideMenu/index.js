@@ -45,6 +45,7 @@ const Head = styled.View`
   flex-direction: row;
   padding-top: 16;
   padding-left: 16;
+  padding-bottom: 8;
 `;
 
 const HeadLogo = styled.Image.attrs({
