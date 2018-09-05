@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 
 const Wrapper = styled.View`
@@ -38,5 +39,19 @@ const Entry = ({ target, occupied, style, moneyTextStyle, descriptionTextStyle }
     <Description style={descriptionTextStyle}>zur nachhaltigen Finanzierung</Description>
   </Wrapper>
 );
+
+Entry.propTypes = {
+  target: PropTypes.number.isRequired,
+  occupied: PropTypes.number.isRequired,
+  style: PropTypes.number.shape(),
+  moneyTextStyle: PropTypes.number.shape(),
+  descriptionTextStyle: PropTypes.number.shape(),
+};
+
+Entry.defaultProps = {
+  style: {},
+  moneyTextStyle: {},
+  descriptionTextStyle: {},
+};
 
 export default Entry;

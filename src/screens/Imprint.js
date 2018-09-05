@@ -4,10 +4,7 @@ import styled from 'styled-components/native';
 import { Platform, Linking, Alert } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import DeviceInfo from 'react-native-device-info';
-
-import Config from '../config';
 
 const ScrollWrapper = styled.ScrollView`
   flex: 1;
@@ -40,11 +37,6 @@ const Version = styled.Text`
   padding-bottom: 11;
   text-align: center;
 `;
-
-const ContactIcons = styled(FontAwesome).attrs({
-  size: 40,
-  color: '#000000',
-})``;
 
 class Support extends Component {
   static navigatorStyle = {
@@ -87,11 +79,6 @@ class Support extends Component {
   };
 
   render() {
-    const phoneNumber =
-      Platform.OS === 'ios' ? `telprompt:${Config.PHONE_NUMBER}` : `tel:${Config.PHONE_NUMBER}`;
-    const email = `mailto:${Config.CONTACT_EMAIL}`;
-    const github = Config.GITHUB_URL;
-
     const version = `Version: ${DeviceInfo.getReadableVersion()
       .split('.')
       .slice(0, 3)

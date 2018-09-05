@@ -4,7 +4,6 @@ import styled from 'styled-components/native';
 import { Platform, Linking, Alert } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import DeviceInfo from 'react-native-device-info';
 
 import Segment from '../Detail/Segment';
@@ -14,31 +13,9 @@ const ScrollWrapper = styled.ScrollView`
   background-color: #ffffff;
 `;
 
-const Wrapper = styled.View`
-  flex: 1;
-  padding-top: 30;
-  padding-horizontal: 18;
-  align-items: center;
-`;
-
 const Text = styled.Text`
   font-size: 15;
   color: #8f8e94;
-`;
-
-const ContactWrapper = styled.View`
-  width: 100%;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-const IconWrapper = styled.TouchableOpacity`
-  width: 65;
-  height: 65;
-  border-width: 2;
-  border-radius: 33;
-  justify-content: center;
-  align-items: center;
 `;
 
 const Version = styled.Text`
@@ -48,11 +25,6 @@ const Version = styled.Text`
   padding-bottom: 11;
   text-align: center;
 `;
-
-const ContactIcons = styled(FontAwesome).attrs({
-  size: 40,
-  color: '#000000',
-})``;
 
 class Support extends Component {
   static navigatorStyle = {

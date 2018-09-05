@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 
 const Wrapper = styled.View`
@@ -23,5 +24,14 @@ const EntryHeader = ({ title, style }) => (
     <Title>{title}</Title>
   </Wrapper>
 );
+
+EntryHeader.propTypes = {
+  title: PropTypes.string.isRequired,
+  style: PropTypes.shape(),
+};
+
+EntryHeader.defaultProps = {
+  style: {},
+};
 
 export default EntryHeader;
