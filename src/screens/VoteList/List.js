@@ -155,6 +155,7 @@ class List extends Component {
     if (filters.activity) {
       filterQuery.activity = filters.activity.map(({ name }) => name);
     }
+    this.setState({ fetchedAll: false });
     refetch({
       filter: filterQuery,
     });
