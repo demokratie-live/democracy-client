@@ -54,12 +54,12 @@ const IntroButtons = styled.View`
   flex-direction: row;
   align-items: center;
   padding-top: 20;
-  margin-left: -4;
+  margin-left: -8;
 `;
 
 const IntroButton = styled.TouchableOpacity`
   align-items: center;
-  width: 32;
+  width: 40;
 `;
 
 const NotificationButtonIcon = styled(Ionicons).attrs({
@@ -69,12 +69,10 @@ const NotificationButtonIcon = styled(Ionicons).attrs({
 })``;
 
 const ShareButtonIcon = styled(Ionicons).attrs({
-  size: 32,
+  size: 28,
   name: () => (Platform.OS === 'ios' ? 'ios-share-outline' : 'md-share'),
   color: 'rgb(0, 0, 0)',
-})`
-  padding-left: 8;
-`;
+})``;
 
 const IntroSide = styled.View`
   justify-content: space-between;
@@ -160,7 +158,7 @@ class Detail extends Component {
     const { title, procedureId } = this.props.data.procedure;
 
     const url = `democracyapp://procedure/${procedureId}`;
-    const message = Platform.OS === 'ios'?title: `${title} – ${url}`
+    const message = Platform.OS === 'ios' ? title : `${title} – ${url}`;
     Share.share(
       {
         message,
