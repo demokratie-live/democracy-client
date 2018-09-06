@@ -12,6 +12,7 @@ import SideMenu from './SideMenu';
 import Detail from './Detail';
 import Support from './Support';
 import Security from './Security';
+import Statistic from './Statistic';
 import VoteVarification from './VoteVarification';
 import Notifications from './Notifications';
 import Credits from './Credits';
@@ -77,6 +78,13 @@ export default function registerScreens() {
   Navigation.registerComponent(
     'democracy.Support',
     () => NetworkStatus(NavBarLinks(Support)),
+    client.store,
+    ApolloProvider,
+    { client },
+  );
+  Navigation.registerComponent(
+    'democracy.Statistic',
+    () => NetworkStatus(NavBarLinks(Statistic)),
     client.store,
     ApolloProvider,
     { client },
