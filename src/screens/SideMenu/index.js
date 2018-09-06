@@ -85,37 +85,47 @@ const SideMenu = ({ data: { currentScreen }, navigator }) => {
       <BackgroundWrapper>
         <BackgroundImage />
       </BackgroundWrapper>
-      <Content>
-        {Platform.OS === 'ios' && <StatusBackground />}
-        <Query query={GET_STATISTIC} fetchPolicy="cache-and-network">
-          {({ loading, data: { voteStatistic } }) => (
-            <Head
-              onPress={() => {
-                if (!loading && !voteStatistic) {
-                  navigator.showModal({
-                    screen: 'democracy.SmsVerification',
-                  });
-                } else if (!loading && voteStatistic) {
-                  navigateTo({
-                    screenId: 'democracy.Statistic',
-                    title: 'Statisitk'.toUpperCase(),
-                  });
-                }
-              }}
-            >
-              <HeadLogo />
-              <HeadTextWrapper>
-                <HeadText>
-                  {loading
-                    ? '…'
-                    : voteStatistic ? 'verifizierter Nutzer' : 'unverifizierter Nutzer'}
-                </HeadText>
-              </HeadTextWrapper>
-            </Head>
-          )}
-        </Query>
-        <Navigation currentScreen={currentScreen} navigateTo={navigateTo} />
-      </Content>
+      {Platform.OS === 'ios' && <StatusBackground />}
+      <Query query={GET_STATISTIC} fetchPolicy="cache-and-network">
+        {({ loading, data: { voteStatistic } }) => {
+          let verified = null;
+          if (!loading && !voteStatistic) verified = false;
+          if (!loading && voteStatistic) verified = true;
+
+          return (
+            <Content>
+              <Head
+                onPress={() => {
+                  if (!loading && !voteStatistic) {
+                    navigator.showModal({
+                      screen: 'democracy.SmsVerification',
+                    });
+                  } else if (!loading && voteStatistic) {
+                    navigateTo({
+                      screenId: 'democracy.Statistic',
+                      title: 'Statisitk'.toUpperCase(),
+                    });
+                  }
+                }}
+              >
+                <HeadLogo />
+                <HeadTextWrapper>
+                  <HeadText>
+                    {loading
+                      ? '…'
+                      : voteStatistic ? 'verifizierter Nutzer' : 'unverifizierter Nutzer'}
+                  </HeadText>
+                </HeadTextWrapper>
+              </Head>
+              <Navigation
+                currentScreen={currentScreen}
+                navigateTo={navigateTo}
+                verified={verified}
+              />
+            </Content>
+          );
+        }}
+      </Query>
     </Wrapper>
   );
 };

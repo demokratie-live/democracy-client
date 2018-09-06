@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
-import { Platform } from 'react-native';
+import { Platform, Dimensions } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { graphql, Query } from 'react-apollo';
-import { VictoryPie, VictoryLabel, VictoryChart, VictoryTheme, VictoryAxis } from 'victory-native';
+import { VictoryPie, VictoryLabel } from 'victory-native';
+import Svg from 'react-native-svg';
 
 import SegmentHeader from '../components/ListSectionHeader';
 import ListItem from '../screens/VoteList/ListItem';
@@ -21,7 +22,6 @@ const ScrollWrapper = styled.ScrollView`
 `;
 
 const StatisticWrapper = styled.View`
-  height: 500;
   padding-top: 18;
   align-items: center;
 `;
@@ -74,6 +74,10 @@ class Statistic extends Component {
     });
   }
 
+  state = {
+    pieChartWidth: Math.min(Dimensions.get('window').width, Dimensions.get('window').height),
+  };
+
   onItemClick = ({ item }) => () => {
     this.props.navigateTo({
       screen: 'democracy.Detail',
@@ -83,11 +87,21 @@ class Statistic extends Component {
     });
   };
 
+  onLayout = () => {
+    const pieChartWidth = Math.min(Dimensions.get('window').width, Dimensions.get('window').height);
+    if (this.state.pieChartWidth !== pieChartWidth) {
+      this.setState({
+        pieChartWidth,
+      });
+    }
+  };
+
   render() {
     const { voteStatistic: { proceduresCount, votedProcedures } } = this.props;
+    const { pieChartWidth } = this.state;
     return (
       <ScrollWrapper>
-        <StatisticWrapper>
+        <StatisticWrapper onLayout={this.onLayout}>
           <StatisticNumbersWrapper>
             <StatisticNumberWrapper>
               <StatisticNumber voted>{votedProcedures}</StatisticNumber>
@@ -98,11 +112,14 @@ class Statistic extends Component {
               <StatisticNumberDescription>Unabgestimme Vorgänge</StatisticNumberDescription>
             </StatisticNumberWrapper>
           </StatisticNumbersWrapper>
-          <VictoryChart theme={VictoryTheme.material}>
+          <Svg
+            width={pieChartWidth}
+            height={pieChartWidth}
+            viewBox="0 0 400 400"
+            style={{ width: '100%', height: 'auto' }}
+          >
             <VictoryPie
               standalone={false}
-              width={400}
-              height={400}
               data={[
                 { x: 1, y: 100 * votedProcedures / proceduresCount },
                 { x: 2, y: 100 - 100 * votedProcedures / proceduresCount },
@@ -116,23 +133,14 @@ class Statistic extends Component {
                 },
               }}
             />
-            <VictoryAxis
-              style={{
-                axis: { stroke: 'none' },
-                ticks: { stroke: 'none' },
-                grid: { stroke: 'none', strokeOpacity: 0.2 },
-              }}
-              tickFormat={() => null}
-            />
-
             <VictoryLabel
               textAnchor="middle"
               style={{ fontSize: 30 }}
               x={200}
-              y={170}
+              y={200}
               text={`${Math.round(100 * votedProcedures / proceduresCount * 10) / 10}%`}
             />
-          </VictoryChart>
+          </Svg>
         </StatisticWrapper>
         <Query query={GET_VOTED_PROCEDURES} fetchPolicy="cache-and-network">
           {({ loading, data }) => {
