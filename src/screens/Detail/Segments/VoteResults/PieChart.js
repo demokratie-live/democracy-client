@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Dimensions, Platform } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import { VictoryPie } from 'victory-native';
@@ -9,7 +9,9 @@ const VoteResultsWrapper = styled.View`
   align-items: center;
 `;
 
-const VoteResultsPieWrapper = styled.View`
+const VoteResultsPieWrapper = styled.View.attrs({
+  pointerEvents: 'none',
+})`
   justify-content: center;
   align-items: center;
 `;
@@ -28,7 +30,7 @@ const VoteResultPieLabel = styled.Text`
 const VoteResultNumbers = styled.View`
   width: ${() => Dimensions.get('window').width - 18 * 2};
   max-width: 464;
-  padding-top: 18;
+  padding-top: 9;
   flex-direction: row;
   justify-content: space-around;
 `;
@@ -83,26 +85,23 @@ class PieChart extends Component {
       yes: 'Zustimmungen',
       abstination: 'Enthaltungen',
       no: 'Ablehnungen',
-      notVote: 'Nicht abg.',
+      notVoted: 'Nicht abg.',
     };
     return labels[label] || label;
   };
+
+  getValue = ({ value, fractions }) => (typeof fractions === 'number' ? fractions : value);
 
   render() {
     const { data, colorScale, label, showNumbers } = this.props;
     const { width } = this.state;
     return (
-      <VoteResultsWrapper
-        onLayout={({ nativeEvent: { layout: { width: newWidth } } }) =>
-          this.setState({ width: newWidth })
-        }
-      >
+      <VoteResultsWrapper>
         <VoteResultsPieWrapper>
           <VictoryPie
+            height={350}
             allowZoom={false}
-            padding={{ top: 0, bottom: 0, left: 0, right: 0 }}
-            width={width}
-            height={width}
+            padding={{ left: 18, top: 0, bottom: 0, right: 18 }}
             colorScale={colorScale}
             data={data.map((entry, index) => ({
               x: index,
@@ -121,19 +120,16 @@ class PieChart extends Component {
           />
           <VoteResult style={{ position: 'absolute' }}>
             {showNumbers && (
-              <VoteResultPieValue>{data.reduce((v, { value }) => v + value, 0)}</VoteResultPieValue>
+              <VoteResultPieValue>
+                {data.reduce(
+                  (v, { value, fractions }) =>
+                    typeof fractions === 'number' ? v + fractions : v + value,
+                  0,
+                )}
+              </VoteResultPieValue>
             )}
             <VoteResultPieLabel>{label}</VoteResultPieLabel>
           </VoteResult>
-          {/* Andoid scroll fix */}
-          <View
-            style={{
-              zIndex: 9999,
-              position: 'absolute',
-              width: '100%',
-              height: '100%',
-            }}
-          />
         </VoteResultsPieWrapper>
         {showNumbers && (
           <VoteResultNumbers>
@@ -141,7 +137,7 @@ class PieChart extends Component {
               <VoteResult key={entry.label}>
                 <VoteResultCircleNumber>
                   <VoteResultCircle color={this.getColor(entry.label, colorScale)} />
-                  <VoteResultNumber>{entry.value !== null ? entry.value : '?'}</VoteResultNumber>
+                  <VoteResultNumber>{this.getValue(entry)}</VoteResultNumber>
                 </VoteResultCircleNumber>
                 <VoteResultLabel>{this.getLabel(entry.label)}</VoteResultLabel>
               </VoteResult>

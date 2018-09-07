@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [0.9.1] - 2018-08-24
+## [0.10.0] - 2018-09-04
 ### Changed
 - [Credits] Lover of the month
 - [Details] Add pre points to history
@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 - SMS-Verification
+- [Details] Fraction Results
 
 ## [0.9.0] - 2018-08-02
 ### Added

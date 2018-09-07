@@ -1,6 +1,6 @@
 {
   "name": "democracyclient",
-  "version": "0.9.1",
+  "version": "0.10.0",
   "private": true,
   "scripts": {
     "test": "eslint . && jest",
@@ -81,7 +81,7 @@
     "react-native-vector-icons": "^4.5.0",
     "styled-components": "^3.0.2",
     "typescript": "^2.6.2",
-    "victory-native": "^0.17.2"
+    "victory-native": "^0.18.2"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
