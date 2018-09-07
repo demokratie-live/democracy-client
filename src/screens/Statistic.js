@@ -124,7 +124,9 @@ class Statistic extends Component {
                 { x: 1, y: 100 * votedProcedures / proceduresCount },
                 { x: 2, y: 100 - 100 * votedProcedures / proceduresCount },
               ]}
-              innerRadius={140}
+              width={400}
+              height={400}
+              innerRadius={130}
               cornerRadius={30}
               labels={() => null}
               style={{
