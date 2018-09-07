@@ -105,7 +105,6 @@ class SearchScreen extends Component {
   }
 
   onChangeTerm = async term => {
-    this.setState({ loading: true });
     const { client: { watchQuery } } = this.props;
 
     if (!this.observableSearchQuery) {
