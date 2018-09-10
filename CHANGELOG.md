@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.10.X] - 2018-09-XX
 ## Added
 - [SMS Verification] Success Screen
+- [Donate] Donate informations
+- [FAQ] New FAQ page
 
 ## [0.9.1] - 2018-08-24
 ### Changed
