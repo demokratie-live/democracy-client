@@ -62,13 +62,19 @@ const HeadText = styled.Text`
   padding-left: 16;
 `;
 
-const DonateBoxWarpper = styled.View`
+const DonateBoxWrapper = styled.View`
   height: 68;
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.8);
+`;
+
+const DonationTouch = styled.TouchableHighlight`
+  flex: 1;
+  width: 100%;
+  height: 68;
 `;
 
 const SideMenu = ({ data: { currentScreen }, navigator }) => {
@@ -87,6 +93,12 @@ const SideMenu = ({ data: { currentScreen }, navigator }) => {
       }
     }
     navigator.toggleDrawer({ side: 'left' });
+  };
+  const donate = () => {
+    navigateTo({
+      screenId: 'democracy.Donate',
+      title: 'Unterstütze DEMOCRACY'.toUpperCase(),
+    });
   };
   return (
     <Wrapper>
@@ -110,14 +122,16 @@ const SideMenu = ({ data: { currentScreen }, navigator }) => {
           </HeadTextWrapper>
         </Head>
         <Navigation currentScreen={currentScreen} navigateTo={navigateTo} />
-        <DonateBoxWarpper>
-          <DonatedBox
-            descriptionTextStyle={{ color: '#fff' }}
-            moneyTextStyle={{ color: '#fff' }}
-            target={10000}
-            occupied={240}
-          />
-        </DonateBoxWarpper>
+        <DonateBoxWrapper>
+          <DonationTouch onPress={donate}>
+            <DonatedBox
+              descriptionTextStyle={{ color: '#fff' }}
+              moneyTextStyle={{ color: '#fff' }}
+              target={10000}
+              occupied={240}
+            />
+          </DonationTouch>
+        </DonateBoxWrapper>
       </Content>
     </Wrapper>
   );
