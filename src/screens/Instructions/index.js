@@ -4,6 +4,7 @@ import { graphql } from 'react-apollo';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { Navigator } from 'react-native-navigation';
+import { AsyncStorage } from 'react-native';
 
 import Slide from './Slide';
 
@@ -30,12 +31,19 @@ const ButtonText = styled.Text`
 const BUTTON_TEXTS = {
   next: 'Weiter',
   finish: 'Überspringen',
+  verified: 'Los gehts!',
 };
 
 class Introductions extends Component {
   state = {
     buttonText: BUTTON_TEXTS.next,
+    registered: null,
   };
+
+  async componentWillMount() {
+    const registered = !!await AsyncStorage.getItem('auth_phoneHash');
+    this.setState({ registered });
+  }
 
   onClick = () => {
     if (this.swiper.state.index < this.swiper.state.total - 1) {
@@ -46,12 +54,10 @@ class Introductions extends Component {
   };
 
   onMomentumScrollEnd = () => {
-    const { buttonText } = this.state;
-    if (
-      this.swiper.state.index === this.swiper.state.total - 1 &&
-      BUTTON_TEXTS.finish !== buttonText
-    ) {
-      this.setState({ buttonText: BUTTON_TEXTS.finish });
+    const { buttonText, registered } = this.state;
+    const finishText = registered ? BUTTON_TEXTS.verified : BUTTON_TEXTS.finish;
+    if (this.swiper.state.index === this.swiper.state.total - 1 && buttonText !== finishText) {
+      this.setState({ buttonText: finishText });
     } else if (BUTTON_TEXTS.next !== buttonText) {
       this.setState({ buttonText: BUTTON_TEXTS.next });
     }
@@ -161,7 +167,8 @@ class Introductions extends Component {
             TxtHead="Registrieren"
             TxtSub={`Zum Abstimmen musst Du Deine\nHandynummer verifizieren`}
             nextPage={this.onClick}
-            verify={this.verify}
+            verify={!this.state.registered ? this.verify : null}
+            verified={this.state.registered}
           />
         </Swiper>
         <Button onPress={this.onClick}>
