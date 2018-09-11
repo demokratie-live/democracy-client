@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Navigator } from 'react-native-navigation';
 import styled from 'styled-components/native';
-import { Platform, Linking } from 'react-native';
+import { Platform } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
-
-import Config from './../../config';
 
 import Button from './Components/Button';
 
@@ -61,12 +59,15 @@ const ButtonContainer = styled.View`
 class SmsSuccess extends Component {
   onClose = async () => {
     await this.props.onComplete();
-    this.props.navigator.dismissAllModals();
+    await this.props.navigator.dismissAllModals();
   };
 
   onDonate = async () => {
     await this.onClose();
-    Linking.openURL(Config.URL_DONATE);
+    this.props.navigator.showModal({
+      screen: 'democracy.Donate',
+      title: 'Unterstütze DEMOCRACY'.toUpperCase(),
+    });
   };
 
   render() {
