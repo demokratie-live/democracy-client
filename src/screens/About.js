@@ -11,6 +11,7 @@ const ScrollWrapper = styled.ScrollView`
   flex: 1;
   padding-horizontal: 18;
   padding-vertical: 18;
+  background-color: #ffffff;
 `;
 
 const Wrapper = styled.View`
