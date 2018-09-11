@@ -6,6 +6,8 @@ import { Navigator } from 'react-native-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import DeviceInfo from 'react-native-device-info';
 
+import Config from '../../config';
+
 import Segment from '../Detail/Segment';
 import DonatedBox from './DonatedBox';
 import Entry from './Entry';
@@ -53,6 +55,19 @@ const DefinitionListTitle = styled.Text`
 
 const DefinitionListDescription = styled.Text`
   width: 70%;
+`;
+
+const DonateTouchable = styled.TouchableOpacity`
+  align-items: center;
+  padding-top: 15;
+`;
+
+const DonateImage = styled.Image.attrs({
+  source: require('../../../assets/images/PayPal-Donate-Button-Transparent.png'),
+  resizeMode: 'contain',
+})`
+  height: 100;
+  width: 80%;
 `;
 
 class Donate extends Component {
@@ -152,7 +167,9 @@ class Donate extends Component {
           </Text>
           <Headline style={{ paddingTop: 18 }}>Spenden via PayPal</Headline>
           <Text>1,5% Deines Spendenbetrags + 0,35 EUR pro Transaktion verbleiben bei PayPal.</Text>
-
+          <DonateTouchable onPress={this.linking(Config.URL_DONATE)}>
+            <DonateImage />
+          </DonateTouchable>
           <Version>{version}</Version>
         </Wrapper>
       </ScrollWrapper>
