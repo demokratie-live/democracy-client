@@ -7,9 +7,10 @@ import DeviceInfo from 'react-native-device-info';
 
 import Button from './Components/Button';
 
-const Container = styled.View`
+const Container = styled.ScrollView.attrs({
+  contentContainerStyle: { flexGrow: 1, alignItems: 'center', justifyContent: 'space-between' },
+})`
   flex: 1;
-  align-items: center;
   background: #fff;
   padding-top: ${() => {
     if (DeviceInfo.getModel() === 'iPhone X') {
@@ -39,6 +40,8 @@ const TextCenterBold = styled.Text`
 `;
 
 const TextCenter = styled.Text`
+  align-content: center;
+  justify-content: space-between;
   flex: 1;
   color: #9b9b9b;
   font-size: 17;
@@ -54,6 +57,7 @@ const ButtonContainer = styled.View`
   width: 100%;
   padding-right: 25;
   padding-left: 25;
+  padding-bottom: 25;
 `;
 
 class SmsSuccess extends Component {
