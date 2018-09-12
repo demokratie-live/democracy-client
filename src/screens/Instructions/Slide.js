@@ -87,15 +87,6 @@ const ButtonVerify = styled.TouchableOpacity`
   position: absolute;
 `;
 
-const ButtonVerified = styled.View`
-  bottom: 175;
-  background-color: rgb(126, 211, 33);
-  border-radius: 8;
-  width: 180;
-  height: 41;
-  position: absolute;
-`;
-
 const TextVerify = styled.Text`
   color: #fff;
   font-size: 22;
@@ -116,7 +107,6 @@ const Slide = ({
   TxtSub,
   nextPage,
   verify,
-  verified,
 }) => (
   <Container>
     <ContainerHead>
@@ -143,11 +133,6 @@ const Slide = ({
             <TextVerify>Verifizieren</TextVerify>
           </ButtonVerify>
         )}
-        {verified && (
-          <ButtonVerified>
-            <TextVerify>✓ Verifiziert</TextVerify>
-          </ButtonVerified>
-        )}
       </ContainerCenterImage>
     </ContainerImages>
     <LinearGradient
@@ -173,7 +158,6 @@ Slide.propTypes = {
   TxtSub: PropTypes.string.isRequired,
   nextPage: PropTypes.func.isRequired,
   verify: PropTypes.func,
-  verified: PropTypes.bool,
 };
 
 Slide.defaultProps = {
@@ -181,7 +165,6 @@ Slide.defaultProps = {
   ImgRight: null,
   ImgCircle: require('../../../assets/tutorial/icon.touch.png'),
   verify: null,
-  verified: false,
 };
 
 export default Slide;
