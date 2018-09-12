@@ -3,9 +3,10 @@ import styled from 'styled-components/native';
 import { Platform } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 
-const Container = styled.View`
+const Container = styled.ScrollView.attrs({
+  contentContainerStyle: { flexGrow: 1, alignItems: 'center', justifyContent: 'space-between' },
+})`
   flex: 1;
-  align-items: center;
   background: #fff;
   padding-top: ${() => {
     if (DeviceInfo.getModel() === 'iPhone X') {
@@ -16,19 +17,37 @@ const Container = styled.View`
   padding-horizontal: 18;
 `;
 
+const Head = styled.View`
+  flex: 1;
+  align-items: flex-end;
+  justify-content: flex-end;
+`;
+// background-color: #ff0000;
+
 const TextHead = styled.Text`
   color: #000;
-  font-size: 42;
-  padding-top: 100;
   font-family: ${Platform.OS === 'ios' ? 'HelveticaNeue-Thin' : 'sans-serif-light'};
-  padding-bottom: 40;
+  font-size: 42;
+  padding-top: 10;
+  padding-bottom: 10;
 `;
+// background-color: #f0f0f0;
+
+const Center = styled.View`
+  flex: 1;
+  align-content: center;
+  justify-content: center;
+`;
+// background-color: #00ff00;
 
 const CenterImage = styled.Image`
+  height: 200;
+`;
+
+const Footer = styled.View`
   flex: 1;
-  height: 235;
+  align-content: center;
   justify-content: center;
-  align-items: center;
 `;
 
 const TextSub = styled.Text`
@@ -37,14 +56,22 @@ const TextSub = styled.Text`
   font-size: 22;
   font-family: ${Platform.OS === 'ios' ? 'HelveticaNeue-Thin' : 'sans-serif-light'};
   text-align: center;
-  padding-top: 40;
+  padding-top: 10;
+  padding-bottom: 20;
 `;
+// background-color: #0000ff;
 
 const SlideThanks = () => (
   <Container>
-    <TextHead>Vielen Dank,</TextHead>
-    <CenterImage source={require('../../../assets/betaend/logo.png')} resizeMode="contain" />
-    <TextSub>dass Du an der BETA{'\n'}teilgenommen hast</TextSub>
+    <Head>
+      <TextHead>Vielen Dank,</TextHead>
+    </Head>
+    <Center>
+      <CenterImage source={require('../../../assets/betaend/logo.png')} resizeMode="contain" />
+    </Center>
+    <Footer>
+      <TextSub>dass Du an der BETA{'\n'}teilgenommen hast</TextSub>
+    </Footer>
   </Container>
 );
 

@@ -5,9 +5,10 @@ import DeviceInfo from 'react-native-device-info';
 
 import Config from './../../config';
 
-const Container = styled.View`
+const Container = styled.ScrollView.attrs({
+  contentContainerStyle: { flexGrow: 1, alignItems: 'center', justifyContent: 'space-between' },
+})`
   flex: 1;
-  align-items: center;
   background: #fff;
   padding-top: ${() => {
     if (DeviceInfo.getModel() === 'iPhone X') {
@@ -18,14 +19,20 @@ const Container = styled.View`
   padding-horizontal: 18;
 `;
 
+const Head = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: flex-start;
+`;
+
 const HeadImage = styled.Image`
-  margin-top: 15;
+  margin-top: 20;
 `;
 
 const TextHead = styled.Text`
   color: #000;
   font-size: 22;
-  padding-top: 25;
+  padding-top: 15;
   text-align: center;
   font-family: ${Platform.OS === 'ios' ? 'HelveticaNeue-Thin' : 'sans-serif-light'};
 `;
@@ -36,16 +43,21 @@ const TextHeadUnerline = styled.Text`
   text-decoration: underline;
 `;
 
+const Center = styled.View`
+  flex: 1;
+  align-content: center;
+  justify-content: space-between;
+`;
+
 const CenterImage = styled.Image`
-  height: 88;
+  height: 80;
 `;
 
 const TouchableOpacity = styled.TouchableOpacity`
-  width: 260;
   justify-content: center;
   align-items: center;
-  margin-top: 110;
-  margin-bottom: 30;
+  margin-top: 30;
+  margin-bottom: 20;
 `;
 
 const TextSub = styled.Text`
@@ -71,16 +83,20 @@ const onPress = () => {
 
 const SlideDownload = () => (
   <Container>
-    <HeadImage source={require('../../../assets/tutorial/icon.logo.png')} />
-    <TextHead>
-      <TextHeadNormal>DEMOCRACY ist </TextHeadNormal>
-      <TextHeadUnerline>ab{'\n'}sofort</TextHeadUnerline>
-      <TextHeadNormal> im Store erhältlich</TextHeadNormal>
-    </TextHead>
-    <TouchableOpacity onPress={onPress}>
-      <CenterImage source={storeImg()} resizeMode="contain" />
-    </TouchableOpacity>
-    <TextSub>zum Herunterladen klicken</TextSub>
+    <Head>
+      <HeadImage source={require('../../../assets/tutorial/icon.logo.png')} />
+      <TextHead>
+        <TextHeadNormal>DEMOCRACY ist </TextHeadNormal>
+        <TextHeadUnerline>ab{'\n'}sofort</TextHeadUnerline>
+        <TextHeadNormal> im Store erhältlich</TextHeadNormal>
+      </TextHead>
+    </Head>
+    <Center>
+      <TouchableOpacity onPress={onPress}>
+        <CenterImage source={storeImg()} resizeMode="contain" />
+      </TouchableOpacity>
+      <TextSub>zum Herunterladen klicken</TextSub>
+    </Center>
   </Container>
 );
 
