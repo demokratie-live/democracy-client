@@ -22,7 +22,6 @@ const Head = styled.View`
   align-items: flex-end;
   justify-content: flex-end;
 `;
-// background-color: #ff0000;
 
 const TextHead = styled.Text`
   color: #000;
@@ -31,14 +30,12 @@ const TextHead = styled.Text`
   padding-top: 10;
   padding-bottom: 10;
 `;
-// background-color: #f0f0f0;
 
 const Center = styled.View`
   flex: 1;
   align-content: center;
   justify-content: center;
 `;
-// background-color: #00ff00;
 
 const CenterImage = styled.Image`
   height: 200;
@@ -59,7 +56,6 @@ const TextSub = styled.Text`
   padding-top: 10;
   padding-bottom: 20;
 `;
-// background-color: #0000ff;
 
 const SlideThanks = () => (
   <Container>
