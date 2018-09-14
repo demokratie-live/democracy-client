@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 - [Search] Search Button fix [#248](https://github.com/demokratie-live/democracy-client/issues/248)
+- Push Notifications for Android open Detailpage [#454](https://github.com/demokratie-live/democracy-client/issues/454)
 
 ## [0.10.0] - 2018-09-04
 ### Changed
