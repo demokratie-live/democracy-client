@@ -45,7 +45,7 @@ const FilterData = [
             value: true,
           },
           {
-            title: 'Abgestimmmt',
+            title: 'Abgestimmt',
             name: 'voted',
             value: true,
           },
