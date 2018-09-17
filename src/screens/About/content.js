@@ -1,44 +1,19 @@
-/* eslint-disable no-irregular-whitespace */
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components/native';
-import { Platform } from 'react-native';
-import { Navigator } from 'react-native-navigation';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import DeviceInfo from 'react-native-device-info';
-
-const ScrollWrapper = styled.ScrollView`
-  flex: 1;
-  padding-horizontal: 18;
-  padding-vertical: 18;
-  background-color: #ffffff;
-`;
-
-const Wrapper = styled.View`
-  flex: 1;
-  align-items: center;
-`;
-
-const Logo = styled.Image.attrs({
-  source: require('../../assets/images/logo-text10X.png'),
-})`
-  margin-bottom: 18;
-`;
-
-const Text = styled.Text`
-  color: #8f8e94;
-  padding-top: 11;
-  width: 100%;
-`;
-
-const Version = styled.Text`
-  font-size: 15;
-  color: #8f8e94;
-  padding-top: 28;
-  padding-bottom: 11;
-`;
-
-const names = `A. Bening
+export const intro1a = 'DEMOCRACY Deutschland e.V.';
+export const intro1b =
+  ' ist ein gemeinnütziger Verein, der mit seiner gleichnamigen App DEMOCRACY unsere Politik transparenter und zugänglicher machen will.';
+export const intro2 =
+  'Als crowdmoderierte und politisch unabhängige Plattform informiert die App dafür über die aktuellen Bundestagsabstimmungen und ermöglicht den Nutzern eine eigene direkte Abstimmung.';
+export const intro3 =
+  '„Mit DEMOCRACY wollen wir eine öffentliche Infrastruktur zur Verfügung stellen, die das Funktionieren einer lebendigen Demokratie begünstigt. Der Weisheit letzter Schluss liegt für uns in der solidarischen Kooperation (Gemeinschaftlichkeit) zum Vorteil aller (Gemeinnützigkeit). Deshalb ist es für uns selbstverständlich, nicht nur alle Abstimmungsergebnisse anonymisiert, sondern auch unseren Source-Code offen zu legen (Transparenz). Und weil Profitinteressen die Idee nur korrumpieren würden, haben wir uns auch äußerlich eine Rechtsform gegeben, die eine Verfremdung oder Bereicherungsabsicht per Satzung für immer ausschließt. DEMOCRACY ist und bleibt spendenfinanziert. Alle entstehenden Nutzerdaten sind gerade keine handelbaren Wirtschaftsgüter, sondern im Sinne des Grundgesetzes zu schützen. Datenverkauf und Werbefinanzierung finden bei unserem Vorhaben keinen Platz."';
+export const intro4 =
+  'Da es zur Umsetzung einer so großen Idee aber auch ein großes Portemonnaie braucht, war und ist der Joker dieses Projekts die gemeinschaftliche Finanzierung.';
+export const intro5a =
+  'Unser tiefste Dank gilt deshalb nach wie vor unseren 542 Unterstützerinnen und Unterstützern der ';
+export const intro5b = 'initialen Crowdfunding-Kampagne';
+export const intro5bLink = 'https://startnext.com/democracy';
+export const intro5c =
+  ', ohne die es nicht möglich gewesen wäre, DEMOCRACY überhaupt umzusetzen. Für immer und ewig danken möchten wir insofern:';
+export const crowd = `A. Bening
 Achim Scheimer
 Albert Hött
 Alexander Klar
@@ -279,7 +254,7 @@ Magnus Rembold
 Maik Scheidler
 Malte Klingauf
 Manja Urner
-Manuel Ruck
+Manu Rauck
 Marc Hofrichter
 Marc Scholz
 Marcel Merle
@@ -478,82 +453,85 @@ Wolfgang Leffler
 Wolfgang Schlegel
 Wolfgang Steller
 Wolfgang Timpe`;
-
-const content1 = `DEMOCRACY Deutschland e.V. ist ein gemeinnütziger Verein, der mit seiner gleichnamigen App DEMOCRACY unsere Politik inklusiver, demokratischer und bürgernäher machen will. 
-
-Als crowdmoderierte und politisch unabhängige Plattform informiert die App dafür über die aktuellen Bundestagsabstimmungen und ermöglicht den Nutzern eine eigene direkte Abstimmung. 
-
-Mit DEMOCRACY wollen wir eine öffentliche Infrastruktur zur Verfügung stellen, die das Funktionieren einer lebendigen Demokratie begünstigt. Der Weisheit letzter Schluss liegt für uns in der solidarischen Kooperation (Gemeinschaftlichkeit) zum Vorteil aller (Gemeinnützigkeit). Deshalb ist es für uns selbstverständlich, nicht nur alle Abstimmungsergebnisse anonymisiert, sondern auch unseren Source-Code offen zu legen (Transparenz). Und weil Profitinteressen die Idee nur korrumpieren würden, haben wir uns auch äußerlich eine Rechtsform gegeben, die eine Verfremdung oder Bereicherungsabsicht per Satzung für immer ausschließt. DEMOCRACY ist und bleibt spendenfinanziert. Alle entstehenden Nutzerdaten sind gerade keine handelbaren Wirtschaftsgüter, sondern im Sinne des Grundgesetzes zu schützen. Datenverkauf und Werbefinanzierung finden bei unserem Vorhaben keinen Platz.
-
-Da es zu Umsetzung einer so großen Idee  aber auch ein großes Portemonnaie braucht, war und ist unser Joker die gemeinschaftliche Finanzierung. 
-
-Unser tiefste Dank gilt deshalb nach wie vor unseren 542 Unterstützerinnen und Unterstützern der initialen Crowdfunding-Kampagne, ohne die es nicht möglich gewesen wäre, DEMOCRACY überhaupt umzusetzen. Für immer und ewig danken möchten wir insofern:
-
+export const patenText =
+  'Neben den initialen Projektunterstützungen ziehen wir unseren Hut vor den zahlreichen Patinnen und Paten, die mit ihrer regelmäßigen Spende (Monatlicher Dauerauftrag) bereits jetzt mithelfen, die Vision einer unabhängigen und nachhaltigen Bürgerfinanzierung von DEMOCRACY zu realisieren:';
+export const paten = `Albert Hött
+Alexander Hoffmann
+Alexander Kuhn
+Andreas Köchig
+Andreas Krüger
+Andreas Lauter
+Andreas Weißfahl
+Anette Büchold
+Anne Dietrich
+Christoph Wallner
+Claudia Ruthner
+Dennis Hack
+Dennis Sauerland
+Doris Junker
+Dr. Thierry Pascal Dietrich
+Elisa Thieme
+Enrico Baer
+Erich J. Molitor
+Felix Gaiser
+Felix Koukal
+Frederik Gesswein
+Guenther Hauk
+Gunnar Hemmerling
+Hans-Peter Franke
+Harald Dost
+Harald Guddat
+Hardy Groeneveld
+Henning Bittermann
+Horst Zeller
+Jan Altnickel
+Jana Hirsch
+Johann Hartenberger
+Karin Schmidt
+Katarzyna Valenta
+Kenny Hübner
+Lorena Garitta
+Luitwin Kiefer
+Lukas Schwab
+Marius Schäfer
+Michael Hack
+Michael Koellisch
+Michael Messerschmidt
+Michael Ott
+Michael Singler
+Oliver Hesse
+Oliver Hummitzsch
+Petar Bukovala
+Petra Al Damrawy
+Randolf Geist
+Renata Bachmann
+Rick Pillatzke
+Sascha Schmid
+Saskia Räthe
+Schünke andre
+Stefan Reitinger
+Sven Bendig
+Thomas Faustmann
+Thomas Hardt
+Thomas Krausse
+Thomas Werner
+Uta Kähler
+Uwe Greim
+Wolfgang Fischer
+Wolfram Zarnisch
 `;
-
-const content2 = `Neben den initialen Projektunterstützungen ziehen wir unseren Hut vor allem auch vor den zahlreichen Paten und Patinen, die mit ihrer regelmäßigen Spende (Monatlicher Dauerauftrag) bereits jetzt mithelfen, die kühne Vision einer unabhängigen und nachhaltigen Bürgerfinanzierung von DEMOCRACY zu realisieren: 
-
-Zu guter Letzt möchten wir noch der Hertie Stiftung für Demokratie sowie im Speziellen dem Hertie Innovationskolleg danken, die uns in jeder nur erdenklichen Art und Weise dabei unterstützt hat, diese App zu veröffentlichen. 
-
-
-Vielen Dank, dass ihr alle Teil von DEMOCRACY wart, seid und es hoffentlich auch in der Zukunft sein werdet. 
-Unsere Arbeit ist unabhängig, überparteilich, allgemeinnützig und nicht-kommerziell – 
-von Menschen für Menschen.
-
-Euer 
+export const outro1a =
+  'Zu guter Letzt möchten wir noch der Hertie Stiftung sowie im Speziellen dem ';
+export const outro1b = 'Hertie Innovationskolleg';
+export const outro1bLink = 'https://www.ghst.de/innovationskolleg/';
+export const outro1c =
+  ' danken, welches uns in jeder nur erdenklichen Art und Weise dabei unterstützt hat, diese App zu veröffentlichen.';
+export const outro2 =
+  'Vielen Dank, dass ihr alle Teil von DEMOCRACY wart, seid und es hoffentlich auch in der Zukunft sein werdet.';
+export const outro3 =
+  'Unsere Arbeit ist unabhängig, überparteilich, allgemeinnützig und nicht-kommerziell – von Menschen für Menschen.';
+export const outro4 = `Euer
 
 Manuel Ruck
 Ulf Gebhardt &
-Marius Krüger
-`;
-
-class Security extends Component {
-  static navigatorStyle = {
-    navBarButtonColor: '#FFFFFF',
-    navBarBackgroundColor: '#4494d3',
-    navBarTextColor: '#FFFFFF',
-    navBarTextFontSize: 17,
-  };
-
-  constructor(props) {
-    super(props);
-
-    const menuIcon = Platform.OS === 'ios' ? 'ios-menu' : 'md-menu';
-
-    Ionicons.getImageSource(menuIcon, 24, '#FFFFFF').then(icon => {
-      props.navigator.setButtons({
-        leftButtons: [
-          {
-            icon,
-            id: 'menu',
-          },
-        ],
-      });
-    });
-  }
-
-  render() {
-    const version = `Version: ${DeviceInfo.getReadableVersion()
-      .split('.')
-      .slice(0, 3)
-      .join('.')} (${DeviceInfo.getBuildNumber()})`;
-    return (
-      <ScrollWrapper>
-        <Wrapper>
-          <Logo />
-          <Text>{content1}</Text>
-          <Text>{names}</Text>
-          <Text>{content2}</Text>
-
-          <Version style={{ paddingTop: 36 }}>{version}</Version>
-        </Wrapper>
-      </ScrollWrapper>
-    );
-  }
-}
-
-Security.propTypes = {
-  navigator: PropTypes.instanceOf(Navigator).isRequired,
-};
-
-export default Security;
+Marius Krüger`;
