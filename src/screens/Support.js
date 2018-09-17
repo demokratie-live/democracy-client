@@ -118,7 +118,7 @@ class Support extends Component {
 
 Um Fehler zu beheben, ist allerdings ein qualifiziertes Feedback notwendig. Deshalb gib uns möglichst viele Informationen zu den von Dir gefunden Fehlern oder Verbesserungsvor-schlägen.
 
-Übermittele uns daher immer einen Screenshot, eine kurze Fehlerbeschreibung sowie Deine Plattform (iOS/Android) und Deine Geräte-bezeichnung (z.B. iPhone SE), damit wir Dir schnellstmöglich helfen können. `}
+Übermittle uns daher immer einen Screenshot, eine kurze Fehlerbeschreibung sowie Deine Plattform (iOS/Android) und Deine Geräte-bezeichnung (z.B. iPhone SE), damit wir Dir schnellstmöglich helfen können. `}
           </Text>
           <ContactWrapper>
             <IconWrapper onPress={this.linking(phoneNumber)}>
