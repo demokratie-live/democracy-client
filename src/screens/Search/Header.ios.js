@@ -83,18 +83,20 @@ class Header extends Component {
   };
 
   finishSearch = () => {
-    client.mutate({
-      mutation: finishSearch,
-      variables: {
-        term: this.state.term,
-      },
-    });
-    client.mutate({
-      mutation: SEARCH_HISTORY_ADD,
-      variables: {
-        term: this.state.term,
-      },
-    });
+    if (this.state.term.trim()) {
+      client.mutate({
+        mutation: finishSearch,
+        variables: {
+          term: this.state.term,
+        },
+      });
+      client.mutate({
+        mutation: SEARCH_HISTORY_ADD,
+        variables: {
+          term: this.state.term,
+        },
+      });
+    }
   };
 
   render() {

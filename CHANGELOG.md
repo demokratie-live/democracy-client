@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.10.1] - 2018-09-XX
+### Added
+- Beta End Nag Screen
+
+### Changed
+- [VoteList] improve filter performance - faster not-/voted query
+
+### Fixed
+- [Search] Search Button fix [#248](https://github.com/demokratie-live/democracy-client/issues/248)
+- Push Notifications for Android open Detailpage [#454](https://github.com/demokratie-live/democracy-client/issues/454)
+
 ## [0.10.0] - 2018-09-04
 ### Changed
 - [Credits] Lover of the month
