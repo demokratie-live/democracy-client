@@ -67,8 +67,10 @@ Hat der Bundesrat den Vermittlungsausschuss nicht angerufen oder dem Gesetz zuge
 `;
 export const faq4Outro1 = `
 In inhaltlicher Anlehnung an: `;
-export const faq4Outro2 = 'https://www.bundestag.de/parlament/aufgaben/gesetzgebung_neu/gesetzgebung/weg/255468';
-export const faq4Link1 = 'https://www.bundestag.de/parlament/aufgaben/gesetzgebung_neu/gesetzgebung/weg/255468';
+export const faq4Outro2 =
+  'https://www.bundestag.de/parlament/aufgaben/gesetzgebung_neu/gesetzgebung/weg/255468';
+export const faq4Link1 =
+  'https://www.bundestag.de/parlament/aufgaben/gesetzgebung_neu/gesetzgebung/weg/255468';
 export const faq5Title = 'Was ist der Wahl-o-Meter?';
 export const faq5Answer1 = `Du kennst sicher den Wahl-o-Mat. In Vorbereitung auf eine anstehende Wahl ermöglicht Dir dieses Tool, die eigenen Stellungnahmen zu vordefinierten Fragen mit den autorisierten Antworten der verschiedenen Parteien zu vergleichen. Der Wahl-o-Mat kreuzt insofern die Wahlversprechen der Parteien mit Deinen Politik-Erwartungen. Vom Wahl-o-Mat nicht abgebildet wird dann allerdings das tatsächliche Abstimmungsverhalten der Parteien und PoltikerInnen in der darauffolgenden Legislaturperiode. Offen bleibt für Dich als BürgerIn insofern:
 
