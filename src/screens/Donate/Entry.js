@@ -7,6 +7,17 @@ const Wrapper = styled.View`
   height: 68;
   background-color: #f6f6f6;
   justify-content: center;
+`;
+
+const FillBox = styled.View`
+  position: absolute;
+  align-self: flex-start;
+  height: 68;
+  width: ${({ width }) => `${width}%`};
+  background-color: #4494d3;
+`;
+
+const Text = styled.Text`
   padding-horizontal: 17;
 `;
 
@@ -14,21 +25,36 @@ const Money = styled.Text`
   font-size: 17;
 `;
 
-const Description = styled.Text`
-  font-size: 13;
-  color: #9b9b9b;
+const DueDate = styled.Text`
+  font-size: 11;
 `;
 
-const Entry = ({ money, description }) => (
+const Description = styled.Text`
+  font-size: 13;
+`;
+// color: #9b9b9b;
+
+const Entry = ({ money, description, occupied, target, dueDate }) => (
   <Wrapper>
-    <Money>{money}</Money>
-    <Description>{description}</Description>
+    <FillBox width={occupied / target * 100} />
+    <Text>
+      <Money>{money}</Money>
+      <DueDate>{`  ${dueDate}`}</DueDate>
+      <Description>{`\n${description}`}</Description>
+    </Text>
   </Wrapper>
 );
 
 Entry.propTypes = {
   money: PropTypes.string.isRequired,
+  dueDate: PropTypes.string,
   description: PropTypes.string.isRequired,
+  target: PropTypes.number.isRequired,
+  occupied: PropTypes.number.isRequired,
+};
+
+Entry.defaultProps = {
+  dueDate: '',
 };
 
 export default Entry;

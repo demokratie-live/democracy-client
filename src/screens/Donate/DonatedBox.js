@@ -15,10 +15,7 @@ const FillBox = styled.View`
   position: absolute;
   align-self: flex-start;
   height: 68;
-  width: ${({ width }) => {
-    console.log('WIDTHXY', width);
-    return `${width}%`;
-  }};
+  width: ${({ width }) => `${width}%`};
   background-color: #4494d3;
 `;
 
@@ -32,7 +29,7 @@ const Description = styled.Text`
   color: #4f4f4b;
 `;
 
-const Entry = ({ target, occupied, style, moneyTextStyle, descriptionTextStyle }) => (
+const DonatedBox = ({ target, occupied, style, moneyTextStyle, descriptionTextStyle }) => (
   <Wrapper style={style}>
     <FillBox width={occupied / target * 100} />
     <Money style={moneyTextStyle}>{`${target - occupied}€/Monat fehlen`}</Money>
@@ -40,7 +37,7 @@ const Entry = ({ target, occupied, style, moneyTextStyle, descriptionTextStyle }
   </Wrapper>
 );
 
-Entry.propTypes = {
+DonatedBox.propTypes = {
   target: PropTypes.number.isRequired,
   occupied: PropTypes.number.isRequired,
   style: PropTypes.shape(),
@@ -48,10 +45,10 @@ Entry.propTypes = {
   descriptionTextStyle: PropTypes.shape(),
 };
 
-Entry.defaultProps = {
+DonatedBox.defaultProps = {
   style: {},
   moneyTextStyle: {},
   descriptionTextStyle: {},
 };
 
-export default Entry;
+export default DonatedBox;

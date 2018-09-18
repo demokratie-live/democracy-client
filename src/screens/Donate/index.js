@@ -154,21 +154,81 @@ class Donate extends Component {
         <Wrapper>
           <Headline>{donate1Head}</Headline>
           <Text>{donate1Text}</Text>
-          <DonatedBox style={{ marginTop: 21 }} target={10000} occupied={240} />
+          <DonatedBox style={{ marginTop: 21 }} target={10830} occupied={881} />
         </Wrapper>
-        <Segment title="Details zum Finanzierungsbedarf">
-          <Entry money="560€ von 10.830€" description="min. Finanzierungsziel/Monat" />
+        <Segment title="Details zum Finanzierungsbedarf" open>
+          <Entry
+            target={10830}
+            occupied={881}
+            money="881€ von 10.830€"
+            description="min. Finanzierungsziel/Monat"
+          />
           <EntryHeader title={`Infrastrukturkosten`.toUpperCase()} style={{ marginTop: 18 }} />
-          <Entry money="500€/Monat" description="Serverkosten zum Livebetrieb" />
-          <Entry money="720€/Monat" description="SMS-Versandkosten bei 10.000 Registrierungen" />
-          <Entry money="30€/Monat" description="Typeform Pro Lizenz (Fragebögen)" />
-          <EntryHeader title={`Weiterentwicklungskosten`.toUpperCase()} />
-          <Entry money="2970€/Monat" description="AG-Brutto-Gehaltskosten Manuel Ruck" />
-          <Entry money="2970€/Monat" description="AG-Brutto-Gehaltskosten Ulf Gebhardt" />
-          <EntryHeader title={`Produktdesign und Verwaltungskosten`.toUpperCase()} />
-          <Entry money="2970€/Monat" description="AG-Brutto-Gehaltskosten Marius Krüger" />
-          <Entry money="595€/Monat" description="AG-Brutto-Gehaltskosten Hilfskraft" />
-          <Entry money="75€/Monat" description="Lohnabrechnung via Steuerberatung" />
+          <Entry
+            target={500}
+            occupied={44}
+            money="500€"
+            dueDate="(ab 01.10.18)"
+            description="Serverkosten zum Livebetrieb"
+          />
+          <Entry
+            target={720}
+            occupied={0}
+            money="720€"
+            dueDate="(ab 01.10.18)"
+            description="SMS-Versandkosten bei 10.000 Registrierungen"
+          />
+          <Entry
+            target={30}
+            occupied={30}
+            money="30€"
+            dueDate="(ab sofort)"
+            description="Typeform Pro Lizenz (Fragebögen)"
+          />
+          <EntryHeader title={`Entwicklung`.toUpperCase()} />
+          <Entry
+            target={2970}
+            occupied={0}
+            money="2970€"
+            dueDate="(ab 01.02.19)"
+            description="AG-Brutto-Gehaltskosten Manuel Ruck (1.640€ netto)"
+          />
+          <Entry
+            target={2970}
+            occupied={0}
+            money="2970€"
+            dueDate="(ab 01.02.19)"
+            description="AG-Brutto-Gehaltskosten Ulf Gebhardt (1.640€ netto)"
+          />
+          <EntryHeader title={`Produktdesign und Verwaltung`.toUpperCase()} />
+          <Entry
+            target={727}
+            occupied={727}
+            money="727€"
+            dueDate="(ab sofort)"
+            description="AG-Brutto-Gehaltskosten Marius Krüger (500€ netto)"
+          />
+          <Entry
+            target={2970}
+            occupied={0}
+            money="2970€"
+            dueDate="(ab 01.04.19)"
+            description="AG-Brutto-Gehaltskosten Marius Krüger (1.640€ netto)"
+          />
+          <Entry
+            target={595}
+            occupied={0}
+            money="595€"
+            dueDate="(ab sofort)"
+            description="AG-Brutto-Gehaltskosten Hilfskraft (450€ netto)"
+          />
+          <Entry
+            target={75}
+            occupied={75}
+            money="75€"
+            dueDate="(ab sofort)"
+            description="Lohnabrechnung via Steuerberatung"
+          />
         </Segment>
         <Wrapper>
           <Headline>{donate2Head}</Headline>

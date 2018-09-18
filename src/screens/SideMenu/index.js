@@ -71,7 +71,7 @@ const DonateBoxWrapper = styled.View`
   background-color: rgba(0, 0, 0, 0.8);
 `;
 
-const DonationTouch = styled.TouchableHighlight`
+const DonationTouch = styled.TouchableOpacity`
   flex: 1;
   width: 100%;
   height: 68;
@@ -127,8 +127,8 @@ const SideMenu = ({ data: { currentScreen }, navigator }) => {
             <DonatedBox
               descriptionTextStyle={{ color: '#fff' }}
               moneyTextStyle={{ color: '#fff' }}
-              target={10000}
-              occupied={240}
+              target={10830}
+              occupied={881}
             />
           </DonationTouch>
         </DonateBoxWrapper>
