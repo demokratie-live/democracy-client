@@ -128,7 +128,7 @@ const NavigationView = ({ currentScreen, navigateTo }) => {
           icon: <NavigationIoniconsIcon name="ios-lock-outline" />,
         },
         {
-          screenId: 'democracy.Imprint',
+          screenId: 'democracy.TermsOfUse',
           title: 'Nutzungsbedingungen'.toUpperCase(),
           icon: <NavigationIoniconsIcon name="ios-paper-outline" />,
         },

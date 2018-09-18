@@ -15,6 +15,7 @@ import Faq from './Faq';
 import Imprint from './Imprint';
 import About from './About';
 import Donate from './Donate';
+import TermsOfUse from './TermsOfUse';
 import VoteVarification from './VoteVarification';
 import Notifications from './Notifications';
 
@@ -109,6 +110,13 @@ export default function registerScreens() {
   Navigation.registerComponent(
     'democracy.Donate',
     () => NetworkStatus(NavBarLinks(Donate)),
+    client.store,
+    ApolloProvider,
+    { client },
+  );
+  Navigation.registerComponent(
+    'democracy.TermsOfUse',
+    () => NetworkStatus(NavBarLinks(TermsOfUse)),
     client.store,
     ApolloProvider,
     { client },

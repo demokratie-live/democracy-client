@@ -90,7 +90,7 @@ class Support extends Component {
       } else {
         Alert.alert(
           'Nicht unterstützt',
-          'Diese Operation wird auf deinem Gerät zurzeit nicht unterstützt!',
+          'Diese Operation wird auf Deinem Gerät zurzeit nicht unterstützt!',
           [{ text: 'OK' }],
           { cancelable: false },
         );

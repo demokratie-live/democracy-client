@@ -120,27 +120,25 @@ class Support extends Component {
     });
   }
 
-  linking = url => () => {
-    Linking.canOpenURL(url).then(supported => {
-      if (supported) {
-        Linking.openURL(url).catch(() => null);
-      } else {
-        Alert.alert(
-          'Nicht unterstützt',
-          'Diese Operation wird auf deinem Gerät zurzeit nicht unterstützt!',
-          [{ text: 'OK' }],
-          { cancelable: false },
-        );
-      }
-    });
-  };
-
   render() {
     const version = `Version: ${DeviceInfo.getReadableVersion()
       .split('.')
       .slice(0, 3)
       .join('.')} (${DeviceInfo.getBuildNumber()})`;
-
+    const linking = url => () => {
+      Linking.canOpenURL(url).then(supported => {
+        if (supported) {
+          Linking.openURL(url).catch(() => null);
+        } else {
+          Alert.alert(
+            'Nicht unterstützt',
+            'Diese Operation wird auf Deinem Gerät zurzeit nicht unterstützt!',
+            [{ text: 'OK' }],
+            { cancelable: false },
+          );
+        }
+      });
+    };
     return (
       <ScrollWrapper>
         <Wrapper>
@@ -169,9 +167,7 @@ class Support extends Component {
           <Headline>{datenschutz4Head}</Headline>
           <Text>
             <Text>{datenschutz4Text1}</Text>
-            <TextLink onPress={() => Linking.openURL(datenschutz4Link)}>
-              {datenschutz4Text2}
-            </TextLink>
+            <TextLink onPress={linking(datenschutz4Link)}>{datenschutz4Text2}</TextLink>
             <Text>{datenschutz4Text3}</Text>
           </Text>
 
@@ -187,9 +183,7 @@ class Support extends Component {
           <Headline>{datenschutz8Head}</Headline>
           <Text>
             <Text>{datenschutz8Text1}</Text>
-            <TextLink onPress={() => Linking.openURL(datenschutz8Link)}>
-              {datenschutz8Text2}
-            </TextLink>
+            <TextLink onPress={linking(datenschutz8Link)}>{datenschutz8Text2}</TextLink>
             <Text>{datenschutz8Text3}</Text>
           </Text>
 
@@ -202,9 +196,7 @@ class Support extends Component {
           <Headline>{datenschutz11Head}</Headline>
           <Text>
             <Text>{datenschutz11Text1}</Text>
-            <TextLink onPress={() => Linking.openURL(datenschutz11Link)}>
-              {datenschutz11Text2}
-            </TextLink>
+            <TextLink onPress={linking(datenschutz11Link)}>{datenschutz11Text2}</TextLink>
             <Text>{datenschutz11Text3}</Text>
           </Text>
 
