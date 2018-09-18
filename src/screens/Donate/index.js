@@ -13,6 +13,30 @@ import DonatedBox from './DonatedBox';
 import Entry from './Entry';
 import EntryHeader from './EntryHeader';
 
+import {
+  donate1Head,
+  donate1Text,
+  donate2Head,
+  donate3Link1,
+  donate3Link2,
+  donate3Link3,
+  donate3Text1,
+  donate3Text2,
+  donate3Text3,
+  donate3Text4,
+  donate3Text5,
+  donate3Text6,
+  donate3Text7,
+  donate4Head,
+  donate4Text,
+  donateList1Head,
+  donateList1Text,
+  donateList2Head,
+  donateList2Text,
+  donateList3Head,
+  donateList3Text,
+} from './content';
+
 const ScrollWrapper = styled.ScrollView`
   flex: 1;
   background-color: #ffffff;
@@ -36,6 +60,12 @@ const Text = styled.Text`
   color: #8f8e94;
 `;
 
+const TextLink = styled.Text`
+  font-size: 15;
+  color: rgb(68, 148, 211);
+  text-decoration: underline;
+`;
+
 const Version = styled.Text`
   font-size: 15;
   color: #8f8e94;
@@ -51,10 +81,13 @@ const DefinitionListWrapper = styled.View`
 
 const DefinitionListTitle = styled.Text`
   width: 30%;
+  font-weight: 600;
+  color: #8f8e94;
 `;
 
 const DefinitionListDescription = styled.Text`
   width: 70%;
+  color: #8f8e94;
 `;
 
 const DonateTouchable = styled.TouchableOpacity`
@@ -119,16 +152,11 @@ class Donate extends Component {
     return (
       <ScrollWrapper>
         <Wrapper>
-          <Headline>Support</Headline>
-          <Text>
-            Unsere Arbeit ist unabhängig, überparteilich, allgemeinnützig und nicht-kommerziell –
-            von Menschen für Menschen. Wenn Du Interesse daran hast, dass das Projekt nachhaltig
-            Bestand hat, bitten wir Dich an der unabhängigen Crowd-Finanzierung von DEMOCRACY per
-            Dauerauftrag mitzuwirken. Pate/in können Sie schon ab 1€ monatlich werden.
-          </Text>
+          <Headline>{donate1Head}</Headline>
+          <Text>{donate1Text}</Text>
           <DonatedBox style={{ marginTop: 21 }} target={10000} occupied={240} />
         </Wrapper>
-        <Segment title="Details zum Finanzierungsbedarf" open>
+        <Segment title="Details zum Finanzierungsbedarf">
           <Entry money="560€ von 10.830€" description="min. Finanzierungsziel/Monat" />
           <EntryHeader title={`Infrastrukturkosten`.toUpperCase()} style={{ marginTop: 18 }} />
           <Entry money="500€/Monat" description="Serverkosten zum Livebetrieb" />
@@ -143,30 +171,30 @@ class Donate extends Component {
           <Entry money="75€/Monat" description="Lohnabrechnung via Steuerberatung" />
         </Segment>
         <Wrapper>
-          <Text>Spendenkonto für Daueraufträge oder einmalige Spenden</Text>
+          <Headline>{donate2Head}</Headline>
           <DefinitionListWrapper style={{ paddingTop: 18 }}>
-            <DefinitionListTitle>Empfänger:</DefinitionListTitle>
-            <DefinitionListDescription>DEMOCRACY Deutschland e.V.</DefinitionListDescription>
+            <DefinitionListTitle>{donateList1Head}</DefinitionListTitle>
+            <DefinitionListDescription>{donateList1Text}</DefinitionListDescription>
           </DefinitionListWrapper>
           <DefinitionListWrapper>
-            <DefinitionListTitle>IBAN:</DefinitionListTitle>
-            <DefinitionListDescription>DE33 5003 1000 1049 7560 00</DefinitionListDescription>
+            <DefinitionListTitle>{donateList2Head}</DefinitionListTitle>
+            <DefinitionListDescription>{donateList2Text}</DefinitionListDescription>
           </DefinitionListWrapper>
           <DefinitionListWrapper style={{ paddingBottom: 18 }}>
-            <DefinitionListTitle>BIC:</DefinitionListTitle>
-            <DefinitionListDescription>TRODEFF1</DefinitionListDescription>
+            <DefinitionListTitle>{donateList3Head}</DefinitionListTitle>
+            <DefinitionListDescription>{donateList3Text}</DefinitionListDescription>
           </DefinitionListWrapper>
           <Text>
-            Für den Verein DEMOCRACY Deutschland e.V. ist mit Bescheid des Finanzamt Göttingen vom
-            23.08.2017 die Einhaltung der satzungsmäigen Voraussetzungen nach den §§ 51, 59, 60 und
-            61 AO festgestellt worden (Nachweis der Gemeinnützigkeit; Satzung). Deine Spenden sind
-            daher steuerlich abzugsfähig. Für Spenden unter 200€ jährlich genügt der
-            Zahlungsnachweis (z.B. Kontoauszug) zusammen mit unserem Vereinfachten
-            Zuwendungsnachweis. Wenn Du eine separate Zuwendungsbestätigung benötigst, schreib uns
-            bitte eine E-Mail oder gib in Deiner Überweisung Deine Wohnadresse an.
+            <Text>{donate3Text1}</Text>
+            <TextLink onPress={() => Linking.openURL(donate3Link1)}>{donate3Text2}</TextLink>
+            <Text>{donate3Text3}</Text>
+            <TextLink onPress={() => Linking.openURL(donate3Link2)}>{donate3Text4}</TextLink>
+            <Text>{donate3Text5}</Text>
+            <TextLink onPress={() => Linking.openURL(donate3Link3)}>{donate3Text6}</TextLink>
+            <Text>{donate3Text7}</Text>
           </Text>
-          <Headline style={{ paddingTop: 18 }}>Spenden via PayPal</Headline>
-          <Text>1,5% Deines Spendenbetrags + 0,35 EUR pro Transaktion verbleiben bei PayPal.</Text>
+          <Headline style={{ paddingTop: 18 }}>{donate4Head}</Headline>
+          <Text>{donate4Text}</Text>
           <DonateTouchable onPress={this.linking(Config.URL_DONATE)}>
             <DonateImage />
           </DonateTouchable>
