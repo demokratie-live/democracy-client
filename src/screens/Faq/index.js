@@ -157,21 +157,6 @@ class Support extends Component {
     });
   }
 
-  linking = url => () => {
-    Linking.canOpenURL(url).then(supported => {
-      if (supported) {
-        Linking.openURL(url).catch(() => null);
-      } else {
-        Alert.alert(
-          'Nicht unterstützt',
-          'Diese Operation wird auf deinem Gerät zurzeit nicht unterstützt!',
-          [{ text: 'OK' }],
-          { cancelable: false },
-        );
-      }
-    });
-  };
-
   render() {
     const version = `Version: ${DeviceInfo.getReadableVersion()
       .split('.')

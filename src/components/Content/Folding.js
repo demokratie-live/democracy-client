@@ -69,7 +69,7 @@ class Folding extends Component {
 
 Folding.propTypes = {
   title: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
 };
 
 export default Folding;
