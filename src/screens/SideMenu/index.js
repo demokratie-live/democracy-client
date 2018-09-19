@@ -1,8 +1,7 @@
-/* eslint-disable no-nested-ternary */
 import React from 'react';
 import { Platform, StatusBar } from 'react-native';
 import styled from 'styled-components/native';
-import { graphql, Query } from 'react-apollo';
+import { graphql } from 'react-apollo';
 import { PropTypes } from 'prop-types';
 import { Navigator } from 'react-native-navigation';
 
@@ -10,7 +9,6 @@ import Navigation from './Navigation';
 import DonatedBox from '../Donate/DonatedBox';
 
 import currentScreenQuery from '../../graphql/queries/currentScreen';
-import GET_STATISTIC from '../../graphql/queries/getStatistic';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -43,7 +41,7 @@ const Content = styled.View`
   background-color: rgba(68, 148, 211, 0.2);
 `;
 
-const Head = styled.TouchableOpacity`
+const Head = styled.View`
   flex-direction: row;
   padding-top: 16;
   padding-left: 16;
@@ -108,57 +106,33 @@ const SideMenu = ({ data: { currentScreen }, navigator }) => {
       <BackgroundWrapper>
         <BackgroundImage />
       </BackgroundWrapper>
-      {Platform.OS === 'ios' && <StatusBackground />}
-      <Query query={GET_STATISTIC} fetchPolicy="cache-and-network">
-        {({ loading, data: { voteStatistic } }) => {
-          let verified = null;
-          if (!loading && !voteStatistic) verified = false;
-          if (!loading && voteStatistic) verified = true;
-
-          return (
-            <Content>
-              <Head
-                onPress={() => {
-                  if (!loading && !voteStatistic) {
-                    navigator.showModal({
-                      screen: 'democracy.SmsVerification',
-                    });
-                  } else if (!loading && voteStatistic) {
-                    navigateTo({
-                      screenId: 'democracy.Statistic',
-                      title: 'Statisitk'.toUpperCase(),
-                    });
-                  }
-                }}
-              >
-                <HeadLogo />
-                <HeadTextWrapper>
-                  <HeadText>
-                    {loading
-                      ? '…'
-                      : voteStatistic ? 'verifizierter Nutzer' : 'unverifizierter Nutzer'}
-                  </HeadText>
-                </HeadTextWrapper>
-              </Head>
-              <Navigation
-                currentScreen={currentScreen}
-                navigateTo={navigateTo}
-                verified={verified}
-              />
-              <DonateBoxWrapper>
-                <DonationTouch onPress={donate}>
-                  <DonatedBox
-                    descriptionTextStyle={{ color: '#fff' }}
-                    moneyTextStyle={{ color: '#fff' }}
-                    target={10830}
-                    occupied={881}
-                  />
-                </DonationTouch>
-              </DonateBoxWrapper>
-            </Content>
-          );
-        }}
-      </Query>
+      <Content>
+        {Platform.OS === 'ios' && <StatusBackground />}
+        <Head
+        /* onPress={() => {
+          navigator.showModal({
+            screen: "democracy.SmsVerification"
+          });
+        }} */
+        >
+          <HeadLogo />
+          <HeadTextWrapper>
+            <HeadText>Prototyp</HeadText>
+            <HeadText>Link-registriert</HeadText>
+          </HeadTextWrapper>
+        </Head>
+        <Navigation currentScreen={currentScreen} navigateTo={navigateTo} />
+        <DonateBoxWrapper>
+          <DonationTouch onPress={donate}>
+            <DonatedBox
+              descriptionTextStyle={{ color: '#fff' }}
+              moneyTextStyle={{ color: '#fff' }}
+              target={10830}
+              occupied={881}
+            />
+          </DonationTouch>
+        </DonateBoxWrapper>
+      </Content>
     </Wrapper>
   );
 };

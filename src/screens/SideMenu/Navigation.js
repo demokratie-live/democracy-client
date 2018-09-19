@@ -82,7 +82,7 @@ ListItem.defaultProps = {
   screenId: '',
 };
 
-const NavigationView = ({ currentScreen, navigateTo, verified }) => {
+const NavigationView = ({ currentScreen, navigateTo }) => {
   const navigation = [
     {
       title: 'Listen',
@@ -145,20 +145,6 @@ const NavigationView = ({ currentScreen, navigateTo, verified }) => {
       ],
     },
   ];
-  if (verified === true) {
-    navigation[1].data.splice(0, 0, {
-      screenId: 'democracy.Statistic',
-      title: 'Statistik'.toUpperCase(),
-      icon: <NavigationIoniconsIcon name="ios-stats-outline" />,
-    });
-  }
-  if (verified === false) {
-    navigation[1].data.splice(0, 0, {
-      screenId: 'democracy.SmsVerification',
-      title: 'Verifizieren'.toUpperCase(),
-      icon: <NavigationIoniconsIcon name="ios-key-outline" />,
-    });
-  }
   return (
     <Wrapper
       sections={navigation}

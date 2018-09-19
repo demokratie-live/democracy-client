@@ -10,7 +10,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [Donate] Donate informations
 - [FAQ] New FAQ page
 - [BurgerMenu] New Texts for all Menus
-- [BurgerMenu] Statistic Screen
 
 ### Changed
 - [Filter] changed colors of disabled Sub-Checkboxes [#533](https://github.com/demokratie-live/democracy-client/issues/533)
