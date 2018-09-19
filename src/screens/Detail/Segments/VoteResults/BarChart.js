@@ -75,6 +75,7 @@ class BarChart extends Component {
   getPartyColor = party => {
     switch (party) {
       case 'CDU/CSU':
+      case 'Union':
         return '#4b4b4b';
       case 'SPD':
         return '#ed170d';
