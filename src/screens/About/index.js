@@ -50,6 +50,7 @@ const Text = styled.Text`
   color: #8f8e94;
   padding-top: 11;
   width: 100%;
+  font-size: 15;
 `;
 
 const TextBold = styled.Text`
@@ -57,6 +58,7 @@ const TextBold = styled.Text`
   padding-top: 11;
   width: 100%;
   font-weight: bold;
+  font-size: 15;
 `;
 
 const TextLink = styled.Text`
@@ -64,6 +66,7 @@ const TextLink = styled.Text`
   padding-top: 11;
   width: 100%;
   text-decoration: underline;
+  font-size: 15;
 `;
 
 const Version = styled.Text`

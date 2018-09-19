@@ -6,6 +6,7 @@ const Wrapper = styled.View`
   flex: 1;
   width: 100%;
   height: 68;
+  max-height: 68;
   background-color: #4494d390;
   justify-content: center;
   align-items: center;

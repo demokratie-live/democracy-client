@@ -120,7 +120,7 @@ const NavigationView = ({ currentScreen, navigateTo }) => {
         {
           screenId: 'democracy.Support',
           title: 'Support'.toUpperCase(),
-          icon: <NavigationIoniconsIcon name="ios-help-circle-outline" />,
+          icon: <NavigationIcon source={require('../../../assets/icons/support.png')} />,
         },
         {
           screenId: 'democracy.Imprint',

@@ -254,7 +254,7 @@ Magnus Rembold
 Maik Scheidler
 Malte Klingauf
 Manja Urner
-Manu Rauck
+Manuel Ruck
 Marc Hofrichter
 Marc Scholz
 Marcel Merle
