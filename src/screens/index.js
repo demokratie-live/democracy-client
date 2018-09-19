@@ -16,6 +16,8 @@ import Imprint from './Imprint';
 import About from './About';
 import Donate from './Donate';
 import TermsOfUse from './TermsOfUse';
+import Security from './Security';
+import Statistic from './Statistic';
 import VoteVarification from './VoteVarification';
 import Notifications from './Notifications';
 
@@ -90,6 +92,20 @@ export default function registerScreens() {
   Navigation.registerComponent(
     'democracy.Faq',
     () => NetworkStatus(NavBarLinks(Faq)),
+    client.store,
+    ApolloProvider,
+    { client },
+  );
+  Navigation.registerComponent(
+    'democracy.Statistic',
+    () => NetworkStatus(NavBarLinks(Statistic)),
+    client.store,
+    ApolloProvider,
+    { client },
+  );
+  Navigation.registerComponent(
+    'democracy.Security',
+    () => NetworkStatus(NavBarLinks(Security)),
     client.store,
     ApolloProvider,
     { client },
