@@ -52,7 +52,7 @@ class Segment extends Component {
 
   onLayout = ({ nativeEvent: { layout: { y, height } } }) => {
     const { scrollTo } = this.props;
-    if (this.fireScroll) {
+    if (this.fireScroll && scrollTo) {
       this.fireScroll = false;
       setTimeout(() => {
         scrollTo({ y, height });
@@ -92,7 +92,7 @@ Segment.propTypes = {
   open: PropTypes.bool,
   collapsible: PropTypes.bool,
   children: PropTypes.node.isRequired,
-  scrollTo: PropTypes.func.isRequired,
+  scrollTo: PropTypes.func,
   fullWidth: PropTypes.bool,
 };
 
@@ -100,6 +100,7 @@ Segment.defaultProps = {
   collapsible: true,
   open: false,
   fullWidth: false,
+  scrollTo: () => {},
 };
 
 export default Segment;

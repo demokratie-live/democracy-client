@@ -5,12 +5,13 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Wrapper = styled.SectionList.attrs({
   stickySectionHeadersEnabled: false,
+  contentContainerStyle: { paddingBottom: 70 },
 })``;
 
 const SectionItem = styled.View`
   padding-left: 16;
-  margin-top: 30;
-  margin-bottom: 16;
+  margin-top: 18;
+  margin-bottom: 11;
 `;
 
 const SectionTitle = styled.Text`
@@ -101,10 +102,15 @@ const NavigationView = ({ currentScreen, navigateTo }) => {
           title: 'Benachrichtigungen'.toUpperCase(),
           icon: <NavigationIoniconsIcon name="ios-notifications-outline" />,
         },
+      ],
+    },
+    {
+      title: 'Mehr',
+      data: [
         {
-          screenId: 'democracy.Security',
-          title: 'Sicherheit'.toUpperCase(),
-          icon: <NavigationIoniconsIcon name="ios-lock-outline" />,
+          screenId: 'democracy.Faq',
+          title: 'FAQ '.toUpperCase(),
+          icon: <NavigationIoniconsIcon name="ios-chatbubbles-outline" />,
         },
         {
           screenId: 'democracy.Instructions',
@@ -114,11 +120,26 @@ const NavigationView = ({ currentScreen, navigateTo }) => {
         {
           screenId: 'democracy.Support',
           title: 'Support'.toUpperCase(),
-          icon: <NavigationIoniconsIcon name="ios-chatbubbles-outline" />,
+          icon: <NavigationIoniconsIcon name="ios-help-circle-outline" />,
         },
         {
-          screenId: 'democracy.Credits',
-          title: 'Credits'.toUpperCase(),
+          screenId: 'democracy.Imprint',
+          title: 'Impressum & Datenschutz'.toUpperCase(),
+          icon: <NavigationIoniconsIcon name="ios-lock-outline" />,
+        },
+        {
+          screenId: 'democracy.TermsOfUse',
+          title: 'Nutzungsbedingungen'.toUpperCase(),
+          icon: <NavigationIoniconsIcon name="ios-paper-outline" />,
+        },
+        {
+          screenId: 'democracy.About',
+          title: 'Über DEMOCRACY'.toUpperCase(),
+          icon: <NavigationIoniconsIcon name="ios-heart-outline" />,
+        },
+        {
+          screenId: 'democracy.Donate',
+          title: 'Unterstütze DEMOCRACY'.toUpperCase(),
           icon: <NavigationIoniconsIcon name="ios-heart-outline" />,
         },
       ],
