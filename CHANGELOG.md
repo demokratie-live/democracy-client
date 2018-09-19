@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [SMS Verification] Success Screen
 - [Donate] Donate informations
 - [FAQ] New FAQ page
+- [BurgerMenu] New Texts for all Menus
 
 ## [0.9.1] - 2018-08-24
 ### Changed
