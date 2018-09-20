@@ -102,7 +102,7 @@ platform :android do
     )
     upload_to_play_store(
       track: 'internal',
-      track_promote_to: 'internal',
+      track_promote_to: 'production',
       apk: "./app/build/outputs/apk/app-production-release.apk",
       metadata_path: "./fastlane/metadata/android"
     )
