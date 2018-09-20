@@ -7,10 +7,11 @@ const Wrapper = styled.View`
   width: 100%;
   height: 68;
   max-height: 68;
-  background-color: #4494d390;
+  background-color: rgba(68, 148, 211, 0.25);
   justify-content: center;
   align-items: center;
 `;
+// background-color: #4494d390;
 
 const FillBox = styled.View`
   position: absolute;
@@ -28,7 +29,7 @@ const Description = styled.Text`
   font-size: 13;
   padding-top: 5;
   color: #4f4f4b;
-`;
+`; // color: rgb(0, 118, 255);
 
 const DonatedBox = ({ target, occupied, style, moneyTextStyle, descriptionTextStyle }) => (
   <Wrapper style={style}>

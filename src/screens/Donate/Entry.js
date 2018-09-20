@@ -31,6 +31,7 @@ const DueDate = styled.Text`
 
 const Description = styled.Text`
   font-size: 13;
+  color: #5f5f5b;
 `;
 // color: #9b9b9b;
 

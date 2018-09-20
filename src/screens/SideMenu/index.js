@@ -125,6 +125,7 @@ const SideMenu = ({ data: { currentScreen }, navigator }) => {
         <DonateBoxWrapper>
           <DonationTouch onPress={donate}>
             <DonatedBox
+              style={{ backgroundColor: '#4494d390' }}
               descriptionTextStyle={{ color: '#fff' }}
               moneyTextStyle={{ color: '#fff' }}
               target={10830}
