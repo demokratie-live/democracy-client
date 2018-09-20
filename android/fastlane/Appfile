@@ -11,3 +11,7 @@ end
 for_lane 'beta' do
   package_name "de.democracydeutschland.app.beta"
 end
+
+for_lane 'production' do
+  package_name "de.democracydeutschland.app"
+end
