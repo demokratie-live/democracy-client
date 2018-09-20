@@ -2,7 +2,7 @@ export const donate1Head = 'Unterstütze DEMOCRACY';
 export const donate1Text = `Unsere Arbeit ist unabhängig, überparteilich, allgemeinnützig und nicht-kommerziell –
 von Menschen für Menschen.
 
-Wenn Du Interesse daran hast, dass das Projekt nachhaltig Bestand hat, bitten wir Dich an der unabhängigen Crowd-Finanzierung von DEMOCRACY per Dauerauftrag mitzuwirken. Pate/in können Sie schon ab 1€ monatlich werden.
+Wenn Du Interesse daran hast, dass das Projekt nachhaltig Bestand hat, bitten wir Dich an der unabhängigen Crowd-Finanzierung von DEMOCRACY per Dauerauftrag mitzuwirken. Pate/in kannst Du schon ab 1€ monatlich werden.
 
 Spendenstand vom 16.09.2018`;
 export const donate2Head = 'Spendenkonto für Daueraufträge oder einmalige Spenden';
