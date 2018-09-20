@@ -120,7 +120,7 @@ const NavigationView = ({ currentScreen, navigateTo }) => {
         {
           screenId: 'democracy.Support',
           title: 'Support'.toUpperCase(),
-          icon: <NavigationIcon source={require('../../../assets/icons/support.png')} />,
+          icon: <NavigationIoniconsIcon name="ios-help-circle-outline" />,
         },
         {
           screenId: 'democracy.Imprint',
@@ -135,7 +135,7 @@ const NavigationView = ({ currentScreen, navigateTo }) => {
         {
           screenId: 'democracy.About',
           title: 'Über DEMOCRACY'.toUpperCase(),
-          icon: <NavigationIoniconsIcon name="ios-heart-outline" />,
+          icon: <NavigationIoniconsIcon name="ios-star-outline" />,
         },
         {
           screenId: 'democracy.Donate',
