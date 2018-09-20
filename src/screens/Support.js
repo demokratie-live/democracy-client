@@ -22,13 +22,12 @@ const Wrapper = styled.View`
 `;
 
 const Logo = styled.Image.attrs({
-  source: require('../../assets/images/support-logo.png'),
+  source: require('../../assets/images/logo-text10X.png'),
 })``;
 
 const Text = styled.Text`
-  text-align: justify;
   font-size: 15;
-  color: #8f8e94;
+  color: #6d6d72;
   padding-vertical: 28;
 `;
 
@@ -91,7 +90,7 @@ class Support extends Component {
       } else {
         Alert.alert(
           'Nicht unterstützt',
-          'Diese Operation wird auf deinem Gerät zurzeit nicht unterstützt!',
+          'Diese Operation wird auf Deinem Gerät zurzeit nicht unterstützt!',
           [{ text: 'OK' }],
           { cancelable: false },
         );
@@ -119,7 +118,7 @@ class Support extends Component {
 
 Um Fehler zu beheben, ist allerdings ein qualifiziertes Feedback notwendig. Deshalb gib uns möglichst viele Informationen zu den von Dir gefunden Fehlern oder Verbesserungsvor-schlägen.
 
-Übermittele uns daher immer einen Screenshot, eine kurze Fehlerbeschreibung sowie Deine Plattform (iOS/Android) und Deine Geräte-bezeichnung (z.B. iPhone SE), damit wir Dir schnellstmöglich helfen können. `}
+Übermittle uns daher immer einen Screenshot, eine kurze Fehlerbeschreibung sowie Deine Plattform (iOS/Android) und Deine Geräte-bezeichnung (z.B. iPhone SE), damit wir Dir schnellstmöglich helfen können. `}
           </Text>
           <ContactWrapper>
             <IconWrapper onPress={this.linking(phoneNumber)}>

@@ -81,13 +81,14 @@ class Code extends Component {
       });
       if (res.data.requestVerification.succeeded) {
         AsyncStorage.setItem('auth_phoneHash', phoneNumberHash);
-        this.props.onComplete();
-        Alert.alert('Deine Verifikation war erfolgreich', null, [
-          {
-            text: 'Ok',
-            onPress: () => this.props.navigator.dismissAllModals(),
+        this.props.navigator.push({
+          screen: 'democracy.SmsVerification.Success',
+          backButtonTitle: 'Zurück',
+          passProps: {
+            onComplete: this.props.onComplete,
           },
-        ]);
+          navigatorStyle: { navBarHidden: true },
+        });
       } else {
         this.showNotification({ message: res.data.requestVerification.reason });
       }

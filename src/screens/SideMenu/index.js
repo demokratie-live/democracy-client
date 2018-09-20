@@ -6,6 +6,7 @@ import { PropTypes } from 'prop-types';
 import { Navigator } from 'react-native-navigation';
 
 import Navigation from './Navigation';
+import DonatedBox from '../Donate/DonatedBox';
 
 import currentScreenQuery from '../../graphql/queries/currentScreen';
 
@@ -44,6 +45,7 @@ const Head = styled.View`
   flex-direction: row;
   padding-top: 16;
   padding-left: 16;
+  padding-bottom: 8;
 `;
 
 const HeadLogo = styled.Image.attrs({
@@ -58,6 +60,21 @@ const HeadText = styled.Text`
   color: #fff;
   font-size: 17;
   padding-left: 16;
+`;
+
+const DonateBoxWrapper = styled.View`
+  height: 68;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+`;
+
+const DonationTouch = styled.TouchableOpacity`
+  flex: 1;
+  width: 100%;
+  height: 68;
 `;
 
 const SideMenu = ({ data: { currentScreen }, navigator }) => {
@@ -76,6 +93,12 @@ const SideMenu = ({ data: { currentScreen }, navigator }) => {
       }
     }
     navigator.toggleDrawer({ side: 'left' });
+  };
+  const donate = () => {
+    navigateTo({
+      screenId: 'democracy.Donate',
+      title: 'Unterstütze DEMOCRACY'.toUpperCase(),
+    });
   };
   return (
     <Wrapper>
@@ -99,6 +122,17 @@ const SideMenu = ({ data: { currentScreen }, navigator }) => {
           </HeadTextWrapper>
         </Head>
         <Navigation currentScreen={currentScreen} navigateTo={navigateTo} />
+        <DonateBoxWrapper>
+          <DonationTouch onPress={donate}>
+            <DonatedBox
+              style={{ backgroundColor: '#4494d390' }}
+              descriptionTextStyle={{ color: '#fff' }}
+              moneyTextStyle={{ color: '#fff' }}
+              target={10830}
+              occupied={881}
+            />
+          </DonationTouch>
+        </DonateBoxWrapper>
       </Content>
     </Wrapper>
   );
