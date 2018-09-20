@@ -90,4 +90,22 @@ platform :android do
     )
   end
 
+  # Production
+  desc "Submit a new Production Build to GooglePlayStore"
+  lane :production do
+    File.open("./metadata_beta/android/de-DE/changelogs/#{buildNumber}.txt", 'w') do |file|
+      file.write changelog
+    end
+    gradle(
+      task: "clean assembleProduction",
+      build_type: "Release"
+    )
+    upload_to_play_store(
+      track: 'internal',
+      track_promote_to: 'production',
+      apk: "./app/build/outputs/apk/app-production-release.apk",
+      metadata_path: "./fastlane/metadata/android"
+    )
+  end
+
 end
