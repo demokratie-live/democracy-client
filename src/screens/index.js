@@ -11,17 +11,22 @@ import Search from './Search';
 import SideMenu from './SideMenu';
 import Detail from './Detail';
 import Support from './Support';
-import Security from './Security';
-import Statistic from './Statistic';
+import Faq from './Faq';
+import Imprint from './Imprint';
+import About from './About';
+import Donate from './Donate';
+import TermsOfUse from './TermsOfUse';
 import VoteVarification from './VoteVarification';
 import Notifications from './Notifications';
-import Credits from './Credits';
+
 import Pdf from '../components/Pdf';
 import InAppNotification from './Notifications/InAppNotification';
 import SmsVerification from './SmsVerification';
 import SmsVerificationPhoneNumber from './SmsVerification/PhoneNumber';
 import SmsVerificationCode from './SmsVerification/Code';
+import SmsVerificationSuccess from './SmsVerification/Success';
 import SmsVerificationError from './SmsVerification/Error';
+import BetaEnd from './BetaEnd';
 
 import DeepLink from '../hocs/DeepLink';
 import NetworkStatus from '../hocs/NetworkStatus';
@@ -83,15 +88,36 @@ export default function registerScreens() {
     { client },
   );
   Navigation.registerComponent(
-    'democracy.Statistic',
-    () => NetworkStatus(NavBarLinks(Statistic)),
+    'democracy.Faq',
+    () => NetworkStatus(NavBarLinks(Faq)),
     client.store,
     ApolloProvider,
     { client },
   );
   Navigation.registerComponent(
-    'democracy.Security',
-    () => NetworkStatus(NavBarLinks(Security)),
+    'democracy.Imprint',
+    () => NetworkStatus(NavBarLinks(Imprint)),
+    client.store,
+    ApolloProvider,
+    { client },
+  );
+  Navigation.registerComponent(
+    'democracy.About',
+    () => NetworkStatus(NavBarLinks(About)),
+    client.store,
+    ApolloProvider,
+    { client },
+  );
+  Navigation.registerComponent(
+    'democracy.Donate',
+    () => NetworkStatus(NavBarLinks(Donate)),
+    client.store,
+    ApolloProvider,
+    { client },
+  );
+  Navigation.registerComponent(
+    'democracy.TermsOfUse',
+    () => NetworkStatus(NavBarLinks(TermsOfUse)),
     client.store,
     ApolloProvider,
     { client },
@@ -106,13 +132,6 @@ export default function registerScreens() {
   Navigation.registerComponent(
     'democracy.Notifications',
     () => NetworkStatus(NavBarLinks(Notifications)),
-    client.store,
-    ApolloProvider,
-    { client },
-  );
-  Navigation.registerComponent(
-    'democracy.Credits',
-    () => NetworkStatus(NavBarLinks(Credits)),
     client.store,
     ApolloProvider,
     { client },
@@ -150,10 +169,20 @@ export default function registerScreens() {
     { client },
   );
   Navigation.registerComponent(
+    'democracy.SmsVerification.Success',
+    () => SmsVerificationSuccess,
+    client.store,
+    ApolloProvider,
+    { client },
+  );
+  Navigation.registerComponent(
     'democracy.SmsVerification.Error',
     () => SmsVerificationError,
     client.store,
     ApolloProvider,
     { client },
   );
+  Navigation.registerComponent('democracy.BetaEnd', () => BetaEnd, client.store, ApolloProvider, {
+    client,
+  });
 }

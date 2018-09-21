@@ -11,7 +11,7 @@ export default {
     },
     {
       type: 'link',
-      title: 'CONTRA.de',
+      title: 'democracy-app.de',
       text: 'Studie bestätigt: IQ steigt durchs Argumentieren',
       image: require('../assets/images/example1-vote-verification.jpg'),
       argumentation: 'contra',
@@ -58,7 +58,7 @@ export default {
     },
     {
       type: 'link',
-      title: 'PRO.de',
+      title: 'democracy-app.de',
       text: 'Studie bestätigt: IQ steigt durchs Argumentieren',
       image: require('../assets/images/example1-vote-verification.jpg'),
       argumentation: 'pro',

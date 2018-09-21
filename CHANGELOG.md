@@ -4,12 +4,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [0.9.X] - 2018-XX-XX
-
+## [0.10.2] - 2018-09-19
 ### Added
-- Statistic Screen
+- [SMS Verification] Success Screen
+- [Donate] Donate informations
+- [FAQ] New FAQ page
+- [BurgerMenu] New Texts for all Menus
 
-## [0.9.1] - 2018-08-24
+### Changed
+- [Filter] changed colors of disabled Sub-Checkboxes [#533](https://github.com/demokratie-live/democracy-client/issues/533)
+- [Tutorial] Removed "Diskutiere" and corrected spelling mistake [#371](https://github.com/demokratie-live/democracy-client/issues/371) & [#236](https://github.com/demokratie-live/democracy-client/issues/236)
+
+## [0.10.1] - 2018-09-17
+### Added
+- Beta End Nag Screen
+
+### Changed
+- [VoteList] improve filter performance - faster not-/voted query
+
+### Fixed
+- [Search] Search Button fix [#248](https://github.com/demokratie-live/democracy-client/issues/248)
+- Push Notifications for Android open Detailpage [#454](https://github.com/demokratie-live/democracy-client/issues/454)
+
+## [0.10.0] - 2018-09-04
 ### Changed
 - [Credits] Lover of the month
 - [Details] Add pre points to history
@@ -17,6 +34,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 - SMS-Verification
+- [Details] Fraction Results
 
 ## [0.9.0] - 2018-08-02
 ### Added

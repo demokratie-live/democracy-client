@@ -45,7 +45,7 @@ const FilterData = [
             value: true,
           },
           {
-            title: 'Abgestimmmt',
+            title: 'Abgestimmt',
             name: 'voted',
             value: true,
           },
@@ -495,6 +495,7 @@ class Filter extends Component {
         renderItem={({ item: { title, data }, section }) => {
           const sectionValue = this.getValue({ type: section.name });
           const mainCheckboxColor = sectionValue ? '#1c659f' : '#fff';
+          const mainCheckboxDisabledColor = sectionValue ? '#1c659f' : '#fff';
           return (
             <ListRowMain>
               <Row
@@ -512,7 +513,12 @@ class Filter extends Component {
                 }}
               >
                 <TitleMain>{title}</TitleMain>
-                <Checkbox value={sectionValue === true} color={mainCheckboxColor} />
+                <Checkbox
+                  value={sectionValue === true}
+                  color={mainCheckboxColor}
+                  disabledColor={mainCheckboxDisabledColor}
+                  disabledCheckmarkColor={mainCheckboxDisabledColor}
+                />
               </Row>
               {data &&
                 data.map(({ title: subtitle, type: subType, name: subName }) => (

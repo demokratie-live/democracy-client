@@ -151,6 +151,11 @@ class List extends Component {
     if (filters.subjectGroups) {
       filterQuery.subjectGroups = filters.subjectGroups.map(({ title }) => title);
     }
+
+    if (filters.activity) {
+      filterQuery.activity = filters.activity.map(({ name }) => name);
+    }
+    this.setState({ fetchedAll: false });
     refetch({
       filter: filterQuery,
     });

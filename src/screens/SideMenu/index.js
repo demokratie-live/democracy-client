@@ -1,15 +1,14 @@
-/* eslint-disable no-nested-ternary */
 import React from 'react';
 import { Platform, StatusBar } from 'react-native';
 import styled from 'styled-components/native';
-import { graphql, Query } from 'react-apollo';
+import { graphql } from 'react-apollo';
 import { PropTypes } from 'prop-types';
 import { Navigator } from 'react-native-navigation';
 
 import Navigation from './Navigation';
+import DonatedBox from '../Donate/DonatedBox';
 
 import currentScreenQuery from '../../graphql/queries/currentScreen';
-import GET_STATISTIC from '../../graphql/queries/getStatistic';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -42,10 +41,11 @@ const Content = styled.View`
   background-color: rgba(68, 148, 211, 0.2);
 `;
 
-const Head = styled.TouchableOpacity`
+const Head = styled.View`
   flex-direction: row;
   padding-top: 16;
   padding-left: 16;
+  padding-bottom: 8;
 `;
 
 const HeadLogo = styled.Image.attrs({
@@ -60,6 +60,21 @@ const HeadText = styled.Text`
   color: #fff;
   font-size: 17;
   padding-left: 16;
+`;
+
+const DonateBoxWrapper = styled.View`
+  height: 68;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+`;
+
+const DonationTouch = styled.TouchableOpacity`
+  flex: 1;
+  width: 100%;
+  height: 68;
 `;
 
 const SideMenu = ({ data: { currentScreen }, navigator }) => {
@@ -79,53 +94,46 @@ const SideMenu = ({ data: { currentScreen }, navigator }) => {
     }
     navigator.toggleDrawer({ side: 'left' });
   };
+  const donate = () => {
+    navigateTo({
+      screenId: 'democracy.Donate',
+      title: 'Unterstütze DEMOCRACY'.toUpperCase(),
+    });
+  };
   return (
     <Wrapper>
       <StatusBar barStyle="light-content" />
       <BackgroundWrapper>
         <BackgroundImage />
       </BackgroundWrapper>
-      {Platform.OS === 'ios' && <StatusBackground />}
-      <Query query={GET_STATISTIC} fetchPolicy="cache-and-network">
-        {({ loading, data: { voteStatistic } }) => {
-          let verified = null;
-          if (!loading && !voteStatistic) verified = false;
-          if (!loading && voteStatistic) verified = true;
-
-          return (
-            <Content>
-              <Head
-                onPress={() => {
-                  if (!loading && !voteStatistic) {
-                    navigator.showModal({
-                      screen: 'democracy.SmsVerification',
-                    });
-                  } else if (!loading && voteStatistic) {
-                    navigateTo({
-                      screenId: 'democracy.Statistic',
-                      title: 'Statisitk'.toUpperCase(),
-                    });
-                  }
-                }}
-              >
-                <HeadLogo />
-                <HeadTextWrapper>
-                  <HeadText>
-                    {loading
-                      ? '…'
-                      : voteStatistic ? 'verifizierter Nutzer' : 'unverifizierter Nutzer'}
-                  </HeadText>
-                </HeadTextWrapper>
-              </Head>
-              <Navigation
-                currentScreen={currentScreen}
-                navigateTo={navigateTo}
-                verified={verified}
-              />
-            </Content>
-          );
-        }}
-      </Query>
+      <Content>
+        {Platform.OS === 'ios' && <StatusBackground />}
+        <Head
+        /* onPress={() => {
+          navigator.showModal({
+            screen: "democracy.SmsVerification"
+          });
+        }} */
+        >
+          <HeadLogo />
+          <HeadTextWrapper>
+            <HeadText>Prototyp</HeadText>
+            <HeadText>Link-registriert</HeadText>
+          </HeadTextWrapper>
+        </Head>
+        <Navigation currentScreen={currentScreen} navigateTo={navigateTo} />
+        <DonateBoxWrapper>
+          <DonationTouch onPress={donate}>
+            <DonatedBox
+              style={{ backgroundColor: '#4494d390' }}
+              descriptionTextStyle={{ color: '#fff' }}
+              moneyTextStyle={{ color: '#fff' }}
+              target={10830}
+              occupied={881}
+            />
+          </DonationTouch>
+        </DonateBoxWrapper>
+      </Content>
     </Wrapper>
   );
 };
