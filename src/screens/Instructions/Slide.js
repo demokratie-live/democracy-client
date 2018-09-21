@@ -38,7 +38,7 @@ const TextSub = styled.Text`
   padding-top: 1;
   font-family: ${Platform.OS === 'ios' ? 'HelveticaNeue-Thin' : 'sans-serif-light'};
   text-align: center;
-  padding-bottom: 18;
+  margin-bottom: 18;
 `;
 
 const ContainerImages = styled.View`
@@ -52,6 +52,7 @@ const ContainerImages = styled.View`
 
 const ContainerCenterImage = styled.View`
   position: absolute;
+  align-items: center;
 `;
 
 const ImageTranspContainer = styled.View`
@@ -77,10 +78,36 @@ const ButtonCircle = styled.TouchableOpacity`
   right: -20;
   top: 165;
 `;
+const ButtonVerify = styled.TouchableOpacity`
+  bottom: 175;
+  background-color: rgb(126, 211, 33);
+  border-radius: 8;
+  width: 180;
+  height: 41;
+  position: absolute;
+`;
+
+const TextVerify = styled.Text`
+  color: #fff;
+  font-size: 22;
+  text-align: center;
+  padding-top: 6;
+  font-family: ${Platform.OS === 'ios' ? 'HelveticaNeue-Thin' : 'sans-serif-light'};
+`;
 
 const ImageCircle = styled.Image``;
 
-const Slide = ({ ImgHead, ImgRight, ImgLeft, ImgCenter, ImgCircle, TxtHead, TxtSub, nextPage }) => (
+const Slide = ({
+  ImgHead,
+  ImgRight,
+  ImgLeft,
+  ImgCenter,
+  ImgCircle,
+  TxtHead,
+  TxtSub,
+  nextPage,
+  verify,
+}) => (
   <Container>
     <ContainerHead>
       <Image source={ImgHead} />
@@ -101,6 +128,11 @@ const Slide = ({ ImgHead, ImgRight, ImgLeft, ImgCenter, ImgCircle, TxtHead, TxtS
         <ButtonCircle onPress={nextPage}>
           <ImageCircle source={ImgCircle} />
         </ButtonCircle>
+        {verify && (
+          <ButtonVerify onPress={verify}>
+            <TextVerify>Verifizieren</TextVerify>
+          </ButtonVerify>
+        )}
       </ContainerCenterImage>
     </ContainerImages>
     <LinearGradient
@@ -125,12 +157,14 @@ Slide.propTypes = {
   TxtHead: PropTypes.string.isRequired,
   TxtSub: PropTypes.string.isRequired,
   nextPage: PropTypes.func.isRequired,
+  verify: PropTypes.func,
 };
 
 Slide.defaultProps = {
   ImgLeft: null,
   ImgRight: null,
   ImgCircle: require('../../../assets/tutorial/icon.touch.png'),
+  verify: null,
 };
 
 export default Slide;
