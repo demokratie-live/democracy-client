@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { graphql, compose } from 'react-apollo';
 import Swiper from 'react-native-swiper';
+import { ActivityIndicator } from 'react-native';
 
 import PieChart from './VoteResults/PieChart';
 import PartyChart from './VoteResults/PartyChart';
@@ -50,6 +51,8 @@ const VoteResults = props => {
   const renderCommuntiyResult = () => {
     const { voteResults: comunnityResults } = communityVotes;
     if (
+      communityVotes &&
+      comunnityResults &&
       communityVotes.voted &&
       (comunnityResults.yes || comunnityResults.no || comunnityResults.abstination)
     ) {
@@ -68,7 +71,7 @@ const VoteResults = props => {
         />
       );
     }
-    return null;
+    return <ActivityIndicator />;
   };
 
   const renderGovernmentVoteDetails = () => {
@@ -106,7 +109,6 @@ const VoteResults = props => {
           label="Abgeordnete"
           voteResults={voteResults}
         />,
-
         <BarChart
           key="barChart"
           data={_.map(voteResults.partyVotes, partyVotes => ({
@@ -127,7 +129,7 @@ const VoteResults = props => {
         );
       }
       return (
-        <Swiper paginationStyle={{ bottom: 0 }} height={440}>
+        <Swiper loop={false} style={{ maxHeight: 460 }} paginationStyle={{ bottom: 0 }}>
           {screens}
         </Swiper>
       );
@@ -183,7 +185,9 @@ const VoteResults = props => {
     if (type === 'community') {
       return (
         <Segment title="Communityergebnis" open scrollTo={scrollTo} fullWidth>
-          <ScrollView>{renderCommuntiyResult()}</ScrollView>
+          <Swiper loadMinimal style={{ maxHeight: 450 }}>
+            {renderCommuntiyResult()}
+          </Swiper>
           <RepresentativeText>
             Dieses Ergebnis wurde nicht auf seine Repräsentativität überprüft.
           </RepresentativeText>

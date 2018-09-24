@@ -146,7 +146,7 @@ class Statistic extends Component {
         </StatisticWrapper>
         <Query query={GET_VOTED_PROCEDURES} fetchPolicy="cache-and-network">
           {({ loading, data }) => {
-            if (!loading) {
+            if (!loading && data.votedProcedures) {
               return (
                 <SectionList
                   sections={[{ title: 'Abgestimmte', data: data.votedProcedures }]}

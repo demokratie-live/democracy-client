@@ -82,7 +82,7 @@ const DonationTouch = styled.TouchableOpacity`
 const SideMenu = ({ data: { currentScreen }, navigator }) => {
   const navigateTo = ({ screenId, title }) => {
     if (screenId) {
-      if (screenId === 'democracy.Instructions') {
+      if (screenId === 'democracy.Instructions' || screenId === 'democracy.SmsVerification') {
         navigator.showModal({
           screen: screenId,
           navigatorStyle: { navBarHidden: true, orientation: 'portrait' },
@@ -111,6 +111,7 @@ const SideMenu = ({ data: { currentScreen }, navigator }) => {
       {Platform.OS === 'ios' && <StatusBackground />}
       <Query query={GET_STATISTIC} fetchPolicy="cache-and-network">
         {({ loading, data }) => {
+          console.log('GET_STATISTIC', loading, data);
           let verified = null;
           const voteStatistic = data ? data.voteStatistic : null;
           if (!loading && !voteStatistic) verified = false;

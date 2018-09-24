@@ -174,6 +174,11 @@ const NavigationView = ({ currentScreen, navigateTo, verified }) => {
 NavigationView.propTypes = {
   currentScreen: PropTypes.string.isRequired,
   navigateTo: PropTypes.func.isRequired,
+  verified: PropTypes.bool,
+};
+
+NavigationView.defaultProps = {
+  verified: false,
 };
 
 export default NavigationView;
