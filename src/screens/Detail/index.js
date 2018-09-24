@@ -5,7 +5,12 @@ import PropTypes from 'prop-types';
 import { graphql, compose } from 'react-apollo';
 import { Navigator } from 'react-native-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import speakingurl from 'speakingurl';
 
+// Helpers
+import getShareLink from '../../services/shareLink';
+
+// GraphQL
 import getProcedure from '../../graphql/queries/getProcedure';
 import TOGGLE_NOTIFICATION from '../../graphql/mutations/toggleNotification';
 import VIEW_PROCEDURE_LOCAL from '../../graphql/mutations/local/viewProcedure';
@@ -155,9 +160,11 @@ class Detail extends Component {
   };
 
   share = () => {
-    const { title, procedureId } = this.props.data.procedure;
-
-    const url = `democracyapp://procedure/${procedureId}`;
+    const { title, procedureId, type } = this.props.data.procedure;
+    const url = `${getShareLink()}/${type.toLowerCase()}/${procedureId}/${speakingurl(title).substr(
+      0,
+      60,
+    )}`;
     const message = Platform.OS === 'ios' ? title : `${title} – ${url}`;
     Share.share(
       {
