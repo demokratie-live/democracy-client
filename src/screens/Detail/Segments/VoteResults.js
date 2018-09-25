@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { graphql, compose } from 'react-apollo';
 import Swiper from 'react-native-swiper';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, Platform } from 'react-native';
 
 import PieChart from './VoteResults/PieChart';
 import PartyChart from './VoteResults/PartyChart';
@@ -129,7 +129,11 @@ const VoteResults = props => {
         );
       }
       return (
-        <Swiper loop={false} style={{ maxHeight: 460 }} paginationStyle={{ bottom: 0 }}>
+        <Swiper
+          loop={false}
+          style={{ height: Platform.OS === 'ios' ? 'auto' : 460, maxHeight: 460 }}
+          paginationStyle={{ bottom: 0 }}
+        >
           {screens}
         </Swiper>
       );
@@ -185,7 +189,13 @@ const VoteResults = props => {
     if (type === 'community') {
       return (
         <Segment title="Communityergebnis" open scrollTo={scrollTo} fullWidth>
-          <Swiper loadMinimal style={{ maxHeight: 450 }}>
+          <Swiper
+            loadMinimal
+            style={{
+              height: Platform.OS === 'ios' ? 'auto' : 450,
+              maxHeight: 450,
+            }}
+          >
             {renderCommuntiyResult()}
           </Swiper>
           <RepresentativeText>
