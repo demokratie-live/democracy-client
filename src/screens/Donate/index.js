@@ -96,10 +96,7 @@ const DonateTouchable = styled.TouchableOpacity`
 `;
 
 const DonateImage = styled.Image.attrs({
-  source:
-    Platform.OS === 'ios'
-      ? require('../../../assets/images/PateButton.png')
-      : require('../../../assets/images/PayPal-Donate-Button-Transparent.png'),
+  source: require('../../../assets/images/PayPal-Donate-Button-Transparent.png'),
   resizeMode: 'contain',
 })`
   height: 100;
@@ -258,13 +255,11 @@ class Donate extends Component {
           </Text>
           <Headline style={{ paddingTop: 18 }}>{donate4Head}</Headline>
           <Text>{donate4Text}</Text>
-          <DonateTouchable
-            onPress={this.linking(
-              Platform.OS === 'ios' ? Config.URL_DONATE_IOS : Config.URL_DONATE_ANDROID,
-            )}
-          >
-            <DonateImage />
-          </DonateTouchable>
+          {Platform.OS !== 'ios' && (
+            <DonateTouchable onPress={this.linking(Config.URL_DONATE)}>
+              <DonateImage />
+            </DonateTouchable>
+          )}
           <Version>{version}</Version>
         </Wrapper>
       </ScrollWrapper>

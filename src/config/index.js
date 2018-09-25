@@ -16,12 +16,6 @@ export default {
     process.env.BETA_END_APPSTORE_URL ||
     Config.BETA_END_APPSTORE_URL ||
     'https://www.democracy-deutschland.de/',
-  URL_DONATE_IOS:
-    process.env.URL_DONATE_IOS ||
-    Config.URL_DONATE_IOS ||
-    'https://www.democracy-deutschland.de/#!donate',
-  URL_DONATE_ANDROID:
-    process.env.URL_DONATE_ANDROID ||
-    Config.URL_DONATE_ANDROID ||
-    'https://www.democracy-deutschland.de/#!donate',
+  URL_DONATE:
+    process.env.URL_DONATE || Config.URL_DONATE || 'https://www.democracy-deutschland.de/#!donate',
 };
