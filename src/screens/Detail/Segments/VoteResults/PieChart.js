@@ -117,19 +117,22 @@ class PieChart extends Component {
                 y: entry.value,
                 label: entry.percentage >= 5 ? `${entry.percentage}%` : ' ',
               }))}
-              innerRadius={100}
-              labelRadius={125}
+              innerRadius={pieChartWidth / 5.6}
+              labelRadius={pieChartWidth / 3.3}
               style={{
                 labels: {
                   fill: 'white',
-                  fontSize: 16,
+                  fontSize: 20,
                   fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue-Thin' : 'sans-serif-light',
                 },
               }}
             />
             <VictoryLabel
               textAnchor="middle"
-              style={{ fontSize: 25, color: '#4a4a4a' }}
+              style={{
+                fontSize: 17,
+                color: '#4a4a4a',
+              }}
               dy={-10}
               x={200}
               y={200}
@@ -141,7 +144,10 @@ class PieChart extends Component {
             />
             <VictoryLabel
               textAnchor="middle"
-              style={[{ fontSize: 14, color: '#d5d5d5' }]}
+              style={{
+                fontSize: 11,
+                color: '#4a4a4a',
+              }}
               dy={10}
               x={200}
               y={200}

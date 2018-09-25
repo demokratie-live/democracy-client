@@ -40,7 +40,6 @@ const RepresentativeText = styled.Text`
   color: rgb(142, 142, 147);
   text-align: center;
   font-size: 10;
-  padding-top: 20;
   padding-bottom: 10;
   font-style: italic;
 `;
@@ -131,7 +130,7 @@ const VoteResults = props => {
       return (
         <Swiper
           loop={false}
-          style={{ height: Platform.OS === 'ios' ? 'auto' : 460, maxHeight: 460 }}
+          style={{ height: Platform.OS === 'ios' ? 'auto' : 440, maxHeight: 440 }}
           paginationStyle={{ bottom: 0 }}
         >
           {screens}
@@ -192,8 +191,8 @@ const VoteResults = props => {
           <Swiper
             loadMinimal
             style={{
-              height: Platform.OS === 'ios' ? 'auto' : 450,
-              maxHeight: 450,
+              height: Platform.OS === 'ios' ? 'auto' : 420,
+              maxHeight: 420,
             }}
           >
             {renderCommuntiyResult()}
