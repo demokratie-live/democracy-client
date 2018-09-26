@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
-import { RefreshControl, ActivityIndicator } from 'react-native';
+import { RefreshControl, ActivityIndicator, Platform, Share } from 'react-native';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import { graphql, compose } from 'react-apollo';
 import { Navigator } from 'react-native-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import speakingurl from 'speakingurl';
 
+// Helpers
+import getShareLink from '../../services/shareLink';
+
+// GraphQL
 import getProcedure from '../../graphql/queries/getProcedure';
 import TOGGLE_NOTIFICATION from '../../graphql/mutations/toggleNotification';
 import VIEW_PROCEDURE_LOCAL from '../../graphql/mutations/local/viewProcedure';
@@ -51,20 +56,27 @@ const IntroTitle = styled.Text`
 `;
 
 const IntroButtons = styled.View`
-  justify-content: center;
+  flex-direction: row;
+  align-items: center;
   padding-top: 20;
-  margin-left: -4;
+  margin-left: -8;
 `;
 
 const IntroButton = styled.TouchableOpacity`
   align-items: center;
-  width: 32;
+  width: 40;
 `;
 
 const NotificationButtonIcon = styled(Ionicons).attrs({
   size: 32,
   name: ({ active }) => (active ? 'ios-notifications' : 'ios-notifications-outline'),
   color: ({ active }) => (active ? 'rgb(255, 171, 33)' : 'rgb(0, 0, 0)'),
+})``;
+
+const ShareButtonIcon = styled(Ionicons).attrs({
+  size: 28,
+  name: () => (Platform.OS === 'ios' ? 'ios-share-outline' : 'md-share'),
+  color: 'rgb(0, 0, 0)',
 })``;
 
 const IntroSide = styled.View`
@@ -147,6 +159,26 @@ class Detail extends Component {
     }
   };
 
+  share = () => {
+    const { title, procedureId, type } = this.props.data.procedure;
+    const url = `${getShareLink()}/${type.toLowerCase()}/${procedureId}/${speakingurl(title).substr(
+      0,
+      60,
+    )}`;
+    const message = Platform.OS === 'ios' ? title : `${title} – ${url}`;
+    Share.share(
+      {
+        message,
+        url,
+        title: 'Weil Deine Stimme Zählt!',
+      },
+      {
+        // Android only:
+        dialogTitle: title,
+      },
+    );
+  };
+
   listType = 'VOTING';
 
   render() {
@@ -199,6 +231,9 @@ class Detail extends Component {
             <IntroButtons>
               <IntroButton onPress={toggleNotification}>
                 <NotificationButtonIcon active={notify} />
+              </IntroButton>
+              <IntroButton onPress={this.share}>
+                <ShareButtonIcon />
               </IntroButton>
             </IntroButtons>
           </IntroMain>

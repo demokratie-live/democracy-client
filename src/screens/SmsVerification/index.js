@@ -62,7 +62,7 @@ class SmsVerification extends Component {
         // NavBar Events
         switch (event.id) {
           case 'closeModal':
-            props.navigator.dismissModal();
+            props.navigator.dismissAllModals();
             break;
 
           default:
@@ -199,11 +199,12 @@ Zu unserer `}
 SmsVerification.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired,
   procedureId: PropTypes.oneOfType(PropTypes.string, PropTypes.bool),
-  onComplete: PropTypes.func.isRequired,
+  onComplete: PropTypes.func,
 };
 
 SmsVerification.defaultProps = {
   procedureId: false,
+  onComplete: () => {},
 };
 
 export default SmsVerification;

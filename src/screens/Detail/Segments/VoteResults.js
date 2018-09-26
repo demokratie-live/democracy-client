@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { graphql, compose } from 'react-apollo';
 import Swiper from 'react-native-swiper';
+import { ActivityIndicator, Platform } from 'react-native';
 
 import PieChart from './VoteResults/PieChart';
 import PartyChart from './VoteResults/PartyChart';
@@ -39,7 +40,6 @@ const RepresentativeText = styled.Text`
   color: rgb(142, 142, 147);
   text-align: center;
   font-size: 10;
-  padding-top: 20;
   padding-bottom: 10;
   font-style: italic;
 `;
@@ -50,6 +50,8 @@ const VoteResults = props => {
   const renderCommuntiyResult = () => {
     const { voteResults: comunnityResults } = communityVotes;
     if (
+      communityVotes &&
+      comunnityResults &&
       communityVotes.voted &&
       (comunnityResults.yes || comunnityResults.no || comunnityResults.abstination)
     ) {
@@ -68,7 +70,7 @@ const VoteResults = props => {
         />
       );
     }
-    return null;
+    return <ActivityIndicator />;
   };
 
   const renderGovernmentVoteDetails = () => {
@@ -106,7 +108,6 @@ const VoteResults = props => {
           label="Abgeordnete"
           voteResults={voteResults}
         />,
-
         <BarChart
           key="barChart"
           data={_.map(voteResults.partyVotes, partyVotes => ({
@@ -127,7 +128,11 @@ const VoteResults = props => {
         );
       }
       return (
-        <Swiper paginationStyle={{ bottom: 0 }} height={440}>
+        <Swiper
+          loop={false}
+          style={{ height: Platform.OS === 'ios' ? 'auto' : 440, maxHeight: 440 }}
+          paginationStyle={{ bottom: 0 }}
+        >
           {screens}
         </Swiper>
       );
@@ -183,7 +188,15 @@ const VoteResults = props => {
     if (type === 'community') {
       return (
         <Segment title="Communityergebnis" open scrollTo={scrollTo} fullWidth>
-          <ScrollView>{renderCommuntiyResult()}</ScrollView>
+          <Swiper
+            loadMinimal
+            style={{
+              height: Platform.OS === 'ios' ? 'auto' : 420,
+              maxHeight: 420,
+            }}
+          >
+            {renderCommuntiyResult()}
+          </Swiper>
           <RepresentativeText>
             Dieses Ergebnis wurde nicht auf seine Repräsentativität überprüft.
           </RepresentativeText>
