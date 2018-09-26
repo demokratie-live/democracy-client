@@ -149,7 +149,23 @@ class Donate extends Component {
       .slice(0, 3)
       .join('.')} (${DeviceInfo.getBuildNumber()})`;
 
-    return (
+    return Platform.OS === 'ios' ? (
+      <ScrollWrapper>
+        <Wrapper>
+          <Headline>{donate1Head}</Headline>
+          <Text>{`Diese Seite steht unter iOS leider nicht zur Verfügung.\n`}</Text>
+          <Text>
+            <Text>Besuchen Sie </Text>
+            <TextLink
+              onPress={() => Linking.openURL('https://www.democracy-deutschland.de/#!donate')}
+            >
+              unsere Webseite
+            </TextLink>
+            <Text> für mehr Informationen</Text>
+          </Text>
+        </Wrapper>
+      </ScrollWrapper>
+    ) : (
       <ScrollWrapper>
         <Wrapper>
           <Headline>{donate1Head}</Headline>
@@ -255,11 +271,9 @@ class Donate extends Component {
           </Text>
           <Headline style={{ paddingTop: 18 }}>{donate4Head}</Headline>
           <Text>{donate4Text}</Text>
-          {Platform.OS !== 'ios' && (
-            <DonateTouchable onPress={this.linking(Config.URL_DONATE)}>
-              <DonateImage />
-            </DonateTouchable>
-          )}
+          <DonateTouchable onPress={this.linking(Config.URL_DONATE)}>
+            <DonateImage />
+          </DonateTouchable>
           <Version>{version}</Version>
         </Wrapper>
       </ScrollWrapper>
