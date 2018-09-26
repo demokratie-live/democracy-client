@@ -4,8 +4,12 @@ import { Navigator } from 'react-native-navigation';
 import styled from 'styled-components/native';
 import { Platform } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
+import client from '../../../src/graphql/client';
 
 import Button from './Components/Button';
+
+// GRAPHQL
+import GET_STATISTIC from '../../graphql/queries/getStatistic';
 
 const Container = styled.ScrollView.attrs({
   contentContainerStyle: { flexGrow: 1, alignItems: 'center', justifyContent: 'space-between' },
@@ -62,6 +66,10 @@ const ButtonContainer = styled.View`
 
 class SmsSuccess extends Component {
   onClose = async () => {
+    client.query({
+      query: GET_STATISTIC,
+      fetchPolicy: 'network-only',
+    });
     await this.props.onComplete();
     await this.props.navigator.dismissAllModals();
   };
