@@ -149,23 +149,7 @@ class Donate extends Component {
       .slice(0, 3)
       .join('.')} (${DeviceInfo.getBuildNumber()})`;
 
-    return Platform.OS === 'ios' ? (
-      <ScrollWrapper>
-        <Wrapper>
-          <Headline>{donate1Head}</Headline>
-          <Text>{`Diese Seite steht unter iOS leider nicht zur Verfügung.\n`}</Text>
-          <Text>
-            <Text>Besuchen Sie </Text>
-            <TextLink
-              onPress={() => Linking.openURL('https://www.democracy-deutschland.de/#!donate')}
-            >
-              unsere Webseite
-            </TextLink>
-            <Text> für mehr Informationen</Text>
-          </Text>
-        </Wrapper>
-      </ScrollWrapper>
-    ) : (
+    return (
       <ScrollWrapper>
         <Wrapper>
           <Headline>{donate1Head}</Headline>
@@ -246,36 +230,52 @@ class Donate extends Component {
             description="Lohnabrechnung via Steuerberatung"
           />
         </Segment>
-        <Wrapper>
-          <Headline>{donate2Head}</Headline>
-          <DefinitionListWrapper style={{ paddingTop: 18 }}>
-            <DefinitionListTitle>{donateList1Head}</DefinitionListTitle>
-            <DefinitionListDescription>{donateList1Text}</DefinitionListDescription>
-          </DefinitionListWrapper>
-          <DefinitionListWrapper>
-            <DefinitionListTitle>{donateList2Head}</DefinitionListTitle>
-            <DefinitionListDescription>{donateList2Text}</DefinitionListDescription>
-          </DefinitionListWrapper>
-          <DefinitionListWrapper style={{ paddingBottom: 18 }}>
-            <DefinitionListTitle>{donateList3Head}</DefinitionListTitle>
-            <DefinitionListDescription>{donateList3Text}</DefinitionListDescription>
-          </DefinitionListWrapper>
-          <Text>
-            <Text>{donate3Text1}</Text>
-            <TextLink onPress={() => Linking.openURL(donate3Link1)}>{donate3Text2}</TextLink>
-            <Text>{donate3Text3}</Text>
-            <TextLink onPress={() => Linking.openURL(donate3Link2)}>{donate3Text4}</TextLink>
-            <Text>{donate3Text5}</Text>
-            <TextLink onPress={() => Linking.openURL(donate3Link3)}>{donate3Text6}</TextLink>
-            <Text>{donate3Text7}</Text>
-          </Text>
-          <Headline style={{ paddingTop: 18 }}>{donate4Head}</Headline>
-          <Text>{donate4Text}</Text>
-          <DonateTouchable onPress={this.linking(Config.URL_DONATE)}>
-            <DonateImage />
-          </DonateTouchable>
-          <Version>{version}</Version>
-        </Wrapper>
+        {Platform.OS === 'ios' ? (
+          <Wrapper>
+            <Text>{`Die verlbeibende Seite steht unter iOS leider nicht zur Verfügung.\n`}</Text>
+            <Text>
+              <Text>Besuchen Sie </Text>
+              <TextLink
+                onPress={() => Linking.openURL('https://www.democracy-deutschland.de/#!donate')}
+              >
+                unsere Webseite
+              </TextLink>
+              <Text> für mehr Informationen.</Text>
+            </Text>
+            <Version>{version}</Version>
+          </Wrapper>
+        ) : (
+          <Wrapper>
+            <Headline>{donate2Head}</Headline>
+            <DefinitionListWrapper style={{ paddingTop: 18 }}>
+              <DefinitionListTitle>{donateList1Head}</DefinitionListTitle>
+              <DefinitionListDescription>{donateList1Text}</DefinitionListDescription>
+            </DefinitionListWrapper>
+            <DefinitionListWrapper>
+              <DefinitionListTitle>{donateList2Head}</DefinitionListTitle>
+              <DefinitionListDescription>{donateList2Text}</DefinitionListDescription>
+            </DefinitionListWrapper>
+            <DefinitionListWrapper style={{ paddingBottom: 18 }}>
+              <DefinitionListTitle>{donateList3Head}</DefinitionListTitle>
+              <DefinitionListDescription>{donateList3Text}</DefinitionListDescription>
+            </DefinitionListWrapper>
+            <Text>
+              <Text>{donate3Text1}</Text>
+              <TextLink onPress={() => Linking.openURL(donate3Link1)}>{donate3Text2}</TextLink>
+              <Text>{donate3Text3}</Text>
+              <TextLink onPress={() => Linking.openURL(donate3Link2)}>{donate3Text4}</TextLink>
+              <Text>{donate3Text5}</Text>
+              <TextLink onPress={() => Linking.openURL(donate3Link3)}>{donate3Text6}</TextLink>
+              <Text>{donate3Text7}</Text>
+            </Text>
+            <Headline style={{ paddingTop: 18 }}>{donate4Head}</Headline>
+            <Text>{donate4Text}</Text>
+            <DonateTouchable onPress={this.linking(Config.URL_DONATE)}>
+              <DonateImage />
+            </DonateTouchable>
+            <Version>{version}</Version>
+          </Wrapper>
+        )}
       </ScrollWrapper>
     );
   }
