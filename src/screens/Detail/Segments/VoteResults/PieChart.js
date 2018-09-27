@@ -52,7 +52,17 @@ const VoteResultCircle = styled.View`
 class PieChart extends Component {
   state = {
     pieChartWidth: Math.min(Dimensions.get('window').width, Dimensions.get('window').height),
+    valueTotal: 0,
   };
+
+  async componentWillMount() {
+    const { data } = this.props;
+    const valueTotal = data.reduce(
+      (v, { value, fractions }) => (typeof fractions === 'number' ? v + fractions : v + value),
+      0,
+    );
+    this.setState({ valueTotal });
+  }
 
   onLayout = () => {
     const pieChartWidth = Math.min(Dimensions.get('window').width, Dimensions.get('window').height);
@@ -90,7 +100,7 @@ class PieChart extends Component {
 
   render() {
     const { data, colorScale, label, showNumbers } = this.props;
-    const { pieChartWidth } = this.state;
+    const { pieChartWidth, valueTotal } = this.state;
     return (
       <VoteResultsWrapper>
         <VoteResultsPieWrapper onLayout={this.onLayout}>
@@ -136,11 +146,7 @@ class PieChart extends Component {
               dy={-10}
               x={200}
               y={200}
-              text={data.reduce(
-                (v, { value, fractions }) =>
-                  typeof fractions === 'number' ? v + fractions : v + value,
-                0,
-              )}
+              text={valueTotal}
             />
             <VictoryLabel
               textAnchor="middle"
