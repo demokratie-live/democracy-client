@@ -6,7 +6,7 @@ import { Navigator } from 'react-native-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { graphql, Query } from 'react-apollo';
 import { VictoryPie, VictoryLabel } from 'victory-native';
-import Svg from 'react-native-svg';
+import Svg, { G } from 'react-native-svg';
 
 import SegmentHeader from '../components/ListSectionHeader';
 import ListItem from '../screens/VoteList/ListItem';
@@ -135,13 +135,15 @@ class Statistic extends Component {
                 },
               }}
             />
-            <VictoryLabel
-              textAnchor="middle"
-              style={{ fontSize: 30 }}
-              x={200}
-              y={200}
-              text={`${Math.round(100 * votedProcedures / proceduresCount * 10) / 10}%`}
-            />
+            <G>
+              <VictoryLabel
+                textAnchor="middle"
+                style={{ fontSize: 30 }}
+                x={200}
+                y={200}
+                text={`${Math.round(100 * votedProcedures / proceduresCount * 10) / 10}%`}
+              />
+            </G>
           </Svg>
         </StatisticWrapper>
         <Query query={GET_VOTED_PROCEDURES} fetchPolicy="cache-and-network">

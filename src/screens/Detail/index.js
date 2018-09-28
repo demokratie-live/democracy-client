@@ -161,10 +161,7 @@ class Detail extends Component {
 
   share = () => {
     const { title, procedureId, type } = this.props.data.procedure;
-    const url = `${getShareLink()}/${type.toLowerCase()}/${procedureId}/${speakingurl(title).substr(
-      0,
-      60,
-    )}`;
+    const url = `${getShareLink()}/${type.toLowerCase()}/${procedureId}/${speakingurl(title)}`;
     const message = Platform.OS === 'ios' ? title : `${title} – ${url}`;
     Share.share(
       {

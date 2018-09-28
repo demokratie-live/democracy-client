@@ -3,7 +3,7 @@ import { Dimensions, Platform } from 'react-native';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import { VictoryPie, VictoryLabel } from 'victory-native';
-import Svg from 'react-native-svg';
+import Svg, { G } from 'react-native-svg';
 
 const VoteResultsWrapper = styled.View`
   flex: 1;
@@ -127,32 +127,36 @@ class PieChart extends Component {
                 },
               }}
             />
-            <VictoryLabel
-              textAnchor="middle"
-              style={{
-                fontSize: 17,
-                color: '#4a4a4a',
-              }}
-              dy={-10}
-              x={200}
-              y={200}
-              text={data.reduce(
-                (v, { value, fractions }) =>
-                  typeof fractions === 'number' ? v + fractions : v + value,
-                0,
-              )}
-            />
-            <VictoryLabel
-              textAnchor="middle"
-              style={{
-                fontSize: 11,
-                color: '#4a4a4a',
-              }}
-              dy={10}
-              x={200}
-              y={200}
-              text={label}
-            />
+            <G>
+              <VictoryLabel
+                textAnchor="middle"
+                style={{
+                  fontSize: 17,
+                  color: '#4a4a4a',
+                }}
+                dy={-10}
+                x={200}
+                y={200}
+                text={data.reduce(
+                  (v, { value, fractions }) =>
+                    typeof fractions === 'number' ? v + fractions : v + value,
+                  0,
+                )}
+              />
+            </G>
+            <G>
+              <VictoryLabel
+                textAnchor="middle"
+                style={{
+                  fontSize: 11,
+                  color: '#4a4a4a',
+                }}
+                dy={10}
+                x={200}
+                y={200}
+                text={label}
+              />
+            </G>
           </Svg>
         </VoteResultsPieWrapper>
         {showNumbers && (
