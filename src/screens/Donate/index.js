@@ -232,7 +232,7 @@ class Donate extends Component {
         </Segment>
         {Platform.OS === 'ios' ? (
           <Wrapper>
-            <Text>{`Die verlbeibende Seite steht unter iOS leider nicht zur Verfügung.\n`}</Text>
+            <Text>{`Die verbleibende Seite steht unter iOS leider nicht zur Verfügung.\n`}</Text>
             <Text>
               <Text>Besuchen Sie </Text>
               <TextLink
