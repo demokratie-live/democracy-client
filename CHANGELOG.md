@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - [Support] Typo
 - [Verify] Fix crash click donate after verification
-- [PieCharts] Android: show vote result numbers
+- [PieCharts] Show vote result numbers
 
 ## [1.0.3] - 2018-09-28
 ### Fixed
