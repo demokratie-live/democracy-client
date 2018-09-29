@@ -116,9 +116,9 @@ class Support extends Component {
           <Text>
             {`Ist etwas unklar? Du möchtest bei Problemen unterstützt werden? Der DEMOCRACY Support steht Dir bei Fragen zur Seite.
 
-Um Fehler zu beheben, ist allerdings ein qualifiziertes Feedback notwendig. Deshalb gib uns möglichst viele Informationen zu den von Dir gefunden Fehlern oder Verbesserungsvor-schlägen.
+Um Fehler zu beheben, ist allerdings ein qualifiziertes Feedback notwendig. Deshalb gib uns möglichst viele Informationen zu den von Dir gefundenen Fehlern oder Verbesserungsvorschlägen.
 
-Übermittle uns daher immer einen Screenshot, eine kurze Fehlerbeschreibung sowie Deine Plattform (iOS/Android) und Deine Geräte-bezeichnung (z.B. iPhone SE), damit wir Dir schnellstmöglich helfen können. `}
+Übermittle uns daher immer einen Screenshot, eine kurze Fehlerbeschreibung sowie Deine Plattform (iOS/Android) und Deine Gerätebezeichnung (z.B. iPhone SE), damit wir Dir schnellstmöglich helfen können. `}
           </Text>
           <ContactWrapper>
             <IconWrapper onPress={this.linking(phoneNumber)}>
