@@ -310,6 +310,11 @@ class Donate extends Component {
 
 Donate.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired,
+  onClose: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+};
+
+Donate.defaultProps = {
+  onClose: false,
 };
 
 export default Donate;
