@@ -81,6 +81,7 @@ class Code extends Component {
       });
       if (res.data.requestVerification.succeeded) {
         AsyncStorage.setItem('auth_phoneHash', phoneNumberHash);
+        Keyboard.dismiss();
         this.props.navigator.push({
           screen: 'democracy.SmsVerification.Success',
           backButtonTitle: 'Zurück',

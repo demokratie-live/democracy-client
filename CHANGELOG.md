@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [1.0.4] - 2018-09-29
 ### Fixed
 - [Support] Typo
+- [Verify] Fix crash click donate after verification
 
 ## [1.0.3] - 2018-09-28
 ### Fixed
