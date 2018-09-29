@@ -102,7 +102,7 @@ class PieChart extends Component {
               width: '100%',
               maxWidth: 400,
               height: 'auto',
-              maxHeight: 400,
+              maxHeight: 350,
             }}
           >
             <VictoryPie
