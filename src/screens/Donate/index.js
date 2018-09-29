@@ -114,19 +114,46 @@ class Donate extends Component {
   constructor(props) {
     super(props);
 
-    const menuIcon = Platform.OS === 'ios' ? 'ios-menu' : 'md-menu';
+    if (!props.onClose) {
+      const menuIcon = Platform.OS === 'ios' ? 'ios-menu' : 'md-menu';
 
-    Ionicons.getImageSource(menuIcon, 24, '#FFFFFF').then(icon => {
+      Ionicons.getImageSource(menuIcon, 24, '#FFFFFF').then(icon => {
+        props.navigator.setButtons({
+          leftButtons: [
+            {
+              icon,
+              id: 'menu',
+            },
+          ],
+        });
+      });
+    } else {
+      this.props.navigator.setStyle({
+        navBarBackgroundColor: '#4494d3',
+        navBarButtonColor: '#fff',
+        navBarTextColor: '#fff',
+      });
       props.navigator.setButtons({
-        leftButtons: [
+        leftButtons: [{}],
+        rightButtons: [
           {
-            icon,
-            id: 'menu',
+            title: 'Fertig',
+            id: 'donateFinish',
           },
         ],
       });
-    });
+
+      props.navigator.addOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+    }
   }
+
+  onNavigatorEvent = event => {
+    if (event.type === 'NavBarButtonPress') {
+      if (event.id === 'donateFinish') {
+        this.props.onClose();
+      }
+    }
+  };
 
   linking = url => () => {
     Linking.canOpenURL(url).then(supported => {

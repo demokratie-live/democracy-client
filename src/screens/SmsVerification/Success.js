@@ -75,10 +75,13 @@ class SmsSuccess extends Component {
   };
 
   onDonate = async () => {
-    await this.onClose();
+    // await this.onClose();
     this.props.navigator.showModal({
       screen: 'democracy.Donate',
       title: 'Unterstütze DEMOCRACY'.toUpperCase(),
+      passProps: {
+        onClose: this.onClose,
+      },
     });
   };
 
