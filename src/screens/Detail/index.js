@@ -249,7 +249,7 @@ class Detail extends Component {
               />
             )}
             <ActivityIndex procedureId={procedureId} touchable {...activityIndex} skipFetchData />
-            {date && <DateTime date={date} />}
+            {date && <DateTime date={date} long />}
           </IntroSide>
         </Intro>
         <Content>

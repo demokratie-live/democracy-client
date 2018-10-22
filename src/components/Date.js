@@ -28,7 +28,7 @@ class DateTime extends Component {
   }
   interval = null;
 
-  formatDate = date => {
+  formatDate = ({ date, long }) => {
     if (date) {
       if (date <= new Date()) {
         return m(date).format('DD.MM.YY');
@@ -37,6 +37,9 @@ class DateTime extends Component {
       const days = Math.floor(m.duration(daysDate.diff(m())).asDays());
 
       if (days > 1) {
+        if (long) {
+          return `in ${days} Tagen`;
+        }
         return `${days} Tage`;
       } else if (days === 1) {
         return `morgen`;
@@ -60,11 +63,11 @@ class DateTime extends Component {
   };
 
   render() {
-    const { date } = this.props;
+    const { date, long } = this.props;
     const localDate = new Date(date);
     localDate.setTime(localDate.getTime() + new Date(date).getTimezoneOffset() * 1000 * 60);
 
-    const formattedDate = this.formatDate(localDate);
+    const formattedDate = this.formatDate({ date: localDate, long });
 
     return (
       <DateText
@@ -81,6 +84,11 @@ class DateTime extends Component {
 DateTime.propTypes = {
   date: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string, PropTypes.bool])
     .isRequired,
+  long: PropTypes.bool,
+};
+
+DateTime.defaultProps = {
+  long: false,
 };
 
 export default DateTime;
