@@ -40,30 +40,32 @@ const Wrapper = styled.ScrollView`
 `;
 
 const Intro = styled.View`
-  flex-direction: row;
   background-color: #fff;
-  padding-vertical: 18;
+  padding-top: 18;
+  padding-bottom: 10;
   padding-horizontal: 18;
 `;
 
-const IntroMain = styled.View`
+const IntroTop = styled.View`
+  flex-direction: row;
   flex: 1;
-  padding-right: 10;
 `;
 
 const IntroTitle = styled.Text`
+  flex: 1;
   font-size: 18;
+  margin-right: 12;
 `;
 
 const IntroButtons = styled.View`
   flex-direction: row;
-  align-items: center;
-  padding-top: 20;
+  justify-content: center;
   margin-left: -8;
 `;
 
 const IntroButton = styled.TouchableOpacity`
   align-items: center;
+  justify-content: center;
   width: 40;
 `;
 
@@ -79,8 +81,15 @@ const ShareButtonIcon = styled(Ionicons).attrs({
   color: 'rgb(0, 0, 0)',
 })``;
 
-const IntroSide = styled.View`
+const IntroBottom = styled.View`
+  padding-top: 8;
+  flex-direction: row;
+  align-items: flex-end;
   justify-content: space-between;
+`;
+
+const VoteDate = styled(DateTime)`
+  padding-bottom: 5;
 `;
 
 const TagsWrapper = styled.View`
@@ -96,13 +105,6 @@ const TagsText = styled.Text`
 
 const Content = styled.View`
   flex: 1;
-`;
-
-const VerificationTouch = styled.TouchableOpacity`
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  z-index: 100;
 `;
 
 class Detail extends Component {
@@ -223,8 +225,18 @@ class Detail extends Component {
         refreshControl={<RefreshControl refreshing={networkStatus === 4} onRefresh={refetch} />}
       >
         <Intro>
-          <IntroMain>
+          <IntroTop>
             <IntroTitle>{title}</IntroTitle>
+            <ActivityIndex
+              procedureId={procedureId}
+              touchable
+              verified={verified}
+              {...activityIndex}
+              skipFetchData
+              navigator={navigator}
+            />
+          </IntroTop>
+          <IntroBottom>
             <IntroButtons>
               <IntroButton onPress={toggleNotification}>
                 <NotificationButtonIcon active={notify} />
@@ -233,24 +245,8 @@ class Detail extends Component {
                 <ShareButtonIcon />
               </IntroButton>
             </IntroButtons>
-          </IntroMain>
-          <IntroSide>
-            {verified ? null : (
-              <VerificationTouch
-                onPress={() => {
-                  navigator.showModal({
-                    screen: 'democracy.SmsVerification',
-                    passProps: {
-                      procedureId,
-                      onComplete: this.onComplete,
-                    },
-                  });
-                }}
-              />
-            )}
-            <ActivityIndex procedureId={procedureId} touchable {...activityIndex} skipFetchData />
-            {date && <DateTime date={date} long />}
-          </IntroSide>
+            {date && <VoteDate date={date} long />}
+          </IntroBottom>
         </Intro>
         <Content>
           {tags.length > 0 && (

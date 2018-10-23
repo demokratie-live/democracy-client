@@ -38,10 +38,13 @@ class DateTime extends Component {
 
       if (days > 1) {
         if (long) {
-          return `in ${days} Tagen`;
+          return `Abstimmung in ${days} Tagen`;
         }
         return `${days} Tage`;
       } else if (days === 1) {
+        if (long) {
+          return `Abstimmung morgen`;
+        }
         return `morgen`;
       }
       // Force update Time
@@ -63,7 +66,7 @@ class DateTime extends Component {
   };
 
   render() {
-    const { date, long } = this.props;
+    const { date, long, ...rest } = this.props;
     const localDate = new Date(date);
     localDate.setTime(localDate.getTime() + new Date(date).getTimezoneOffset() * 1000 * 60);
 
@@ -74,6 +77,7 @@ class DateTime extends Component {
         visible={localDate}
         date={localDate}
         soon={formattedDate === 'morgen' || formattedDate.indexOf(':') !== -1}
+        {...rest}
       >
         {formattedDate}
       </DateText>
