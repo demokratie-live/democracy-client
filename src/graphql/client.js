@@ -11,6 +11,7 @@ import { createNetworkStatusNotifier } from 'react-apollo-network-status';
 import DeviceInfo from 'react-native-device-info';
 import { sha256 } from 'react-native-sha256';
 import jwtDecode from 'jwt-decode';
+import { RestLink } from 'apollo-link-rest';
 
 import Configuration from '../config';
 
@@ -177,6 +178,10 @@ const { link: loadingIndicator } = createNetworkStatusNotifier({
 
 const stateLink = withClientState({ resolvers, cache, defaults, typeDefs });
 
+const restLink = new RestLink({
+  uri: 'https://democracy-deutschland.de/api.php', // ?call=donation_status
+});
+
 client = new ApolloClient({
   cache,
   link: ApolloLink.from([
@@ -185,6 +190,7 @@ client = new ApolloClient({
     authLinkMiddleware,
     authLinkAfterware,
     stateLink,
+    restLink,
     new HttpLink({ uri: Configuration.GRAPHQL_URL }),
   ]),
 });

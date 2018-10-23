@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
-import { Platform, Linking, Alert } from 'react-native';
+import { Platform, Linking, Alert, View } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import DeviceInfo from 'react-native-device-info';
+import { graphql } from 'react-apollo';
 
 import Config from '../../config';
 
@@ -12,6 +13,9 @@ import Segment from '../Detail/Segment';
 import DonatedBox from './DonatedBox';
 import Entry from './Entry';
 import EntryHeader from './EntryHeader';
+
+// GraphQl
+import DONATION_STATUS from '../../graphql/queries/donationStatus';
 
 import {
   donate1Head,
@@ -170,93 +174,71 @@ class Donate extends Component {
     });
   };
 
+  renderDonationEntries = entries =>
+    entries.map(entry => {
+      switch (entry.type) {
+        case 0:
+          return this.renderEntryHeadline(entry);
+        case 1:
+          return this.renderEntry(entry);
+
+        default:
+          return null;
+      }
+    });
+
+  renderEntryHeadline = entry => (
+    <EntryHeader key={entry.id} title={entry.text_description} style={{ marginTop: 18 }} />
+  );
+
+  renderEntry = entry => (
+    <Entry
+      key={entry.id}
+      target={entry.max}
+      occupied={entry.value}
+      money={`${entry.max}€`}
+      dueDate={entry.text_date}
+      description={`${entry.text_description} ${entry.text_cost} ${entry.text_description_subtext}`}
+    />
+  );
+
   render() {
     const version = `Version: ${DeviceInfo.getReadableVersion()
       .split('.')
       .slice(0, 3)
       .join('.')} (${DeviceInfo.getBuildNumber()})`;
 
+    const { donationStatus } = this.props;
+
     return (
       <ScrollWrapper>
-        <Wrapper>
-          <Headline>{donate1Head}</Headline>
-          <Text>{donate1Text}</Text>
-          <DonatedBox style={{ marginTop: 21 }} target={10830} occupied={881} />
-        </Wrapper>
-        <Segment title="Details zum Finanzierungsbedarf" open>
-          <Entry
-            target={10830}
-            occupied={881}
-            money="881€ von 10.830€"
-            description="min. Finanzierungsziel/Monat"
-          />
-          <EntryHeader title={`Infrastrukturkosten`.toUpperCase()} style={{ marginTop: 18 }} />
-          <Entry
-            target={500}
-            occupied={44}
-            money="500€"
-            dueDate="(ab 01.10.18)"
-            description="Serverkosten zum Livebetrieb"
-          />
-          <Entry
-            target={720}
-            occupied={0}
-            money="720€"
-            dueDate="(ab 01.10.18)"
-            description="SMS-Versandkosten bei 10.000 Registrierungen"
-          />
-          <Entry
-            target={30}
-            occupied={30}
-            money="30€"
-            dueDate="(ab sofort)"
-            description="Typeform Pro Lizenz (Fragebögen)"
-          />
-          <EntryHeader title={`Entwicklung`.toUpperCase()} />
-          <Entry
-            target={2970}
-            occupied={0}
-            money="2970€"
-            dueDate="(ab 01.02.19)"
-            description="AG-Brutto-Gehaltskosten Manuel Ruck (1.640€ netto)"
-          />
-          <Entry
-            target={2970}
-            occupied={0}
-            money="2970€"
-            dueDate="(ab 01.02.19)"
-            description="AG-Brutto-Gehaltskosten Ulf Gebhardt (1.640€ netto)"
-          />
-          <EntryHeader title={`Produktdesign und Verwaltung`.toUpperCase()} />
-          <Entry
-            target={727}
-            occupied={727}
-            money="727€"
-            dueDate="(ab sofort)"
-            description="AG-Brutto-Gehaltskosten Marius Krüger (500€ netto)"
-          />
-          <Entry
-            target={2970}
-            occupied={0}
-            money="2970€"
-            dueDate="(ab 01.04.19)"
-            description="AG-Brutto-Gehaltskosten Marius Krüger (1.640€ netto)"
-          />
-          <Entry
-            target={595}
-            occupied={0}
-            money="595€"
-            dueDate="(ab sofort)"
-            description="AG-Brutto-Gehaltskosten Hilfskraft (450€ netto)"
-          />
-          <Entry
-            target={75}
-            occupied={75}
-            money="75€"
-            dueDate="(ab sofort)"
-            description="Lohnabrechnung via Steuerberatung"
-          />
-        </Segment>
+        {donationStatus &&
+          donationStatus.result && (
+            <View>
+              <Wrapper>
+                <Headline>{donate1Head}</Headline>
+                <Text>{donate1Text}</Text>
+                <Text>{donate1Text}</Text>
+                <Text>Spendenstand vom {donationStatus.result.donation_date}</Text>
+                <DonatedBox
+                  style={{ marginTop: 21 }}
+                  target={donationStatus.result.donation_value_goal}
+                  occupied={donationStatus.result.donation_value}
+                />
+              </Wrapper>
+              <Segment title="Details zum Finanzierungsbedarf" open>
+                <Entry
+                  target={donationStatus.result.donation_value_goal}
+                  occupied={donationStatus.result.donation_value}
+                  money={`${donationStatus.result.donation_value}€ von ${
+                    donationStatus.result.donation_value_goal
+                  }€`}
+                  description="min. Finanzierungsziel/Monat"
+                />
+                {this.renderDonationEntries(donationStatus.result.donation_data)}
+              </Segment>
+            </View>
+          )}
         {Platform.OS === 'ios' ? (
           <Wrapper>
             <Text>{`Die verbleibende Seite steht unter iOS leider nicht zur Verfügung.\n`}</Text>
@@ -311,10 +293,19 @@ class Donate extends Component {
 Donate.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired,
   onClose: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+  donationStatus: PropTypes.shape(),
 };
 
 Donate.defaultProps = {
   onClose: false,
+  donationStatus: {},
 };
 
-export default Donate;
+export default graphql(DONATION_STATUS, {
+  options: {
+    fetchPolicy: 'cache-and-network',
+  },
+  props: ({ data: { donationStatus } }) => ({
+    donationStatus,
+  }),
+})(Donate);
