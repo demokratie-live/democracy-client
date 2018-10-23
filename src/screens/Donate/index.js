@@ -242,15 +242,6 @@ class Donate extends Component {
         {Platform.OS === 'ios' ? (
           <Wrapper>
             <Text>{`Die verbleibende Seite steht unter iOS leider nicht zur Verfügung.\n`}</Text>
-            <Text>
-              <Text>Besuchen Sie </Text>
-              <TextLink
-                onPress={() => Linking.openURL('https://www.democracy-deutschland.de/#!donate')}
-              >
-                unsere Webseite
-              </TextLink>
-              <Text> für mehr Informationen.</Text>
-            </Text>
             <Version>{version}</Version>
           </Wrapper>
         ) : (
