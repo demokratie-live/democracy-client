@@ -31,7 +31,7 @@ const FilterData = [
     name: 'activity',
     data: [
       {
-        title: 'Alle Aktivitäten',
+        title: 'Eigene Aktivitäten',
         value: true,
         data: [
           // {
