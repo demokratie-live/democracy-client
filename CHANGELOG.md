@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.0.X] - 2018-XX-XX
+### Changed
+- [Detail] Show government vote result without own voting for past procedures
+
 ## [1.0.4] - 2018-09-29
 ### Fixed
 - [Support] Typo
@@ -75,7 +79,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Push Notifications
 - Add deep linking
 - [Details] Add PDF-reader [#249](https://github.com/demokratie-live/democracy-client/issues/249)
-- Add time until goverment-vote [#358](https://github.com/demokratie-live/democracy-client/issues/358)
+- Add time until government-vote [#358](https://github.com/demokratie-live/democracy-client/issues/358)
 - [Details] History segment of current states to Detail page
 - [iOS] network indicator in status bar [#367](https://github.com/demokratie-live/democracy-client/issues/367)
 - [ListView] load more indicator [#368](https://github.com/demokratie-live/democracy-client/issues/368)
