@@ -76,7 +76,11 @@ class DateTime extends Component {
       <DateText
         visible={localDate}
         date={localDate}
-        soon={formattedDate === 'morgen' || formattedDate.indexOf(':') !== -1}
+        soon={
+          formattedDate === 'morgen' ||
+          formattedDate === 'Abstimmung morgen' ||
+          formattedDate.indexOf(':') !== -1
+        }
         {...rest}
       >
         {formattedDate}
