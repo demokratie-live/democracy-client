@@ -180,8 +180,8 @@ class Donate extends Component {
       <ScrollWrapper>
         <Wrapper>
           <Headline>{donate1Head}</Headline>
-          <Text>{donate1Text}</Text>
-          <DonatedBox style={{ marginTop: 21 }} target={10830} occupied={881} />
+          <Text style={{ marginBottom: 21 }}>{donate1Text}</Text>
+          <DonatedBox target={10830} occupied={881} />
         </Wrapper>
         <Segment title="Details zum Finanzierungsbedarf" open>
           <Entry

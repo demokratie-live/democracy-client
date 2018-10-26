@@ -6,7 +6,6 @@ const Wrapper = styled.View`
   flex: 1;
   width: 100%;
   height: 68;
-  max-height: 68;
   background-color: rgba(68, 148, 211, 0.25);
   justify-content: center;
   align-items: center;
@@ -16,7 +15,7 @@ const Wrapper = styled.View`
 const FillBox = styled.View`
   position: absolute;
   align-self: flex-start;
-  height: 68;
+  height: 100%;
   width: ${({ width }) => `${width}%`};
   background-color: #4494d3;
 `;
