@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - [Detail] remove pixel line on empty barChart
 - [Donation] Fix Donation bar gap
+- [Charts] unified all Chart-Fonts [#573](https://github.com/demokratie-live/democracy-client/issues/573)
 
 ### Added
 - [Detail] government named vote info

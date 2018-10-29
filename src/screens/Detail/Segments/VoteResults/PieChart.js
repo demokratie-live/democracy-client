@@ -133,6 +133,7 @@ class PieChart extends Component {
                 style={{
                   fontSize: 17,
                   color: '#4a4a4a',
+                  fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue-Thin' : 'sans-serif-light',
                 }}
                 dy={-10}
                 x={200}
@@ -150,6 +151,7 @@ class PieChart extends Component {
                 style={{
                   fontSize: 11,
                   color: '#4a4a4a',
+                  fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue-Thin' : 'sans-serif-light',
                 }}
                 dy={10}
                 x={200}

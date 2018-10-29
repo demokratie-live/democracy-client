@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import { VictoryChart, VictoryBar, VictoryStack, VictoryAxis } from 'victory-native';
@@ -187,6 +187,7 @@ class PartyChart extends Component {
                     },
                     labels: {
                       axis: { stroke: 'none' },
+                      fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue-Thin' : 'sans-serif-light',
                     },
                   }}
                 />
