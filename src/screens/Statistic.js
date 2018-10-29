@@ -138,7 +138,10 @@ class Statistic extends Component {
             <G>
               <VictoryLabel
                 textAnchor="middle"
-                style={{ fontSize: 30 }}
+                style={{
+                  fontSize: 30,
+                  fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue-Thin' : 'sans-serif-light',
+                }}
                 x={200}
                 y={200}
                 text={`${Math.round(100 * votedProcedures / proceduresCount * 10) / 10}%`}

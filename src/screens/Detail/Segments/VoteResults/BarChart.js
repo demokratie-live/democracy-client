@@ -35,7 +35,7 @@ const VoteResultNumber = styled.Text`
   font-size: 12;
 `;
 const VoteResultLabel = styled.Text`
-  color: #d5d5d5;
+  color: rgb(142, 142, 147);
   font-size: 10;
 `;
 
@@ -212,8 +212,8 @@ class BarChart extends Component {
                     labels: { fill: 'white' },
                     data: {
                       fill: d => {
-                        if (!d.fillColor) {
-                          // console.log("STYLE VictoryBar", d);
+                        if (d.y === 0) {
+                          return '#fff';
                         }
                         return d.fillColor;
                       },

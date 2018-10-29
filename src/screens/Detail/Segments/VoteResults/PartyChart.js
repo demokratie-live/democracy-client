@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import { VictoryChart, VictoryBar, VictoryStack, VictoryAxis } from 'victory-native';
@@ -35,7 +35,7 @@ const VoteResultNumber = styled.Text`
   font-size: 12;
 `;
 const VoteResultLabel = styled.Text`
-  color: #d5d5d5;
+  color: rgb(142, 142, 147);
   font-size: 10;
 `;
 
@@ -187,6 +187,7 @@ class PartyChart extends Component {
                     },
                     labels: {
                       axis: { stroke: 'none' },
+                      fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue-Thin' : 'sans-serif-light',
                     },
                   }}
                 />

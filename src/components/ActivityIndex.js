@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { graphql, compose } from 'react-apollo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Navigator } from 'react-native-navigation';
 
 import INCREASE_ACTIVITY from '../graphql/mutations/increaseActivity';
 
@@ -32,6 +33,13 @@ const Arrow = styled(Ionicons).attrs({
   text-align-vertical: top;
 `;
 
+const VerificationTouch = styled.TouchableOpacity`
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 100;
+`;
+
 class ActivityIndex extends Component {
   shouldComponentUpdate(nextProps) {
     const { active, activityIndex } = this.props;
@@ -42,10 +50,32 @@ class ActivityIndex extends Component {
   }
 
   render() {
-    const { active, touchable, activityIndex, increaseActivity, listView } = this.props;
+    const {
+      active,
+      touchable,
+      activityIndex,
+      increaseActivity,
+      listView,
+      verified,
+      procedureId,
+      navigator,
+    } = this.props;
     if (touchable && !active) {
       return (
         <WrapperTouchable onPress={increaseActivity}>
+          {verified ? null : (
+            <VerificationTouch
+              onPress={() => {
+                navigator.showModal({
+                  screen: 'democracy.SmsVerification',
+                  passProps: {
+                    procedureId,
+                    onComplete: this.onComplete,
+                  },
+                });
+              }}
+            />
+          )}
           <Arrow active={active} listView={listView} />
           <Counter listView={listView}>{activityIndex}</Counter>
         </WrapperTouchable>
@@ -67,6 +97,8 @@ ActivityIndex.propTypes = {
   active: PropTypes.bool,
   touchable: PropTypes.bool,
   listView: PropTypes.bool,
+  verified: PropTypes.bool,
+  navigator: PropTypes.instanceOf(Navigator),
 };
 
 ActivityIndex.defaultProps = {
@@ -74,6 +106,8 @@ ActivityIndex.defaultProps = {
   touchable: false,
   listView: false,
   activityIndex: 0,
+  verified: true,
+  navigator: null,
 };
 
 export default compose(
