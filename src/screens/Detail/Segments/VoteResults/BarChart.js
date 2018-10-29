@@ -212,8 +212,8 @@ class BarChart extends Component {
                     labels: { fill: 'white' },
                     data: {
                       fill: d => {
-                        if (!d.fillColor) {
-                          // console.log("STYLE VictoryBar", d);
+                        if (d.y === 0) {
+                          return '#fff';
                         }
                         return d.fillColor;
                       },

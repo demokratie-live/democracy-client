@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [Details] Adjusted color of legend-labels below charts for better readability [#566](https://github.com/demokratie-live/democracy-client/issues/566)
 - [Donate] get donation status by API
 
+### Fixed
+- [Detail] remove pixel line on empty barChart
+
 ## [1.0.4] - 2018-09-29
 ### Fixed
 - [Support] Typo
