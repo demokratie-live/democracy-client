@@ -218,9 +218,8 @@ class Donate extends Component {
               <Wrapper>
                 <Headline>{donate1Head}</Headline>
                 <Text>{donate1Text}</Text>
-                <Text>Spendenstand vom {donationStatus.result.donation_date}</Text>
+                <Text style={{ marginBottom: 21 }}>Spendenstand vom {donationStatus.result.donation_date}</Text>
                 <DonatedBox
-                  style={{ marginTop: 21 }}
                   target={donationStatus.result.donation_value_goal}
                   occupied={donationStatus.result.donation_value}
                 />
