@@ -35,7 +35,6 @@ const LoadingWrapper = styled.View`
 const Reload = styled.Button``;
 
 const Wrapper = styled.ScrollView`
-  flex: 1;
   background-color: #fff;
 `;
 
@@ -43,12 +42,11 @@ const Intro = styled.View`
   background-color: #fff;
   padding-top: 18;
   padding-bottom: 10;
-  padding-horizontal: 18;
+  margin-horizontal: 18;
 `;
 
 const IntroTop = styled.View`
   flex-direction: row;
-  flex: 1;
 `;
 
 const IntroTitle = styled.Text`
