@@ -184,25 +184,25 @@ const VoteResults = props => {
     return null;
   };
 
-  if (communityVotes.voted) {
-    if (type === 'community') {
-      return (
-        <Segment title="Communityergebnis" open scrollTo={scrollTo} fullWidth>
-          <Swiper
-            loadMinimal
-            style={{
-              height: Platform.OS === 'ios' ? 'auto' : 420,
-              maxHeight: 420,
-            }}
-          >
-            {renderCommuntiyResult()}
-          </Swiper>
-          <RepresentativeText>
-            Dieses Ergebnis wurde nicht auf seine Repräsentativität überprüft.
-          </RepresentativeText>
-        </Segment>
-      );
-    }
+  if (communityVotes.voted && type === 'community') {
+    return (
+      <Segment title="Communityergebnis" open scrollTo={scrollTo} fullWidth>
+        <Swiper
+          loadMinimal
+          style={{
+            height: Platform.OS === 'ios' ? 'auto' : 420,
+            maxHeight: 420,
+          }}
+        >
+          {renderCommuntiyResult()}
+        </Swiper>
+        <RepresentativeText>
+          Dieses Ergebnis wurde nicht auf seine Repräsentativität überprüft.
+        </RepresentativeText>
+      </Segment>
+    );
+  }
+  if (type === 'government') {
     return renderGovernmentResult();
   }
   return null;

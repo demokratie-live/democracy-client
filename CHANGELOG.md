@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [Filter] renamed "Aktivitäten" -> "Eigene Aktivitäten" [#532](https://github.com/demokratie-live/democracy-client/issues/532)
 - [Details] Adjusted color of legend-labels below charts for better readability [#566](https://github.com/demokratie-live/democracy-client/issues/566)
 - [Donate] get donation status by API
+- [Detail] Show government vote result without own voting for past procedures
 
 ### Fixed
 - [Detail] remove pixel line on empty barChart
@@ -84,7 +85,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Push Notifications
 - Add deep linking
 - [Details] Add PDF-reader [#249](https://github.com/demokratie-live/democracy-client/issues/249)
-- Add time until goverment-vote [#358](https://github.com/demokratie-live/democracy-client/issues/358)
+- Add time until government-vote [#358](https://github.com/demokratie-live/democracy-client/issues/358)
 - [Details] History segment of current states to Detail page
 - [iOS] network indicator in status bar [#367](https://github.com/demokratie-live/democracy-client/issues/367)
 - [ListView] load more indicator [#368](https://github.com/demokratie-live/democracy-client/issues/368)
