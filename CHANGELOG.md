@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - [Detail] remove pixel line on empty barChart
 
+### Added
+- [Detail] government named vote info
+
 ## [1.0.4] - 2018-09-29
 ### Fixed
 - [Support] Typo

@@ -164,6 +164,9 @@ const VoteResults = props => {
       return (
         <Segment title="Bundestagsergebnis" open scrollTo={scrollTo} fullWidth>
           {renderGovernmentVoteDetails()}
+          <RepresentativeText style={{ marginTop: -35 }}>
+            {voteResults.namedVote ? 'Namentliche Abstimmung' : 'Nicht-Namentlich Abstimmung'}
+          </RepresentativeText>
         </Segment>
       );
     }
