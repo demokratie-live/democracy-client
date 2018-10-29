@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - [Filter] renamed "Aktivitäten" -> "Eigene Aktivitäten" [#532](https://github.com/demokratie-live/democracy-client/issues/532)
 - [Details] Adjusted color of legend-labels below charts for better readability [#566](https://github.com/demokratie-live/democracy-client/issues/566)
+- [Donate] get donation status by API
 
 ## [1.0.4] - 2018-09-29
 ### Fixed

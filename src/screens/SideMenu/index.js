@@ -2,15 +2,17 @@
 import React from 'react';
 import { Platform, StatusBar } from 'react-native';
 import styled from 'styled-components/native';
-import { graphql, Query } from 'react-apollo';
+import { graphql, Query, compose } from 'react-apollo';
 import { PropTypes } from 'prop-types';
 import { Navigator } from 'react-native-navigation';
 
 import Navigation from './Navigation';
 import DonatedBox from '../Donate/DonatedBox';
 
+// GraphQL
 import currentScreenQuery from '../../graphql/queries/currentScreen';
 import GET_STATISTIC from '../../graphql/queries/getStatistic';
+import DONATION_STATUS from '../../graphql/queries/donationStatus';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -79,7 +81,7 @@ const DonationTouch = styled.TouchableOpacity`
   height: 68;
 `;
 
-const SideMenu = ({ data: { currentScreen }, navigator }) => {
+const SideMenu = ({ donationStatus, data: { currentScreen }, navigator }) => {
   const navigateTo = ({ screenId, title }) => {
     if (screenId) {
       if (screenId === 'democracy.Instructions' || screenId === 'democracy.SmsVerification') {
@@ -102,6 +104,7 @@ const SideMenu = ({ data: { currentScreen }, navigator }) => {
       title: 'Unterstütze DEMOCRACY'.toUpperCase(),
     });
   };
+
   return (
     <Wrapper>
       <StatusBar barStyle="light-content" />
@@ -111,7 +114,6 @@ const SideMenu = ({ data: { currentScreen }, navigator }) => {
       {Platform.OS === 'ios' && <StatusBackground />}
       <Query query={GET_STATISTIC} fetchPolicy="cache-and-network">
         {({ loading, data }) => {
-          console.log('GET_STATISTIC', loading, data);
           let verified = null;
           const voteStatistic = data ? data.voteStatistic : null;
           if (!loading && !voteStatistic) verified = false;
@@ -148,17 +150,20 @@ const SideMenu = ({ data: { currentScreen }, navigator }) => {
                 navigateTo={navigateTo}
                 verified={verified}
               />
-              <DonateBoxWrapper>
-                <DonationTouch onPress={donate}>
-                  <DonatedBox
-                    style={{ backgroundColor: '#4494d390' }}
-                    descriptionTextStyle={{ color: '#fff' }}
-                    moneyTextStyle={{ color: '#fff' }}
-                    target={10830}
-                    occupied={881}
-                  />
-                </DonationTouch>
-              </DonateBoxWrapper>
+              {donationStatus &&
+                donationStatus.result && (
+                  <DonateBoxWrapper>
+                    <DonationTouch onPress={donate}>
+                      <DonatedBox
+                        style={{ backgroundColor: '#4494d390' }}
+                        descriptionTextStyle={{ color: '#fff' }}
+                        moneyTextStyle={{ color: '#fff' }}
+                        target={donationStatus.result.donation_value_goal}
+                        occupied={donationStatus.result.donation_value}
+                      />
+                    </DonationTouch>
+                  </DonateBoxWrapper>
+                )}
             </Content>
           );
         }}
@@ -170,6 +175,18 @@ const SideMenu = ({ data: { currentScreen }, navigator }) => {
 SideMenu.propTypes = {
   data: PropTypes.shape().isRequired,
   navigator: PropTypes.instanceOf(Navigator).isRequired,
+  donationStatus: PropTypes.shape(),
 };
 
-export default graphql(currentScreenQuery)(SideMenu);
+SideMenu.defaultProps = {
+  donationStatus: {},
+};
+
+export default compose(
+  graphql(currentScreenQuery),
+  graphql(DONATION_STATUS, {
+    props: ({ data: { donationStatus } }) => ({
+      donationStatus,
+    }),
+  }),
+)(SideMenu);
