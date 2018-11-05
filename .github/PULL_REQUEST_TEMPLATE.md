@@ -9,8 +9,10 @@
 - [X] None
 
 ### Checklist
+<!-- Anything important to be thought of when deploying?
 - [ ] Env-Variables adjustment needed
 - [ ] Breaking/critical change
+-->
 - [X] None
 
 ### How2Test
