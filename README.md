@@ -2,7 +2,7 @@
 
 # Democracy-Client &nbsp; <a href="https://github.com/kriasoft/nodejs-api-starter/stargazers" target="_blank"><img src="https://img.shields.io/github/stars/demokratie-live/democracy-client.svg?style=social&label=Star&maxAge=3600" height="20"/></a> <a href="https://twitter.com/democracy_de" target="_blank"><img src="https://img.shields.io/twitter/follow/democracy_de.svg?style=social&label=Follow&maxAge=3600" height="20"/></a> <a href="https://www.facebook.com/democracygermany/" target="_blank"><img src="https://github.com/demokratie-live/democracy-assets/blob/master/docu/facebook.png" height="20"/></a> <a href="https://discord.gg/Pdu3ZEV" target="_blank"><img src="https://github.com/demokratie-live/democracy-assets/blob/master/docu/discord.png" height="20"/></a>
 
-[![Build Status](https://travis-ci.org/demokratie-live/democracy-client.svg?branch=master)](https://travis-ci.org/demokratie-live/democracy-client) &nbsp; [![BrowserStack Status](https://www.browserstack.com/app-automate/badge.svg?badge_key=ZzRuckM0N1UzSFZ3ZFd1cDh6Zzk5UT09LS11UUJiaDZVOTZ6S3ZwRURzMzgrVnhRPT0=--5cad88eae285631b741017a6d5c827260db8a86f)](https://www.browserstack.com/app-automate/public-build/ZzRuckM0N1UzSFZ3ZFd1cDh6Zzk5UT09LS11UUJiaDZVOTZ6S3ZwRURzMzgrVnhRPT0=--5cad88eae285631b741017a6d5c827260db8a86f)
+[![Build Status](https://travis-ci.org/demokratie-live/democracy-client.svg?branch=master)](https://travis-ci.org/demokratie-live/democracy-client)
 
 The Client for the DEMOCRACY App. This includes iOS and Android generated from the same Codebase.
 
@@ -41,17 +41,12 @@ cd democracy-client
 yarn install
 ```
 
-Create the config file and modify it accordingly
+### Create the config file and modify it accordingly
 ```
 cp ./.env.debug.example ./.env.debug
 touch ./.env.debug
 ```
 
-run the project
-```
-yarn start:android
-yarn start:ios
-```
 
 ### Compile and start Version of your choosing
 ```
@@ -77,7 +72,7 @@ Deployment is done with Travis CI
 ## Contributing
 
 Anyone and everyone is welcome to [contribute](CONTRIBUTING.md). Start by checking out the list of
-[open issues](https://github.com/demokratie-live/democracy-client/issues) marked.
+[open issues](https://github.com/demokratie-live/democracy-client/issues).
 
 ## License
 
