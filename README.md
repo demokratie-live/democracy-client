@@ -34,11 +34,25 @@ The Client for the DEMOCRACY App. This includes iOS and Android generated from t
 
 ## Getting started
 
-Clone the git repo & run the project
+Clone the git repo
 ```
 git clone git@github.com:demokratie-live/democracy-client.git
 cd democracy-client
 yarn install
+```
+
+Create the config file and modify it accordingly
+```
+cp ./.env.debug.example ./.env.debug
+```
+
+run the project
+```
+yarn start:android
+```
+or
+```
+yarn start:ios
 ```
 
 ### Compile and start Version of your choosing
