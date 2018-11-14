@@ -88,10 +88,12 @@ class VoteList extends Component {
               this.setState({
                 selectedIndex: event.nativeEvent.selectedSegmentIndex,
               });
-              this.scrollView.scrollTo({
-                y: 0,
-                x: event.nativeEvent.selectedSegmentIndex * this.width,
-              });
+              if (this.scrollView) {
+                this.scrollView.scrollTo({
+                  y: 0,
+                  x: event.nativeEvent.selectedSegmentIndex * this.width,
+                });
+              }
             }}
           />
         </SegmentControlsWrapper>
@@ -106,10 +108,12 @@ class VoteList extends Component {
         <ScrollView
           onContentSizeChange={contentWidth => {
             this.width = contentWidth / this.lists.length;
-            this.scrollView.scrollTo({
-              y: 0,
-              x: this.state.selectedIndex * this.width,
-            });
+            if (this.scrollView) {
+              this.scrollView.scrollTo({
+                y: 0,
+                x: this.state.selectedIndex * this.width,
+              });
+            }
           }}
           onMomentumScrollEnd={this.onScrollEndDrag}
           innerRef={e => {
