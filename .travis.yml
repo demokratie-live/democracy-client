@@ -77,7 +77,7 @@ matrix:
 
   # ios test
   - if: type IN (pull_request)
-    osx_image: xcode9.2
+    osx_image: xcode10.1
     language: objective-c
     before_install:
     - cd ios

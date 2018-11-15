@@ -154,7 +154,7 @@ class Detail extends Component {
     } else {
       scrollTo = y;
     }
-    if (scrollTo > 0) {
+    if (scrollTo > 0 && this.scrollView) {
       this.scrollView.scrollTo({ y: scrollTo });
     }
   };
