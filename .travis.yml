@@ -39,7 +39,7 @@ matrix:
       components:
       - tools
       - platform-tools
-      # android 23,25,26
+      # android 23,25,26,27
       - build-tools-23.0.1
       - build-tools-25.0.0
       - build-tools-25.0.1
@@ -48,9 +48,11 @@ matrix:
       - build-tools-26.0.1
       - build-tools-26.0.2
       - build-tools-26.0.3
+      - build-tools-27.0.3
       - android-23
       - android-25
       - android-26
+      - android-27
       # extra
       - extra-android-m2repository
       - extra-google-google_play_services
