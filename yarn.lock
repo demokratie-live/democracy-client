@@ -8014,14 +8014,6 @@ react-native-device-info@0.21.2:
   resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-0.21.2.tgz#82209bf529f5cae7eab1d6512b1cfb03e29ced30"
   integrity sha512-mzOPNTpZIUaaTsxEFJ0fo7C8uYNZCWHfZg+s7gV7i4dLHPdPM2HVKZpXa2W/NpP+CFoXT0aC6S4Oe8ka5LmWzQ==
 
-react-native-fetch-blob@^0.10.8:
-  version "0.10.8"
-  resolved "https://registry.yarnpkg.com/react-native-fetch-blob/-/react-native-fetch-blob-0.10.8.tgz#4fc256abae0cb5f10e7c41f28c11b3ff330d72a9"
-  integrity sha1-T8JWq64MtfEOfEHyjBGz/zMNcqk=
-  dependencies:
-    base-64 "0.1.0"
-    glob "7.0.6"
-
 react-native-iphone-x-helper@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.0.3.tgz#7a2f1e0574e899a0f1d426e6167fd98990083214"
@@ -8061,9 +8053,10 @@ react-native-navigation@1.1.443:
     core-js "^1.0.0"
     uuid "^2.0.3"
 
-"react-native-pdf@https://github.com/wonday/react-native-pdf#not_use_tiledlayer":
-  version "3.0.16"
-  resolved "https://github.com/wonday/react-native-pdf#463d73fb1e81aa577103af07d10ab3a63801b2da"
+react-native-pdf@^5.0.9:
+  version "5.0.9"
+  resolved "https://registry.yarnpkg.com/react-native-pdf/-/react-native-pdf-5.0.9.tgz#86113f316f37a661c43404430cf75d35edb5248b"
+  integrity sha512-k7JdNc4sdxcJVhvrefaDC8O4seHOZLcPnu2nZ861zdqhMbVPuekQXEgGm1nafDG20wRJ9ct9TU8y0YAT8VeeUw==
   dependencies:
     crypto-js "^3.1.9-1"
     prop-types "^15.5.10"
@@ -8623,6 +8616,14 @@ rimraf@~2.2.6:
   version "2.2.8"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
   integrity sha1-5Dm+Kq7jJzIZUnMPmaiSnk/FBYI=
+
+rn-fetch-blob@^0.10.13:
+  version "0.10.13"
+  resolved "https://registry.yarnpkg.com/rn-fetch-blob/-/rn-fetch-blob-0.10.13.tgz#e0fd5eac1a3a872563b35061353d96c4e51ae1cc"
+  integrity sha512-CEz7coPlMMUpX5RB+k7Mqzq+eYYfZuFbpuNkFYhvEFnT5DnZyqdNF50Xk6BuZyqZwAjNvsQ1CUMz7XDvuN10DA==
+  dependencies:
+    base-64 "0.1.0"
+    glob "7.0.6"
 
 rsvp@^3.3.3:
   version "3.6.2"
