@@ -2,7 +2,7 @@ import {
   Navigation,
   ScreenVisibilityListener as RNNScreenVisibilityListener,
 } from 'react-native-navigation';
-import { NetInfo } from 'react-native';
+import { NetInfo, YellowBox } from 'react-native';
 // import Reactotron from "reactotron-react-native";
 
 import Config from './src/config';
@@ -20,6 +20,8 @@ import UPDATE_NETWORK_STATUS from './src/graphql/mutations/updateNetworkStatus';
 import topTabs from './src/screens/VoteList/topTabs';
 
 import './src/services/browserLinks';
+
+YellowBox.ignoreWarnings(['Require cycle:', 'Attempted to invoke']);
 
 // Reactotron.configure() // controls connection & communication settings
 //  .useReactNative() // add all built-in react native plugins
