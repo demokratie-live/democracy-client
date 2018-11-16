@@ -130,7 +130,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.democracyclient"
+        applicationId "de.democracydeutschland.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode getVersionCode()
