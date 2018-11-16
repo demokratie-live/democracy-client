@@ -11,9 +11,9 @@ import Button from './Components/Button';
 // GRAPHQL
 import GET_STATISTIC from '../../graphql/queries/getStatistic';
 
-const Container = styled.ScrollView.attrs({
+const Container = styled.ScrollView.attrs(() => ({
   contentContainerStyle: { flexGrow: 1, alignItems: 'center', justifyContent: 'space-between' },
-})`
+}))`
   flex: 1;
   background: #fff;
   padding-top: ${() => {

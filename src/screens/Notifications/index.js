@@ -44,11 +44,11 @@ const SwitchItemTitle = styled.Text`
   align-self: center;
 `;
 
-const SwitchItemIcon = styled(Ionicons).attrs({
+const SwitchItemIcon = styled(Ionicons).attrs(() => ({
   color: '#000',
   size: 20,
   backgroundColor: 'transparent',
-})`
+}))`
   align-self: center;
   padding-right: 11;
 `;
@@ -59,12 +59,11 @@ const ProcedureDetailWrapper = styled.View`
   align-items: center;
 `;
 
-// const NotificationButtonIcon = styled(Ionicons).attrs({
+// const NotificationButtonIcon = styled(Ionicons).attrs(({active}) => ({
 //   size: 32,
-//   name: ({ active }) =>
-//     active ? "ios-notifications" : "ios-notifications-outline",
-//   color: ({ active }) => (active ? "rgb(255, 171, 33)" : "rgb(0, 0, 0)")
-// })``;
+//   name: active ? "ios-notifications" : "ios-notifications-outline",
+//   color: (active ? "rgb(255, 171, 33)" : "rgb(0, 0, 0)")
+// }))``;
 
 const ProcedureDescription = styled.Text`
   font-size: 13;

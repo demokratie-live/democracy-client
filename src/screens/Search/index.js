@@ -48,9 +48,9 @@ const Text = styled.Text`
   color: grey;
 `;
 
-const ActivityIndicator = styled.ActivityIndicator.attrs({
+const ActivityIndicator = styled.ActivityIndicator.attrs(() => ({
   size: 'large',
-})``;
+}))``;
 
 const LoadingWrapper = styled.View`
   flex: 1;
@@ -64,10 +64,10 @@ const NoResultsWrapper = styled.View`
   align-items: center;
 `;
 
-const NoResultsImage = styled.Image.attrs({
+const NoResultsImage = styled.Image.attrs(() => ({
   source: require('../../../assets/images/search_no_results.png'),
   opacity: 0.2,
-})`
+}))`
   margin-top: 18;
 `;
 

@@ -13,11 +13,11 @@ import Segment from '../Segment';
 
 import VOTES from '../../../graphql/queries/votes';
 
-const ScrollView = styled.ScrollView.attrs({
+const ScrollView = styled.ScrollView.attrs(() => ({
   horizontal: true,
   pagingEnabled: true,
   showsHorizontalScrollIndicator: true,
-})``;
+}))``;
 
 const DecisionTextView = styled.View`
   flex: 1;

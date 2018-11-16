@@ -14,10 +14,10 @@ const Screen = styled.View`
   background-color: #ffffff;
 `;
 
-const ScrollView = styled.ScrollView.attrs({
+const ScrollView = styled.ScrollView.attrs(() => ({
   horizontal: true,
   pagingEnabled: true,
-})``;
+}))``;
 
 const SegmentControlsWrapper = styled.View`
   background-color: #4494d3;
@@ -88,12 +88,10 @@ class VoteList extends Component {
               this.setState({
                 selectedIndex: event.nativeEvent.selectedSegmentIndex,
               });
-              if (this.scrollView) {
-                this.scrollView.scrollTo({
-                  y: 0,
-                  x: event.nativeEvent.selectedSegmentIndex * this.width,
-                });
-              }
+              this.scrollView.scrollTo({
+                y: 0,
+                x: event.nativeEvent.selectedSegmentIndex * this.width,
+              });
             }}
           />
         </SegmentControlsWrapper>
@@ -108,15 +106,13 @@ class VoteList extends Component {
         <ScrollView
           onContentSizeChange={contentWidth => {
             this.width = contentWidth / this.lists.length;
-            if (this.scrollView) {
-              this.scrollView.scrollTo({
-                y: 0,
-                x: this.state.selectedIndex * this.width,
-              });
-            }
+            this.scrollView.scrollTo({
+              y: 0,
+              x: this.state.selectedIndex * this.width,
+            });
           }}
           onMomentumScrollEnd={this.onScrollEndDrag}
-          innerRef={e => {
+          ref={e => {
             this.scrollView = e;
           }}
         >

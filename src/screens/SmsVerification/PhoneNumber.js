@@ -11,12 +11,12 @@ import Button from './Components/Button';
 
 import REQUEST_CODE from '../../graphql/mutations/requestCode';
 
-const ScrollView = styled.ScrollView.attrs({
+const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: {
     alignItems: 'center',
     justifyContent: 'center',
   },
-})`
+}))`
   background-color: #fff;
 `;
 

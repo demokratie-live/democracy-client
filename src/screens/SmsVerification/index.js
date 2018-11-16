@@ -8,18 +8,18 @@ import Description from './Components/Description';
 import Button from './Components/Button';
 import Folding from '../../components/Content/Folding';
 
-const ScrollView = styled.ScrollView.attrs({
+const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: {
     paddingVertical: 11,
     paddingHorizontal: 11,
   },
-})`
+}))`
   background-color: #fff;
 `;
 
-const Logo = styled.Image.attrs({
+const Logo = styled.Image.attrs(() => ({
   source: require('../../../assets/images/democracy.png'),
-})`
+}))`
   align-self: center;
   margin-vertical: 11;
 `;

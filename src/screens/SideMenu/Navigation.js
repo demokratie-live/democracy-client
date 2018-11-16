@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const Wrapper = styled.SectionList.attrs({
+const Wrapper = styled.SectionList.attrs(() => ({
   stickySectionHeadersEnabled: false,
   contentContainerStyle: { paddingBottom: 70 },
-})``;
+}))``;
 
 const SectionItem = styled.View`
   padding-left: 16;
@@ -28,16 +28,16 @@ const NavigationItem = styled.TouchableOpacity`
   padding-left: 19;
 `;
 
-const NavigationIcon = styled.Image.attrs({
+const NavigationIcon = styled.Image.attrs(() => ({
   resizeMode: 'contain',
-})`
+}))`
   width: 24;
 `;
 
-const NavigationIoniconsIcon = styled(Ionicons).attrs({
+const NavigationIoniconsIcon = styled(Ionicons).attrs(() => ({
   size: 24,
   color: '#fff',
-})`
+}))`
   text-align: center;
   width: 24;
 `;

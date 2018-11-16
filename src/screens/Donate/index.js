@@ -99,10 +99,10 @@ const DonateTouchable = styled.TouchableOpacity`
   padding-top: 15;
 `;
 
-const DonateImage = styled.Image.attrs({
+const DonateImage = styled.Image.attrs(() => ({
   source: require('../../../assets/images/PayPal-Donate-Button-Transparent.png'),
   resizeMode: 'contain',
-})`
+}))`
   height: 100;
   width: 80%;
 `;

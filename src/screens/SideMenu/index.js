@@ -32,9 +32,9 @@ const BackgroundWrapper = styled.View`
   height: 100%;
 `;
 
-const BackgroundImage = styled.Image.attrs({
+const BackgroundImage = styled.Image.attrs(() => ({
   source: require('../../../assets/images/stars2.png'),
-})`
+}))`
   resize-mode: ${Platform.OS === 'ios' ? 'repeat' : 'stretch'};
   width: 100%;
   height: 100%;
@@ -52,9 +52,9 @@ const Head = styled.TouchableOpacity`
   padding-bottom: 8;
 `;
 
-const HeadLogo = styled.Image.attrs({
+const HeadLogo = styled.Image.attrs(() => ({
   source: require('../../../assets/images/logo-sidemenu.png'),
-})``;
+}))``;
 
 const HeadTextWrapper = styled.View`
   justify-content: center;

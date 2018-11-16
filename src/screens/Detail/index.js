@@ -67,17 +67,17 @@ const IntroButton = styled.TouchableOpacity`
   width: 40;
 `;
 
-const NotificationButtonIcon = styled(Ionicons).attrs({
+const NotificationButtonIcon = styled(Ionicons).attrs(({ active }) => ({
   size: 32,
-  name: ({ active }) => (active ? 'ios-notifications' : 'ios-notifications-outline'),
-  color: ({ active }) => (active ? 'rgb(255, 171, 33)' : 'rgb(0, 0, 0)'),
-})``;
+  name: active ? 'ios-notifications' : 'ios-notifications-outline',
+  color: active ? 'rgb(255, 171, 33)' : 'rgb(0, 0, 0)',
+}))``;
 
-const ShareButtonIcon = styled(Ionicons).attrs({
+const ShareButtonIcon = styled(Ionicons).attrs(() => ({
   size: 28,
-  name: () => (Platform.OS === 'ios' ? 'ios-share-outline' : 'md-share'),
+  name: Platform.OS === 'ios' ? 'ios-share-outline' : 'md-share',
   color: 'rgb(0, 0, 0)',
-})``;
+}))``;
 
 const IntroBottom = styled.View`
   padding-top: 8;
@@ -154,7 +154,7 @@ class Detail extends Component {
     } else {
       scrollTo = y;
     }
-    if (scrollTo > 0 && this.scrollView) {
+    if (scrollTo > 0) {
       this.scrollView.scrollTo({ y: scrollTo });
     }
   };
@@ -217,7 +217,7 @@ class Detail extends Component {
           this.contentHeight = height;
         }}
         onLayout={this.onLayout}
-        innerRef={comp => {
+        ref={comp => {
           this.scrollView = comp;
         }}
         refreshControl={<RefreshControl refreshing={networkStatus === 4} onRefresh={refetch} />}

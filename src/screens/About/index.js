@@ -40,9 +40,9 @@ const Wrapper = styled.View`
   align-items: center;
 `;
 
-const Logo = styled.Image.attrs({
+const Logo = styled.Image.attrs(() => ({
   source: require('../../../assets/images/logo-text10X.png'),
-})`
+}))`
   margin-bottom: 18;
 `;
 
