@@ -50,7 +50,6 @@ platform :android do
     upload_to_play_store(
       track: 'internal',
       track_promote_to: 'internal',
-      apk: "./app/build/outputs/apk/internal/release/app-internal-release.apk",
       metadata_path: "./fastlane/metadata_internal/android"
     )
   end
