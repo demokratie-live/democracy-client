@@ -11,6 +11,7 @@ import Search from './Search';
 import SideMenu from './SideMenu';
 import Detail from './Detail';
 import Support from './Support';
+import Profil from './Profil';
 import Faq from './Faq';
 import Imprint from './Imprint';
 import About from './About';
@@ -98,6 +99,13 @@ export default function registerScreens() {
   Navigation.registerComponent(
     'democracy.Statistic',
     () => NetworkStatus(NavBarLinks(Statistic)),
+    client.store,
+    ApolloProvider,
+    { client },
+  );
+  Navigation.registerComponent(
+    'democracy.Profil',
+    () => NetworkStatus(NavBarLinks(Profil)),
     client.store,
     ApolloProvider,
     { client },
