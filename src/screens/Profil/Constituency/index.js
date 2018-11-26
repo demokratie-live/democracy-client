@@ -113,7 +113,7 @@ class Constituency extends Component {
 
   getConstituency = wk => {
     const DynComp = constituencies[`${wk}`];
-    return <DynComp.default width={60} height={36} childProps={{ fill: "none", stroke: "#4494d3", strokeWidth: "3%" }} />;
+    return <DynComp.default width={60} height={36} childProps={{ fill: "none", stroke: "#000", strokeWidth: "2%" }} />;
   };
 
   getPlz = item => {
