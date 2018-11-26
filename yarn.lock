@@ -8083,10 +8083,10 @@ react-native-sha256@^1.1.1:
   resolved "https://registry.yarnpkg.com/react-native-sha256/-/react-native-sha256-1.1.1.tgz#3598dba556b0bbcd12618bd101c10d130c217fc3"
   integrity sha512-Tj2HP++0RfyUW36a+k61YUr4cdOxvOQVvEtkVoC0G7VAVLaXiVHYpEb7TL3ObgViWw5jxRj+EeMzB7xIbhOleA==
 
-react-native-svg@^7.0.3:
-  version "7.0.3"
-  resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-7.0.3.tgz#1ced56f4f6e96ad95374d66706390f51fa86bea7"
-  integrity sha512-fIMgoum2YWY1mBM93G+vYIj7l0te4v4XmndxAfq7A6GZPYrNNM0rysg+bsGMCFiYQQbjeoqzqQkY3jWqZgY7UQ==
+react-native-svg@^8.0.8:
+  version "8.0.8"
+  resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-8.0.8.tgz#5d4c636751d9db2d98a9b3cfc4ef45c4eac65d60"
+  integrity sha512-a5q7896HJztH3XBa4MouuBcwhOvDsJXRZB/PPvEMvc4NhudIDXDUKpwd9V7Hm6beDjg5CjFIdE/c92jnVo+0CA==
   dependencies:
     color "^2.0.1"
     lodash "^4.16.6"

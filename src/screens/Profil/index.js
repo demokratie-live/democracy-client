@@ -41,20 +41,74 @@ class Profil extends Component {
     });
   }
 
+  navigateTo = screen => () => {
+    console.log('PUSH SCREEN', screen);
+    const { navigator } = this.props;
+    switch (screen) {
+      case 'constituency':
+        navigator.push({
+          screen: 'democracy.Profil.Constituency',
+          title: 'Wahlkreissuche',
+          backButtonTitle: '',
+        });
+        break;
+      case 'verificate':
+        navigator.showModal({
+          screen: 'democracy.SmsVerification',
+          navigatorStyle: { navBarHidden: true, orientation: 'portrait' },
+        });
+        break;
+
+      default:
+        break;
+    }
+  };
+
   render() {
     return (
       <ScrollWrapper
-        renderItem={({ item, index }) => <ListItem key={index}>{item}</ListItem>}
+        renderItem={({ item, index }) => (
+          <ListItem
+            key={index}
+            text={item.text}
+            arrow={item.arrow !== false}
+            onPress={item.onPress}
+          >
+            {item.title}
+          </ListItem>
+        )}
         renderSectionHeader={({ section: { title } }) => <SegmentHead>{title}</SegmentHead>}
         sections={[
-          { title: 'Identität', data: ['Status', 'Wahlkreis'] },
-          { title: 'Einstellungen', data: ['Benachrichtigungen', 'Newsletter'] },
+          {
+            title: 'Identität',
+            data: [
+              {
+                title: 'Status',
+                text: 'Verifizieren',
+                arrow: true,
+                onPress: this.navigateTo('verificate'),
+              },
+              {
+                title: 'Wahlkreis',
+                text: '53',
+                onPress: this.navigateTo('constituency'),
+              },
+            ],
+          },
+          {
+            title: 'Einstellungen',
+            data: [{ title: 'Benachrichtigungen' }, { title: 'Newsletter' }],
+          },
           {
             title: 'Auswertungen',
-            data: ['Wahl-O-Meter', 'Abgeordnetenprofil', 'Persönliche Historie'],
+            data: [
+              { title: 'Wahl-O-Meter' },
+              { title: 'Abgeordnetenprofil' },
+              { title: 'Persönliche Historie' },
+            ],
           },
         ]}
-        keyExtractor={(item, index) => item + index}
+        keyExtractor={item => item.title}
       />
     );
   }

@@ -21,6 +21,7 @@ const Text = styled.Text`
 const Value = styled.Text`
   font-size: 17;
   color: #8f8e94;
+  padding-right: ${({ arrow }) => (arrow ? 5 : 12)};
 `;
 
 const NavigationIoniconsIcon = styled(Ionicons).attrs(() => ({
@@ -29,13 +30,15 @@ const NavigationIoniconsIcon = styled(Ionicons).attrs(() => ({
 }))`
   text-align: center;
   width: 24;
+  padding-right: 10;
+  margin-top: 3;
 `;
 
-const ListItem = ({ children }) => (
-  <Wrapper>
+const ListItem = ({ children, text, arrow, onPress }) => (
+  <Wrapper onPress={onPress}>
     <Text>{children}</Text>
-    <Value>XY</Value>
-    <NavigationIoniconsIcon name="ios-arrow-forward" />
+    {text && <Value arrow={arrow}>{text}</Value>}
+    {arrow && <NavigationIoniconsIcon name="ios-arrow-forward" />}
   </Wrapper>
 );
 

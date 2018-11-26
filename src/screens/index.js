@@ -12,6 +12,7 @@ import SideMenu from './SideMenu';
 import Detail from './Detail';
 import Support from './Support';
 import Profil from './Profil';
+import Constituency from './Profil/Constituency';
 import Faq from './Faq';
 import Imprint from './Imprint';
 import About from './About';
@@ -106,6 +107,13 @@ export default function registerScreens() {
   Navigation.registerComponent(
     'democracy.Profil',
     () => NetworkStatus(NavBarLinks(Profil)),
+    client.store,
+    ApolloProvider,
+    { client },
+  );
+  Navigation.registerComponent(
+    'democracy.Profil.Constituency',
+    () => NetworkStatus(NavBarLinks(Constituency)),
     client.store,
     ApolloProvider,
     { client },
