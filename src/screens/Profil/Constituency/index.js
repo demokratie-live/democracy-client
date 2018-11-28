@@ -4,12 +4,17 @@ import styled from 'styled-components/native';
 import { AsyncStorage, Alert } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { graphql, compose } from 'react-apollo';
 
 // Components
 import constituencies from '../../../../assets/constituencies';
 
 // constituencies plz list
 import constituenciesList from '../../../../assets/constituencies-list.json';
+
+// GraphQL
+import GET_CONSTITUENCY from '../../../graphql/queries/local/constituency';
+import SET_CONSTITUENCY from '../../../graphql/mutations/local/setConstituency';
 
 const Wrapper = styled.KeyboardAvoidingView`
   flex: 1;
@@ -135,7 +140,13 @@ class Constituency extends Component {
         {
           text: 'Ja',
           onPress: () => {
-            AsyncStorage.setItem('selected-constituency', item.number);
+            // AsyncStorage.setItem('selected-constituency', item.number);
+            this.props.mutate({
+              refetchQueries: [{ query: GET_CONSTITUENCY }],
+              variables: {
+                constituency: item.number,
+              },
+            });
           },
         },
       ],
@@ -144,14 +155,35 @@ class Constituency extends Component {
   };
 
   render() {
-    const constituenciesData =
+    const data = [...constituenciesList.constituencies.filter(({ selected }) => !selected)];
+    let constituenciesData = data.map(constituency => {
+      let selected = false;
+      if (constituency.number === this.props.data.constituency.constituency) {
+        selected = true;
+      }
+      return { ...constituency, selected };
+    });
+    console.log('TESTXYZ', this.props);
+    const selectedConstituency = constituenciesData.find(data => {
+      console.log('HOSDFH', data);
+      return data.selected;
+    });
+    console.log('HOSDFH 1', selectedConstituency);
+    constituenciesData =
       this.state.term.length > 0
-        ? constituenciesList.constituencies.filter(
+        ? constituenciesData.filter(
             ({ areacodes, name }) =>
               areacodes.some(({ code }) => code.indexOf(this.state.term) === 0) ||
               name.toLowerCase().indexOf(this.state.term.toLowerCase()) !== -1,
           )
         : constituenciesList.constituencies;
+
+    console.log('HOSDFH', selectedConstituency);
+
+    if (selectedConstituency) {
+      constituenciesData = [selectedConstituency, ...constituenciesData];
+    }
+
     console.log(constituenciesData);
     return (
       <Wrapper behavior="padding" enabled>
@@ -187,8 +219,4 @@ class Constituency extends Component {
   }
 }
 
-Constituency.propTypes = {
-  navigator: PropTypes.instanceOf(Navigator).isRequired,
-};
-
-export default Constituency;
+export default compose(graphql(SET_CONSTITUENCY), graphql(GET_CONSTITUENCY))(Constituency);

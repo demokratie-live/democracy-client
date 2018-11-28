@@ -4,10 +4,14 @@ import styled from 'styled-components/native';
 import { Platform } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { graphql } from 'react-apollo';
 
 // Components
 import SegmentHead from './components/SegmentHead';
 import ListItem from './components/ListItem';
+
+// GraphQL
+import GET_CONSTITUENCY from '../../graphql/queries/local/constituency';
 
 const ScrollWrapper = styled.SectionList`
   flex: 1;
@@ -62,6 +66,7 @@ class Profil extends Component {
   };
 
   render() {
+    console.log('TESTXYZ render profil', this.props);
     return (
       <ScrollWrapper
         renderItem={({ item, index }) => (
@@ -87,7 +92,7 @@ class Profil extends Component {
               },
               {
                 title: 'Wahlkreis',
-                text: 'TEST',
+                text: this.props.data.constituency.constituency,
                 onPress: this.navigateTo('constituency'),
               },
             ],
@@ -115,4 +120,8 @@ Profil.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired,
 };
 
-export default Profil;
+export default graphql(GET_CONSTITUENCY, {
+  options: {
+    fetchPolicy: 'network-only',
+  },
+})(Profil);
