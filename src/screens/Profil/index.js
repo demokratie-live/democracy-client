@@ -14,8 +14,6 @@ const ScrollWrapper = styled.SectionList`
   background-color: #efeff4;
 `;
 
-const Text = styled.Text``;
-
 class Profil extends Component {
   static navigatorStyle = {
     navBarButtonColor: '#FFFFFF',
@@ -42,7 +40,6 @@ class Profil extends Component {
   }
 
   navigateTo = screen => () => {
-    console.log('PUSH SCREEN', screen);
     const { navigator } = this.props;
     switch (screen) {
       case 'constituency':
@@ -90,7 +87,7 @@ class Profil extends Component {
               },
               {
                 title: 'Wahlkreis',
-                text: '53',
+                text: 'TEST',
                 onPress: this.navigateTo('constituency'),
               },
             ],

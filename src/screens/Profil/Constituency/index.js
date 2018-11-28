@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
-import { Platform } from 'react-native';
+import { AsyncStorage, Alert } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -11,7 +11,7 @@ import constituencies from '../../../../assets/constituencies';
 // constituencies plz list
 import constituenciesList from '../../../../assets/constituencies-list.json';
 
-const Wrapper = styled.View`
+const Wrapper = styled.KeyboardAvoidingView`
   flex: 1;
 `;
 
@@ -46,6 +46,7 @@ const SearchInput = styled.TextInput.attrs(() => ({
   underlineColorAndroid: 'transparent',
   selectionColor: '#000',
   returnKeyType: 'search',
+  autoCorrect: false,
 }))`
   flex: 1;
   font-size: 14;
@@ -67,7 +68,7 @@ const Plz = styled.Text.attrs({
   color: #8e8e93;
 `;
 
-const Row = styled.View`
+const Row = styled.TouchableOpacity`
   flex-direction: row;
   padding-vertical: 12;
   padding-horizontal: 12;
@@ -90,11 +91,6 @@ const RowTextWrapper = styled.View`
   padding-left: 12;
 `;
 
-const ConstituencyIconWrapper = styled.View`
-  width: 60;
-  height: 36;
-`;
-
 class Constituency extends Component {
   static navigatorStyle = {
     navBarButtonColor: '#FFFFFF',
@@ -113,7 +109,13 @@ class Constituency extends Component {
 
   getConstituency = wk => {
     const DynComp = constituencies[`${wk}`];
-    return <DynComp.default width={60} height={36} childProps={{ fill: "none", stroke: "#000", strokeWidth: "2%" }} />;
+    return (
+      <DynComp.default
+        width={60}
+        height={36}
+        childProps={{ fill: 'none', stroke: '#000', strokeWidth: '2%' }}
+      />
+    );
   };
 
   getPlz = item => {
@@ -122,6 +124,23 @@ class Constituency extends Component {
       return x.indexOf(this.state.term) !== -1 ? -1 : y.indexOf(this.state.term) !== -1 ? 1 : 0;
     });
     return areacodes.join(', ');
+  };
+
+  selectConstituency = item => () => {
+    Alert.alert(
+      'Bestätigung des Wahlkreises',
+      `WK: ${item.number}: ${item.name}\n Ist diese Auswahl korrekt?`,
+      [
+        { text: 'Nein', onPress: () => {} },
+        {
+          text: 'Ja',
+          onPress: () => {
+            AsyncStorage.setItem('selected-constituency', item.number);
+          },
+        },
+      ],
+      { cancelable: false },
+    );
   };
 
   render() {
@@ -135,7 +154,7 @@ class Constituency extends Component {
         : constituenciesList.constituencies;
     console.log(constituenciesData);
     return (
-      <Wrapper>
+      <Wrapper behavior="padding" enabled>
         <SearchBox>
           <SearchInputWrapper>
             <SearchInputIcon />
@@ -145,15 +164,17 @@ class Constituency extends Component {
         <FlatList
           data={constituenciesData}
           renderItem={({ item }) => {
-            console.log(item);
             return (
-              <Row>
+              <Row onPress={this.selectConstituency(item)}>
                 <>
                   {this.getConstituency(item.number)}
                   {item.selected && <SelectedConstituencyIcon />}
                   <RowTextWrapper>
                     <Title>{item.name}</Title>
-                    <Plz>{this.getPlz(item)}</Plz>
+                    <Plz>
+                      {`Wahlkreis ${item.number}: `}
+                      {this.getPlz(item)}
+                    </Plz>
                   </RowTextWrapper>
                 </>
               </Row>
