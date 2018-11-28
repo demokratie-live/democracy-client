@@ -155,7 +155,7 @@ class Constituency extends Component {
   };
 
   render() {
-    const data = [...constituenciesList.constituencies.filter(({ selected }) => !selected)];
+    const data = [...constituenciesList.constituencies];
     let constituenciesData = data.map(constituency => {
       let selected = false;
       if (constituency.number === this.props.data.constituency.constituency) {
@@ -172,11 +172,12 @@ class Constituency extends Component {
     constituenciesData =
       this.state.term.length > 0
         ? constituenciesData.filter(
-            ({ areacodes, name }) =>
-              areacodes.some(({ code }) => code.indexOf(this.state.term) === 0) ||
-              name.toLowerCase().indexOf(this.state.term.toLowerCase()) !== -1,
+            ({ areacodes, name, selected }) =>
+              (areacodes.some(({ code }) => code.indexOf(this.state.term) === 0) ||
+                name.toLowerCase().indexOf(this.state.term.toLowerCase()) !== -1) &&
+              !selected,
           )
-        : constituenciesList.constituencies;
+        : constituenciesData.filter(({ selected }) => !selected);
 
     console.log('HOSDFH', selectedConstituency);
 

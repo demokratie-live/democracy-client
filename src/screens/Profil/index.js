@@ -92,7 +92,7 @@ class Profil extends Component {
               },
               {
                 title: 'Wahlkreis',
-                text: this.props.data.constituency.constituency,
+                text: `WK ${this.props.data.constituency.constituency}`,
                 onPress: this.navigateTo('constituency'),
               },
             ],
