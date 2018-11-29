@@ -92,7 +92,7 @@ class Profil extends Component {
               },
               {
                 title: 'Wahlkreis',
-                text: `WK ${this.props.data.constituency.constituency}`,
+                text: `WK ${this.props.constituency}`,
                 onPress: this.navigateTo('constituency'),
               },
             ],
@@ -121,7 +121,10 @@ Profil.propTypes = {
 };
 
 export default graphql(GET_CONSTITUENCY, {
-  options: {
-    fetchPolicy: 'network-only',
-  },
+  props: ({ data }) => ({
+    constituency:
+      data.constituency && data.constituency.constituency
+        ? data.constituency.constituency
+        : 'auswählen',
+  }),
 })(Profil);
