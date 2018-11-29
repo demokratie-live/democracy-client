@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 import { Platform } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { graphql } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 
 // Components
 import SegmentHead from './components/SegmentHead';
@@ -12,6 +12,7 @@ import ListItem from './components/ListItem';
 
 // GraphQL
 import GET_CONSTITUENCY from '../../graphql/queries/local/constituency';
+import GET_STATISTIC from '../../graphql/queries/getStatistic';
 
 const ScrollWrapper = styled.SectionList`
   flex: 1;
@@ -86,9 +87,12 @@ class Profil extends Component {
             data: [
               {
                 title: 'Status',
-                text: 'Verifizieren',
-                arrow: true,
-                onPress: this.navigateTo('verificate'),
+                text:
+                  this.props.verified === true
+                    ? 'Verifiziert'
+                    : this.props.verified === false ? 'Verifizieren' : '…',
+                arrow: this.props.verified === false,
+                onPress: this.props.verified === false ? this.navigateTo('verificate') : null,
               },
               {
                 title: 'Wahlkreis',
@@ -120,11 +124,18 @@ Profil.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired,
 };
 
-export default graphql(GET_CONSTITUENCY, {
-  props: ({ data }) => ({
-    constituency:
-      data.constituency && data.constituency.constituency
-        ? data.constituency.constituency
-        : 'auswählen',
+export default compose(
+  graphql(GET_CONSTITUENCY, {
+    props: ({ data }) => ({
+      constituency:
+        data.constituency && data.constituency.constituency
+          ? data.constituency.constituency
+          : 'auswählen',
+    }),
   }),
-})(Profil);
+  graphql(GET_STATISTIC, {
+    props: ({ data }) => ({
+      verified: data.loading ? null : data.voteStatistic ? true : false,
+    }),
+  }),
+)(Profil);

@@ -89,6 +89,7 @@ const SelectedConstituencyIcon = styled(Ionicons).attrs(() => ({
 }))`
   position: absolute;
   left: 50;
+  bottom: 10;
 `;
 
 const RowTextWrapper = styled.View`
