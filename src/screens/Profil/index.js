@@ -57,7 +57,19 @@ class Profil extends Component {
       case 'verificate':
         navigator.showModal({
           screen: 'democracy.SmsVerification',
-          navigatorStyle: { navBarHidden: true, orientation: 'portrait' },
+          navigatorStyle: { orientation: 'portrait' },
+        });
+        break;
+      case 'statistic':
+        navigator.push({
+          screen: 'democracy.Statistic',
+          title: 'Statistik',
+        });
+        break;
+      case 'notifications-settings':
+        navigator.push({
+          screen: 'democracy.Notifications',
+          title: 'Statistik',
         });
         break;
 
@@ -103,14 +115,23 @@ class Profil extends Component {
           },
           {
             title: 'Einstellungen',
-            data: [{ title: 'Benachrichtigungen' }, { title: 'Newsletter' }],
+            data: [
+              {
+                title: 'Benachrichtigungen',
+                onPress: this.navigateTo('notifications-settings'),
+              },
+              { title: 'Newsletter' },
+            ],
           },
           {
             title: 'Auswertungen',
             data: [
               { title: 'Wahl-O-Meter' },
               { title: 'Abgeordnetenprofil' },
-              { title: 'Persönliche Historie' },
+              {
+                title: 'Persönliche Historie',
+                onPress: this.navigateTo('statistic'),
+              },
             ],
           },
         ]}
