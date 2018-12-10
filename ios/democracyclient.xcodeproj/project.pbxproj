@@ -32,15 +32,9 @@
 		2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */; };
 		2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6891FA4F8E400B85C8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* democracyclientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* democracyclientTests.m */; };
-		5B3A3653AC514347891E19D1 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E60EEBD31A544D8B801D6D1 /* libBVLinearGradient.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
-		66B8424A5A3540EB9206F580 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4654A6B1BDD4F2AB17AC00D /* libRNSVG.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		A5B4938634834275904F12FE /* libreact-native-sha256.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EA84DDFEDC54F129F17E108 /* libreact-native-sha256.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
-		ADFA4473E79A4134B0A72B42 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D6DF01BA014AF1A090AC45 /* libRNDeviceInfo.a */; };
-		B17D87D80D60480996D720C5 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA8D3AFFC23E472D810B6D55 /* libRNFetchBlob.a */; };
-		BFBF28EFC41F43D1BD244700 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE21168EDFFA4F90B10BEC29 /* libReactNativeConfig.a */; };
 		C347997920162AB8000A511E /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C347997820162A9D000A511E /* libReactNativeNavigation.a */; };
 		C36B46BD201C8BBF00B68A81 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46AC201C8BBF00B68A81 /* Ionicons.ttf */; };
 		C36B46BF201C8BBF00B68A81 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46AD201C8BBF00B68A81 /* FontAwesome.ttf */; };
@@ -48,11 +42,17 @@
 		C36B46CD201C8C4000B68A81 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46AC201C8BBF00B68A81 /* Ionicons.ttf */; };
 		C36B46CE201C8C4000B68A81 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46AD201C8BBF00B68A81 /* FontAwesome.ttf */; };
 		C36B46D1201C8C4000B68A81 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36B46B0201C8BBF00B68A81 /* SimpleLineIcons.ttf */; };
+		C387733D21BE668800B206D3 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C35A58562032E3E80068C84F /* libReactNativeConfig.a */; };
+		C387733E21BE669100B206D3 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3EBC7C420455F7E0040ED81 /* libRNDeviceInfo.a */; };
+		C387733F21BE669C00B206D3 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A76DBF204EE9A2008D1C29 /* libBVLinearGradient.a */; };
+		C387734021BE66A500B206D3 /* libreact-native-sha256.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F4D96D206156EB00D8F965 /* libreact-native-sha256.a */; };
+		C387734121BE66AC00B206D3 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F4D973206156EB00D8F965 /* libRNSVG.a */; };
+		C387734221BE66B400B206D3 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C38760C320BC30CB00536865 /* libRNFetchBlob.a */; };
+		C387734321BE66BB00B206D3 /* libRCTPdf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C38760C820BC30CB00536865 /* libRCTPdf.a */; };
 		C3AE459420B80C6B007578F1 /* libRNKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3AE458E20B80C35007578F1 /* libRNKeychain.a */; };
 		C3BBBEED20B5AA3200085C5D /* libRNNotifications.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3BBBEE920B5AA0D00085C5D /* libRNNotifications.a */; };
 		C3E792522088C96F009C4A39 /* DemocracyFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3E792512088C95E009C4A39 /* DemocracyFont.ttf */; };
 		C3EBC760204548F50040ED81 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3EBC740204547DB0040ED81 /* libRNVectorIcons.a */; };
-		FCB76C87655B4150B7635A88 /* libRCTPdf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04EB3A17D908400592732DF3 /* libRCTPdf.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -503,6 +503,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C387734321BE66BB00B206D3 /* libRCTPdf.a in Frameworks */,
+				C387734221BE66B400B206D3 /* libRNFetchBlob.a in Frameworks */,
+				C387734121BE66AC00B206D3 /* libRNSVG.a in Frameworks */,
+				C387734021BE66A500B206D3 /* libreact-native-sha256.a in Frameworks */,
+				C387733F21BE669C00B206D3 /* libBVLinearGradient.a in Frameworks */,
+				C387733E21BE669100B206D3 /* libRNDeviceInfo.a in Frameworks */,
+				C387733D21BE668800B206D3 /* libReactNativeConfig.a in Frameworks */,
 				C3AE459420B80C6B007578F1 /* libRNKeychain.a in Frameworks */,
 				C3BBBEED20B5AA3200085C5D /* libRNNotifications.a in Frameworks */,
 				C3EBC760204548F50040ED81 /* libRNVectorIcons.a in Frameworks */,
@@ -519,13 +526,6 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				BFBF28EFC41F43D1BD244700 /* libReactNativeConfig.a in Frameworks */,
-				ADFA4473E79A4134B0A72B42 /* libRNDeviceInfo.a in Frameworks */,
-				5B3A3653AC514347891E19D1 /* libBVLinearGradient.a in Frameworks */,
-				A5B4938634834275904F12FE /* libreact-native-sha256.a in Frameworks */,
-				66B8424A5A3540EB9206F580 /* libRNSVG.a in Frameworks */,
-				B17D87D80D60480996D720C5 /* libRNFetchBlob.a in Frameworks */,
-				FCB76C87655B4150B7635A88 /* libRCTPdf.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1104,12 +1104,12 @@
 					ProjectRef = CF1A551E9AD54473AE890083 /* RNDeviceInfo.xcodeproj */;
 				},
 				{
-					ProductGroup = C3AE455B20B80C35007578F1 /* Products */;
-					ProjectRef = C3AE455A20B80C35007578F1 /* RNKeychain.xcodeproj */;
-				},
-				{
 					ProductGroup = C38760BF20BC30CB00536865 /* Products */;
 					ProjectRef = 35BD36787F684CB0B4E99503 /* RNFetchBlob.xcodeproj */;
+				},
+				{
+					ProductGroup = C3AE455B20B80C35007578F1 /* Products */;
+					ProjectRef = C3AE455A20B80C35007578F1 /* RNKeychain.xcodeproj */;
 				},
 				{
 					ProductGroup = C3BBBEB720B5AA0D00085C5D /* Products */;

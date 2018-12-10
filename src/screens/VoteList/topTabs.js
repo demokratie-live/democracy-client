@@ -3,7 +3,14 @@ export default [
     screenId: 'democracy.VoteList.List',
     title: 'Abstimmung',
     passProps: {
-      listType: 'VOTING',
+      listType: 'IN_VOTE',
+    },
+  },
+  {
+    screenId: 'democracy.VoteList.List',
+    title: 'Vergangen',
+    passProps: {
+      listType: 'PAST',
     },
   },
   {

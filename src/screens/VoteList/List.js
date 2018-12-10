@@ -56,10 +56,24 @@ const PAGE_SIZE = 20;
 const STORAGE_KEY = 'VoteList.Filters';
 
 const SORTERS = {
-  VOTING: [
+  IN_VOTE: [
     {
       key: 'voteDate',
       title: 'nach Restzeit sortieren',
+    },
+    {
+      key: 'activities',
+      title: 'nach Aktivitätsindex sortieren',
+    },
+  ],
+  PAST: [
+    {
+      key: 'lastUpdateDate',
+      title: 'nach Aktualisierung sortieren',
+    },
+    {
+      key: 'created',
+      title: 'nach Vorgangsdatum sortieren',
     },
     {
       key: 'activities',
@@ -109,7 +123,7 @@ class List extends Component {
     width: Platform.OS === 'ios' ? Dimensions.get('window').width : 'auto',
     fetchedAll: false,
     filters: false,
-    sort: this.props.listType === 'VOTING' ? 'voteDate' : 'lastUpdateDate',
+    sort: this.props.listType === 'IN_VOTE' ? 'voteDate' : 'lastUpdateDate',
     sorterOpened: false,
   };
 
@@ -293,19 +307,13 @@ class List extends Component {
     if (listType !== 'HOT') {
       preparedData[0].data.push({ type: 'sort' });
     }
-    if (listType === 'VOTING') {
-      preparedData.push({
-        title: 'Vergangen',
-        data: [],
-      });
-    }
     const proceduresSorted = [...procedures];
     proceduresSorted.forEach(procedure => {
       if (!this.filterProcedures(procedure)) {
         return;
       }
       if (
-        listType === 'VOTING' &&
+        listType === 'IN_VOTE' &&
         ((new Date(procedure.voteDate) < new Date() && procedure.voteDate !== null) ||
           procedure.completed)
       ) {
@@ -327,6 +335,7 @@ class List extends Component {
 
   renderItem = onClick => ({ item }) => {
     const { listType } = this.props;
+    console.log('listType', listType);
     if (item.type === 'sort') {
       if (Platform.OS === 'ios') {
         const curSort = SORTERS[listType].find(({ key }) => key === this.state.sort);
@@ -376,12 +385,7 @@ class List extends Component {
           }}
           refreshing={data.networkStatus === 4}
           renderItem={this.renderItem(this.onItemClick)}
-          renderSectionHeader={({ section }) => {
-            if (section.data.length > 0) {
-              return <ListSectionHeader title={section.title} />;
-            }
-            return null;
-          }}
+          renderSectionHeader={({}) => null}
           onEndReached={() => {
             if (!data.loading && !fetchedAll) {
               data.fetchMore({
@@ -439,7 +443,7 @@ List.propTypes = {
 };
 
 List.defaultProps = {
-  listType: 'VOTING',
+  listType: 'IN_VOTE',
 };
 
 export default compose(
