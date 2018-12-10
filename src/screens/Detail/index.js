@@ -291,7 +291,7 @@ class Detail extends Component {
             currentStatus={currentStatus}
             type="government"
           />
-          {listType === 'IN_VOTE' && (
+          {(listType === 'IN_VOTE' || listType === 'PAST') && (
             <Voting
               verified={verified}
               procedureObjId={_id}
