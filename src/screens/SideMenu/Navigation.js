@@ -98,7 +98,7 @@ const NavigationView = ({ currentScreen, navigateTo, verified }) => {
       title: 'Auswertungen',
       data: [
         {
-          screenId: 'democracy.Notifications',
+          screenId: 'democracy.WahlOMeter',
           title: 'Wahl-O-Meter'.toUpperCase(),
           icon: <NavigationIoniconsIcon name="ios-timer-outline" />,
         },
