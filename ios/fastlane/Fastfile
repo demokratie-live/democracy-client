@@ -75,6 +75,7 @@ platform :ios do
     )
 
     build_app( 
+      silent: true,
       clean: true, 
       scheme: "Internal"
     )
