@@ -77,7 +77,8 @@ platform :ios do
     build_app( 
       silent: true,
       clean: true, 
-      scheme: "Internal"
+      scheme: "Internal",
+      suppress_xcode_output: true
     )
 
     upload_to_testflight(
