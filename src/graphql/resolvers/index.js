@@ -107,15 +107,12 @@ export const resolvers = {
       return null;
     },
     setConstituency: async (_, { constituency }) => {
-      console.log('TESTXYZ setConstituency 1', constituency);
       await AsyncStorage.setItem('Constituency', constituency);
-      console.log('TESTXYZ setConstituency 2', await AsyncStorage.getItem('Constituency'));
       return null;
     },
   },
   Query: {
     constituency: async () => {
-      console.log('TESTXYZ ');
       return {
         constituency: await AsyncStorage.getItem('Constituency'),
         __typename: 'Constituency',
