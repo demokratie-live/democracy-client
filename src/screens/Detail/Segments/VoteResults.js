@@ -58,12 +58,10 @@ const VoteResults = props => {
       const votes = comunnityResults.yes + comunnityResults.no + comunnityResults.abstination;
       return (
         <PieChart
-          data={_.map(
-            communityVotes.voteResults,
-            (value, label) =>
-              label !== '__typename'
-                ? { value, label, percentage: Math.round(value / votes * 100) }
-                : false,
+          data={_.map(communityVotes.voteResults, (value, label) =>
+            label !== '__typename'
+              ? { value, label, percentage: Math.round((value / votes) * 100) }
+              : false,
           ).filter(e => e)}
           colorScale={['#15C063', '#2C82E4', '#EC3E31']}
           label="Abstimmende"
@@ -79,20 +77,18 @@ const VoteResults = props => {
       const screens = [
         <PieChart
           key="pieChart"
-          data={_.map(
-            voteResults,
-            (value, label) =>
-              label !== '__typename' && typeof value === 'number'
-                ? {
-                    value,
-                    label,
-                    fractions: voteResults.namedVote
-                      ? null
-                      : voteResults.partyVotes.filter(({ main }) => label === main.toLowerCase())
-                          .length,
-                    percentage: Math.round(value / votes * 100),
-                  }
-                : false,
+          data={_.map(voteResults, (value, label) =>
+            label !== '__typename' && typeof value === 'number'
+              ? {
+                  value,
+                  label,
+                  fractions: voteResults.namedVote
+                    ? null
+                    : voteResults.partyVotes.filter(({ main }) => label === main.toLowerCase())
+                        .length,
+                  percentage: Math.round((value / votes) * 100),
+                }
+              : false,
           ).filter(e => e)}
           colorScale={['#99C93E', '#4CB0D8', '#D43194', '#B1B3B4']}
           label={voteResults.namedVote ? 'Abgeordnete' : 'Fraktionen'}
@@ -139,16 +135,14 @@ const VoteResults = props => {
     }
     return (
       <PieChart
-        data={_.map(
-          voteResults,
-          (value, label) =>
-            label !== '__typename' && typeof value === 'number'
-              ? {
-                  value,
-                  label,
-                  percentage: Math.round(value / votes * 100),
-                }
-              : false,
+        data={_.map(voteResults, (value, label) =>
+          label !== '__typename' && typeof value === 'number'
+            ? {
+                value,
+                label,
+                percentage: Math.round((value / votes) * 100),
+              }
+            : false,
         ).filter(e => e)}
         colorScale={['#99C93E', '#4CB0D8', '#D43194', '#B1B3B4']}
         label="Abgeordnete"

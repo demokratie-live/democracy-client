@@ -96,7 +96,9 @@ class BarChart extends Component {
   };
 
   getTotals = data => {
-    const { voteResults: { namedVote } } = this.props;
+    const {
+      voteResults: { namedVote },
+    } = this.props;
     const totals = data.reduce(
       (prev, party) => {
         const { yes, abstination, no, notVoted } = party.value;

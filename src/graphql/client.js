@@ -105,13 +105,12 @@ const { link: networkStatusNotifierLink } = createNetworkStatusNotifier({
   reducers: {
     onSuccess: (state, { operation }) => {
       const ignore = operation.query.definitions.some(definition =>
-        definition.selectionSet.selections.some(
-          section =>
-            section.directives
-              ? section.directives.some(
-                  directive => directive.name.kind === 'Name' && directive.name.value === 'client',
-                )
-              : false,
+        definition.selectionSet.selections.some(section =>
+          section.directives
+            ? section.directives.some(
+                directive => directive.name.kind === 'Name' && directive.name.value === 'client',
+              )
+            : false,
         ),
       );
       if (!ignore) {

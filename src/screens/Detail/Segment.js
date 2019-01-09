@@ -50,7 +50,11 @@ class Segment extends Component {
     }
   }
 
-  onLayout = ({ nativeEvent: { layout: { y, height } } }) => {
+  onLayout = ({
+    nativeEvent: {
+      layout: { y, height },
+    },
+  }) => {
     const { scrollTo } = this.props;
     if (this.fireScroll && scrollTo) {
       this.fireScroll = false;

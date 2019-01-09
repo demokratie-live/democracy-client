@@ -174,7 +174,10 @@ class Notifications extends Component {
   };
 
   enabledToggle = async () => {
-    const { update, notificationSettings: { enabled } } = this.props;
+    const {
+      update,
+      notificationSettings: { enabled },
+    } = this.props;
     let disableUntil;
     if (enabled) {
       disableUntil = await new Promise(resolve => {
@@ -278,7 +281,10 @@ class Notifications extends Component {
   };
 
   renderItem = args => {
-    const { item, item: { type, title, key } } = args;
+    const {
+      item,
+      item: { type, title, key },
+    } = args;
 
     switch (type) {
       case 'switch':
@@ -361,6 +367,7 @@ Notifications.propTypes = {
   }),
   toggleNotification: PropTypes.func.isRequired,
   notifiedProcedures: PropTypes.arrayOf(PropTypes.shape()),
+  update: PropTypes.func.isRequired,
 };
 
 Notifications.defaultProps = {

@@ -78,7 +78,7 @@ ListItem.propTypes = {
 };
 
 ListItem.defaultProps = {
-  active: false,
+  // active: false,
   screenId: '',
 };
 

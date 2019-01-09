@@ -139,7 +139,11 @@ class Detail extends Component {
     }
   }
 
-  onLayout = ({ nativeEvent: { layout: { height } } }) => {
+  onLayout = ({
+    nativeEvent: {
+      layout: { height },
+    },
+  }) => {
     this.componentHeight = height;
   };
 
@@ -180,7 +184,9 @@ class Detail extends Component {
 
   render() {
     const { procedureId, toggleNotification, navigator } = this.props;
-    const { data: { networkStatus, refetch, loading, procedure } } = this.props;
+    const {
+      data: { networkStatus, refetch, loading, procedure },
+    } = this.props;
     if (!procedure && loading) {
       return <LoadingWrapper>{loading && <ActivityIndicator size="large" />}</LoadingWrapper>;
     }
@@ -359,7 +365,11 @@ export default compose(
     props({ mutate, ownProps }) {
       return {
         toggleNotification: () => {
-          const { data: { procedure: { notify, procedureId } } } = ownProps;
+          const {
+            data: {
+              procedure: { notify, procedureId },
+            },
+          } = ownProps;
           mutate({
             variables: { procedureId },
             optimisticResponse: {
@@ -369,7 +379,14 @@ export default compose(
                 notify: !notify,
               },
             },
-            update: (cache, { data: { toggleNotification: { notify: newNotify } } }) => {
+            update: (
+              cache,
+              {
+                data: {
+                  toggleNotification: { notify: newNotify },
+                },
+              },
+            ) => {
               const data = cache.readQuery({
                 query: getProcedure,
                 variables: { id: procedureId },

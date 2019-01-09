@@ -212,33 +212,32 @@ class Donate extends Component {
 
     return (
       <ScrollWrapper>
-        {donationStatus &&
-          donationStatus.result && (
-            <View>
-              <Wrapper>
-                <Headline>{donate1Head}</Headline>
-                <Text>{donate1Text}</Text>
-                <Text style={{ marginBottom: 21 }}>
-                  Spendenstand vom {donationStatus.result.donation_date}
-                </Text>
-                <DonatedBox
-                  target={donationStatus.result.donation_value_goal}
-                  occupied={donationStatus.result.donation_value}
-                />
-              </Wrapper>
-              <Segment title="Details zum Finanzierungsbedarf" open>
-                <Entry
-                  target={donationStatus.result.donation_value_goal}
-                  occupied={donationStatus.result.donation_value}
-                  money={`${donationStatus.result.donation_value}€ von ${
-                    donationStatus.result.donation_value_goal
-                  }€`}
-                  description="min. Finanzierungsziel/Monat"
-                />
-                {this.renderDonationEntries(donationStatus.result.donation_data)}
-              </Segment>
-            </View>
-          )}
+        {donationStatus && donationStatus.result && (
+          <View>
+            <Wrapper>
+              <Headline>{donate1Head}</Headline>
+              <Text>{donate1Text}</Text>
+              <Text style={{ marginBottom: 21 }}>
+                Spendenstand vom {donationStatus.result.donation_date}
+              </Text>
+              <DonatedBox
+                target={donationStatus.result.donation_value_goal}
+                occupied={donationStatus.result.donation_value}
+              />
+            </Wrapper>
+            <Segment title="Details zum Finanzierungsbedarf" open>
+              <Entry
+                target={donationStatus.result.donation_value_goal}
+                occupied={donationStatus.result.donation_value}
+                money={`${donationStatus.result.donation_value}€ von ${
+                  donationStatus.result.donation_value_goal
+                }€`}
+                description="min. Finanzierungsziel/Monat"
+              />
+              {this.renderDonationEntries(donationStatus.result.donation_data)}
+            </Segment>
+          </View>
+        )}
         {Platform.OS === 'ios' ? (
           <Wrapper>
             <Text>{`Die verbleibende Seite steht unter iOS leider nicht zur Verfügung.\n`}</Text>

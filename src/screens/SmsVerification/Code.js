@@ -148,7 +148,9 @@ class Code extends Component {
           text: 'Ja',
           onPress: async () => {
             const {
-              data: { requestCode: { succeeded, reason, expireTime, resendTime } },
+              data: {
+                requestCode: { succeeded, reason, expireTime, resendTime },
+              },
             } = await this.props.requestCode({
               variables: { newPhone: phoneNumber, newUser: true },
             });

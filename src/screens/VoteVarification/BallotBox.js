@@ -122,7 +122,11 @@ class BalloutBox extends Component {
     this.previewAnimation();
   }
 
-  onLayout = ({ nativeEvent: { layout: { width } } }) => {
+  onLayout = ({
+    nativeEvent: {
+      layout: { width },
+    },
+  }) => {
     if (!this.state.isDraggable) {
       Animated.spring(this.state.pan, {
         toValue: {
@@ -203,7 +207,14 @@ export default compose(
                 voted: true,
               },
             },
-            update: (cache, { data: { vote: { voted } } }) => {
+            update: (
+              cache,
+              {
+                data: {
+                  vote: { voted },
+                },
+              },
+            ) => {
               const data = cache.readQuery({
                 query: VOTED,
                 variables: { procedure: procedureObjId },

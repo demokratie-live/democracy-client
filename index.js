@@ -72,7 +72,9 @@ class App {
   }
 
   checkToShowInstructions = async () => {
-    const { data: { isInstructionsShown } } = await client.query({
+    const {
+      data: { isInstructionsShown },
+    } = await client.query({
       query: IS_INSTRUCTIONS_SHOWN,
       options: {
         fetchPolicy: 'cache-first',
@@ -162,12 +164,12 @@ class App {
 (async () => {
   await persistor.restore();
 
-  console.log('migrations start');
+  // console.log('migrations start');
   const migrations = await Migrations();
   if (migrations.some(v => v)) {
     await persistor.purge();
   }
-  console.log('migrations finish');
+  // console.log('migrations finish');
 
   const app = new App(); // eslint-disable-line
 })();

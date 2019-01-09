@@ -73,7 +73,9 @@ class PartyChart extends Component {
   };
 
   getTotals = data => {
-    const { voteResults: { namedVote } } = this.props;
+    const {
+      voteResults: { namedVote },
+    } = this.props;
     const totals = data.reduce(
       (prev, party) => {
         const { yes, abstination, no, notVoted } = party.value;
@@ -163,7 +165,7 @@ class PartyChart extends Component {
   render() {
     const { data, colorScale, showNumbers } = this.props;
     const dataSet = this.prepareChartData(data);
-    console.log('dataSet', dataSet);
+    // console.log('dataSet', dataSet);
     return (
       <VoteResultsWrapper>
         <VoteResultsPieWrapper>

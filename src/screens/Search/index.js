@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { Navigation, Navigator } from 'react-native-navigation';
+import { ApolloClient } from 'apollo-client';
 import { withApollo, graphql, compose, ApolloProvider } from 'react-apollo';
 import { TouchableHighlight } from 'react-native';
 
@@ -105,7 +106,9 @@ class SearchScreen extends Component {
   }
 
   onChangeTerm = async term => {
-    const { client: { watchQuery } } = this.props;
+    const {
+      client: { watchQuery },
+    } = this.props;
 
     if (!this.observableSearchQuery) {
       this.observableSearchQuery = await watchQuery({
@@ -154,7 +157,10 @@ class SearchScreen extends Component {
   };
 
   handleSearchResults = ({
-    data: { loading, searchProceduresAutocomplete: { procedures, autocomplete } },
+    data: {
+      loading,
+      searchProceduresAutocomplete: { procedures, autocomplete },
+    },
   }) => {
     if (!loading) {
       const searchData = [
@@ -243,6 +249,7 @@ SearchScreen.propTypes = {
   searchTerm: PropTypes.string.isRequired,
   addToSearchHistory: PropTypes.func.isRequired,
   searchHistory: PropTypes.arrayOf(PropTypes.string),
+  client: PropTypes.instanceOf(ApolloClient).isRequired,
 };
 
 SearchScreen.defaultProps = {

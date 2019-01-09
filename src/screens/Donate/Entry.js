@@ -37,7 +37,7 @@ const Description = styled.Text`
 
 const Entry = ({ money, description, occupied, target, dueDate }) => (
   <Wrapper>
-    <FillBox width={occupied / target * 100} />
+    <FillBox width={(occupied / target) * 100} />
     <Text>
       <Money>{money}</Money>
       <DueDate>{`  ${dueDate}`}</DueDate>

@@ -79,8 +79,8 @@ class VoteList extends Component {
               alignSelf: 'flex-end',
               width: '100%',
             }}
-            values={this.lists.map(
-              ({ title, smallTitle }) => (this.width > 320 ? title : smallTitle),
+            values={this.lists.map(({ title, smallTitle }) =>
+              this.width > 320 ? title : smallTitle,
             )}
             selectedIndex={this.state.selectedIndex}
             tintColor="#ffffff"

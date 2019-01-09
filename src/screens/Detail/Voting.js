@@ -207,7 +207,9 @@ export default compose(
       variables: { procedureId },
     }),
     props: props => {
-      const { data: { votedLocal } } = props;
+      const {
+        data: { votedLocal },
+      } = props;
       if (votedLocal) {
         return { votedSelection: votedLocal.selection };
       }
