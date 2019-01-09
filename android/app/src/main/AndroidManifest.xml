@@ -91,7 +91,7 @@
             android:name="com.wix.reactnativenotifications.gcm.GcmInstanceIdRefreshHandlerService"
             android:exported="false" />
 
-        <meta-data android:name="com.wix.reactnativenotifications.gcmSenderId" android:value="1001330142172\0"/>
+        <meta-data android:name="com.wix.reactnativenotifications.gcmSenderId" android:value="1001330142172\"/>
         <!-- Push Notification end -->
     </application>
 
