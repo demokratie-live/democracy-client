@@ -8,6 +8,10 @@ export default gql`
         yes
         no
         abstination
+        partyVotes {
+          party
+          main
+        }
       }
     }
   }

@@ -1,67 +1,49 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components/native';
-import { Query } from 'react-apollo';
 import PropTypes from 'prop-types';
-import { Navigator } from 'react-native-navigation';
+import { Dimensions } from 'react-native';
 
 // Components
-import NoVotesPlaceholder from '../NoVotesPlaceholder';
-
-// GraphQL
-import VOTES_LOCAL from '../../../graphql/queries/votesLocalKeyStore';
-import PROCEDURES_WITH_VOTE_RESULTS from '../../../graphql/queries/proceduresWithVoteResults';
+// import PartyChart from './PartyChart';
+import PartyChart from './PartyChart';
 
 const Wrapper = styled.View`
   flex: 1;
   background-color: #fff;
 `;
 
-const Debug = styled.Text`
-  color: #000;
-`;
-
-const Fraktionen = ({ navigator }) => (
-  <Wrapper>
-    <Query query={VOTES_LOCAL} fetchPolicy="network-only">
-      {({ data }) => {
-        if (!data.votesLocalKeyStore || data.votesLocalKeyStore.length === 0) {
-          return <NoVotesPlaceholder subline="Fraktionen" navigator={navigator} />;
-        }
-        return (
-          <Query
-            query={PROCEDURES_WITH_VOTE_RESULTS}
-            variables={{
-              procedureIds: data.votesLocalKeyStore.map(({ procedureId }) => procedureId),
-            }}
-            fetchPolicy="cache-and-network"
-          >
-            {({ data: votedProcedures }) => {
-              if (
-                !votedProcedures.proceduresWithVoteResults ||
-                votedProcedures.proceduresWithVoteResults.length === 0
-              ) {
-                return <NoVotesPlaceholder subline="Fraktionen" navigator={navigator} />;
-              }
-              console.log('VOTES_LOCAL QUERY', votedProcedures.proceduresWithVoteResults);
-              console.log('VOTES_LOCAL QUERY', data.votesLocalKeyStore);
-              const chartData = votedProcedures.proceduresWithVoteResults.map(
-                ({ voteResults, procedureId }) => ({
-                  government: voteResults.yes > voteResults.no ? 'YES' : 'NO',
-                  me: data.votesLocalKeyStore.find(({ procedureId: pid }) => pid === procedureId)
-                    .selection,
-                }),
-              );
-              return <Debug>{JSON.stringify(chartData)}</Debug>;
-            }}
-          </Query>
-        );
-      }}
-    </Query>
-  </Wrapper>
-);
+class Fraktionen extends Component {
+  state = {
+    chartWidth: Math.min(Dimensions.get('window').width, Dimensions.get('window').height),
+  };
+  onLayout = () => {
+    const chartWidth = Math.min(Dimensions.get('window').width, Dimensions.get('window').height);
+    if (this.state.chartWidth !== chartWidth) {
+      this.setState({
+        chartWidth,
+      });
+    }
+  };
+  render() {
+    const { chartData } = this.props;
+    const { chartWidth } = this.state;
+    return (
+      <Wrapper onLayout={this.onLayout}>
+        {/* <Debug>{JSON.stringify(chartData)}</Debug> */}
+        {/* <PartyChart
+          key="partyChart"
+          data={chartData}
+          colorScale={['#99C93E', '#4CB0D8', '#D43194', '#B1B3B4']}
+          label="Fraktionen"
+        /> */}
+        <PartyChart width={chartWidth} />
+      </Wrapper>
+    );
+  }
+}
 
 Fraktionen.propTypes = {
-  navigator: PropTypes.instanceOf(Navigator).isRequired,
+  chartData: PropTypes.shape().isRequired,
 };
 
 export default Fraktionen;
