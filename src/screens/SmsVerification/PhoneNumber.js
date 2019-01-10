@@ -159,7 +159,7 @@ class SmsVerification extends Component {
 SmsVerification.propTypes = {
   requestCode: PropTypes.func.isRequired,
   navigator: PropTypes.instanceOf(Navigator).isRequired,
-  procedureId: PropTypes.oneOfType(PropTypes.string, PropTypes.bool),
+  procedureId: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onComplete: PropTypes.func.isRequired,
 };
 

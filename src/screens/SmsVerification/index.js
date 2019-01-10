@@ -198,7 +198,7 @@ Zu unserer `}
 
 SmsVerification.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired,
-  procedureId: PropTypes.oneOfType(PropTypes.string, PropTypes.bool),
+  procedureId: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onComplete: PropTypes.func,
 };
 
