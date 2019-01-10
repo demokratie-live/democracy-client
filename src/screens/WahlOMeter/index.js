@@ -160,29 +160,39 @@ class WahlOMeter extends Component {
       },
       {},
     );
+    return Object.keys(chartData)
+      .map(key => ({
+        party: key,
+        values: [
+          { label: 'Übereinstimmungen', value: chartData[key].matches },
+          { label: 'Differenzen', value: chartData[key].diffs },
+        ],
+      }))
+      .sort((a, b) => b.values[0].value - a.values[0].value);
 
-    return Object.keys(chartData).reduce(
-      (prev, party) => {
-        prev[0].push({
-          x: party,
-          y: chartData[party].matches,
-          fillColor: '#99c93e',
-        });
-        prev[1].push({
-          x: party,
-          y: chartData[party].diffs,
-          fillColor: '#d43194',
-        });
-        return prev;
-      },
-      [[], []],
-    );
+    // values: [{ label: 'Übereinstimmungen', value: 15 }, { label: 'Differenzen', value: 85 }],
+
+    // return Object.keys(chartData).reduce(
+    //   (prev, party) => {
+    //     prev[0].push({
+    //       x: party,
+    //       y: chartData[party].matches,
+    //       fillColor: '#99c93e',
+    //     });
+    //     prev[1].push({
+    //       x: party,
+    //       y: chartData[party].diffs,
+    //       fillColor: '#d43194',
+    //     });
+    //     return prev;
+    //   },
+    //   [[], []],
+    // );
   };
 
   width = Dimensions.get('window').width;
 
   render() {
-    console.log('navigator', this.props.navigator);
     return (
       <Wrapper>
         <SegmentControlsWrapper>

@@ -5,15 +5,28 @@ import PropTypes from 'prop-types';
 // Components
 import PartyRow from './PartyRow';
 
-const PartyChart = ({ width }) => (
-  <Svg
-    width={width - 36}
-    height={width / 305 * 246 - 36}
-    viewBox="0 0 305 246"
-    style={{ marginVertical: 18, marginHorizontal: 18 }}
-  >
-    {/* <Rect x="0" y="0" width="1000" height="850" fill="red" /> */}
-    <G>
+const PartyChart = ({ width, chartData, onClick, selected }) => {
+  return (
+    <Svg
+      width={width - 36}
+      height={width / 305 * 270 - 36}
+      viewBox="0 0 305 270"
+      style={{ marginVertical: 18, marginHorizontal: 18 }}
+    >
+      <Rect y={selected * 46} width="305" rx="3" ry="3" height="36" fill="#ededed" />
+      {chartData.map(({ party, values }, i) => (
+        <PartyRow
+          key={party}
+          party={party}
+          values={values}
+          index={i}
+          onClick={onClick}
+          colors={['#f5a623', '#b1b3b4']}
+        />
+      ))}
+
+      {/* <Rect x="0" y="0" width="1000" height="850" fill="red" /> */}
+      {/* <G>
       <Rect y="0" width="305" rx="3" ry="3" height="36" fill="#ededed" />
       <Text fill="#4a4a4a" fontSize="13" x="50" y="23" textAnchor="end">
         Union
@@ -25,7 +38,6 @@ const PartyChart = ({ width }) => (
       </Text>
     </G>
     <G>
-      {/* <Rect y="46" width="305" rx="3" ry="3" height="36" fill="#ededed" /> */}
       <Text fill="#4a4a4a" fontSize="13" x="50" y="69" textAnchor="end">
         SPD
       </Text>
@@ -45,13 +57,13 @@ const PartyChart = ({ width }) => (
       <Text fill="#4a4a4a" fontSize="12" x="175" y="115" textAnchor="end">
         55,5%
       </Text>
-    </G>
-    <PartyRow party="Test" />
-  </Svg>
-);
+    </G> */}
+    </Svg>
+  );
+};
 
 PartyChart.propTypes = {
-  width: PropTypes.string.isRequired,
+  width: PropTypes.number.isRequired,
 };
 
 export default PartyChart;
