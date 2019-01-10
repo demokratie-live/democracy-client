@@ -15,12 +15,12 @@ import REQUEST_CODE from '../../graphql/mutations/requestCode';
 import GET_PROCEDURE from '../../graphql/queries/getProcedure';
 import F_PROCEDURE_VERIFIED from '../../graphql/fragments/ProcedureVerified';
 
-const ScrollView = styled.ScrollView.attrs({
+const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: {
     alignItems: 'center',
     justifyContent: 'center',
   },
-})`
+}))`
   background-color: #fff;
 `;
 
@@ -148,7 +148,9 @@ class Code extends Component {
           text: 'Ja',
           onPress: async () => {
             const {
-              data: { requestCode: { succeeded, reason, expireTime, resendTime } },
+              data: {
+                requestCode: { succeeded, reason, expireTime, resendTime },
+              },
             } = await this.props.requestCode({
               variables: { newPhone: phoneNumber, newUser: true },
             });

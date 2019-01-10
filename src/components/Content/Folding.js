@@ -20,11 +20,11 @@ const Headline = styled.Text`
   font-size: 17;
 `;
 
-const CollapseIcon = styled(Ionicons).attrs({
+const CollapseIcon = styled(Ionicons).attrs(() => ({
   color: 'rgb(151, 151, 151)',
   name: 'ios-arrow-up-outline',
   size: 20,
-})`
+}))`
   align-self: flex-start;
   transform: ${({ open }) => (open ? 'rotate(0deg)' : 'rotate(180deg)')};
 `;

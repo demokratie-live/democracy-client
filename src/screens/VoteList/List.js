@@ -143,7 +143,9 @@ class List extends Component {
   }
 
   onChangeFilter = filters => {
-    const { data: { refetch } } = this.props;
+    const {
+      data: { refetch },
+    } = this.props;
     const filterQuery = {};
     if (filters.type) {
       filterQuery.type = filters.type.map(({ title }) => title);
@@ -180,7 +182,9 @@ class List extends Component {
   };
 
   onChangeSort = sort => {
-    const { data: { refetch } } = this.props;
+    const {
+      data: { refetch },
+    } = this.props;
     this.setState({ sort });
     refetch({
       sort,
@@ -280,7 +284,10 @@ class List extends Component {
   };
 
   prepareData = () => {
-    const { listType, data: { procedures } } = this.props;
+    const {
+      listType,
+      data: { procedures },
+    } = this.props;
 
     if (!procedures || procedures.length === 0) {
       return [];
@@ -405,26 +412,21 @@ class List extends Component {
             }
           }}
         />
-        {Platform.OS === 'ios' &&
-          sorterOpened && (
-            <PickerWrapper>
-              <PickerHeader>
-                <PickerFinishButton
-                  title="Fertig"
-                  onPress={() => this.setState({ sorterOpened: false })}
-                />
-              </PickerHeader>
-              <Picker
-                selectedValue={sort}
-                style={{ height: 200 }}
-                onValueChange={this.onChangeSort}
-              >
-                {SORTERS[listType].map(({ key, title }) => (
-                  <Picker.Item key={key} label={title} value={key} />
-                ))}
-              </Picker>
-            </PickerWrapper>
-          )}
+        {Platform.OS === 'ios' && sorterOpened && (
+          <PickerWrapper>
+            <PickerHeader>
+              <PickerFinishButton
+                title="Fertig"
+                onPress={() => this.setState({ sorterOpened: false })}
+              />
+            </PickerHeader>
+            <Picker selectedValue={sort} style={{ height: 200 }} onValueChange={this.onChangeSort}>
+              {SORTERS[listType].map(({ key, title }) => (
+                <Picker.Item key={key} label={title} value={key} />
+              ))}
+            </Picker>
+          </PickerWrapper>
+        )}
       </Wrapper>
     );
   }

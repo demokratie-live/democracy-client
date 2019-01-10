@@ -27,13 +27,13 @@ const VoteIconButtonWrapper = styled.TouchableOpacity`
   }};
 `;
 
-const VoteIconButton = styled.Image.attrs({
+const VoteIconButton = styled.Image.attrs(() => ({
   flex: 1,
   source: require('../../assets/icons/thumbsUp.png'),
   resizeMode: 'contain',
   width: null,
   height: null,
-})`
+}))`
   width: 40;
   height: 40;
 `;

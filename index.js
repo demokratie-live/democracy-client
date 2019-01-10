@@ -2,7 +2,7 @@ import {
   Navigation,
   ScreenVisibilityListener as RNNScreenVisibilityListener,
 } from 'react-native-navigation';
-import { NetInfo } from 'react-native';
+import { NetInfo, YellowBox } from 'react-native';
 // import Reactotron from "reactotron-react-native";
 
 import Config from './src/config';
@@ -20,6 +20,8 @@ import UPDATE_NETWORK_STATUS from './src/graphql/mutations/updateNetworkStatus';
 import topTabs from './src/screens/VoteList/topTabs';
 
 import './src/services/browserLinks';
+
+YellowBox.ignoreWarnings(['Require cycle:', 'Attempted to invoke']);
 
 // Reactotron.configure() // controls connection & communication settings
 //  .useReactNative() // add all built-in react native plugins
@@ -70,7 +72,9 @@ class App {
   }
 
   checkToShowInstructions = async () => {
-    const { data: { isInstructionsShown } } = await client.query({
+    const {
+      data: { isInstructionsShown },
+    } = await client.query({
       query: IS_INSTRUCTIONS_SHOWN,
       options: {
         fetchPolicy: 'cache-first',
@@ -160,12 +164,12 @@ class App {
 (async () => {
   await persistor.restore();
 
-  console.log('migrations start');
+  // console.log('migrations start');
   const migrations = await Migrations();
   if (migrations.some(v => v)) {
     await persistor.purge();
   }
-  console.log('migrations finish');
+  // console.log('migrations finish');
 
   const app = new App(); // eslint-disable-line
 })();

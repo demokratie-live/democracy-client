@@ -32,7 +32,7 @@ const Description = styled.Text`
 
 const DonatedBox = ({ target, occupied, style, moneyTextStyle, descriptionTextStyle }) => (
   <Wrapper style={style}>
-    <FillBox width={occupied / target * 100} />
+    <FillBox width={(occupied / target) * 100} />
     <Money style={moneyTextStyle}>{`${target - occupied}€/Monat fehlen`}</Money>
     <Description style={descriptionTextStyle}>zur nachhaltigen Finanzierung</Description>
   </Wrapper>

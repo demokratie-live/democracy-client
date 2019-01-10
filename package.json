@@ -1,6 +1,6 @@
 {
   "name": "democracyclient",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "test": "eslint . && jest",
@@ -28,20 +28,16 @@
   },
   "xcodeSchemes": {
     "Debug": [
-      "Beta.Debug",
-      "Alpha.Debug",
       "Internal.Debug"
     ],
     "Release": [
-      "Beta.Release",
-      "Alpha.Release",
       "Internal.Release"
     ]
   },
   "dependencies": {
     "apollo-cache-inmemory": "^1.1.5",
     "apollo-cache-persist": "^0.1.1",
-    "apollo-client": "2.2.7",
+    "apollo-client": "^2.3.8",
     "apollo-link": "^1.0.7",
     "apollo-link-context": "^1.0.7",
     "apollo-link-error": "^1.0.7",
@@ -62,32 +58,38 @@
     "moment": "^2.20.1",
     "prisma": "^1.0.11",
     "prop-types": "^15.6.0",
-    "react": "^16.3.2",
+    "qs": "^6.0.0",
+    "react": "16.6.1",
     "react-apollo": "^2.0.4",
     "react-apollo-network-status": "^1.0.0",
-    "react-native": "0.54.2",
+    "react-dom": "^16.3.0",
+    "react-native": "0.57.7",
     "react-native-config": "^0.11.5",
     "react-native-device-info": "0.21.2",
-    "react-native-fetch-blob": "^0.10.8",
     "react-native-keyboard-aware-scroll-view": "^0.6.0",
     "react-native-keychain": "^3.0.0-rc.3",
     "react-native-linear-gradient": "^2.4.0",
     "react-native-navigation": "1.1.443",
     "react-native-notifications": "https://github.com/demokratie-live/react-native-notifications#android-initial-all-notifications",
-    "react-native-pdf": "https://github.com/wonday/react-native-pdf#not_use_tiledlayer",
+    "react-native-pdf": "^5.0.9",
     "react-native-rsa": "^0.0.3",
     "react-native-sha256": "^1.1.1",
     "react-native-svg": "^7.0.3",
     "react-native-swiper": "^1.5.13",
     "react-native-vector-icons": "^4.5.0",
+    "rn-fetch-blob": "^0.10.13",
     "speakingurl": "^14.0.1",
-    "styled-components": "^3.0.2",
+    "styled-components": "^4.1.1",
     "typescript": "^2.6.2",
     "victory-native": "^30.4.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.2.3",
+    "@babel/plugin-transform-flow-strip-types": "^7.2.3",
+    "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^8.2.1",
-    "babel-jest": "22.1.0",
+    "babel-jest": "^23.6.0",
     "babel-preset-react-native": "4.0.0",
     "buildfont": "^2.0.2",
     "depcheck": "^0.6.9",
@@ -100,10 +102,7 @@
     "jest": "22.1.4",
     "prettier": "^1.10.2",
     "react-native-schemes-manager": "^1.0.4",
-    "react-test-renderer": "16.2.0",
+    "react-test-renderer": "16.6.1",
     "reactotron-react-native": "^2.0.0"
-  },
-  "jest": {
-    "preset": "react-native"
   }
 }

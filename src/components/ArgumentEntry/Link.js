@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 
 import ArgumentEntry from '../ArgumentEntry';
 
-const Image = styled.Image.attrs({
+const Image = styled.Image.attrs(() => ({
   width: 82,
   height: 82,
-})`
+}))`
   width: 82;
   height: 82;
 `;
@@ -18,9 +18,9 @@ const Content = styled.View`
   padding-vertical: 11;
 `;
 
-const Title = styled.Text.attrs({
+const Title = styled.Text.attrs(() => ({
   numberOfLines: 1,
-})`
+}))`
   padding-bottom: 11;
 `;
 

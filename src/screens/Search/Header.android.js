@@ -19,20 +19,20 @@ const Wrapper = styled.View`
   margin-right: 16;
 `;
 
-const Icons = styled(Ionicons.Button).attrs({
+const Icons = styled(Ionicons.Button).attrs(() => ({
   color: '#fff',
   size: 30,
   backgroundColor: 'transparent',
-})``;
+}))``;
 
-const SearchInput = styled.TextInput.attrs({
+const SearchInput = styled.TextInput.attrs(() => ({
   clearButtonMode: 'always',
   autoFocus: true,
   placeholderTextColor: 'rgba(255, 255, 255, 0.38)',
   underlineColorAndroid: 'transparent',
   selectionColor: '#fff',
   returnKeyType: 'search',
-})`
+}))`
   flex: 1;
   background-color: transparent;
   border-radius: 5.5;
@@ -40,15 +40,15 @@ const SearchInput = styled.TextInput.attrs({
   color: #fff;
 `;
 
-const SearchBackButtonAndroid = styled(Icons).attrs({
+const SearchBackButtonAndroid = styled(Icons).attrs(() => ({
   name: 'md-arrow-back',
-})`
+}))`
   padding-right: 16;
 `;
 
-const SearchClearButtonAndroid = styled(Icons).attrs({
+const SearchClearButtonAndroid = styled(Icons).attrs(() => ({
   name: 'md-close',
-})`
+}))`
   display: ${({ visible }) => (visible ? 'flex' : 'none')};
   padding-left: 16;
 `;
