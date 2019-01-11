@@ -140,6 +140,7 @@ class App {
         selectedTopTabTextColor: '#ffffff',
         selectedTopTabIndicatorColor: '#ffffff',
         selectedTopTabIndicatorHeight: 5,
+        topTabsScrollable: true,
       },
       animationType: 'fade',
     });

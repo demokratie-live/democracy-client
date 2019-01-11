@@ -63,12 +63,12 @@ class VoteList extends Component {
   lists = [
     { key: 'IN_VOTE', title: 'Abstimmung', smallTitle: 'Abstimmung' },
     { key: 'PAST', title: 'Vergangen', smallTitle: 'Vergangen' },
+    { key: 'HOT', title: 'Populär', smallTitle: 'Populär' },
     {
       key: 'PREPARATION',
       title: 'Vorbereitung',
       smallTitle: 'Vorbereitung',
     },
-    { key: 'HOT', title: 'Populär', smallTitle: 'Populär' },
   ];
 
   renderSegmentControls = () => {
