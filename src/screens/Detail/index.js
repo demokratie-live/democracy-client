@@ -125,8 +125,12 @@ class Detail extends Component {
       this.listType = data.procedure.listType;
       let newTitle;
       switch (data.procedure.listType) {
-        case 'VOTING':
+        case 'IN_VOTE':
           newTitle = 'Abstimmung';
+          break;
+
+        case 'PAST':
+          newTitle = 'Vergangen';
           break;
 
         default:
@@ -180,7 +184,7 @@ class Detail extends Component {
     );
   };
 
-  listType = 'VOTING';
+  listType = 'IN_VOTE';
 
   render() {
     const { procedureId, toggleNotification, navigator } = this.props;
@@ -293,7 +297,7 @@ class Detail extends Component {
             currentStatus={currentStatus}
             type="government"
           />
-          {listType === 'VOTING' && (
+          {(listType === 'IN_VOTE' || listType === 'PAST') && (
             <Voting
               verified={verified}
               procedureObjId={_id}

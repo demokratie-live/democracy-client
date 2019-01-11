@@ -61,13 +61,14 @@ class VoteList extends Component {
   width = Dimensions.get('window').width;
 
   lists = [
-    { key: 'VOTING', title: 'in Abstimmung', smallTitle: 'Abstimmung' },
+    { key: 'IN_VOTE', title: 'Abstimmung', smallTitle: 'Abstimmung' },
+    { key: 'PAST', title: 'Vergangen', smallTitle: 'Vergangen' },
+    { key: 'HOT', title: 'Populär', smallTitle: 'Populär' },
     {
       key: 'PREPARATION',
-      title: 'in Vorbereitung',
+      title: 'Vorbereitung',
       smallTitle: 'Vorbereitung',
     },
-    { key: 'HOT', title: "What's hot?", smallTitle: "What's hot?" },
   ];
 
   renderSegmentControls = () => {

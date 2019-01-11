@@ -1,9 +1,23 @@
 export default [
   {
     screenId: 'democracy.VoteList.List',
-    title: 'Abstimmung',
+    title: 'ABSTIMMUNG',
     passProps: {
-      listType: 'VOTING',
+      listType: 'IN_VOTE',
+    },
+  },
+  {
+    screenId: 'democracy.VoteList.List',
+    title: 'Vergangen',
+    passProps: {
+      listType: 'PAST',
+    },
+  },
+  {
+    screenId: 'democracy.VoteList.List',
+    title: 'Populär',
+    passProps: {
+      listType: 'HOT',
     },
   },
   {
@@ -11,13 +25,6 @@ export default [
     title: 'Vorbereitung',
     passProps: {
       listType: 'PREPARATION',
-    },
-  },
-  {
-    screenId: 'democracy.VoteList.List',
-    title: "What's Hot",
-    passProps: {
-      listType: 'HOT',
     },
   },
 ];
