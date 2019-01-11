@@ -99,7 +99,7 @@ platform :ios do
     build_app( 
       clean: true, 
       scheme: "Alpha",
-      UseModernBuildSystem: 0
+      xcargs: "-UseNewBuildSystem=NO"
     )
 
     upload_to_testflight(
