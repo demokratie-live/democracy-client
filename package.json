@@ -28,10 +28,14 @@
   },
   "xcodeSchemes": {
     "Debug": [
-      "Internal.Debug"
+      "Internal.Debug",
+      "Alpha.Debug",
+      "Beta.Debug"
     ],
     "Release": [
-      "Internal.Release"
+      "Internal.Release",
+      "Alpha.Release",
+      "Beta.Release"
     ]
   },
   "dependencies": {
