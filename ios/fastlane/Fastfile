@@ -107,7 +107,6 @@ platform :ios do
       groups: "Developer",
       app_identifier: "de.democracy-deutschland.clientapp.alpha",
       demo_account_required: false,
-      notify_external_testers: true,
       distribute_external: true,
       reject_build_waiting_for_review: true
     )
