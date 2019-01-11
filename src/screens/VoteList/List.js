@@ -342,7 +342,7 @@ class List extends Component {
 
   renderItem = onClick => ({ item }) => {
     const { listType } = this.props;
-    console.log('listType', listType);
+    // console.log('listType', listType);
     if (item.type === 'sort') {
       if (Platform.OS === 'ios') {
         const curSort = SORTERS[listType].find(({ key }) => key === this.state.sort);
@@ -392,7 +392,7 @@ class List extends Component {
           }}
           refreshing={data.networkStatus === 4}
           renderItem={this.renderItem(this.onItemClick)}
-          renderSectionHeader={({}) => null}
+          renderSectionHeader={() => null}
           onEndReached={() => {
             if (!data.loading && !fetchedAll) {
               data.fetchMore({
