@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [General] PushNotification Token corrected
 - [General] Updated ReactNative and all other used Libraries including the PDF-Viewer
 - [Internal] Removed BetaEnd Screen
+- [ListView] 4 Segments in List including "Vergangen"
+- [ListView] Reorder Lists in TopTabs ("Abstimmen", "Vergangen", "Populär", "Vorbereitung")
 
 ## [1.0.5] - 2018-10-29
 ### Changed
