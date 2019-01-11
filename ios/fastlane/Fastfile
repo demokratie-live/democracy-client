@@ -99,9 +99,7 @@ platform :ios do
     build_app( 
       clean: true, 
       scheme: "Alpha",
-      export_options: {
-        UseModernBuildSystem: 0
-      }
+      xcargs: "-UseNewBuildSystem=NO"
     )
 
     upload_to_testflight(
