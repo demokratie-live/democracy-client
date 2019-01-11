@@ -98,7 +98,10 @@ platform :ios do
 
     build_app( 
       clean: true, 
-      scheme: "Alpha"
+      scheme: "Alpha",
+      export_options: {
+        UseModernBuildSystem: 0
+      }
     )
 
     upload_to_testflight(
