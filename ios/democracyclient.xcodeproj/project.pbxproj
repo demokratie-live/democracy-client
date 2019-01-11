@@ -317,7 +317,7 @@
 			remoteGlobalIDString = CD7408D71ECDFA2900866FA7;
 			remoteInfo = "react-native-sha256";
 		};
-		C3306C6721E78FF200C1F410 /* PBXContainerItemProxy */ = {
+		C3474B0421E8A7D7009D3A3A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 03885401ECF640B08F42ACDE /* ReactNativeConfig.xcodeproj */;
 			proxyType = 2;
@@ -760,7 +760,7 @@
 			isa = PBXGroup;
 			children = (
 				C35A58562032E3E80068C84F /* libReactNativeConfig.a */,
-				C3306C6821E78FF200C1F410 /* libReactNativeConfig-tvOS.a */,
+				C3474B0521E8A7D7009D3A3A /* libReactNativeConfig-tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1314,11 +1314,11 @@
 			remoteRef = C32312B4219C490200FD4562 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		C3306C6821E78FF200C1F410 /* libReactNativeConfig-tvOS.a */ = {
+		C3474B0521E8A7D7009D3A3A /* libReactNativeConfig-tvOS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReactNativeConfig-tvOS.a";
-			remoteRef = C3306C6721E78FF200C1F410 /* PBXContainerItemProxy */;
+			remoteRef = C3474B0421E8A7D7009D3A3A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		C349BC89219C7DC700EF0254 /* libReactNativeNavigation.a */ = {
@@ -1459,7 +1459,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export DEVELOPMENT_BUILD_CONFIGURATIONS=\"+(Internal.Debug|Debug)\"\nexport NODE_BINARY=node\n../node_modules/react-native-schemes-manager/lib/react-native-xcode.sh";
+			shellScript = "export DEVELOPMENT_BUILD_CONFIGURATIONS=\"+(Internal.Debug|Alpha.Debug|Beta.Debug|Debug)\"\nexport NODE_BINARY=node\n../node_modules/react-native-schemes-manager/lib/react-native-xcode.sh";
 		};
 		C3BBBEEE20B5B39400085C5D /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1626,6 +1626,7 @@
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
 				);
 				INFOPLIST_FILE = democracyclient/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1647,7 +1648,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = democracyclient/democracyclient.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 102774;
@@ -1668,6 +1669,7 @@
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
 				);
 				INFOPLIST_FILE = democracyclient/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1732,7 +1734,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1781,14 +1783,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		C3306C3921E78FF200C1F410 /* Alpha.Debug */ = {
+		C3474AD621E8A7D7009D3A3A /* Alpha.Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1837,17 +1839,17 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Alpha.Debug;
 		};
-		C3306C3A21E78FF200C1F410 /* Alpha.Debug */ = {
+		C3474AD721E8A7D7009D3A3A /* Alpha.Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.alpha;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.internal;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = democracyclient/democracyclient.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1872,22 +1874,23 @@
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
 				);
 				INFOPLIST_FILE = democracyclient/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.alpha";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.internal";
 				PRODUCT_NAME = democracyclient;
 				PROVISIONING_PROFILE = "8b428ae3-d742-4b55-851f-23a1749ff852";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development de.democracy-deutschland.clientapp.alpha";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development de.democracy-deutschland.clientapp.internal";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Alpha.Debug;
 		};
-		C3306C3B21E78FF200C1F410 /* Alpha.Debug */ = {
+		C3474AD821E8A7D7009D3A3A /* Alpha.Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1935,7 +1938,7 @@
 			};
 			name = Alpha.Debug;
 		};
-		C3306C7321E7900100C1F410 /* Alpha.Release */ = {
+		C3474B1021E8A7E3009D3A3A /* Alpha.Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1977,20 +1980,20 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Alpha.Release;
 		};
-		C3306C7421E7900100C1F410 /* Alpha.Release */ = {
+		C3474B1121E8A7E3009D3A3A /* Alpha.Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.alpha;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.internal;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = democracyclient/democracyclient.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 102774;
@@ -2011,22 +2014,23 @@
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
 				);
 				INFOPLIST_FILE = democracyclient/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.alpha";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.internal";
 				PRODUCT_NAME = democracyclient;
 				PROVISIONING_PROFILE = "e28d3442-4abd-4257-82a8-8f5e92cdf604";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore de.democracy-deutschland.clientapp.alpha";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore de.democracy-deutschland.clientapp.internal";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Alpha.Release;
 		};
-		C3306C7521E7900100C1F410 /* Alpha.Release */ = {
+		C3474B1221E8A7E3009D3A3A /* Alpha.Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2071,7 +2075,7 @@
 			};
 			name = Alpha.Release;
 		};
-		C3306C7621E7900D00C1F410 /* Beta.Debug */ = {
+		C3474B1321E8A7EF009D3A3A /* Beta.Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -2120,17 +2124,17 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Beta.Debug;
 		};
-		C3306C7721E7900D00C1F410 /* Beta.Debug */ = {
+		C3474B1421E8A7EF009D3A3A /* Beta.Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.beta;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.internal;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = democracyclient/democracyclient.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2155,22 +2159,23 @@
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
 				);
 				INFOPLIST_FILE = democracyclient/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.beta";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.internal";
 				PRODUCT_NAME = democracyclient;
 				PROVISIONING_PROFILE = "8b428ae3-d742-4b55-851f-23a1749ff852";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development de.democracy-deutschland.clientapp.beta";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development de.democracy-deutschland.clientapp.internal";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Beta.Debug;
 		};
-		C3306C7821E7900D00C1F410 /* Beta.Debug */ = {
+		C3474B1521E8A7EF009D3A3A /* Beta.Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2218,7 +2223,7 @@
 			};
 			name = Beta.Debug;
 		};
-		C3306C7921E7901700C1F410 /* Beta.Release */ = {
+		C3474B1621E8A7F8009D3A3A /* Beta.Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -2260,20 +2265,20 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta.Release;
 		};
-		C3306C7A21E7901700C1F410 /* Beta.Release */ = {
+		C3474B1721E8A7F8009D3A3A /* Beta.Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.beta;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.internal;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = democracyclient/democracyclient.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 102774;
@@ -2294,22 +2299,23 @@
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
 				);
 				INFOPLIST_FILE = democracyclient/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.beta";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.internal";
 				PRODUCT_NAME = democracyclient;
 				PROVISIONING_PROFILE = "e28d3442-4abd-4257-82a8-8f5e92cdf604";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore de.democracy-deutschland.clientapp.beta";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore de.democracy-deutschland.clientapp.internal";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Beta.Release;
 		};
-		C3306C7B21E7901700C1F410 /* Beta.Release */ = {
+		C3474B1821E8A7F8009D3A3A /* Beta.Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2354,7 +2360,7 @@
 			};
 			name = Beta.Release;
 		};
-		C3306C7C21E7902100C1F410 /* Production.Debug */ = {
+		C3474B1921E8A7FF009D3A3A /* Production.Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -2403,17 +2409,17 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Production.Debug;
 		};
-		C3306C7D21E7902100C1F410 /* Production.Debug */ = {
+		C3474B1A21E8A7FF009D3A3A /* Production.Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.internal;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = democracyclient/democracyclient.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2438,22 +2444,23 @@
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
 				);
 				INFOPLIST_FILE = democracyclient/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.internal";
 				PRODUCT_NAME = democracyclient;
 				PROVISIONING_PROFILE = "8b428ae3-d742-4b55-851f-23a1749ff852";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development de.democracy-deutschland.clientapp";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development de.democracy-deutschland.clientapp.internal";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Production.Debug;
 		};
-		C3306C7E21E7902100C1F410 /* Production.Debug */ = {
+		C3474B1B21E8A7FF009D3A3A /* Production.Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2501,7 +2508,7 @@
 			};
 			name = Production.Debug;
 		};
-		C3306C7F21E7902B00C1F410 /* Production.Release */ = {
+		C3474B1C21E8A80B009D3A3A /* Production.Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -2543,20 +2550,20 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Production.Release;
 		};
-		C3306C8021E7902B00C1F410 /* Production.Release */ = {
+		C3474B1D21E8A80B009D3A3A /* Production.Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.internal;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = democracyclient/democracyclient.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 102774;
@@ -2577,22 +2584,23 @@
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
 				);
 				INFOPLIST_FILE = democracyclient/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.internal";
 				PRODUCT_NAME = democracyclient;
 				PROVISIONING_PROFILE = "e28d3442-4abd-4257-82a8-8f5e92cdf604";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore de.democracy-deutschland.clientapp";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore de.democracy-deutschland.clientapp.internal";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Production.Release;
 		};
-		C3306C8121E7902B00C1F410 /* Production.Release */ = {
+		C3474B1E21E8A80B009D3A3A /* Production.Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2686,7 +2694,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -2721,6 +2729,7 @@
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
 				);
 				INFOPLIST_FILE = democracyclient/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -2826,7 +2835,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -2839,7 +2848,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.internal;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = democracyclient/democracyclient.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 102774;
@@ -2860,6 +2869,7 @@
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
 				);
 				INFOPLIST_FILE = democracyclient/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -2928,14 +2938,14 @@
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
 				C36D6886219C435A00DA39DF /* Internal.Debug */,
-				C3306C3B21E78FF200C1F410 /* Alpha.Debug */,
-				C3306C7821E7900D00C1F410 /* Beta.Debug */,
-				C3306C7E21E7902100C1F410 /* Production.Debug */,
+				C3474AD821E8A7D7009D3A3A /* Alpha.Debug */,
+				C3474B1521E8A7EF009D3A3A /* Beta.Debug */,
+				C3474B1B21E8A7FF009D3A3A /* Production.Debug */,
 				00E356F71AD99517003FC87E /* Release */,
 				C36D688B219C436300DA39DF /* Internal.Release */,
-				C3306C7521E7900100C1F410 /* Alpha.Release */,
-				C3306C7B21E7901700C1F410 /* Beta.Release */,
-				C3306C8121E7902B00C1F410 /* Production.Release */,
+				C3474B1221E8A7E3009D3A3A /* Alpha.Release */,
+				C3474B1821E8A7F8009D3A3A /* Beta.Release */,
+				C3474B1E21E8A80B009D3A3A /* Production.Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2945,14 +2955,14 @@
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
 				C36D6885219C435A00DA39DF /* Internal.Debug */,
-				C3306C3A21E78FF200C1F410 /* Alpha.Debug */,
-				C3306C7721E7900D00C1F410 /* Beta.Debug */,
-				C3306C7D21E7902100C1F410 /* Production.Debug */,
+				C3474AD721E8A7D7009D3A3A /* Alpha.Debug */,
+				C3474B1421E8A7EF009D3A3A /* Beta.Debug */,
+				C3474B1A21E8A7FF009D3A3A /* Production.Debug */,
 				13B07F951A680F5B00A75B9A /* Release */,
 				C36D688A219C436300DA39DF /* Internal.Release */,
-				C3306C7421E7900100C1F410 /* Alpha.Release */,
-				C3306C7A21E7901700C1F410 /* Beta.Release */,
-				C3306C8021E7902B00C1F410 /* Production.Release */,
+				C3474B1121E8A7E3009D3A3A /* Alpha.Release */,
+				C3474B1721E8A7F8009D3A3A /* Beta.Release */,
+				C3474B1D21E8A80B009D3A3A /* Production.Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2962,14 +2972,14 @@
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
 				C36D6884219C435A00DA39DF /* Internal.Debug */,
-				C3306C3921E78FF200C1F410 /* Alpha.Debug */,
-				C3306C7621E7900D00C1F410 /* Beta.Debug */,
-				C3306C7C21E7902100C1F410 /* Production.Debug */,
+				C3474AD621E8A7D7009D3A3A /* Alpha.Debug */,
+				C3474B1321E8A7EF009D3A3A /* Beta.Debug */,
+				C3474B1921E8A7FF009D3A3A /* Production.Debug */,
 				83CBBA211A601CBA00E9B192 /* Release */,
 				C36D6889219C436300DA39DF /* Internal.Release */,
-				C3306C7321E7900100C1F410 /* Alpha.Release */,
-				C3306C7921E7901700C1F410 /* Beta.Release */,
-				C3306C7F21E7902B00C1F410 /* Production.Release */,
+				C3474B1021E8A7E3009D3A3A /* Alpha.Release */,
+				C3474B1621E8A7F8009D3A3A /* Beta.Release */,
+				C3474B1C21E8A80B009D3A3A /* Production.Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
