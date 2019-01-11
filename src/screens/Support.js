@@ -21,9 +21,9 @@ const Wrapper = styled.View`
   align-items: center;
 `;
 
-const Logo = styled.Image.attrs({
+const Logo = styled.Image.attrs(() => ({
   source: require('../../assets/images/logo-text10X.png'),
-})``;
+}))``;
 
 const Text = styled.Text`
   font-size: 15;
@@ -53,10 +53,10 @@ const Version = styled.Text`
   padding-bottom: 11;
 `;
 
-const ContactIcons = styled(FontAwesome).attrs({
+const ContactIcons = styled(FontAwesome).attrs(() => ({
   size: 40,
   color: '#000000',
-})``;
+}))``;
 
 class Support extends Component {
   static navigatorStyle = {

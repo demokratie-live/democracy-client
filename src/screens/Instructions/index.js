@@ -41,7 +41,7 @@ class Introductions extends Component {
   };
 
   async componentWillMount() {
-    const registered = !!await AsyncStorage.getItem('auth_phoneHash');
+    const registered = !!(await AsyncStorage.getItem('auth_phoneHash'));
     this.setState({ registered });
   }
 

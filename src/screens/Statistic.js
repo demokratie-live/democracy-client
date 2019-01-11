@@ -97,7 +97,9 @@ class Statistic extends Component {
   };
 
   render() {
-    const { voteStatistic: { proceduresCount, votedProcedures } } = this.props;
+    const {
+      voteStatistic: { proceduresCount, votedProcedures },
+    } = this.props;
     const { pieChartWidth } = this.state;
     return (
       <ScrollWrapper>
@@ -121,8 +123,8 @@ class Statistic extends Component {
             <VictoryPie
               standalone={false}
               data={[
-                { x: 1, y: 100 * votedProcedures / proceduresCount },
-                { x: 2, y: 100 - 100 * votedProcedures / proceduresCount },
+                { x: 1, y: (100 * votedProcedures) / proceduresCount },
+                { x: 2, y: 100 - (100 * votedProcedures) / proceduresCount },
               ]}
               width={400}
               height={400}
@@ -144,7 +146,7 @@ class Statistic extends Component {
                 }}
                 x={200}
                 y={200}
-                text={`${Math.round(100 * votedProcedures / proceduresCount * 10) / 10}%`}
+                text={`${Math.round(((100 * votedProcedures) / proceduresCount) * 10) / 10}%`}
               />
             </G>
           </Svg>

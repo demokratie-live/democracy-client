@@ -14,10 +14,10 @@ const Screen = styled.View`
   background-color: #ffffff;
 `;
 
-const ScrollView = styled.ScrollView.attrs({
+const ScrollView = styled.ScrollView.attrs(() => ({
   horizontal: true,
   pagingEnabled: true,
-})``;
+}))``;
 
 const SegmentControlsWrapper = styled.View`
   background-color: #4494d3;
@@ -80,8 +80,8 @@ class VoteList extends Component {
               alignSelf: 'flex-end',
               width: '100%',
             }}
-            values={this.lists.map(
-              ({ title, smallTitle }) => (this.width > 320 ? title : smallTitle),
+            values={this.lists.map(({ title, smallTitle }) =>
+              this.width > 320 ? title : smallTitle,
             )}
             selectedIndex={this.state.selectedIndex}
             tintColor="#ffffff"
@@ -113,7 +113,7 @@ class VoteList extends Component {
             });
           }}
           onMomentumScrollEnd={this.onScrollEndDrag}
-          innerRef={e => {
+          ref={e => {
             this.scrollView = e;
           }}
         >

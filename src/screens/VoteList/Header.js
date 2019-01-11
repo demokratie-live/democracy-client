@@ -22,26 +22,26 @@ const Title = styled.Text`
   font-weight: 600;
 `;
 
-const Icons = styled(Ionicons.Button).attrs({
+const Icons = styled(Ionicons.Button).attrs(() => ({
   color: '#fff',
   size: 25,
   backgroundColor: 'transparent',
   iconStyle: { marginRight: 0 },
-})`
+}))`
   padding: 0;
 `;
 
-const SearchIcon = styled(Icons).attrs({
+const SearchIcon = styled(Icons).attrs(() => ({
   name: Platform.OS === 'ios' ? 'ios-search' : 'md-search',
-})``;
+}))``;
 
-const FilterIcon = styled(Icons).attrs({
+const FilterIcon = styled(Icons).attrs(() => ({
   name: 'ios-funnel-outline',
-})``;
+}))``;
 
-const MenuIcon = styled(Icons).attrs({
+const MenuIcon = styled(Icons).attrs(() => ({
   name: Platform.OS === 'ios' ? 'ios-menu' : 'md-menu',
-})``;
+}))``;
 
 class Header extends Component {
   clickSearchIcon = () => {

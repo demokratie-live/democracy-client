@@ -17,11 +17,11 @@ const Wrapper = styled.View`
 //   margin-right: 2;
 // `;
 
-const NotificationButtonIcon = styled(Ionicons).attrs({
+const NotificationButtonIcon = styled(Ionicons).attrs(() => ({
   size: 20,
   name: 'ios-notifications',
   color: '#1badf8',
-})``;
+}))``;
 
 const StatusIcon = ({
   // unreaded,

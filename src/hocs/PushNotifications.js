@@ -45,7 +45,7 @@ export default ComposedComponent => {
           if (!LISTENERS_ADDED) {
             LISTENERS_ADDED = true;
             NotificationsAndroid.setRegistrationTokenUpdateListener(async deviceToken => {
-              console.log('PUSHLOG: setRegistrationTokenUpdateListener', deviceToken);
+              // console.log('PUSHLOG: setRegistrationTokenUpdateListener', deviceToken);
               // TODO: Send the token to my server so it could send back push notifications...
               const tokenSucceeded = await client.mutate({
                 mutation: ADD_TOKEN,
@@ -62,31 +62,30 @@ export default ComposedComponent => {
 
             // On Android, we allow for only one (global) listener per each event type.
             NotificationsAndroid.setNotificationReceivedListener(notification => {
-              console.log('PUSHLOG: setNotificationReceivedListener', notification);
+              // console.log('PUSHLOG: setNotificationReceivedListener', notification);
               const notificationData = JSON.parse(notification.getData().payload);
               this.onNotificationReceivedForeground(notificationData);
             });
             NotificationsAndroid.setNotificationOpenedListener(notification => {
-              console.log('PUSHLOG: setNotificationOpenedListener', notification);
+              // console.log('PUSHLOG: setNotificationOpenedListener', notification);
               const notificationData = JSON.parse(notification.getData().payload);
               this.onNotificationOpened(notificationData);
             });
 
-            PendingNotifications.getInitialNotification()
-              .then(notifications => {
-                console.log('PUSHLOG: getInitialNotification', notifications);
-                if (notifications) {
-                  notifications.data.forEach(notification => {
-                    const notificationData = JSON.parse(notification.payload);
-                    if (notification.opened) {
-                      this.onNotificationOpened(notificationData);
-                    } else {
-                      this.handlePushData(notificationData);
-                    }
-                  });
-                }
-              })
-              .catch(err => console.error('getInitialNotifiation() failed', err));
+            PendingNotifications.getInitialNotification().then(notifications => {
+              // console.log('PUSHLOG: getInitialNotification', notifications);
+              if (notifications) {
+                notifications.data.forEach(notification => {
+                  const notificationData = JSON.parse(notification.payload);
+                  if (notification.opened) {
+                    this.onNotificationOpened(notificationData);
+                  } else {
+                    this.handlePushData(notificationData);
+                  }
+                });
+              }
+            });
+            // .catch(err => console.error('getInitialNotifiation() failed', err));
           }
           break;
         default:
@@ -97,7 +96,7 @@ export default ComposedComponent => {
     componentDidMount() {
       switch (Platform.OS) {
         case 'ios':
-          console.log('PUSHLOG: NotificationsIOS.consumeBackgroundQueue();');
+          // console.log('PUSHLOG: NotificationsIOS.consumeBackgroundQueue();');
           NotificationsIOS.consumeBackgroundQueue();
           break;
 
@@ -135,13 +134,13 @@ export default ComposedComponent => {
     }
 
     onNotificationReceivedForeground = async notification => {
-      console.log('PUSHLOG: onNotificationReceivedForeground', notification);
+      // console.log('PUSHLOG: onNotificationReceivedForeground', notification);
       const { navigator } = this.props;
       const { title, message, procedureId, type } = notification;
       await this.handlePushData(notification);
 
       if (type === 'procedure') {
-        console.log('showInAppNotification!!!!');
+        // console.log('showInAppNotification!!!!');
         Navigation.showInAppNotification({
           screen: 'democracy.Notifications.InApp', // unique ID registered with Navigation.registerScreen
           passProps: {
@@ -175,12 +174,12 @@ export default ComposedComponent => {
     };
 
     onNotificationReceivedBackground = notification => {
-      console.log('PUSHLOG: onNotificationReceivedBackground', notification);
+      // console.log('PUSHLOG: onNotificationReceivedBackground', notification);
       this.handlePushData(notification);
     };
 
     onNotificationOpened = notification => {
-      console.log('PUSHLOG: onNotificationOpened', notification);
+      // console.log('PUSHLOG: onNotificationOpened', notification);
       const { procedureId, type } = notification;
       if (type === 'procedure') {
         const { navigator } = this.props;
@@ -196,7 +195,7 @@ export default ComposedComponent => {
     };
 
     onPushRegistered = async deviceToken => {
-      console.log('PUSHLOG: onPushRegistered', deviceToken);
+      // console.log('PUSHLOG: onPushRegistered', deviceToken);
       // TODO: Send the token to my server so it could send back push notifications...
       const tokenSucceeded = await client.mutate({
         mutation: ADD_TOKEN,
@@ -211,13 +210,13 @@ export default ComposedComponent => {
       }
     };
 
-    onPushRegistrationFailed = error => {
-      console.log('PUSHLOG: onPushRegistrationFailed', error);
-      console.error(error);
+    onPushRegistrationFailed = (/*error*/) => {
+      //console.log('PUSHLOG: onPushRegistrationFailed', error);
+      //console.error(error);
     };
 
     handlePushData = async notification => {
-      console.log('PUSHLOG: handlePushData', notification, notification.type);
+      //console.log('PUSHLOG: handlePushData', notification, notification.type);
       const { procedureId, procedureIds, type } = notification;
       if (type === 'procedure') {
         await ViewedProcedures.setViewedProcedure({

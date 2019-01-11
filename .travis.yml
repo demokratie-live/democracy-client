@@ -11,6 +11,7 @@ env:
     # MATCH_PASSWORD
     - secure: "DBRDvRv6mUCqz7mheYFfyQS0zqoR4zHbJ3+KO1dD41/7UYCuI43sTBhfuF4TInc63ysu4tTVqg22phajnJ3r2s544CaPlm6/OrbOoGW5gV6i392u5z44Yk8hZP+OBKctUw671RTY02O3binYOi4FQZoq+V2w5x7KYQnzm8nlMwd8W4B/Oq27HuxYrVV/zfD0b+vQXhoyeMZRZ/hXCuYWkkXKl68qLMZy3XiJgOVXmDzBuHZULvjDPwZQ7DCj4ngL7cn23s3SpLSH1r8hG4RrqzEY4hWgOH0aWF2CzA7SKdEDYNudMlXVlFatd8oY6V6ityNDimXzWDl5nhvd8SKprVDbEwcR2TXbkm7YaLHOZH7pXtfs6oeDhTVELKVZjhIfFgQp0OmWJg72HMwRlu8LdJgylFeZC54QcLyO3ARxQF7J+b/afQHuxHEGsM/whwlW8JXu9p+/UcfwLijYeDIf75bg+tBl4ydVM0WcKSYfMVQAJlxb7uA1ZSNsd7H/6N45mmrXgJnw6tv3GI8I/CrynTr66GhfqMHEHq7iIVp5+RD5CfDji+p0qeS4SkLfoMJcl3Es4EYXavKTUOy5NNbMvOy1Mohi/B3pLRbhHuHouFnLdFVlYq4tqnJ525aiP2r3q7cIl0AqbMvUqoJD++BUy6PCHW2fkk4g/zMvJL+wY0Y="
 matrix:
+  sudo: required
   include:
   # test
   - os: linux
@@ -31,6 +32,8 @@ matrix:
     cache:
       yarn: true
     before_install:
+    # Allow more watched files
+    - echo fs.inotify.max_user_watches=2048000 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
     - cd android
     - bundle install
     - gem update --system
@@ -39,19 +42,23 @@ matrix:
       components:
       - tools
       - platform-tools
-      # android 23,25,26
+      # build tools
       - build-tools-23.0.1
       - build-tools-25.0.0
       - build-tools-25.0.1
       - build-tools-25.0.2
-      - build-tools-25.0.3
-      - build-tools-25.3.3
+      # - build-tools-25.0.3
       - build-tools-26.0.1
       - build-tools-26.0.2
       - build-tools-26.0.3
+      - build-tools-27.0.3
+      - build-tools-28.0.3
+      # android
       - android-23
       - android-25
       - android-26
+      - android-27
+      - android-28
       # extra
       - extra-android-m2repository
       - extra-google-google_play_services
@@ -78,7 +85,7 @@ matrix:
 
   # ios test
   - if: type IN (pull_request)
-    osx_image: xcode9.2
+    osx_image: xcode10.1
     language: objective-c
     before_install:
     - cd ios

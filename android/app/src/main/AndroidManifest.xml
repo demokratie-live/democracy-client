@@ -3,11 +3,18 @@
     package="de.democracydeutschland.app">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> 
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+
+    <!-- Default permissions which are added silently and not needed by use - hence we remove them -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" tools:node="remove" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" tools:node="remove" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" tools:node="remove" />
+
+    <!-- This needs to be added in dev mode but removed in all others
+         since this config is used for production aswell we need to remove it here -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" tools:node="remove" />
+
+    <!-- included from rn-fetch-blob - implications of removal are unknown -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" tools:node="remove" />
 
     <!-- Push Notification start -->
     <permission
@@ -91,7 +98,7 @@
             android:name="com.wix.reactnativenotifications.gcm.GcmInstanceIdRefreshHandlerService"
             android:exported="false" />
 
-        <meta-data android:name="com.wix.reactnativenotifications.gcmSenderId" android:value="1001330142172\0"/>
+        <meta-data android:name="com.wix.reactnativenotifications.gcmSenderId" android:value="1001330142172\"/>
         <!-- Push Notification end -->
     </application>
 

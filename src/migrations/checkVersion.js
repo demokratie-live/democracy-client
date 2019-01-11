@@ -1,4 +1,4 @@
-export default version => {
+export default (/*version*/) => {
   // TODO: add an version check
-  console.log(version);
+  // console.log(version);
 };

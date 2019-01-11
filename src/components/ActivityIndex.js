@@ -22,11 +22,11 @@ const Counter = styled.Text`
   color: #8f8e94;
 `;
 
-const Arrow = styled(Ionicons).attrs({
-  size: ({ listView }) => (listView ? 45 : 50),
+const Arrow = styled(Ionicons).attrs(({ listView, active }) => ({
+  size: listView ? 45 : 50,
   name: 'ios-arrow-up-outline',
-  color: ({ active }) => (active ? 'rgb(68, 148, 211)' : 'rgb(199, 199, 204)'),
-})`
+  color: active ? 'rgb(68, 148, 211)' : 'rgb(199, 199, 204)',
+}))`
   padding-top: 15;
   margin-bottom: -15;
   line-height: 20;
