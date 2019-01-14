@@ -106,8 +106,19 @@ export const resolvers = {
       await AsyncStorage.setItem('Filters', filters);
       return null;
     },
+    setConstituency: async (_, { constituency }) => {
+      await AsyncStorage.setItem('Constituency', constituency);
+      return null;
+    },
   },
   Query: {
+    constituency: async () => {
+      return {
+        constituency: await AsyncStorage.getItem('Constituency'),
+        __typename: 'Constituency',
+      };
+    },
+
     isInstructionsShown: async () => JSON.parse(await AsyncStorage.getItem('isInstructionsShown')),
 
     votesLocalKeyStore: async () =>

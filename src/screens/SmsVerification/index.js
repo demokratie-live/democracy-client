@@ -38,7 +38,7 @@ const TextLink = styled.Text`
 
 class SmsVerification extends Component {
   static navigatorStyle = {
-    // navBarHidden: true,
+    navBarHidden: false,
     orientation: 'portrait',
   };
 
