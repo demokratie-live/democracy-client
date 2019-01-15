@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 import styled from 'styled-components/native';
-import { Platform, SegmentedControlIOS, Dimensions } from 'react-native';
+import { Platform, Dimensions } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { TabView, SceneMap } from 'react-native-tab-view';
 
 // Components
 import Bundestag from './Bundestag';
@@ -21,24 +22,10 @@ const Wrapper = styled.View`
 `;
 
 const SegmentView = styled.View`
-  background-color: blue;
+  flex: 1;
+  background-color: red;
   width: ${Dimensions.get('window').width};
 `;
-
-const SegmentControlsWrapper = styled.View`
-  background-color: #4494d3;
-  height: 50;
-  padding-left: 16;
-  padding-right: 16;
-  flex-direction: row;
-  justify-content: center;
-  padding-bottom: 10;
-`;
-
-const ScrollView = styled.ScrollView.attrs(() => ({
-  horizontal: true,
-  pagingEnabled: true,
-}))``;
 
 class WahlOMeter extends Component {
   static navigatorStyle = {
@@ -66,7 +53,8 @@ class WahlOMeter extends Component {
   }
 
   state = {
-    selectedIndex: 0,
+    index: 0,
+    routes: [{ key: 'first', title: 'Bundestag' }, { key: 'second', title: 'Fraktionen' }],
   };
 
   onScrollEndDrag = e => {
@@ -76,8 +64,8 @@ class WahlOMeter extends Component {
 
       // Divide the horizontal offset by the width of the view to see which page is visible
       const pageNum = Math.floor(contentOffset.x / viewSize.width);
-      if (this.state.selectedIndex !== pageNum) {
-        this.setState({ selectedIndex: pageNum });
+      if (this.state.index !== pageNum) {
+        this.setState({ index: pageNum });
       }
     }
   };
@@ -174,28 +162,9 @@ class WahlOMeter extends Component {
   width = Dimensions.get('window').width;
 
   render() {
+    const { index, routes } = this.state;
     return (
       <Wrapper>
-        <SegmentControlsWrapper>
-          <SegmentedControlIOS
-            style={{
-              alignSelf: 'flex-end',
-              width: '100%',
-            }}
-            values={['Bundestag', 'Fraktionen']}
-            tintColor="#ffffff"
-            selectedIndex={this.state.selectedIndex}
-            onChange={event => {
-              this.setState({
-                selectedIndex: event.nativeEvent.selectedSegmentIndex,
-              });
-              this.scrollView.scrollTo({
-                y: 0,
-                x: event.nativeEvent.selectedSegmentIndex * this.width,
-              });
-            }}
-          />
-        </SegmentControlsWrapper>
         <Query query={VOTES_LOCAL} fetchPolicy="network-only">
           {({ data }) => {
             if (!data.votesLocalKeyStore || data.votesLocalKeyStore.length === 0) {
@@ -219,29 +188,28 @@ class WahlOMeter extends Component {
                     );
                   }
 
+                  const bundestagScreen = () => (
+                    <SegmentView key="bundestag">
+                      <Bundestag chartData={this.pieChartData({ votedProcedures, data })} />
+                    </SegmentView>
+                  );
+
+                  const fraktionenScreen = () => (
+                    <SegmentView key="fraktionen">
+                      <Fraktionen chartData={this.partyChartData({ votedProcedures, data })} />
+                    </SegmentView>
+                  );
+
                   return (
-                    <ScrollView
-                      onContentSizeChange={contentWidth => {
-                        this.width = contentWidth / 2;
-                        this.scrollView.scrollTo({
-                          y: 0,
-                          x: this.state.selectedIndex * this.width,
-                        });
-                      }}
-                      onMomentumScrollEnd={this.onScrollEndDrag}
-                      ref={e => {
-                        this.scrollView = e;
-                      }}
-                    >
-                      {[
-                        <SegmentView key="bundestag">
-                          <Bundestag chartData={this.pieChartData({ votedProcedures, data })} />
-                        </SegmentView>,
-                        <SegmentView key="fraktionen">
-                          <Fraktionen chartData={this.partyChartData({ votedProcedures, data })} />
-                        </SegmentView>,
-                      ]}
-                    </ScrollView>
+                    <TabView
+                      navigationState={{ index, routes }}
+                      renderScene={SceneMap({
+                        first: bundestagScreen,
+                        second: fraktionenScreen,
+                      })}
+                      onIndexChange={index => this.setState({ index })}
+                      initialLayout={{ width: Dimensions.get('window').width }}
+                    />
                   );
                 }}
               </Query>
