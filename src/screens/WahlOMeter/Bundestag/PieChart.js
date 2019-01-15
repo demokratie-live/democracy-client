@@ -180,12 +180,7 @@ class PieChart extends Component {
 }
 
 PieChart.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      value: PropTypes.number,
-      label: PropTypes.string,
-    }),
-  ).isRequired,
+  data: PropTypes.shape().isRequired,
   label: PropTypes.string.isRequired,
   colorScale: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   showNumbers: PropTypes.bool,

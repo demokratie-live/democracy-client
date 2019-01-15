@@ -1,5 +1,5 @@
 import React from 'react';
-import Svg, { G, Text, Rect } from 'react-native-svg';
+import { G, Text, Rect } from 'react-native-svg';
 import PropTypes from 'prop-types';
 
 const PartyRow = ({ party, values, colors, index, onClick }) => {
@@ -9,7 +9,7 @@ const PartyRow = ({ party, values, colors, index, onClick }) => {
 
   // Prepare Data
   let preValues = 0;
-  const rowValues = values.map(({ value, label }) => {
+  let rowValues = values.map(({ value, label }) => {
     const width = value / total * 100 + preValues;
     preValues = width;
     return {
@@ -20,57 +20,57 @@ const PartyRow = ({ party, values, colors, index, onClick }) => {
 
   // reverse order of arrays because of rendering order
   rowValues.reverse();
-  colors.reverse();
+
+  rowValues = rowValues.map(v => v);
 
   const getPercentagePosition = rowValues[rowValues.length - 1].value;
   return (
     <G y={index * 46}>
+      <Text fill="#4a4a4a" fontSize="13" x="50" y="23" textAnchor="end">
+        {party}
+      </Text>
+      <G x="62" y="8" width="235" height="20">
+        {rowValues.map(({ label, value }, i) => {
+          return (
+            <Rect
+              key={label}
+              x="0"
+              y="0"
+              width={235 / 100 * value}
+              rx="3"
+              ry="3"
+              height="20"
+              fill={colors[i]}
+            />
+          );
+        })}
+        <Text
+          fill="#4a4a4a"
+          fontSize="12"
+          x={
+            getPercentagePosition > 18
+              ? `${getPercentagePosition - 2}%`
+              : `${getPercentagePosition + 2}%`
+          }
+          y="15"
+          textAnchor={getPercentagePosition > 18 ? 'end' : 'start'}
+        >
+          {`${parseFloat(rowValues[rowValues.length - 1].value)
+            .toFixed(1)
+            .replace('.', ',')}%`}
+        </Text>
+      </G>
       <Rect
+        id={`clickable-${index}`}
         y="0"
         width="305"
         rx="3"
         ry="3"
         height="36"
-        fill="black"
-        fillOpacity="0"
+        fill="red"
+        fillOpacity="0.0"
         onPressIn={onClick(index)}
       />
-      <Text fill="#4a4a4a" fontSize="13" x="50" y="23" textAnchor="end">
-        {party}
-      </Text>
-      <G x="62" y="8">
-        <Svg viewBox="0 0 235 20" width="235" height="20">
-          {rowValues.map(({ label, value }, i) => {
-            return (
-              <Rect
-                key={label}
-                x="0"
-                y="0"
-                width={`${value}%`}
-                rx="3"
-                ry="3"
-                height="20"
-                fill={colors[i]}
-              />
-            );
-          })}
-          <Text
-            fill="#4a4a4a"
-            fontSize="12"
-            x={
-              getPercentagePosition > 18
-                ? `${getPercentagePosition - 2}%`
-                : `${getPercentagePosition + 2}%`
-            }
-            y="15"
-            textAnchor={getPercentagePosition > 18 ? 'end' : 'start'}
-          >
-            {`${parseFloat(rowValues[rowValues.length - 1].value)
-              .toFixed(1)
-              .replace('.', ',')}%`}
-          </Text>
-        </Svg>
-      </G>
     </G>
   );
 };
