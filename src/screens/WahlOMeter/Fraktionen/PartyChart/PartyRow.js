@@ -10,7 +10,7 @@ const PartyRow = ({ party, values, colors, index, onClick }) => {
   // Prepare Data
   let preValues = 0;
   let rowValues = values.map(({ value, label }) => {
-    const width = value / total * 100 + preValues;
+    const width = (value / total) * 100 + preValues;
     preValues = width;
     return {
       value: width,
@@ -36,7 +36,7 @@ const PartyRow = ({ party, values, colors, index, onClick }) => {
               key={label}
               x="0"
               y="0"
-              width={235 / 100 * value}
+              width={(235 / 100) * value}
               rx="3"
               ry="3"
               height="20"
