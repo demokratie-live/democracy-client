@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  query proceduresWithVoteResults($procedureIds: [String!]!) {
-    proceduresWithVoteResults(procedureIds: $procedureIds) {
+  query proceduresByIdHavingVoteResults($procedureIds: [String!]!) {
+    proceduresByIdHavingVoteResults(procedureIds: $procedureIds) {
       procedureId
       voteResults {
         yes

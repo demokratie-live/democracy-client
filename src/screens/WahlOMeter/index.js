@@ -13,7 +13,7 @@ import NoVotesPlaceholder from './NoVotesPlaceholder';
 
 // GraphQL
 import VOTES_LOCAL from '../../graphql/queries/votesLocalKeyStore';
-import PROCEDURES_WITH_VOTE_RESULTS from '../../graphql/queries/proceduresWithVoteResults';
+import PROCEDURES_WITH_VOTE_RESULTS from '../../graphql/queries/proceduresByIdHavingVoteResults';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -84,7 +84,7 @@ class WahlOMeter extends Component {
 
   pieChartData = ({ votedProcedures, data }) => {
     // Pie Chart Data Preparation
-    let pieDataRaw = votedProcedures.proceduresWithVoteResults.map(
+    let pieDataRaw = votedProcedures.proceduresByIdHavingVoteResults.map(
       ({ voteResults, procedureId }) => ({
         government: voteResults.yes >= voteResults.no ? 'YES' : 'NO',
         me: data.votesLocalKeyStore.find(({ procedureId: pid }) => pid === procedureId).selection,
@@ -108,7 +108,7 @@ class WahlOMeter extends Component {
   };
 
   partyChartData = ({ votedProcedures, data }) => {
-    const chartData = votedProcedures.proceduresWithVoteResults.reduce(
+    const chartData = votedProcedures.proceduresByIdHavingVoteResults.reduce(
       (prev, { voteResults: { partyVotes }, procedureId }) => {
         const me = data.votesLocalKeyStore.find(({ procedureId: pid }) => pid === procedureId)
           .selection;
@@ -211,8 +211,8 @@ class WahlOMeter extends Component {
               >
                 {({ data: votedProcedures }) => {
                   if (
-                    !votedProcedures.proceduresWithVoteResults ||
-                    votedProcedures.proceduresWithVoteResults.length === 0
+                    !votedProcedures.proceduresByIdHavingVoteResults ||
+                    votedProcedures.proceduresByIdHavingVoteResults.length === 0
                   ) {
                     return (
                       <NoVotesPlaceholder subline="Bundestag" navigator={this.props.navigator} />

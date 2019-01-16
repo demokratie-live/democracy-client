@@ -86,7 +86,7 @@
     "speakingurl": "^14.0.1",
     "styled-components": "^4.1.1",
     "typescript": "^2.6.2",
-    "victory": "30.4.0",
+    "victory": "^31.1.0",
     "victory-native": "^31.0.0"
   },
   "devDependencies": {
