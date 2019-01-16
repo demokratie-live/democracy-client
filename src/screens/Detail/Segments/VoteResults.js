@@ -108,17 +108,27 @@ const VoteResults = props => {
           label="Abgeordnete"
           voteResults={voteResults}
         />,
-        <BarChart
-          key="barChart"
-          data={_.map(voteResults.partyVotes, partyVotes => ({
-            value: partyVotes.deviants,
-            label: partyVotes.party,
-          }))}
-          colorScale={['#99C93E', '#4CB0D8', '#D43194', '#B1B3B4']}
-          label="Abgeordnete"
-          voteResults={voteResults}
-        />,
       ];
+
+      // FIXME: Für iOS mit SVG nachbauen
+      /**
+       * Ursache: Mit der react-native-svg@9.0.0 library schmiert iOS beim
+       *  BarChart ab.
+       */
+      if (Platform.OS === 'android') {
+        screens.push(
+          <BarChart
+            key="barChart"
+            data={_.map(voteResults.partyVotes, partyVotes => ({
+              value: partyVotes.deviants,
+              label: partyVotes.party,
+            }))}
+            colorScale={['#99C93E', '#4CB0D8', '#D43194', '#B1B3B4']}
+            label="Abgeordnete"
+            voteResults={voteResults}
+          />,
+        );
+      }
       if (voteResults.decisionText) {
         screens.push(
           <DecisionTextView key="decisionText">

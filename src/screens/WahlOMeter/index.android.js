@@ -166,8 +166,8 @@ class WahlOMeter extends Component {
     return (
       <Wrapper>
         <Query query={VOTES_LOCAL} fetchPolicy="network-only">
-          {({ data }) => {
-            if (!data.votesLocalKeyStore || data.votesLocalKeyStore.length === 0) {
+          {({ data, error }) => {
+            if (!data || !data.votesLocalKeyStore || data.votesLocalKeyStore.length === 0) {
               return <NoVotesPlaceholder subline="Bundestag" navigator={this.props.navigator} />;
             }
             return (

@@ -113,11 +113,21 @@ class PieChart extends Component {
               padding={{ left: 18, top: 0, bottom: 0, right: 18 }}
               colorScale={colorScale}
               data={[
-                { x: `${data.matches * 100 / data.count}%`, y: data.matches },
-                { x: `${data.diffs * 100 / data.count}%`, y: data.diffs },
+                {
+                  x: `${parseFloat((data.matches * 100) / data.count)
+                    .toFixed(1)
+                    .replace('.', ',')}%`,
+                  y: data.matches,
+                },
+                {
+                  x: `${parseFloat((data.diffs * 100) / data.count)
+                    .toFixed(1)
+                    .replace('.', ',')}%`,
+                  y: data.diffs,
+                },
               ]}
               innerRadius={pieChartWidth / 5.6}
-              labelRadius={pieChartWidth / 3.3}
+              labelRadius={pieChartWidth / 4}
               style={{
                 labels: {
                   fill: 'white',
