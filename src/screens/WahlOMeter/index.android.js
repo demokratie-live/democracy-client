@@ -5,7 +5,7 @@ import styled from 'styled-components/native';
 import { Platform, Dimensions } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { TabView, SceneMap } from 'react-native-tab-view';
+import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 
 // Components
 import Bundestag from './Bundestag';
@@ -32,6 +32,9 @@ class WahlOMeter extends Component {
     navBarBackgroundColor: '#4494d3',
     navBarTextColor: '#FFFFFF',
     navBarTextFontSize: 17,
+    navBarNoBorder: true,
+    topBarElevationShadowEnabled: false,
+    topBarShadowOpacity: 0,
   };
 
   constructor(props) {
@@ -73,7 +76,7 @@ class WahlOMeter extends Component {
     // Pie Chart Data Preparation
     let pieDataRaw = votedProcedures.proceduresWithVoteResults.map(
       ({ voteResults, procedureId }) => ({
-        government: voteResults.yes >= voteResults.no ? 'YES' : 'NO',
+        government: voteResults.governmentDecision,
         me: data.votesLocalKeyStore.find(({ procedureId: pid }) => pid === procedureId).selection,
       }),
     );
@@ -165,7 +168,7 @@ class WahlOMeter extends Component {
     return (
       <Wrapper>
         <Query query={VOTES_LOCAL} fetchPolicy="network-only">
-          {({ data, error }) => {
+          {({ data }) => {
             if (!data || !data.votesLocalKeyStore || data.votesLocalKeyStore.length === 0) {
               return <NoVotesPlaceholder subline="Bundestag" navigator={this.props.navigator} />;
             }
@@ -207,7 +210,13 @@ class WahlOMeter extends Component {
                         second: fraktionenScreen,
                       })}
                       onIndexChange={index => this.setState({ index })}
-                      initialLayout={{ width: Dimensions.get('window').width }}
+                      initialLayout={{
+                        width: Dimensions.get('window').width,
+                        height: Dimensions.get('window').height,
+                      }}
+                      renderTabBar={props => (
+                        <TabBar {...props} tabStyle={{ backgroundColor: '#4494D3' }} />
+                      )}
                     />
                   );
                 }}

@@ -97,7 +97,7 @@ class Fraktionen extends Component {
 }
 
 Fraktionen.propTypes = {
-  chartData: PropTypes.shape().isRequired,
+  chartData: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 
 export default Fraktionen;

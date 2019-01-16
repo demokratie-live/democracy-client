@@ -102,7 +102,9 @@ class Profil extends Component {
                 text:
                   this.props.verified === true
                     ? 'Verifiziert'
-                    : this.props.verified === false ? 'Verifizieren' : '…',
+                    : this.props.verified === false
+                    ? 'Verifizieren'
+                    : '…',
                 arrow: this.props.verified === false,
                 onPress: this.props.verified === false ? this.navigateTo('verificate') : null,
               },
@@ -126,7 +128,7 @@ class Profil extends Component {
           {
             title: 'Auswertungen',
             data: [
-              { title: 'Wahl-O-Meter' },
+              { title: `Wahl-\u00D8-Meter` },
               { title: 'Abgeordnetenprofil' },
               {
                 title: 'Persönliche Historie',

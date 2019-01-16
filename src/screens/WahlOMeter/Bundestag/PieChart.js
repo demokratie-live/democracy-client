@@ -1,203 +1,105 @@
 import React, { Component } from 'react';
-import { Dimensions, Platform } from 'react-native';
-import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
-import { VictoryPie, VictoryLabel } from 'victory-native';
-import Svg, { G } from 'react-native-svg';
-
-const VoteResultsWrapper = styled.View`
-  flex: 1;
-  align-items: center;
-`;
-
-const VoteResultsPieWrapper = styled.View.attrs(() => ({
-  pointerEvents: 'none',
-}))``;
-
-const VoteResultNumbers = styled.View`
-  width: ${() => Dimensions.get('window').width - 18 * 2};
-  max-width: 464;
-  padding-top: 18;
-  flex-direction: row;
-  justify-content: space-around;
-`;
-
-const VoteResult = styled.View`
-  justify-content: center;
-  align-items: center;
-`;
-
-const VoteResultCircleNumber = styled.View`
-  flex-direction: row;
-`;
-
-const VoteResultNumber = styled.Text`
-  color: #4a4a4a;
-  font-size: 12;
-`;
-const VoteResultLabel = styled.Text`
-  color: rgb(142, 142, 147);
-  font-size: 10;
-`;
-
-const VoteResultCircle = styled.View`
-  width: 10;
-  height: 10;
-  border-radius: 5;
-  background-color: ${props => props.color};
-  margin-top: 3;
-  margin-right: 5;
-`;
+import Svg, { Path, Circle, Text, G } from 'react-native-svg';
 
 class PieChart extends Component {
-  state = {
-    pieChartWidth: Math.min(Dimensions.get('window').width, Dimensions.get('window').height),
+  getCoordinatesForPercent = percent => {
+    const x = Math.cos(2 * Math.PI * percent) * 100;
+    const y = Math.sin(2 * Math.PI * percent) * 100;
+    return [x, y];
   };
-
-  onLayout = () => {
-    const pieChartWidth = Math.min(Dimensions.get('window').width, Dimensions.get('window').height);
-    if (this.state.pieChartWidth !== pieChartWidth) {
-      this.setState({
-        pieChartWidth,
-      });
-    }
-  };
-
-  getColor = (label, colors) => {
-    switch (label) {
-      case 'yes':
-        return colors[0];
-      case 'abstination':
-        return colors[1];
-      case 'no':
-        return colors[2];
-      default:
-        return colors[3];
-    }
-  };
-
-  getLabel = label => {
-    const labels = {
-      yes: 'Zustimmungen',
-      abstination: 'Enthaltungen',
-      no: 'Ablehnungen',
-      notVoted: 'Nicht abg.',
-    };
-    return labels[label] || label;
-  };
-
-  getValue = ({ value, fractions }) => (typeof fractions === 'number' ? fractions : value);
 
   render() {
-    const { data, colorScale, label, showNumbers } = this.props;
-    const { pieChartWidth } = this.state;
+    const { data, label, subLabel } = this.props;
+
+    let cumulativePercent = 0;
+
+    /**
+     * source: https://hackernoon.com/a-simple-pie-chart-in-svg-dbdd653b6936
+     */
     return (
-      <VoteResultsWrapper>
-        <VoteResultsPieWrapper onLayout={this.onLayout}>
-          <Svg
-            width={pieChartWidth}
-            height={pieChartWidth}
-            viewBox="0 0 400 400"
-            style={{
-              width: '100%',
-              maxWidth: 400,
-              height: 'auto',
-              maxHeight: 350,
-            }}
-          >
-            <VictoryPie
-              standalone={false}
-              height={400}
-              width={400}
-              allowZoom={false}
-              padding={{ left: 18, top: 0, bottom: 0, right: 18 }}
-              colorScale={colorScale}
-              data={[
-                {
-                  x: `${parseFloat((data.matches * 100) / data.count)
-                    .toFixed(1)
-                    .replace('.', ',')}%`,
-                  y: data.matches,
-                },
-                {
-                  x: `${parseFloat((data.diffs * 100) / data.count)
-                    .toFixed(1)
-                    .replace('.', ',')}%`,
-                  y: data.diffs,
-                },
-              ]}
-              innerRadius={pieChartWidth / 5.6}
-              labelRadius={pieChartWidth / 4}
-              style={{
-                labels: {
-                  fill: 'white',
-                  fontSize: 20,
-                  fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue-Thin' : 'sans-serif-light',
-                },
-              }}
-            />
-            <G>
-              <VictoryLabel
-                textAnchor="middle"
-                style={{
-                  fontSize: 17,
-                  color: '#4a4a4a',
-                  fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue-Thin' : 'sans-serif-light',
-                }}
-                dy={-10}
-                x={200}
-                y={200}
-                text="Bundestag"
-              />
-            </G>
-            <G>
-              <VictoryLabel
-                textAnchor="middle"
-                style={{
-                  fontSize: 11,
-                  color: '#4a4a4a',
-                  fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue-Thin' : 'sans-serif-light',
-                }}
-                dy={10}
-                x={200}
-                y={200}
-                text={label}
-              />
-            </G>
-          </Svg>
-        </VoteResultsPieWrapper>
-        {showNumbers && (
-          <VoteResultNumbers>
-            <VoteResult>
-              <VoteResultCircleNumber>
-                <VoteResultCircle color={colorScale[0]} />
-                <VoteResultNumber>{data.matches}</VoteResultNumber>
-              </VoteResultCircleNumber>
-              <VoteResultLabel>Übereinstimmungen</VoteResultLabel>
-            </VoteResult>
-            <VoteResult>
-              <VoteResultCircleNumber>
-                <VoteResultCircle color={colorScale[1]} />
-                <VoteResultNumber>{data.diffs}</VoteResultNumber>
-              </VoteResultCircleNumber>
-              <VoteResultLabel>Differenzen</VoteResultLabel>
-            </VoteResult>
-          </VoteResultNumbers>
+      <Svg
+        viewBox="-100 -100 200 200"
+        width="100%"
+        height="100%"
+        style={{ flex: 1, aspectRatio: 1 }}
+      >
+        <G transform="rotate(-90)">
+          {data.map(({ percent, label, color }) => {
+            // destructuring assignment sets the two variables at once
+            const [startX, startY] = this.getCoordinatesForPercent(cumulativePercent);
+
+            const [labelX, labelY] = this.getCoordinatesForPercent(cumulativePercent + percent / 2);
+
+            // each slice starts where the last slice ended, so keep a cumulative percent
+            cumulativePercent += percent;
+
+            const [endX, endY] = this.getCoordinatesForPercent(cumulativePercent);
+
+            // if the slice is more than 50%, take the large arc (the long way around)
+            const largeArcFlag = percent > 0.5 ? 1 : 0;
+
+            // create an array and join it just for code readability
+            const pathData = [
+              `M ${startX} ${startY}`, // Move
+              `A 100 100 0 ${largeArcFlag} 1 ${endX} ${endY}`, // Arc
+              `L 0 0`, // Line
+            ].join(' ');
+
+            // create a <path>
+            return (
+              <G key={label}>
+                <Path d={pathData} fill={color} />
+                <Text
+                  textAnchor="middle"
+                  transform={`rotate(90, ${labelX * 0.7}, ${labelY * 0.7})`}
+                  fontSize="10"
+                  x={labelX * 0.7}
+                  y={labelY * 0.7}
+                  fill="#fff"
+                >
+                  {`${parseFloat(percent * 100)
+                    .toFixed(0)
+                    .replace('.', ',')}%`}
+                </Text>
+              </G>
+            );
+          })}
+        </G>
+
+        {
+          // TODO mask the circle
+        }
+        <Circle cx="0" cy="0" r="20%" fill="#fff" />
+
+        {label && (
+          <Text fill="#4a4a4a" fontSize="12" textAnchor="middle">
+            {label}
+          </Text>
         )}
-      </VoteResultsWrapper>
+
+        {subLabel && (
+          <Text fill="#4a4a4a" y="5%" fontSize="7" textAnchor="middle">
+            {subLabel}
+          </Text>
+        )}
+      </Svg>
     );
   }
 }
 
 PieChart.propTypes = {
-  data: PropTypes.shape().isRequired,
-  label: PropTypes.string.isRequired,
-  colorScale: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  showNumbers: PropTypes.bool,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string,
+      percent: PropTypes.number.isRequired,
+      value: PropTypes.number,
+      total: PropTypes.number,
+      color: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
 };
 
-PieChart.defaultProps = {
-  showNumbers: true,
-};
+PieChart.defaultProps = {};
 
 export default PieChart;
