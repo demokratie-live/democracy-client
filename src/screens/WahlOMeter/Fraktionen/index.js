@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { Dimensions } from 'react-native';
 
 // Components
-// import PartyChart from './PartyChart';
 import PartyChart from './PartyChart';
 
 const Wrapper = styled.View`

@@ -21,9 +21,8 @@ const Wrapper = styled.View`
   background-color: #ffffff;
 `;
 
-const SegmentView = styled.View`
-  flex: 1;
-  background-color: red;
+const SegmentView = styled.ScrollView`
+  background-color: #fff;
   width: ${Dimensions.get('window').width};
 `;
 
