@@ -5,9 +5,7 @@ export default gql`
     proceduresByIdHavingVoteResults(procedureIds: $procedureIds) {
       procedureId
       voteResults {
-        yes
-        no
-        abstination
+        governmentDecision
         partyVotes {
           party
           main

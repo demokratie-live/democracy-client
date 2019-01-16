@@ -86,7 +86,7 @@ class WahlOMeter extends Component {
     // Pie Chart Data Preparation
     let pieDataRaw = votedProcedures.proceduresByIdHavingVoteResults.map(
       ({ voteResults, procedureId }) => ({
-        government: voteResults.yes >= voteResults.no ? 'YES' : 'NO',
+        government: voteResults.governmentDecision,
         me: data.votesLocalKeyStore.find(({ procedureId: pid }) => pid === procedureId).selection,
       }),
     );
