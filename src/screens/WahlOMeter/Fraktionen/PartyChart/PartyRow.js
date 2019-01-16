@@ -2,6 +2,8 @@ import React from 'react';
 import { G, Text, Rect } from 'react-native-svg';
 import PropTypes from 'prop-types';
 
+const WIDTH = 235;
+
 const PartyRow = ({ party, values, colors, index, onClick }) => {
   const total = values.reduce((sum, { value }) => {
     return sum + value;
@@ -23,20 +25,21 @@ const PartyRow = ({ party, values, colors, index, onClick }) => {
 
   rowValues = rowValues.map(v => v);
 
-  const getPercentagePosition = rowValues[rowValues.length - 1].value;
+  const getPercentagePosition = (WIDTH / 100) * rowValues[rowValues.length - 1].value;
+
   return (
     <G y={index * 46}>
       <Text fill="#4a4a4a" fontSize="13" x="50" y="23" textAnchor="end">
         {party}
       </Text>
-      <G x="62" y="8" width="235" height="20">
+      <G x="62" y="8" width={WIDTH} height="20">
         {rowValues.map(({ label, value }, i) => {
           return (
             <Rect
               key={label}
               x="0"
               y="0"
-              width={(235 / 100) * value}
+              width={(WIDTH / 100) * value}
               rx="3"
               ry="3"
               height="20"
@@ -47,11 +50,7 @@ const PartyRow = ({ party, values, colors, index, onClick }) => {
         <Text
           fill="#4a4a4a"
           fontSize="12"
-          x={
-            getPercentagePosition > 18
-              ? `${getPercentagePosition - 2}%`
-              : `${getPercentagePosition + 2}%`
-          }
+          x={getPercentagePosition > 18 ? getPercentagePosition - 5 : getPercentagePosition + 5}
           y="15"
           textAnchor={getPercentagePosition > 18 ? 'end' : 'start'}
         >
