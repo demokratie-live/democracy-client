@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.X.X] - 2019-0X-XX
+### Added
+- [Support] added hint to donation statistics that only monthly donations are represented [#590](https://github.com/demokratie-live/democracy-client/issues/590)
+
 ## [1.1.0] - 2019-01-10
 ### Fixed
 - [General] removed Permission query on Install (Read/Write external Store  + Wifi) [#402](https://github.com/demokratie-live/democracy-client/issues/402)
