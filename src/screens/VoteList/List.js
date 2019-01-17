@@ -320,13 +320,12 @@ class List extends Component {
         return;
       }
 
-    preparedData[0].data.push({
+      preparedData[0].data.push({
         ...procedure,
         date: procedure.voteDate || false,
         listType,
       });
-
-      });
+    });
     return preparedData;
   };
 
