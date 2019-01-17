@@ -11,9 +11,10 @@ const VoteResultsWrapper = styled.View`
 const VoteResultNumbers = styled.View`
   width: ${() => Dimensions.get('window').width - 18 * 2};
   max-width: 464;
-  padding-top: 18;
   flex-direction: row;
   justify-content: space-around;
+  padding-top: 18;
+  height: 40;
 `;
 
 const VoteResult = styled.View`

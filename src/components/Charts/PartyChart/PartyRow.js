@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const WIDTH = 235;
 
-const PartyRow = ({ party, values, colors, index, onClick }) => {
+const PartyRow = ({ party, values, colors, index, onClick, showPercentage }) => {
   const total = values.reduce((sum, { value }) => {
     return sum + value;
   }, 0);
@@ -47,17 +47,19 @@ const PartyRow = ({ party, values, colors, index, onClick }) => {
             />
           );
         })}
-        <Text
-          fill="#4a4a4a"
-          fontSize="12"
-          x={getPercentagePosition > 18 ? getPercentagePosition - 5 : getPercentagePosition + 5}
-          y="15"
-          textAnchor={getPercentagePosition > 18 ? 'end' : 'start'}
-        >
-          {`${parseFloat(rowValues[rowValues.length - 1].value)
-            .toFixed(1)
-            .replace('.', ',')}%`}
-        </Text>
+        {showPercentage && (
+          <Text
+            fill="#4a4a4a"
+            fontSize="12"
+            x={getPercentagePosition > 18 ? getPercentagePosition - 5 : getPercentagePosition + 5}
+            y="15"
+            textAnchor={getPercentagePosition > 18 ? 'end' : 'start'}
+          >
+            {`${parseFloat(rowValues[rowValues.length - 1].value)
+              .toFixed(1)
+              .replace('.', ',')}%`}
+          </Text>
+        )}
       </G>
       <Rect
         id={`clickable-${index}`}

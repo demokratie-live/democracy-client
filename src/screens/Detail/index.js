@@ -21,9 +21,10 @@ import DateTime from '../../components/Date';
 import SegmentDetails from './Segments/Details';
 import SegmentDocuments from './Segments/Documents';
 import History from './Segments/History';
-import VoteResults from './Segments/VoteResults';
 import Segment from './Segment';
 import Voting from './Voting';
+import CommunityVoteResults from './Segments/VoteResults/CommunityVoteResults';
+import GovernmentVoteResults from './Segments/VoteResults/GovernmentVoteResults';
 
 const LoadingWrapper = styled.View`
   flex: 1;
@@ -282,14 +283,8 @@ class Detail extends Component {
               <History history={currentStatusHistory} currentStatus={currentStatus} voted={voted} />
             </Segment>
           )}
-          <VoteResults
-            key="community"
-            voteResults={voteResults}
-            procedure={_id}
-            scrollTo={this.scrollTo}
-            type="community"
-          />
-          <VoteResults
+          <CommunityVoteResults key="community" procedure={_id} scrollTo={this.scrollTo} />
+          <GovernmentVoteResults
             key="government"
             voteResults={voteResults}
             procedure={_id}

@@ -3,8 +3,8 @@ import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 
 // Components
-import PieChart from './PieChart';
-import ChartLegend from './ChartLegend';
+import PieChart from '../../../components/Charts/PieChart';
+import ChartLegend from '../../../components/Charts/ChartLegend';
 
 const Wrapper = styled.View`
   flex: 1;

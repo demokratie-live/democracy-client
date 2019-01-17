@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Dimensions } from 'react-native';
 
 // Components
-import PartyChart from './PartyChart';
+import PartyChart from '../../../components/Charts/PartyChart';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -74,6 +74,7 @@ class Fraktionen extends Component {
           chartData={chartData}
           onClick={this.onClick}
           selected={selected}
+          showPercentage
         />
         <VoteResultNumbers>
           <VoteResult>

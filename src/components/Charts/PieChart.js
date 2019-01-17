@@ -50,18 +50,20 @@ class PieChart extends Component {
             return (
               <G key={label}>
                 <Path d={pathData} fill={color} />
-                <Text
-                  textAnchor="middle"
-                  transform={`rotate(90, ${labelX * 0.7}, ${labelY * 0.7})`}
-                  fontSize="10"
-                  x={labelX * 0.7}
-                  y={labelY * 0.7}
-                  fill="#fff"
-                >
-                  {`${parseFloat(percent * 100)
-                    .toFixed(0)
-                    .replace('.', ',')}%`}
-                </Text>
+                {percent > 0.05 && (
+                  <Text
+                    textAnchor="middle"
+                    transform={`rotate(90, ${labelX * 0.7}, ${labelY * 0.7})`}
+                    fontSize="10"
+                    x={labelX * 0.7}
+                    y={labelY * 0.7}
+                    fill="#fff"
+                  >
+                    {`${parseFloat(percent * 100)
+                      .toFixed(0)
+                      .replace('.', ',')}%`}
+                  </Text>
+                )}
               </G>
             );
           })}
@@ -77,7 +79,6 @@ class PieChart extends Component {
             {label}
           </Text>
         )}
-
         {subLabel && (
           <Text fill="#4a4a4a" y="5%" fontSize="7" textAnchor="middle">
             {subLabel}
@@ -98,8 +99,13 @@ PieChart.propTypes = {
       color: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  label: PropTypes.string,
+  subLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
-PieChart.defaultProps = {};
+PieChart.defaultProps = {
+  label: false,
+  subLabel: false,
+};
 
 export default PieChart;

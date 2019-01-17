@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 // Components
 import PartyRow from './PartyRow';
 
-const PartyChart = ({ width, chartData, onClick, selected }) => {
+const PartyChart = ({ width, chartData, onClick, selected, colors, showPercentage }) => {
   return (
     <Svg
       width={width - 36}
@@ -21,7 +21,8 @@ const PartyChart = ({ width, chartData, onClick, selected }) => {
           values={values}
           index={i}
           onClick={onClick}
-          colors={['#b1b3b4', '#f5a623']}
+          colors={colors}
+          showPercentage={showPercentage}
         />
       ))}
     </Svg>
@@ -30,6 +31,15 @@ const PartyChart = ({ width, chartData, onClick, selected }) => {
 
 PartyChart.propTypes = {
   width: PropTypes.number.isRequired,
+  colors: PropTypes.arrayOf(PropTypes.string),
+  showPercentage: PropTypes.bool,
+  onClick: PropTypes.func.isRequired,
+  selected: PropTypes.number.isRequired,
+};
+
+PartyChart.defaultProps = {
+  colors: ['#b1b3b4', '#f5a623'],
+  showPercentage: false,
 };
 
 export default PartyChart;
