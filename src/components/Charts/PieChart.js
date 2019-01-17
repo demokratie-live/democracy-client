@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Platform } from 'react-native';
 import Svg, { Path, Circle, Text, G } from 'react-native-svg';
 
 class PieChart extends Component {
   getCoordinatesForPercent = percent => {
+    if (percent === 1 && Platform.OS === 'android') {
+      percent -= 0.00001;
+    }
     const x = Math.cos(2 * Math.PI * percent) * 100;
     const y = Math.sin(2 * Math.PI * percent) * 100;
     return [x, y];
@@ -26,6 +30,9 @@ class PieChart extends Component {
       >
         <G transform="rotate(-90)">
           {data.map(({ percent, label, color }) => {
+            if (percent === 0) {
+              return null;
+            }
             // destructuring assignment sets the two variables at once
             const [startX, startY] = this.getCoordinatesForPercent(cumulativePercent);
 
