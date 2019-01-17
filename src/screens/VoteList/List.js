@@ -319,23 +319,12 @@ class List extends Component {
       if (!this.filterProcedures(procedure)) {
         return;
       }
-      if (
-        listType === 'IN_VOTE' &&
-        ((new Date(procedure.voteDate) < new Date() && procedure.voteDate !== null) ||
-          procedure.completed)
-      ) {
-        preparedData[1].data.push({
-          ...procedure,
-          date: procedure.voteDate || false,
-          listType,
-        });
-      } else {
-        preparedData[0].data.push({
-          ...procedure,
-          date: procedure.voteDate || false,
-          listType,
-        });
-      }
+
+      preparedData[0].data.push({
+        ...procedure,
+        date: procedure.voteDate || false,
+        listType,
+      });
     });
     return preparedData;
   };
