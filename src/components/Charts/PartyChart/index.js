@@ -8,7 +8,7 @@ import PartyRow from './PartyRow';
 const PartyChart = ({ width, chartData, onClick, selected, colors, showPercentage }) => {
   return (
     <Svg
-      width={width - 36}
+      width={width}
       height={chartData.length * 46}
       viewBox={`0 0 305 ${chartData.length * 46}`}
       style={{ marginVertical: 18, marginHorizontal: 18 }}

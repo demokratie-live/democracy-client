@@ -14,7 +14,7 @@ class PieChart extends Component {
   };
 
   render() {
-    const { data, label, subLabel } = this.props;
+    const { data, label, subLabel, width } = this.props;
 
     let cumulativePercent = 0;
 
@@ -24,8 +24,8 @@ class PieChart extends Component {
     return (
       <Svg
         viewBox="-100 -100 200 200"
-        width="100%"
-        height="100%"
+        width={width}
+        height={width}
         style={{ flex: 1, aspectRatio: 1 }}
       >
         <G transform="rotate(-90)">

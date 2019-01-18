@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import { graphql, compose } from 'react-apollo';
@@ -22,65 +22,79 @@ const RepresentativeText = styled.Text`
 `;
 
 const PieChartWrapper = styled.View`
-  width: ${width - 36};
-  height: ${width - 36};
+  align-items: center;
 `;
 
-const VoteResults = props => {
-  const { communityVotes, scrollTo } = props;
-
-  const renderCommuntiyResult = () => {
-    const { voteResults: comunnityResults } = communityVotes;
-    if (
-      communityVotes &&
-      comunnityResults &&
-      communityVotes.voted &&
-      (comunnityResults.yes || comunnityResults.no || comunnityResults.abstination)
-    ) {
-      const votes = comunnityResults.yes + comunnityResults.no + comunnityResults.abstination;
-      const data = [
-        {
-          label: 'Zustimmungen',
-          percent: comunnityResults.yes / votes,
-          color: '#15C063',
-          value: comunnityResults.yes,
-        },
-        {
-          label: 'Enthaltungen',
-          percent: comunnityResults.abstination / votes,
-          color: '#2C82E4',
-          value: comunnityResults.abstination,
-        },
-        {
-          label: 'Ablehnungen',
-          percent: comunnityResults.no / votes,
-          color: '#EC3E31',
-          value: comunnityResults.no,
-        },
-      ];
-
-      return (
-        <PieChartWrapper>
-          <PieChart data={data} label="Abstimmende" subLabel={votes} />
-          <ChartLegend data={data} />
-        </PieChartWrapper>
-      );
-    }
-    return <ActivityIndicator />;
+class VoteResults extends Component {
+  state = {
+    chartWidth: Math.min(Dimensions.get('window').width, Dimensions.get('window').height),
   };
 
-  if (communityVotes.voted) {
-    return (
-      <Segment title="Communityergebnis" open scrollTo={scrollTo}>
-        {renderCommuntiyResult()}
-        <RepresentativeText>
-          Dieses Ergebnis wurde nicht auf seine Repräsentativität überprüft.
-        </RepresentativeText>
-      </Segment>
-    );
+  onLayout = () => {
+    const chartWidth = Math.min(Dimensions.get('window').width, Dimensions.get('window').height);
+    if (this.state.chartWidth !== chartWidth) {
+      this.setState({
+        chartWidth,
+      });
+    }
+  };
+  render() {
+    const { communityVotes, scrollTo } = this.props;
+    const { chartWidth } = this.state;
+
+    const renderCommuntiyResult = () => {
+      const { voteResults: comunnityResults } = communityVotes;
+      if (
+        communityVotes &&
+        comunnityResults &&
+        communityVotes.voted &&
+        (comunnityResults.yes || comunnityResults.no || comunnityResults.abstination)
+      ) {
+        const votes = comunnityResults.yes + comunnityResults.no + comunnityResults.abstination;
+        const data = [
+          {
+            label: 'Zustimmungen',
+            percent: comunnityResults.yes / votes,
+            color: '#15C063',
+            value: comunnityResults.yes,
+          },
+          {
+            label: 'Enthaltungen',
+            percent: comunnityResults.abstination / votes,
+            color: '#2C82E4',
+            value: comunnityResults.abstination,
+          },
+          {
+            label: 'Ablehnungen',
+            percent: comunnityResults.no / votes,
+            color: '#EC3E31',
+            value: comunnityResults.no,
+          },
+        ];
+
+        return (
+          <PieChartWrapper onLayout={this.onLayout}>
+            <PieChart data={data} label="Abstimmende" subLabel={votes} width={chartWidth - 36} />
+            <ChartLegend data={data} />
+          </PieChartWrapper>
+        );
+      }
+      return <ActivityIndicator />;
+    };
+
+    if (communityVotes.voted) {
+      return (
+        <Segment title="Communityergebnis" open scrollTo={scrollTo}>
+          {renderCommuntiyResult()}
+          <RepresentativeText>
+            Dieses Ergebnis wurde nicht auf seine Repräsentativität überprüft.
+          </RepresentativeText>
+        </Segment>
+      );
+    }
+    return null;
   }
-  return null;
-};
+}
 
 VoteResults.propTypes = {
   scrollTo: PropTypes.func.isRequired,

@@ -4,7 +4,9 @@ import styled from 'styled-components/native';
 import PartyChartComponent from '../../../../../components/Charts/PartyChart';
 import ChartLegend from '../../../../../components/Charts/ChartLegend';
 
-const Wrapper = styled.View``;
+const Wrapper = styled.View`
+  align-items: center;
+`;
 
 class PartyChart extends Component {
   state = {
