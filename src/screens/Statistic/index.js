@@ -5,16 +5,15 @@ import { Platform, Dimensions } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { graphql, Query } from 'react-apollo';
-import { VictoryPie, VictoryLabel } from 'victory-native';
-import Svg, { G } from 'react-native-svg';
+import Chart from './Chart';
 
-import SegmentHeader from '../components/ListSectionHeader';
-import ListItem from '../screens/VoteList/ListItem';
+import SegmentHeader from '../../components/ListSectionHeader';
+import ListItem from '../VoteList/ListItem';
 
-import preventNavStackDuplicate from '../hocs/preventNavStackDuplicate';
+import preventNavStackDuplicate from '../../hocs/preventNavStackDuplicate';
 
-import GET_STATISTIC from '../graphql/queries/getStatistic';
-import GET_VOTED_PROCEDURES from '../graphql/queries/getVotedProcedures';
+import GET_STATISTIC from '../../graphql/queries/getStatistic';
+import GET_VOTED_PROCEDURES from '../../graphql/queries/getVotedProcedures';
 
 const ScrollWrapper = styled.ScrollView`
   flex: 1;
@@ -100,7 +99,6 @@ class Statistic extends Component {
     const {
       voteStatistic: { proceduresCount, votedProcedures },
     } = this.props;
-    const { pieChartWidth } = this.state;
     return (
       <ScrollWrapper>
         <StatisticWrapper onLayout={this.onLayout}>
@@ -114,42 +112,7 @@ class Statistic extends Component {
               <StatisticNumberDescription>Unabgestimme Vorgänge</StatisticNumberDescription>
             </StatisticNumberWrapper>
           </StatisticNumbersWrapper>
-          <Svg
-            width={pieChartWidth}
-            height={pieChartWidth}
-            viewBox="0 0 400 400"
-            style={{ width: '100%', height: 'auto' }}
-          >
-            <VictoryPie
-              standalone={false}
-              data={[
-                { x: 1, y: (100 * votedProcedures) / proceduresCount },
-                { x: 2, y: 100 - (100 * votedProcedures) / proceduresCount },
-              ]}
-              width={400}
-              height={400}
-              innerRadius={130}
-              cornerRadius={30}
-              labels={() => null}
-              style={{
-                data: {
-                  fill: d => (d.x === 1 ? '#5794CE' : '#ECECEC'),
-                },
-              }}
-            />
-            <G>
-              <VictoryLabel
-                textAnchor="middle"
-                style={{
-                  fontSize: 30,
-                  fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue-Thin' : 'sans-serif-light',
-                }}
-                x={200}
-                y={200}
-                text={`${Math.round(((100 * votedProcedures) / proceduresCount) * 10) / 10}%`}
-              />
-            </G>
-          </Svg>
+          <Chart value={(100 * votedProcedures) / proceduresCount} />
         </StatisticWrapper>
         <Query query={GET_VOTED_PROCEDURES} fetchPolicy="cache-and-network">
           {({ loading, data }) => {

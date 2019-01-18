@@ -85,9 +85,7 @@
     "rn-fetch-blob": "^0.10.13",
     "speakingurl": "^14.0.1",
     "styled-components": "^4.1.1",
-    "typescript": "^2.6.2",
-    "victory": "^31.1.0",
-    "victory-native": "^31.0.0"
+    "typescript": "^2.6.2"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
