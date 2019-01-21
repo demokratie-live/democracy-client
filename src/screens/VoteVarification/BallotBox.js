@@ -14,7 +14,6 @@ import VOTES from '../../graphql/queries/votes';
 import VOTED_LOCAL from '../../graphql/queries/votedLocal';
 import F_ACTIVITY_INDEX from '../../graphql/fragments/ProcedureActivityIndex';
 import F_VOTED from '../../graphql/fragments/ProcedureVoted';
-import PROCEDURES_WITH_VOTE_RESULTS from '../../graphql/queries/proceduresByIdHavingVoteResults';
 import VOTES_LOCAL from '../../graphql/queries/votesLocalKeyStore';
 
 const Wrapper = styled.View`
@@ -260,7 +259,9 @@ export default compose(
                 query: VOTES,
                 variables: { procedure: procedureObjId },
               },
-              VOTES_LOCAL,
+              {
+                query: VOTES_LOCAL,
+              },
             ],
           }),
       };

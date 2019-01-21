@@ -11,7 +11,6 @@ import PROCEDURES_WITH_VOTE_RESULTS from '../../graphql/queries/proceduresByIdHa
 const VotedProceduresList = ({ onItemClick }) => (
   <Query query={PROCEDURES_WITH_VOTE_RESULTS} variables={{ procedureIds: null }}>
     {({ data, loading, error }) => {
-      console.log('VotedProceduresList', data);
       if (!data || !data.proceduresByIdHavingVoteResults) {
         return <ActivityIndicator />;
       }
