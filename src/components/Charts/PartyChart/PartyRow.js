@@ -51,9 +51,13 @@ const PartyRow = ({ party, values, colors, index, onClick, showPercentage }) => 
           <Text
             fill="#4a4a4a"
             fontSize="12"
-            x={getPercentagePosition > 18 ? getPercentagePosition - 5 : getPercentagePosition + 5}
+            x={
+              rowValues[rowValues.length - 1].value > 18
+                ? getPercentagePosition - 5
+                : getPercentagePosition + 5
+            }
             y="15"
-            textAnchor={getPercentagePosition > 18 ? 'end' : 'start'}
+            textAnchor={rowValues[rowValues.length - 1].value > 18 ? 'end' : 'start'}
           >
             {`${parseFloat(rowValues[rowValues.length - 1].value)
               .toFixed(1)

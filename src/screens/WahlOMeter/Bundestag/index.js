@@ -1,4 +1,5 @@
 import React from 'react';
+import { Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 
@@ -8,16 +9,17 @@ import ChartLegend from '../../../components/Charts/ChartLegend';
 import Header from '../Header';
 import VotedProceduresList from '../VotedProceduresList';
 
-const Wrapper = styled.View`
-  flex: 1;
+const Wrapper = styled.ScrollView`
   background-color: #fff;
-  padding-horizontal: 18;
   padding-top: 18;
-  padding-bottom: 9;
+  width: ${Dimensions.get('screen').width};
 `;
 
 const ChartWrapper = styled.View`
   flex: 1;
+  padding-horizontal: 18;
+  padding-top: 18;
+  min-height: 150;
 `;
 
 const Bundestag = ({
@@ -43,8 +45,20 @@ const Bundestag = ({
     },
   ];
 
+  const isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }) => {
+    const paddingToBottom = 20;
+    return layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom;
+  };
+
   return (
-    <Wrapper>
+    <Wrapper
+      onScroll={({ nativeEvent }) => {
+        if (isCloseToBottom(nativeEvent)) {
+          if (this.myView.fetchMore) this.myView.fetchMore();
+        }
+      }}
+      scrollEventThrottle={4000}
+    >
       <Header totalProcedures={totalProcedures} votedProceduresCount={votedProceduresCount} />
       <ChartWrapper>
         <PieChart
@@ -55,7 +69,7 @@ const Bundestag = ({
         />
       </ChartWrapper>
       <ChartLegend data={data} />
-      <VotedProceduresList onItemClick={onProcedureListItemClick} />
+      <VotedProceduresList onItemClick={onProcedureListItemClick} ref={el => (this.myView = el)} />
     </Wrapper>
   );
 };

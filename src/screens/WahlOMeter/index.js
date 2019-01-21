@@ -22,11 +22,6 @@ const Wrapper = styled.View`
   background-color: #ffffff;
 `;
 
-const SegmentView = styled.ScrollView`
-  background-color: #fff;
-  width: ${Dimensions.get('window').width};
-`;
-
 const SegmentControlsWrapper = styled.View`
   background-color: #4494d3;
   height: 50;
@@ -251,22 +246,20 @@ class WahlOMeter extends Component {
                       }}
                     >
                       {[
-                        <SegmentView key="bundestag">
-                          <Bundestag
-                            chartData={this.pieChartData({ votedProcedures, data })}
-                            totalProcedures={totalProcedures}
-                            votedProceduresCount={votedProceduresCount}
-                            onProcedureListItemClick={this.onProcedureListItemClick}
-                          />
-                        </SegmentView>,
-                        <SegmentView key="fraktionen">
-                          <Fraktionen
-                            chartData={this.partyChartData({ votedProcedures, data })}
-                            totalProcedures={totalProcedures}
-                            votedProceduresCount={votedProceduresCount}
-                            onProcedureListItemClick={this.onProcedureListItemClick}
-                          />
-                        </SegmentView>,
+                        <Bundestag
+                          key="bundestag"
+                          chartData={this.pieChartData({ votedProcedures, data })}
+                          totalProcedures={totalProcedures}
+                          votedProceduresCount={votedProceduresCount}
+                          onProcedureListItemClick={this.onProcedureListItemClick}
+                        />,
+                        <Fraktionen
+                          key="fraktionen"
+                          chartData={this.partyChartData({ votedProcedures, data })}
+                          totalProcedures={totalProcedures}
+                          votedProceduresCount={votedProceduresCount}
+                          onProcedureListItemClick={this.onProcedureListItemClick}
+                        />,
                       ]}
                     </ScrollView>
                   );
