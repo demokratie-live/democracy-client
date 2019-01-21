@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 // Components
 import PieChart from '../../../components/Charts/PieChart';
 import ChartLegend from '../../../components/Charts/ChartLegend';
+import Header from '../Header';
+import VotedProceduresList from '../VotedProceduresList';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -18,7 +20,12 @@ const ChartWrapper = styled.View`
   flex: 1;
 `;
 
-const Bundestag = ({ chartData }) => {
+const Bundestag = ({
+  chartData,
+  totalProcedures,
+  votedProceduresCount,
+  onProcedureListItemClick,
+}) => {
   const data = [
     {
       label: 'Übereinstimmungen',
@@ -38,6 +45,7 @@ const Bundestag = ({ chartData }) => {
 
   return (
     <Wrapper>
+      <Header totalProcedures={totalProcedures} votedProceduresCount={votedProceduresCount} />
       <ChartWrapper>
         <PieChart
           data={data}
@@ -47,6 +55,7 @@ const Bundestag = ({ chartData }) => {
         />
       </ChartWrapper>
       <ChartLegend data={data} />
+      <VotedProceduresList onItemClick={onProcedureListItemClick} />
     </Wrapper>
   );
 };

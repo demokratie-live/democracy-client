@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 import styled from 'styled-components/native';
-import { Platform, SegmentedControlIOS, Dimensions } from 'react-native';
+import { Platform, SegmentedControlIOS, Dimensions, RefreshControl } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+
+import preventNavStackDuplicate from '../../hocs/preventNavStackDuplicate';
 
 // Components
 import Bundestag from './Bundestag';
@@ -13,6 +15,7 @@ import NoVotesPlaceholder from './NoVotesPlaceholder';
 
 // GraphQL
 import VOTES_LOCAL from '../../graphql/queries/votesLocalKeyStore';
+import client from '../../graphql/client';
 import PROCEDURES_WITH_VOTE_RESULTS from '../../graphql/queries/proceduresByIdHavingVoteResults';
 
 const Wrapper = styled.View`
@@ -67,6 +70,16 @@ class WahlOMeter extends Component {
 
   state = {
     selectedIndex: 0,
+    refreshing: false,
+  };
+
+  onProcedureListItemClick = ({ item }) => () => {
+    this.props.navigateTo({
+      screen: 'democracy.Detail',
+      title: 'Abstimmung'.toUpperCase(),
+      passProps: { ...item },
+      backButtonTitle: '',
+    });
   };
 
   onScrollEndDrag = e => {
@@ -82,9 +95,16 @@ class WahlOMeter extends Component {
     }
   };
 
+  _onRefresh = () => {
+    this.setState({ refreshing: true }, () => {
+      client.query({ query: VOTES_LOCAL });
+      this.setState({ refreshing: false });
+    });
+  };
+
   pieChartData = ({ votedProcedures, data }) => {
     // Pie Chart Data Preparation
-    let pieDataRaw = votedProcedures.proceduresByIdHavingVoteResults.map(
+    let pieDataRaw = votedProcedures.proceduresByIdHavingVoteResults.procedures.map(
       ({ voteResults, procedureId }) => ({
         government: voteResults.governmentDecision,
         me: data.votesLocalKeyStore.find(({ procedureId: pid }) => pid === procedureId).selection,
@@ -108,7 +128,7 @@ class WahlOMeter extends Component {
   };
 
   partyChartData = ({ votedProcedures, data }) => {
-    const chartData = votedProcedures.proceduresByIdHavingVoteResults.reduce(
+    const chartData = votedProcedures.proceduresByIdHavingVoteResults.procedures.reduce(
       (prev, { voteResults: { partyVotes }, procedureId }) => {
         const me = data.votesLocalKeyStore.find(({ procedureId: pid }) => pid === procedureId)
           .selection;
@@ -174,6 +194,7 @@ class WahlOMeter extends Component {
   width = Dimensions.get('window').width;
 
   render() {
+    console.log('rerender');
     return (
       <Wrapper>
         <SegmentControlsWrapper>
@@ -201,23 +222,29 @@ class WahlOMeter extends Component {
             if (!data.votesLocalKeyStore || data.votesLocalKeyStore.length === 0) {
               return <NoVotesPlaceholder subline="Bundestag" navigator={this.props.navigator} />;
             }
+            console.log('rerender', data.votesLocalKeyStore.length);
             return (
               <Query
                 query={PROCEDURES_WITH_VOTE_RESULTS}
                 variables={{
                   procedureIds: data.votesLocalKeyStore.map(({ procedureId }) => procedureId),
+                  pageSize: 999999,
                 }}
                 fetchPolicy="cache-and-network"
               >
                 {({ data: votedProcedures }) => {
                   if (
                     !votedProcedures.proceduresByIdHavingVoteResults ||
-                    votedProcedures.proceduresByIdHavingVoteResults.length === 0
+                    votedProcedures.proceduresByIdHavingVoteResults.procedures.length === 0
                   ) {
                     return (
                       <NoVotesPlaceholder subline="Bundestag" navigator={this.props.navigator} />
                     );
                   }
+
+                  const totalProcedures = votedProcedures.proceduresByIdHavingVoteResults.total;
+                  const votedProceduresCount =
+                    votedProcedures.proceduresByIdHavingVoteResults.procedures.length;
 
                   return (
                     <ScrollView
@@ -234,11 +261,29 @@ class WahlOMeter extends Component {
                       }}
                     >
                       {[
-                        <SegmentView key="bundestag">
-                          <Bundestag chartData={this.pieChartData({ votedProcedures, data })} />
+                        <SegmentView
+                          key="bundestag"
+                          refreshControl={
+                            <RefreshControl
+                              refreshing={this.state.refreshing}
+                              onRefresh={this._onRefresh}
+                            />
+                          }
+                        >
+                          <Bundestag
+                            chartData={this.pieChartData({ votedProcedures, data })}
+                            totalProcedures={totalProcedures}
+                            votedProceduresCount={votedProceduresCount}
+                            onProcedureListItemClick={this.onProcedureListItemClick}
+                          />
                         </SegmentView>,
                         <SegmentView key="fraktionen">
-                          <Fraktionen chartData={this.partyChartData({ votedProcedures, data })} />
+                          <Fraktionen
+                            chartData={this.partyChartData({ votedProcedures, data })}
+                            totalProcedures={totalProcedures}
+                            votedProceduresCount={votedProceduresCount}
+                            onProcedureListItemClick={this.onProcedureListItemClick}
+                          />
                         </SegmentView>,
                       ]}
                     </ScrollView>
@@ -257,4 +302,4 @@ WahlOMeter.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired,
 };
 
-export default WahlOMeter;
+export default preventNavStackDuplicate(WahlOMeter);

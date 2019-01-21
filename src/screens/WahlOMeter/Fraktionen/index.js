@@ -5,11 +5,14 @@ import { Dimensions } from 'react-native';
 
 // Components
 import PartyChart from '../../../components/Charts/PartyChart';
+import Header from '../Header';
 
 const Wrapper = styled.View`
   flex: 1;
   background-color: #fff;
-  align-items: center;
+  padding-horizontal: 18;
+  padding-top: 18;
+  padding-bottom: 9;
 `;
 
 const VoteResultNumbers = styled.View`
@@ -65,12 +68,13 @@ class Fraktionen extends Component {
   };
 
   render() {
-    const { chartData } = this.props;
+    const { chartData, totalProcedures, votedProceduresCount } = this.props;
     const { chartWidth, selected } = this.state;
     return (
       <Wrapper onLayout={this.onLayout}>
+        <Header totalProcedures={totalProcedures} votedProceduresCount={votedProceduresCount} />
         <PartyChart
-          width={chartWidth}
+          width={chartWidth - 18 * 2}
           chartData={chartData}
           onClick={this.onClick}
           selected={selected}
