@@ -29,15 +29,17 @@ const VoteResultCircleNumber = styled.View`
 const VoteResultNumber = styled.Text`
   color: #4a4a4a;
   font-size: 12;
+  padding-top: 1;
 `;
 const VoteResultLabel = styled.Text`
   color: rgb(142, 142, 147);
   font-size: 10;
+  padding-top: 6;
 `;
 
 const VoteResultCircle = styled.View`
-  width: 10;
-  height: 10;
+  width: 11;
+  height: 11;
   border-radius: 5;
   background-color: ${props => props.color};
   margin-top: 3;

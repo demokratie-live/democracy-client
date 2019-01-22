@@ -8,10 +8,10 @@ import PartyRow from './PartyRow';
 const PartyChart = ({ width, chartData, onClick, selected, colors, showPercentage }) => {
   return (
     <Svg
-      width={width}
+      width={width - 2 * 18}
       height={chartData.length * 46}
       viewBox={`0 0 305 ${chartData.length * 46}`}
-      style={{ marginVertical: 18, marginHorizontal: 18 }}
+      style={{ flex: 1 }}
     >
       <Rect y={selected * 46} width="305" rx="3" ry="3" height="36" fill="#ededed" />
       {chartData.map(({ party, values }, i) => (

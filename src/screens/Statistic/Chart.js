@@ -66,7 +66,7 @@ class Chart extends Component {
             strokeDasharray={`${Math.max(value - 2.5, 0.01)}, 100`}
           />
           {showValue && (
-            <Text textAnchor="middle" fontSize="4" x="18" y="18" color="#4a4a4a">
+            <Text textAnchor="middle" fontSize="3" x="18" y="19" color="#4a4a4a">
               {`${parseFloat(value)
                 .toFixed(1)
                 .replace('.', ',')}%`}
