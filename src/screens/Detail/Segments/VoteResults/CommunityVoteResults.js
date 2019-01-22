@@ -10,6 +10,7 @@ import Segment from '../../Segment';
 import ChartLegend from '../../../../components/Charts/ChartLegend';
 
 import VOTES from '../../../../graphql/queries/votes';
+import GermanySvgComponent from '../../../../../assets/svgs/GermanySVG';
 
 export const { width, height } = Dimensions.get('window');
 
@@ -22,6 +23,11 @@ const RepresentativeText = styled.Text`
 
 const PieChartWrapper = styled.View`
   align-items: center;
+`;
+
+const SvgWrapper = styled.View`
+  position: absolute;
+  right: 0;
 `;
 
 class VoteResults extends Component {
@@ -73,6 +79,13 @@ class VoteResults extends Component {
 
         return (
           <PieChartWrapper onLayout={this.onLayout}>
+            <SvgWrapper>
+              <GermanySvgComponent
+                width={60}
+                height={36}
+                childProps={{ fill: 'none', stroke: '#000', strokeWidth: '1%' }}
+              />
+            </SvgWrapper>
             <PieChart
               data={data}
               label="Abstimmende"
