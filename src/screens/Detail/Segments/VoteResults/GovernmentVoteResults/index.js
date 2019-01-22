@@ -151,7 +151,7 @@ class GovernmentVoteResults extends Component {
             data={dataPieChart}
             label={voteResults.namedVote ? 'Abgeordnete' : 'Fraktionen'}
             subLabel={voteResults.namedVote ? votes : voteResults.partyVotes.length}
-            width={pieChartWidth - 36}
+            width={pieChartWidth - 36 * 1.5}
           />
           <ChartLegend data={dataPieChart} />
         </PieChartWrapper>,

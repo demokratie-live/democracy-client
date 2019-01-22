@@ -17,8 +17,7 @@ const RepresentativeText = styled.Text`
   color: rgb(142, 142, 147);
   text-align: center;
   font-size: 10;
-  padding-bottom: 10;
-  font-style: italic;
+  padding-top: 18;
 `;
 
 const PieChartWrapper = styled.View`
@@ -74,7 +73,12 @@ class VoteResults extends Component {
 
         return (
           <PieChartWrapper onLayout={this.onLayout}>
-            <PieChart data={data} label="Abstimmende" subLabel={votes} width={chartWidth - 36} />
+            <PieChart
+              data={data}
+              label="Abstimmende"
+              subLabel={votes}
+              width={chartWidth - 36 * 1.5}
+            />
             <ChartLegend data={data} />
           </PieChartWrapper>
         );

@@ -82,7 +82,7 @@ class PieChart extends Component {
         <Circle cx="0" cy="0" r="20%" fill="#fff" />
 
         {label && (
-          <Text fill="#4a4a4a" fontSize="12" textAnchor="middle">
+          <Text fill="#4a4a4a" fontSize="10" textAnchor="middle">
             {label}
           </Text>
         )}
