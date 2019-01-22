@@ -64,12 +64,30 @@ class Profil extends Component {
         navigator.push({
           screen: 'democracy.Statistic',
           title: 'Statistik',
+          backButtonTitle: '',
+          passProps: {
+            noMenu: true,
+          },
         });
         break;
       case 'notifications-settings':
         navigator.push({
           screen: 'democracy.Notifications',
-          title: 'Statistik',
+          title: 'Benachrichtigungen',
+          backButtonTitle: '',
+          passProps: {
+            noMenu: true,
+          },
+        });
+        break;
+      case 'wahl-o-meter':
+        navigator.push({
+          screen: 'democracy.WahlOMeter',
+          title: `Wahl-\u00D8-Meter`,
+          backButtonTitle: '',
+          passProps: {
+            noMenu: true,
+          },
         });
         break;
 
@@ -121,13 +139,13 @@ class Profil extends Component {
                 title: 'Benachrichtigungen',
                 onPress: this.navigateTo('notifications-settings'),
               },
-              { title: 'Newsletter' },
+              // { title: 'Newsletter' },
             ],
           },
           {
             title: 'Auswertungen',
             data: [
-              { title: `Wahl-\u00D8-Meter` },
+              { title: `Wahl-\u00D8-Meter`, onPress: this.navigateTo('wahl-o-meter') },
               { title: 'Abgeordnetenprofil' },
               {
                 title: 'Persönliche Historie',

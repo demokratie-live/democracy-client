@@ -48,18 +48,20 @@ class WahlOMeter extends Component {
   constructor(props) {
     super(props);
 
-    const menuIcon = Platform.OS === 'ios' ? 'ios-menu' : 'md-menu';
+    if (!props.noMenu) {
+      const menuIcon = Platform.OS === 'ios' ? 'ios-menu' : 'md-menu';
 
-    Ionicons.getImageSource(menuIcon, 24, '#FFFFFF').then(icon => {
-      props.navigator.setButtons({
-        leftButtons: [
-          {
-            icon,
-            id: 'menu',
-          },
-        ],
+      Ionicons.getImageSource(menuIcon, 24, '#FFFFFF').then(icon => {
+        props.navigator.setButtons({
+          leftButtons: [
+            {
+              icon,
+              id: 'menu',
+            },
+          ],
+        });
       });
-    });
+    }
   }
 
   state = {
@@ -276,6 +278,11 @@ class WahlOMeter extends Component {
 WahlOMeter.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired,
   navigateTo: PropTypes.func.isRequired,
+  noMenu: PropTypes.bool,
+};
+
+WahlOMeter.defaultProps = {
+  noMenu: false,
 };
 
 export default preventNavStackDuplicate(WahlOMeter);

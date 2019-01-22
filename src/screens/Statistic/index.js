@@ -59,18 +59,20 @@ class Statistic extends Component {
   constructor(props) {
     super(props);
 
-    const menuIcon = Platform.OS === 'ios' ? 'ios-menu' : 'md-menu';
+    if (!props.noMenu) {
+      const menuIcon = Platform.OS === 'ios' ? 'ios-menu' : 'md-menu';
 
-    Ionicons.getImageSource(menuIcon, 24, '#FFFFFF').then(icon => {
-      props.navigator.setButtons({
-        leftButtons: [
-          {
-            icon,
-            id: 'menu',
-          },
-        ],
+      Ionicons.getImageSource(menuIcon, 24, '#FFFFFF').then(icon => {
+        props.navigator.setButtons({
+          leftButtons: [
+            {
+              icon,
+              id: 'menu',
+            },
+          ],
+        });
       });
-    });
+    }
   }
 
   state = {
@@ -145,10 +147,12 @@ Statistic.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired,
   navigateTo: PropTypes.func.isRequired,
   voteStatistic: PropTypes.shape(),
+  noMenu: PropTypes.bool,
 };
 
 Statistic.defaultProps = {
   voteStatistic: {},
+  noMenu: false,
 };
 
 export default graphql(GET_STATISTIC, {
