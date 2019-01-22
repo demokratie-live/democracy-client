@@ -54,7 +54,7 @@ const Bundestag = ({
     <Wrapper
       onScroll={({ nativeEvent }) => {
         if (isCloseToBottom(nativeEvent)) {
-          if (this.myView.fetchMore) this.myView.fetchMore();
+          if (this.procedureList.fetchMore) this.procedureList.fetchMore();
         }
       }}
       scrollEventThrottle={4000}
@@ -69,7 +69,10 @@ const Bundestag = ({
         />
       </ChartWrapper>
       <ChartLegend data={data} />
-      <VotedProceduresList onItemClick={onProcedureListItemClick} ref={el => (this.myView = el)} />
+      <VotedProceduresList
+        onItemClick={onProcedureListItemClick}
+        ref={el => (this.procedureList = el)}
+      />
     </Wrapper>
   );
 };

@@ -69,6 +69,11 @@ class GovernmentVoteResults extends Component {
     const { voteResults, scrollTo, currentStatus } = this.props;
     const { pieChartWidth } = this.state;
 
+    // FIXME Sollte nur im falle von Fehlerhaften Daten vom server ausgelöst werden.
+    if (voteResults.partyVotes.length === 0) {
+      return null;
+    }
+
     if (currentStatus === 'Zurückgezogen') {
       return (
         <Segment title="Bundestagsergebnis" open scrollTo={scrollTo} fullWidth>
