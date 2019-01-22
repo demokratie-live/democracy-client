@@ -31,7 +31,7 @@ const WomHeader = ({ totalProcedures, votedProceduresCount }) => (
         {votedProceduresCount}/{totalProcedures}
       </ProcedureCountText>
     </ProcedureCount>
-    <Chart value={votedProceduresCount / totalProcedures} width={20} />
+    <Chart value={(votedProceduresCount / totalProcedures) * 100} width={20} />
   </Wrapper>
 );
 
