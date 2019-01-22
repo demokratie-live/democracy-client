@@ -51,11 +51,11 @@ const VoteResultCircle = styled.View`
 
 class Fraktionen extends Component {
   state = {
-    chartWidth: Math.min(Dimensions.get('window').width, Dimensions.get('window').height),
+    chartWidth: Math.min(Dimensions.get('screen').width, Dimensions.get('screen').height),
     selected: 0,
   };
   onLayout = () => {
-    const chartWidth = Math.min(Dimensions.get('window').width, Dimensions.get('window').height);
+    const chartWidth = Math.min(Dimensions.get('screen').width, Dimensions.get('screen').height);
     if (this.state.chartWidth !== chartWidth) {
       this.setState({
         chartWidth,
@@ -92,7 +92,7 @@ class Fraktionen extends Component {
       >
         <Header totalProcedures={totalProcedures} votedProceduresCount={votedProceduresCount} />
         <PartyChart
-          width={chartWidth - 18 * 2}
+          width={chartWidth + 36}
           chartData={chartData}
           onClick={this.onClick}
           selected={selected}

@@ -5,6 +5,7 @@ import styled from 'styled-components/native';
 import { Platform, SegmentedControlIOS, Dimensions } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 
 import preventNavStackDuplicate from '../../hocs/preventNavStackDuplicate';
 
@@ -66,6 +67,7 @@ class WahlOMeter extends Component {
 
   state = {
     selectedIndex: 0,
+    routes: [{ key: 'first', title: 'Bundestag' }, { key: 'second', title: 'Fraktionen' }],
   };
 
   onProcedureListItemClick = ({ item }) => () => {
@@ -182,28 +184,31 @@ class WahlOMeter extends Component {
   width = Dimensions.get('window').width;
 
   render() {
+    const { selectedIndex, routes } = this.state;
     return (
       <Wrapper>
-        <SegmentControlsWrapper>
-          <SegmentedControlIOS
-            style={{
-              alignSelf: 'flex-end',
-              width: '100%',
-            }}
-            values={['Bundestag', 'Fraktionen']}
-            tintColor="#ffffff"
-            selectedIndex={this.state.selectedIndex}
-            onChange={event => {
-              this.setState({
-                selectedIndex: event.nativeEvent.selectedSegmentIndex,
-              });
-              this.scrollView.scrollTo({
-                y: 0,
-                x: event.nativeEvent.selectedSegmentIndex * this.width,
-              });
-            }}
-          />
-        </SegmentControlsWrapper>
+        {Platform.OS === 'ios' && (
+          <SegmentControlsWrapper>
+            <SegmentedControlIOS
+              style={{
+                alignSelf: 'flex-end',
+                width: '100%',
+              }}
+              values={['Bundestag', 'Fraktionen']}
+              tintColor="#ffffff"
+              selectedIndex={selectedIndex}
+              onChange={event => {
+                this.setState({
+                  selectedIndex: event.nativeEvent.selectedSegmentIndex,
+                });
+                this.scrollView.scrollTo({
+                  y: 0,
+                  x: event.nativeEvent.selectedSegmentIndex * this.width,
+                });
+              }}
+            />
+          </SegmentControlsWrapper>
+        )}
         <Query query={VOTES_LOCAL}>
           {({ data }) => {
             if (!data.votesLocalKeyStore || data.votesLocalKeyStore.length === 0) {
@@ -233,38 +238,63 @@ class WahlOMeter extends Component {
                   const votedProceduresCount =
                     votedProcedures.proceduresByIdHavingVoteResults.procedures.length;
 
-                  return (
-                    <ScrollView
-                      onContentSizeChange={contentWidth => {
-                        this.width = contentWidth / 2;
-                        this.scrollView.scrollTo({
-                          y: 0,
-                          x: this.state.selectedIndex * this.width,
-                        });
-                      }}
-                      onMomentumScrollEnd={this.onScrollEndDrag}
-                      ref={e => {
-                        this.scrollView = e;
-                      }}
-                    >
-                      {[
-                        <Bundestag
-                          key="bundestag"
-                          chartData={this.pieChartData({ votedProcedures, data })}
-                          totalProcedures={totalProcedures}
-                          votedProceduresCount={votedProceduresCount}
-                          onProcedureListItemClick={this.onProcedureListItemClick}
-                        />,
-                        <Fraktionen
-                          key="fraktionen"
-                          chartData={this.partyChartData({ votedProcedures, data })}
-                          totalProcedures={totalProcedures}
-                          votedProceduresCount={votedProceduresCount}
-                          onProcedureListItemClick={this.onProcedureListItemClick}
-                        />,
-                      ]}
-                    </ScrollView>
+                  const bundestagScreen = (
+                    <Bundestag
+                      key="bundestag"
+                      chartData={this.pieChartData({ votedProcedures, data })}
+                      totalProcedures={totalProcedures}
+                      votedProceduresCount={votedProceduresCount}
+                      onProcedureListItemClick={this.onProcedureListItemClick}
+                    />
                   );
+
+                  const fraktionenScreen = (
+                    <Fraktionen
+                      key="fraktionen"
+                      chartData={this.partyChartData({ votedProcedures, data })}
+                      totalProcedures={totalProcedures}
+                      votedProceduresCount={votedProceduresCount}
+                      onProcedureListItemClick={this.onProcedureListItemClick}
+                    />
+                  );
+
+                  if (Platform.OS === 'ios') {
+                    return (
+                      <ScrollView
+                        onContentSizeChange={contentWidth => {
+                          this.width = contentWidth / 2;
+                          this.scrollView.scrollTo({
+                            y: 0,
+                            x: selectedIndex * this.width,
+                          });
+                        }}
+                        onMomentumScrollEnd={this.onScrollEndDrag}
+                        ref={e => {
+                          this.scrollView = e;
+                        }}
+                      >
+                        {[bundestagScreen, fraktionenScreen]}
+                      </ScrollView>
+                    );
+                  } else {
+                    return (
+                      <TabView
+                        navigationState={{ index: selectedIndex, routes }}
+                        renderScene={SceneMap({
+                          first: () => bundestagScreen,
+                          second: () => fraktionenScreen,
+                        })}
+                        onIndexChange={selectedIndex => this.setState({ selectedIndex })}
+                        initialLayout={{
+                          width: Dimensions.get('window').width,
+                          height: Dimensions.get('window').height,
+                        }}
+                        renderTabBar={props => (
+                          <TabBar {...props} tabStyle={{ backgroundColor: '#4494D3' }} />
+                        )}
+                      />
+                    );
+                  }
                 }}
               </Query>
             );

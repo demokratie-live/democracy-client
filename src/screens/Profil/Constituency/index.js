@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
-import { Alert } from 'react-native';
+import { Alert, Platform } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { graphql, compose } from 'react-apollo';
 
@@ -17,6 +17,7 @@ import SET_CONSTITUENCY from '../../../graphql/mutations/local/setConstituency';
 
 const Wrapper = styled.KeyboardAvoidingView`
   flex: 1;
+  background-color: #fff;
 `;
 
 const SearchBox = styled.View`
@@ -54,7 +55,7 @@ const SearchInput = styled.TextInput.attrs(() => ({
 }))`
   flex: 1;
   font-size: 14;
-  height: 28;
+  height: ${Platform.OS === 'ios' ? 28 : 50};
   padding-horizontal: 6;
   color: #000;
 `;
