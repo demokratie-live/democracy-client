@@ -70,6 +70,7 @@ class GovernmentVoteResults extends Component {
     const { pieChartWidth } = this.state;
 
     // FIXME Sollte nur im falle von Fehlerhaften Daten vom server ausgelöst werden.
+    // https://github.com/demokratie-live/democracy-client/issues/714
     if (voteResults.partyVotes.length === 0) {
       return null;
     }
