@@ -42,6 +42,9 @@ BarRow.propTypes = {
       ),
     }),
   ).isRequired,
+  index: PropTypes.number.isRequired,
+  maxValue: PropTypes.number.isRequired,
+  barsNumber: PropTypes.number.isRequired,
 };
 
 BarRow.defaultProps = {};

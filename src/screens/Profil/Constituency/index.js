@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
-import { AsyncStorage, Alert } from 'react-native';
-import { Navigator } from 'react-native-navigation';
+import { Alert } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { graphql, compose } from 'react-apollo';
 
@@ -164,12 +163,11 @@ class Constituency extends Component {
       }
       return { ...constituency, selected };
     });
-    console.log('TESTXYZ', this.props);
+
     const selectedConstituency = constituenciesData.find(data => {
-      console.log('HOSDFH', data);
       return data.selected;
     });
-    console.log('HOSDFH 1', selectedConstituency);
+
     constituenciesData =
       this.state.term.length > 0
         ? constituenciesData.filter(
@@ -180,13 +178,10 @@ class Constituency extends Component {
           )
         : constituenciesData.filter(({ selected }) => !selected);
 
-    console.log('HOSDFH', selectedConstituency);
-
     if (selectedConstituency) {
       constituenciesData = [selectedConstituency, ...constituenciesData];
     }
 
-    console.log(constituenciesData);
     return (
       <Wrapper behavior="padding" enabled>
         <SearchBox>
@@ -221,4 +216,14 @@ class Constituency extends Component {
   }
 }
 
-export default compose(graphql(SET_CONSTITUENCY), graphql(GET_CONSTITUENCY))(Constituency);
+Constituency.propTypes = {
+  data: PropTypes.string.isRequired,
+  mutate: PropTypes.func.isRequired,
+};
+
+Constituency.defaultProps = {};
+
+export default compose(
+  graphql(SET_CONSTITUENCY),
+  graphql(GET_CONSTITUENCY),
+)(Constituency);

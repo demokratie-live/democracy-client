@@ -275,6 +275,7 @@ class WahlOMeter extends Component {
 
 WahlOMeter.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired,
+  navigateTo: PropTypes.func.isRequired,
 };
 
 export default preventNavStackDuplicate(WahlOMeter);

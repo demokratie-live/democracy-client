@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 
 import PartyChartComponent from '../../../../../components/Charts/PartyChart';
@@ -33,5 +34,11 @@ class PartyChart extends Component {
     );
   }
 }
+
+PartyChart.propTypes = {
+  chartData: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+};
+
+PartyChart.defaultProps = {};
 
 export default PartyChart;

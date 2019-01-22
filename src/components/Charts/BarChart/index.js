@@ -25,7 +25,15 @@ const BarChart = ({ data, width }) => {
   );
 };
 
-BarChart.propTypes = {};
+BarChart.propTypes = {
+  width: PropTypes.number.isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      values: PropTypes.arrayOf(PropTypes.shape).isRequired,
+    }),
+  ).isRequired,
+};
 
 BarChart.defaultProps = {};
 

@@ -115,6 +115,7 @@ class BarChart extends Component {
 
 BarChart.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  legendData: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
 BarChart.defaultProps = {};

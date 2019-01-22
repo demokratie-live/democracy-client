@@ -84,11 +84,15 @@ PartyRow.propTypes = {
   party: PropTypes.string.isRequired,
   values: PropTypes.arrayOf(PropTypes.shape()),
   colors: PropTypes.arrayOf(PropTypes.string),
+  index: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired,
+  showPercentage: PropTypes.bool,
 };
 
 PartyRow.defaultProps = {
   values: [{ label: 'Übereinstimmungen', value: 15 }, { label: 'Differenzen', value: 85 }],
   colors: ['#99C93E', '#4CB0D8', '#D43194', '#B1B3B4'],
+  showPercentage: false,
 };
 
 export default PartyRow;

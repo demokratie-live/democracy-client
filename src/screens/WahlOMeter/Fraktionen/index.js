@@ -6,13 +6,13 @@ import { Dimensions } from 'react-native';
 // Components
 import PartyChart from '../../../components/Charts/PartyChart';
 import Header from '../Header';
+import ChartNote from '../ChartNote';
+import VotedProceduresList from '../VotedProceduresList';
 
-const Wrapper = styled.View`
-  flex: 1;
+const Wrapper = styled.ScrollView`
   background-color: #fff;
-  padding-horizontal: 18;
   padding-top: 18;
-  padding-bottom: 9;
+  width: ${Dimensions.get('screen').width};
 `;
 
 const VoteResultNumbers = styled.View`
@@ -67,11 +67,29 @@ class Fraktionen extends Component {
     this.setState({ selected: index });
   };
 
+  isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }) => {
+    const paddingToBottom = 20;
+    return layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom;
+  };
+
   render() {
-    const { chartData, totalProcedures, votedProceduresCount } = this.props;
+    const {
+      chartData,
+      totalProcedures,
+      votedProceduresCount,
+      onProcedureListItemClick,
+    } = this.props;
     const { chartWidth, selected } = this.state;
     return (
-      <Wrapper onLayout={this.onLayout}>
+      <Wrapper
+        onScroll={({ nativeEvent }) => {
+          if (this.isCloseToBottom(nativeEvent)) {
+            if (this.procedureList.fetchMore) this.procedureList.fetchMore();
+          }
+        }}
+        onLayout={this.onLayout}
+        scrollEventThrottle={4000}
+      >
         <Header totalProcedures={totalProcedures} votedProceduresCount={votedProceduresCount} />
         <PartyChart
           width={chartWidth - 18 * 2}
@@ -96,6 +114,14 @@ class Fraktionen extends Component {
             <VoteResultLabel>Differenzen</VoteResultLabel>
           </VoteResult>
         </VoteResultNumbers>
+        <ChartNote>
+          Hohe Übereinstimmungen Ihrer Stellungnahmen mit mehreren Parteien bedeuten nicht
+          zwangsläufig eine inhaltliche Nähe dieser Parteien zueinander
+        </ChartNote>
+        <VotedProceduresList
+          onItemClick={onProcedureListItemClick}
+          ref={el => (this.procedureList = el)}
+        />
       </Wrapper>
     );
   }
@@ -103,6 +129,9 @@ class Fraktionen extends Component {
 
 Fraktionen.propTypes = {
   chartData: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  totalProcedures: PropTypes.number.isRequired,
+  votedProceduresCount: PropTypes.number.isRequired,
+  onProcedureListItemClick: PropTypes.func.isRequired,
 };
 
 export default Fraktionen;

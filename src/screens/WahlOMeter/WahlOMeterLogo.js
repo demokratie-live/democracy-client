@@ -27,7 +27,7 @@ const Subline = styled.Text`
 
 const WahlOMeterLogo = ({ subline }) => (
   <Wrapper>
-    <Headline>Wahl-⦻-Meter</Headline>
+    <Headline>{`Wahl-\u00D8-Meter`}</Headline>
     {subline && <Subline>{subline}</Subline>}
   </Wrapper>
 );

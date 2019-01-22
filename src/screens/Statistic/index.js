@@ -112,7 +112,7 @@ class Statistic extends Component {
               <StatisticNumberDescription>Unabgestimme Vorgänge</StatisticNumberDescription>
             </StatisticNumberWrapper>
           </StatisticNumbersWrapper>
-          <Chart value={(100 * votedProcedures) / proceduresCount} />
+          <Chart value={(100 * votedProcedures) / proceduresCount} showValue />
         </StatisticWrapper>
         <Query query={GET_VOTED_PROCEDURES} fetchPolicy="cache-and-network">
           {({ loading, data }) => {

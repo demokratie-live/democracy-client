@@ -31,7 +31,7 @@ class Chart extends Component {
   };
 
   render() {
-    const { value } = this.props;
+    const { value, width, showValue } = this.props;
     const { chartWidth } = this.state;
     /**
      * source: https://hackernoon.com/a-simple-pie-chart-in-svg-dbdd653b6936
@@ -40,8 +40,8 @@ class Chart extends Component {
       <Wrapper onLayout={this.onLayout}>
         <Svg
           viewBox="0 0 36 36"
-          width={chartWidth - 36}
-          height={chartWidth - 36}
+          width={width || chartWidth - 36}
+          height={width || chartWidth - 36}
           style={{ flex: 1, aspectRatio: 1 }}
         >
           <Path
@@ -65,22 +65,27 @@ class Chart extends Component {
             strokeLinecap="round"
             strokeDasharray={`${Math.max(value - 2.5, 0.01)}, 100`}
           />
-          <Text textAnchor="middle" fontSize="4" x="18" y="18" color="#4a4a4a">
-            {`${parseFloat(value)
-              .toFixed(1)
-              .replace('.', ',')}%`}
-          </Text>
+          {showValue && (
+            <Text textAnchor="middle" fontSize="4" x="18" y="18" color="#4a4a4a">
+              {`${parseFloat(value)
+                .toFixed(1)
+                .replace('.', ',')}%`}
+            </Text>
+          )}
         </Svg>
       </Wrapper>
     );
   }
 }
 
-Chart.propTypes = {};
+Chart.propTypes = {
+  value: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired,
+  showValue: PropTypes.bool,
+};
 
 Chart.defaultProps = {
-  label: false,
-  subLabel: false,
+  showValue: false,
 };
 
 export default Chart;

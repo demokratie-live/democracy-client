@@ -108,6 +108,7 @@ PieChart.propTypes = {
   ).isRequired,
   label: PropTypes.string,
   subLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  width: PropTypes.number.isRequired,
 };
 
 PieChart.defaultProps = {

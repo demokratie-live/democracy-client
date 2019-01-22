@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 
 const Wrapper = styled.View`
@@ -18,5 +19,11 @@ const SegmentHead = ({ children }) => (
     <Text>{children.toUpperCase()}</Text>
   </Wrapper>
 );
+
+SegmentHead.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+SegmentHead.defaultProps = {};
 
 export default SegmentHead;

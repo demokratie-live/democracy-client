@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -41,5 +42,17 @@ const ListItem = ({ children, text, arrow, onPress }) => (
     {arrow && <NavigationIoniconsIcon name="ios-arrow-forward" />}
   </Wrapper>
 );
+
+ListItem.propTypes = {
+  children: PropTypes.node.isRequired,
+  text: PropTypes.string,
+  arrow: PropTypes.bool,
+  onPress: PropTypes.func.isRequired,
+};
+
+ListItem.defaultProps = {
+  text: false,
+  arrow: false,
+};
 
 export default ListItem;

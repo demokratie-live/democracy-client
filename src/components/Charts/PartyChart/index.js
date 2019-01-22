@@ -35,6 +35,7 @@ PartyChart.propTypes = {
   showPercentage: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
   selected: PropTypes.number.isRequired,
+  chartData: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 
 PartyChart.defaultProps = {

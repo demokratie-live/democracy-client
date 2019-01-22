@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import PieChart from '../../../components/Charts/PieChart';
 import ChartLegend from '../../../components/Charts/ChartLegend';
 import Header from '../Header';
+import ChartNote from '../ChartNote';
 import VotedProceduresList from '../VotedProceduresList';
 
 const Wrapper = styled.ScrollView`
@@ -69,6 +70,10 @@ const Bundestag = ({
         />
       </ChartWrapper>
       <ChartLegend data={data} />
+      <ChartNote>
+        Hohe Übereinstimmungen Ihrer Stellungnahmen mit dem Bundestag bedeuten eine inhaltliche Nähe
+        zu den Regierungsfraktionen
+      </ChartNote>
       <VotedProceduresList
         onItemClick={onProcedureListItemClick}
         ref={el => (this.procedureList = el)}
@@ -79,6 +84,9 @@ const Bundestag = ({
 
 Bundestag.propTypes = {
   chartData: PropTypes.shape().isRequired,
+  totalProcedures: PropTypes.number.isRequired,
+  votedProceduresCount: PropTypes.number.isRequired,
+  onProcedureListItemClick: PropTypes.func.isRequired,
 };
 
 export default Bundestag;

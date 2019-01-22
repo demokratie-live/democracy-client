@@ -1,15 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
+
+import Chart from '../Statistic/Chart';
 
 const Wrapper = styled.View`
   flex-direction: row;
+  padding-horizontal: 18;
 `;
 
 const TimeSelect = styled.View`
   flex: 1;
 `;
 
-const ProcedureCount = styled.View``;
+const ProcedureCount = styled.View`
+  padding-right: 9;
+`;
 
 const ProcedureCountText = styled.Text`
   font-size: 15;
@@ -25,7 +31,15 @@ const WomHeader = ({ totalProcedures, votedProceduresCount }) => (
         {votedProceduresCount}/{totalProcedures}
       </ProcedureCountText>
     </ProcedureCount>
+    <Chart value={votedProceduresCount / totalProcedures} width={20} />
   </Wrapper>
 );
+
+WomHeader.propTypes = {
+  totalProcedures: PropTypes.number.isRequired,
+  votedProceduresCount: PropTypes.number.isRequired,
+};
+
+WomHeader.defaultProps = {};
 
 export default WomHeader;

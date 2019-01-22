@@ -79,7 +79,6 @@ class Profil extends Component {
   };
 
   render() {
-    console.log('TESTXYZ render profil', this.props);
     return (
       <ScrollWrapper
         renderItem={({ item, index }) => (
@@ -145,6 +144,8 @@ class Profil extends Component {
 
 Profil.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired,
+  verified: PropTypes.bool.isRequired,
+  constituency: PropTypes.string.isRequired,
 };
 
 export default compose(
