@@ -1,34 +1,17 @@
-export default `
+import enumViewSelection from './enumViewSelection';
 
-    enum ViewSelection {
-        VIEWED
-        NEW
-        UPDATE
-        PUSH
-    }
+import typeMutation from './typeMutation';
+import typeQuery from './typeQuery';
 
-    type VoteSelection {
-        procedure: ID!
-        selection: String!
-    }
+import typeListStatus from './typeListStatus';
+import typeSearchTerm from './typeSearchTerm';
+import typeVoteSelection from './typeVoteSelection';
 
-    type ListStatus {
-        procedureId: String!
-        status: String!
-    }
-
-    type SearchTerm {
-        term: String!
-    }
-
-    type Mutation {
-        voteLocal(procedure: ID!, selection: VoteSelection!): VoteSelection
-        viewProcedure(procedureId: String!, status: String!): ListStatus
-        searchHistoryAdd(term: String!): [SearchTerm]
-    }
-
-    type Query {
-        votesLocal: [VoteSelection]
-        votedLocal(procedure: ID!): VoteSelection
-    }
-`;
+export default [
+  typeMutation,
+  typeQuery,
+  enumViewSelection,
+  typeListStatus,
+  typeSearchTerm,
+  typeVoteSelection,
+];

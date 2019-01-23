@@ -6,9 +6,8 @@ import { Navigator } from 'react-native-navigation';
 
 import VoteButton from '../../components/VoteButton';
 
-import VOTE_LOCAL from '../../graphql/mutations/voteLocal';
 import VOTED from '../../graphql/queries/voted';
-import VOTED_LOCAL from '../../graphql/queries/votedLocal';
+import VOTED_LOCAL from '../../graphql/queries/local/voted';
 
 const SegmentWrapper = styled.View`
   padding-vertical: 10;
@@ -185,26 +184,10 @@ export default compose(
     }),
   }),
 
-  graphql(VOTE_LOCAL, {
-    name: 'voteLocal',
-    props({ ownProps: { procedureObjId }, voteLocal }) {
-      return {
-        voteLocal: selection =>
-          voteLocal({
-            variables: { procedure: procedureObjId, selection },
-            refetchQueries: [
-              {
-                query: VOTED_LOCAL,
-                variables: { procedure: procedureObjId },
-              },
-            ],
-          }),
-      };
-    },
-  }),
   graphql(VOTED_LOCAL, {
     options: ({ procedureId }) => ({
       variables: { procedureId },
+      // fetchPolicy: 'cache-and-network',
     }),
     props: props => {
       const {
