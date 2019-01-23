@@ -10,6 +10,7 @@ class VotesLocal {
         procedureId1: 0/1/2/3, (selection)
         procedureId2: 0/1/2/3,
       }
+
       // v1
       democracyVotesIndex
       {
@@ -35,7 +36,7 @@ class VotesLocal {
         ]
       }
 
-    Structure returned from this interface:
+    Structure returned from this interface via getVote/getVotes(array):
     {
       procedureId: String,
       selection: null/YES/NO/ABSTINATION,
@@ -46,7 +47,7 @@ class VotesLocal {
 
   static KEYCHAIN_INDEX_SERVICE = `${DeviceInfo.getBundleId()}.localVotesIndex`;
   static KEYCHAIN_VOTES_SERVICE = `${DeviceInfo.getBundleId()}.localVotes`; // IndexId is appended
-  static KEYCHAIN_VOTES_SERVICE_VERSION_0 = `${DeviceInfo.getBundleId()}.localVotes`;
+  static KEYCHAIN_VOTES_SERVICE_VERSION_0 = undefined; // this is the correct value ¯\_(ツ)_/¯
   static KEYCHAIN_VERSION = 1;
   static KEYCHAIN_MAXSIZE = 100;
   static KEYCHAIN_INDEX_KEY = 'democracyIndex';
@@ -84,7 +85,6 @@ class VotesLocal {
 
     // Cleanup index & return
     delete indexchain.i;
-    console.log(indexchain);
     return indexchain;
   };
 
@@ -147,6 +147,10 @@ class VotesLocal {
     const oldChainRaw = await Keychain.getGenericPassword(
       VotesLocal.KEYCHAIN_VOTES_SERVICE_VERSION_0,
     );
+    // Old Chain present?
+    if (!oldChainRaw) {
+      return false;
+    }
     const oldChain = JSON.parse(oldChainRaw.password);
 
     // Determin Version
@@ -161,7 +165,7 @@ class VotesLocal {
       if (value === 0) {
         value = null;
       }
-      // Time should be 1.1.1970 00:00.000
+      // Time is 1970-01-01T00:00:00.000Z
       newChain.d.push({ i: key, s: value, t: new Date(0).toISOString(), c: null });
     }
 
@@ -273,12 +277,9 @@ class VotesLocal {
   /*
   static reset = async () => {
     console.log('reset');
-    // Write empty Object to Chain
-    return await Keychain.setGenericPassword(
-      VotesLocal.KEYCHAIN_INDEX_KEY,
-      JSON.stringify({}),
-      VotesLocal.KEYCHAIN_INDEX_SERVICE,
-    );
+    // Delete Chain
+    // await Keychain.resetGenericPassword(VotesLocal.KEYCHAIN_VOTES_SERVICE_VERSION_0);
+    return await Keychain.resetGenericPassword(VotesLocal.KEYCHAIN_INDEX_SERVICE);
   };
   */
 }
