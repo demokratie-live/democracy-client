@@ -14,7 +14,7 @@ class PieChart extends Component {
   };
 
   render() {
-    const { data, label, subLabel, width } = this.props;
+    const { data, label, subLabel, width, showPercentage } = this.props;
 
     let cumulativePercent = 0;
 
@@ -57,7 +57,7 @@ class PieChart extends Component {
             return (
               <G key={label}>
                 <Path d={pathData} fill={color} />
-                {percent > 0.05 && (
+                {showPercentage && percent > 0.05 && (
                   <Text
                     textAnchor="middle"
                     transform={`rotate(90, ${labelX * 0.7}, ${labelY * 0.7})`}
@@ -109,11 +109,13 @@ PieChart.propTypes = {
   label: PropTypes.string,
   subLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   width: PropTypes.number.isRequired,
+  showPercentage: PropTypes.bool,
 };
 
 PieChart.defaultProps = {
   label: false,
   subLabel: false,
+  showPercentage: true,
 };
 
 export default PieChart;

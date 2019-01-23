@@ -5,7 +5,7 @@ import styled from 'styled-components/native';
 import { Navigator } from 'react-native-navigation';
 
 import Description from './Components/Description';
-import Button from './Components/Button';
+import Button from '../../components/Button';
 import Folding from '../../components/Content/Folding';
 
 const ScrollView = styled.ScrollView.attrs(() => ({

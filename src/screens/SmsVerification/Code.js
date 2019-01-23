@@ -8,7 +8,7 @@ import { sha256 } from 'react-native-sha256';
 
 import Description from './Components/Description';
 import CodeInput from './Components/CodeInput';
-import Button from './Components/Button';
+import Button from '../../components/Button';
 
 import REQUEST_VERIFICATION from '../../graphql/mutations/requestVerification';
 import REQUEST_CODE from '../../graphql/mutations/requestCode';

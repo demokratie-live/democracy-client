@@ -159,7 +159,10 @@ class Constituency extends Component {
     const data = [...constituenciesList.constituencies];
     let constituenciesData = data.map(constituency => {
       let selected = false;
-      if (constituency.number === this.props.data.constituency.constituency) {
+      if (
+        !this.props.data.loading &&
+        constituency.number === this.props.data.constituency.constituency
+      ) {
         selected = true;
       }
       return { ...constituency, selected };
@@ -225,6 +228,8 @@ Constituency.propTypes = {
 Constituency.defaultProps = {};
 
 export default compose(
-  graphql(SET_CONSTITUENCY),
+  graphql(SET_CONSTITUENCY, {
+    refetchQueries: [GET_CONSTITUENCY],
+  }),
   graphql(GET_CONSTITUENCY),
 )(Constituency);

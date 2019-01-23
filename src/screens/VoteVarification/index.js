@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
-import { Platform } from 'react-native';
+import { Platform, ActivityIndicator } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { graphql } from 'react-apollo';
 
 import Fade from '../../components/Animations/Fade';
 import MessageRow from '../../components/ArgumentEntry/Message';
@@ -12,13 +13,25 @@ import BallotBox from './BallotBox';
 
 import dummyEntryData from '../../../dummy/voteVerification';
 
+// Components
+import NoConstituency from './NoConstituency';
+import PartyChart from './PartyChart';
+
+// GraphQL
+import GET_CONSTITUENCY from '../../graphql/queries/local/constituency';
+
 const Wrapper = styled.View`
   flex: 1;
-  background-color: rgb(246, 246, 246);
+  background-color: #fff;
 `;
 
-const ScrollWrapper = styled.ScrollView`
-  flex: 1;
+const ScrollWrapper = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    flex: 1,
+    marginBottom: 70,
+  },
+})`
+  flex-grow: 1;
 `;
 
 const Title = styled.Text`
@@ -29,10 +42,9 @@ const Title = styled.Text`
 `;
 
 const WarnWrapper = styled.View`
-  position: absolute;
+  position: relative;
   left: 0;
   right: 0;
-  bottom: 130;
   background-color: rgba(0, 0, 0, 0);
 `;
 
@@ -118,12 +130,17 @@ class VoteVerification extends Component {
   };
 
   render() {
-    const { selection, procedureObjId, procedureId, navigator } = this.props;
+    const { selection, procedureObjId, procedureId, navigator, data } = this.props;
     return (
       <Wrapper>
         <ScrollWrapper onScroll={this.onScroll}>
           <Title>Schon gewusst?</Title>
-          {this.renderEntries()}
+          {/* {this.renderEntries()} */}
+          {data.loading && <ActivityIndicator size="large" />}
+          {!data.loading && !data.constituency.constituency && (
+            <NoConstituency navigator={navigator} />
+          )}
+          {!data.loading && data.constituency.constituency && <PartyChart />}
         </ScrollWrapper>
         <WarnWrapper pointerEvents="none">
           <Fade visible={this.state.showWarning}>
@@ -151,5 +168,4 @@ VoteVerification.propTypes = {
   procedureId: PropTypes.string.isRequired,
   procedureObjId: PropTypes.string.isRequired,
 };
-
-export default VoteVerification;
+export default graphql(GET_CONSTITUENCY)(VoteVerification);
