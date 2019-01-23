@@ -259,9 +259,6 @@ export default compose(
                 query: VOTES,
                 variables: { procedure: procedureObjId },
               },
-              {
-                query: VOTES_LOCAL,
-              },
             ],
           }),
       };
@@ -279,6 +276,9 @@ export default compose(
               {
                 query: VOTED_LOCAL,
                 variables: { procedureId },
+              },
+              {
+                query: VOTES_LOCAL,
               },
             ],
           }),
