@@ -7,11 +7,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { graphql } from 'react-apollo';
 
 import Fade from '../../components/Animations/Fade';
-import MessageRow from '../../components/ArgumentEntry/Message';
-import LinkRow from '../../components/ArgumentEntry/Link';
 import BallotBox from './BallotBox';
-
-import dummyEntryData from '../../../dummy/voteVerification';
 
 // Components
 import NoConstituency from './NoConstituency';
@@ -27,24 +23,24 @@ const Wrapper = styled.View`
 
 const ScrollWrapper = styled.ScrollView.attrs({
   contentContainerStyle: {
-    flex: 1,
-    marginBottom: 70,
+    flexGrow: 1,
   },
 })`
   flex-grow: 1;
 `;
 
 const Title = styled.Text`
-  padding-top: 11;
+  padding-top: 9;
   padding-horizontal: 18;
   font-size: 34;
-  padding-bottom: 18;
+  padding-bottom: 9;
 `;
 
 const WarnWrapper = styled.View`
-  position: relative;
+  position: absolute;
   left: 0;
   right: 0;
+  bottom: 130;
   background-color: rgba(0, 0, 0, 0);
 `;
 
@@ -105,37 +101,12 @@ class VoteVerification extends Component {
     }
   };
 
-  renderEntries = () => {
-    const { selection } = this.props;
-    return dummyEntryData[selection].map(
-      ({ type, argumentation, title, text, moreText, image, _id }) => {
-        if (type === 'message') {
-          return (
-            <MessageRow key={_id} text={text} argumentation={argumentation} moreText={moreText} />
-          );
-        }
-        return (
-          <LinkRow
-            key={_id}
-            image={{
-              source: image,
-            }}
-            argumentation={argumentation}
-            title={title}
-            text={text}
-          />
-        );
-      },
-    );
-  };
-
   render() {
     const { selection, procedureObjId, procedureId, navigator, data } = this.props;
     return (
       <Wrapper>
         <ScrollWrapper onScroll={this.onScroll}>
           <Title>Schon gewusst?</Title>
-          {/* {this.renderEntries()} */}
           {data.loading && <ActivityIndicator size="large" />}
           {!data.loading && !data.constituency.constituency && (
             <NoConstituency navigator={navigator} />
@@ -167,5 +138,6 @@ VoteVerification.propTypes = {
   selection: PropTypes.string.isRequired,
   procedureId: PropTypes.string.isRequired,
   procedureObjId: PropTypes.string.isRequired,
+  data: PropTypes.shape().isRequired,
 };
 export default graphql(GET_CONSTITUENCY)(VoteVerification);
