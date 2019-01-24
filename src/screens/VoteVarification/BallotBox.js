@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { PanResponder, Animated, Dimensions } from 'react-native';
+import { PanResponder, Animated, Dimensions, AsyncStorage } from 'react-native';
 import styled from 'styled-components/native';
 import { graphql, compose } from 'react-apollo';
 import { Navigator, Navigation } from 'react-native-navigation';
@@ -198,9 +198,13 @@ export default compose(
   graphql(VOTE, {
     props({ ownProps: { procedureObjId, procedureId }, mutate }) {
       return {
-        vote: selection =>
+        vote: async selection =>
           mutate({
-            variables: { procedure: procedureObjId, selection },
+            variables: {
+              procedure: procedureObjId,
+              selection,
+              constituency: await AsyncStorage.getItem('Constituency'),
+            },
             optimisticResponse: {
               __typename: 'Mutation',
               vote: {
