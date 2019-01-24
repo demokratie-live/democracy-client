@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.1.X] - 2019-0X-XX
+### Changed
+- [KeyChain] Changed the way local Votes are saved in the Keychain
+
 ## [1.1.0] - 2019-01-10
 ### Fixed
 - [General] removed Permission query on Install (Read/Write external Store  + Wifi) [#402](https://github.com/demokratie-live/democracy-client/issues/402)
