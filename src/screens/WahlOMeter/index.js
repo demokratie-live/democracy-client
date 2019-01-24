@@ -102,11 +102,7 @@ class WahlOMeter extends Component {
     );
     const pieData = pieDataRaw.reduce(
       (pre, { government, me }) => {
-        if (
-          (me === 1 && government === 'YES') ||
-          (me === 2 && government === 'ABSTINATION') ||
-          (me === 3 && government === 'NO')
-        ) {
+        if (me === government) {
           return { ...pre, matches: pre.matches + 1, count: pre.count + 1 };
         } else {
           return { ...pre, diffs: pre.diffs + 1, count: pre.count + 1 };
@@ -124,11 +120,7 @@ class WahlOMeter extends Component {
           .selection;
         partyVotes.forEach(({ party, main }) => {
           let matched = false;
-          if (
-            (me === 1 && main === 'YES') ||
-            (me === 2 && main === 'ABSTINATION') ||
-            (me === 3 && main === 'NO')
-          ) {
+          if (me === main) {
             matched = true;
           }
 
@@ -248,10 +240,13 @@ class WahlOMeter extends Component {
                     />
                   );
 
+                  const partyChartData = this.partyChartData({ votedProcedures, data });
+                  console.log('partyChartData', partyChartData);
+
                   const fraktionenScreen = (
                     <Fraktionen
                       key="fraktionen"
-                      chartData={this.partyChartData({ votedProcedures, data })}
+                      chartData={partyChartData}
                       totalProcedures={totalProcedures}
                       votedProceduresCount={votedProceduresCount}
                       onProcedureListItemClick={this.onProcedureListItemClick}

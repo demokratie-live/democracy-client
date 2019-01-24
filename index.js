@@ -7,9 +7,6 @@ import { NetInfo, YellowBox } from 'react-native';
 
 import Config from './src/config';
 
-// Migrations
-import Migrations from './src/migrations';
-
 import client, { persistor } from './src/graphql/client';
 import registerScreens from './src/screens';
 
@@ -164,13 +161,5 @@ class App {
 
 (async () => {
   await persistor.restore();
-
-  // console.log('migrations start');
-  const migrations = await Migrations();
-  if (migrations.some(v => v)) {
-    await persistor.purge();
-  }
-  // console.log('migrations finish');
-
   const app = new App(); // eslint-disable-line
 })();

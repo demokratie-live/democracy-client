@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - [Wahl-O-Meter] Add Wahl-Ø-Meter :D
 
+### Changed
+- [KeyChain] Changed the way local Votes are saved in the Keychain
+
 ## [1.1.0] - 2019-01-10
 ### Fixed
 - [General] removed Permission query on Install (Read/Write external Store  + Wifi) [#402](https://github.com/demokratie-live/democracy-client/issues/402)

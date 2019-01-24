@@ -52,11 +52,7 @@ class Fraktionen extends Component {
           .selection;
         partyVotes.forEach(({ party, main }) => {
           let matched = false;
-          if (
-            (me === 1 && main === 'YES') ||
-            (me === 2 && main === 'ABSTINATION') ||
-            (me === 3 && main === 'NO')
-          ) {
+          if (me === main) {
             matched = true;
           }
 

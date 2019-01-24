@@ -6,9 +6,8 @@ import { Navigator } from 'react-native-navigation';
 
 import VoteButton from '../../components/VoteButton';
 
-import VOTE_LOCAL from '../../graphql/mutations/voteLocal';
 import VOTED from '../../graphql/queries/voted';
-import VOTED_LOCAL from '../../graphql/queries/votedLocal';
+import VOTE_SELECTION_LOCAL from '../../graphql/queries/local/voteSelection';
 
 const SegmentWrapper = styled.View`
   padding-vertical: 10;
@@ -69,7 +68,7 @@ class Voting extends Component {
     const {
       verified,
       voted,
-      votedSelection,
+      voteSelection,
       navigator,
       procedureObjId,
       procedureId,
@@ -99,7 +98,7 @@ class Voting extends Component {
             <VoteButton
               voted={voted}
               selection="YES"
-              votedSelection={votedSelection}
+              voteSelection={voteSelection}
               onPress={() => {
                 navigator.showModal({
                   screen: 'democracy.VoteVarification',
@@ -118,7 +117,7 @@ class Voting extends Component {
             <VoteButton
               voted={voted}
               selection="ABSTINATION"
-              votedSelection={votedSelection}
+              voteSelection={voteSelection}
               onPress={() => {
                 navigator.showModal({
                   screen: 'democracy.VoteVarification',
@@ -137,7 +136,7 @@ class Voting extends Component {
             <VoteButton
               voted={voted}
               selection="NO"
-              votedSelection={votedSelection}
+              voteSelection={voteSelection}
               onPress={() => {
                 navigator.showModal({
                   screen: 'democracy.VoteVarification',
@@ -161,7 +160,7 @@ class Voting extends Component {
 Voting.propTypes = {
   verified: PropTypes.bool.isRequired,
   voted: PropTypes.bool.isRequired,
-  votedSelection: PropTypes.string,
+  voteSelection: PropTypes.string,
   navigator: PropTypes.instanceOf(Navigator).isRequired,
   procedureObjId: PropTypes.string.isRequired,
   procedureId: PropTypes.string.isRequired,
@@ -170,7 +169,7 @@ Voting.propTypes = {
 };
 
 Voting.defaultProps = {
-  votedSelection: undefined,
+  voteSelection: undefined,
 };
 
 export default compose(
@@ -185,33 +184,17 @@ export default compose(
     }),
   }),
 
-  graphql(VOTE_LOCAL, {
-    name: 'voteLocal',
-    props({ ownProps: { procedureObjId }, voteLocal }) {
-      return {
-        voteLocal: selection =>
-          voteLocal({
-            variables: { procedure: procedureObjId, selection },
-            refetchQueries: [
-              {
-                query: VOTED_LOCAL,
-                variables: { procedure: procedureObjId },
-              },
-            ],
-          }),
-      };
-    },
-  }),
-  graphql(VOTED_LOCAL, {
+  graphql(VOTE_SELECTION_LOCAL, {
     options: ({ procedureId }) => ({
       variables: { procedureId },
+      // fetchPolicy: 'cache-and-network',
     }),
     props: props => {
       const {
-        data: { votedLocal },
+        data: { voteSelectionLocal },
       } = props;
-      if (votedLocal) {
-        return { votedSelection: votedLocal.selection };
+      if (voteSelectionLocal) {
+        return { voteSelection: voteSelectionLocal.selection };
       }
       return {};
     },
