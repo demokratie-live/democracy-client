@@ -12,12 +12,12 @@ export default {
     },
   },
   Query: {
-    votedLocal: async (_, { procedureId }) => {
+    voteSelectionLocal: async (_, { procedureId }) => {
       const vote = await VotesLocal.getVote(procedureId);
       if (vote && vote.selection) {
         return {
           ...vote,
-          __typename: 'VotedLocal',
+          __typename: 'VoteSelectionLocal',
         };
       }
       return null;

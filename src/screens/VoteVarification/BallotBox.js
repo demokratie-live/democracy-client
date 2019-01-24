@@ -11,7 +11,7 @@ import VOTE from '../../graphql/mutations/vote';
 import VOTE_LOCAL from '../../graphql/mutations/local/vote';
 import VOTED from '../../graphql/queries/voted';
 import VOTES from '../../graphql/queries/votes';
-import VOTED_LOCAL from '../../graphql/queries/local/voted';
+import VOTE_SELECTION_LOCAL from '../../graphql/queries/local/voteSelection';
 import F_ACTIVITY_INDEX from '../../graphql/fragments/ProcedureActivityIndex';
 import F_VOTED from '../../graphql/fragments/ProcedureVoted';
 
@@ -273,7 +273,7 @@ export default compose(
             variables: { procedureId, selection },
             refetchQueries: [
               {
-                query: VOTED_LOCAL,
+                query: VOTE_SELECTION_LOCAL,
                 variables: { procedureId },
               },
             ],

@@ -1,4 +1,4 @@
 export default `
 type Query {
-  votedLocal(procedureId: String!): VoteSelection
+  voteSelectionLocal(procedureId: String!): VoteSelection
 }`;
