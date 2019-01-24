@@ -35,6 +35,15 @@ const ContactWrapper = styled.View`
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
+  max-width: 300;
+`;
+
+const SocialMediaWrapper = styled.View`
+  padding-top: 25;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 300;
 `;
 
 const IconWrapper = styled.TouchableOpacity`
@@ -50,7 +59,16 @@ const Version = styled.Text`
   font-size: 15;
   color: #8f8e94;
   padding-top: 28;
-  padding-bottom: 11;
+  padding-bottom: 18;
+`;
+
+const MadeWith = styled.Text`
+  font-size: 12;
+  text-align: center;
+  color: rgb(143, 142, 148);
+  padding-top: 7;
+  padding-bottom: 7;
+  background-color: rgb(239, 239, 244);
 `;
 
 const ContactIcons = styled(FontAwesome).attrs(() => ({
@@ -103,6 +121,12 @@ class Support extends Component {
       Platform.OS === 'ios' ? `telprompt:${Config.PHONE_NUMBER}` : `tel:${Config.PHONE_NUMBER}`;
     const email = `mailto:${Config.CONTACT_EMAIL}`;
     const github = Config.GITHUB_URL;
+    const facebook = Config.FACEBOOK_URL;
+    const twitter = Config.TWITTER_URL;
+    const instagram = Config.INSTAGRAM_URL;
+    const youtube = Config.YOUTUBE_URL;
+    const discord = Config.DISCORD_URL;
+    const website = Config.WEBSITE_URL;
 
     const version = `Version: ${DeviceInfo.getReadableVersion()
       .split('.')
@@ -127,12 +151,35 @@ Um Fehler zu beheben, ist allerdings ein qualifiziertes Feedback notwendig. Desh
             <IconWrapper onPress={this.linking(email)}>
               <ContactIcons name="envelope" size={30} />
             </IconWrapper>
+            <IconWrapper onPress={this.linking(website)}>
+              <ContactIcons name="globe" />
+            </IconWrapper>
+          </ContactWrapper>
+          <SocialMediaWrapper>
             <IconWrapper onPress={this.linking(github)}>
               <ContactIcons name="github" />
             </IconWrapper>
-          </ContactWrapper>
+            <IconWrapper onPress={this.linking(twitter)}>
+              <ContactIcons name="twitter" />
+            </IconWrapper>
+            <IconWrapper onPress={this.linking(instagram)}>
+              <ContactIcons name="instagram" />
+            </IconWrapper>
+          </SocialMediaWrapper>
+          <SocialMediaWrapper>
+            <IconWrapper onPress={this.linking(facebook)}>
+              <ContactIcons name="facebook" />
+            </IconWrapper>
+            <IconWrapper onPress={this.linking(youtube)}>
+              <ContactIcons name="youtube" />
+            </IconWrapper>
+            <IconWrapper onPress={this.linking(discord)}>
+              <ContactIcons name="weixin" />
+            </IconWrapper>
+          </SocialMediaWrapper>
           <Version>{version}</Version>
         </Wrapper>
+        <MadeWith>Made with ❤ – DEMOCRACY Deutschland e.V.</MadeWith>
       </ScrollWrapper>
     );
   }
