@@ -23,7 +23,7 @@ export default {
       return null;
     },
 
-    votesLocalKeyStore: async () =>
+    votesSelectionLocal: async () =>
       VotesLocal.getVotes().then(votesLocal =>
         votesLocal.map(vote => ({
           ...vote,

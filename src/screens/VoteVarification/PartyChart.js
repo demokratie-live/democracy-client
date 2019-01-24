@@ -8,7 +8,7 @@ import PartyChart from '../../components/Charts/PartyChart';
 import NoConstituency from './NoConstituency';
 
 // GraphQL
-import VOTES_LOCAL from '../../graphql/queries/votesLocalKeyStore';
+import VOTES_SELECTION_LOCAL from '../../graphql/queries/local/votesSelection';
 import PROCEDURES_WITH_VOTE_RESULTS from '../../graphql/queries/proceduresByIdHavingVoteResults';
 
 const Wrapper = styled.View`
@@ -48,7 +48,7 @@ class Fraktionen extends Component {
   partyChartData = ({ votedProcedures, data }) => {
     const chartData = votedProcedures.proceduresByIdHavingVoteResults.procedures.reduce(
       (prev, { voteResults: { partyVotes }, procedureId }) => {
-        const me = data.votesLocalKeyStore.find(({ procedureId: pid }) => pid === procedureId)
+        const me = data.votesSelectionLocal.find(({ procedureId: pid }) => pid === procedureId)
           .selection;
         partyVotes.forEach(({ party, main }) => {
           let matched = false;
@@ -108,12 +108,12 @@ class Fraktionen extends Component {
   render() {
     const { chartWidth, selected } = this.state;
     return (
-      <Query query={VOTES_LOCAL}>
+      <Query query={VOTES_SELECTION_LOCAL}>
         {({ data }) => {
           if (data.loading) {
             return <ActivityIndicator size="large" />;
           }
-          if (!data.votesLocalKeyStore || data.votesLocalKeyStore.length === 0) {
+          if (!data.votesSelectionLocal || data.votesSelectionLocal.length === 0) {
             return <NoConstituency noButton />;
           }
 
@@ -121,7 +121,7 @@ class Fraktionen extends Component {
             <Query
               query={PROCEDURES_WITH_VOTE_RESULTS}
               variables={{
-                procedureIds: data.votesLocalKeyStore.map(({ procedureId }) => procedureId),
+                procedureIds: data.votesSelectionLocal.map(({ procedureId }) => procedureId),
                 pageSize: 999999,
               }}
               fetchPolicy="cache-and-network"

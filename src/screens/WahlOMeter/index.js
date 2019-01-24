@@ -15,7 +15,7 @@ import Fraktionen from './Fraktionen';
 import NoVotesPlaceholder from './NoVotesPlaceholder';
 
 // GraphQL
-import VOTES_LOCAL from '../../graphql/queries/votesLocalKeyStore';
+import VOTES_SELECTION_LOCAL from '../../graphql/queries/local/votesSelection';
 import PROCEDURES_WITH_VOTE_RESULTS from '../../graphql/queries/proceduresByIdHavingVoteResults';
 
 const Wrapper = styled.View`
@@ -97,7 +97,7 @@ class WahlOMeter extends Component {
     let pieDataRaw = votedProcedures.proceduresByIdHavingVoteResults.procedures.map(
       ({ voteResults, procedureId }) => ({
         government: voteResults.governmentDecision,
-        me: data.votesLocalKeyStore.find(({ procedureId: pid }) => pid === procedureId).selection,
+        me: data.votesSelectionLocal.find(({ procedureId: pid }) => pid === procedureId).selection,
       }),
     );
     const pieData = pieDataRaw.reduce(
@@ -116,7 +116,7 @@ class WahlOMeter extends Component {
   partyChartData = ({ votedProcedures, data }) => {
     const chartData = votedProcedures.proceduresByIdHavingVoteResults.procedures.reduce(
       (prev, { voteResults: { partyVotes }, procedureId }) => {
-        const me = data.votesLocalKeyStore.find(({ procedureId: pid }) => pid === procedureId)
+        const me = data.votesSelectionLocal.find(({ procedureId: pid }) => pid === procedureId)
           .selection;
         partyVotes.forEach(({ party, main }) => {
           let matched = false;
@@ -201,9 +201,9 @@ class WahlOMeter extends Component {
             />
           </SegmentControlsWrapper>
         )}
-        <Query query={VOTES_LOCAL}>
+        <Query query={VOTES_SELECTION_LOCAL}>
           {({ data }) => {
-            if (!data.votesLocalKeyStore || data.votesLocalKeyStore.length === 0) {
+            if (!data.votesSelectionLocal || data.votesSelectionLocal.length === 0) {
               return <NoVotesPlaceholder subline="Bundestag" navigator={this.props.navigator} />;
             }
 
@@ -211,7 +211,7 @@ class WahlOMeter extends Component {
               <Query
                 query={PROCEDURES_WITH_VOTE_RESULTS}
                 variables={{
-                  procedureIds: data.votesLocalKeyStore.map(({ procedureId }) => procedureId),
+                  procedureIds: data.votesSelectionLocal.map(({ procedureId }) => procedureId),
                   pageSize: 999999,
                 }}
                 fetchPolicy="cache-and-network"
@@ -241,7 +241,6 @@ class WahlOMeter extends Component {
                   );
 
                   const partyChartData = this.partyChartData({ votedProcedures, data });
-                  console.log('partyChartData', partyChartData);
 
                   const fraktionenScreen = (
                     <Fraktionen

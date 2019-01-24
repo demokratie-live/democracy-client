@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  query votesLocalKeyStore {
-    votesLocalKeyStore @client {
+  query votesSelectionLocal {
+    votesSelectionLocal @client {
       selection
       procedureId
     }
