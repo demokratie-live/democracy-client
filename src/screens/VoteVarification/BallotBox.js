@@ -198,8 +198,10 @@ export default compose(
   graphql(VOTE, {
     props({ ownProps: { procedureObjId, procedureId }, mutate }) {
       return {
-        vote: async selection =>
-          mutate({
+        vote: async selection => {
+          const constituency = await AsyncStorage.getItem('Constituency');
+          const constituencies = constituency ? [constituency] : [];
+          return mutate({
             variables: {
               procedure: procedureObjId,
               selection,
@@ -261,10 +263,11 @@ export default compose(
             refetchQueries: [
               {
                 query: VOTES,
-                variables: { procedure: procedureObjId },
+                variables: { procedure: procedureObjId, constituencies },
               },
             ],
-          }),
+          });
+        },
       };
     },
   }),

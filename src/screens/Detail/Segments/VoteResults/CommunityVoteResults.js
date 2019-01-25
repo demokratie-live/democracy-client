@@ -1,16 +1,18 @@
-import React, { Component } from 'react';
-import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
-import { graphql, compose } from 'react-apollo';
-import { ActivityIndicator, Dimensions } from 'react-native';
-
-// import PieChart from './VoteResults/PieChart';
-import PieChart from '../../../../components/Charts/PieChart';
-import Segment from '../../Segment';
-import ChartLegend from '../../../../components/Charts/ChartLegend';
-
-import VOTES from '../../../../graphql/queries/votes';
+import React, { Component } from 'react';
+import { graphql, Query } from 'react-apollo';
+import { ActivityIndicator, Dimensions, Platform } from 'react-native';
+import Swiper from 'react-native-swiper';
+import styled from 'styled-components/native';
+import constituencySvgs from '../../../../../assets/constituencies';
+// Components
 import GermanySvgComponent from '../../../../../assets/svgs/GermanySVG';
+import ChartLegend from '../../../../components/Charts/ChartLegend';
+import PieChart from '../../../../components/Charts/PieChart';
+// GraphQL
+import GET_CONSTITUENCY from '../../../../graphql/queries/local/constituency';
+import VOTES from '../../../../graphql/queries/votes';
+import Segment from '../../Segment';
 
 export const { width, height } = Dimensions.get('window');
 
@@ -43,91 +45,112 @@ class VoteResults extends Component {
       });
     }
   };
-  render() {
-    const { communityVotes, scrollTo } = this.props;
+
+  renderCommuntiyResult = comunnityResults => {
     const { chartWidth } = this.state;
+    if (
+      comunnityResults &&
+      (comunnityResults.yes || comunnityResults.no || comunnityResults.abstination)
+    ) {
+      const votes = comunnityResults.yes + comunnityResults.no + comunnityResults.abstination;
+      const data = [
+        {
+          label: 'Zustimmungen',
+          percent: comunnityResults.yes / votes,
+          color: '#15C063',
+          value: comunnityResults.yes,
+        },
+        {
+          label: 'Enthaltungen',
+          percent: comunnityResults.abstination / votes,
+          color: '#2C82E4',
+          value: comunnityResults.abstination,
+        },
+        {
+          label: 'Ablehnungen',
+          percent: comunnityResults.no / votes,
+          color: '#EC3E31',
+          value: comunnityResults.no,
+        },
+      ];
 
-    const renderCommuntiyResult = () => {
-      const { voteResults: comunnityResults } = communityVotes;
-      if (
-        communityVotes &&
-        comunnityResults &&
-        communityVotes.voted &&
-        (comunnityResults.yes || comunnityResults.no || comunnityResults.abstination)
-      ) {
-        const votes = comunnityResults.yes + comunnityResults.no + comunnityResults.abstination;
-        const data = [
-          {
-            label: 'Zustimmungen',
-            percent: comunnityResults.yes / votes,
-            color: '#15C063',
-            value: comunnityResults.yes,
-          },
-          {
-            label: 'Enthaltungen',
-            percent: comunnityResults.abstination / votes,
-            color: '#2C82E4',
-            value: comunnityResults.abstination,
-          },
-          {
-            label: 'Ablehnungen',
-            percent: comunnityResults.no / votes,
-            color: '#EC3E31',
-            value: comunnityResults.no,
-          },
-        ];
+      const DynSvgComp = !comunnityResults.constituency
+        ? GermanySvgComponent
+        : constituencySvgs[comunnityResults.constituency].default;
 
-        return (
-          <PieChartWrapper onLayout={this.onLayout}>
-            <SvgWrapper>
-              <GermanySvgComponent
-                width={60}
-                height={36}
-                childProps={{ fill: 'none', stroke: '#000', strokeWidth: '1%' }}
-              />
-            </SvgWrapper>
-            <PieChart
-              data={data}
-              label="Abstimmende"
-              subLabel={votes}
-              width={chartWidth - 36 * 1.5}
-            />
-            <ChartLegend data={data} />
-          </PieChartWrapper>
-        );
-      }
-      return <ActivityIndicator />;
-    };
-
-    if (communityVotes.voted) {
       return (
-        <Segment title="Communityergebnis" open scrollTo={scrollTo}>
-          {renderCommuntiyResult()}
-          <RepresentativeText>
-            Dieses Ergebnis wurde nicht auf seine Repräsentativität überprüft.
-          </RepresentativeText>
-        </Segment>
+        <PieChartWrapper
+          onLayout={this.onLayout}
+          key={comunnityResults.constituency ? 'goverment' : 'constituency'}
+        >
+          <SvgWrapper>
+            <DynSvgComp
+              width={60}
+              height={36}
+              childProps={{ fill: 'none', stroke: '#000', strokeWidth: '1%' }}
+            />
+          </SvgWrapper>
+          <PieChart
+            data={data}
+            label="Abstimmende"
+            subLabel={votes}
+            width={chartWidth - 36 * 1.5}
+          />
+          <ChartLegend data={data} />
+        </PieChartWrapper>
       );
     }
-    return null;
+    return <ActivityIndicator />;
+  };
+
+  render() {
+    const { scrollTo, procedure, data } = this.props;
+    if (data.loading) {
+      return null;
+    }
+    const constituencies = data.constituency.constituency ? [data.constituency.constituency] : [];
+    return (
+      <Query
+        query={VOTES}
+        variables={{ procedure, constituencies }}
+        fetchPolicy="cache-and-network"
+      >
+        {({ data: voteData, loading }) => {
+          if (loading || !voteData || !voteData.votes.voted) {
+            return null;
+          }
+          const screens = [this.renderCommuntiyResult(voteData.votes.voteResults)];
+          if (constituencies.length > 0 && voteData.votes.voteResults.constituencies[0]) {
+            screens.push(this.renderCommuntiyResult(voteData.votes.voteResults.constituencies[0]));
+          }
+          return (
+            <Segment title="Communityergebnis" open scrollTo={scrollTo}>
+              <Swiper
+                loop={false}
+                style={{ height: Platform.OS === 'ios' ? 'auto' : 430, maxHeight: 430 }}
+                paginationStyle={{ bottom: 14 }}
+              >
+                {screens}
+              </Swiper>
+              <RepresentativeText>
+                Dieses Ergebnis wurde nicht auf seine Repräsentativität überprüft.
+              </RepresentativeText>
+            </Segment>
+          );
+        }}
+      </Query>
+    );
   }
 }
 
 VoteResults.propTypes = {
   scrollTo: PropTypes.func.isRequired,
-  communityVotes: PropTypes.oneOfType([PropTypes.shape(), PropTypes.bool]),
 };
 
-VoteResults.defaultProps = {
-  communityVotes: null,
-};
+VoteResults.defaultProps = {};
 
-export default compose(
-  graphql(VOTES, {
-    options: ({ procedure }) => ({
-      variables: { procedure },
-      fetchPolicy: 'cache-and-network',
-    }),
-    props: ({ data }) => ({ communityVotes: data.votes || {} }),
-  }),
-)(VoteResults);
+export default graphql(GET_CONSTITUENCY, {
+  options: {
+    fetchPolicy: 'network-only',
+  },
+})(VoteResults);
