@@ -12,11 +12,18 @@ import VotedProceduresList from '../VotedProceduresList';
 const Wrapper = styled.ScrollView`
   background-color: #fff;
   padding-top: 18;
-  width: ${Dimensions.get('screen').width};
+`;
+
+const ChartWrapper = styled.View`
+  padding-horizontal: 18;
+  padding-top: 18;
+  align-self: center;
+  width: 100%;
+  max-width: ${() => Math.min(Dimensions.get('window').width, Dimensions.get('window').height)};
 `;
 
 const VoteResultNumbers = styled.View`
-  width: ${() => Dimensions.get('window').width - 18 * 2};
+  width: 100%;
   max-width: 464;
   flex-direction: row;
   justify-content: space-around;
@@ -91,33 +98,36 @@ class Fraktionen extends Component {
         scrollEventThrottle={4000}
       >
         <Header totalProcedures={totalProcedures} votedProceduresCount={votedProceduresCount} />
-        <PartyChart
-          width={chartWidth + 36}
-          chartData={chartData}
-          onClick={this.onClick}
-          selected={selected}
-          showPercentage
-        />
-        <VoteResultNumbers>
-          <VoteResult>
-            <VoteResultCircleNumber>
-              <VoteResultCircle color="#f5a623" />
-              <VoteResultNumber>{chartData[selected].values[0].value}</VoteResultNumber>
-            </VoteResultCircleNumber>
-            <VoteResultLabel>Übereinstimmungen</VoteResultLabel>
-          </VoteResult>
-          <VoteResult>
-            <VoteResultCircleNumber>
-              <VoteResultCircle color="#b1b3b4" />
-              <VoteResultNumber>{chartData[selected].values[1].value}</VoteResultNumber>
-            </VoteResultCircleNumber>
-            <VoteResultLabel>Differenzen</VoteResultLabel>
-          </VoteResult>
-        </VoteResultNumbers>
-        <ChartNote>
-          Hohe Übereinstimmungen Ihrer Stellungnahmen mit mehreren Parteien bedeuten nicht
-          zwangsläufig eine inhaltliche Nähe dieser Parteien zueinander
-        </ChartNote>
+        <ChartWrapper>
+          <PartyChart
+            width={chartWidth}
+            chartData={chartData}
+            onClick={this.onClick}
+            selected={selected}
+            showPercentage
+          />
+          <VoteResultNumbers>
+            <VoteResult>
+              <VoteResultCircleNumber>
+                <VoteResultCircle color="#f5a623" />
+                <VoteResultNumber>{chartData[selected].values[0].value}</VoteResultNumber>
+              </VoteResultCircleNumber>
+              <VoteResultLabel>Übereinstimmungen</VoteResultLabel>
+            </VoteResult>
+            <VoteResult>
+              <VoteResultCircleNumber>
+                <VoteResultCircle color="#b1b3b4" />
+                <VoteResultNumber>{chartData[selected].values[1].value}</VoteResultNumber>
+              </VoteResultCircleNumber>
+              <VoteResultLabel>Differenzen</VoteResultLabel>
+            </VoteResult>
+          </VoteResultNumbers>
+          <ChartNote>
+            Hohe Übereinstimmungen Ihrer Stellungnahmen mit mehreren Parteien bedeuten nicht
+            zwangsläufig eine inhaltliche Nähe dieser Parteien zueinander
+          </ChartNote>
+        </ChartWrapper>
+
         <VotedProceduresList
           onItemClick={onProcedureListItemClick}
           ref={el => (this.procedureList = el)}

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 import styled from 'styled-components/native';
-import { Platform, SegmentedControlIOS, Dimensions } from 'react-native';
+import { Platform, SegmentedControlIOS, Dimensions, View } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
@@ -20,7 +20,7 @@ import PROCEDURES_WITH_VOTE_RESULTS from '../../graphql/queries/proceduresByIdHa
 
 const Wrapper = styled.View`
   flex: 1;
-  background-color: #ffffff;
+  background-color: #ffa;
 `;
 
 const SegmentControlsWrapper = styled.View`
@@ -36,7 +36,13 @@ const SegmentControlsWrapper = styled.View`
 const ScrollView = styled.ScrollView.attrs(() => ({
   horizontal: true,
   pagingEnabled: true,
-}))``;
+  contentContainerStyle: {
+    backgroundColor: '#aff',
+  },
+}))`
+  flex: 1;
+  background-color: #faf;
+`;
 
 class WahlOMeter extends Component {
   static navigatorStyle = {
@@ -66,6 +72,7 @@ class WahlOMeter extends Component {
   }
 
   state = {
+    width: Dimensions.get('window').width,
     selectedIndex: 0,
     routes: [{ key: 'first', title: 'Bundestag' }, { key: 'second', title: 'Fraktionen' }],
   };
@@ -80,15 +87,21 @@ class WahlOMeter extends Component {
   };
 
   onScrollEndDrag = e => {
-    if (this.width === Dimensions.get('window').width) {
-      const { contentOffset } = e.nativeEvent;
-      const viewSize = e.nativeEvent.layoutMeasurement;
+    const { contentOffset } = e.nativeEvent;
+    const viewSize = e.nativeEvent.layoutMeasurement;
+    // Divide the horizontal offset by the width of the view to see which page is visible
+    const pageNum = Math.floor(contentOffset.x / viewSize.width);
+    if (this.state.selectedIndex !== pageNum) {
+      this.setState({ selectedIndex: pageNum });
+    }
+  };
 
-      // Divide the horizontal offset by the width of the view to see which page is visible
-      const pageNum = Math.floor(contentOffset.x / viewSize.width);
-      if (this.state.selectedIndex !== pageNum) {
-        this.setState({ selectedIndex: pageNum });
-      }
+  onLayout = () => {
+    const { width } = Dimensions.get('window');
+    if (this.state.width !== width) {
+      this.setState({
+        width,
+      });
     }
   };
 
@@ -176,9 +189,9 @@ class WahlOMeter extends Component {
   width = Dimensions.get('window').width;
 
   render() {
-    const { selectedIndex, routes } = this.state;
+    const { selectedIndex, routes, width } = this.state;
     return (
-      <Wrapper>
+      <Wrapper onLayout={this.onLayout}>
         {Platform.OS === 'ios' && (
           <SegmentControlsWrapper>
             <SegmentedControlIOS
@@ -195,7 +208,7 @@ class WahlOMeter extends Component {
                 });
                 this.scrollView.scrollTo({
                   y: 0,
-                  x: event.nativeEvent.selectedSegmentIndex * this.width,
+                  x: event.nativeEvent.selectedSegmentIndex * this.state.width,
                 });
               }}
             />
@@ -231,35 +244,36 @@ class WahlOMeter extends Component {
                     votedProcedures.proceduresByIdHavingVoteResults.procedures.length;
 
                   const bundestagScreen = (
-                    <Bundestag
-                      key="bundestag"
-                      chartData={this.pieChartData({ votedProcedures, data })}
-                      totalProcedures={totalProcedures}
-                      votedProceduresCount={votedProceduresCount}
-                      onProcedureListItemClick={this.onProcedureListItemClick}
-                    />
+                    <View key="bundestag" style={{ flex: 1, width: width }}>
+                      <Bundestag
+                        chartData={this.pieChartData({ votedProcedures, data })}
+                        totalProcedures={totalProcedures}
+                        votedProceduresCount={votedProceduresCount}
+                        onProcedureListItemClick={this.onProcedureListItemClick}
+                      />
+                    </View>
                   );
 
                   const partyChartData = this.partyChartData({ votedProcedures, data });
 
                   const fraktionenScreen = (
-                    <Fraktionen
-                      key="fraktionen"
-                      chartData={partyChartData}
-                      totalProcedures={totalProcedures}
-                      votedProceduresCount={votedProceduresCount}
-                      onProcedureListItemClick={this.onProcedureListItemClick}
-                    />
+                    <View key="fraktionen" style={{ flex: 1, width: width }}>
+                      <Fraktionen
+                        chartData={partyChartData}
+                        totalProcedures={totalProcedures}
+                        votedProceduresCount={votedProceduresCount}
+                        onProcedureListItemClick={this.onProcedureListItemClick}
+                      />
+                    </View>
                   );
 
                   if (Platform.OS === 'ios') {
                     return (
                       <ScrollView
-                        onContentSizeChange={contentWidth => {
-                          this.width = contentWidth / 2;
+                        onContentSizeChange={() => {
                           this.scrollView.scrollTo({
                             y: 0,
-                            x: selectedIndex * this.width,
+                            x: selectedIndex * this.state.width,
                           });
                         }}
                         onMomentumScrollEnd={this.onScrollEndDrag}

@@ -20,7 +20,10 @@ const ScrollView = styled.ScrollView.attrs(() => ({
 }))``;
 
 const PieChartWrapper = styled.View`
-  align-items: center;
+  align-self: center;
+  padding-horizontal: 36;
+  width: 100%;
+  max-width: ${() => Math.min(Dimensions.get('window').width, Dimensions.get('window').height)};
 `;
 
 const DecisionTextView = styled.View`

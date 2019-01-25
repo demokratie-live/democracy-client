@@ -1,7 +1,7 @@
 import React from 'react';
-import { Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
+import { Dimensions } from 'react-native';
 
 // Components
 import PieChart from '../../../components/Charts/PieChart';
@@ -13,14 +13,14 @@ import VotedProceduresList from '../VotedProceduresList';
 const Wrapper = styled.ScrollView`
   background-color: #fff;
   padding-top: 18;
-  width: ${Dimensions.get('screen').width};
 `;
 
 const ChartWrapper = styled.View`
-  flex: 1;
   padding-horizontal: 18;
   padding-top: 18;
-  min-height: 150;
+  align-self: center;
+  width: 100%;
+  max-width: ${() => Math.min(Dimensions.get('window').width, Dimensions.get('window').height)};
 `;
 
 const Bundestag = ({

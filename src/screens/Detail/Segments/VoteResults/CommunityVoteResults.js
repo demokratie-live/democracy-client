@@ -24,7 +24,10 @@ const RepresentativeText = styled.Text`
 `;
 
 const PieChartWrapper = styled.View`
-  align-items: center;
+  align-self: center;
+  padding-horizontal: 36;
+  width: 100%;
+  max-width: ${() => Math.min(Dimensions.get('window').width, Dimensions.get('window').height)};
 `;
 
 const SvgWrapper = styled.View`
@@ -33,21 +36,7 @@ const SvgWrapper = styled.View`
 `;
 
 class VoteResults extends Component {
-  state = {
-    chartWidth: Math.min(Dimensions.get('window').width, Dimensions.get('window').height),
-  };
-
-  onLayout = () => {
-    const chartWidth = Math.min(Dimensions.get('window').width, Dimensions.get('window').height);
-    if (this.state.chartWidth !== chartWidth) {
-      this.setState({
-        chartWidth,
-      });
-    }
-  };
-
   renderCommuntiyResult = comunnityResults => {
-    const { chartWidth } = this.state;
     if (
       comunnityResults &&
       (comunnityResults.yes || comunnityResults.no || comunnityResults.abstination)
@@ -79,10 +68,7 @@ class VoteResults extends Component {
         : constituencySvgs[comunnityResults.constituency].default;
 
       return (
-        <PieChartWrapper
-          onLayout={this.onLayout}
-          key={comunnityResults.constituency ? 'goverment' : 'constituency'}
-        >
+        <PieChartWrapper key={comunnityResults.constituency ? 'goverment' : 'constituency'}>
           <SvgWrapper>
             <DynSvgComp
               width={60}
@@ -90,12 +76,7 @@ class VoteResults extends Component {
               childProps={{ fill: 'none', stroke: '#000', strokeWidth: '1%' }}
             />
           </SvgWrapper>
-          <PieChart
-            data={data}
-            label="Abstimmende"
-            subLabel={votes}
-            width={chartWidth - 36 * 1.5}
-          />
+          <PieChart data={data} label="Abstimmende" subLabel={votes} />
           <ChartLegend data={data} />
         </PieChartWrapper>
       );
@@ -124,10 +105,13 @@ class VoteResults extends Component {
             screens.push(this.renderCommuntiyResult(voteData.votes.voteResults.constituencies[0]));
           }
           return (
-            <Segment title="Communityergebnis" open scrollTo={scrollTo}>
+            <Segment title="Communityergebnis" open scrollTo={scrollTo} fullWidth>
               <Swiper
                 loop={false}
-                style={{ height: Platform.OS === 'ios' ? 'auto' : 430, maxHeight: 430 }}
+                style={{
+                  height: Platform.OS === 'ios' ? 'auto' : 430,
+                  maxHeight: 430,
+                }}
                 paginationStyle={{ bottom: 14 }}
               >
                 {screens}
@@ -145,6 +129,8 @@ class VoteResults extends Component {
 
 VoteResults.propTypes = {
   scrollTo: PropTypes.func.isRequired,
+  data: PropTypes.shape().isRequired,
+  procedure: PropTypes.string.isRequired,
 };
 
 VoteResults.defaultProps = {};
