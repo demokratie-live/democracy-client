@@ -12,7 +12,7 @@ class VotesLocal {
       }
 
       // v1
-      democracyVotesIndex
+      democracyIndex
       {
         v: 1,
         i: [0,1,2,...] (buckets: democracyVotes0, democracyVotes1, democracyVotes2, ...)
@@ -160,14 +160,21 @@ class VotesLocal {
     }
 
     // Convert Chain
-    const newChain = { v: VotesLocal.KEYCHAIN_VERSION, d: [] };
-    for (let [key, value] of Object.entries(oldChain)) {
-      if (value === 0) {
-        value = null;
-      }
-      // Time is 1970-01-01T00:00:00.000Z
-      newChain.d.push({ i: key, s: value, t: new Date(0).toISOString(), c: null });
-    }
+    const oldChainKeyValue = Object.entries(oldChain);
+    const newChain = oldChainKeyValue.reduce(
+      (newChain, currentValue) => {
+        let [key, value] = currentValue;
+        if (value === 0) {
+          value = null;
+        }
+        // Time is 1970-01-01T00:00:00.000Z
+        return {
+          ...newChain,
+          d: [...newChain.d, { i: key, s: value, t: new Date(0).toISOString(), c: null }],
+        };
+      },
+      { v: VotesLocal.KEYCHAIN_VERSION, d: [] },
+    );
 
     // Retrun converted Chain
     return newChain;
@@ -248,24 +255,23 @@ class VotesLocal {
   static setVote = async ({ procedureId, selection, constituency }) => {
     let chain = await VotesLocal.readKeychain();
 
-    // Find the requested Data
-    const data = chain.d.find(({ i }) => {
-      return i === procedureId;
+    // Construct Chain Data Object
+    const newVote = VotesLocal.convertToKeychain({
+      procedureId,
+      selection,
+      time: new Date(),
+      constituency,
     });
-    // Data alread in the Chain
-    if (data) {
-      return false;
-    }
 
-    // Add Data to Data Object
-    chain.d.push(
-      VotesLocal.convertToKeychain({
-        procedureId,
-        selection,
-        time: new Date(),
-        constituency,
-      }),
-    );
+    // Find the requested Data index
+    const dataIndex = chain.d.findIndex(({ i }) => i === procedureId);
+    // Data not in the Chain
+    if (dataIndex === -1) {
+      chain.d.push(newVote);
+    } else {
+      // Data is already in the Chain
+      chain.d[dataIndex] = newVote;
+    }
 
     // Write Chain
     return VotesLocal.writeKeychain(chain);
