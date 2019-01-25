@@ -162,13 +162,13 @@ Um Fehler zu beheben, ist allerdings ein qualifiziertes Feedback notwendig. Desh
             <IconWrapper onPress={this.linking(twitter)}>
               <ContactIcons name="twitter" />
             </IconWrapper>
-            <IconWrapper onPress={this.linking(instagram)}>
-              <ContactIcons name="instagram" />
+            <IconWrapper onPress={this.linking(facebook)}>
+              <ContactIcons name="facebook" />
             </IconWrapper>
           </SocialMediaWrapper>
           <SocialMediaWrapper>
-            <IconWrapper onPress={this.linking(facebook)}>
-              <ContactIcons name="facebook" />
+            <IconWrapper onPress={this.linking(instagram)}>
+              <ContactIcons name="instagram" />
             </IconWrapper>
             <IconWrapper onPress={this.linking(youtube)}>
               <ContactIcons name="youtube" />
