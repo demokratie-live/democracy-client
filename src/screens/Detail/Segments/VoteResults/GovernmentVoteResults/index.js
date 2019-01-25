@@ -1,19 +1,15 @@
-import React, { Component } from 'react';
-import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
-import { graphql, compose } from 'react-apollo';
+import React, { Component } from 'react';
+import { Dimensions, Platform } from 'react-native';
 import Swiper from 'react-native-swiper';
-import { Platform, Dimensions } from 'react-native';
-
+import styled from 'styled-components/native';
+import ChartLegend from '../../../../../components/Charts/ChartLegend';
 // import PieChart from './VoteResults/PieChart';
 import PieChart from '../../../../../components/Charts/PieChart';
-import ChartLegend from '../../../../../components/Charts/ChartLegend';
-import BarChart from './BarChart';
-import PartyChart from './PartyChart';
 // import BarChart from '../BarChart';
 import Segment from '../../../Segment';
-
-import VOTES from '../../../../../graphql/queries/votes';
+import BarChart from './BarChart';
+import PartyChart from './PartyChart';
 
 export const { width, height } = Dimensions.get('window');
 
@@ -225,12 +221,4 @@ GovernmentVoteResults.defaultProps = {
   currentStatus: null,
 };
 
-export default compose(
-  graphql(VOTES, {
-    options: ({ procedure }) => ({
-      variables: { procedure },
-      fetchPolicy: 'cache-and-network',
-    }),
-    props: ({ data }) => ({ communityVotes: data.votes || {} }),
-  }),
-)(GovernmentVoteResults);
+export default GovernmentVoteResults;
