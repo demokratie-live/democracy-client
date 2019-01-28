@@ -34,19 +34,14 @@ import {
   datenschutz7Head,
   datenschutz7Text,
   datenschutz8Head,
-  datenschutz8Text1,
-  datenschutz8Text2,
-  datenschutz8Text3,
-  datenschutz8Link,
+  datenschutz8Text,
   datenschutz9Head,
   datenschutz9Text,
   datenschutz10Head,
-  datenschutz10Text,
-  datenschutz11Head,
-  datenschutz11Text1,
-  datenschutz11Text2,
-  datenschutz11Text3,
-  datenschutz11Link,
+  datenschutz10Text1,
+  datenschutz10Text2,
+  datenschutz10Text3,
+  datenschutz10Link,
 } from './content';
 
 const ScrollWrapper = styled.ScrollView`
@@ -180,24 +175,24 @@ class Support extends Component {
           <Headline>{datenschutz7Head}</Headline>
           <Text>{datenschutz7Text}</Text>
 
-          <Headline>{datenschutz8Head}</Headline>
+          {/* <Headline>{datenschutz8Head}</Headline>
           <Text>
             <Text>{datenschutz8Text1}</Text>
             <TextLink onPress={linking(datenschutz8Link)}>{datenschutz8Text2}</TextLink>
             <Text>{datenschutz8Text3}</Text>
-          </Text>
+          </Text> */}
+
+          <Headline>{datenschutz8Head}</Headline>
+          <Text>{datenschutz8Text}</Text>
 
           <Headline>{datenschutz9Head}</Headline>
           <Text>{datenschutz9Text}</Text>
 
           <Headline>{datenschutz10Head}</Headline>
-          <Text>{datenschutz10Text}</Text>
-
-          <Headline>{datenschutz11Head}</Headline>
           <Text>
-            <Text>{datenschutz11Text1}</Text>
-            <TextLink onPress={linking(datenschutz11Link)}>{datenschutz11Text2}</TextLink>
-            <Text>{datenschutz11Text3}</Text>
+            <Text>{datenschutz10Text1}</Text>
+            <TextLink onPress={linking(datenschutz10Link)}>{datenschutz10Text2}</TextLink>
+            <Text>{datenschutz10Text3}</Text>
           </Text>
 
           <Version>{version}</Version>
