@@ -123,20 +123,20 @@ Sie können Cookies und Zähl-Pixel über Ihre Browser-Einstellungen und andere 
 Notwendige Cookies werden von uns benötigt, damit unsere Website oder App funktionieren kann. Das sind z.B. Cookies die notwendig sind, um Sie in sichere Bereiche unserer Website oder App einzuloggen.
 Analytische Cookies helfen uns dabei, zu analysieren wie viele Besucher unsere Website oder App hat und welche Seiten oder Bereiche von den Nutzern aufgerufen werden.
 Funktionale Cookies werden verwendet, um Sie bei ihrem nächsten Besuch auf der Website bzw. Nutzung der App wiederzuerkennen. Damit wird es uns ermöglicht, bestimmte Einstellungen (z.B. Spracheinstellungen) zu speichern.`;
-export const datenschutz8Head = '8. Nutzung von GoogleAnalytics';
-export const datenschutz8Text1 = `Diese Website benutzt Google Analytics, einen Webanalysedienst der Google Inc. („Google“). Google Analytics verwendet sog. „Cookies“, Textdateien, die auf deinem Computer oder Mobiltelefon gespeichert werden und die eine Analyse deiner Benutzung von DEMOCRACY ermöglichen. Die durch den Cookie erzeugten Informationen über deine Benutzung von DEMOCRACY (einschließlich deiner verkürzten IP-Adresse) werden in der Regel an einen Server von Google in den USA übertragen und dort gespeichert. Google wird diese Informationen benutzen, um deine Nutzung von DEMOCRACY auszuwerten, um Reports über die Aktivitäten zusammenzustellen und um weitere mit deiner Nutzung und deiner Internetnutzung verbundene Dienstleistungen zu erbringen.
+// export const datenschutz8Head = '8. Nutzung von GoogleAnalytics';
+/* export const datenschutz8Text1 = `Diese Website benutzt Google Analytics, einen Webanalysedienst der Google Inc. („Google“). Google Analytics verwendet sog. „Cookies“, Textdateien, die auf deinem Computer oder Mobiltelefon gespeichert werden und die eine Analyse deiner Benutzung von DEMOCRACY ermöglichen. Die durch den Cookie erzeugten Informationen über deine Benutzung von DEMOCRACY (einschließlich deiner verkürzten IP-Adresse) werden in der Regel an einen Server von Google in den USA übertragen und dort gespeichert. Google wird diese Informationen benutzen, um deine Nutzung von DEMOCRACY auszuwerten, um Reports über die Aktivitäten zusammenzustellen und um weitere mit deiner Nutzung und deiner Internetnutzung verbundene Dienstleistungen zu erbringen.
 Auch wird Google diese Informationen gegebenenfalls an Dritte übertragen, sofern dies gesetzlich vorgeschrieben oder soweit Dritte diese Daten im Auftrag von Google verarbeiten.
 Sie können die Speicherung der Cookies durch eine entsprechende Einstellung Ihrer Browser-Software verhindern; wir weisen Sie jedoch darauf hin, dass Sie in diesem Fall gegebenenfalls nicht sämtliche Funktionen der Website-Services vollumfänglich nutzen können. 
-Sie können darüber hinaus die Erfassung der durch das Cookie erzeugten und auf Ihre Nutzung von DEMOCRACY bezogenen Daten (inkl. Ihrer IP-Adresse) an Google sowie die Verarbeitung dieser Daten durch Google verhindern, indem Sie sich unter dem folgenden `;
-export const datenschutz8Text2 = 'Link';
-export const datenschutz8Link = 'http://tools.google.com/dlpage/gaoptout?hl=de';
-export const datenschutz8Text3 = ` das verfügbare Browser-Plugin herunterladen und installierst.
-Durch die Nutzung von DEMOCRACY erklären Sie sich mit der Verarbeitung der über Sie erhobenen Daten durch Google in der zuvor beschriebenen Art und zu dem zuvor benannten Zweck einverstanden.`;
-export const datenschutz9Head = '9. SSL-Verschlüsselung';
-export const datenschutz9Text = `Die DEMOCRACY-Dienste nutzen aus Gründen der Sicherheit und zum Schutz der Übertragung vertraulicher Inhalte, wie zum Beispiel der Anfragen, die Sie an uns als Seitenbetreiber senden, eine SSL-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von "http://" auf "https://" wechselt und an dem Schloss-Symbol in Ihrer Browserzeile.
+Sie können darüber hinaus die Erfassung der durch das Cookie erzeugten und auf Ihre Nutzung von DEMOCRACY bezogenen Daten (inkl. Ihrer IP-Adresse) an Google sowie die Verarbeitung dieser Daten durch Google verhindern, indem Sie sich unter dem folgenden `; */
+// export const datenschutz8Text2 = 'Link';
+// export const datenschutz8Link = 'http://tools.google.com/dlpage/gaoptout?hl=de';
+/* export const datenschutz8Text3 = ` das verfügbare Browser-Plugin herunterladen und installierst.
+Durch die Nutzung von DEMOCRACY erklären Sie sich mit der Verarbeitung der über Sie erhobenen Daten durch Google in der zuvor beschriebenen Art und zu dem zuvor benannten Zweck einverstanden.`; */
+export const datenschutz8Head = '8. SSL-Verschlüsselung';
+export const datenschutz8Text = `Die DEMOCRACY-Dienste nutzen aus Gründen der Sicherheit und zum Schutz der Übertragung vertraulicher Inhalte, wie zum Beispiel der Anfragen, die Sie an uns als Seitenbetreiber senden, eine SSL-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von "http://" auf "https://" wechselt und an dem Schloss-Symbol in Ihrer Browserzeile.
 Wenn die SSL-Verschlüsselung aktiviert ist, können die Daten, die Sie an uns übermitteln, nur unter hohem Aufwand von Dritten mitgelesen werden.`;
-export const datenschutz10Head = '10. Recht auf Auskunft, Berichtigung, Löschung und Beschwerde';
-export const datenschutz10Text = `Wenn Sie Ihren Account löschen, werden alle personenbezogenen Daten, mit Ausnahme ihrer nicht zurückverfolgbaren anonymisierten Abstimmungsdaten, von unserem Server gelöscht. Soweit Daten aus gesetzlichen Gründen aufbewahrt werden müssen, werden diese gesperrt. Die Daten stehen weiteren Verwendungs-Schritten sogleich nicht mehr zur Verfügung.
+export const datenschutz9Head = '9. Recht auf Auskunft, Berichtigung, Löschung und Beschwerde';
+export const datenschutz9Text = `Wenn Sie Ihren Account löschen, werden alle personenbezogenen Daten, mit Ausnahme ihrer nicht zurückverfolgbaren anonymisierten Abstimmungsdaten, von unserem Server gelöscht. Soweit Daten aus gesetzlichen Gründen aufbewahrt werden müssen, werden diese gesperrt. Die Daten stehen weiteren Verwendungs-Schritten sogleich nicht mehr zur Verfügung.
 Sie sind berechtigt, der Verwendung Ihrer personenbezogenen Daten zu Werbezwecken jederzeit zu widersprechen. Wenn Sie sich entscheiden, Ihre Einwilligung in diese Datenschutzbestimmung zu widerrufen, so können Sie ein schriftliches Ansuchen an DEMOCRACY Deutschland e.V. richten. Die Anschrift finden sie im Impressum. Mit dem Widerruf sind wir allerdings nicht mehr in der Lage, Ihnen den Zugriff auf alle DEMOCRACY-Dienste zu ermöglichen. 
 Sie können eine Kopie der personenbezogenen Daten, die bei uns über Sie gespeichert sind, verlangen und die Herkunft und etwaige Empfänger hiervon sowie den Zweck etwaiger erfolgter Datenbearbeitung von uns erfahren. Für weitere Informationen wenden Sie sich bitte an uns. Die Anschrift finden Sie im Impressum. Möglicherweise werden Sie aufgefordert, weitere Nachweise bezüglich Ihrer Identität vorzulegen (z. B. Kopie der letzten Mobilfunkrechnung), bevor Sie eine Antwort erhalten, damit Ihre Identität überprüft werden kann.
 Wenn Sie uns personenbezogene Daten überlassen haben, können Sie diese jederzeit berichtigen, sperren oder löschen lassen. Daten für etwaige Abrechnungs- und buchhalterische Zwecke sind von einer Kündigung beziehungsweise von einer Löschung nicht berührt. Wende Sie sich dazu bitte per E-Mail oder per Post an uns. Die Anschrift finden Sie im Impressum.
@@ -151,8 +151,8 @@ Bitte wenden Sie sich diesbezüglich an die im Impressum angegebene Adresse.
 Beschwerde
 
 Wenn Sie der Ansicht sein sollten, dass die Verarbeitung Ihrer personenbezogenen Daten durch uns gegen Datenschutzgesetze verstößt, können Sie sich mit Bedenken auch an die zuständige Datenschutzaufsichtsbehörde wenden.`;
-export const datenschutz11Head = '11. Änderung dieser Datenschutzerklärung';
-export const datenschutz11Text1 = `Wir behalten es uns vor, diese Datenschutzerklärung notwendigen Änderungen zu unterziehen. Die aktuelle Fassung der Datenschutzerklärung können Sie stets unter `;
-export const datenschutz11Text2 = 'https://www.democracy-deutschland.de/#!datenschutz';
-export const datenschutz11Link = 'https://www.democracy-deutschland.de/#!datenschutz';
-export const datenschutz11Text3 = ' abrufen. Wir werden Sie hierüber informieren.';
+export const datenschutz10Head = '10. Änderung dieser Datenschutzerklärung';
+export const datenschutz10Text1 = `Wir behalten es uns vor, diese Datenschutzerklärung notwendigen Änderungen zu unterziehen. Die aktuelle Fassung der Datenschutzerklärung können Sie stets unter `;
+export const datenschutz10Text2 = 'https://www.democracy-deutschland.de/#!datenschutz';
+export const datenschutz10Link = 'https://www.democracy-deutschland.de/#!datenschutz';
+export const datenschutz10Text3 = ' abrufen. Wir werden Sie hierüber informieren.';
