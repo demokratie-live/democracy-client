@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [1.1.1] - 2019-01-28
 ### Added
 - [Donation] added hint to donation statistics that only monthly donations are represented [#590](https://github.com/demokratie-live/democracy-client/issues/590)
+
 ### Fixed
 - [Imprint] Removed reference to Google Analytics(unused) [#687](https://github.com/demokratie-live/democracy-client/issues/687)
 
