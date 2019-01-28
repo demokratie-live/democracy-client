@@ -90,6 +90,16 @@ class Profil extends Component {
           },
         });
         break;
+      case 'memberProfil':
+        navigator.push({
+          screen: 'democracy.MemberProfil',
+          title: `Abgeordnetenprofil`,
+          backButtonTitle: '',
+          passProps: {
+            noMenu: true,
+          },
+        });
+        break;
 
       default:
         break;
@@ -146,7 +156,7 @@ class Profil extends Component {
             title: 'Auswertungen',
             data: [
               { title: `Wahl-\u00D8-Meter`, onPress: this.navigateTo('wahl-o-meter') },
-              { title: 'Abgeordnetenprofil' },
+              { title: 'Abgeordnetenprofil', onPress: this.navigateTo('memberProfil') },
               {
                 title: 'Persönliche Historie',
                 onPress: this.navigateTo('statistic'),

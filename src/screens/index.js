@@ -22,6 +22,7 @@ import Statistic from './Statistic';
 import VoteVarification from './VoteVarification';
 import Notifications from './Notifications';
 import WahlOMeter from './WahlOMeter';
+import MemberProfil from './Profil/MemberProfil';
 
 import Pdf from '../components/Pdf';
 import InAppNotification from './Notifications/InAppNotification';
@@ -203,6 +204,13 @@ export default function registerScreens() {
   Navigation.registerComponent(
     'democracy.SmsVerification.Error',
     () => SmsVerificationError,
+    client.store,
+    ApolloProvider,
+    { client },
+  );
+  Navigation.registerComponent(
+    'democracy.MemberProfil',
+    () => MemberProfil,
     client.store,
     ApolloProvider,
     { client },
