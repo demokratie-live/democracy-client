@@ -20,6 +20,7 @@ import DONATION_STATUS from '../../graphql/queries/donationStatus';
 import {
   donate1Head,
   donate1Text,
+  donateHintMonthly,
   donate2Head,
   donate3Link1,
   donate3Link2,
@@ -236,6 +237,9 @@ class Donate extends Component {
               />
               {this.renderDonationEntries(donationStatus.result.donation_data)}
             </Segment>
+            <Wrapper>
+              <Text>{donateHintMonthly}</Text>
+            </Wrapper>
           </View>
         )}
         {Platform.OS === 'ios' ? (
