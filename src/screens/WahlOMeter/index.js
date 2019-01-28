@@ -20,7 +20,7 @@ import PROCEDURES_WITH_VOTE_RESULTS from '../../graphql/queries/proceduresByIdHa
 
 const Wrapper = styled.View`
   flex: 1;
-  background-color: #ffa;
+  background-color: #fff;
 `;
 
 const SegmentControlsWrapper = styled.View`
@@ -36,12 +36,8 @@ const SegmentControlsWrapper = styled.View`
 const ScrollView = styled.ScrollView.attrs(() => ({
   horizontal: true,
   pagingEnabled: true,
-  contentContainerStyle: {
-    backgroundColor: '#aff',
-  },
 }))`
   flex: 1;
-  background-color: #faf;
 `;
 
 class WahlOMeter extends Component {
