@@ -123,7 +123,7 @@ class List extends Component {
     width: Platform.OS === 'ios' ? Dimensions.get('window').width : 'auto',
     fetchedAll: false,
     filters: false,
-    sort: this.props.listType === 'IN_VOTE' ? 'voteDate' : 'lastUpdateDate',
+    sort: this.props.list === 'IN_VOTE' ? 'voteDate' : 'lastUpdateDate',
     sorterOpened: false,
   };
 
@@ -139,7 +139,7 @@ class List extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.listType !== this.props.listType) {
+    if (nextProps.list !== this.props.list) {
       nextProps.data.procedures = false; // eslint-disable-line
     }
 
@@ -299,7 +299,7 @@ class List extends Component {
 
   prepareData = () => {
     const {
-      listType,
+      list,
       data: { procedures },
     } = this.props;
 
@@ -311,7 +311,7 @@ class List extends Component {
         data: [],
       },
     ];
-    if (listType !== 'HOT') {
+    if (list !== 'HOT') {
       preparedData[0].data.push({ type: 'sort' });
     }
     const proceduresSorted = [...procedures];
@@ -323,18 +323,17 @@ class List extends Component {
       preparedData[0].data.push({
         ...procedure,
         date: procedure.voteDate || false,
-        listType,
+        list,
       });
     });
     return preparedData;
   };
 
   renderItem = onClick => ({ item }) => {
-    const { listType } = this.props;
-    // console.log('listType', listType);
+    const { list } = this.props;
     if (item.type === 'sort') {
       if (Platform.OS === 'ios') {
-        const curSort = SORTERS[listType].find(({ key }) => key === this.state.sort);
+        const curSort = SORTERS[list].find(({ key }) => key === this.state.sort);
         return (
           <SortRow onPress={() => this.setState({ sorterOpened: true })}>
             <ListSectionHeader title={curSort.title} />
@@ -348,7 +347,7 @@ class List extends Component {
           style={{ paddingLeft: 18, height: 35, backgroundColor: '#e6edf2' }}
           onValueChange={this.onChangeSort}
         >
-          {SORTERS[listType].map(({ key, title }) => (
+          {SORTERS[list].map(({ key, title }) => (
             <Picker.Item key={key} label={title} value={key} />
           ))}
         </Picker>
@@ -358,13 +357,13 @@ class List extends Component {
   };
 
   render() {
-    const { data, listType } = this.props;
+    const { data, list } = this.props;
     const { fetchedAll, sorterOpened, sort } = this.state;
 
     return (
       <Wrapper onLayout={this.onLayout} width={this.state.width}>
         <SectionList
-          contentOffset={{ y: listType !== 'HOT' ? 35 : 0 }}
+          contentOffset={{ y: list !== 'HOT' ? 35 : 0 }}
           ListFooterComponent={() =>
             data.loading || !fetchedAll ? (
               <Loading>
@@ -414,7 +413,7 @@ class List extends Component {
               />
             </PickerHeader>
             <Picker selectedValue={sort} style={{ height: 200 }} onValueChange={this.onChangeSort}>
-              {SORTERS[listType].map(({ key, title }) => (
+              {SORTERS[list].map(({ key, title }) => (
                 <Picker.Item key={key} label={title} value={key} />
               ))}
             </Picker>
@@ -426,7 +425,7 @@ class List extends Component {
 }
 
 List.propTypes = {
-  listType: PropTypes.string,
+  list: PropTypes.string,
   navigator: PropTypes.instanceOf(Navigator).isRequired,
   navigateTo: PropTypes.func.isRequired,
   data: PropTypes.shape().isRequired,
@@ -434,14 +433,14 @@ List.propTypes = {
 };
 
 List.defaultProps = {
-  listType: 'IN_VOTE',
+  list: 'IN_VOTE',
 };
 
 export default compose(
   graphql(getProcedures, {
-    options: ({ listType }) => ({
+    options: ({ list }) => ({
       notifyOnNetworkStatusChange: true,
-      variables: { type: listType, pageSize: PAGE_SIZE, offset: 0 },
+      variables: { listTypes: [list], pageSize: PAGE_SIZE, offset: 0 },
       fetchPolicy: 'cache-and-network',
     }),
   }),

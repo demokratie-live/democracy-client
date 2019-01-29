@@ -118,7 +118,7 @@ class VoteList extends Component {
           }}
         >
           {this.lists.map(list => (
-            <List key={list.key} listType={list.key} navigator={this.props.navigator} />
+            <List key={list.key} list={list.key} navigator={this.props.navigator} />
           ))}
         </ScrollView>
       );
