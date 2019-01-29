@@ -42,7 +42,9 @@
         <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
 
         <!-- Push Notifications -->
-        <meta-data android:name="com.wix.reactnativenotifications.gcmSenderId" android:value="1001330142172\0"/>
+        <!-- Acording to https://github.com/wix/react-native-notifications/issues/245 one has to leave out the
+             "\0" provided in the original docu and only end the token with "\" -->
+        <meta-data android:name="com.wix.reactnativenotifications.gcmSenderId" android:value="1001330142172\"/>
     </application>
 
 </manifest>
