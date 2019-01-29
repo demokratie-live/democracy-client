@@ -15,7 +15,7 @@ export default gql`
       abstract
       voteDate
       notify
-      listType
+      list
       type
       subjectGroups
       submissionDate

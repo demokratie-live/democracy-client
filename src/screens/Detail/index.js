@@ -122,10 +122,10 @@ class Detail extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { data } = nextProps;
-    if (data.procedure && this.listType !== data.procedure.listType) {
-      this.listType = data.procedure.listType;
+    if (data.procedure && this.list !== data.procedure.list) {
+      this.list = data.procedure.list;
       let newTitle;
-      switch (data.procedure.listType) {
+      switch (data.procedure.list) {
         case 'IN_VOTE':
           newTitle = 'Abstimmung';
           break;
@@ -185,7 +185,7 @@ class Detail extends Component {
     );
   };
 
-  listType = 'IN_VOTE';
+  list = 'IN_VOTE';
 
   render() {
     const { procedureId, toggleNotification, navigator } = this.props;
@@ -215,7 +215,7 @@ class Detail extends Component {
       currentStatus,
       currentStatusHistory,
       notify,
-      listType,
+      list,
       type,
       activityIndex,
       voted,
@@ -292,7 +292,7 @@ class Detail extends Component {
             currentStatus={currentStatus}
             type="government"
           />
-          {(listType === 'IN_VOTE' || listType === 'PAST') && (
+          {(list === 'IN_VOTE' || list === 'PAST') && (
             <Voting
               verified={verified}
               procedureObjId={_id}
