@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { graphql, Query } from 'react-apollo';
-import { ActivityIndicator, Platform, Linking, Alert } from 'react-native';
-import { Navigator } from 'react-native-navigation';
+import { ActivityIndicator } from 'react-native';
 import styled from 'styled-components/native';
+import ContactBox from '../../../components/ContactBox';
 // Components
 import PartyComponent from '../../../components/Parties';
-import ContactBox from '../../../components/ContactBox';
 // GraphQL
 import DEPUTIES_OF_CONSTITUENCY from '../../../graphql/queries/deputiesOfConstituency';
 import GET_CONSTITUENCY from '../../../graphql/queries/local/constituency';
@@ -69,25 +68,6 @@ class MemberProfil extends Component {
     navBarTextFontSize: 17,
   };
 
-  constructor(props) {
-    super(props);
-
-    if (!props.noMenu) {
-      const menuIcon = Platform.OS === 'ios' ? 'ios-menu' : 'md-menu';
-
-      Ionicons.getImageSource(menuIcon, 24, '#FFFFFF').then(icon => {
-        props.navigator.setButtons({
-          leftButtons: [
-            {
-              icon,
-              id: 'menu',
-            },
-          ],
-        });
-      });
-    }
-  }
-
   getActivityIndicator = () => <ActivityIndicator size="large" />;
 
   render() {
@@ -106,12 +86,15 @@ class MemberProfil extends Component {
               directCandidate: true,
             }}
           >
-            {({ data: { deputiesOfConstituency }, loading, error }) => {
-              console.log({ deputiesOfConstituency, loading, error });
+            {({ data: { deputiesOfConstituency }, loading }) => {
               if (loading) {
                 return this.getActivityIndicator();
               }
               const { imgURL, party, name, job, biography, contact } = deputiesOfConstituency[0];
+              const contacts = contact.email
+                ? [{ name: 'email', url: contact.email }, ...contact.links]
+                : [...contact.links];
+
               return (
                 <>
                   <MemberImageWrapper>
@@ -127,8 +110,7 @@ class MemberProfil extends Component {
                     </Segment>
                     <Segment title="Kontakt" open>
                       <TextGrey>{contact.address}</TextGrey>
-
-                      <ContactBox />
+                      {contacts.length !== 0 && <ContactBox contacts={contacts} />}
                     </Segment>
                   </SegmentWrapper>
                 </>
@@ -142,14 +124,10 @@ class MemberProfil extends Component {
 }
 
 MemberProfil.propTypes = {
-  navigator: PropTypes.instanceOf(Navigator).isRequired,
   data: PropTypes.shape().isRequired,
-  noMenu: PropTypes.bool,
 };
 
-MemberProfil.defaultProps = {
-  noMenu: false,
-};
+MemberProfil.defaultProps = {};
 
 export default graphql(GET_CONSTITUENCY, {
   options: {

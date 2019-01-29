@@ -10,6 +10,11 @@ export default gql`
       biography
       contact {
         address
+        email
+        links {
+          name
+          URL
+        }
       }
     }
   }

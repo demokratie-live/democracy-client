@@ -5,9 +5,11 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import styled from 'styled-components/native';
 
 const ContactWrapper = styled.View`
+  flex-wrap: wrap;
+  padding-top: 18;
   width: 100%;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
 `;
 
 const IconWrapper = styled.TouchableOpacity`
@@ -24,20 +26,56 @@ const ContactIcons = styled(FontAwesome).attrs(() => ({
   color: '#000000',
 }))``;
 
+const ServiceWrapper = styled.View`
+  align-items: center;
+  flex: 1;
+  min-width: 80;
+  max-width: 200;
+  height: 100;
+`;
+
+const Domain = styled.Text`
+  font-size: 12;
+  padding-top: 3;
+`;
+
 class ContactBox extends React.PureComponent {
-  getIcon = ({ service, url }) => {
-    switch (service) {
+  getIcon = ({ name, url }) => {
+    switch (name) {
       case 'email': {
         const email = `mailto:${url}`;
         return (
-          <IconWrapper onPress={this.linking(email)}>
-            <ContactIcons name="envelope" size={30} />
-          </IconWrapper>
+          <ServiceWrapper key={url}>
+            <IconWrapper onPress={this.linking(email)}>
+              <ContactIcons name="envelope" size={30} />
+            </IconWrapper>
+          </ServiceWrapper>
         );
       }
 
+      case 'facebook':
+      case 'Facebook':
+      case 'twitter':
+      case 'Twitter':
+      case 'instagram':
+      case 'Instagram':
+        return (
+          <ServiceWrapper key={url}>
+            <IconWrapper onPress={this.linking(url)}>
+              <ContactIcons name={name.toLowerCase()} />
+            </IconWrapper>
+          </ServiceWrapper>
+        );
+
       default:
-        return null;
+        return (
+          <ServiceWrapper key={url}>
+            <IconWrapper onPress={this.linking(url)}>
+              <ContactIcons name="globe" />
+            </IconWrapper>
+            <Domain>{name}</Domain>
+          </ServiceWrapper>
+        );
     }
   };
   linking = url => () => {
@@ -59,21 +97,21 @@ class ContactBox extends React.PureComponent {
     const { contacts } = this.props;
     return (
       <ContactWrapper>
-        {contacts.map(({ service, URL }) => this.getIcon({ service, url: URL }))}
+        {contacts.map(({ name, URL }) => this.getIcon({ name, url: URL }))}
       </ContactWrapper>
     );
   }
 }
 
 ContactBox.propTypes = {
-  contacts: PropTypes.arrayOf(PropTypes.shape()),
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      URL: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
 };
 
-ContactBox.defaultProps = {
-  contacts: [
-    { service: 'facebook', URL: 'http://facebook.com' },
-    { service: 'email', URL: 'test@test.de' },
-  ],
-};
+ContactBox.defaultProps = {};
 
 export default ContactBox;
