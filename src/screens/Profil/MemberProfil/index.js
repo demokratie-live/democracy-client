@@ -131,6 +131,6 @@ MemberProfil.defaultProps = {};
 
 export default graphql(GET_CONSTITUENCY, {
   options: {
-    fetchPolicy: 'network-only',
+    fetchPolicy: 'no-cache',
   },
 })(MemberProfil);
