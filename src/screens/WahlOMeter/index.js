@@ -226,43 +226,47 @@ class WahlOMeter extends Component {
                 fetchPolicy="cache-and-network"
               >
                 {({ data: votedProcedures }) => {
+                  let bundestagScreen = null;
+                  let fraktionenScreen = null;
                   if (
                     !votedProcedures.proceduresByIdHavingVoteResults ||
                     votedProcedures.proceduresByIdHavingVoteResults.procedures.length === 0
                   ) {
-                    return (
+                    bundestagScreen = (
                       <NoVotesPlaceholder subline="Bundestag" navigator={this.props.navigator} />
                     );
+                    fraktionenScreen = (
+                      <NoVotesPlaceholder subline="Fraktionen" navigator={this.props.navigator} />
+                    );
+                  } else {
+                    const totalProcedures = votedProcedures.proceduresByIdHavingVoteResults.total;
+                    const votedProceduresCount =
+                      votedProcedures.proceduresByIdHavingVoteResults.procedures.length;
+
+                    bundestagScreen = (
+                      <View key="bundestag" style={{ flex: 1, width: width }}>
+                        <Bundestag
+                          chartData={this.pieChartData({ votedProcedures, data })}
+                          totalProcedures={totalProcedures}
+                          votedProceduresCount={votedProceduresCount}
+                          onProcedureListItemClick={this.onProcedureListItemClick}
+                        />
+                      </View>
+                    );
+
+                    const partyChartData = this.partyChartData({ votedProcedures, data });
+
+                    fraktionenScreen = (
+                      <View key="fraktionen" style={{ flex: 1, width: width }}>
+                        <Fraktionen
+                          chartData={partyChartData}
+                          totalProcedures={totalProcedures}
+                          votedProceduresCount={votedProceduresCount}
+                          onProcedureListItemClick={this.onProcedureListItemClick}
+                        />
+                      </View>
+                    );
                   }
-
-                  const totalProcedures = votedProcedures.proceduresByIdHavingVoteResults.total;
-                  const votedProceduresCount =
-                    votedProcedures.proceduresByIdHavingVoteResults.procedures.length;
-
-                  const bundestagScreen = (
-                    <View key="bundestag" style={{ flex: 1, width: width }}>
-                      <Bundestag
-                        chartData={this.pieChartData({ votedProcedures, data })}
-                        totalProcedures={totalProcedures}
-                        votedProceduresCount={votedProceduresCount}
-                        onProcedureListItemClick={this.onProcedureListItemClick}
-                      />
-                    </View>
-                  );
-
-                  const partyChartData = this.partyChartData({ votedProcedures, data });
-
-                  const fraktionenScreen = (
-                    <View key="fraktionen" style={{ flex: 1, width: width }}>
-                      <Fraktionen
-                        chartData={partyChartData}
-                        totalProcedures={totalProcedures}
-                        votedProceduresCount={votedProceduresCount}
-                        onProcedureListItemClick={this.onProcedureListItemClick}
-                      />
-                    </View>
-                  );
-
                   if (Platform.OS === 'ios') {
                     return (
                       <ScrollView
