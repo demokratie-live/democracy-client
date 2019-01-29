@@ -35,7 +35,7 @@ const SvgWrapper = styled.View`
   right: 0;
 `;
 
-class VoteResults extends Component {
+class CommunityVoteResults extends Component {
   renderCommuntiyResult = comunnityResults => {
     if (
       comunnityResults &&
@@ -89,7 +89,8 @@ class VoteResults extends Component {
     if (data.loading) {
       return null;
     }
-    const constituencies = data.constituency.constituency ? [data.constituency.constituency] : [];
+    const constituencies =
+      data.constituency && data.constituency.constituency ? [data.constituency.constituency] : [];
     return (
       <Query
         query={VOTES}
@@ -127,16 +128,16 @@ class VoteResults extends Component {
   }
 }
 
-VoteResults.propTypes = {
+CommunityVoteResults.propTypes = {
   scrollTo: PropTypes.func.isRequired,
   data: PropTypes.shape().isRequired,
   procedure: PropTypes.string.isRequired,
 };
 
-VoteResults.defaultProps = {};
+CommunityVoteResults.defaultProps = {};
 
 export default graphql(GET_CONSTITUENCY, {
   options: {
     fetchPolicy: 'no-cache',
   },
-})(VoteResults);
+})(CommunityVoteResults);
