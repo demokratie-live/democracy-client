@@ -27,7 +27,8 @@ const PieChartWrapper = styled.View`
   align-self: center;
   padding-horizontal: 36;
   width: 100%;
-  max-width: ${() => Math.min(Dimensions.get('window').width, Dimensions.get('window').height)};
+  max-width: ${() =>
+    Math.min(400, Dimensions.get('window').width, Dimensions.get('window').height)};
 `;
 
 const SvgWrapper = styled.View`

@@ -23,7 +23,8 @@ const PieChartWrapper = styled.View`
   align-self: center;
   padding-horizontal: 36;
   width: 100%;
-  max-width: ${() => Math.min(Dimensions.get('window').width, Dimensions.get('window').height)};
+  max-width: ${() =>
+    Math.min(430, Dimensions.get('window').width, Dimensions.get('window').height)};
 `;
 
 const DecisionTextView = styled.View`
@@ -192,7 +193,7 @@ class GovernmentVoteResults extends Component {
 
           {voteResults.namedVote ? (
             <RepresentativeText>
-              Diese Abstimmung wurde <RepresentativeTextBlack>namentlich</RepresentativeTextBlack>
+              Diese Abstimmung wurde <RepresentativeTextBlack>namentlich</RepresentativeTextBlack>{' '}
               durchgeführt
             </RepresentativeText>
           ) : (
