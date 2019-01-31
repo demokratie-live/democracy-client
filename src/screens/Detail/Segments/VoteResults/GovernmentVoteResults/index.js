@@ -175,7 +175,7 @@ class GovernmentVoteResults extends Component {
       return (
         <Swiper
           loop={false}
-          style={{ height: Platform.OS === 'ios' ? 'auto' : 430, maxHeight: 430 }}
+          style={{ height: Platform.OS === 'ios' ? 'auto' : 400, maxHeight: 400 }}
           paginationStyle={{ bottom: 14 }}
         >
           {screens}
@@ -198,7 +198,7 @@ class GovernmentVoteResults extends Component {
             </RepresentativeText>
           ) : (
             <RepresentativeText>
-              Diese Abstimmung wurde
+              Diese Abstimmung wurde{' '}
               <RepresentativeTextBlack>nicht-namentlich</RepresentativeTextBlack> durchgeführt
             </RepresentativeText>
           )}

@@ -36,7 +36,7 @@ const ServiceWrapper = styled.View`
 
 const Domain = styled.Text`
   font-size: 12;
-  padding-top: 3;
+  padding-top: 5;
 `;
 
 class ContactBox extends React.PureComponent {

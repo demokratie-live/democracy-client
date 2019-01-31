@@ -27,6 +27,7 @@ const MemberImageWrapper = styled.View`
   max-width: 284;
   height: 379;
   align-items: center;
+  padding-bottom: 8;
 `;
 
 const MemberImage = styled.Image.attrs({

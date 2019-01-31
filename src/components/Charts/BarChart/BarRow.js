@@ -16,7 +16,7 @@ const BarRow = ({ values, index, maxValue, barsNumber }) => {
         prevY -= height;
         return (
           <G key={label} y={prevY}>
-            <Rect width="20" height={height} fill={color} />
+            <Rect width={barWidth} height={height} fill={color} />
             {height > 6 && (
               <Text y="6" fontSize="5" fill="#fff" textAnchor="middle" x={barWidth / 2}>
                 {label}

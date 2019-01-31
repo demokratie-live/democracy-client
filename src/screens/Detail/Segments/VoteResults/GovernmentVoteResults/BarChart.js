@@ -12,11 +12,15 @@ const Wrapper = styled.View`
 
 class BarChart extends Component {
   state = {
-    chartWidth: Math.min(Dimensions.get('window').width, Dimensions.get('window').height),
+    chartWidth: Math.min(400, Dimensions.get('window').width, Dimensions.get('window').height),
   };
 
   onLayout = () => {
-    const chartWidth = Math.min(Dimensions.get('window').width, Dimensions.get('window').height);
+    const chartWidth = Math.min(
+      400,
+      Dimensions.get('window').width,
+      Dimensions.get('window').height,
+    );
     if (this.state.chartWidth !== chartWidth) {
       this.setState({
         chartWidth,
@@ -106,7 +110,7 @@ class BarChart extends Component {
 
     return (
       <Wrapper onLayout={this.onLayout}>
-        <BarChartComponent data={chartData} width={chartWidth - 36} />
+        <BarChartComponent data={chartData} width={chartWidth} maxHeight={300} />
         <ChartLegend data={legendData} />
       </Wrapper>
     );

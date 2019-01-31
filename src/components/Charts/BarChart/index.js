@@ -5,13 +5,19 @@ import PropTypes from 'prop-types';
 // Components
 import BarRow from './BarRow';
 
-const BarChart = ({ data, width }) => {
+const BarChart = ({ data, width, maxHeight }) => {
   const maxValue = data.reduce((maxSum, { values }) => {
     const barSum = values.reduce((sum, { value }) => sum + value, 0);
     return Math.max(maxSum, barSum);
   }, 0);
   return (
-    <Svg viewBox="0 0 100 100" width={width} height={width} style={{ flex: 1, aspectRatio: 1 }}>
+    <Svg
+      viewBox="0 0 100 100"
+      width={width}
+      height={Math.min(maxHeight, width)}
+      style={{}}
+      preserveAspectRatio="none"
+    >
       {data.map(({ label, values }, i) => (
         <BarRow
           key={label}
