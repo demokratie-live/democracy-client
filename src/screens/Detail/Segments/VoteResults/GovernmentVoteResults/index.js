@@ -21,10 +21,11 @@ const ScrollView = styled.ScrollView.attrs(() => ({
 
 const PieChartWrapper = styled.View`
   align-self: center;
+  padding-top: 9;
   padding-horizontal: 36;
   width: 100%;
   max-width: ${() =>
-    Math.min(430, Dimensions.get('window').width, Dimensions.get('window').height)};
+    Math.min(380, Dimensions.get('window').width, Dimensions.get('window').height)};
 `;
 
 const DecisionTextView = styled.View`
@@ -149,9 +150,8 @@ class GovernmentVoteResults extends Component {
         <PieChartWrapper key="pieChart" onLayout={this.onLayout}>
           <PieChart
             data={dataPieChart}
-            label={voteResults.namedVote ? 'Abgeordnete' : 'Fraktionen'}
-            subLabel={voteResults.namedVote ? votes : voteResults.partyVotes.length}
-            width={pieChartWidth - 36 * 1.5}
+            subLabel={voteResults.namedVote ? 'Abgeordnete' : 'Fraktionen'}
+            label={`${voteResults.namedVote ? votes : voteResults.partyVotes.length}`}
           />
           <ChartLegend data={dataPieChart} />
         </PieChartWrapper>,

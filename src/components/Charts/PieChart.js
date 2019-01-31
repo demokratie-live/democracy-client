@@ -103,7 +103,7 @@ class PieChart extends Component {
           {
             // TODO mask the circle
           }
-          <Circle cx="0" cy="0" r="20%" fill="#fff" />
+          <Circle cx="0" cy="0" r="18%" fill="#fff" />
 
           {label.length > 0 && (
             <Text fill="#4a4a4a" fontSize="10" textAnchor="middle">
@@ -111,7 +111,7 @@ class PieChart extends Component {
             </Text>
           )}
           {subLabel && (
-            <Text fill="#4a4a4a" y="5%" fontSize="7" textAnchor="middle">
+            <Text letterSpacing="0.01em" fill="#4a4a4a" y="5%" fontSize="7" textAnchor="middle">
               {subLabel}
             </Text>
           )}

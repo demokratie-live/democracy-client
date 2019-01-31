@@ -19,8 +19,16 @@ export const { width, height } = Dimensions.get('window');
 const RepresentativeText = styled.Text`
   color: rgb(142, 142, 147);
   text-align: center;
-  font-size: 10;
-  padding-top: 18;
+  font-size: 12;
+  padding-bottom: 18;
+  padding-horizontal: 24;
+`;
+
+const CommunitySegmentText = styled.Text`
+  color: rgb(142, 142, 147);
+  font-size: 12;
+  padding-top: 8;
+  padding-bottom: 16;
 `;
 
 const PieChartWrapper = styled.View`
@@ -28,12 +36,13 @@ const PieChartWrapper = styled.View`
   padding-horizontal: 36;
   width: 100%;
   max-width: ${() =>
-    Math.min(400, Dimensions.get('window').width, Dimensions.get('window').height)};
+    Math.min(380, Dimensions.get('window').width, Dimensions.get('window').height)};
 `;
 
 const SvgWrapper = styled.View`
   position: absolute;
-  right: 0;
+  top: 8;
+  right: 22;
 `;
 
 class CommunityVoteResults extends Component {
@@ -70,14 +79,23 @@ class CommunityVoteResults extends Component {
 
       return (
         <PieChartWrapper key={comunnityResults.constituency ? 'goverment' : 'constituency'}>
+          <CommunitySegmentText>
+            {!comunnityResults.constituency
+              ? 'Deutschland'
+              : `Wahlkreis ${comunnityResults.constituency}`}
+          </CommunitySegmentText>
           <SvgWrapper>
             <DynSvgComp
               width={60}
               height={36}
-              childProps={{ fill: 'none', stroke: '#000', strokeWidth: '1%' }}
+              childProps={{
+                fill: 'lightgrey',
+                stroke: 'none',
+                strokeWidth: !comunnityResults.constituency ? '1%' : '2%',
+              }}
             />
           </SvgWrapper>
-          <PieChart data={data} label="Abstimmende" subLabel={votes} />
+          <PieChart data={data} label={`${votes}`} subLabel="Abstimmende" />
           <ChartLegend data={data} />
         </PieChartWrapper>
       );

@@ -33,7 +33,7 @@ const VoteResultNumber = styled.Text`
 `;
 const VoteResultLabel = styled.Text`
   color: rgb(142, 142, 147);
-  font-size: 10;
+  font-size: 12;
   padding-top: 6;
 `;
 
