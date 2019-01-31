@@ -19,7 +19,7 @@ const Constituency = props => (
 );
 
 Constituency.propTypes = {
-  childProps: PropTypes.shape,
+  childProps: PropTypes.shape(),
 };
 
 Constituency.defaultProps = {

@@ -1,15 +1,15 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Dimensions, ActivityIndicator } from 'react-native';
 import { Query } from 'react-apollo';
+import { ActivityIndicator, Dimensions } from 'react-native';
+import { Navigator } from 'react-native-navigation';
 import styled from 'styled-components/native';
-
 // Components
 import PartyChart from '../../components/Charts/PartyChart';
-import NoConstituency from './NoConstituency';
-
 // GraphQL
 import VOTES_SELECTION_LOCAL from '../../graphql/queries/local/votesSelection';
 import PROCEDURES_WITH_VOTE_RESULTS from '../../graphql/queries/proceduresByIdHavingVoteResults';
+import NoConstituency from './NoConstituency';
 
 const Wrapper = styled.View`
   align-items: center;
@@ -107,6 +107,7 @@ class Fraktionen extends Component {
 
   render() {
     const { chartWidth, selected } = this.state;
+    const { navigator } = this.props;
     return (
       <Query query={VOTES_SELECTION_LOCAL}>
         {({ data }) => {
@@ -114,7 +115,7 @@ class Fraktionen extends Component {
             return <ActivityIndicator size="large" />;
           }
           if (!data.votesSelectionLocal || data.votesSelectionLocal.length === 0) {
-            return <NoConstituency noButton />;
+            return <NoConstituency noButton navigator={navigator} />;
           }
 
           return (
@@ -132,7 +133,7 @@ class Fraktionen extends Component {
                 }
 
                 if (votedProcedures.proceduresByIdHavingVoteResults.procedures.length === 0) {
-                  return <NoConstituency noButton />;
+                  return <NoConstituency noButton navigator={navigator} />;
                 }
 
                 // CHART
@@ -156,5 +157,11 @@ class Fraktionen extends Component {
     );
   }
 }
+
+Fraktionen.propTypes = {
+  navigator: PropTypes.instanceOf(Navigator).isRequired,
+};
+
+Fraktionen.defaultProps = {};
 
 export default Fraktionen;

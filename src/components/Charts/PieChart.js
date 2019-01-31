@@ -105,7 +105,7 @@ class PieChart extends Component {
           }
           <Circle cx="0" cy="0" r="20%" fill="#fff" />
 
-          {label && (
+          {label.length > 0 && (
             <Text fill="#4a4a4a" fontSize="10" textAnchor="middle">
               {label}
             </Text>
@@ -132,12 +132,12 @@ PieChart.propTypes = {
     }),
   ).isRequired,
   label: PropTypes.string,
-  subLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  subLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
   showPercentage: PropTypes.bool,
 };
 
 PieChart.defaultProps = {
-  label: false,
+  label: '',
   subLabel: false,
   showPercentage: true,
 };

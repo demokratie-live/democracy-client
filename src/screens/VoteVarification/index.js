@@ -111,7 +111,7 @@ class VoteVerification extends Component {
           {!data.loading && !data.constituency.constituency && (
             <NoConstituency navigator={navigator} />
           )}
-          {!data.loading && data.constituency.constituency && <PartyChart />}
+          {!data.loading && data.constituency.constituency && <PartyChart navigator={navigator} />}
         </ScrollWrapper>
         <WarnWrapper pointerEvents="none">
           <Fade visible={this.state.showWarning}>

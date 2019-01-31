@@ -39,9 +39,9 @@ const VoteVarificationNoConstituency = ({ navigator, noButton }) => {
   const randomSecondValue = Math.min(...[Math.random() * (1 - randomMainValue), 0.2]);
 
   const pieChartData = [
-    { percent: randomMainValue, color: '#59BC6D' },
-    { percent: randomSecondValue, color: '#4183DD' },
-    { percent: 1 - randomMainValue - randomSecondValue, color: '#DB4D3C' },
+    { percent: randomMainValue, color: '#59BC6D', label: 'Zustimmungen' },
+    { percent: randomSecondValue, color: '#4183DD', label: 'Enthaltungen' },
+    { percent: 1 - randomMainValue - randomSecondValue, color: '#DB4D3C', label: 'Ablehnungen' },
   ];
 
   const navigateToSelectConstituency = () =>
@@ -55,7 +55,7 @@ const VoteVarificationNoConstituency = ({ navigator, noButton }) => {
     <Wrapper noButton={noButton}>
       <ImageWrapper>
         <Constituency width={249} height={155} />
-        <PieChartWrapper>
+        <PieChartWrapper width={100}>
           <PieChart data={pieChartData} width={100} showPercentage={false} />
         </PieChartWrapper>
       </ImageWrapper>
