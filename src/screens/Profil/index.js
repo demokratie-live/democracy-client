@@ -83,7 +83,7 @@ class Profil extends Component {
       case 'wahl-o-meter':
         navigator.push({
           screen: 'democracy.WahlOMeter',
-          title: `Wahl-\u00D8-Meter`,
+          title: `Wahl-O-Meter`,
           backButtonTitle: '',
           passProps: {
             noMenu: true,
@@ -155,7 +155,7 @@ class Profil extends Component {
           {
             title: 'Auswertungen',
             data: [
-              { title: `Wahl-\u00D8-Meter`, onPress: this.navigateTo('wahl-o-meter') },
+              { title: `Wahl-O-Meter`, onPress: this.navigateTo('wahl-o-meter') },
               { title: 'Abgeordnetenprofil', onPress: this.navigateTo('memberProfil') },
               {
                 title: 'Persönliche Historie',

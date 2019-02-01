@@ -20,7 +20,8 @@ const ChartWrapper = styled.View`
   padding-top: 18;
   align-self: center;
   width: 100%;
-  max-width: ${() => Math.min(Dimensions.get('window').width, Dimensions.get('window').height)};
+  max-width: ${() =>
+    Math.min(400, Dimensions.get('window').width, Dimensions.get('window').height)};
 `;
 
 const Bundestag = ({
@@ -66,7 +67,7 @@ const Bundestag = ({
           data={data}
           colorScale={['#EAA844', '#B1B3B4']}
           label="Bundestag"
-          subLabel={`Wahl-\u00D8-Meter`}
+          subLabel="Wahl-O-Meter"
         />
       </ChartWrapper>
       <ChartLegend data={data} />

@@ -24,6 +24,7 @@ const Wrapper = styled.View`
 const ScrollWrapper = styled.ScrollView.attrs({
   contentContainerStyle: {
     flexGrow: 1,
+    paddingBottom: 18,
   },
 })`
   flex-grow: 1;

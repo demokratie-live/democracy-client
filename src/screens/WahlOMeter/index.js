@@ -233,18 +233,14 @@ class WahlOMeter extends Component {
                     votedProcedures.proceduresByIdHavingVoteResults.procedures.length === 0
                   ) {
                     bundestagScreen = (
-                      <NoVotesPlaceholder
-                        key="noVotes-bundestag"
-                        subline="Bundestag"
-                        navigator={this.props.navigator}
-                      />
+                      <View key="noVotes-bundestag" style={{ flex: 1, width: width }}>
+                        <NoVotesPlaceholder subline="Bundestag" navigator={this.props.navigator} />
+                      </View>
                     );
                     fraktionenScreen = (
-                      <NoVotesPlaceholder
-                        key="noVotes-fraktionen"
-                        subline="Fraktionen"
-                        navigator={this.props.navigator}
-                      />
+                      <View key="noVotes-fraktionen" style={{ flex: 1, width: width }}>
+                        <NoVotesPlaceholder subline="Fraktionen" navigator={this.props.navigator} />
+                      </View>
                     );
                   } else {
                     const totalProcedures = votedProcedures.proceduresByIdHavingVoteResults.total;

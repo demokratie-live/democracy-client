@@ -5,6 +5,7 @@ import { Dimensions } from 'react-native';
 
 // Components
 import PartyChart from '../../../components/Charts/PartyChart';
+import ChartLegend from '../../../components/Charts/ChartLegend';
 import Header from '../Header';
 import ChartNote from '../ChartNote';
 import VotedProceduresList from '../VotedProceduresList';
@@ -87,6 +88,18 @@ class Fraktionen extends Component {
       onProcedureListItemClick,
     } = this.props;
     const { chartWidth, selected } = this.state;
+    const chartLegendData = [
+      {
+        label: 'Übereinstimmungen',
+        value: chartData[selected].values[0].value,
+        color: '#f5a623',
+      },
+      {
+        label: 'Differenzen',
+        value: chartData[selected].values[1].value,
+        color: '#b1b3b4',
+      },
+    ];
     return (
       <Wrapper
         onScroll={({ nativeEvent }) => {
@@ -106,22 +119,7 @@ class Fraktionen extends Component {
             selected={selected}
             showPercentage
           />
-          <VoteResultNumbers>
-            <VoteResult>
-              <VoteResultCircleNumber>
-                <VoteResultCircle color="#f5a623" />
-                <VoteResultNumber>{chartData[selected].values[0].value}</VoteResultNumber>
-              </VoteResultCircleNumber>
-              <VoteResultLabel>Übereinstimmungen</VoteResultLabel>
-            </VoteResult>
-            <VoteResult>
-              <VoteResultCircleNumber>
-                <VoteResultCircle color="#b1b3b4" />
-                <VoteResultNumber>{chartData[selected].values[1].value}</VoteResultNumber>
-              </VoteResultCircleNumber>
-              <VoteResultLabel>Differenzen</VoteResultLabel>
-            </VoteResult>
-          </VoteResultNumbers>
+          <ChartLegend data={chartLegendData} />
           <ChartNote>
             Hohe Übereinstimmungen Ihrer Stellungnahmen mit mehreren Parteien bedeuten nicht
             zwangsläufig eine inhaltliche Nähe dieser Parteien zueinander

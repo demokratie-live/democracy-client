@@ -22,6 +22,7 @@ const Text = styled.Text`
   font-size: 15;
   color: #4a4a4a;
   text-align: center;
+  padding-horizontal: 18;
 `;
 
 const GoToVoteButton = styled.TouchableOpacity`

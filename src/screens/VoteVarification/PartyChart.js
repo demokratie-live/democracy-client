@@ -6,6 +6,7 @@ import { Navigator } from 'react-native-navigation';
 import styled from 'styled-components/native';
 // Components
 import PartyChart from '../../components/Charts/PartyChart';
+import ChartLegend from '../../components/Charts/ChartLegend';
 // GraphQL
 import VOTES_SELECTION_LOCAL from '../../graphql/queries/local/votesSelection';
 import PROCEDURES_WITH_VOTE_RESULTS from '../../graphql/queries/proceduresByIdHavingVoteResults';
@@ -136,17 +137,33 @@ class Fraktionen extends Component {
                   return <NoConstituency noButton navigator={navigator} />;
                 }
 
+                const chartData = this.partyChartData({ votedProcedures, data });
+
+                const chartLegendData = [
+                  {
+                    label: 'Übereinstimmungen',
+                    value: chartData[selected].values[0].value,
+                    color: '#f5a623',
+                  },
+                  {
+                    label: 'Differenzen',
+                    value: chartData[selected].values[1].value,
+                    color: '#b1b3b4',
+                  },
+                ];
+
                 // CHART
                 return (
                   <Wrapper>
                     <Text>Deine derzeitige Übereinstimmung mit den Fraktionen</Text>
                     <PartyChart
                       width={chartWidth + 36}
-                      chartData={this.partyChartData({ votedProcedures, data })}
+                      chartData={chartData}
                       onClick={this.onClick}
                       selected={selected}
                       showPercentage
                     />
+                    <ChartLegend data={chartLegendData} />
                   </Wrapper>
                 );
               }}
