@@ -102,6 +102,7 @@ class Fraktionen extends Component {
     ];
     return (
       <Wrapper
+        removeClippedSubviews
         onScroll={({ nativeEvent }) => {
           if (this.isCloseToBottom(nativeEvent)) {
             if (this.procedureList.fetchMore) this.procedureList.fetchMore();

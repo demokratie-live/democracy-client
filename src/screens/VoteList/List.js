@@ -363,6 +363,7 @@ class List extends Component {
     return (
       <Wrapper onLayout={this.onLayout} width={this.state.width}>
         <SectionList
+          removeClippedSubviews
           contentOffset={{ y: list !== 'HOT' ? 35 : 0 }}
           ListFooterComponent={() =>
             data.loading || !fetchedAll ? (

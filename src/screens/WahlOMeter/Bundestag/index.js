@@ -54,6 +54,7 @@ const Bundestag = ({
 
   return (
     <Wrapper
+      removeClippedSubviews
       onScroll={({ nativeEvent }) => {
         if (isCloseToBottom(nativeEvent)) {
           if (this.procedureList.fetchMore) this.procedureList.fetchMore();
