@@ -412,6 +412,7 @@ class Filter extends Component {
     await AsyncStorage.setItem(STORAGE_KEY, jsonString);
     this.props.setFilters({
       variables: { filters: jsonString },
+      awaitRefetchQueries: true,
       refetchQueries: [{ query: GET_FILTERS }],
     });
 

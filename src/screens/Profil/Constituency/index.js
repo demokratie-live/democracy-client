@@ -143,6 +143,7 @@ class Constituency extends Component {
           onPress: () => {
             // AsyncStorage.setItem('selected-constituency', item.number);
             this.props.mutate({
+              awaitRefetchQueries: true,
               refetchQueries: [{ query: GET_CONSTITUENCY }],
               variables: {
                 constituency: item.number,
@@ -229,6 +230,7 @@ Constituency.defaultProps = {};
 
 export default compose(
   graphql(SET_CONSTITUENCY, {
+    awaitRefetchQueries: true,
     refetchQueries: [GET_CONSTITUENCY],
   }),
   graphql(GET_CONSTITUENCY),

@@ -240,6 +240,7 @@ export default compose(
               }
               return { data };
             },
+            awaitRefetchQueries: true,
             refetchQueries: [
               {
                 query: GET_PROCEDURE,
