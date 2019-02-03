@@ -11,7 +11,7 @@ export const donateList2Head = 'IBAN:';
 export const donateList2Text = 'DE33 5003 1000 1049 7560 00';
 export const donateList3Head = 'BIC:';
 export const donateList3Text = 'TRODDEF1';
-export const donate3Text1 = `Für den Verein DEMOCRACY Deutschland e.V. ist mit Bescheid des Finanzamt Göttingen vom 23.08.2017 die Einhaltung der satzungsmäigen Voraussetzungen nach den §§ 51, 59, 60 und 61 AO festgestellt worden (`;
+export const donate3Text1 = `Für den Verein DEMOCRACY Deutschland e.V. ist mit Bescheid des Finanzamt Göttingen vom 23.08.2017 die Einhaltung der satzungsmäßigen Voraussetzungen nach den §§ 51, 59, 60 und 61 AO festgestellt worden (`;
 export const donate3Text2 = 'Nachweis der Gemeinnützigkeit';
 export const donate3Link1 =
   'https://www.democracy-deutschland.de/files/download/Gemeinnutzigkeit_DEMOCRACY.pdf';
