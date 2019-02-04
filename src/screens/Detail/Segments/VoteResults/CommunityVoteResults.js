@@ -5,7 +5,7 @@ import { ActivityIndicator, Dimensions, Platform } from 'react-native';
 import Swiper from 'react-native-swiper';
 import styled from 'styled-components/native';
 // Components
-// import constituencySvgs from '../../../../../assets/constituencies';
+import constituencySvgs from '../../../../../assets/constituencies';
 import GermanySvgComponent from '../../../../../assets/svgs/GermanySVG';
 import ChartLegend from '../../../../components/Charts/ChartLegend';
 import PieChart from '../../../../components/Charts/PieChart';
@@ -73,7 +73,9 @@ class CommunityVoteResults extends Component {
         },
       ];
 
-      const DynSvgComp = GermanySvgComponent;
+      const DynSvgComp = !comunnityResults.constituency
+        ? GermanySvgComponent
+        : constituencySvgs[comunnityResults.constituency].default;
 
       return (
         <PieChartWrapper key={comunnityResults.constituency ? 'goverment' : 'constituency'}>
