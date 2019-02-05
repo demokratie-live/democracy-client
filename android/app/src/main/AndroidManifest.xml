@@ -3,21 +3,18 @@
     package="de.democracydeutschland.app">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> 
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+
+    <!-- Default permissions which are added silently and not needed by us - hence we remove them -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" tools:node="remove" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" tools:node="remove" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" tools:node="remove" />
 
-    <!-- Push Notification start -->
-    <permission
-        android:name="${applicationId}.permission.C2D_MESSAGE"
-        android:protectionLevel="signature" />
-    <uses-permission android:name="${applicationId}.permission.C2D_MESSAGE" />
-    <uses-permission android:name="android.permission.VIBRATE" android:maxSdkVersion="18" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <!-- Push Notification end -->
+    <!-- This needs to be added in dev mode but removed in all others
+         since this config is used for production aswell we need to remove it here -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" tools:node="remove" />
+
+    <!-- included from rn-fetch-blob - implications of removal are unknown -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" tools:node="remove" />
 
     <application
       android:name=".MainApplication"
@@ -44,55 +41,10 @@
         </activity>
         <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
 
-        <!-- Push Notification start -->
-
-        <!--
-         A proxy-service that gives the library an opportunity to do some work before launching/resuming the actual application task.
-
-        <service android:name=".core.ProxyService"/>
-         -->
-        <!--
-         Google's ready-to-use GcmReceiver.
-         1. Awaits actual GCM messages (e.g. push notifications) and invokes the GCM service with the concrete content.
-         2. Awaits instance-ID/token refresh requests from the GCM and invokes the Instance-ID listener service.
-        -->
-
-        <receiver
-            android:name="com.google.android.gms.gcm.GcmReceiver"
-            android:exported="true"
-            android:permission="com.google.android.c2dm.permission.SEND">
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-                <category android:name="${applicationId}" />
-            </intent-filter>
-        </receiver>
-
-        <!-- Dispatched by the GcmReceiver when messages are received. -->
-
-        <service
-            android:name="com.wix.reactnativenotifications.gcm.GcmMessageHandlerService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-            </intent-filter>
-        </service>
-
-        <!-- Dispatched by the GcmReceiver. Starts the designated refresh-handling service. -->
-
-        <service
-            android:name="com.wix.reactnativenotifications.gcm.GcmInstanceIdListenerService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.android.gms.iid.InstanceID" />
-            </intent-filter>
-        </service>
-        <service
-            android:name="com.wix.reactnativenotifications.gcm.GcmInstanceIdRefreshHandlerService"
-            android:exported="false" />
-
-        <meta-data android:name="com.wix.reactnativenotifications.gcmSenderId" android:value="1001330142172\0"/>
-        <!-- Push Notification end -->
+        <!-- Push Notifications -->
+        <!-- Acording to https://github.com/wix/react-native-notifications/issues/245 one has to leave out the
+             "\0" provided in the original docu and only end the token with "\" -->
+        <meta-data android:name="com.wix.reactnativenotifications.gcmSenderId" android:value="1001330142172\"/>
     </application>
 
 </manifest>

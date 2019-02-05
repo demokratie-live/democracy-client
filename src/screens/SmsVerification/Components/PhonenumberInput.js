@@ -22,12 +22,12 @@ const CountryNumber = styled.Text`
   padding-top: ${Platform.OS === 'ios' ? 0 : 7};
 `;
 
-const Number = styled.TextInput.attrs({
+const Number = styled.TextInput.attrs(() => ({
   placeholder: 'Deine Telefonnr.',
   keyboardType: Platform.OS === 'ios' ? 'number-pad' : 'numeric',
   maxLength: 13,
   returnKeyType: 'next',
-})`
+}))`
   flex: 1;
   font-size: 24;
   margin-bottom: 0;

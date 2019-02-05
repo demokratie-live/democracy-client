@@ -5,9 +5,9 @@ import DeviceInfo from 'react-native-device-info';
 
 import Config from './../../config';
 
-const Container = styled.ScrollView.attrs({
+const Container = styled.ScrollView.attrs(() => ({
   contentContainerStyle: { flexGrow: 1, alignItems: 'center', justifyContent: 'space-between' },
-})`
+}))`
   flex: 1;
   background: #fff;
   padding-top: ${() => {

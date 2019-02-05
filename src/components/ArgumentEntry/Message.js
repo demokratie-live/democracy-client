@@ -11,13 +11,13 @@ const Content = styled.View`
   padding-vertical: 11;
 `;
 
-const Title = styled.Text.attrs({
+const Title = styled.Text.attrs(() => ({
   numberOfLines: 1,
-})``;
+}))``;
 
 const Text = styled.Text``;
 
-const TextMore = styled.Text.attrs({})`
+const TextMore = styled.Text`
   padding-top: 7;
   color: #979797;
 `;
@@ -37,11 +37,11 @@ const Collapse = styled.TouchableOpacity`
   padding-top: 10;
 `;
 
-const CollapseIcon = styled(Ionicons).attrs({
+const CollapseIcon = styled(Ionicons).attrs(() => ({
   color: 'rgb(151, 151, 151)',
   name: 'ios-arrow-up-outline',
   size: 20,
-})`
+}))`
   transform: ${({ open }) => (open ? 'rotate(0deg)' : 'rotate(180deg)')};
 `;
 

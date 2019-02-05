@@ -50,7 +50,6 @@ platform :android do
     upload_to_play_store(
       track: 'internal',
       track_promote_to: 'internal',
-      apk: "./app/build/outputs/apk/app-internal-release.apk",
       metadata_path: "./fastlane/metadata_internal/android"
     )
   end
@@ -67,7 +66,7 @@ platform :android do
     upload_to_play_store(
       track: 'alpha',
       track_promote_to: 'alpha',
-      apk: "./app/build/outputs/apk/app-alpha-release.apk",
+      apk: "./app/build/outputs/apk/alpha/release/app-alpha-release.apk",
       metadata_path: "./fastlane/metadata_alpha/android"
     )
   end
@@ -85,7 +84,7 @@ platform :android do
     upload_to_play_store(
       track: 'beta',
       track_promote_to: 'beta',
-      apk: "./app/build/outputs/apk/app-beta-release.apk",
+      apk: "./app/build/outputs/apk/beta/release/app-beta-release.apk",
       metadata_path: "./fastlane/metadata_beta/android"
     )
   end
@@ -103,7 +102,7 @@ platform :android do
     upload_to_play_store(
       track: 'internal',
       track_promote_to: 'production',
-      apk: "./app/build/outputs/apk/app-production-release.apk",
+      apk: "./app/build/outputs/apk/production/release/app-production-release.apk",
       metadata_path: "./fastlane/metadata/android"
     )
   end

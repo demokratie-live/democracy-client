@@ -9,7 +9,9 @@ const Wrapper = styled.View``;
 
 const Documents = ({ documents, navigator }) => (
   <Wrapper>
-    {documents.map(doc => <Document key={doc.number} {...doc} navigator={navigator} />)}
+    {documents.map(doc => (
+      <Document key={doc.number} {...doc} navigator={navigator} />
+    ))}
   </Wrapper>
 );
 

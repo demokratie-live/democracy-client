@@ -27,21 +27,21 @@ const SearchInputWrapper = styled.View`
   padding-left: 6;
 `;
 
-const SearchInputIcon = styled(Ionicons).attrs({
+const SearchInputIcon = styled(Ionicons).attrs(() => ({
   color: '#7a797b',
   size: 16,
   backgroundColor: 'transparent',
   name: 'ios-search',
-})``;
+}))``;
 
-const SearchInput = styled.TextInput.attrs({
+const SearchInput = styled.TextInput.attrs(() => ({
   clearButtonMode: 'always',
   autoFocus: true,
   placeholderTextColor: '#7a797b',
   underlineColorAndroid: 'transparent',
   selectionColor: '#000',
   returnKeyType: 'search',
-})`
+}))`
   flex: 1;
   font-size: 14;
   height: 28;
@@ -49,9 +49,9 @@ const SearchInput = styled.TextInput.attrs({
   color: #000;
 `;
 
-const SearchBackTextIos = styled.Button.attrs({
+const SearchBackTextIos = styled.Button.attrs(() => ({
   color: '#fff',
-})`
+}))`
   padding-left: 8;
   font-size: 17;
 `;

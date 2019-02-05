@@ -8,18 +8,18 @@ import Description from './Components/Description';
 import Button from './Components/Button';
 import Folding from '../../components/Content/Folding';
 
-const ScrollView = styled.ScrollView.attrs({
+const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: {
     paddingVertical: 11,
     paddingHorizontal: 11,
   },
-})`
+}))`
   background-color: #fff;
 `;
 
-const Logo = styled.Image.attrs({
+const Logo = styled.Image.attrs(() => ({
   source: require('../../../assets/images/democracy.png'),
-})`
+}))`
   align-self: center;
   margin-vertical: 11;
 `;
@@ -115,7 +115,7 @@ class SmsVerification extends Component {
                 {`Ergebnisintegrität ist eine der zentralen Anforderungen eines Wahlverfahrens und bedeutet, dass genau die Stimmen gezählt werden, die von wahlberechtigten BürgerInnen abgegeben werden.\n
 Da uns von DEMOCRACY Deutschland e.V. allerdings keine Wählerkartei vorliegt, haben wir uns dafür entschieden, das sogenannte Urnenbuchproblem heuristisch zu lösen und Deine deutsche Handynummer als Schlüsselidentifikator zu verwenden. Das Urnenbuchproblem beschäftigt sich mit der Frage, wer bei einer konkreten Wahl/Abstimmung berechtigt ist, seine Stimme abzugeben und führt die Berechtigten in eben diesem.
 
-Auf diese Weise können wir weit belastere Ergebnisse erzeugen als über eine einfache E-Mail-Verifikation. Es gilt insofern, eine deutsche Handynummer – eine Stimme. 
+Auf diese Weise können wir weit belastbare Ergebnisse erzeugen als über eine einfache E-Mail-Verifikation. Es gilt insofern, eine deutsche Handynummer – eine Stimme. 
 
 Mehr Informationen zu diesem Verfahren kannst du `}
               </Text>
@@ -198,7 +198,7 @@ Zu unserer `}
 
 SmsVerification.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired,
-  procedureId: PropTypes.oneOfType(PropTypes.string, PropTypes.bool),
+  procedureId: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onComplete: PropTypes.func,
 };
 

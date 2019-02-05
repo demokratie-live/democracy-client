@@ -25,11 +25,11 @@ const SideWrapper = styled.View`
   min-width: 50;
 `;
 
-const Title = styled.Text.attrs({ numberOfLines: 3 })`
+const Title = styled.Text.attrs(() => ({ numberOfLines: 3 }))`
   font-size: 17;
   color: #030303;
 `;
-const Tags = styled.Text.attrs({ numberOfLines: 2 })`
+const Tags = styled.Text.attrs(() => ({ numberOfLines: 2 }))`
   padding-top: 8;
   font-size: 15;
   color: #8f8e94;

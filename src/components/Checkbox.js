@@ -12,12 +12,12 @@ const Wrapper = styled.View`
   border-color: rgba(74, 74, 74, 0.2);
 `;
 
-const Checkmark = styled(Ionicons).attrs({
-  color: ({ value, disabledColor }) => (value ? '#fff' : disabledColor),
+const Checkmark = styled(Ionicons).attrs(({ value, disabledColor }) => ({
+  color: value ? '#fff' : disabledColor,
   size: 40,
   backgroundColor: 'transparent',
   name: 'ios-checkmark',
-})`
+}))`
   margin-top: -8;
   margin-left: 3;
 `;

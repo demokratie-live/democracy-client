@@ -20,6 +20,7 @@ import DONATION_STATUS from '../../graphql/queries/donationStatus';
 import {
   donate1Head,
   donate1Text,
+  donateHintMonthly,
   donate2Head,
   donate3Link1,
   donate3Link2,
@@ -99,10 +100,10 @@ const DonateTouchable = styled.TouchableOpacity`
   padding-top: 15;
 `;
 
-const DonateImage = styled.Image.attrs({
+const DonateImage = styled.Image.attrs(() => ({
   source: require('../../../assets/images/PayPal-Donate-Button-Transparent.png'),
   resizeMode: 'contain',
-})`
+}))`
   height: 100;
   width: 80%;
 `;
@@ -212,33 +213,35 @@ class Donate extends Component {
 
     return (
       <ScrollWrapper>
-        {donationStatus &&
-          donationStatus.result && (
-            <View>
-              <Wrapper>
-                <Headline>{donate1Head}</Headline>
-                <Text>{donate1Text}</Text>
-                <Text style={{ marginBottom: 21 }}>
-                  Spendenstand vom {donationStatus.result.donation_date}
-                </Text>
-                <DonatedBox
-                  target={donationStatus.result.donation_value_goal}
-                  occupied={donationStatus.result.donation_value}
-                />
-              </Wrapper>
-              <Segment title="Details zum Finanzierungsbedarf" open>
-                <Entry
-                  target={donationStatus.result.donation_value_goal}
-                  occupied={donationStatus.result.donation_value}
-                  money={`${donationStatus.result.donation_value}€ von ${
-                    donationStatus.result.donation_value_goal
-                  }€`}
-                  description="min. Finanzierungsziel/Monat"
-                />
-                {this.renderDonationEntries(donationStatus.result.donation_data)}
-              </Segment>
-            </View>
-          )}
+        {donationStatus && donationStatus.result && (
+          <View>
+            <Wrapper>
+              <Headline>{donate1Head}</Headline>
+              <Text>{donate1Text}</Text>
+              <Text style={{ marginBottom: 21 }}>
+                Spendenstand vom {donationStatus.result.donation_date}
+              </Text>
+              <DonatedBox
+                target={donationStatus.result.donation_value_goal}
+                occupied={donationStatus.result.donation_value}
+              />
+            </Wrapper>
+            <Segment title="Details zum Finanzierungsbedarf" open>
+              <Entry
+                target={donationStatus.result.donation_value_goal}
+                occupied={donationStatus.result.donation_value}
+                money={`${donationStatus.result.donation_value}€ von ${
+                  donationStatus.result.donation_value_goal
+                }€`}
+                description="min. Finanzierungsziel/Monat"
+              />
+              {this.renderDonationEntries(donationStatus.result.donation_data)}
+            </Segment>
+            <Wrapper>
+              <Text>{donateHintMonthly}</Text>
+            </Wrapper>
+          </View>
+        )}
         {Platform.OS === 'ios' ? (
           <Wrapper>
             <Text>{`Die verbleibende Seite steht unter iOS leider nicht zur Verfügung.\n`}</Text>

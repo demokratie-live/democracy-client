@@ -32,9 +32,9 @@ const BackgroundWrapper = styled.View`
   height: 100%;
 `;
 
-const BackgroundImage = styled.Image.attrs({
+const BackgroundImage = styled.Image.attrs(() => ({
   source: require('../../../assets/images/stars2.png'),
-})`
+}))`
   resize-mode: ${Platform.OS === 'ios' ? 'repeat' : 'stretch'};
   width: 100%;
   height: 100%;
@@ -52,9 +52,9 @@ const Head = styled.TouchableOpacity`
   padding-bottom: 8;
 `;
 
-const HeadLogo = styled.Image.attrs({
+const HeadLogo = styled.Image.attrs(() => ({
   source: require('../../../assets/images/logo-sidemenu.png'),
-})``;
+}))``;
 
 const HeadTextWrapper = styled.View`
   justify-content: center;
@@ -141,7 +141,9 @@ const SideMenu = ({ donationStatus, data: { currentScreen }, navigator }) => {
                   <HeadText>
                     {loading
                       ? '…'
-                      : voteStatistic ? 'verifizierter Nutzer' : 'unverifizierter Nutzer'}
+                      : voteStatistic
+                      ? 'verifizierter Nutzer'
+                      : 'unverifizierter Nutzer'}
                   </HeadText>
                 </HeadTextWrapper>
               </Head>
@@ -150,20 +152,19 @@ const SideMenu = ({ donationStatus, data: { currentScreen }, navigator }) => {
                 navigateTo={navigateTo}
                 verified={verified}
               />
-              {donationStatus &&
-                donationStatus.result && (
-                  <DonateBoxWrapper>
-                    <DonationTouch onPress={donate}>
-                      <DonatedBox
-                        style={{ backgroundColor: '#4494d390' }}
-                        descriptionTextStyle={{ color: '#fff' }}
-                        moneyTextStyle={{ color: '#fff' }}
-                        target={donationStatus.result.donation_value_goal}
-                        occupied={donationStatus.result.donation_value}
-                      />
-                    </DonationTouch>
-                  </DonateBoxWrapper>
-                )}
+              {donationStatus && donationStatus.result && (
+                <DonateBoxWrapper>
+                  <DonationTouch onPress={donate}>
+                    <DonatedBox
+                      style={{ backgroundColor: '#4494d390' }}
+                      descriptionTextStyle={{ color: '#fff' }}
+                      moneyTextStyle={{ color: '#fff' }}
+                      target={donationStatus.result.donation_value_goal}
+                      occupied={donationStatus.result.donation_value}
+                    />
+                  </DonationTouch>
+                </DonateBoxWrapper>
+              )}
             </Content>
           );
         }}

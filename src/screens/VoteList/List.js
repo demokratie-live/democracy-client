@@ -56,10 +56,24 @@ const PAGE_SIZE = 20;
 const STORAGE_KEY = 'VoteList.Filters';
 
 const SORTERS = {
-  VOTING: [
+  IN_VOTE: [
     {
       key: 'voteDate',
       title: 'nach Restzeit sortieren',
+    },
+    {
+      key: 'activities',
+      title: 'nach Aktivitätsindex sortieren',
+    },
+  ],
+  PAST: [
+    {
+      key: 'lastUpdateDate',
+      title: 'nach Aktualisierung sortieren',
+    },
+    {
+      key: 'created',
+      title: 'nach Vorgangsdatum sortieren',
     },
     {
       key: 'activities',
@@ -109,7 +123,7 @@ class List extends Component {
     width: Platform.OS === 'ios' ? Dimensions.get('window').width : 'auto',
     fetchedAll: false,
     filters: false,
-    sort: this.props.listType === 'VOTING' ? 'voteDate' : 'lastUpdateDate',
+    sort: this.props.list === 'IN_VOTE' ? 'voteDate' : 'lastUpdateDate',
     sorterOpened: false,
   };
 
@@ -125,7 +139,7 @@ class List extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.listType !== this.props.listType) {
+    if (nextProps.list !== this.props.list) {
       nextProps.data.procedures = false; // eslint-disable-line
     }
 
@@ -143,7 +157,9 @@ class List extends Component {
   }
 
   onChangeFilter = filters => {
-    const { data: { refetch } } = this.props;
+    const {
+      data: { refetch },
+    } = this.props;
     const filterQuery = {};
     if (filters.type) {
       filterQuery.type = filters.type.map(({ title }) => title);
@@ -180,7 +196,9 @@ class List extends Component {
   };
 
   onChangeSort = sort => {
-    const { data: { refetch } } = this.props;
+    const {
+      data: { refetch },
+    } = this.props;
     this.setState({ sort });
     refetch({
       sort,
@@ -280,7 +298,10 @@ class List extends Component {
   };
 
   prepareData = () => {
-    const { listType, data: { procedures } } = this.props;
+    const {
+      list,
+      data: { procedures },
+    } = this.props;
 
     if (!procedures || procedures.length === 0) {
       return [];
@@ -290,46 +311,29 @@ class List extends Component {
         data: [],
       },
     ];
-    if (listType !== 'HOT') {
+    if (list !== 'HOT') {
       preparedData[0].data.push({ type: 'sort' });
-    }
-    if (listType === 'VOTING') {
-      preparedData.push({
-        title: 'Vergangen',
-        data: [],
-      });
     }
     const proceduresSorted = [...procedures];
     proceduresSorted.forEach(procedure => {
       if (!this.filterProcedures(procedure)) {
         return;
       }
-      if (
-        listType === 'VOTING' &&
-        ((new Date(procedure.voteDate) < new Date() && procedure.voteDate !== null) ||
-          procedure.completed)
-      ) {
-        preparedData[1].data.push({
-          ...procedure,
-          date: procedure.voteDate || false,
-          listType,
-        });
-      } else {
-        preparedData[0].data.push({
-          ...procedure,
-          date: procedure.voteDate || false,
-          listType,
-        });
-      }
+
+      preparedData[0].data.push({
+        ...procedure,
+        date: procedure.voteDate || false,
+        list,
+      });
     });
     return preparedData;
   };
 
   renderItem = onClick => ({ item }) => {
-    const { listType } = this.props;
+    const { list } = this.props;
     if (item.type === 'sort') {
       if (Platform.OS === 'ios') {
-        const curSort = SORTERS[listType].find(({ key }) => key === this.state.sort);
+        const curSort = SORTERS[list].find(({ key }) => key === this.state.sort);
         return (
           <SortRow onPress={() => this.setState({ sorterOpened: true })}>
             <ListSectionHeader title={curSort.title} />
@@ -343,7 +347,7 @@ class List extends Component {
           style={{ paddingLeft: 18, height: 35, backgroundColor: '#e6edf2' }}
           onValueChange={this.onChangeSort}
         >
-          {SORTERS[listType].map(({ key, title }) => (
+          {SORTERS[list].map(({ key, title }) => (
             <Picker.Item key={key} label={title} value={key} />
           ))}
         </Picker>
@@ -353,13 +357,13 @@ class List extends Component {
   };
 
   render() {
-    const { data, listType } = this.props;
+    const { data, list } = this.props;
     const { fetchedAll, sorterOpened, sort } = this.state;
 
     return (
       <Wrapper onLayout={this.onLayout} width={this.state.width}>
         <SectionList
-          contentOffset={{ y: listType !== 'HOT' ? 35 : 0 }}
+          contentOffset={{ y: list !== 'HOT' ? 35 : 0 }}
           ListFooterComponent={() =>
             data.loading || !fetchedAll ? (
               <Loading>
@@ -376,12 +380,7 @@ class List extends Component {
           }}
           refreshing={data.networkStatus === 4}
           renderItem={this.renderItem(this.onItemClick)}
-          renderSectionHeader={({ section }) => {
-            if (section.data.length > 0) {
-              return <ListSectionHeader title={section.title} />;
-            }
-            return null;
-          }}
+          renderSectionHeader={() => null}
           onEndReached={() => {
             if (!data.loading && !fetchedAll) {
               data.fetchMore({
@@ -405,33 +404,28 @@ class List extends Component {
             }
           }}
         />
-        {Platform.OS === 'ios' &&
-          sorterOpened && (
-            <PickerWrapper>
-              <PickerHeader>
-                <PickerFinishButton
-                  title="Fertig"
-                  onPress={() => this.setState({ sorterOpened: false })}
-                />
-              </PickerHeader>
-              <Picker
-                selectedValue={sort}
-                style={{ height: 200 }}
-                onValueChange={this.onChangeSort}
-              >
-                {SORTERS[listType].map(({ key, title }) => (
-                  <Picker.Item key={key} label={title} value={key} />
-                ))}
-              </Picker>
-            </PickerWrapper>
-          )}
+        {Platform.OS === 'ios' && sorterOpened && (
+          <PickerWrapper>
+            <PickerHeader>
+              <PickerFinishButton
+                title="Fertig"
+                onPress={() => this.setState({ sorterOpened: false })}
+              />
+            </PickerHeader>
+            <Picker selectedValue={sort} style={{ height: 200 }} onValueChange={this.onChangeSort}>
+              {SORTERS[list].map(({ key, title }) => (
+                <Picker.Item key={key} label={title} value={key} />
+              ))}
+            </Picker>
+          </PickerWrapper>
+        )}
       </Wrapper>
     );
   }
 }
 
 List.propTypes = {
-  listType: PropTypes.string,
+  list: PropTypes.string,
   navigator: PropTypes.instanceOf(Navigator).isRequired,
   navigateTo: PropTypes.func.isRequired,
   data: PropTypes.shape().isRequired,
@@ -439,14 +433,14 @@ List.propTypes = {
 };
 
 List.defaultProps = {
-  listType: 'VOTING',
+  list: 'IN_VOTE',
 };
 
 export default compose(
   graphql(getProcedures, {
-    options: ({ listType }) => ({
+    options: ({ list }) => ({
       notifyOnNetworkStatusChange: true,
-      variables: { type: listType, pageSize: PAGE_SIZE, offset: 0 },
+      variables: { listTypes: [list], pageSize: PAGE_SIZE, offset: 0 },
       fetchPolicy: 'cache-and-network',
     }),
   }),

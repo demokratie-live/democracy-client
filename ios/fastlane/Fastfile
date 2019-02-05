@@ -98,7 +98,8 @@ platform :ios do
 
     build_app( 
       clean: true, 
-      scheme: "Alpha"
+      scheme: "Alpha",
+      xcargs: "-UseNewBuildSystem=NO"
     )
 
     upload_to_testflight(
@@ -106,7 +107,6 @@ platform :ios do
       groups: "Developer",
       app_identifier: "de.democracy-deutschland.clientapp.alpha",
       demo_account_required: false,
-      notify_external_testers: true,
       distribute_external: true,
       reject_build_waiting_for_review: true
     )
@@ -145,7 +145,7 @@ platform :ios do
     )
     build_app( 
       clean: true, 
-      scheme: "democracyclient-prod"
+      scheme: "democracyclient-production"
     )
     
     upload_to_testflight(
