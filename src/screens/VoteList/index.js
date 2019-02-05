@@ -14,10 +14,10 @@ const Screen = styled.View`
   background-color: #ffffff;
 `;
 
-const ScrollView = styled.ScrollView.attrs({
+const ScrollView = styled.ScrollView.attrs(() => ({
   horizontal: true,
   pagingEnabled: true,
-})``;
+}))``;
 
 const SegmentControlsWrapper = styled.View`
   background-color: #4494d3;
@@ -61,13 +61,14 @@ class VoteList extends Component {
   width = Dimensions.get('window').width;
 
   lists = [
-    { key: 'VOTING', title: 'in Abstimmung', smallTitle: 'Abstimmung' },
+    { key: 'IN_VOTE', title: 'Abstimmung', smallTitle: 'Abstimmung' },
+    { key: 'PAST', title: 'Vergangen', smallTitle: 'Vergangen' },
+    { key: 'HOT', title: 'Populär', smallTitle: 'Populär' },
     {
       key: 'PREPARATION',
-      title: 'in Vorbereitung',
+      title: 'Vorbereitung',
       smallTitle: 'Vorbereitung',
     },
-    { key: 'HOT', title: "What's hot?", smallTitle: "What's hot?" },
   ];
 
   renderSegmentControls = () => {
@@ -79,8 +80,8 @@ class VoteList extends Component {
               alignSelf: 'flex-end',
               width: '100%',
             }}
-            values={this.lists.map(
-              ({ title, smallTitle }) => (this.width > 320 ? title : smallTitle),
+            values={this.lists.map(({ title, smallTitle }) =>
+              this.width > 320 ? title : smallTitle,
             )}
             selectedIndex={this.state.selectedIndex}
             tintColor="#ffffff"
@@ -112,12 +113,12 @@ class VoteList extends Component {
             });
           }}
           onMomentumScrollEnd={this.onScrollEndDrag}
-          innerRef={e => {
+          ref={e => {
             this.scrollView = e;
           }}
         >
           {this.lists.map(list => (
-            <List key={list.key} listType={list.key} navigator={this.props.navigator} />
+            <List key={list.key} list={list.key} navigator={this.props.navigator} />
           ))}
         </ScrollView>
       );

@@ -5,8 +5,9 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.facebook.react.ReactApplication;
-import org.wonday.pdf.RCTPdfView;
+import com.sha256lib.Sha256Package;
 import com.RNFetchBlob.RNFetchBlobPackage;
+import org.wonday.pdf.RCTPdfView;
 import com.horcrux.svg.SvgPackage;
 import com.horcrux.svg.SvgPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
@@ -23,7 +24,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.BV.LinearGradient.LinearGradientPackage;
-import com.sha256lib.Sha256Package;
 import com.oblador.keychain.KeychainPackage;
 
 import com.wix.reactnativenotifications.RNNotificationsPackage;
@@ -77,9 +77,9 @@ public class MainApplication extends NavigationApplication implements INotificat
     	// No need to add RnnPackage and MainReactPackage
       	return Arrays.<ReactPackage>asList(
       		//new MainReactPackage(),
+            new RNFetchBlobPackage(),
       		new RNNotificationsPackage(MainApplication.this),
             new RCTPdfView(),
-            new RNFetchBlobPackage(),
             new SvgPackage(),
             new RNDeviceInfo(),
             new ReactNativeConfigPackage(),

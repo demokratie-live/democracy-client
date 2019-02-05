@@ -16,7 +16,7 @@ const HeaderElement = styled.View`
   padding-right: ${Platform.OS === 'android' ? 11 : 0};
 `;
 
-const TitleText = styled.Text.attrs({})`
+const TitleText = styled.Text`
   font-size: 17;
   color: #fff;
   font-weight: bold;

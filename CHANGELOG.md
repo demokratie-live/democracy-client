@@ -3,6 +3,25 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+## [1.1.1] - 2019-01-28
+### Added
+- [Donation] added hint to donation statistics that only monthly donations are represented [#590](https://github.com/demokratie-live/democracy-client/issues/590)
+- [Support] More Socialmedia buttons
+- [Support] Made with <3
+
+### Fixed
+- [Imprint] Removed reference to Google Analytics(unused) [#687](https://github.com/demokratie-live/democracy-client/issues/687)
+- [SMS-Verification] Spelling mistake corrected [#710](https://github.com/demokratie-live/democracy-client/issues/710)
+- [General] PushNotification Library Updated to prevent crash
+
+## [1.1.0] - 2019-01-10
+### Fixed
+- [General] removed Permission query on Install (Read/Write external Store  + Wifi) [#402](https://github.com/demokratie-live/democracy-client/issues/402)
+- [General] PushNotification Token corrected
+- [General] Updated ReactNative and all other used Libraries including the PDF-Viewer
+- [Internal] Removed BetaEnd Screen
+- [ListView] 4 Segments in List including "Vergangen"
+- [ListView] Reorder Lists in TopTabs ("Abstimmen", "Vergangen", "Populär", "Vorbereitung")
 
 ## [1.0.5] - 2018-10-29
 ### Changed

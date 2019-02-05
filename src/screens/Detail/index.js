@@ -67,17 +67,17 @@ const IntroButton = styled.TouchableOpacity`
   width: 40;
 `;
 
-const NotificationButtonIcon = styled(Ionicons).attrs({
+const NotificationButtonIcon = styled(Ionicons).attrs(({ active }) => ({
   size: 32,
-  name: ({ active }) => (active ? 'ios-notifications' : 'ios-notifications-outline'),
-  color: ({ active }) => (active ? 'rgb(255, 171, 33)' : 'rgb(0, 0, 0)'),
-})``;
+  name: active ? 'ios-notifications' : 'ios-notifications-outline',
+  color: active ? 'rgb(255, 171, 33)' : 'rgb(0, 0, 0)',
+}))``;
 
-const ShareButtonIcon = styled(Ionicons).attrs({
+const ShareButtonIcon = styled(Ionicons).attrs(() => ({
   size: 28,
-  name: () => (Platform.OS === 'ios' ? 'ios-share-outline' : 'md-share'),
+  name: Platform.OS === 'ios' ? 'ios-share-outline' : 'md-share',
   color: 'rgb(0, 0, 0)',
-})``;
+}))``;
 
 const IntroBottom = styled.View`
   padding-top: 8;
@@ -121,12 +121,16 @@ class Detail extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { data } = nextProps;
-    if (data.procedure && this.listType !== data.procedure.listType) {
-      this.listType = data.procedure.listType;
+    if (data.procedure && this.list !== data.procedure.list) {
+      this.list = data.procedure.list;
       let newTitle;
-      switch (data.procedure.listType) {
-        case 'VOTING':
+      switch (data.procedure.list) {
+        case 'IN_VOTE':
           newTitle = 'Abstimmung';
+          break;
+
+        case 'PAST':
+          newTitle = 'Vergangen';
           break;
 
         default:
@@ -139,7 +143,11 @@ class Detail extends Component {
     }
   }
 
-  onLayout = ({ nativeEvent: { layout: { height } } }) => {
+  onLayout = ({
+    nativeEvent: {
+      layout: { height },
+    },
+  }) => {
     this.componentHeight = height;
   };
 
@@ -176,11 +184,13 @@ class Detail extends Component {
     );
   };
 
-  listType = 'VOTING';
+  list = 'IN_VOTE';
 
   render() {
     const { procedureId, toggleNotification, navigator } = this.props;
-    const { data: { networkStatus, refetch, loading, procedure } } = this.props;
+    const {
+      data: { networkStatus, refetch, loading, procedure },
+    } = this.props;
     if (!procedure && loading) {
       return <LoadingWrapper>{loading && <ActivityIndicator size="large" />}</LoadingWrapper>;
     }
@@ -204,7 +214,7 @@ class Detail extends Component {
       currentStatus,
       currentStatusHistory,
       notify,
-      listType,
+      list,
       type,
       activityIndex,
       voted,
@@ -217,7 +227,7 @@ class Detail extends Component {
           this.contentHeight = height;
         }}
         onLayout={this.onLayout}
-        innerRef={comp => {
+        ref={comp => {
           this.scrollView = comp;
         }}
         refreshControl={<RefreshControl refreshing={networkStatus === 4} onRefresh={refetch} />}
@@ -287,7 +297,7 @@ class Detail extends Component {
             currentStatus={currentStatus}
             type="government"
           />
-          {listType === 'VOTING' && (
+          {(list === 'IN_VOTE' || list === 'PAST') && (
             <Voting
               verified={verified}
               procedureObjId={_id}
@@ -359,7 +369,11 @@ export default compose(
     props({ mutate, ownProps }) {
       return {
         toggleNotification: () => {
-          const { data: { procedure: { notify, procedureId } } } = ownProps;
+          const {
+            data: {
+              procedure: { notify, procedureId },
+            },
+          } = ownProps;
           mutate({
             variables: { procedureId },
             optimisticResponse: {
@@ -369,7 +383,14 @@ export default compose(
                 notify: !notify,
               },
             },
-            update: (cache, { data: { toggleNotification: { notify: newNotify } } }) => {
+            update: (
+              cache,
+              {
+                data: {
+                  toggleNotification: { notify: newNotify },
+                },
+              },
+            ) => {
               const data = cache.readQuery({
                 query: getProcedure,
                 variables: { id: procedureId },

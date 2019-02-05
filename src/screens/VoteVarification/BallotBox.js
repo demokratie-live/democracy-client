@@ -32,15 +32,15 @@ const DropZone = styled.TouchableOpacity`
   justify-content: center;
 `;
 
-const CheckIcon = styled.Image.attrs({
+const CheckIcon = styled.Image.attrs(() => ({
   source: require('../../../assets/icons/voteDropZone.png'),
-})``;
+}))``;
 
-// const CheckIcon = styled(SimpleLineIcons).attrs({
+// const CheckIcon = styled(SimpleLineIcons).attrs(() => ({
 //   size: 80,
 //   color: "#000000",
 //   name: "check"
-// })`
+// }))`
 //   padding-top: 5;
 // `;
 
@@ -53,10 +53,10 @@ const LineWrapper = styled.View`
   align-items: center;
 `;
 
-const Line = styled.Image.attrs({
+const Line = styled.Image.attrs(() => ({
   source: require('../../../assets/icons/vote-line.png'),
   resizeMode: 'stretch',
-})``;
+}))``;
 
 class BalloutBox extends Component {
   state = {
@@ -122,7 +122,11 @@ class BalloutBox extends Component {
     this.previewAnimation();
   }
 
-  onLayout = ({ nativeEvent: { layout: { width } } }) => {
+  onLayout = ({
+    nativeEvent: {
+      layout: { width },
+    },
+  }) => {
     if (!this.state.isDraggable) {
       Animated.spring(this.state.pan, {
         toValue: {
@@ -203,7 +207,14 @@ export default compose(
                 voted: true,
               },
             },
-            update: (cache, { data: { vote: { voted } } }) => {
+            update: (
+              cache,
+              {
+                data: {
+                  vote: { voted },
+                },
+              },
+            ) => {
               const data = cache.readQuery({
                 query: VOTED,
                 variables: { procedure: procedureObjId },

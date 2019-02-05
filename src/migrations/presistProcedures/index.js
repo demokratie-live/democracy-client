@@ -10,7 +10,9 @@ export default async () => {
     query: VOTES_LOCAL,
   });
   if (votesLocal.length > 0) {
-    const { data: { proceduresById } } = await client.query({
+    const {
+      data: { proceduresById },
+    } = await client.query({
       query: gql`
         query proceduresById($ids: [String!]!) {
           proceduresById(ids: $ids) {

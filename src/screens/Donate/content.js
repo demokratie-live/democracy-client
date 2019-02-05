@@ -4,6 +4,7 @@ von Menschen für Menschen.
 
 Wenn Du Interesse daran hast, dass das Projekt nachhaltig Bestand hat, bitten wir Dich an der unabhängigen Crowd-Finanzierung von DEMOCRACY per Dauerauftrag mitzuwirken. Pate/in kannst Du schon ab 1€ monatlich werden.
 `;
+export const donateHintMonthly = `* Diese Darstellung kann nur monatliche Spenden (Daueraufträge) berücksichtigen.\n`;
 export const donate2Head = 'Spendenkonto für Daueraufträge oder einmalige Spenden';
 export const donateList1Head = 'Kontoinhaber:';
 export const donateList1Text = 'DEMOCRACY Deutschland e.V.';

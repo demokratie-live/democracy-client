@@ -18,12 +18,12 @@ const NumberBox = styled.View`
   height: 40;
 `;
 
-const Number = styled.TextInput.attrs({
+const Number = styled.TextInput.attrs(() => ({
   placeholder: 'XXXXXX',
   keyboardType: Platform.OS === 'ios' ? 'number-pad' : 'numeric',
   maxLength: 6,
   returnKeyType: 'next',
-})`
+}))`
   flex: 1;
   font-size: 24;
   text-align: center;
