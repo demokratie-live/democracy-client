@@ -30,12 +30,14 @@
     "Debug": [
       "Internal.Debug",
       "Alpha.Debug",
-      "Beta.Debug"
+      "Beta.Debug",
+      "Production.Debug"
     ],
     "Release": [
       "Internal.Release",
       "Alpha.Release",
-      "Beta.Release"
+      "Beta.Release",
+      "Production.Release"
     ]
   },
   "dependencies": {
