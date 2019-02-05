@@ -117,11 +117,24 @@ class Detail extends Component {
   };
 
   componentDidMount() {
-    this.props.viewProcedure();
+    if (
+      this.props.data &&
+      this.props.data.procedure &&
+      this.props.data.procedure.viewedStatus !== 'VIEWED'
+    ) {
+      this.props.viewProcedure();
+    }
   }
 
   componentWillReceiveProps(nextProps) {
     const { data } = nextProps;
+    if (
+      nextProps.data &&
+      nextProps.data.procedure &&
+      nextProps.data.procedure.viewedStatus !== 'VIEWED'
+    ) {
+      nextProps.viewProcedure();
+    }
     if (data.procedure && this.list !== data.procedure.list) {
       this.list = data.procedure.list;
       let newTitle;
