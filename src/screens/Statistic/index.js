@@ -29,6 +29,7 @@ const StatisticNumbersWrapper = styled.View`
   flex-direction: row;
   width: 100%;
   justify-content: space-around;
+  padding-bottom: 18;
 `;
 
 const StatisticNumberWrapper = styled.View``;
@@ -46,7 +47,9 @@ const StatisticNumberDescription = styled.Text`
   color: #4a4a4a;
 `;
 
-const SectionList = styled.SectionList``;
+const SectionList = styled.SectionList`
+  padding-top: 18;
+`;
 
 class Statistic extends Component {
   static navigatorStyle = {

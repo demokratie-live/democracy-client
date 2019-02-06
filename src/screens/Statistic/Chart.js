@@ -40,8 +40,8 @@ class Chart extends Component {
       <Wrapper onLayout={this.onLayout}>
         <Svg
           viewBox="0 0 36 36"
-          width={width || chartWidth - 36}
-          height={width || chartWidth - 36}
+          width={width || chartWidth - 60}
+          height={width || chartWidth - 60}
           style={{ flex: 1, aspectRatio: 1 }}
         >
           <Path
