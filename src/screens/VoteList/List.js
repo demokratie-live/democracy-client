@@ -94,7 +94,6 @@ const SORTERS = {
       title: 'nach Aktivitätsindex sortieren',
     },
   ],
-  HOT: [],
 };
 
 class List extends Component {
@@ -335,7 +334,12 @@ class List extends Component {
     } = this.props;
     const { fetchedAll, sorterOpened, sort } = this.state;
 
-    const listData = procedures ? [{ procedureId: 'soter', type: 'sort' }, ...procedures] : [];
+    let listData = [];
+    if (list !== 'HOT') {
+      listData = procedures ? [{ procedureId: 'soter', type: 'sort' }, ...procedures] : [];
+    } else {
+      listData = procedures ? procedures : [];
+    }
 
     return (
       <Wrapper onLayout={this.onLayout} width={this.state.width}>
