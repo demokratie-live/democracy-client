@@ -94,6 +94,20 @@ const SORTERS = {
       title: 'nach Aktivitätsindex sortieren',
     },
   ],
+  HOT: [
+    {
+      key: 'activities',
+      title: 'nach Aktivitätsindex sortieren',
+    },
+    {
+      key: 'lastUpdateDate',
+      title: 'nach Aktualisierung sortieren',
+    },
+    {
+      key: 'created',
+      title: 'nach Vorgangsdatum sortieren',
+    },
+  ],
 };
 
 class List extends Component {
