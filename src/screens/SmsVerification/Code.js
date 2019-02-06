@@ -10,10 +10,12 @@ import Description from './Components/Description';
 import CodeInput from './Components/CodeInput';
 import Button from '../../components/Button';
 
+// GraphQL
 import REQUEST_VERIFICATION from '../../graphql/mutations/requestVerification';
 import REQUEST_CODE from '../../graphql/mutations/requestCode';
 import GET_PROCEDURE from '../../graphql/queries/getProcedure';
 import F_PROCEDURE_VERIFIED from '../../graphql/fragments/ProcedureVerified';
+import GET_STATISTIC from '../../graphql/queries/getStatistic';
 
 const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: {
@@ -240,13 +242,15 @@ export default compose(
               }
               return { data };
             },
-            awaitRefetchQueries: true,
             refetchQueries: [
               {
                 query: GET_PROCEDURE,
                 variables: {
                   id: procedureId,
                 },
+              },
+              {
+                query: GET_STATISTIC,
               },
             ],
           }),

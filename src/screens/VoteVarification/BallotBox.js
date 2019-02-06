@@ -260,7 +260,6 @@ export default compose(
                 data: votedFragment,
               });
             },
-            awaitRefetchQueries: true,
             refetchQueries: [
               {
                 query: VOTES,
@@ -280,7 +279,6 @@ export default compose(
         voteLocal: selection =>
           voteLocal({
             variables: { procedureId, selection },
-            awaitRefetchQueries: true,
             refetchQueries: [
               {
                 query: VOTE_SELECTION_LOCAL,
