@@ -101,87 +101,6 @@ class WahlOMeter extends Component {
     }
   };
 
-  pieChartData = ({ votedProcedures, data }) => {
-    // Pie Chart Data Preparation
-    let pieDataRaw = votedProcedures.proceduresByIdHavingVoteResults.procedures.map(
-      ({ voteResults, procedureId }) => ({
-        government: voteResults.governmentDecision,
-        me: data.votesSelectionLocal.find(({ procedureId: pid }) => pid === procedureId).selection,
-      }),
-    );
-    const pieData = pieDataRaw.reduce(
-      (pre, { government, me }) => {
-        if (me === government) {
-          return { ...pre, matches: pre.matches + 1, count: pre.count + 1 };
-        } else {
-          return { ...pre, diffs: pre.diffs + 1, count: pre.count + 1 };
-        }
-      },
-      { matches: 0, diffs: 0, count: 0 },
-    );
-    return pieData;
-  };
-
-  partyChartData = ({ votedProcedures, data }) => {
-    const chartData = votedProcedures.proceduresByIdHavingVoteResults.procedures.reduce(
-      (prev, { voteResults: { partyVotes }, procedureId }) => {
-        const me = data.votesSelectionLocal.find(({ procedureId: pid }) => pid === procedureId)
-          .selection;
-        partyVotes.forEach(({ party, main }) => {
-          let matched = false;
-          if (me === main) {
-            matched = true;
-          }
-
-          if (prev[party] && matched) {
-            prev = {
-              ...prev,
-              [party]: {
-                ...prev[party],
-                matches: prev[party].matches + 1,
-              },
-            };
-          } else if (prev[party] && !matched) {
-            prev = {
-              ...prev,
-              [party]: {
-                ...prev[party],
-                diffs: prev[party].diffs + 1,
-              },
-            };
-          } else if (!prev[party] && matched) {
-            prev = {
-              ...prev,
-              [party]: {
-                diffs: 0,
-                matches: 1,
-              },
-            };
-          } else if (!prev[party] && !matched) {
-            prev = {
-              ...prev,
-              [party]: {
-                matches: 0,
-                diffs: 1,
-              },
-            };
-          }
-        });
-        return prev;
-      },
-      {},
-    );
-    return Object.keys(chartData)
-      .map(key => ({
-        party: key,
-        values: [
-          { label: 'Übereinstimmungen', value: chartData[key].matches },
-          { label: 'Differenzen', value: chartData[key].diffs },
-        ],
-      }))
-      .sort((a, b) => b.values[0].value - a.values[0].value);
-  };
-
   width = Dimensions.get('window').width;
 
   render() {
@@ -250,7 +169,7 @@ class WahlOMeter extends Component {
                     bundestagScreen = (
                       <View key="bundestag" style={{ flex: 1, width: width }}>
                         <Bundestag
-                          chartData={this.pieChartData({ votedProcedures, data })}
+                          chartData={{ votedProcedures, data }}
                           totalProcedures={totalProcedures}
                           votedProceduresCount={votedProceduresCount}
                           onProcedureListItemClick={this.onProcedureListItemClick}
@@ -258,12 +177,10 @@ class WahlOMeter extends Component {
                       </View>
                     );
 
-                    const partyChartData = this.partyChartData({ votedProcedures, data });
-
                     fraktionenScreen = (
                       <View key="fraktionen" style={{ flex: 1, width: width }}>
                         <Fraktionen
-                          chartData={partyChartData}
+                          chartData={{ votedProcedures, data }}
                           totalProcedures={totalProcedures}
                           votedProceduresCount={votedProceduresCount}
                           onProcedureListItemClick={this.onProcedureListItemClick}

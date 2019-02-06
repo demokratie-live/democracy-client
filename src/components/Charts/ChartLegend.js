@@ -4,7 +4,6 @@ import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 
 const VoteResultsWrapper = styled.View`
-  flex: 1;
   align-items: center;
 `;
 

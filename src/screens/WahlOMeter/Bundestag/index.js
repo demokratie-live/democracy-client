@@ -8,12 +8,8 @@ import PieChart from '../../../components/Charts/PieChart';
 import ChartLegend from '../../../components/Charts/ChartLegend';
 import Header from '../Header';
 import ChartNote from '../ChartNote';
-import VotedProceduresList from '../VotedProceduresList';
-
-const Wrapper = styled.ScrollView`
-  background-color: #fff;
-  padding-top: 18;
-`;
+import VotedProceduresWrapper from '../VotedProceduresWrapper';
+import ListSectionHeader from '../../../components/ListSectionHeader';
 
 const ChartWrapper = styled.View`
   padding-horizontal: 18;
@@ -24,63 +20,70 @@ const ChartWrapper = styled.View`
     Math.min(400, Dimensions.get('window').width, Dimensions.get('window').height)};
 `;
 
+const pieChartData = ({ votedProcedures, data }) => {
+  // Pie Chart Data Preparation
+  let pieDataRaw = votedProcedures.proceduresByIdHavingVoteResults.procedures.map(
+    ({ voteResults, procedureId }) => ({
+      government: voteResults.governmentDecision,
+      me: data.votesSelectionLocal.find(({ procedureId: pid }) => pid === procedureId).selection,
+    }),
+  );
+  const pieData = pieDataRaw.reduce(
+    (pre, { government, me }) => {
+      if (me === government) {
+        return { ...pre, matches: pre.matches + 1, count: pre.count + 1 };
+      } else {
+        return { ...pre, diffs: pre.diffs + 1, count: pre.count + 1 };
+      }
+    },
+    { matches: 0, diffs: 0, count: 0 },
+  );
+  return [
+    {
+      label: 'Übereinstimmungen',
+      percent: pieData.matches / pieData.count,
+      value: pieData.matches,
+      total: pieData.count,
+      color: '#f5a623',
+    },
+    {
+      label: 'Differenzen',
+      percent: pieData.diffs / pieData.count,
+      value: pieData.diffs,
+      total: pieData.count,
+      color: '#b1b3b4',
+    },
+  ];
+};
+
 const Bundestag = ({
   chartData,
   totalProcedures,
   votedProceduresCount,
   onProcedureListItemClick,
 }) => {
-  const data = [
-    {
-      label: 'Übereinstimmungen',
-      percent: chartData.matches / chartData.count,
-      value: chartData.matches,
-      total: chartData.count,
-      color: '#f5a623',
-    },
-    {
-      label: 'Differenzen',
-      percent: chartData.diffs / chartData.count,
-      value: chartData.diffs,
-      total: chartData.count,
-      color: '#b1b3b4',
-    },
-  ];
-
-  const isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }) => {
-    const paddingToBottom = 20;
-    return layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom;
-  };
+  const preparedData = pieChartData(chartData);
 
   return (
-    <Wrapper
-      removeClippedSubviews
-      onScroll={({ nativeEvent }) => {
-        if (isCloseToBottom(nativeEvent)) {
-          if (this.procedureList.fetchMore) this.procedureList.fetchMore();
-        }
-      }}
-      scrollEventThrottle={4000}
-    >
-      <Header totalProcedures={totalProcedures} votedProceduresCount={votedProceduresCount} />
-      <ChartWrapper>
-        <PieChart
-          data={data}
-          colorScale={['#EAA844', '#B1B3B4']}
-          label="Bundestag"
-          subLabel="Wahl-O-Meter"
-        />
-      </ChartWrapper>
-      <ChartLegend data={data} />
-      <ChartNote>
-        Hohe Übereinstimmungen Ihrer Stellungnahmen mit dem Bundestag bedeuten eine inhaltliche Nähe
-        zu den Regierungsfraktionen
-      </ChartNote>
-      <VotedProceduresList
-        onItemClick={onProcedureListItemClick}
-        ref={el => (this.procedureList = el)}
-      />
-    </Wrapper>
+    <VotedProceduresWrapper onProcedureListItemClick={onProcedureListItemClick}>
+      <>
+        <Header totalProcedures={totalProcedures} votedProceduresCount={votedProceduresCount} />
+        <ChartWrapper>
+          <PieChart
+            data={preparedData}
+            colorScale={['#EAA844', '#B1B3B4']}
+            label="Bundestag"
+            subLabel="Wahl-O-Meter"
+          />
+        </ChartWrapper>
+        <ChartLegend data={preparedData} />
+        <ChartNote>
+          Hohe Übereinstimmungen Ihrer Stellungnahmen mit dem Bundestag bedeuten eine inhaltliche
+          Nähe zu den Regierungsfraktionen
+        </ChartNote>
+        <ListSectionHeader title="Abstimmungen" />
+      </>
+    </VotedProceduresWrapper>
   );
 };
 

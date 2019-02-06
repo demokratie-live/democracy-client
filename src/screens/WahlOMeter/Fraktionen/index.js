@@ -8,12 +8,8 @@ import PartyChart from '../../../components/Charts/PartyChart';
 import ChartLegend from '../../../components/Charts/ChartLegend';
 import Header from '../Header';
 import ChartNote from '../ChartNote';
-import VotedProceduresList from '../VotedProceduresList';
-
-const Wrapper = styled.ScrollView`
-  background-color: #fff;
-  padding-top: 18;
-`;
+import VotedProceduresWrapper from '../VotedProceduresWrapper';
+import ListSectionHeader from '../../../components/ListSectionHeader';
 
 const ChartWrapper = styled.View`
   padding-horizontal: 18;
@@ -21,40 +17,6 @@ const ChartWrapper = styled.View`
   align-self: center;
   width: 100%;
   max-width: ${() => Math.min(Dimensions.get('window').width, Dimensions.get('window').height)};
-`;
-
-const VoteResultNumbers = styled.View`
-  width: 100%;
-  max-width: 464;
-  flex-direction: row;
-  justify-content: space-around;
-`;
-
-const VoteResult = styled.View`
-  justify-content: center;
-  align-items: center;
-`;
-
-const VoteResultCircleNumber = styled.View`
-  flex-direction: row;
-`;
-
-const VoteResultNumber = styled.Text`
-  color: #4a4a4a;
-  font-size: 12;
-`;
-const VoteResultLabel = styled.Text`
-  color: rgb(142, 142, 147);
-  font-size: 10;
-`;
-
-const VoteResultCircle = styled.View`
-  width: 10;
-  height: 10;
-  border-radius: 5;
-  background-color: ${props => props.color};
-  margin-top: 3;
-  margin-right: 5;
 `;
 
 class Fraktionen extends Component {
@@ -80,6 +42,66 @@ class Fraktionen extends Component {
     return layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom;
   };
 
+  partyChartData = ({ votedProcedures, data }) => {
+    const chartData = votedProcedures.proceduresByIdHavingVoteResults.procedures.reduce(
+      (prev, { voteResults: { partyVotes }, procedureId }) => {
+        const me = data.votesSelectionLocal.find(({ procedureId: pid }) => pid === procedureId)
+          .selection;
+        partyVotes.forEach(({ party, main }) => {
+          let matched = false;
+          if (me === main) {
+            matched = true;
+          }
+
+          if (prev[party] && matched) {
+            prev = {
+              ...prev,
+              [party]: {
+                ...prev[party],
+                matches: prev[party].matches + 1,
+              },
+            };
+          } else if (prev[party] && !matched) {
+            prev = {
+              ...prev,
+              [party]: {
+                ...prev[party],
+                diffs: prev[party].diffs + 1,
+              },
+            };
+          } else if (!prev[party] && matched) {
+            prev = {
+              ...prev,
+              [party]: {
+                diffs: 0,
+                matches: 1,
+              },
+            };
+          } else if (!prev[party] && !matched) {
+            prev = {
+              ...prev,
+              [party]: {
+                matches: 0,
+                diffs: 1,
+              },
+            };
+          }
+        });
+        return prev;
+      },
+      {},
+    );
+    return Object.keys(chartData)
+      .map(key => ({
+        party: key,
+        values: [
+          { label: 'Übereinstimmungen', value: chartData[key].matches },
+          { label: 'Differenzen', value: chartData[key].diffs },
+        ],
+      }))
+      .sort((a, b) => b.values[0].value - a.values[0].value);
+  };
+
   render() {
     const {
       chartData,
@@ -88,50 +110,42 @@ class Fraktionen extends Component {
       onProcedureListItemClick,
     } = this.props;
     const { chartWidth, selected } = this.state;
+
+    const preparedData = this.partyChartData(chartData);
+
     const chartLegendData = [
       {
         label: 'Übereinstimmungen',
-        value: chartData[selected].values[0].value,
+        value: preparedData[selected].values[0].value,
         color: '#f5a623',
       },
       {
         label: 'Differenzen',
-        value: chartData[selected].values[1].value,
+        value: preparedData[selected].values[1].value,
         color: '#b1b3b4',
       },
     ];
     return (
-      <Wrapper
-        removeClippedSubviews
-        onScroll={({ nativeEvent }) => {
-          if (this.isCloseToBottom(nativeEvent)) {
-            if (this.procedureList.fetchMore) this.procedureList.fetchMore();
-          }
-        }}
-        onLayout={this.onLayout}
-        scrollEventThrottle={4000}
-      >
-        <Header totalProcedures={totalProcedures} votedProceduresCount={votedProceduresCount} />
-        <ChartWrapper>
-          <PartyChart
-            width={chartWidth}
-            chartData={chartData}
-            onClick={this.onClick}
-            selected={selected}
-            showPercentage
-          />
-          <ChartLegend data={chartLegendData} />
-          <ChartNote>
-            Hohe Übereinstimmungen Ihrer Stellungnahmen mit mehreren Parteien bedeuten nicht
-            zwangsläufig eine inhaltliche Nähe dieser Parteien zueinander
-          </ChartNote>
-        </ChartWrapper>
-
-        <VotedProceduresList
-          onItemClick={onProcedureListItemClick}
-          ref={el => (this.procedureList = el)}
-        />
-      </Wrapper>
+      <VotedProceduresWrapper onProcedureListItemClick={onProcedureListItemClick}>
+        <>
+          <Header totalProcedures={totalProcedures} votedProceduresCount={votedProceduresCount} />
+          <ChartWrapper>
+            <PartyChart
+              width={chartWidth}
+              chartData={preparedData}
+              onClick={this.onClick}
+              selected={selected}
+              showPercentage
+            />
+            <ChartLegend data={chartLegendData} />
+            <ChartNote>
+              Hohe Übereinstimmungen Ihrer Stellungnahmen mit mehreren Parteien bedeuten nicht
+              zwangsläufig eine inhaltliche Nähe dieser Parteien zueinander
+            </ChartNote>
+          </ChartWrapper>
+          <ListSectionHeader title="Abstimmungen" />
+        </>
+      </VotedProceduresWrapper>
     );
   }
 }
