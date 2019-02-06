@@ -221,7 +221,7 @@ class Constituency extends Component {
 }
 
 Constituency.propTypes = {
-  data: PropTypes.string.isRequired,
+  data: PropTypes.shape().isRequired,
   mutate: PropTypes.func.isRequired,
 };
 

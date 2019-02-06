@@ -151,7 +151,7 @@ class Fraktionen extends Component {
 }
 
 Fraktionen.propTypes = {
-  chartData: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  chartData: PropTypes.shape().isRequired,
   totalProcedures: PropTypes.number.isRequired,
   votedProceduresCount: PropTypes.number.isRequired,
   onProcedureListItemClick: PropTypes.func.isRequired,
