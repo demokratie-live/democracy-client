@@ -66,7 +66,7 @@ class BarChart extends Component {
         values: [],
       },
       {
-        label: 'Nicht Abgestimmt',
+        label: 'Abwesend',
         values: [],
       },
     ];

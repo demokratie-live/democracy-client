@@ -117,7 +117,7 @@ class GovernmentVoteResults extends Component {
 
       if (voteResults.namedVote) {
         dataPieChart.push({
-          label: 'Nicht Abgestimmt',
+          label: 'Abwesend',
           percent: voteResults.notVoted / votes,
           value: voteResults.notVoted,
           color: '#B1B3B4',
@@ -134,7 +134,7 @@ class GovernmentVoteResults extends Component {
         };
         if (voteResults.namedVote) {
           partyData.values.push({
-            label: 'Nicht Abgestimmt',
+            label: 'Abwesend',
             value: deviants.notVoted,
             color: '#B1B3B4',
           });

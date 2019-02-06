@@ -6,6 +6,8 @@ import styled from 'styled-components/native';
 import ContactBox from '../../../components/ContactBox';
 // Components
 import PartyComponent from '../../../components/Parties';
+import ChartLegend from '../../../components/Charts/ChartLegend';
+import Chart from './Chart';
 // GraphQL
 import DEPUTIES_OF_CONSTITUENCY from '../../../graphql/queries/deputiesOfConstituency';
 import GET_CONSTITUENCY from '../../../graphql/queries/local/constituency';
@@ -59,6 +61,7 @@ const TextLighGrey = styled(Text)`
 
 const SegmentWrapper = styled.View`
   width: 100%;
+  padding-top: 18;
 `;
 
 class MemberProfil extends Component {
@@ -77,6 +80,26 @@ class MemberProfil extends Component {
     if (data.loading) {
       return this.getActivityIndicator();
     }
+
+    const votingData = [
+      {
+        label: 'Zustimmungen',
+        color: '#15C063',
+        value: 37,
+      },
+      {
+        label: 'Enthaltungen',
+        color: '#2C82E4',
+        value: 32,
+      },
+      {
+        label: 'Ablehnungen',
+        color: '#EC3E31',
+        value: 2,
+      },
+      { label: 'Abwesend', value: 23, color: '#B1B3B4' },
+    ];
+
     return (
       <ScrollWrapper>
         {constituency && (
@@ -105,6 +128,10 @@ class MemberProfil extends Component {
                   <Text>{name}</Text>
                   <TextLighGrey>Direktkadidat WK {constituency}</TextLighGrey>
                   <TextGrey>{job}</TextGrey>
+                  {/* TODO AddRealData START */}
+                  <Chart totalProcedures={150} votedProceduresCount={30} />
+                  <ChartLegend data={votingData} />
+                  {/* TODO AddRealData END */}
                   <SegmentWrapper>
                     <Segment title="Biographie">
                       <TextGrey>{biography}</TextGrey>

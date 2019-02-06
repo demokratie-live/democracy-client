@@ -107,6 +107,7 @@ class Profil extends Component {
   };
 
   render() {
+    const { hasConstituency } = this.props;
     return (
       <ScrollWrapper
         renderItem={({ item, index }) => (
@@ -156,7 +157,12 @@ class Profil extends Component {
             title: 'Auswertungen',
             data: [
               { title: `Wahl-O-Meter`, onPress: this.navigateTo('wahl-o-meter') },
-              { title: 'Abgeordnetenprofil', onPress: this.navigateTo('memberProfil') },
+              {
+                title: 'Abgeordnetenprofil',
+                onPress: hasConstituency
+                  ? this.navigateTo('memberProfil')
+                  : this.navigateTo('constituency'),
+              },
               {
                 title: 'Persönliche Historie',
                 onPress: this.navigateTo('statistic'),
@@ -179,6 +185,7 @@ Profil.propTypes = {
 export default compose(
   graphql(GET_CONSTITUENCY, {
     props: ({ data }) => ({
+      hasConstituency: !!data.constituency && data.constituency.constituency,
       constituency:
         data.constituency && data.constituency.constituency
           ? data.constituency.constituency

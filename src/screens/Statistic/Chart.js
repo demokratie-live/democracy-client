@@ -31,7 +31,7 @@ class Chart extends Component {
   };
 
   render() {
-    const { value, width, showValue } = this.props;
+    const { value, width, showValue, valueSize, floatNumbers } = this.props;
     const { chartWidth } = this.state;
     /**
      * source: https://hackernoon.com/a-simple-pie-chart-in-svg-dbdd653b6936
@@ -66,9 +66,15 @@ class Chart extends Component {
             strokeDasharray={`${Math.max(value - 2.5, 0.01)}, 100`}
           />
           {showValue && (
-            <Text textAnchor="middle" fontSize="3" x="18" y="19" color="#4a4a4a">
+            <Text
+              textAnchor="middle"
+              fontSize={valueSize}
+              x="18"
+              y={36 / 2 + valueSize / 2 - 1}
+              color="#4a4a4a"
+            >
               {`${parseFloat(value)
-                .toFixed(1)
+                .toFixed(floatNumbers)
                 .replace('.', ',')}%`}
             </Text>
           )}
@@ -82,10 +88,14 @@ Chart.propTypes = {
   value: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
   showValue: PropTypes.bool,
+  valueSize: PropTypes.number,
+  floatNumbers: PropTypes.number,
 };
 
 Chart.defaultProps = {
   showValue: false,
+  valueSize: 3,
+  floatNumbers: 1,
 };
 
 export default Chart;
