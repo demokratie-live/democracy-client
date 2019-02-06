@@ -86,7 +86,7 @@ class Chart extends Component {
 
 Chart.propTypes = {
   value: PropTypes.number.isRequired,
-  width: PropTypes.number.isRequired,
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
   showValue: PropTypes.bool,
   valueSize: PropTypes.number,
   floatNumbers: PropTypes.number,
@@ -96,6 +96,7 @@ Chart.defaultProps = {
   showValue: false,
   valueSize: 3,
   floatNumbers: 1,
+  width: false,
 };
 
 export default Chart;

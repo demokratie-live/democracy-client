@@ -45,14 +45,15 @@ const ListItem = ({ children, text, arrow, onPress }) => (
 
 ListItem.propTypes = {
   children: PropTypes.node.isRequired,
-  text: PropTypes.string,
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   arrow: PropTypes.bool,
-  onPress: PropTypes.func.isRequired,
+  onPress: PropTypes.func,
 };
 
 ListItem.defaultProps = {
   text: false,
   arrow: false,
+  onPress: () => {},
 };
 
 export default ListItem;
