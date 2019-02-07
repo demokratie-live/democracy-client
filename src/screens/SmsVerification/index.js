@@ -49,20 +49,17 @@ class SmsVerification extends Component {
       title: 'Verifizieren'.toUpperCase(), // the new title of the screen as appears in the nav bar
     });
 
-    const cancelButton = {
-      title: 'Abbrechen',
-      id: 'closeModal',
-    };
-
     if (Platform.OS === 'ios') {
       props.navigator.setButtons({
-        leftButtons: [cancelButton],
-      });
-    } else {
-      props.navigator.setButtons({
-        rightButtons: [cancelButton],
+        leftButtons: [
+          {
+            title: 'Abbrechen',
+            id: 'closeModal',
+          },
+        ],
       });
     }
+
     props.navigator.addOnNavigatorEvent(event => {
       if (event.type) {
         // NavBar Events
