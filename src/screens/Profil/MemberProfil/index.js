@@ -128,10 +128,10 @@ class MemberProfil extends Component {
                   <Text>{name}</Text>
                   <TextLighGrey>Direktkadidat WK {constituency}</TextLighGrey>
                   <TextGrey>{job}</TextGrey>
-                  {/* TODO AddRealData START */}
+                  {/* TODO AddRealData START 
                   <Chart totalProcedures={150} votedProceduresCount={30} />
                   <ChartLegend data={votingData} />
-                  {/* TODO AddRealData END */}
+                   TODO AddRealData END */}
                   <SegmentWrapper>
                     <Segment title="Biographie">
                       <TextGrey>{biography}</TextGrey>
