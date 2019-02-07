@@ -134,16 +134,27 @@ class Introductions extends Component {
         ImgHead={require('../../../assets/tutorial/icon.stimme.png')}
         ImgLeft={require('../../../assets/tutorial/screen.detail.png')}
         ImgCenter={require('../../../assets/tutorial/screen.vote.png')}
-        ImgRight={require('../../../assets/tutorial/screen.analyse.png')}
+        ImgRight={require('../../../assets/tutorial/screen.compare.png')}
         TxtHead="Stimme"
         TxtSub="…noch vor der offiziellen Bundestagsentscheidung selbst über den Antrag ab"
+        nextPage={this.onClick}
+      />,
+      // Vergleiche
+      <Slide
+        key="vote"
+        ImgHead={require('../../../assets/tutorial/icon.vergleiche.png')}
+        ImgLeft={require('../../../assets/tutorial/screen.vote.png')}
+        ImgCenter={require('../../../assets/tutorial/screen.compare.png')}
+        ImgRight={require('../../../assets/tutorial/screen.analyse.png')}
+        TxtHead="Vergleiche"
+        TxtSub="…Dein eigenes Abstimmungsverhalten mit dem Stimmungsbild in der Community und Deinem Wahlkreis"
         nextPage={this.onClick}
       />,
       // Analysiere
       <Slide
         key="analyze"
-        ImgHead={require('../../../assets/tutorial/icon.analysiere.png')}
-        ImgLeft={require('../../../assets/tutorial/screen.vote.png')}
+        ImgHead={require('../../../assets/tutorial/icon.vergleiche.png')}
+        ImgLeft={require('../../../assets/tutorial/screen.compare.png')}
         ImgCenter={require('../../../assets/tutorial/screen.analyse.png')}
         ImgCircle={
           !this.state.registered ? require('../../../assets/tutorial/icon.touch.png') : null
