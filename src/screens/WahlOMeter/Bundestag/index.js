@@ -12,7 +12,7 @@ import VotedProceduresWrapper from '../VotedProceduresWrapper';
 import ListSectionHeader from '../../../components/ListSectionHeader';
 
 const ChartWrapper = styled.View`
-  padding-horizontal: 18;
+  padding-horizontal: 36;
   padding-top: 18;
   align-self: center;
   width: 100%;
