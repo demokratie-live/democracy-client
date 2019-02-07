@@ -16,7 +16,6 @@ const BarChart = ({ data, width, maxHeight }) => {
       width={width}
       height={Math.min(maxHeight, width)}
       style={{}}
-      preserveAspectRatio="none"
     >
       {data.map(({ label, values }, i) => (
         <BarRow
@@ -33,6 +32,7 @@ const BarChart = ({ data, width, maxHeight }) => {
 
 BarChart.propTypes = {
   width: PropTypes.number.isRequired,
+  maxHeight: PropTypes.number.isRequired,
   data: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,

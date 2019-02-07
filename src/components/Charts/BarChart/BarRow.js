@@ -6,10 +6,10 @@ const BarRow = ({ values, index, maxValue, barsNumber }) => {
   let prevY = 100;
 
   const barWidth = 20;
-  const padding = (100 - barsNumber * barWidth) / (barsNumber + 1);
+  const padding = Math.ceil((100 - barsNumber * barWidth) / (barsNumber - 1));
 
   return (
-    <G x={padding * (1 + index) + index * barWidth}>
+    <G x={padding * index + index * barWidth}>
       {values.map(({ label, value, color }) => {
         const height = (value / maxValue) * 100;
 
