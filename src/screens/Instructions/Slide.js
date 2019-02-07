@@ -97,6 +97,14 @@ const TextVerify = styled.Text`
 
 const ImageCircle = styled.Image``;
 
+const NewMarker = styled.Image.attrs({
+  source: require('../../../assets/tutorial/icon.new.png'),
+})`
+  position: absolute;
+  top: 28;
+  left: 18;
+`;
+
 const Slide = ({
   ImgHead,
   ImgRight,
@@ -107,8 +115,10 @@ const Slide = ({
   TxtSub,
   nextPage,
   verify,
+  newMarker,
 }) => (
   <Container>
+    {newMarker && <NewMarker />}
     <ContainerHead>
       <Image source={ImgHead} />
     </ContainerHead>
@@ -158,6 +168,7 @@ Slide.propTypes = {
   TxtSub: PropTypes.string.isRequired,
   nextPage: PropTypes.func.isRequired,
   verify: PropTypes.func,
+  newMarker: PropTypes.bool,
 };
 
 Slide.defaultProps = {
@@ -165,6 +176,7 @@ Slide.defaultProps = {
   ImgRight: null,
   ImgCircle: require('../../../assets/tutorial/icon.touch.png'),
   verify: null,
+  newMarker: false,
 };
 
 export default Slide;

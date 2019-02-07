@@ -142,6 +142,7 @@ class Introductions extends Component {
       // Vergleiche
       <Slide
         key="vote"
+        newMarker
         ImgHead={require('../../../assets/tutorial/icon.vergleiche.png')}
         ImgLeft={require('../../../assets/tutorial/screen.vote.png')}
         ImgCenter={require('../../../assets/tutorial/screen.compare.png')}
@@ -153,6 +154,7 @@ class Introductions extends Component {
       // Analysiere
       <Slide
         key="analyze"
+        newMarker
         ImgHead={require('../../../assets/tutorial/icon.analyse.png')}
         ImgLeft={require('../../../assets/tutorial/screen.compare.png')}
         ImgCenter={require('../../../assets/tutorial/screen.analyse.png')}
