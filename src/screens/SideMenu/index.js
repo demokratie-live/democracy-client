@@ -178,7 +178,7 @@ SideMenu.propTypes = {
   data: PropTypes.shape().isRequired,
   navigator: PropTypes.instanceOf(Navigator).isRequired,
   donationStatus: PropTypes.shape(),
-  constituency: PropTypes.oneOfType([PropTypes.string, PropTypes.string]),
+  constituency: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 };
 
 SideMenu.defaultProps = {
