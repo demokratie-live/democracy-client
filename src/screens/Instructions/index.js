@@ -153,7 +153,7 @@ class Introductions extends Component {
       // Analysiere
       <Slide
         key="analyze"
-        ImgHead={require('../../../assets/tutorial/icon.vergleiche.png')}
+        ImgHead={require('../../../assets/tutorial/icon.analyse.png')}
         ImgLeft={require('../../../assets/tutorial/screen.compare.png')}
         ImgCenter={require('../../../assets/tutorial/screen.analyse.png')}
         ImgCircle={
@@ -165,7 +165,7 @@ class Introductions extends Component {
             : null
         }
         TxtHead="Analysiere"
-        TxtSub="…das Community-Abstimmungsverhalten und vergleich es mit den Bundestagsresultaten"
+        TxtSub="…Deine Übereinstimmungen mit den im Bundestag vertretenen Parteien und Kandidaten"
         nextPage={this.onClick}
       />,
     ];
