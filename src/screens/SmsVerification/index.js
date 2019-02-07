@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AsyncStorage, Linking, Alert } from 'react-native';
+import { AsyncStorage, Linking, Alert, Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { Navigator } from 'react-native-navigation';
@@ -49,14 +49,20 @@ class SmsVerification extends Component {
       title: 'Verifizieren'.toUpperCase(), // the new title of the screen as appears in the nav bar
     });
 
-    props.navigator.setButtons({
-      leftButtons: [
-        {
-          title: 'Abbrechen',
-          id: 'closeModal',
-        },
-      ],
-    });
+    const cancelButton = {
+      title: 'Abbrechen',
+      id: 'closeModal',
+    };
+
+    if (Platform.OS === 'ios') {
+      props.navigator.setButtons({
+        leftButtons: [cancelButton],
+      });
+    } else {
+      props.navigator.setButtons({
+        rightButtons: [cancelButton],
+      });
+    }
     props.navigator.addOnNavigatorEvent(event => {
       if (event.type) {
         // NavBar Events
