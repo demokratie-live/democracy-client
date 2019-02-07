@@ -161,7 +161,8 @@ class GovernmentVoteResults extends Component {
           chartData={dataPartyChart}
           colors={partyColors}
         />,
-        <BarChart key="barChart" data={voteResults} legendData={dataPieChart} />,
+        // FIXME SVG dimensionen dynamisch und schön machen
+        // <BarChart key="barChart" data={voteResults} legendData={dataPieChart} />,
       ];
 
       if (voteResults.decisionText) {
