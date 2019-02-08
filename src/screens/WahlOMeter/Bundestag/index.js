@@ -12,6 +12,10 @@ import ChartNote from '../ChartNote';
 import VotedProceduresWrapper from '../VotedProceduresWrapper';
 import ListSectionHeader from '../../../components/ListSectionHeader';
 
+const Wrapper = styled.View`
+  padding-top: 18;
+`;
+
 const ChartWrapper = styled.View`
   padding-horizontal: 36;
   padding-top: 18;
@@ -73,7 +77,7 @@ const Bundestag = ({ onProcedureListItemClick, navigator }) => {
         const preparedData = pieChartData({ ...chartData, matchingProcedures });
 
         return (
-          <>
+          <Wrapper>
             <Header
               totalProcedures={totalProcedures}
               votedProceduresCount={matchingProcedures.length}
@@ -92,7 +96,7 @@ const Bundestag = ({ onProcedureListItemClick, navigator }) => {
               inhaltliche Nähe zu den Regierungsfraktionen
             </ChartNote>
             <ListSectionHeader title="Abstimmungen" />
-          </>
+          </Wrapper>
         );
       }}
     </VotedProceduresWrapper>

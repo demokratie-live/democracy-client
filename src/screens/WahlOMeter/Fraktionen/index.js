@@ -12,6 +12,10 @@ import ChartNote from '../ChartNote';
 import VotedProceduresWrapper from '../VotedProceduresWrapper';
 import ListSectionHeader from '../../../components/ListSectionHeader';
 
+const Wrapper = styled.View`
+  padding-top: 18;
+`;
+
 const ChartWrapper = styled.View`
   padding-horizontal: 18;
   padding-top: 18;
@@ -137,7 +141,7 @@ class Fraktionen extends Component {
             },
           ];
           return (
-            <>
+            <Wrapper>
               <Header
                 totalProcedures={totalProcedures}
                 votedProceduresCount={matchingProcedures.length}
@@ -157,7 +161,7 @@ class Fraktionen extends Component {
                 </ChartNote>
               </ChartWrapper>
               <ListSectionHeader title="Abstimmungen" />
-            </>
+            </Wrapper>
           );
         }}
       </VotedProceduresWrapper>

@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 import { Platform, SegmentedControlIOS, Dimensions, View } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+import MaterialTabs from 'react-native-material-tabs';
 
 import preventNavStackDuplicate from '../../hocs/preventNavStackDuplicate';
 
@@ -64,7 +64,7 @@ class WahlOMeter extends Component {
   state = {
     width: Dimensions.get('window').width,
     selectedIndex: 0,
-    routes: [{ key: 'first', title: 'Bundestag' }, { key: 'second', title: 'Fraktionen' }],
+    routes: ['Bundestag', 'Fraktionen'],
   };
 
   onProcedureListItemClick = ({ item }) => () => {
@@ -98,7 +98,7 @@ class WahlOMeter extends Component {
   width = Dimensions.get('window').width;
 
   render() {
-    const { selectedIndex, routes, width } = this.state;
+    const { selectedIndex, width, routes } = this.state;
     let bundestagScreen = (
       <View key="bundestag" style={{ flex: 1, width: width }}>
         <Bundestag
@@ -125,7 +125,7 @@ class WahlOMeter extends Component {
                   alignSelf: 'flex-end',
                   width: '100%',
                 }}
-                values={['Bundestag', 'Fraktionen']}
+                values={routes}
                 tintColor="#ffffff"
                 selectedIndex={selectedIndex}
                 onChange={event => {
@@ -157,19 +157,36 @@ class WahlOMeter extends Component {
           </>
         )}
         {Platform.OS === 'android' && (
-          <TabView
-            navigationState={{ index: selectedIndex, routes }}
-            renderScene={SceneMap({
-              first: () => bundestagScreen,
-              second: () => fraktionenScreen,
-            })}
-            onIndexChange={selectedIndex => this.setState({ selectedIndex })}
-            initialLayout={{
-              width: Dimensions.get('window').width,
-              height: Dimensions.get('window').height,
-            }}
-            renderTabBar={props => <TabBar {...props} tabStyle={{ backgroundColor: '#4494D3' }} />}
-          />
+          <>
+            <MaterialTabs
+              items={routes}
+              selectedIndex={selectedIndex}
+              onChange={selectedIndex => {
+                this.setState({
+                  selectedIndex,
+                });
+                this.scrollView.scrollTo({
+                  y: 0,
+                  x: selectedIndex * this.state.width,
+                });
+              }}
+            />
+
+            <ScrollView
+              onContentSizeChange={() => {
+                this.scrollView.scrollTo({
+                  y: 0,
+                  x: selectedIndex * this.state.width,
+                });
+              }}
+              onMomentumScrollEnd={this.onScrollEndDrag}
+              ref={e => {
+                this.scrollView = e;
+              }}
+            >
+              {[bundestagScreen, fraktionenScreen]}
+            </ScrollView>
+          </>
         )}
       </Wrapper>
     );
