@@ -10,8 +10,6 @@ import Description from './Components/Description';
 import CodeInput from './Components/CodeInput';
 import Button from '../../components/Button';
 
-import topTabs from '../../screens/VoteList/topTabs';
-
 // GraphQL
 import REQUEST_VERIFICATION from '../../graphql/mutations/requestVerification';
 import REQUEST_CODE from '../../graphql/mutations/requestCode';

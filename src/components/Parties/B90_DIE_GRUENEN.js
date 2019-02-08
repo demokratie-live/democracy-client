@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Svg, { G, Path } from 'react-native-svg';
 /* SVGR has dropped some elements not supported by react-native-svg: title */
 
@@ -24,5 +25,11 @@ const DieGruenen = props => (
     </G>
   </Svg>
 );
+
+DieGruenen.propTypes = {
+  width: PropTypes.number.isRequired,
+};
+
+DieGruenen.defaultProps = {};
 
 export default DieGruenen;

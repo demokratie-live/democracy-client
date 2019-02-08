@@ -1,5 +1,6 @@
 import React from 'react';
 import Svg, { G, Path } from 'react-native-svg';
+import PropTypes from 'prop-types';
 /* SVGR has dropped some elements not supported by react-native-svg: title */
 
 export const CduCsu = props => (
@@ -98,5 +99,11 @@ export const CduCsu = props => (
     </G>
   </Svg>
 );
+
+CduCsu.propTypes = {
+  width: PropTypes.number.isRequired,
+};
+
+CduCsu.defaultProps = {};
 
 export default CduCsu;

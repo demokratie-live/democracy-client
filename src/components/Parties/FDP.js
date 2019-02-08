@@ -1,8 +1,9 @@
 import React from 'react';
 import Svg, { G, Path } from 'react-native-svg';
+import PropTypes from 'prop-types';
 /* SVGR has dropped some elements not supported by react-native-svg: title */
 
-export const FDP = props => (
+export const Fdp = props => (
   <Svg width={1080} height={(props.width / 1080) * 314} viewBox="0 0 1080 314" {...props}>
     <G fill="none" fillRule="evenodd">
       <G fill="#009EE3">
@@ -59,4 +60,10 @@ export const FDP = props => (
   </Svg>
 );
 
-export default FDP;
+Fdp.propTypes = {
+  width: PropTypes.number.isRequired,
+};
+
+Fdp.defaultProps = {};
+
+export default Fdp;

@@ -1,5 +1,6 @@
 import React from 'react';
 import Svg, { G, Path } from 'react-native-svg';
+import PropTypes from 'prop-types';
 /* SVGR has dropped some elements not supported by react-native-svg: title */
 
 const SPD = props => (
@@ -97,5 +98,11 @@ const SPD = props => (
     </G>
   </Svg>
 );
+
+SPD.propTypes = {
+  width: PropTypes.number.isRequired,
+};
+
+SPD.defaultProps = {};
 
 export default SPD;

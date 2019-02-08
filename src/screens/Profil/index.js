@@ -180,6 +180,11 @@ Profil.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired,
   verified: PropTypes.bool.isRequired,
   constituency: PropTypes.string.isRequired,
+  hasConstituency: PropTypes.bool,
+};
+
+Profil.defaultProps = {
+  hasConstituency: false,
 };
 
 export default compose(
