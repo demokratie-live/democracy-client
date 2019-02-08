@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Platform } from 'react-native';
 import Svg, { Path, Circle, Text, G } from 'react-native-svg';
 import styled from 'styled-components/native';
 
@@ -12,6 +11,21 @@ class PieChart extends Component {
   state = {
     width: 0,
   };
+
+  // This does not work properly - but the component is rendered 3 times
+  /* shouldComponentUpdate(nextProps, nextState) {
+    if (
+      this.props.data !== nextProps.data ||
+      this.props.label !== nextProps.label ||
+      this.props.subLabel !== nextProps.subLabel ||
+      this.props.showPercentage !== nextProps.showPercentage
+    ) {
+      return true;
+    }
+    return false;
+  }
+  */
+
   onLayout = ({
     nativeEvent: {
       layout: { width },
@@ -25,11 +39,8 @@ class PieChart extends Component {
   };
 
   getCoordinatesForPercent = percent => {
-    if (percent === 1 && Platform.OS === 'android') {
-      percent -= 0.00001;
-    }
-    const x = Math.cos(2 * Math.PI * percent) * 100;
-    const y = Math.sin(2 * Math.PI * percent) * 100;
+    const x = Math.round(Math.cos(2 * Math.PI * percent) * 100, 2);
+    const y = Math.round(Math.sin(2 * Math.PI * percent) * 100, 2);
     return [x, y];
   };
 
@@ -65,15 +76,19 @@ class PieChart extends Component {
               // each slice starts where the last slice ended, so keep a cumulative percent
               cumulativePercent += percent;
 
-              const [endX, endY] = this.getCoordinatesForPercent(cumulativePercent);
+              // End coordinates - half circle for 100% (which is the labelX&Y)
+              const [endX, endY] =
+                percent === 1 ? [labelX, labelY] : this.getCoordinatesForPercent(cumulativePercent);
 
               // if the slice is more than 50%, take the large arc (the long way around)
-              const largeArcFlag = percent > 0.5 ? 1 : 0;
+              // if the slice is 100%, take the small arc, since two halfs are drawn
+              const largeArcFlag = percent !== 1 && percent > 0.5 ? 1 : 0;
 
               // create an array and join it just for code readability
               const pathData = [
                 `M ${startX} ${startY}`, // Move
                 `A 100 100 0 ${largeArcFlag} 1 ${endX} ${endY}`, // Arc
+                percent === 1 ? `A 100 100 0 ${largeArcFlag} 1 ${startX} ${startY}` : '', // Second half for 100%
                 `L 0 0`, // Line
               ].join(' ');
 

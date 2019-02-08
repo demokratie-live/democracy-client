@@ -157,6 +157,14 @@ class Detail extends Component {
     }
   }
 
+  // TODO the render event happens 3 times, which slows down the Detail Page
+  // Why is it rerendering?
+  /*
+  shouldComponentUpdate(nextProps , nextState) {
+    return false;
+  }
+  */
+
   onLayout = ({
     nativeEvent: {
       layout: { height },
