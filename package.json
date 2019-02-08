@@ -1,6 +1,6 @@
 {
   "name": "democracyclient",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "private": true,
   "scripts": {
     "test": "eslint . && jest",
@@ -30,12 +30,14 @@
     "Debug": [
       "Internal.Debug",
       "Alpha.Debug",
-      "Beta.Debug"
+      "Beta.Debug",
+      "Production.Debug"
     ],
     "Release": [
       "Internal.Release",
       "Alpha.Release",
-      "Beta.Release"
+      "Beta.Release",
+      "Production.Release"
     ]
   },
   "dependencies": {
@@ -73,19 +75,19 @@
     "react-native-keyboard-aware-scroll-view": "^0.6.0",
     "react-native-keychain": "^3.0.0-rc.3",
     "react-native-linear-gradient": "^2.4.0",
+    "react-native-material-tabs": "^3.8.1",
     "react-native-navigation": "1.1.443",
     "react-native-notifications": "https://github.com/demokratie-live/react-native-notifications#android-initial-all-notifications",
     "react-native-pdf": "^5.0.9",
     "react-native-rsa": "^0.0.3",
     "react-native-sha256": "^1.1.1",
-    "react-native-svg": "^7.0.3",
+    "react-native-svg": "^9.0.0",
     "react-native-swiper": "^1.5.13",
-    "react-native-vector-icons": "^4.5.0",
+    "react-native-vector-icons": "^4",
     "rn-fetch-blob": "^0.10.13",
     "speakingurl": "^14.0.1",
     "styled-components": "^4.1.1",
-    "typescript": "^2.6.2",
-    "victory-native": "^30.4.0"
+    "typescript": "^2.6.2"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",

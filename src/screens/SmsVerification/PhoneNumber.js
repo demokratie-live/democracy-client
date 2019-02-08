@@ -7,7 +7,7 @@ import { graphql } from 'react-apollo';
 
 import Description from './Components/Description';
 import PhonenumberInput from './Components/PhonenumberInput';
-import Button from './Components/Button';
+import Button from '../../components/Button';
 
 import REQUEST_CODE from '../../graphql/mutations/requestCode';
 

@@ -114,7 +114,7 @@ class SearchScreen extends Component {
       this.observableSearchQuery = await watchQuery({
         query: searchProcedures,
         variables: { term },
-        fetchPolicy: 'network-only',
+        fetchPolicy: 'no-cache',
       });
 
       this.observableSearchQuery.subscribe({

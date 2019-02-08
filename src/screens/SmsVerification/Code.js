@@ -8,12 +8,14 @@ import { sha256 } from 'react-native-sha256';
 
 import Description from './Components/Description';
 import CodeInput from './Components/CodeInput';
-import Button from './Components/Button';
+import Button from '../../components/Button';
 
+// GraphQL
 import REQUEST_VERIFICATION from '../../graphql/mutations/requestVerification';
 import REQUEST_CODE from '../../graphql/mutations/requestCode';
 import GET_PROCEDURE from '../../graphql/queries/getProcedure';
 import F_PROCEDURE_VERIFIED from '../../graphql/fragments/ProcedureVerified';
+import GET_STATISTIC from '../../graphql/queries/getStatistic';
 
 const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: {
@@ -29,6 +31,20 @@ class Code extends Component {
     // navBarHidden: true,
     orientation: 'landscape',
   };
+
+  constructor(props) {
+    super(props);
+
+    this.props.navigator.addOnNavigatorEvent(event => {
+      if (event.id === 'willAppear') {
+        AsyncStorage.getItem('auth_phoneHash').then(res => {
+          if (res) {
+            this.props.onComplete();
+          }
+        });
+      }
+    });
+  }
 
   state = {
     height: Dimensions.get('window').height,
@@ -246,6 +262,9 @@ export default compose(
                 variables: {
                   id: procedureId,
                 },
+              },
+              {
+                query: GET_STATISTIC,
               },
             ],
           }),

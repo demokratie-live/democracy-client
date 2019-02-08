@@ -22,15 +22,10 @@ export default gql`
       _id
       title
       procedureId
-      currentStatus
-      type
       subjectGroups
-      tags
-      abstract
       voteDate
+      list
       votedGovernment
-      submissionDate
-      completed
       ...ActivityIndex
       ...Voted
       ...Viewed

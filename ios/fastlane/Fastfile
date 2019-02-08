@@ -145,7 +145,7 @@ platform :ios do
     )
     build_app( 
       clean: true, 
-      scheme: "democracyclient-production"
+      scheme: "Production"
     )
     
     upload_to_testflight(

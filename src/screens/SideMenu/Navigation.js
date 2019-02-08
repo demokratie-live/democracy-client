@@ -95,8 +95,23 @@ const NavigationView = ({ currentScreen, navigateTo, verified }) => {
       ],
     },
     {
+      title: 'Auswertungen',
+      data: [
+        {
+          screenId: 'democracy.WahlOMeter',
+          title: `Wahl-O-Meter`.toUpperCase(),
+          icon: <NavigationIoniconsIcon name="ios-timer-outline" />,
+        },
+      ],
+    },
+    {
       title: 'Einstellungen',
       data: [
+        {
+          screenId: 'democracy.Profil',
+          title: 'Profil'.toUpperCase(),
+          icon: <NavigationIoniconsIcon name="ios-contact-outline" />,
+        },
         {
           screenId: 'democracy.Notifications',
           title: 'Benachrichtigungen'.toUpperCase(),

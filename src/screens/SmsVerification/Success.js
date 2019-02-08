@@ -6,7 +6,7 @@ import { Platform } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import client from '../../../src/graphql/client';
 
-import Button from './Components/Button';
+import Button from '../../components/Button';
 
 // GRAPHQL
 import GET_STATISTIC from '../../graphql/queries/getStatistic';
@@ -68,7 +68,7 @@ class SmsSuccess extends Component {
   onClose = async () => {
     client.query({
       query: GET_STATISTIC,
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'no-cache',
     });
     await this.props.onComplete();
     await this.props.navigator.dismissAllModals();

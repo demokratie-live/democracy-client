@@ -37,8 +37,8 @@ const Tags = styled.Text.attrs(() => ({ numberOfLines: 2 }))`
 
 const ListItem = ({
   title,
-  tags,
-  date,
+  subjectGroups,
+  voteDate,
   procedureId,
   children,
   activityIndex: { activityIndex, active },
@@ -53,7 +53,7 @@ const ListItem = ({
     />
     <MainWrapper>
       <Title>{title}</Title>
-      {!children && <Tags>{tags && tags.join(', ')}</Tags>}
+      {!children && <Tags>{subjectGroups && subjectGroups.join(', ')}</Tags>}
       {children}
     </MainWrapper>
     <SideWrapper>
@@ -71,7 +71,7 @@ const ListItem = ({
           color="#35a335"
         />
       )}
-      {date && <DateTime date={date} />}
+      {voteDate && <DateTime date={voteDate} />}
     </SideWrapper>
   </ListItemWrapper>
 );
@@ -79,8 +79,8 @@ const ListItem = ({
 ListItem.propTypes = {
   title: PropTypes.string.isRequired,
   procedureId: PropTypes.string.isRequired,
-  tags: PropTypes.arrayOf(PropTypes.string),
-  date: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string, PropTypes.bool]),
+  subjectGroups: PropTypes.arrayOf(PropTypes.string),
+  voteDate: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string, PropTypes.bool]),
   children: PropTypes.node,
   activityIndex: PropTypes.shape(),
   votedGovernment: PropTypes.bool,
@@ -89,8 +89,8 @@ ListItem.propTypes = {
 };
 
 ListItem.defaultProps = {
-  tags: [],
-  date: false,
+  subjectGroups: [],
+  voteDate: false,
   children: null,
   activityIndex: {},
   votedGovernment: false,

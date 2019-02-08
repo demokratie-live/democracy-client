@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { PanResponder, Animated, Dimensions } from 'react-native';
+import { PanResponder, Animated, Dimensions, AsyncStorage } from 'react-native';
 import styled from 'styled-components/native';
 import { graphql, compose } from 'react-apollo';
 import { Navigator, Navigation } from 'react-native-navigation';
@@ -8,12 +8,13 @@ import { Navigator, Navigation } from 'react-native-navigation';
 import VoteButton from '../../components/VoteButton';
 
 import VOTE from '../../graphql/mutations/vote';
-import VOTE_LOCAL from '../../graphql/mutations/voteLocal';
+import VOTE_LOCAL from '../../graphql/mutations/local/vote';
 import VOTED from '../../graphql/queries/voted';
 import VOTES from '../../graphql/queries/votes';
-import VOTED_LOCAL from '../../graphql/queries/votedLocal';
+import VOTE_SELECTION_LOCAL from '../../graphql/queries/local/voteSelection';
 import F_ACTIVITY_INDEX from '../../graphql/fragments/ProcedureActivityIndex';
 import F_VOTED from '../../graphql/fragments/ProcedureVoted';
+import VOTES_SELECTION_LOCAL from '../../graphql/queries/local/votesSelection';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -197,9 +198,15 @@ export default compose(
   graphql(VOTE, {
     props({ ownProps: { procedureObjId, procedureId }, mutate }) {
       return {
-        vote: selection =>
-          mutate({
-            variables: { procedure: procedureObjId, selection },
+        vote: async selection => {
+          const constituency = await AsyncStorage.getItem('Constituency');
+          const constituencies = constituency ? [constituency] : [];
+          return mutate({
+            variables: {
+              procedure: procedureObjId,
+              selection,
+              constituency: await AsyncStorage.getItem('Constituency'),
+            },
             optimisticResponse: {
               __typename: 'Mutation',
               vote: {
@@ -256,10 +263,11 @@ export default compose(
             refetchQueries: [
               {
                 query: VOTES,
-                variables: { procedure: procedureObjId },
+                variables: { procedure: procedureObjId, constituencies },
               },
             ],
-          }),
+          });
+        },
       };
     },
   }),
@@ -273,8 +281,11 @@ export default compose(
             variables: { procedureId, selection },
             refetchQueries: [
               {
-                query: VOTED_LOCAL,
+                query: VOTE_SELECTION_LOCAL,
                 variables: { procedureId },
+              },
+              {
+                query: VOTES_SELECTION_LOCAL,
               },
             ],
           }),

@@ -21,9 +21,10 @@ import DateTime from '../../components/Date';
 import SegmentDetails from './Segments/Details';
 import SegmentDocuments from './Segments/Documents';
 import History from './Segments/History';
-import VoteResults from './Segments/VoteResults';
 import Segment from './Segment';
 import Voting from './Voting';
+import CommunityVoteResults from './Segments/VoteResults/CommunityVoteResults';
+import GovernmentVoteResults from './Segments/VoteResults/GovernmentVoteResults';
 
 const LoadingWrapper = styled.View`
   flex: 1;
@@ -116,11 +117,24 @@ class Detail extends Component {
   };
 
   componentDidMount() {
-    this.props.viewProcedure();
+    if (
+      this.props.data &&
+      this.props.data.procedure &&
+      this.props.data.procedure.viewedStatus !== 'VIEWED'
+    ) {
+      this.props.viewProcedure();
+    }
   }
 
   componentWillReceiveProps(nextProps) {
     const { data } = nextProps;
+    if (
+      nextProps.data &&
+      nextProps.data.procedure &&
+      nextProps.data.procedure.viewedStatus !== 'VIEWED'
+    ) {
+      nextProps.viewProcedure();
+    }
     if (data.procedure && this.list !== data.procedure.list) {
       this.list = data.procedure.list;
       let newTitle;
@@ -142,6 +156,14 @@ class Detail extends Component {
       });
     }
   }
+
+  // TODO the render event happens 3 times, which slows down the Detail Page
+  // Why is it rerendering?
+  /*
+  shouldComponentUpdate(nextProps , nextState) {
+    return false;
+  }
+  */
 
   onLayout = ({
     nativeEvent: {
@@ -282,14 +304,8 @@ class Detail extends Component {
               <History history={currentStatusHistory} currentStatus={currentStatus} voted={voted} />
             </Segment>
           )}
-          <VoteResults
-            key="community"
-            voteResults={voteResults}
-            procedure={_id}
-            scrollTo={this.scrollTo}
-            type="community"
-          />
-          <VoteResults
+          <CommunityVoteResults key="community" procedure={_id} scrollTo={this.scrollTo} />
+          <GovernmentVoteResults
             key="government"
             voteResults={voteResults}
             procedure={_id}

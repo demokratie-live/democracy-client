@@ -50,7 +50,7 @@ const SortIcon = styled.Text`
 
 const PickerFinishButton = styled.Button``;
 
-const SectionList = styled.SectionList``;
+const FlatList = styled.FlatList``;
 
 const PAGE_SIZE = 20;
 const STORAGE_KEY = 'VoteList.Filters';
@@ -297,43 +297,13 @@ class List extends Component {
     return doFilter;
   };
 
-  prepareData = () => {
-    const {
-      list,
-      data: { procedures },
-    } = this.props;
-
-    if (!procedures || procedures.length === 0) {
-      return [];
-    }
-    const preparedData = [
-      {
-        data: [],
-      },
-    ];
-    if (list !== 'HOT') {
-      preparedData[0].data.push({ type: 'sort' });
-    }
-    const proceduresSorted = [...procedures];
-    proceduresSorted.forEach(procedure => {
-      if (!this.filterProcedures(procedure)) {
-        return;
-      }
-
-      preparedData[0].data.push({
-        ...procedure,
-        date: procedure.voteDate || false,
-        list,
-      });
-    });
-    return preparedData;
-  };
-
   renderItem = onClick => ({ item }) => {
     const { list } = this.props;
     if (item.type === 'sort') {
       if (Platform.OS === 'ios') {
-        const curSort = SORTERS[list].find(({ key }) => key === this.state.sort);
+        const curSort = SORTERS[list]
+          ? SORTERS[list].find(({ key }) => key === this.state.sort)
+          : {};
         return (
           <SortRow onPress={() => this.setState({ sorterOpened: true })}>
             <ListSectionHeader title={curSort.title} />
@@ -357,32 +327,43 @@ class List extends Component {
   };
 
   render() {
-    const { data, list } = this.props;
+    const {
+      data,
+      data: { loading, procedures },
+      list,
+    } = this.props;
     const { fetchedAll, sorterOpened, sort } = this.state;
+
+    let listData = [];
+    if (list !== 'HOT') {
+      listData = procedures ? [{ procedureId: 'soter', type: 'sort' }, ...procedures] : [];
+    } else {
+      listData = procedures ? procedures : [];
+    }
 
     return (
       <Wrapper onLayout={this.onLayout} width={this.state.width}>
-        <SectionList
+        <FlatList
+          removeClippedSubviews
           contentOffset={{ y: list !== 'HOT' ? 35 : 0 }}
           ListFooterComponent={() =>
-            data.loading || !fetchedAll ? (
+            loading || !fetchedAll ? (
               <Loading>
                 <ActivityIndicator />
               </Loading>
             ) : null
           }
-          sections={this.prepareData()}
+          data={listData}
           stickySectionHeadersEnabled
-          keyExtractor={({ _id }) => _id}
+          keyExtractor={({ procedureId }) => procedureId}
           onRefresh={() => {
             this.setState({ fetchedAll: false });
             data.refetch();
           }}
           refreshing={data.networkStatus === 4}
           renderItem={this.renderItem(this.onItemClick)}
-          renderSectionHeader={() => null}
           onEndReached={() => {
-            if (!data.loading && !fetchedAll) {
+            if (!loading && !fetchedAll) {
               data.fetchMore({
                 variables: {
                   offset: data.procedures ? data.procedures.length : PAGE_SIZE,

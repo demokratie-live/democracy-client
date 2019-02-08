@@ -8,14 +8,14 @@ const Wrapper = styled.View`
   padding-left: 2;
 `;
 
-// const UnreadedIcon = styled.View`
-//   width: 12;
-//   height: 12;
-//   background-color: #1badf8;
-//   border-radius: 6;
-//   margin-top: 5;
-//   margin-right: 2;
-// `;
+const UnreadedIcon = styled.View`
+  width: 12;
+  height: 12;
+  background-color: #1badf8;
+  border-radius: 6;
+  margin-top: 5;
+  margin-right: 2;
+`;
 
 const NotificationButtonIcon = styled(Ionicons).attrs(() => ({
   size: 20,
@@ -23,23 +23,20 @@ const NotificationButtonIcon = styled(Ionicons).attrs(() => ({
   color: '#1badf8',
 }))``;
 
-const StatusIcon = ({
-  // unreaded,
-  push,
-}) => (
+const StatusIcon = ({ unreaded, push }) => (
   <Wrapper>
-    {/* {unreaded && !push && <UnreadedIcon />} */}
+    {unreaded && !push && <UnreadedIcon />}
     {push && <NotificationButtonIcon />}
   </Wrapper>
 );
 
 StatusIcon.propTypes = {
-  // unreaded: PropTypes.bool,
+  unreaded: PropTypes.bool,
   push: PropTypes.bool,
 };
 
 StatusIcon.defaultProps = {
-  // unreaded: false,
+  unreaded: false,
   push: false,
 };
 

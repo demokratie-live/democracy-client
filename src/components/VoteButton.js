@@ -10,8 +10,8 @@ const VoteIconButtonWrapper = styled.TouchableOpacity`
   border-radius: ${88 / 2};
   align-items: center;
   justify-content: center;
-  background-color: ${({ selection, votedSelection, voted }) => {
-    if ((voted || votedSelection) && selection !== votedSelection) {
+  background-color: ${({ selection, voteSelection, voted }) => {
+    if ((voted || voteSelection) && selection !== voteSelection) {
       return 'grey';
     }
     switch (selection) {
@@ -39,7 +39,7 @@ const VoteIconButton = styled.Image.attrs(() => ({
 `;
 
 const VoteButton = props => {
-  const { votedSelection, onPress, selection, voted, style } = props;
+  const { voteSelection, onPress, selection, voted, style } = props;
   let styleWrapper;
   let styleButton;
   switch (selection) {
@@ -76,7 +76,7 @@ const VoteButton = props => {
       voted={voted}
       disabled={!!(!onPress || voted)}
       selection={selection}
-      votedSelection={votedSelection}
+      voteSelection={voteSelection}
       onPress={onPress}
       style={{ ...styleWrapper, ...style }}
     >
@@ -86,7 +86,7 @@ const VoteButton = props => {
 };
 
 VoteButton.propTypes = {
-  votedSelection: PropTypes.string,
+  voteSelection: PropTypes.string,
   onPress: PropTypes.func,
   selection: PropTypes.string.isRequired,
   voted: PropTypes.bool,
@@ -94,7 +94,7 @@ VoteButton.propTypes = {
 };
 
 VoteButton.defaultProps = {
-  votedSelection: null,
+  voteSelection: null,
   onPress: null,
   voted: null,
   style: {},
