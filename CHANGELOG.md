@@ -21,6 +21,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [Imprint] Removed reference to Google Analytics(unused) [#687](https://github.com/demokratie-live/democracy-client/issues/687)
 - [SMS-Verification] Spelling mistake corrected [#710](https://github.com/demokratie-live/democracy-client/issues/710)
 - [General] PushNotification Library Updated to prevent crash
+- [General] Reduced Memory usage (apollo-cache-inmemory)
+- [Donation] Fixed spelling mistake [#727](https://github.com/demokratie-live/democracy-client/issues/727)
 
 ## [1.1.0] - 2019-01-10
 ### Fixed
