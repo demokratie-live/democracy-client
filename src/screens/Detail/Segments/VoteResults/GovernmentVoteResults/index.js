@@ -103,7 +103,6 @@ class GovernmentVoteResults extends Component {
     }
 
     const renderGovernmentVoteDetails = () => {
-      console.log('renderGovernmentVoteDetails');
       const votes =
         voteResults.yes + voteResults.no + voteResults.notVoted + voteResults.abstination;
       const dataPieChart = [
