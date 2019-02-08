@@ -60,6 +60,17 @@ class GovernmentVoteResults extends Component {
     pieChartWidth: Math.min(Dimensions.get('window').width, Dimensions.get('window').height),
   };
 
+  shouldComponentUpdate(nextProps /* , nextState */) {
+    if (
+      this.props.voteResults !== nextProps.voteResults ||
+      this.props.scrollTo !== nextProps.scrollTo ||
+      this.props.currentStatus !== nextProps.currentStatus
+    ) {
+      return true;
+    }
+    return false;
+  }
+
   onLayout = () => {
     const pieChartWidth = Math.min(Dimensions.get('window').width, Dimensions.get('window').height);
     if (this.state.pieChartWidth !== pieChartWidth) {
@@ -161,8 +172,7 @@ class GovernmentVoteResults extends Component {
           chartData={dataPartyChart}
           colors={partyColors}
         />,
-        // FIXME SVG dimensionen dynamisch und schön machen
-        // <BarChart key="barChart" data={voteResults} legendData={dataPieChart} />,
+        <BarChart key="barChart" data={voteResults} legendData={dataPieChart} />,
       ];
 
       if (voteResults.decisionText) {

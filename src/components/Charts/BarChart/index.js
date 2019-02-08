@@ -3,7 +3,7 @@ import Svg from 'react-native-svg';
 import PropTypes from 'prop-types';
 
 // Components
-import BarRow from './BarRow';
+import BarColumn from './BarColumn';
 
 const BarChart = ({ data, width, maxHeight }) => {
   const maxValue = data.reduce((maxSum, { values }) => {
@@ -11,15 +11,9 @@ const BarChart = ({ data, width, maxHeight }) => {
     return Math.max(maxSum, barSum);
   }, 0);
   return (
-    <Svg
-      viewBox="0 0 100 100"
-      width={width}
-      height={Math.min(maxHeight, width)}
-      style={{}}
-      preserveAspectRatio="none"
-    >
+    <Svg viewBox="0 0 100 100" width={width} height={Math.min(maxHeight, width)} style={{}}>
       {data.map(({ label, values }, i) => (
-        <BarRow
+        <BarColumn
           key={label}
           values={values}
           index={i}
@@ -33,6 +27,7 @@ const BarChart = ({ data, width, maxHeight }) => {
 
 BarChart.propTypes = {
   width: PropTypes.number.isRequired,
+  maxHeight: PropTypes.number.isRequired,
   data: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
