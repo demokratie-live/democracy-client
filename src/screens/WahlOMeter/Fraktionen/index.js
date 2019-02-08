@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import { Dimensions } from 'react-native';
+import { Navigator } from 'react-native-navigation';
 
 // Components
 import PartyChart from '../../../components/Charts/PartyChart';
@@ -37,16 +38,23 @@ class Fraktionen extends Component {
     this.setState({ selected: index });
   };
 
+  // Filtered Array of procedures voted local
+  getMatchingProcedures = ({ votedProcedures, localVotes }) =>
+    votedProcedures.proceduresByIdHavingVoteResults.procedures.filter(({ procedureId }) =>
+      localVotes.votesSelectionLocal.find(({ procedureId: pid }) => pid === procedureId),
+    );
+
   isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }) => {
     const paddingToBottom = 20;
     return layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom;
   };
 
-  partyChartData = ({ votedProcedures, data }) => {
-    const chartData = votedProcedures.proceduresByIdHavingVoteResults.procedures.reduce(
+  partyChartData = ({ localVotes, matchingProcedures }) => {
+    const chartData = matchingProcedures.reduce(
       (prev, { voteResults: { partyVotes }, procedureId }) => {
-        const me = data.votesSelectionLocal.find(({ procedureId: pid }) => pid === procedureId)
-          .selection;
+        const me = localVotes.votesSelectionLocal.find(
+          ({ procedureId: pid }) => pid === procedureId,
+        ).selection;
         partyVotes.forEach(({ party, main }) => {
           let matched = false;
           if (me === main) {
@@ -103,57 +111,62 @@ class Fraktionen extends Component {
   };
 
   render() {
-    const {
-      chartData,
-      totalProcedures,
-      votedProceduresCount,
-      onProcedureListItemClick,
-    } = this.props;
+    const { onProcedureListItemClick, navigator } = this.props;
     const { chartWidth, selected } = this.state;
 
-    const preparedData = this.partyChartData(chartData);
-
-    const chartLegendData = [
-      {
-        label: 'Übereinstimmungen',
-        value: preparedData[selected].values[0].value,
-        color: '#f5a623',
-      },
-      {
-        label: 'Differenzen',
-        value: preparedData[selected].values[1].value,
-        color: '#b1b3b4',
-      },
-    ];
     return (
-      <VotedProceduresWrapper onProcedureListItemClick={onProcedureListItemClick}>
-        <>
-          <Header totalProcedures={totalProcedures} votedProceduresCount={votedProceduresCount} />
-          <ChartWrapper>
-            <PartyChart
-              width={chartWidth}
-              chartData={preparedData}
-              onClick={this.onClick}
-              selected={selected}
-              showPercentage
-            />
-            <ChartLegend data={chartLegendData} />
-            <ChartNote>
-              Hohe Übereinstimmungen Ihrer Stellungnahmen mit mehreren Parteien bedeuten nicht
-              zwangsläufig eine inhaltliche Nähe dieser Parteien zueinander
-            </ChartNote>
-          </ChartWrapper>
-          <ListSectionHeader title="Abstimmungen" />
-        </>
+      <VotedProceduresWrapper
+        onProcedureListItemClick={onProcedureListItemClick}
+        navigator={navigator}
+      >
+        {({ totalProcedures, chartData }) => {
+          const matchingProcedures = this.getMatchingProcedures(chartData);
+
+          const preparedData = this.partyChartData({ ...chartData, matchingProcedures });
+
+          const chartLegendData = [
+            {
+              label: 'Übereinstimmungen',
+              value: preparedData[selected].values[0].value,
+              color: '#f5a623',
+            },
+            {
+              label: 'Differenzen',
+              value: preparedData[selected].values[1].value,
+              color: '#b1b3b4',
+            },
+          ];
+          return (
+            <>
+              <Header
+                totalProcedures={totalProcedures}
+                votedProceduresCount={matchingProcedures.length}
+              />
+              <ChartWrapper>
+                <PartyChart
+                  width={chartWidth}
+                  chartData={preparedData}
+                  onClick={this.onClick}
+                  selected={selected}
+                  showPercentage
+                />
+                <ChartLegend data={chartLegendData} />
+                <ChartNote>
+                  Hohe Übereinstimmungen Ihrer Stellungnahmen mit mehreren Parteien bedeuten nicht
+                  zwangsläufig eine inhaltliche Nähe dieser Parteien zueinander
+                </ChartNote>
+              </ChartWrapper>
+              <ListSectionHeader title="Abstimmungen" />
+            </>
+          );
+        }}
       </VotedProceduresWrapper>
     );
   }
 }
 
 Fraktionen.propTypes = {
-  chartData: PropTypes.shape().isRequired,
-  totalProcedures: PropTypes.number.isRequired,
-  votedProceduresCount: PropTypes.number.isRequired,
+  navigator: PropTypes.instanceOf(Navigator).isRequired,
   onProcedureListItemClick: PropTypes.func.isRequired,
 };
 

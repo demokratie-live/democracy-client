@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import { Dimensions } from 'react-native';
+import { Navigator } from 'react-native-navigation';
 
 // Components
 import PieChart from '../../../components/Charts/PieChart';
@@ -20,14 +21,19 @@ const ChartWrapper = styled.View`
     Math.min(400, Dimensions.get('window').width, Dimensions.get('window').height)};
 `;
 
-const pieChartData = ({ votedProcedures, data }) => {
-  // Pie Chart Data Preparation
-  let pieDataRaw = votedProcedures.proceduresByIdHavingVoteResults.procedures.map(
-    ({ voteResults, procedureId }) => ({
-      government: voteResults.governmentDecision,
-      me: data.votesSelectionLocal.find(({ procedureId: pid }) => pid === procedureId).selection,
-    }),
+// Filtered Array of procedures voted local
+const getMatchingProcedures = ({ votedProcedures, localVotes }) =>
+  votedProcedures.proceduresByIdHavingVoteResults.procedures.filter(({ procedureId }) =>
+    localVotes.votesSelectionLocal.find(({ procedureId: pid }) => pid === procedureId),
   );
+
+const pieChartData = ({ localVotes, matchingProcedures }) => {
+  // Pie Chart Data Preparation
+  let pieDataRaw = matchingProcedures.map(({ voteResults, procedureId }) => ({
+    government: voteResults.governmentDecision,
+    me: localVotes.votesSelectionLocal.find(({ procedureId: pid }) => pid === procedureId)
+      .selection,
+  }));
   const pieData = pieDataRaw.reduce(
     (pre, { government, me }) => {
       if (me === government) {
@@ -56,41 +62,45 @@ const pieChartData = ({ votedProcedures, data }) => {
   ];
 };
 
-const Bundestag = ({
-  chartData,
-  totalProcedures,
-  votedProceduresCount,
-  onProcedureListItemClick,
-}) => {
-  const preparedData = pieChartData(chartData);
-
+const Bundestag = ({ onProcedureListItemClick, navigator }) => {
   return (
-    <VotedProceduresWrapper onProcedureListItemClick={onProcedureListItemClick}>
-      <>
-        <Header totalProcedures={totalProcedures} votedProceduresCount={votedProceduresCount} />
-        <ChartWrapper>
-          <PieChart
-            data={preparedData}
-            colorScale={['#EAA844', '#B1B3B4']}
-            label="Bundestag"
-            subLabel="Wahl-O-Meter"
-          />
-        </ChartWrapper>
-        <ChartLegend data={preparedData} />
-        <ChartNote>
-          Hohe Übereinstimmungen Ihrer Stellungnahmen mit dem Bundestag bedeuten eine inhaltliche
-          Nähe zu den Regierungsfraktionen
-        </ChartNote>
-        <ListSectionHeader title="Abstimmungen" />
-      </>
+    <VotedProceduresWrapper
+      onProcedureListItemClick={onProcedureListItemClick}
+      navigator={navigator}
+    >
+      {({ totalProcedures, chartData }) => {
+        const matchingProcedures = getMatchingProcedures(chartData);
+        const preparedData = pieChartData({ ...chartData, matchingProcedures });
+
+        return (
+          <>
+            <Header
+              totalProcedures={totalProcedures}
+              votedProceduresCount={matchingProcedures.length}
+            />
+            <ChartWrapper>
+              <PieChart
+                data={preparedData}
+                colorScale={['#EAA844', '#B1B3B4']}
+                label="Bundestag"
+                subLabel="Wahl-O-Meter"
+              />
+            </ChartWrapper>
+            <ChartLegend data={preparedData} />
+            <ChartNote>
+              Hohe Übereinstimmungen Ihrer Stellungnahmen mit dem Bundestag bedeuten eine
+              inhaltliche Nähe zu den Regierungsfraktionen
+            </ChartNote>
+            <ListSectionHeader title="Abstimmungen" />
+          </>
+        );
+      }}
     </VotedProceduresWrapper>
   );
 };
 
 Bundestag.propTypes = {
-  chartData: PropTypes.shape().isRequired,
-  totalProcedures: PropTypes.number.isRequired,
-  votedProceduresCount: PropTypes.number.isRequired,
+  navigator: PropTypes.instanceOf(Navigator).isRequired,
   onProcedureListItemClick: PropTypes.func.isRequired,
 };
 

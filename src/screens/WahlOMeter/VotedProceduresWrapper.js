@@ -2,71 +2,59 @@ import React from 'react';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
-import { unionBy } from 'lodash';
+import { Navigator } from 'react-native-navigation';
+
+// Components
+import ListItem from '../VoteList/ListItem';
+import NoVotesPlaceholder from './NoVotesPlaceholder';
 
 // GraphQL
 import PROCEDURES_WITH_VOTE_RESULTS from '../../graphql/queries/proceduresByIdHavingVoteResults';
-import ListItem from '../VoteList/ListItem';
+import VOTES_SELECTION_LOCAL from '../../graphql/queries/local/votesSelection';
 
 const Wrapper = styled.FlatList`
   background-color: #fff;
   padding-top: 18;
 `;
 
-const VotedProceduresWrapper = ({ onProcedureListItemClick, children }) => {
-  let hasMore = true;
-
+const VotedProceduresWrapper = ({ onProcedureListItemClick, children, navigator }) => {
   return (
-    <Query
-      query={PROCEDURES_WITH_VOTE_RESULTS}
-      variables={{ procedureIds: null, offset: 0, limit: 10 }}
-      fetchPolicy="cache-and-network"
-    >
-      {({ data, fetchMore }) => {
-        if (!data || !data.proceduresByIdHavingVoteResults) {
-          return children;
+    <Query query={VOTES_SELECTION_LOCAL}>
+      {({ data: localVotes }) => {
+        if (!localVotes.votesSelectionLocal || localVotes.votesSelectionLocal.length === 0) {
+          return <NoVotesPlaceholder subline="Bundestag" navigator={navigator} />;
         }
-
         return (
-          <Wrapper
-            data={['chart', ...data.proceduresByIdHavingVoteResults.procedures]}
-            renderItem={({ item }) =>
-              item === 'chart' ? (
-                children
-              ) : (
-                <ListItem item={item} onClick={() => onProcedureListItemClick({ item })} />
-              )
-            }
-            keyExtractor={({ procedureId }) => (procedureId ? procedureId : 'chart')}
-            onEndReached={() =>
-              hasMore &&
-              fetchMore({
-                variables: {
-                  offset: data.proceduresByIdHavingVoteResults.procedures.length,
-                },
-                updateQuery: (prev, { fetchMoreResult }) => {
-                  if (!fetchMoreResult) return prev;
-                  if (
-                    hasMore &&
-                    fetchMoreResult.proceduresByIdHavingVoteResults.procedures.length === 0
-                  )
-                    hasMore = false;
+          <Query
+            query={PROCEDURES_WITH_VOTE_RESULTS}
+            variables={{ procedureIds: null, pageSize: 999999 }}
+            fetchPolicy="cache-and-network"
+          >
+            {({ data: proceduresData }) => {
+              let totalProcedures = 0;
+              if (proceduresData && proceduresData.proceduresByIdHavingVoteResults) {
+                totalProcedures = proceduresData.proceduresByIdHavingVoteResults.total;
 
-                  prev.proceduresByIdHavingVoteResults.procedures;
-                  return Object.assign({}, prev, {
-                    proceduresByIdHavingVoteResults: {
-                      ...prev.proceduresByIdHavingVoteResults,
-                      procedures: unionBy(
-                        prev.proceduresByIdHavingVoteResults.procedures,
-                        fetchMoreResult.proceduresByIdHavingVoteResults.procedures,
-                        '_id',
-                      ),
-                    },
-                  });
-                },
-              })
-            }
-          />
+                return (
+                  <Wrapper
+                    data={['chart', ...proceduresData.proceduresByIdHavingVoteResults.procedures]}
+                    renderItem={({ item }) =>
+                      item === 'chart' ? (
+                        children({
+                          totalProcedures,
+                          chartData: { votedProcedures: proceduresData, localVotes },
+                        })
+                      ) : (
+                        <ListItem item={item} onClick={() => onProcedureListItemClick({ item })} />
+                      )
+                    }
+                    keyExtractor={({ procedureId }) => (procedureId ? procedureId : 'chart')}
+                  />
+                );
+              }
+              return null;
+            }}
+          </Query>
         );
       }}
     </Query>
@@ -74,7 +62,8 @@ const VotedProceduresWrapper = ({ onProcedureListItemClick, children }) => {
 };
 
 VotedProceduresWrapper.propTypes = {
-  children: PropTypes.node.isRequired,
+  navigator: PropTypes.instanceOf(Navigator).isRequired,
+  children: PropTypes.func.isRequired,
   onProcedureListItemClick: PropTypes.func.isRequired,
 };
 

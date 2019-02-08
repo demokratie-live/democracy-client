@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Query } from 'react-apollo';
 import styled from 'styled-components/native';
 import { Platform, SegmentedControlIOS, Dimensions, View } from 'react-native';
 import { Navigator } from 'react-native-navigation';
@@ -12,11 +11,6 @@ import preventNavStackDuplicate from '../../hocs/preventNavStackDuplicate';
 // Components
 import Bundestag from './Bundestag';
 import Fraktionen from './Fraktionen';
-import NoVotesPlaceholder from './NoVotesPlaceholder';
-
-// GraphQL
-import VOTES_SELECTION_LOCAL from '../../graphql/queries/local/votesSelection';
-import PROCEDURES_WITH_VOTE_RESULTS from '../../graphql/queries/proceduresByIdHavingVoteResults';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -105,130 +99,78 @@ class WahlOMeter extends Component {
 
   render() {
     const { selectedIndex, routes, width } = this.state;
+    let bundestagScreen = (
+      <View key="bundestag" style={{ flex: 1, width: width }}>
+        <Bundestag
+          onProcedureListItemClick={this.onProcedureListItemClick}
+          navigator={this.props.navigator}
+        />
+      </View>
+    );
+    let fraktionenScreen = (
+      <View key="fraktionen" style={{ flex: 1, width: width }}>
+        <Fraktionen
+          onProcedureListItemClick={this.onProcedureListItemClick}
+          navigator={this.props.navigator}
+        />
+      </View>
+    );
     return (
       <Wrapper onLayout={this.onLayout}>
         {Platform.OS === 'ios' && (
-          <SegmentControlsWrapper>
-            <SegmentedControlIOS
-              style={{
-                alignSelf: 'flex-end',
-                width: '100%',
-              }}
-              values={['Bundestag', 'Fraktionen']}
-              tintColor="#ffffff"
-              selectedIndex={selectedIndex}
-              onChange={event => {
-                this.setState({
-                  selectedIndex: event.nativeEvent.selectedSegmentIndex,
-                });
+          <>
+            <SegmentControlsWrapper>
+              <SegmentedControlIOS
+                style={{
+                  alignSelf: 'flex-end',
+                  width: '100%',
+                }}
+                values={['Bundestag', 'Fraktionen']}
+                tintColor="#ffffff"
+                selectedIndex={selectedIndex}
+                onChange={event => {
+                  this.setState({
+                    selectedIndex: event.nativeEvent.selectedSegmentIndex,
+                  });
+                  this.scrollView.scrollTo({
+                    y: 0,
+                    x: event.nativeEvent.selectedSegmentIndex * this.state.width,
+                  });
+                }}
+              />
+            </SegmentControlsWrapper>
+
+            <ScrollView
+              onContentSizeChange={() => {
                 this.scrollView.scrollTo({
                   y: 0,
-                  x: event.nativeEvent.selectedSegmentIndex * this.state.width,
+                  x: selectedIndex * this.state.width,
                 });
               }}
-            />
-          </SegmentControlsWrapper>
+              onMomentumScrollEnd={this.onScrollEndDrag}
+              ref={e => {
+                this.scrollView = e;
+              }}
+            >
+              {[bundestagScreen, fraktionenScreen]}
+            </ScrollView>
+          </>
         )}
-        <Query query={VOTES_SELECTION_LOCAL}>
-          {({ data }) => {
-            if (!data.votesSelectionLocal || data.votesSelectionLocal.length === 0) {
-              return <NoVotesPlaceholder subline="Bundestag" navigator={this.props.navigator} />;
-            }
-
-            return (
-              <Query
-                query={PROCEDURES_WITH_VOTE_RESULTS}
-                variables={{
-                  procedureIds: data.votesSelectionLocal.map(({ procedureId }) => procedureId),
-                  pageSize: 999999,
-                }}
-                fetchPolicy="cache-and-network"
-              >
-                {({ data: votedProcedures }) => {
-                  let bundestagScreen = null;
-                  let fraktionenScreen = null;
-                  if (
-                    !votedProcedures.proceduresByIdHavingVoteResults ||
-                    votedProcedures.proceduresByIdHavingVoteResults.procedures.length === 0
-                  ) {
-                    bundestagScreen = (
-                      <View key="noVotes-bundestag" style={{ flex: 1, width: width }}>
-                        <NoVotesPlaceholder subline="Bundestag" navigator={this.props.navigator} />
-                      </View>
-                    );
-                    fraktionenScreen = (
-                      <View key="noVotes-fraktionen" style={{ flex: 1, width: width }}>
-                        <NoVotesPlaceholder subline="Fraktionen" navigator={this.props.navigator} />
-                      </View>
-                    );
-                  } else {
-                    const totalProcedures = votedProcedures.proceduresByIdHavingVoteResults.total;
-                    const votedProceduresCount =
-                      votedProcedures.proceduresByIdHavingVoteResults.procedures.length;
-
-                    bundestagScreen = (
-                      <View key="bundestag" style={{ flex: 1, width: width }}>
-                        <Bundestag
-                          chartData={{ votedProcedures, data }}
-                          totalProcedures={totalProcedures}
-                          votedProceduresCount={votedProceduresCount}
-                          onProcedureListItemClick={this.onProcedureListItemClick}
-                        />
-                      </View>
-                    );
-
-                    fraktionenScreen = (
-                      <View key="fraktionen" style={{ flex: 1, width: width }}>
-                        <Fraktionen
-                          chartData={{ votedProcedures, data }}
-                          totalProcedures={totalProcedures}
-                          votedProceduresCount={votedProceduresCount}
-                          onProcedureListItemClick={this.onProcedureListItemClick}
-                        />
-                      </View>
-                    );
-                  }
-                  if (Platform.OS === 'ios') {
-                    return (
-                      <ScrollView
-                        onContentSizeChange={() => {
-                          this.scrollView.scrollTo({
-                            y: 0,
-                            x: selectedIndex * this.state.width,
-                          });
-                        }}
-                        onMomentumScrollEnd={this.onScrollEndDrag}
-                        ref={e => {
-                          this.scrollView = e;
-                        }}
-                      >
-                        {[bundestagScreen, fraktionenScreen]}
-                      </ScrollView>
-                    );
-                  } else {
-                    return (
-                      <TabView
-                        navigationState={{ index: selectedIndex, routes }}
-                        renderScene={SceneMap({
-                          first: () => bundestagScreen,
-                          second: () => fraktionenScreen,
-                        })}
-                        onIndexChange={selectedIndex => this.setState({ selectedIndex })}
-                        initialLayout={{
-                          width: Dimensions.get('window').width,
-                          height: Dimensions.get('window').height,
-                        }}
-                        renderTabBar={props => (
-                          <TabBar {...props} tabStyle={{ backgroundColor: '#4494D3' }} />
-                        )}
-                      />
-                    );
-                  }
-                }}
-              </Query>
-            );
-          }}
-        </Query>
+        {Platform.OS === 'android' && (
+          <TabView
+            navigationState={{ index: selectedIndex, routes }}
+            renderScene={SceneMap({
+              first: () => bundestagScreen,
+              second: () => fraktionenScreen,
+            })}
+            onIndexChange={selectedIndex => this.setState({ selectedIndex })}
+            initialLayout={{
+              width: Dimensions.get('window').width,
+              height: Dimensions.get('window').height,
+            }}
+            renderTabBar={props => <TabBar {...props} tabStyle={{ backgroundColor: '#4494D3' }} />}
+          />
+        )}
       </Wrapper>
     );
   }
