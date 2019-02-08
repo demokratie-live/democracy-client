@@ -27,6 +27,10 @@ const SegmentControlsWrapper = styled.View`
   padding-bottom: 10;
 `;
 
+const AndroidControlsWrapper = styled.View`
+  elevation: 2;
+`;
+
 const ScrollView = styled.ScrollView.attrs(() => ({
   horizontal: true,
   pagingEnabled: true,
@@ -44,7 +48,10 @@ class WahlOMeter extends Component {
 
   constructor(props) {
     super(props);
-
+    this.props.navigator.setStyle({
+      topBarElevationShadowEnabled: false,
+      topBarShadowOffset: 0,
+    });
     if (!props.noMenu) {
       const menuIcon = Platform.OS === 'ios' ? 'ios-menu' : 'md-menu';
 
@@ -158,20 +165,23 @@ class WahlOMeter extends Component {
         )}
         {Platform.OS === 'android' && (
           <>
-            <MaterialTabs
-              items={routes}
-              selectedIndex={selectedIndex}
-              onChange={selectedIndex => {
-                this.setState({
-                  selectedIndex,
-                });
-                this.scrollView.scrollTo({
-                  y: 0,
-                  x: selectedIndex * this.state.width,
-                });
-              }}
-            />
-
+            <AndroidControlsWrapper>
+              <MaterialTabs
+                items={routes}
+                barColor="#4494d3"
+                inactiveTextColor="#214867"
+                selectedIndex={selectedIndex}
+                onChange={selectedIndex => {
+                  this.setState({
+                    selectedIndex,
+                  });
+                  this.scrollView.scrollTo({
+                    y: 0,
+                    x: selectedIndex * this.state.width,
+                  });
+                }}
+              />
+            </AndroidControlsWrapper>
             <ScrollView
               onContentSizeChange={() => {
                 this.scrollView.scrollTo({
