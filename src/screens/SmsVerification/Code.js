@@ -10,6 +10,8 @@ import Description from './Components/Description';
 import CodeInput from './Components/CodeInput';
 import Button from '../../components/Button';
 
+import topTabs from '../../screens/VoteList/topTabs';
+
 // GraphQL
 import REQUEST_VERIFICATION from '../../graphql/mutations/requestVerification';
 import REQUEST_CODE from '../../graphql/mutations/requestCode';
@@ -31,6 +33,20 @@ class Code extends Component {
     // navBarHidden: true,
     orientation: 'landscape',
   };
+
+  constructor(props) {
+    super(props);
+
+    this.props.navigator.addOnNavigatorEvent(event => {
+      if (event.id === 'willAppear') {
+        AsyncStorage.getItem('auth_phoneHash').then(res => {
+          if (res) {
+            this.props.onComplete();
+          }
+        });
+      }
+    });
+  }
 
   state = {
     height: Dimensions.get('window').height,
