@@ -60,6 +60,17 @@ class GovernmentVoteResults extends Component {
     pieChartWidth: Math.min(Dimensions.get('window').width, Dimensions.get('window').height),
   };
 
+  shouldComponentUpdate(nextProps /* , nextState */) {
+    if (
+      this.props.voteResults !== nextProps.voteResults ||
+      this.props.scrollTo !== nextProps.scrollTo ||
+      this.props.currentStatus !== nextProps.currentStatus
+    ) {
+      return true;
+    }
+    return false;
+  }
+
   onLayout = () => {
     const pieChartWidth = Math.min(Dimensions.get('window').width, Dimensions.get('window').height);
     if (this.state.pieChartWidth !== pieChartWidth) {
@@ -92,6 +103,7 @@ class GovernmentVoteResults extends Component {
     }
 
     const renderGovernmentVoteDetails = () => {
+      console.log('renderGovernmentVoteDetails');
       const votes =
         voteResults.yes + voteResults.no + voteResults.notVoted + voteResults.abstination;
       const dataPieChart = [

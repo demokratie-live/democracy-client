@@ -3,7 +3,6 @@ import { G, Text, Rect } from 'react-native-svg';
 import PropTypes from 'prop-types';
 
 const BarColumn = ({ values, index, maxValue, barsNumber }) => {
-  // console.log({ values, index, maxValue, barsNumber });
   // Y Iterator startig from Bottom
   let barElementY = 100;
 
