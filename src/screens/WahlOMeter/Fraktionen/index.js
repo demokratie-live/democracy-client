@@ -11,6 +11,7 @@ import Header from '../Header';
 import ChartNote from '../ChartNote';
 import VotedProceduresWrapper from '../VotedProceduresWrapper';
 import ListSectionHeader from '../../../components/ListSectionHeader';
+import NoVotesPlaceholder from '../NoVotesPlaceholder';
 
 const Wrapper = styled.View`
   padding-top: 18;
@@ -114,6 +115,22 @@ class Fraktionen extends Component {
       .sort((a, b) => b.values[0].value - a.values[0].value);
   };
 
+  prepareCharLegendData = preparedData => {
+    const { selected } = this.state;
+    return [
+      {
+        label: 'Übereinstimmungen',
+        value: preparedData[selected].values[0].value,
+        color: '#f5a623',
+      },
+      {
+        label: 'Differenzen',
+        value: preparedData[selected].values[1].value,
+        color: '#b1b3b4',
+      },
+    ];
+  };
+
   render() {
     const { onProcedureListItemClick, navigator } = this.props;
     const { chartWidth, selected } = this.state;
@@ -128,40 +145,37 @@ class Fraktionen extends Component {
 
           const preparedData = this.partyChartData({ ...chartData, matchingProcedures });
 
-          const chartLegendData = [
-            {
-              label: 'Übereinstimmungen',
-              value: preparedData[selected].values[0].value,
-              color: '#f5a623',
-            },
-            {
-              label: 'Differenzen',
-              value: preparedData[selected].values[1].value,
-              color: '#b1b3b4',
-            },
-          ];
-          return (
-            <Wrapper>
-              <Header
-                totalProcedures={totalProcedures}
-                votedProceduresCount={matchingProcedures.length}
-              />
-              <ChartWrapper>
-                <PartyChart
-                  width={chartWidth}
-                  chartData={preparedData}
-                  onClick={this.onClick}
-                  selected={selected}
-                  showPercentage
+          if (matchingProcedures.length > 0) {
+            return (
+              <Wrapper>
+                <Header
+                  totalProcedures={totalProcedures}
+                  votedProceduresCount={matchingProcedures.length}
                 />
-                <ChartLegend data={chartLegendData} />
-                <ChartNote>
-                  Hohe Übereinstimmungen Ihrer Stellungnahmen mit mehreren Parteien bedeuten nicht
-                  zwangsläufig eine inhaltliche Nähe dieser Parteien zueinander
-                </ChartNote>
-              </ChartWrapper>
+                <ChartWrapper>
+                  <PartyChart
+                    width={chartWidth}
+                    chartData={preparedData}
+                    onClick={this.onClick}
+                    selected={selected}
+                    showPercentage
+                  />
+                  <ChartLegend data={this.prepareCharLegendData(preparedData)} />
+                  <ChartNote>
+                    Hohe Übereinstimmungen Ihrer Stellungnahmen mit mehreren Parteien bedeuten nicht
+                    zwangsläufig eine inhaltliche Nähe dieser Parteien zueinander
+                  </ChartNote>
+                </ChartWrapper>
+
+                <ListSectionHeader title="Abstimmungen" />
+              </Wrapper>
+            );
+          }
+          return (
+            <>
+              <NoVotesPlaceholder subline="Fraktionen" />
               <ListSectionHeader title="Abstimmungen" />
-            </Wrapper>
+            </>
           );
         }}
       </VotedProceduresWrapper>
