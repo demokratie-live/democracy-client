@@ -11,6 +11,7 @@ import Header from '../Header';
 import ChartNote from '../ChartNote';
 import VotedProceduresWrapper from '../VotedProceduresWrapper';
 import ListSectionHeader from '../../../components/ListSectionHeader';
+import NoVotesPlaceholder from '../NoVotesPlaceholder';
 
 const Wrapper = styled.View`
   padding-top: 18;
@@ -76,27 +77,35 @@ const Bundestag = ({ onProcedureListItemClick, navigator }) => {
         const matchingProcedures = getMatchingProcedures(chartData);
         const preparedData = pieChartData({ ...chartData, matchingProcedures });
 
-        return (
-          <Wrapper>
-            <Header
-              totalProcedures={totalProcedures}
-              votedProceduresCount={matchingProcedures.length}
-            />
-            <ChartWrapper>
-              <PieChart
-                data={preparedData}
-                colorScale={['#EAA844', '#B1B3B4']}
-                label="Bundestag"
-                subLabel="Wahl-O-Meter"
+        if (matchingProcedures.length > 0) {
+          return (
+            <Wrapper>
+              <Header
+                totalProcedures={totalProcedures}
+                votedProceduresCount={matchingProcedures.length}
               />
-            </ChartWrapper>
-            <ChartLegend data={preparedData} />
-            <ChartNote>
-              Hohe Übereinstimmungen Ihrer Stellungnahmen mit dem Bundestag bedeuten eine
-              inhaltliche Nähe zu den Regierungsfraktionen
-            </ChartNote>
+              <ChartWrapper>
+                <PieChart
+                  data={preparedData}
+                  colorScale={['#EAA844', '#B1B3B4']}
+                  label="Bundestag"
+                  subLabel="Wahl-O-Meter"
+                />
+              </ChartWrapper>
+              <ChartLegend data={preparedData} />
+              <ChartNote>
+                Hohe Übereinstimmungen Ihrer Stellungnahmen mit dem Bundestag bedeuten eine
+                inhaltliche Nähe zu den Regierungsfraktionen
+              </ChartNote>
+              <ListSectionHeader title="Abstimmungen" />
+            </Wrapper>
+          );
+        }
+        return (
+          <>
+            <NoVotesPlaceholder subline="Bundestag" />
             <ListSectionHeader title="Abstimmungen" />
-          </Wrapper>
+          </>
         );
       }}
     </VotedProceduresWrapper>
