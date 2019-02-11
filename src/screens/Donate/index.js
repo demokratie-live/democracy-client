@@ -9,10 +9,12 @@ import { graphql } from 'react-apollo';
 
 import Config from '../../config';
 
+// Components
 import Segment from '../Detail/Segment';
 import DonatedBox from './DonatedBox';
 import Entry from './Entry';
 import EntryHeader from './EntryHeader';
+import MadeWithLove from '../../components/MadeWithLove';
 
 // GraphQl
 import DONATION_STATUS from '../../graphql/queries/donationStatus';
@@ -279,6 +281,7 @@ class Donate extends Component {
             <Version>{version}</Version>
           </Wrapper>
         )}
+        <MadeWithLove />
       </ScrollWrapper>
     );
   }

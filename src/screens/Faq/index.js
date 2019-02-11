@@ -6,7 +6,9 @@ import { Navigator } from 'react-native-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import DeviceInfo from 'react-native-device-info';
 
+// Components
 import Segment from '../Detail/Segment';
+import MadeWithLove from '../../components/MadeWithLove';
 
 import {
   faq1Title,
@@ -274,6 +276,7 @@ class Support extends Component {
         </Segment>
 
         <Version>{version}</Version>
+        <MadeWithLove />
       </ScrollWrapper>
     );
   }
