@@ -48,7 +48,7 @@ const DecisionText = styled.Text`
 const RepresentativeText = styled.Text`
   color: #9b9b9b;
   text-align: center;
-  font-size: 10;
+  font-size: 12;
 `;
 
 const RepresentativeTextBlack = styled(RepresentativeText)`

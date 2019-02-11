@@ -17,7 +17,7 @@ import Segment from '../../Segment';
 export const { width, height } = Dimensions.get('window');
 
 const RepresentativeText = styled.Text`
-  color: rgb(142, 142, 147);
+  color: #9b9b9b;
   text-align: center;
   font-size: 12;
   padding-bottom: 18;
