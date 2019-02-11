@@ -119,7 +119,11 @@ const VotedProceduresWrapper = ({ onProcedureListItemClick, children, navigator 
                   </Query>
                 );
               }
-              return null;
+              return (
+                <Loading>
+                  <ActivityIndicator />
+                </Loading>
+              );
             }}
           </Query>
         );
