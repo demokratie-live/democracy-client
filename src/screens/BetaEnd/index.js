@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Swiper from 'react-native-swiper';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
@@ -30,7 +30,7 @@ const BUTTON_TEXTS = {
   finish: 'Überspringen',
 };
 
-class BetaEnd extends Component {
+class BetaEnd extends PureComponent {
   state = {
     buttonText: BUTTON_TEXTS.next,
   };

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Platform } from 'react-native';
 import styled from 'styled-components/native';
@@ -43,7 +43,7 @@ const MenuIcon = styled(Icons).attrs(() => ({
   name: Platform.OS === 'ios' ? 'ios-menu' : 'md-menu',
 }))``;
 
-class Header extends Component {
+class Header extends PureComponent {
   clickSearchIcon = () => {
     const { navigator } = this.props;
     navigator.push({

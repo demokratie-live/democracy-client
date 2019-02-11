@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { Platform, ActivityIndicator } from 'react-native';
@@ -67,7 +67,7 @@ const BalloutBoxWrapper = styled.View`
   border-top-color: rgba(68, 148, 211, 0.1);
 `;
 
-class VoteVerification extends Component {
+class VoteVerification extends PureComponent {
   static navigatorStyle = {
     navBarButtonColor: '#FFFFFF',
     navBarBackgroundColor: '#4494d3',

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
@@ -56,7 +56,7 @@ const SearchBackTextIos = styled.Button.attrs(() => ({
   font-size: 17;
 `;
 
-class Header extends Component {
+class Header extends PureComponent {
   state = {
     term: '',
   };

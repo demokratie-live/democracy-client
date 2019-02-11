@@ -1,5 +1,5 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["__typename"] }] */
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import {
@@ -98,7 +98,7 @@ const sections = [
   },
 ];
 
-class Notifications extends Component {
+class Notifications extends PureComponent {
   static navigatorStyle = {
     navBarButtonColor: '#FFFFFF',
     navBarBackgroundColor: '#4494d3',

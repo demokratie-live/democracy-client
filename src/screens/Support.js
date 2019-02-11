@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { Platform, Linking, Alert } from 'react-native';
@@ -76,7 +76,7 @@ const ContactIcons = styled(FontAwesome).attrs(() => ({
   color: '#000000',
 }))``;
 
-class Support extends Component {
+class Support extends PureComponent {
   static navigatorStyle = {
     navBarButtonColor: '#FFFFFF',
     navBarBackgroundColor: '#4494d3',

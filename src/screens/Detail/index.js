@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { RefreshControl, ActivityIndicator, Platform, Share } from 'react-native';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
@@ -106,7 +106,7 @@ const Content = styled.View`
   flex: 1;
 `;
 
-class Detail extends Component {
+class Detail extends PureComponent {
   static navigatorStyle = {
     navBarBackgroundColor: '#4494d3',
     navBarTextColor: '#FFFFFF',

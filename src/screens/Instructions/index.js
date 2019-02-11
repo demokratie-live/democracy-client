@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Swiper from 'react-native-swiper';
 import { graphql } from 'react-apollo';
 import PropTypes from 'prop-types';
@@ -34,7 +34,7 @@ const BUTTON_TEXTS = {
   verified: 'Los gehts!',
 };
 
-class Introductions extends Component {
+class Introductions extends PureComponent {
   state = {
     buttonText: BUTTON_TEXTS.next,
     registered: null,

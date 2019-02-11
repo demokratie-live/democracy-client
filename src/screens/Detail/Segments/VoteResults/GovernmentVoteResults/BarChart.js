@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
@@ -10,7 +10,7 @@ const Wrapper = styled.View`
   align-items: center;
 `;
 
-class BarChart extends Component {
+class BarChart extends PureComponent {
   state = {
     chartWidth: Math.min(400, Dimensions.get('window').width, Dimensions.get('window').height),
   };

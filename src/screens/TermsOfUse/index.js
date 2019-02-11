@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { Platform, Linking, Alert } from 'react-native';
@@ -82,7 +82,7 @@ const Version = styled.Text`
   text-align: center;
 `;
 
-class TermsOfUse extends Component {
+class TermsOfUse extends PureComponent {
   static navigatorStyle = {
     navBarButtonColor: '#FFFFFF',
     navBarBackgroundColor: '#4494d3',

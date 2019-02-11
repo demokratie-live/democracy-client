@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { Platform, Dimensions } from 'react-native';
@@ -51,7 +51,7 @@ const SectionList = styled.SectionList`
   padding-top: 18;
 `;
 
-class Statistic extends Component {
+class Statistic extends PureComponent {
   static navigatorStyle = {
     navBarButtonColor: '#FFFFFF',
     navBarBackgroundColor: '#4494d3',

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { graphql, Query } from 'react-apollo';
 import { ActivityIndicator, Dimensions, Platform } from 'react-native';
 import Swiper from 'react-native-swiper';
@@ -45,7 +45,7 @@ const SvgWrapper = styled.View`
   right: 22;
 `;
 
-class CommunityVoteResults extends Component {
+class CommunityVoteResults extends PureComponent {
   renderCommuntiyResult = comunnityResults => {
     if (
       comunnityResults &&

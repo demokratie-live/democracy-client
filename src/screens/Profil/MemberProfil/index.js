@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { graphql, Query } from 'react-apollo';
 import { ActivityIndicator } from 'react-native';
 import styled from 'styled-components/native';
@@ -64,7 +64,7 @@ const SegmentWrapper = styled.View`
   padding-top: 18;
 `;
 
-class MemberProfil extends Component {
+class MemberProfil extends PureComponent {
   static navigatorStyle = {
     navBarButtonColor: '#FFFFFF',
     navBarBackgroundColor: '#4494d3',

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { AsyncStorage, Linking, Alert, Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
@@ -36,7 +36,7 @@ const TextLink = styled.Text`
   text-decoration: underline;
 `;
 
-class SmsVerification extends Component {
+class SmsVerification extends PureComponent {
   static navigatorStyle = {
     navBarHidden: false,
     orientation: 'portrait',

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import m from 'moment';
@@ -20,7 +20,7 @@ padding-bottom: 2;
   display: ${({ visible }) => (visible ? 'flex' : 'none')};
 `;
 
-class DateTime extends Component {
+class DateTime extends PureComponent {
   componentWillUnmount() {
     if (this.interval) {
       clearInterval(this.interval);

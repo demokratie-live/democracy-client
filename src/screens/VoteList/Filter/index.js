@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { AsyncStorage, Alert } from 'react-native';
 import styled from 'styled-components/native';
@@ -321,7 +321,7 @@ const TitleSub = styled.Text`
 
 const STORAGE_KEY = 'VoteList.Filters';
 
-class Filter extends Component {
+class Filter extends PureComponent {
   constructor(props) {
     super(props);
     props.navigator.setStyle({
