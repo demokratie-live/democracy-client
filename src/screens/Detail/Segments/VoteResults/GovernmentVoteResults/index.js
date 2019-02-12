@@ -10,6 +10,7 @@ import PieChart from '../../../../../components/Charts/PieChart';
 import Segment from '../../../Segment';
 import BarChart from './BarChart';
 import PartyChart from './PartyChart';
+import DeputyVoteData from './Deputy';
 
 export const { width, height } = Dimensions.get('window');
 
@@ -173,6 +174,7 @@ class GovernmentVoteResults extends Component {
           colors={partyColors}
         />,
         <BarChart key="barChart" data={voteResults} legendData={dataPieChart} />,
+        <DeputyVoteData key="deputy" />,
       ];
 
       if (voteResults.decisionText) {
