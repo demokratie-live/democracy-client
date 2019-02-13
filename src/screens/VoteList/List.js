@@ -299,7 +299,6 @@ class List extends Component {
               filters: { filters },
             },
           }) => {
-            console.log('filterQuery', filters);
             let filterQuery;
             if (this.filterJson !== filters) {
               const jsonObj = JSON.parse(filters);
@@ -309,7 +308,6 @@ class List extends Component {
               filterQuery = this.filterQuery;
             }
             this.filterJson = filters;
-            console.log('filterQuery', filterQuery);
             return (
               <Query
                 query={GET_PROCEDURES}

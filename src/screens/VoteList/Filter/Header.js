@@ -64,7 +64,11 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  onSave: PropTypes.func.isRequired,
+  onSave: PropTypes.func,
+};
+
+Header.defaultProps = {
+  onSave: () => {},
 };
 
 Header.defaultProps = {};
