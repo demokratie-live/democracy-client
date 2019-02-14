@@ -104,6 +104,7 @@ const DeputyVoteData = ({ procedureId }) => (
           constituencies: [constituency],
           procedureId: procedureId,
         }}
+        fetchPolicy="cache-and-network"
       >
         {({ data }) => {
           if (data && data.procedure && data.procedure.voteResults.deputyVotes[0]) {
