@@ -1,18 +1,14 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Query } from 'react-apollo';
 
 // Components
 import PartyComponent from '../../../../../components/Parties';
 
-const DEPUTY = {
-  imgURL:
-    'https://www.bundestag.de/image/522342/3x4/284/379/bae60206f15f78c7badebd6b2a67b62c/yn/nicolaisen_petra_gross.jpg',
-  party: 'CDU/CSU',
-  name: 'Petra Niclolaisen',
-  constituency: '1',
-  decision: 'YES',
-};
+// GraphQl
+import GET_DEPUTY_VOTE_RESULT from '../../../../../graphql/queries/getDeputyVoteResultsByProcedure';
+import GET_CONSTITUENCY from '../../../../../graphql/queries/local/constituency';
 
 const Wrapper = styled.View`
   width: 100%;
@@ -95,21 +91,46 @@ const getDecisionString = decision => {
   }
 };
 
-const { imgURL, party, name, constituency, decision } = DEPUTY;
-
-const DeputyVoteData = () => (
-  <Wrapper>
-    <MemberImageWrapper>
-      <MemberImage source={{ uri: imgURL }} />
-      <Party party={party} />
-      <InfoIconButton>
-        <InfoIcon />
-      </InfoIconButton>
-    </MemberImageWrapper>
-    <Text>{name}</Text>
-    <TextLighGrey>Direktkadidat WK {constituency}</TextLighGrey>
-    <Decision decision={decision}>{getDecisionString(decision)}</Decision>
-  </Wrapper>
+const DeputyVoteData = ({ procedureId }) => (
+  <Query query={GET_CONSTITUENCY} fetchPolicy="network-only">
+    {({
+      data: {
+        constituency: { constituency },
+      },
+    }) => (
+      <Query
+        query={GET_DEPUTY_VOTE_RESULT}
+        variables={{
+          constituencies: [constituency],
+          procedureId: procedureId,
+        }}
+      >
+        {({ data }) => {
+          if (data && data.procedure && data.procedure.voteResults.deputyVotes[0]) {
+            const {
+              decision,
+              deputy: { constituency, imgURL, name, party },
+            } = data.procedure.voteResults.deputyVotes[0];
+            return (
+              <Wrapper>
+                <MemberImageWrapper>
+                  <MemberImage source={{ uri: imgURL }} />
+                  <Party party={party} />
+                  <InfoIconButton>
+                    <InfoIcon />
+                  </InfoIconButton>
+                </MemberImageWrapper>
+                <Text>{name}</Text>
+                <TextLighGrey>Direktkadidat WK {constituency}</TextLighGrey>
+                <Decision decision={decision}>{getDecisionString(decision)}</Decision>
+              </Wrapper>
+            );
+          }
+          return null;
+        }}
+      </Query>
+    )}
+  </Query>
 );
 
 export default DeputyVoteData;

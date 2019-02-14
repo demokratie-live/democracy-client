@@ -174,9 +174,11 @@ class GovernmentVoteResults extends Component {
           colors={partyColors}
         />,
         <BarChart key="barChart" data={voteResults} legendData={dataPieChart} />,
-        <DeputyVoteData key="deputy" />,
       ];
 
+      if (voteResults.namedVote) {
+        screens.push(<DeputyVoteData key="deputy" procedureId={this.props.procedureId} />);
+      }
       if (voteResults.decisionText) {
         screens.push(
           <DecisionTextView key="decisionText">

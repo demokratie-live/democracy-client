@@ -309,6 +309,7 @@ class Detail extends Component {
             key="government"
             voteResults={voteResults}
             procedure={_id}
+            procedureId={procedureId}
             scrollTo={this.scrollTo}
             currentStatus={currentStatus}
             type="government"
