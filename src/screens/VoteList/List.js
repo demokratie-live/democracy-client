@@ -213,7 +213,7 @@ class List extends Component {
     return filters;
   };
 
-  filterProcedures = ({ type, subjectGroups, voted, viewedStatus, currentStatus, refetch }) => {
+  filterProcedures = ({ type, subjectGroups, voted, viewedStatus, currentStatus }) => {
     const { filters } = this.state;
     if (!filters || filters.length === 0) {
       return true;
