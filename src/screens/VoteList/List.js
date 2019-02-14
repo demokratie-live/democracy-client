@@ -1,6 +1,6 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
 import React, { Component } from 'react';
-import { Dimensions, Platform, ActivityIndicator, AsyncStorage, Picker } from 'react-native';
+import { Dimensions, Platform, ActivityIndicator, Picker } from 'react-native';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import { Navigator } from 'react-native-navigation';
@@ -53,7 +53,6 @@ const PickerFinishButton = styled.Button``;
 const FlatList = styled.FlatList``;
 
 const PAGE_SIZE = 20;
-const STORAGE_KEY = 'VoteList.Filters';
 
 const SORTERS = {
   IN_VOTE: [
@@ -127,6 +126,10 @@ class List extends Component {
     fetchedAll: false,
   };
 
+  componentDidMount() {
+    this.setRightButtons(false);
+  }
+
   onChangeFilter = filters => {
     const filterQuery = {};
     if (filters.type) {
@@ -164,7 +167,7 @@ class List extends Component {
     });
   };
 
-  onChangeSort = sort => {
+  onChangeSort = refetch => sort => {
     this.setState({ sort });
     refetch({
       sort,
@@ -210,7 +213,7 @@ class List extends Component {
     return filters;
   };
 
-  filterProcedures = ({ type, subjectGroups, voted, viewedStatus, currentStatus }) => {
+  filterProcedures = ({ type, subjectGroups, voted, viewedStatus, currentStatus, refetch }) => {
     const { filters } = this.state;
     if (!filters || filters.length === 0) {
       return true;
@@ -258,7 +261,7 @@ class List extends Component {
 
   filterJson = null;
 
-  renderItem = onClick => ({ item }) => {
+  renderItem = (onClick, refetch) => ({ item }) => {
     const { list } = this.props;
     if (item.type === 'sort') {
       if (Platform.OS === 'ios') {
@@ -276,7 +279,7 @@ class List extends Component {
         <Picker
           selectedValue={this.state.sort}
           style={{ paddingLeft: 18, height: 35, backgroundColor: '#e6edf2' }}
-          onValueChange={this.onChangeSort}
+          onValueChange={this.onChangeSort(refetch)}
         >
           {SORTERS[list].map(({ key, title }) => (
             <Picker.Item key={key} label={title} value={key} />
@@ -316,6 +319,7 @@ class List extends Component {
                   pageSize: PAGE_SIZE,
                   offset: 0,
                   filter: filterQuery,
+                  sort: this.state.sort,
                 }}
                 fetchPolicy="cache-and-network"
               >
@@ -329,68 +333,74 @@ class List extends Component {
                     listData = procedures ? procedures : [];
                   }
                   return (
-                    <FlatList
-                      removeClippedSubviews
-                      contentOffset={{ y: list !== 'HOT' ? 35 : 0 }}
-                      ListFooterComponent={() =>
-                        networkStatus === 3 ? (
-                          <Loading>
-                            <ActivityIndicator />
-                          </Loading>
-                        ) : null
-                      }
-                      data={listData}
-                      stickySectionHeadersEnabled
-                      keyExtractor={({ procedureId }) => procedureId}
-                      onRefresh={() => {
-                        refetch();
-                      }}
-                      refreshing={networkStatus === 4}
-                      renderItem={this.renderItem(this.onItemClick)}
-                      onEndReached={() => {
-                        if (!loading && !this.state.fetchedAll) {
-                          fetchMore({
-                            variables: {
-                              offset: procedures ? procedures.length : PAGE_SIZE,
-                            },
-                            updateQuery: (previousResult, { fetchMoreResult }) => {
-                              if (!fetchMoreResult || fetchMoreResult.procedures.length === 0) {
-                                this.setState({ fetchedAll: true });
-                                return previousResult;
-                              }
-                              return {
-                                procedures: unionBy(
-                                  previousResult.procedures,
-                                  fetchMoreResult.procedures,
-                                  '_id',
-                                ),
-                              };
-                            },
-                          });
+                    <>
+                      <FlatList
+                        removeClippedSubviews
+                        contentOffset={{ y: list !== 'HOT' ? 35 : 0 }}
+                        ListFooterComponent={() =>
+                          networkStatus === 3 ? (
+                            <Loading>
+                              <ActivityIndicator />
+                            </Loading>
+                          ) : null
                         }
-                      }}
-                    />
+                        data={listData}
+                        stickySectionHeadersEnabled
+                        keyExtractor={({ procedureId }) => procedureId}
+                        onRefresh={() => {
+                          refetch();
+                        }}
+                        refreshing={networkStatus === 4}
+                        renderItem={this.renderItem(this.onItemClick, refetch)}
+                        onEndReached={() => {
+                          if (!loading && !this.state.fetchedAll) {
+                            fetchMore({
+                              variables: {
+                                offset: procedures ? procedures.length : PAGE_SIZE,
+                              },
+                              updateQuery: (previousResult, { fetchMoreResult }) => {
+                                if (!fetchMoreResult || fetchMoreResult.procedures.length === 0) {
+                                  this.setState({ fetchedAll: true });
+                                  return previousResult;
+                                }
+                                return {
+                                  procedures: unionBy(
+                                    previousResult.procedures,
+                                    fetchMoreResult.procedures,
+                                    '_id',
+                                  ),
+                                };
+                              },
+                            });
+                          }
+                        }}
+                      />
+                      {Platform.OS === 'ios' && sorterOpened && (
+                        <PickerWrapper>
+                          <PickerHeader>
+                            <PickerFinishButton
+                              title="Fertig"
+                              onPress={() => this.setState({ sorterOpened: false })}
+                            />
+                          </PickerHeader>
+                          <Picker
+                            selectedValue={sort}
+                            style={{ height: 200 }}
+                            onValueChange={this.onChangeSort(refetch)}
+                          >
+                            {SORTERS[list].map(({ key, title }) => (
+                              <Picker.Item key={key} label={title} value={key} />
+                            ))}
+                          </Picker>
+                        </PickerWrapper>
+                      )}
+                    </>
                   );
                 }}
               </Query>
             );
           }}
         </Query>
-        {Platform.OS === 'ios' && sorterOpened && (
-          <PickerWrapper>
-            <PickerHeader>
-              <PickerFinishButton
-                title="Fertig"
-                onPress={() => this.setState({ sorterOpened: false })}
-              />
-            </PickerHeader>
-            <Picker selectedValue={sort} style={{ height: 200 }} onValueChange={this.onChangeSort}>
-              {SORTERS[list].map(({ key, title }) => (
-                <Picker.Item key={key} label={title} value={key} />
-              ))}
-            </Picker>
-          </PickerWrapper>
-        )}
       </Wrapper>
     );
   }

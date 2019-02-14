@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Platform } from 'react-native';
 import styled from 'styled-components/native';
@@ -29,7 +29,7 @@ const ButtonText = styled.Text`
   color: #fff;
 `;
 
-class Header extends Component {
+class Header extends PureComponent {
   onSave = async () => {
     await this.props.onSave();
   };
@@ -70,7 +70,5 @@ Header.propTypes = {
 Header.defaultProps = {
   onSave: () => {},
 };
-
-Header.defaultProps = {};
 
 export default Header;
