@@ -313,6 +313,7 @@ class Detail extends Component {
             scrollTo={this.scrollTo}
             currentStatus={currentStatus}
             type="government"
+            navigator={this.props.navigator}
           />
           {(list === 'IN_VOTE' || list === 'PAST') && (
             <Voting

@@ -1,7 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Query } from 'react-apollo';
+import { Navigator } from 'react-native-navigation';
 
 // Components
 import PartyComponent from '../../../../../components/Parties';
@@ -91,7 +93,7 @@ const getDecisionString = decision => {
   }
 };
 
-const DeputyVoteData = ({ procedureId }) => (
+const DeputyVoteData = ({ procedureId, navigator }) => (
   <Query query={GET_CONSTITUENCY} fetchPolicy="network-only">
     {({
       data: {
@@ -117,7 +119,18 @@ const DeputyVoteData = ({ procedureId }) => (
                 <MemberImageWrapper>
                   <MemberImage source={{ uri: imgURL }} />
                   <Party party={party} />
-                  <InfoIconButton>
+                  <InfoIconButton
+                    onPress={() =>
+                      navigator.push({
+                        screen: 'democracy.MemberProfil',
+                        title: `Abgeordnetenprofil`,
+                        backButtonTitle: '',
+                        passProps: {
+                          noMenu: true,
+                        },
+                      })
+                    }
+                  >
                     <InfoIcon />
                   </InfoIconButton>
                 </MemberImageWrapper>
@@ -133,5 +146,12 @@ const DeputyVoteData = ({ procedureId }) => (
     )}
   </Query>
 );
+
+DeputyVoteData.propTypes = {
+  procedureId: PropTypes.string.isRequired,
+  navigator: PropTypes.instanceOf(Navigator).isRequired,
+};
+
+DeputyVoteData.defaultProps = {};
 
 export default DeputyVoteData;

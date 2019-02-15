@@ -3,14 +3,19 @@ import React, { Component } from 'react';
 import { Dimensions, Platform } from 'react-native';
 import Swiper from 'react-native-swiper';
 import styled from 'styled-components/native';
+import { graphql } from 'react-apollo';
+import { Navigator } from 'react-native-navigation';
+
+// Components
 import ChartLegend from '../../../../../components/Charts/ChartLegend';
-// import PieChart from './VoteResults/PieChart';
 import PieChart from '../../../../../components/Charts/PieChart';
-// import BarChart from '../BarChart';
 import Segment from '../../../Segment';
 import BarChart from './BarChart';
 import PartyChart from './PartyChart';
 import DeputyVoteData from './Deputy';
+
+// GraphQL
+import GET_CONSTITUENCY from '../../../../../graphql/queries/local/constituency';
 
 export const { width, height } = Dimensions.get('window');
 
@@ -104,6 +109,7 @@ class GovernmentVoteResults extends Component {
     }
 
     const renderGovernmentVoteDetails = () => {
+      const { constituency, navigator } = this.props;
       const votes =
         voteResults.yes + voteResults.no + voteResults.notVoted + voteResults.abstination;
       const dataPieChart = [
@@ -176,8 +182,14 @@ class GovernmentVoteResults extends Component {
         <BarChart key="barChart" data={voteResults} legendData={dataPieChart} />,
       ];
 
-      if (voteResults.namedVote) {
-        screens.push(<DeputyVoteData key="deputy" procedureId={this.props.procedureId} />);
+      if (voteResults.namedVote && constituency) {
+        screens.push(
+          <DeputyVoteData
+            key="deputy"
+            procedureId={this.props.procedureId}
+            navigator={navigator}
+          />,
+        );
       }
       if (voteResults.decisionText) {
         screens.push(
@@ -233,11 +245,22 @@ GovernmentVoteResults.propTypes = {
   }),
   scrollTo: PropTypes.func.isRequired,
   currentStatus: PropTypes.string,
+  constituency: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  procedureId: PropTypes.string.isRequired,
+  navigator: PropTypes.instanceOf(Navigator).isRequired,
 };
 
 GovernmentVoteResults.defaultProps = {
   voteResults: null,
   currentStatus: null,
+  constituency: false,
 };
 
-export default GovernmentVoteResults;
+export default graphql(GET_CONSTITUENCY, {
+  props: ({ data }) => ({
+    constituency:
+      data && data.constituency && data.constituency.constituency
+        ? data.constituency.constituency
+        : false,
+  }),
+})(GovernmentVoteResults);
