@@ -297,11 +297,11 @@ class List extends Component {
     return (
       <Wrapper onLayout={this.onLayout} width={this.state.width}>
         <Query query={GET_FILTERS} fetchPolicy="network-only">
-          {({
-            data: {
-              filters: { filters },
-            },
-          }) => {
+          {({ data: filterData }) => {
+            const filters =
+              filterData && filterData.filters && filterData.filters.filters
+                ? filterData.filters.filters
+                : '{}';
             let filterQuery;
             if (this.filterJson !== filters) {
               const jsonObj = JSON.parse(filters);
