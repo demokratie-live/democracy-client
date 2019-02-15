@@ -1,4 +1,5 @@
 import React from 'react';
+import { Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -43,7 +44,7 @@ const MemberImage = styled.Image.attrs({
   height: 175;
   width: 200;
   border-radius: 100;
-  border-width: 1;
+  border-width: ${() => (Platform.OS === 'ios' ? 1 : 0)};
   border-color: lightgray;
 `;
 
