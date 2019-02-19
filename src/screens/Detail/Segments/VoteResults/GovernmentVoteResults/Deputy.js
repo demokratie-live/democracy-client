@@ -19,9 +19,7 @@ const Wrapper = styled.View`
 `;
 
 const InfoIconButton = styled.TouchableOpacity`
-  position: absolute;
-  right: -18;
-  top: 0;
+  padding-left: 9;
 `;
 
 const InfoIcon = styled(Ionicons).attrs(() => ({
@@ -29,6 +27,17 @@ const InfoIcon = styled(Ionicons).attrs(() => ({
   name: 'ios-information-circle-outline',
   color: 'rgb(199, 199, 204)',
 }))``;
+
+const DeputyDetailsWrapper = styled.View`
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  left: 20;
+`;
+
+const NameWrapper = styled.View`
+  align-items: center;
+`;
 
 const MemberImageWrapper = styled.View`
   width: 200;
@@ -120,6 +129,12 @@ const DeputyVoteData = ({ procedureId, navigator }) => (
                 <MemberImageWrapper>
                   <MemberImage source={{ uri: imgURL }} />
                   <Party party={party} />
+                </MemberImageWrapper>
+                <DeputyDetailsWrapper>
+                  <NameWrapper>
+                    <Text>{name}</Text>
+                    <TextLighGrey>Direktkadidat WK {constituency}</TextLighGrey>
+                  </NameWrapper>
                   <InfoIconButton
                     onPress={() =>
                       navigator.push({
@@ -134,9 +149,7 @@ const DeputyVoteData = ({ procedureId, navigator }) => (
                   >
                     <InfoIcon />
                   </InfoIconButton>
-                </MemberImageWrapper>
-                <Text>{name}</Text>
-                <TextLighGrey>Direktkadidat WK {constituency}</TextLighGrey>
+                </DeputyDetailsWrapper>
                 <Decision decision={decision}>{getDecisionString(decision)}</Decision>
               </Wrapper>
             );

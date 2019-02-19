@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
-import { Platform } from 'react-native';
+import { Platform, View } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Svg, { Rect, Text as SvgText, G } from 'react-native-svg';
@@ -44,9 +44,7 @@ const Party = styled(PartyComponent)`
 `;
 
 const InfoIconButton = styled.TouchableOpacity`
-  position: absolute;
-  right: -18;
-  top: 0;
+  padding-left: 9;
 `;
 
 const InfoIcon = styled(Ionicons).attrs(() => ({
@@ -57,6 +55,17 @@ const InfoIcon = styled(Ionicons).attrs(() => ({
 
 const Text = styled.Text`
   font-size: 15;
+`;
+
+const DeputyDetailsWrapper = styled.View`
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  left: 20;
+`;
+
+const NameWrapper = styled.View`
+  align-items: center;
 `;
 
 const TextLighGrey = styled(Text)`
@@ -115,7 +124,7 @@ const Wahlkreis = ({ onProcedureListItemClick, navigator }) => {
       navigator={navigator}
     >
       {({ totalProcedures, chartData, deputy: { imgURL, party, constituency, name } }) => {
-        const WIDTH = 235;
+        const WIDTH = 300;
         const matchingProcedures = getMatchingProcedures(chartData);
         let preparedData = pieChartData({ ...chartData, matchingProcedures });
 
@@ -144,6 +153,12 @@ const Wahlkreis = ({ onProcedureListItemClick, navigator }) => {
                 <MemberImageWrapper>
                   <MemberImage source={{ uri: imgURL }} />
                   <Party party={party} />
+                </MemberImageWrapper>
+                <DeputyDetailsWrapper>
+                  <NameWrapper>
+                    <Text>{name}</Text>
+                    <TextLighGrey>Direktkadidat WK {constituency}</TextLighGrey>
+                  </NameWrapper>
                   <InfoIconButton
                     onPress={() =>
                       navigator.push({
@@ -158,10 +173,7 @@ const Wahlkreis = ({ onProcedureListItemClick, navigator }) => {
                   >
                     <InfoIcon />
                   </InfoIconButton>
-                </MemberImageWrapper>
-                <Text>{name}</Text>
-                <TextLighGrey>Direktkadidat WK {constituency}</TextLighGrey>
-
+                </DeputyDetailsWrapper>
                 <Svg
                   viewBox={`0 0 ${WIDTH} 46`}
                   style={{ width: '100%', height: 46 }}
