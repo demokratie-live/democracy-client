@@ -53,10 +53,6 @@ const InfoIcon = styled(Ionicons).attrs(() => ({
   color: 'rgb(199, 199, 204)',
 }))``;
 
-const Text = styled.Text`
-  font-size: 15;
-`;
-
 const DeputyDetailsWrapper = styled.View`
   flex-direction: row;
   align-items: center;
@@ -66,6 +62,10 @@ const DeputyDetailsWrapper = styled.View`
 
 const NameWrapper = styled.View`
   align-items: center;
+`;
+
+const Text = styled.Text`
+  font-size: 15;
 `;
 
 const TextLighGrey = styled(Text)`
@@ -175,8 +175,8 @@ const Wahlkreis = ({ onProcedureListItemClick, navigator }) => {
                   </InfoIconButton>
                 </DeputyDetailsWrapper>
                 <Svg
-                  viewBox={`0 0 ${WIDTH} 46`}
-                  style={{ width: '100%', height: 46 }}
+                  viewBox={`0 0 ${WIDTH} 37`}
+                  style={{ width: '100%', height: 37, marginTop: 8 }}
                   preserveAspectRatio={false}
                 >
                   <G x="0" y="8" width={WIDTH} height="20">
