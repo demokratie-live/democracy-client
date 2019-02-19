@@ -15,6 +15,7 @@ import GET_PROCEDURE_CHART_DATA from '../../../graphql/queries/getDeputyChartDat
 import GET_DEPUTY_PROCEDURES from '../../../graphql/queries/getDeputyProcedures';
 import VOTES_SELECTION_LOCAL from '../../../graphql/queries/local/votesSelection';
 import GET_CONSTITUENCY from '../../../graphql/queries/local/constituency';
+import VoteVarificationNoConstituency from '../../VoteVarification/NoConstituency';
 
 const Wrapper = styled.FlatList`
   background-color: #fff;
@@ -84,7 +85,7 @@ const VotedProceduresWrapper = ({ onProcedureListItemClick, children, navigator 
                         }}
                         fetchPolicy="network-only"
                       >
-                        {({ data: procedurListData, fetchMore, loading }) => {
+                        {({ data: procedurListData, fetchMore, networkStatus }) => {
                           if (
                             !(
                               procedurListData &&
@@ -122,7 +123,7 @@ const VotedProceduresWrapper = ({ onProcedureListItemClick, children, navigator 
                                 )
                               }
                               ListFooterComponent={() =>
-                                loading || hasMore ? (
+                                networkStatus === 3 ? (
                                   <Loading>
                                     <ActivityIndicator />
                                   </Loading>
@@ -169,7 +170,7 @@ const VotedProceduresWrapper = ({ onProcedureListItemClick, children, navigator 
                       </Query>
                     );
                   }
-                  return null;
+                  return <VoteVarificationNoConstituency navigator={navigator} />;
                 }}
               </Query>
             );

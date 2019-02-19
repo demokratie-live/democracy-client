@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
-import { Platform, View } from 'react-native';
+import { Platform } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Svg, { Rect, Text as SvgText, G } from 'react-native-svg';
