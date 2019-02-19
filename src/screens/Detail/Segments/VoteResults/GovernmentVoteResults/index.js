@@ -143,7 +143,7 @@ class GovernmentVoteResults extends Component {
       }
       const dataPartyChart = voteResults.partyVotes.map(({ party, deviants }) => {
         const partyData = {
-          party: party === 'fraktionslos' ? 'Ohne' : party,
+          party: party === 'fraktionslos' ? 'Andere' : party,
           values: [
             { label: 'Zustimmungen', value: deviants.yes, color: '#99C93E' },
             { label: 'Enthaltungen', value: deviants.abstination, color: '#4CB0D8' },
