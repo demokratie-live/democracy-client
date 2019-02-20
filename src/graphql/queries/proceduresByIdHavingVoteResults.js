@@ -25,6 +25,7 @@ export default gql`
         votedGovernment
         submissionDate
         completed
+        subjectGroups
         voteResults {
           governmentDecision
           partyVotes {
