@@ -8,7 +8,10 @@ export default gql`
     $directCandidate: Boolean
     $procedureIds: [String!]!
   ) {
-    deputiesOfConstituency(constituency: $constituency, directCandidate: $directCandidate) {
+    chartData: deputiesOfConstituency(
+      constituency: $constituency
+      directCandidate: $directCandidate
+    ) {
       totalProcedures
       party
       imgURL
