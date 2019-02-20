@@ -1,15 +1,21 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Dimensions, Platform } from 'react-native';
 import Swiper from 'react-native-swiper';
 import styled from 'styled-components/native';
+import { graphql } from 'react-apollo';
+import { Navigator } from 'react-native-navigation';
+
+// Components
 import ChartLegend from '../../../../../components/Charts/ChartLegend';
-// import PieChart from './VoteResults/PieChart';
 import PieChart from '../../../../../components/Charts/PieChart';
-// import BarChart from '../BarChart';
 import Segment from '../../../Segment';
 import BarChart from './BarChart';
 import PartyChart from './PartyChart';
+import DeputyVoteData from './Deputy';
+
+// GraphQL
+import GET_CONSTITUENCY from '../../../../../graphql/queries/local/constituency';
 
 export const { width, height } = Dimensions.get('window');
 
@@ -48,28 +54,17 @@ const DecisionText = styled.Text`
 const RepresentativeText = styled.Text`
   color: #9b9b9b;
   text-align: center;
-  font-size: 10;
+  font-size: 12;
 `;
 
 const RepresentativeTextBlack = styled(RepresentativeText)`
   color: #000;
 `;
 
-class GovernmentVoteResults extends Component {
+class GovernmentVoteResults extends PureComponent {
   state = {
     pieChartWidth: Math.min(Dimensions.get('window').width, Dimensions.get('window').height),
   };
-
-  shouldComponentUpdate(nextProps /* , nextState */) {
-    if (
-      this.props.voteResults !== nextProps.voteResults ||
-      this.props.scrollTo !== nextProps.scrollTo ||
-      this.props.currentStatus !== nextProps.currentStatus
-    ) {
-      return true;
-    }
-    return false;
-  }
 
   onLayout = () => {
     const pieChartWidth = Math.min(Dimensions.get('window').width, Dimensions.get('window').height);
@@ -103,6 +98,7 @@ class GovernmentVoteResults extends Component {
     }
 
     const renderGovernmentVoteDetails = () => {
+      const { constituency, navigator } = this.props;
       const votes =
         voteResults.yes + voteResults.no + voteResults.notVoted + voteResults.abstination;
       const dataPieChart = [
@@ -136,7 +132,7 @@ class GovernmentVoteResults extends Component {
       }
       const dataPartyChart = voteResults.partyVotes.map(({ party, deviants }) => {
         const partyData = {
-          party: party === 'fraktionslos' ? 'Ohne' : party,
+          party: party === 'fraktionslos' ? 'Andere' : party,
           values: [
             { label: 'Zustimmungen', value: deviants.yes, color: '#99C93E' },
             { label: 'Enthaltungen', value: deviants.abstination, color: '#4CB0D8' },
@@ -175,6 +171,15 @@ class GovernmentVoteResults extends Component {
         <BarChart key="barChart" data={voteResults} legendData={dataPieChart} />,
       ];
 
+      if (voteResults.namedVote && constituency) {
+        screens.push(
+          <DeputyVoteData
+            key="deputy"
+            procedureId={this.props.procedureId}
+            navigator={navigator}
+          />,
+        );
+      }
       if (voteResults.decisionText) {
         screens.push(
           <DecisionTextView key="decisionText">
@@ -229,11 +234,22 @@ GovernmentVoteResults.propTypes = {
   }),
   scrollTo: PropTypes.func.isRequired,
   currentStatus: PropTypes.string,
+  constituency: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  procedureId: PropTypes.string.isRequired,
+  navigator: PropTypes.instanceOf(Navigator).isRequired,
 };
 
 GovernmentVoteResults.defaultProps = {
   voteResults: null,
   currentStatus: null,
+  constituency: false,
 };
 
-export default GovernmentVoteResults;
+export default graphql(GET_CONSTITUENCY, {
+  props: ({ data }) => ({
+    constituency:
+      data && data.constituency && data.constituency.constituency
+        ? data.constituency.constituency
+        : false,
+  }),
+})(GovernmentVoteResults);

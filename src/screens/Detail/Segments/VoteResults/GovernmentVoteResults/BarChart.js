@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
@@ -10,7 +10,7 @@ const Wrapper = styled.View`
   align-items: center;
 `;
 
-class BarChart extends Component {
+class BarChart extends PureComponent {
   state = {
     chartWidth: Math.min(400, Dimensions.get('window').width, Dimensions.get('window').height),
   };
@@ -30,20 +30,16 @@ class BarChart extends Component {
 
   getPartyColor = party => {
     switch (party) {
-      case 'CDU/CSU':
       case 'Union':
         return '#4b4b4b';
       case 'SPD':
         return '#ed170d';
       case 'AfD':
-      case 'AFD':
         return '#18a7d8';
       case 'FDP':
         return '#ffd32c';
-      case 'Die Linke':
       case 'Linke':
         return '#aa4581';
-      case 'B90/Grüne':
       case 'Grüne':
         return '#34ac14';
       default:

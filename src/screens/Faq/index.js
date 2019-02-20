@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { Platform, Linking, Alert } from 'react-native';
@@ -6,7 +6,9 @@ import { Navigator } from 'react-native-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import DeviceInfo from 'react-native-device-info';
 
+// Components
 import Segment from '../Detail/Segment';
+import MadeWithLove from '../../components/MadeWithLove';
 
 import {
   faq1Title,
@@ -132,7 +134,7 @@ const TextBold = styled.Text`
   color: #8f8e94;
 `;
 
-class Support extends Component {
+class Support extends PureComponent {
   static navigatorStyle = {
     navBarButtonColor: '#FFFFFF',
     navBarBackgroundColor: '#4494d3',
@@ -274,6 +276,7 @@ class Support extends Component {
         </Segment>
 
         <Version>{version}</Version>
+        <MadeWithLove />
       </ScrollWrapper>
     );
   }

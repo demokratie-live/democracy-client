@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Navigator } from 'react-native-navigation';
 import styled from 'styled-components/native';
@@ -64,7 +64,7 @@ const ButtonContainer = styled.View`
   padding-bottom: 25;
 `;
 
-class SmsSuccess extends Component {
+class SmsSuccess extends PureComponent {
   onClose = async () => {
     client.query({
       query: GET_STATISTIC,

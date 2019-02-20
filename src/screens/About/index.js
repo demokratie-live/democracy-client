@@ -1,5 +1,5 @@
 /* eslint-disable no-irregular-whitespace */
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { Platform, Linking } from 'react-native';
@@ -27,16 +27,17 @@ import {
   outro3,
   outro4,
 } from './content';
+import MadeWithLove from '../../components/MadeWithLove';
 
 const ScrollWrapper = styled.ScrollView`
   flex: 1;
-  padding-horizontal: 18;
-  padding-vertical: 18;
   background-color: #ffffff;
 `;
 
 const Wrapper = styled.View`
   flex: 1;
+  padding-horizontal: 18;
+  padding-vertical: 18;
   align-items: center;
 `;
 
@@ -73,10 +74,9 @@ const Version = styled.Text`
   font-size: 15;
   color: #8f8e94;
   padding-top: 28;
-  padding-bottom: 28;
 `;
 
-class Security extends Component {
+class Security extends PureComponent {
   static navigatorStyle = {
     navBarButtonColor: '#FFFFFF',
     navBarBackgroundColor: '#4494d3',
@@ -136,6 +136,7 @@ class Security extends Component {
 
           <Version>{version}</Version>
         </Wrapper>
+        <MadeWithLove />
       </ScrollWrapper>
     );
   }

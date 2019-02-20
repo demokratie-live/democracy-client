@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { Platform } from 'react-native';
@@ -19,7 +19,7 @@ const ScrollWrapper = styled.SectionList`
   background-color: #efeff4;
 `;
 
-class Profil extends Component {
+class Profil extends PureComponent {
   static navigatorStyle = {
     navBarButtonColor: '#FFFFFF',
     navBarBackgroundColor: '#4494d3',
@@ -190,7 +190,7 @@ Profil.defaultProps = {
 export default compose(
   graphql(GET_CONSTITUENCY, {
     props: ({ data }) => ({
-      hasConstituency: !!data.constituency && data.constituency.constituency,
+      hasConstituency: data.constituency && !!data.constituency.constituency,
       constituency:
         data.constituency && data.constituency.constituency
           ? data.constituency.constituency

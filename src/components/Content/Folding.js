@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -41,7 +41,7 @@ const Text = styled.Text`
   color: #666666;
 `;
 
-class Folding extends Component {
+class Folding extends PureComponent {
   state = {
     open: false,
   };

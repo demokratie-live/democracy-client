@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Svg, { Path, Circle, Text, G } from 'react-native-svg';
 import styled from 'styled-components/native';
@@ -7,7 +7,7 @@ const Wrapper = styled.View`
   width: 100%;
 `;
 
-class PieChart extends Component {
+class PieChart extends PureComponent {
   state = {
     width: 0,
   };
@@ -39,8 +39,8 @@ class PieChart extends Component {
   };
 
   getCoordinatesForPercent = percent => {
-    const x = Math.round(Math.cos(2 * Math.PI * percent) * 100, 2);
-    const y = Math.round(Math.sin(2 * Math.PI * percent) * 100, 2);
+    const x = Math.cos(2 * Math.PI * percent) * 100;
+    const y = Math.sin(2 * Math.PI * percent) * 100;
     return [x, y];
   };
 

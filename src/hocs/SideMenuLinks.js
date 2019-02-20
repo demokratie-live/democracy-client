@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Navigator } from 'react-native-navigation';
 
@@ -9,7 +9,7 @@ import topTabs from '../screens/VoteList/topTabs';
 let currentScreen;
 
 export default ComposedComponent => {
-  class WrappingComponent extends Component {
+  class WrappingComponent extends PureComponent {
     componentDidMount() {
       const { navigator } = this.props;
       navigator.addOnNavigatorEvent(event => {

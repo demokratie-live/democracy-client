@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import { Dimensions } from 'react-native';
@@ -25,7 +25,7 @@ const ChartWrapper = styled.View`
   max-width: ${() => Math.min(Dimensions.get('window').width, Dimensions.get('window').height)};
 `;
 
-class Fraktionen extends Component {
+class Fraktionen extends PureComponent {
   state = {
     chartWidth: Math.min(Dimensions.get('screen').width, Dimensions.get('screen').height),
     selected: 0,
@@ -61,6 +61,9 @@ class Fraktionen extends Component {
           ({ procedureId: pid }) => pid === procedureId,
         ).selection;
         partyVotes.forEach(({ party, main }) => {
+          if (party === 'fraktionslos') {
+            return prev;
+          }
           let matched = false;
           if (me === main) {
             matched = true;

@@ -51,7 +51,7 @@ const VotedProceduresWrapper = ({ onProcedureListItemClick, children, navigator 
                     query={PROCEDURES_WITH_VOTE_RESULTS}
                     variables={{ procedureIds: null, offset: 0, limit: 10 }}
                   >
-                    {({ data: procedurListData, fetchMore, loading }) => {
+                    {({ data: procedurListData, fetchMore, networkStatus }) => {
                       const listData =
                         procedurListData &&
                         procedurListData.proceduresByIdHavingVoteResults &&
@@ -75,7 +75,7 @@ const VotedProceduresWrapper = ({ onProcedureListItemClick, children, navigator 
                             )
                           }
                           ListFooterComponent={() =>
-                            loading || hasMore ? (
+                            networkStatus === 3 ? (
                               <Loading>
                                 <ActivityIndicator />
                               </Loading>
@@ -119,7 +119,11 @@ const VotedProceduresWrapper = ({ onProcedureListItemClick, children, navigator 
                   </Query>
                 );
               }
-              return null;
+              return (
+                <Loading>
+                  <ActivityIndicator />
+                </Loading>
+              );
             }}
           </Query>
         );

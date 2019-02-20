@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { PanResponder, Animated, Dimensions, AsyncStorage } from 'react-native';
 import styled from 'styled-components/native';
@@ -59,7 +59,7 @@ const Line = styled.Image.attrs(() => ({
   resizeMode: 'stretch',
 }))``;
 
-class BalloutBox extends Component {
+class BalloutBox extends PureComponent {
   state = {
     pan: new Animated.ValueXY(),
     isDraggable: true,

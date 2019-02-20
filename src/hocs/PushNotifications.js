@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Navigator, Navigation } from 'react-native-navigation';
 import { Platform, AsyncStorage } from 'react-native';
@@ -17,7 +17,7 @@ import F_PROCEDURE_VIEWED from '../graphql/fragments/ProcedureViewed';
 let LISTENERS_ADDED = false;
 
 export default ComposedComponent => {
-  class WrappingComponent extends Component {
+  class WrappingComponent extends PureComponent {
     constructor(props) {
       super(props);
       switch (Platform.OS) {

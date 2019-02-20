@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { graphql, Query } from 'react-apollo';
 import { ActivityIndicator, Dimensions, Platform } from 'react-native';
 import Swiper from 'react-native-swiper';
@@ -17,7 +17,7 @@ import Segment from '../../Segment';
 export const { width, height } = Dimensions.get('window');
 
 const RepresentativeText = styled.Text`
-  color: rgb(142, 142, 147);
+  color: #9b9b9b;
   text-align: center;
   font-size: 12;
   padding-bottom: 18;
@@ -45,7 +45,7 @@ const SvgWrapper = styled.View`
   right: 22;
 `;
 
-class CommunityVoteResults extends Component {
+class CommunityVoteResults extends PureComponent {
   renderCommuntiyResult = comunnityResults => {
     if (
       comunnityResults &&
