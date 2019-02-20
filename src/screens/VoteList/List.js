@@ -1,6 +1,6 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
-import React, { Component } from 'react';
-import { Dimensions, Platform, ActivityIndicator, Picker } from 'react-native';
+import React, { PureComponent } from 'react';
+import { Dimensions, Platform, ActivityIndicator, Picker, AsyncStorage } from 'react-native';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import { Navigator } from 'react-native-navigation';
@@ -8,13 +8,18 @@ import { Query } from 'react-apollo';
 import { unionBy } from 'lodash';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
+// HOCs
 import preventNavStackDuplicate from '../../hocs/preventNavStackDuplicate';
 
+// Components
 import ListSectionHeader from '../../components/ListSectionHeader';
 import ListItem from './ListItem';
 
+// GraphQl
 import GET_PROCEDURES from '../../graphql/queries/getProcedures';
 import GET_FILTERS from '../../graphql/queries/local/filters';
+
+const STORAGE_KEY = 'VoteList.Filters';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -95,7 +100,7 @@ const SORTERS = {
   ],
 };
 
-class List extends Component {
+class List extends PureComponent {
   static navigatorStyle = {
     navBarButtonColor: '#FFFFFF',
     navBarBackgroundColor: '#4494d3',
@@ -115,6 +120,12 @@ class List extends Component {
           },
         ],
       });
+    });
+    AsyncStorage.getItem(STORAGE_KEY).then(data => {
+      if (data) {
+        const jsonObj = JSON.parse(data);
+        this.prepareFilter(jsonObj);
+      }
     });
   }
 
