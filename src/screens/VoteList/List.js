@@ -1,5 +1,5 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Dimensions, Platform, ActivityIndicator, Picker } from 'react-native';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
@@ -95,7 +95,7 @@ const SORTERS = {
   ],
 };
 
-class List extends PureComponent {
+class List extends Component {
   static navigatorStyle = {
     navBarButtonColor: '#FFFFFF',
     navBarBackgroundColor: '#4494d3',
