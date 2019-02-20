@@ -309,9 +309,11 @@ class Detail extends Component {
             key="government"
             voteResults={voteResults}
             procedure={_id}
+            procedureId={procedureId}
             scrollTo={this.scrollTo}
             currentStatus={currentStatus}
             type="government"
+            navigator={this.props.navigator}
           />
           {(list === 'IN_VOTE' || list === 'PAST') && (
             <Voting

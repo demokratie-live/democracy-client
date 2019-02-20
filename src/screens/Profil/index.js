@@ -190,7 +190,7 @@ Profil.defaultProps = {
 export default compose(
   graphql(GET_CONSTITUENCY, {
     props: ({ data }) => ({
-      hasConstituency: !!data.constituency && data.constituency.constituency,
+      hasConstituency: data.constituency && !!data.constituency.constituency,
       constituency:
         data.constituency && data.constituency.constituency
           ? data.constituency.constituency

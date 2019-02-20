@@ -6,10 +6,10 @@ import styled from 'styled-components/native';
 import ContactBox from '../../../components/ContactBox';
 // Components
 import PartyComponent from '../../../components/Parties';
-// import ChartLegend from '../../../components/Charts/ChartLegend';
-// import Chart from './Chart';
+import ChartLegend from '../../../components/Charts/ChartLegend';
+import Chart from './Chart';
 // GraphQL
-import DEPUTIES_OF_CONSTITUENCY from '../../../graphql/queries/deputiesOfConstituency';
+import GET_DEPUTY_PROFIL from '../../../graphql/queries/getDeputyProfil';
 import GET_CONSTITUENCY from '../../../graphql/queries/local/constituency';
 import Segment from '../../Detail/Segment';
 
@@ -74,6 +74,41 @@ class MemberProfil extends Component {
 
   getActivityIndicator = () => <ActivityIndicator size="large" />;
 
+  getVotingData = procedureCountByDecision => {
+    return [
+      {
+        label: 'Zustimmungen',
+        color: '#15C063',
+        value: procedureCountByDecision.YES,
+      },
+      {
+        label: 'Enthaltungen',
+        color: '#2C82E4',
+        value: procedureCountByDecision.ABSTINATION,
+      },
+      {
+        label: 'Ablehnungen',
+        color: '#EC3E31',
+        value: procedureCountByDecision.NO,
+      },
+      { label: 'Abwesend', color: '#B1B3B4', value: procedureCountByDecision.NOTVOTED },
+    ];
+  };
+
+  getProcedureCountByDecision = procedures => {
+    return procedures.reduce(
+      (prev, { decision }) => {
+        return { ...prev, [decision]: prev[decision] + 1 };
+      },
+      {
+        YES: 0,
+        ABSTINATION: 0,
+        NO: 0,
+        NOTVOTED: 0,
+      },
+    );
+  };
+
   render() {
     const { data } = this.props;
     const constituency = data.constituency.constituency || false;
@@ -81,30 +116,11 @@ class MemberProfil extends Component {
       return this.getActivityIndicator();
     }
 
-    // const votingData = [
-    //   {
-    //     label: 'Zustimmungen',
-    //     color: '#15C063',
-    //     value: 37,
-    //   },
-    //   {
-    //     label: 'Enthaltungen',
-    //     color: '#2C82E4',
-    //     value: 32,
-    //   },
-    //   {
-    //     label: 'Ablehnungen',
-    //     color: '#EC3E31',
-    //     value: 2,
-    //   },
-    //   { label: 'Abwesend', value: 23, color: '#B1B3B4' },
-    // ];
-
     return (
       <ScrollWrapper>
         {constituency && (
           <Query
-            query={DEPUTIES_OF_CONSTITUENCY}
+            query={GET_DEPUTY_PROFIL}
             variables={{
               constituency,
               directCandidate: true,
@@ -114,10 +130,23 @@ class MemberProfil extends Component {
               if (loading) {
                 return this.getActivityIndicator();
               }
-              const { imgURL, party, name, job, biography, contact } = deputiesOfConstituency[0];
+              const {
+                imgURL,
+                party,
+                name,
+                job,
+                biography,
+                contact,
+                procedures,
+                totalProcedures,
+              } = deputiesOfConstituency[0];
               const contacts = contact.email
                 ? [{ name: 'email', url: contact.email }, ...contact.links]
                 : [...contact.links];
+
+              const procedureCountByDecision = this.getProcedureCountByDecision(procedures);
+
+              const votedProceduresCount = procedures.length - procedureCountByDecision.NOTVOTED;
 
               return (
                 <>
@@ -128,10 +157,11 @@ class MemberProfil extends Component {
                   <Text>{name}</Text>
                   <TextLighGrey>Direktkadidat WK {constituency}</TextLighGrey>
                   <TextGrey>{job}</TextGrey>
-                  {/* TODO AddRealData START 
-                  <Chart totalProcedures={150} votedProceduresCount={30} />
-                  <ChartLegend data={votingData} />
-                   TODO AddRealData END */}
+                  <Chart
+                    totalProcedures={totalProcedures}
+                    votedProceduresCount={votedProceduresCount}
+                  />
+                  <ChartLegend data={this.getVotingData(procedureCountByDecision)} />
                   <SegmentWrapper>
                     <Segment title="Biographie">
                       <TextGrey>{biography}</TextGrey>

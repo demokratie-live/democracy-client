@@ -61,6 +61,9 @@ class Fraktionen extends Component {
           ({ procedureId: pid }) => pid === procedureId,
         ).selection;
         partyVotes.forEach(({ party, main }) => {
+          if (party === 'fraktionslos') {
+            return prev;
+          }
           let matched = false;
           if (me === main) {
             matched = true;

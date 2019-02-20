@@ -11,6 +11,7 @@ import preventNavStackDuplicate from '../../hocs/preventNavStackDuplicate';
 // Components
 import Bundestag from './Bundestag';
 import Fraktionen from './Fraktionen';
+import Wahlkreis from './Wahlkreis';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -71,7 +72,7 @@ class WahlOMeter extends Component {
   state = {
     width: Dimensions.get('window').width,
     selectedIndex: 0,
-    routes: ['Bundestag', 'Fraktionen'],
+    routes: ['Bundestag', 'Fraktionen', 'Wahlkreis'],
   };
 
   onProcedureListItemClick = ({ item }) => () => {
@@ -122,6 +123,14 @@ class WahlOMeter extends Component {
         />
       </View>
     );
+    let wahlkreisScreen = (
+      <View key="wahlkreis" style={{ flex: 1, width: width }}>
+        <Wahlkreis
+          onProcedureListItemClick={this.onProcedureListItemClick}
+          navigator={this.props.navigator}
+        />
+      </View>
+    );
     return (
       <Wrapper onLayout={this.onLayout}>
         {Platform.OS === 'ios' && (
@@ -159,7 +168,7 @@ class WahlOMeter extends Component {
                 this.scrollView = e;
               }}
             >
-              {[bundestagScreen, fraktionenScreen]}
+              {[bundestagScreen, fraktionenScreen, wahlkreisScreen]}
             </ScrollView>
           </>
         )}
@@ -194,7 +203,7 @@ class WahlOMeter extends Component {
                 this.scrollView = e;
               }}
             >
-              {[bundestagScreen, fraktionenScreen]}
+              {[bundestagScreen, fraktionenScreen, wahlkreisScreen]}
             </ScrollView>
           </>
         )}

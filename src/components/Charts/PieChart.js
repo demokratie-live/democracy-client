@@ -58,7 +58,7 @@ class PieChart extends Component {
         {// TODO This is a hack - rerendering should be controlled somewhere else
         width !== 0 && (
           <Svg
-            viewBox="-100 -100 200 200"
+            viewBox="-105 -105 205 205"
             width={width}
             height={width}
             style={{ flex: 1, aspectRatio: 1 }}
