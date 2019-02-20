@@ -12,10 +12,10 @@ import getShareLink from '../../services/shareLink';
 
 // GraphQL
 import getProcedure from '../../graphql/queries/getProcedure';
-import TOGGLE_NOTIFICATION from '../../graphql/mutations/toggleNotification';
 import VIEW_PROCEDURE_LOCAL from '../../graphql/mutations/local/viewProcedure';
 import F_PROCEDURE_VIEWED from '../../graphql/fragments/ProcedureViewed';
 
+// Components
 import ActivityIndex from '../../components/ActivityIndex';
 import DateTime from '../../components/Date';
 import SegmentDetails from './Segments/Details';
@@ -25,6 +25,8 @@ import Segment from './Segment';
 import Voting from './Voting';
 import CommunityVoteResults from './Segments/VoteResults/CommunityVoteResults';
 import GovernmentVoteResults from './Segments/VoteResults/GovernmentVoteResults';
+import IntroButton from './components/IntroButton';
+import NotificationButton from './components/NotificationButton';
 
 const LoadingWrapper = styled.View`
   flex: 1;
@@ -61,18 +63,6 @@ const IntroButtons = styled.View`
   justify-content: center;
   margin-left: -8;
 `;
-
-const IntroButton = styled.TouchableOpacity`
-  align-items: center;
-  justify-content: center;
-  width: 40;
-`;
-
-const NotificationButtonIcon = styled(Ionicons).attrs(({ active }) => ({
-  size: 32,
-  name: active ? 'ios-notifications' : 'ios-notifications-outline',
-  color: active ? 'rgb(255, 171, 33)' : 'rgb(0, 0, 0)',
-}))``;
 
 const ShareButtonIcon = styled(Ionicons).attrs(() => ({
   size: 28,
@@ -209,7 +199,7 @@ class Detail extends Component {
   list = 'IN_VOTE';
 
   render() {
-    const { procedureId, toggleNotification, navigator } = this.props;
+    const { procedureId, navigator } = this.props;
     const {
       data: { networkStatus, refetch, loading, procedure },
     } = this.props;
@@ -268,9 +258,7 @@ class Detail extends Component {
           </IntroTop>
           <IntroBottom>
             <IntroButtons>
-              <IntroButton onPress={toggleNotification}>
-                <NotificationButtonIcon active={notify} />
-              </IntroButton>
+              <NotificationButton notify={notify} procedureId={procedureId} />
               <IntroButton onPress={this.share}>
                 <ShareButtonIcon />
               </IntroButton>
@@ -334,7 +322,6 @@ Detail.propTypes = {
   procedureId: PropTypes.string.isRequired,
   data: PropTypes.shape().isRequired,
   navigator: PropTypes.instanceOf(Navigator).isRequired,
-  toggleNotification: PropTypes.func.isRequired,
   viewProcedure: PropTypes.func.isRequired,
 };
 
@@ -377,49 +364,6 @@ export default compose(
                   data: aiFragment,
                 });
               }
-            },
-          });
-        },
-      };
-    },
-  }),
-  graphql(TOGGLE_NOTIFICATION, {
-    props({ mutate, ownProps }) {
-      return {
-        toggleNotification: () => {
-          const {
-            data: {
-              procedure: { notify, procedureId },
-            },
-          } = ownProps;
-          mutate({
-            variables: { procedureId },
-            optimisticResponse: {
-              __typename: 'Mutation',
-              toggleNotification: {
-                __typename: 'Procedure',
-                notify: !notify,
-              },
-            },
-            update: (
-              cache,
-              {
-                data: {
-                  toggleNotification: { notify: newNotify },
-                },
-              },
-            ) => {
-              const data = cache.readQuery({
-                query: getProcedure,
-                variables: { id: procedureId },
-              });
-
-              data.procedure.notify = newNotify;
-              cache.writeQuery({
-                query: getProcedure,
-                variables: { id: procedureId },
-                data,
-              });
             },
           });
         },
