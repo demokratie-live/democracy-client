@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { Platform, SegmentedControlIOS, Dimensions, View } from 'react-native';
@@ -39,7 +39,7 @@ const ScrollView = styled.ScrollView.attrs(() => ({
   flex: 1;
 `;
 
-class WahlOMeter extends Component {
+class WahlOMeter extends PureComponent {
   static navigatorStyle = {
     navBarButtonColor: '#FFFFFF',
     navBarBackgroundColor: '#4494d3',

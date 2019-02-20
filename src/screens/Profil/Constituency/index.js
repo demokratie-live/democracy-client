@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { Alert, Platform } from 'react-native';
@@ -97,7 +97,7 @@ const RowTextWrapper = styled.View`
   padding-left: 12;
 `;
 
-class Constituency extends Component {
+class Constituency extends PureComponent {
   static navigatorStyle = {
     navBarButtonColor: '#FFFFFF',
     navBarBackgroundColor: '#4494d3',

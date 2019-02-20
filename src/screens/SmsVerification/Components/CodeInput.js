@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
@@ -31,7 +31,7 @@ const Number = styled.TextInput.attrs(() => ({
   padding-bottom: 0;
 `;
 
-class CodeInput extends Component {
+class CodeInput extends PureComponent {
   state = {
     code: this.props.value,
   };

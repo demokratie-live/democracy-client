@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Platform, Dimensions } from 'react-native';
 import styled from 'styled-components';
@@ -8,7 +8,7 @@ const Wrapper = styled.View`
   align-items: center;
 `;
 
-class Chart extends Component {
+class Chart extends PureComponent {
   state = {
     chartWidth: Math.min(Dimensions.get('window').width, Dimensions.get('window').height),
   };

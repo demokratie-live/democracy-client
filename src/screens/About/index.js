@@ -1,5 +1,5 @@
 /* eslint-disable no-irregular-whitespace */
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { Platform, Linking } from 'react-native';
@@ -76,7 +76,7 @@ const Version = styled.Text`
   padding-top: 28;
 `;
 
-class Security extends Component {
+class Security extends PureComponent {
   static navigatorStyle = {
     navBarButtonColor: '#FFFFFF',
     navBarBackgroundColor: '#4494d3',

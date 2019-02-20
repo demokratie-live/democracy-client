@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Svg, { Path, Circle, Text, G } from 'react-native-svg';
 import styled from 'styled-components/native';
@@ -7,7 +7,7 @@ const Wrapper = styled.View`
   width: 100%;
 `;
 
-class PieChart extends Component {
+class PieChart extends PureComponent {
   state = {
     width: 0,
   };

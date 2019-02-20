@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 
@@ -9,7 +9,7 @@ const Wrapper = styled.View`
   align-items: center;
 `;
 
-class PartyChart extends Component {
+class PartyChart extends PureComponent {
   state = {
     partyChartSelected: 0,
   };

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components/native';
 import { graphql, compose } from 'react-apollo';
 import PropTypes from 'prop-types';
@@ -60,7 +60,7 @@ const VerificationTouch = styled.TouchableOpacity`
   z-index: 100;
 `;
 
-class Voting extends Component {
+class Voting extends PureComponent {
   onComplete = () => {
     this.props.refetch();
   };

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
@@ -53,7 +53,7 @@ const SearchClearButtonAndroid = styled(Icons).attrs(() => ({
   padding-left: 16;
 `;
 
-class Header extends Component {
+class Header extends PureComponent {
   state = {
     term: '',
   };

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { Platform, Linking, Alert, View } from 'react-native';
@@ -110,7 +110,7 @@ const DonateImage = styled.Image.attrs(() => ({
   width: 80%;
 `;
 
-class Donate extends Component {
+class Donate extends PureComponent {
   static navigatorStyle = {
     navBarButtonColor: '#FFFFFF',
     navBarBackgroundColor: '#4494d3',

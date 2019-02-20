@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import { Navigator } from 'react-native-navigation';
 
 export default function prevetNavStackDuplicate(ComposedComponent) {
-  return class PreventNavStackDuplicate extends Component {
+  return class PreventNavStackDuplicate extends PureComponent {
     static propTypes = {
       navigator: PropTypes.instanceOf(Navigator).isRequired,
     };

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Query } from 'react-apollo';
 import { ActivityIndicator, Dimensions } from 'react-native';
 import { Navigator } from 'react-native-navigation';
@@ -23,7 +23,7 @@ const Text = styled.Text`
   text-align: center;
 `;
 
-class Fraktionen extends Component {
+class Fraktionen extends PureComponent {
   state = {
     chartWidth: Math.min(Dimensions.get('screen').width, Dimensions.get('screen').height),
     selected: 0,

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { Dimensions } from 'react-native';
@@ -17,7 +17,7 @@ const Title = styled.Text`
 
 const Description = styled.Text``;
 
-class SmsError extends Component {
+class SmsError extends PureComponent {
   state = {
     clicked: false,
   };
