@@ -6,6 +6,9 @@ import { Navigator } from 'react-native-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import DeviceInfo from 'react-native-device-info';
 
+// Components
+import MadeWithLove from '../../components/MadeWithLove';
+
 import {
   termsIntroText,
   terms1Head,
@@ -181,6 +184,7 @@ class TermsOfUse extends Component {
 
           <Version>{version}</Version>
         </Wrapper>
+        <MadeWithLove />
       </ScrollWrapper>
     );
   }

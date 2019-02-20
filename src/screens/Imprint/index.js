@@ -5,6 +5,7 @@ import { Platform, Linking, Alert } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import DeviceInfo from 'react-native-device-info';
+import MadeWithLove from '../../components/MadeWithLove';
 
 import {
   impressum1Head,
@@ -197,6 +198,7 @@ class Support extends Component {
 
           <Version>{version}</Version>
         </Wrapper>
+        <MadeWithLove />
       </ScrollWrapper>
     );
   }

@@ -9,6 +9,9 @@ import DeviceInfo from 'react-native-device-info';
 
 import Config from '../config';
 
+// Components
+import MadeWithLove from '../components/MadeWithLove';
+
 const ScrollWrapper = styled.ScrollView`
   flex: 1;
   background-color: #ffffff;
@@ -60,15 +63,6 @@ const Version = styled.Text`
   color: #8f8e94;
   padding-top: 28;
   padding-bottom: 18;
-`;
-
-const MadeWith = styled.Text`
-  font-size: 12;
-  text-align: center;
-  color: rgb(143, 142, 148);
-  padding-top: 7;
-  padding-bottom: 7;
-  background-color: rgb(239, 239, 244);
 `;
 
 const ContactIcons = styled(FontAwesome).attrs(() => ({
@@ -179,7 +173,7 @@ Um Fehler zu beheben, ist allerdings ein qualifiziertes Feedback notwendig. Desh
           </SocialMediaWrapper>
           <Version>{version}</Version>
         </Wrapper>
-        <MadeWith>Made with ❤ – DEMOCRACY Deutschland e.V.</MadeWith>
+        <MadeWithLove />
       </ScrollWrapper>
     );
   }
