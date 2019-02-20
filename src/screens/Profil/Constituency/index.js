@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
-import { Alert, Platform } from 'react-native';
+import { Alert, Platform, KeyboardAvoidingView, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { graphql, compose } from 'react-apollo';
 
@@ -15,7 +15,7 @@ import constituenciesList from '../../../../assets/constituencies-list.json';
 import GET_CONSTITUENCY from '../../../graphql/queries/local/constituency';
 import SET_CONSTITUENCY from '../../../graphql/mutations/local/setConstituency';
 
-const Wrapper = styled.KeyboardAvoidingView`
+const Wrapper = styled.View`
   flex: 1;
   background-color: #fff;
 `;
@@ -60,7 +60,13 @@ const SearchInput = styled.TextInput.attrs(() => ({
   color: #000;
 `;
 
-const FlatList = styled.FlatList``;
+const FlatListWrapper = styled(Platform.OS === 'ios' ? KeyboardAvoidingView : View).attrs({
+  behavior: 'height',
+})``;
+
+const FlatList = styled.FlatList`
+  margin-bottom: ${Platform.OS === 'ios' ? 55 : 0};
+`;
 
 const Title = styled.Text`
   font-size: 17;
@@ -194,27 +200,29 @@ class Constituency extends Component {
             <SearchInput placeholder="PLZ eingeben" onChangeText={this.onChangePlz} />
           </SearchInputWrapper>
         </SearchBox>
-        <FlatList
-          data={constituenciesData}
-          renderItem={({ item }) => {
-            return (
-              <Row onPress={this.selectConstituency(item)}>
-                <>
-                  {this.getConstituency(item.number)}
-                  {item.selected && <SelectedConstituencyIcon />}
-                  <RowTextWrapper>
-                    <Title>{item.name}</Title>
-                    <Plz>
-                      {`Wahlkreis ${item.number}: `}
-                      {this.getPlz(item)}
-                    </Plz>
-                  </RowTextWrapper>
-                </>
-              </Row>
-            );
-          }}
-          keyExtractor={item => item.number}
-        />
+        <FlatListWrapper>
+          <FlatList
+            data={constituenciesData}
+            renderItem={({ item }) => {
+              return (
+                <Row onPress={this.selectConstituency(item)}>
+                  <>
+                    {this.getConstituency(item.number)}
+                    {item.selected && <SelectedConstituencyIcon />}
+                    <RowTextWrapper>
+                      <Title>{item.name}</Title>
+                      <Plz>
+                        {`Wahlkreis ${item.number}: `}
+                        {this.getPlz(item)}
+                      </Plz>
+                    </RowTextWrapper>
+                  </>
+                </Row>
+              );
+            }}
+            keyExtractor={item => item.number}
+          />
+        </FlatListWrapper>
       </Wrapper>
     );
   }
