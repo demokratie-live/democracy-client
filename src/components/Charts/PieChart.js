@@ -39,8 +39,8 @@ class PieChart extends PureComponent {
   };
 
   getCoordinatesForPercent = percent => {
-    const x = Math.round(Math.cos(2 * Math.PI * percent) * 100, 2);
-    const y = Math.round(Math.sin(2 * Math.PI * percent) * 100, 2);
+    const x = Math.cos(2 * Math.PI * percent) * 100;
+    const y = Math.sin(2 * Math.PI * percent) * 100;
     return [x, y];
   };
 
