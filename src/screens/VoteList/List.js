@@ -1,10 +1,10 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
 import React, { Component } from 'react';
-import { Dimensions, Platform, ActivityIndicator, AsyncStorage, Picker } from 'react-native';
+import { Dimensions, Platform, ActivityIndicator, Picker } from 'react-native';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import { Navigator } from 'react-native-navigation';
-import { graphql, compose } from 'react-apollo';
+import { Query } from 'react-apollo';
 import { unionBy } from 'lodash';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -13,7 +13,7 @@ import preventNavStackDuplicate from '../../hocs/preventNavStackDuplicate';
 import ListSectionHeader from '../../components/ListSectionHeader';
 import ListItem from './ListItem';
 
-import getProcedures from '../../graphql/queries/getProcedures';
+import GET_PROCEDURES from '../../graphql/queries/getProcedures';
 import GET_FILTERS from '../../graphql/queries/local/filters';
 
 const Wrapper = styled.View`
@@ -53,7 +53,6 @@ const PickerFinishButton = styled.Button``;
 const FlatList = styled.FlatList``;
 
 const PAGE_SIZE = 20;
-const STORAGE_KEY = 'VoteList.Filters';
 
 const SORTERS = {
   IN_VOTE: [
@@ -121,45 +120,17 @@ class List extends Component {
 
   state = {
     width: Platform.OS === 'ios' ? Dimensions.get('window').width : 'auto',
-    fetchedAll: false,
     filters: false,
     sort: this.props.list === 'IN_VOTE' ? 'voteDate' : 'lastUpdateDate',
     sorterOpened: false,
+    fetchedAll: false,
   };
 
   componentDidMount() {
-    this.setRightButtons({ filterActive: false });
-
-    AsyncStorage.getItem(STORAGE_KEY).then(data => {
-      if (data) {
-        const jsonObj = JSON.parse(data);
-        this.prepareFilter(jsonObj);
-      }
-    });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.list !== this.props.list) {
-      nextProps.data.procedures = false; // eslint-disable-line
-    }
-
-    if (
-      nextProps.data.procedures &&
-      nextProps.data.procedures.length < PAGE_SIZE &&
-      !this.state.fetchedAll
-    ) {
-      this.setState({ fetchedAll: true });
-    }
-
-    if (nextProps.filters !== this.props.filters) {
-      this.prepareFilter(JSON.parse(nextProps.filters));
-    }
+    this.setRightButtons(false);
   }
 
   onChangeFilter = filters => {
-    const {
-      data: { refetch },
-    } = this.props;
     const filterQuery = {};
     if (filters.type) {
       filterQuery.type = filters.type.map(({ title }) => title);
@@ -171,10 +142,11 @@ class List extends Component {
     if (filters.activity) {
       filterQuery.activity = filters.activity.map(({ name }) => name);
     }
-    this.setState({ fetchedAll: false });
-    refetch({
-      filter: filterQuery,
-    });
+
+    if (this.state.fetchedAll) {
+      this.setState({ fetchedAll: false });
+    }
+    return filterQuery;
   };
 
   onLayout = () => {
@@ -195,10 +167,7 @@ class List extends Component {
     });
   };
 
-  onChangeSort = sort => {
-    const {
-      data: { refetch },
-    } = this.props;
+  onChangeSort = refetch => sort => {
     this.setState({ sort });
     refetch({
       sort,
@@ -238,17 +207,10 @@ class List extends Component {
       }
       return prev;
     }, {});
-    if (
-      Object.keys(filters).length > 0 ||
-      (this.state.filters && Object.keys(this.state.filters).length)
-    ) {
-      this.setState({ filters }, () => {
-        this.onChangeFilter(this.state.filters);
-      });
-    }
     this.setRightButtons({
       filterActive: filters && Object.keys(filters).length > 0,
     });
+    return filters;
   };
 
   filterProcedures = ({ type, subjectGroups, voted, viewedStatus, currentStatus }) => {
@@ -297,7 +259,9 @@ class List extends Component {
     return doFilter;
   };
 
-  renderItem = onClick => ({ item }) => {
+  filterJson = null;
+
+  renderItem = (onClick, refetch) => ({ item }) => {
     const { list } = this.props;
     if (item.type === 'sort') {
       if (Platform.OS === 'ios') {
@@ -315,7 +279,7 @@ class List extends Component {
         <Picker
           selectedValue={this.state.sort}
           style={{ paddingLeft: 18, height: 35, backgroundColor: '#e6edf2' }}
-          onValueChange={this.onChangeSort}
+          onValueChange={this.onChangeSort(refetch)}
         >
           {SORTERS[list].map(({ key, title }) => (
             <Picker.Item key={key} label={title} value={key} />
@@ -327,79 +291,116 @@ class List extends Component {
   };
 
   render() {
-    const {
-      data,
-      data: { loading, procedures },
-      list,
-    } = this.props;
-    const { fetchedAll, sorterOpened, sort } = this.state;
-
-    let listData = [];
-    if (list !== 'HOT') {
-      listData = procedures ? [{ procedureId: 'soter', type: 'sort' }, ...procedures] : [];
-    } else {
-      listData = procedures ? procedures : [];
-    }
+    const { list } = this.props;
+    const { sorterOpened, sort } = this.state;
 
     return (
       <Wrapper onLayout={this.onLayout} width={this.state.width}>
-        <FlatList
-          removeClippedSubviews
-          contentOffset={{ y: list !== 'HOT' ? 35 : 0 }}
-          ListFooterComponent={() =>
-            loading || !fetchedAll ? (
-              <Loading>
-                <ActivityIndicator />
-              </Loading>
-            ) : null
-          }
-          data={listData}
-          stickySectionHeadersEnabled
-          keyExtractor={({ procedureId }) => procedureId}
-          onRefresh={() => {
-            this.setState({ fetchedAll: false });
-            data.refetch();
-          }}
-          refreshing={data.networkStatus === 4}
-          renderItem={this.renderItem(this.onItemClick)}
-          onEndReached={() => {
-            if (!loading && !fetchedAll) {
-              data.fetchMore({
-                variables: {
-                  offset: data.procedures ? data.procedures.length : PAGE_SIZE,
-                },
-                updateQuery: (previousResult, { fetchMoreResult }) => {
-                  if (!fetchMoreResult || fetchMoreResult.procedures.length === 0) {
-                    this.setState({ fetchedAll: true });
-                    return previousResult;
-                  }
-                  return {
-                    procedures: unionBy(
-                      previousResult.procedures,
-                      fetchMoreResult.procedures,
-                      '_id',
-                    ),
-                  };
-                },
-              });
+        <Query query={GET_FILTERS} fetchPolicy="network-only">
+          {({ data: filterData }) => {
+            const filters =
+              filterData && filterData.filters && filterData.filters.filters
+                ? filterData.filters.filters
+                : '{}';
+            let filterQuery;
+            if (this.filterJson !== filters) {
+              const jsonObj = JSON.parse(filters);
+              filterQuery = this.onChangeFilter(this.prepareFilter(jsonObj));
+              this.filterQuery = filterQuery;
+            } else {
+              filterQuery = this.filterQuery;
             }
+            this.filterJson = filters;
+            return (
+              <Query
+                query={GET_PROCEDURES}
+                variables={{
+                  listTypes: [list],
+                  pageSize: PAGE_SIZE,
+                  offset: 0,
+                  filter: filterQuery,
+                  sort: this.state.sort,
+                }}
+                fetchPolicy="cache-and-network"
+              >
+                {({ data: { procedures }, loading, refetch, networkStatus, fetchMore }) => {
+                  let listData = [];
+                  if (list !== 'HOT') {
+                    listData = procedures
+                      ? [{ procedureId: 'soter', type: 'sort' }, ...procedures]
+                      : [];
+                  } else {
+                    listData = procedures ? procedures : [];
+                  }
+                  return (
+                    <>
+                      <FlatList
+                        removeClippedSubviews
+                        contentOffset={{ y: list !== 'HOT' ? 35 : 0 }}
+                        ListFooterComponent={() =>
+                          networkStatus === 3 ? (
+                            <Loading>
+                              <ActivityIndicator />
+                            </Loading>
+                          ) : null
+                        }
+                        data={listData}
+                        stickySectionHeadersEnabled
+                        keyExtractor={({ procedureId }) => procedureId}
+                        onRefresh={() => {
+                          refetch();
+                        }}
+                        refreshing={networkStatus === 4}
+                        renderItem={this.renderItem(this.onItemClick, refetch)}
+                        onEndReached={() => {
+                          if (!loading && !this.state.fetchedAll) {
+                            fetchMore({
+                              variables: {
+                                offset: procedures ? procedures.length : PAGE_SIZE,
+                              },
+                              updateQuery: (previousResult, { fetchMoreResult }) => {
+                                if (!fetchMoreResult || fetchMoreResult.procedures.length === 0) {
+                                  this.setState({ fetchedAll: true });
+                                  return previousResult;
+                                }
+                                return {
+                                  procedures: unionBy(
+                                    previousResult.procedures,
+                                    fetchMoreResult.procedures,
+                                    '_id',
+                                  ),
+                                };
+                              },
+                            });
+                          }
+                        }}
+                      />
+                      {Platform.OS === 'ios' && sorterOpened && (
+                        <PickerWrapper>
+                          <PickerHeader>
+                            <PickerFinishButton
+                              title="Fertig"
+                              onPress={() => this.setState({ sorterOpened: false })}
+                            />
+                          </PickerHeader>
+                          <Picker
+                            selectedValue={sort}
+                            style={{ height: 200 }}
+                            onValueChange={this.onChangeSort(refetch)}
+                          >
+                            {SORTERS[list].map(({ key, title }) => (
+                              <Picker.Item key={key} label={title} value={key} />
+                            ))}
+                          </Picker>
+                        </PickerWrapper>
+                      )}
+                    </>
+                  );
+                }}
+              </Query>
+            );
           }}
-        />
-        {Platform.OS === 'ios' && sorterOpened && (
-          <PickerWrapper>
-            <PickerHeader>
-              <PickerFinishButton
-                title="Fertig"
-                onPress={() => this.setState({ sorterOpened: false })}
-              />
-            </PickerHeader>
-            <Picker selectedValue={sort} style={{ height: 200 }} onValueChange={this.onChangeSort}>
-              {SORTERS[list].map(({ key, title }) => (
-                <Picker.Item key={key} label={title} value={key} />
-              ))}
-            </Picker>
-          </PickerWrapper>
-        )}
+        </Query>
       </Wrapper>
     );
   }
@@ -409,25 +410,10 @@ List.propTypes = {
   list: PropTypes.string,
   navigator: PropTypes.instanceOf(Navigator).isRequired,
   navigateTo: PropTypes.func.isRequired,
-  data: PropTypes.shape().isRequired,
-  filters: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
 };
 
 List.defaultProps = {
   list: 'IN_VOTE',
 };
 
-export default compose(
-  graphql(getProcedures, {
-    options: ({ list }) => ({
-      notifyOnNetworkStatusChange: true,
-      variables: { listTypes: [list], pageSize: PAGE_SIZE, offset: 0 },
-      fetchPolicy: 'cache-and-network',
-    }),
-  }),
-  graphql(GET_FILTERS, {
-    props: ({ data: { filters } }) => ({
-      filters: filters && filters.filters ? filters.filters : false,
-    }),
-  }),
-)(preventNavStackDuplicate(List));
+export default preventNavStackDuplicate(List);
