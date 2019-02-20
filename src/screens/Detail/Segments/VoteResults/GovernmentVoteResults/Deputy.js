@@ -18,15 +18,15 @@ const Wrapper = styled.View`
   align-items: center;
 `;
 
-const InfoIconButton = styled.TouchableOpacity`
-  padding-left: 9;
-`;
+const InfoIconButton = styled.TouchableOpacity``;
 
 const InfoIcon = styled(Ionicons).attrs(() => ({
   size: 24,
   name: 'ios-information-circle-outline',
   color: 'rgb(199, 199, 204)',
-}))``;
+}))`
+  padding-left: 9;
+`;
 
 const DeputyDetailsWrapper = styled.View`
   flex-direction: row;
@@ -39,7 +39,7 @@ const NameWrapper = styled.View`
   align-items: center;
 `;
 
-const MemberImageWrapper = styled.View`
+const MemberImageWrapper = styled.TouchableOpacity`
   width: 200;
   height: 275;
   align-items: center;
@@ -126,7 +126,18 @@ const DeputyVoteData = ({ procedureId, navigator }) => (
             } = data.procedure.voteResults.deputyVotes[0];
             return (
               <Wrapper>
-                <MemberImageWrapper>
+                <MemberImageWrapper
+                  onPress={() =>
+                    navigator.push({
+                      screen: 'democracy.MemberProfil',
+                      title: `Abgeordnetenprofil`,
+                      backButtonTitle: '',
+                      passProps: {
+                        noMenu: true,
+                      },
+                    })
+                  }
+                >
                   <MemberImage source={{ uri: imgURL }} />
                   <Party party={party} />
                 </MemberImageWrapper>

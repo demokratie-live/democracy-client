@@ -19,7 +19,7 @@ const Wrapper = styled.View`
   padding-top: 18;
 `;
 
-const MemberImageWrapper = styled.View`
+const MemberImageWrapper = styled.TouchableOpacity`
   width: 200;
   height: 275;
   align-items: center;
@@ -43,15 +43,15 @@ const Party = styled(PartyComponent)`
   bottom: 30;
 `;
 
-const InfoIconButton = styled.TouchableOpacity`
-  padding-left: 9;
-`;
+const InfoIconButton = styled.TouchableOpacity``;
 
 const InfoIcon = styled(Ionicons).attrs(() => ({
   size: 24,
   name: 'ios-information-circle-outline',
   color: 'rgb(199, 199, 204)',
-}))``;
+}))`
+  padding-left: 9;
+`;
 
 const DeputyDetailsWrapper = styled.View`
   flex-direction: row;
@@ -150,7 +150,18 @@ const Wahlkreis = ({ onProcedureListItemClick, navigator }) => {
                 votedProceduresCount={matchingProcedures.length}
               />
               <ChartWrapper>
-                <MemberImageWrapper>
+                <MemberImageWrapper
+                  onPress={() =>
+                    navigator.push({
+                      screen: 'democracy.MemberProfil',
+                      title: `Abgeordnetenprofil`,
+                      backButtonTitle: '',
+                      passProps: {
+                        noMenu: true,
+                      },
+                    })
+                  }
+                >
                   <MemberImage source={{ uri: imgURL }} />
                   <Party party={party} />
                 </MemberImageWrapper>
