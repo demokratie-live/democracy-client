@@ -11,14 +11,13 @@ const Image = styled.Image``;
 
 const Party = ({ party, ...restProps }) => {
   switch (party) {
-    case 'CDU/CSU':
     case 'Union':
       return <Union width={150} {...restProps} />;
     case 'SPD':
       return <SPD width={150} {...restProps} />;
     case 'FDP':
       return <FDP width={150} {...restProps} />;
-    case 'Bündnis 90/Die Grünen':
+    case 'Grüne':
       return <GRUENEN width={150} {...restProps} />;
     case 'AfD':
       return (
@@ -29,7 +28,7 @@ const Party = ({ party, ...restProps }) => {
           {...restProps}
         />
       );
-    case 'Die Linke':
+    case 'Linke':
       return (
         <Image
           width={150}
