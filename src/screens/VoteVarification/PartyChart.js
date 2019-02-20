@@ -113,7 +113,7 @@ class Fraktionen extends PureComponent {
     const { chartWidth, selected } = this.state;
     const { navigator } = this.props;
     return (
-      <Query query={VOTES_SELECTION_LOCAL}>
+      <Query query={VOTES_SELECTION_LOCAL} fetchPolicy="no-cache">
         {({ data }) => {
           if (data.loading) {
             return <ActivityIndicator size="large" />;

@@ -125,6 +125,7 @@ class MemberProfil extends PureComponent {
               constituency,
               directCandidate: true,
             }}
+            fetchPolicy="cache-and-network"
           >
             {({ data: { deputiesOfConstituency }, loading }) => {
               if (loading) {
