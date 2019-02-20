@@ -181,9 +181,10 @@ class Constituency extends PureComponent {
     constituenciesData =
       this.state.term.length > 0
         ? constituenciesData.filter(
-            ({ areacodes, name, selected }) =>
+            ({ areacodes, name, selected, number }) =>
               (areacodes.some(({ code }) => code.indexOf(this.state.term) === 0) ||
-                name.toLowerCase().indexOf(this.state.term.toLowerCase()) !== -1) &&
+                name.toLowerCase().indexOf(this.state.term.toLowerCase()) !== -1 ||
+                number === this.state.term) &&
               !selected,
           )
         : constituenciesData.filter(({ selected }) => !selected);
