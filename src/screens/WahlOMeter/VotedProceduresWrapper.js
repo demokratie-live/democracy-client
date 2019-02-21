@@ -27,7 +27,7 @@ const Loading = styled.View`
 const VotedProceduresWrapper = ({ onProcedureListItemClick, children, navigator }) => {
   let hasMore = true;
   return (
-    <Query query={VOTES_SELECTION_LOCAL} fetchPolicy="no-cache">
+    <Query query={VOTES_SELECTION_LOCAL} fetchPolicy="network-only">
       {({ data: localVotes }) => {
         if (!localVotes.votesSelectionLocal || localVotes.votesSelectionLocal.length === 0) {
           return <NoVotesPlaceholder subline="Bundestag" navigator={navigator} />;
