@@ -334,7 +334,8 @@ class List extends PureComponent {
                 }}
                 fetchPolicy="cache-and-network"
               >
-                {({ data: { procedures }, loading, refetch, networkStatus, fetchMore }) => {
+                {({ data, loading, refetch, networkStatus, fetchMore }) => {
+                  const procedures = data ? data.procedures : [];
                   let listData = [];
                   if (list !== 'HOT') {
                     listData = procedures

@@ -40,7 +40,7 @@ const VotedProceduresWrapper = ({ onProcedureListItemClick, children, navigator 
           return <VoteVarificationNoConstituency navigator={navigator} />;
         }
         return (
-          <Query query={VOTES_SELECTION_LOCAL}>
+          <Query query={VOTES_SELECTION_LOCAL} fetchPolicy="no-cache">
             {({ data: localVotes }) => {
               if (!localVotes.votesSelectionLocal || localVotes.votesSelectionLocal.length === 0) {
                 return <NoVotesPlaceholder subline="Wahlkreis" navigator={navigator} />;
