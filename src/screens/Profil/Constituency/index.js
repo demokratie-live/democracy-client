@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
-import { Alert, Platform, KeyboardAvoidingView, View } from 'react-native';
+import { Alert, Platform } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { graphql, compose } from 'react-apollo';
 
@@ -60,12 +60,10 @@ const SearchInput = styled.TextInput.attrs(() => ({
   color: #000;
 `;
 
-const FlatListWrapper = styled(Platform.OS === 'ios' ? KeyboardAvoidingView : View).attrs({
-  behavior: 'height',
-})``;
+const FlatListWrapper = styled.View``;
 
 const FlatList = styled.FlatList`
-  margin-bottom: ${Platform.OS === 'ios' ? 55 : 0};
+  margin-bottom: ${Platform.OS === 'ios' ? 44 : 0};
 `;
 
 const Title = styled.Text`
