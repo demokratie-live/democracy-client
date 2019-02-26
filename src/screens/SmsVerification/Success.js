@@ -68,7 +68,7 @@ class SmsSuccess extends PureComponent {
   onClose = async () => {
     client.query({
       query: GET_STATISTIC,
-      fetchPolicy: 'cache-and-network',
+      fetchPolicy: 'network-only',
     });
     await this.props.onComplete();
     await this.props.navigator.dismissAllModals();
