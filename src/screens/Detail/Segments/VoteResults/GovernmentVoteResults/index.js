@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Dimensions, Platform } from 'react-native';
 import Swiper from 'react-native-swiper';
 import styled from 'styled-components/native';
@@ -61,10 +61,23 @@ const RepresentativeTextBlack = styled(RepresentativeText)`
   color: #000;
 `;
 
-class GovernmentVoteResults extends PureComponent {
+class GovernmentVoteResults extends Component {
   state = {
     pieChartWidth: Math.min(Dimensions.get('window').width, Dimensions.get('window').height),
   };
+
+  shouldComponentUpdate(p, s) {
+    const { procedureId, voteResults, currentStatus, constituency } = this.props;
+    const { pieChartWidth } = this.state;
+
+    return (
+      currentStatus !== p.currentStatus ||
+      pieChartWidth !== s.pieChartWidth ||
+      procedureId !== p.procedureId ||
+      constituency !== p.constituency ||
+      JSON.stringify(voteResults) !== JSON.stringify(p.voteResults)
+    );
+  }
 
   onLayout = () => {
     const pieChartWidth = Math.min(Dimensions.get('window').width, Dimensions.get('window').height);

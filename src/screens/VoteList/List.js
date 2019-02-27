@@ -1,6 +1,6 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
 import React, { PureComponent } from 'react';
-import { Dimensions, Platform, ActivityIndicator, Picker, AsyncStorage } from 'react-native';
+import { Dimensions, Platform, Picker, AsyncStorage } from 'react-native';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import { Navigator } from 'react-native-navigation';
@@ -18,6 +18,7 @@ import ListItem from './ListItem';
 // GraphQl
 import GET_PROCEDURES from '../../graphql/queries/getProcedures';
 import GET_FILTERS from '../../graphql/queries/local/filters';
+import ListLoading from '../../components/ListLoading';
 
 const STORAGE_KEY = 'VoteList.Filters';
 
@@ -25,12 +26,6 @@ const Wrapper = styled.View`
   flex: 1;
   background-color: #fff;
   width: ${({ width }) => width};
-`;
-
-const Loading = styled.View`
-  height: 50;
-  align-items: center;
-  justify-content: center;
 `;
 
 const PickerWrapper = styled.View``;
@@ -298,6 +293,7 @@ class List extends PureComponent {
         </Picker>
       );
     }
+
     return <ListItem item={item} onClick={onClick} />;
   };
 
@@ -349,13 +345,7 @@ class List extends PureComponent {
                       <FlatList
                         removeClippedSubviews
                         contentOffset={{ y: list !== 'HOT' ? 35 : 0 }}
-                        ListFooterComponent={() =>
-                          networkStatus === 3 ? (
-                            <Loading>
-                              <ActivityIndicator />
-                            </Loading>
-                          ) : null
-                        }
+                        ListFooterComponent={() => (networkStatus === 3 ? <ListLoading /> : null)}
                         data={listData}
                         stickySectionHeadersEnabled
                         keyExtractor={({ procedureId }) => procedureId}

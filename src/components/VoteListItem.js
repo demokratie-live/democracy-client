@@ -35,7 +35,7 @@ const Tags = styled.Text.attrs(() => ({ numberOfLines: 2 }))`
   color: #8f8e94;
 `;
 
-const ListItem = ({
+const VoteListItem = ({
   title,
   subjectGroups,
   voteDate,
@@ -76,7 +76,7 @@ const ListItem = ({
   </ListItemWrapper>
 );
 
-ListItem.propTypes = {
+VoteListItem.propTypes = {
   title: PropTypes.string.isRequired,
   procedureId: PropTypes.string.isRequired,
   subjectGroups: PropTypes.arrayOf(PropTypes.string),
@@ -88,7 +88,7 @@ ListItem.propTypes = {
   viewedStatus: PropTypes.string.isRequired,
 };
 
-ListItem.defaultProps = {
+VoteListItem.defaultProps = {
   subjectGroups: [],
   voteDate: false,
   children: null,
@@ -97,4 +97,4 @@ ListItem.defaultProps = {
   voted: false,
 };
 
-export default ListItem;
+export default VoteListItem;

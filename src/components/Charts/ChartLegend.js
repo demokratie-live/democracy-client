@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
@@ -45,23 +45,31 @@ const VoteResultCircle = styled.View`
   margin-right: 5;
 `;
 
-const ChartLegend = ({ data }) => {
-  return (
-    <VoteResultsWrapper>
-      <VoteResultNumbers>
-        {data.map(({ label, value, color }) => (
-          <VoteResult key={label}>
-            <VoteResultCircleNumber>
-              <VoteResultCircle color={color} />
-              <VoteResultNumber>{value}</VoteResultNumber>
-            </VoteResultCircleNumber>
-            <VoteResultLabel>{label}</VoteResultLabel>
-          </VoteResult>
-        ))}
-      </VoteResultNumbers>
-    </VoteResultsWrapper>
-  );
-};
+class ChartLegend extends Component {
+  shouldComponentUpdate(p) {
+    const { data } = this.props;
+    return JSON.stringify(data) !== JSON.stringify(p.data);
+  }
+
+  render() {
+    const { data } = this.props;
+    return (
+      <VoteResultsWrapper>
+        <VoteResultNumbers>
+          {data.map(({ label, value, color }) => (
+            <VoteResult key={label}>
+              <VoteResultCircleNumber>
+                <VoteResultCircle color={color} />
+                <VoteResultNumber>{value}</VoteResultNumber>
+              </VoteResultCircleNumber>
+              <VoteResultLabel>{label}</VoteResultLabel>
+            </VoteResult>
+          ))}
+        </VoteResultNumbers>
+      </VoteResultsWrapper>
+    );
+  }
+}
 
 ChartLegend.propTypes = {
   data: PropTypes.arrayOf(

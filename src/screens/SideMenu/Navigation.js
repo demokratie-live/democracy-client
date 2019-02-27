@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -48,28 +48,53 @@ const NavigationTitle = styled.Text`
   color: #fff;
 `;
 
-const ListSection = ({ title }) => (
-  <SectionItem>
-    <SectionTitle>{title.toUpperCase()}</SectionTitle>
-  </SectionItem>
-);
+class ListSection extends Component {
+  shouldComponentUpdate(np) {
+    const { title } = this.props;
+    if (title !== np.title) {
+      return true;
+    }
+    return false;
+  }
+  render() {
+    const { title } = this.props;
+    return (
+      <SectionItem>
+        <SectionTitle>{title.toUpperCase()}</SectionTitle>
+      </SectionItem>
+    );
+  }
+}
 
 ListSection.propTypes = {
   title: PropTypes.string.isRequired,
 };
 
-const ListItem = ({ title, icon, currentScreen, screenId, navigateTo }) => (
-  <NavigationItem
-    active={currentScreen === screenId}
-    onPress={() => navigateTo({ screenId, title })}
-  >
-    {icon}
+class NavigationListItem extends Component {
+  shouldComponentUpdate(p) {
+    const { currentScreen } = this.props;
+    if (currentScreen === p.currentScreen) {
+      return false;
+    }
+    return true;
+  }
 
-    <NavigationTitle>{title}</NavigationTitle>
-  </NavigationItem>
-);
+  render() {
+    const { title, icon, currentScreen, screenId, navigateTo } = this.props;
+    return (
+      <NavigationItem
+        active={currentScreen === screenId}
+        onPress={() => navigateTo({ screenId, title })}
+      >
+        {icon}
 
-ListItem.propTypes = {
+        <NavigationTitle>{title}</NavigationTitle>
+      </NavigationItem>
+    );
+  }
+}
+
+NavigationListItem.propTypes = {
   title: PropTypes.string.isRequired,
   icon: PropTypes.node.isRequired,
   screenId: PropTypes.string,
@@ -77,7 +102,7 @@ ListItem.propTypes = {
   navigateTo: PropTypes.func.isRequired,
 };
 
-ListItem.defaultProps = {
+NavigationListItem.defaultProps = {
   // active: false,
   screenId: '',
 };
@@ -179,7 +204,7 @@ const NavigationView = ({ currentScreen, navigateTo, verified }) => {
       sections={navigation}
       renderSectionHeader={({ section }) => <ListSection {...section} />}
       renderItem={({ item }) => (
-        <ListItem {...item} currentScreen={currentScreen} navigateTo={navigateTo} />
+        <NavigationListItem {...item} currentScreen={currentScreen} navigateTo={navigateTo} />
       )}
       keyExtractor={({ title }) => title}
     />

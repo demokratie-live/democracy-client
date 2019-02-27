@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Navigation,
   ScreenVisibilityListener as RNNScreenVisibilityListener,
@@ -19,6 +20,52 @@ import topTabs from './src/screens/VoteList/topTabs';
 import './src/services/browserLinks';
 
 YellowBox.ignoreWarnings(['Require cycle:', 'Attempted to invoke']);
+
+if (process.env.NODE_ENV !== 'production') {
+  const { whyDidYouUpdate } = require('why-did-you-update');
+  whyDidYouUpdate(React, {
+    exclude: [
+      '_class',
+      /^Touchable/,
+      /^Yellow/,
+      /^Safe/,
+      'CellRenderer',
+      'StyledNativeComponent',
+      'Query',
+      'ItemWithSeparator',
+      'AnimatedComponent',
+      'FlatList',
+      /^Virtualized/,
+      'RefreshControl',
+      'Mutation',
+      /^Apollo/,
+      'ListFooterComponent',
+      'StatusBar',
+      'SectionList',
+      'ScrollView',
+      'LinearGradient',
+
+      // SVG
+      // 'Path',
+      // 'Text',
+      // 'G',
+      // 'TSpan',
+      // 'Rect',
+      // 'Svg',
+      // 'Circle',
+
+      // Recheck
+      // 'Segment',
+      // 'Icon',
+      // 'IntroButton',
+      // 'Row',
+      // 'BalloutBox',
+      // 'ListLoading',
+      // 'VotedProceduresWrapper',
+      // /^Svg/,
+    ],
+  });
+}
 
 // Reactotron.configure() // controls connection & communication settings
 //   .useReactNative() // add all built-in react native plugins

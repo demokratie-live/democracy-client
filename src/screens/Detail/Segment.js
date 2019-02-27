@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -38,7 +38,7 @@ const Content = styled.View`
   padding-vertical: 10;
 `;
 
-class Segment extends PureComponent {
+class Segment extends Component {
   state = {
     open: false,
   };

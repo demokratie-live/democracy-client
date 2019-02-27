@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 
@@ -26,29 +26,34 @@ const Label = styled.Text`
   color: #9b9b9b;
 `;
 
-const WomHeader = ({ totalProcedures, votedProceduresCount }) => (
-  <Wrapper>
-    <Chart
-      showValue
-      valueSize={8}
-      floatNumbers={0}
-      value={(votedProceduresCount / totalProcedures) * 100}
-      width={60}
-    />
-    <ProcedureCount>
-      <ProcedureCountText>
-        {votedProceduresCount}/{totalProcedures}
-      </ProcedureCountText>
-      <Label>Namentliche Abstimmungen</Label>
-    </ProcedureCount>
-  </Wrapper>
-);
+class MemberChart extends PureComponent {
+  render() {
+    const { totalProcedures, votedProceduresCount } = this.props;
+    return (
+      <Wrapper>
+        <Chart
+          showValue
+          valueSize={8}
+          floatNumbers={0}
+          value={(votedProceduresCount / totalProcedures) * 100}
+          width={60}
+        />
+        <ProcedureCount>
+          <ProcedureCountText>
+            {votedProceduresCount}/{totalProcedures}
+          </ProcedureCountText>
+          <Label>Namentliche Abstimmungen</Label>
+        </ProcedureCount>
+      </Wrapper>
+    );
+  }
+}
 
-WomHeader.propTypes = {
+MemberChart.propTypes = {
   totalProcedures: PropTypes.number.isRequired,
   votedProceduresCount: PropTypes.number.isRequired,
 };
 
-WomHeader.defaultProps = {};
+MemberChart.defaultProps = {};
 
-export default WomHeader;
+export default MemberChart;

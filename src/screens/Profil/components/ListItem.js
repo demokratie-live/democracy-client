@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -35,13 +35,18 @@ const NavigationIoniconsIcon = styled(Ionicons).attrs(() => ({
   margin-top: 3;
 `;
 
-const ListItem = ({ children, text, arrow, onPress }) => (
-  <Wrapper onPress={onPress}>
-    <Text>{children}</Text>
-    {text && <Value arrow={arrow}>{text}</Value>}
-    {arrow && <NavigationIoniconsIcon name="ios-arrow-forward" />}
-  </Wrapper>
-);
+class ListItem extends PureComponent {
+  render() {
+    const { children, text, arrow, onPress } = this.props;
+    return (
+      <Wrapper onPress={onPress}>
+        <Text>{children}</Text>
+        {text && <Value arrow={arrow}>{text}</Value>}
+        {arrow && <NavigationIoniconsIcon name="ios-arrow-forward" />}
+      </Wrapper>
+    );
+  }
+}
 
 ListItem.propTypes = {
   children: PropTypes.node.isRequired,
