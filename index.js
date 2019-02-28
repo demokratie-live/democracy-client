@@ -55,10 +55,9 @@ if (process.env.NODE_ENV !== 'production') {
       // 'Circle',
 
       // Recheck
-      // 'Segment',
-      // 'Icon',
-      // 'IntroButton',
-      // 'Row',
+      'Segment',
+      'IntroButton',
+      'Row',
       // 'BalloutBox',
       // 'ListLoading',
       // 'VotedProceduresWrapper',

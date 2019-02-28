@@ -4,7 +4,6 @@ import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import { graphql, compose } from 'react-apollo';
 import { Navigator } from 'react-native-navigation';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import speakingurl from 'speakingurl';
 
 // Helpers
@@ -27,6 +26,7 @@ import CommunityVoteResults from './Segments/VoteResults/CommunityVoteResults';
 import GovernmentVoteResults from './Segments/VoteResults/GovernmentVoteResults';
 import IntroButton from './components/IntroButton';
 import NotificationButton from './components/NotificationButton';
+import IconCmp from '../../components/Icon';
 
 const LoadingWrapper = styled.View`
   flex: 1;
@@ -63,12 +63,6 @@ const IntroButtons = styled.View`
   justify-content: center;
   margin-left: -8;
 `;
-
-const ShareButtonIcon = styled(Ionicons).attrs(() => ({
-  size: 28,
-  name: Platform.OS === 'ios' ? 'ios-share-outline' : 'md-share',
-  color: 'rgb(0, 0, 0)',
-}))``;
 
 const IntroBottom = styled.View`
   padding-top: 8;
@@ -260,7 +254,7 @@ class Detail extends PureComponent {
             <IntroButtons>
               <NotificationButton notify={notify} procedureId={procedureId} />
               <IntroButton onPress={this.share}>
-                <ShareButtonIcon />
+                <IconCmp name={Platform.OS === 'ios' ? 'ios-share-outline' : 'md-share'} />
               </IntroButton>
             </IntroButtons>
             {date && <VoteDate date={date} long />}
