@@ -8,6 +8,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import VoteButton from '../../components/VoteButton';
 import ActionButton from '../../components/ActionButton';
 
+// GraphQL
+import client from '../../graphql/client';
 import VOTED from '../../graphql/queries/voted';
 import VOTE_SELECTION_LOCAL from '../../graphql/queries/local/voteSelection';
 import TOGGLE_NOTIFICATION from '../../graphql/mutations/toggleNotification';
@@ -91,6 +93,16 @@ class Voting extends PureComponent {
     this.props.refetch();
   };
 
+  onCompleteActivityIndex = () => {
+    this.props.refetch();
+    client.query({
+      query: GET_PROCEDURE,
+      variables: {
+        procedureId: this.props.procedureId,
+      },
+    });
+  };
+
   notifyOR = ({ notify }) => {
     return {
       __typename: 'Mutation',
@@ -121,13 +133,13 @@ class Voting extends PureComponent {
     });
   };
 
-  verify = () => {
+  verify = activityIndex => {
     const { navigator, procedureId } = this.props;
     navigator.showModal({
       screen: 'democracy.SmsVerification',
       passProps: {
         procedureId,
-        onComplete: this.onComplete,
+        onComplete: activityIndex ? this.onCompleteActivityIndex : this.onComplete,
       },
     });
   };
@@ -232,30 +244,28 @@ class Voting extends PureComponent {
           )}
 
           {list === 'PREPARATION' && (
-            <VoteButtonWrapper>
-              <ActivityIndexWrapper
-                procedureId={procedureId}
-                verified={verified}
-                active={active}
-                touchable
-              >
-                {({ onPress }) => (
-                  <>
-                    <ActionButton
-                      selection="ACTIVITY_INDEX"
-                      onPress={verified ? onPress : this.verify}
-                      procedureId={procedureId}
-                    />
-                    <VoteButtonLabel>UpVote</VoteButtonLabel>
-                  </>
-                )}
-              </ActivityIndexWrapper>
-              {active && (
-                <LockIconWrapper>
-                  <LockIcon />
-                </LockIconWrapper>
+            <ActivityIndexWrapper
+              procedureId={procedureId}
+              verified={verified}
+              active={active}
+              touchable
+            >
+              {({ onPress }) => (
+                <VoteButtonWrapper>
+                  <ActionButton
+                    selection="ACTIVITY_INDEX"
+                    onPress={() => (verified ? onPress && onPress() : this.verify(true))}
+                    procedureId={procedureId}
+                  />
+                  <VoteButtonLabel>UpVote</VoteButtonLabel>
+                  {active && (
+                    <LockIconWrapper>
+                      <LockIcon />
+                    </LockIconWrapper>
+                  )}
+                </VoteButtonWrapper>
               )}
-            </VoteButtonWrapper>
+            </ActivityIndexWrapper>
           )}
           {(list === 'PREPARATION' || voted) && (
             <Mutation

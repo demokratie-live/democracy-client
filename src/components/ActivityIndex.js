@@ -41,9 +41,9 @@ const VerificationTouch = styled.TouchableOpacity`
 `;
 
 class ActivityIndex extends Component {
-  shouldComponentUpdate(nextProps) {
-    const { active, activityIndex } = this.props;
-    if (active !== nextProps.active || activityIndex !== nextProps.activityIndex) {
+  shouldComponentUpdate(p) {
+    const { active, activityIndex, verified } = this.props;
+    if (active !== p.active || activityIndex !== p.activityIndex || verified !== p.verified) {
       return true;
     }
     return false;

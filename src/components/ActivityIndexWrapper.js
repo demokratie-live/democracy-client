@@ -7,10 +7,10 @@ import INCREASE_ACTIVITY from '../graphql/mutations/increaseActivity';
 
 import F_ACTIVITY_INDEX from '../graphql/fragments/ProcedureActivityIndex';
 
-class ActivityIndex extends Component {
-  shouldComponentUpdate(nextProps) {
-    const { active, activityIndex } = this.props;
-    if (active !== nextProps.active || activityIndex !== nextProps.activityIndex) {
+class ActivityIndexWrapper extends Component {
+  shouldComponentUpdate(p) {
+    const { active, activityIndex, verified } = this.props;
+    if (active !== p.active || activityIndex !== p.activityIndex || verified !== p.verified) {
       return true;
     }
     return false;
@@ -41,7 +41,7 @@ class ActivityIndex extends Component {
   }
 }
 
-ActivityIndex.propTypes = {
+ActivityIndexWrapper.propTypes = {
   procedureId: PropTypes.string.isRequired, // eslint-disable-line
   increaseActivity: PropTypes.func.isRequired,
   activityIndex: PropTypes.number,
@@ -49,10 +49,10 @@ ActivityIndex.propTypes = {
   touchable: PropTypes.bool,
   verified: PropTypes.bool,
   navigator: PropTypes.instanceOf(Navigator),
-  children: PropTypes.node.isRequired,
+  children: PropTypes.func.isRequired,
 };
 
-ActivityIndex.defaultProps = {
+ActivityIndexWrapper.defaultProps = {
   active: false,
   touchable: false,
   activityIndex: 0,
@@ -62,7 +62,7 @@ ActivityIndex.defaultProps = {
 
 export default compose(
   graphql(INCREASE_ACTIVITY, {
-    props({ ownProps: { activityIndex: prevActivityIndex, procedureId }, mutate }) {
+    props({ ownProps: { activityIndex: prevActivityIndex = 0, procedureId }, mutate }) {
       return {
         increaseActivity: () =>
           mutate({
@@ -96,4 +96,4 @@ export default compose(
       };
     },
   }),
-)(ActivityIndex);
+)(ActivityIndexWrapper);
