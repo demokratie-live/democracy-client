@@ -21,12 +21,12 @@ import SegmentDetails from './Segments/Details';
 import SegmentDocuments from './Segments/Documents';
 import History from './Segments/History';
 import Segment from './Segment';
-import Voting from './Voting';
 import CommunityVoteResults from './Segments/VoteResults/CommunityVoteResults';
 import GovernmentVoteResults from './Segments/VoteResults/GovernmentVoteResults';
 import IntroButton from './components/IntroButton';
 import NotificationButton from './components/NotificationButton';
 import IconCmp from '../../components/Icon';
+import PrepareActions from './PrepareActions';
 
 const LoadingWrapper = styled.View`
   flex: 1;
@@ -37,7 +37,11 @@ const LoadingWrapper = styled.View`
 
 const Reload = styled.Button``;
 
-const Wrapper = styled.ScrollView`
+const Wrapper = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    flexGrow: 1,
+  },
+})`
   background-color: #fff;
 `;
 
@@ -297,15 +301,17 @@ class Detail extends PureComponent {
             type="government"
             navigator={this.props.navigator}
           />
-          {(list === 'IN_VOTE' || list === 'PAST') && (
-            <Voting
-              verified={verified}
-              procedureObjId={_id}
-              procedureId={procedureId}
-              navigator={this.props.navigator}
-              type={type}
-            />
-          )}
+          <PrepareActions
+            list={list}
+            verified={verified}
+            procedureObjId={_id}
+            procedureId={procedureId}
+            navigator={this.props.navigator}
+            type={type}
+            notify={notify}
+            share={this.share}
+            active={activityIndex.active}
+          />
         </Content>
       </Wrapper>
     );
