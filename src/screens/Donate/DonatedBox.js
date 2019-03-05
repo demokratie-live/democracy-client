@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 
@@ -30,13 +30,26 @@ const Description = styled.Text`
   color: #4f4f4b;
 `; // color: rgb(0, 118, 255);
 
-const DonatedBox = ({ target, occupied, style, moneyTextStyle, descriptionTextStyle }) => (
-  <Wrapper style={style}>
-    <FillBox width={(occupied / target) * 100} />
-    <Money style={moneyTextStyle}>{`${target - occupied}€/Monat fehlen`}</Money>
-    <Description style={descriptionTextStyle}>zur nachhaltigen Finanzierung</Description>
-  </Wrapper>
-);
+class DonatedBox extends Component {
+  shouldComponentUpdate(np) {
+    const { occupied, target } = this.props;
+    if (occupied !== np.occupied || target !== np.target) {
+      return true;
+    }
+    return false;
+  }
+
+  render() {
+    const { target, occupied, style, moneyTextStyle, descriptionTextStyle } = this.props;
+    return (
+      <Wrapper style={style}>
+        <FillBox width={(occupied / target) * 100} />
+        <Money style={moneyTextStyle}>{`${target - occupied}€/Monat fehlen`}</Money>
+        <Description style={descriptionTextStyle}>zur nachhaltigen Finanzierung</Description>
+      </Wrapper>
+    );
+  }
+}
 
 DonatedBox.propTypes = {
   target: PropTypes.number.isRequired,

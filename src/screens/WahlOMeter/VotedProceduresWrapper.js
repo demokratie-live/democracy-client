@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 import { Navigator } from 'react-native-navigation';
 import { unionBy } from 'lodash';
-import { ActivityIndicator } from 'react-native';
 
 // Components
 import ListItem from '../VoteList/ListItem';
@@ -13,15 +12,10 @@ import NoVotesPlaceholder from './NoVotesPlaceholder';
 // GraphQL
 import PROCEDURES_WITH_VOTE_RESULTS from '../../graphql/queries/proceduresByIdHavingVoteResults';
 import VOTES_SELECTION_LOCAL from '../../graphql/queries/local/votesSelection';
+import ListLoading from '../../components/ListLoading';
 
 const Wrapper = styled.FlatList`
   background-color: #fff;
-`;
-
-const Loading = styled.View`
-  height: 50;
-  align-items: center;
-  justify-content: center;
 `;
 
 const VotedProceduresWrapper = ({ onProcedureListItemClick, children, navigator }) => {
@@ -75,13 +69,7 @@ const VotedProceduresWrapper = ({ onProcedureListItemClick, children, navigator 
                               />
                             )
                           }
-                          ListFooterComponent={() =>
-                            networkStatus === 3 ? (
-                              <Loading>
-                                <ActivityIndicator />
-                              </Loading>
-                            ) : null
-                          }
+                          ListFooterComponent={() => (networkStatus === 3 ? <ListLoading /> : null)}
                           onEndReached={() =>
                             hasMore &&
                             listData.length > 0 &&
@@ -120,11 +108,7 @@ const VotedProceduresWrapper = ({ onProcedureListItemClick, children, navigator 
                   </Query>
                 );
               }
-              return (
-                <Loading>
-                  <ActivityIndicator />
-                </Loading>
-              );
+              return <ListLoading />;
             }}
           </Query>
         );

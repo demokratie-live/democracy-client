@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 
@@ -38,52 +38,54 @@ const VoteIconButton = styled.Image.attrs(() => ({
   height: 40;
 `;
 
-const VoteButton = props => {
-  const { voteSelection, onPress, selection, voted, style } = props;
-  let styleWrapper;
-  let styleButton;
-  switch (selection) {
-    case 'YES':
-      styleButton = {
-        marginBottom: 5,
-      };
-      break;
-    case 'ABSTINATION':
-      styleWrapper = {
-        borderColor: 'rgba(44, 130, 228, 0.8)',
-      };
-      styleButton = {
-        transform: [{ rotate: '-90deg' }],
-        marginRight: 5,
-      };
+class VoteButton extends PureComponent {
+  render() {
+    const { voteSelection, onPress, selection, voted, style } = this.props;
+    let styleWrapper;
+    let styleButton;
+    switch (selection) {
+      case 'YES':
+        styleButton = {
+          marginBottom: 5,
+        };
+        break;
+      case 'ABSTINATION':
+        styleWrapper = {
+          borderColor: 'rgba(44, 130, 228, 0.8)',
+        };
+        styleButton = {
+          transform: [{ rotate: '-90deg' }],
+          marginRight: 5,
+        };
 
-      break;
-    case 'NO':
-      styleWrapper = {
-        borderColor: 'rgba(236, 62, 49, 0.8)',
-      };
-      styleButton = {
-        transform: [{ rotate: '180deg' }],
-        marginTop: 5,
-      };
-      break;
+        break;
+      case 'NO':
+        styleWrapper = {
+          borderColor: 'rgba(236, 62, 49, 0.8)',
+        };
+        styleButton = {
+          transform: [{ rotate: '180deg' }],
+          marginTop: 5,
+        };
+        break;
 
-    default:
-      break;
+      default:
+        break;
+    }
+    return (
+      <VoteIconButtonWrapper
+        voted={voted}
+        disabled={!!(!onPress || voted)}
+        selection={selection}
+        voteSelection={voteSelection}
+        onPress={onPress}
+        style={{ ...styleWrapper, ...style }}
+      >
+        <VoteIconButton style={styleButton} />
+      </VoteIconButtonWrapper>
+    );
   }
-  return (
-    <VoteIconButtonWrapper
-      voted={voted}
-      disabled={!!(!onPress || voted)}
-      selection={selection}
-      voteSelection={voteSelection}
-      onPress={onPress}
-      style={{ ...styleWrapper, ...style }}
-    >
-      <VoteIconButton style={styleButton} />
-    </VoteIconButtonWrapper>
-  );
-};
+}
 
 VoteButton.propTypes = {
   voteSelection: PropTypes.string,

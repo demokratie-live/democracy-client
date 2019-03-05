@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 
@@ -14,11 +14,16 @@ const Text = styled.Text`
   color: #6d6d72;
 `;
 
-const SegmentHead = ({ children }) => (
-  <Wrapper>
-    <Text>{children.toUpperCase()}</Text>
-  </Wrapper>
-);
+class SegmentHead extends PureComponent {
+  render() {
+    const { children } = this.props;
+    return (
+      <Wrapper>
+        <Text>{children.toUpperCase()}</Text>
+      </Wrapper>
+    );
+  }
+}
 
 SegmentHead.propTypes = {
   children: PropTypes.node.isRequired,

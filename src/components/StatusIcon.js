@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -23,12 +23,17 @@ const NotificationButtonIcon = styled(Ionicons).attrs(() => ({
   color: '#1badf8',
 }))``;
 
-const StatusIcon = ({ unreaded, push }) => (
-  <Wrapper>
-    {unreaded && !push && <UnreadedIcon />}
-    {push && <NotificationButtonIcon />}
-  </Wrapper>
-);
+class StatusIcon extends PureComponent {
+  render() {
+    const { unreaded, push } = this.props;
+    return (
+      <Wrapper>
+        {unreaded && !push && <UnreadedIcon />}
+        {push && <NotificationButtonIcon />}
+      </Wrapper>
+    );
+  }
+}
 
 StatusIcon.propTypes = {
   unreaded: PropTypes.bool,

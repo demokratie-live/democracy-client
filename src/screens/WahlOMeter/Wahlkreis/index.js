@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import { Platform } from 'react-native';
@@ -117,60 +117,42 @@ const pieChartData = ({ localVotes, matchingProcedures }) => {
   ];
 };
 
-const Wahlkreis = ({ onProcedureListItemClick, navigator }) => {
-  return (
-    <VotedProceduresWrapper
-      onProcedureListItemClick={onProcedureListItemClick}
-      navigator={navigator}
-    >
-      {({ totalProcedures, chartData, deputy: { imgURL, party, constituency, name } }) => {
-        const WIDTH = 300;
-        const matchingProcedures = getMatchingProcedures(chartData);
-        let preparedData = pieChartData({ ...chartData, matchingProcedures });
+class Wahlkreis extends PureComponent {
+  render() {
+    const { onProcedureListItemClick, navigator } = this.props;
+    return (
+      <VotedProceduresWrapper
+        onProcedureListItemClick={onProcedureListItemClick}
+        navigator={navigator}
+      >
+        {({ totalProcedures, chartData, deputy: { imgURL, party, constituency, name } }) => {
+          const WIDTH = 300;
+          const matchingProcedures = getMatchingProcedures(chartData);
+          let preparedData = pieChartData({ ...chartData, matchingProcedures });
 
-        // Prepare Data
-        let preValues = 0;
-        let rowValues = preparedData.map(rowChartData => {
-          const width = (rowChartData.value / rowChartData.total) * 100 + preValues;
-          preValues = width;
-          return {
-            ...rowChartData,
-            value: width,
-          };
-        });
-        rowValues = [...rowValues].reverse();
+          // Prepare Data
+          let preValues = 0;
+          let rowValues = preparedData.map(rowChartData => {
+            const width = (rowChartData.value / rowChartData.total) * 100 + preValues;
+            preValues = width;
+            return {
+              ...rowChartData,
+              value: width,
+            };
+          });
+          rowValues = [...rowValues].reverse();
 
-        const getPercentagePosition = (WIDTH / 100) * rowValues[1].value;
+          const getPercentagePosition = (WIDTH / 100) * rowValues[1].value;
 
-        if (matchingProcedures.length > 0) {
-          return (
-            <Wrapper>
-              <Header
-                totalProcedures={totalProcedures}
-                votedProceduresCount={matchingProcedures.length}
-              />
-              <ChartWrapper>
-                <MemberImageWrapper
-                  onPress={() =>
-                    navigator.push({
-                      screen: 'democracy.MemberProfil',
-                      title: `Abgeordnetenprofil`,
-                      backButtonTitle: '',
-                      passProps: {
-                        noMenu: true,
-                      },
-                    })
-                  }
-                >
-                  <MemberImage source={{ uri: imgURL }} />
-                  <Party party={party} />
-                </MemberImageWrapper>
-                <DeputyDetailsWrapper>
-                  <NameWrapper>
-                    <Text>{name}</Text>
-                    <TextLighGrey>Direktkadidat WK {constituency}</TextLighGrey>
-                  </NameWrapper>
-                  <InfoIconButton
+          if (matchingProcedures.length > 0) {
+            return (
+              <Wrapper>
+                <Header
+                  totalProcedures={totalProcedures}
+                  votedProceduresCount={matchingProcedures.length}
+                />
+                <ChartWrapper>
+                  <MemberImageWrapper
                     onPress={() =>
                       navigator.push({
                         screen: 'democracy.MemberProfil',
@@ -182,68 +164,89 @@ const Wahlkreis = ({ onProcedureListItemClick, navigator }) => {
                       })
                     }
                   >
-                    <InfoIcon />
-                  </InfoIconButton>
-                </DeputyDetailsWrapper>
-                <Svg
-                  viewBox={`0 0 ${WIDTH} 37`}
-                  style={{ width: '100%', height: 37, marginTop: 8 }}
-                  preserveAspectRatio={false}
-                >
-                  <G x="0" y="8" width={WIDTH} height="20">
-                    {rowValues.map(({ label, value, color }) => {
-                      return (
-                        <Rect
-                          key={label}
-                          x="0"
-                          y="0"
-                          width={(WIDTH / 100) * value}
-                          rx="3"
-                          ry="3"
-                          height="20"
-                          fill={color}
-                        />
-                      );
-                    })}
-                    {
-                      <SvgText
-                        fill="#4a4a4a"
-                        fontSize="12"
-                        x={
-                          rowValues[1].value > 18
-                            ? getPercentagePosition - 5
-                            : getPercentagePosition + 5
-                        }
-                        y="15"
-                        textAnchor={rowValues[1].value > 18 ? 'end' : 'start'}
-                      >
-                        {`${parseFloat(rowValues[1].value)
-                          .toFixed(1)
-                          .replace('.', ',')}%`}
-                      </SvgText>
-                    }
-                  </G>
-                </Svg>
-              </ChartWrapper>
-              <ChartLegend data={preparedData} />
-              <ChartNote>
-                Hohe Übereinstimmungen Ihrer Stellungnahmen mit Ihrem Direktkandidaten bedeuten eine
-                inhaltliche Nähe zu diesem Abgeordneten
-              </ChartNote>
+                    <MemberImage source={{ uri: imgURL }} />
+                    <Party party={party} />
+                  </MemberImageWrapper>
+                  <DeputyDetailsWrapper>
+                    <NameWrapper>
+                      <Text>{name}</Text>
+                      <TextLighGrey>Direktkadidat WK {constituency}</TextLighGrey>
+                    </NameWrapper>
+                    <InfoIconButton
+                      onPress={() =>
+                        navigator.push({
+                          screen: 'democracy.MemberProfil',
+                          title: `Abgeordnetenprofil`,
+                          backButtonTitle: '',
+                          passProps: {
+                            noMenu: true,
+                          },
+                        })
+                      }
+                    >
+                      <InfoIcon />
+                    </InfoIconButton>
+                  </DeputyDetailsWrapper>
+                  <Svg
+                    viewBox={`0 0 ${WIDTH} 37`}
+                    style={{ width: '100%', height: 37, marginTop: 8 }}
+                    preserveAspectRatio={false}
+                  >
+                    <G x="0" y="8" width={WIDTH} height="20">
+                      {rowValues.map(({ label, value, color }) => {
+                        return (
+                          <Rect
+                            key={label}
+                            x="0"
+                            y="0"
+                            width={(WIDTH / 100) * value}
+                            rx="3"
+                            ry="3"
+                            height="20"
+                            fill={color}
+                          />
+                        );
+                      })}
+                      {
+                        <SvgText
+                          fill="#4a4a4a"
+                          fontSize="12"
+                          x={
+                            rowValues[1].value > 18
+                              ? getPercentagePosition - 5
+                              : getPercentagePosition + 5
+                          }
+                          y="15"
+                          textAnchor={rowValues[1].value > 18 ? 'end' : 'start'}
+                        >
+                          {`${parseFloat(rowValues[1].value)
+                            .toFixed(1)
+                            .replace('.', ',')}%`}
+                        </SvgText>
+                      }
+                    </G>
+                  </Svg>
+                </ChartWrapper>
+                <ChartLegend data={preparedData} />
+                <ChartNote>
+                  Hohe Übereinstimmungen Ihrer Stellungnahmen mit Ihrem Direktkandidaten bedeuten
+                  eine inhaltliche Nähe zu diesem Abgeordneten
+                </ChartNote>
+                <ListSectionHeader title="Abstimmungen" />
+              </Wrapper>
+            );
+          }
+          return (
+            <>
+              <NoVotesPlaceholder subline="Wahlkreis" />
               <ListSectionHeader title="Abstimmungen" />
-            </Wrapper>
+            </>
           );
-        }
-        return (
-          <>
-            <NoVotesPlaceholder subline="Wahlkreis" />
-            <ListSectionHeader title="Abstimmungen" />
-          </>
-        );
-      }}
-    </VotedProceduresWrapper>
-  );
-};
+        }}
+      </VotedProceduresWrapper>
+    );
+  }
+}
 
 Wahlkreis.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired,

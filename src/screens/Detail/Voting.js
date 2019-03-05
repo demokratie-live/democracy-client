@@ -1,7 +1,8 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components/native';
 import { graphql, compose } from 'react-apollo';
 import PropTypes from 'prop-types';
+
 import { Navigator } from 'react-native-navigation';
 
 import VoteButton from '../../components/VoteButton';
@@ -60,10 +61,23 @@ const VerificationTouch = styled.TouchableOpacity`
   z-index: 100;
 `;
 
-class Voting extends PureComponent {
+class Voting extends Component {
+  shouldComponentUpdate(p) {
+    const { verified, voted, voteSelection, procedureObjId, procedureId, type } = this.props;
+    return (
+      verified !== p.verified ||
+      voted !== p.voted ||
+      voteSelection !== p.voteSelection ||
+      procedureObjId !== p.procedureObjId ||
+      procedureId !== p.procedureId ||
+      type !== p.type
+    );
+  }
+
   onComplete = () => {
     this.props.refetch();
   };
+
   render() {
     const {
       verified,

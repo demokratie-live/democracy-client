@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 
@@ -13,16 +13,24 @@ const Title = styled.Text`
   color: #6d6d72;
 `;
 
-const ListSectionHeader = ({ title }) => {
-  if (!title) {
-    return null;
+class ListSectionHeader extends Component {
+  shouldComponentUpdate(np) {
+    const { title } = this.props;
+    return title !== np.title;
   }
-  return (
-    <Wrapper>
-      <Title>{title.toUpperCase()}</Title>
-    </Wrapper>
-  );
-};
+
+  render() {
+    const { title } = this.props;
+    if (!title) {
+      return null;
+    }
+    return (
+      <Wrapper>
+        <Title>{title.toUpperCase()}</Title>
+      </Wrapper>
+    );
+  }
+}
 
 ListSectionHeader.propTypes = {
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),

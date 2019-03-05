@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 
@@ -23,12 +23,17 @@ const Text = styled.Text`
   padding-horizontal: 18;
 `;
 
-const NoVotesPlaceholder = ({ subline }) => (
-  <NoVotesWrapper>
-    <WahlOMeterLogo subline={subline} />
-    <Text>Diese Auswertung ist erst nach der ersten Abstimmung verfügbar</Text>
-  </NoVotesWrapper>
-);
+class NoVotesPlaceholder extends PureComponent {
+  render() {
+    const { subline } = this.props;
+    return (
+      <NoVotesWrapper>
+        <WahlOMeterLogo subline={subline} />
+        <Text>Diese Auswertung ist erst nach der ersten Abstimmung verfügbar</Text>
+      </NoVotesWrapper>
+    );
+  }
+}
 
 NoVotesPlaceholder.propTypes = {
   subline: PropTypes.string.isRequired,
