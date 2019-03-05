@@ -21,15 +21,15 @@ padding-bottom: 2;
 `;
 
 class DateTime extends Component {
+  shouldComponentUpdate(p) {
+    const { date, long } = this.props;
+    return date !== p.date || long !== p.long;
+  }
+
   componentWillUnmount() {
     if (this.interval) {
       clearInterval(this.interval);
     }
-  }
-
-  shouldComponentUpdate(p) {
-    const { date, long } = this.props;
-    return date !== p.date || long !== p.long;
   }
 
   interval = null;

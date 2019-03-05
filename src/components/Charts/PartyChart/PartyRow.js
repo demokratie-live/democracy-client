@@ -6,7 +6,7 @@ const WIDTH = 235;
 
 class PartyRow extends Component {
   shouldComponentUpdate(p) {
-    const { party, values, colors, index, onClick, showPercentage } = this.props;
+    const { party, values, colors, index, showPercentage } = this.props;
 
     return (
       party !== p.party ||

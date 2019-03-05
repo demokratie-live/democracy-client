@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
+// Components
+import NavigationListItem from './NavigationListItem';
+
 const Wrapper = styled.SectionList.attrs(() => ({
   stickySectionHeadersEnabled: false,
   contentContainerStyle: { paddingBottom: 70 },
@@ -19,15 +22,6 @@ const SectionTitle = styled.Text`
   color: #fff;
 `;
 
-const NavigationItem = styled.TouchableOpacity`
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  background-color: ${({ active }) => (active ? 'rgba(68, 148, 211, 0.5)' : 'transparent')};
-  height: 44;
-  padding-left: 19;
-`;
-
 const NavigationIcon = styled.Image.attrs(() => ({
   resizeMode: 'contain',
 }))`
@@ -40,12 +34,6 @@ const NavigationIoniconsIcon = styled(Ionicons).attrs(() => ({
 }))`
   text-align: center;
   width: 24;
-`;
-
-const NavigationTitle = styled.Text`
-  padding-left: 17;
-  font-size: 17;
-  color: #fff;
 `;
 
 class ListSection extends Component {
@@ -68,43 +56,6 @@ class ListSection extends Component {
 
 ListSection.propTypes = {
   title: PropTypes.string.isRequired,
-};
-
-class NavigationListItem extends Component {
-  shouldComponentUpdate(p) {
-    const { currentScreen } = this.props;
-    if (currentScreen === p.currentScreen) {
-      return false;
-    }
-    return true;
-  }
-
-  render() {
-    const { title, icon, currentScreen, screenId, navigateTo } = this.props;
-    return (
-      <NavigationItem
-        active={currentScreen === screenId}
-        onPress={() => navigateTo({ screenId, title })}
-      >
-        {icon}
-
-        <NavigationTitle>{title}</NavigationTitle>
-      </NavigationItem>
-    );
-  }
-}
-
-NavigationListItem.propTypes = {
-  title: PropTypes.string.isRequired,
-  icon: PropTypes.node.isRequired,
-  screenId: PropTypes.string,
-  currentScreen: PropTypes.string.isRequired,
-  navigateTo: PropTypes.func.isRequired,
-};
-
-NavigationListItem.defaultProps = {
-  // active: false,
-  screenId: '',
 };
 
 const NavigationView = ({ currentScreen, navigateTo, verified }) => {

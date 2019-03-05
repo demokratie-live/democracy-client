@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import GRUENEN from './B90_DIE_GRUENEN';
 import Union from './CDU_CSU';
@@ -49,5 +50,14 @@ class Party extends Component {
     }
   }
 }
+
+Party.propTypes = {
+  party: PropTypes.string.isRequired,
+  style: PropTypes.arrayOf(PropTypes.shape),
+};
+
+Party.defaultProps = {
+  style: [],
+};
 
 export default Party;
