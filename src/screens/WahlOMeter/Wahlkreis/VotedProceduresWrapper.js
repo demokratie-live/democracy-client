@@ -56,6 +56,7 @@ const VotedProceduresWrapper = ({ onProcedureListItemClick, children, navigator 
                     if (
                       proceduresData &&
                       proceduresData.chartData &&
+                      proceduresData.chartData[0] &&
                       proceduresData.chartData[0].totalProcedures
                     ) {
                       totalProcedures = proceduresData.chartData[0].totalProcedures;
