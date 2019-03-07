@@ -68,7 +68,6 @@ class Details extends Component {
       procedureId,
       currentStatus,
       type,
-      voted,
     } = this.props;
 
     return (
@@ -78,7 +77,6 @@ class Details extends Component {
       procedureId !== p.procedureId ||
       currentStatus !== p.currentStatus ||
       type !== p.type ||
-      voted !== p.voted ||
       JSON.stringify(subjectGroups) !== JSON.stringify(p.subjectGroups)
     );
   }
@@ -92,7 +90,6 @@ class Details extends Component {
       procedureId,
       currentStatus,
       type,
-      voted,
     } = this.props;
 
     return (
@@ -122,11 +119,7 @@ class Details extends Component {
         </Head>
 
         <DefTitle style={{ paddingTop: 8 }}>Aktueller Stand</DefTitle>
-        <DefDescr>
-          {['Angenommen', 'Abgelehnt'].indexOf(currentStatus) === -1 || voted
-            ? currentStatus
-            : 'Abgestimmt'}
-        </DefDescr>
+        <DefDescr>{currentStatus}</DefDescr>
         <Content>
           {abstract && (
             <View>
@@ -148,7 +141,6 @@ Details.propTypes = {
   procedureId: PropTypes.string.isRequired,
   currentStatus: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  voted: PropTypes.bool.isRequired,
 };
 
 Details.defaultProps = {
