@@ -134,7 +134,7 @@ const TextBold = styled.Text`
   color: #8f8e94;
 `;
 
-class Support extends PureComponent {
+class FaqScreen extends PureComponent {
   static navigatorStyle = {
     navBarButtonColor: '#FFFFFF',
     navBarBackgroundColor: '#4494d3',
@@ -145,18 +145,20 @@ class Support extends PureComponent {
   constructor(props) {
     super(props);
 
-    const menuIcon = Platform.OS === 'ios' ? 'ios-menu' : 'md-menu';
+    if (!props.noMenu) {
+      const menuIcon = Platform.OS === 'ios' ? 'ios-menu' : 'md-menu';
 
-    Ionicons.getImageSource(menuIcon, 24, '#FFFFFF').then(icon => {
-      props.navigator.setButtons({
-        leftButtons: [
-          {
-            icon,
-            id: 'menu',
-          },
-        ],
+      Ionicons.getImageSource(menuIcon, 24, '#FFFFFF').then(icon => {
+        props.navigator.setButtons({
+          leftButtons: [
+            {
+              icon,
+              id: 'menu',
+            },
+          ],
+        });
       });
-    });
+    }
   }
 
   render() {
@@ -282,8 +284,13 @@ class Support extends PureComponent {
   }
 }
 
-Support.propTypes = {
+FaqScreen.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired,
+  noMenu: PropTypes.bool,
 };
 
-export default Support;
+FaqScreen.defaultProps = {
+  noMenu: false,
+};
+
+export default FaqScreen;
