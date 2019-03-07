@@ -3,10 +3,16 @@ export const faq1Answer = `Immer wieder kam und kommt die Frage auf, warum wir d
 Dies hat einen ganz einfachen Grund: 
 Eines der Kernanliegen von DEMOCRACY ist es, den Wandel von einer personen- bzw.  durch politische Farben dominierten und mit Versprechen und Emotionen geführten Politik hin zu einer an konkreten Entscheidungen erfahrbaren Sachpolitik mitzugestalten. Das Abstimmungsverhalten vorab mit politischen Farben zu beeinflussen, ist insofern nicht Teil dieses Kernkonzepts.
 Nimm es als Chance, Deine (politischen) Einstellungen anhand der konkret vertretenen Inhalte nochmal zu überprüfen.`;
+
 export const faq2Title = 'Was zeigt die Zahl unter dem Dach an?';
 export const faq2Answer = `Sowohl in der Liste als auch auf den Detailseiten der einzelnen Vorgänge zeigen wir unter dem Dach eine Zahl an. Möglicherweise ist Dir schon aufgefallen, dass diese manchmal von der Anzahl der Abstimmenden abweicht – sie repräsentiert den Aktivitätsindex jeder Prozedur und zeigt an, wie viele Nutzer mit diesem Bundestagsvorgang interagieren. Nutzerinteraktionen i.S. des Aktivitätsindex sind: a) das ‚Für-Relevant-Befinden‘ (Klicken des Dachs) bzw. b) die Abstimmung eines Vorgangs. Jeder Nutzer kann den Aktivitätsindex pro Vorgang um +1 erhöhen.`;
+
 export const faq3Title = 'Warum können Vorgänge ‚in Vorbereitung‘ nicht abgestimmt werden?';
-export const faq3Answer = `DEMOCRACY ist ein interaktives Tool zum Verstehen des Bundestages. Wird im Parlament ein Gesetzgebungsverfahren initiiert, informiert Dich die App DEMOCRACY über alle Schritte bis zur letztendlichen Abstimmung. Um vor der eigenen Abstimmung möglichst viele Informationen (potentiell) einsehen zu können (z.B. die Beschlussempfehlung, später auch eingebundene Reden aus den etwaigen Parlamentsdebatten usw.) unterscheidet DEMOCRACY Bundestagsvorgänge in die Kategorien ‚in Vorbereitung‘ und ‚in Abstimmung‘. Abgestimmt werden kann insofern erst sobald die Beschlussempfehlung einer Prozedur vorliegt, d.h. der Vorgang sich ‚in Abstimmung befindet‘.`;
+export const faq3Answer = `DEMOCRACY ist ein interaktives Tool zum Verstehen des Bundestages. Wird im Parlament ein Gesetzgebungsverfahren initiiert, informiert Dich die App DEMOCRACY über alle Schritte bis zur letztendlichen Abstimmung. Um vor der eigenen Abstimmung möglichst viele Informationen (potentiell) einsehen zu können (z.B. die Beschlussempfehlung, später auch eingebundene Reden aus den etwaigen Parlamentsdebatten usw.) unterscheidet DEMOCRACY Bundestagsvorgänge in die Kategorien ‚in Vorbereitung‘ und ‚in Abstimmung‘. Abgestimmt werden kann insofern erst sobald die Beschlussempfehlung einer Prozedur vorliegt.`;
+
+export const faq11Title = 'Warum ist meine Stimme grau und enthält ein Fragezeichen?';
+export const faq11Answer = `Die Aufrechterhaltung des Abstimmungs- bzw. Wahlgeheimnis ist zentraler Bestandteil der DNA der DEMOCRACY App. Unser Konzept sieht insofern vor, Deine konkrete Abstimmungsentscheidung (Zugestimmt, Enthalten, Ablehnt) nur lokal auf Deinem Handy zu speichern und ausschließlich anonymisierte Stimmdaten an unseren Server zu übersenden. Der graue Button mit weißem Fragezeichen zeigt Dir an, dass Deine Stimme korrekt an unseren Server übertragen wurde, aber auf Deinem Handy verlorengegangen ist. Dazu kann es kommen, wenn Du die Cache-Daten der DEMOCRACY App via App-Manager löschst. Ein nachträgliches Ändern Deiner Stimme ist leider nicht möglich.`;
+
 export const faq4Title = 'Was bedeuten die Beratungszustände?';
 export const faq4Section1 = 'Noch nicht beraten';
 export const faq4Answer1 = `
@@ -71,6 +77,7 @@ export const faq4Outro2 =
   'https://www.bundestag.de/parlament/aufgaben/gesetzgebung_neu/gesetzgebung/weg/255468';
 export const faq4Link1 =
   'https://www.bundestag.de/parlament/aufgaben/gesetzgebung_neu/gesetzgebung/weg/255468';
+
 export const faq5Title = 'Was ist der Wahl-o-Meter?';
 export const faq5Answer1 = `Du kennst sicher den Wahl-o-Mat. In Vorbereitung auf eine anstehende Wahl ermöglicht Dir dieses Tool, die eigenen Stellungnahmen zu vordefinierten Fragen mit den autorisierten Antworten der verschiedenen Parteien zu vergleichen. Der Wahl-o-Mat kreuzt insofern die Wahlversprechen der Parteien mit Deinen Politik-Erwartungen. Vom Wahl-o-Mat nicht abgebildet wird dann allerdings das tatsächliche Abstimmungsverhalten der Parteien und PoltikerInnen in der darauffolgenden Legislaturperiode. Offen bleibt für Dich als BürgerIn insofern:
 
@@ -79,40 +86,39 @@ export const faq5Answer1 = `Du kennst sicher den Wahl-o-Mat. In Vorbereitung auf
 
 Der `;
 export const faq5Answer2 = 'Wahl-o-Meter';
-export const faq5Answer3 = ' – ein noch umzusetzendes Feature unserer ';
-export const faq5Answer4 = 'DEMOCRACY App';
-export const faq5Link1 = 'https://github.com/demokratie-live';
-export const faq5Answer5 = ` – setzt genau an diesem Punkt an.
+export const faq5Answer5 = ` setzt genau an diesem Punkt an.
 Entsprechend des Wahl-O-Mats, bekommst Du mit dem Wahl-o-Meter eine Auswertungsmöglichkeit zur Verfügung gestellt, die Dir für den parlamentarischen Echtbetrieb zeigt, mit welcher (Bundestagas-)Partei Du wie stark übereinstimmst. Mathematisch bildet der Wahl-o-Meter dafür ebenfalls Mittelwerte Deiner Zustimmungen, Ablehnungen und neutralen Antworten mit den Zustimmungen, Ablehnungen und neutralen Antworten jeder Partei und sortiert diese Mittelwerte absteigend. 
 
-Voraussichtlicher Releasetermin für den Wahl-O-Meter ist der 01.02.2019.
 Mehr Informationen dazu findest Du unter: `;
 export const faq5Answer6 = 'https://github.com/demokratie-live/democracy-docu/wiki/Wahl-o-Meter';
 export const faq5Link2 = 'https://github.com/demokratie-live/democracy-docu/wiki/Wahl-⦻-Meter';
+
 export const faq6Title = 'Gebt ihr meine Abstimmungsdaten an Dritte weiter?';
 export const faq6Answer1 = `Die Betreiber der App DEMOCRACY nehmen den Schutz Deiner persönlichen Daten sehr ernst.
 Unserer Meinung nach sind Nutzerdaten gerade keine handelbaren Wirtschaftsgüter, sondern im Sinne des Grundgesetzes zu schützen. Deshalb behandeln wir Deine personenbezogenen wie Abstimmungsdaten vertraulich entsprechend den gesetzlichen Datenschutzrichtlinien und geben sie selbstverständlich nicht an Dritte weiter. Damit Du Dich bei der Nutzung unserer App sicher fühlst, informieren wir Dich in unserer Datenschutzrichtlinie ausführlich darüber, welche Daten wir warum erheben und wie wir diese verarbeiten und nutzen, vgl. `;
 export const faq6Answer2 = 'https://www.democracy-deutschland.de/#!datenschutz';
 export const faq6Link1 = 'https://www.democracy-deutschland.de/#!datenschutz';
+
 export const faq7Title = 'Wie stellt ihr meine Stimmanonymität sicher?';
 export const faq7Answer1 = `Wahlgeheimnis bedeutet, dass während und nach einer Wahl keine Information bekannt werden darf, die darauf schließen lässt, was ein Wähler gewählt hat. Im Konkreten geht es also um die Trennung von Person und Stimme in Urnenbuch und Auszählung. Die Aufrechterhaltung dieses Abstimmungs- bzw. Wahlgeheimnis ist zentraler Bestandteil der DNA der DEMOCRACY App.
 Unser Konzept sieht daher vor, jede Deiner Abstimmungsentscheidungen (Ja, Enthaltung, Nein als Stimme) von Deinen personenbezogenen Identifikationsdaten ( – dem Urnenbuch) zu trennen. DEMOCRACY speichert insofern lediglich eine Quittung Deiner Abstimmungsentscheidung lokal auf Deinem Handy, an den Server werden ausschließlich anonymisierte und nicht kommerziell nutzbare Daten übersendet. 
 
 Das vollständige Konzept zur Stimmanonymisierung kannst du hier `;
-export const faq7Answer2 =
-  'https://github.com/demokratie-live/democracy-development/wiki/Stimmanonymität';
-export const faq7Link1 =
-  'https://github.com/demokratie-live/democracy-development/wiki/Stimmanonymität';
+export const faq7Answer2 = 'https://github.com/demokratie-live/democracy-docu/wiki/Stimmanonymität';
+export const faq7Link1 = 'https://github.com/demokratie-live/democracy-docu/wiki/Stimmanonymität';
 export const faq7Answer3 = ` nachlesen.`;
+
 export const faq8Title = 'Sensible Daten und Open Source – geht das?';
 export const faq8Answer = `Open Source bedeutet, dass der Quellcode frei und offen ist. Die Daten der Nutzer sind kein Bestandteil des Quellcodes, sondern der entsprechenden Installation des freien Programms auf einem Server. Insofern ist der unberechtigte Zugriff auf Nutzerdaten durch Dritte durch unsere Open-Source-Eigenschaft nicht angetastet. Überdies wird jede Änderung im Code, bevor sie in den Betrieb übergeht, von uns geprüft. Somit wird der hohe Anspruch an guter Programmierung gewahrt und auch verhindert, dass dubioser Code einfließen kann.`;
+
 export const faq9Title = 'Wie wird DEMOCRACY finanziert?';
 export const faq9Answer1 = `DEMOCRACY ist eine gemeinnützige App, das heißt von Menschen für Menschen, um unsere Politik transparenter und zugänglicher zu machen. Da wir DEMOCRACY als eine werbefreie Plattform ohne Datenverkauf realisieren wollen, kann unser Joker nur die gemeinschaftliche Finanzierung sein. Insofern wird DEMOCRACY, um die laufenden Kosten zu decken, auch nach dem initialen Crowdfunding durch Spenden finanziert.
-Während die Konzeption der Plattform bislang hauptsächlich von freiwilliger Arbeit gestemmt wurde, hat der Crowdfundingerfolg DEMOCRACY Deutschland e.V. das Privileg verschafft, 3 Vollzeitangestellte für 6 Monate beschäftigen zu können, die ihre gesamte Zeit und Energie dem Projekt widmen – das hat die Entwicklung von DEMOCRACY extrem vorangebracht.
+Während die Konzeption der Plattform bislang hauptsächlich von freiwilliger Arbeit gestemmt wurde, hat der Crowdfundingerfolg und die Förderung der Hertie Stiftung DEMOCRACY Deutschland e.V. das Privileg verschafft, 3 Vollzeitangestellte für 13 Monate beschäftigen zu können, die ihre gesamte Zeit und Energie dem Projekt widmen – das hat die Entwicklung von DEMOCRACY extrem vorangebracht.
 Wenn es nach uns geht, möchten wir so schnell wie möglich mit DEMOCRACY die Politik transformieren, allerdings müssen bis dahin noch einige Meilensteine in der Entwicklung erreicht werden. Dafür brauchen wir Deine finanzielle Unterstützung via `;
 export const faq9Answer2 = 'https://www.democracy-deutschland.de/#!donate';
 export const faq9Link1 = 'https://www.democracy-deutschland.de/#!donate';
 export const faq9Answer3 = '.';
+
 export const faq10Title = 'Wie kann ich Mithelfen?';
 export const faq10Intro = `Spenden und Daueraufträge sind nur eine Möglichkeit, uns zu unterstützen. Hier haben wir eine Liste von Tätigkeiten aufgeführt, die Du sofort angehen kannst, wenn Du bei DEMOCRACY mithelfen möchtest.
 

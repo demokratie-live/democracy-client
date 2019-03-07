@@ -94,6 +94,8 @@ import {
   faq10Outro1,
   faq10Outro2,
   faq10LinkO1,
+  faq11Title,
+  faq11Answer,
 } from './content';
 
 const ScrollWrapper = styled.ScrollView`
@@ -189,6 +191,9 @@ class Support extends PureComponent {
         <Segment title={faq3Title}>
           <Text>{faq3Answer}</Text>
         </Segment>
+        <Segment title={faq11Title}>
+          <Text>{faq11Answer}</Text>
+        </Segment>
         <Segment title={faq4Title}>
           <Text>
             <Section>{faq4Section1}</Section>
@@ -220,8 +225,6 @@ class Support extends PureComponent {
           <Text>
             <Text>{faq5Answer1}</Text>
             <TextBold>{faq5Answer2}</TextBold>
-            <Text>{faq5Answer3}</Text>
-            <TextLink onPress={linking(faq5Link1)}>{faq5Answer4}</TextLink>
             <Text>{faq5Answer5}</Text>
             <TextLink onPress={linking(faq5Link2)}>{faq5Answer6}</TextLink>
           </Text>
