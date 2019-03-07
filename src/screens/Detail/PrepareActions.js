@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import styled from 'styled-components/native';
 import { graphql, compose, Mutation } from 'react-apollo';
 import PropTypes from 'prop-types';
-import { Navigator } from 'react-native-navigation';
+import { Navigator, Navigation } from 'react-native-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import VoteButton from '../../components/VoteButton';
@@ -73,6 +73,14 @@ const LockIcon = styled(Ionicons).attrs(() => ({
   color: 'grey',
 }))``;
 
+const InfoIcon = styled(Ionicons).attrs(() => ({
+  size: 35,
+  name: 'ios-information',
+  color: 'grey',
+}))`
+  margin-top: -4;
+`;
+
 const LockIconWrapper = styled.View`
   position: absolute;
   top: -3;
@@ -100,6 +108,26 @@ class Voting extends PureComponent {
       variables: {
         procedureId: this.props.procedureId,
       },
+    });
+  };
+
+  showUnknownVoteNotification = () => {
+    const { navigator } = this.props;
+    Navigation.showInAppNotification({
+      screen: 'democracy.Notifications.InApp', // unique ID registered with Navigation.registerScreen
+      passProps: {
+        title: 'Deine Stimme ist lokal verlorengegangen',
+        description: 'Für weitere Informationen schaue bitte ins FAQ',
+        onClick: () => {
+          navigator.push({
+            screen: 'democracy.Faq',
+            passProps: {
+              noMenu: true,
+            },
+          });
+        },
+      }, // simple serializable object that will pass as props to the in-app notification (optional)
+      autoDismissTimerSec: 5, // auto dismiss notification in seconds
     });
   };
 
@@ -238,8 +266,11 @@ class Voting extends PureComponent {
 
           {!voteSelection && voted && (
             <VoteButtonWrapper>
-              <ActionButton selection="UNKNOWN" />
+              <ActionButton selection="UNKNOWN" onPress={this.showUnknownVoteNotification} />
               <VoteButtonLabel>Abgestimmt</VoteButtonLabel>
+              <LockIconWrapper>
+                <InfoIcon />
+              </LockIconWrapper>
             </VoteButtonWrapper>
           )}
 
