@@ -26,7 +26,7 @@ export default gql`
           _id
           procedureId
           title
-          tags
+          subjectGroups
           voteDate
           votedGovernment
           submissionDate
