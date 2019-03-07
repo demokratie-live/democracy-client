@@ -281,7 +281,7 @@ class Voting extends PureComponent {
                     notify={notify}
                     onPress={() => toggleNotification()}
                   />
-                  <VoteButtonLabel>Benachrichtigen</VoteButtonLabel>
+                  <VoteButtonLabel>{notify ? 'Stumm schalten' : 'Benachrichtigen'}</VoteButtonLabel>
                 </VoteButtonWrapper>
               )}
             </Mutation>
