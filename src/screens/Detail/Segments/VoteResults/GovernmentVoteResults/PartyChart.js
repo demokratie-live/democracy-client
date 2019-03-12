@@ -9,7 +9,7 @@ const Wrapper = styled.View`
   align-items: center;
 `;
 
-class PartyChart extends PureComponent {
+class PartyChartGov extends PureComponent {
   state = {
     partyChartSelected: 0,
   };
@@ -35,10 +35,10 @@ class PartyChart extends PureComponent {
   }
 }
 
-PartyChart.propTypes = {
+PartyChartGov.propTypes = {
   chartData: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 
-PartyChart.defaultProps = {};
+PartyChartGov.defaultProps = {};
 
-export default PartyChart;
+export default PartyChartGov;

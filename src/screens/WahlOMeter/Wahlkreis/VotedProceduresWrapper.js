@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 import { Navigator } from 'react-native-navigation';
 import { unionBy } from 'lodash';
-import { ActivityIndicator } from 'react-native';
 
 // Components
 import ListItem from '../../VoteList/ListItem';
-import NoVotesPlaceholder from './../NoVotesPlaceholder';
+import NoVotesPlaceholder from '../NoVotesPlaceholder';
+import ListLoading from '../../../components/ListLoading';
 
 // GraphQL
 import GET_PROCEDURE_CHART_DATA from '../../../graphql/queries/getDeputyChartData';
@@ -19,12 +19,6 @@ import VoteVarificationNoConstituency from '../../VoteVarification/NoConstituenc
 
 const Wrapper = styled.FlatList`
   background-color: #fff;
-`;
-
-const Loading = styled.View`
-  height: 50;
-  align-items: center;
-  justify-content: center;
 `;
 
 const VotedProceduresWrapper = ({ onProcedureListItemClick, children, navigator }) => {
@@ -62,6 +56,7 @@ const VotedProceduresWrapper = ({ onProcedureListItemClick, children, navigator 
                     if (
                       proceduresData &&
                       proceduresData.chartData &&
+                      proceduresData.chartData[0] &&
                       proceduresData.chartData[0].totalProcedures
                     ) {
                       totalProcedures = proceduresData.chartData[0].totalProcedures;
@@ -127,11 +122,7 @@ const VotedProceduresWrapper = ({ onProcedureListItemClick, children, navigator 
                                   )
                                 }
                                 ListFooterComponent={() =>
-                                  networkStatus === 3 ? (
-                                    <Loading>
-                                      <ActivityIndicator />
-                                    </Loading>
-                                  ) : null
+                                  networkStatus === 3 ? <ListLoading /> : null
                                 }
                                 onEndReached={() =>
                                   hasMore &&

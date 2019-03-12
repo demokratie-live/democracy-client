@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import { Dimensions } from 'react-native';
@@ -67,50 +67,53 @@ const pieChartData = ({ localVotes, matchingProcedures }) => {
   ];
 };
 
-const Bundestag = ({ onProcedureListItemClick, navigator }) => {
-  return (
-    <VotedProceduresWrapper
-      onProcedureListItemClick={onProcedureListItemClick}
-      navigator={navigator}
-    >
-      {({ totalProcedures, chartData }) => {
-        const matchingProcedures = getMatchingProcedures(chartData);
-        const preparedData = pieChartData({ ...chartData, matchingProcedures });
+class Bundestag extends PureComponent {
+  render() {
+    const { onProcedureListItemClick, navigator } = this.props;
+    return (
+      <VotedProceduresWrapper
+        onProcedureListItemClick={onProcedureListItemClick}
+        navigator={navigator}
+      >
+        {({ totalProcedures, chartData }) => {
+          const matchingProcedures = getMatchingProcedures(chartData);
+          const preparedData = pieChartData({ ...chartData, matchingProcedures });
 
-        if (matchingProcedures.length > 0) {
-          return (
-            <Wrapper>
-              <Header
-                totalProcedures={totalProcedures}
-                votedProceduresCount={matchingProcedures.length}
-              />
-              <ChartWrapper>
-                <PieChart
-                  data={preparedData}
-                  colorScale={['#EAA844', '#B1B3B4']}
-                  label="Bundestag"
-                  subLabel="Wahl-O-Meter"
+          if (matchingProcedures.length > 0) {
+            return (
+              <Wrapper>
+                <Header
+                  totalProcedures={totalProcedures}
+                  votedProceduresCount={matchingProcedures.length}
                 />
-              </ChartWrapper>
-              <ChartLegend data={preparedData} />
-              <ChartNote>
-                Hohe Übereinstimmungen Ihrer Stellungnahmen mit dem Bundestag bedeuten eine
-                inhaltliche Nähe zu den Regierungsfraktionen
-              </ChartNote>
+                <ChartWrapper>
+                  <PieChart
+                    data={preparedData}
+                    colorScale={['#EAA844', '#B1B3B4']}
+                    label="Bundestag"
+                    subLabel="Wahl-O-Meter"
+                  />
+                </ChartWrapper>
+                <ChartLegend data={preparedData} />
+                <ChartNote>
+                  Hohe Übereinstimmungen Ihrer Stellungnahmen mit dem Bundestag bedeuten eine
+                  inhaltliche Nähe zu den Regierungsfraktionen
+                </ChartNote>
+                <ListSectionHeader title="Abstimmungen" />
+              </Wrapper>
+            );
+          }
+          return (
+            <>
+              <NoVotesPlaceholder subline="Bundestag" />
               <ListSectionHeader title="Abstimmungen" />
-            </Wrapper>
+            </>
           );
-        }
-        return (
-          <>
-            <NoVotesPlaceholder subline="Bundestag" />
-            <ListSectionHeader title="Abstimmungen" />
-          </>
-        );
-      }}
-    </VotedProceduresWrapper>
-  );
-};
+        }}
+      </VotedProceduresWrapper>
+    );
+  }
+}
 
 Bundestag.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired,

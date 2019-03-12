@@ -47,7 +47,7 @@ const StatisticNumberDescription = styled.Text`
   color: #4a4a4a;
 `;
 
-const SectionList = styled.SectionList`
+const SectionListCmp = styled.SectionList`
   padding-top: 18;
 `;
 
@@ -123,7 +123,7 @@ class Statistic extends PureComponent {
           {({ loading, data }) => {
             if (!loading && data.votedProcedures) {
               return (
-                <SectionList
+                <SectionListCmp
                   sections={[{ title: 'Abgestimmte', data: data.votedProcedures }]}
                   renderItem={({ item }) => (
                     <ListItem item={item} onClick={() => this.onItemClick({ item })} />

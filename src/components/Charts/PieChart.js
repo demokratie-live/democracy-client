@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Svg, { Path, Circle, Text, G } from 'react-native-svg';
 import styled from 'styled-components/native';
@@ -7,24 +7,26 @@ const Wrapper = styled.View`
   width: 100%;
 `;
 
-class PieChart extends PureComponent {
+class PieChart extends Component {
   state = {
     width: 0,
   };
 
   // TODO This does not work properly - but the component is rendered 3 times
-  /* shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(p, s) {
+    const { data, label, subLabel, showPercentage } = this.props;
+    const { width } = this.state;
     if (
-      this.props.data !== nextProps.data ||
-      this.props.label !== nextProps.label ||
-      this.props.subLabel !== nextProps.subLabel ||
-      this.props.showPercentage !== nextProps.showPercentage ||
-      this.state.width !== nextState.width
+      JSON.stringify(data) !== JSON.stringify(p.data) ||
+      label !== p.label ||
+      subLabel !== p.subLabel ||
+      showPercentage !== p.showPercentage ||
+      width !== s.width
     ) {
       return true;
     }
     return false;
-  }*/
+  }
 
   onLayout = ({
     nativeEvent: {

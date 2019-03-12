@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const VoteIconButtonWrapper = styled.TouchableOpacity`
   width: 88;
@@ -25,6 +26,27 @@ const VoteIconButtonWrapper = styled.TouchableOpacity`
         return 'grey';
     }
   }};
+`;
+
+const LockIcon = styled(Ionicons).attrs(() => ({
+  size: 20,
+  name: 'ios-lock-outline',
+  color: 'grey',
+}))``;
+
+const LockIconWrapper = styled.View`
+  position: absolute;
+  top: -3;
+  right: -3;
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 30;
+  height: 30;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14;
+  border-width: 1;
+  border-style: dashed;
+  border-color: rgba(0, 0, 0, 0.3);
 `;
 
 const VoteIconButton = styled.Image.attrs(() => ({
@@ -67,6 +89,12 @@ const VoteButton = props => {
         marginTop: 5,
       };
       break;
+    case 'UNKNOWN':
+      styleButton = {
+        transform: [{ rotate: '180deg' }],
+        marginTop: 5,
+      };
+      break;
 
     default:
       break;
@@ -80,6 +108,11 @@ const VoteButton = props => {
       onPress={onPress}
       style={{ ...styleWrapper, ...style }}
     >
+      {voted && (
+        <LockIconWrapper>
+          <LockIcon />
+        </LockIconWrapper>
+      )}
       <VoteIconButton style={styleButton} />
     </VoteIconButtonWrapper>
   );

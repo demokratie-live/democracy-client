@@ -85,10 +85,15 @@ const DonationTouch = styled.TouchableOpacity`
 const SideMenu = ({ donationStatus, data: { currentScreen }, navigator, constituency }) => {
   const navigateTo = ({ screenId, title }) => {
     if (screenId) {
-      if (screenId === 'democracy.Instructions' || screenId === 'democracy.SmsVerification') {
+      if (screenId === 'democracy.Instructions') {
         navigator.showModal({
           screen: screenId,
           navigatorStyle: { navBarHidden: true, orientation: 'portrait' },
+        });
+      } else if (screenId === 'democracy.SmsVerification') {
+        navigator.showModal({
+          screen: screenId,
+          navigatorStyle: { navBarHidden: false, orientation: 'portrait' },
         });
       } else {
         navigator.handleDeepLink({

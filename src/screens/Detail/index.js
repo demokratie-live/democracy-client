@@ -4,7 +4,6 @@ import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import { graphql, compose } from 'react-apollo';
 import { Navigator } from 'react-native-navigation';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import speakingurl from 'speakingurl';
 
 // Helpers
@@ -22,11 +21,12 @@ import SegmentDetails from './Segments/Details';
 import SegmentDocuments from './Segments/Documents';
 import History from './Segments/History';
 import Segment from './Segment';
-import Voting from './Voting';
 import CommunityVoteResults from './Segments/VoteResults/CommunityVoteResults';
 import GovernmentVoteResults from './Segments/VoteResults/GovernmentVoteResults';
 import IntroButton from './components/IntroButton';
 import NotificationButton from './components/NotificationButton';
+import IconCmp from '../../components/Icon';
+import PrepareActions from './PrepareActions';
 
 const LoadingWrapper = styled.View`
   flex: 1;
@@ -37,7 +37,11 @@ const LoadingWrapper = styled.View`
 
 const Reload = styled.Button``;
 
-const Wrapper = styled.ScrollView`
+const Wrapper = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    flexGrow: 1,
+  },
+})`
   background-color: #fff;
 `;
 
@@ -63,12 +67,6 @@ const IntroButtons = styled.View`
   justify-content: center;
   margin-left: -8;
 `;
-
-const ShareButtonIcon = styled(Ionicons).attrs(() => ({
-  size: 28,
-  name: Platform.OS === 'ios' ? 'ios-share-outline' : 'md-share',
-  color: 'rgb(0, 0, 0)',
-}))``;
 
 const IntroBottom = styled.View`
   padding-top: 8;
@@ -260,7 +258,7 @@ class Detail extends PureComponent {
             <IntroButtons>
               <NotificationButton notify={notify} procedureId={procedureId} />
               <IntroButton onPress={this.share}>
-                <ShareButtonIcon />
+                <IconCmp name={Platform.OS === 'ios' ? 'ios-share-outline' : 'md-share'} />
               </IntroButton>
             </IntroButtons>
             {date && <VoteDate date={date} long />}
@@ -303,15 +301,17 @@ class Detail extends PureComponent {
             type="government"
             navigator={this.props.navigator}
           />
-          {(list === 'IN_VOTE' || list === 'PAST') && (
-            <Voting
-              verified={verified}
-              procedureObjId={_id}
-              procedureId={procedureId}
-              navigator={this.props.navigator}
-              type={type}
-            />
-          )}
+          <PrepareActions
+            list={list}
+            verified={verified}
+            procedureObjId={_id}
+            procedureId={procedureId}
+            navigator={this.props.navigator}
+            type={type}
+            notify={notify}
+            share={this.share}
+            active={activityIndex.active}
+          />
         </Content>
       </Wrapper>
     );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 
@@ -23,17 +23,22 @@ const ProcedureCountText = styled.Text`
   font-weight: 500;
 `;
 
-const WomHeader = ({ totalProcedures, votedProceduresCount }) => (
-  <Wrapper>
-    <TimeSelect />
-    <ProcedureCount>
-      <ProcedureCountText>
-        {votedProceduresCount}/{totalProcedures}
-      </ProcedureCountText>
-    </ProcedureCount>
-    <Chart value={(votedProceduresCount / totalProcedures) * 100} width={20} />
-  </Wrapper>
-);
+class WomHeader extends PureComponent {
+  render() {
+    const { totalProcedures, votedProceduresCount } = this.props;
+    return (
+      <Wrapper>
+        <TimeSelect />
+        <ProcedureCount>
+          <ProcedureCountText>
+            {votedProceduresCount}/{totalProcedures}
+          </ProcedureCountText>
+        </ProcedureCount>
+        <Chart value={(votedProceduresCount / totalProcedures) * 100} width={20} />
+      </Wrapper>
+    );
+  }
+}
 
 WomHeader.propTypes = {
   totalProcedures: PropTypes.number.isRequired,

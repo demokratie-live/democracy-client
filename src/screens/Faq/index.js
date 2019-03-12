@@ -44,9 +44,6 @@ import {
   faq5Title,
   faq5Answer1,
   faq5Answer2,
-  faq5Answer3,
-  faq5Answer4,
-  faq5Link1,
   faq5Answer5,
   faq5Answer6,
   faq5Link2,
@@ -94,6 +91,8 @@ import {
   faq10Outro1,
   faq10Outro2,
   faq10LinkO1,
+  faq11Title,
+  faq11Answer,
 } from './content';
 
 const ScrollWrapper = styled.ScrollView`
@@ -134,7 +133,7 @@ const TextBold = styled.Text`
   color: #8f8e94;
 `;
 
-class Support extends PureComponent {
+class FaqScreen extends PureComponent {
   static navigatorStyle = {
     navBarButtonColor: '#FFFFFF',
     navBarBackgroundColor: '#4494d3',
@@ -145,18 +144,20 @@ class Support extends PureComponent {
   constructor(props) {
     super(props);
 
-    const menuIcon = Platform.OS === 'ios' ? 'ios-menu' : 'md-menu';
+    if (!props.noMenu) {
+      const menuIcon = Platform.OS === 'ios' ? 'ios-menu' : 'md-menu';
 
-    Ionicons.getImageSource(menuIcon, 24, '#FFFFFF').then(icon => {
-      props.navigator.setButtons({
-        leftButtons: [
-          {
-            icon,
-            id: 'menu',
-          },
-        ],
+      Ionicons.getImageSource(menuIcon, 24, '#FFFFFF').then(icon => {
+        props.navigator.setButtons({
+          leftButtons: [
+            {
+              icon,
+              id: 'menu',
+            },
+          ],
+        });
       });
-    });
+    }
   }
 
   render() {
@@ -189,6 +190,9 @@ class Support extends PureComponent {
         <Segment title={faq3Title}>
           <Text>{faq3Answer}</Text>
         </Segment>
+        <Segment title={faq11Title}>
+          <Text>{faq11Answer}</Text>
+        </Segment>
         <Segment title={faq4Title}>
           <Text>
             <Section>{faq4Section1}</Section>
@@ -220,8 +224,6 @@ class Support extends PureComponent {
           <Text>
             <Text>{faq5Answer1}</Text>
             <TextBold>{faq5Answer2}</TextBold>
-            <Text>{faq5Answer3}</Text>
-            <TextLink onPress={linking(faq5Link1)}>{faq5Answer4}</TextLink>
             <Text>{faq5Answer5}</Text>
             <TextLink onPress={linking(faq5Link2)}>{faq5Answer6}</TextLink>
           </Text>
@@ -282,8 +284,13 @@ class Support extends PureComponent {
   }
 }
 
-Support.propTypes = {
+FaqScreen.propTypes = {
   navigator: PropTypes.instanceOf(Navigator).isRequired,
+  noMenu: PropTypes.bool,
 };
 
-export default Support;
+FaqScreen.defaultProps = {
+  noMenu: false,
+};
+
+export default FaqScreen;

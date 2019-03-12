@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Mutation } from 'react-apollo';
@@ -48,20 +48,25 @@ const update = ({ procedureId }) => (
 };
 
 // TODO https://github.com/apollographql/apollo-client/issues/4160 remove unnececary arrow function
-const NotificationButton = ({ notify, procedureId }) => (
-  <Mutation
-    mutation={TOGGLE_NOTIFICATION}
-    variables={{ procedureId: procedureId }}
-    optimisticResponse={optimisticResponse({ notify })}
-    update={update({ procedureId })}
-  >
-    {toggleNotification => (
-      <IntroButton onPress={() => toggleNotification()}>
-        <NotificationButtonIcon active={notify} />
-      </IntroButton>
-    )}
-  </Mutation>
-);
+class NotificationButton extends PureComponent {
+  render() {
+    const { notify, procedureId } = this.props;
+    return (
+      <Mutation
+        mutation={TOGGLE_NOTIFICATION}
+        variables={{ procedureId: procedureId }}
+        optimisticResponse={optimisticResponse({ notify })}
+        update={update({ procedureId })}
+      >
+        {toggleNotification => (
+          <IntroButton onPress={() => toggleNotification()}>
+            <NotificationButtonIcon active={notify} />
+          </IntroButton>
+        )}
+      </Mutation>
+    );
+  }
+}
 
 NotificationButton.propTypes = {
   notify: PropTypes.bool,
