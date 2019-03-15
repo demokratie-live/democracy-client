@@ -4,7 +4,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [1.2.1] - 2019-02-XX
+## [1.2.2] - 2019-02-15
+DEMOCRACY+ ist da! 
+
+WAHL-O-METER
+Du wolltest schon immer wissen, ob die Partei, die Du gewählt hast, auch während der Legislaturperiode noch auf Deiner politischen Linie liegt und wie stark Du mit dem Abstimmungsverhalten Deines Direktkandidaten übereinstimmst, dem Du Dein Vertrauen zugesprochen hast? Der Wahl-O-Meter macht’s möglich, denn mit diesem Release enthält die App endlich auch den systematischen Vergleich des eigenen Abstimmungsverhaltens mit dem der Fraktionen bzw. dem jeweiligen Direktkandidaten. 
+
+WAHLKREISERGEBNISSE & ABGEORDNETENPROFILE
+Um den bürgerlobbyistischen Einfluss auf die Politik zu erhöhen, schlüsseln wir ab sofort das Community-Ergebnis zusätzlich nach Wahlkreisen auf. Hast du zuvor Deine Postleitzahl eingegeben, siehst Du ab sofort eine weitere Grafik, die Dich über das Abstimmungsergebnis der User in Deinem Wahlkreis informiert. Auf diese Weise möchten wir den Druck auf die Direktkandidaten erhöhen, sich regelmäßig mit den Meinungen ihrer Wähler zu beschäftigen und ihnen Rede und Antwort zu stehen. Dafür stehen in den Abgeordnetenprofilen In-App-Kontaktmöglichkeiten zur Verfügung.
+
+NEUE INTERAKTIONEN 
+Hast Du zu einem Vorgang Deine Stimme abgegeben, bieten wir Dir mit DEMOCRACY+ jetzt schnelle weitere Interaktionsmöglichkeiten an: Du kannst ab sofort mit einem Klick die Benachrichtigungen aktivieren und/oder das Gesetz teilen. 
+Für Anträge in Vorbereitung haben wir diese Logik um das Upvoten erweitert. 
+
+Aber jetzt, sieh selbst, was DEMOCRACY+ für Dich bereithält!
+
+## [1.2.1] - 2019-02-11
 ### Fixed
 - [Piecharts] Removed rounding errors in Piecharts resulting in edges
 

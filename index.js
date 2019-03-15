@@ -21,7 +21,8 @@ import './src/services/browserLinks';
 
 YellowBox.ignoreWarnings(['Require cycle:', 'Attempted to invoke']);
 
-if (process.env.NODE_ENV !== 'production') {
+// disable rerender analyst with false !== false because of eslint
+if (process.env.NODE_ENV !== 'production' && false !== false) {
   const { whyDidYouUpdate } = require('why-did-you-update');
   whyDidYouUpdate(React, {
     exclude: [
