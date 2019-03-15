@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 
 import de.democracydeutschland.app.R;
@@ -24,17 +25,17 @@ public class CustomPushNotification extends PushNotification {
     }
 
     @Override
-    protected Notification.Builder getNotificationBuilder(PendingIntent intent) {
+    protected NotificationCompat.Builder getNotificationBuilder(PendingIntent intent) {
         final Resources resources = mContext.getResources();
 
         // First, get a builder initialized with defaults from the core class.
-        final Notification.Builder builder = super.getNotificationBuilder(intent);
+        final NotificationCompat.Builder builder = super.getNotificationBuilder(intent);
 
         // Set our custom overrides --
 
         // Enable 'extended' layout (extends on down-stroke gesture):
-        final Notification.BigTextStyle extendedNotificationStyle =
-                new Notification.BigTextStyle()
+        final NotificationCompat.BigTextStyle extendedNotificationStyle =
+                new NotificationCompat.BigTextStyle()
                         .bigText(mNotificationProps.getBody()); // "4:15 - 5:15 PM\nBig Conference Room"
         builder.setStyle(extendedNotificationStyle);
 
