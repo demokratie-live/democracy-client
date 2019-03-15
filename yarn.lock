@@ -8210,9 +8210,9 @@ react-native-navigation@1.1.443:
   dependencies:
     lodash "4.x.x"
 
-"react-native-notifications@https://github.com/demokratie-live/react-native-notifications#android-initial-all-notifications+minSDK16":
-  version "1.1.23"
-  resolved "https://github.com/demokratie-live/react-native-notifications#82f28e674fd7dd6862d2535f3d683750e89730a8"
+"react-native-notifications@https://github.com/demokratie-live/react-native-notifications/archive/1.1.24.tar.gz":
+  version "1.1.24"
+  resolved "https://github.com/demokratie-live/react-native-notifications/archive/1.1.24.tar.gz#ef15c03b4d284e6ded665c95dd6c8bc4952b6187"
   dependencies:
     core-js "^1.0.0"
     uuid "^2.0.3"
