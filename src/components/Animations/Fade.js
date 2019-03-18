@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Animated } from 'react-native';
 
-class Fade extends Component {
+class Fade extends PureComponent {
   state = {
     fadeAnim: new Animated.Value(1),
   };

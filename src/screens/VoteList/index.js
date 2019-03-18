@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Platform, SegmentedControlIOS, Dimensions } from 'react-native';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
@@ -29,7 +29,7 @@ const SegmentControlsWrapper = styled.View`
   padding-bottom: 10;
 `;
 
-class VoteList extends Component {
+class VoteList extends PureComponent {
   static navigatorStyle = {
     navBarNoBorder: true,
     navBarButtonColor: '#FFFFFF',

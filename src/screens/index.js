@@ -11,6 +11,8 @@ import Search from './Search';
 import SideMenu from './SideMenu';
 import Detail from './Detail';
 import Support from './Support';
+import Profil from './Profil';
+import Constituency from './Profil/Constituency';
 import Faq from './Faq';
 import Imprint from './Imprint';
 import About from './About';
@@ -19,6 +21,8 @@ import TermsOfUse from './TermsOfUse';
 import Statistic from './Statistic';
 import VoteVarification from './VoteVarification';
 import Notifications from './Notifications';
+import WahlOMeter from './WahlOMeter';
+import MemberProfil from './Profil/MemberProfil';
 
 import Pdf from '../components/Pdf';
 import InAppNotification from './Notifications/InAppNotification';
@@ -98,6 +102,20 @@ export default function registerScreens() {
   Navigation.registerComponent(
     'democracy.Statistic',
     () => NetworkStatus(NavBarLinks(Statistic)),
+    client.store,
+    ApolloProvider,
+    { client },
+  );
+  Navigation.registerComponent(
+    'democracy.Profil',
+    () => NetworkStatus(NavBarLinks(Profil)),
+    client.store,
+    ApolloProvider,
+    { client },
+  );
+  Navigation.registerComponent(
+    'democracy.Profil.Constituency',
+    () => NetworkStatus(NavBarLinks(Constituency)),
     client.store,
     ApolloProvider,
     { client },
@@ -186,6 +204,20 @@ export default function registerScreens() {
   Navigation.registerComponent(
     'democracy.SmsVerification.Error',
     () => SmsVerificationError,
+    client.store,
+    ApolloProvider,
+    { client },
+  );
+  Navigation.registerComponent(
+    'democracy.MemberProfil',
+    () => MemberProfil,
+    client.store,
+    ApolloProvider,
+    { client },
+  );
+  Navigation.registerComponent(
+    'democracy.WahlOMeter',
+    () => NetworkStatus(NavBarLinks(WahlOMeter)),
     client.store,
     ApolloProvider,
     { client },

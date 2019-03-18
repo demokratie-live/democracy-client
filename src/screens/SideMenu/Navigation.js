@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+
+// Components
+import NavigationListItem from './NavigationListItem';
 
 const Wrapper = styled.SectionList.attrs(() => ({
   stickySectionHeadersEnabled: false,
@@ -19,15 +22,6 @@ const SectionTitle = styled.Text`
   color: #fff;
 `;
 
-const NavigationItem = styled.TouchableOpacity`
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  background-color: ${({ active }) => (active ? 'rgba(68, 148, 211, 0.5)' : 'transparent')};
-  height: 44;
-  padding-left: 19;
-`;
-
 const NavigationIcon = styled.Image.attrs(() => ({
   resizeMode: 'contain',
 }))`
@@ -42,44 +36,26 @@ const NavigationIoniconsIcon = styled(Ionicons).attrs(() => ({
   width: 24;
 `;
 
-const NavigationTitle = styled.Text`
-  padding-left: 17;
-  font-size: 17;
-  color: #fff;
-`;
-
-const ListSection = ({ title }) => (
-  <SectionItem>
-    <SectionTitle>{title.toUpperCase()}</SectionTitle>
-  </SectionItem>
-);
+class ListSection extends Component {
+  shouldComponentUpdate(np) {
+    const { title } = this.props;
+    if (title !== np.title) {
+      return true;
+    }
+    return false;
+  }
+  render() {
+    const { title } = this.props;
+    return (
+      <SectionItem>
+        <SectionTitle>{title.toUpperCase()}</SectionTitle>
+      </SectionItem>
+    );
+  }
+}
 
 ListSection.propTypes = {
   title: PropTypes.string.isRequired,
-};
-
-const ListItem = ({ title, icon, currentScreen, screenId, navigateTo }) => (
-  <NavigationItem
-    active={currentScreen === screenId}
-    onPress={() => navigateTo({ screenId, title })}
-  >
-    {icon}
-
-    <NavigationTitle>{title}</NavigationTitle>
-  </NavigationItem>
-);
-
-ListItem.propTypes = {
-  title: PropTypes.string.isRequired,
-  icon: PropTypes.node.isRequired,
-  screenId: PropTypes.string,
-  currentScreen: PropTypes.string.isRequired,
-  navigateTo: PropTypes.func.isRequired,
-};
-
-ListItem.defaultProps = {
-  // active: false,
-  screenId: '',
 };
 
 const NavigationView = ({ currentScreen, navigateTo, verified }) => {
@@ -95,8 +71,23 @@ const NavigationView = ({ currentScreen, navigateTo, verified }) => {
       ],
     },
     {
+      title: 'Auswertungen',
+      data: [
+        {
+          screenId: 'democracy.WahlOMeter',
+          title: `Wahl-O-Meter`.toUpperCase(),
+          icon: <NavigationIoniconsIcon name="ios-timer-outline" />,
+        },
+      ],
+    },
+    {
       title: 'Einstellungen',
       data: [
+        {
+          screenId: 'democracy.Profil',
+          title: 'Profil'.toUpperCase(),
+          icon: <NavigationIoniconsIcon name="ios-contact-outline" />,
+        },
         {
           screenId: 'democracy.Notifications',
           title: 'Benachrichtigungen'.toUpperCase(),
@@ -164,7 +155,7 @@ const NavigationView = ({ currentScreen, navigateTo, verified }) => {
       sections={navigation}
       renderSectionHeader={({ section }) => <ListSection {...section} />}
       renderItem={({ item }) => (
-        <ListItem {...item} currentScreen={currentScreen} navigateTo={navigateTo} />
+        <NavigationListItem {...item} currentScreen={currentScreen} navigateTo={navigateTo} />
       )}
       keyExtractor={({ title }) => title}
     />

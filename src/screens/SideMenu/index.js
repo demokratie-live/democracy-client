@@ -13,6 +13,7 @@ import DonatedBox from '../Donate/DonatedBox';
 import currentScreenQuery from '../../graphql/queries/currentScreen';
 import GET_STATISTIC from '../../graphql/queries/getStatistic';
 import DONATION_STATUS from '../../graphql/queries/donationStatus';
+import GET_CONSTITUENCY from '../../graphql/queries/local/constituency';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -81,13 +82,18 @@ const DonationTouch = styled.TouchableOpacity`
   height: 68;
 `;
 
-const SideMenu = ({ donationStatus, data: { currentScreen }, navigator }) => {
+const SideMenu = ({ donationStatus, data: { currentScreen }, navigator, constituency }) => {
   const navigateTo = ({ screenId, title }) => {
     if (screenId) {
-      if (screenId === 'democracy.Instructions' || screenId === 'democracy.SmsVerification') {
+      if (screenId === 'democracy.Instructions') {
         navigator.showModal({
           screen: screenId,
           navigatorStyle: { navBarHidden: true, orientation: 'portrait' },
+        });
+      } else if (screenId === 'democracy.SmsVerification') {
+        navigator.showModal({
+          screen: screenId,
+          navigatorStyle: { navBarHidden: false, orientation: 'portrait' },
         });
       } else {
         navigator.handleDeepLink({
@@ -130,8 +136,8 @@ const SideMenu = ({ donationStatus, data: { currentScreen }, navigator }) => {
                     });
                   } else if (!loading && voteStatistic) {
                     navigateTo({
-                      screenId: 'democracy.Statistic',
-                      title: 'Statisitk'.toUpperCase(),
+                      screenId: 'democracy.Profil',
+                      title: 'Profil'.toUpperCase(),
                     });
                   }
                 }}
@@ -142,7 +148,7 @@ const SideMenu = ({ donationStatus, data: { currentScreen }, navigator }) => {
                     {loading
                       ? '…'
                       : voteStatistic
-                      ? 'verifizierter Nutzer'
+                      ? `verifizierter Nutzer${constituency ? '\nWahlkreis ' + constituency : ''}`
                       : 'unverifizierter Nutzer'}
                   </HeadText>
                 </HeadTextWrapper>
@@ -177,10 +183,12 @@ SideMenu.propTypes = {
   data: PropTypes.shape().isRequired,
   navigator: PropTypes.instanceOf(Navigator).isRequired,
   donationStatus: PropTypes.shape(),
+  constituency: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 };
 
 SideMenu.defaultProps = {
   donationStatus: {},
+  constituency: false,
 };
 
 export default compose(
@@ -189,5 +197,13 @@ export default compose(
     props: ({ data: { donationStatus } }) => ({
       donationStatus,
     }),
+  }),
+  graphql(GET_CONSTITUENCY, {
+    fetchPolicy: 'no-cache',
+    props: ({ data: { constituency } }) => {
+      return {
+        constituency: constituency && constituency.constituency,
+      };
+    },
   }),
 )(SideMenu);

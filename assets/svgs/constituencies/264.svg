@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="46px" height="26px" viewBox="0 0 46 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.4 (67378) - http://www.bohemiancoding.com/sketch -->
+    <title>264</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="wahlkreise_gen" transform="translate(-277.000000, -795.000000)" fill="#000000">
+            <g id="264" transform="translate(277.000000, 795.000000)">
+                <polyline id="Path" points="38 1 38 2 38 3 40 4 40 5 41 4 43 6 44 6 46 14 46 15 45 15 44 16 42 17 41 17 41 16 40 16 38 16 36 16 35 16 35 17 35 18 35 20 34 20 33 21 33 22 32 22 30 21 29 22 29 23 30 24 30 25 30 26 27 26 26 25 24 24 23 24 23 25 21 24 21 23 20 23 18 22 17 22 15 22 14 22 14 21 13 21 13 22 13 23 8 23 7 23 7 22 5 21 2 20 0 16 0 15 0 13 1 13 1 12 3 11 5 11 6 9 5 9 5 8 6 7 6 6 7 6 8 5 9 5 10 5 12 5 12 4 13 3 18 6 21 6 22 6 27 4 28 4 28 5 28 6 29 6 30 6 31 3 30 3 30 2 31 2 31 1 34 0 38 1"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const VoteIconButtonWrapper = styled.TouchableOpacity`
   width: 88;
@@ -10,8 +11,8 @@ const VoteIconButtonWrapper = styled.TouchableOpacity`
   border-radius: ${88 / 2};
   align-items: center;
   justify-content: center;
-  background-color: ${({ selection, votedSelection, voted }) => {
-    if ((voted || votedSelection) && selection !== votedSelection) {
+  background-color: ${({ selection, voteSelection, voted }) => {
+    if ((voted || voteSelection) && selection !== voteSelection) {
       return 'grey';
     }
     switch (selection) {
@@ -27,6 +28,27 @@ const VoteIconButtonWrapper = styled.TouchableOpacity`
   }};
 `;
 
+const LockIcon = styled(Ionicons).attrs(() => ({
+  size: 20,
+  name: 'ios-lock-outline',
+  color: 'grey',
+}))``;
+
+const LockIconWrapper = styled.View`
+  position: absolute;
+  top: -3;
+  right: -3;
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 30;
+  height: 30;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14;
+  border-width: 1;
+  border-style: dashed;
+  border-color: rgba(0, 0, 0, 0.3);
+`;
+
 const VoteIconButton = styled.Image.attrs(() => ({
   flex: 1,
   source: require('../../assets/icons/thumbsUp.png'),
@@ -39,7 +61,7 @@ const VoteIconButton = styled.Image.attrs(() => ({
 `;
 
 const VoteButton = props => {
-  const { votedSelection, onPress, selection, voted, style } = props;
+  const { voteSelection, onPress, selection, voted, style } = props;
   let styleWrapper;
   let styleButton;
   switch (selection) {
@@ -67,6 +89,12 @@ const VoteButton = props => {
         marginTop: 5,
       };
       break;
+    case 'UNKNOWN':
+      styleButton = {
+        transform: [{ rotate: '180deg' }],
+        marginTop: 5,
+      };
+      break;
 
     default:
       break;
@@ -76,17 +104,22 @@ const VoteButton = props => {
       voted={voted}
       disabled={!!(!onPress || voted)}
       selection={selection}
-      votedSelection={votedSelection}
+      voteSelection={voteSelection}
       onPress={onPress}
       style={{ ...styleWrapper, ...style }}
     >
+      {voted && (
+        <LockIconWrapper>
+          <LockIcon />
+        </LockIconWrapper>
+      )}
       <VoteIconButton style={styleButton} />
     </VoteIconButtonWrapper>
   );
 };
 
 VoteButton.propTypes = {
-  votedSelection: PropTypes.string,
+  voteSelection: PropTypes.string,
   onPress: PropTypes.func,
   selection: PropTypes.string.isRequired,
   voted: PropTypes.bool,
@@ -94,7 +127,7 @@ VoteButton.propTypes = {
 };
 
 VoteButton.defaultProps = {
-  votedSelection: null,
+  voteSelection: null,
   onPress: null,
   voted: null,
   style: {},

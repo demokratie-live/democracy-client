@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { AsyncStorage, Linking, Alert } from 'react-native';
+import React, { PureComponent } from 'react';
+import { AsyncStorage, Linking, Alert, Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { Navigator } from 'react-native-navigation';
 
 import Description from './Components/Description';
-import Button from './Components/Button';
+import Button from '../../components/Button';
 import Folding from '../../components/Content/Folding';
 
 const ScrollView = styled.ScrollView.attrs(() => ({
@@ -36,9 +36,9 @@ const TextLink = styled.Text`
   text-decoration: underline;
 `;
 
-class SmsVerification extends Component {
+class SmsVerification extends PureComponent {
   static navigatorStyle = {
-    // navBarHidden: true,
+    navBarHidden: false,
     orientation: 'portrait',
   };
 
@@ -49,14 +49,17 @@ class SmsVerification extends Component {
       title: 'Verifizieren'.toUpperCase(), // the new title of the screen as appears in the nav bar
     });
 
-    props.navigator.setButtons({
-      leftButtons: [
-        {
-          title: 'Abbrechen',
-          id: 'closeModal',
-        },
-      ],
-    });
+    if (Platform.OS === 'ios') {
+      props.navigator.setButtons({
+        leftButtons: [
+          {
+            title: 'Abbrechen',
+            id: 'closeModal',
+          },
+        ],
+      });
+    }
+
     props.navigator.addOnNavigatorEvent(event => {
       if (event.type) {
         // NavBar Events

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { Navigation, Navigator } from 'react-native-navigation';
@@ -72,7 +72,7 @@ const NoResultsImage = styled.Image.attrs(() => ({
   margin-top: 18;
 `;
 
-class SearchScreen extends Component {
+class SearchScreen extends PureComponent {
   static navigatorStyle = {
     navBarBackgroundColor: '#4494d3',
   };
@@ -114,7 +114,7 @@ class SearchScreen extends Component {
       this.observableSearchQuery = await watchQuery({
         query: searchProcedures,
         variables: { term },
-        fetchPolicy: 'network-only',
+        fetchPolicy: 'no-cache',
       });
 
       this.observableSearchQuery.subscribe({

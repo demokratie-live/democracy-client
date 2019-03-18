@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { Platform, Linking, Alert } from 'react-native';
@@ -8,6 +8,9 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import DeviceInfo from 'react-native-device-info';
 
 import Config from '../config';
+
+// Components
+import MadeWithLove from '../components/MadeWithLove';
 
 const ScrollWrapper = styled.ScrollView`
   flex: 1;
@@ -62,21 +65,12 @@ const Version = styled.Text`
   padding-bottom: 18;
 `;
 
-const MadeWith = styled.Text`
-  font-size: 12;
-  text-align: center;
-  color: rgb(143, 142, 148);
-  padding-top: 7;
-  padding-bottom: 7;
-  background-color: rgb(239, 239, 244);
-`;
-
 const ContactIcons = styled(FontAwesome).attrs(() => ({
   size: 40,
   color: '#000000',
 }))``;
 
-class Support extends Component {
+class Support extends PureComponent {
   static navigatorStyle = {
     navBarButtonColor: '#FFFFFF',
     navBarBackgroundColor: '#4494d3',
@@ -179,7 +173,7 @@ Um Fehler zu beheben, ist allerdings ein qualifiziertes Feedback notwendig. Desh
           </SocialMediaWrapper>
           <Version>{version}</Version>
         </Wrapper>
-        <MadeWith>Made with ❤ – DEMOCRACY Deutschland e.V.</MadeWith>
+        <MadeWithLove />
       </ScrollWrapper>
     );
   }

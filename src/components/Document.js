@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Linking, Platform } from 'react-native';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
@@ -17,7 +17,7 @@ const Text = styled.Text`
   color: rgb(0, 118, 255);
 `;
 
-class Document extends Component {
+class Document extends PureComponent {
   openPdf = url => () => {
     const previewUrl =
       Platform.OS === 'ios' ? url : `https://docs.google.com/gview?embedded=true&url=${url}`;

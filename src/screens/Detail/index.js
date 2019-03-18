@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { RefreshControl, ActivityIndicator, Platform, Share } from 'react-native';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import { graphql, compose } from 'react-apollo';
 import { Navigator } from 'react-native-navigation';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import speakingurl from 'speakingurl';
 
 // Helpers
@@ -12,18 +11,22 @@ import getShareLink from '../../services/shareLink';
 
 // GraphQL
 import getProcedure from '../../graphql/queries/getProcedure';
-import TOGGLE_NOTIFICATION from '../../graphql/mutations/toggleNotification';
 import VIEW_PROCEDURE_LOCAL from '../../graphql/mutations/local/viewProcedure';
 import F_PROCEDURE_VIEWED from '../../graphql/fragments/ProcedureViewed';
 
+// Components
 import ActivityIndex from '../../components/ActivityIndex';
 import DateTime from '../../components/Date';
 import SegmentDetails from './Segments/Details';
 import SegmentDocuments from './Segments/Documents';
 import History from './Segments/History';
-import VoteResults from './Segments/VoteResults';
 import Segment from './Segment';
-import Voting from './Voting';
+import CommunityVoteResults from './Segments/VoteResults/CommunityVoteResults';
+import GovernmentVoteResults from './Segments/VoteResults/GovernmentVoteResults';
+import IntroButton from './components/IntroButton';
+import NotificationButton from './components/NotificationButton';
+import IconCmp from '../../components/Icon';
+import PrepareActions from './PrepareActions';
 
 const LoadingWrapper = styled.View`
   flex: 1;
@@ -34,7 +37,11 @@ const LoadingWrapper = styled.View`
 
 const Reload = styled.Button``;
 
-const Wrapper = styled.ScrollView`
+const Wrapper = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    flexGrow: 1,
+  },
+})`
   background-color: #fff;
 `;
 
@@ -60,24 +67,6 @@ const IntroButtons = styled.View`
   justify-content: center;
   margin-left: -8;
 `;
-
-const IntroButton = styled.TouchableOpacity`
-  align-items: center;
-  justify-content: center;
-  width: 40;
-`;
-
-const NotificationButtonIcon = styled(Ionicons).attrs(({ active }) => ({
-  size: 32,
-  name: active ? 'ios-notifications' : 'ios-notifications-outline',
-  color: active ? 'rgb(255, 171, 33)' : 'rgb(0, 0, 0)',
-}))``;
-
-const ShareButtonIcon = styled(Ionicons).attrs(() => ({
-  size: 28,
-  name: Platform.OS === 'ios' ? 'ios-share-outline' : 'md-share',
-  color: 'rgb(0, 0, 0)',
-}))``;
 
 const IntroBottom = styled.View`
   padding-top: 8;
@@ -105,7 +94,7 @@ const Content = styled.View`
   flex: 1;
 `;
 
-class Detail extends Component {
+class Detail extends PureComponent {
   static navigatorStyle = {
     navBarBackgroundColor: '#4494d3',
     navBarTextColor: '#FFFFFF',
@@ -116,11 +105,24 @@ class Detail extends Component {
   };
 
   componentDidMount() {
-    this.props.viewProcedure();
+    if (
+      this.props.data &&
+      this.props.data.procedure &&
+      this.props.data.procedure.viewedStatus !== 'VIEWED'
+    ) {
+      this.props.viewProcedure();
+    }
   }
 
   componentWillReceiveProps(nextProps) {
     const { data } = nextProps;
+    if (
+      nextProps.data &&
+      nextProps.data.procedure &&
+      nextProps.data.procedure.viewedStatus !== 'VIEWED'
+    ) {
+      nextProps.viewProcedure();
+    }
     if (data.procedure && this.list !== data.procedure.list) {
       this.list = data.procedure.list;
       let newTitle;
@@ -142,6 +144,14 @@ class Detail extends Component {
       });
     }
   }
+
+  // TODO the render event happens 3 times, which slows down the Detail Page
+  // Why is it rerendering?
+  /*
+  shouldComponentUpdate(nextProps , nextState) {
+    return false;
+  }
+  */
 
   onLayout = ({
     nativeEvent: {
@@ -187,7 +197,7 @@ class Detail extends Component {
   list = 'IN_VOTE';
 
   render() {
-    const { procedureId, toggleNotification, navigator } = this.props;
+    const { procedureId, navigator } = this.props;
     const {
       data: { networkStatus, refetch, loading, procedure },
     } = this.props;
@@ -246,11 +256,9 @@ class Detail extends Component {
           </IntroTop>
           <IntroBottom>
             <IntroButtons>
-              <IntroButton onPress={toggleNotification}>
-                <NotificationButtonIcon active={notify} />
-              </IntroButton>
+              <NotificationButton notify={notify} procedureId={procedureId} />
               <IntroButton onPress={this.share}>
-                <ShareButtonIcon />
+                <IconCmp name={Platform.OS === 'ios' ? 'ios-share-outline' : 'md-share'} />
               </IntroButton>
             </IntroButtons>
             {date && <VoteDate date={date} long />}
@@ -282,30 +290,28 @@ class Detail extends Component {
               <History history={currentStatusHistory} currentStatus={currentStatus} voted={voted} />
             </Segment>
           )}
-          <VoteResults
-            key="community"
-            voteResults={voteResults}
-            procedure={_id}
-            scrollTo={this.scrollTo}
-            type="community"
-          />
-          <VoteResults
+          <CommunityVoteResults key="community" procedure={_id} scrollTo={this.scrollTo} />
+          <GovernmentVoteResults
             key="government"
             voteResults={voteResults}
             procedure={_id}
+            procedureId={procedureId}
             scrollTo={this.scrollTo}
             currentStatus={currentStatus}
             type="government"
+            navigator={this.props.navigator}
           />
-          {(list === 'IN_VOTE' || list === 'PAST') && (
-            <Voting
-              verified={verified}
-              procedureObjId={_id}
-              procedureId={procedureId}
-              navigator={this.props.navigator}
-              type={type}
-            />
-          )}
+          <PrepareActions
+            list={list}
+            verified={verified}
+            procedureObjId={_id}
+            procedureId={procedureId}
+            navigator={this.props.navigator}
+            type={type}
+            notify={notify}
+            share={this.share}
+            active={activityIndex.active}
+          />
         </Content>
       </Wrapper>
     );
@@ -316,7 +322,6 @@ Detail.propTypes = {
   procedureId: PropTypes.string.isRequired,
   data: PropTypes.shape().isRequired,
   navigator: PropTypes.instanceOf(Navigator).isRequired,
-  toggleNotification: PropTypes.func.isRequired,
   viewProcedure: PropTypes.func.isRequired,
 };
 
@@ -359,49 +364,6 @@ export default compose(
                   data: aiFragment,
                 });
               }
-            },
-          });
-        },
-      };
-    },
-  }),
-  graphql(TOGGLE_NOTIFICATION, {
-    props({ mutate, ownProps }) {
-      return {
-        toggleNotification: () => {
-          const {
-            data: {
-              procedure: { notify, procedureId },
-            },
-          } = ownProps;
-          mutate({
-            variables: { procedureId },
-            optimisticResponse: {
-              __typename: 'Mutation',
-              toggleNotification: {
-                __typename: 'Procedure',
-                notify: !notify,
-              },
-            },
-            update: (
-              cache,
-              {
-                data: {
-                  toggleNotification: { notify: newNotify },
-                },
-              },
-            ) => {
-              const data = cache.readQuery({
-                query: getProcedure,
-                variables: { id: procedureId },
-              });
-
-              data.procedure.notify = newNotify;
-              cache.writeQuery({
-                query: getProcedure,
-                variables: { id: procedureId },
-                data,
-              });
             },
           });
         },

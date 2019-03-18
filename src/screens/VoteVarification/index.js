@@ -1,31 +1,40 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
-import { Platform } from 'react-native';
+import { Platform, ActivityIndicator } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { graphql } from 'react-apollo';
 
 import Fade from '../../components/Animations/Fade';
-import MessageRow from '../../components/ArgumentEntry/Message';
-import LinkRow from '../../components/ArgumentEntry/Link';
 import BallotBox from './BallotBox';
 
-import dummyEntryData from '../../../dummy/voteVerification';
+// Components
+import NoConstituency from './NoConstituency';
+import PartyChart from './PartyChart';
+
+// GraphQL
+import GET_CONSTITUENCY from '../../graphql/queries/local/constituency';
 
 const Wrapper = styled.View`
   flex: 1;
-  background-color: rgb(246, 246, 246);
+  background-color: #fff;
 `;
 
-const ScrollWrapper = styled.ScrollView`
-  flex: 1;
+const ScrollWrapper = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    flexGrow: 1,
+    paddingBottom: Platform.OS === 'android' ? 73 : 18,
+  },
+})`
+  flex-grow: 1;
 `;
 
 const Title = styled.Text`
-  padding-top: 11;
+  padding-top: 9;
   padding-horizontal: 18;
   font-size: 34;
-  padding-bottom: 18;
+  padding-bottom: 9;
 `;
 
 const WarnWrapper = styled.View`
@@ -58,7 +67,7 @@ const BalloutBoxWrapper = styled.View`
   border-top-color: rgba(68, 148, 211, 0.1);
 `;
 
-class VoteVerification extends Component {
+class VoteVerification extends PureComponent {
   static navigatorStyle = {
     navBarButtonColor: '#FFFFFF',
     navBarBackgroundColor: '#4494d3',
@@ -93,37 +102,17 @@ class VoteVerification extends Component {
     }
   };
 
-  renderEntries = () => {
-    const { selection } = this.props;
-    return dummyEntryData[selection].map(
-      ({ type, argumentation, title, text, moreText, image, _id }) => {
-        if (type === 'message') {
-          return (
-            <MessageRow key={_id} text={text} argumentation={argumentation} moreText={moreText} />
-          );
-        }
-        return (
-          <LinkRow
-            key={_id}
-            image={{
-              source: image,
-            }}
-            argumentation={argumentation}
-            title={title}
-            text={text}
-          />
-        );
-      },
-    );
-  };
-
   render() {
-    const { selection, procedureObjId, procedureId, navigator } = this.props;
+    const { selection, procedureObjId, procedureId, navigator, data } = this.props;
     return (
       <Wrapper>
         <ScrollWrapper onScroll={this.onScroll}>
           <Title>Schon gewusst?</Title>
-          {this.renderEntries()}
+          {data.loading && <ActivityIndicator size="large" />}
+          {!data.loading && !data.constituency.constituency && (
+            <NoConstituency navigator={navigator} />
+          )}
+          {!data.loading && data.constituency.constituency && <PartyChart navigator={navigator} />}
         </ScrollWrapper>
         <WarnWrapper pointerEvents="none">
           <Fade visible={this.state.showWarning}>
@@ -150,6 +139,6 @@ VoteVerification.propTypes = {
   selection: PropTypes.string.isRequired,
   procedureId: PropTypes.string.isRequired,
   procedureObjId: PropTypes.string.isRequired,
+  data: PropTypes.shape().isRequired,
 };
-
-export default VoteVerification;
+export default graphql(GET_CONSTITUENCY)(VoteVerification);

@@ -1,14 +1,12 @@
+import React from 'react';
 import {
   Navigation,
   ScreenVisibilityListener as RNNScreenVisibilityListener,
 } from 'react-native-navigation';
 import { NetInfo, YellowBox } from 'react-native';
-// import Reactotron from "reactotron-react-native";
+// import Reactotron from 'reactotron-react-native';
 
 import Config from './src/config';
-
-// Migrations
-import Migrations from './src/migrations';
 
 import client, { persistor } from './src/graphql/client';
 import registerScreens from './src/screens';
@@ -23,9 +21,55 @@ import './src/services/browserLinks';
 
 YellowBox.ignoreWarnings(['Require cycle:', 'Attempted to invoke']);
 
+// disable rerender analyst with false !== false because of eslint
+if (process.env.NODE_ENV !== 'production' && false !== false) {
+  const { whyDidYouUpdate } = require('why-did-you-update');
+  whyDidYouUpdate(React, {
+    exclude: [
+      '_class',
+      /^Touchable/,
+      /^Yellow/,
+      /^Safe/,
+      'CellRenderer',
+      'StyledNativeComponent',
+      'Query',
+      'ItemWithSeparator',
+      'AnimatedComponent',
+      'FlatList',
+      /^Virtualized/,
+      'RefreshControl',
+      'Mutation',
+      /^Apollo/,
+      'ListFooterComponent',
+      'StatusBar',
+      'SectionList',
+      'ScrollView',
+      'LinearGradient',
+
+      // SVG
+      // 'Path',
+      // 'Text',
+      // 'G',
+      // 'TSpan',
+      // 'Rect',
+      // 'Svg',
+      // 'Circle',
+
+      // Recheck
+      'Segment',
+      'IntroButton',
+      'Row',
+      // 'BalloutBox',
+      // 'ListLoading',
+      // 'VotedProceduresWrapper',
+      // /^Svg/,
+    ],
+  });
+}
+
 // Reactotron.configure() // controls connection & communication settings
-//  .useReactNative() // add all built-in react native plugins
-//  .connect(); // let's connect!
+//   .useReactNative() // add all built-in react native plugins
+//   .connect(); // let's connect!
 
 registerScreens();
 
@@ -164,13 +208,5 @@ class App {
 
 (async () => {
   await persistor.restore();
-
-  // console.log('migrations start');
-  const migrations = await Migrations();
-  if (migrations.some(v => v)) {
-    await persistor.purge();
-  }
-  // console.log('migrations finish');
-
   const app = new App(); // eslint-disable-line
 })();

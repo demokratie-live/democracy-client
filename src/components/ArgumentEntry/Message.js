@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -45,7 +45,7 @@ const CollapseIcon = styled(Ionicons).attrs(() => ({
   transform: ${({ open }) => (open ? 'rotate(0deg)' : 'rotate(180deg)')};
 `;
 
-class Message extends Component {
+class Message extends PureComponent {
   state = {
     moreTextOpened: false,
   };

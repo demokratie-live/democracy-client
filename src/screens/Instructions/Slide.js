@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { Dimensions, Platform, Image } from 'react-native';
@@ -97,56 +97,71 @@ const TextVerify = styled.Text`
 
 const ImageCircle = styled.Image``;
 
-const Slide = ({
-  ImgHead,
-  ImgRight,
-  ImgLeft,
-  ImgCenter,
-  ImgCircle,
-  TxtHead,
-  TxtSub,
-  nextPage,
-  verify,
-}) => (
-  <Container>
-    <ContainerHead>
-      <Image source={ImgHead} />
-    </ContainerHead>
-    <ContainerText>
-      <TextHead>{TxtHead}</TextHead>
-      <TextSub>{TxtSub}</TextSub>
-    </ContainerText>
-    <ContainerImages>
-      <ImageTranspContainer style={{ alignSelf: 'flex-start' }}>
-        <ImageLeft source={ImgLeft} />
-      </ImageTranspContainer>
-      <ImageTranspContainer style={{ alignSelf: 'flex-end' }}>
-        <ImageRight source={ImgRight} />
-      </ImageTranspContainer>
-      <ContainerCenterImage>
-        <ImageCenter source={ImgCenter} />
-        <ButtonCircle onPress={nextPage}>
-          <ImageCircle source={ImgCircle} />
-        </ButtonCircle>
-        {verify && (
-          <ButtonVerify onPress={verify}>
-            <TextVerify>Verifizieren</TextVerify>
-          </ButtonVerify>
-        )}
-      </ContainerCenterImage>
-    </ContainerImages>
-    <LinearGradient
-      colors={['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 1)']}
-      locations={[0, 0.5]}
-      style={{
-        height: 35,
-        width: Dimensions.get('window').width,
-        position: 'absolute',
-        bottom: 0,
-      }}
-    />
-  </Container>
-);
+const NewMarker = styled.Image.attrs({
+  source: require('../../../assets/tutorial/icon.new.png'),
+})`
+  position: absolute;
+  top: 28;
+  left: 18;
+`;
+
+class Slide extends PureComponent {
+  render() {
+    const {
+      ImgHead,
+      ImgRight,
+      ImgLeft,
+      ImgCenter,
+      ImgCircle,
+      TxtHead,
+      TxtSub,
+      nextPage,
+      verify,
+      newMarker,
+    } = this.props;
+    return (
+      <Container>
+        {newMarker && <NewMarker />}
+        <ContainerHead>
+          <Image source={ImgHead} />
+        </ContainerHead>
+        <ContainerText>
+          <TextHead>{TxtHead}</TextHead>
+          <TextSub>{TxtSub}</TextSub>
+        </ContainerText>
+        <ContainerImages>
+          <ImageTranspContainer style={{ alignSelf: 'flex-start' }}>
+            <ImageLeft source={ImgLeft} />
+          </ImageTranspContainer>
+          <ImageTranspContainer style={{ alignSelf: 'flex-end' }}>
+            <ImageRight source={ImgRight} />
+          </ImageTranspContainer>
+          <ContainerCenterImage>
+            <ImageCenter source={ImgCenter} />
+            <ButtonCircle onPress={nextPage}>
+              <ImageCircle source={ImgCircle} />
+            </ButtonCircle>
+            {verify && (
+              <ButtonVerify onPress={verify}>
+                <TextVerify>Verifizieren</TextVerify>
+              </ButtonVerify>
+            )}
+          </ContainerCenterImage>
+        </ContainerImages>
+        <LinearGradient
+          colors={['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 1)']}
+          locations={[0, 0.5]}
+          style={{
+            height: 35,
+            width: Dimensions.get('window').width,
+            position: 'absolute',
+            bottom: 0,
+          }}
+        />
+      </Container>
+    );
+  }
+}
 
 Slide.propTypes = {
   ImgHead: PropTypes.number.isRequired,
@@ -158,6 +173,7 @@ Slide.propTypes = {
   TxtSub: PropTypes.string.isRequired,
   nextPage: PropTypes.func.isRequired,
   verify: PropTypes.func,
+  newMarker: PropTypes.bool,
 };
 
 Slide.defaultProps = {
@@ -165,6 +181,7 @@ Slide.defaultProps = {
   ImgRight: null,
   ImgCircle: require('../../../assets/tutorial/icon.touch.png'),
   verify: null,
+  newMarker: false,
 };
 
 export default Slide;

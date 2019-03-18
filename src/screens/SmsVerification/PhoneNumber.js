@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { AsyncStorage, Dimensions, Keyboard, Alert, Platform } from 'react-native';
@@ -7,7 +7,7 @@ import { graphql } from 'react-apollo';
 
 import Description from './Components/Description';
 import PhonenumberInput from './Components/PhonenumberInput';
-import Button from './Components/Button';
+import Button from '../../components/Button';
 
 import REQUEST_CODE from '../../graphql/mutations/requestCode';
 
@@ -20,7 +20,7 @@ const ScrollView = styled.ScrollView.attrs(() => ({
   background-color: #fff;
 `;
 
-class SmsVerification extends Component {
+class SmsVerification extends PureComponent {
   static navigatorStyle = {
     // navBarHidden: true,
     orientation: 'landscape',

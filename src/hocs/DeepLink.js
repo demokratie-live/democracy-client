@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Navigator } from 'react-native-navigation';
 
@@ -7,7 +7,7 @@ import { Navigator } from 'react-native-navigation';
 let LISTENERS_ADDED = false;
 
 export default ComposedComponent => {
-  class WrappingComponent extends Component {
+  class WrappingComponent extends PureComponent {
     componentDidMount() {
       const { navigator } = this.props;
       if (!LISTENERS_ADDED) {

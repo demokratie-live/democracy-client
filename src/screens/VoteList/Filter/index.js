@@ -74,24 +74,26 @@ const FilterData = [
     ],
   },
   // {
-  //   title: "Abstimmungstyp",
-  //   name: "voteType",
+  //   title: 'Abstimmungstyp',
+  //   name: 'voteType',
   //   data: [
   //     {
-  //       title: "Alle Abstimmungen",
+  //       title: 'Alle Abstimmungen',
   //       value: true,
   //       data: [
   //         {
-  //           title: "Namentliche Abstimmung",
-  //           value: true
+  //           title: 'Namentliche Abstimmung',
+  //           name: 'named-votes',
+  //           value: true,
   //         },
   //         {
-  //           title: "Nicht-namentliche Abstimmungen",
-  //           value: true
-  //         }
-  //       ]
-  //     }
-  //   ]
+  //           title: 'Nicht-namentliche Abstimmungen',
+  //           name: 'not-named-votes',
+  //           value: true,
+  //         },
+  //       ],
+  //     },
+  //   ],
   // },
   {
     title: 'Sachgebiete',
@@ -428,7 +430,12 @@ class Filter extends Component {
         ({ name, title }) => subType === name || subType === title,
       );
       if (index !== -1) {
-        data[type][index].value = value;
+        if (data[type].every(({ value: v }) => v)) {
+          data[type] = data[type].map(d => ({ ...d, value: value }));
+          data[type][index].value = !value;
+        } else {
+          data[type][index].value = value;
+        }
       } else {
         const filterData = FilterData.find(
           ({ name, title }) => (name && type === name) || (title && type === title),

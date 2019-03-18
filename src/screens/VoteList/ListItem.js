@@ -9,8 +9,7 @@ class ListItem extends Component {
   shouldComponentUpdate(nextProps) {
     const {
       title,
-      tags,
-      date,
+      voteDate,
       procedureId,
       activityIndex: { activityIndex, active },
       votedGovernment,
@@ -21,8 +20,7 @@ class ListItem extends Component {
 
     if (
       title !== item.title ||
-      tags !== item.tags ||
-      date !== item.date ||
+      voteDate !== item.voteDate ||
       procedureId !== item.procedureId ||
       activityIndex !== item.activityIndex.activityIndex ||
       active !== item.activityIndex.active ||

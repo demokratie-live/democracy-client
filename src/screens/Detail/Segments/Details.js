@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import m from 'moment';
@@ -58,57 +58,80 @@ const renderType = type => {
   }
 };
 
-const Details = ({
-  subjectGroups,
-  submissionDate,
-  dateVote,
-  abstract,
-  procedureId,
-  currentStatus,
-  type,
-  voted,
-}) => (
-  <Wrapper>
-    <Head>
-      {subjectGroups.length > 0 && (
-        <HeadLeft>
-          <DefTitle>Sachgebiete</DefTitle>
-          <DefDescr>{subjectGroups.join('\n')}</DefDescr>
-        </HeadLeft>
-      )}
-      <HeadRight>
-        <HeadRightTitle>
-          <DefTitleRight>Typ</DefTitleRight>
-          <DefTitleRight>Vorgang</DefTitleRight>
-          <DefTitleRight>erstellt am</DefTitleRight>
+class Details extends Component {
+  shouldComponentUpdate(p) {
+    const {
+      subjectGroups,
+      submissionDate,
+      dateVote,
+      abstract,
+      procedureId,
+      currentStatus,
+      type,
+    } = this.props;
 
-          {dateVote && <DefTitleRight>Abstimmung</DefTitleRight>}
-        </HeadRightTitle>
-        <HeadRightDescr>
-          <DefDescr>{renderType(type)}</DefDescr>
-          <DefDescr>{procedureId}</DefDescr>
-          <DefDescr>{submissionDate && m(submissionDate).format('DD.MM.YY')}</DefDescr>
-          {dateVote && <DefDescr>{m(dateVote).format('DD.MM.YY')}</DefDescr>}
-        </HeadRightDescr>
-      </HeadRight>
-    </Head>
+    return (
+      submissionDate !== p.submissionDate ||
+      dateVote !== p.dateVote ||
+      abstract !== p.abstract ||
+      procedureId !== p.procedureId ||
+      currentStatus !== p.currentStatus ||
+      type !== p.type ||
+      JSON.stringify(subjectGroups) !== JSON.stringify(p.subjectGroups)
+    );
+  }
 
-    <DefTitle style={{ paddingTop: 8 }}>Aktueller Stand</DefTitle>
-    <DefDescr>
-      {['Angenommen', 'Abgelehnt'].indexOf(currentStatus) === -1 || voted
-        ? currentStatus
-        : 'Abgestimmt'}
-    </DefDescr>
-    <Content>
-      {abstract && (
-        <View>
-          <DefTitle>Inhalt</DefTitle>
-          <ContentText>{abstract}</ContentText>
-        </View>
-      )}
-    </Content>
-  </Wrapper>
-);
+  render() {
+    const {
+      subjectGroups,
+      submissionDate,
+      dateVote,
+      abstract,
+      procedureId,
+      currentStatus,
+      type,
+    } = this.props;
+
+    return (
+      <Wrapper>
+        <Head>
+          {subjectGroups.length > 0 && (
+            <HeadLeft>
+              <DefTitle>Sachgebiete</DefTitle>
+              <DefDescr>{subjectGroups.join('\n')}</DefDescr>
+            </HeadLeft>
+          )}
+          <HeadRight>
+            <HeadRightTitle>
+              <DefTitleRight>Typ</DefTitleRight>
+              <DefTitleRight>Vorgang</DefTitleRight>
+              <DefTitleRight>erstellt am</DefTitleRight>
+
+              {dateVote && <DefTitleRight>Abstimmung</DefTitleRight>}
+            </HeadRightTitle>
+            <HeadRightDescr>
+              <DefDescr>{renderType(type)}</DefDescr>
+              <DefDescr>{procedureId}</DefDescr>
+              <DefDescr>{submissionDate && m(submissionDate).format('DD.MM.YY')}</DefDescr>
+              {dateVote && <DefDescr>{m(dateVote).format('DD.MM.YY')}</DefDescr>}
+            </HeadRightDescr>
+          </HeadRight>
+        </Head>
+
+        <DefTitle style={{ paddingTop: 8 }}>Aktueller Stand</DefTitle>
+        <DefDescr>{currentStatus}</DefDescr>
+        <Content>
+          {abstract && (
+            <View>
+              <DefTitle>Inhalt</DefTitle>
+              <ContentText>{abstract}</ContentText>
+            </View>
+          )}
+        </Content>
+      </Wrapper>
+    );
+  }
+}
 
 Details.propTypes = {
   subjectGroups: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -118,7 +141,6 @@ Details.propTypes = {
   procedureId: PropTypes.string.isRequired,
   currentStatus: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  voted: PropTypes.bool.isRequired,
 };
 
 Details.defaultProps = {

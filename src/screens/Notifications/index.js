@@ -1,5 +1,5 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["__typename"] }] */
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import {
@@ -98,7 +98,7 @@ const sections = [
   },
 ];
 
-class Notifications extends Component {
+class Notifications extends PureComponent {
   static navigatorStyle = {
     navBarButtonColor: '#FFFFFF',
     navBarBackgroundColor: '#4494d3',
@@ -111,16 +111,18 @@ class Notifications extends Component {
 
     const menuIcon = Platform.OS === 'ios' ? 'ios-menu' : 'md-menu';
 
-    Ionicons.getImageSource(menuIcon, 24, '#FFFFFF').then(icon => {
-      props.navigator.setButtons({
-        leftButtons: [
-          {
-            icon,
-            id: 'menu',
-          },
-        ],
+    if (!props.noMenu) {
+      Ionicons.getImageSource(menuIcon, 24, '#FFFFFF').then(icon => {
+        props.navigator.setButtons({
+          leftButtons: [
+            {
+              icon,
+              id: 'menu',
+            },
+          ],
+        });
       });
-    });
+    }
   }
 
   state = {
@@ -368,6 +370,7 @@ Notifications.propTypes = {
   toggleNotification: PropTypes.func.isRequired,
   notifiedProcedures: PropTypes.arrayOf(PropTypes.shape()),
   update: PropTypes.func.isRequired,
+  noMenu: PropTypes.bool,
 };
 
 Notifications.defaultProps = {
@@ -375,6 +378,7 @@ Notifications.defaultProps = {
     enabled: true,
   },
   notifiedProcedures: [],
+  noMenu: false,
 };
 
 export default compose(
