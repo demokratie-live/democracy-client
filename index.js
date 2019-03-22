@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import {
   Navigation,
   ScreenVisibilityListener as RNNScreenVisibilityListener,
@@ -22,7 +22,7 @@ import './src/services/browserLinks';
 YellowBox.ignoreWarnings(['Require cycle:', 'Attempted to invoke']);
 
 // disable rerender analyst with false !== false because of eslint
-if (process.env.NODE_ENV !== 'production' && false !== false) {
+/* if (process.env.NODE_ENV !== 'production' && false !== false) {
   const { whyDidYouUpdate } = require('why-did-you-update');
   whyDidYouUpdate(React, {
     exclude: [
@@ -66,10 +66,13 @@ if (process.env.NODE_ENV !== 'production' && false !== false) {
     ],
   });
 }
+*/
 
-// Reactotron.configure() // controls connection & communication settings
-//   .useReactNative() // add all built-in react native plugins
-//   .connect(); // let's connect!
+/*
+Reactotron.configure() // controls connection & communication settings
+   .useReactNative() // add all built-in react native plugins
+   .connect(); // let's connect!
+*/
 
 registerScreens();
 
@@ -207,6 +210,15 @@ class App {
 }
 
 (async () => {
-  await persistor.restore();
+  // Restore cache if possible
+  try {
+    // Might throw Couldn't read row 0, col 0 from CursorWindow
+    await persistor.restore();
+  } catch (err) {
+    // CachePersistor failed - purge
+    await persistor.purge();
+  }
+
+  // Start the App
   const app = new App(); // eslint-disable-line
 })();
