@@ -3,53 +3,15 @@ export const impressum1Text = `DEMOCRACY Deutschland e.V. (gemeinnützig)
 Industriestraße 10
 37079 Göttingen\n`;
 export const impressum2Head = 'Vertreten durch';
-export const impressum2Text = `Marius Krüger 
+export const impressum2Text = `Marius Krüger
 Andreas Krüger \n`;
 export const impressum3Head = 'Kontakt';
 export const impressum3Text = `Telefon: +49 176 470 40 213
 E-Mail: contact@democracy-deutschland.de\n`;
 export const impressum4Head = 'Registereintrag';
-export const impressum4Text = `Eintragung im Vereinsregister. 
-Registergericht: Amtsgericht Göttingen 
+export const impressum4Text = `Eintragung im Vereinsregister.
+Registergericht: Amtsgericht Göttingen
 Registernummer: VR 201924\n`;
-
-/*
-          <Headline>Umsatzsteuer</Headline>
-          <Text>{`Umsatzsteuer-Identifikationsnummer gemäß §27a Umsatzsteuergesetz:
-
-*Der gemeinnützige Verein DEMOCRACY Deutschland e.V. macht in seinem wirtschaftlichen Geschäftsbetrieb von der Kleinunternehmerregelung nach § 19 UStG Gebrauch und weist insofern die Umsatzsteuer nicht aus, weil er auch nicht zu deren Abführung verpflichtet ist.\n`}</Text>
-          
-
-          <Headline>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</Headline>
-          <Text>{`Marius Krüger
-Am Klausberge 12
-37075 Göttingen\n`}</Text>
-
-          <Headline>Streitschlichtung</Headline>
-          <Text
-          >{`Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.\n`}</Text>
-
-          <Headline>Haftung für Inhalte</Headline>
-          <Text
-          >{`Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
-
-Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.\n`}</Text>
-
-          <Headline>Haftung für Links</Headline>
-          <Text
-          >{`Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar.
-
-Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.\n`}</Text>
-
-          <Headline>Urheberrecht</Headline>
-          <Text
-          >{`Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet.
-
-Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.\n`}</Text>
-
-          {/**
-    Datenschutz
-*/
 
 export const datenschutzSection = 'Datenschutzerklärung';
 export const datenschutz1Head = '1. Präambel – Vorwort';
@@ -77,7 +39,7 @@ Personenbezogene Daten werden von uns nicht länger gespeichert, als für die Be
 
 Eingegebene Daten
 
-Ohne Anmeldung können Sie die DEMOCRACY App nur eingeschränkt nutzen. Für den Anmeldeprozess müssen Sie Ihre E-Mail-Adresse und/oder Mobilfunknummer bereitstellen. Diese Daten werden von uns abgefragt, damit DEMOCRACY adäquat (d.h. mit identifizierter Nutzerbasis) funktionieren kann. Wir benötigen diese und gegebenenfalls auch andere Daten, um auf Deine Wünsche, Fragen und Verbesserungsvorschläge reagieren zu können. Mitteilungen zu anstehenden Veränderungen oder Verbesserungen der DEMOCRACY-Dienste übermitteln wir Ihnen gegebenenfalls unter Verwendung Ihrer E-Mail Adresse oder via Push-Notifications.
+Ohne Anmeldung können Sie die DEMOCRACY App nur eingeschränkt nutzen. Für den Anmeldeprozess müssen Sie Ihre E-Mail-Adresse und/oder Mobilfunknummer bereitstellen. Diese Daten werden von uns abgefragt, damit DEMOCRACY adäquat (d.h. mit identifizierter Nutzerbasis) funktionieren kann. Wir benötigen diese und gegebenenfalls auch andere Daten, um auf Ihre Wünsche, Fragen und Verbesserungsvorschläge reagieren zu können. Mitteilungen zu anstehenden Veränderungen oder Verbesserungen der DEMOCRACY-Dienste übermitteln wir Ihnen gegebenenfalls unter Verwendung Ihrer E-Mail Adresse oder via Push-Notifications.
 
 Kumulierte Speicherung der Abstimmungsdaten
 
@@ -123,21 +85,13 @@ Sie können Cookies und Zähl-Pixel über Ihre Browser-Einstellungen und andere 
 Notwendige Cookies werden von uns benötigt, damit unsere Website oder App funktionieren kann. Das sind z.B. Cookies die notwendig sind, um Sie in sichere Bereiche unserer Website oder App einzuloggen.
 Analytische Cookies helfen uns dabei, zu analysieren wie viele Besucher unsere Website oder App hat und welche Seiten oder Bereiche von den Nutzern aufgerufen werden.
 Funktionale Cookies werden verwendet, um Sie bei ihrem nächsten Besuch auf der Website bzw. Nutzung der App wiederzuerkennen. Damit wird es uns ermöglicht, bestimmte Einstellungen (z.B. Spracheinstellungen) zu speichern.`;
-// export const datenschutz8Head = '8. Nutzung von GoogleAnalytics';
-/* export const datenschutz8Text1 = `Diese Website benutzt Google Analytics, einen Webanalysedienst der Google Inc. („Google“). Google Analytics verwendet sog. „Cookies“, Textdateien, die auf deinem Computer oder Mobiltelefon gespeichert werden und die eine Analyse deiner Benutzung von DEMOCRACY ermöglichen. Die durch den Cookie erzeugten Informationen über deine Benutzung von DEMOCRACY (einschließlich deiner verkürzten IP-Adresse) werden in der Regel an einen Server von Google in den USA übertragen und dort gespeichert. Google wird diese Informationen benutzen, um deine Nutzung von DEMOCRACY auszuwerten, um Reports über die Aktivitäten zusammenzustellen und um weitere mit deiner Nutzung und deiner Internetnutzung verbundene Dienstleistungen zu erbringen.
-Auch wird Google diese Informationen gegebenenfalls an Dritte übertragen, sofern dies gesetzlich vorgeschrieben oder soweit Dritte diese Daten im Auftrag von Google verarbeiten.
-Sie können die Speicherung der Cookies durch eine entsprechende Einstellung Ihrer Browser-Software verhindern; wir weisen Sie jedoch darauf hin, dass Sie in diesem Fall gegebenenfalls nicht sämtliche Funktionen der Website-Services vollumfänglich nutzen können. 
-Sie können darüber hinaus die Erfassung der durch das Cookie erzeugten und auf Ihre Nutzung von DEMOCRACY bezogenen Daten (inkl. Ihrer IP-Adresse) an Google sowie die Verarbeitung dieser Daten durch Google verhindern, indem Sie sich unter dem folgenden `; */
-// export const datenschutz8Text2 = 'Link';
-// export const datenschutz8Link = 'http://tools.google.com/dlpage/gaoptout?hl=de';
-/* export const datenschutz8Text3 = ` das verfügbare Browser-Plugin herunterladen und installierst.
-Durch die Nutzung von DEMOCRACY erklären Sie sich mit der Verarbeitung der über Sie erhobenen Daten durch Google in der zuvor beschriebenen Art und zu dem zuvor benannten Zweck einverstanden.`; */
+
 export const datenschutz8Head = '8. SSL-Verschlüsselung';
 export const datenschutz8Text = `Die DEMOCRACY-Dienste nutzen aus Gründen der Sicherheit und zum Schutz der Übertragung vertraulicher Inhalte, wie zum Beispiel der Anfragen, die Sie an uns als Seitenbetreiber senden, eine SSL-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von "http://" auf "https://" wechselt und an dem Schloss-Symbol in Ihrer Browserzeile.
 Wenn die SSL-Verschlüsselung aktiviert ist, können die Daten, die Sie an uns übermitteln, nur unter hohem Aufwand von Dritten mitgelesen werden.`;
 export const datenschutz9Head = '9. Recht auf Auskunft, Berichtigung, Löschung und Beschwerde';
 export const datenschutz9Text = `Wenn Sie Ihren Account löschen, werden alle personenbezogenen Daten, mit Ausnahme ihrer nicht zurückverfolgbaren anonymisierten Abstimmungsdaten, von unserem Server gelöscht. Soweit Daten aus gesetzlichen Gründen aufbewahrt werden müssen, werden diese gesperrt. Die Daten stehen weiteren Verwendungs-Schritten sogleich nicht mehr zur Verfügung.
-Sie sind berechtigt, der Verwendung Ihrer personenbezogenen Daten zu Werbezwecken jederzeit zu widersprechen. Wenn Sie sich entscheiden, Ihre Einwilligung in diese Datenschutzbestimmung zu widerrufen, so können Sie ein schriftliches Ansuchen an DEMOCRACY Deutschland e.V. richten. Die Anschrift finden sie im Impressum. Mit dem Widerruf sind wir allerdings nicht mehr in der Lage, Ihnen den Zugriff auf alle DEMOCRACY-Dienste zu ermöglichen. 
+Sie sind berechtigt, der Verwendung Ihrer personenbezogenen Daten zu Werbezwecken jederzeit zu widersprechen. Wenn Sie sich entscheiden, Ihre Einwilligung in diese Datenschutzbestimmung zu widerrufen, so können Sie ein schriftliches Ansuchen an DEMOCRACY Deutschland e.V. richten. Die Anschrift finden sie im Impressum. Mit dem Widerruf sind wir allerdings nicht mehr in der Lage, Ihnen den Zugriff auf alle DEMOCRACY-Dienste zu ermöglichen.
 Sie können eine Kopie der personenbezogenen Daten, die bei uns über Sie gespeichert sind, verlangen und die Herkunft und etwaige Empfänger hiervon sowie den Zweck etwaiger erfolgter Datenbearbeitung von uns erfahren. Für weitere Informationen wenden Sie sich bitte an uns. Die Anschrift finden Sie im Impressum. Möglicherweise werden Sie aufgefordert, weitere Nachweise bezüglich Ihrer Identität vorzulegen (z. B. Kopie der letzten Mobilfunkrechnung), bevor Sie eine Antwort erhalten, damit Ihre Identität überprüft werden kann.
 Wenn Sie uns personenbezogene Daten überlassen haben, können Sie diese jederzeit berichtigen, sperren oder löschen lassen. Daten für etwaige Abrechnungs- und buchhalterische Zwecke sind von einer Kündigung beziehungsweise von einer Löschung nicht berührt. Wende Sie sich dazu bitte per E-Mail oder per Post an uns. Die Anschrift finden Sie im Impressum.
 Werden Ihre personenbezogenen Daten im Rahmen einer Interessenabwägung nach Art. 6 Abs. 1 lit. f) DSGVO verarbeitet, so steht Ihnen ebenfalls ein Widerspruchsrecht gegen die Verarbeitung zu. In diesem Fall können wir Ihre personenbezogenen Daten trotz Ihres Widerspruchs in solchen Fällen weiterhin verarbeiten, wenn wir nachweisen können, dass die Verarbeitung der Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen dient, oder wir zwingend schutzwürdige Gründe für die Verarbeitung anführen können, die Ihren Interessen, Rechten und Freiheiten überwiegen.
@@ -145,7 +99,7 @@ Werden Ihre personenbezogenen Daten im Rahmen einer Interessenabwägung nach Art
 Datenformat
 
 Sie sind berechtigt, Ihre personenbezogenen Daten, die Sie uns bereitgestellt haben, in einem strukturierten, gängigen und maschinenlesbaren Format zu erhalten und Sie haben das Recht, diese Daten einem anderen Verantwortlichen zu übermitteln, sofern die Verarbeitung Ihrer personenbezogenen Daten auf einer Einwilligung gemäß der Art. 6 Abs. 1 lit. a) DSGVO oder auf einem Vertrag gem. Art. 6 Abs. 1 lit. b) DSGVO beruht.
-Auch können Sie verlangen, dass wir Ihre Daten bei uns an einen anderen Verantwortlichen übermitteln. 
+Auch können Sie verlangen, dass wir Ihre Daten bei uns an einen anderen Verantwortlichen übermitteln.
 Bitte wenden Sie sich diesbezüglich an die im Impressum angegebene Adresse.
 
 Beschwerde
