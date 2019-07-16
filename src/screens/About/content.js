@@ -67,7 +67,7 @@ Carolin Mey
 Carsten Brier
 Carsten waldschmidt
 Chahir Etayaa
-Christian Frster
+Christian Förster
 Christian Heigele
 Christian Heller
 Christian Jung
