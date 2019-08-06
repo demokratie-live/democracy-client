@@ -21,6 +21,7 @@ DerivedData
 *.ipa
 *.xcuserstate
 project.xcworkspace
+ios/Podfile.lock
 
 # Android/IntelliJ
 #
@@ -64,3 +65,6 @@ android/vendor
 
 # Bundle artifact
 *.jsbundle
+
+# CocoaPods
+/ios/Pods/

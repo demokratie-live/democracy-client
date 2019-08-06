@@ -1,4 +1,6 @@
 rootProject.name = 'democracyclient'
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
+
 include ':react-native-sha256'
 project(':react-native-sha256').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-sha256/android')
 include ':rn-fetch-blob'

@@ -1,9 +1,13 @@
 package de.democracydeutschland.app;
 
 import android.app.Application;
+import android.util.Log;
 import android.content.Context;
 import android.os.Bundle;
 
+import com.facebook.react.PackageList;
+import com.facebook.hermes.reactexecutor.HermesExecutorFactory;
+import com.facebook.react.bridge.JavaScriptExecutorFactory;
 import com.facebook.react.ReactApplication;
 import com.sha256lib.Sha256Package;
 import com.RNFetchBlob.RNFetchBlobPackage;
@@ -15,12 +19,10 @@ import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
-import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 
 import com.reactnativenavigation.NavigationApplication;
 
-import java.util.Arrays;
 import java.util.List;
 
 import com.BV.LinearGradient.LinearGradientPackage;
@@ -73,9 +75,14 @@ public class MainApplication extends NavigationApplication implements INotificat
 
     // @Override
     protected List<ReactPackage> getPackages() {
-    	// Add additional packages you require here
+		@SuppressWarnings("UnnecessaryLocalVariable")
+    	List<ReactPackage> packages = new PackageList(this).getPackages();
+      	// Packages that cannot be autolinked yet can be added manually here, for example:
+      	// packages.add(new MyReactNativePackage());
+      	return packages;
+		// Add additional packages you require here
     	// No need to add RnnPackage and MainReactPackage
-      	return Arrays.<ReactPackage>asList(
+      	/*return Arrays.<ReactPackage>asList(
       		//new MainReactPackage(),
             new RNFetchBlobPackage(),
       		new RNNotificationsPackage(MainApplication.this),
@@ -87,7 +94,7 @@ public class MainApplication extends NavigationApplication implements INotificat
             new LinearGradientPackage(),
             new Sha256Package(),
             new KeychainPackage()
-      );
+      );*/
     }
 
     @Override

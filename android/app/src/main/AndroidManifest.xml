@@ -11,7 +11,7 @@
 
     <!-- This needs to be added in dev mode but removed in all others
          since this config is used for production aswell we need to remove it here -->
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" tools:node="remove" />
+    <!--<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" tools:node="remove" />-->
 
     <!-- included from rn-fetch-blob - implications of removal are unknown -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" tools:node="remove" />
@@ -20,6 +20,7 @@
       android:name=".MainApplication"
       android:label="@string/app_name"
       android:icon="@mipmap/ic_launcher"
+      android:roundIcon="@mipmap/ic_launcher_round"
       android:allowBackup="false"
       android:theme="@style/AppTheme">
       <activity

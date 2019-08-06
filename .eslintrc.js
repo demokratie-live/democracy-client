@@ -1,4 +1,5 @@
 module.exports = {
+  root: true,
   env: {
     node: true,
     es6: true,
@@ -8,7 +9,7 @@ module.exports = {
   plugins: ["react", "react-native", "flowtype", "prettier", "standard"],
   extends: ["airbnb",
   "eslint:recommended",
-  "plugin:react/recommended", "prettier", "prettier/flowtype", "prettier/react"],
+  "plugin:react/recommended", "prettier", "prettier/flowtype", "prettier/react", "@react-native-community"],
   settings: {
     "import/resolver": {
       node: {
