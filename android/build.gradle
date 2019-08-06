@@ -19,6 +19,8 @@ buildscript {
         compileSdkVersion = 27
         targetSdkVersion = 27
         supportLibVersion = "27.1.1"
+        googlePlayServicesVersion = "16.0.0"
+        firebaseVersion = "17.3.4"
     }
     repositories {
         google()
@@ -40,6 +42,19 @@ allprojects {
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
             url "$rootDir/../node_modules/react-native/android"
+        }
+    }
+    // force libs to use recent buildtools
+    // https://github.com/luggit/react-native-config/issues/299
+    subprojects {
+        afterEvaluate {
+            project ->
+                if (project.hasProperty("android")) {
+                    android {
+                        compileSdkVersion = 27
+                        buildToolsVersion = "27.0.3"
+                    }
+                }
         }
     }
 }
