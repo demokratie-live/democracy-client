@@ -5,8 +5,8 @@ include ':react-native-sha256'
 project(':react-native-sha256').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-sha256/android')
 include ':rn-fetch-blob'
 project(':rn-fetch-blob').projectDir = new File(rootProject.projectDir, '../node_modules/rn-fetch-blob/android')
-include ':reactnativenotifications'
-project(':reactnativenotifications').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-notifications/android')
+include ':react-native-notifications'
+project(':react-native-notifications').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-notifications/android')
 include ':react-native-pdf'
 project(':react-native-pdf').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-pdf/android')
 include ':react-native-keychain'

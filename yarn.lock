@@ -5018,6 +5018,13 @@ hermesvm@^0.1.0:
   resolved "https://registry.yarnpkg.com/hermesvm/-/hermesvm-0.1.0.tgz#4bfaf4ac682a2fd407b862ab641eb8deb232de83"
   integrity sha512-GbP6dKaVW/V2QpB+DZPxcmhBhJVFa9cHS/xRX7FD1MGfa6Z1aHHD83VDCwo3SgcqNj5yHlVbe9UgrK1PFGCXpw==
 
+hoist-non-react-statics@3.x.x:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.0.tgz#b09178f0122184fb95acf525daaecb4d8f45958b"
+  integrity sha512-0XsbTXxgiaCDYDIWFcwkmerZPSwywfUqYmwT4jzewKTQSWoE6FCMoUVOeBJWK3E/CrWbxRG3m5GzY4lnIwGRBA==
+  dependencies:
+    react-is "^16.7.0"
+
 hoist-non-react-statics@^3.0.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.2.0.tgz#d21b9fc72b50fdc38c5d88f6e2c52f2c2dbe5ee2"
@@ -6473,10 +6480,10 @@ lodash.uniqby@^4.7.0:
   resolved "https://registry.yarnpkg.com/lodash.uniqby/-/lodash.uniqby-4.7.0.tgz#d99c07a669e9e6d24e1362dfe266c67616af1302"
   integrity sha1-2ZwHpmnp5tJOE2Lf4mbGdhavEwI=
 
-lodash@4.x.x:
-  version "4.17.5"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.5.tgz#99a92d65c0272debe8c96b6057bc8fbfa3bed511"
-  integrity sha512-svL3uiZf1RwhH+cWrfZn3A4+U58wbP0tGVTLQPbjplZxZ8ROD9VLuNgsRniTlLe7OlSqR79RUehXgpBW/s0IQw==
+lodash@4.17.x, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14:
+  version "4.17.15"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
+  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
 
 lodash@^4.0.0:
   version "4.17.4"
@@ -6492,11 +6499,6 @@ lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.0,
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
   integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
-
-lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14:
-  version "4.17.15"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
-  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
 
 log-symbols@^2.2.0:
   version "2.2.0"
@@ -8287,15 +8289,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.3"
 
-prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.6.0, prop-types@^15.6.2:
-  version "15.6.2"
-  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
-  integrity sha512-3pboPvLiWD7dkI3qf3KbUe6hKFKa52w+AE0VCqECtf+QHAKgOL37tTaNCnuX1nAAQ4ZhyP+kYVKf8rLmJ/feDQ==
-  dependencies:
-    loose-envify "^1.3.1"
-    object-assign "^4.1.1"
-
-prop-types@^15.7.2:
+prop-types@15.x.x, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -8303,6 +8297,14 @@ prop-types@^15.7.2:
     loose-envify "^1.4.0"
     object-assign "^4.1.1"
     react-is "^16.8.1"
+
+prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.6.0, prop-types@^15.6.2:
+  version "15.6.2"
+  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
+  integrity sha512-3pboPvLiWD7dkI3qf3KbUe6hKFKa52w+AE0VCqECtf+QHAKgOL37tTaNCnuX1nAAQ4ZhyP+kYVKf8rLmJ/feDQ==
+  dependencies:
+    loose-envify "^1.3.1"
+    object-assign "^4.1.1"
 
 protochain@^1.0.5:
   version "1.0.5"
@@ -8460,10 +8462,15 @@ react-is@^16.3.2, react-is@^16.6.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.6.3.tgz#d2d7462fcfcbe6ec0da56ad69047e47e56e7eac0"
   integrity sha512-u7FDWtthB4rWibG/+mFbVd5FvdI20yde86qKGx4lVUTWmPlSWQ4QxbBIrrs+HnXGbxOUlUzTAP/VDmvCwaP2yA==
 
-react-is@^16.8.1, react-is@^16.8.4, react-is@^16.8.6:
+react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.8.6:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.6.tgz#5bbc1e2d29141c9fbdfed456343fe2bc430a6a16"
   integrity sha512-aUk3bHfZ2bRSVFFbbeVS4i+lNPZr3/WM5jT2J5omUVV1zzcs1nAaf3l51ctA5FFvCRbhrH0bdAsRRQddFJZPtA==
+
+react-lifecycles-compat@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-2.0.0.tgz#71d9c4cde47114c4102454f76da055c2bc48c948"
+  integrity sha512-txfpPCQYiazVdcbMRhatqWKcAxJweUu2wDXvts5/7Wyp6+Y9cHojqXHsLPEckzutfHlxZhG8Oiundbmp8Fd6eQ==
 
 react-native-config@^0.11.5:
   version "0.11.7"
@@ -8488,10 +8495,10 @@ react-native-keyboard-aware-scroll-view@^0.6.0:
     prop-types "^15.6.0"
     react-native-iphone-x-helper "^1.0.1"
 
-react-native-keychain@^3.0.0-rc.3:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/react-native-keychain/-/react-native-keychain-3.0.0.tgz#29da1dfa43c2581f76bf9420914fd38a1558cf18"
-  integrity sha512-0incABt1+aXsZvG34mDV57KKanSB+iMHmxvWv+N6lgpNLaSoqrCxazjbZdeqD4qJ7Z+Etp5CLf/4v1aI+sNLBw==
+react-native-keychain@^3.1.3:
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/react-native-keychain/-/react-native-keychain-3.1.3.tgz#fce176e7b95243cecda1896a7e6bdfe0335d778a"
+  integrity sha512-eWUbjYJge4icX8FhWJk/OPlyGxPnW9bZDysBX3WwOG37iurdH692HKnM2Ih+S+0te65RytImvUrcVnHVBbumYg==
 
 react-native-linear-gradient@^2.4.0:
   version "2.5.3"
@@ -8506,12 +8513,16 @@ react-native-material-tabs@^3.8.1:
     prop-types "^15.6.2"
     styled-components "^4.1.2"
 
-react-native-navigation@1.1.443:
-  version "1.1.443"
-  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-1.1.443.tgz#80d6f4d9b1e7d5cee6b95e0cb2a5aa4253ed3716"
-  integrity sha512-1U2pRBokG9/V//bXrs9a854KtCyXliyEsnyzlYyGYelxkLywcIdkMkvjnGqLpuK/VYCjx479S3jIN3TnG49MPQ==
+react-native-navigation@2.26.5:
+  version "2.26.5"
+  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-2.26.5.tgz#440c94b38d19f186e3b8ee8126eb81168e41064b"
+  integrity sha512-1NETnuUVB5NP/z8R5yJMmT2W1reOXHd6sLklkNoAaHXY+gtyOSwkSt2cLf6x71qZ6DsR4Od/vggN+bH54k5djw==
   dependencies:
-    lodash "4.x.x"
+    hoist-non-react-statics "3.x.x"
+    lodash "4.17.x"
+    prop-types "15.x.x"
+    react-lifecycles-compat "2.0.0"
+    tslib "1.9.3"
 
 "react-native-notifications@https://github.com/demokratie-live/react-native-notifications/archive/1.1.24.tar.gz":
   version "1.1.24"
@@ -10141,15 +10152,15 @@ trim-right@^1.0.1:
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
   integrity sha1-yy4SAwZ+DI3h9hQJS5/kVwTqYAM=
 
+tslib@1.9.3, tslib@^1.9.0, tslib@^1.9.3:
+  version "1.9.3"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
+  integrity sha512-4krF8scpejhaOgqzBEcGM7yDIEfi0/8+8zDRZhNZZ2kjmHJ4hv3zCbQWxoJGz1iw5U0Jl0nma13xzHXcncMavQ==
+
 tslib@^1.8.1:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.10.0.tgz#c3c19f95973fb0a62973fb09d90d961ee43e5c8a"
   integrity sha512-qOebF53frne81cf0S9B41ByenJ3/IuH8yJKngAX35CmiZySA0khhkovshKK+jGCaMnVomla7gVlIcc3EvKPbTQ==
-
-tslib@^1.9.0, tslib@^1.9.3:
-  version "1.9.3"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
-  integrity sha512-4krF8scpejhaOgqzBEcGM7yDIEfi0/8+8zDRZhNZZ2kjmHJ4hv3zCbQWxoJGz1iw5U0Jl0nma13xzHXcncMavQ==
 
 tsutils@^3.7.0:
   version "3.17.0"
