@@ -68,7 +68,7 @@
     "react-native-config": "^0.11.5",
     "react-native-device-info": "0.21.2",
     "react-native-keyboard-aware-scroll-view": "^0.6.0",
-    "react-native-keychain": "^3.1.3",
+    "react-native-keychain": "https://github.com/DribbleUp/react-native-keychain",
     "react-native-linear-gradient": "^2.4.0",
     "react-native-material-tabs": "^3.8.1",
     "react-native-navigation": "2.26.5",
