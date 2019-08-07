@@ -8495,10 +8495,9 @@ react-native-keyboard-aware-scroll-view@^0.6.0:
     prop-types "^15.6.0"
     react-native-iphone-x-helper "^1.0.1"
 
-react-native-keychain@^3.1.3:
+"react-native-keychain@https://github.com/DribbleUp/react-native-keychain":
   version "3.1.3"
-  resolved "https://registry.yarnpkg.com/react-native-keychain/-/react-native-keychain-3.1.3.tgz#fce176e7b95243cecda1896a7e6bdfe0335d778a"
-  integrity sha512-eWUbjYJge4icX8FhWJk/OPlyGxPnW9bZDysBX3WwOG37iurdH692HKnM2Ih+S+0te65RytImvUrcVnHVBbumYg==
+  resolved "https://github.com/DribbleUp/react-native-keychain#a42fd06a69d0de26f7272f666df548a851acbfb1"
 
 react-native-linear-gradient@^2.4.0:
   version "2.5.3"
