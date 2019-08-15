@@ -157,6 +157,16 @@ android {
             keyAlias MYAPP_RELEASE_KEY_ALIAS
             keyPassword System.getenv('ANDROID_PASS')
         }
+        debug {
+            //storeFile file('debug.keystore')
+            //storePassword 'android'
+            //keyAlias 'androiddebugkey'
+            //keyPassword 'android'
+            storeFile file(MYAPP_RELEASE_STORE_FILE)
+            storePassword System.getenv('ANDROID_PASS')
+            keyAlias MYAPP_RELEASE_KEY_ALIAS
+            keyPassword System.getenv('ANDROID_PASS')
+        }
     }
 
     defaultConfig {
@@ -172,14 +182,6 @@ android {
             enable enableSeparateBuildPerCPUArchitecture
             universalApk false  // If true, also generate a universal APK
             include "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
-        }
-    }
-    signingConfigs {
-        debug {
-            storeFile file('debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
         }
     }
     buildTypes {
@@ -246,7 +248,7 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
-    implementation project(':react-native-sha256')
+    //implementation project(':react-native-sha256')
 
     if (enableHermes) {
       def hermesPath = "../../node_modules/hermesvm/android/";
@@ -256,14 +258,14 @@ dependencies {
       implementation jscFlavor
     }
 
-    api project(':rn-fetch-blob')
-    api project(':react-native-pdf')
-    api project(':react-native-svg')
-    api project(':react-native-device-info')
-    api project(':react-native-config')
-    api project(':react-native-vector-icons')
-    api project(':react-native-linear-gradient')
-    api project(':react-native-keychain')
+    //api project(':rn-fetch-blob')
+    //api project(':react-native-pdf')
+    //api project(':react-native-svg')
+    //api project(':react-native-device-info')
+    //api project(':react-native-config')
+    //api project(':react-native-vector-icons')
+    //api project(':react-native-linear-gradient')
+    //api project(':react-native-keychain')
 
     implementation 'com.android.support:design:27.1.0'
 
