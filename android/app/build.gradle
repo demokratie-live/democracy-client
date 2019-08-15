@@ -262,10 +262,8 @@ dependencies {
     api project(':react-native-device-info')
     api project(':react-native-config')
     api project(':react-native-vector-icons')
-    api project(':react-native-navigation')
     api project(':react-native-linear-gradient')
     api project(':react-native-keychain')
-    api project(':reactnativenotifications')
 
     implementation 'com.android.support:design:27.1.0'
 

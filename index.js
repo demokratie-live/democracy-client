@@ -1,5 +1,5 @@
 // import React from 'react';
-import {
+/*import {
   Navigation,
   ScreenVisibilityListener as RNNScreenVisibilityListener,
 } from 'react-native-navigation';
@@ -20,7 +20,7 @@ import topTabs from './src/screens/VoteList/topTabs';
 import './src/services/browserLinks';
 
 YellowBox.ignoreWarnings(['Require cycle:', 'Attempted to invoke']);
-
+*/
 // disable rerender analyst with false !== false because of eslint
 /* if (process.env.NODE_ENV !== 'production' && false !== false) {
   const { whyDidYouUpdate } = require('why-did-you-update');
@@ -73,7 +73,7 @@ Reactotron.configure() // controls connection & communication settings
    .useReactNative() // add all built-in react native plugins
    .connect(); // let's connect!
 */
-
+/*
 registerScreens();
 
 class App {
@@ -222,3 +222,4 @@ class App {
   // Start the App
   const app = new App(); // eslint-disable-line
 })();
+*/

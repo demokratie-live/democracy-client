@@ -1,6 +1,6 @@
 package de.democracydeutschland.app;
 
-import com.reactnativenavigation.controllers.SplashActivity;
+/*import com.reactnativenavigation.controllers.SplashActivity;
 
 import android.support.v4.content.ContextCompat;
 import android.view.ViewGroup;
@@ -30,5 +30,19 @@ public class MainActivity extends SplashActivity {
 
         view.addView(imageView);
         return view;
+    }
+}
+*/
+import com.facebook.react.ReactActivity;
+
+public class MainActivity extends ReactActivity {
+
+    /**
+     * Returns the name of the main component registered from JavaScript.
+     * This is used to schedule rendering of the component.
+     */
+    @Override
+    protected String getMainComponentName() {
+        return "RnDiffApp";
     }
 }
