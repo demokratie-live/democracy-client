@@ -156,7 +156,7 @@ class MemberProfil extends PureComponent {
                     <Party party={party} />
                   </MemberImageWrapper>
                   <Text>{name}</Text>
-                  <TextLighGrey>Direktkadidat WK {constituency}</TextLighGrey>
+                  <TextLighGrey>Direktkandidat WK {constituency}</TextLighGrey>
                   <TextGrey>{job}</TextGrey>
                   <Chart
                     totalProcedures={totalProcedures}
