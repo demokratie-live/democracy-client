@@ -16,6 +16,7 @@ yarn install
 ```
 cd mobile-ui
 yarn android
+(ignore metro bundler errors)
 CMD+M and Change Bundle Location to 127.0.0.1:8088
 ```
 
@@ -27,6 +28,7 @@ cd ios
 pod install
 cd ..
 yarn ios
+(ignore metro bundler errors)
 CMD+M and Configure Bundler Location to Host: 127.0.0.1 & Port: 8088
 ```
 
