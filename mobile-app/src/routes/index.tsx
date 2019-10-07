@@ -4,6 +4,9 @@ import { NavigationNativeContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import styled from 'styled-components/native';
 import HomeScreen from '../screens/Home';
+import {Screen, slidesData} from "@democracy-deutschland/ui-mobile/src/components/Instruction/data";
+import Slide from '@democracy-deutschland/ui-mobile/src/components/Instruction/Slide';
+
 
 const Container = styled.View`
   flex: 1;
@@ -13,9 +16,12 @@ const Container = styled.View`
 
 function DetailsScreen() {
   return (
-    <Container>
-      <Text>Details Screen</Text>
-    </Container>
+    <Slide
+        head={slidesData[Screen.Analysiere].head}
+        images={slidesData[Screen.Analysiere].images}
+        nextPage={() => {}}
+        isNew={slidesData[Screen.Analysiere].isNew}
+      />
   );
 }
 

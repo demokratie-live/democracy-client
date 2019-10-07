@@ -996,6 +996,14 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@democracy-deutschland/ui-mobile@../mobile-ui":
+  version "0.0.1"
+  dependencies:
+    react "16.9.0"
+    react-native "0.61.1"
+    react-native-linear-gradient "^2.5.6"
+    styled-components "^4.4.0"
+
 "@emotion/cache@^10.0.17", "@emotion/cache@^10.0.9":
   version "10.0.19"
   resolved "https://registry.yarnpkg.com/@emotion/cache/-/cache-10.0.19.tgz#d258d94d9c707dcadaf1558def968b86bb87ad71"
