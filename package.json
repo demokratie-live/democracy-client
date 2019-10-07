@@ -1,0 +1,15 @@
+{
+  "name": "democracy",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "workspaces": {
+    "packages": ["mobile-ui", "mobile-app"],
+    "nohoist": [
+      "**/react-native",
+      "**/react-native/**",
+      "**/react-native-linear-gradient",
+      "**/react-native-linear-gradient/**"
+    ]
+  }
+}
