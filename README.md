@@ -3,8 +3,8 @@
 ## install dependencies
 
 ```
-clone PROJECT_ULR
-cd democracy
+git clone https://github.com/demokratie-live/democracy-app
+cd democracy-app
 yarn install
 
 ```
