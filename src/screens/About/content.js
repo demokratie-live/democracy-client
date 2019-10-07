@@ -21,7 +21,7 @@ Aljoscha Waterstradt
 Andre Mai
 Andre Moser
 André Pitz
-Andre Schünke 
+Andre Schünke
 Andrea Buchelt
 Andrea Guse
 Andreas Appenheimer
@@ -67,7 +67,7 @@ Carolin Mey
 Carsten Brier
 Carsten waldschmidt
 Chahir Etayaa
-Christian Frster
+Christian Förster
 Christian Heigele
 Christian Heller
 Christian Jung
