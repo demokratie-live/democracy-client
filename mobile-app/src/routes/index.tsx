@@ -1,46 +1,64 @@
 import 'react-native-gesture-handler'; // TODO remove workaround https://github.com/kmagiera/react-native-gesture-handler/issues/320#issuecomment-538190653
-import React from 'react';
-import { Text } from 'react-native';
+import React, { useState, useContext } from 'react';
 import { NavigationNativeContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import styled from 'styled-components/native';
 import HomeScreen from '../screens/Home';
-import {Screen, slidesData} from "@democracy-deutschland/ui-mobile/src/components/Instruction/data";
-import Slide from '@democracy-deutschland/ui-mobile/src/components/Instruction/Slide';
+import Introduction from '../screens/modals/Introduction';
+import Verification from '../screens/modals/Verification';
+import { InitialStateContext } from '../context/InitialStates';
+import DeviceInfo from 'react-native-device-info';
+import { InitialState } from '@react-navigation/core';
 
+export type RootStackParamList = {
+  Home: undefined;
+  Introduction: { done: () => void };
+  Verification: undefined;
+};
 
-const Container = styled.View`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-`;
+type Screens = keyof RootStackParamList;
 
-function DetailsScreen() {
-  return (
-    <Slide
-        head={slidesData[Screen.Analysiere].head}
-        images={slidesData[Screen.Analysiere].images}
-        nextPage={() => {}}
-        isNew={slidesData[Screen.Analysiere].isNew}
-      />
+const RootStack = createStackNavigator<RootStackParamList>();
+
+const App = () => {
+  const [currentVersion, setCurrentVersion] = useState();
+  const { lastStartWithVersion, setLastStartWithVersion } = useContext(
+    InitialStateContext,
   );
-}
 
-const Stack = createStackNavigator();
+  DeviceInfo.getVersion().then(setCurrentVersion);
 
-function App() {
+  if (lastStartWithVersion === undefined || currentVersion === undefined) {
+    return null;
+  }
+
+  console.log('#########', `${lastStartWithVersion} !== ${currentVersion}`);
+  const initialState: InitialState = {
+    routes: [
+      {
+        name: 'Home',
+      },
+    ],
+  };
+  if (currentVersion !== lastStartWithVersion) {
+    initialState.routes.push({
+      name: 'Introduction',
+    });
+    setLastStartWithVersion(currentVersion);
+  }
+
   return (
-    <NavigationNativeContainer>
-      <Stack.Navigator>
-        <Stack.Screen
+    <NavigationNativeContainer initialState={initialState}>
+      <RootStack.Navigator mode="modal" headerMode="none">
+        <RootStack.Screen
           name="Home"
           component={HomeScreen}
           options={{ title: 'Overview 🙈' }}
         />
-        <Stack.Screen name="Details" component={DetailsScreen} />
-      </Stack.Navigator>
+        <RootStack.Screen name="Introduction" component={Introduction} />
+        <RootStack.Screen name="Verification" component={Verification} />
+      </RootStack.Navigator>
     </NavigationNativeContainer>
   );
-}
+};
 
 export default App;

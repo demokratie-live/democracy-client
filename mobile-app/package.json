@@ -32,17 +32,21 @@
       "**/styled-components",
       "**/styled-components/**",
       "**/@democracy-deutschland",
-      "**/@democracy-deutschland/**"
+      "**/@democracy-deutschland/**",
+      "**/react-native-device-info",
+      "**/react-native-device-info/**"
     ]
   },
   "dependencies": {
     "@democracy-deutschland/ui-mobile": "../mobile-ui",
+    "@react-native-community/async-storage": "^1.6.2",
     "@react-native-community/masked-view": "^0.1.1",
     "@react-navigation/core": "^5.0.0-alpha.13",
     "@react-navigation/native": "^5.0.0-alpha.10",
     "@react-navigation/stack": "^5.0.0-alpha.20",
     "react": "16.9.0",
     "react-native": "0.61.1",
+    "react-native-device-info": "^3.1.4",
     "react-native-gesture-handler": "^1.4.1",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-reanimated": "^1.3.0",
