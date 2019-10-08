@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler'; // TODO remove workaround https://github.com/kmagiera/react-native-gesture-handler/issues/320#issuecomment-538190653
 import React from 'react';
 import { Text } from 'react-native';
 import { NavigationNativeContainer } from '@react-navigation/native';
