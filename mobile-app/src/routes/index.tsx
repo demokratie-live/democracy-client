@@ -8,8 +8,11 @@ import Verification from '../screens/modals/Verification';
 import { InitialStateContext } from '../context/InitialStates';
 import DeviceInfo from 'react-native-device-info';
 import { InitialState } from '@react-navigation/core';
+import { Sidebar } from '../screens/Sidebar';
+import { rootNavigationRef } from './Root';
 
 export type RootStackParamList = {
+  Sidebar: undefined;
   Home: undefined;
   Introduction: { done: () => void };
   Verification: undefined;
@@ -31,11 +34,10 @@ const App = () => {
     return null;
   }
 
-  console.log('#########', `${lastStartWithVersion} !== ${currentVersion}`);
   const initialState: InitialState = {
     routes: [
       {
-        name: 'Home',
+        name: 'Sidebar',
       },
     ],
   };
@@ -47,8 +49,11 @@ const App = () => {
   }
 
   return (
-    <NavigationNativeContainer initialState={initialState}>
+    <NavigationNativeContainer
+      initialState={initialState}
+      ref={rootNavigationRef}>
       <RootStack.Navigator mode="modal" headerMode="none">
+        <RootStack.Screen name="Sidebar" component={Sidebar} />
         <RootStack.Screen
           name="Home"
           component={HomeScreen}

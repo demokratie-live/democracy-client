@@ -4,15 +4,15 @@ import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../routes';
 
-const Verification = () => {
+const Introduction = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   return (
     <SafeAreaView>
-      <Text>Verification Screen</Text>
+      <Text>Introduction Screen</Text>
       <Button onPress={() => navigation.goBack()} title="Dismiss" />
     </SafeAreaView>
   );
 };
 
-export default Verification;
+export default Introduction;
