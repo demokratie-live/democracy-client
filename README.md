@@ -79,6 +79,33 @@ Anyone and everyone is welcome to [contribute](CONTRIBUTING.md). Start by checki
 Copyright © 2017-present DEMOCRACY Deutschland e.V.. This source code is licensed under the Apache 2.0 license found in the
 [LICENSE](https://github.com/demokratie-live/democracy-client/blob/master/LICENSE) file.
 
+## Maintainers
+
+<table>
+  <tbody>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/ManAnRuck">
+          <img width="150" height="150" src="https://github.com/ManAnRuck.png?v=3&s=150">
+          </br>
+          <strong>Manuel Ruck</strong>
+        </a>
+        <br>
+        Maintainer
+      </td>
+      <td align="center">
+        <a href="https://github.com/ulfgebhardt">
+          <img width="150" height="150" src="https://github.com/ulfgebhardt.png?v=3&s=150">
+          </br>
+          <strong>Ulf Gebhardt</strong>
+        </a>
+        <br>
+        Maintainer
+      </td>
+    </tr>
+  <tbody>
+</table>
+
 ---
 
 Made with ♥ by Team DEMOCRACY ([democracy-deutschland.de](https://www.democracy-deutschland.de)), [startnext contributors](https://www.startnext.com/democracy/unterstuetzer/) and [contributors](https://github.com/demokratie-live/democracy-client/graphs/contributors)
