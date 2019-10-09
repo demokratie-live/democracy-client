@@ -170,7 +170,7 @@ class Wahlkreis extends PureComponent {
                   <DeputyDetailsWrapper>
                     <NameWrapper>
                       <Text>{name}</Text>
-                      <TextLighGrey>Direktkadidat WK {constituency}</TextLighGrey>
+                      <TextLighGrey>Direktkandidat WK {constituency}</TextLighGrey>
                     </NameWrapper>
                     <InfoIconButton
                       onPress={() =>

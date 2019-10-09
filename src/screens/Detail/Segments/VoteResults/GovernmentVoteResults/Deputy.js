@@ -144,7 +144,7 @@ const DeputyVoteData = ({ procedureId, navigator }) => (
                 <DeputyDetailsWrapper>
                   <NameWrapper>
                     <Text>{name}</Text>
-                    <TextLighGrey>Direktkadidat WK {constituency}</TextLighGrey>
+                    <TextLighGrey>Direktkandidat WK {constituency}</TextLighGrey>
                   </NameWrapper>
                   <InfoIconButton
                     onPress={() =>
