@@ -2,13 +2,12 @@ import 'react-native-gesture-handler'; // TODO remove workaround https://github.
 import React, { useState, useContext } from 'react';
 import { NavigationNativeContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import HomeScreen from '../screens/Home';
 import Introduction from '../screens/modals/Introduction';
 import Verification from '../screens/modals/Verification';
 import { InitialStateContext } from '../context/InitialStates';
 import DeviceInfo from 'react-native-device-info';
 import { InitialState } from '@react-navigation/core';
-import { Sidebar } from '../screens/Sidebar';
+import { Sidebar } from './Sidebar';
 import { rootNavigationRef } from './Root';
 
 export type RootStackParamList = {
@@ -17,8 +16,6 @@ export type RootStackParamList = {
   Introduction: { done: () => void };
   Verification: undefined;
 };
-
-type Screens = keyof RootStackParamList;
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
@@ -54,11 +51,6 @@ const App = () => {
       ref={rootNavigationRef}>
       <RootStack.Navigator mode="modal" headerMode="none">
         <RootStack.Screen name="Sidebar" component={Sidebar} />
-        <RootStack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ title: 'Overview 🙈' }}
-        />
         <RootStack.Screen name="Introduction" component={Introduction} />
         <RootStack.Screen name="Verification" component={Verification} />
       </RootStack.Navigator>

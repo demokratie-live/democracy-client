@@ -12,11 +12,16 @@ import {
   StyleSheet,
   Text,
 } from 'react-native';
-import HomeScreen from '../Home';
+import BundestagRootNavigation from './Bundestag';
 
-const Drawer = createDrawerNavigator();
+export type SidebarParamList = {
+  Bundestag: undefined;
+  Statistic: undefined;
+};
 
-function MyNotificationsScreen({ navigation }) {
+const SidebarDrawer = createDrawerNavigator<SidebarParamList>();
+
+function MyStatisticScreen({ navigation }) {
   return (
     <SafeAreaView>
       <Button onPress={() => navigation.goBack()} title="Go back home" />
@@ -42,12 +47,15 @@ const styles = StyleSheet.create({
 export const Sidebar = () => {
   return (
     <NavigationNativeContainer>
-      <Drawer.Navigator
-        initialRouteName="Home"
+      <SidebarDrawer.Navigator
+        initialRouteName="Bundestag"
         contentComponent={CustomDrawerContentComponent}>
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Notifications" component={MyNotificationsScreen} />
-      </Drawer.Navigator>
+        <SidebarDrawer.Screen
+          name="Bundestag"
+          component={BundestagRootNavigation}
+        />
+        <SidebarDrawer.Screen name="Statistic" component={MyStatisticScreen} />
+      </SidebarDrawer.Navigator>
     </NavigationNativeContainer>
   );
 };

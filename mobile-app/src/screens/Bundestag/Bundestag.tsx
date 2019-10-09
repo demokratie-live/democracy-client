@@ -10,10 +10,10 @@ const Container = styled.View`
   justify-content: center;
 `;
 
-const HomeScreen: FC = () => {
+export const Bundestag: FC = () => {
   return (
     <Container>
-      <Text>Home Screen</Text>
+      <Text>Bundestag Screen</Text>
       <Button
         title="Go to Introduction"
         onPress={() => rootNavigate('Introduction')}
@@ -29,5 +29,3 @@ const HomeScreen: FC = () => {
     </Container>
   );
 };
-
-export default HomeScreen;
