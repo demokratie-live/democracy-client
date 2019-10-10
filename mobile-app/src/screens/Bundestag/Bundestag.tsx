@@ -3,6 +3,9 @@ import styled from 'styled-components/native';
 import { Text, Button } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { rootNavigate } from '../../routes/Root';
+import { useNavigation } from '@react-navigation/core';
+import { BundestagRootStackParamList } from '../../routes/Sidebar/Bundestag';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 const Container = styled.View`
   flex: 1;
@@ -11,9 +14,16 @@ const Container = styled.View`
 `;
 
 export const Bundestag: FC = () => {
+  const navigation = useNavigation<
+    StackNavigationProp<BundestagRootStackParamList>
+  >();
   return (
     <Container>
       <Text>Bundestag Screen</Text>
+      <Button
+        title="Go to Procedure"
+        onPress={() => navigation.navigate('Procedure')}
+      />
       <Button
         title="Go to Introduction"
         onPress={() => rootNavigate('Introduction')}
