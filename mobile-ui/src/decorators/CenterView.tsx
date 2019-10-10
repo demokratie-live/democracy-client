@@ -1,5 +1,5 @@
 import React from 'react';
-import {DecoratorFunction} from '@storybook/addons';
+import { DecoratorFunction } from '@storybook/addons';
 import styled from 'styled-components/native';
 
 const Centered = styled.View`

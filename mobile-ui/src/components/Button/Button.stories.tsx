@@ -1,8 +1,8 @@
 import React from 'react';
-import {Text} from 'react-native';
+import { Text } from 'react-native';
 
-import {storiesOf} from '@storybook/react-native';
-import {action} from '@storybook/addon-actions';
+import { storiesOf } from '@storybook/react-native';
+import { action } from '@storybook/addon-actions';
 
 import Button from '../Button';
 import CenterView from '../../decorators/CenterView';

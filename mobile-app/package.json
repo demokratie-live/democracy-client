@@ -13,11 +13,11 @@
     "test": "jest",
     "test:watch": "yarn test --watch",
     "coverage": "yarn run test --coverage",
-    "lint:eslint": "eslint 'src/**/*.{ts,tsx}'",
+    "lint:eslint": "eslint 'src/**/*.{ts,tsx,js,jsx}'",
     "lint:ts": "tsc && yarn lint:eslint",
     "lint": "yarn lint:ts",
-    "format": "prettier --write 'src/**/*.{ts,tsx}' && yarn lint:eslint --fix",
-    "format:check": "prettier -c 'src/**/*.{ts,tsx}'"
+    "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx}' && yarn lint:eslint --fix",
+    "format:check": "prettier -c 'src/**/*.{ts,tsx,js,jsx}'"
   },
   "workspaces": {
     "nohoist": [
