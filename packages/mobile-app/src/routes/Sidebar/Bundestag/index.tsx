@@ -9,6 +9,7 @@ import {
   Voting,
 } from '../../../screens/Bundestag';
 import { Button } from 'react-native';
+import { sidebarToggle } from '../NavigationService';
 
 export type BundestagRootStackParamList = {
   Bundestag: undefined;
@@ -28,7 +29,7 @@ const BundestagRootNavigation = () => {
           name="Bundestag"
           component={Bundestag}
           options={{
-            headerLeft: () => <Button onPress={() => {}} title="123" />,
+            headerLeft: () => <Button onPress={sidebarToggle} title="🍔" />,
           }}
         />
         <BundestagRootStack.Screen name="Procedure" component={Procedure} />

@@ -13,6 +13,9 @@ import {
   Text,
 } from 'react-native';
 import BundestagRootNavigation from './Bundestag';
+import { sidebarNavigationRef } from './NavigationService';
+
+export * from './NavigationService';
 
 export type SidebarParamList = {
   Bundestag: undefined;
@@ -46,7 +49,7 @@ const styles = StyleSheet.create({
 
 export const Sidebar = () => {
   return (
-    <NavigationNativeContainer>
+    <NavigationNativeContainer ref={sidebarNavigationRef}>
       <SidebarDrawer.Navigator
         initialRouteName="Bundestag"
         contentComponent={CustomDrawerContentComponent}>
