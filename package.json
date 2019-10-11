@@ -4,12 +4,20 @@
   "license": "MIT",
   "private": true,
   "workspaces": {
-    "packages": ["mobile-ui", "mobile-app"],
-    "nohoist": [
-      "**/react-native",
-      "**/react-native/**",
-      "**/react-native-linear-gradient",
-      "**/react-native-linear-gradient/**"
-    ]
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": []
+  },
+  "scripts": {
+    "app:start": "yarn workspace app start",
+    "app:ios": "yarn workspace app ios",
+    "app:android": "yarn workspace app android",
+    "ui:start": "yarn workspace ui start",
+    "ui:ios": "yarn workspace ui ios",
+    "ui:android": "yarn workspace ui android"
+  },
+  "dependencies": {
+    "react-native": "0.61.1"
   }
 }
