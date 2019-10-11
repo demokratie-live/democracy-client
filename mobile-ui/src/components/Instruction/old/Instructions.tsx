@@ -81,8 +81,6 @@ class Introductions extends PureComponent {
   };
 
   render() {
-    console.log(this.swiper);
-
     const screens = [
       // Willkommen bei DEMOCRACY
       <Slide

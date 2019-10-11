@@ -1,4 +1,4 @@
-import React, { useState, useRef, ReactChild, FC } from 'react';
+import React, { useState, useRef, FC } from 'react';
 import {
   NativeScrollEvent,
   NativeSyntheticEvent,
@@ -6,13 +6,14 @@ import {
   ScrollView,
 } from 'react-native';
 import { Dots } from './PageDots';
+import { Props as SlideProps } from '../Instruction/Slide';
 
 interface Dat {
   row: number;
 }
 
 interface Props {
-  children: React.ReactElement<ReactChild>[];
+  children: React.ReactElement<SlideProps>[];
 }
 
 export const Pager: FC<Props> = ({ children }) => {
@@ -36,6 +37,14 @@ export const Pager: FC<Props> = ({ children }) => {
       scrollView.current.scrollTo(undefined, currentDot * pageWidth, false);
     }
   };
+
+  const nextPage = () => {
+    if (scrollView.current) {
+      scrollView.current.scrollTo({
+        x: (currentDot + 1) * pageWidth,
+      });
+    }
+  };
   return (
     <>
       <ScrollView
@@ -47,7 +56,9 @@ export const Pager: FC<Props> = ({ children }) => {
         showsHorizontalScrollIndicator={false}
         onContentSizeChange={onContentSizeChange}
         contentContainerStyle={{ width: pageWidth * children.length }}>
-        {children}
+        {children.map(child =>
+          React.cloneElement<SlideProps>(child, { nextPage }),
+        )}
       </ScrollView>
       <Dots length={children.length} current={currentDot} />
     </>
