@@ -37,14 +37,6 @@ storiesOf('Pager', module)
             isNew={slidesData[screen as Screen].isNew}
           />
         ))}
-        {/* {[
-          <Slide
-            head={slidesData[slideSelected].head}
-            images={slidesData[slideSelected].images}
-            nextPage={() => {}}
-            isNew={slidesData[slideSelected].isNew}
-          />,
-        ]} */}
       </Pager>
     </SafeAreaView>
   ));
