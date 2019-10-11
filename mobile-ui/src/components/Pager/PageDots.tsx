@@ -31,7 +31,7 @@ interface Props {
 export const Dots: FC<Props> = ({ length, current }) => (
   <DotsWrapper>
     {[...Array(length)].map((_, i) => (
-      <Dot size={5} active={i === current} />
+      <Dot key={i.toString()} size={5} active={i === current} />
     ))}
   </DotsWrapper>
 );
