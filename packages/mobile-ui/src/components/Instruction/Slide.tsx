@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { Dimensions, Platform, Image } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { PageProps } from '../Pager';
 
 const Container = styled.View`
   flex: 1;
@@ -107,7 +108,7 @@ const NewMarker = styled.Image.attrs({
   left: 18;
 `;
 
-export interface Props {
+export interface Props extends PageProps {
   head: {
     image: NodeRequire;
     title: string;
@@ -121,17 +122,33 @@ export interface Props {
   };
   isNew?: boolean;
   verify?: () => void;
-  nextPage?: () => void;
+  nextSlide?: () => void;
 }
 
 export const Slide: React.FC<Props> = ({
   head,
   images,
   isNew,
-  nextPage,
+  nextSlide,
   verify,
+  nextPage,
 }) => {
   const circleImage = images.circle || require('./assets/icon.touch.png');
+
+  const handleNextSlide = () => {
+    if (nextPage && !nextSlide) {
+      console.log('sim');
+      nextPage();
+      return;
+    } else if (nextSlide) {
+      console.log('sam');
+      nextSlide();
+      return;
+    }
+    console.log('song');
+    return;
+  };
+
   return (
     <Container>
       {isNew && <NewMarker />}
@@ -155,7 +172,7 @@ export const Slide: React.FC<Props> = ({
         )}
         <ContainerCenterImage>
           <ImageCenter source={images.center} />
-          <ButtonCircle onPress={nextPage}>
+          <ButtonCircle onPress={handleNextSlide}>
             <ImageCircle source={circleImage} />
           </ButtonCircle>
           {verify && (

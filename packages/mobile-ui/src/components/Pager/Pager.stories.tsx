@@ -33,7 +33,7 @@ storiesOf('Pager', module)
             key={screen}
             head={slidesData[screen as Screen].head}
             images={slidesData[screen as Screen].images}
-            nextPage={() => {
+            nextSlide={() => {
               console.log('custom next page');
             }}
             isNew={slidesData[screen as Screen].isNew}
