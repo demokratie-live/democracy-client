@@ -11,7 +11,7 @@ const Introduction = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   return (
-    <Pager>
+    <Pager testID="welcome">
       {Object.keys(slidesData).map((screen, i) => (
         <Slide
           head={slidesData[screen].head}

@@ -17,7 +17,8 @@
     "lint:ts": "tsc && yarn lint:eslint",
     "lint": "yarn lint:ts",
     "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx}' && yarn lint:eslint --fix",
-    "format:check": "prettier -c 'src/**/*.{ts,tsx,js,jsx}'"
+    "format:check": "prettier -c 'src/**/*.{ts,tsx,js,jsx}'",
+    "detox:build": "xcodebuild -workspace ios/client.xcworkspace -configuration Debug -scheme client -derivedDataPath build/client"
   },
   "dependencies": {
     "@democracy-deutschland/mobile-ui": "0.0.1",
@@ -47,6 +48,7 @@
     "@types/react-test-renderer": "16.9.0",
     "@types/styled-components": "^4.1.19",
     "babel-jest": "^24.9.0",
+    "detox": "^14.4.1",
     "eslint": "^6.5.1",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.56.0",
@@ -64,5 +66,16 @@
       "json",
       "node"
     ]
+  },
+  "detox": {
+    "configurations": {
+      "ios.sim.debug": {
+        "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/DEMOCRACY.app",
+        "build": "xcodebuild -workspace ios/client.xcworkspace -scheme client -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
+        "type": "ios.simulator",
+        "name": "iPhone X, iOS 12.0"
+      }
+    },
+    "test-runner": "jest"
   }
 }
