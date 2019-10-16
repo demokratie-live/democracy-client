@@ -4,6 +4,8 @@ const adapter = require('detox/runners/jest/adapter');
 const specReporter = require('detox/runners/jest/specReporter');
 const assignReporter = require('detox/runners/jest/assignReporter');
 
+/* global jest, jasmine, beforeAll, beforeEach, afterAll, device */
+
 // Set the default timeout
 jest.setTimeout(60000);
 jasmine.getEnv().addReporter(adapter);
@@ -16,7 +18,12 @@ jasmine.getEnv().addReporter(assignReporter);
 
 beforeAll(async () => {
   console.log('DETOX INIT', config);
-  await detox.init(config);
+  await detox.init(config, { launchApp: false });
+  console.log('DETOX INIT STEP');
+  await device.launchApp({
+    newInstance: true,
+    launchArgs: { detoxPrintBusyIdleResources: 'YES' },
+  });
   console.log('DETOX INIT END');
 });
 
