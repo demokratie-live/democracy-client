@@ -25,12 +25,10 @@ interface Props {
   click: () => void;
 }
 
-const Header: React.FC<Props> = ({ text, click }) => (
+export const NextButton: React.FC<Props> = ({ text, click }) => (
   <>
     <Button onPress={click}>
       <ButtonText>{ButtonTexts[text]}</ButtonText>
     </Button>
   </>
 );
-
-export default Header;

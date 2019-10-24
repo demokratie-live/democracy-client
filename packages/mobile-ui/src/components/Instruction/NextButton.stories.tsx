@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react-native';
 import { withKnobs, select } from '@storybook/addon-knobs';
 
 import CenterView from '../../decorators/CenterView';
-import NextButton, { ButtonTexts } from './NextButton';
+import { ButtonTexts, NextButton } from './NextButton';
 import { Alert } from 'react-native';
 
 storiesOf('Instruction', module)
