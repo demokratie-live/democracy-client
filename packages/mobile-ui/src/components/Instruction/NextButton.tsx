@@ -22,11 +22,12 @@ export const ButtonTexts = {
 
 interface Props {
   text: keyof typeof ButtonTexts;
+  click: () => void;
 }
 
-const Header: React.FC<Props> = ({ text }) => (
+const Header: React.FC<Props> = ({ text, click }) => (
   <>
-    <Button onPress={() => {}}>
+    <Button onPress={click}>
       <ButtonText>{ButtonTexts[text]}</ButtonText>
     </Button>
   </>

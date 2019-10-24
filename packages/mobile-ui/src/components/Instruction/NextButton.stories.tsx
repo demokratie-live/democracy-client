@@ -4,6 +4,7 @@ import { withKnobs, select } from '@storybook/addon-knobs';
 
 import CenterView from '../../decorators/CenterView';
 import NextButton, { ButtonTexts } from './NextButton';
+import { Alert } from 'react-native';
 
 storiesOf('Instruction', module)
   .addDecorator(CenterView)
@@ -12,8 +13,12 @@ storiesOf('Instruction', module)
     const slideSelected = select(
       'Slide',
       Object.keys(ButtonTexts),
-      ButtonTexts.next,
+      'next',
     ) as keyof typeof ButtonTexts;
-
-    return <NextButton text={slideSelected} />;
+    return (
+      <NextButton
+        text={slideSelected}
+        click={() => Alert.alert('NextButton clicked 🎉')}
+      />
+    );
   });
