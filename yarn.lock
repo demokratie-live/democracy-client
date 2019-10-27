@@ -1438,7 +1438,7 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/masked-view/-/masked-view-0.1.1.tgz#dbcfc5ec08efbb02d4142dd9426c8d7a396829d7"
   integrity sha512-EyJVSbarZkOPYq+zCZLx9apMcpwkX9HvH6R+6CeVL29q88kEFemnLO/IhmE4YX/0MfalsduI8eTi7fuQh/5VeA==
 
-"@react-navigation/core@^5.0.0-alpha.14":
+"@react-navigation/core@next":
   version "5.0.0-alpha.17"
   resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-5.0.0-alpha.17.tgz#8dd24616a8779ea9ca4e0addfa11c04827171a14"
   integrity sha512-vppLh/IPg/mN383xT7/rgpjWmTkFQdIX7f3aWTJRcX2GEZEAoQ9Q2GVw6Bd7RVfJBG9nysTtvWTDI/dZVXRiTg==
@@ -1448,39 +1448,38 @@
     shortid "^2.2.15"
     use-subscription "^1.1.1"
 
-"@react-navigation/drawer@^5.0.0-alpha.13":
+"@react-navigation/drawer@next":
   version "5.0.0-alpha.16"
   resolved "https://registry.yarnpkg.com/@react-navigation/drawer/-/drawer-5.0.0-alpha.16.tgz#7f861451b6b229dfb318c90bc79303a9be6d54dd"
   integrity sha512-8++DvlIX1HJwk6E8sENGWTlZ/lI7XDbP0U2UQL1ooPBXLfA+23sx97+b2/35wH/VXldSB6m2fMrAeULTwkRIuA==
   dependencies:
     "@react-navigation/routers" "^5.0.0-alpha.9"
 
-"@react-navigation/material-top-tabs@^5.0.0-alpha.12":
+"@react-navigation/material-top-tabs@next":
   version "5.0.0-alpha.12"
   resolved "https://registry.yarnpkg.com/@react-navigation/material-top-tabs/-/material-top-tabs-5.0.0-alpha.12.tgz#9ff20484ceffafde52f138095536f895f8db0525"
   integrity sha512-SxjSNjE8+agqNchsTpEG34tCKMiBG3zi/RPYiT5XXfhENB0bByvxahTfb5L/HzSnVLkcVyp/sibW9BKRpfIE9w==
   dependencies:
     "@react-navigation/routers" "^5.0.0-alpha.9"
 
-"@react-navigation/native@^5.0.0-alpha.10":
+"@react-navigation/native@next":
   version "5.0.0-alpha.13"
   resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-5.0.0-alpha.13.tgz#fd0150bad0f5646724caa11e162588861c3e4a6b"
   integrity sha512-Zn5RkqrY94c/vmlAplvUUjZ6SA5tyN8JTmzSbSV6IlSPvOgF+Tg9J6BTyFq/iO0nrCX2P4EtOZnv7htRGC33wg==
 
-"@react-navigation/routers@^5.0.0-alpha.8", "@react-navigation/routers@^5.0.0-alpha.9":
+"@react-navigation/routers@^5.0.0-alpha.9":
   version "5.0.0-alpha.9"
   resolved "https://registry.yarnpkg.com/@react-navigation/routers/-/routers-5.0.0-alpha.9.tgz#f91450e9211ae21fdf1d1a67848957c55f7c02a3"
   integrity sha512-XaoukLDQxIgrLJyGnG95ArMrdz4IxMPehcsHdSK1sr2tJ88uYfMknLRbO+UNNxsJUAvtoX3+i17cbrixtNbVRw==
   dependencies:
     shortid "^2.2.15"
 
-"@react-navigation/stack@^5.0.0-alpha.20":
-  version "5.0.0-alpha.20"
-  resolved "https://registry.yarnpkg.com/@react-navigation/stack/-/stack-5.0.0-alpha.20.tgz#62042540e25615ca38203c632b527737dcf84990"
-  integrity sha512-L81dp2rzwilzdz0KqkAtg0pVVEb39Gxhsb4bzL3QGLw0e/AYVNAEB8pkrMeBmZDUUr6xZsp6Lum7k6/IwvBUWQ==
+"@react-navigation/stack@next":
+  version "5.0.0-alpha.29"
+  resolved "https://registry.yarnpkg.com/@react-navigation/stack/-/stack-5.0.0-alpha.29.tgz#255548555614963a03c99c3dbda3c852f765f3e8"
+  integrity sha512-p2LS1YwDTPCwZCt4Bl2oD87tP83IHe+XkpebYkIJlgFXYtlfDirWKOX4tcQ2NkYJKHkkZKxs7RbFz3X0vT84xw==
   dependencies:
-    "@react-navigation/routers" "^5.0.0-alpha.8"
-    react-native-safe-area-view "^0.14.6"
+    "@react-navigation/routers" "^5.0.0-alpha.9"
 
 "@storybook/addon-actions@^5.2.1":
   version "5.2.3"
@@ -9456,13 +9455,6 @@ react-native-safe-area-context@^0.3.6:
   version "0.3.6"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-0.3.6.tgz#666bf581b59aa49a9685aea4e76dfd6e1c8a8a52"
   integrity sha512-5wlaJplOlWxBNnjmCtY/FAlsgRDuoKzmLQzbWUw4NDuOa3H2uq1kTdqTWOw78Nzm5FRqGWe1ZSLWU9+nSaN+vA==
-
-react-native-safe-area-view@^0.14.6:
-  version "0.14.8"
-  resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.14.8.tgz#ef33c46ff8164ae77acad48c3039ec9c34873e5b"
-  integrity sha512-MtRSIcZNstxv87Jet+UsPhEd1tpGe8cVskDXlP657x6rHpSrbrc+y13ZNXrwAgGNNhqQNX7UJT68ZIq//ZRmvw==
-  dependencies:
-    hoist-non-react-statics "^2.3.1"
 
 react-native-screens@^2.0.0-alpha.3:
   version "2.0.0-alpha.6"
