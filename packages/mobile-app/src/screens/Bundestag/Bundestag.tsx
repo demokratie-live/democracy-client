@@ -24,6 +24,7 @@ export const Bundestag: FC = () => {
         title="Go to Procedure"
         onPress={() => navigation.navigate('Procedure')}
       />
+      <Button title="Voting" onPress={() => navigation.navigate('Voting')} />
       <Button
         title="Go to Introduction"
         onPress={() => rootNavigate('Introduction')}

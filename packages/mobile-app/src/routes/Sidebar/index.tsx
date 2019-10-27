@@ -1,8 +1,7 @@
 import React from 'react';
 import {
   createDrawerNavigator,
-  DrawerNavigatorItems,
-  DrawerNavigationItemsProps,
+  DrawerItemList,
 } from '@react-navigation/drawer';
 import { NavigationNativeContainer } from '@react-navigation/native';
 import {
@@ -34,11 +33,11 @@ function MyStatisticScreen({ navigation }) {
   );
 }
 
-const CustomDrawerContentComponent = (props: DrawerNavigationItemsProps) => (
+const CustomDrawerContentComponent = (props: any) => (
   <ScrollView>
     <SafeAreaView style={styles.container}>
       <Text>Header</Text>
-      <DrawerNavigatorItems {...props} />
+      <DrawerItemList {...props} />
     </SafeAreaView>
   </ScrollView>
 );

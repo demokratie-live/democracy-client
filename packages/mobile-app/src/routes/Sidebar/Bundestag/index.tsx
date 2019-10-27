@@ -10,6 +10,7 @@ import {
 } from '../../../screens/Bundestag';
 import { Button } from 'react-native';
 import { sidebarToggle } from '../NavigationService';
+import TabView from './TabView';
 
 export type BundestagRootStackParamList = {
   Bundestag: undefined;
@@ -27,7 +28,7 @@ const BundestagRootNavigation = () => {
       <BundestagRootStack.Navigator>
         <BundestagRootStack.Screen
           name="Bundestag"
-          component={Bundestag}
+          component={TabView}
           options={{
             headerLeft: () => <Button onPress={sidebarToggle} title="🍔" />,
           }}
@@ -36,9 +37,11 @@ const BundestagRootNavigation = () => {
         <BundestagRootStack.Screen
           name="Voting"
           component={Voting}
-          options={{
-            gestureDirection: 'vertical',
-          }}
+          options={
+            {
+              // gestureDirection: 'vertical',
+            }
+          }
         />
         <BundestagRootStack.Screen name="Filter" component={Filter} />
         <BundestagRootStack.Screen name="Search" component={Search} />
