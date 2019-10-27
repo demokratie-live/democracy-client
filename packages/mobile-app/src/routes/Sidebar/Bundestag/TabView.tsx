@@ -6,7 +6,6 @@ import { Bundestag } from '../../../screens/Bundestag';
 const TabNavigation = createMaterialTopTabNavigator();
 
 const Tab = ({ route }) => {
-  console.log(route.params);
   const { text } = route.params;
   return (
     <View>
