@@ -13,9 +13,9 @@
     "test": "jest",
     "test:watch": "yarn test --watch",
     "coverage": "yarn run test --coverage",
-    "lint:eslint": "eslint 'src/**/*.{ts,tsx,js,jsx}'",
-    "lint:ts": "tsc && yarn lint:eslint",
-    "lint": "yarn lint:ts",
+    "lint:eslint": "eslint 'src/**/*.{ts,tsx,js,jsx}' --fix",
+    "lint:ts": "tsc --noEmit",
+    "lint": " yarn lint:ts && yarn lint:eslint",
     "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx}' && yarn lint:eslint --fix",
     "format:check": "prettier -c 'src/**/*.{ts,tsx,js,jsx}'"
   },

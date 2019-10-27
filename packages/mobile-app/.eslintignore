@@ -2,6 +2,7 @@ ios
 android
 build
 coverage
+node_modules
 
 # Storybook
 storybook/storyLoader.js

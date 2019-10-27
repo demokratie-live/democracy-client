@@ -1,13 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationNativeContainer } from '@react-navigation/native';
-import {
-  Filter,
-  Bundestag,
-  Search,
-  Procedure,
-  Voting,
-} from '../../../screens/Bundestag';
+import { Filter, Search, Procedure, Voting } from '../../../screens/Bundestag';
 import { Button } from 'react-native';
 import { sidebarToggle } from '../NavigationService';
 import TabView from './TabView';

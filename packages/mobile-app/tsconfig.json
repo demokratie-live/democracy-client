@@ -3,6 +3,7 @@
     "jsx": "react-native",
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
+    "skipLibCheck": true,
     "plugins": [
       {
         "name": "typescript-styled-plugin",
