@@ -13,6 +13,7 @@ import {
   Text,
 } from 'react-native';
 import BundestagRootNavigation from './Bundestag';
+import InstructionScreen from '../../screens/modals/Introduction';
 import { sidebarNavigationRef } from './NavigationService';
 
 export * from './NavigationService';
@@ -20,6 +21,7 @@ export * from './NavigationService';
 export type SidebarParamList = {
   Bundestag: undefined;
   Statistic: undefined;
+  Instruction: undefined;
 };
 
 const SidebarDrawer = createDrawerNavigator<SidebarParamList>();
@@ -57,7 +59,16 @@ export const Sidebar = () => {
           name="Bundestag"
           component={BundestagRootNavigation}
         />
-        <SidebarDrawer.Screen name="Statistic" component={MyStatisticScreen} />
+        <SidebarDrawer.Screen
+          options={{}}
+          name="Statistic"
+          component={MyStatisticScreen}
+        />
+        <SidebarDrawer.Screen
+          options={{}}
+          name="Instruction"
+          component={InstructionScreen}
+        />
       </SidebarDrawer.Navigator>
     </NavigationNativeContainer>
   );
