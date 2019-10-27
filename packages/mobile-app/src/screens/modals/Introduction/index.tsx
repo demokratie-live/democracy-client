@@ -16,9 +16,15 @@ const SafeAreaView = styled.SafeAreaView`
 const Introduction = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
+  const finishAction = navigation.goBack;
+
   return (
     <SafeAreaView>
-      <Pager>
+      <Pager
+        nextButton
+        nextText="Weiter"
+        finishText="Los geht's"
+        finishAction={finishAction}>
         {Object.keys(slidesData).map((screen, i) => (
           <Slide
             head={slidesData[screen].head}
@@ -26,10 +32,7 @@ const Introduction = () => {
             isNew={slidesData[screen].isNew}
             nextSlide={
               i + 1 === Object.keys(slidesData).length
-                ? () => {
-                    console.log('HIER');
-                    navigation.goBack();
-                  }
+                ? finishAction
                 : undefined
             }
           />

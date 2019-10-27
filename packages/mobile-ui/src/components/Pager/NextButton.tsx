@@ -14,21 +14,15 @@ const ButtonText = styled.Text`
   line-height: 24;
 `;
 
-export const ButtonTexts = {
-  next: 'Weiter',
-  finish: 'Überspringen',
-  verified: 'Los gehts!',
-};
-
 interface Props {
-  text: keyof typeof ButtonTexts;
+  text: string;
   click: () => void;
 }
 
 export const NextButton: React.FC<Props> = ({ text, click }) => (
   <>
     <Button onPress={click}>
-      <ButtonText>{ButtonTexts[text]}</ButtonText>
+      <ButtonText>{text}</ButtonText>
     </Button>
   </>
 );
