@@ -21,8 +21,10 @@
   },
   "dependencies": {
     "react": "16.9.0",
+    "react-art": "^16.11.0",
     "react-native": "0.61.1",
     "react-native-linear-gradient": "^2.5.6",
+    "react-native-web": "^0.11.7",
     "styled-components": "^4.4.0"
   },
   "devDependencies": {
