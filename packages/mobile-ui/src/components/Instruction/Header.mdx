@@ -5,17 +5,14 @@ route: /
 
 import { Playground, Props } from 'docz';
 import Header from './Header';
+import Logo from './assets/icon.logo.png';
 
-# Button
+# Header
 
-<Props of={Button} />
+<Props of={Header} />
 
 ## Basic usage
 
 <Playground>
-  <Header
-    title="the title"
-    description="the description"
-    image={require('./assets/icon.logo.png')}
-  />
+  <Header title="the title" description="the description" image={Logo} />
 </Playground>
