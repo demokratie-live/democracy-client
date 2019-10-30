@@ -4,7 +4,7 @@ route: /
 ---
 
 import { Playground, Props } from 'docz'
-import Button from './index.tsx'
+import Button from './index'
 
 # Button
 
@@ -13,6 +13,7 @@ import Button from './index.tsx'
 ## Basic usage
 
 <Playground>
-  <Button type="submit">Click me</Button>
-  <Button>No, click me</Button>
+  <Button onPress={() => {}}>
+      <Text>Hello Button</Text>
+    </Button>
 </Playground>
