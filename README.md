@@ -13,6 +13,9 @@ The Client for the DEMOCRACY App. This includes iOS and Android generated from t
 
 [Entwicklertagebuch](https://github.com/demokratie-live/democracy-client/wiki/Entwicklertagebuch)
 
+## Systemmap
+![Systemmap](https://github.com/demokratie-live/democracy-docu/blob/master/app/Systemmap.png)
+
 ## Tech Stack
 
 * [Node.js][node], [Yarn][yarn], [JavaScript][js], [Babel][babel], [Jest][jest]
