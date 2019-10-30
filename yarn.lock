@@ -14390,6 +14390,11 @@ react-native-testing-library@^1.11.1:
   dependencies:
     pretty-format "^24.0.0"
 
+react-native-web-linear-gradient@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/react-native-web-linear-gradient/-/react-native-web-linear-gradient-1.0.5.tgz#11ef5f91fe0ef8ef61c4c18a556522ec93eda1a5"
+  integrity sha512-PqAsAc5rgFaJtCJ0sOuyr2yfidu59nOCvqRi1y2HRMrukoihaVOCdNsfJyrCRVHEGp6kpiyBDBl+aQT9P+Av+w==
+
 react-native-web@^0.11.7:
   version "0.11.7"
   resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.11.7.tgz#d173d5a9b58db23b6d442c4bc4c81e9939adac23"
