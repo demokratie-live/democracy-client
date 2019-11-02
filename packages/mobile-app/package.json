@@ -37,7 +37,7 @@
     "react-native-safe-area-context": "^0.3.6",
     "react-native-screens": "^2.0.0-alpha.3",
     "react-native-tab-view": "^2.10.0",
-    "styled-components": "^4.4.0"
+    "styled-components": "4.4.0-reactnativewebfix"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
