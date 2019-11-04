@@ -12,6 +12,7 @@
     "start": "react-native start",
     "test": "jest",
     "test:watch": "yarn test --watch",
+    "apollo:codegen": "apollo client:codegen --target typescript --globalTypesFile=./__generated__/globalTypes.ts",
     "coverage": "yarn run test --coverage",
     "lint:eslint": "eslint 'src/**/*.{ts,tsx,js,jsx}' --fix",
     "lint:ts": "tsc --noEmit",
