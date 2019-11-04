@@ -1,7 +1,7 @@
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { View, Text } from 'react-native';
-import { Bundestag } from '../../../screens/Bundestag';
+import { DevPlaceholder, List } from '../../../screens/Bundestag';
 
 const TabNavigation = createMaterialTopTabNavigator();
 
@@ -19,12 +19,12 @@ export default () => {
     <TabNavigation.Navigator tabBarOptions={{ scrollEnabled: true }}>
       <TabNavigation.Screen
         name="Abstimmung"
-        component={Bundestag}
+        component={List}
         initialParams={{ text: 'in Abstimmung Content' }}
       />
       <TabNavigation.Screen
         name="Vergangen"
-        component={Bundestag}
+        component={DevPlaceholder}
         initialParams={{ text: 'Vergangen Content' }}
       />
       <TabNavigation.Screen
