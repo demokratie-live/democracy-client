@@ -13,7 +13,7 @@ const Container = styled.View`
   justify-content: center;
 `;
 
-export const Bundestag: FC = () => {
+export const DevPlaceholder: FC = () => {
   const navigation = useNavigation<
     StackNavigationProp<BundestagRootStackParamList>
   >();
