@@ -6,3 +6,6 @@ node_modules
 
 # Storybook
 storybook/storyLoader.js
+
+# apollo:codegen
+__generated__
