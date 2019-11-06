@@ -28,9 +28,11 @@ const Tab: FC<Props> = ({ route }) => {
 
 export default () => {
   return (
-    <TabNavigation.Navigator tabBarOptions={{ scrollEnabled: true }}>
+    <TabNavigation.Navigator
+      tabBarOptions={{ scrollEnabled: false }}
+      initialRouteName={'Aktuell'}>
       <TabNavigation.Screen
-        name="Abstimmung"
+        name="Aktuell"
         component={List}
         initialParams={{ text: 'in Abstimmung Content' }}
       />
@@ -40,14 +42,9 @@ export default () => {
         initialParams={{ text: 'Vergangen Content' }}
       />
       <TabNavigation.Screen
-        name="Populär"
+        name="Top 100"
         component={Tab}
         initialParams={{ text: 'Populär Content' }}
-      />
-      <TabNavigation.Screen
-        name="Vorbereitung"
-        component={Tab}
-        initialParams={{ text: 'in Vorbereitung Content' }}
       />
     </TabNavigation.Navigator>
   );

@@ -27,7 +27,6 @@ export const List = () => {
 
   return (
     <>
-      <Text>{data.procedures.length}</Text>
       {data.procedures.map(({ procedureId, title }) => (
         <Text key={procedureId}>{title}</Text>
       ))}
