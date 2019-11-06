@@ -18,18 +18,22 @@ export const List = () => {
       pageSize: 10,
     },
   });
-  if (loading) {
+  if (loading || !data) {
     return <Text>…loading</Text>;
   }
   if (error) {
     return <Text>some error: {error.message}</Text>;
   }
 
+  if (!data.procedures) {
+    return <Text>…no data</Text>;
+  }
+
   return (
     <>
       <Text>{data.procedures.length}</Text>
-      {data.procedures.map(({ procedureId, title }) => (
-        <Text key={procedureId}>{title}</Text>
+      {data.procedures.map(procedure => (
+        <Text key={procedure!.procedureId}>{procedure!.title}</Text>
       ))}
     </>
   );

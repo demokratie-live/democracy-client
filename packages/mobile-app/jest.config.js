@@ -9,6 +9,11 @@ module.exports = {
     '^.+\\.tsx?$': 'ts-jest',
   },
 
+  moduleNameMapper: {
+    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+      '<rootDir>/test/assetsTransformer.js',
+  },
+
   // Test spec file resolution pattern
   // Matches parent folder `__tests__` and filename
   // should contain `test` or `spec`.
@@ -19,7 +24,7 @@ module.exports = {
 
   setupFiles: [
     '../../node_modules/react-native-gesture-handler/jestSetup.js',
-    '../../node_modules/@react-native-community/async-storage/jest/async-storage-mock.js',
+    '<rootDir>/test/jestSetup.js',
   ],
 
   preset: 'react-native',

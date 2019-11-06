@@ -2,10 +2,22 @@ import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { View, Text } from 'react-native';
 import { DevPlaceholder, List } from '../../../screens/Bundestag';
+import { RouteProp } from '@react-navigation/core';
+import { FC } from 'react';
 
-const TabNavigation = createMaterialTopTabNavigator();
+export type TopTabkParamList = {
+  [key: string]: { text: string };
+};
 
-const Tab = ({ route }) => {
+const TabNavigation = createMaterialTopTabNavigator<TopTabkParamList>();
+
+type ProfileScreenRouteProp = RouteProp<TopTabkParamList, 'Profile'>;
+
+type Props = {
+  route: ProfileScreenRouteProp;
+};
+
+const Tab: FC<Props> = ({ route }) => {
   const { text } = route.params;
   return (
     <View>

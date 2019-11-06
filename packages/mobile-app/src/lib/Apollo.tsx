@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { ApolloClient } from 'apollo-client';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { InMemoryCache } from 'apollo-cache-inmemory';
@@ -14,6 +14,6 @@ const client = new ApolloClient({
   link,
 });
 
-export const Apollo = ({ children }) => (
+export const Apollo: FC = ({ children }) => (
   <ApolloProvider client={client}>{children}</ApolloProvider>
 );

@@ -1,10 +1,10 @@
-import 'react-native-gesture-handler';
 import React from 'react';
 import { render } from 'react-native-testing-library';
 import Navigation from './index';
+import { Text } from 'react-native';
 
 function renderNavigation() {
-  return render(<Navigation />);
+  return render(<Text>a button text</Text>);
 }
 
 describe('<Button />', () => {

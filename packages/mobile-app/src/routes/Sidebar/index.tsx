@@ -1,5 +1,8 @@
-import React from 'react';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import React, { FC } from 'react';
+import {
+  createDrawerNavigator,
+  DrawerNavigationProp,
+} from '@react-navigation/drawer';
 import { NavigationNativeContainer } from '@react-navigation/native';
 import { Button, SafeAreaView } from 'react-native';
 import BundestagRootNavigation from './Bundestag';
@@ -17,13 +20,17 @@ export type SidebarParamList = {
 
 const SidebarDrawer = createDrawerNavigator<SidebarParamList>();
 
-function MyStatisticScreen({ navigation }) {
+interface MyStatisticScreenProps {
+  navigation: DrawerNavigationProp<SidebarParamList>;
+}
+
+const MyStatisticScreen: FC<MyStatisticScreenProps> = ({ navigation }) => {
   return (
     <SafeAreaView>
       <Button onPress={() => navigation.goBack()} title="Go back home" />
     </SafeAreaView>
   );
-}
+};
 
 export const SidebarNavigation = () => {
   return (
