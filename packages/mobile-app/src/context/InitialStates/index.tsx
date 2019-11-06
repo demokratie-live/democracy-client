@@ -22,7 +22,7 @@ export const InitialStateContext = createContext<InitialStateInterface>(
 export const InitialStateProvider: FC = ({ children }) => {
   const [lastStartVersion, setLastStartVersion] = useState<
     InitialStateInterface['lastStartWithVersion']
-  >();
+  >('0.0.0');
 
   useEffect(() => {
     AsyncStorage.getItem('lastStartWithVersion').then(version =>

@@ -6,7 +6,10 @@ import styled from 'styled-components/native';
 import { RootStackParamList } from '../../../routes';
 
 import { Slide } from '@democracy-deutschland/mobile-ui/src/components/Instruction';
-import { slidesData } from '@democracy-deutschland/mobile-ui/src/components/Instruction/data';
+import {
+  slidesData,
+  Screen,
+} from '@democracy-deutschland/mobile-ui/src/components/Instruction/data';
 import { Pager } from '@democracy-deutschland/mobile-ui/src/components/Pager';
 
 const SafeAreaView = styled.SafeAreaView`
@@ -28,9 +31,9 @@ const Introduction = () => {
         {Object.keys(slidesData).map((screen, i) => (
           <Slide
             key={screen}
-            head={slidesData[screen].head}
-            images={slidesData[screen].images}
-            isNew={slidesData[screen].isNew}
+            head={slidesData[screen as Screen].head}
+            images={slidesData[screen as Screen].images}
+            isNew={slidesData[screen as Screen].isNew}
             nextSlide={
               i + 1 === Object.keys(slidesData).length
                 ? finishAction
