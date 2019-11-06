@@ -6,10 +6,10 @@
     "android": "react-native run-android --port 8088",
     "ios": "react-native run-ios --port 8088",
     "start": "react-native start --port 8088",
-    "test": "jest",
+    "test": "jest -c jest.config.js",
+    "test:watch": "yarn test --watch",
     "device:ios": "react-native run-ios --port 8088 --device",
     "release:ios": "react-native run-ios --configuration Release --port 8088 --device",
-    "test:watch": "yarn test --watch",
     "coverage": "yarn run test --coverage",
     "lint:eslint": "eslint 'src/**/*.{ts,tsx,js,jsx}'",
     "lint:ts": "tsc && yarn lint:eslint",
@@ -40,7 +40,8 @@
     "@storybook/react": "^5.2.1",
     "@storybook/react-native": "^5.2.1",
     "@storybook/react-native-server": "^5.2.1",
-    "@types/jest": "^24.0.18",
+    "@testing-library/react": "^9.3.2",
+    "@types/jest": "^24.0.22",
     "@types/react": "16.9.0",
     "@types/react-native": "^0.60.17",
     "@types/react-test-renderer": "16.9.0",
@@ -56,18 +57,8 @@
     "react-native-testing-library": "^1.11.1",
     "react-native-web-linear-gradient": "^1.0.5",
     "react-test-renderer": "16.9.0",
+    "ts-jest": "^24.1.0",
     "typescript": "^3.6.3"
-  },
-  "jest": {
-    "preset": "react-native",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
   },
   "config": {
     "react-native-storybook-loader": {
