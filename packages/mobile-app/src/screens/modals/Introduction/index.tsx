@@ -27,6 +27,7 @@ const Introduction = () => {
         finishAction={finishAction}>
         {Object.keys(slidesData).map((screen, i) => (
           <Slide
+            key={screen}
             head={slidesData[screen].head}
             images={slidesData[screen].images}
             isNew={slidesData[screen].isNew}
