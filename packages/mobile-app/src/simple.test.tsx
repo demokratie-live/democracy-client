@@ -1,17 +1,16 @@
 import React from 'react';
 import { render } from 'react-native-testing-library';
-import Navigation from './index';
 import { Text } from 'react-native';
 
 function renderNavigation() {
-  return render(<Text>a button text</Text>);
+  return render(<Text>a simple Text</Text>);
 }
 
-describe('<Button />', () => {
-  test('should display a simple button', async () => {
+describe('<Text />', () => {
+  test('should display a simple text', async () => {
     const { getByText } = renderNavigation();
 
-    const button = await getByText('a button text');
+    const button = await getByText('a simple Text');
 
     expect(button).toMatchSnapshot();
   });

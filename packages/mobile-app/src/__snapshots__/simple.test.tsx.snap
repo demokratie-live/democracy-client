@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Button /> should display a simple button 1`] = `
+exports[`<Text /> should display a simple text 1`] = `
 ReactTestInstance {
   "_fiber": FiberNode {
     "_debugHookTypes": null,
@@ -42,11 +42,11 @@ ReactTestInstance {
         "index": 0,
         "key": null,
         "lastEffect": null,
-        "memoizedProps": "a button text",
+        "memoizedProps": "a simple Text",
         "memoizedState": null,
         "mode": 0,
         "nextEffect": null,
-        "pendingProps": "a button text",
+        "pendingProps": "a simple Text",
         "ref": null,
         "return": [Circular],
         "selfBaseDuration": 0,
@@ -54,7 +54,7 @@ ReactTestInstance {
         "stateNode": Object {
           "isHidden": false,
           "tag": "TEXT",
-          "text": "a button text",
+          "text": "a simple Text",
         },
         "tag": 6,
         "treeBaseDuration": 0,
@@ -71,13 +71,13 @@ ReactTestInstance {
       "key": null,
       "lastEffect": null,
       "memoizedProps": Object {
-        "children": "a button text",
+        "children": "a simple Text",
       },
       "memoizedState": null,
       "mode": 0,
       "nextEffect": null,
       "pendingProps": Object {
-        "children": "a button text",
+        "children": "a simple Text",
       },
       "ref": null,
       "return": [Circular],
@@ -88,13 +88,13 @@ ReactTestInstance {
           Object {
             "isHidden": false,
             "tag": "TEXT",
-            "text": "a button text",
+            "text": "a simple Text",
           },
         ],
         "internalInstanceHandle": [Circular],
         "isHidden": false,
         "props": Object {
-          "children": "a button text",
+          "children": "a simple Text",
         },
         "rootContainerInstance": Object {
           "children": Array [
@@ -121,13 +121,13 @@ ReactTestInstance {
     "key": null,
     "lastEffect": null,
     "memoizedProps": Object {
-      "children": "a button text",
+      "children": "a simple Text",
     },
     "memoizedState": null,
     "mode": 0,
     "nextEffect": null,
     "pendingProps": Object {
-      "children": "a button text",
+      "children": "a simple Text",
     },
     "ref": null,
     "return": FiberNode {
@@ -179,7 +179,7 @@ ReactTestInstance {
                   Object {
                     "isHidden": false,
                     "tag": "TEXT",
-                    "text": "a button text",
+                    "text": "a simple Text",
                   },
                 ],
                 "internalInstanceHandle": FiberNode {
@@ -212,11 +212,11 @@ ReactTestInstance {
                     "index": 0,
                     "key": null,
                     "lastEffect": null,
-                    "memoizedProps": "a button text",
+                    "memoizedProps": "a simple Text",
                     "memoizedState": null,
                     "mode": 0,
                     "nextEffect": null,
-                    "pendingProps": "a button text",
+                    "pendingProps": "a simple Text",
                     "ref": null,
                     "return": [Circular],
                     "selfBaseDuration": 0,
@@ -224,7 +224,7 @@ ReactTestInstance {
                     "stateNode": Object {
                       "isHidden": false,
                       "tag": "TEXT",
-                      "text": "a button text",
+                      "text": "a simple Text",
                     },
                     "tag": 6,
                     "treeBaseDuration": 0,
@@ -241,13 +241,13 @@ ReactTestInstance {
                   "key": null,
                   "lastEffect": null,
                   "memoizedProps": Object {
-                    "children": "a button text",
+                    "children": "a simple Text",
                   },
                   "memoizedState": null,
                   "mode": 0,
                   "nextEffect": null,
                   "pendingProps": Object {
-                    "children": "a button text",
+                    "children": "a simple Text",
                   },
                   "ref": null,
                   "return": [Circular],
@@ -261,7 +261,7 @@ ReactTestInstance {
                 },
                 "isHidden": false,
                 "props": Object {
-                  "children": "a button text",
+                  "children": "a simple Text",
                 },
                 "rootContainerInstance": [Circular],
                 "tag": "INSTANCE",
@@ -306,7 +306,7 @@ ReactTestInstance {
             "nextEffect": null,
             "payload": Object {
               "element": <Text>
-                a button text
+                a simple Text
               </Text>,
             },
             "priority": 97,
@@ -323,7 +323,7 @@ ReactTestInstance {
             "nextEffect": null,
             "payload": Object {
               "element": <Text>
-                a button text
+                a simple Text
               </Text>,
             },
             "priority": 97,
@@ -345,7 +345,7 @@ ReactTestInstance {
       "memoizedProps": null,
       "memoizedState": Object {
         "element": <Text>
-          a button text
+          a simple Text
         </Text>,
       },
       "mode": 0,
@@ -366,7 +366,7 @@ ReactTestInstance {
                 Object {
                   "isHidden": false,
                   "tag": "TEXT",
-                  "text": "a button text",
+                  "text": "a simple Text",
                 },
               ],
               "internalInstanceHandle": FiberNode {
@@ -399,11 +399,11 @@ ReactTestInstance {
                   "index": 0,
                   "key": null,
                   "lastEffect": null,
-                  "memoizedProps": "a button text",
+                  "memoizedProps": "a simple Text",
                   "memoizedState": null,
                   "mode": 0,
                   "nextEffect": null,
-                  "pendingProps": "a button text",
+                  "pendingProps": "a simple Text",
                   "ref": null,
                   "return": [Circular],
                   "selfBaseDuration": 0,
@@ -411,7 +411,7 @@ ReactTestInstance {
                   "stateNode": Object {
                     "isHidden": false,
                     "tag": "TEXT",
-                    "text": "a button text",
+                    "text": "a simple Text",
                   },
                   "tag": 6,
                   "treeBaseDuration": 0,
@@ -428,13 +428,13 @@ ReactTestInstance {
                 "key": null,
                 "lastEffect": null,
                 "memoizedProps": Object {
-                  "children": "a button text",
+                  "children": "a simple Text",
                 },
                 "memoizedState": null,
                 "mode": 0,
                 "nextEffect": null,
                 "pendingProps": Object {
-                  "children": "a button text",
+                  "children": "a simple Text",
                 },
                 "ref": null,
                 "return": [Circular],
@@ -448,7 +448,7 @@ ReactTestInstance {
               },
               "isHidden": false,
               "props": Object {
-                "children": "a button text",
+                "children": "a simple Text",
               },
               "rootContainerInstance": [Circular],
               "tag": "INSTANCE",
@@ -484,7 +484,7 @@ ReactTestInstance {
       "updateQueue": Object {
         "baseState": Object {
           "element": <Text>
-            a button text
+            a simple Text
           </Text>,
         },
         "firstCapturedEffect": null,
@@ -504,7 +504,7 @@ ReactTestInstance {
       "_reactInternalInstance": Object {},
       "context": Object {},
       "props": Object {
-        "children": "a button text",
+        "children": "a simple Text",
       },
       "refs": Object {},
       "state": null,
