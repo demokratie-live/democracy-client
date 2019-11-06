@@ -2,9 +2,9 @@ module.exports = {
   client: {
     includes: ["./packages/mobile-app/src/**/*.ts"],
     service: {
-      name: "DEMOCRACY API Live",
-      url: "https://api.democracy-app.de/"
-      //   skipSSLValidation: true
+      name: "DEMOCRACY API Local",
+      url: "http://localhost:3000/",
+      skipSSLValidation: true
     }
   }
 };
