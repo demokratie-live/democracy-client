@@ -2,7 +2,7 @@ import React, { createContext, useState, FC, useEffect } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
 interface InitialStateInterface {
-  lastStartWithVersion: string;
+  lastStartWithVersion: string | undefined;
   setLastStartWithVersion: (version: string) => void;
 }
 
@@ -22,7 +22,7 @@ export const InitialStateContext = createContext<InitialStateInterface>(
 export const InitialStateProvider: FC = ({ children }) => {
   const [lastStartVersion, setLastStartVersion] = useState<
     InitialStateInterface['lastStartWithVersion']
-  >('0.0.0');
+  >();
 
   useEffect(() => {
     AsyncStorage.getItem('lastStartWithVersion').then(version =>

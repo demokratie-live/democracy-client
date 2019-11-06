@@ -20,7 +20,7 @@ export interface ProceduresList_procedures {
 }
 
 export interface ProceduresList {
-  procedures: (ProceduresList_procedures | null)[] | null;
+  procedures: ProceduresList_procedures[];
 }
 
 export interface ProceduresListVariables {
