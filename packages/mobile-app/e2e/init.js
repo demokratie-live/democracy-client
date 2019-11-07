@@ -17,14 +17,11 @@ jasmine.getEnv().addReporter(specReporter);
 jasmine.getEnv().addReporter(assignReporter);
 
 beforeAll(async () => {
-  console.log('DETOX INIT', config);
   await detox.init(config, { launchApp: false });
-  console.log('DETOX INIT STEP');
   await device.launchApp({
     newInstance: true,
     launchArgs: { detoxPrintBusyIdleResources: 'YES' },
   });
-  console.log('DETOX INIT END');
 });
 
 beforeEach(async () => {
