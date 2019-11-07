@@ -7,7 +7,7 @@ import Verification from '../screens/modals/Verification';
 import { InitialStateContext } from '../context/InitialStates';
 import DeviceInfo from 'react-native-device-info';
 import { InitialState } from '@react-navigation/core';
-import { Sidebar } from './Sidebar';
+import { SidebarNavigation } from './Sidebar';
 import { rootNavigationRef } from './Root';
 
 export type RootStackParamList = {
@@ -50,7 +50,7 @@ const App = () => {
       initialState={initialState}
       ref={rootNavigationRef}>
       <RootStack.Navigator mode="modal" headerMode="none">
-        <RootStack.Screen name="Sidebar" component={Sidebar} />
+        <RootStack.Screen name="Sidebar" component={SidebarNavigation} />
         <RootStack.Screen name="Introduction" component={Introduction} />
         <RootStack.Screen name="Verification" component={Verification} />
       </RootStack.Navigator>

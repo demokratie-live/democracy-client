@@ -13,7 +13,7 @@ const Container = styled.View`
   justify-content: center;
 `;
 
-export const Bundestag: FC = () => {
+export const DevPlaceholder: FC = () => {
   const navigation = useNavigation<
     StackNavigationProp<BundestagRootStackParamList>
   >();
@@ -24,6 +24,7 @@ export const Bundestag: FC = () => {
         title="Go to Procedure"
         onPress={() => navigation.navigate('Procedure')}
       />
+      <Button title="Voting" onPress={() => navigation.navigate('Voting')} />
       <Button
         title="Go to Introduction"
         onPress={() => rootNavigate('Introduction')}

@@ -2,12 +2,14 @@ import React, { FC } from 'react';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
 
-interface Props {
+export interface Props {
   onPress: () => any;
   children: React.ReactNode;
 }
 
-const Button: FC<Props> = ({ children }) => <View>{children}</View>;
+const Button: FC<Props> = ({ children }) => (
+  <View testID="button">{children}</View>
+);
 
 Button.defaultProps = {
   children: null,

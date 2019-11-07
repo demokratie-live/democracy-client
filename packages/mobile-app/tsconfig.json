@@ -1,8 +1,15 @@
 {
   "compilerOptions": {
-    "jsx": "react-native",
+    "jsx": "react",
+    "module": "commonjs",
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "strict": true,
+    "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "sourceMap": true,
+    "skipLibCheck": true,
     "plugins": [
       {
         "name": "typescript-styled-plugin",
@@ -24,5 +31,5 @@
       }
     ]
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "android", "ios", "coverage"]
 }

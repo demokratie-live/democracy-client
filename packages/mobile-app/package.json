@@ -10,23 +10,33 @@
     "release:ios": "react-native run-ios --configuration Release --device",
     "release:android": "react-native run-android --configuration Release --device",
     "start": "react-native start",
-    "test": "jest",
+    "clean": "react-native-clean-project",
+    "test": "jest -c jest.config.js",
     "test:watch": "yarn test --watch",
+    "apollo:codegen": "apollo client:codegen --target typescript --globalTypesFile=./__generated__/globalTypes.ts",
     "coverage": "yarn run test --coverage",
-    "lint:eslint": "eslint 'src/**/*.{ts,tsx,js,jsx}'",
-    "lint:ts": "tsc && yarn lint:eslint",
-    "lint": "yarn lint:ts",
+    "lint:eslint": "eslint 'src/**/*.{ts,tsx,js,jsx}' --fix",
+    "lint:ts": "tsc --noEmit",
+    "lint": " yarn lint:ts && yarn lint:eslint",
     "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx}' && yarn lint:eslint --fix",
     "format:check": "prettier -c 'src/**/*.{ts,tsx,js,jsx}'"
   },
   "dependencies": {
+    "@apollo/react-hooks": "^3.1.3",
     "@democracy-deutschland/mobile-ui": "0.0.1",
     "@react-native-community/async-storage": "^1.6.2",
-    "@react-native-community/masked-view": "^0.1.1",
-    "@react-navigation/core": "^5.0.0-alpha.14",
-    "@react-navigation/drawer": "^5.0.0-alpha.13",
-    "@react-navigation/native": "^5.0.0-alpha.10",
-    "@react-navigation/stack": "^5.0.0-alpha.20",
+    "@react-native-community/cli-platform-android": "2.9.0",
+    "@react-native-community/masked-view": "^0.1.5",
+    "@react-navigation/core": "next",
+    "@react-navigation/drawer": "next",
+    "@react-navigation/material-top-tabs": "next",
+    "@react-navigation/native": "next",
+    "@react-navigation/stack": "next",
+    "apollo-cache-inmemory": "^1.6.3",
+    "apollo-client": "^2.6.4",
+    "apollo-link-http": "^1.5.16",
+    "graphql": "^14.5.8",
+    "graphql-tag": "^2.10.1",
     "react": "16.9.0",
     "react-native": "0.61.1",
     "react-native-device-info": "^3.1.4",
@@ -35,49 +45,42 @@
     "react-native-reanimated": "^1.3.0",
     "react-native-safe-area-context": "^0.3.6",
     "react-native-screens": "^2.0.0-alpha.3",
-    "styled-components": "^4.4.0"
+    "react-native-tab-view": "^2.10.0",
+    "styled-components": "4.4.0-reactnativewebfix"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
     "@babel/runtime": "^7.6.2",
     "@react-native-community/eslint-config": "^0.0.5",
-    "@types/jest": "^24.0.18",
+    "@testing-library/react": "^9.3.2",
+    "@types/jest": "^24.0.22",
     "@types/react": "16.9.0",
     "@types/react-native": "^0.60.17",
     "@types/react-test-renderer": "16.9.0",
     "@types/styled-components": "^4.1.19",
     "babel-jest": "^24.9.0",
     "detox": "^14.5.0",
-    "eslint": "^6.5.1",
+    "eslint": "6.6.0",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.56.0",
+    "react-native-clean-project": "^3.2.4",
     "react-native-testing-library": "^1.11.1",
-    "react-test-renderer": "16.9.0",
+    "react-test-renderer": "^16.11.0",
+    "ts-jest": "^24.1.0",
     "typescript": "^3.6.3"
   },
-  "jest": {
-    "preset": "react-native",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
-  },
   "detox": {
-    "configurations": {
-      "ios.sim.debug": {
-        "type": "ios.simulator",
-        "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/DEMOCRACY.app",
-        "device": {
-          "type": "iPhone X",
-          "os": "iOS 12.0"
-        },
-        "build": "xcodebuild -workspace ios/client.xcworkspace -configuration Debug -scheme client -derivedDataPath build/client"
-      }
-    },
-    "test-runner": "jest"
+      "configurations": {
+          "ios.sim.debug": {
+              "type": "ios.simulator",
+              "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/DEMOCRACY.app",
+              "device": {
+                  "type": "iPhone X",
+                  "os": "iOS 12.0"
+              },
+              "build": "xcodebuild -workspace ios/client.xcworkspace -configuration Debug -scheme client -derivedDataPath build/client"
+          }
+      },
+      "test-runner": "jest"
   }
 }
