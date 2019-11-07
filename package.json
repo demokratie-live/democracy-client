@@ -6,9 +6,6 @@
   "workspaces": {
     "packages": [
       "packages/*"
-    ],
-    "nohoist": [
-      "**/detox**"
     ]
   },
   "scripts": {
