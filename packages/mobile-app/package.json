@@ -24,7 +24,7 @@
     "@apollo/react-hooks": "^3.1.3",
     "@democracy-deutschland/mobile-ui": "0.0.1",
     "@react-native-community/async-storage": "^1.6.2",
-    "@react-native-community/masked-view": "^0.1.1",
+    "@react-native-community/masked-view": "^0.1.5",
     "@react-navigation/core": "next",
     "@react-navigation/drawer": "next",
     "@react-navigation/material-top-tabs": "next",
