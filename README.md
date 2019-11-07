@@ -6,7 +6,16 @@
 git clone https://github.com/demokratie-live/democracy-app
 cd democracy-app
 yarn install
+```
 
+### Android Workaround
+
+```
+open node_modules/@react-native-community/cli-platform-android/native_modules.gradle
+replace:
+def command = "node ./node_modules/react-native/cli.js config"
+with
+def command = "node ../../node_modules/react-native/cli.js config"
 ```
 
 ## start developing UI
