@@ -8,7 +8,7 @@ cd democracy-app
 yarn install
 ```
 
-### Android Workaround
+### Android Workaround https://github.com/facebook/react-native/issues/25822
 
 ```
 open node_modules/@react-native-community/cli-platform-android/native_modules.gradle
