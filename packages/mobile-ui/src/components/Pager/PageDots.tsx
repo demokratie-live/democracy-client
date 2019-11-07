@@ -28,8 +28,8 @@ interface Props {
   current: number;
 }
 
-export const Dots: FC<Props> = ({ length, current }) => (
-  <DotsWrapper>
+export const Dots: FC<Props> = ({ length, current, ...rest }) => (
+  <DotsWrapper {...rest}>
     {[...Array(length)].map((_, i) => (
       <Dot key={i.toString()} size={5} active={i === current} />
     ))}

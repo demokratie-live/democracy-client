@@ -21,9 +21,14 @@
     "ui:ios": "yarn workspace @democracy-deutschland/mobile-ui ios",
     "ui:android": "yarn workspace @democracy-deutschland/mobile-ui android",
     "ui:release:ios": "yarn workspace @democracy-deutschland/mobile-ui release:ios",
-    "ui:release:android": "yarn workspace @democracy-deutschland/mobile-ui release:android"
+    "ui:release:android": "yarn workspace @democracy-deutschland/mobile-ui release:android",
+    "docz": "docz dev",
+    "docz:build": "docz build"
   },
   "dependencies": {
     "react-native": "0.61.1"
+  },
+  "devDependencies": {
+    "docz": "^2.0.0-rc.67"
   }
 }

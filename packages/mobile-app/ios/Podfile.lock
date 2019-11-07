@@ -223,7 +223,7 @@ PODS:
     - ReactCommon/jscallinvoker (= 0.61.1)
   - RNCAsyncStorage (1.6.2):
     - React
-  - RNCMaskedView (0.1.1):
+  - RNCMaskedView (0.1.5):
     - React
   - RNDeviceInfo (3.1.4):
     - React
@@ -231,7 +231,7 @@ PODS:
     - React
   - RNReanimated (1.3.0):
     - React
-  - RNScreens (2.0.0-alpha.4):
+  - RNScreens (2.0.0-alpha.6):
     - React
   - Yoga (1.14.0)
 
@@ -374,11 +374,11 @@ SPEC CHECKSUMS:
   React-RCTVibration: 8be61459e3749d1fb02cf414edd05b3007622882
   ReactCommon: 4fba5be89efdf0b5720e0adb3d8d7edf6e532db0
   RNCAsyncStorage: 60a80e72d95bf02a01cace55d3697d9724f0d77f
-  RNCMaskedView: b79e193409a90bf6b5170d421684f437ff4e2278
+  RNCMaskedView: dd13f9f7b146a9ad82f9b7eb6c9b5548fcf6e990
   RNDeviceInfo: 88099e84466f053bae3f34c307b506738b2b6946
   RNGestureHandler: 4cb47a93019c1a201df2644413a0a1569a51c8aa
   RNReanimated: 6abbbae2e5e72609d85aabd92a982a94566885f1
-  RNScreens: 84be1a2369a580beb2fea0755cc62ef16b83fffe
+  RNScreens: 73691421e207a57b85af0fea931e620b05a35e89
   Yoga: d8c572ddec8d05b7dba08e4e5f1924004a177078
 
 PODFILE CHECKSUM: dd39f90d882162b1ee618003041e0e8b8b78685f

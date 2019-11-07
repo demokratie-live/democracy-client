@@ -137,15 +137,12 @@ export const Slide: React.FC<Props> = ({
 
   const handleNextSlide = () => {
     if (nextPage && !nextSlide) {
-      console.log('sim');
       nextPage();
       return;
     } else if (nextSlide) {
-      console.log('sam');
       nextSlide();
       return;
     }
-    console.log('song');
     return;
   };
 

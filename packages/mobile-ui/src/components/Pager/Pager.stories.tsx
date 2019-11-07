@@ -12,7 +12,7 @@ const DummySlide = ({ row }: { row: number }) => (
 );
 
 storiesOf('Pager', module)
-  .add('dummy', () => (
+  .add('simple', () => (
     <SafeAreaView style={{ flex: 1 }}>
       <Pager>
         {[
@@ -25,9 +25,20 @@ storiesOf('Pager', module)
       </Pager>
     </SafeAreaView>
   ))
+  .add('next Button', () => (
+    <SafeAreaView style={{ flex: 1 }}>
+      <Pager nextButton nextText="Weiter" finishText="Los geht's">
+        {[
+          <DummySlide row={1} key="1" />,
+          <DummySlide row={2} key="2" />,
+          <DummySlide row={3} key="3" />,
+        ]}
+      </Pager>
+    </SafeAreaView>
+  ))
   .add('Instructions', () => (
     <SafeAreaView style={{ flex: 1 }}>
-      <Pager>
+      <Pager nextButton nextText="Weiter" finishText="Los geht's">
         {Object.keys(slidesData).map(screen => (
           <Slide
             key={screen}

@@ -2,7 +2,7 @@ import React, { createContext, useState, FC, useEffect } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
 interface InitialStateInterface {
-  lastStartWithVersion: string;
+  lastStartWithVersion: string | undefined;
   setLastStartWithVersion: (version: string) => void;
 }
 
