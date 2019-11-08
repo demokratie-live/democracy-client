@@ -8,18 +8,20 @@ describe('Example', () => {
     // await device.reloadReactNative();
   });
 
-  it('should have welcome screen', async () => {
-    await element(by.text('Weiter')).tap();
-    await element(by.text('Weiter')).tap();
-    await element(by.text('Weiter')).tap();
-    await element(by.text('Weiter')).tap();
-    await expect(element(by.text('Vergleiche'))).toBeVisible();
-  });
-  // it('should have instruction screen', async () => {
-  //   await expect(element(by.id('Instructions')))
-  //     .toBeVisible()
-  //     .withTimeout(10000);
+  // it('should have welcome screen', async () => {
+  //   await element(by.text('Weiter')).tap();
+  //   await element(by.text('Weiter')).tap();
+  //   await element(by.text('Weiter')).tap();
+  //   await element(by.text('Weiter')).tap();
+  //   await expect(element(by.text('Vergleiche'))).toBeVisible();
   // });
+  it('should have instruction screen', async () => {
+    await expect(element(by.id('Instructions'))).toBeVisible();
+  });
+
+  it('should have instruction nex button', async () => {
+    await expect(element(by.id('PagerNextButton'))).toBeVisible();
+  });
 
   // it('should show hello screen after tap', async () => {
   //   await element(by.id('hello_button')).tap();
