@@ -22,8 +22,9 @@ const Introduction = () => {
   const finishAction = navigation.goBack;
 
   return (
-    <SafeAreaView>
+    <SafeAreaView testID="Instructions">
       <Pager
+        testID="pager"
         nextButton
         nextText="Weiter"
         finishText="Los geht's"

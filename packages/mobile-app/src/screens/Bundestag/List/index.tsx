@@ -27,9 +27,9 @@ export const List = () => {
 
   return (
     <>
-      {data.procedures.map(({ procedureId, title }) => (
+      {/* {data.procedures.map(({ procedureId, title }) => (
         <Text key={procedureId}>{title}</Text>
-      ))}
+      ))} */}
     </>
   );
 };

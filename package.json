@@ -6,8 +6,7 @@
   "workspaces": {
     "packages": [
       "packages/*"
-    ],
-    "nohoist": []
+    ]
   },
   "scripts": {
     "app:start": "yarn workspace app start",
