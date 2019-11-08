@@ -134,6 +134,10 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+
+        // Wix Detox
+        testBuildType System.getProperty('testBuildType', 'debug')  // This will later be used to control the test apk build type
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     splits {
         abi {
@@ -186,6 +190,10 @@ dependencies {
     // React Navigation (react-native-screens)
     implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'
+
+    // Wix Detox
+    androidTestImplementation('com.wix:detox:+') { transitive = true } 
+    androidTestImplementation 'junit:junit:4.12'
 
     if (enableHermes) {
         def hermesPath = "../../../../node_modules/hermes-engine/android/";

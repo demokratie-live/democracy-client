@@ -15,6 +15,7 @@ describe('Example', () => {
   //   await element(by.text('Weiter')).tap();
   //   await expect(element(by.text('Vergleiche'))).toBeVisible();
   // });
+
   it('should have instruction screen', async () => {
     await expect(element(by.id('Instructions'))).toBeVisible();
   });
