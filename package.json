@@ -21,12 +21,14 @@
     "ui:release:ios": "yarn workspace @democracy-deutschland/mobile-ui release:ios",
     "ui:release:android": "yarn workspace @democracy-deutschland/mobile-ui release:android",
     "docz": "docz dev",
-    "docz:build": "docz build"
+    "docz:build": "docz build",
+    "postinstall": "npx replace-in-file \"node ./node_modules/react-native/cli.js config\" \"node ../../node_modules/react-native/cli.js config\" node_modules/@react-native-community/cli-platform-android/native_modules.gradle"
   },
   "dependencies": {
     "react-native": "0.61.1"
   },
   "devDependencies": {
-    "docz": "^2.0.0-rc.67"
+    "docz": "^2.0.0-rc.67",
+    "replace-in-file": "^4.2.0"
   }
 }
