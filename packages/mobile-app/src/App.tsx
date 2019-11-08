@@ -6,7 +6,7 @@ import { InitialStateProvider } from './context/InitialStates';
 import { Apollo } from './lib/Apollo';
 
 export default () => (
-  <Apollo>
+  <Apollo testID="Apollo-test-id">
     <InitialStateProvider>
       <Navigation />
     </InitialStateProvider>
