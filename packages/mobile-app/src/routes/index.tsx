@@ -11,10 +11,10 @@ import { SidebarNavigation } from './Sidebar';
 import { rootNavigationRef } from './Root';
 
 export type RootStackParamList = {
-  Sidebar: undefined;
-  Home: undefined;
+  Sidebar: {};
+  Home: {};
   Introduction: { done?: () => void; lastStartWithVersion?: string };
-  Verification: undefined;
+  Verification: {};
 };
 
 const RootStack = createStackNavigator<RootStackParamList>();

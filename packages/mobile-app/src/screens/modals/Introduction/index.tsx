@@ -5,8 +5,8 @@ import styled from 'styled-components/native';
 
 import { RootStackParamList } from '../../../routes';
 
-import { Slide } from '@democracy-deutschland/mobile-ui/src/components/Instruction';
-import { slidesData } from '@democracy-deutschland/mobile-ui/src/components/Instruction/data';
+import { Slide } from '@democracy-deutschland/mobile-ui/src/components/Introduction';
+import { slidesData } from '@democracy-deutschland/mobile-ui/src/components/Introduction/data';
 import { Pager } from '@democracy-deutschland/mobile-ui/src/components/Pager';
 import { getSlides } from './utils/getSlides';
 
@@ -14,30 +14,35 @@ const SafeAreaView = styled.SafeAreaView`
   flex: 1;
 `;
 
-type InstructionScreenRouteProp = RouteProp<RootStackParamList, 'Introduction'>;
+type IntroductionScreenRouteProp = RouteProp<
+  RootStackParamList,
+  'Introduction'
+>;
 
 type Props = {
-  route: InstructionScreenRouteProp;
+  route: IntroductionScreenRouteProp;
 };
 
 const Introduction: FC<Props> = ({ route }) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const { lastStartWithVersion, done } = route.params;
 
   const finishAction = () => {
-    if (route.params && route.params.done) {
-      route.params.done();
+    if (done) {
+      done();
     }
     navigation.goBack();
   };
 
+  console.log('Router Params', route);
+
   const slides = getSlides({
-    // TODO route.params could be undefined. check update the library or create an issue
-    lastVersion: route.params ? route.params.lastStartWithVersion : undefined,
+    lastVersion: lastStartWithVersion,
     registered: false,
   });
 
   return (
-    <SafeAreaView testID="Instructions">
+    <SafeAreaView testID="Introduction">
       <Pager
         nextButton
         nextText="Weiter"
