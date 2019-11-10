@@ -51,6 +51,7 @@ export const Pager: FC<Props> = props => {
   const length = children.length;
 
   const handleScrollEnd = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    // TODO fix android next button click. onMomentumScrollEnd is not fired on android
     const offsetPosition = event.nativeEvent.contentOffset.x;
     let viewSize = event.nativeEvent.layoutMeasurement;
 
