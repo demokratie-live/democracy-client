@@ -34,8 +34,6 @@ const Introduction: FC<Props> = ({ route }) => {
     navigation.goBack();
   };
 
-  console.log('Router Params', route);
-
   const slides = getSlides({
     lastVersion: lastStartWithVersion,
     registered: false,
