@@ -1,40 +1,54 @@
-import React from 'react';
-import { useNavigation } from '@react-navigation/core';
+import React, { FC } from 'react';
+import { useNavigation, RouteProp } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import styled from 'styled-components/native';
 
 import { RootStackParamList } from '../../../routes';
 
 import { Slide } from '@democracy-deutschland/mobile-ui/src/components/Instruction';
-import {
-  slidesData,
-  Screen,
-} from '@democracy-deutschland/mobile-ui/src/components/Instruction/data';
+import { slidesData } from '@democracy-deutschland/mobile-ui/src/components/Instruction/data';
 import { Pager } from '@democracy-deutschland/mobile-ui/src/components/Pager';
+import { getSlides } from './utils/getSlides';
 
 const SafeAreaView = styled.SafeAreaView`
   flex: 1;
 `;
 
-const Introduction = () => {
+type InstructionScreenRouteProp = RouteProp<RootStackParamList, 'Introduction'>;
+
+type Props = {
+  route: InstructionScreenRouteProp;
+};
+
+const Introduction: FC<Props> = ({ route }) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
-  const finishAction = navigation.goBack;
+  const finishAction = () => {
+    if (route.params && route.params.done) {
+      route.params.done();
+    }
+    navigation.goBack();
+  };
+
+  const slides = getSlides({
+    // TODO route.params could be undefined. check update the library or create an issue
+    lastVersion: route.params ? route.params.lastStartWithVersion : undefined,
+    registered: false,
+  });
 
   return (
     <SafeAreaView testID="Instructions">
       <Pager
-        testID="pager"
         nextButton
         nextText="Weiter"
         finishText="Los geht's"
         finishAction={finishAction}>
-        {Object.keys(slidesData).map((screen, i) => (
+        {slides.map((slide, i) => (
           <Slide
-            key={screen}
-            head={slidesData[screen as Screen].head}
-            images={slidesData[screen as Screen].images}
-            isNew={slidesData[screen as Screen].isNew}
+            key={slide.head.title}
+            head={slide.head}
+            images={slide.images}
+            isNew={slide.isNew}
             nextSlide={
               i + 1 === Object.keys(slidesData).length
                 ? finishAction

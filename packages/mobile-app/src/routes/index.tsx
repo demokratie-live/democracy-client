@@ -13,7 +13,7 @@ import { rootNavigationRef } from './Root';
 export type RootStackParamList = {
   Sidebar: undefined;
   Home: undefined;
-  Introduction: { done: () => void };
+  Introduction: { done?: () => void; lastStartWithVersion?: string };
   Verification: undefined;
 };
 
@@ -41,8 +41,11 @@ const App = () => {
   if (currentVersion !== lastStartWithVersion) {
     initialState.routes.push({
       name: 'Introduction',
+      params: {
+        done: () => setLastStartWithVersion(currentVersion),
+        lastStartWithVersion,
+      },
     });
-    setLastStartWithVersion(currentVersion);
   }
 
   return (
