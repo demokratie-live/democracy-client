@@ -55,6 +55,7 @@ const Introduction: FC<Props> = ({ route }) => {
             images={slide.images}
             isNew={slide.isNew}
             nextSlide={
+              // TODO fix android next button click. does not work correctly
               i + 1 === Object.keys(slidesData).length
                 ? finishAction
                 : undefined
