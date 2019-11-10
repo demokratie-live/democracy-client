@@ -4,6 +4,9 @@ import { RootStackParamList } from '..';
 
 export const rootNavigationRef = React.createRef<NavigationContainerRef>();
 
-export const rootNavigate = (name: keyof RootStackParamList, params?: any) => {
+export const rootNavigate = <T extends keyof RootStackParamList>(
+  name: T,
+  params: RootStackParamList[T] = {},
+) => {
   rootNavigationRef.current && rootNavigationRef.current.navigate(name, params);
 };

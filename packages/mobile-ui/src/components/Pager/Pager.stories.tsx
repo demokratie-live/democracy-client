@@ -4,8 +4,8 @@ import { storiesOf } from '@storybook/react-native';
 
 import { Pager } from './Pager';
 import { SafeAreaView, Text } from 'react-native';
-import { slidesData, Screen } from '../Instruction/data';
-import { Slide } from '../Instruction/Slide';
+import { slidesData, Screen } from '../Introduction/data';
+import { Slide } from '../Introduction/Slide';
 
 const DummySlide = ({ row }: { row: number }) => (
   <Text style={{ flex: 2 }}>Slide {row}</Text>

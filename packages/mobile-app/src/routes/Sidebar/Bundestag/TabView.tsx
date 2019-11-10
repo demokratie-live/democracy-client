@@ -11,7 +11,7 @@ export type TopTabkParamList = {
 
 const TabNavigation = createMaterialTopTabNavigator<TopTabkParamList>();
 
-type ProfileScreenRouteProp = RouteProp<TopTabkParamList, 'Profile'>;
+type ProfileScreenRouteProp = RouteProp<TopTabkParamList, 'Top 100'>;
 
 type Props = {
   route: ProfileScreenRouteProp;

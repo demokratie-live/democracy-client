@@ -1,7 +1,7 @@
 import {
   Slide,
   slidesData,
-} from '@democracy-deutschland/mobile-ui/src/components/Instruction';
+} from '@democracy-deutschland/mobile-ui/src/components/Introduction';
 
 export const getSlides = ({
   lastVersion,

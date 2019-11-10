@@ -16,11 +16,11 @@ describe('Example', () => {
   //   await expect(element(by.text('Vergleiche'))).toBeVisible();
   // });
 
-  it('should have instruction screen', async () => {
-    await expect(element(by.id('Instructions'))).toBeVisible();
+  it('should have introduction screen', async () => {
+    await expect(element(by.id('Introduction'))).toBeVisible();
   });
 
-  it('should have instruction nex button', async () => {
+  it('should have introduction nex button', async () => {
     await expect(element(by.id('PagerNextButton'))).toBeVisible();
   });
 
