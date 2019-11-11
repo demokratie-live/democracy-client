@@ -15,6 +15,7 @@ interface DotsProps {
 
 const Dots = styled(DotsComponent)<DotsProps>`
   bottom: ${({ withButton }) => (withButton ? '70' : '20')};
+  background-color: #fff;
 `;
 
 interface PropsBase {
@@ -51,11 +52,15 @@ export const Pager: FC<Props> = props => {
   const length = children.length;
 
   const handleScrollEnd = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    // TODO fix android next button click. onMomentumScrollEnd is not fired on android
     const offsetPosition = event.nativeEvent.contentOffset.x;
     let viewSize = event.nativeEvent.layoutMeasurement;
 
-    setCurrentDot(offsetPosition / viewSize.width);
+    // TODO onMomentumScrollEnd workaround for android https://github.com/facebook/react-native/issues/21718
+    // Replace onScroll with onMomentumScrollEnd when github issue is solved and remove if statement
+    if ((offsetPosition / viewSize.width) % 1 < 0.001) {
+      const curDot = Math.floor(offsetPosition / viewSize.width);
+      setCurrentDot(curDot);
+    }
   };
 
   const onLayout = (event: LayoutChangeEvent) => {
@@ -83,7 +88,7 @@ export const Pager: FC<Props> = props => {
         ref={scrollView as any}
         onLayout={onLayout}
         horizontal
-        onMomentumScrollEnd={handleScrollEnd}
+        onScroll={handleScrollEnd}
         pagingEnabled
         showsHorizontalScrollIndicator={false}
         onContentSizeChange={onContentSizeChange}
