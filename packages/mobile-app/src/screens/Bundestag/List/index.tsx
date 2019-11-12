@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import { useQuery } from '@apollo/react-hooks';
 import { procedures } from './graphql/query/procedures';
 import {
@@ -26,10 +26,10 @@ export const List = () => {
   }
 
   return (
-    <>
+    <View testID="ListView">
       {/* {data.procedures.map(({ procedureId, title }) => (
         <Text key={procedureId}>{title}</Text>
       ))} */}
-    </>
+    </View>
   );
 };

@@ -2467,6 +2467,11 @@
   resolved "https://registry.yarnpkg.com/@types/debug/-/debug-0.0.29.tgz#a1e514adfbd92f03a224ba54d693111dbf1f3754"
   integrity sha1-oeUUrfvZLwOiJLpU1pMRHb8fN1Q=
 
+"@types/detox@^14.5.1":
+  version "14.5.1"
+  resolved "https://registry.yarnpkg.com/@types/detox/-/detox-14.5.1.tgz#54ad43d28da9b1e4d02dedbf7629a7879923e8e7"
+  integrity sha512-JZIejOec6KElGU145ErK3s1lbyPCRilCCmpsLvu0cLZQGJOPDypv0OXozGTDGOUnClrz/zphqnmiV4081q58JQ==
+
 "@types/eslint-visitor-keys@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@types/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#1ee30d79544ca84d68d4b3cdb0af4f205663dd2d"
@@ -2529,6 +2534,11 @@
   dependencies:
     "@types/istanbul-lib-coverage" "*"
     "@types/istanbul-lib-report" "*"
+
+"@types/jasmine@^3.4.6":
+  version "3.4.6"
+  resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-3.4.6.tgz#afcb210af0fa751b85a96b2034eedada65390be1"
+  integrity sha512-hpQHs+lmZ0uuCrGyqypdI1Ho7jRFolOBT6OkNdZPFziLSSEKvWu+VxWU6bGdNEA/hoV4jV8pdDeNx8EWlmfNAw==
 
 "@types/jest-diff@*":
   version "20.0.1"
