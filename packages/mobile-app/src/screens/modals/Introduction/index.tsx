@@ -12,6 +12,7 @@ import { getSlides } from './utils/getSlides';
 
 const SafeAreaView = styled.SafeAreaView`
   flex: 1;
+  background-color: #fff;
 `;
 
 type IntroductionScreenRouteProp = RouteProp<
@@ -52,6 +53,7 @@ const Introduction: FC<Props> = ({ route }) => {
             head={slide.head}
             images={slide.images}
             isNew={slide.isNew}
+            verify={slide.verify}
             nextSlide={
               // TODO fix android next button click. does not work correctly
               i + 1 === Object.keys(slidesData).length
@@ -63,13 +65,6 @@ const Introduction: FC<Props> = ({ route }) => {
       </Pager>
     </SafeAreaView>
   );
-
-  // return (
-  //   <SafeAreaView>
-  //     <Text>Introduction Screen</Text>
-  //     <Button onPress={() => navigation.goBack()} title="Dismiss" />
-  //   </SafeAreaView>
-  // );
 };
 
 export default Introduction;
