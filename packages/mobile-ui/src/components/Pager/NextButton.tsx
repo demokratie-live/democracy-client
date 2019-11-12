@@ -22,7 +22,7 @@ interface Props {
 export const NextButton: React.FC<Props> = ({ text, click }) => (
   <>
     <Button testID="PagerNextButton" onPress={click}>
-      <ButtonText>{text}</ButtonText>
+      <ButtonText testID="PagerNextButtonText">{text}</ButtonText>
     </Button>
   </>
 );

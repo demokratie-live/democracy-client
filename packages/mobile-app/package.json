@@ -13,6 +13,12 @@
     "clean": "react-native-clean-project",
     "test": "jest -c jest.config.js",
     "test:watch": "yarn test --watch",
+    "e2e:ios": "yarn e2e:ios:build && yarn e2e:ios:test",
+    "e2e:ios:build": "detox build -c ios.sim.debug",
+    "e2e:ios:test": "detox test -c ios.sim.debug",
+    "e2e:android": "yarn e2e:android:build && yarn e2e:android:test",
+    "e2e:android:build": "detox build -c android.emu.debug",
+    "e2e:android:test": "detox test -c android.emu.debug",
     "apollo:codegen": "apollo client:codegen --target typescript --globalTypesFile=./__generated__/globalTypes.ts",
     "coverage": "yarn run test --coverage",
     "lint:eslint": "eslint 'src/**/*.{ts,tsx,js,jsx}' --fix",
@@ -58,6 +64,8 @@
     "@babel/runtime": "^7.6.2",
     "@react-native-community/eslint-config": "^0.0.5",
     "@testing-library/react": "^9.3.2",
+    "@types/detox": "^14.5.1",
+    "@types/jasmine": "^3.4.6",
     "@types/jest": "^24.0.22",
     "@types/react": "16.9.0",
     "@types/react-native": "^0.60.17",
@@ -75,6 +83,8 @@
     "typescript": "^3.6.3"
   },
   "detox": {
+    "test-runner": "jest",
+    "runner-config": "./e2e/jest.config.js",
     "configurations": {
       "ios.sim.debug": {
         "type": "ios.simulator",
@@ -101,7 +111,6 @@
           "avdName": "Nexus_5X_API_26"
         }
       }
-    },
-    "test-runner": "jest"
+    }
   }
 }
