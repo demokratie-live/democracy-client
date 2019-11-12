@@ -66,3 +66,4 @@ buck-out/
 # Test
 .jest
 coverage
+artifacts
