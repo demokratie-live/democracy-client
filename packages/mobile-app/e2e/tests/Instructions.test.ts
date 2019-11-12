@@ -33,7 +33,6 @@ describe('Example', () => {
     await element(by.id('PagerNextButton')).tap();
     await element(by.id('PagerNextButton')).tap();
     await element(by.id('PagerNextButton')).tap();
-    await device.takeScreenshot('test_screenshot');
     await expect(element(by.id('PagerNextButtonText'))).toHaveText(
       "Los geht's",
     );
