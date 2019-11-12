@@ -121,10 +121,10 @@ export interface Slide {
     circle?: NodeRequire;
   };
   isNew?: boolean;
+  verify?: () => void;
 }
 
 export interface Props extends Slide, PageProps {
-  verify?: () => void;
   nextSlide?: () => void;
 }
 
