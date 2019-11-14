@@ -1,13 +1,14 @@
 module.exports = {
+  displayName: 'mobile-app',
+  preset: 'react-native',
+  transform: {
+    '\\.js$': '<rootDir>/../../node_modules/react-native/jest/preprocessor.js',
+  },
+  cacheDirectory: '.jest/cache',
+  testPathIgnorePatterns: ['<rootDir>/e2e/', '<rootDir>/node_modules/'],
   // The root of your source code, typically /src
   // `<rootDir>` is a token Jest substitutes
   roots: ['<rootDir>/src'],
-
-  // Jest transformations -- this adds support for TypeScript
-  // using ts-jest
-  transform: {
-    '^.+\\.tsx?$': 'ts-jest',
-  },
 
   moduleNameMapper: {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
@@ -26,6 +27,4 @@ module.exports = {
     '../../node_modules/react-native-gesture-handler/jestSetup.js',
     '<rootDir>/test/jestSetup.js',
   ],
-
-  preset: 'react-native',
 };

@@ -21,8 +21,8 @@ interface Props {
 
 export const NextButton: React.FC<Props> = ({ text, click }) => (
   <>
-    <Button onPress={click}>
-      <ButtonText>{text}</ButtonText>
+    <Button testID="PagerNextButton" onPress={click}>
+      <ButtonText testID="PagerNextButtonText">{text}</ButtonText>
     </Button>
   </>
 );

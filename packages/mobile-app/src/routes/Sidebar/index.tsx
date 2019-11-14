@@ -6,16 +6,17 @@ import {
 import { NavigationNativeContainer } from '@react-navigation/native';
 import { Button, SafeAreaView } from 'react-native';
 import BundestagRootNavigation from './Bundestag';
-import InstructionScreen from '../../screens/modals/Introduction';
+import IntroductionScreen from '../../screens/modals/Introduction';
 import { sidebarNavigationRef } from './NavigationService';
 import { Sidebar } from '../../screens/Sidebar';
+import { RootStackParamList } from '..';
 
 export * from './NavigationService';
 
 export type SidebarParamList = {
   Bundestag: undefined;
   Statistic: undefined;
-  Instruction: undefined;
+  Introduction: RootStackParamList['Introduction'];
 };
 
 const SidebarDrawer = createDrawerNavigator<SidebarParamList>();
@@ -37,7 +38,7 @@ export const SidebarNavigation = () => {
     <NavigationNativeContainer ref={sidebarNavigationRef}>
       <SidebarDrawer.Navigator
         initialRouteName="Bundestag"
-        contentComponent={Sidebar}>
+        drawerContent={Sidebar}>
         <SidebarDrawer.Screen
           name="Bundestag"
           component={BundestagRootNavigation}
@@ -49,8 +50,9 @@ export const SidebarNavigation = () => {
         />
         <SidebarDrawer.Screen
           options={{}}
-          name="Instruction"
-          component={InstructionScreen}
+          name={'Introduction'}
+          initialParams={{}}
+          component={IntroductionScreen}
         />
       </SidebarDrawer.Navigator>
     </NavigationNativeContainer>

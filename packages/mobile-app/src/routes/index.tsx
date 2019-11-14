@@ -11,10 +11,10 @@ import { SidebarNavigation } from './Sidebar';
 import { rootNavigationRef } from './Root';
 
 export type RootStackParamList = {
-  Sidebar: undefined;
-  Home: undefined;
-  Introduction: { done: () => void };
-  Verification: undefined;
+  Sidebar: {};
+  Home: {};
+  Introduction: { done?: () => void; lastStartWithVersion?: string };
+  Verification: {};
 };
 
 const RootStack = createStackNavigator<RootStackParamList>();
@@ -41,8 +41,11 @@ const App = () => {
   if (currentVersion !== lastStartWithVersion) {
     initialState.routes.push({
       name: 'Introduction',
+      params: {
+        done: () => setLastStartWithVersion(currentVersion),
+        lastStartWithVersion,
+      },
     });
-    setLastStartWithVersion(currentVersion);
   }
 
   return (

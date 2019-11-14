@@ -6,7 +6,16 @@
 git clone https://github.com/demokratie-live/democracy-app
 cd democracy-app
 yarn install
+```
 
+### Android Workaround (currently handled by postinstall script) https://github.com/facebook/react-native/issues/25822
+
+```
+open node_modules/@react-native-community/cli-platform-android/native_modules.gradle
+replace:
+def command = "node ./node_modules/react-native/cli.js config"
+with
+def command = "node ../../node_modules/react-native/cli.js config"
 ```
 
 ## start developing UI
@@ -51,4 +60,37 @@ cd ios
 pod install
 cd ..
 yarn ios
+```
+
+## Testing
+
+### Unit tests
+
+```
+cd packages/mobile-app
+yarn test
+```
+
+or with watch mode
+
+```
+cd packages/mobile-app
+yarn test:watch
+```
+
+### e2e Detox iOS
+
+```
+cd packages/mobile-app
+detox build -c ios.sim.debug
+detox test -c ios.sim.debug
+```
+
+### e2e Detox Android
+
+```
+cd packages/mobile-app
+detox build -c android.emu.debug
+yarn start
+detox test -c android.emu.debug
 ```

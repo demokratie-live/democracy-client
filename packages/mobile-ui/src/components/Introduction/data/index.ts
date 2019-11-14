@@ -1,4 +1,4 @@
-import { Props } from '../Slide';
+import { Slide } from '../Slide';
 
 export enum Screen {
   Willkommen = 'Willkommen',
@@ -10,7 +10,7 @@ export enum Screen {
   Registrieren = 'Registrieren',
 }
 
-type ScreenData = { [key in Screen]: Props };
+type ScreenData = { [key in Screen]: Slide };
 
 export const slidesData: ScreenData = {
   Willkommen: {
@@ -98,5 +98,6 @@ export const slidesData: ScreenData = {
     images: {
       center: require('../assets/screen.registrieren.png'),
     },
+    verify: () => {},
   },
 };
