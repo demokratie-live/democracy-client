@@ -17,7 +17,8 @@
     "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx}' && yarn lint:eslint --fix",
     "format:check": "prettier -c 'src/**/*.{ts,tsx,js,jsx}'",
     "prestorybook": "rnstl",
-    "storybook": "start-storybook -p 7007"
+    "storybook": "start-storybook -p 7007",
+    "svg-to-jsx": "svgr --config-file ./svgr/svgr.config.js --ext tsx -d ./src/components/Icons ./svgr"
   },
   "dependencies": {
     "react": "16.9.0",
@@ -42,6 +43,7 @@
     "@storybook/react": "^5.2.1",
     "@storybook/react-native": "^5.2.1",
     "@storybook/react-native-server": "^5.2.1",
+    "@svgr/cli": "^4.3.3",
     "@testing-library/react": "^9.3.2",
     "@types/jest": "^24.0.22",
     "@types/react": "16.9.0",
