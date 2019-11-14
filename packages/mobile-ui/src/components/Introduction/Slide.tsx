@@ -108,7 +108,7 @@ const NewMarker = styled.Image.attrs({
   left: 18;
 `;
 
-export interface Props extends PageProps {
+export interface Slide {
   head: {
     image: NodeRequire;
     title: string;
@@ -122,6 +122,9 @@ export interface Props extends PageProps {
   };
   isNew?: boolean;
   verify?: () => void;
+}
+
+export interface Props extends Slide, PageProps {
   nextSlide?: () => void;
 }
 

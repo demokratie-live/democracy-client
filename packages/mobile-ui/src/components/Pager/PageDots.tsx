@@ -7,8 +7,8 @@ interface DotProps {
 }
 
 export const Dot = styled.View<DotProps>`
-  background-color: #0076ff;
-  opacity: ${({ active }) => (active ? 1 : 0.5)};
+  background-color: ${({ active }) =>
+    active ? 'rgba(68, 148, 211, 1)' : 'rgba(68, 148, 211, 0.5)'};
   width: ${({ size }) => size};
   height: ${({ size }) => size};
   border-radius: ${({ size }) => size};

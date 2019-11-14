@@ -76,7 +76,8 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    entryFile: "index.js",
+    entryFile: "packages/mobile-app/index.js",
+    root: "../../../../",
     enableHermes: false,  // clean and rebuild if changing
 ]
 
@@ -131,8 +132,12 @@ android {
         applicationId "de.democracydeutschland.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 102021
+        versionName "1.2.2"
+
+        // Wix Detox
+        testBuildType System.getProperty('testBuildType', 'debug')  // This will later be used to control the test apk build type
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     splits {
         abi {
@@ -186,8 +191,12 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'
 
+    // Wix Detox
+    androidTestImplementation('com.wix:detox:+') { transitive = true } 
+    androidTestImplementation 'junit:junit:4.12'
+
     if (enableHermes) {
-        def hermesPath = "../../node_modules/hermes-engine/android/";
+        def hermesPath = "../../../../node_modules/hermes-engine/android/";
         debugImplementation files(hermesPath + "hermes-debug.aar")
         releaseImplementation files(hermesPath + "hermes-release.aar")
     } else {
@@ -202,4 +211,5 @@ task copyDownloadableDepsToLibs(type: Copy) {
     into 'libs'
 }
 
-apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+apply from: file("../../../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); 
+applyNativeModulesAppBuildGradle(project)

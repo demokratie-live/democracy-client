@@ -63,5 +63,7 @@ buck-out/
 # CocoaPods
 /ios/Pods/
 
-# Test Coverage
+# Test
+.jest
 coverage
+artifacts

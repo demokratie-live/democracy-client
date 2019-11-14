@@ -10,8 +10,15 @@
     "release:ios": "react-native run-ios --configuration Release --device",
     "release:android": "react-native run-android --configuration Release --device",
     "start": "react-native start",
+    "clean": "react-native-clean-project",
     "test": "jest -c jest.config.js",
     "test:watch": "yarn test --watch",
+    "e2e:ios": "yarn e2e:ios:build && yarn e2e:ios:test",
+    "e2e:ios:build": "detox build -c ios.sim.debug",
+    "e2e:ios:test": "detox test -c ios.sim.debug",
+    "e2e:android": "yarn e2e:android:build && yarn e2e:android:test",
+    "e2e:android:build": "detox build -c android.emu.debug",
+    "e2e:android:test": "detox test -c android.emu.debug",
     "apollo:codegen": "apollo client:codegen --target typescript --globalTypesFile=./__generated__/globalTypes.ts",
     "coverage": "yarn run test --coverage",
     "lint:eslint": "eslint 'src/**/*.{ts,tsx,js,jsx}' --fix",
@@ -20,16 +27,22 @@
     "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx}' && yarn lint:eslint --fix",
     "format:check": "prettier -c 'src/**/*.{ts,tsx,js,jsx}'"
   },
+  "workspaces": {
+    "nohoist": [
+      "**/detox**"
+    ]
+  },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.3",
     "@democracy-deutschland/mobile-ui": "0.0.1",
     "@react-native-community/async-storage": "^1.6.2",
-    "@react-native-community/masked-view": "^0.1.1",
-    "@react-navigation/core": "next",
-    "@react-navigation/drawer": "next",
-    "@react-navigation/material-top-tabs": "next",
-    "@react-navigation/native": "next",
-    "@react-navigation/stack": "next",
+    "@react-native-community/cli-platform-android": "2.9.0",
+    "@react-native-community/masked-view": "^0.1.5",
+    "@react-navigation/core": "^5.0.0-alpha.21",
+    "@react-navigation/drawer": "^5.0.0-alpha.21",
+    "@react-navigation/material-top-tabs": "^5.0.0-alpha.16",
+    "@react-navigation/native": "^5.0.0-alpha.15",
+    "@react-navigation/stack": "^5.0.0-alpha.35",
     "apollo-cache-inmemory": "^1.6.3",
     "apollo-client": "^2.6.4",
     "apollo-link-http": "^1.5.16",
@@ -51,18 +64,53 @@
     "@babel/runtime": "^7.6.2",
     "@react-native-community/eslint-config": "^0.0.5",
     "@testing-library/react": "^9.3.2",
+    "@types/detox": "^14.5.1",
+    "@types/jasmine": "^3.4.6",
     "@types/jest": "^24.0.22",
     "@types/react": "16.9.0",
     "@types/react-native": "^0.60.17",
     "@types/react-test-renderer": "16.9.0",
     "@types/styled-components": "^4.1.19",
     "babel-jest": "^24.9.0",
+    "detox": "^14.6.1",
     "eslint": "6.6.0",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.56.0",
+    "react-native-clean-project": "^3.2.4",
     "react-native-testing-library": "^1.11.1",
     "react-test-renderer": "^16.11.0",
     "ts-jest": "^24.1.0",
     "typescript": "^3.6.3"
+  },
+  "detox": {
+    "test-runner": "jest",
+    "runner-config": "./e2e/jest.config.js",
+    "configurations": {
+      "ios.sim.debug": {
+        "type": "ios.simulator",
+        "binaryPath": "ios/build/client/Build/Products/Debug-iphonesimulator/DEMOCRACY.app",
+        "device": {
+          "type": "iPhone X",
+          "os": "iOS 12.0"
+        },
+        "build": "xcodebuild -workspace ios/client.xcworkspace -configuration Debug -scheme client -derivedDataPath build/client"
+      },
+      "android.emu.debug": {
+        "binaryPath": "android/app/build/outputs/apk/debug/app-debug.apk",
+        "build": "cd android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug && cd ..",
+        "type": "android.emulator",
+        "device": {
+          "avdName": "Nexus_5X_8.0_x86"
+        }
+      },
+      "android.emu.release": {
+        "binaryPath": "android/app/build/outputs/apk/release/app-release.apk",
+        "build": "cd android && ./gradlew assembleRelease assembleAndroidTest -DtestBuildType=release && cd ..",
+        "type": "android.emulator",
+        "device": {
+          "avdName": "Nexus_5X_API_26"
+        }
+      }
+    }
   }
 }
