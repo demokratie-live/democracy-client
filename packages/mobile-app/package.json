@@ -25,7 +25,8 @@
     "lint:ts": "tsc --noEmit",
     "lint": " yarn lint:ts && yarn lint:eslint",
     "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx}' && yarn lint:eslint --fix",
-    "format:check": "prettier -c 'src/**/*.{ts,tsx,js,jsx}'"
+    "format:check": "prettier -c 'src/**/*.{ts,tsx,js,jsx}'",
+    "pods": "cd ios && pod install && cd .."
   },
   "workspaces": {
     "nohoist": [
@@ -49,7 +50,7 @@
     "graphql": "^14.5.8",
     "graphql-tag": "^2.10.1",
     "react": "16.9.0",
-    "react-native": "0.61.1",
+    "react-native": "0.61.4",
     "react-native-device-info": "^3.1.4",
     "react-native-gesture-handler": "^1.4.1",
     "react-native-linear-gradient": "^2.5.6",
@@ -73,7 +74,7 @@
     "@types/styled-components": "^4.1.19",
     "babel-jest": "^24.9.0",
     "detox": "^14.6.1",
-    "eslint": "6.6.0",
+    "eslint": "^6.5.1",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.56.0",
     "react-native-clean-project": "^3.2.4",

@@ -1,34 +1,35 @@
 {
-	"name": "democracy",
-	"version": "1.2.2",
-	"license": "MIT",
-	"private": true,
-	"workspaces": {
-		"packages": [
-			"packages/*"
-		]
-	},
-	"scripts": {
-		"app:start": "yarn workspace app start",
-		"app:ios": "yarn workspace app ios",
-		"app:android": "yarn workspace app android",
-		"app:release:ios": "yarn workspace app release:ios",
-		"app:release:android": "yarn workspace app release:android",
-		"ui:start": "yarn workspace @democracy-deutschland/mobile-ui start",
-		"ui:ios": "yarn workspace @democracy-deutschland/mobile-ui ios",
-		"ui:android": "yarn workspace @democracy-deutschland/mobile-ui android",
-		"ui:release:ios": "yarn workspace @democracy-deutschland/mobile-ui release:ios",
-		"ui:release:android": "yarn workspace @democracy-deutschland/mobile-ui release:android",
-		"docz": "docz dev",
-		"docz:build": "docz build",
-		"postinstall": "npx replace-in-file \"node ./node_modules/react-native/cli.js config\" \"node ../../node_modules/react-native/cli.js config\" node_modules/@react-native-community/cli-platform-android/native_modules.gradle"
-	},
-	"dependencies": {
-		"react-native": "0.61.1"
-	},
-	"devDependencies": {
-		"@babel/plugin-proposal-class-properties": "^7.7.0",
-		"docz": "^2.0.0-rc.67",
-		"replace-in-file": "^4.2.0"
-	}
+  "name": "democracy",
+  "version": "1.2.2",
+  "license": "MIT",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "scripts": {
+    "app:start": "yarn workspace app start",
+    "app:ios": "yarn workspace app ios",
+    "app:android": "yarn workspace app android",
+    "app:release:ios": "yarn workspace app release:ios",
+    "app:release:android": "yarn workspace app release:android",
+    "ui:start": "yarn workspace @democracy-deutschland/mobile-ui start",
+    "ui:ios": "yarn workspace @democracy-deutschland/mobile-ui ios",
+    "ui:android": "yarn workspace @democracy-deutschland/mobile-ui android",
+    "ui:release:ios": "yarn workspace @democracy-deutschland/mobile-ui release:ios",
+    "ui:release:android": "yarn workspace @democracy-deutschland/mobile-ui release:android",
+    "docz": "docz dev",
+    "docz:build": "docz build",
+    "postinstall:android-fix": "npx replace-in-file \"node ./node_modules/react-native/cli.js config\" \"node ../../node_modules/react-native/cli.js config\" node_modules/@react-native-community/cli-platform-android/native_modules.gradle",
+    "postinstall": "yarn postinstall:android-fix && yarn workspace app pods"
+  },
+  "dependencies": {
+    "react-native": "0.61.4"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.7.0",
+    "docz": "^2.0.0-rc.67",
+    "replace-in-file": "^4.2.0"
+  }
 }
