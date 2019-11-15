@@ -22,7 +22,7 @@
     "docz": "docz dev",
     "docz:build": "docz build",
     "postinstall:android-fix": "npx replace-in-file \"node ./node_modules/react-native/cli.js config\" \"node ../../node_modules/react-native/cli.js config\" node_modules/@react-native-community/cli-platform-android/native_modules.gradle",
-    "postinstall": "yarn postinstall:android-fix && yarn workspace app pods"
+    "postinstall": "yarn postinstall:android-fix && yarn workspace app pods && yarn workspace @democracy-deutschland/mobile-ui pods"
   },
   "dependencies": {
     "react-native": "0.61.4"

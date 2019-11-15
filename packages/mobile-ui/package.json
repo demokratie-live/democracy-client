@@ -17,7 +17,8 @@
     "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx}' && yarn lint:eslint --fix",
     "format:check": "prettier -c 'src/**/*.{ts,tsx,js,jsx}'",
     "prestorybook": "rnstl",
-    "storybook": "start-storybook -p 7007"
+    "storybook": "start-storybook -p 7007",
+    "pods": "cd ios && pod install && cd .."
   },
   "dependencies": {
     "react": "16.9.0",
