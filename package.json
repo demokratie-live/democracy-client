@@ -28,7 +28,6 @@
     "react-native": "0.61.4"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.7.0",
     "docz": "^2.0.0-rc.67",
     "replace-in-file": "^4.2.0"
   }
