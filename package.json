@@ -28,7 +28,9 @@
     "react-native": "0.61.4"
   },
   "devDependencies": {
-    "docz": "^2.0.0-rc.67",
+    "docz": "2.0.0-rc.67",
+    "husky": "^3.0.9",
+    "lint-staged": "^9.4.3",
     "replace-in-file": "^4.2.0"
   }
 }
