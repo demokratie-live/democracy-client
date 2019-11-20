@@ -53,7 +53,7 @@ export const Pager: FC<Props> = props => {
 
   const handleScrollEnd = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const offsetPosition = event.nativeEvent.contentOffset.x;
-    let viewSize = event.nativeEvent.layoutMeasurement;
+    const viewSize = event.nativeEvent.layoutMeasurement;
 
     // TODO onMomentumScrollEnd workaround for android https://github.com/facebook/react-native/issues/21718
     // Replace onScroll with onMomentumScrollEnd when github issue is solved and remove if statement
@@ -85,6 +85,7 @@ export const Pager: FC<Props> = props => {
   return (
     <>
       <ScrollView
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ref={scrollView as any}
         onLayout={onLayout}
         horizontal
