@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { View } from 'react-native';
 
 export interface Props {
-  onPress: () => any;
+  onPress: () => void;
   children: React.ReactNode;
 }
 
