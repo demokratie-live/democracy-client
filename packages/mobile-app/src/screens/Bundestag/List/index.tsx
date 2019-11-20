@@ -27,9 +27,9 @@ export const List = () => {
 
   return (
     <View testID="ListView">
-      {/* {data.procedures.map(({ procedureId, title }) => (
+      {data.procedures.map(({ procedureId, title }) => (
         <Text key={procedureId}>{title}</Text>
-      ))} */}
+      ))}
     </View>
   );
 };
