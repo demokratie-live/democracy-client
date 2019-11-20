@@ -5,6 +5,7 @@
 
 function loadStories() {
   require('../src/components/Button/Button.stories');
+  require('../src/components/Icons/Icons.stories');
   require('../src/components/Introduction/Header.stories');
   require('../src/components/Introduction/Slide.stories');
   require('../src/components/Pager/NextButton.stories');
@@ -13,8 +14,9 @@ function loadStories() {
 
 const stories = [
   '../src/components/Button/Button.stories',
-  '../src/components/Instruction/Header.stories',
-  '../src/components/Instruction/Slide.stories',
+  '../src/components/Icons/Icons.stories',
+  '../src/components/Introduction/Header.stories',
+  '../src/components/Introduction/Slide.stories',
   '../src/components/Pager/NextButton.stories',
   '../src/components/Pager/Pager.stories',
 ];

@@ -1,15 +1,11 @@
-const svgrTemplate = (
-  { template },
-  opts,
-  { imports, componentName, props, jsx, exports },
-) => {
+const svgrTemplate = ({ template }, opts, { componentName, jsx }) => {
   const typeScriptTpl = template.smart({ plugins: ['typescript'] });
   return typeScriptTpl.ast`
       import * as React from 'react';
-      import { Svg } from "react-native-svg";
-      const ${componentName} = (props: React.SVGProps<SVGSVGElement>) => ${jsx};
+      import { Svg, SvgProps } from "react-native-svg";
+      const ${componentName} = (props: SvgProps) => ${jsx};
       
-      export { ${componentName} };
+      export default ${componentName};
     `;
 };
 
