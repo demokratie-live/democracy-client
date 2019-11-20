@@ -1,7 +1,8 @@
 module.exports = {
   hooks: {
-    "pre-push":
+    "pre-commit":
       // todo add yarn audit first with good level
-      "yarn lint && yarn workspace app e2e:ios-debug && lint-staged"
+      // yarn workspace app e2e:ios-debug on travicCi
+      "yarn lint && lint-staged"
   }
 };
