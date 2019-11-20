@@ -41,6 +41,9 @@ module.exports = {
     'react/jsx-fragments': [1, 'syntax'],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
+    'jsx-a11y/accessible-emoji': 0,
+    'react-native/no-raw-text': 0,
+    '@typescript-eslint/explicit-function-return-type': 0,
   },
   env: {
     jest: true,
