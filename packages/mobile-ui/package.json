@@ -11,7 +11,7 @@
     "device:ios": "react-native run-ios --port 8088 --device",
     "release:ios": "react-native run-ios --configuration Release --port 8088 --device",
     "coverage": "yarn run test --coverage",
-    "lint:eslint": "eslint 'src/**/*.{ts,tsx,js,jsx}'",
+    "lint:eslint": "eslint 'src/**/*.{ts,tsx,js,jsx}' --fix",
     "lint:ts": "tsc -p tsconfig.json --noEmit",
     "lint": "yarn lint:ts && yarn lint:eslint",
     "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx}' && yarn lint:eslint --fix",
