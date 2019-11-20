@@ -7,8 +7,8 @@ module.exports = {
 
     // go to app
     "cd packages/mobile-app",
+    "yarn workspace app format",
     "eslint --fix",
-    "prettier --fix",
     "cross-env NODE_ENV=test jest --bail --findRelatedTests",
     "cd ../..",
 
