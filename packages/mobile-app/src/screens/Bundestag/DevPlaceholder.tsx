@@ -6,6 +6,7 @@ import { rootNavigate } from '../../routes/Root';
 import { useNavigation } from '@react-navigation/core';
 import { BundestagRootStackParamList } from '../../routes/Sidebar/Bundestag';
 import { StackNavigationProp } from '@react-navigation/stack';
+import Document from '@democracy-deutschland/mobile-ui/src/components/Icons/Document';
 
 const Container = styled.View`
   flex: 1;
@@ -37,6 +38,7 @@ export const DevPlaceholder: FC = () => {
         title="Clear Async Storage"
         onPress={() => AsyncStorage.clear()}
       />
+      <Document width="32px" height="32px" color="black" />
     </Container>
   );
 };
