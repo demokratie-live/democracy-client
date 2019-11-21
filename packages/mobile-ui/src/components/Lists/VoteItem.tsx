@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { VotesIndex } from '../VotesIndex';
+import VoteDate from '../VoteDate';
 
 // import ActivityIndex from './ActivityIndex';
-// import DateTime from './Date';
 // import DemocracyIconComponent from '../../iconfont/DemocracyFont';
 // import StatusIcon from '../components/StatusIcon';
 
@@ -40,12 +40,15 @@ interface Props {
   subline?: string;
   voted: boolean;
   votes: number;
+  voteDate: Date;
+  endDate?: Date;
 }
 
 const VoteItem: React.FC<Props> = ({
   title,
   subline,
-  // voteDate,
+  voteDate,
+  endDate,
   // procedureId,
   // children,
   // activityIndex: { activityIndex, active },
@@ -90,7 +93,7 @@ const VoteItem: React.FC<Props> = ({
           color="#35a335"
         />
       )} */}
-        {/* {voteDate && <DateTime date={voteDate} />} */}
+        {voteDate && <VoteDate date={voteDate} endDate={endDate} />}
       </SideWrapper>
     </ListItemWrapper>
   );
