@@ -66,14 +66,16 @@ const VoteDate: React.FC<Props> = ({ date, endDate }) => {
   const [tileLeft, setTimeLeft] = useState(formatDate({ date, endDate }));
 
   useEffect(() => {
-    const intervalId = setTimeout(() => {
-      if (intervalId) {
-        setTimeLeft(formatDate({ date, endDate }));
-      }
-    });
-    return () => {
-      clearInterval(intervalId);
-    };
+    if ((endDate && endDate >= new Date()) || date <= new Date()) {
+      const intervalId = setTimeout(() => {
+        if (intervalId) {
+          setTimeLeft(formatDate({ date, endDate }));
+        }
+      });
+      return () => {
+        clearInterval(intervalId);
+      };
+    }
   });
 
   return (
