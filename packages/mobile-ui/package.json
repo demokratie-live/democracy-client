@@ -22,6 +22,7 @@
     "pods": "cd ios && pod install && cd .."
   },
   "dependencies": {
+    "faker": "^4.1.0",
     "react": "16.9.0",
     "react-art": "^16.11.0",
     "react-native": "0.61.4",
@@ -46,6 +47,7 @@
     "@storybook/react-native-server": "^5.2.1",
     "@svgr/cli": "^4.3.3",
     "@testing-library/react": "^9.3.2",
+    "@types/faker": "^4.1.7",
     "@types/jest": "^24.0.22",
     "@types/react": "16.9.0",
     "@types/react-native": "^0.60.17",
