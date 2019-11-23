@@ -16,5 +16,6 @@
     "**/.DS_Store": true,
     "**/__snapshots__": true
   },
-  "eslint.enable": true
+  "eslint.enable": true,
+  "svg.preview.background": "black"
 }

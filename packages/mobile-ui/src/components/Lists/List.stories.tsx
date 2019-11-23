@@ -7,6 +7,7 @@ import { storiesOf } from '@storybook/react-native';
 
 import { Row } from './Row';
 import { VoteItem } from './VoteItem';
+import { generateDates } from '../shared/VoteDate.tsx/Dates';
 // import CenterView from '../../decorators/CenterView';
 
 storiesOf('List', module)
@@ -29,24 +30,20 @@ storiesOf('List', module)
   .add('VoteItem', () => (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>
-        {Array.from(Array(30).keys()).map(n => {
-          const earlyDate = new Date();
-          earlyDate.setDate(earlyDate.getDate() - 3);
-          const laterDate = new Date();
-          laterDate.setDate(laterDate.getDate() + 3);
+        {generateDates().map(({ date, endDate }, i) => {
           return (
             <Row
-              key={n}
+              key={date.toString() + endDate.toString()}
               onPress={() => {
-                Alert.alert(`Row ${n} Clicked 👌`);
+                Alert.alert(`Row ${i} Clicked 👌`);
               }}>
               <VoteItem
                 title={faker.lorem.sentence(faker.random.number(30))}
                 subline={faker.lorem.sentence(faker.random.number(30))}
                 voted={faker.random.boolean()}
                 votes={faker.random.number()}
-                voteDate={faker.date.between(earlyDate, laterDate)}
-                endDate={faker.date.between(earlyDate, laterDate)}
+                voteDate={faker.date.between(date, endDate)}
+                endDate={faker.date.between(date, endDate)}
               />
             </Row>
           );
