@@ -11,6 +11,7 @@ function loadStories() {
   require('../src/components/Lists/List.stories');
   require('../src/components/Pager/NextButton.stories');
   require('../src/components/Pager/Pager.stories');
+  require('../src/components/shared/Shared.stories');
 }
 
 const stories = [
@@ -21,6 +22,7 @@ const stories = [
   '../src/components/Lists/List.stories',
   '../src/components/Pager/NextButton.stories',
   '../src/components/Pager/Pager.stories',
+  '../src/components/shared/Shared.stories',
 ];
 
 module.exports = {

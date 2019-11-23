@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { VotesIndex } from '../VotesIndex';
-import VoteDate from '../VoteDate';
+import VoteDate from '../shared/VoteDate.tsx/VoteDate';
 
 // import ActivityIndex from './ActivityIndex';
 // import DemocracyIconComponent from '../../iconfont/DemocracyFont';
