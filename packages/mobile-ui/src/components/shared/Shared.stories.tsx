@@ -23,5 +23,8 @@ storiesOf('Shared', module)
         color: 'yellow',
       },
     ];
-    return <PieChart data={data} />;
+    return <PieChart data={data} size={200} />;
+  })
+  .add('PieChart empty', () => {
+    return <PieChart size={200} />;
   });

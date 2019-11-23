@@ -8,7 +8,8 @@ export interface Slice {
 }
 
 interface Props {
-  data: Slice[];
+  data?: Slice[];
+  size: number;
 }
 
 const getCoordinatesForPercent = (percent: number) => {
@@ -18,7 +19,10 @@ const getCoordinatesForPercent = (percent: number) => {
   return [x, y];
 };
 
-export const PieChart: React.FC<Props> = ({ data = [] }) => {
+export const PieChart: React.FC<Props> = ({
+  data = [{ percent: 1, color: '#d8d8d8' }],
+  size,
+}) => {
   let cumulativePercent = 0;
   const getPathData = ({
     percent,
@@ -35,7 +39,7 @@ export const PieChart: React.FC<Props> = ({ data = [] }) => {
     // if the slice is more than 50%, take the large arc (the long way around)
     const largeArcFlag = percent > 0.5 ? 1 : 0;
 
-    const larger = large ? 10 : 9;
+    const larger = large ? 10 : 8.5;
 
     // create an array and join it just for code readability
     const pathData = [
@@ -48,7 +52,7 @@ export const PieChart: React.FC<Props> = ({ data = [] }) => {
     return pathData.join(',');
   };
   return (
-    <Svg height="200" width="200" viewBox="-10 -10 20 20">
+    <Svg height={size} width={size} viewBox="-10 -10 20 20">
       {data.map(({ color, percent, large }) => {
         const pathData = getPathData({ percent, large });
         return <Path key={color} d={pathData} fill={color} />;

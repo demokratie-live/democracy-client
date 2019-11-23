@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { VotesIndex } from '../VotesIndex';
 import VoteDate from '../shared/VoteDate.tsx/VoteDate';
+import { PieChart, Slice } from '../shared/Charts/PieChart';
 
 // import ActivityIndex from './ActivityIndex';
 // import DemocracyIconComponent from '../../iconfont/DemocracyFont';
@@ -20,7 +21,7 @@ const MainWrapper = styled.View`
 `;
 
 const SideWrapper = styled.View`
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   min-width: 50;
 `;
@@ -42,6 +43,7 @@ interface Props {
   votes: number;
   voteDate: Date;
   endDate?: Date;
+  communityVotes?: Slice[];
 }
 
 const VoteItem: React.FC<Props> = ({
@@ -49,6 +51,7 @@ const VoteItem: React.FC<Props> = ({
   subline,
   voteDate,
   endDate,
+  communityVotes,
   // procedureId,
   // children,
   // activityIndex: { activityIndex, active },
@@ -85,6 +88,8 @@ const VoteItem: React.FC<Props> = ({
       </MainWrapper>
       <SideWrapper>
         <VotesIndex votes={votes} voted={voted} />
+
+        <PieChart data={communityVotes} size={20} />
 
         {/* {voted && (
         <DemocracyIcon
