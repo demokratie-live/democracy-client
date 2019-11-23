@@ -39,7 +39,7 @@ export const PieChart: React.FC<Props> = ({
     // if the slice is more than 50%, take the large arc (the long way around)
     const largeArcFlag = percent > 0.5 ? 1 : 0;
 
-    const larger = large ? 10 : 8.5;
+    const larger = large ? 9 : 7.5;
 
     // create an array and join it just for code readability
     const pathData = [
@@ -49,13 +49,34 @@ export const PieChart: React.FC<Props> = ({
       'L 0 0',
     ];
 
-    return pathData.join(',');
+    const space = 0.3;
+
+    return {
+      path: pathData.join(','),
+      // transform: large ? `${endY},${startX}` : '',
+      transform: large
+        ? `${((endY - startY) / percent) * space},${((startX - endX) /
+            percent) *
+            space}`
+        : '',
+    };
   };
   return (
-    <Svg height={size} width={size} viewBox="-10 -10 20 20">
+    <Svg
+      height={size}
+      width={size}
+      viewBox="-10 -10 20 20"
+      style={{ transform: [{ rotate: '-90deg' }] }}>
       {data.map(({ color, percent, large }) => {
-        const pathData = getPathData({ percent, large });
-        return <Path key={color} d={pathData} fill={color} />;
+        const slice = getPathData({ percent, large });
+        return (
+          <Path
+            key={color}
+            d={slice.path}
+            fill={color}
+            transform={{ translate: slice.transform }}
+          />
+        );
       })}
     </Svg>
   );

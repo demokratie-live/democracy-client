@@ -55,7 +55,6 @@ storiesOf('List', module)
                   large: large === 2,
                 },
               ];
-          console.log(communityVotes);
           return (
             <Row
               key={date.toString() + endDate.toString()}

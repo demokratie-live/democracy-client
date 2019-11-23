@@ -10,17 +10,17 @@ storiesOf('Shared', module)
   .add('PieChart', () => {
     const data: Slice[] = [
       {
-        percent: 0.3,
-        color: 'blue',
-        large: true,
+        percent: 0.2,
+        color: '#16c063',
       },
       {
         percent: 0.4,
-        color: 'green',
+        color: '#2882e4',
       },
       {
-        percent: 0.3,
-        color: 'yellow',
+        percent: 0.4,
+        color: '#ec3e31',
+        large: true,
       },
     ];
     return <PieChart data={data} size={200} />;
