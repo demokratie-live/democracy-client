@@ -51,7 +51,6 @@ export const PieChart: React.FC<Props> = ({ data = [] }) => {
     <Svg height="200" width="200" viewBox="-10 -10 20 20">
       {data.map(({ color, percent, large }) => {
         const pathData = getPathData({ percent, large });
-        console.log(pathData);
         return <Path key={color} d={pathData} fill={color} />;
       })}
     </Svg>
