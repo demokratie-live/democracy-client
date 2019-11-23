@@ -1,0 +1,8 @@
+<svg width="200" viewBox="-10 -10 20 20" style="transform:rotate(-90deg)">
+    <path 
+        transform="translate(1.1, .35)" 
+        d="M 9 0 A 9 9 0 0 1 7.281152949374527 5.2900672706322585 L 0 0" fill="Coral"/>
+    <path 
+        d="M 7.281152949374527 5.2900672706322585 A 9 9 0 1 1 -1.6532731788489267e-15 -9 L 0 0" fill="CornflowerBlue"/>
+    <path d="M -1.6532731788489267e-15 -9 A 9 9 0 0 1 9 -2.204364238465236e-15 L 0 0" fill="#00ab6b"/>
+</svg>
