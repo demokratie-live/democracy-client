@@ -44,7 +44,7 @@ const Subline = styled.Text`
 
 interface Props {
   title: string;
-  subline?: string;
+  subline?: string | null;
   voted: boolean;
   votes: number;
   voteDate: Date;
