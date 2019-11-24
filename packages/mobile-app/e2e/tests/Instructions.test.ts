@@ -1,5 +1,4 @@
-import { by, device, expect, element, waitFor, init } from 'detox';
-import { getSlides } from '../../src/screens/modals/Introduction/utils/getSlides';
+import { by, device, expect, element, init } from 'detox';
 const config = require('../../package.json').detox;
 
 describe('Example', () => {
@@ -33,9 +32,8 @@ describe('Example', () => {
     await element(by.id('PagerNextButton')).tap();
     await element(by.id('PagerNextButton')).tap();
     await element(by.id('PagerNextButton')).tap();
-    await expect(element(by.id('PagerNextButtonText'))).toHaveText(
-      "Los geht's",
-    );
+    await element(by.id('PagerNextButton')).tap();
+    await expect(element(by.id('ListView'))).toBeVisible();
   });
 
   // it('should show hello screen after tap', async () => {
