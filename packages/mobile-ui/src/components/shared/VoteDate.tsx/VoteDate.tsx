@@ -26,7 +26,11 @@ const DateText = styled.Text<Pick<Props, 'date'> & { running: boolean }>`
 const formatDate = ({ date, endDate, long }: Props) => {
   if (date) {
     // Laufende Abstimmung
-    if (endDate && date <= new Date() && endDate >= new Date()) {
+    if (
+      endDate &&
+      new Date(date) <= new Date() &&
+      new Date(endDate) >= new Date()
+    ) {
       if (long) {
         return 'Abstimmung läuft derzeit';
       }
@@ -34,7 +38,7 @@ const formatDate = ({ date, endDate, long }: Props) => {
     }
 
     // Vergangene Abstimmung
-    if (date <= new Date()) {
+    if (new Date(date) <= new Date()) {
       return m(date).format('DD.MM.YY');
     }
 
@@ -63,7 +67,7 @@ const formatDate = ({ date, endDate, long }: Props) => {
 };
 
 const VoteDate: React.FC<Props> = ({ date, endDate }) => {
-  const [tileLeft, setTimeLeft] = useState(formatDate({ date, endDate }));
+  const [timeLeft, setTimeLeft] = useState(formatDate({ date, endDate }));
 
   useEffect(() => {
     // TODO check this interval function (should run only on feature procedures)
@@ -82,8 +86,8 @@ const VoteDate: React.FC<Props> = ({ date, endDate }) => {
   return (
     <DateText
       date={date}
-      running={tileLeft === 'läuft' || tileLeft === 'Abstimmung läuft derzeit'}>
-      {tileLeft}
+      running={timeLeft === 'läuft' || timeLeft === 'Abstimmung läuft derzeit'}>
+      {timeLeft}
     </DateText>
   );
 };

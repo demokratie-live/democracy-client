@@ -25,6 +25,7 @@ export interface ProceduresList_procedures {
   _id: string;
   title: string;
   procedureId: string;
+  sessionTOPHeading: string | null;
   subjectGroups: string[] | null;
   voteDate: any | null;
   list: ListType | null;
