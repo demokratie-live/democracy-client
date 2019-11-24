@@ -26,5 +26,5 @@ storiesOf('Shared', module)
     return <PieChart data={data} size={200} />;
   })
   .add('PieChart empty', () => {
-    return <PieChart size={200} />;
+    return <PieChart data={[{ percent: 1, color: '#d8d8d8' }]} size={200} />;
   });

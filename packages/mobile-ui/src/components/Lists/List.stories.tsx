@@ -55,6 +55,9 @@ storiesOf('List', module)
                   large: large === 2,
                 },
               ];
+          const governmentVotes = communityVotes
+            ? [...communityVotes].reverse()
+            : undefined;
           return (
             <Row
               key={date.toString() + endDate.toString()}
@@ -63,6 +66,7 @@ storiesOf('List', module)
               }}>
               <VoteItem
                 communityVotes={communityVotes}
+                governmentVotes={governmentVotes}
                 title={faker.lorem.sentence(faker.random.number(30))}
                 subline={faker.lorem.sentence(faker.random.number(30))}
                 voted={faker.random.boolean()}
