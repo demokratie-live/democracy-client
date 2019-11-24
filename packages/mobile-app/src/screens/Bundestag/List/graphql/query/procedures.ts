@@ -18,6 +18,7 @@ export const procedures = gql`
       _id
       title
       procedureId
+      sessionTOPHeading
       subjectGroups
       voteDate
       list

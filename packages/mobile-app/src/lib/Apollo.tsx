@@ -6,7 +6,7 @@ import { HttpLink } from 'apollo-link-http';
 
 const cache = new InMemoryCache();
 const link = new HttpLink({
-  uri: 'https://api.democracy-app.de/',
+  uri: 'http://127.0.0.1:3000',
 });
 
 const client = new ApolloClient({

@@ -16,32 +16,46 @@ export const List = () => {
     ProceduresList,
     ProceduresListVariables
   >(procedures, {
+    fetchPolicy: 'network-only',
+    errorPolicy: 'all',
     variables: {
       listTypes: [ListType.IN_VOTE],
       pageSize: 10,
     },
   });
-  if (loading || !data) {
+  if (loading) {
     return <Text>…loading</Text>;
   }
+
   if (error) {
     return <Text>some error: {error.message}</Text>;
+  }
+
+  if (!data) {
+    return <Text>some error: No Data</Text>;
   }
 
   const renderItem: ListRenderItem<ProceduresList_procedures> = ({
     item: {
       title,
+      sessionTOPHeading,
       subjectGroups,
       voteDate,
       voted,
       activityIndex: { activityIndex },
     },
   }) => {
+    let subline = null;
+    if (sessionTOPHeading) {
+      subline = sessionTOPHeading;
+    } else if (subjectGroups) {
+      subline = subjectGroups.join(',');
+    }
     return (
       <Row onPress={() => {}}>
         <VoteItem
           title={title}
-          subline={subjectGroups && subjectGroups.join(',')}
+          subline={subline}
           voteDate={voteDate}
           voted={voted}
           votes={activityIndex}
