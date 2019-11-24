@@ -21,7 +21,16 @@ export const procedures = gql`
       subjectGroups
       voteDate
       list
+      activityIndex {
+        activityIndex
+      }
       votedGovernment
+      voted
+      voteResults {
+        yes
+        abstination
+        no
+      }
     }
   }
 `;

@@ -8,15 +8,30 @@ import { ListType, ProcedureFilter } from "./../../../../../../../__generated__/
 // GraphQL query operation: ProceduresList
 // ====================================================
 
+export interface ProceduresList_procedures_activityIndex {
+  __typename: "ActivityIndex";
+  activityIndex: number;
+}
+
+export interface ProceduresList_procedures_voteResults {
+  __typename: "VoteResult";
+  yes: number | null;
+  abstination: number | null;
+  no: number | null;
+}
+
 export interface ProceduresList_procedures {
   __typename: "Procedure";
   _id: string;
   title: string;
   procedureId: string;
-  subjectGroups: (string | null)[] | null;
+  subjectGroups: string[] | null;
   voteDate: any | null;
   list: ListType | null;
+  activityIndex: ProceduresList_procedures_activityIndex;
   votedGovernment: boolean | null;
+  voted: boolean;
+  voteResults: ProceduresList_procedures_voteResults | null;
 }
 
 export interface ProceduresList {
