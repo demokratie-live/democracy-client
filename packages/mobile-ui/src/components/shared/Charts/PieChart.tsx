@@ -8,7 +8,7 @@ export interface Slice {
 }
 
 interface Props {
-  data?: Slice[];
+  data: Slice[];
   size: number;
 }
 
@@ -19,10 +19,7 @@ const getCoordinatesForPercent = (percent: number) => {
   return [x, y];
 };
 
-export const PieChart: React.FC<Props> = ({
-  data = [{ percent: 1, color: '#d8d8d8' }],
-  size,
-}) => {
+export const PieChart: React.FC<Props> = ({ data, size }) => {
   let cumulativePercent = 0;
   const getPathData = ({
     percent,

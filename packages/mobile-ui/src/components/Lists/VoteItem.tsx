@@ -26,6 +26,12 @@ const SideWrapper = styled.View`
   min-width: 50;
 `;
 
+const ChartWrapper = styled.View`
+  flex-direction: row;
+  justify-content: flex-end;
+  min-width: 45;
+`;
+
 const Title = styled.Text.attrs(() => ({ numberOfLines: 3 }))`
   font-size: 17;
   color: #030303;
@@ -44,6 +50,7 @@ interface Props {
   voteDate: Date;
   endDate?: Date;
   communityVotes?: Slice[];
+  governmentVotes?: Slice[];
 }
 
 const VoteItem: React.FC<Props> = ({
@@ -51,7 +58,8 @@ const VoteItem: React.FC<Props> = ({
   subline,
   voteDate,
   endDate,
-  communityVotes,
+  communityVotes = [{ percent: 1, color: '#d8d8d8' }],
+  governmentVotes,
   // procedureId,
   // children,
   // activityIndex: { activityIndex, active },
@@ -88,16 +96,10 @@ const VoteItem: React.FC<Props> = ({
       </MainWrapper>
       <SideWrapper>
         <VotesIndex votes={votes} voted={voted} />
-
-        <PieChart data={communityVotes} size={20} />
-
-        {/* {voted && (
-        <DemocracyIcon
-          name={`checkmark${votedGovernment ? '-double' : ''}`}
-          size={14}
-          color="#35a335"
-        />
-      )} */}
+        <ChartWrapper>
+          <PieChart data={communityVotes} size={20} />
+          {governmentVotes && <PieChart data={governmentVotes} size={20} />}
+        </ChartWrapper>
         {voteDate && <VoteDate date={voteDate} endDate={endDate} />}
       </SideWrapper>
     </ListItemWrapper>
