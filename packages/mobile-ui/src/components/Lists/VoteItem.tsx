@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { VotesIndex } from '../VotesIndex';
-import VoteDate from '../shared/VoteDate.tsx/VoteDate';
+import { VotesIndex as VotesIndexCmp } from '../VotesIndex';
+import VoteDateCmp from '../shared/VoteDate.tsx/VoteDate';
 import { PieChart, Slice } from '../shared/Charts/PieChart';
 
 // import ActivityIndex from './ActivityIndex';
@@ -22,14 +22,24 @@ const MainWrapper = styled.View`
 
 const SideWrapper = styled.View`
   align-items: flex-end;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   min-width: 50;
+  & ~ & {
+    background-color: 'red';
+  }
 `;
+
+const VotesIndex = styled(VotesIndexCmp)``;
 
 const ChartWrapper = styled.View`
   flex-direction: row;
   justify-content: flex-end;
   min-width: 45;
+  padding-top: 11;
+`;
+
+const VoteDate = styled(VoteDateCmp)`
+  padding-top: 11;
 `;
 
 const Title = styled.Text.attrs(() => ({ numberOfLines: 3 }))`
