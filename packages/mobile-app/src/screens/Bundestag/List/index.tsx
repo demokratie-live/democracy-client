@@ -19,7 +19,7 @@ export const List = () => {
     fetchPolicy: 'network-only',
     errorPolicy: 'all',
     variables: {
-      listTypes: [ListType.IN_VOTE],
+      listTypes: [ListType.PAST],
       pageSize: 10,
     },
   });
