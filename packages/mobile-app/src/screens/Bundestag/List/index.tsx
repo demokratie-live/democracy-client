@@ -45,11 +45,12 @@ export const List = () => {
       activityIndex: { activityIndex },
     },
   }) => {
+    // If no session top headings available use subject groups
     let subline = null;
     if (sessionTOPHeading) {
       subline = sessionTOPHeading;
     } else if (subjectGroups) {
-      subline = subjectGroups.join(',');
+      subline = subjectGroups.join(', ');
     }
     return (
       <Row onPress={() => {}}>
