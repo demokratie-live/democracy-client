@@ -65,7 +65,7 @@
     "react-native-web-linear-gradient": "^1.0.5",
     "react-test-renderer": "16.9.0",
     "ts-jest": "^24.1.0",
-    "typescript": "^3.6.3"
+    "typescript": "^3.7.2"
   },
   "config": {
     "react-native-storybook-loader": {

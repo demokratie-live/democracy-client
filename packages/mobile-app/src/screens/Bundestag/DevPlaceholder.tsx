@@ -23,7 +23,12 @@ export const DevPlaceholder: FC = () => {
       <Text>Bundestag Screen</Text>
       <Button
         title="Go to Procedure"
-        onPress={() => navigation.navigate('Procedure')}
+        onPress={() =>
+          navigation.navigate('Procedure', {
+            procedureId: '1',
+            title: 'Sitzungswoche',
+          })
+        }
       />
       <Button title="Voting" onPress={() => navigation.navigate('Voting')} />
       <Button

@@ -8,7 +8,7 @@ import TabView from './TabView';
 
 export type BundestagRootStackParamList = {
   Bundestag: undefined;
-  Procedure: undefined;
+  Procedure: { procedureId: string; title: string };
   Voting: undefined;
   Filter: undefined;
   Search: undefined;
@@ -27,7 +27,11 @@ const BundestagRootNavigation = () => {
             headerLeft: () => <Button onPress={sidebarToggle} title="🍔" />,
           }}
         />
-        <BundestagRootStack.Screen name="Procedure" component={Procedure} />
+        <BundestagRootStack.Screen
+          name="Procedure"
+          component={Procedure}
+          options={({ route }) => ({ title: route.params.title })}
+        />
         <BundestagRootStack.Screen
           name="Voting"
           component={Voting}
