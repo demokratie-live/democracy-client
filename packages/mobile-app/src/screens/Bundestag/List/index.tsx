@@ -10,8 +10,15 @@ import {
 import { ListType } from '../../../../__generated__/globalTypes';
 import { VoteItem } from '@democracy-deutschland/mobile-ui/src/components/Lists/VoteItem';
 import { Row } from '@democracy-deutschland/mobile-ui/src/components/Lists/Row';
+import { useNavigation } from '@react-navigation/core';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
 
 export const List = () => {
+  const navigation = useNavigation<
+    StackNavigationProp<BundestagRootStackParamList>
+  >();
+
   const { loading, data, error } = useQuery<
     ProceduresList,
     ProceduresListVariables
@@ -19,7 +26,7 @@ export const List = () => {
     fetchPolicy: 'network-only',
     errorPolicy: 'all',
     variables: {
-      listTypes: [ListType.PAST],
+      listTypes: [ListType.IN_VOTE],
       pageSize: 10,
     },
   });
@@ -37,6 +44,7 @@ export const List = () => {
 
   const renderItem: ListRenderItem<ProceduresList_procedures> = ({
     item: {
+      procedureId,
       title,
       sessionTOPHeading,
       subjectGroups,
@@ -53,7 +61,10 @@ export const List = () => {
       subline = subjectGroups.join(', ');
     }
     return (
-      <Row onPress={() => {}}>
+      <Row
+        onPress={() =>
+          navigation.navigate('Procedure', { procedureId, title })
+        }>
         <VoteItem
           title={title}
           subline={subline}
