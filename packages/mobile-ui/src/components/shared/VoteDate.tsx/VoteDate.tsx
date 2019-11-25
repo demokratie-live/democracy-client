@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import m from 'moment';
+import { StyleProp, TextStyle } from 'react-native';
 
 interface Props {
   date: Date;
   endDate?: Date;
   long?: boolean;
+  style?: StyleProp<TextStyle>;
 }
 
 const DateText = styled.Text<Pick<Props, 'date'> & { running: boolean }>`
-  padding-top: 8;
-  padding-bottom: 2;
   color: ${({ date, running }) => {
     if (running) {
       return '#f5a623';
@@ -66,7 +66,7 @@ const formatDate = ({ date, endDate, long }: Props) => {
   return null;
 };
 
-const VoteDate: React.FC<Props> = ({ date, endDate }) => {
+const VoteDate: React.FC<Props> = ({ date, endDate, style }) => {
   const [timeLeft, setTimeLeft] = useState(formatDate({ date, endDate }));
 
   useEffect(() => {
@@ -85,6 +85,7 @@ const VoteDate: React.FC<Props> = ({ date, endDate }) => {
 
   return (
     <DateText
+      style={style}
       date={date}
       running={timeLeft === 'läuft' || timeLeft === 'Abstimmung läuft derzeit'}>
       {timeLeft}

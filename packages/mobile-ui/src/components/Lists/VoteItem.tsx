@@ -22,11 +22,7 @@ const MainWrapper = styled.View`
 
 const SideWrapper = styled.View`
   align-items: flex-end;
-  /* justify-content: space-between; */
   min-width: 50;
-  & ~ & {
-    background-color: 'red';
-  }
 `;
 
 const VotesIndex = styled(VotesIndexCmp)``;
@@ -35,11 +31,11 @@ const ChartWrapper = styled.View`
   flex-direction: row;
   justify-content: flex-end;
   min-width: 45;
-  padding-top: 11;
+  padding-top: 18;
 `;
 
 const VoteDate = styled(VoteDateCmp)`
-  padding-top: 11;
+  padding-top: 18;
 `;
 
 const Title = styled.Text.attrs(() => ({ numberOfLines: 3 }))`
