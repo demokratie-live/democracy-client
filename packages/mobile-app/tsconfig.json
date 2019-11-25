@@ -25,7 +25,8 @@
             "margin-horizontal",
             "tint-color",
             "aspect-ratio",
-            "elevation"
+            "elevation",
+            "resize-mode"
           ]
         }
       }
