@@ -51,7 +51,8 @@ const App = () => {
   return (
     <NavigationNativeContainer
       initialState={initialState}
-      ref={rootNavigationRef}>
+      ref={rootNavigationRef}
+      independent>
       <RootStack.Navigator mode="modal" headerMode="none">
         <RootStack.Screen name="Sidebar" component={SidebarNavigation} />
         <RootStack.Screen name="Introduction" component={Introduction} />

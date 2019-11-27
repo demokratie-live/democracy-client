@@ -18,7 +18,7 @@ const BundestagRootStack = createStackNavigator<BundestagRootStackParamList>();
 
 const BundestagRootNavigation = () => {
   return (
-    <NavigationNativeContainer>
+    <NavigationNativeContainer independent>
       <BundestagRootStack.Navigator>
         <BundestagRootStack.Screen
           name="Bundestag"

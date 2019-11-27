@@ -1,4 +1,4 @@
-import { by, device, expect, element, init } from 'detox';
+import { by, device, expect, element, init, waitFor } from 'detox';
 const config = require('../../package.json').detox;
 
 describe('Example', () => {
@@ -33,7 +33,7 @@ describe('Example', () => {
     await element(by.id('PagerNextButton')).tap();
     await element(by.id('PagerNextButton')).tap();
     await element(by.id('PagerNextButton')).tap();
-    await expect(element(by.id('ListView'))).toBeVisible();
+    await waitFor(element(by.id('ListView'))).toBeVisible();
   });
 
   // it('should show hello screen after tap', async () => {
