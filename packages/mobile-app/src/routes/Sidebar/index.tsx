@@ -35,7 +35,7 @@ const MyStatisticScreen: FC<MyStatisticScreenProps> = ({ navigation }) => {
 
 export const SidebarNavigation = () => {
   return (
-    <NavigationNativeContainer ref={sidebarNavigationRef}>
+    <NavigationNativeContainer ref={sidebarNavigationRef} independent>
       <SidebarDrawer.Navigator
         initialRouteName="Bundestag"
         drawerContent={Sidebar}>

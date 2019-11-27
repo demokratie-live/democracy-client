@@ -10,11 +10,15 @@ import {
 import { ListType } from '../../../../__generated__/globalTypes';
 import { VoteItem } from '@democracy-deutschland/mobile-ui/src/components/Lists/VoteItem';
 import { Row } from '@democracy-deutschland/mobile-ui/src/components/Lists/Row';
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation, useRoute, RouteProp } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
+import { TopTabkParamList } from '../../../routes/Sidebar/Bundestag/TabView';
+
+type ProfileScreenRouteProp = RouteProp<TopTabkParamList, ListType>;
 
 export const List = () => {
+  const route = useRoute<ProfileScreenRouteProp>();
   const navigation = useNavigation<
     StackNavigationProp<BundestagRootStackParamList>
   >();
@@ -26,7 +30,7 @@ export const List = () => {
     fetchPolicy: 'network-only',
     errorPolicy: 'all',
     variables: {
-      listTypes: [ListType.IN_VOTE],
+      listTypes: [route.params.list],
       pageSize: 10,
     },
   });

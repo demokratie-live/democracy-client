@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "react-native run-android --port 8088",
-    "ios": "react-native run-ios --port 8088",
     "start": "react-native start --port 8088",
+    "ios": "react-native run-ios --port 8088",
+    "android": "react-native run-android --port 8088",
     "test": "jest -c jest.config.js",
     "test:watch": "yarn test --watch",
     "device:ios": "react-native run-ios --port 8088 --device",

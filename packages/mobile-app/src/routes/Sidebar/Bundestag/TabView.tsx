@@ -1,50 +1,38 @@
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { View, Text } from 'react-native';
 import { DevPlaceholder, List } from '../../../screens/Bundestag';
-import { RouteProp } from '@react-navigation/core';
-import { FC } from 'react';
+import { ListType } from '../../../../__generated__/globalTypes';
 
 export type TopTabkParamList = {
-  [key: string]: { text: string };
+  [key: string]: { list: ListType };
 };
 
 const TabNavigation = createMaterialTopTabNavigator<TopTabkParamList>();
 
-type ProfileScreenRouteProp = RouteProp<TopTabkParamList, 'Top 100'>;
-
-type Props = {
-  route: ProfileScreenRouteProp;
-};
-
-const Tab: FC<Props> = ({ route }) => {
-  const { text } = route.params;
-  return (
-    <View>
-      <Text>{text}</Text>
-    </View>
-  );
-};
-
 export default () => {
   return (
     <TabNavigation.Navigator
-      tabBarOptions={{ scrollEnabled: false }}
-      initialRouteName={'Aktuell'}>
+      tabBarOptions={{ scrollEnabled: true }}
+      initialRouteName={'Sitzungswoche'}>
       <TabNavigation.Screen
-        name="Aktuell"
+        name="Sitzungswoche"
         component={List}
-        initialParams={{ text: 'in Abstimmung Content' }}
+        initialParams={{ list: ListType.IN_VOTE }}
       />
       <TabNavigation.Screen
         name="Vergangen"
-        component={DevPlaceholder}
-        initialParams={{ text: 'Vergangen Content' }}
+        component={List}
+        initialParams={{ list: ListType.PAST }}
       />
       <TabNavigation.Screen
         name="Top 100"
-        component={Tab}
-        initialParams={{ text: 'Populär Content' }}
+        component={List}
+        initialParams={{ list: ListType.HOT }}
+      />
+      <TabNavigation.Screen
+        name="DEV"
+        component={DevPlaceholder}
+        initialParams={{ list: ListType.PREPARATION }}
       />
     </TabNavigation.Navigator>
   );
