@@ -1,6 +1,9 @@
 # environment setup
 language: swift
 osx_image: xcode11.1
+
+before_script: cd packages/mobile-app/ios
+
 # caching of dependencies
 cache:
   bundler: true
@@ -19,7 +22,6 @@ before_install:
 # install dependencies
 install:
   - travis_wait carthage bootstrap --platform iOS --cache-builds
-  - cd packages/mobile-app/ios
   - bundle install
 # jobs and stages to run
 jobs:
