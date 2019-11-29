@@ -67,3 +67,7 @@ buck-out/
 .jest
 coverage
 artifacts
+
+# Configs
+.env*
+!.env.example
