@@ -7,7 +7,7 @@ import { Platform } from 'react-native';
 
 const cache = new InMemoryCache();
 
-let graphQlUri = 'http://alpha.api.democracy-app.de';
+let graphQlUri = 'https://alpha.api.democracy-app.de';
 if (process.env.NODE_ENV === 'development') {
   graphQlUri =
     Platform.OS === 'android'
