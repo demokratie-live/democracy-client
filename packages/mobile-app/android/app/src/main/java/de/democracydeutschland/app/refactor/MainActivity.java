@@ -1,4 +1,4 @@
-package de.democracydeutschland.app;
+package de.democracydeutschland.app.refactor;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
