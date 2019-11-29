@@ -5,5 +5,11 @@ osx_image: xcode11.1
 before_install: cd packages/mobile-app/ios
 install:
   - bundle install
-script:
-  - fastlane beta
+jobs:
+  include:
+    - stage: Deploy
+      name: Deploy to App Store
+      script:
+        - echo "machine github.com login $GITHUB_API_TOKEN" >> ~/.netrc
+        - bundle exec fastlane beta
+      if: branch =~ /^release\/.*$/
