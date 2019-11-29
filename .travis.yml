@@ -2,32 +2,8 @@
 language: swift
 osx_image: xcode11.1
 
-before_script: cd packages/mobile-app/ios
-
-# caching of dependencies
-cache:
-  bundler: true
-  directories:
-    - Carthage
-# branch safelist
-branches:
-  only:
-    - master
-    - /^release\/.*$/
-# prepare dependency managers
-before_install:
-  - brew update
-  - brew outdated carthage || brew upgrade carthage
-  - gem install bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)"
-# install dependencies
+before_install: cd packages/mobile-app/ios
 install:
-  - travis_wait carthage bootstrap --platform iOS --cache-builds
   - bundle install
-# jobs and stages to run
-jobs:
-  include:
-    - stage: Deploy
-      name: Deploy to App Store
-      script:
-        - bundle exec fastlane internal
-      if: branch =~ /^release\/.*$/
+script:
+  - fastlane internal
