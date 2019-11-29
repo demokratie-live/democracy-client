@@ -1,6 +1,6 @@
 # environment setup
 language: swift
-osx_image: xcode11.2
+osx_image: xcode11.1
 
 install:
   - yarn && yarn pods
