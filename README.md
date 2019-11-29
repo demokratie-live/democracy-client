@@ -23,8 +23,9 @@ def command = "node ../../node_modules/react-native/cli.js config"
 ### Android
 
 ```
-cd mobile-ui
+cd packages/mobile-ui
 yarn android
+(if that gets stuck use two terminals. One for `yarn start` and one for `yarn android`)
 (ignore metro bundler errors)
 CMD+M and Change Bundle Location to 127.0.0.1:8088
 (error should be solved)
@@ -33,7 +34,7 @@ CMD+M and Change Bundle Location to 127.0.0.1:8088
 ### iOS
 
 ```
-cd mobile-ui
+cd packages/mobile-ui
 cd ios
 pod install
 cd ..
@@ -82,15 +83,15 @@ yarn test:watch
 
 ```
 cd packages/mobile-app
-detox build -c ios.sim.debug
-detox test -c ios.sim.debug
+yarn detox build -c ios.sim.debug
+yarn detox test -c ios.sim.debug
 ```
 
 ### e2e Detox Android
 
 ```
 cd packages/mobile-app
-detox build -c android.emu.debug
+yarn detox build -c android.emu.debug
 yarn start
-detox test -c android.emu.debug
+yarn detox test -c android.emu.debug
 ```
