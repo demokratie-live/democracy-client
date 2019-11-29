@@ -2,6 +2,8 @@
 language: swift
 osx_image: xcode11.1
 
+cache: yarn
+
 install:
   - yarn && yarn pods
   - cd packages/mobile-app/ios
