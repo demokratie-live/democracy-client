@@ -1,4 +1,4 @@
-package de.democracydeutschland.app;
+package de.democracydeutschland.app.refactor;
 
 import android.app.Application;
 import android.content.Context;

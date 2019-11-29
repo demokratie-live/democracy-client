@@ -61,7 +61,6 @@ buck-out/
 
 # iOS
 /ios/Pods/
-/ios/builds/
 
 # Test
 .jest
