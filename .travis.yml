@@ -6,4 +6,4 @@ before_install: cd packages/mobile-app/ios
 install:
   - bundle install
 script:
-  - fastlane internal
+  - fastlane beta
