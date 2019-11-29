@@ -15,11 +15,11 @@ branches:
 before_install:
   - brew update
   - brew outdated carthage || brew upgrade carthage
-  - cd packages/mobile-app/ios
   - gem install bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)"
 # install dependencies
 install:
   - travis_wait carthage bootstrap --platform iOS --cache-builds
+  - cd packages/mobile-app/ios
   - bundle install
 # jobs and stages to run
 jobs:
