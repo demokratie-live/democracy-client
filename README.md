@@ -8,6 +8,10 @@ cd democracy-app
 yarn install
 ```
 
+## Setup React-Native Environment
+
+[ReactNative Setup](https://facebook.github.io/react-native/docs/getting-started)
+
 ### Android Workaround (currently handled by postinstall script) https://github.com/facebook/react-native/issues/25822
 
 ```
