@@ -21,12 +21,13 @@ platform :android do
     gradle(task: "test")
   end
 
-  desc "Submit a new Beta Build to Play Store"
-  lane :beta do
+  private_lane :build do
     store_password = prompt(text: "Signing Store Password: ", secure_text: true)
     key_password = prompt(text: "Alias Key Password: ", secure_text: true)
     releaseFilePath = File.join(Dir.pwd, "..", "my-release-key.keystore")
+
     gradle(task: 'clean')
+
     gradle(
       task: 'assemble',
       build_type: 'Release',
@@ -38,7 +39,16 @@ platform :android do
         "android.injected.signing.key.password" => key_password,
       }
     )
+  end
+
+  desc "Submit a new Internal Build to Play Store"
+  lane :internal do
+
+    build
+
     upload_to_play_store(
-      track: 'internal'
+     track: 'internal',
+     track_promote_to: 'internal'
     )
+    end
 end
