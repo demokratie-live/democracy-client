@@ -23,7 +23,7 @@ def command = "node ../../node_modules/react-native/cli.js config"
 ### Android
 
 ```
-cd mobile-ui
+cd packages/mobile-ui
 yarn android
 (ignore metro bundler errors)
 CMD+M and Change Bundle Location to 127.0.0.1:8088
@@ -33,7 +33,7 @@ CMD+M and Change Bundle Location to 127.0.0.1:8088
 ### iOS
 
 ```
-cd mobile-ui
+cd packages/mobile-ui
 cd ios
 pod install
 cd ..
