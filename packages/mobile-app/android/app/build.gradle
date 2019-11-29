@@ -129,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "de.democracydeutschland.app"
+        applicationId "de.democracydeutschland.app.refactor"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 102021
