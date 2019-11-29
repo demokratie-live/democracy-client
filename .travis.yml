@@ -2,8 +2,9 @@
 language: swift
 osx_image: xcode11.2
 
-before_install: cd packages/mobile-app/ios
 install:
+  - yarn && yarn pods
+  - cd packages/mobile-app/ios
   - bundle install
 jobs:
   include:
