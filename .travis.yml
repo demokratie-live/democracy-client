@@ -26,6 +26,12 @@ matrix:
       install:
         - yarn
         - yarn pods
+        - cd packages/mobile-app/ios
+        - bundle install
+        - cd $HOME
       script:
         - cd packages/mobile-app/ios
-        - fastlane ios beta
+        - bundle exec fastlane ios beta
+        - cd $HOME
+      after_success:
+        - .travis/push.sh
