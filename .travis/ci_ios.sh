@@ -2,7 +2,8 @@
 
 set -e
 
-printenv
+# print environment variables
+# printenv
 
-node --version
-npm --version
+# Check if all commands are availables or install (on travis only)
+sh "${BASH_SOURCE%/*}/ci_check_commands.sh"
