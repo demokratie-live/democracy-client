@@ -19,7 +19,7 @@ matrix:
         - node --version
         - npm install -g yarn
         - yarn -version
-        - gem install fastlane --no-rdoc --no-ri --no-document --quiet
+        - gem install fastlane
         - echo -e "machine github.com\n  login $GITHUB_API_TOKEN" >> ~/.netrc
       install:
         - yarn install
