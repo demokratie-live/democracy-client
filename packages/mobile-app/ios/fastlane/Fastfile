@@ -17,13 +17,9 @@ default_platform(:ios)
 
 setup_travis
 
-def version_number
-  if ENV["TRAVIS_BRANCH"].match?(/^release\/.*$/)
-    return ENV["TRAVIS_BRANCH"].split("/").last
-  else
-    return get_version_number
-  end
-end
+package = load_json(json_path: "../../../package.json")
+
+version_number = package["version"]
 
 platform :ios do
   desc "Installs the certificates locally"
