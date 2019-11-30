@@ -5,9 +5,6 @@ cache:
     - packages/mobile-app/node_modules
     - packages/mobile-ui/node_modules
 
-install:
-  - yarn
-
 matrix:
   include:
     - os: osx
