@@ -1,15 +1,14 @@
+env:
+  global:
+    secure: aJ8jCTs1VWdawdXWgd/0fZXxFGKOlOAb9YS7ijIdm2NSTJr+4jqK2CWQSgpyvHIdxNccvWtxrEB1azeocBHk9G+pJm2GTwR0cncaJUEo+lrJjOnNJzMk/mpIj0IpxzYt5vvlPnliuDpgXkwFZAhc9a7INMmrA2m9Y4be2EYn9Sa1vzB3grJO0JYxQgN1tcH3aPk1Q7eia/hQaECIaQ36o3VDQh0+rKbWAnLNQWHF+Rr9Gn7Y6QUcW+RJfxp77K3/6W4ZS67650kG3efEUTWw4b2zvdUqVRjhP7z9Jqjw0R5QuR2GVQUZzQliTuiAAVbiHlu/kpk6p05nMMClEm3yZoiGar1qE+LibDVT6si0Fsm9tmzCU5qCaz7GvAxbM5oBie9av0eUg1mQrRvWG10e7lHiNm+VC3jDRorf7AaNIQuQQpB/61w2IXiqFj5OHMV0BVYKItACM0u9dCGAgHICsEmNkNbW20anZiYAy3NrstYxmgP70nkwppmD3/lfzorGAw21SzZXe2ebdCM2cHf9G3cw6lk+jNhwo4YO211dcsF2sauZ5Ok31Yd7nWyDoxZShPwF0l1mJlHERPMXQUf6luGXWq+PAJ63y0Tp7EhZVGfZf7tHJz8IbxIVlBJ/5Ggv/FMYp9PolnHEJKifrzd5xHOY5j248d7nDQZkYCQj3kw=
+
 cache:
   yarn: true
   directories:
-    - $HOME/.yarn-cache
+    - "$HOME/.yarn-cache"
     - node_modules
     - packages/mobile-app/node_modules
     - packages/mobile-ui/node_modules
-# notifications:
-#   email:
-#     on_success: never
-#     on_failure: always
-
 matrix:
   include:
     - language: swift
@@ -35,7 +34,7 @@ matrix:
         - bundle exec fastlane ios beta
         - cd $TRAVIS_BUILD_DIR
       after_success:
-        - .travis/push.sh
+        - ".travis/push.sh"
 
     # Android
     - language: android
@@ -58,8 +57,9 @@ matrix:
           - extra-google-google_play_services
       node_js: false
       before_install:
-        - openssl aes-256-cbc -K $encrypted_99567c7cc0d3_key -iv $encrypted_99567c7cc0d3_iv -in my-release-key.keystore.enc -out my-release-key.keystore -d
-        - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/my-release-key.keystore.gpg
+        - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo
+          sysctl -p
         - nvm install 10
         - node --version
         - npm install -g yarn
@@ -76,4 +76,4 @@ matrix:
         - bundle exec fastlane android internal
         - cd $TRAVIS_BUILD_DIR
       after_success:
-        - .travis/push.sh
+        - ".travis/push.sh"
