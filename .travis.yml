@@ -1,3 +1,10 @@
+cache:
+  yarn: true
+  directories:
+    - node_modules
+    - packages/mobile-app/node_modules
+    - packages/mobile-ui/node_modules
+
 matrix:
   include:
     - os: osx
