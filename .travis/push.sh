@@ -4,7 +4,7 @@ setup_git() {
   git config --global user.name "Travis CI"
 }
 commit_ios_files() {
-  git checkout -b $TRAVIS_BRANCH
+  git checkout $TRAVIS_BRANCH
   git add .
   git commit --message "Travis build: $TRAVIS_BUILD_NUMBER (no-deploy)"
 }
