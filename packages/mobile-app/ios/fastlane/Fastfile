@@ -15,41 +15,43 @@
 
 default_platform(:ios)
 
+setup_travis
+
+package = load_json(json_path: "../../../package.json")
+
+version_number = package["version"]
+
 platform :ios do
+  desc "Installs the certificates locally"
+  private_lane :install_certificates do
+    tmp_keychain = "temporary_keychain"
+    create_keychain(
+      name: tmp_keychain,
+      password: tmp_keychain,
+      default_keychain: true,
+      timeout: 3600,
+      unlock: true,
+    )
+    match(
+      type: "appstore",
+      keychain_name: tmp_keychain,
+      keychain_password: tmp_keychain,
+      readonly: true
+    )
+  end
+
   desc "Push a new beta build to TestFlight"
   lane :beta do
+    install_certificates
+
+    increment_version_number(version_number: version_number)
     increment_build_number(xcodeproj: "client.xcodeproj")
 
-    get_certificates( # Create or get certificate, and install it
-      output_path: "./builds" # Download certificate in the build folder (you don't need to create the folder)
-    )
-    get_provisioning_profile( # Create or get provisioning profile
-      output_path: "./builds",  # Download provisioning profile in the build folder
-      filename: "provisioning.mobileprovision" # Rename the local provisioning profile
-    )
-    update_project_provisioning( # Set the project provisioning profile (related in Xcode to the General > Signing Release section)
-      xcodeproj: "client.xcodeproj",
-      target_filter: "DEMOCRACY", # Name of your project
-      profile: "./builds/provisioning.mobileprovision",
-      build_configuration: "Release"
-    )
-    update_project_team( # Set the right team on your project
-      teamid: CredentialsManager::AppfileConfig.try_fetch_value(:team_id)
-    )
-
-    build_app(
-      workspace: "client.xcworkspace", 
-      scheme: "client",
-      clean: true,
-      export_method: "app-store",
-      export_options: {
-        provisioningProfiles: { 
-          CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier) => CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier) + " AppStore" # Value of this parameter is the name of the Provisioning Profile. By default, it will be "{bundleId} AppStore"
-        }
-      },
-      build_path: "./builds",
-      output_directory: "./builds"
-    )
-    upload_to_testflight
+#    build_app(
+#      workspace: "client.xcworkspace", 
+#      scheme: "client",
+#      clean: true,
+#    )
+#    upload_to_testflight
   end
 end
