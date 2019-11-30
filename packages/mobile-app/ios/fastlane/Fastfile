@@ -38,6 +38,7 @@ platform :ios do
       keychain_password: tmp_keychain,
       readonly: true
     )
+    delete_keychain(name: "temporary_keychain")
   end
 
   desc "Push a new beta build to TestFlight"
