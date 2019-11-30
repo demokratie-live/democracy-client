@@ -1,23 +1,31 @@
 cache:
   yarn: true
   directories:
+    - $HOME/.yarn-cache
     - node_modules
-    - packages/mobile-app/node_modules
-    - packages/mobile-ui/node_modules
-
-node_js:
-  - "10"
+branches:
+  only:
+    - master
+notifications:
+  email:
+    on_success: never
+    on_failure: always
 
 matrix:
   include:
-    - os: osx
-      language: swift
+    - language: objective-c
+      os: osx
       osx_image: xcode11.1
-      script: .travis/ci_ios.sh
-    - language: android
-      # android:
-      #   components:
-      #     - tools
-      #     - platform-tools
-      sudo: true
-      script: .travis/ci_android.sh
+      node_js: false
+      before_install:
+        - nvm install 10
+        - node --version
+        - npm install -g yarn
+        - yarn -version
+        - gem install fastlane --no-rdoc --no-ri --no-document --quiet
+        - echo -e "machine github.com\n  login $GITHUB_API_TOKEN" >> ~/.netrc
+      install:
+        - yarn install
+        - yarn pods
+      script:
+        - fastlane ios beta
