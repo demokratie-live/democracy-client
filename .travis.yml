@@ -3,6 +3,11 @@ matrix:
     - os: osx
       language: swift
       osx_image: xcode11.1
-      # env:
-      #   - JOB_NAME=IOS
       script: .travis/ci_ios.sh
+    - language: android
+      android:
+        components:
+          - tools
+          - platform-tools
+      sudo: true
+      script: .travis/ci_android.sh
