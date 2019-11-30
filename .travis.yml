@@ -5,14 +5,14 @@ cache:
     - node_modules
     - packages/mobile-app/node_modules
     - packages/mobile-ui/node_modules
-notifications:
-  email:
-    on_success: never
-    on_failure: always
+# notifications:
+#   email:
+#     on_success: never
+#     on_failure: always
 
 matrix:
   include:
-    - language: objective-c
+    - language: swift
       os: osx
       osx_image: xcode11.1
       node_js: false
@@ -24,7 +24,8 @@ matrix:
         - gem install fastlane
         - echo -e "machine github.com\n  login $GITHUB_API_TOKEN" >> ~/.netrc
       install:
-        - yarn install
+        - yarn
         - yarn pods
       script:
+        - cd packages/mobile-app/ios
         - fastlane ios beta
