@@ -5,6 +5,9 @@ cache:
     - packages/mobile-app/node_modules
     - packages/mobile-ui/node_modules
 
+node_js:
+  - "10"
+
 matrix:
   include:
     - os: osx
@@ -12,9 +15,9 @@ matrix:
       osx_image: xcode11.1
       script: .travis/ci_ios.sh
     - language: android
-      android:
-        components:
-          - tools
-          - platform-tools
+      # android:
+      #   components:
+      #     - tools
+      #     - platform-tools
       sudo: true
       script: .travis/ci_android.sh
