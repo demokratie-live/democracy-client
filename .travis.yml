@@ -58,6 +58,7 @@ matrix:
           - extra-google-google_play_services
       node_js: false
       before_install:
+        - openssl aes-256-cbc -K $encrypted_99567c7cc0d3_key -iv $encrypted_99567c7cc0d3_iv -in my-release-key.keystore.enc -out my-release-key.keystore -d
         - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
         - nvm install 10
         - node --version
