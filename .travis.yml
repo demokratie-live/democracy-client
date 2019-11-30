@@ -3,9 +3,6 @@ cache:
   directories:
     - $HOME/.yarn-cache
     - node_modules
-branches:
-  only:
-    - master
 notifications:
   email:
     on_success: never
