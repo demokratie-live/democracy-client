@@ -29,7 +29,7 @@ platform :android do
     gradle(task: 'clean')
 
     gradle(
-      task: 'assemble',
+      task: 'bundle',
       build_type: 'Release',
       print_command: false,
       properties: {
