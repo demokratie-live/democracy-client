@@ -26,6 +26,10 @@ platform :android do
     key_password = prompt(text: "Alias Key Password: ", secure_text: true)
     releaseFilePath = File.join(Dir.pwd, "..", "my-release-key.keystore")
 
+    increment_version_code(
+      gradle_file_path: "app/build.gradle"
+    )
+
     gradle(task: 'clean')
 
     gradle(
