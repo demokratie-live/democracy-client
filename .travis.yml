@@ -3,6 +3,8 @@ cache:
   directories:
     - $HOME/.yarn-cache
     - node_modules
+    - packages/mobile-app/node_modules
+    - packages/mobile-ui/node_modules
 notifications:
   email:
     on_success: never
