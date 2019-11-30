@@ -28,10 +28,10 @@ matrix:
         - yarn pods
         - cd packages/mobile-app/ios
         - bundle install
-        - cd $HOME
+        - cd $TRAVIS_BUILD_DIR
       script:
         - cd packages/mobile-app/ios
         - bundle exec fastlane ios beta
-        - cd $HOME
+        - cd $TRAVIS_BUILD_DIR
       after_success:
         - .travis/push.sh
