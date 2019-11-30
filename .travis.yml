@@ -15,7 +15,7 @@ matrix:
     - language: swift
       os: osx
       osx_image: xcode11.1
-      if: sender != "Travis CI"
+      if: commit_message !~ /(no-deploy)/
       node_js: false
       before_install:
         - nvm install 10
