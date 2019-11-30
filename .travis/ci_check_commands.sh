@@ -13,7 +13,6 @@ fi
 echo "Use npm version: $(npm --version)"
 
 if ! [ -x "$(command -v yarn)" ]; then
-  echo 'Error: yarn is not installed.' >&2
-  exit 1
+  curl -o- -L https://yarnpkg.com/install.sh | bash
 fi
 echo "Use yarn version: $(yarn --version)"
