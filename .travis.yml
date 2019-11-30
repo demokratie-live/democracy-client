@@ -11,8 +11,9 @@ before_install:
   - yarn -version
 
 install:
-  - yarn && yarn pods
+  - yarn
   - cd packages/mobile-app/ios
+  - pod install
   - bundle install
 jobs:
   include:
