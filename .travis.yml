@@ -1,6 +1,6 @@
 env:
   global:
-    secure: "kCzBB1lv2VcGkRBvy0S465nUXrI53E/f4+508Z6KQXjAOqK+/ltG/kRj77TqxE5WF+LWkQtIANO+SCM3QoqJtm3Ulvfbi+qVZfBmCaqKZD3f0vg1OScgAFa04wcojSkVPKA/y7jcVo5jiTzKsq0sOQjIGh4P5wskHbwEOI2ndhIN5NX2Oc3Jq12BLQYjzLM/45oGyaG12T5MGu8NQgRsJUgODHlxVpcPEpA6BYj6Kz4GpzypHvdcsoN/z8X3J+KnrcqunmeG4GcO0pjwDwemIMak6Erb8qJvrp5HkZfCTfmq2+FYp+RReWMv/IMAfH0OsB1tWtkC8AGbA14Txk4+waR91zfYN5woSUXb7Kj1qaxwZ65zvZxigAAX2WbJkvphCaWg5EkUujqKMbneTivGXby4mVTnLtq06Ok5EXTjGUzvA72RFKieZxtzTlQhZNIXuII6ss55a5pjX9B75vY5ziZhwzjdrlz8DwCL3GQgVMQMQtDtC7GeKxP4B0QeVVwHMpntE0JFSF4dAqYa6s91CAQ8pmNeioO0LduggHL+1XGjJ1i6icw8z1Irr7HNBxBv+CqAgwrhqJFcHAWMlT1a+uZ0VSWTp/hfQMT64qGF3XxS8vwT3x76xZ7CGI8Oq4+2HW6mv0YmiaQOqPEiLtsFrWA4KjnBagBYMvJ3Q8ldr/0="
+    secure: "TNm3z2WKiUfD3tIUrt8JLOJ5XFtYbulfUUsgu124TOCSirCYH05/OQpmtbDvkeydiF+Pw/7Py0tTDTqzMiToTssSNK7tfDuo/77meye0bHN3l1EP/rABT9Se9LEaZaiz4GHNZ66s+xTtKSY86fnm3npV2D9f6MfXHUtdO2A930JBWa5/+R5KoFfhb82tk/WFzQDAufZNY4le9l5+SMPBnV4KJFBZq00ZW4YC5ucihOoRqZUJ7TQ7POYVFUkl6C54CxaL9FHcT+PisLODwniV/A4LFSLa1+BrunvWOKnkRDhjR8zex1JfARX+99/i16WM1Hqnm0ospRvoASWPMUQKuYMNAHWIuHafqf8A7QKyeYAak0orpTLzHCbfNgkwMRCs1Tn2qiI2hkptF8EE1VS5fNIh5TQ4fE+cCUUBiijSUlHwrQ5rpCaVR/c6YmttxXSTa9Eua4qyDx1I412xmisUz0vlUXaKrPHwiF0utk1a+0rk9Sv17kHImBgCbwCbNtzHs3rv3HhWi2LeUt5Ttn7K6EEroT1o1CU1JljrVMPv5CxXrGDzjHvXtG1yEdaHHRH0Jafyahv7faOg0xNolfaZg0mIUNyyIaGUPf4kTaJku+1kJiZdkQOfKaOlo4QFB5mk7PVoRliCwjv/v5Uul6q+amtZdz5EkwIzDTbBMTq0eFI="
 
 cache:
   yarn: true
@@ -57,6 +57,7 @@ matrix:
       #     - extra-google-google_play_services
       node_js: false
       before_install:
+        - echo "$super_secret_password"
         - openssl aes-256-cbc -k "$super_secret_password" -in packages/mobile-app/android/my-release-key.keystore.enc -out packages/mobile-app/android/my-release-key.keystore -d
         - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo
           sysctl -p
