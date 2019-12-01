@@ -38,9 +38,6 @@ matrix:
       os: linux
       jdk: oraclejdk8
       sudo: required
-      env:
-        secure: "R0/gdap0keM96snX33sac3t2SnAAqBj1UEW7YEX8KctCTNtgKN331NQGvl95hONdx29ZT7Mw1W5BzvgYKiwC3qFg7RvQp2zhybrhSJNLDJeZTol+ojrdI0iKv17crps6MCGBPbMHCEkXIgy37UHFLx8240S8siZzIkj/LIZmfe1af9WCGZQYWAGykWT/hS6/PBfLZEwnPyFdY9n8AFZeZuMz7LEWtOrNrQsQLpTpgfk+3ce2sPou5TJHj1gd3vpzOAjRCYNKe3JGKYH+YfGHNkv4u0h7PHUpCjwDOByh6cTxUY4hYExfLR1p+/j3FZKrg/GPo+o87QNy3L7A00ukaFSPGUggMT0MWL1osDI1P0yjFxbpyfC1/OMCd7TvHTjRfToqSd/1otCMQjdmtBfoXs4XjnBf2QTZIodEDyHbcQ9iMRbHPc6Z0fcXKjhVP2TB1gNG0wzRrKOpGDvXe1kPCwy9zrHTETBJ+bbXd/KybZKKYzoYstuFs3o9xIIw47VIUL7IMVSk66/+mO7XsyVJy27JEycV3bb6UX08adkJn89XghEyN/VC2QDjCXs2l3lRkZXOqHcW4+YDzD6vdLLOi/FolCX0hFk4dDWVoYQa2RlqK9XStgYQxVrrKGwiHt+BApJxGULtWmQFmlO7uWryseRBViVPAEDZGEz5b3a3Wdw="
-        MY_TEST: "A TEST"
       # android:
       #   components:
       #     - platform-tools
@@ -57,7 +54,7 @@ matrix:
       node_js: false
       before_install:
         - echo "xX $MY_TEST Xx"
-        - openssl aes-256-cbc -k "$super_secret_password" -in packages/mobile-app/android/my-release-key.keystore.enc -out packages/mobile-app/android/my-release-key.keystore -d
+        - openssl aes-256-cbc -k "$SECURE_PASSWORD" -in packages/mobile-app/android/my-release-key.keystore.enc -out packages/mobile-app/android/my-release-key.keystore -d
         - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo
           sysctl -p
         - nvm install 10
