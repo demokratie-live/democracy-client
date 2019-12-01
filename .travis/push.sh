@@ -9,6 +9,7 @@ commit_ios_files() {
   git commit --message "Travis build: $TRAVIS_BUILD_NUMBER (no-deploy)"
 }
 upload_files() {
+  git pull --quiet
   git push --quiet
 }
 setup_git
