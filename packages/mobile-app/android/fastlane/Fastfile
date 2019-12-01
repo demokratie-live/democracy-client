@@ -22,8 +22,8 @@ platform :android do
   end
 
   private_lane :build do
-    store_password = prompt(text: "Signing Store Password: ", secure_text: true)
-    key_password = prompt(text: "Alias Key Password: ", secure_text: true)
+    store_password = prompt(text: "Signing Store Password: ", secure_text: true, ci_input: $MATCH_PASSWORD)
+    key_password = prompt(text: "Alias Key Password: ", secure_text: true, ci_input: $MATCH_PASSWORD)
     releaseFilePath = File.join(Dir.pwd, "..", "my-release-key.keystore")
 
     increment_version_code(
