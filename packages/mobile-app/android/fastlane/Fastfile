@@ -15,6 +15,10 @@
 
 default_platform(:android)
 
+package = load_json(json_path: "../../../package.json")
+
+version_number = package["version"]
+
 platform :android do
   desc "Runs all the tests"
   lane :test do
@@ -25,6 +29,10 @@ platform :android do
     store_password = prompt(text: "Signing Store Password: ", secure_text: true, ci_input: ENV['ANDROID_KEYSTORE_PASSWORD'])
     key_password = prompt(text: "Alias Key Password: ", secure_text: true, ci_input: ENV['ANDROID_KEYSTORE_PASSWORD'])
     releaseFilePath = File.join(Dir.pwd, "..", "my-release-key.keystore")
+
+    android_set_version_name(
+      version_name: version_number
+    )
 
     increment_version_code(
       gradle_file_path: "app/build.gradle"
