@@ -1,7 +1,3 @@
-env:
-  global:
-    secure: "TNm3z2WKiUfD3tIUrt8JLOJ5XFtYbulfUUsgu124TOCSirCYH05/OQpmtbDvkeydiF+Pw/7Py0tTDTqzMiToTssSNK7tfDuo/77meye0bHN3l1EP/rABT9Se9LEaZaiz4GHNZ66s+xTtKSY86fnm3npV2D9f6MfXHUtdO2A930JBWa5/+R5KoFfhb82tk/WFzQDAufZNY4le9l5+SMPBnV4KJFBZq00ZW4YC5ucihOoRqZUJ7TQ7POYVFUkl6C54CxaL9FHcT+PisLODwniV/A4LFSLa1+BrunvWOKnkRDhjR8zex1JfARX+99/i16WM1Hqnm0ospRvoASWPMUQKuYMNAHWIuHafqf8A7QKyeYAak0orpTLzHCbfNgkwMRCs1Tn2qiI2hkptF8EE1VS5fNIh5TQ4fE+cCUUBiijSUlHwrQ5rpCaVR/c6YmttxXSTa9Eua4qyDx1I412xmisUz0vlUXaKrPHwiF0utk1a+0rk9Sv17kHImBgCbwCbNtzHs3rv3HhWi2LeUt5Ttn7K6EEroT1o1CU1JljrVMPv5CxXrGDzjHvXtG1yEdaHHRH0Jafyahv7faOg0xNolfaZg0mIUNyyIaGUPf4kTaJku+1kJiZdkQOfKaOlo4QFB5mk7PVoRliCwjv/v5Uul6q+amtZdz5EkwIzDTbBMTq0eFI="
-
 cache:
   yarn: true
   directories:
@@ -57,7 +53,7 @@ matrix:
       #     - extra-google-google_play_services
       node_js: false
       before_install:
-        - echo "$super_secret_password"
+        - echo "xX $super_secret_password Xx"
         - openssl aes-256-cbc -k "$super_secret_password" -in packages/mobile-app/android/my-release-key.keystore.enc -out packages/mobile-app/android/my-release-key.keystore -d
         - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo
           sysctl -p
@@ -78,3 +74,7 @@ matrix:
         - cd $TRAVIS_BUILD_DIR
       after_success:
         - ".travis/push.sh"
+
+env:
+  global:
+    secure: "TNm3z2WKiUfD3tIUrt8JLOJ5XFtYbulfUUsgu124TOCSirCYH05/OQpmtbDvkeydiF+Pw/7Py0tTDTqzMiToTssSNK7tfDuo/77meye0bHN3l1EP/rABT9Se9LEaZaiz4GHNZ66s+xTtKSY86fnm3npV2D9f6MfXHUtdO2A930JBWa5/+R5KoFfhb82tk/WFzQDAufZNY4le9l5+SMPBnV4KJFBZq00ZW4YC5ucihOoRqZUJ7TQ7POYVFUkl6C54CxaL9FHcT+PisLODwniV/A4LFSLa1+BrunvWOKnkRDhjR8zex1JfARX+99/i16WM1Hqnm0ospRvoASWPMUQKuYMNAHWIuHafqf8A7QKyeYAak0orpTLzHCbfNgkwMRCs1Tn2qiI2hkptF8EE1VS5fNIh5TQ4fE+cCUUBiijSUlHwrQ5rpCaVR/c6YmttxXSTa9Eua4qyDx1I412xmisUz0vlUXaKrPHwiF0utk1a+0rk9Sv17kHImBgCbwCbNtzHs3rv3HhWi2LeUt5Ttn7K6EEroT1o1CU1JljrVMPv5CxXrGDzjHvXtG1yEdaHHRH0Jafyahv7faOg0xNolfaZg0mIUNyyIaGUPf4kTaJku+1kJiZdkQOfKaOlo4QFB5mk7PVoRliCwjv/v5Uul6q+amtZdz5EkwIzDTbBMTq0eFI="
