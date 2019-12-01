@@ -5,11 +5,11 @@ setup_git() {
 }
 commit_ios_files() {
   git checkout $TRAVIS_BRANCH
+  git pull --quiet
   git add .
   git commit --message "Travis build: $TRAVIS_BUILD_NUMBER (no-deploy)"
 }
 upload_files() {
-  git pull --quiet
   git push --quiet
 }
 setup_git
