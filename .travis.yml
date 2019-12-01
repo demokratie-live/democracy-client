@@ -53,7 +53,7 @@ matrix:
           - extra-google-google_play_services
       node_js: false
       before_install:
-          - echo $SECURE_PASSWORD | gpg --passphrase-fd 0 packages/mobile-app/android/my-release-key.keystore.gpg
+        - echo $SECURE_PASSWORD | gpg --passphrase-fd 0 packages/mobile-app/android/my-release-key.keystore.gpg
         - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo
           sysctl -p
         - nvm install 10
