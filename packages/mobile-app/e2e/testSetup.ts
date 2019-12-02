@@ -7,7 +7,7 @@ import adapter from 'detox/runners/jest/adapter';
 const config = require('../package.json').detox;
 
 // Set the default timeout
-jest.setTimeout(120000);
+jest.setTimeout(240000);
 jasmine.getEnv().addReporter(adapter);
 
 // This takes care of generating status logs on a per-spec basis. By default, jest only reports at file-level.
