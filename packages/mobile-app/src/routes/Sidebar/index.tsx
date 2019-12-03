@@ -10,6 +10,9 @@ import IntroductionScreen from '../../screens/modals/Introduction';
 import { sidebarNavigationRef } from './NavigationService';
 import { Sidebar } from '../../screens/Sidebar';
 import { RootStackParamList } from '..';
+import GovernmentIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Government';
+import IncreaseArrowIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/IncreaseArrow';
+import InfoArrowIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Info';
 
 export * from './NavigationService';
 
@@ -38,18 +41,40 @@ export const SidebarNavigation = () => {
     <NavigationNativeContainer ref={sidebarNavigationRef} independent>
       <SidebarDrawer.Navigator
         initialRouteName="Bundestag"
-        drawerContent={Sidebar}>
+        drawerContent={Sidebar}
+        drawerContentOptions={{
+          labelStyle: { color: '#fff' },
+          activeTintColor: '#fff',
+          inactiveTintColor: '#fff',
+          activeBackgroundColor: 'rgba(68, 148, 211, 0.5)',
+        }}>
         <SidebarDrawer.Screen
           name="Bundestag"
           component={BundestagRootNavigation}
+          options={{
+            gestureEnabled: true,
+            drawerIcon: ({ color, size }) => (
+              <GovernmentIcon width={size} height={size} color={color} />
+            ),
+          }}
         />
         <SidebarDrawer.Screen
-          options={{}}
+          options={{
+            gestureEnabled: true,
+            drawerIcon: ({ color, size }) => (
+              <IncreaseArrowIcon width={size} height={size} color={color} />
+            ),
+          }}
           name="Statistic"
           component={MyStatisticScreen}
         />
         <SidebarDrawer.Screen
-          options={{}}
+          options={{
+            gestureEnabled: false,
+            drawerIcon: ({ color, size }) => (
+              <InfoArrowIcon width={size} height={size} color={color} />
+            ),
+          }}
           name={'Introduction'}
           initialParams={{}}
           component={IntroductionScreen}
