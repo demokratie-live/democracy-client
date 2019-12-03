@@ -1,8 +1,8 @@
 import React from 'react';
-import { DrawerItemList } from '@react-navigation/drawer';
 import styled from 'styled-components/native';
 import { Background } from '@democracy-deutschland/mobile-ui/src/components/Sidebar/Background';
 import { HeadLogo } from '@democracy-deutschland/mobile-ui/src/components/Sidebar/HeadLogo';
+import DrawerItemList from './DrawerItemList';
 
 const SafeAreaView = styled.SafeAreaView`
   flex: 1;
