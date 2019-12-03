@@ -12,7 +12,7 @@ const TabNavigation = createMaterialTopTabNavigator<TopTabkParamList>();
 export default () => {
   return (
     <TabNavigation.Navigator
-      tabBarOptions={{ scrollEnabled: true }}
+      tabBarOptions={{ scrollEnabled: false }}
       initialRouteName={'Sitzungswoche'}>
       <TabNavigation.Screen
         name="Sitzungswoche"
