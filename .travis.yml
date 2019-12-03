@@ -20,7 +20,7 @@ matrix:
         - gem install fastlane
         - echo -e "machine github.com\n  login $GITHUB_API_TOKEN" >> ~/.netrc
       install:
-        - yarn
+        - yarn install --no-bin-links
         - yarn pods
         - cd packages/mobile-app/ios
         - bundle install
@@ -63,7 +63,7 @@ matrix:
         - gem install fastlane
         - echo -e "machine github.com\n  login $GITHUB_API_TOKEN" >> ~/.netrc
       install:
-        - yarn
+        - yarn install --no-bin-links
         - cd packages/mobile-app/android
         - bundle install
         - cd $TRAVIS_BUILD_DIR
