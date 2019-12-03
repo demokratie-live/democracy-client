@@ -52,6 +52,7 @@ export const SidebarNavigation = () => {
           name="Bundestag"
           component={BundestagRootNavigation}
           options={{
+            drawerLabel: 'Listen/Bundestag',
             gestureEnabled: true,
             drawerIcon: ({ color, size }) => (
               <GovernmentIcon width={size} height={size} color={color} />
@@ -60,6 +61,7 @@ export const SidebarNavigation = () => {
         />
         <SidebarDrawer.Screen
           options={{
+            drawerLabel: 'Auswertungen/Statistik',
             gestureEnabled: true,
             drawerIcon: ({ color, size }) => (
               <IncreaseArrowIcon width={size} height={size} color={color} />
@@ -70,6 +72,7 @@ export const SidebarNavigation = () => {
         />
         <SidebarDrawer.Screen
           options={{
+            drawerLabel: 'Mehr/Anleitung',
             gestureEnabled: false,
             drawerIcon: ({ color, size }) => (
               <InfoArrowIcon width={size} height={size} color={color} />
