@@ -137,8 +137,8 @@ android {
         applicationId "de.democracydeutschland.app.refactor"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 102028
-        versionName "1.2.2"
+        versionCode 102029
+        versionName "1.2.3"
 
         // Wix Detox
         testBuildType System.getProperty('testBuildType', 'debug')  // This will later be used to control the test apk build type
