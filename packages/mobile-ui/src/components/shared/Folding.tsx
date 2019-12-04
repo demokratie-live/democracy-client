@@ -39,6 +39,11 @@ const Divider = styled.View`
   margin-top: 9;
 `;
 
+const Content = styled.View`
+  padding-horizontal: 8;
+  padding-vertical: 8;
+`;
+
 interface Props {
   title: string;
 }
@@ -55,7 +60,7 @@ const Folding: React.FC<Props> = ({ title, children }) => {
       {open && (
         <>
           <Divider />
-          {children}
+          <Content>{children}</Content>
         </>
       )}
       <Divider />
