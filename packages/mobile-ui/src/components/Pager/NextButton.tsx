@@ -1,3 +1,4 @@
+// TODO replace this NextButton with global components/Button
 import React from 'react';
 import styled from 'styled-components/native';
 
