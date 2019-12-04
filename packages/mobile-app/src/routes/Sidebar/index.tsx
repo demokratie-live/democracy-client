@@ -8,7 +8,7 @@ import { Button, SafeAreaView } from 'react-native';
 import BundestagRootNavigation from './Bundestag';
 import IntroductionScreen from '../../screens/modals/Introduction';
 import { sidebarNavigationRef } from './NavigationService';
-import { Sidebar } from '../../screens/Sidebar';
+import { Sidebar } from '../../screens/Sidebar/Sidebar';
 import { RootStackParamList } from '..';
 import GovernmentIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Government';
 import IncreaseArrowIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/IncreaseArrow';
@@ -41,7 +41,7 @@ export const SidebarNavigation = () => {
     <NavigationNativeContainer ref={sidebarNavigationRef} independent>
       <SidebarDrawer.Navigator
         initialRouteName="Bundestag"
-        drawerContent={Sidebar}
+        drawerContent={props => <Sidebar {...props} />}
         drawerContentOptions={{
           labelStyle: { color: '#fff' },
           activeTintColor: '#fff',
