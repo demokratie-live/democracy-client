@@ -11,8 +11,7 @@ import { Centered } from '@democracy-deutschland/mobile-ui/src/components/shared
 
 const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: {
-    // paddingVertical: 11,
-    // paddingHorizontal: 11,
+    paddingHorizontal: 11,
   },
 }))``;
 
@@ -112,7 +111,7 @@ Zu unserer `}
       )}
 
       <Button
-        onPress={() => Alert.alert('VerifiVERIFIZIERENzieren')}
+        onPress={() => Alert.alert('VERIFIZIEREN')}
         text={`${authCodeExpires ? 'Neuen Code senden' : 'VERIFIZIEREN'} `}
         textColor="white"
         backgroundColor="lightBlue"

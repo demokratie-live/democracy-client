@@ -16,6 +16,7 @@ const Container = styled.TouchableOpacity<ContainerProps>`
   height: 60;
   justify-content: center;
   border-radius: 2;
+  margin-top: 11;
 `;
 
 enum TextColors {
