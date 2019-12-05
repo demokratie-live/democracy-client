@@ -8,6 +8,9 @@ import { Linking, Alert } from 'react-native';
 
 import { HeadLogo } from '@democracy-deutschland/mobile-ui/src/components/Sidebar/HeadLogo';
 import { Centered } from '@democracy-deutschland/mobile-ui/src/components/shared/Centered';
+import { useNavigation } from '@react-navigation/core';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { VerificationRootStackParamList } from '../../../routes/Verification';
 
 const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: {
@@ -43,8 +46,11 @@ const linking = (url: string) => () => {
 };
 
 export const VerificationStart: React.FC = () => {
+  const navigation = useNavigation<
+    StackNavigationProp<VerificationRootStackParamList>
+  >();
   // TODO handle authCodeExpires by context or state
-  const authCodeExpires = true;
+  const authCodeExpires = false;
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic">
       <Centered>
@@ -111,10 +117,10 @@ Zu unserer `}
       )}
 
       <Button
-        onPress={() => Alert.alert('VERIFIZIEREN')}
+        onPress={() => navigation.push('PhoneNumberInput')}
         text={`${authCodeExpires ? 'Neuen Code senden' : 'VERIFIZIEREN'} `}
         textColor="white"
-        backgroundColor="lightBlue"
+        backgroundColor={authCodeExpires ? 'lightBlue' : 'blue'}
       />
     </ScrollView>
   );

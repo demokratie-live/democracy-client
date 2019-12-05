@@ -3,7 +3,7 @@ import React, { useState, useContext } from 'react';
 import { NavigationNativeContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Introduction from '../screens/modals/Introduction';
-import Verification from '../screens/modals/Verification';
+import Verification from './Verification';
 import { InitialStateContext } from '../context/InitialStates';
 import DeviceInfo from 'react-native-device-info';
 import { InitialState } from '@react-navigation/core';

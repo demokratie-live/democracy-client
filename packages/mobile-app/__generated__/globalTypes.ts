@@ -7,10 +7,12 @@
 //==============================================================
 
 export enum ListType {
+  CONFERENCEWEEKS_PLANNED = "CONFERENCEWEEKS_PLANNED",
   HOT = "HOT",
   IN_VOTE = "IN_VOTE",
   PAST = "PAST",
   PREPARATION = "PREPARATION",
+  TOP100 = "TOP100",
 }
 
 export interface ProcedureFilter {

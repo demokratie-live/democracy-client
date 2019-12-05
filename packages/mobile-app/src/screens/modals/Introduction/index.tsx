@@ -35,6 +35,13 @@ const Introduction: FC<Props> = ({ route }) => {
     navigation.goBack();
   };
 
+  const verifyAction = () => {
+    if (done) {
+      done();
+    }
+    navigation.replace('Verification', {});
+  };
+
   const slides = getSlides({
     lastVersion: lastStartWithVersion,
     registered: false,
@@ -53,7 +60,11 @@ const Introduction: FC<Props> = ({ route }) => {
             head={slide.head}
             images={slide.images}
             isNew={slide.isNew}
-            verify={slide.verify}
+            verify={
+              i + 1 === Object.keys(slidesData).length
+                ? verifyAction
+                : undefined
+            }
             nextSlide={
               // TODO fix android next button click. does not work correctly
               i + 1 === Object.keys(slidesData).length
