@@ -7,6 +7,8 @@ commit_ios_files() {
   git checkout $TRAVIS_BRANCH
   git pull --quiet
   git add .
+  git reset -- packages/mobile-app/ios/Podfile.lock
+  git reset -- packages/mobile-ui/ios/Podfile.lock
   git commit --message "Travis build: $TRAVIS_BUILD_NUMBER (no-deploy)"
 }
 upload_files() {
