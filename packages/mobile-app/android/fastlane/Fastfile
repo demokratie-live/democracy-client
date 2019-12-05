@@ -41,7 +41,7 @@ platform :android do
     gradle(task: 'clean')
 
     gradle(
-      task: 'bundle',
+      task: 'assemble',
       build_type: 'Release',
       print_command: false,
       properties: {
