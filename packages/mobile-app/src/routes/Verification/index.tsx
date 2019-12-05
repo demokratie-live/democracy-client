@@ -5,6 +5,7 @@ import { Button } from 'react-native';
 import { sidebarToggle } from '../Sidebar';
 import { VerificationStart } from '../../screens/modals/Verification/Start';
 import { PhoneNumber } from '../../screens/modals/Verification/PhoneNumber';
+import { Code } from '../../screens/modals/Verification/Code';
 
 export type VerificationRootStackParamList = {
   Start: undefined;
@@ -32,11 +33,11 @@ const VerificationRootNavigation = () => {
           component={PhoneNumber}
           options={{}}
         />
-        {/* <VerificationRootStack.Screen
+        <VerificationRootStack.Screen
           name="SmsCodeInput"
-          component={Voting}
+          component={Code}
           options={{}}
-        /> */}
+        />
       </VerificationRootStack.Navigator>
     </NavigationNativeContainer>
   );

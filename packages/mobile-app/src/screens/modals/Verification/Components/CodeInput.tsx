@@ -12,53 +12,41 @@ const Container = styled.View`
   flex: 1;
 `;
 
-const CountryNumber = styled.Text`
-  font-size: 24;
-  margin-bottom: 0;
-  padding-bottom: 0;
-  padding-top: ${Platform.OS === 'ios' ? 0 : 7};
-`;
-
 const Number = styled.TextInput.attrs(() => ({
-  placeholder: 'Deine Telefonnr.',
+  placeholder: 'XXXXXX',
   keyboardType: Platform.OS === 'ios' ? 'number-pad' : 'numeric',
-  maxLength: 13,
+  maxLength: 6,
   returnKeyType: 'next',
 }))`
   flex: 1;
   font-size: 24;
+  text-align: center;
   margin-bottom: 0;
   padding-bottom: 0;
-  margin-left: 11;
 `;
 
 interface Props {
-  phoneNumber: string;
-  onChange: (phoneNumber: string) => void;
+  code: string;
+  onChange: (code: string) => void;
 }
 
-export const PhonenumberInput: React.FC<Props> = ({
-  phoneNumber = '',
-  onChange,
-}) => {
+export const CodeInput: React.FC<Props> = ({ code, onChange }) => {
   const onChangeText = (text: string) => {
-    const formattedPhoneNumber = text.replace(/[^0-9]/g, '');
-    onChange(formattedPhoneNumber);
+    const formattedCode = text.replace(/[^0-9]/g, '');
+    onChange(formattedCode);
   };
 
   return (
     <Container>
-      <CountryNumber>+49</CountryNumber>
       <Number
         multiline={false}
         autoFocus
         onChangeText={onChangeText}
-        value={phoneNumber}
-        textContentType="telephoneNumber"
+        value={code}
         underlineColorAndroid="transparent"
       />
     </Container>
   );
 };
 
-export default PhonenumberInput;
+export default CodeInput;
