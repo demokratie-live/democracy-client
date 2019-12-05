@@ -30,7 +30,12 @@
           ]
         }
       }
+    ],
+    "typeRoots": [
+      "./types",
+      "./node_modules/@types",
+      "../../node_modules/@types"
     ]
   },
-  "exclude": ["node_modules", "android", "ios", "coverage"]
+  "exclude": ["node_modules", "android", "ios", "coverage", "types"]
 }

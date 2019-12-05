@@ -9,10 +9,12 @@ enum BackgroundColors {
 }
 interface ContainerProps {
   color: keyof typeof BackgroundColors;
+  disabled?: boolean;
 }
 
 const Container = styled.TouchableOpacity<ContainerProps>`
-  background-color: ${({ color }) => BackgroundColors[color]};
+  background-color: ${({ color, disabled }) =>
+    disabled ? '#979797' : BackgroundColors[color]};
   height: 60;
   justify-content: center;
   border-radius: 2;
@@ -40,6 +42,7 @@ export interface Props {
   onPress: () => void;
   textColor: keyof typeof TextColors;
   backgroundColor?: keyof typeof BackgroundColors;
+  disabled?: boolean;
 }
 
 export const Button: React.FC<Props> = ({
@@ -47,8 +50,13 @@ export const Button: React.FC<Props> = ({
   onPress,
   textColor,
   backgroundColor = 'transparent',
+  disabled,
 }) => (
-  <Container testID="Button" onPress={onPress} color={backgroundColor}>
+  <Container
+    disabled={disabled}
+    testID="Button"
+    onPress={onPress}
+    color={backgroundColor}>
     <ButtonText testID="ButtonText" color={textColor}>
       {text}
     </ButtonText>
