@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { Dimensions, Platform, Image } from 'react-native';
+import { Dimensions, Platform, Image, ImageSourcePropType } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { PageProps } from '../Pager';
 
@@ -110,15 +110,15 @@ const NewMarker = styled.Image.attrs({
 
 export interface Slide {
   head: {
-    image: NodeRequire;
+    image: ImageSourcePropType;
     title: string;
     description: string;
   };
   images: {
-    left?: NodeRequire;
-    center: NodeRequire;
-    right?: NodeRequire;
-    circle?: NodeRequire;
+    left?: ImageSourcePropType;
+    center: ImageSourcePropType;
+    right?: ImageSourcePropType;
+    circle?: ImageSourcePropType;
   };
   isNew?: boolean;
   verify?: () => void;

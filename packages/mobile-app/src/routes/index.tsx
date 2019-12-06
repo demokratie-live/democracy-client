@@ -9,6 +9,7 @@ import DeviceInfo from 'react-native-device-info';
 import { InitialState } from '@react-navigation/core';
 import { SidebarNavigation } from './Sidebar';
 import { rootNavigationRef } from './Root';
+import { useEffect } from 'react';
 
 export type RootStackParamList = {
   Sidebar: { registered?: boolean };
@@ -27,7 +28,9 @@ const App = () => {
     registered,
   } = useContext(InitialStateContext);
 
-  DeviceInfo.getVersion().then(setCurrentVersion);
+  useEffect(() => {
+    setCurrentVersion(DeviceInfo.getVersion());
+  }, []);
 
   if (lastStartWithVersion === undefined || currentVersion === undefined) {
     return null;
