@@ -25,6 +25,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { VerificationRootStackParamList } from '../../../routes/Verification';
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
 import { RootStackParamList } from '../../../routes';
+import Me from '../../../context/InitialStates/graphql/query/Me';
 // import GET_PROCEDURE from '../../graphql/queries/getProcedure';
 // import F_PROCEDURE_VERIFIED from '../../graphql/fragments/ProcedureVerified';
 // import GET_STATISTIC from '../../graphql/queries/getStatistic';
@@ -51,7 +52,9 @@ export const Code: React.FC = () => {
   const [requestVerification] = useMutation<
     RequestVerification,
     RequestVerificationVariables
-  >(REQUEST_VERIFICATION);
+  >(REQUEST_VERIFICATION, {
+    refetchQueries: [{ query: Me }],
+  });
   const [phoneNumber, setPhoneNumber] = useState('');
   const [code, setCode] = useState('');
   // const [countdown, setCountdown] = useState<number>(0);
