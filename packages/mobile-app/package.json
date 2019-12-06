@@ -8,7 +8,7 @@
     "device:ios": "react-native run-ios --device",
     "device:android": "react-native run-android --device",
     "release:ios": "react-native run-ios --configuration Release --device",
-    "release:android": "react-native run-android --configuration Release --device",
+    "release:android": "react-native run-android --variant=release",
     "start": "react-native start",
     "clean": "react-native-clean-project",
     "test": "jest -c jest.config.js --coverage",
