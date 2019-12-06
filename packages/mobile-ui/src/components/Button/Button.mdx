@@ -5,7 +5,7 @@ route: /button
 
 import { Playground, Props } from 'docz';
 import { Text } from 'react-native';
-import Button from './';
+import { Button } from './';
 
 # Button
 
@@ -14,7 +14,10 @@ import Button from './';
 ## Basic usage
 
 <Playground>
-  <Button onPress={() => {}}>
-    <Text>Hello Button</Text>
-  </Button>
+  <Button
+    onPress={() => {}}
+    text="Hello Button"
+    textColor="red"
+    backgroundColor="blue"
+  />
 </Playground>
