@@ -36,6 +36,7 @@ export const SidebarNavigation = () => {
   return (
     <SidebarDrawer.Navigator
       initialRouteName="Bundestag"
+      unmountInactiveScreens={true}
       drawerContent={props => <Sidebar {...props} />}
       drawerContentOptions={{
         labelStyle: { color: '#fff' },
