@@ -8,7 +8,10 @@ import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
 
 import REQUEST_CODE from './graphql/mutation/requestCode';
 import { useMutation } from '@apollo/react-hooks';
-import { RequestSmsCode } from './graphql/mutation/__generated__/RequestSmsCode';
+import {
+  RequestSmsCode,
+  RequestSmsCodeVariables,
+} from './graphql/mutation/__generated__/RequestSmsCode';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -30,7 +33,9 @@ export const PhoneNumber: React.FC<Props> = () => {
     StackNavigationProp<VerificationRootStackParamList>
   >();
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [requestCode] = useMutation<RequestSmsCode>(REQUEST_CODE);
+  const [requestCode] = useMutation<RequestSmsCode, RequestSmsCodeVariables>(
+    REQUEST_CODE,
+  );
 
   const sendNumber = () => {
     let preparedPhoneNumber = phoneNumber;
@@ -53,7 +58,7 @@ export const PhoneNumber: React.FC<Props> = () => {
           onPress: async () => {
             AsyncStorage.setItem('auth_phone', preparedPhoneNumber);
             const res = await requestCode({
-              variables: { newPhone: preparedPhoneNumber, newUser: true },
+              variables: { newPhone: preparedPhoneNumber },
             });
             console.log('res 1', res);
             if (res.data && !res.data.requestCode.succeeded) {

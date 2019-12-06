@@ -11,9 +11,15 @@ import { useEffect } from 'react';
 // GraphQL
 import REQUEST_CODE from './graphql/mutation/requestCode';
 import REQUEST_VERIFICATION from './graphql/mutation/requestVerification';
-import { RequestVerification } from './graphql/mutation/__generated__/RequestVerification';
+import {
+  RequestVerification,
+  RequestVerificationVariables,
+} from './graphql/mutation/__generated__/RequestVerification';
 import { useMutation } from '@apollo/react-hooks';
-import { RequestSmsCode } from './graphql/mutation/__generated__/RequestSmsCode';
+import {
+  RequestSmsCode,
+  RequestSmsCodeVariables,
+} from './graphql/mutation/__generated__/RequestSmsCode';
 import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { VerificationRootStackParamList } from '../../../routes/Verification';
@@ -35,10 +41,13 @@ export const Code: React.FC = () => {
   const navigation = useNavigation<
     StackNavigationProp<VerificationRootStackParamList>
   >();
-  const [requestCode] = useMutation<RequestSmsCode>(REQUEST_CODE);
-  const [requestVerification] = useMutation<RequestVerification>(
-    REQUEST_VERIFICATION,
+  const [requestCode] = useMutation<RequestSmsCode, RequestSmsCodeVariables>(
+    REQUEST_CODE,
   );
+  const [requestVerification] = useMutation<
+    RequestVerification,
+    RequestVerificationVariables
+  >(REQUEST_VERIFICATION);
   const [phoneNumber, setPhoneNumber] = useState('');
   const [code, setCode] = useState('');
   // const [countdown, setCountdown] = useState<number>(0);
@@ -72,12 +81,15 @@ export const Code: React.FC = () => {
     setCode(newCode);
     if (newCode.length === 6) {
       const phoneNumberHash = await sha256(phoneNumber || '');
+      console.log({ newCode, newPhoneHash: phoneNumberHash });
       const res = await requestVerification({
-        variables: { newCode, newPhoneHash: phoneNumberHash },
+        variables: { code: newCode, newPhoneHash: phoneNumberHash },
       });
+
       if (res.data && res.data.requestVerification.succeeded) {
         AsyncStorage.setItem('auth_phoneHash', phoneNumberHash);
         Keyboard.dismiss();
+        navigation.pop();
         // this.props.navigator.push({
         //   screen: 'democracy.SmsVerification.Success',
         //   backButtonTitle: 'Zurück',
@@ -128,7 +140,7 @@ export const Code: React.FC = () => {
           text: 'Ja',
           onPress: async () => {
             const res = await requestCode({
-              variables: { newPhone: phoneNumber, newUser: true },
+              variables: { newPhone: phoneNumber },
             });
             if (res.data) {
               const {
