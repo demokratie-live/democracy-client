@@ -20,10 +20,11 @@ import {
   RequestSmsCode,
   RequestSmsCodeVariables,
 } from './graphql/mutation/__generated__/RequestSmsCode';
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation, CompositeNavigationProp } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { VerificationRootStackParamList } from '../../../routes/Verification';
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
+import { RootStackParamList } from '../../../routes';
 // import GET_PROCEDURE from '../../graphql/queries/getProcedure';
 // import F_PROCEDURE_VERIFIED from '../../graphql/fragments/ProcedureVerified';
 // import GET_STATISTIC from '../../graphql/queries/getStatistic';
@@ -37,10 +38,13 @@ const ScrollView = styled.ScrollView.attrs(() => ({
   background-color: #fff;
 `;
 
+type DevPlaceholderNavigationProps = CompositeNavigationProp<
+  StackNavigationProp<VerificationRootStackParamList, 'SmsCodeInput'>,
+  StackNavigationProp<RootStackParamList>
+>;
+
 export const Code: React.FC = () => {
-  const navigation = useNavigation<
-    StackNavigationProp<VerificationRootStackParamList>
-  >();
+  const navigation = useNavigation<DevPlaceholderNavigationProps>();
   const [requestCode] = useMutation<RequestSmsCode, RequestSmsCodeVariables>(
     REQUEST_CODE,
   );
@@ -89,7 +93,7 @@ export const Code: React.FC = () => {
       if (res.data && res.data.requestVerification.succeeded) {
         AsyncStorage.setItem('auth_phoneHash', phoneNumberHash);
         Keyboard.dismiss();
-        navigation.pop();
+        navigation.resetRoot();
         // this.props.navigator.push({
         //   screen: 'democracy.SmsVerification.Success',
         //   backButtonTitle: 'Zurück',

@@ -1,13 +1,18 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationNativeContainer } from '@react-navigation/native';
+import {
+  createStackNavigator,
+  StackNavigationProp,
+} from '@react-navigation/stack';
 import { Filter, Search, Procedure, Voting } from '../../../screens/Bundestag';
 import { Button } from 'react-native';
-import { sidebarToggle } from '../NavigationService';
 import TabView from './TabView';
+import { CompositeNavigationProp, useNavigation } from '@react-navigation/core';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { SidebarParamList } from '..';
+import { RootStackParamList } from '../..';
 
 export type BundestagRootStackParamList = {
-  Bundestag: undefined;
+  TabView: undefined;
   Procedure: { procedureId: string; title: string };
   Voting: undefined;
   Filter: undefined;
@@ -16,35 +21,41 @@ export type BundestagRootStackParamList = {
 
 const BundestagRootStack = createStackNavigator<BundestagRootStackParamList>();
 
+type BundestagNavigationProps = CompositeNavigationProp<
+  DrawerNavigationProp<SidebarParamList, 'Bundestag'>,
+  StackNavigationProp<RootStackParamList>
+>;
+
 const BundestagRootNavigation = () => {
+  const navigation = useNavigation<BundestagNavigationProps>();
   return (
-    <NavigationNativeContainer independent>
-      <BundestagRootStack.Navigator>
-        <BundestagRootStack.Screen
-          name="Bundestag"
-          component={TabView}
-          options={{
-            headerLeft: () => <Button onPress={sidebarToggle} title="🍔" />,
-          }}
-        />
-        <BundestagRootStack.Screen
-          name="Procedure"
-          component={Procedure}
-          options={({ route }) => ({ title: route.params.title })}
-        />
-        <BundestagRootStack.Screen
-          name="Voting"
-          component={Voting}
-          options={
-            {
-              // gestureDirection: 'vertical',
-            }
+    <BundestagRootStack.Navigator>
+      <BundestagRootStack.Screen
+        name="TabView"
+        component={TabView}
+        options={{
+          headerLeft: () => (
+            <Button onPress={navigation.toggleDrawer} title="🍔" />
+          ),
+        }}
+      />
+      <BundestagRootStack.Screen
+        name="Procedure"
+        component={Procedure}
+        options={({ route }) => ({ title: route.params.title })}
+      />
+      <BundestagRootStack.Screen
+        name="Voting"
+        component={Voting}
+        options={
+          {
+            // gestureDirection: 'vertical',
           }
-        />
-        <BundestagRootStack.Screen name="Filter" component={Filter} />
-        <BundestagRootStack.Screen name="Search" component={Search} />
-      </BundestagRootStack.Navigator>
-    </NavigationNativeContainer>
+        }
+      />
+      <BundestagRootStack.Screen name="Filter" component={Filter} />
+      <BundestagRootStack.Screen name="Search" component={Search} />
+    </BundestagRootStack.Navigator>
   );
 };
 
