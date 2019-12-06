@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import styled from 'styled-components/native';
 import { Text, Button } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -12,6 +12,7 @@ import Document from '@democracy-deutschland/mobile-ui/src/components/Icons/Docu
 import { RootStackParamList } from '../../routes';
 import { SidebarParamList } from '../../routes/Sidebar';
 import { TopTabkParamList } from '../../routes/Sidebar/Bundestag/TabView';
+import { InitialStateContext } from '../../context/InitialStates';
 
 const Container = styled.View`
   flex: 1;
@@ -31,6 +32,7 @@ type DevPlaceholderNavigationProps = CompositeNavigationProp<
 >;
 
 export const DevPlaceholder: FC = () => {
+  const { isVerified } = useContext(InitialStateContext);
   const navigation = useNavigation<DevPlaceholderNavigationProps>();
   return (
     <Container>
@@ -53,6 +55,7 @@ export const DevPlaceholder: FC = () => {
         title="Go to Verification"
         onPress={() => navigation.navigate('Verification')}
       />
+      {__DEV__ && <Text>is verified {JSON.stringify(isVerified)}</Text>}
       <Button
         title="Clear Async Storage"
         onPress={() => AsyncStorage.clear()}
