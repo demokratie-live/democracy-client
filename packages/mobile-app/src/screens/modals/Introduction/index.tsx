@@ -39,7 +39,7 @@ const Introduction: FC<Props> = ({ route }) => {
     if (done) {
       done();
     }
-    navigation.replace('Verification', {});
+    navigation.push('Verification');
   };
 
   const slides = getSlides({
