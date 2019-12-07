@@ -6,7 +6,7 @@ import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Fold
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
 import { Linking, Alert } from 'react-native';
 
-import { HeadLogo } from '@democracy-deutschland/mobile-ui/src/components/Sidebar/HeadLogo';
+import { Democracy } from '@democracy-deutschland/mobile-ui/src/assets/democracy';
 import { Centered } from '@democracy-deutschland/mobile-ui/src/components/shared/Centered';
 import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -15,8 +15,11 @@ import { VerificationRootStackParamList } from '../../../routes/Verification';
 const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: {
     paddingHorizontal: 11,
+    paddingVertical: 11,
   },
-}))``;
+}))`
+  background-color: #fff;
+`;
 
 const Text = styled.Text`
   font-size: 15;
@@ -54,7 +57,7 @@ export const VerificationStart: React.FC = () => {
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic">
       <Centered>
-        <HeadLogo />
+        <Democracy />
       </Centered>
       <Description
         text={
