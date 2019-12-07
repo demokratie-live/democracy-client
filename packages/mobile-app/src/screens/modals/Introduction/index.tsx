@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { useNavigation, RouteProp } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import styled from 'styled-components/native';
@@ -9,6 +9,7 @@ import { Slide } from '@democracy-deutschland/mobile-ui/src/components/Introduct
 import { slidesData } from '@democracy-deutschland/mobile-ui/src/components/Introduction/data';
 import { Pager } from '@democracy-deutschland/mobile-ui/src/components/Pager';
 import { getSlides } from './utils/getSlides';
+import { InitialStateContext } from '../../../context/InitialStates';
 
 const SafeAreaView = styled.SafeAreaView`
   flex: 1;
@@ -26,6 +27,7 @@ type Props = {
 
 const Introduction: FC<Props> = ({ route }) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const { isVerified } = useContext(InitialStateContext);
   const { lastStartWithVersion, done } = route.params;
 
   const finishAction = () => {
@@ -44,7 +46,7 @@ const Introduction: FC<Props> = ({ route }) => {
 
   const slides = getSlides({
     lastVersion: lastStartWithVersion,
-    registered: false,
+    registered: isVerified,
   });
 
   return (
