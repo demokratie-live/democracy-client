@@ -11,7 +11,7 @@ import { SidebarNavigation } from './Sidebar';
 import { useEffect } from 'react';
 
 export type RootStackParamList = {
-  Sidebar: { registered?: boolean };
+  Sidebar: undefined;
   Home: {};
   Introduction: { done?: () => void; lastStartWithVersion?: string };
   Verification: {};
@@ -21,11 +21,9 @@ const RootStack = createStackNavigator<RootStackParamList>();
 
 const App = () => {
   const [currentVersion, setCurrentVersion] = useState();
-  const {
-    lastStartWithVersion,
-    setLastStartWithVersion,
-    registered,
-  } = useContext(InitialStateContext);
+  const { lastStartWithVersion, setLastStartWithVersion } = useContext(
+    InitialStateContext,
+  );
 
   useEffect(() => {
     setCurrentVersion(DeviceInfo.getVersion());
@@ -55,11 +53,7 @@ const App = () => {
   return (
     <NavigationNativeContainer initialState={initialState}>
       <RootStack.Navigator mode="modal" headerMode="none">
-        <RootStack.Screen
-          name="Sidebar"
-          component={SidebarNavigation}
-          initialParams={{ registered }}
-        />
+        <RootStack.Screen name="Sidebar" component={SidebarNavigation} />
         <RootStack.Screen name="Introduction" component={Introduction} />
         <RootStack.Screen name="Verification" component={Verification} />
       </RootStack.Navigator>
