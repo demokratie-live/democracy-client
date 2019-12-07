@@ -33,6 +33,7 @@
     "docz": "2.0.0-rc.67",
     "husky": "^3.0.9",
     "lint-staged": "^9.4.3",
-    "replace-in-file": "^4.2.0"
+    "replace-in-file": "^4.2.0",
+    "typescript": "3.5.2"
   }
 }
