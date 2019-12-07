@@ -26,9 +26,6 @@ import { VerificationRootStackParamList } from '../../../routes/Verification';
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
 import { RootStackParamList } from '../../../routes';
 import Me from '../../../context/InitialStates/graphql/query/Me';
-// import GET_PROCEDURE from '../../graphql/queries/getProcedure';
-// import F_PROCEDURE_VERIFIED from '../../graphql/fragments/ProcedureVerified';
-// import GET_STATISTIC from '../../graphql/queries/getStatistic';
 
 const Container = styled.KeyboardAvoidingView.attrs(() => ({
   behavior: 'padding',
@@ -65,32 +62,38 @@ export const Code: React.FC = () => {
   });
   const [phoneNumber, setPhoneNumber] = useState('');
   const [code, setCode] = useState('');
-  // const [countdown, setCountdown] = useState<number>(0);
-  // let COUNTDOWN_INTERVAL: NodeJS.Timeout;
+  const [countdown, setCountdown] = useState<number>();
+  const [resendTime, setResendTime] = useState<Date>(new Date());
 
   // did Mount
   useEffect(() => {
     // Setup Countdown
-    // AsyncStorage.getItem('auth_code_resend_time').then(resendTime => {
-    //   const resendTimeDate = resendTime ? new Date(resendTime) : new Date();
-    //   const countdownValue = Math.ceil(
-    //     (resendTimeDate.getTime() - new Date().getTime()) / 1000,
-    //   );
-    //   if (countdownValue > 0) {
-    //     setCountdown(countdownValue);
-    //     startCountdown();
-    //   }
-    // });
+    AsyncStorage.getItem('verification_code_resend_time').then(time => {
+      const resendTimeDate = time ? new Date(time) : new Date();
+      setResendTime(resendTimeDate);
+    });
 
     // Setup Phone Number
     AsyncStorage.getItem('auth_phone').then(value => {
       setPhoneNumber(value || '');
     });
-
-    // return () => {
-    //   stopCountdown();
-    // };
   }, []);
+
+  useEffect(() => {
+    const countdownValue = Math.ceil(
+      (resendTime.getTime() - new Date().getTime()) / 1000,
+    );
+    if (countdownValue > 0) {
+      const countdownInterval = setInterval(() => {
+        setCountdown(
+          Math.ceil((resendTime.getTime() - new Date().getTime()) / 1000),
+        );
+      }, 1000);
+      return () => {
+        clearInterval(countdownInterval);
+      };
+    }
+  }, [resendTime]);
 
   const onChangeCode = async (newCode: string) => {
     setCode(newCode);
@@ -109,36 +112,11 @@ export const Code: React.FC = () => {
         AsyncStorage.setItem('auth_phoneHash', phoneNumberHash);
         Keyboard.dismiss();
         navigation.resetRoot();
-        // this.props.navigator.push({
-        //   screen: 'democracy.SmsVerification.Success',
-        //   backButtonTitle: 'Zurück',
-        //   passProps: {
-        //     onComplete: this.props.onComplete,
-        //   },
-        //   navigatorStyle: { navBarHidden: true },
-        // });
       } else if (res.data) {
         showNotification(res.data.requestVerification.reason || '');
       }
     }
   };
-
-  // const startCountdown = () => {
-  //   if (COUNTDOWN_INTERVAL) {
-  //     this.stopCountdown();
-  //   }
-  //   COUNTDOWN_INTERVAL = setInterval(() => {
-  //     this.setState({ countdown: this.state.countdown - 1 }, () => {
-  //       if (this.state.countdown <= 0) {
-  //         this.stopCountdown();
-  //       }
-  //     });
-  //   }, 1000);
-  // };
-
-  // const stopCountdown = () => {
-  //   clearInterval(COUNTDOWN_INTERVAL);
-  // };
 
   const showNotification = (message: string) => {
     Alert.alert('Verifikationsfehler', message);
@@ -171,17 +149,17 @@ export const Code: React.FC = () => {
               if (!succeeded) {
                 showNotification(reason || '');
               } else {
-                AsyncStorage.setItem('auth_code_expires', expireTime);
-                AsyncStorage.setItem('auth_code_resend_time', resendTime);
+                AsyncStorage.setItem(
+                  'verification_code_expire_time',
+                  expireTime,
+                );
+                AsyncStorage.setItem(
+                  'verification_code_resend_time',
+                  resendTime,
+                );
+                setResendTime(new Date(resendTime));
               }
             }
-
-            // this.setState({
-            //   countdown: Math.ceil(
-            //     (new Date(resendTime).getTime() - new Date().getTime()) / 1000,
-            //   ),
-            // });
-            // this.startCountdown();
           },
         },
       ],
@@ -189,9 +167,9 @@ export const Code: React.FC = () => {
   };
 
   let buttonTitle = 'Code erneut senden';
-  // if (countdown > 0) {
-  //   buttonTitle += ` (${countdown})`;
-  // }
+  if (countdown === undefined || countdown > 0) {
+    buttonTitle += ` (${countdown})`;
+  }
 
   return (
     <Container>
@@ -201,7 +179,7 @@ export const Code: React.FC = () => {
         <Button
           text={buttonTitle}
           onPress={sendNumber}
-          // disabled={countdown > 0}
+          disabled={countdown === undefined || countdown > 0}
           textColor="white"
           backgroundColor="blue"
         />
@@ -209,45 +187,3 @@ export const Code: React.FC = () => {
     </Container>
   );
 };
-
-// export default compose(
-//   graphql(REQUEST_VERIFICATION, {
-//     props({ mutate, ownProps: { procedureId } }) {
-//       return {
-//         requestVerification: args =>
-//           mutate({
-//             ...args,
-//             update: (cache, { data }) => {
-//               if (procedureId) {
-//                 const aiFragment = cache.readFragment({
-//                   id: procedureId,
-//                   fragment: F_PROCEDURE_VERIFIED,
-//                 });
-
-//                 aiFragment.verified = data.requestVerification.succeeded;
-
-//                 cache.writeFragment({
-//                   id: procedureId,
-//                   fragment: F_PROCEDURE_VERIFIED,
-//                   data: aiFragment,
-//                 });
-//               }
-//               return { data };
-//             },
-//             refetchQueries: [
-//               {
-//                 query: GET_PROCEDURE,
-//                 variables: {
-//                   id: procedureId,
-//                 },
-//               },
-//               {
-//                 query: GET_STATISTIC,
-//               },
-//             ],
-//           }),
-//       };
-//     },
-//   }),
-//   graphql(REQUEST_CODE, { name: 'requestCode' }),
-// )(Code);
