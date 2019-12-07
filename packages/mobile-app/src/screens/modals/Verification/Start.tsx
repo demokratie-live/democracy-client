@@ -1,5 +1,5 @@
 // TODO move this to mobile-ui library
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components/native';
 import Description from './Components/Description';
 import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Folding';
@@ -11,6 +11,7 @@ import { Centered } from '@democracy-deutschland/mobile-ui/src/components/shared
 import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { VerificationRootStackParamList } from '../../../routes/Verification';
+import { VerificationContext } from '../../../context/Verification';
 
 const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: {
@@ -52,8 +53,8 @@ export const VerificationStart: React.FC = () => {
   const navigation = useNavigation<
     StackNavigationProp<VerificationRootStackParamList>
   >();
-  // TODO handle authCodeExpires by context or state
-  const authCodeExpires = false;
+  const { countdown, expireTime } = useContext(VerificationContext);
+  const authCodeExpires = expireTime > new Date();
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic">
       <Centered>
@@ -112,7 +113,7 @@ Zu unserer `}
       </Folding>
       {authCodeExpires && (
         <Button
-          onPress={() => Alert.alert('CODE eingeben')}
+          onPress={() => navigation.push('SmsCodeInput')}
           text="CODE EINGEBEN"
           textColor="white"
           backgroundColor="blue"
@@ -121,7 +122,12 @@ Zu unserer `}
 
       <Button
         onPress={() => navigation.push('PhoneNumberInput')}
-        text={`${authCodeExpires ? 'Neuen Code senden' : 'VERIFIZIEREN'} `}
+        text={`${
+          authCodeExpires
+            ? `Neuen Code senden${countdown ? ` (${countdown})` : ''}`
+            : 'VERIFIZIEREN'
+        } `}
+        disabled={countdown > 0}
         textColor="white"
         backgroundColor={authCodeExpires ? 'lightBlue' : 'blue'}
       />
