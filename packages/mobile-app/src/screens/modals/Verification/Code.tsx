@@ -30,14 +30,22 @@ import Me from '../../../context/InitialStates/graphql/query/Me';
 // import F_PROCEDURE_VERIFIED from '../../graphql/fragments/ProcedureVerified';
 // import GET_STATISTIC from '../../graphql/queries/getStatistic';
 
+const Container = styled.KeyboardAvoidingView.attrs(() => ({
+  behavior: 'padding',
+  keyboardVerticalOffset: 100,
+  // enabled: true,
+}))`
+  background-color: #fff;
+  flex: 1;
+`;
+
 const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: {
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
+    flex: 1,
   },
-}))`
-  background-color: #fff;
-`;
+}))``;
 
 type DevPlaceholderNavigationProps = CompositeNavigationProp<
   StackNavigationProp<VerificationRootStackParamList, 'SmsCodeInput'>,
@@ -186,17 +194,19 @@ export const Code: React.FC = () => {
   // }
 
   return (
-    <ScrollView keyboardShouldPersistTaps="always">
-      <Description text={`Bitte gib Deinen Code ein für\n${phoneNumber}`} />
-      <CodeInput onChange={onChangeCode} code={code} />
-      <Button
-        text={buttonTitle}
-        onPress={sendNumber}
-        // disabled={countdown > 0}
-        textColor="white"
-        backgroundColor="blue"
-      />
-    </ScrollView>
+    <Container>
+      <ScrollView keyboardShouldPersistTaps="always">
+        <Description text={`Bitte gib Deinen Code ein für\n${phoneNumber}`} />
+        <CodeInput onChange={onChangeCode} code={code} />
+        <Button
+          text={buttonTitle}
+          onPress={sendNumber}
+          // disabled={countdown > 0}
+          textColor="white"
+          backgroundColor="blue"
+        />
+      </ScrollView>
+    </Container>
   );
 };
 

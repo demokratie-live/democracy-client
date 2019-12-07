@@ -17,14 +17,23 @@ import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { VerificationRootStackParamList } from '../../../routes/Verification';
 
-const ScrollView = styled.ScrollView.attrs(() => ({
-  contentContainerStyle: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+const Container = styled.KeyboardAvoidingView.attrs(() => ({
+  behavior: 'padding',
+  keyboardVerticalOffset: 100,
+  // enabled: true,
 }))`
   background-color: #fff;
+  flex: 1;
 `;
+
+const ScrollView = styled.ScrollView.attrs(() => ({
+  keyboardShouldPersistTaps: 'always',
+  contentContainerStyle: {
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    flex: 1,
+  },
+}))``;
 
 interface Props {}
 
@@ -60,12 +69,10 @@ export const PhoneNumber: React.FC<Props> = () => {
             const res = await requestCode({
               variables: { newPhone: preparedPhoneNumber },
             });
-            console.log('res 1', res);
             if (res.data && !res.data.requestCode.succeeded) {
               // TODO show notification of reason why it failed
               showNotification(res.data.requestCode.reason || '');
             } else if (res.data) {
-              console.log('res 2');
               // TODO: Navigate to Code Input if aut_code_expires is not yet expired
               // Contains a Date (String)
               // Do not do the Nvaigation here - do it on the "openVerificationScreen"
@@ -96,16 +103,18 @@ export const PhoneNumber: React.FC<Props> = () => {
   };
 
   return (
-    <ScrollView keyboardShouldPersistTaps="always">
-      <Description text="Bitte gib Deine aktuelle Handynummer ein" />
-      <PhonenumberInput phoneNumber={phoneNumber} onChange={setPhoneNumber} />
-      <Button
-        text="CODE ANFORDERN"
-        onPress={sendNumber}
-        disabled={phoneNumber.length < 10}
-        textColor="white"
-        backgroundColor="blue"
-      />
-    </ScrollView>
+    <Container>
+      <ScrollView>
+        <Description text="Bitte gib Deine aktuelle Handynummer ein" />
+        <PhonenumberInput phoneNumber={phoneNumber} onChange={setPhoneNumber} />
+        <Button
+          text="CODE ANFORDERN"
+          onPress={sendNumber}
+          disabled={phoneNumber.length < 10}
+          textColor="white"
+          backgroundColor="blue"
+        />
+      </ScrollView>
+    </Container>
   );
 };

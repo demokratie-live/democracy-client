@@ -9,7 +9,6 @@ const Container = styled.View`
   flex-direction: row;
   margin-horizontal: 9;
   max-width: 300;
-  flex: 1;
 `;
 
 const CountryNumber = styled.Text`
