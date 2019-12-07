@@ -90,7 +90,11 @@ export const Code: React.FC = () => {
       const phoneNumberHash = await sha256(phoneNumber || '');
       console.log({ newCode, newPhoneHash: phoneNumberHash });
       const res = await requestVerification({
-        variables: { code: newCode, newPhoneHash: phoneNumberHash },
+        variables: {
+          code: newCode,
+          newPhoneHash: phoneNumberHash,
+          newUser: true, // TODO ask user if he already used the App with same phone number
+        },
       });
 
       if (res.data && res.data.requestVerification.succeeded) {
