@@ -69,28 +69,22 @@ export const PhoneNumber: React.FC<Props> = () => {
             const res = await requestCode({
               variables: { newPhone: preparedPhoneNumber },
             });
+            console.log(res);
             if (res.data && !res.data.requestCode.succeeded) {
               // TODO show notification of reason why it failed
               showNotification(res.data.requestCode.reason || '');
             } else if (res.data) {
               // TODO: Navigate to Code Input if aut_code_expires is not yet expired
               // Contains a Date (String)
-              // Do not do the Nvaigation here - do it on the "openVerificationScreen"
               AsyncStorage.setItem(
-                'auth_code_expires',
+                'verification_code_expire_time',
                 res.data.requestCode.expireTime,
               );
-              // TODO go to code input Screen
+              AsyncStorage.setItem(
+                'verification_code_resend_time',
+                res.data.requestCode.resendTime,
+              );
               navigation.push('SmsCodeInput');
-              // this.props.navigator.push({
-              //   screen: 'democracy.SmsVerification.Code',
-              //   backButtonTitle: 'Zurück',
-              //   passProps: {
-              //     resendTime: new Date(res.data.requestCode.resendTime),
-              //     procedureId: this.props.procedureId,
-              //     onComplete: this.props.onComplete,
-              //   },
-              // });
             }
           },
         },
