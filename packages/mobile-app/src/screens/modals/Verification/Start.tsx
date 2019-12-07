@@ -6,7 +6,7 @@ import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Fold
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
 import { Linking, Alert } from 'react-native';
 
-import { Democracy } from '@democracy-deutschland/mobile-ui/src/assets/democracy';
+import DemocracyTextLogo from '@democracy-deutschland/mobile-ui/src/components/Icons/DemocracyTextLogo';
 import { Centered } from '@democracy-deutschland/mobile-ui/src/components/shared/Centered';
 import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -57,7 +57,7 @@ export const VerificationStart: React.FC = () => {
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic">
       <Centered>
-        <Democracy />
+        <DemocracyTextLogo width="274" height="48" color="#000" />
       </Centered>
       <Description
         text={
