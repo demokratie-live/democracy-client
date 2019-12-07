@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Introduction from '../screens/modals/Introduction';
 import Verification from './Verification';
 import { InitialStateContext } from '../context/InitialStates';
+import { VerificationProvider } from '../context/Verification';
 import DeviceInfo from 'react-native-device-info';
 import { InitialState } from '@react-navigation/core';
 import { SidebarNavigation } from './Sidebar';
@@ -55,7 +56,14 @@ const App = () => {
       <RootStack.Navigator mode="modal" headerMode="none">
         <RootStack.Screen name="Sidebar" component={SidebarNavigation} />
         <RootStack.Screen name="Introduction" component={Introduction} />
-        <RootStack.Screen name="Verification" component={Verification} />
+        <RootStack.Screen
+          name="Verification"
+          component={() => (
+            <VerificationProvider>
+              <Verification />
+            </VerificationProvider>
+          )}
+        />
       </RootStack.Navigator>
     </NavigationNativeContainer>
   );

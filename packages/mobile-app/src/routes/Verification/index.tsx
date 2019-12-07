@@ -39,6 +39,7 @@ const VerificationRootNavigation = () => {
         name="Start"
         component={VerificationStart}
         options={{
+          headerTitle: 'VERIFIZIEREN',
           headerLeft: () => {
             return (
               <Button
@@ -53,12 +54,18 @@ const VerificationRootNavigation = () => {
       <VerificationRootStack.Screen
         name="PhoneNumberInput"
         component={PhoneNumber}
-        options={{}}
+        options={{
+          headerTitle: 'VERIFIZIEREN',
+          headerBackTitle: 'Zurück',
+        }}
       />
       <VerificationRootStack.Screen
         name="SmsCodeInput"
         component={Code}
-        options={{}}
+        options={{
+          headerTitle: 'VERIFIZIEREN',
+          headerBackTitle: 'Zurück',
+        }}
       />
     </VerificationRootStack.Navigator>
   );
