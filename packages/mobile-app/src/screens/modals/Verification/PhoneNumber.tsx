@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components/native';
 import { Alert } from 'react-native';
 
@@ -12,10 +12,10 @@ import {
   RequestSmsCode,
   RequestSmsCodeVariables,
 } from './graphql/mutation/__generated__/RequestSmsCode';
-import AsyncStorage from '@react-native-community/async-storage';
 import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { VerificationRootStackParamList } from '../../../routes/Verification';
+import { VerificationContext } from '../../../context/Verification';
 
 const Container = styled.KeyboardAvoidingView.attrs(() => ({
   behavior: 'padding',
@@ -41,13 +41,21 @@ export const PhoneNumber: React.FC<Props> = () => {
   const navigation = useNavigation<
     StackNavigationProp<VerificationRootStackParamList>
   >();
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const {
+    phoneNumber,
+    setPhoneNumber,
+    setExpireTime,
+    setResendTime,
+  } = useContext(VerificationContext);
+  const [phoneNumberInputValue, setPhoneNumberInputValue] = useState(
+    phoneNumber.substr(3),
+  );
   const [requestCode] = useMutation<RequestSmsCode, RequestSmsCodeVariables>(
     REQUEST_CODE,
   );
 
   const sendNumber = () => {
-    let preparedPhoneNumber = phoneNumber;
+    let preparedPhoneNumber = phoneNumberInputValue;
     if (preparedPhoneNumber.charAt(0) === '0') {
       preparedPhoneNumber = preparedPhoneNumber.substr(1);
     }
@@ -65,25 +73,19 @@ export const PhoneNumber: React.FC<Props> = () => {
         {
           text: 'Ja',
           onPress: async () => {
-            AsyncStorage.setItem('auth_phone', preparedPhoneNumber);
+            setPhoneNumber(preparedPhoneNumber);
             const res = await requestCode({
               variables: { newPhone: preparedPhoneNumber },
             });
-            console.log(res);
             if (res.data && !res.data.requestCode.succeeded) {
-              // TODO show notification of reason why it failed
+              setExpireTime(res.data.requestCode.expireTime);
+              setResendTime(res.data.requestCode.resendTime);
               showNotification(res.data.requestCode.reason || '');
             } else if (res.data) {
               // TODO: Navigate to Code Input if aut_code_expires is not yet expired
               // Contains a Date (String)
-              AsyncStorage.setItem(
-                'verification_code_expire_time',
-                res.data.requestCode.expireTime,
-              );
-              AsyncStorage.setItem(
-                'verification_code_resend_time',
-                res.data.requestCode.resendTime,
-              );
+              setExpireTime(res.data.requestCode.expireTime);
+              setResendTime(res.data.requestCode.resendTime);
               navigation.push('SmsCodeInput');
             }
           },
@@ -100,11 +102,14 @@ export const PhoneNumber: React.FC<Props> = () => {
     <Container>
       <ScrollView>
         <Description text="Bitte gib Deine aktuelle Handynummer ein" />
-        <PhonenumberInput phoneNumber={phoneNumber} onChange={setPhoneNumber} />
+        <PhonenumberInput
+          phoneNumber={phoneNumberInputValue}
+          onChange={setPhoneNumberInputValue}
+        />
         <Button
           text="CODE ANFORDERN"
           onPress={sendNumber}
-          disabled={phoneNumber.length < 10}
+          disabled={phoneNumberInputValue.length < 10}
           textColor="white"
           backgroundColor="blue"
         />

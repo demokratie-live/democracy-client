@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components/native';
 import { Keyboard, Alert } from 'react-native';
 import { sha256 } from 'react-native-sha256';
@@ -6,7 +6,6 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 import Description from './Components/Description';
 import CodeInput from './Components/CodeInput';
-import { useEffect } from 'react';
 
 // GraphQL
 import REQUEST_CODE from './graphql/mutation/requestCode';
@@ -26,6 +25,7 @@ import { VerificationRootStackParamList } from '../../../routes/Verification';
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
 import { RootStackParamList } from '../../../routes';
 import Me from '../../../context/InitialStates/graphql/query/Me';
+import { VerificationContext } from '../../../context/Verification';
 
 const Container = styled.KeyboardAvoidingView.attrs(() => ({
   behavior: 'padding',
@@ -50,6 +50,9 @@ type DevPlaceholderNavigationProps = CompositeNavigationProp<
 >;
 
 export const Code: React.FC = () => {
+  const { countdown, setExpireTime, setResendTime, phoneNumber } = useContext(
+    VerificationContext,
+  );
   const navigation = useNavigation<DevPlaceholderNavigationProps>();
   const [requestCode] = useMutation<RequestSmsCode, RequestSmsCodeVariables>(
     REQUEST_CODE,
@@ -60,46 +63,12 @@ export const Code: React.FC = () => {
   >(REQUEST_VERIFICATION, {
     refetchQueries: [{ query: Me }],
   });
-  const [phoneNumber, setPhoneNumber] = useState('');
   const [code, setCode] = useState('');
-  const [countdown, setCountdown] = useState<number>();
-  const [resendTime, setResendTime] = useState<Date>(new Date());
-
-  // did Mount
-  useEffect(() => {
-    // Setup Countdown
-    AsyncStorage.getItem('verification_code_resend_time').then(time => {
-      const resendTimeDate = time ? new Date(time) : new Date();
-      setResendTime(resendTimeDate);
-    });
-
-    // Setup Phone Number
-    AsyncStorage.getItem('auth_phone').then(value => {
-      setPhoneNumber(value || '');
-    });
-  }, []);
-
-  useEffect(() => {
-    const countdownValue = Math.ceil(
-      (resendTime.getTime() - new Date().getTime()) / 1000,
-    );
-    if (countdownValue > 0) {
-      const countdownInterval = setInterval(() => {
-        setCountdown(
-          Math.ceil((resendTime.getTime() - new Date().getTime()) / 1000),
-        );
-      }, 1000);
-      return () => {
-        clearInterval(countdownInterval);
-      };
-    }
-  }, [resendTime]);
 
   const onChangeCode = async (newCode: string) => {
     setCode(newCode);
     if (newCode.length === 6) {
-      const phoneNumberHash = await sha256(phoneNumber || '');
-      console.log({ newCode, newPhoneHash: phoneNumberHash });
+      const phoneNumberHash = await sha256(phoneNumber);
       const res = await requestVerification({
         variables: {
           code: newCode,
@@ -149,15 +118,8 @@ export const Code: React.FC = () => {
               if (!succeeded) {
                 showNotification(reason || '');
               } else {
-                AsyncStorage.setItem(
-                  'verification_code_expire_time',
-                  expireTime,
-                );
-                AsyncStorage.setItem(
-                  'verification_code_resend_time',
-                  resendTime,
-                );
-                setResendTime(new Date(resendTime));
+                setExpireTime(expireTime);
+                setResendTime(resendTime);
               }
             }
           },
@@ -167,7 +129,7 @@ export const Code: React.FC = () => {
   };
 
   let buttonTitle = 'Code erneut senden';
-  if (countdown === undefined || countdown > 0) {
+  if (countdown > 0) {
     buttonTitle += ` (${countdown})`;
   }
 
