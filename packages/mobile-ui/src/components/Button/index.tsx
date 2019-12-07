@@ -33,8 +33,8 @@ interface TextProps {
 const ButtonText = styled.Text<TextProps>`
   text-align: center;
   color: ${({ color }) => TextColors[color]};
-  font-size: 20;
-  line-height: 24;
+  font-size: 17;
+  padding-horizontal: 11;
 `;
 
 export interface Props {
