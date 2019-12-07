@@ -8,7 +8,6 @@ import { InitialStateContext } from '../context/InitialStates';
 import DeviceInfo from 'react-native-device-info';
 import { InitialState } from '@react-navigation/core';
 import { SidebarNavigation } from './Sidebar';
-import { rootNavigationRef } from './Root';
 import { useEffect } from 'react';
 
 export type RootStackParamList = {
@@ -54,9 +53,7 @@ const App = () => {
   }
 
   return (
-    <NavigationNativeContainer
-      initialState={initialState}
-      ref={rootNavigationRef}>
+    <NavigationNativeContainer initialState={initialState}>
       <RootStack.Navigator mode="modal" headerMode="none">
         <RootStack.Screen
           name="Sidebar"

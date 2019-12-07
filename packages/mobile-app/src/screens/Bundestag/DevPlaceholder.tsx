@@ -2,7 +2,6 @@ import React, { FC, useContext } from 'react';
 import styled from 'styled-components/native';
 import { Text, Button } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import { rootNavigate } from '../../routes/Root';
 import { useNavigation, CompositeNavigationProp } from '@react-navigation/core';
 import { BundestagRootStackParamList } from '../../routes/Sidebar/Bundestag';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -49,7 +48,7 @@ export const DevPlaceholder: FC = () => {
       <Button title="Voting" onPress={() => navigation.navigate('Voting')} />
       <Button
         title="Go to Introduction"
-        onPress={() => rootNavigate('Introduction')}
+        onPress={() => navigation.navigate('Introduction')}
       />
       <Button
         title="Go to Verification"
