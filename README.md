@@ -6,6 +6,7 @@
 git clone https://github.com/demokratie-live/democracy-app
 cd democracy-app
 yarn install
+yarn pods (macOS only)
 ```
 
 ## Setup React-Native Environment
@@ -38,6 +39,7 @@ CMD+M and Change Bundle Location to 127.0.0.1:8088
 ```
 
 Start virtual Android Device:
+
 ```
 open Android Studio
 create Device with API 29 or higher(?)
@@ -45,6 +47,7 @@ start device
 ```
 
 Connect real Android Device:
+
 ```
 adb start-server
 enable usb debugging on the device
@@ -56,9 +59,6 @@ verify with `adb devices`
 
 ```
 cd packages/mobile-ui
-cd ios
-pod install
-cd ..
 yarn ios
 (ignore metro bundler errors)
 CMD+M and Configure Bundler Location to Host: 127.0.0.1 & Port: 8088
