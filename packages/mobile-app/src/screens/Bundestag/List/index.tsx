@@ -23,7 +23,7 @@ export const List = () => {
     StackNavigationProp<BundestagRootStackParamList>
   >();
 
-  const { loading, data, error } = useQuery<
+  const { loading, data, error, fetchMore, networkStatus } = useQuery<
     ProceduresList,
     ProceduresListVariables
   >(procedures, {
@@ -86,6 +86,32 @@ export const List = () => {
       data={data.procedures}
       renderItem={renderItem}
       keyExtractor={({ procedureId }) => procedureId}
+      refreshing={networkStatus === 4}
+      onEndReachedThreshold={0.5}
+      onEndReached={() => {
+        fetchMore({
+          variables: {
+            offset: data.procedures.length,
+          },
+          updateQuery: (prev, { fetchMoreResult }) => {
+            if (!fetchMoreResult) {
+              return prev;
+            }
+            const newProcedureList = [
+              ...prev.procedures,
+              ...fetchMoreResult.procedures,
+            ];
+
+            return Object.assign({}, prev, {
+              procedures: newProcedureList.filter(
+                (s1, pos, arr) =>
+                  arr.findIndex(s2 => s2.procedureId === s1.procedureId) ===
+                  pos,
+              ),
+            });
+          },
+        });
+      }}
     />
   );
 };
