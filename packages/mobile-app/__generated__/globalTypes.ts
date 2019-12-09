@@ -15,6 +15,13 @@ export enum ListType {
   TOP100 = "TOP100",
 }
 
+export enum VoteSelection {
+  ABSTINATION = "ABSTINATION",
+  NO = "NO",
+  NOTVOTED = "NOTVOTED",
+  YES = "YES",
+}
+
 export interface ProcedureFilter {
   subjectGroups?: (string | null)[] | null;
   status?: (string | null)[] | null;
