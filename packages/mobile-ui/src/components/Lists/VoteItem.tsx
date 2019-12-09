@@ -103,8 +103,8 @@ const VoteItem: React.FC<Props> = ({
       <SideWrapper>
         <VotesIndex votes={votes} voted={voted} />
         <ChartWrapper>
-          <PieChart data={communityVotes} size={20} />
           {governmentVotes && <PieChart data={governmentVotes} size={20} />}
+          <PieChart data={communityVotes} size={20} />
         </ChartWrapper>
         {voteDate && <VoteDate date={voteDate} endDate={endDate} />}
       </SideWrapper>
