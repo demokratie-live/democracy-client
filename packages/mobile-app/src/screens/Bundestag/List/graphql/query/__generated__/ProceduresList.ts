@@ -29,6 +29,7 @@ export interface ProceduresList_procedures {
   subjectGroups: string[] | null;
   voteDate: any | null;
   list: ListType | null;
+  type: string | null;
   activityIndex: ProceduresList_procedures_activityIndex;
   votedGovernment: boolean | null;
   voted: boolean;
