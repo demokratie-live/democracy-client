@@ -17,7 +17,7 @@ export default () => {
       <TabNavigation.Screen
         name="Sitzungswoche"
         component={List}
-        initialParams={{ list: ListType.IN_VOTE }}
+        initialParams={{ list: ListType.CONFERENCEWEEKS_PLANNED }}
       />
       <TabNavigation.Screen
         name="Vergangen"
@@ -27,7 +27,7 @@ export default () => {
       <TabNavigation.Screen
         name="Top 100"
         component={List}
-        initialParams={{ list: ListType.HOT }}
+        initialParams={{ list: ListType.TOP100 }}
       />
       <TabNavigation.Screen
         name="DEV"
