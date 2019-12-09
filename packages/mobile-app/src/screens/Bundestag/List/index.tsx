@@ -62,7 +62,6 @@ export const List = () => {
       votedGovernment,
     },
   }) => {
-    console.log({ voteResults, votedGovernment });
     // If no session top headings available use subject groups
     let subline = null;
     if (sessionTOPHeading) {
