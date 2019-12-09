@@ -15,6 +15,7 @@ import { useNavigation, useRoute, RouteProp } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
 import { TopTabkParamList } from '../../../routes/Sidebar/Bundestag/TabView';
+import { Slice } from '@democracy-deutschland/mobile-ui/src/components/shared/Charts/PieChart';
 
 type ProfileScreenRouteProp = RouteProp<TopTabkParamList, ListType>;
 
@@ -57,14 +58,42 @@ export const List = () => {
       voted,
       activityIndex: { activityIndex },
       type,
+      voteResults,
+      votedGovernment,
     },
   }) => {
+    console.log({ voteResults, votedGovernment });
     // If no session top headings available use subject groups
     let subline = null;
     if (sessionTOPHeading) {
       subline = sessionTOPHeading;
     } else if (subjectGroups) {
       subline = subjectGroups.join(', ');
+    }
+    let govSlices: Slice[] | undefined;
+    if (votedGovernment && voteResults) {
+      // TODO improve graphql types for this
+      const sumVotes =
+        (voteResults.yes || 0) +
+        (voteResults.abstination || 0) +
+        (voteResults.no || 0);
+      govSlices = [
+        {
+          color: '#99C93E',
+          percent: (voteResults.yes || 0) / sumVotes,
+          large: voteResults.governmentDecision === 'YES',
+        },
+        {
+          color: '#4CB0D8',
+          percent: (voteResults.abstination || 0) / sumVotes,
+          large: voteResults.governmentDecision === 'ABSTINATION',
+        },
+        {
+          color: '#D43194',
+          percent: (voteResults.no || 0) / sumVotes,
+          large: voteResults.governmentDecision === 'NO',
+        },
+      ];
     }
     return (
       <Row
@@ -80,6 +109,7 @@ export const List = () => {
           voteDate={voteDate}
           voted={voted}
           votes={activityIndex}
+          governmentVotes={govSlices}
         />
       </Row>
     );

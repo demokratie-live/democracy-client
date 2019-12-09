@@ -2,7 +2,7 @@
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
-import { ListType, ProcedureFilter } from "./../../../../../../../__generated__/globalTypes";
+import { ListType, ProcedureFilter, VoteSelection } from "./../../../../../../../__generated__/globalTypes";
 
 // ====================================================
 // GraphQL query operation: ProceduresList
@@ -18,6 +18,7 @@ export interface ProceduresList_procedures_voteResults {
   yes: number | null;
   abstination: number | null;
   no: number | null;
+  governmentDecision: VoteSelection | null;
 }
 
 export interface ProceduresList_procedures {
