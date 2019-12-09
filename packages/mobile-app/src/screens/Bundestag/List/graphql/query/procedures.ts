@@ -32,6 +32,7 @@ export const procedures = gql`
         yes
         abstination
         no
+        governmentDecision
       }
     }
   }
