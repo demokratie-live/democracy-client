@@ -22,6 +22,7 @@ export const procedures = gql`
       subjectGroups
       voteDate
       list
+      type
       activityIndex {
         activityIndex
       }
