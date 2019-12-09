@@ -55,6 +55,7 @@ export const List = () => {
       voteDate,
       voted,
       activityIndex: { activityIndex },
+      type,
     },
   }) => {
     // If no session top headings available use subject groups
@@ -67,7 +68,10 @@ export const List = () => {
     return (
       <Row
         onPress={() =>
-          navigation.navigate('Procedure', { procedureId, title })
+          navigation.navigate('Procedure', {
+            procedureId,
+            title: type || procedureId,
+          })
         }>
         <VoteItem
           title={title}
