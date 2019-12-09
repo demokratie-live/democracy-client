@@ -10,6 +10,7 @@ import {
 import { ListType } from '../../../../__generated__/globalTypes';
 import { VoteItem } from '@democracy-deutschland/mobile-ui/src/components/Lists/VoteItem';
 import { Row } from '@democracy-deutschland/mobile-ui/src/components/Lists/Row';
+import { ListLoading } from '@democracy-deutschland/mobile-ui/src/components/shared/ListLoading';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
@@ -23,7 +24,7 @@ export const List = () => {
     StackNavigationProp<BundestagRootStackParamList>
   >();
 
-  const { loading, data, error, fetchMore, networkStatus } = useQuery<
+  const { loading, data, error, fetchMore, networkStatus, refetch } = useQuery<
     ProceduresList,
     ProceduresListVariables
   >(procedures, {
@@ -87,10 +88,13 @@ export const List = () => {
   return (
     <FlatList<ProceduresList_procedures>
       testID="ListView"
+      removeClippedSubviews
       data={data.procedures}
       renderItem={renderItem}
       keyExtractor={({ procedureId }) => procedureId}
       refreshing={networkStatus === 4}
+      ListFooterComponent={() => (networkStatus === 3 ? <ListLoading /> : null)}
+      onRefresh={refetch}
       onEndReachedThreshold={0.5}
       onEndReached={() => {
         fetchMore({
