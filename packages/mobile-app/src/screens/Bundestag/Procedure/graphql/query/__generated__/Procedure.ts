@@ -58,7 +58,7 @@ export interface Procedure_procedure {
   subjectGroups: string[] | null;
   submissionDate: any | null;
   currentStatus: string | null;
-  currentStatusHistory: (string | null)[] | null;
+  currentStatusHistory: string[];
   importantDocuments: Procedure_procedure_importantDocuments[];
   voteResults: Procedure_procedure_voteResults | null;
 }
