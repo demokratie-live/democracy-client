@@ -10,7 +10,7 @@ import { MaterialTopTabNavigationProp } from '@react-navigation/material-top-tab
 import Document from '@democracy-deutschland/mobile-ui/src/components/Icons/Document';
 import { RootStackParamList } from '../../routes';
 import { SidebarParamList } from '../../routes/Sidebar';
-import { TopTabkParamList } from '../../routes/Sidebar/Bundestag/TabView';
+import { TopTabParamList } from '../../routes/Sidebar/Bundestag/TabView';
 import { InitialStateContext } from '../../context/InitialStates';
 
 const Container = styled.View`
@@ -20,7 +20,7 @@ const Container = styled.View`
 `;
 
 type DevPlaceholderNavigationProps = CompositeNavigationProp<
-  MaterialTopTabNavigationProp<TopTabkParamList, 'DEV'>,
+  MaterialTopTabNavigationProp<TopTabParamList, 'DEV'>,
   CompositeNavigationProp<
     StackNavigationProp<BundestagRootStackParamList, 'TabView'>,
     CompositeNavigationProp<
