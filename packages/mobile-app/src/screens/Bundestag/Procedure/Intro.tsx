@@ -1,6 +1,11 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import VoteDate from '@democracy-deutschland/mobile-ui/src/components/shared/VoteDate.tsx/VoteDate';
+import ShareIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Share';
+import { IntroButton } from './components/IntroButton';
+import { Share, Platform } from 'react-native';
+import { getShareLink } from '../../../lib/shareLink';
+import speakingurl from 'speakingurl';
 
 const Container = styled.View`
   background-color: #fff;
@@ -19,6 +24,12 @@ const IntroTitle = styled.Text`
   margin-right: 12;
 `;
 
+const Subline = styled.Text`
+  padding-top: 8;
+  font-size: 15;
+  color: #8f8e94;
+`;
+
 const IntroButtons = styled.View`
   flex-direction: row;
   justify-content: center;
@@ -33,12 +44,40 @@ const IntroBottom = styled.View`
 `;
 
 interface Props {
+  procedureId: string;
   title: string;
+  topHeading?: string | null;
+  type: string;
   date: Date;
   endDate: Date;
 }
 
-export const Intro: React.FC<Props> = ({ title, date, endDate }) => {
+export const Intro: React.FC<Props> = ({
+  title,
+  topHeading,
+  date,
+  endDate,
+  type,
+  procedureId,
+}) => {
+  const share = () => {
+    const url = `${getShareLink()}/${type.toLowerCase()}/${procedureId}/${speakingurl(
+      title,
+    )}`;
+    const message = Platform.OS === 'ios' ? title : `${title} – ${url}`;
+    Share.share(
+      {
+        message,
+        url,
+        title: 'Weil Deine Stimme Zählt!',
+      },
+      {
+        // Android only:
+        dialogTitle: title,
+      },
+    );
+  };
+
   return (
     <Container>
       <IntroTop>
@@ -52,14 +91,19 @@ export const Intro: React.FC<Props> = ({ title, date, endDate }) => {
           navigator={navigator}
         /> */}
       </IntroTop>
+      <Subline>{topHeading}</Subline>
       <IntroBottom>
         <IntroButtons>
           {/* <NotificationButton notify={notify} procedureId={procedureId} /> */}
-          {/* <IntroButton onPress={this.share}>
-            <IconCmp
-              name={Platform.OS === 'ios' ? 'ios-share-outline' : 'md-share'}
-            />
-          </IntroButton> */}
+          {
+            // TODO Notification icon if needed
+          }
+          <IntroButton onPress={share}>
+            <ShareIcon width={20} height={20} color="#000" />
+            {
+              // TODO Add iOS share icon
+            }
+          </IntroButton>
         </IntroButtons>
         {date && <VoteDate date={date} endDate={endDate} long />}
       </IntroBottom>

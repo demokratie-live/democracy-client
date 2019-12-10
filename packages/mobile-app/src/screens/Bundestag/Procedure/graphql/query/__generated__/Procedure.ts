@@ -47,6 +47,7 @@ export interface Procedure_procedure {
   _id: string;
   procedureId: string;
   title: string;
+  sessionTOPHeading: string | null;
   tags: (string | null)[] | null;
   abstract: string | null;
   voteDate: any | null;
