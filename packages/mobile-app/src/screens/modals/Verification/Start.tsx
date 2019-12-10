@@ -4,7 +4,6 @@ import styled from 'styled-components/native';
 import Description from './Components/Description';
 import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Folding';
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
-import { Linking, Alert } from 'react-native';
 
 import DemocracyTextLogo from '@democracy-deutschland/mobile-ui/src/components/Icons/DemocracyTextLogo';
 import { Centered } from '@democracy-deutschland/mobile-ui/src/components/shared/Centered';
@@ -12,6 +11,7 @@ import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { VerificationRootStackParamList } from '../../../routes/Verification';
 import { VerificationContext } from '../../../context/Verification';
+import { linking } from '../../../lib/linking';
 
 const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: {
@@ -33,21 +33,6 @@ const TextLink = styled.Text`
   color: rgb(68, 148, 211);
   text-decoration: underline;
 `;
-
-const linking = (url: string) => () => {
-  Linking.canOpenURL(url).then(supported => {
-    if (supported) {
-      Linking.openURL(url).catch(() => null);
-    } else {
-      Alert.alert(
-        'Nicht unterstützt',
-        'Diese Operation wird auf Deinem Gerät zurzeit nicht unterstützt!',
-        [{ text: 'OK' }],
-        { cancelable: false },
-      );
-    }
-  });
-};
 
 export const VerificationStart: React.FC = () => {
   const navigation = useNavigation<
