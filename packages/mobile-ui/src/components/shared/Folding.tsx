@@ -46,10 +46,11 @@ const Content = styled.View`
 
 interface Props {
   title: string;
+  opened?: boolean;
 }
 
-const Folding: React.FC<Props> = ({ title, children }) => {
-  const [open, setOpen] = useState(false);
+const Folding: React.FC<Props> = ({ title, opened = false, children }) => {
+  const [open, setOpen] = useState(opened);
 
   return (
     <Wrapper>

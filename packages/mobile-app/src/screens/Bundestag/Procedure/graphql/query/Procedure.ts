@@ -6,6 +6,7 @@ export default gql`
       _id
       procedureId
       title
+      sessionTOPHeading
       tags
       abstract
       voteDate
