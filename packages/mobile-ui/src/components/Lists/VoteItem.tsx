@@ -42,6 +42,7 @@ const Title = styled.Text.attrs(() => ({ numberOfLines: 3 }))`
   font-size: 17;
   color: #030303;
 `;
+
 const Subline = styled.Text`
   padding-top: 8;
   font-size: 15;
