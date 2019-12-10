@@ -3,11 +3,14 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { DevPlaceholder, List } from '../../../screens/Bundestag';
 import { ListType } from '../../../../__generated__/globalTypes';
 
-export type TopTabkParamList = {
-  [key: string]: { list: ListType };
+export type TopTabParamList = {
+  Sitzungswoche: { list: ListType };
+  Vergangen: { list: ListType };
+  'Top 100': { list: ListType };
+  DEV: { list: ListType };
 };
 
-const TabNavigation = createMaterialTopTabNavigator<TopTabkParamList>();
+const TabNavigation = createMaterialTopTabNavigator<TopTabParamList>();
 
 export default () => {
   return (
