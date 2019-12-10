@@ -10,10 +10,10 @@ import { ListType, VoteSelection } from "./../../../../../../../__generated__/gl
 
 export interface Procedure_procedure_importantDocuments {
   __typename: "Document";
-  editor: string | null;
-  type: string | null;
-  url: string | null;
-  number: string | null;
+  editor: string;
+  type: string;
+  url: string;
+  number: string;
 }
 
 export interface Procedure_procedure_voteResults_partyVotes_deviants {
@@ -59,7 +59,7 @@ export interface Procedure_procedure {
   submissionDate: any | null;
   currentStatus: string | null;
   currentStatusHistory: (string | null)[] | null;
-  importantDocuments: (Procedure_procedure_importantDocuments | null)[] | null;
+  importantDocuments: Procedure_procedure_importantDocuments[];
   voteResults: Procedure_procedure_voteResults | null;
 }
 

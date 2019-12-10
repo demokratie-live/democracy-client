@@ -14,6 +14,7 @@ import PROCEDURE from './graphql/query/Procedure';
 import { Intro } from './Intro';
 import styled from 'styled-components/native';
 import Details from './components/Details';
+import Documents from './components/Documents';
 
 const Container = styled.ScrollView`
   background-color: #fff;
@@ -30,7 +31,7 @@ type Props = {
 
 export const Procedure: FC<Props> = ({ route }) => {
   const navigation = useNavigation<
-    StackNavigationProp<BundestagRootStackParamList>
+    StackNavigationProp<BundestagRootStackParamList, 'TabView'>
   >();
   const { data, loading } = useQuery<ProcedureQueryObj, ProcedureVariables>(
     PROCEDURE,
@@ -58,6 +59,7 @@ export const Procedure: FC<Props> = ({ route }) => {
     submissionDate,
     abstract,
     currentStatus,
+    importantDocuments,
   } = data.procedure;
 
   return (
@@ -80,6 +82,9 @@ export const Procedure: FC<Props> = ({ route }) => {
           currentStatus={currentStatus}
           type={type}
         />
+      </Folding>
+      <Folding title="Dokumente">
+        <Documents documents={importantDocuments} />
       </Folding>
 
       {

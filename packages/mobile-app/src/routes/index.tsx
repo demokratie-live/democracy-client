@@ -10,12 +10,14 @@ import DeviceInfo from 'react-native-device-info';
 import { InitialState } from '@react-navigation/core';
 import { SidebarNavigation } from './Sidebar';
 import { useEffect } from 'react';
+import { PdfScreen } from '../screens/modals/Pdf/Pdf';
 
 export type RootStackParamList = {
   Sidebar: undefined;
   Home: {};
   Introduction: { done?: () => void; lastStartWithVersion?: string };
   Verification: {};
+  Pdf: { url: string };
 };
 
 const RootStack = createStackNavigator<RootStackParamList>();
@@ -53,9 +55,18 @@ const App = () => {
 
   return (
     <NavigationNativeContainer initialState={initialState}>
-      <RootStack.Navigator mode="modal" headerMode="none">
-        <RootStack.Screen name="Sidebar" component={SidebarNavigation} />
+      <RootStack.Navigator mode="modal">
+        <RootStack.Screen
+          name="Sidebar"
+          component={SidebarNavigation}
+          options={{ headerShown: false }}
+        />
         <RootStack.Screen name="Introduction" component={Introduction} />
+        <RootStack.Screen
+          name="Pdf"
+          component={PdfScreen}
+          options={{ headerShown: true }}
+        />
         <RootStack.Screen
           name="Verification"
           component={() => (

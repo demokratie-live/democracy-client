@@ -7,20 +7,22 @@ import {
   ProceduresListVariables,
   ProceduresList_procedures,
 } from './graphql/query/__generated__/ProceduresList';
-import { ListType } from '../../../../__generated__/globalTypes';
 import { VoteItem } from '@democracy-deutschland/mobile-ui/src/components/Lists/VoteItem';
 import { Row } from '@democracy-deutschland/mobile-ui/src/components/Lists/Row';
 import { ListLoading } from '@democracy-deutschland/mobile-ui/src/components/shared/ListLoading';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
-import { TopTabkParamList } from '../../../routes/Sidebar/Bundestag/TabView';
+import { TopTabParamList } from '../../../routes/Sidebar/Bundestag/TabView';
 import { Slice } from '@democracy-deutschland/mobile-ui/src/components/shared/Charts/PieChart';
 
-type ProfileScreenRouteProp = RouteProp<TopTabkParamList, ListType>;
+type ListScreenRouteProp = RouteProp<
+  TopTabParamList,
+  'DEV' | 'Sitzungswoche' | 'Top 100' | 'Vergangen'
+>;
 
 export const List = () => {
-  const route = useRoute<ProfileScreenRouteProp>();
+  const route = useRoute<ListScreenRouteProp>();
   const navigation = useNavigation<
     StackNavigationProp<BundestagRootStackParamList>
   >();
