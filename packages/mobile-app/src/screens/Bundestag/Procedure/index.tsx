@@ -15,6 +15,7 @@ import { Intro } from './Intro';
 import styled from 'styled-components/native';
 import Details from './components/Details';
 import Documents from './components/Documents';
+import { History } from './components/History';
 
 const Container = styled.ScrollView`
   background-color: #fff;
@@ -60,6 +61,7 @@ export const Procedure: FC<Props> = ({ route }) => {
     abstract,
     currentStatus,
     importantDocuments,
+    currentStatusHistory,
   } = data.procedure;
 
   return (
@@ -86,6 +88,14 @@ export const Procedure: FC<Props> = ({ route }) => {
       <Folding title="Dokumente">
         <Documents documents={importantDocuments} />
       </Folding>
+      {currentStatusHistory.length > 0 && (
+        <Folding title="Gesetzesstand">
+          <History
+            history={currentStatusHistory}
+            currentStatus={currentStatus}
+          />
+        </Folding>
+      )}
 
       {
         // TODO Remove source bottom from here

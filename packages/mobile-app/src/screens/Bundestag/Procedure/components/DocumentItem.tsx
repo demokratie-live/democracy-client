@@ -9,17 +9,27 @@ import { BundestagRootStackParamList } from '../../../../routes/Sidebar/Bundesta
 import { SidebarParamList } from '../../../../routes/Sidebar';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { RootStackParamList } from '../../../../routes';
+import DownloadIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Download';
+import { linking } from '../../../../lib/linking';
 
-const Wrapper = styled.TouchableOpacity`
+const Container = styled.View`
+  flex-direction: row;
+  padding-top: 13;
+`;
+
+const ViewerButton = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
-  padding-top: 13;
 `;
 
 const Text = styled.Text`
   padding-left: 14;
   font-size: 13;
   color: rgb(0, 118, 255);
+`;
+
+const DownloadButton = styled.TouchableOpacity`
+  margin-left: auto;
 `;
 
 type DevPlaceholderNavigationProps = CompositeNavigationProp<
@@ -51,9 +61,15 @@ export const DocumentItem: React.FC<Props> = ({
 }) => {
   const navigation = useNavigation<DevPlaceholderNavigationProps>();
   return (
-    <Wrapper onPress={() => navigation.navigate('Pdf', { url })}>
-      <DocumentIcon width={18} height={18} color="#000" />
-      <Text>{`${type} (${editor} ${number})`}</Text>
-    </Wrapper>
+    <Container>
+      <ViewerButton onPress={() => navigation.navigate('Pdf', { url })}>
+        <DocumentIcon width={18} height={18} color="#000" />
+        <Text>{`${type} (${editor} ${number})`}</Text>
+      </ViewerButton>
+
+      <DownloadButton onPress={linking(url)}>
+        <DownloadIcon width={18} height={18} color="red" />
+      </DownloadButton>
+    </Container>
   );
 };
