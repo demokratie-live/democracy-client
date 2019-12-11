@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, ListRenderItem, FlatList } from 'react-native';
+import { Text, ListRenderItem, SectionList } from 'react-native';
 import { useQuery } from '@apollo/react-hooks';
 import { procedures } from './graphql/query/procedures';
 import {
@@ -22,6 +22,11 @@ type ListScreenRouteProp = RouteProp<
   TopTabParamList,
   'DEV' | 'Sitzungswoche' | 'Top 100' | 'Vergangen'
 >;
+
+interface SegmentedData {
+  title: string;
+  data: ProceduresList_procedures[];
+}
 
 const Container = styled.View`
   flex: 1;
@@ -57,22 +62,26 @@ export const List = () => {
     return <Text>some error: No Data</Text>;
   }
 
-  let SEGMENT = '';
-
-  const renderSegment = ({
-    voteWeek,
-    voteYear,
-  }: {
-    voteWeek: number | null;
-    voteYear: number | null;
-  }) => {
-    const newSegment = `KW ${voteWeek}/${voteYear}`;
-    if (SEGMENT !== newSegment && route.params.list !== 'TOP100') {
-      SEGMENT = newSegment;
-      return <Segment text={SEGMENT} />;
-    }
-    return;
-  };
+  const segmentedData = data.procedures.reduce<SegmentedData[]>(
+    (prev, procedure) => {
+      const { voteWeek, voteYear } = procedure;
+      const segment = `KW ${voteWeek}/${voteYear}`;
+      const index = prev.findIndex(({ title }) => title === segment);
+      if (index !== -1) {
+        return Object.assign([...prev], {
+          [index]: { title: segment, data: [...prev[index].data, procedure] },
+        });
+      }
+      return [
+        ...prev,
+        {
+          title: segment,
+          data: [procedure],
+        },
+      ];
+    },
+    [],
+  );
 
   const renderItem: ListRenderItem<ProceduresList_procedures> = ({
     item: {
@@ -86,8 +95,6 @@ export const List = () => {
       voteResults,
       votedGovernment,
       communityVotes,
-      voteWeek,
-      voteYear,
     },
   }) => {
     // If no session top headings available use subject groups
@@ -143,34 +150,36 @@ export const List = () => {
       : [{ percent: 1, color: '#d8d8d8', large: true }];
 
     return (
-      <>
-        {renderSegment({ voteWeek, voteYear })}
-        <Row
-          onPress={() =>
-            navigation.navigate('Procedure', {
-              procedureId,
-              title: type || procedureId,
-            })
-          }>
-          <ListItem
-            title={title}
-            subline={subline}
-            voteDate={voteDate}
-            voted={voted}
-            votes={communityVotes ? communityVotes.total || 0 : 0}
-            governmentVotes={govSlices}
-            communityVotes={communityVoteData}
-          />
-        </Row>
-      </>
+      <Row
+        onPress={() =>
+          navigation.navigate('Procedure', {
+            procedureId,
+            title: type || procedureId,
+          })
+        }>
+        <ListItem
+          title={title}
+          subline={subline}
+          voteDate={voteDate}
+          voted={voted}
+          votes={communityVotes ? communityVotes.total || 0 : 0}
+          governmentVotes={govSlices}
+          communityVotes={communityVoteData}
+        />
+      </Row>
     );
   };
 
   return (
     <Container>
-      <FlatList<ProceduresList_procedures>
+      <SectionList<ProceduresList_procedures>
+        sections={segmentedData}
+        renderSectionHeader={({ section }) =>
+          route.params.list !== 'TOP100' ? (
+            <Segment text={section.title} />
+          ) : null
+        }
         testID="ListView"
-        data={data.procedures}
         renderItem={renderItem}
         keyExtractor={({ procedureId }) => procedureId}
         refreshing={networkStatus === 4}
@@ -198,7 +207,13 @@ export const List = () => {
                   ...fetchMoreResult.procedures,
                 ];
 
-                return { procedures: newProcedureList };
+                return Object.assign({}, prev, {
+                  procedures: newProcedureList.filter(
+                    (s1, pos, arr) =>
+                      arr.findIndex(s2 => s2.procedureId === s1.procedureId) ===
+                      pos,
+                  ),
+                });
               },
             });
         }}
