@@ -16,6 +16,7 @@ import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
 import { TopTabParamList } from '../../../routes/Sidebar/Bundestag/TabView';
 import { Slice } from '@democracy-deutschland/mobile-ui/src/components/shared/Charts/PieChart';
 import styled from 'styled-components/native';
+import { Segment } from './Components/Segment';
 
 type ListScreenRouteProp = RouteProp<
   TopTabParamList,
@@ -56,6 +57,23 @@ export const List = () => {
     return <Text>some error: No Data</Text>;
   }
 
+  let SEGMENT = '';
+
+  const renderSegment = ({
+    voteWeek,
+    voteYear,
+  }: {
+    voteWeek: number | null;
+    voteYear: number | null;
+  }) => {
+    const newSegment = `KW ${voteWeek}/${voteYear}`;
+    if (SEGMENT !== newSegment && route.params.list !== 'TOP100') {
+      SEGMENT = newSegment;
+      return <Segment text={SEGMENT} />;
+    }
+    return;
+  };
+
   const renderItem: ListRenderItem<ProceduresList_procedures> = ({
     item: {
       procedureId,
@@ -68,6 +86,8 @@ export const List = () => {
       voteResults,
       votedGovernment,
       communityVotes,
+      voteWeek,
+      voteYear,
     },
   }) => {
     // If no session top headings available use subject groups
@@ -123,23 +143,26 @@ export const List = () => {
       : [{ percent: 1, color: '#d8d8d8', large: true }];
 
     return (
-      <Row
-        onPress={() =>
-          navigation.navigate('Procedure', {
-            procedureId,
-            title: type || procedureId,
-          })
-        }>
-        <ListItem
-          title={title}
-          subline={subline}
-          voteDate={voteDate}
-          voted={voted}
-          votes={communityVotes ? communityVotes.total || 0 : 0}
-          governmentVotes={govSlices}
-          communityVotes={communityVoteData}
-        />
-      </Row>
+      <>
+        {renderSegment({ voteWeek, voteYear })}
+        <Row
+          onPress={() =>
+            navigation.navigate('Procedure', {
+              procedureId,
+              title: type || procedureId,
+            })
+          }>
+          <ListItem
+            title={title}
+            subline={subline}
+            voteDate={voteDate}
+            voted={voted}
+            votes={communityVotes ? communityVotes.total || 0 : 0}
+            governmentVotes={govSlices}
+            communityVotes={communityVoteData}
+          />
+        </Row>
+      </>
     );
   };
 
