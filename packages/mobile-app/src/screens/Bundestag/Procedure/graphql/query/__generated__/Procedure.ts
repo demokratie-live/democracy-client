@@ -16,6 +16,24 @@ export interface Procedure_procedure_importantDocuments {
   number: string;
 }
 
+export interface Procedure_procedure_communityVotes_constituencies {
+  __typename: "CommunityConstituencyVotes";
+  yes: number;
+  abstination: number;
+  no: number;
+  constituency: string;
+  total: number | null;
+}
+
+export interface Procedure_procedure_communityVotes {
+  __typename: "CommunityVotes";
+  yes: number | null;
+  abstination: number | null;
+  no: number | null;
+  total: number | null;
+  constituencies: (Procedure_procedure_communityVotes_constituencies | null)[] | null;
+}
+
 export interface Procedure_procedure_voteResults_partyVotes_deviants {
   __typename: "Deviants";
   yes: number | null;
@@ -60,6 +78,7 @@ export interface Procedure_procedure {
   currentStatus: string | null;
   currentStatusHistory: string[];
   importantDocuments: Procedure_procedure_importantDocuments[];
+  communityVotes: Procedure_procedure_communityVotes | null;
   voteResults: Procedure_procedure_voteResults | null;
 }
 
