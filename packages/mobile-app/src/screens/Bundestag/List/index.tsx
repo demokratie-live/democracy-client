@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, ListRenderItem, FlatList } from 'react-native';
 import { useQuery } from '@apollo/react-hooks';
 import { procedures } from './graphql/query/procedures';
@@ -33,7 +33,7 @@ export const List = () => {
   const navigation = useNavigation<
     StackNavigationProp<BundestagRootStackParamList>
   >();
-
+  const [hasMore, setHasMore] = useState(true);
   const { loading, data, error, fetchMore, networkStatus, refetch } = useQuery<
     ProceduresList,
     ProceduresListVariables
@@ -174,11 +174,12 @@ export const List = () => {
         renderItem={renderItem}
         keyExtractor={({ procedureId }) => procedureId}
         refreshing={networkStatus === 4}
-        ListFooterComponent={() => <ListLoading />}
+        ListFooterComponent={() => (hasMore ? <ListLoading /> : null)}
         onRefresh={refetch}
         onEndReachedThreshold={0.5}
         onEndReached={() => {
           !loading &&
+            hasMore &&
             fetchMore({
               variables: {
                 offset: data.procedures.length,
@@ -187,6 +188,11 @@ export const List = () => {
                 if (!fetchMoreResult) {
                   return prev;
                 }
+
+                if (fetchMoreResult.procedures.length === 0) {
+                  setHasMore(false);
+                }
+
                 const newProcedureList = [
                   ...prev.procedures,
                   ...fetchMoreResult.procedures,
