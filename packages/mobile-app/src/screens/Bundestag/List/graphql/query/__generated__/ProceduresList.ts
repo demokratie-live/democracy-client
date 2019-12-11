@@ -21,6 +21,14 @@ export interface ProceduresList_procedures_voteResults {
   governmentDecision: VoteSelection | null;
 }
 
+export interface ProceduresList_procedures_communityVotes {
+  __typename: "CommunityVotes";
+  yes: number | null;
+  abstination: number | null;
+  no: number | null;
+  total: number | null;
+}
+
 export interface ProceduresList_procedures {
   __typename: "Procedure";
   _id: string;
@@ -35,6 +43,7 @@ export interface ProceduresList_procedures {
   votedGovernment: boolean | null;
   voted: boolean;
   voteResults: ProceduresList_procedures_voteResults | null;
+  communityVotes: ProceduresList_procedures_communityVotes | null;
 }
 
 export interface ProceduresList {

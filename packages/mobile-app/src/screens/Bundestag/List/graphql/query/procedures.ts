@@ -34,6 +34,12 @@ export const procedures = gql`
         no
         governmentDecision
       }
+      communityVotes {
+        yes
+        abstination
+        no
+        total
+      }
     }
   }
 `;

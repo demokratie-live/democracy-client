@@ -30,7 +30,7 @@ const VotesIndex = styled(VotesIndexCmp)``;
 const ChartWrapper = styled.View`
   flex-direction: row;
   justify-content: flex-end;
-  min-width: 45;
+  /* min-width: 45; */
   padding-top: 18;
 `;
 
@@ -49,6 +49,10 @@ const Subline = styled.Text`
   color: #8f8e94;
 `;
 
+const PaddingRight = styled.View`
+  padding-right: 3;
+`;
+
 interface Props {
   title: string;
   subline?: string | null;
@@ -56,16 +60,16 @@ interface Props {
   votes: number;
   voteDate: Date;
   endDate?: Date;
-  communityVotes?: Slice[];
+  communityVotes: Slice[];
   governmentVotes?: Slice[];
 }
 
-const VoteItem: React.FC<Props> = ({
+const ListItem: React.FC<Props> = ({
   title,
   subline,
   voteDate,
   endDate,
-  communityVotes = [{ percent: 1, color: '#d8d8d8' }],
+  communityVotes,
   governmentVotes,
   // procedureId,
   // children,
@@ -104,7 +108,11 @@ const VoteItem: React.FC<Props> = ({
       <SideWrapper>
         <VotesIndex votes={votes} voted={voted} />
         <ChartWrapper>
-          {governmentVotes && <PieChart data={governmentVotes} size={20} />}
+          {governmentVotes && (
+            <PaddingRight>
+              <PieChart data={governmentVotes} size={20} />
+            </PaddingRight>
+          )}
           <PieChart data={communityVotes} size={20} />
         </ChartWrapper>
         {voteDate && <VoteDate date={voteDate} endDate={endDate} />}
@@ -113,4 +121,4 @@ const VoteItem: React.FC<Props> = ({
   );
 };
 
-export { VoteItem };
+export { ListItem };
