@@ -17,6 +17,7 @@ const ListItemWrapper = styled.View`
 const MainWrapper = styled.View`
   flex: 1;
   padding-right: 10;
+  padding-left: 10;
   justify-content: space-between;
 `;
 
