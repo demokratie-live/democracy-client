@@ -7,7 +7,7 @@ import {
   ProceduresListVariables,
   ProceduresList_procedures,
 } from './graphql/query/__generated__/ProceduresList';
-import { VoteItem } from '@democracy-deutschland/mobile-ui/src/components/Lists/VoteItem';
+import { ListItem } from '@democracy-deutschland/mobile-ui/src/components/Lists/ListItem';
 import { Row } from '@democracy-deutschland/mobile-ui/src/components/Lists/Row';
 import { ListLoading } from '@democracy-deutschland/mobile-ui/src/components/shared/ListLoading';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/core';
@@ -58,10 +58,10 @@ export const List = () => {
       subjectGroups,
       voteDate,
       voted,
-      activityIndex: { activityIndex },
       type,
       voteResults,
       votedGovernment,
+      communityVotes,
     },
   }) => {
     // If no session top headings available use subject groups
@@ -96,6 +96,26 @@ export const List = () => {
         },
       ];
     }
+
+    // TODO improve Graphql Types
+    const communityVoteData: Slice[] = communityVotes
+      ? [
+          {
+            percent: (communityVotes.yes || 0) / (communityVotes.total || 0),
+            color: voted ? '#16C063' : '#C7C7CC',
+          },
+          {
+            percent:
+              (communityVotes.abstination || 0) / (communityVotes.total || 0),
+            color: voted ? '#2882E4' : '#D8D8D8',
+          },
+          {
+            percent: (communityVotes.no || 0) / (communityVotes.total || 0),
+            color: voted ? '#EC3E31' : '#B0AFB7',
+          },
+        ]
+      : [{ percent: 1, color: '#d8d8d8', large: true }];
+
     return (
       <Row
         onPress={() =>
@@ -104,13 +124,14 @@ export const List = () => {
             title: type || procedureId,
           })
         }>
-        <VoteItem
+        <ListItem
           title={title}
           subline={subline}
           voteDate={voteDate}
           voted={voted}
-          votes={activityIndex}
+          votes={communityVotes ? communityVotes.total || 0 : 0}
           governmentVotes={govSlices}
+          communityVotes={communityVoteData}
         />
       </Row>
     );
@@ -119,7 +140,6 @@ export const List = () => {
   return (
     <FlatList<ProceduresList_procedures>
       testID="ListView"
-      removeClippedSubviews
       data={data.procedures}
       renderItem={renderItem}
       keyExtractor={({ procedureId }) => procedureId}

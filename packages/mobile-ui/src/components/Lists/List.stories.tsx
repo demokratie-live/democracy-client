@@ -6,7 +6,7 @@ import { storiesOf } from '@storybook/react-native';
 // import { action } from '@storybook/addon-actions';
 
 import { Row } from './Row';
-import { VoteItem } from './VoteItem';
+import { ListItem } from './ListItem';
 import { generateDates } from '../shared/VoteDate.tsx/Dates';
 import { Slice } from '../shared/Charts/PieChart';
 // import CenterView from '../../decorators/CenterView';
@@ -36,8 +36,8 @@ storiesOf('List', module)
           const communityVotesNo =
             Math.floor(Math.random() * (100 - communityVotesYes)) + 1;
           const large = Math.floor(Math.random() * 3);
-          const communityVotes: Slice[] | undefined = faker.random.boolean()
-            ? undefined
+          const communityVotes: Slice[] = faker.random.boolean()
+            ? [{ percent: 1, color: '#d8d8d8' }]
             : [
                 {
                   percent: communityVotesYes / 100,
@@ -64,7 +64,7 @@ storiesOf('List', module)
               onPress={() => {
                 Alert.alert(`Row ${i} Clicked 👌`);
               }}>
-              <VoteItem
+              <ListItem
                 communityVotes={communityVotes}
                 governmentVotes={governmentVotes}
                 title={faker.lorem.sentence(faker.random.number(30))}
