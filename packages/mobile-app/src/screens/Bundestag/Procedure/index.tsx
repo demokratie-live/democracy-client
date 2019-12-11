@@ -11,11 +11,12 @@ import {
   ProcedureVariables,
 } from './graphql/query/__generated__/Procedure';
 import PROCEDURE from './graphql/query/Procedure';
-import { Intro } from './Intro';
+import { Intro } from './components/Intro';
 import styled from 'styled-components/native';
 import Details from './components/Details';
 import Documents from './components/Documents';
 import { History } from './components/History';
+import { CommunityVoteResults } from './components/CommunityVoteResults';
 
 const Container = styled.ScrollView`
   background-color: #fff;
@@ -62,6 +63,7 @@ export const Procedure: FC<Props> = ({ route }) => {
     currentStatus,
     importantDocuments,
     currentStatusHistory,
+    communityVotes,
   } = data.procedure;
 
   return (
@@ -96,6 +98,8 @@ export const Procedure: FC<Props> = ({ route }) => {
           />
         </Folding>
       )}
+
+      {communityVotes && <CommunityVoteResults voteResults={communityVotes} />}
 
       {
         // TODO Remove source bottom from here
