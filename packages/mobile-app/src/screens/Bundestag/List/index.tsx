@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, FlatList, ListRenderItem } from 'react-native';
+import { Text, ListRenderItem, FlatList } from 'react-native';
 import { useQuery } from '@apollo/react-hooks';
 import { procedures } from './graphql/query/procedures';
 import {
@@ -15,11 +15,17 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
 import { TopTabParamList } from '../../../routes/Sidebar/Bundestag/TabView';
 import { Slice } from '@democracy-deutschland/mobile-ui/src/components/shared/Charts/PieChart';
+import styled from 'styled-components/native';
 
 type ListScreenRouteProp = RouteProp<
   TopTabParamList,
   'DEV' | 'Sitzungswoche' | 'Top 100' | 'Vergangen'
 >;
+
+const Container = styled.View`
+  flex: 1;
+  background-color: #fff;
+`;
 
 export const List = () => {
   const route = useRoute<ListScreenRouteProp>();
@@ -138,39 +144,43 @@ export const List = () => {
   };
 
   return (
-    <FlatList<ProceduresList_procedures>
-      testID="ListView"
-      data={data.procedures}
-      renderItem={renderItem}
-      keyExtractor={({ procedureId }) => procedureId}
-      refreshing={networkStatus === 4}
-      ListFooterComponent={() => (networkStatus === 3 ? <ListLoading /> : null)}
-      onRefresh={refetch}
-      onEndReachedThreshold={0.5}
-      onEndReached={() => {
-        fetchMore({
-          variables: {
-            offset: data.procedures.length,
-          },
-          updateQuery: (prev, { fetchMoreResult }) => {
-            if (!fetchMoreResult) {
-              return prev;
-            }
-            const newProcedureList = [
-              ...prev.procedures,
-              ...fetchMoreResult.procedures,
-            ];
+    <Container>
+      <FlatList<ProceduresList_procedures>
+        testID="ListView"
+        data={data.procedures}
+        renderItem={renderItem}
+        keyExtractor={({ procedureId }) => procedureId}
+        refreshing={networkStatus === 4}
+        ListFooterComponent={() =>
+          networkStatus === 3 ? <ListLoading /> : null
+        }
+        onRefresh={refetch}
+        onEndReachedThreshold={0.5}
+        onEndReached={() => {
+          fetchMore({
+            variables: {
+              offset: data.procedures.length,
+            },
+            updateQuery: (prev, { fetchMoreResult }) => {
+              if (!fetchMoreResult) {
+                return prev;
+              }
+              const newProcedureList = [
+                ...prev.procedures,
+                ...fetchMoreResult.procedures,
+              ];
 
-            return Object.assign({}, prev, {
-              procedures: newProcedureList.filter(
-                (s1, pos, arr) =>
-                  arr.findIndex(s2 => s2.procedureId === s1.procedureId) ===
-                  pos,
-              ),
-            });
-          },
-        });
-      }}
-    />
+              return Object.assign({}, prev, {
+                procedures: newProcedureList.filter(
+                  (s1, pos, arr) =>
+                    arr.findIndex(s2 => s2.procedureId === s1.procedureId) ===
+                    pos,
+                ),
+              });
+            },
+          });
+        }}
+      />
+    </Container>
   );
 };

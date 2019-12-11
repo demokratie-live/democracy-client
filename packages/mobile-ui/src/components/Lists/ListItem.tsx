@@ -53,7 +53,7 @@ const PaddingRight = styled.View`
   padding-right: 3;
 `;
 
-interface Props {
+export interface Props {
   title: string;
   subline?: string | null;
   voted: boolean;

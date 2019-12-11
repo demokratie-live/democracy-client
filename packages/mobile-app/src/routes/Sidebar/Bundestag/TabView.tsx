@@ -15,7 +15,15 @@ const TabNavigation = createMaterialTopTabNavigator<TopTabParamList>();
 export default () => {
   return (
     <TabNavigation.Navigator
-      tabBarOptions={{ scrollEnabled: false }}
+      tabBarOptions={{
+        scrollEnabled: false,
+        indicatorStyle: {
+          backgroundColor: '#fff',
+        },
+        style: {
+          backgroundColor: '#4494D3',
+        },
+      }}
       initialRouteName={'Sitzungswoche'}>
       <TabNavigation.Screen
         name="Sitzungswoche"
@@ -32,11 +40,13 @@ export default () => {
         component={List}
         initialParams={{ list: ListType.TOP100 }}
       />
-      <TabNavigation.Screen
-        name="DEV"
-        component={DevPlaceholder}
-        initialParams={{ list: ListType.PREPARATION }}
-      />
+      {__DEV__ && (
+        <TabNavigation.Screen
+          name="DEV"
+          component={DevPlaceholder}
+          initialParams={{ list: ListType.PREPARATION }}
+        />
+      )}
     </TabNavigation.Navigator>
   );
 };
