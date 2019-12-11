@@ -61,7 +61,11 @@ const App = () => {
           component={SidebarNavigation}
           options={{ headerShown: false }}
         />
-        <RootStack.Screen name="Introduction" component={Introduction} />
+        <RootStack.Screen
+          name="Introduction"
+          component={Introduction}
+          options={{ headerShown: false }}
+        />
         <RootStack.Screen
           name="Pdf"
           component={PdfScreen}

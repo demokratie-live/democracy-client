@@ -4,12 +4,13 @@ import {
   StackNavigationProp,
 } from '@react-navigation/stack';
 import { Filter, Search, Procedure, Voting } from '../../../screens/Bundestag';
-import { Button } from 'react-native';
 import TabView from './TabView';
 import { CompositeNavigationProp, useNavigation } from '@react-navigation/core';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { SidebarParamList } from '..';
 import { RootStackParamList } from '../..';
+import MenuIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Menu';
+import styled from 'styled-components/native';
 
 export type BundestagRootStackParamList = {
   TabView: undefined;
@@ -26,6 +27,10 @@ type BundestagNavigationProps = CompositeNavigationProp<
   StackNavigationProp<RootStackParamList>
 >;
 
+const MenuButton = styled.TouchableOpacity`
+  margin-left: 11;
+`;
+
 const BundestagRootNavigation = () => {
   const navigation = useNavigation<BundestagNavigationProps>();
   return (
@@ -34,8 +39,15 @@ const BundestagRootNavigation = () => {
         name="TabView"
         component={TabView}
         options={{
+          title: 'BUNDESTAG',
+          headerTintColor: '#fff',
+          headerStyle: {
+            backgroundColor: '#4494D3',
+          },
           headerLeft: () => (
-            <Button onPress={navigation.toggleDrawer} title="🍔" />
+            <MenuButton onPress={navigation.toggleDrawer}>
+              <MenuIcon width={18} height={18} color="#fff" />
+            </MenuButton>
           ),
         }}
       />
