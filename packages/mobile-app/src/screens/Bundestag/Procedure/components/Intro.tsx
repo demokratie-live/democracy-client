@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components/native';
 import VoteDate from '@democracy-deutschland/mobile-ui/src/components/shared/VoteDate.tsx/VoteDate';
 import ShareIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Share';
-import { IntroButton } from './components/IntroButton';
+import { IntroButton } from './IntroButton';
 import { Share, Platform } from 'react-native';
-import { getShareLink } from '../../../lib/shareLink';
+import { getShareLink } from '../../../../lib/shareLink';
 import speakingurl from 'speakingurl';
 
 const Container = styled.View`

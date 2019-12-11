@@ -24,6 +24,19 @@ export default gql`
         url
         number
       }
+      communityVotes {
+        yes
+        abstination
+        no
+        total
+        constituencies {
+          yes
+          abstination
+          no
+          constituency
+          total
+        }
+      }
       voteResults {
         yes
         abstination
