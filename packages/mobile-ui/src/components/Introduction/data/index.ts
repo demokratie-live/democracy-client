@@ -98,6 +98,8 @@ export const slidesData: ScreenData = {
     images: {
       center: require('../assets/screen.registrieren.png'),
     },
-    verify: () => {},
+    verify: () => {
+      console.log('press verify');
+    },
   },
 };
