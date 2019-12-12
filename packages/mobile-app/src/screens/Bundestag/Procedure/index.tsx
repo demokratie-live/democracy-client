@@ -6,6 +6,7 @@ import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
 import { FC } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Folding';
+import { ListLoading } from '@democracy-deutschland/mobile-ui/src/components/shared/ListLoading';
 import {
   Procedure as ProcedureQueryObj,
   ProcedureVariables,
@@ -45,7 +46,7 @@ export const Procedure: FC<Props> = ({ route }) => {
     },
   });
   if (loading) {
-    return <Text>loading…</Text>;
+    return <ListLoading />;
   }
   if (error) {
     return <Text>{JSON.stringify(error)}</Text>;
