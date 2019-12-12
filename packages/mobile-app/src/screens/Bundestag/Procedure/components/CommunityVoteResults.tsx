@@ -1,6 +1,6 @@
 import React from 'react';
 import { ActivityIndicator, Dimensions, Platform } from 'react-native';
-import Swiper from 'react-native-swiper';
+import Swiper from 'react-native-swiper'; // TODO Replace this library (it's not good maintained)
 import styled from 'styled-components/native';
 // Components
 import getConstituencySvgs from './svgs/constituencies';
@@ -60,7 +60,7 @@ interface Props {
 }
 
 export const CommunityVoteResults: React.FC<Props> = ({ voteResults }) => {
-  const myConstituency: string = '';
+  const myConstituency: string = ''; // TODO handle constituency from profile settings
   const renderCommuntiyResult = (
     comunnityResults: Procedure_procedure_communityVotes,
   ) => {
