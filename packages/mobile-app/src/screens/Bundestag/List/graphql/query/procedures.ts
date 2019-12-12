@@ -21,6 +21,7 @@ export const procedures = gql`
       sessionTOPHeading
       subjectGroups
       voteDate
+      voteEnd
       list
       type
       voteWeek
