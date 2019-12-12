@@ -17,6 +17,7 @@ import Details from './components/Details';
 import Documents from './components/Documents';
 import { History } from './components/History';
 import { CommunityVoteResults } from './components/CommunityVoteResults';
+import { GovernmentVoteResults } from './components/GovernmentVoteResults';
 
 const Container = styled.ScrollView`
   background-color: #fff;
@@ -35,16 +36,19 @@ export const Procedure: FC<Props> = ({ route }) => {
   const navigation = useNavigation<
     StackNavigationProp<BundestagRootStackParamList, 'TabView'>
   >();
-  const { data, loading } = useQuery<ProcedureQueryObj, ProcedureVariables>(
-    PROCEDURE,
-    {
-      variables: {
-        id: route.params.procedureId,
-      },
+  const { data, loading, error } = useQuery<
+    ProcedureQueryObj,
+    ProcedureVariables
+  >(PROCEDURE, {
+    variables: {
+      id: route.params.procedureId,
     },
-  );
+  });
   if (loading) {
     return <Text>loading…</Text>;
+  }
+  if (error) {
+    return <Text>{JSON.stringify(error)}</Text>;
   }
   if (!data) {
     return <Text>procedure not found</Text>;
@@ -64,6 +68,7 @@ export const Procedure: FC<Props> = ({ route }) => {
     importantDocuments,
     currentStatusHistory,
     communityVotes,
+    voteResults,
   } = data.procedure;
 
   return (
@@ -100,6 +105,14 @@ export const Procedure: FC<Props> = ({ route }) => {
       )}
 
       {communityVotes && <CommunityVoteResults voteResults={communityVotes} />}
+      {voteResults && (
+        <GovernmentVoteResults
+          key="government"
+          voteResults={voteResults}
+          procedureId={procedureId}
+          currentStatus={currentStatus}
+        />
+      )}
 
       {
         // TODO Remove source bottom from here
