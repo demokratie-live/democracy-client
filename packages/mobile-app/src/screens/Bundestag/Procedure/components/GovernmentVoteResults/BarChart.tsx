@@ -79,17 +79,17 @@ const BarChart: React.FC<Props> = ({ data, legendData }) => {
       const color = getPartyColor(party);
       chartData[0].values.push({
         label: party,
-        value: deviants.yes,
+        value: deviants.yes || 0,
         color,
       });
       chartData[1].values.push({
         label: party,
-        value: deviants.abstination,
+        value: deviants.abstination || 0,
         color,
       });
       chartData[2].values.push({
         label: party,
-        value: deviants.no,
+        value: deviants.no || 0,
         color,
       });
       chartData[3].values.push({
