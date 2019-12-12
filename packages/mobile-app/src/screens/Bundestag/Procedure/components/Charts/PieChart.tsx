@@ -7,10 +7,7 @@ const Wrapper = styled.View`
   width: 100%;
 `;
 
-const SvgStyled = styled(Svg)`
-  flex: 1;
-  aspect-ratio: 1;
-`;
+const SvgStyled = styled(Svg).attrs({})``;
 
 interface Props {
   data: {
