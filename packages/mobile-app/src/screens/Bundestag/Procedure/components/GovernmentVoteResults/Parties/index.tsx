@@ -10,8 +10,8 @@ const Text = styled.Text``;
 const Image = styled.Image``;
 
 interface Props {
-  party: string;
-  style: any;
+  party?: string | null;
+  style?: any;
 }
 
 class Party extends Component<Props> {
@@ -31,7 +31,7 @@ class Party extends Component<Props> {
           <Image
             width={150}
             height={59}
-            source={require('../../../assets/parties/AfD.png')}
+            source={require('./AfD.png')}
             {...restProps}
           />
         );
@@ -40,7 +40,7 @@ class Party extends Component<Props> {
           <Image
             width={150}
             height={56}
-            source={require('../../../assets/parties/DIE_LINKE.png')}
+            source={require('./DIE_LINKE.png')}
             {...restProps}
           />
         );
