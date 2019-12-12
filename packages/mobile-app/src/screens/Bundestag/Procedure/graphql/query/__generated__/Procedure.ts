@@ -36,10 +36,10 @@ export interface Procedure_procedure_communityVotes {
 
 export interface Procedure_procedure_voteResults_partyVotes_deviants {
   __typename: "Deviants";
-  yes: number;
-  abstination: number;
-  no: number;
-  notVoted: number;
+  yes: number | null;
+  abstination: number | null;
+  no: number | null;
+  notVoted: number | null;
 }
 
 export interface Procedure_procedure_voteResults_partyVotes {
@@ -51,10 +51,10 @@ export interface Procedure_procedure_voteResults_partyVotes {
 
 export interface Procedure_procedure_voteResults {
   __typename: "VoteResult";
-  yes: number;
-  abstination: number;
-  no: number;
-  notVoted: number;
+  yes: number | null;
+  abstination: number | null;
+  no: number | null;
+  notVoted: number | null;
   decisionText: string | null;
   namedVote: boolean | null;
   partyVotes: Procedure_procedure_voteResults_partyVotes[];

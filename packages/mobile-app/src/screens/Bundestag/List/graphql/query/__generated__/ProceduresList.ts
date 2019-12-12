@@ -15,9 +15,9 @@ export interface ProceduresList_procedures_activityIndex {
 
 export interface ProceduresList_procedures_voteResults {
   __typename: "VoteResult";
-  yes: number;
-  abstination: number;
-  no: number;
+  yes: number | null;
+  abstination: number | null;
+  no: number | null;
   governmentDecision: VoteSelection | null;
 }
 
