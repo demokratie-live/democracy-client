@@ -90,6 +90,7 @@ export const List = () => {
       sessionTOPHeading,
       subjectGroups,
       voteDate,
+      voteEnd,
       voted,
       type,
       voteResults,
@@ -161,6 +162,7 @@ export const List = () => {
           title={title}
           subline={subline}
           voteDate={voteDate}
+          endDate={voteEnd}
           voted={voted}
           votes={communityVotes ? communityVotes.total || 0 : 0}
           governmentVotes={govSlices}

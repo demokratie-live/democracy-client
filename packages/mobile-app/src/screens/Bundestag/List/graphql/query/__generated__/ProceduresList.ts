@@ -37,6 +37,7 @@ export interface ProceduresList_procedures {
   sessionTOPHeading: string | null;
   subjectGroups: string[] | null;
   voteDate: any | null;
+  voteEnd: any | null;
   list: ListType | null;
   type: string;
   voteWeek: number | null;
