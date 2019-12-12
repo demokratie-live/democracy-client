@@ -38,7 +38,7 @@ export interface ProceduresList_procedures {
   subjectGroups: string[] | null;
   voteDate: any | null;
   list: ListType | null;
-  type: string | null;
+  type: string;
   voteWeek: number | null;
   voteYear: number | null;
   activityIndex: ProceduresList_procedures_activityIndex;
