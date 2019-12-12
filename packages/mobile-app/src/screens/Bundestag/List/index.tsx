@@ -51,7 +51,7 @@ export const List = () => {
     },
   });
   if (loading) {
-    return <Text>…loading</Text>;
+    return <ListLoading />;
   }
 
   if (error) {
