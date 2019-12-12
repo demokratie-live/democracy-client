@@ -14,6 +14,7 @@ import { useState } from 'react';
 import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Folding';
 import PieChart from '../Charts/PieChart';
 import { Procedure_procedure_voteResults } from '../../graphql/query/__generated__/Procedure';
+import { PartyChartChartData } from './PartyChart/Component';
 
 export const { width, height } = Dimensions.get('window');
 
@@ -115,27 +116,27 @@ export const GovernmentVoteResults: React.FC<Props> = ({
 
   const renderGovernmentVoteDetails = () => {
     // const constituency = ''; // TODO Handle by constituency context
-    const votes =
-      voteResults.yes +
-      voteResults.no +
-      voteResults.notVoted +
-      voteResults.abstination;
+    const votes = // TODO improve server typesafety
+      (voteResults.yes || 0) +
+      (voteResults.no || 0) +
+      (voteResults.notVoted || 0) +
+      (voteResults.abstination || 0);
     const dataPieChart = [
       {
         label: 'Zustimmungen',
-        percent: voteResults.yes / votes,
+        percent: (voteResults.yes || 0) / votes,
         value: voteResults.yes,
         color: '#99C93E',
       },
       {
         label: 'Enthaltungen',
-        percent: voteResults.abstination / votes,
+        percent: (voteResults.abstination || 0) / votes,
         value: voteResults.abstination,
         color: '#4CB0D8',
       },
       {
         label: 'Ablehnungen',
-        percent: voteResults.no / votes,
+        percent: (voteResults.no || 0) / votes,
         value: voteResults.no,
         color: '#D43194',
       },
@@ -144,33 +145,39 @@ export const GovernmentVoteResults: React.FC<Props> = ({
     if (voteResults.namedVote) {
       dataPieChart.push({
         label: 'Abwesend',
-        percent: voteResults.notVoted / votes,
+        percent: (voteResults.notVoted || 0) / votes,
         value: voteResults.notVoted,
         color: '#B1B3B4',
       });
     }
-    const dataPartyChart = voteResults.partyVotes.map(({ party, deviants }) => {
-      const partyData = {
-        party: party === 'fraktionslos' ? 'Andere' : party,
-        values: [
-          { label: 'Zustimmungen', value: deviants.yes, color: '#99C93E' },
-          {
-            label: 'Enthaltungen',
-            value: deviants.abstination,
-            color: '#4CB0D8',
-          },
-          { label: 'Ablehnungen', value: deviants.no, color: '#D43194' },
-        ],
-      };
-      if (voteResults.namedVote) {
-        partyData.values.push({
-          label: 'Abwesend',
-          value: deviants.notVoted,
-          color: '#B1B3B4',
-        });
-      }
-      return partyData;
-    });
+    const dataPartyChart: PartyChartChartData[] = voteResults.partyVotes.map(
+      ({ party, deviants }) => {
+        const partyData: PartyChartChartData = {
+          party: party === 'fraktionslos' ? 'Andere' : party,
+          values: [
+            {
+              label: 'Zustimmungen',
+              value: deviants.yes || 0,
+              color: '#99C93E',
+            },
+            {
+              label: 'Enthaltungen',
+              value: deviants.abstination || 0,
+              color: '#4CB0D8',
+            },
+            { label: 'Ablehnungen', value: deviants.no || 0, color: '#D43194' },
+          ],
+        };
+        if (voteResults.namedVote) {
+          partyData.values.push({
+            label: 'Abwesend',
+            value: deviants.notVoted || 0,
+            color: '#B1B3B4',
+          });
+        }
+        return partyData;
+      },
+    );
     const partyColors = ['#D43194', '#4CB0D8', '#99C93E'];
     if (voteResults.namedVote) {
       partyColors.unshift('#B1B3B4');
