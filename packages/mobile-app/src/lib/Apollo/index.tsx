@@ -7,7 +7,17 @@ import { Platform } from 'react-native';
 import { ApolloLink } from 'apollo-link';
 import { authLinkMiddleware, authLinkAfterware } from './Auth';
 
-const cache = new InMemoryCache();
+const cache = new InMemoryCache({
+  dataIdFromObject: (o: any) => {
+    switch (o.__typename) {
+      case 'Procedure':
+        return o.procedureId;
+
+      default:
+        return o._id;
+    }
+  },
+});
 
 let graphQlUri = 'https://alpha.api.democracy-app.de';
 if (process.env.NODE_ENV === 'development') {
