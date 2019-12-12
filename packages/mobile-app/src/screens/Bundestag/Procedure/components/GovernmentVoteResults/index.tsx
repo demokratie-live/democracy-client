@@ -6,7 +6,7 @@ import styled from 'styled-components/native';
 // Components
 import BarChart from './BarChart';
 import PartyChart from './PartyChart';
-// import DeputyVoteData from './Deputy';
+import DeputyVoteData from './Deputy';
 
 // GraphQL
 import ChartLegend from '../Charts/ChartLegend';
@@ -80,10 +80,12 @@ interface Props {
 export const GovernmentVoteResults: React.FC<Props> = ({
   voteResults,
   currentStatus,
+  procedureId,
 }) => {
   const [pieChartWidth, setPieChartWidth] = useState(
     Math.min(Dimensions.get('window').width, Dimensions.get('window').height),
   );
+  const constituency = '103'; // TODO get by constituency context
 
   const onLayout = () => {
     const newPieChartWidth = Math.min(
@@ -204,16 +206,9 @@ export const GovernmentVoteResults: React.FC<Props> = ({
       <BarChart key="barChart" data={voteResults} legendData={dataPieChart} />,
     ];
 
-    // TODO add Deputy
-    // if (voteResults.namedVote && constituency) {
-    //   screens.push(
-    //     <DeputyVoteData
-    //       key="deputy"
-    //       procedureId={procedureId}
-    //       navigator={navigator}
-    //     />,
-    //   );
-    // }
+    if (voteResults.namedVote && constituency) {
+      screens.push(<DeputyVoteData key="deputy" procedureId={procedureId} />);
+    }
     if (voteResults.decisionText) {
       screens.push(
         <DecisionTextView key="decisionText">
