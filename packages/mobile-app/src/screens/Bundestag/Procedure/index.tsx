@@ -1,12 +1,12 @@
-import React from 'react';
-import { Text, Button } from 'react-native';
-import { useNavigation, RouteProp } from '@react-navigation/core';
-import { StackNavigationProp } from '@react-navigation/stack';
+import React, { useContext } from 'react';
+import { Text, Platform, Share } from 'react-native';
+import { RouteProp } from '@react-navigation/core';
 import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
 import { FC } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Folding';
 import { ListLoading } from '@democracy-deutschland/mobile-ui/src/components/shared/ListLoading';
+import speakingurl from 'speakingurl';
 import {
   Procedure as ProcedureQueryObj,
   ProcedureVariables,
@@ -19,6 +19,9 @@ import Documents from './components/Documents';
 import { History } from './components/History';
 import { CommunityVoteResults } from './components/CommunityVoteResults';
 import { GovernmentVoteResults } from './components/GovernmentVoteResults';
+import PrepareActions from './PrepareActions';
+import { InitialStateContext } from '../../../context/InitialStates';
+import { getShareLink } from '../../../lib/shareLink';
 
 const Container = styled.ScrollView`
   background-color: #fff;
@@ -34,9 +37,10 @@ type Props = {
 };
 
 export const Procedure: FC<Props> = ({ route }) => {
-  const navigation = useNavigation<
-    StackNavigationProp<BundestagRootStackParamList, 'TabView'>
-  >();
+  // const navigation = useNavigation<
+  //   StackNavigationProp<BundestagRootStackParamList, 'TabView'>
+  // >();
+  const { isVerified } = useContext(InitialStateContext);
   const { data, loading, error } = useQuery<
     ProcedureQueryObj,
     ProcedureVariables
@@ -70,7 +74,27 @@ export const Procedure: FC<Props> = ({ route }) => {
     currentStatusHistory,
     communityVotes,
     voteResults,
+    voted,
+    notify,
   } = data.procedure;
+
+  const share = () => {
+    const url = `${getShareLink()}/${type.toLowerCase()}/${procedureId}/${speakingurl(
+      title,
+    )}`;
+    const message = Platform.OS === 'ios' ? title : `${title} – ${url}`;
+    Share.share(
+      {
+        message,
+        url,
+        title: 'Weil Deine Stimme Zählt!',
+      },
+      {
+        // Android only:
+        dialogTitle: title,
+      },
+    );
+  };
 
   return (
     <Container>
@@ -114,15 +138,12 @@ export const Procedure: FC<Props> = ({ route }) => {
           currentStatus={currentStatus}
         />
       )}
-
-      {
-        // TODO Remove source bottom from here
-      }
-      <Text>Procedure Page</Text>
-      <Text>ID: {route.params.procedureId}</Text>
-      <Button
-        title="Go to Voting"
-        onPress={() => navigation.navigate('Voting')}
+      <PrepareActions
+        verified={isVerified}
+        type={type}
+        voted={voted}
+        share={share}
+        notify={!!notify}
       />
     </Container>
   );

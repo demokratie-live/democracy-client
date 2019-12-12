@@ -34,7 +34,13 @@ const MenuButton = styled.TouchableOpacity`
 const BundestagRootNavigation = () => {
   const navigation = useNavigation<BundestagNavigationProps>();
   return (
-    <BundestagRootStack.Navigator>
+    <BundestagRootStack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#4494d3',
+        },
+        headerTintColor: '#fff',
+      }}>
       <BundestagRootStack.Screen
         name="TabView"
         component={TabView}

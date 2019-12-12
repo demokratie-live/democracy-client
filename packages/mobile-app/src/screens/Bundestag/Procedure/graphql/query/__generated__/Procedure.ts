@@ -72,11 +72,12 @@ export interface Procedure_procedure {
   voteEnd: any | null;
   notify: boolean | null;
   list: ListType | null;
-  type: string | null;
+  type: string;
   subjectGroups: string[] | null;
   submissionDate: any | null;
   currentStatus: string | null;
   currentStatusHistory: string[];
+  voted: boolean;
   importantDocuments: Procedure_procedure_importantDocuments[];
   communityVotes: Procedure_procedure_communityVotes | null;
   voteResults: Procedure_procedure_voteResults | null;

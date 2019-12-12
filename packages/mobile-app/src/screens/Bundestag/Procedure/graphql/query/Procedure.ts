@@ -18,6 +18,8 @@ export default gql`
       submissionDate
       currentStatus
       currentStatusHistory
+      voted
+      notify
       importantDocuments {
         editor
         type
