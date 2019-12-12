@@ -44,12 +44,14 @@ const VoteResultCircle = styled.View<{ color: string }>`
   margin-right: 5;
 `;
 
+export interface ChartLegendData {
+  label: string;
+  value: number | null;
+  color: string;
+}
+
 interface Props {
-  data: {
-    label: string;
-    value: number | null;
-    color: string;
-  }[];
+  data: ChartLegendData[];
 }
 
 export const ChartLegend: React.FC<Props> = ({ data }) => {
