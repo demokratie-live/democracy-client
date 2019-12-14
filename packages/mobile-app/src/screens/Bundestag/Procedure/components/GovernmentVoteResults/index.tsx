@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Dimensions, Platform } from 'react-native';
+// eslint-disable-next-line import/default
 import Swiper from 'react-native-swiper';
 import styled from 'styled-components/native';
 
@@ -10,7 +11,7 @@ import DeputyVoteData from './Deputy';
 
 // GraphQL
 import ChartLegend from '../Charts/ChartLegend';
-import { useState } from 'react';
+
 import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Folding';
 import PieChart from '../Charts/PieChart';
 import { Procedure_procedure_voteResults } from '../../graphql/query/__generated__/Procedure';

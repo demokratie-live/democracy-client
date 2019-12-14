@@ -85,7 +85,6 @@ export const Pager: FC<Props> = props => {
   return (
     <>
       <ScrollView
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ref={scrollView as any}
         scrollEventThrottle={300}
         onLayout={onLayout}

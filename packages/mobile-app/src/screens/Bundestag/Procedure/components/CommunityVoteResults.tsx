@@ -1,5 +1,6 @@
 import React from 'react';
 import { ActivityIndicator, Dimensions, Platform } from 'react-native';
+// eslint-disable-next-line import/default
 import Swiper from 'react-native-swiper'; // TODO Replace this library (it's not good maintained)
 import styled from 'styled-components/native';
 // Components
@@ -60,7 +61,7 @@ interface Props {
 }
 
 export const CommunityVoteResults: React.FC<Props> = ({ voteResults }) => {
-  const myConstituency: string = ''; // TODO handle constituency from profile settings
+  const myConstituency = ''; // TODO handle constituency from profile settings
   const renderCommuntiyResult = (
     comunnityResults: Procedure_procedure_communityVotes,
   ) => {

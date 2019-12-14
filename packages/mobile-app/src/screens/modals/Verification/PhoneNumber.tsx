@@ -35,9 +35,7 @@ const ScrollView = styled.ScrollView.attrs(() => ({
   },
 }))``;
 
-interface Props {}
-
-export const PhoneNumber: React.FC<Props> = () => {
+export const PhoneNumber: React.FC = () => {
   const navigation = useNavigation<
     StackNavigationProp<VerificationRootStackParamList>
   >();
@@ -54,6 +52,10 @@ export const PhoneNumber: React.FC<Props> = () => {
     REQUEST_CODE,
   );
 
+  const showNotification = (message: string) => {
+    Alert.alert('Verifikationsfehler', message);
+  };
+
   const sendNumber = () => {
     let preparedPhoneNumber = phoneNumberInputValue;
     if (preparedPhoneNumber.charAt(0) === '0') {
@@ -67,7 +69,9 @@ export const PhoneNumber: React.FC<Props> = () => {
       [
         {
           text: 'Bearbeiten',
-          onPress: () => {},
+          onPress: () => {
+            // TODO Edit phone number
+          },
           style: 'cancel',
         },
         {
@@ -92,10 +96,6 @@ export const PhoneNumber: React.FC<Props> = () => {
         },
       ],
     );
-  };
-
-  const showNotification = (message: string) => {
-    Alert.alert('Verifikationsfehler', message);
   };
 
   return (

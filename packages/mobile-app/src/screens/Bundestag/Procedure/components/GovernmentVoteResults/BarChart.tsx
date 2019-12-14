@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 
 import BarChartComponent, { BarChartData } from './BarChart/Component';
 import ChartLegend, { ChartLegendData } from '../Charts/ChartLegend';
-import { useState } from 'react';
+
 import { Procedure_procedure_voteResults } from '../../graphql/query/__generated__/Procedure';
 
 const Wrapper = styled.View`
@@ -75,7 +75,7 @@ const BarChart: React.FC<Props> = ({ data, legendData }) => {
       },
     ];
 
-    let preparedData = data.partyVotes.reduce((prev, { party, deviants }) => {
+    const preparedData = data.partyVotes.reduce((prev, { party, deviants }) => {
       const color = getPartyColor(party);
       chartData[0].values.push({
         label: party,
