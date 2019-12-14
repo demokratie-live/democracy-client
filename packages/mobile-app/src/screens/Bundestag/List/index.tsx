@@ -199,6 +199,7 @@ export const List = () => {
         refreshing={networkStatus === 4}
         ListFooterComponent={() => (hasMore ? <ListLoading /> : null)}
         onRefresh={refetch}
+        onEndReachedThreshold={0.5}
         onEndReached={() => {
           !loading &&
             hasMore &&
