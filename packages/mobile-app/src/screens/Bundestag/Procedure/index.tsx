@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, FC } from 'react';
 import { Text, Platform, Share } from 'react-native';
 import { RouteProp } from '@react-navigation/core';
 import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
-import { FC } from 'react';
+
 import { useQuery } from '@apollo/react-hooks';
 import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Folding';
 import { ListLoading } from '@democracy-deutschland/mobile-ui/src/components/shared/ListLoading';

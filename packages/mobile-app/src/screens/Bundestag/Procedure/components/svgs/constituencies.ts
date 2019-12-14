@@ -1,8 +1,7 @@
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
 // @ts-ignore
 
-export default (key: string) => constituencies[key];
-
-const constituencies = {
+const constituencies: { [key: string]: any } = {
   '1': require('./constituencies/1.tsx'),
   '10': require('./constituencies/10.tsx'),
   '100': require('./constituencies/100.tsx'),
@@ -303,3 +302,5 @@ const constituencies = {
   '98': require('./constituencies/98.tsx'),
   '99': require('./constituencies/99.tsx'),
 };
+
+export default (key: string) => constituencies[key];

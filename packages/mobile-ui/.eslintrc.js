@@ -20,18 +20,8 @@ module.exports = {
     'plugin:jest/recommended',
     '@react-native-community',
   ],
-  plugins: ['react-hooks', 'detox'],
+  plugins: ['react-hooks', 'better-styled-components', 'detox'],
   rules: {
-    // TODO remove "react-native/no-inline-styles" and "react/self-closing-comp"
-    'react-native/no-inline-styles': 0,
-    'react/self-closing-comp': [
-      'error',
-      {
-        component: true,
-        html: true,
-      },
-    ],
-
     'react/jsx-filename-extension': [
       1,
       {
@@ -41,9 +31,16 @@ module.exports = {
     'react/jsx-fragments': [1, 'syntax'],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
-    'jsx-a11y/accessible-emoji': 0,
-    'react-native/no-raw-text': 0,
+
+    // My Config changes
+    // TODO check to enable it again
     '@typescript-eslint/explicit-function-return-type': 0,
+    '@typescript-eslint/camelcase': 0,
+    'react-native/no-raw-text': 0,
+    'import/no-named-as-default': 0,
+    '@typescript-eslint/no-explicit-any': 0,
+    'jsx-a11y/no-autofocus': 0,
+    'react-native/no-inline-styles': 0,
   },
   env: {
     jest: true,

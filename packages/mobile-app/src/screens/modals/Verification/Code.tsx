@@ -65,6 +65,10 @@ export const Code: React.FC = () => {
   });
   const [code, setCode] = useState('');
 
+  const showNotification = (message: string) => {
+    Alert.alert('Verifikationsfehler', message);
+  };
+
   const onChangeCode = async (newCode: string) => {
     setCode(newCode);
     if (newCode.length === 6) {
@@ -85,10 +89,6 @@ export const Code: React.FC = () => {
         showNotification(res.data.requestVerification.reason || '');
       }
     }
-  };
-
-  const showNotification = (message: string) => {
-    Alert.alert('Verifikationsfehler', message);
   };
 
   const sendNumber = async () => {
