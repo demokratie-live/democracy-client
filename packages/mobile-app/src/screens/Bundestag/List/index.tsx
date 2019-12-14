@@ -17,6 +17,7 @@ import { TopTabParamList } from '../../../routes/Sidebar/Bundestag/TabView';
 import { Slice } from '@democracy-deutschland/mobile-ui/src/components/shared/Charts/PieChart';
 import styled from 'styled-components/native';
 import { Segment } from './Components/Segment';
+import { ListType } from '../../../../__generated__/globalTypes';
 
 type ListScreenRouteProp = RouteProp<
   TopTabParamList,
@@ -50,6 +51,7 @@ export const List = () => {
       pageSize: 10,
     },
   });
+
   if (loading) {
     return <ListLoading />;
   }
@@ -60,6 +62,16 @@ export const List = () => {
 
   if (!data) {
     return <Text>some error: No Data</Text>;
+  }
+
+  if (
+    route.params.list === ListType.CONFERENCEWEEKS_PLANNED &&
+    data.procedures.length === 0
+  ) {
+    // TODO missing UI
+    return (
+      <Text>Noch keine daten für die nächste Sitzungswoche vorhanden</Text>
+    );
   }
 
   const segmentedData = data.procedures.reduce<SegmentedData[]>(
@@ -187,7 +199,6 @@ export const List = () => {
         refreshing={networkStatus === 4}
         ListFooterComponent={() => (hasMore ? <ListLoading /> : null)}
         onRefresh={refetch}
-        onEndReachedThreshold={0.5}
         onEndReached={() => {
           !loading &&
             hasMore &&
