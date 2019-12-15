@@ -24,7 +24,7 @@ type ListScreenRouteProp = RouteProp<
   'DEV' | 'Sitzungswoche' | 'Top 100' | 'Vergangen'
 >;
 
-interface SegmentedData {
+export interface SegmentedData {
   title: string;
   data: ProceduresList_procedures[];
 }

@@ -1,9 +1,12 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 
 import VoteButton from './components/VoteButton';
 import ActionButton from './components/ActionButton';
 import { Alert, Text } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
 
 // GraphQL
 // import client from '../../graphql/client';
@@ -107,12 +110,23 @@ interface Props {
   // active: boolean;
 }
 
-class PrepareActions extends PureComponent<Props> {
-  onComplete = () => {
-    // this.props.refetch();
-  };
+const PrepareActions: React.FC<Props> = ({
+  verified,
+  voted,
+  voteSelection,
+  // procedureObjId,
+  // procedureId,
+  type,
+  // list,
+  notify,
+  share,
+  // active,
+}) => {
+  const navigation = useNavigation<
+    StackNavigationProp<BundestagRootStackParamList, 'TabView'>
+  >();
 
-  showUnknownVoteNotification = () => {
+  const showUnknownVoteNotification = () => {
     Alert.alert(
       'Deine Stimme ist lokal verlorengegangen',
       'Für weitere Informationen schaue bitte ins FAQ',
@@ -120,140 +134,98 @@ class PrepareActions extends PureComponent<Props> {
     // TODO link to FAQ
   };
 
-  verify = () => {
+  const verify = () => {
     Alert.alert('go to verification');
     // TODO go to verification
   };
 
-  render() {
-    const {
-      verified,
-      voted,
-      voteSelection,
-      // procedureObjId,
-      // procedureId,
-      type,
-      // list,
-      notify,
-      share,
-      // active,
-    } = this.props;
-    return (
-      <Wrapper>
-        <SegmentWrapper>
-          <Title>{voted ? 'Abgestimmt' : 'Abstimmen'}</Title>
-          <TitleAddition>über {type}</TitleAddition>
-        </SegmentWrapper>
-        {!verified ? <VerificationTouch onPress={this.verify} /> : null}
-        <VoteWrapper>
-          {(!voted || (voted && voteSelection === 'YES')) && (
-            <VoteButtonWrapper>
-              <VoteButton
-                voted={voted}
-                selection="YES"
-                voteSelection={voteSelection}
-                onPress={() => {
-                  // TODO go to verification screen
-                  Alert.alert('go to verification screen');
-                  // navigator.showModal({
-                  //   screen: 'democracy.VoteVarification',
-                  //   title: 'Zur Wahlurne'.toUpperCase(),
-                  //   passProps: {
-                  //     selection: 'YES',
-                  //     procedureObjId,
-                  //     procedureId,
-                  //   },
-                  // });
-                }}
-              />
-              <VoteButtonLabel>
-                {!voted ? 'Zustimmen' : 'Zugestimmt'}
-              </VoteButtonLabel>
-            </VoteButtonWrapper>
-          )}
-          {(!voted || (voted && voteSelection === 'ABSTINATION')) && (
-            <VoteButtonWrapper>
-              <VoteButton
-                voted={voted}
-                selection="ABSTINATION"
-                voteSelection={voteSelection}
-                onPress={() => {
-                  // TODO go to verification screen
-                  Alert.alert('go to verification screen');
-                  // navigator.showModal({
-                  //   screen: 'democracy.VoteVarification',
-                  //   title: 'Zur Wahlurne'.toUpperCase(),
-                  //   passProps: {
-                  //     selection: 'ABSTINATION',
-                  //     procedureObjId,
-                  //     procedureId,
-                  //   },
-                  // });
-                }}
-              />
-              <VoteButtonLabel>Enthalten</VoteButtonLabel>
-            </VoteButtonWrapper>
-          )}
-          {(!voted || (voted && voteSelection === 'NO')) && (
-            <VoteButtonWrapper>
-              <VoteButton
-                voted={voted}
-                selection="NO"
-                voteSelection={voteSelection}
-                onPress={() => {
-                  // TODO go to verification screen
-                  Alert.alert('go to verification screen');
-                  // navigator.showModal({
-                  //   screen: 'democracy.VoteVarification',
-                  //   title: 'Zur Wahlurne'.toUpperCase(),
-                  //   passProps: {
-                  //     selection: 'NO',
-                  //     procedureObjId,
-                  //     procedureId,
-                  //   },
-                  // });
-                }}
-              />
-              <VoteButtonLabel>
-                {!voted ? 'Ablehnen' : 'Abgelehnt'}
-              </VoteButtonLabel>
-            </VoteButtonWrapper>
-          )}
+  return (
+    <Wrapper>
+      <SegmentWrapper>
+        <Title>{voted ? 'Abgestimmt' : 'Abstimmen'}</Title>
+        <TitleAddition>über {type}</TitleAddition>
+      </SegmentWrapper>
+      {!verified ? <VerificationTouch onPress={verify} /> : null}
+      <VoteWrapper>
+        {(!voted || (voted && voteSelection === 'YES')) && (
+          <VoteButtonWrapper>
+            <VoteButton
+              voted={voted}
+              selection="YES"
+              voteSelection={voteSelection}
+              onPress={() => {
+                navigation.navigate('Voting', { selection: 'YES' });
+              }}
+            />
+            <VoteButtonLabel>
+              {!voted ? 'Zustimmen' : 'Zugestimmt'}
+            </VoteButtonLabel>
+          </VoteButtonWrapper>
+        )}
+        {(!voted || (voted && voteSelection === 'ABSTINATION')) && (
+          <VoteButtonWrapper>
+            <VoteButton
+              voted={voted}
+              selection="ABSTINATION"
+              voteSelection={voteSelection}
+              onPress={() => {
+                navigation.navigate('Voting', {
+                  selection: 'ABSTINATION',
+                });
+              }}
+            />
+            <VoteButtonLabel>Enthalten</VoteButtonLabel>
+          </VoteButtonWrapper>
+        )}
+        {(!voted || (voted && voteSelection === 'NO')) && (
+          <VoteButtonWrapper>
+            <VoteButton
+              voted={voted}
+              selection="NO"
+              voteSelection={voteSelection}
+              onPress={() => {
+                navigation.navigate('Voting', { selection: 'NO' });
+              }}
+            />
+            <VoteButtonLabel>
+              {!voted ? 'Ablehnen' : 'Abgelehnt'}
+            </VoteButtonLabel>
+          </VoteButtonWrapper>
+        )}
 
-          {!voteSelection && voted && (
-            <VoteButtonWrapper>
-              <ActionButton
-                selection="UNKNOWN"
-                onPress={this.showUnknownVoteNotification}
-              />
-              <VoteButtonLabel>Abgestimmt</VoteButtonLabel>
-              <LockIconWrapper>
-                <Text>info icon</Text>
-              </LockIconWrapper>
-            </VoteButtonWrapper>
-          )}
-          {voted && (
-            <VoteButtonWrapper>
-              <ActionButton
-                selection="NOTIFY"
-                notify={notify}
-                onPress={() => Alert.alert('Notify')}
-              />
-              <VoteButtonLabel>
-                {notify ? 'Stumm schalten' : 'Benachrichtigen'}
-              </VoteButtonLabel>
-            </VoteButtonWrapper>
-          )}
-          {voted && (
-            <VoteButtonWrapper>
-              <ActionButton selection="SHARE" onPress={share} />
-              <VoteButtonLabel>Teilen</VoteButtonLabel>
-            </VoteButtonWrapper>
-          )}
-        </VoteWrapper>
-      </Wrapper>
-    );
-  }
-}
+        {!voteSelection && voted && (
+          <VoteButtonWrapper>
+            <ActionButton
+              selection="UNKNOWN"
+              onPress={showUnknownVoteNotification}
+            />
+            <VoteButtonLabel>Abgestimmt</VoteButtonLabel>
+            <LockIconWrapper>
+              <Text>info icon</Text>
+            </LockIconWrapper>
+          </VoteButtonWrapper>
+        )}
+        {voted && (
+          <VoteButtonWrapper>
+            <ActionButton
+              selection="NOTIFY"
+              notify={notify}
+              onPress={() => Alert.alert('Notify')}
+            />
+            <VoteButtonLabel>
+              {notify ? 'Stumm schalten' : 'Benachrichtigen'}
+            </VoteButtonLabel>
+          </VoteButtonWrapper>
+        )}
+        {voted && (
+          <VoteButtonWrapper>
+            <ActionButton selection="SHARE" onPress={share} />
+            <VoteButtonLabel>Teilen</VoteButtonLabel>
+          </VoteButtonWrapper>
+        )}
+      </VoteWrapper>
+    </Wrapper>
+  );
+};
 
 export default PrepareActions;
