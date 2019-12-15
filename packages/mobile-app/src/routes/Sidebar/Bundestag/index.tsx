@@ -3,7 +3,12 @@ import {
   createStackNavigator,
   StackNavigationProp,
 } from '@react-navigation/stack';
-import { Filter, Search, Procedure, Voting } from '../../../screens/Bundestag';
+import {
+  Filter,
+  Search,
+  Procedure,
+  VoteVerification,
+} from '../../../screens/Bundestag';
 import TabView from './TabView';
 import { CompositeNavigationProp, useNavigation } from '@react-navigation/core';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
@@ -15,7 +20,7 @@ import styled from 'styled-components/native';
 export type BundestagRootStackParamList = {
   TabView: undefined;
   Procedure: { procedureId: string; title: string };
-  Voting: undefined;
+  Voting: { selection: string };
   Filter: undefined;
   Search: undefined;
 };
@@ -64,7 +69,10 @@ const BundestagRootNavigation = () => {
       />
       <BundestagRootStack.Screen
         name="Voting"
-        component={Voting}
+        component={VoteVerification}
+        initialParams={{
+          selection: '',
+        }}
         options={
           {
             // gestureDirection: 'vertical',

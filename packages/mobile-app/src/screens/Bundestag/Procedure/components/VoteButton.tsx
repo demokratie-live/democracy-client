@@ -56,9 +56,9 @@ const VoteIconButton = styled.Image.attrs(() => ({
 
 interface Props {
   voteSelection?: string;
-  onPress: () => void;
+  onPress?: () => void;
   selection: string;
-  voted: boolean;
+  voted?: boolean;
   style?: any;
 }
 

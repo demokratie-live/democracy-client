@@ -13,7 +13,7 @@ const SvgStyled = styled(Svg).attrs({
 
 export interface PartyChartChartData {
   party: string;
-  // label: string;
+  // label?: string;
   values: PartyChartRowValues[];
 }
 
