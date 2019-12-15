@@ -86,7 +86,7 @@ export class VoteVerification extends PureComponent<Props> {
   };
 
   render() {
-    const { selection } = this.props.route.params;
+    const { selection, procedureId } = this.props.route.params;
     // Load constituency from context api
     const data = { constituency: { constituency: null }, loading: false };
     return (
@@ -110,7 +110,7 @@ export class VoteVerification extends PureComponent<Props> {
           </Fade>
         </WarnWrapper>
         <BalloutBoxWrapper>
-          <BallotBox selection={selection} />
+          <BallotBox selection={selection} procedureId={procedureId} />
         </BalloutBoxWrapper>
       </Wrapper>
     );
