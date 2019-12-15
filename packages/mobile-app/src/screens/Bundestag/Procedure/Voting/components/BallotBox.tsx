@@ -10,6 +10,10 @@ import {
 import styled from 'styled-components/native';
 
 import VoteButton from '../../components/VoteButton';
+import { useMutation } from '@apollo/react-hooks';
+import { VOTE } from './graphql/mutation/vote';
+import { Vote, VoteVariables } from './graphql/mutation/__generated__/vote';
+import { VoteSelection } from '../../../../../../__generated__/globalTypes';
 
 // import VOTE from '../../graphql/mutations/vote';
 // import VOTE_LOCAL from '../../graphql/mutations/local/vote';
@@ -64,10 +68,12 @@ const Line = styled.Image.attrs(() => ({
 }))``;
 
 interface Props {
-  selection: string;
+  selection: VoteSelection;
+  procedureId: string;
 }
 
-const BalloutBox: React.FC<Props> = ({ selection }) => {
+const BalloutBox: React.FC<Props> = ({ selection, procedureId }) => {
+  const [vote] = useMutation<Vote, VoteVariables>(VOTE);
   const [isDraggable, setIsDraggable] = useState(true);
   const pan = React.useRef(new Animated.ValueXY({ x: 0, y: 0 })).current;
 
@@ -116,11 +122,21 @@ const BalloutBox: React.FC<Props> = ({ selection }) => {
               setIsDraggable(false);
 
               // TODO remove delay after drop in zone
-              Alert.alert('send vote mutation');
-              // TODO run vote mutation here
-              // vote(selection).then(() => {
-              //   voteLocal(selection);
-              // });
+              vote({
+                variables: {
+                  constituency: '103',
+                  procedureId,
+                  selection,
+                },
+                // TODO refetch procedure detail page
+              })
+                .then(() => {
+                  Alert.alert('go back');
+                })
+                .catch(voteError => {
+                  console.log(voteError);
+                  Alert.alert(JSON.stringify(voteError.messages));
+                });
               // TODO navigate back
               // navigator.dismissAllModals({
               //   animationType: 'slide-down', // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
@@ -139,7 +155,7 @@ const BalloutBox: React.FC<Props> = ({ selection }) => {
           }
         },
       }),
-    [pan, previewAnimation, isDraggable],
+    [pan, isDraggable, vote, procedureId, selection, previewAnimation],
   );
 
   useEffect(() => {

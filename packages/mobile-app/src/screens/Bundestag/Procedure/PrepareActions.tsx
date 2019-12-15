@@ -7,6 +7,7 @@ import { Alert, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
+import { VoteSelection } from '../../../../__generated__/globalTypes';
 
 // GraphQL
 // import client from '../../graphql/client';
@@ -101,7 +102,7 @@ interface Props {
   voted: boolean;
   voteSelection?: string;
   // procedureObjId: string;
-  // procedureId: string;
+  procedureId: string;
   type: string;
   // refetch: () => void;
   // list: string;
@@ -115,7 +116,7 @@ const PrepareActions: React.FC<Props> = ({
   voted,
   voteSelection,
   // procedureObjId,
-  // procedureId,
+  procedureId,
   type,
   // list,
   notify,
@@ -154,7 +155,10 @@ const PrepareActions: React.FC<Props> = ({
               selection="YES"
               voteSelection={voteSelection}
               onPress={() => {
-                navigation.navigate('Voting', { selection: 'YES' });
+                navigation.navigate('Voting', {
+                  selection: VoteSelection.YES,
+                  procedureId,
+                });
               }}
             />
             <VoteButtonLabel>
@@ -170,7 +174,8 @@ const PrepareActions: React.FC<Props> = ({
               voteSelection={voteSelection}
               onPress={() => {
                 navigation.navigate('Voting', {
-                  selection: 'ABSTINATION',
+                  selection: VoteSelection.ABSTINATION,
+                  procedureId,
                 });
               }}
             />
@@ -184,7 +189,10 @@ const PrepareActions: React.FC<Props> = ({
               selection="NO"
               voteSelection={voteSelection}
               onPress={() => {
-                navigation.navigate('Voting', { selection: 'NO' });
+                navigation.navigate('Voting', {
+                  selection: VoteSelection.NO,
+                  procedureId,
+                });
               }}
             />
             <VoteButtonLabel>
