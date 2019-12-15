@@ -16,11 +16,12 @@ import { SidebarParamList } from '..';
 import { RootStackParamList } from '../..';
 import MenuIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Menu';
 import styled from 'styled-components/native';
+import { VoteSelection } from '../../../../__generated__/globalTypes';
 
 export type BundestagRootStackParamList = {
   TabView: undefined;
   Procedure: { procedureId: string; title: string };
-  Voting: { selection: string };
+  Voting: { selection: VoteSelection; procedureId: string };
   Filter: undefined;
   Search: undefined;
 };
@@ -70,9 +71,6 @@ const BundestagRootNavigation = () => {
       <BundestagRootStack.Screen
         name="Voting"
         component={VoteVerification}
-        initialParams={{
-          selection: '',
-        }}
         options={
           {
             // gestureDirection: 'vertical',
