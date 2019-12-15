@@ -144,6 +144,7 @@ export const Procedure: FC<Props> = ({ route }) => {
         voted={voted}
         share={share}
         notify={!!notify}
+        procedureId={procedureId}
       />
     </Container>
   );
