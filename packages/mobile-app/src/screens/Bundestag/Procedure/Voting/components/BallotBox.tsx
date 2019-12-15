@@ -112,19 +112,19 @@ const BalloutBox: React.FC<Props> = ({ selection }) => {
                   y: 0,
                 },
                 friction: 5,
-              }).start(() => {
-                // TODO remove delay after drop in zone
-                Alert.alert('send vote mutation');
-                // TODO run vote mutation here
-                // vote(selection).then(() => {
-                //   voteLocal(selection);
-                // });
-                // TODO navigate back
-                // navigator.dismissAllModals({
-                //   animationType: 'slide-down', // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
-                // });
-              });
+              }).start();
               setIsDraggable(false);
+
+              // TODO remove delay after drop in zone
+              Alert.alert('send vote mutation');
+              // TODO run vote mutation here
+              // vote(selection).then(() => {
+              //   voteLocal(selection);
+              // });
+              // TODO navigate back
+              // navigator.dismissAllModals({
+              //   animationType: 'slide-down', // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
+              // });
             } else {
               Animated.spring(pan, {
                 toValue: { x: 0, y: 0 },
