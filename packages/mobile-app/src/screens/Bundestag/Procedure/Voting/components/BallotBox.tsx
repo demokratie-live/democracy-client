@@ -14,6 +14,10 @@ import { useMutation } from '@apollo/react-hooks';
 import { VOTE } from './graphql/mutation/vote';
 import { Vote, VoteVariables } from './graphql/mutation/__generated__/vote';
 import { VoteSelection } from '../../../../../../__generated__/globalTypes';
+import { useNavigation } from '@react-navigation/core';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { BundestagRootStackParamList } from '../../../../../routes/Sidebar/Bundestag';
+import Procedure from '../../graphql/query/Procedure';
 
 // import VOTE from '../../graphql/mutations/vote';
 // import VOTE_LOCAL from '../../graphql/mutations/local/vote';
@@ -73,7 +77,19 @@ interface Props {
 }
 
 const BalloutBox: React.FC<Props> = ({ selection, procedureId }) => {
-  const [vote] = useMutation<Vote, VoteVariables>(VOTE);
+  const navigation = useNavigation<
+    StackNavigationProp<BundestagRootStackParamList, 'Voting'>
+  >();
+  const [vote] = useMutation<Vote, VoteVariables>(VOTE, {
+    refetchQueries: [
+      {
+        query: Procedure,
+        variables: {
+          id: procedureId,
+        },
+      },
+    ],
+  });
   const [isDraggable, setIsDraggable] = useState(true);
   const pan = React.useRef(new Animated.ValueXY({ x: 0, y: 0 })).current;
 
@@ -131,11 +147,11 @@ const BalloutBox: React.FC<Props> = ({ selection, procedureId }) => {
                 // TODO refetch procedure detail page
               })
                 .then(() => {
-                  Alert.alert('go back');
+                  navigation.goBack();
                 })
                 .catch(voteError => {
                   console.log(voteError);
-                  Alert.alert(JSON.stringify(voteError.messages));
+                  Alert.alert(JSON.stringify(voteError));
                 });
               // TODO navigate back
               // navigator.dismissAllModals({
@@ -155,7 +171,15 @@ const BalloutBox: React.FC<Props> = ({ selection, procedureId }) => {
           }
         },
       }),
-    [pan, isDraggable, vote, procedureId, selection, previewAnimation],
+    [
+      pan,
+      isDraggable,
+      vote,
+      procedureId,
+      selection,
+      previewAnimation,
+      navigation,
+    ],
   );
 
   useEffect(() => {
