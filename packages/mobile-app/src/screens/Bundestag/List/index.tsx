@@ -75,27 +75,38 @@ export const List = () => {
       <Text>Noch keine daten für die nächste Sitzungswoche vorhanden</Text>
     );
   }
+  let segmentedData: SegmentedData[];
 
-  const segmentedData = data.procedures.reduce<SegmentedData[]>(
-    (prev, procedure) => {
-      const { voteWeek, voteYear } = procedure;
-      const segment = `KW ${voteWeek}/${voteYear}`;
-      const index = prev.findIndex(({ title }) => title === segment);
-      if (index !== -1) {
-        return Object.assign([...prev], {
-          [index]: { title: segment, data: [...prev[index].data, procedure] },
-        });
-      }
-      return [
-        ...prev,
-        {
-          title: segment,
-          data: [procedure],
-        },
-      ];
-    },
-    [],
-  );
+  // Do not sort top 100 list
+  if (ListType.TOP100 === route.params.list) {
+    segmentedData = [
+      {
+        title: '',
+        data: data.procedures,
+      },
+    ];
+  } else {
+    segmentedData = data.procedures.reduce<SegmentedData[]>(
+      (prev, procedure) => {
+        const { voteWeek, voteYear } = procedure;
+        const segment = `KW ${voteWeek}/${voteYear}`;
+        const index = prev.findIndex(({ title }) => title === segment);
+        if (index !== -1) {
+          return Object.assign([...prev], {
+            [index]: { title: segment, data: [...prev[index].data, procedure] },
+          });
+        }
+        return [
+          ...prev,
+          {
+            title: segment,
+            data: [procedure],
+          },
+        ];
+      },
+      [],
+    );
+  }
 
   const renderItem: ListRenderItem<ProceduresList_procedures> = ({
     item: {
