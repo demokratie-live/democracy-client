@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Text, ListRenderItem, SectionList } from 'react-native';
 import { useQuery } from '@apollo/react-hooks';
 import { procedures } from './graphql/query/procedures';
@@ -18,6 +18,7 @@ import { Slice } from '@democracy-deutschland/mobile-ui/src/components/shared/Ch
 import styled from 'styled-components/native';
 import { Segment } from './Components/Segment';
 import { ListType } from '../../../../__generated__/globalTypes';
+import { LocalVotesContext } from '../../../context/LocalVotes';
 
 type ListScreenRouteProp = RouteProp<
   TopTabParamList,
@@ -35,6 +36,7 @@ const Container = styled.View`
 `;
 
 export const List = () => {
+  const { getLocalVoteSelection } = useContext(LocalVotesContext);
   const route = useRoute<ListScreenRouteProp>();
   const navigation = useNavigation<
     StackNavigationProp<BundestagRootStackParamList>
@@ -149,15 +151,18 @@ export const List = () => {
           {
             percent: (communityVotes.yes || 0) / (communityVotes.total || 0),
             color: voted ? '#16C063' : '#C7C7CC',
+            large: getLocalVoteSelection(procedureId) === 'YES',
           },
           {
             percent:
               (communityVotes.abstination || 0) / (communityVotes.total || 0),
             color: voted ? '#2882E4' : '#D8D8D8',
+            large: getLocalVoteSelection(procedureId) === 'ABSTINATION',
           },
           {
             percent: (communityVotes.no || 0) / (communityVotes.total || 0),
             color: voted ? '#EC3E31' : '#B0AFB7',
+            large: getLocalVoteSelection(procedureId) === 'NO',
           },
         ]
       : [{ percent: 1, color: '#d8d8d8', large: true }];

@@ -2,11 +2,11 @@
 import * as Keychain from 'react-native-keychain';
 import DeviceInfo from 'react-native-device-info';
 
-interface ChainEntry {
+export interface ChainEntry {
   procedureId: string;
-  selection: null | 'YES' | 'NO' | 'ABSTINATION';
+  selection: 'YES' | 'NO' | 'ABSTINATION';
   time: Date;
-  constituency: string;
+  constituency: string | null;
 }
 
 interface ChainEntryRaw {
@@ -23,6 +23,11 @@ interface Chain {
   d: ChainEntryRaw[];
   i?: any;
 }
+
+export type SetLocalVote = Pick<
+  ChainEntry,
+  'procedureId' | 'selection' | 'constituency'
+>;
 
 class VotesLocal {
   /*
@@ -214,7 +219,7 @@ class VotesLocal {
 
   // Convert a Data Object from the Chain to return Object
   private static convertFromKeychain = ({ i, s, t, c }: ChainEntryRaw) => {
-    let selection;
+    let selection: ChainEntry['selection'] | undefined;
     switch (s) {
       case 1:
         selection = 'YES';
@@ -226,8 +231,11 @@ class VotesLocal {
         selection = 'NO';
         break;
       default:
-        selection = null;
+        selection = undefined;
         break;
+    }
+    if (!selection) {
+      return;
     }
     return {
       procedureId: i,
@@ -280,10 +288,16 @@ class VotesLocal {
   };
 
   // Get all available VoteData
-  static getVotes = async () => {
+  static getVotes = async (): Promise<ChainEntry[]> => {
     const chain = await VotesLocal.readKeychain();
 
-    return chain.d.map(val => VotesLocal.convertFromKeychain(val));
+    return chain.d.reduce<ChainEntry[]>((prev, val) => {
+      const entry = VotesLocal.convertFromKeychain(val);
+      if (entry) {
+        return [...prev, entry];
+      }
+      return prev;
+    }, []);
   };
 
   // Write VoteData
@@ -291,7 +305,7 @@ class VotesLocal {
     procedureId,
     selection,
     constituency,
-  }: Pick<ChainEntry, 'procedureId' | 'selection' | 'constituency'>) => {
+  }: SetLocalVote) => {
     const chain = await VotesLocal.readKeychain();
 
     // Construct Chain Data Object

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components/native';
 
 import VoteButton from './components/VoteButton';
@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
 import { VoteSelection } from '../../../../__generated__/globalTypes';
+import { LocalVotesContext } from '../../../context/LocalVotes';
 
 // GraphQL
 // import client from '../../graphql/client';
@@ -100,7 +101,6 @@ const LockIconWrapper = styled.View`
 interface Props {
   verified: boolean;
   voted: boolean;
-  voteSelection?: string;
   // procedureObjId: string;
   procedureId: string;
   type: string;
@@ -114,7 +114,6 @@ interface Props {
 const PrepareActions: React.FC<Props> = ({
   verified,
   voted,
-  voteSelection,
   // procedureObjId,
   procedureId,
   type,
@@ -123,6 +122,7 @@ const PrepareActions: React.FC<Props> = ({
   share,
   // active,
 }) => {
+  const { getLocalVoteSelection } = useContext(LocalVotesContext);
   const navigation = useNavigation<
     StackNavigationProp<BundestagRootStackParamList, 'TabView'>
   >();
@@ -139,6 +139,8 @@ const PrepareActions: React.FC<Props> = ({
     Alert.alert('go to verification');
     // TODO go to verification
   };
+
+  const voteSelection = getLocalVoteSelection(procedureId);
 
   return (
     <Wrapper>
