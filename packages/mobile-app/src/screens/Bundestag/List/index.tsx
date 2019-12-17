@@ -156,24 +156,25 @@ export const List = () => {
       ];
     }
 
+    const localSelection = getLocalVoteSelection(procedureId);
     // TODO improve Graphql Types
     const communityVoteData: Slice[] = communityVotes
       ? [
           {
             percent: (communityVotes.yes || 0) / (communityVotes.total || 0),
             color: voted ? '#16C063' : '#C7C7CC',
-            large: getLocalVoteSelection(procedureId) === 'YES',
+            large: localSelection === 'YES',
           },
           {
             percent:
               (communityVotes.abstination || 0) / (communityVotes.total || 0),
             color: voted ? '#2882E4' : '#D8D8D8',
-            large: getLocalVoteSelection(procedureId) === 'ABSTINATION',
+            large: localSelection === 'ABSTINATION',
           },
           {
             percent: (communityVotes.no || 0) / (communityVotes.total || 0),
             color: voted ? '#EC3E31' : '#B0AFB7',
-            large: getLocalVoteSelection(procedureId) === 'NO',
+            large: localSelection === 'NO',
           },
         ]
       : [{ percent: 1, color: '#d8d8d8', large: true }];
