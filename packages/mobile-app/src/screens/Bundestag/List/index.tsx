@@ -193,6 +193,7 @@ export const List = () => {
     <Container>
       <SectionList<ProceduresList_procedures>
         sections={segmentedData}
+        stickySectionHeadersEnabled
         renderSectionHeader={({ section }) =>
           route.params.list !== 'TOP100' ? (
             <Segment text={section.title} />
