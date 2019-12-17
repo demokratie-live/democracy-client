@@ -21,7 +21,10 @@ import { VoteSelection } from '../../../../__generated__/globalTypes';
 export type BundestagRootStackParamList = {
   TabView: undefined;
   Procedure: { procedureId: string; title: string };
-  Voting: { selection: VoteSelection; procedureId: string };
+  Voting: {
+    selection: VoteSelection.YES | VoteSelection.ABSTINATION | VoteSelection.NO;
+    procedureId: string;
+  };
   Filter: undefined;
   Search: undefined;
 };

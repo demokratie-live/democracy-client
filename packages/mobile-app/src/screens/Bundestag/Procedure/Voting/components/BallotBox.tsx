@@ -1,4 +1,10 @@
-import React, { useState, useMemo, useEffect, useCallback } from 'react';
+import React, {
+  useState,
+  useMemo,
+  useEffect,
+  useCallback,
+  useContext,
+} from 'react';
 import {
   PanResponder,
   Animated,
@@ -18,6 +24,7 @@ import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { BundestagRootStackParamList } from '../../../../../routes/Sidebar/Bundestag';
 import Procedure from '../../graphql/query/Procedure';
+import { LocalVotesContext } from '../../../../../context/LocalVotes';
 
 // import VOTE from '../../graphql/mutations/vote';
 // import VOTE_LOCAL from '../../graphql/mutations/local/vote';
@@ -72,11 +79,12 @@ const Line = styled.Image.attrs(() => ({
 }))``;
 
 interface Props {
-  selection: VoteSelection;
+  selection: VoteSelection.YES | VoteSelection.ABSTINATION | VoteSelection.NO;
   procedureId: string;
 }
 
 const BalloutBox: React.FC<Props> = ({ selection, procedureId }) => {
+  const { setLocalVote } = useContext(LocalVotesContext);
   const navigation = useNavigation<
     StackNavigationProp<BundestagRootStackParamList, 'Voting'>
   >();
@@ -91,6 +99,9 @@ const BalloutBox: React.FC<Props> = ({ selection, procedureId }) => {
     ],
   });
   const [isDraggable, setIsDraggable] = useState(true);
+
+  const constituency = '103';
+
   const pan = React.useRef(new Animated.ValueXY({ x: 0, y: 0 })).current;
 
   const isDropArea = (gesture: PanResponderGestureState) =>
@@ -140,13 +151,18 @@ const BalloutBox: React.FC<Props> = ({ selection, procedureId }) => {
               // TODO remove delay after drop in zone
               vote({
                 variables: {
-                  constituency: '103',
+                  constituency,
                   procedureId,
                   selection,
                 },
                 // TODO refetch procedure detail page
               })
                 .then(() => {
+                  setLocalVote({
+                    procedureId,
+                    constituency,
+                    selection,
+                  });
                   navigation.goBack();
                 })
                 .catch(voteError => {
@@ -179,6 +195,7 @@ const BalloutBox: React.FC<Props> = ({ selection, procedureId }) => {
       selection,
       previewAnimation,
       navigation,
+      setLocalVote,
     ],
   );
 
