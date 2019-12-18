@@ -137,6 +137,10 @@ android {
         applicationId "de.democracydeutschland.app.refactor"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
+
+        // react-native-notifications
+        missingDimensionStrategy "RNNotifications.reactNativeVersion", "reactNative60" // See note below!
+        
         versionCode 102067
         versionName "1.2.3"
 
@@ -210,6 +214,10 @@ dependencies {
     androidTestImplementation('com.wix:detox:+') { transitive = true } 
     androidTestImplementation 'junit:junit:4.12'
 
+    // react-native-notifications
+    implementation project(':reactnativenotifications')
+    implementation 'com.google.firebase:firebase-core:16.0.0'
+
     if (enableHermes) {
         def hermesPath = "../../../../node_modules/hermes-engine/android/";
         debugImplementation files(hermesPath + "hermes-debug.aar")
@@ -218,6 +226,9 @@ dependencies {
         implementation jscFlavor
     }
 }
+
+// react-native-notifications
+apply plugin: 'com.google.gms.google-services'
 
 // Run this once to be able to run the application with BUCK
 // puts all compile dependencies into folder libs for BUCK to use

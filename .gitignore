@@ -4,3 +4,4 @@ yarn-error.log
 
 # Documentation
 .docz
+/packages/mobile-app/android/app/google-services.json
