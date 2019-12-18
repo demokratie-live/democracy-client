@@ -38,6 +38,7 @@ export const SidebarNavigation = () => {
       initialRouteName="Bundestag"
       unmountInactiveScreens={true}
       drawerContent={props => <Sidebar {...props} />}
+      hideStatusBar
       drawerContentOptions={{
         labelStyle: { color: '#fff' },
         activeTintColor: '#fff',
