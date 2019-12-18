@@ -114,8 +114,8 @@
         "type": "ios.simulator",
         "binaryPath": "ios/build/client/Build/Products/Debug-iphonesimulator/DEMOCRACY.app",
         "device": {
-          "type": "iPhone X",
-          "os": "iOS 12.0"
+          "type": "iPhone 11",
+          "os": "13.2.2"
         },
         "build": "xcodebuild -workspace ios/client.xcworkspace -configuration Debug -scheme client -derivedDataPath build/client"
       },
@@ -124,7 +124,7 @@
         "build": "cd android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug && cd ..",
         "type": "android.emulator",
         "device": {
-          "avdName": "Nexus_5X_8.0_x86"
+          "avdName": "Pixel_2_API_28"
         }
       },
       "android.emu.release": {
