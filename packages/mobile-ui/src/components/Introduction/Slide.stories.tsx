@@ -4,7 +4,6 @@ import { withKnobs, select } from '@storybook/addon-knobs';
 
 import { Slide } from './Slide';
 import { slidesData, Screen } from './data';
-import console = require('console');
 
 storiesOf('Instruction', module)
   .addDecorator(withKnobs)
