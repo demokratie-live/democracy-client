@@ -3,7 +3,8 @@ matrix:
     - language: swift
       os: osx
       osx_image: xcode11.1
-      if: branch = master AND commit_message !~ /(no-deploy)/ OR commit_message =~ /(do-deploy)/
+      if: ( branch = master AND commit_message !~ /(no-deploy)/ ) OR \
+        commit_message =~ /(do-deploy)/
       cache:
         yarn: true
         directories:
