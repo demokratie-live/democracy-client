@@ -4,7 +4,10 @@ import { Svg, SvgProps, Defs, Path, G, Mask, Use } from 'react-native-svg';
 const SvgFunnel = (props: SvgProps) => (
   <Svg width="1em" height="1em" viewBox="0 0 1024 1024" {...props}>
     <Defs>
-      <Path id="funnel_svg__path-1" d="M385 756V399L0 24h1024L657 399v602z" />
+      <Path
+        id="funnel_svg__path-1"
+        d="M394.426 738.055v-330.69L38 60h948L646.238 407.364V965z"
+      />
     </Defs>
     <G
       id="funnel_svg__Symbols"
@@ -18,6 +21,8 @@ const SvgFunnel = (props: SvgProps) => (
         </Mask>
         <Use
           id="funnel_svg__Path-3"
+          stroke={props.color}
+          strokeWidth={30}
           fill={props.color}
           fillRule="nonzero"
           xlinkHref="#funnel_svg__path-1"
