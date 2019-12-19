@@ -11,11 +11,9 @@ import { SearchContext } from '../../../context/Search';
 
 const Wrapper = styled.View`
   flex: 1;
-  height: 100;
   flex-direction: row;
   align-items: center;
-  padding-horizontal: 30;
-  background-color: #4494d3;
+  margin-right: 16;
 `;
 
 // const Icons = styled(Ionicons.Button).attrs(() => ({

@@ -21,7 +21,7 @@ import FilterEmptyIcon from '@democracy-deutschland/mobile-ui/src/components/Ico
 import styled from 'styled-components/native';
 import { VoteSelection } from '../../../../__generated__/globalTypes';
 import { SearchProvider } from '../../../context/Search';
-import { SearchHeader } from '../../../screens/Bundestag/Search/Header.android';
+import { SearchHeader } from '../../../screens/Bundestag/Search/Header';
 
 export type BundestagRootStackParamList = {
   TabView: undefined;
