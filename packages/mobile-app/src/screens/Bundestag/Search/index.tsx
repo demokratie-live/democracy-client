@@ -15,7 +15,10 @@ import { SEARCH_PROCEDURES } from './graphql/query/searchProcedures';
 import {
   SearchProcedures,
   SearchProceduresVariables,
+  SearchProcedures_searchProceduresAutocomplete_procedures,
 } from './graphql/query/__generated__/SearchProcedures';
+import { communityVoteData } from '../../../lib/helper/PieChartCommunityData';
+import { pieChartGovernmentData } from '../../../lib/helper/PieChartGovernmentData';
 
 // import searchProcedures from '../../graphql/queries/searchProcedures';
 // import mostSearched from '../../graphql/queries/mostSearched';
@@ -26,6 +29,19 @@ import {
 // import SEARCH_HISTORY_ADD from '../../graphql/mutations/local/searchHistoryAdd';
 
 // import preventNavStackDuplicate from '../../hocs/preventNavStackDuplicate';
+
+const isProcedureGuard = (
+  searchItem:
+    | string
+    | MostSearched_mostSearched
+    | SearchProcedures_searchProceduresAutocomplete_procedures,
+): searchItem is SearchProcedures_searchProceduresAutocomplete_procedures => {
+  return (
+    typeof searchItem !== 'string' &&
+    (searchItem as SearchProcedures_searchProceduresAutocomplete_procedures)
+      .procedureId !== undefined
+  );
+};
 
 const Wrapper = styled.View`
   flex: 1;
@@ -102,7 +118,10 @@ export const Search: React.FC = () => {
     item,
     section,
   }: {
-    item: string;
+    item:
+      | string
+      | SearchProcedures_searchProceduresAutocomplete_procedures
+      | MostSearched_mostSearched;
     section: string;
   }) => () => {
     if (section === 'Ergebnisse') {
@@ -112,7 +131,7 @@ export const Search: React.FC = () => {
       //   title: 'Abstimmung'.toUpperCase(),
       //   passProps: { ...item },
       // });
-    } else {
+    } else if (typeof item === 'string') {
       setTerm(item);
       // this.props.addToSearchHistory({
       //   variables: {
@@ -159,7 +178,9 @@ export const Search: React.FC = () => {
 
   return (
     <Wrapper>
-      <SectionList<any | MostSearched_mostSearched>
+      <SectionList<
+        string | SearchProcedures_searchProceduresAutocomplete_procedures
+      >
         keyboardShouldPersistTaps={'always'}
         sections={sectionData}
         renderSectionHeader={({ section: { title, data } }) =>
@@ -168,8 +189,15 @@ export const Search: React.FC = () => {
         renderItem={({ item, section: { title } }) => (
           <Row onPress={onItemClick({ item, section: title })}>
             <>
-              {title === 'Ergebnisse' && (
-                <ListItem {...item} date={item.voteDate} />
+              {title === 'Ergebnisse' && isProcedureGuard(item) && (
+                <ListItem
+                  {...item}
+                  votes={
+                    item.communityVotes ? item.communityVotes.total || 0 : 0
+                  }
+                  governmentVotes={pieChartGovernmentData(item)}
+                  communityVotes={communityVoteData(item)}
+                />
               )}
               {title === 'Zuletzt gesucht' && <ListText>{item}</ListText>}
               {title === 'Vorschläge' && <ListText>{item}</ListText>}
@@ -177,7 +205,7 @@ export const Search: React.FC = () => {
             </>
           </Row>
         )}
-        keyExtractor={item => (typeof item === 'string' ? item : item._id)}
+        keyExtractor={item => (!isProcedureGuard(item) ? item : item._id)}
         ListEmptyComponent={() => {
           if (term) {
             return (
