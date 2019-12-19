@@ -20,6 +20,8 @@ import SearchIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Le
 import FilterEmptyIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/FunnelEmpty';
 import styled from 'styled-components/native';
 import { VoteSelection } from '../../../../__generated__/globalTypes';
+import { SearchProvider } from '../../../context/Search';
+import { SearchHeader } from '../../../screens/Bundestag/Search/Header.android';
 
 export type BundestagRootStackParamList = {
   TabView: undefined;
@@ -51,57 +53,65 @@ const HaderRightWrapper = styled.View`
 const BundestagRootNavigation = () => {
   const navigation = useNavigation<BundestagNavigationProps>();
   return (
-    <BundestagRootStack.Navigator
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: '#4494d3',
-        },
-        headerTintColor: '#fff',
-      }}>
-      <BundestagRootStack.Screen
-        name="TabView"
-        component={TabView}
-        options={{
-          title: 'BUNDESTAG',
-          headerTintColor: '#fff',
+    <SearchProvider>
+      <BundestagRootStack.Navigator
+        screenOptions={{
           headerStyle: {
-            backgroundColor: '#4494D3',
+            backgroundColor: '#4494d3',
           },
-          headerLeft: () => (
-            <MenuButton onPress={navigation.toggleDrawer}>
-              <MenuIcon width={18} height={18} color="#fff" />
-            </MenuButton>
-          ),
-          headerRight: () => (
-            <HaderRightWrapper>
-              <MenuButton onPress={() => navigation.navigate('Filter')}>
-                {/* <FilterIcon width={18} height={18} color="#fff" /> */}
-                <FilterEmptyIcon width={18} height={18} color="#fff" />
+          headerTintColor: '#fff',
+        }}>
+        <BundestagRootStack.Screen
+          name="TabView"
+          component={TabView}
+          options={{
+            title: 'BUNDESTAG',
+            headerTintColor: '#fff',
+            headerStyle: {
+              backgroundColor: '#4494D3',
+            },
+            headerLeft: () => (
+              <MenuButton onPress={navigation.toggleDrawer}>
+                <MenuIcon width={18} height={18} color="#fff" />
               </MenuButton>
-              <MenuButton onPress={() => navigation.navigate('Search')}>
-                <SearchIcon width={18} height={18} color="#fff" />
-              </MenuButton>
-            </HaderRightWrapper>
-          ),
-        }}
-      />
-      <BundestagRootStack.Screen
-        name="Procedure"
-        component={Procedure}
-        options={({ route }) => ({ title: route.params.title })}
-      />
-      <BundestagRootStack.Screen
-        name="Voting"
-        component={VoteVerification}
-        options={
-          {
-            // gestureDirection: 'vertical',
+            ),
+            headerRight: () => (
+              <HaderRightWrapper>
+                <MenuButton onPress={() => navigation.navigate('Filter')}>
+                  {/* <FilterIcon width={18} height={18} color="#fff" /> */}
+                  <FilterEmptyIcon width={18} height={18} color="#fff" />
+                </MenuButton>
+                <MenuButton onPress={() => navigation.navigate('Search')}>
+                  <SearchIcon width={18} height={18} color="#fff" />
+                </MenuButton>
+              </HaderRightWrapper>
+            ),
+          }}
+        />
+        <BundestagRootStack.Screen
+          name="Procedure"
+          component={Procedure}
+          options={({ route }) => ({ title: route.params.title })}
+        />
+        <BundestagRootStack.Screen
+          name="Voting"
+          component={VoteVerification}
+          options={
+            {
+              // gestureDirection: 'vertical',
+            }
           }
-        }
-      />
-      <BundestagRootStack.Screen name="Filter" component={Filter} />
-      <BundestagRootStack.Screen name="Search" component={Search} />
-    </BundestagRootStack.Navigator>
+        />
+        <BundestagRootStack.Screen name="Filter" component={Filter} />
+        <BundestagRootStack.Screen
+          name="Search"
+          options={{
+            header: () => <SearchHeader />,
+          }}
+          component={() => <Search />}
+        />
+      </BundestagRootStack.Navigator>
+    </SearchProvider>
   );
 };
 
