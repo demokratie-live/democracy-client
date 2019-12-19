@@ -14,11 +14,12 @@ import { useNavigation, useRoute, RouteProp } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
 import { TopTabParamList } from '../../../routes/Sidebar/Bundestag/TabView';
-import { Slice } from '@democracy-deutschland/mobile-ui/src/components/shared/Charts/PieChart';
 import styled from 'styled-components/native';
 import { Segment } from './Components/Segment';
 import { ListType } from '../../../../__generated__/globalTypes';
 import { LocalVotesContext } from '../../../context/LocalVotes';
+import { communityVoteData } from '../../../lib/helper/PieChartCommunityData';
+import { pieChartGovernmentData } from '../../../lib/helper/PieChartGovernmentData';
 
 type ListScreenRouteProp = RouteProp<
   TopTabParamList,
@@ -130,54 +131,19 @@ export const List = () => {
     } else if (subjectGroups) {
       subline = subjectGroups.join(', ');
     }
-    let govSlices: Slice[] | undefined;
-    if (votedGovernment && voteResults) {
-      // TODO improve graphql types for this
-      const sumVotes =
-        (voteResults.yes || 0) +
-        (voteResults.abstination || 0) +
-        (voteResults.no || 0);
-      govSlices = [
-        {
-          color: '#99C93E',
-          percent: (voteResults.yes || 0) / sumVotes,
-          large: voteResults.governmentDecision === 'YES',
-        },
-        {
-          color: '#4CB0D8',
-          percent: (voteResults.abstination || 0) / sumVotes,
-          large: voteResults.governmentDecision === 'ABSTINATION',
-        },
-        {
-          color: '#D43194',
-          percent: (voteResults.no || 0) / sumVotes,
-          large: voteResults.governmentDecision === 'NO',
-        },
-      ];
-    }
+
+    const govSlices = pieChartGovernmentData({
+      voteResults,
+      votedGovernment,
+    });
 
     const localSelection = getLocalVoteSelection(procedureId);
     // TODO improve Graphql Types
-    const communityVoteData: Slice[] = communityVotes
-      ? [
-          {
-            percent: (communityVotes.yes || 0) / (communityVotes.total || 0),
-            color: voted ? '#16C063' : '#C7C7CC',
-            large: localSelection === 'YES',
-          },
-          {
-            percent:
-              (communityVotes.abstination || 0) / (communityVotes.total || 0),
-            color: voted ? '#2882E4' : '#D8D8D8',
-            large: localSelection === 'ABSTINATION',
-          },
-          {
-            percent: (communityVotes.no || 0) / (communityVotes.total || 0),
-            color: voted ? '#EC3E31' : '#B0AFB7',
-            large: localSelection === 'NO',
-          },
-        ]
-      : [{ percent: 1, color: '#d8d8d8', large: true }];
+    const communityVoteSlices = communityVoteData({
+      communityVotes,
+      localSelection,
+      voted,
+    });
 
     return (
       <Row
@@ -195,7 +161,7 @@ export const List = () => {
           voted={voted}
           votes={communityVotes ? communityVotes.total || 0 : 0}
           governmentVotes={govSlices}
-          communityVotes={communityVoteData}
+          communityVotes={communityVoteSlices}
         />
       </Row>
     );
