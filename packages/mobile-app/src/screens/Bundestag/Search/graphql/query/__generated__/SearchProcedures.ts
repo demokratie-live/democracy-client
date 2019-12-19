@@ -2,9 +2,27 @@
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
+import { VoteSelection } from "./../../../../../../../__generated__/globalTypes";
+
 // ====================================================
 // GraphQL query operation: SearchProcedures
 // ====================================================
+
+export interface SearchProcedures_searchProceduresAutocomplete_procedures_voteResults {
+  __typename: "VoteResult";
+  yes: number | null;
+  abstination: number | null;
+  no: number | null;
+  governmentDecision: VoteSelection | null;
+}
+
+export interface SearchProcedures_searchProceduresAutocomplete_procedures_communityVotes {
+  __typename: "CommunityVotes";
+  yes: number | null;
+  abstination: number | null;
+  no: number | null;
+  total: number | null;
+}
 
 export interface SearchProcedures_searchProceduresAutocomplete_procedures {
   __typename: "Procedure";
@@ -18,6 +36,8 @@ export interface SearchProcedures_searchProceduresAutocomplete_procedures {
   submissionDate: any | null;
   completed: boolean | null;
   voted: boolean;
+  voteResults: SearchProcedures_searchProceduresAutocomplete_procedures_voteResults | null;
+  communityVotes: SearchProcedures_searchProceduresAutocomplete_procedures_communityVotes | null;
 }
 
 export interface SearchProcedures_searchProceduresAutocomplete {

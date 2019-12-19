@@ -14,6 +14,18 @@ export const SEARCH_PROCEDURES = gql`
         submissionDate
         completed
         voted
+        voteResults {
+          yes
+          abstination
+          no
+          governmentDecision
+        }
+        communityVotes {
+          yes
+          abstination
+          no
+          total
+        }
       }
       autocomplete
     }
