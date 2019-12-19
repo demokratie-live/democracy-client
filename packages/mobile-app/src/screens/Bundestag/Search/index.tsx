@@ -1,0 +1,195 @@
+import React, { useContext, useEffect } from 'react';
+import styled from 'styled-components/native';
+import { SectionList, Alert } from 'react-native';
+import { SearchContext } from '../../../context/Search';
+import { Segment } from '../List/Components/Segment';
+import { Row } from '@democracy-deutschland/mobile-ui/src/components/Lists/Row';
+import { ListItem } from '@democracy-deutschland/mobile-ui/src/components/Lists/ListItem';
+import { useQuery, useLazyQuery } from '@apollo/react-hooks';
+import { MOST_SEARCHED } from './graphql/query/mostSearched';
+import {
+  MostSearched,
+  MostSearched_mostSearched,
+} from './graphql/query/__generated__/MostSearched';
+import { SEARCH_PROCEDURES } from './graphql/query/searchProcedures';
+import {
+  SearchProcedures,
+  SearchProceduresVariables,
+} from './graphql/query/__generated__/SearchProcedures';
+
+// import searchProcedures from '../../graphql/queries/searchProcedures';
+// import mostSearched from '../../graphql/queries/mostSearched';
+// import searchTerm from '../../graphql/queries/local/searchTerm';
+// import SEARCH_HISTORY from '../../graphql/queries/local/history';
+// import finishSearch from '../../graphql/mutations/finishSearch';
+// import changeSearchTerm from '../../graphql/mutations/local/changeSearchTerm';
+// import SEARCH_HISTORY_ADD from '../../graphql/mutations/local/searchHistoryAdd';
+
+// import preventNavStackDuplicate from '../../hocs/preventNavStackDuplicate';
+
+const Wrapper = styled.View`
+  flex: 1;
+  background-color: #fff;
+`;
+
+const ListText = styled.Text`
+  font-size: 18;
+  color: grey;
+  padding-left: 8;
+`;
+
+const Text = styled.Text`
+  font-size: 18;
+  color: grey;
+`;
+
+const ActivityIndicator = styled.ActivityIndicator.attrs(() => ({
+  size: 'large',
+}))``;
+
+const LoadingWrapper = styled.View`
+  flex: 1;
+  background-color: #ffffff;
+  padding-top: 18;
+`;
+
+const NoResultsWrapper = styled.View`
+  flex: 1;
+  padding-top: 18;
+  align-items: center;
+`;
+
+const NoResultsImage = styled.Image.attrs(() => ({
+  source: require('./assets/search_no_results.png'),
+  opacity: 0.2,
+}))`
+  margin-top: 18;
+`;
+
+export const Search: React.FC = () => {
+  const { setTerm, term, history } = useContext(SearchContext);
+  const { data: mostSearchedTerms, loading: loadingMostSearched } = useQuery<
+    MostSearched
+  >(MOST_SEARCHED);
+  const [
+    executeSearch,
+    { data: searchData, loading: loadingSearchProcedures, error: searchError },
+  ] = useLazyQuery<SearchProcedures, SearchProceduresVariables>(
+    SEARCH_PROCEDURES,
+    {
+      variables: {
+        term,
+      },
+    },
+  );
+
+  useEffect(() => {
+    if (term.length > 0) {
+      executeSearch();
+    }
+  }, [term, executeSearch]);
+
+  // TODO handle errors
+  if (searchError) {
+    Alert.alert(JSON.stringify(searchError));
+  }
+
+  // TODO loading most searched ters
+  const loading =
+    (loadingMostSearched && history.length === 0) || loadingSearchProcedures;
+
+  const onItemClick = ({
+    item,
+    section,
+  }: {
+    item: string;
+    section: string;
+  }) => () => {
+    if (section === 'Ergebnisse') {
+      Alert.alert('navigate to procedure');
+      // this.props.navigateTo({
+      //   screen: 'democracy.Detail',
+      //   title: 'Abstimmung'.toUpperCase(),
+      //   passProps: { ...item },
+      // });
+    } else {
+      setTerm(item);
+      // this.props.addToSearchHistory({
+      //   variables: {
+      //     term: item,
+      //   },
+      // });
+    }
+  };
+
+  const handleSearchResults = ({
+    searchProceduresAutocomplete: { procedures, autocomplete },
+  }: SearchProcedures) => {
+    return [
+      { title: 'Vorschläge', data: autocomplete },
+      { title: 'Ergebnisse', data: procedures },
+    ];
+  };
+
+  if (loading) {
+    return (
+      <LoadingWrapper>
+        <ActivityIndicator />
+      </LoadingWrapper>
+    );
+  }
+
+  let sectionData: { title: string; data: any[] }[] = [];
+  if (!term) {
+    sectionData = [
+      {
+        title: 'Zuletzt gesucht',
+        data: history,
+      },
+      {
+        title: 'Meistgesucht',
+        data: mostSearchedTerms
+          ? mostSearchedTerms.mostSearched.map(({ term: value }) => value)
+          : [],
+      },
+    ];
+  } else {
+    sectionData = searchData ? handleSearchResults(searchData) : [];
+  }
+
+  return (
+    <Wrapper>
+      <SectionList<any | MostSearched_mostSearched>
+        keyboardShouldPersistTaps={'always'}
+        sections={sectionData}
+        renderSectionHeader={({ section: { title, data } }) =>
+          data.length > 0 ? <Segment text={title} /> : null
+        }
+        renderItem={({ item, section: { title } }) => (
+          <Row onPress={onItemClick({ item, section: title })}>
+            <>
+              {title === 'Ergebnisse' && (
+                <ListItem {...item} date={item.voteDate} />
+              )}
+              {title === 'Zuletzt gesucht' && <ListText>{item}</ListText>}
+              {title === 'Vorschläge' && <ListText>{item}</ListText>}
+              {title === 'Meistgesucht' && <ListText>{item}</ListText>}
+            </>
+          </Row>
+        )}
+        keyExtractor={item => (typeof item === 'string' ? item : item._id)}
+        ListEmptyComponent={() => {
+          if (term) {
+            return (
+              <NoResultsWrapper>
+                <Text>Leider nichts gefunden.</Text>
+                <NoResultsImage />
+              </NoResultsWrapper>
+            );
+          }
+          return null;
+        }}
+      />
+    </Wrapper>
+  );
+};
