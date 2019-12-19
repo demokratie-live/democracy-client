@@ -36,6 +36,7 @@ export interface SearchProcedures_searchProceduresAutocomplete_procedures {
   submissionDate: any | null;
   completed: boolean | null;
   voted: boolean;
+  type: string;
   voteResults: SearchProcedures_searchProceduresAutocomplete_procedures_voteResults | null;
   communityVotes: SearchProcedures_searchProceduresAutocomplete_procedures_communityVotes | null;
 }

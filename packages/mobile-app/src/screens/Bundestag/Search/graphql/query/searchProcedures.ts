@@ -14,6 +14,7 @@ export const SEARCH_PROCEDURES = gql`
         submissionDate
         completed
         voted
+        type
         voteResults {
           yes
           abstination

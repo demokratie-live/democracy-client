@@ -19,6 +19,9 @@ import {
 } from './graphql/query/__generated__/SearchProcedures';
 import { communityVoteData } from '../../../lib/helper/PieChartCommunityData';
 import { pieChartGovernmentData } from '../../../lib/helper/PieChartGovernmentData';
+import { useNavigation } from '@react-navigation/core';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
 
 // import searchProcedures from '../../graphql/queries/searchProcedures';
 // import mostSearched from '../../graphql/queries/mostSearched';
@@ -83,6 +86,9 @@ const NoResultsImage = styled.Image.attrs(() => ({
 `;
 
 export const Search: React.FC = () => {
+  const navigation = useNavigation<
+    StackNavigationProp<BundestagRootStackParamList>
+  >();
   const { setTerm, term, history } = useContext(SearchContext);
   const { data: mostSearchedTerms, loading: loadingMostSearched } = useQuery<
     MostSearched
@@ -124,8 +130,11 @@ export const Search: React.FC = () => {
       | MostSearched_mostSearched;
     section: string;
   }) => () => {
-    if (section === 'Ergebnisse') {
-      Alert.alert('navigate to procedure');
+    if (section === 'Ergebnisse' && isProcedureGuard(item)) {
+      navigation.navigate('Procedure', {
+        procedureId: item.procedureId,
+        title: item.type || item.procedureId,
+      });
       // this.props.navigateTo({
       //   screen: 'democracy.Detail',
       //   title: 'Abstimmung'.toUpperCase(),
