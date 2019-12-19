@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components/native';
 import { SearchContext } from '../../../context/Search';
+import { useNavigation } from '@react-navigation/core';
 
 // import client from '../../graphql/client';
 
@@ -13,45 +14,54 @@ const Wrapper = styled.View`
   flex: 1;
   flex-direction: row;
   align-items: center;
-  margin-right: 16;
+  justify-content: center;
+  height: 87;
+  background-color: #4494d3;
+  padding-horizontal: 11;
+  padding-top: 36;
 `;
 
-// const Icons = styled(Ionicons.Button).attrs(() => ({
-//   color: '#fff',
-//   size: 30,
+const SearchInputWrapper = styled.View`
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 5.5;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 6;
+`;
+
+// const SearchInputIcon = styled(Ionicons).attrs(() => ({
+//   color: '#7a797b',
+//   size: 16,
 //   backgroundColor: 'transparent',
+//   name: 'ios-search',
 // }))``;
 
 const SearchInput = styled.TextInput.attrs(() => ({
   clearButtonMode: 'always',
   autoFocus: true,
-  placeholderTextColor: 'rgba(255, 255, 255, 0.38)',
+  placeholderTextColor: '#7a797b',
   underlineColorAndroid: 'transparent',
-  selectionColor: '#fff',
+  selectionColor: '#000',
   returnKeyType: 'search',
 }))`
   flex: 1;
-  background-color: transparent;
-  border-radius: 5.5;
-  font-size: 20;
-  color: #fff;
+  font-size: 14;
+  height: 28;
+  padding-horizontal: 6;
+  color: #000;
 `;
 
-// const SearchBackButtonAndroid = styled(Icons).attrs(() => ({
-//   name: 'md-arrow-back',
-// }))`
-//   padding-right: 16;
-// `;
-
-// const SearchClearButtonAndroid = styled(Icons).attrs(() => ({
-//   name: 'md-close',
-// }))`
-//   display: ${({ visible }) => (visible ? 'flex' : 'none')};
-//   padding-left: 16;
-// `;
+const SearchBackTextIos = styled.Button.attrs(() => ({
+  color: '#fff',
+}))`
+  padding-left: 8;
+  font-size: 17;
+`;
 
 export const SearchHeader: React.FC = () => {
   const { setTerm, term } = useContext(SearchContext);
+  const navigation = useNavigation();
 
   const finishSearch = () => {
     console.log(`finish Search ${term}`);
@@ -73,15 +83,17 @@ export const SearchHeader: React.FC = () => {
 
   return (
     <Wrapper>
-      {/* <SearchBackButtonAndroid onPress={this.clickBack} /> */}
-      <SearchInput
-        placeholder="Suche iOS"
-        onChangeText={setTerm}
-        value={term}
-        onSubmitEditing={finishSearch}
-      />
+      <SearchInputWrapper>
+        {/* <SearchInputIcon /> */}
+        <SearchInput
+          placeholder="Suche"
+          onChangeText={setTerm}
+          value={term}
+          onSubmitEditing={finishSearch}
+        />
+      </SearchInputWrapper>
 
-      {/* <SearchClearButtonAndroid visible={term} onPress={() => setTerm('')} /> */}
+      <SearchBackTextIos title="Zurück" onPress={navigation.goBack} />
     </Wrapper>
   );
 };
