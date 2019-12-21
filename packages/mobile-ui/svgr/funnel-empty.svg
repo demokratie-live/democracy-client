@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="1024px" height="1024px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 56.3 (81716) - https://sketch.com -->
-    <title>funnel</title>
+    <title>funnel-empty</title>
     <desc>Created with Sketch.</desc>
     <defs>
-        <polygon id="path-1" points="394.425781 738.055271 394.425781 407.364381 38 60 986 60 646.238281 407.364381 646.238281 965"></polygon>
+        <polygon id="path-1" points="402.859375 722.104401 402.859375 414.799386 72 92 952 92 636.609375 414.799386 636.609375 933"></polygon>
     </defs>
     <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="funnel">
+        <g id="funnel-empty">
             <mask id="mask-2" fill="white">
                 <use xlink:href="#path-1"></use>
             </mask>
-            <use id="Path-3" stroke="#000000" stroke-width="30" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+            <use id="Path-3" stroke="#000000" stroke-width="60" fill-rule="nonzero" xlink:href="#path-1"></use>
         </g>
     </g>
 </svg>

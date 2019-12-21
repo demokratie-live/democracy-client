@@ -2304,10 +2304,10 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/masked-view/-/masked-view-0.1.5.tgz#25421be6cd943a4b1660b62cfbcd45be8891462c"
   integrity sha512-Lj1DzfCmW0f4HnmHtEuX8Yy2f7cnUA8r5KGGUuDDGtQt1so6QJkKeUmsnLo2zYDtsF8due6hvIL06Vdo5xxuLQ==
 
-"@react-navigation/core@^5.0.0-alpha.21", "@react-navigation/core@^5.0.0-alpha.28":
-  version "5.0.0-alpha.28"
-  resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-5.0.0-alpha.28.tgz#284d07114e6dd93a2b0bc06d2a23e72f27ea3bf2"
-  integrity sha512-GkRGb2F3lxj+F2B/N1Fih1KFFX0B5fnMlsHvuY14uU/7aEOdS0pUeOMMLBzrpQx3FhJDMGm9mIh68j28NEU2eg==
+"@react-navigation/core@^5.0.0-alpha.21", "@react-navigation/core@^5.0.0-alpha.29":
+  version "5.0.0-alpha.29"
+  resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-5.0.0-alpha.29.tgz#547f3468c2c9fab839e72c76d5582c0396006a29"
+  integrity sha512-4lsy04cjFeo08SG/gzgSXXV5tCVqqMC2YfWOoFHKpjTtoxX2hYsVFPrWMwQGB6efXFB4nHxXBGLDfHz67zpN2Q==
   dependencies:
     escape-string-regexp "^2.0.0"
     query-string "^6.9.0"
@@ -2329,11 +2329,11 @@
     "@react-navigation/routers" "^5.0.0-alpha.15"
 
 "@react-navigation/native@^5.0.0-alpha.15":
-  version "5.0.0-alpha.20"
-  resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-5.0.0-alpha.20.tgz#081f21aa06c7a329033f88345e44650a82421b59"
-  integrity sha512-as8/DLhBsifBNqJG/PnhEHcmiXiUFTa9QVIDCGe7BfXcpZjPI9pdeuCOKCBFwvLsCnfwZ48aQfnGHQrywbO0pA==
+  version "5.0.0-alpha.21"
+  resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-5.0.0-alpha.21.tgz#346827f68b7667fc51a31eda784213a5f5041297"
+  integrity sha512-bui4ePYd00ElsmrKUAyCEcYZ99dme2NDXkQCJ6gZ5QEU3U+Gp2Q80TIJKegMMA4ypFy57oMQ/Sub4ckMJV0zgg==
   dependencies:
-    "@react-navigation/core" "^5.0.0-alpha.28"
+    "@react-navigation/core" "^5.0.0-alpha.29"
 
 "@react-navigation/routers@^5.0.0-alpha.15":
   version "5.0.0-alpha.15"
@@ -3111,9 +3111,9 @@
   integrity sha512-kGCRI9oiCxFS6soGKlyzhMzDydfcPix9PpTkr7h11huxOxhWwP37Tg7DYBaQ18eQTNreZEuLkhpbGSqVNZPnnw==
 
 "@types/jest@^24.0.22":
-  version "24.0.23"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-24.0.23.tgz#046f8e2ade026fe831623e361a36b6fb9a4463e4"
-  integrity sha512-L7MBvwfNpe7yVPTXLn32df/EK+AMBFAFvZrRuArGs7npEWnlziUXK+5GMIUTI4NIuwok3XibsjXCs5HxviYXjg==
+  version "24.0.24"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-24.0.24.tgz#0f2f523dc77cc1bc6bef34eaf287ede887a73f05"
+  integrity sha512-vgaG968EDPSJPMunEDdZvZgvxYSmeH8wKqBlHSkBt1pV2XlLEVDzsj1ZhLuI4iG4Pv841tES61txSBF0obh4CQ==
   dependencies:
     jest-diff "^24.3.0"
 

@@ -4,11 +4,14 @@ import styled from 'styled-components/native';
 import VoteButton from './components/VoteButton';
 import ActionButton from './components/ActionButton';
 import { Alert, Text } from 'react-native';
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation, CompositeNavigationProp } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
 import { VoteSelection } from '../../../../__generated__/globalTypes';
 import { LocalVotesContext } from '../../../context/LocalVotes';
+import { RootStackParamList } from '../../../routes';
+import { SidebarParamList } from '../../../routes/Sidebar';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
 
 // GraphQL
 // import client from '../../graphql/client';
@@ -101,7 +104,7 @@ const LockIconWrapper = styled.View`
 interface Props {
   verified: boolean;
   voted: boolean;
-  // procedureObjId: string;
+  procedureObjId: string;
   procedureId: string;
   type: string;
   // refetch: () => void;
@@ -111,10 +114,18 @@ interface Props {
   // active: boolean;
 }
 
+type DetailScreenNavigationProps = CompositeNavigationProp<
+  StackNavigationProp<BundestagRootStackParamList, 'TabView'>,
+  CompositeNavigationProp<
+    DrawerNavigationProp<SidebarParamList, 'Bundestag'>,
+    StackNavigationProp<RootStackParamList>
+  >
+>;
+
 const PrepareActions: React.FC<Props> = ({
   verified,
   voted,
-  // procedureObjId,
+  procedureObjId,
   procedureId,
   type,
   // list,
@@ -123,9 +134,7 @@ const PrepareActions: React.FC<Props> = ({
   // active,
 }) => {
   const { getLocalVoteSelection } = useContext(LocalVotesContext);
-  const navigation = useNavigation<
-    StackNavigationProp<BundestagRootStackParamList, 'TabView'>
-  >();
+  const navigation = useNavigation<DetailScreenNavigationProps>();
 
   const showUnknownVoteNotification = () => {
     Alert.alert(
@@ -136,7 +145,7 @@ const PrepareActions: React.FC<Props> = ({
   };
 
   const verify = () => {
-    Alert.alert('go to verification');
+    navigation.navigate('Verification');
     // TODO go to verification
   };
 
@@ -160,6 +169,7 @@ const PrepareActions: React.FC<Props> = ({
                 navigation.navigate('Voting', {
                   selection: VoteSelection.YES,
                   procedureId,
+                  procedureObjId,
                 });
               }}
             />
@@ -178,6 +188,7 @@ const PrepareActions: React.FC<Props> = ({
                 navigation.navigate('Voting', {
                   selection: VoteSelection.ABSTINATION,
                   procedureId,
+                  procedureObjId,
                 });
               }}
             />
@@ -194,6 +205,7 @@ const PrepareActions: React.FC<Props> = ({
                 navigation.navigate('Voting', {
                   selection: VoteSelection.NO,
                   procedureId,
+                  procedureObjId,
                 });
               }}
             />

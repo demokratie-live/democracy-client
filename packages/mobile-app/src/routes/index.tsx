@@ -72,6 +72,9 @@ const App = () => {
         />
         <RootStack.Screen
           name="Verification"
+          options={{
+            headerShown: false,
+          }}
           component={() => (
             <VerificationProvider>
               <Verification />
