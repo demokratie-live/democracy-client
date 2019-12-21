@@ -18,7 +18,7 @@ export interface Vote {
 }
 
 export interface VoteVariables {
-  procedureId: string;
+  procedure: string;
   selection: VoteSelection;
   constituency?: string | null;
 }

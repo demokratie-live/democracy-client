@@ -104,7 +104,7 @@ const LockIconWrapper = styled.View`
 interface Props {
   verified: boolean;
   voted: boolean;
-  // procedureObjId: string;
+  procedureObjId: string;
   procedureId: string;
   type: string;
   // refetch: () => void;
@@ -125,7 +125,7 @@ type DetailScreenNavigationProps = CompositeNavigationProp<
 const PrepareActions: React.FC<Props> = ({
   verified,
   voted,
-  // procedureObjId,
+  procedureObjId,
   procedureId,
   type,
   // list,
@@ -169,6 +169,7 @@ const PrepareActions: React.FC<Props> = ({
                 navigation.navigate('Voting', {
                   selection: VoteSelection.YES,
                   procedureId,
+                  procedureObjId,
                 });
               }}
             />
@@ -187,6 +188,7 @@ const PrepareActions: React.FC<Props> = ({
                 navigation.navigate('Voting', {
                   selection: VoteSelection.ABSTINATION,
                   procedureId,
+                  procedureObjId,
                 });
               }}
             />
@@ -203,6 +205,7 @@ const PrepareActions: React.FC<Props> = ({
                 navigation.navigate('Voting', {
                   selection: VoteSelection.NO,
                   procedureId,
+                  procedureObjId,
                 });
               }}
             />

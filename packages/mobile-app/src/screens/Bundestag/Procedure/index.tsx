@@ -60,6 +60,7 @@ export const Procedure: FC<Props> = ({ route }) => {
   }
 
   const {
+    _id,
     title,
     voteDate,
     voteEnd,
@@ -145,6 +146,7 @@ export const Procedure: FC<Props> = ({ route }) => {
         share={share}
         notify={!!notify}
         procedureId={procedureId}
+        procedureObjId={_id}
       />
     </Container>
   );
