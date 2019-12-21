@@ -51,24 +51,20 @@ const SearchInput = styled.TextInput.attrs(() => ({
 // `;
 
 export const SearchHeader: React.FC = () => {
-  const { setTerm, term } = useContext(SearchContext);
+  const { setTerm, term, addToHistory } = useContext(SearchContext);
 
   const finishSearch = () => {
     console.log(`finish Search ${term}`);
-    // if (this.state.term.trim()) {
-    //   client.mutate({
-    //     mutation: finishSearch,
-    //     variables: {
-    //       term: this.state.term,
-    //     },
-    //   });
-    //   client.mutate({
-    //     mutation: SEARCH_HISTORY_ADD,
-    //     variables: {
-    //       term: this.state.term,
-    //     },
-    //   });
-    // }
+    if (term.trim()) {
+      // TODO run finishSearch mutation
+      //   client.mutate({
+      //     mutation: finishSearch,
+      //     variables: {
+      //       term: this.state.term,
+      //     },
+      //   });
+      addToHistory(term);
+    }
   };
 
   return (
