@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components/native';
-import { SectionList, Alert } from 'react-native';
+import { SectionList } from 'react-native';
 import { SearchContext } from '../../../context/Search';
 import { Segment } from '../List/Components/Segment';
 import { Row } from '@democracy-deutschland/mobile-ui/src/components/Lists/Row';
 import { ListItem } from '@democracy-deutschland/mobile-ui/src/components/Lists/ListItem';
-import { useQuery, useLazyQuery } from '@apollo/react-hooks';
+import { useQuery, useLazyQuery, useMutation } from '@apollo/react-hooks';
 import { MOST_SEARCHED } from './graphql/query/mostSearched';
 import {
   MostSearched,
@@ -22,6 +22,11 @@ import { pieChartGovernmentData } from '../../../lib/helper/PieChartGovernmentDa
 import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
+import {
+  FinishSearch,
+  FinishSearchVariables,
+} from './graphql/mutation/__generated__/FinishSearch';
+import { FINISH_SEARCH } from './graphql/mutation/finishSearch';
 
 // import searchProcedures from '../../graphql/queries/searchProcedures';
 // import mostSearched from '../../graphql/queries/mostSearched';
@@ -89,6 +94,10 @@ export const Search: React.FC = () => {
   const navigation = useNavigation<
     StackNavigationProp<BundestagRootStackParamList>
   >();
+  const [executeFinishSearch] = useMutation<
+    FinishSearch,
+    FinishSearchVariables
+  >(FINISH_SEARCH);
   const { setTerm, term, history } = useContext(SearchContext);
   const { data: mostSearchedTerms, loading: loadingMostSearched } = useQuery<
     MostSearched
@@ -108,12 +117,15 @@ export const Search: React.FC = () => {
   useEffect(() => {
     if (term.length > 0) {
       executeSearch();
+      executeFinishSearch({
+        variables: { term },
+      });
     }
-  }, [term, executeSearch]);
+  }, [term, executeSearch, executeFinishSearch]);
 
   // TODO handle errors
   if (searchError) {
-    Alert.alert(JSON.stringify(searchError));
+    // Alert.alert(JSON.stringify(searchError));
   }
 
   // TODO loading most searched ters

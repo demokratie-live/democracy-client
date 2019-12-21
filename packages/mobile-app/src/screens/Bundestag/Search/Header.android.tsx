@@ -1,6 +1,12 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components/native';
 import { SearchContext } from '../../../context/Search';
+import { useMutation } from '@apollo/react-hooks';
+import {
+  FinishSearch,
+  FinishSearchVariables,
+} from './graphql/mutation/__generated__/FinishSearch';
+import { FINISH_SEARCH } from './graphql/mutation/finishSearch';
 
 // import client from '../../graphql/client';
 
@@ -50,21 +56,22 @@ const SearchInput = styled.TextInput.attrs(() => ({
 //   padding-left: 16;
 // `;
 
+// TODO fix and check logic for finish search with ios version
+
 export const SearchHeader: React.FC = () => {
   const { setTerm, term, addToHistory } = useContext(SearchContext);
+  const [executeFinishSearch] = useMutation<
+    FinishSearch,
+    FinishSearchVariables
+  >(FINISH_SEARCH);
 
   const finishSearch = () => {
-    console.log(`finish Search ${term}`);
-    if (term.trim()) {
-      // TODO run finishSearch mutation
-      //   client.mutate({
-      //     mutation: finishSearch,
-      //     variables: {
-      //       term: this.state.term,
-      //     },
-      //   });
-      addToHistory(term);
-    }
+    addToHistory(term);
+    executeFinishSearch({
+      variables: {
+        term,
+      },
+    });
   };
 
   return (
