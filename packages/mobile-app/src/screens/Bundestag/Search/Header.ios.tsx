@@ -2,6 +2,12 @@ import React, { useContext } from 'react';
 import styled from 'styled-components/native';
 import { SearchContext } from '../../../context/Search';
 import { useNavigation } from '@react-navigation/core';
+import { useMutation } from '@apollo/react-hooks';
+import { FINISH_SEARCH } from './graphql/mutation/finishSearch';
+import {
+  FinishSearch,
+  FinishSearchVariables,
+} from './graphql/mutation/__generated__/FinishSearch';
 
 // import client from '../../graphql/client';
 
@@ -60,25 +66,20 @@ const SearchBackTextIos = styled.Button.attrs(() => ({
 `;
 
 export const SearchHeader: React.FC = () => {
-  const { setTerm, term } = useContext(SearchContext);
+  const { setTerm, term, addToHistory } = useContext(SearchContext);
+  const [executeFinishSearch] = useMutation<
+    FinishSearch,
+    FinishSearchVariables
+  >(FINISH_SEARCH);
   const navigation = useNavigation();
 
   const finishSearch = () => {
-    console.log(`finish Search ${term}`);
-    // if (this.state.term.trim()) {
-    //   client.mutate({
-    //     mutation: finishSearch,
-    //     variables: {
-    //       term: this.state.term,
-    //     },
-    //   });
-    //   client.mutate({
-    //     mutation: SEARCH_HISTORY_ADD,
-    //     variables: {
-    //       term: this.state.term,
-    //     },
-    //   });
-    // }
+    addToHistory(term);
+    executeFinishSearch({
+      variables: {
+        term,
+      },
+    });
   };
 
   return (
