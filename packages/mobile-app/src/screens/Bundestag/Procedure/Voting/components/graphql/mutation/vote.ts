@@ -2,12 +2,12 @@ import gql from 'graphql-tag';
 
 export const VOTE = gql`
   mutation Vote(
-    $procedureId: String!
+    $procedure: ID!
     $selection: VoteSelection!
     $constituency: String
   ) {
     vote(
-      procedureId: $procedureId
+      procedure: $procedure
       selection: $selection
       constituency: $constituency
     ) {

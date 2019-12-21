@@ -29,6 +29,7 @@ export type BundestagRootStackParamList = {
   Voting: {
     selection: VoteSelection.YES | VoteSelection.ABSTINATION | VoteSelection.NO;
     procedureId: string;
+    procedureObjId: string;
   };
   Filter: undefined;
   Search: undefined;

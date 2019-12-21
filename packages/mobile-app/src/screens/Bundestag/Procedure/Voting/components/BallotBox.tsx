@@ -81,9 +81,14 @@ const Line = styled.Image.attrs(() => ({
 interface Props {
   selection: VoteSelection.YES | VoteSelection.ABSTINATION | VoteSelection.NO;
   procedureId: string;
+  procedureObjId: string;
 }
 
-const BalloutBox: React.FC<Props> = ({ selection, procedureId }) => {
+const BalloutBox: React.FC<Props> = ({
+  selection,
+  procedureId,
+  procedureObjId,
+}) => {
   const { setLocalVote } = useContext(LocalVotesContext);
   const navigation = useNavigation<
     StackNavigationProp<BundestagRootStackParamList, 'Voting'>
@@ -152,7 +157,7 @@ const BalloutBox: React.FC<Props> = ({ selection, procedureId }) => {
               vote({
                 variables: {
                   constituency,
-                  procedureId,
+                  procedure: procedureObjId,
                   selection,
                 },
                 // TODO refetch procedure detail page
@@ -196,6 +201,7 @@ const BalloutBox: React.FC<Props> = ({ selection, procedureId }) => {
       previewAnimation,
       navigation,
       setLocalVote,
+      procedureObjId,
     ],
   );
 
