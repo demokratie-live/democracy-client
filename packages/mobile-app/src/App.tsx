@@ -5,12 +5,15 @@ import Navigation from './routes';
 import { InitialStateProvider } from './context/InitialStates';
 import { LocalVotesProvider } from './context/LocalVotes';
 import { Apollo } from './lib/Apollo';
+import { ListFilterProvider } from './context/ListFilter';
 
 export default () => (
   <Apollo>
     <InitialStateProvider>
       <LocalVotesProvider>
-        <Navigation />
+        <ListFilterProvider>
+          <Navigation />
+        </ListFilterProvider>
       </LocalVotesProvider>
     </InitialStateProvider>
   </Apollo>
