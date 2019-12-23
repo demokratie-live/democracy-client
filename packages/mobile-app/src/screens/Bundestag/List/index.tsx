@@ -20,6 +20,7 @@ import { ListType } from '../../../../__generated__/globalTypes';
 import { LocalVotesContext } from '../../../context/LocalVotes';
 import { communityVoteData } from '../../../lib/helper/PieChartCommunityData';
 import { pieChartGovernmentData } from '../../../lib/helper/PieChartGovernmentData';
+import { ListFilterContext } from '../../../context/ListFilter';
 
 type ListScreenRouteProp = RouteProp<
   TopTabParamList,
@@ -38,6 +39,7 @@ const Container = styled.View`
 
 export const List = () => {
   const { getLocalVoteSelection } = useContext(LocalVotesContext);
+  const { proceduresFilter } = useContext(ListFilterContext);
   const route = useRoute<ListScreenRouteProp>();
   const navigation = useNavigation<
     StackNavigationProp<BundestagRootStackParamList>
@@ -52,6 +54,7 @@ export const List = () => {
     variables: {
       listTypes: [route.params.list],
       pageSize: 10,
+      filter: proceduresFilter,
     },
   });
 
