@@ -11,10 +11,12 @@ import { RootStackParamList } from '..';
 import GovernmentIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Government';
 import IncreaseArrowIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/IncreaseArrow';
 import InfoArrowIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Info';
+import WaterDrop from '@democracy-deutschland/mobile-ui/src/components/Icons/WaterDrop';
 
 export type SidebarParamList = {
   Bundestag: undefined;
   Statistic: undefined;
+  WahlOMeter: undefined;
   Introduction: RootStackParamList['Introduction'];
 };
 
@@ -55,6 +57,17 @@ export const SidebarNavigation = () => {
             <GovernmentIcon width={size} height={size} color={color} />
           ),
         }}
+      />
+      <SidebarDrawer.Screen
+        options={{
+          drawerLabel: 'Auswertungen/Wahl-O-Meter',
+          gestureEnabled: true,
+          drawerIcon: ({ color, size }) => (
+            <WaterDrop width={size} height={size} color={color} />
+          ),
+        }}
+        name="WahlOMeter"
+        component={MyStatisticScreen}
       />
       <SidebarDrawer.Screen
         options={{
