@@ -5,6 +5,8 @@ import { FilterData, FilterEntry } from '../../../context/ListFilter/initData';
 import { Segment } from '../List/Components/Segment';
 import Checkbox from './components/Checkbox';
 import { ListFilterContext } from '../../../context/ListFilter';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
 
 // import SegmentHeader from '../../../components/ListSectionHeader';
 // import Checkbox from '../../../components/Checkbox';
@@ -43,54 +45,36 @@ const TitleSub = styled.Text`
   font-size: 15;
 `;
 
-export const Filter: React.FC = () => {
+const SaveButton = styled.Button.attrs({
+  color: '#fff',
+})``;
+
+type FilterScreenNavigationProp = StackNavigationProp<
+  BundestagRootStackParamList,
+  'Filter'
+>;
+
+type Props = {
+  navigation: FilterScreenNavigationProp;
+};
+
+export const Filter: React.FC<Props> = ({ navigation }) => {
   // TODO add header save button
-  const { filter } = useContext(ListFilterContext);
+  const { filter, setFilter } = useContext(ListFilterContext);
   const [data, setData] = useState<FilterData[]>(filter);
+
+  const onSave = async () => {
+    setFilter(data);
+    navigation.goBack();
+  };
+
+  navigation.setOptions({
+    headerRight: () => <SaveButton onPress={onSave} title="Speichern" />,
+  });
 
   useEffect(() => {
     setData(filter);
   }, [filter]);
-
-  // const onSave = async () => {
-  //   const saveError = data.find(filterType => {
-  //     if (Array.isArray(filterType)) {
-  //       return filterType.every(({ value }) => !value);
-  //     }
-  //     return false;
-  //   });
-  //   if (saveError) {
-  //     const filterWithNoneSelection = filterData.find(
-  //       ({ name }) => name === saveError.name,
-  //     );
-  //     const filterTitle = filterWithNoneSelection
-  //       ? filterWithNoneSelection.title
-  //       : undefined;
-  //     let indefiniteArticle;
-  //     switch (saveError.name) {
-  //       case 'activity':
-  //         indefiniteArticle = 'eine';
-  //         break;
-  //       case 'type':
-  //       case 'voteType':
-  //       case 'currentStatus':
-  //         indefiniteArticle = 'einen';
-  //         break;
-  //       default:
-  //         indefiniteArticle = 'ein';
-  //         break;
-  //     }
-  //     Alert.alert(
-  //       `Speichern war nicht möglich – wähle mindestens ${indefiniteArticle} ${filterTitle} aus`,
-  //     );
-  //     return false;
-  //   }
-
-  //   setFilter(data);
-
-  //   // TODO navigate Back
-  //   return true;
-  // };
 
   const onChange = ({
     type,
