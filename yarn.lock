@@ -15921,9 +15921,9 @@ react-native-safe-area-context@^0.6.1:
   integrity sha512-027x9zNed2xucJq6WWvA1tyxtNs/D3mcWkTnXy+VX3F8sz8DXktd1X4hG/yqd1XW+okI6lAVAeZYnlCyWLDlSw==
 
 react-native-screens@^2.0.0-alpha.3:
-  version "2.0.0-alpha.20"
-  resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.0.0-alpha.20.tgz#a50a74eaafb562ace110daf7a70f9816442fbb3d"
-  integrity sha512-jf2yULUrqftVXVW4boqyZZEXS2bbAAt2PNA6+Twm33aVF4i1RP/jLkMd7IliPhLXGYLJYLJyNjGIZ+piPIi+Pg==
+  version "2.0.0-alpha.22"
+  resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.0.0-alpha.22.tgz#67cde460153985e400e0280ed3a0e5be07b0dc5a"
+  integrity sha512-2U++QrTf8H989ekHbgFuia8LLd8/+SbXra+rqDAOihCNRLFi91+y5QGgc7DP4Ic9MtHTaYRtWopyfyUo4ybD0A==
   dependencies:
     debounce "^1.2.0"
 
