@@ -21,6 +21,7 @@ import { LocalVotesContext } from '../../../context/LocalVotes';
 import { communityVoteData } from '../../../lib/helper/PieChartCommunityData';
 import { pieChartGovernmentData } from '../../../lib/helper/PieChartGovernmentData';
 import { ListFilterContext } from '../../../context/ListFilter';
+import { NoConferenceWeekData } from './NoConferenceWeekData';
 
 type ListScreenRouteProp = RouteProp<
   TopTabParamList,
@@ -74,10 +75,7 @@ export const List = () => {
     route.params.list === ListType.CONFERENCEWEEKS_PLANNED &&
     data.procedures.length === 0
   ) {
-    // TODO missing UI
-    return (
-      <Text>Noch keine daten für die nächste Sitzungswoche vorhanden</Text>
-    );
+    return <NoConferenceWeekData />;
   }
   let segmentedData: SegmentedData[];
 
