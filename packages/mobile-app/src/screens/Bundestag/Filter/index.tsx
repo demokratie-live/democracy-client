@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { SectionList, View } from 'react-native';
+import { SectionList, View, Alert } from 'react-native';
 import styled from 'styled-components/native';
 import { FilterData, FilterEntry } from '../../../context/ListFilter/initData';
 import { Segment } from '../List/Components/Segment';
@@ -7,6 +7,7 @@ import Checkbox from './components/Checkbox';
 import { ListFilterContext } from '../../../context/ListFilter';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
+import { InitialStateContext } from '../../../context/InitialStates';
 
 // import SegmentHeader from '../../../components/ListSectionHeader';
 // import Checkbox from '../../../components/Checkbox';
@@ -59,53 +60,18 @@ type Props = {
 };
 
 export const Filter: React.FC<Props> = ({ navigation }) => {
-  // TODO add header save button
+  const { isVerified } = useContext(InitialStateContext);
   const { filter, setFilter } = useContext(ListFilterContext);
   const [data, setData] = useState<FilterData[]>(filter);
 
-  const onSave = async () => {
-    setFilter(data);
-    navigation.goBack();
-  };
-
-  navigation.setOptions({
-    headerRight: () => <SaveButton onPress={onSave} title="Speichern" />,
-  });
-
   useEffect(() => {
-    setData(filter);
-  }, [filter]);
-
-  const onChange = ({
-    type,
-    subType,
-    value,
-  }: {
-    type: string;
-    subType?: string;
-    value: boolean;
-  }) => {
-    console.log('onChange', {
-      type,
-      subType,
-      value,
-    });
-    const newData = data.map(category => {
-      if (category.name === type) {
-        const newEntryData = category.data.map(entry => {
-          if (subType && (entry.name === subType || entry.title === subType)) {
-            return { ...entry, value };
-          } else if (!subType) {
-            return { ...entry, value };
-          }
-          return entry;
-        });
-        return { ...category, data: newEntryData };
-      }
-      return category;
-    });
-    setData(newData);
-  };
+    if (
+      !isVerified &&
+      data.findIndex(({ name }) => name === 'activity') !== -1
+    ) {
+      setData(data.filter(({ name }) => name !== 'activity'));
+    }
+  }, [data, setData, isVerified]);
 
   const getValue = ({ type, subType }: { type: string; subType?: string }) => {
     const filterCategory = data.find(({ name }) => {
@@ -134,6 +100,65 @@ export const Filter: React.FC<Props> = ({ navigation }) => {
     return false;
   };
 
+  const onSave = async () => {
+    const saveError = data.find(({ name }) => !getValue({ type: name }));
+    if (saveError) {
+      let indefiniteArticle;
+      switch (saveError.name) {
+        case 'activity':
+          indefiniteArticle = 'eine';
+          break;
+        case 'type':
+        case 'voteType':
+        case 'currentStatus':
+          indefiniteArticle = 'einen';
+          break;
+        default:
+          indefiniteArticle = 'ein';
+          break;
+      }
+      Alert.alert(
+        `Speichern war nicht möglich – wähle mindestens ${indefiniteArticle} ${saveError.title} aus`,
+      );
+      return false;
+    }
+    setFilter(data);
+    navigation.goBack();
+  };
+
+  navigation.setOptions({
+    headerRight: () => <SaveButton onPress={onSave} title="Speichern" />,
+  });
+
+  const onChange = ({
+    type,
+    subType,
+    value,
+  }: {
+    type: string;
+    subType?: string;
+    value: boolean;
+  }) => {
+    const newData = data.map(category => {
+      if (category.name === type) {
+        const allSelected = getValue({ type: category.name }) === true;
+        const newEntryData = category.data.map(entry => {
+          if (subType && (entry.name === subType || entry.title === subType)) {
+            return { ...entry, value: allSelected ? !value : value };
+          } else if (subType && allSelected) {
+            return { ...entry, value: allSelected ? value : !value };
+          } else if (!subType) {
+            return { ...entry, value };
+          }
+          return entry;
+        });
+        return { ...category, data: newEntryData };
+      }
+      return category;
+    });
+    setData(newData);
+  };
+
   const lightgrey = 'lightgrey';
   return (
     <Container>
@@ -156,7 +181,6 @@ export const Filter: React.FC<Props> = ({ navigation }) => {
                 }}
                 onPress={() => {
                   const curValue = getValue({ type: name });
-                  console.log('section value', curValue);
                   onChange({
                     type: name,
                     value: !!(curValue === 'mixed' || !curValue),
@@ -183,7 +207,6 @@ export const Filter: React.FC<Props> = ({ navigation }) => {
                       type: section.name,
                       subType: subName || subtitle,
                     });
-                    console.log('enty value', curValue);
                     onChange({
                       type: section.name,
                       subType: subName || subtitle,
