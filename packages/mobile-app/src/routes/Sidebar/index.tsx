@@ -49,7 +49,7 @@ export const SidebarNavigation = () => {
         name="Bundestag"
         component={BundestagRootNavigation}
         options={{
-          drawerLabel: 'Listen/Bundestag',
+          drawerLabel: '/Bundestag',
           gestureEnabled: true,
           drawerIcon: ({ color, size }) => (
             <GovernmentIcon width={size} height={size} color={color} />

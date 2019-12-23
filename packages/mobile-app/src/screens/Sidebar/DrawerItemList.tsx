@@ -11,7 +11,12 @@ import {
   DrawerNavigationHelpers,
   DrawerDescriptorMap,
 } from '@react-navigation/drawer/lib/typescript/drawer/src/types';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import styled from 'styled-components/native';
+
+const Space = styled.View`
+  padding-bottom: 18;
+`;
 
 type Props = Omit<DrawerContentOptions, 'contentContainerStyle' | 'style'> & {
   state: DrawerNavigationState;
@@ -38,12 +43,13 @@ export default function DrawerItemList({
     const focused = i === state.index;
     const { title, drawerLabel, drawerIcon } = descriptors[route.key].options;
     const [curCategory, label] = (drawerLabel as string).split('/');
+    console.log({ curCategory, label });
     const showCategoryLabel = curCategory !== preCategory;
     preCategory = curCategory;
 
     return (
       <View key={route.key}>
-        {showCategoryLabel && <Text style={labelStyle}>{curCategory}</Text>}
+        {showCategoryLabel && <Space />}
         <DrawerItem
           label={
             label !== undefined
