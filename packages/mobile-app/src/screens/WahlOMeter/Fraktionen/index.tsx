@@ -53,7 +53,7 @@ class Fraktionen extends PureComponent {
   getMatchingProcedures = ({ votedProcedures, localVotes }: any) =>
     votedProcedures.proceduresByIdHavingVoteResults.procedures.filter(
       ({ procedureId }: any) =>
-        localVotes.votesSelectionLocal.find(
+        localVotes.find(
           ({ procedureId: pid }: any) => pid === procedureId,
         ),
     );
@@ -73,7 +73,7 @@ class Fraktionen extends PureComponent {
   partyChartData = ({ localVotes, matchingProcedures }: any) => {
     const chartData = matchingProcedures.reduce(
       (prev: any, { voteResults: { partyVotes }, procedureId }: any) => {
-        const me = localVotes.votesSelectionLocal.find(
+        const me = localVotes.find(
           ({ procedureId: pid }: any) => pid === procedureId,
         ).selection;
         partyVotes.forEach(({ party, main }: any) => {
