@@ -137,7 +137,7 @@ android {
         applicationId "de.democracydeutschland.app.refactor"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 102080
+        versionCode 102081
         versionName "1.2.3"
 
         // Wix Detox
