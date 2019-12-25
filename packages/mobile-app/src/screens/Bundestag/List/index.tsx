@@ -139,7 +139,6 @@ export const List = () => {
     });
 
     const localSelection = getLocalVoteSelection(procedureId);
-    // TODO improve Graphql Types
     const communityVoteSlices = communityVoteData({
       communityVotes,
       localSelection,
