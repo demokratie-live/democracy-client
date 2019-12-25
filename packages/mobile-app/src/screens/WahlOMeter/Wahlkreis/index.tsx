@@ -70,7 +70,7 @@ const ChartWrapper = styled.View`
 // Filtered Array of procedures voted local
 const getMatchingProcedures = ({ votedProcedures, localVotes }: any) =>
   votedProcedures.filter(({ procedureId }: any) =>
-    localVotes.votesSelectionLocal.find(
+    localVotes.find(
       ({ procedureId: pid }: any) => pid === procedureId,
     ),
   );
@@ -80,7 +80,7 @@ const pieChartData = ({ localVotes, matchingProcedures }: any) => {
   const pieDataRaw = matchingProcedures.map(
     ({ decision, procedureId }: any) => ({
       deputy: decision,
-      me: localVotes.votesSelectionLocal.find(
+      me: localVotes.find(
         ({ procedureId: pid }: any) => pid === procedureId,
       ).selection,
     }),
