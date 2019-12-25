@@ -24,7 +24,6 @@ const Wrapper = styled.View`
   align-items: center;
   min-height: ${Platform.OS === 'android' ? 56 : undefined};
   background-color: #4494d3;
-  z-index: 1;
 `;
 
 // const Icons = styled(Ionicons.Button).attrs(() => ({

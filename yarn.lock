@@ -2304,7 +2304,7 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/masked-view/-/masked-view-0.1.5.tgz#25421be6cd943a4b1660b62cfbcd45be8891462c"
   integrity sha512-Lj1DzfCmW0f4HnmHtEuX8Yy2f7cnUA8r5KGGUuDDGtQt1so6QJkKeUmsnLo2zYDtsF8due6hvIL06Vdo5xxuLQ==
 
-"@react-navigation/core@^5.0.0-alpha.21", "@react-navigation/core@^5.0.0-alpha.29":
+"@react-navigation/core@^5.0.0-alpha.29":
   version "5.0.0-alpha.29"
   resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-5.0.0-alpha.29.tgz#547f3468c2c9fab839e72c76d5582c0396006a29"
   integrity sha512-4lsy04cjFeo08SG/gzgSXXV5tCVqqMC2YfWOoFHKpjTtoxX2hYsVFPrWMwQGB6efXFB4nHxXBGLDfHz67zpN2Q==
@@ -2314,40 +2314,44 @@
     shortid "^2.2.15"
     use-subscription "^1.3.0"
 
-"@react-navigation/drawer@^5.0.0-alpha.21":
-  version "5.0.0-alpha.23"
-  resolved "https://registry.yarnpkg.com/@react-navigation/drawer/-/drawer-5.0.0-alpha.23.tgz#d4ef70e07b09e51f84b997d63e6885cf56ddedd8"
-  integrity sha512-thPLwXB5WHx8nSaQ2dwdn7QySSpnSTTf1f5XtxQ2YWfOAOycceBRpsre0g9L66ng+TzO97squWbHjSofQsN4nQ==
+"@react-navigation/drawer@^5.0.0-alpha.30":
+  version "5.0.0-alpha.30"
+  resolved "https://registry.yarnpkg.com/@react-navigation/drawer/-/drawer-5.0.0-alpha.30.tgz#5ae9cce254e148a0d417d6fa030e5695426ebb3e"
+  integrity sha512-nfBr3lAIjdpzwXbsvtkj7MexD8J1QssjqnSbWi4u34ZZqb5HAjjZ6krIcW4a1mr2xzPKH+Bq54QhvNOXG1ZScg==
   dependencies:
-    "@react-navigation/routers" "^5.0.0-alpha.15"
+    "@react-navigation/routers" "^5.0.0-alpha.18"
+    color "^3.1.2"
 
-"@react-navigation/material-top-tabs@^5.0.0-alpha.16":
-  version "5.0.0-alpha.18"
-  resolved "https://registry.yarnpkg.com/@react-navigation/material-top-tabs/-/material-top-tabs-5.0.0-alpha.18.tgz#fb77e6223cdd37b3f13f832a575f9863c51db3f0"
-  integrity sha512-HED+qrCWFucIIFJTeT5vXC2mk/sqSK64ZJf3S1Jsp4a9fHrTcsNC0hZbdgjhdeqla9KRSuxvejN0k8EgIm0Obw==
+"@react-navigation/material-top-tabs@^5.0.0-alpha.25":
+  version "5.0.0-alpha.25"
+  resolved "https://registry.yarnpkg.com/@react-navigation/material-top-tabs/-/material-top-tabs-5.0.0-alpha.25.tgz#2e6ad866491302f41734ed2709dbf7b52c663e4f"
+  integrity sha512-p9p8xKGaKvrEKMAKBqsBNLSfyrooQkQKztcyoEwQR6XTgZO5GPYc+V6j787C9XQ/V5vcyaF+Cc1PZE1T2htVtQ==
   dependencies:
-    "@react-navigation/routers" "^5.0.0-alpha.15"
+    "@react-navigation/routers" "^5.0.0-alpha.18"
+    color "^3.1.2"
 
-"@react-navigation/native@^5.0.0-alpha.15":
+"@react-navigation/native@^5.0.0-alpha.21":
   version "5.0.0-alpha.21"
   resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-5.0.0-alpha.21.tgz#346827f68b7667fc51a31eda784213a5f5041297"
   integrity sha512-bui4ePYd00ElsmrKUAyCEcYZ99dme2NDXkQCJ6gZ5QEU3U+Gp2Q80TIJKegMMA4ypFy57oMQ/Sub4ckMJV0zgg==
   dependencies:
     "@react-navigation/core" "^5.0.0-alpha.29"
 
-"@react-navigation/routers@^5.0.0-alpha.15":
-  version "5.0.0-alpha.15"
-  resolved "https://registry.yarnpkg.com/@react-navigation/routers/-/routers-5.0.0-alpha.15.tgz#0e6b06dd1c3f65512ced5797e81a19e3a5fd734b"
-  integrity sha512-ZIBOxusqIwGxJYdfHyhgueqyWaCbPIEFAJ0AfQchogl43O/+DxgRgtyXLI1iIxN9KTRT3kOcgMdfpYa8Y8OugQ==
+"@react-navigation/routers@^5.0.0-alpha.18":
+  version "5.0.0-alpha.18"
+  resolved "https://registry.yarnpkg.com/@react-navigation/routers/-/routers-5.0.0-alpha.18.tgz#515ae91c5c4cd0156c505e4de810c3fe996ecd75"
+  integrity sha512-XRbGHD43C2hJ8gCvCfnDNGvk5r4pJd2k8UQUjfKauVRB1UObxnLCvuB1lsXaAL7lxLmHOkkwTXSoCMmrTQnmnw==
   dependencies:
+    "@react-navigation/core" "^5.0.0-alpha.29"
     shortid "^2.2.15"
 
-"@react-navigation/stack@^5.0.0-alpha.35":
-  version "5.0.0-alpha.37"
-  resolved "https://registry.yarnpkg.com/@react-navigation/stack/-/stack-5.0.0-alpha.37.tgz#5736ec6275e5b862960a93537530c51d11625e7d"
-  integrity sha512-Litxebu+ZLMYIEgCdseIEqvGeIsurduCroNOzYtbZiMSSYbFp7Jyu2SvS9UF1Rhi2zs0LgYdZBgis+/AGn6zqQ==
+"@react-navigation/stack@^5.0.0-alpha.46":
+  version "5.0.0-alpha.46"
+  resolved "https://registry.yarnpkg.com/@react-navigation/stack/-/stack-5.0.0-alpha.46.tgz#a0a5f5eb757f688ae8ae0354a9d0f5f5c2aaa864"
+  integrity sha512-pZVpZgBlFFE0SIS7nyjzx5ZCIDfhhMW8sUoW/nFtFAbbnuoNUlHRj4mzdFQe400gKOY+S93zvWNLjHQVZUbuaA==
   dependencies:
-    "@react-navigation/routers" "^5.0.0-alpha.15"
+    "@react-navigation/routers" "^5.0.0-alpha.18"
+    color "^3.1.2"
 
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
