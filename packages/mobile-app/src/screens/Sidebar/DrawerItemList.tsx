@@ -43,7 +43,6 @@ export default function DrawerItemList({
     const focused = i === state.index;
     const { title, drawerLabel, drawerIcon } = descriptors[route.key].options;
     const [curCategory, label] = (drawerLabel as string).split('/');
-    console.log({ curCategory, label });
     const showCategoryLabel = curCategory !== preCategory;
     preCategory = curCategory;
 

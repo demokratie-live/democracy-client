@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components/native';
-import { Keyboard, Alert } from 'react-native';
+import { Keyboard, Alert, Platform } from 'react-native';
 import { sha256 } from 'react-native-sha256';
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -28,7 +28,7 @@ import Me from '../../../context/InitialStates/graphql/query/Me';
 import { VerificationContext } from '../../../context/Verification';
 
 const Container = styled.KeyboardAvoidingView.attrs(() => ({
-  behavior: 'padding',
+  behavior: Platform.OS === 'ios' ? 'padding' : undefined,
   keyboardVerticalOffset: 100,
   // enabled: true,
 }))`

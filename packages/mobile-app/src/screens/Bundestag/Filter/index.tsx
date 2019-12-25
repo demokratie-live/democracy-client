@@ -8,6 +8,7 @@ import { ListFilterContext } from '../../../context/ListFilter';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
 import { InitialStateContext } from '../../../context/InitialStates';
+import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
 
 // import SegmentHeader from '../../../components/ListSectionHeader';
 // import Checkbox from '../../../components/Checkbox';
@@ -45,10 +46,6 @@ const TitleSub = styled.Text`
   flex: 0.98;
   font-size: 15;
 `;
-
-const SaveButton = styled.Button.attrs({
-  color: '#fff',
-})``;
 
 type FilterScreenNavigationProp = StackNavigationProp<
   BundestagRootStackParamList,
@@ -127,7 +124,9 @@ export const Filter: React.FC<Props> = ({ navigation }) => {
   };
 
   navigation.setOptions({
-    headerRight: () => <SaveButton onPress={onSave} title="Speichern" />,
+    headerRight: () => (
+      <Button onPress={onSave} text="Speichern" textColor="white" />
+    ),
   });
 
   const onChange = ({
