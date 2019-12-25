@@ -12,6 +12,13 @@ import { LocalVotesContext } from '../../../context/LocalVotes';
 import { RootStackParamList } from '../../../routes';
 import { SidebarParamList } from '../../../routes/Sidebar';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { useMutation } from '@apollo/react-hooks';
+import {
+  ToggleNotification,
+  ToggleNotificationVariables,
+} from './graphql/muatation/__generated__/ToggleNotification';
+import { TOGGLE_NOTIFICATION } from './graphql/muatation/toggleNotification';
+import Procedure from './graphql/query/Procedure';
 
 // GraphQL
 // import client from '../../graphql/client';
@@ -134,6 +141,22 @@ const PrepareActions: React.FC<Props> = ({
   // active,
 }) => {
   const { getLocalVoteSelection } = useContext(LocalVotesContext);
+  const [toggleNotification] = useMutation<
+    ToggleNotification,
+    ToggleNotificationVariables
+  >(TOGGLE_NOTIFICATION, {
+    variables: {
+      procedureId,
+    },
+    refetchQueries: [
+      {
+        query: Procedure,
+        variables: {
+          id: procedureId,
+        },
+      },
+    ],
+  });
   const navigation = useNavigation<DetailScreenNavigationProps>();
 
   const showUnknownVoteNotification = () => {
@@ -232,7 +255,7 @@ const PrepareActions: React.FC<Props> = ({
             <ActionButton
               selection="NOTIFY"
               notify={notify}
-              onPress={() => Alert.alert('Notify')}
+              onPress={toggleNotification}
             />
             <VoteButtonLabel>
               {notify ? 'Stumm schalten' : 'Benachrichtigen'}
