@@ -1,9 +1,5 @@
-import React, { FC } from 'react';
-import {
-  createDrawerNavigator,
-  DrawerNavigationProp,
-} from '@react-navigation/drawer';
-import { Button, SafeAreaView } from 'react-native';
+import React from 'react';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import BundestagRootNavigation from './Bundestag';
 import IntroductionScreen from '../../screens/modals/Introduction';
 import { Sidebar } from '../../screens/Sidebar/Sidebar';
@@ -12,6 +8,7 @@ import GovernmentIcon from '@democracy-deutschland/mobile-ui/src/components/Icon
 import IncreaseArrowIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/IncreaseArrow';
 import InfoArrowIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Info';
 import WaterDrop from '@democracy-deutschland/mobile-ui/src/components/Icons/WaterDrop';
+import { Statistic } from '../../screens/Statistic';
 
 export type SidebarParamList = {
   Bundestag: undefined;
@@ -21,18 +18,6 @@ export type SidebarParamList = {
 };
 
 const SidebarDrawer = createDrawerNavigator<SidebarParamList>();
-
-interface MyStatisticScreenProps {
-  navigation: DrawerNavigationProp<SidebarParamList>;
-}
-
-const MyStatisticScreen: FC<MyStatisticScreenProps> = ({ navigation }) => {
-  return (
-    <SafeAreaView>
-      <Button onPress={() => navigation.goBack()} title="Go back home" />
-    </SafeAreaView>
-  );
-};
 
 export const SidebarNavigation = () => {
   return (
@@ -67,7 +52,7 @@ export const SidebarNavigation = () => {
           ),
         }}
         name="WahlOMeter"
-        component={MyStatisticScreen}
+        component={Statistic}
       />
       <SidebarDrawer.Screen
         options={{
@@ -78,7 +63,7 @@ export const SidebarNavigation = () => {
           ),
         }}
         name="Statistic"
-        component={MyStatisticScreen}
+        component={Statistic}
       />
       <SidebarDrawer.Screen
         options={{
