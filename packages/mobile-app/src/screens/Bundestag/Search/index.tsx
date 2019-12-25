@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components/native';
-import { SectionList } from 'react-native';
+import { SectionList, Platform } from 'react-native';
 import { SearchContext } from '../../../context/Search';
 import { Segment } from '../List/Components/Segment';
 import { Row } from '@democracy-deutschland/mobile-ui/src/components/Lists/Row';
@@ -53,6 +53,7 @@ const isProcedureGuard = (
 
 const Wrapper = styled.View`
   flex: 1;
+  margin-top: ${Platform.OS === 'android' ? 56 : 0};
   background-color: #fff;
 `;
 

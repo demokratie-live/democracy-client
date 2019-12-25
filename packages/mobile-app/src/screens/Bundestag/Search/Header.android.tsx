@@ -7,6 +7,9 @@ import {
   FinishSearchVariables,
 } from './graphql/mutation/__generated__/FinishSearch';
 import { FINISH_SEARCH } from './graphql/mutation/finishSearch';
+import { Platform } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
+import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
 
 // import client from '../../graphql/client';
 
@@ -19,7 +22,9 @@ const Wrapper = styled.View`
   flex: 1;
   flex-direction: row;
   align-items: center;
-  margin-right: 16;
+  min-height: ${Platform.OS === 'android' ? 56 : undefined};
+  background-color: #4494d3;
+  z-index: 1;
 `;
 
 // const Icons = styled(Ionicons.Button).attrs(() => ({
@@ -43,12 +48,6 @@ const SearchInput = styled.TextInput.attrs(() => ({
   color: #fff;
 `;
 
-// const SearchBackButtonAndroid = styled(Icons).attrs(() => ({
-//   name: 'md-arrow-back',
-// }))`
-//   padding-right: 16;
-// `;
-
 // const SearchClearButtonAndroid = styled(Icons).attrs(() => ({
 //   name: 'md-close',
 // }))`
@@ -64,6 +63,7 @@ export const SearchHeader: React.FC = () => {
     FinishSearch,
     FinishSearchVariables
   >(FINISH_SEARCH);
+  const navigation = useNavigation();
 
   const finishSearch = () => {
     addToHistory(term);
@@ -76,7 +76,7 @@ export const SearchHeader: React.FC = () => {
 
   return (
     <Wrapper>
-      {/* <SearchBackButtonAndroid onPress={this.clickBack} /> */}
+      <Button onPress={navigation.goBack} text="Zurück" textColor="white" />
       <SearchInput
         placeholder="Suche"
         onChangeText={setTerm}
@@ -84,7 +84,7 @@ export const SearchHeader: React.FC = () => {
         onSubmitEditing={finishSearch}
       />
 
-      {/* <SearchClearButtonAndroid visible={term} onPress={() => setTerm('')} /> */}
+      <Button onPress={() => setTerm('')} text="X" textColor="white" />
     </Wrapper>
   );
 };
