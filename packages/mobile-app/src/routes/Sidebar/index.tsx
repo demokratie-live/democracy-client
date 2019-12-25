@@ -9,6 +9,7 @@ import IncreaseArrowIcon from '@democracy-deutschland/mobile-ui/src/components/I
 import InfoArrowIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Info';
 import WaterDrop from '@democracy-deutschland/mobile-ui/src/components/Icons/WaterDrop';
 import { Statistic } from '../../screens/Statistic';
+import WahlOMeter from '../../screens/WahlOMeter';
 
 export type SidebarParamList = {
   Bundestag: undefined;
@@ -52,7 +53,7 @@ export const SidebarNavigation = () => {
           ),
         }}
         name="WahlOMeter"
-        component={Statistic}
+        component={WahlOMeter}
       />
       <SidebarDrawer.Screen
         options={{
