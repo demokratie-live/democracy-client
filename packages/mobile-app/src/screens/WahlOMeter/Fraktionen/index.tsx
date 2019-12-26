@@ -53,9 +53,7 @@ class Fraktionen extends PureComponent {
   getMatchingProcedures = ({ votedProcedures, localVotes }: any) =>
     votedProcedures.proceduresByIdHavingVoteResults.procedures.filter(
       ({ procedureId }: any) =>
-        localVotes.find(
-          ({ procedureId: pid }: any) => pid === procedureId,
-        ),
+        localVotes.find(({ procedureId: pid }: any) => pid === procedureId),
     );
 
   isCloseToBottom = ({
