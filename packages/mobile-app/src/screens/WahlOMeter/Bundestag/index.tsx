@@ -32,9 +32,7 @@ const ChartWrapper = styled.View`
 const getMatchingProcedures = ({ votedProcedures, localVotes }: any) =>
   votedProcedures.proceduresByIdHavingVoteResults.procedures.filter(
     ({ procedureId }: any) =>
-      localVotes.find(
-        ({ procedureId: pid }: any) => pid === procedureId,
-      ),
+      localVotes.find(({ procedureId: pid }: any) => pid === procedureId),
   );
 
 const pieChartData = ({ localVotes, matchingProcedures }: any) => {
@@ -42,9 +40,8 @@ const pieChartData = ({ localVotes, matchingProcedures }: any) => {
   const pieDataRaw = matchingProcedures.map(
     ({ voteResults, procedureId }: any) => ({
       government: voteResults.governmentDecision,
-      me: localVotes.find(
-        ({ procedureId: pid }: any) => pid === procedureId,
-      ).selection,
+      me: localVotes.find(({ procedureId: pid }: any) => pid === procedureId)
+        .selection,
     }),
   );
   const pieData = pieDataRaw.reduce(

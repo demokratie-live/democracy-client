@@ -14,7 +14,7 @@ import MaterialTabs from 'react-native-material-tabs';
 // Components
 import Bundestag from './Bundestag';
 import Fraktionen from './Fraktionen';
-// import Wahlkreis from './Wahlkreis';
+import Wahlkreis from './Wahlkreis';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -98,11 +98,11 @@ class WahlOMeter extends PureComponent<Props> {
         <Fraktionen />
       </View>
     );
-    // const wahlkreisScreen = (
-    //   <View key="wahlkreis" style={{ flex: 1, width: width }}>
-    //     <Wahlkreis />
-    //   </View>
-    // );
+    const wahlkreisScreen = (
+      <View key="wahlkreis" style={{ flex: 1, width: width }}>
+        <Wahlkreis />
+      </View>
+    );
     return (
       <Wrapper onLayout={this.onLayout}>
         {Platform.OS === 'ios' && (
@@ -140,11 +140,7 @@ class WahlOMeter extends PureComponent<Props> {
               ref={e => {
                 this.scrollView = e;
               }}>
-              {[
-                bundestagScreen,
-                fraktionenScreen,
-                // wahlkreisScreen
-              ]}
+              {[bundestagScreen, fraktionenScreen, wahlkreisScreen]}
             </ScrollView>
           </>
         )}
@@ -156,13 +152,13 @@ class WahlOMeter extends PureComponent<Props> {
                 barColor="#4494d3"
                 inactiveTextColor="#214867"
                 selectedIndex={selectedIndex}
-                onChange={selectedIndex => {
+                onChange={newSelectedIndex => {
                   this.setState({
-                    selectedIndex,
+                    newSelectedIndex,
                   });
                   this.scrollView.scrollTo({
                     y: 0,
-                    x: selectedIndex * this.state.width,
+                    x: newSelectedIndex * this.state.width,
                   });
                 }}
               />
@@ -178,11 +174,7 @@ class WahlOMeter extends PureComponent<Props> {
               ref={e => {
                 this.scrollView = e;
               }}>
-              {[
-                bundestagScreen,
-                fraktionenScreen,
-                // wahlkreisScreen
-              ]}
+              {[bundestagScreen, fraktionenScreen, wahlkreisScreen]}
             </ScrollView>
           </>
         )}
