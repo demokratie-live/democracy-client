@@ -25,7 +25,7 @@ const Subline = styled.Text`
   color: #db9522;
 `;
 
-const WahlOMeterLogo = ({ subline }) => (
+const WahlOMeterLogo = ({ subline }: any) => (
   <Wrapper>
     <Headline>Wahl-O-Meter</Headline>
     {subline && <Subline>{subline}</Subline>}

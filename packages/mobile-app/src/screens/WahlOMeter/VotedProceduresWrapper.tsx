@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components/native';
-import { unionBy } from 'lodash';
+import unionBy from 'lodash.unionby';
 
 // Components
 import NoVotesPlaceholder from './NoVotesPlaceholder';
@@ -53,6 +53,9 @@ const VotedProceduresWrapper = ({
   if (proceduresData && proceduresData.proceduresByIdHavingVoteResults) {
     totalProcedures = proceduresData.proceduresByIdHavingVoteResults.total;
   }
+  if (!procedurListData) {
+    return <ListLoading />;
+  }
   const listData =
     procedurListData &&
     procedurListData.proceduresByIdHavingVoteResults &&
@@ -94,8 +97,9 @@ const VotedProceduresWrapper = ({
           listData.length > 0 &&
           fetchMore({
             variables: {
-              offset: procedurListData!.proceduresByIdHavingVoteResults
-                .procedures.length,
+              offset:
+                procedurListData.proceduresByIdHavingVoteResults.procedures
+                  .length,
             },
             updateQuery: (prev, { fetchMoreResult }) => {
               if (!fetchMoreResult) {
