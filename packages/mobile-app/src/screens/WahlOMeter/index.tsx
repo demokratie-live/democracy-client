@@ -1,13 +1,14 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, createRef } from 'react';
 import styled from 'styled-components/native';
 import {
   Platform,
+  // eslint-disable-next-line react-native/split-platform-components
   SegmentedControlIOS,
   Dimensions,
   View,
-  Alert,
   NativeSyntheticEvent,
   NativeScrollEvent,
+  ScrollView,
 } from 'react-native';
 import MaterialTabs from 'react-native-material-tabs';
 
@@ -35,35 +36,20 @@ const AndroidControlsWrapper = styled.SafeAreaView`
   elevation: 2;
 `;
 
-const ScrollView = styled.ScrollView.attrs(() => ({
+const ScrollViewCmp = styled.ScrollView.attrs(() => ({
   horizontal: true,
   pagingEnabled: true,
 }))`
   flex: 1;
 `;
 
-interface Props {
-  navigation: any;
-  route: any;
-}
-
-class WahlOMeter extends PureComponent<Props> {
+class WahlOMeter extends PureComponent {
   state = {
     width: Dimensions.get('window').width,
     selectedIndex: 0,
     routes: ['Bundestag', 'Fraktionen', 'Wahlkreis'],
   };
-  scrollView: any;
-
-  onProcedureListItemClick = ({ item }: any) => () => {
-    Alert.alert('navigate to procedure', item.procedureId);
-    // this.props.navigateTo({
-    //   screen: 'democracy.Detail',
-    //   title: 'Abstimmung'.toUpperCase(),
-    //   passProps: { ...item },
-    //   backButtonTitle: '',
-    // });
-  };
+  scrollView = createRef<ScrollView>().current;
 
   onScrollEndDrag = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
     const { contentOffset } = e.nativeEvent;
@@ -85,6 +71,15 @@ class WahlOMeter extends PureComponent<Props> {
   };
 
   width = Dimensions.get('window').width;
+
+  scrollTo = ({ x, y }: { x: number; y: number }) => {
+    if (this.scrollView) {
+      this.scrollView.scrollTo({
+        y,
+        x,
+      });
+    }
+  };
 
   render() {
     const { selectedIndex, width, routes } = this.state;
@@ -120,7 +115,7 @@ class WahlOMeter extends PureComponent<Props> {
                   this.setState({
                     selectedIndex: event.nativeEvent.selectedSegmentIndex,
                   });
-                  this.scrollView.scrollTo({
+                  this.scrollTo({
                     y: 0,
                     x:
                       event.nativeEvent.selectedSegmentIndex * this.state.width,
@@ -129,19 +124,21 @@ class WahlOMeter extends PureComponent<Props> {
               />
             </SegmentControlsWrapper>
 
-            <ScrollView
+            <ScrollViewCmp
               onContentSizeChange={() => {
-                this.scrollView.scrollTo({
+                this.scrollTo({
                   y: 0,
                   x: selectedIndex * this.state.width,
                 });
               }}
               onMomentumScrollEnd={this.onScrollEndDrag}
               ref={e => {
-                this.scrollView = e;
+                if (e) {
+                  this.scrollView = e;
+                }
               }}>
               {[bundestagScreen, fraktionenScreen, wahlkreisScreen]}
-            </ScrollView>
+            </ScrollViewCmp>
           </>
         )}
         {Platform.OS === 'android' && (
@@ -156,16 +153,16 @@ class WahlOMeter extends PureComponent<Props> {
                   this.setState({
                     newSelectedIndex,
                   });
-                  this.scrollView.scrollTo({
+                  this.scrollTo({
                     y: 0,
                     x: newSelectedIndex * this.state.width,
                   });
                 }}
               />
             </AndroidControlsWrapper>
-            <ScrollView
+            <ScrollViewCmp
               onContentSizeChange={() => {
-                this.scrollView.scrollTo({
+                this.scrollTo({
                   y: 0,
                   x: selectedIndex * this.state.width,
                 });
@@ -175,7 +172,7 @@ class WahlOMeter extends PureComponent<Props> {
                 this.scrollView = e;
               }}>
               {[bundestagScreen, fraktionenScreen, wahlkreisScreen]}
-            </ScrollView>
+            </ScrollViewCmp>
           </>
         )}
       </Wrapper>
