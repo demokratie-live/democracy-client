@@ -5,11 +5,13 @@ import { Dimensions, Alert } from 'react-native';
 // Components
 import Header from '../Header';
 import ChartNote from '../ChartNote';
-import VotedProceduresWrapper from '../VotedProceduresWrapper';
+import VotedProceduresWrapper, { ChartData } from '../VotedProceduresWrapper';
 import NoVotesPlaceholder from '../NoVotesPlaceholder';
 import PieChart from '../../Bundestag/Procedure/components/Charts/PieChart';
 import ChartLegend from '../../Bundestag/Procedure/components/Charts/ChartLegend';
 import { Segment } from '../../Bundestag/List/Components/Segment';
+import { ChainEntry } from '../../../lib/VotesLocal';
+import { proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults_procedures } from '../../Bundestag/Procedure/Voting/components/graphql/query/__generated__/proceduresByIdHavingVoteResults';
 
 const Wrapper = styled.View`
   padding-top: 18;
@@ -29,23 +31,31 @@ const ChartWrapper = styled.View`
 `;
 
 // Filtered Array of procedures voted local
-const getMatchingProcedures = ({ votedProcedures, localVotes }: any) =>
+const getMatchingProcedures = ({ votedProcedures, localVotes }: ChartData) =>
   votedProcedures.proceduresByIdHavingVoteResults.procedures.filter(
-    ({ procedureId }: any) =>
-      localVotes.find(({ procedureId: pid }: any) => pid === procedureId),
+    ({ procedureId }) =>
+      localVotes.find(({ procedureId: pid }) => pid === procedureId),
   );
 
-const pieChartData = ({ localVotes, matchingProcedures }: any) => {
+const pieChartData = ({
+  localVotes,
+  matchingProcedures,
+}: {
+  localVotes: ChainEntry[];
+  matchingProcedures: proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults_procedures[];
+}) => {
   // Pie Chart Data Preparation
-  const pieDataRaw = matchingProcedures.map(
-    ({ voteResults, procedureId }: any) => ({
-      government: voteResults.governmentDecision,
-      me: localVotes.find(({ procedureId: pid }: any) => pid === procedureId)
-        .selection,
-    }),
-  );
+  const pieDataRaw = matchingProcedures.map(({ voteResults, procedureId }) => {
+    const userVote = localVotes.find(
+      ({ procedureId: pid }) => pid === procedureId,
+    );
+    return {
+      government: voteResults ? voteResults.governmentDecision : undefined,
+      me: userVote ? userVote.selection : undefined,
+    };
+  });
   const pieData = pieDataRaw.reduce(
-    (pre: any, { government, me }: any) => {
+    (pre, { government, me }) => {
       if (me === government) {
         return { ...pre, matches: pre.matches + 1, count: pre.count + 1 };
       } else {
@@ -76,9 +86,8 @@ class Bundestag extends PureComponent {
   render() {
     return (
       <VotedProceduresWrapper
-        onProcedureListItemClick={() => Alert.alert('navigate to procedure')}
-        navigator={navigator}>
-        {({ totalProcedures, chartData }: any) => {
+        onProcedureListItemClick={() => Alert.alert('navigate to procedure')}>
+        {({ totalProcedures, chartData }) => {
           const matchingProcedures = getMatchingProcedures(chartData);
           const preparedData = pieChartData({
             ...chartData,

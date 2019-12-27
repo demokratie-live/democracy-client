@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, ReactElement } from 'react';
 import styled from 'styled-components/native';
 import unionBy from 'lodash.unionby';
 
@@ -20,15 +20,33 @@ import {
 import { useQuery } from '@apollo/react-hooks';
 import { pieChartGovernmentData } from '../../lib/helper/PieChartGovernmentData';
 import { communityVoteData } from '../../lib/helper/PieChartCommunityData';
+import { ChainEntry } from '../../lib/VotesLocal';
 
 const Container = styled.View`
   background-color: #fff;
 `;
 
-const VotedProceduresWrapper = ({
+export interface ChartData {
+  votedProcedures: proceduresByIdHavingVoteResults;
+  localVotes: ChainEntry[];
+}
+interface ChildProps {
+  totalProcedures: number;
+  chartData: ChartData;
+}
+interface Props {
+  onProcedureListItemClick: ({
+    item,
+  }: {
+    item: proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults_procedures;
+  }) => void;
+  children: JSX.Element | ((props: ChildProps) => ReactElement);
+}
+
+const VotedProceduresWrapper: React.FC<Props> = ({
   onProcedureListItemClick,
   children,
-}: any) => {
+}) => {
   const { localVotes } = useContext(LocalVotesContext);
   const { data: proceduresData } = useQuery<
     proceduresByIdHavingVoteResults,
@@ -49,11 +67,11 @@ const VotedProceduresWrapper = ({
   if (!localVotes || localVotes.length === 0) {
     return <NoVotesPlaceholder subline="Bundestag" />;
   }
-  let totalProcedures: any = 0;
+  let totalProcedures = 0;
   if (proceduresData && proceduresData.proceduresByIdHavingVoteResults) {
-    totalProcedures = proceduresData.proceduresByIdHavingVoteResults.total;
+    totalProcedures = proceduresData.proceduresByIdHavingVoteResults.total || 0;
   }
-  if (!procedurListData) {
+  if (!procedurListData || !proceduresData) {
     return <ListLoading />;
   }
   const listData =
@@ -71,7 +89,7 @@ const VotedProceduresWrapper = ({
         data={['chart', ...listData]}
         renderItem={({ item }) =>
           item === 'chart' ? (
-            children({
+            (children as (props: ChildProps) => ReactElement)({
               totalProcedures,
               chartData: {
                 votedProcedures: proceduresData,

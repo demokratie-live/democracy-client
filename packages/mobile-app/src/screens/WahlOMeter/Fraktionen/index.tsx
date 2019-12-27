@@ -6,11 +6,16 @@ import { Dimensions, Alert } from 'react-native';
 
 import Header from '../Header';
 import ChartNote from '../ChartNote';
-import VotedProceduresWrapper from '../VotedProceduresWrapper';
+import VotedProceduresWrapper, { ChartData } from '../VotedProceduresWrapper';
 import NoVotesPlaceholder from '../NoVotesPlaceholder';
 import PartyChart from '../../Bundestag/Procedure/components/GovernmentVoteResults/PartyChart/Component';
 import ChartLegend from '../../Bundestag/Procedure/components/Charts/ChartLegend';
 import { Segment } from '../../Bundestag/List/Components/Segment';
+import { ChainEntry } from '../../../lib/VotesLocal';
+import {
+  proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults_procedures,
+  proceduresByIdHavingVoteResults,
+} from '../../Bundestag/Procedure/Voting/components/graphql/query/__generated__/proceduresByIdHavingVoteResults';
 
 const Wrapper = styled.View`
   padding-top: 18;
@@ -45,82 +50,81 @@ class Fraktionen extends PureComponent {
     }
   };
 
-  onClick = (index: any) => () => {
+  onClick = (index: number) => () => {
     this.setState({ selected: index });
   };
 
   // Filtered Array of procedures voted local
-  getMatchingProcedures = ({ votedProcedures, localVotes }: any) =>
+  getMatchingProcedures = ({ votedProcedures, localVotes }: ChartData) =>
     votedProcedures.proceduresByIdHavingVoteResults.procedures.filter(
-      ({ procedureId }: any) =>
-        localVotes.find(({ procedureId: pid }: any) => pid === procedureId),
+      ({ procedureId }) =>
+        localVotes.find(({ procedureId: pid }) => pid === procedureId),
     );
 
-  isCloseToBottom = ({
-    layoutMeasurement,
-    contentOffset,
-    contentSize,
-  }: any) => {
-    const paddingToBottom = 20;
-    return (
-      layoutMeasurement.height + contentOffset.y >=
-      contentSize.height - paddingToBottom
-    );
-  };
-
-  partyChartData = ({ localVotes, matchingProcedures }: any) => {
-    const chartData = matchingProcedures.reduce(
-      (prev: any, { voteResults: { partyVotes }, procedureId }: any) => {
-        const me = localVotes.find(
-          ({ procedureId: pid }: any) => pid === procedureId,
-        ).selection;
-        partyVotes.forEach(({ party, main }: any) => {
-          if (party === 'fraktionslos') {
-            return prev;
-          }
-          let matched = false;
-          if (me === main) {
-            matched = true;
-          }
-
-          if (prev[party] && matched) {
-            prev = {
-              ...prev,
-              [party]: {
-                ...prev[party],
-                matches: prev[party].matches + 1,
-              },
-            };
-          } else if (prev[party] && !matched) {
-            prev = {
-              ...prev,
-              [party]: {
-                ...prev[party],
-                diffs: prev[party].diffs + 1,
-              },
-            };
-          } else if (!prev[party] && matched) {
-            prev = {
-              ...prev,
-              [party]: {
-                diffs: 0,
-                matches: 1,
-              },
-            };
-          } else if (!prev[party] && !matched) {
-            prev = {
-              ...prev,
-              [party]: {
-                matches: 0,
-                diffs: 1,
-              },
-            };
-          }
-        });
+  partyChartData = ({
+    localVotes,
+    matchingProcedures,
+  }: {
+    matchingProcedures: proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults_procedures[];
+    votedProcedures: proceduresByIdHavingVoteResults;
+    localVotes: ChainEntry[];
+  }) => {
+    const chartData = matchingProcedures.reduce<{
+      [party: string]: { diffs: number; matches: number };
+    }>((prev, { voteResults, procedureId }) => {
+      if (!voteResults) {
         return prev;
-      },
-      {},
-    );
+      }
+      const { partyVotes } = voteResults;
+      const userVote = localVotes.find(
+        ({ procedureId: pid }) => pid === procedureId,
+      );
+      const me = userVote ? userVote.selection : undefined;
+      partyVotes.forEach(({ party, main }) => {
+        if (party === 'fraktionslos') {
+          return prev;
+        }
+        let matched = false;
+        if (me === main) {
+          matched = true;
+        }
+
+        if (prev[party] && matched) {
+          prev = {
+            ...prev,
+            [party]: {
+              ...prev[party],
+              matches: prev[party].matches + 1,
+            },
+          };
+        } else if (prev[party] && !matched) {
+          prev = {
+            ...prev,
+            [party]: {
+              ...prev[party],
+              diffs: prev[party].diffs + 1,
+            },
+          };
+        } else if (!prev[party] && matched) {
+          prev = {
+            ...prev,
+            [party]: {
+              diffs: 0,
+              matches: 1,
+            },
+          };
+        } else if (!prev[party] && !matched) {
+          prev = {
+            ...prev,
+            [party]: {
+              matches: 0,
+              diffs: 1,
+            },
+          };
+        }
+      });
+      return prev;
+    }, {});
     return Object.keys(chartData)
       .map(key => ({
         party: key,
@@ -140,7 +144,16 @@ class Fraktionen extends PureComponent {
       .sort((a, b) => b.values[0].value - a.values[0].value);
   };
 
-  prepareCharLegendData = (preparedData: any) => {
+  prepareCharLegendData = (
+    preparedData: {
+      party: string;
+      values: {
+        label: string;
+        value: number;
+        color: string;
+      }[];
+    }[],
+  ) => {
     const { selected } = this.state;
     return [
       {
@@ -161,9 +174,8 @@ class Fraktionen extends PureComponent {
 
     return (
       <VotedProceduresWrapper
-        onProcedureListItemClick={() => Alert.alert('navigate to procedure')}
-        navigator={navigator}>
-        {({ totalProcedures, chartData }: any) => {
+        onProcedureListItemClick={() => Alert.alert('navigate to procedure')}>
+        {({ totalProcedures, chartData }) => {
           const matchingProcedures = this.getMatchingProcedures(chartData);
 
           const preparedData = this.partyChartData({
