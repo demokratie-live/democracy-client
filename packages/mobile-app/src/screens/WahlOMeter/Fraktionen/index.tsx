@@ -197,7 +197,7 @@ class Fraktionen extends PureComponent {
                     onClick={this.onClick}
                     selected={selected}
                     showPercentage
-                    colors={['#f5a623', '#b1b3b4']}
+                    colors={['#b1b3b4', '#f5a623']}
                   />
                   <ChartLegend
                     data={this.prepareCharLegendData(preparedData)}
