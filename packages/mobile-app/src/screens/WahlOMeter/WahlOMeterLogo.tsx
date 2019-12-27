@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import PropTypes from 'prop-types';
 
 const CIRCLE_SIZE = 210;
 
@@ -25,15 +24,15 @@ const Subline = styled.Text`
   color: #db9522;
 `;
 
-const WahlOMeterLogo = ({ subline }: any) => (
+interface Props {
+  subline: string;
+}
+
+const WahlOMeterLogo: React.FC<Props> = ({ subline }) => (
   <Wrapper>
     <Headline>Wahl-O-Meter</Headline>
     {subline && <Subline>{subline}</Subline>}
   </Wrapper>
 );
-
-WahlOMeterLogo.propTypes = {
-  subline: PropTypes.string.isRequired,
-};
 
 export default WahlOMeterLogo;

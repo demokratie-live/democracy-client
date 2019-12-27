@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, ReactElement } from 'react';
 import unionBy from 'lodash.unionby';
 
 // Components
@@ -23,6 +23,8 @@ import { Row } from '@democracy-deutschland/mobile-ui/src/components/Lists/Row';
 import { pieChartGovernmentData } from '../../../lib/helper/PieChartGovernmentData';
 import { communityVoteData } from '../../../lib/helper/PieChartCommunityData';
 import { ListLoading } from '@democracy-deutschland/mobile-ui/src/components/shared/ListLoading';
+import { VoteSelection } from '../../../../__generated__/globalTypes';
+import { ChainEntry } from '../../../lib/VotesLocal';
 
 // GraphQL
 // import GET_PROCEDURE_CHART_DATA from '../../../graphql/queries/getDeputyChartData';
@@ -31,10 +33,36 @@ import { ListLoading } from '@democracy-deutschland/mobile-ui/src/components/sha
 // import GET_CONSTITUENCY from '../../../graphql/queries/local/constituency';
 // import VoteVarificationNoConstituency from '../../VoteVarification/NoConstituency';
 
-const VotedProceduresWrapper = ({
+export interface ChartData {
+  votedProcedures: {
+    procedureId: string;
+    decision: VoteSelection;
+  }[];
+  localVotes: ChainEntry[];
+}
+interface ChildProps {
+  deputy: {
+    party: string | null;
+    imgURL: string;
+    constituency: string;
+    name: string;
+  };
+  totalProcedures: number;
+  chartData: ChartData;
+}
+interface Props {
+  onProcedureListItemClick: ({
+    item,
+  }: {
+    item: 'chart' | DeputyProcedures_deputyProcedures_procedures_procedure;
+  }) => void;
+  children: JSX.Element | ((props: ChildProps) => ReactElement);
+}
+
+const VotedProceduresWrapper: React.FC<Props> = ({
   onProcedureListItemClick,
   children,
-}: any) => {
+}) => {
   const { localVotes } = useContext(LocalVotesContext);
 
   // TODO get constituency by context api
@@ -116,27 +144,34 @@ const VotedProceduresWrapper = ({
         'chart' | DeputyProcedures_deputyProcedures_procedures_procedure
       >
         data={['chart', ...listData]}
-        renderItem={({ item }) =>
-          item === 'chart' ? (
-            children({
+        renderItem={({ item }) => {
+          if (item === 'chart') {
+            const renderedChild = (children as (
+              props: ChildProps,
+            ) => ReactElement)({
               deputy,
               totalProcedures,
               chartData: {
                 votedProcedures,
                 localVotes,
               },
-            })
-          ) : (
-            <Row onPress={() => onProcedureListItemClick({ item })}>
-              <ListItem
-                {...item}
-                votes={item.communityVotes ? item.communityVotes.total || 0 : 0}
-                governmentVotes={pieChartGovernmentData(item)}
-                communityVotes={communityVoteData(item)}
-              />
-            </Row>
-          )
-        }
+            });
+            return renderedChild;
+          } else {
+            return (
+              <Row onPress={() => onProcedureListItemClick({ item })}>
+                <ListItem
+                  {...item}
+                  votes={
+                    item.communityVotes ? item.communityVotes.total || 0 : 0
+                  }
+                  governmentVotes={pieChartGovernmentData(item)}
+                  communityVotes={communityVoteData(item)}
+                />
+              </Row>
+            );
+          }
+        }}
         ListFooterComponent={() =>
           networkStatus === 3 ? <ListLoading /> : null
         }
