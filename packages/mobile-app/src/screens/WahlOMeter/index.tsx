@@ -16,6 +16,9 @@ import MaterialTabs from 'react-native-material-tabs';
 import Bundestag from './Bundestag';
 import Fraktionen from './Fraktionen';
 import Wahlkreis from './Wahlkreis';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { SidebarParamList } from '../../routes/Sidebar';
+import { RouteProp } from '@react-navigation/core';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -43,7 +46,19 @@ const ScrollViewCmp = styled.ScrollView.attrs(() => ({
   flex: 1;
 `;
 
-class WahlOMeter extends PureComponent {
+type WahlOMeterScreenNavigationProp = DrawerNavigationProp<
+  SidebarParamList,
+  'WahlOMeter'
+>;
+
+type WahlOMeterScreenRouteProp = RouteProp<SidebarParamList, 'WahlOMeter'>;
+
+interface Props {
+  route: WahlOMeterScreenRouteProp;
+  navigation: WahlOMeterScreenNavigationProp;
+}
+
+class WahlOMeter extends PureComponent<Props> {
   state = {
     width: Dimensions.get('window').width,
     selectedIndex: 0,

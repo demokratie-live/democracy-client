@@ -53,7 +53,7 @@ export const SidebarNavigation = () => {
           ),
         }}
         name="WahlOMeter"
-        component={() => <WahlOMeter />}
+        component={WahlOMeter}
       />
       <SidebarDrawer.Screen
         options={{

@@ -69,7 +69,8 @@ export default function DrawerItemList({
             navigation.dispatch({
               ...(focused
                 ? DrawerActions.closeDrawer()
-                : CommonActions.navigate(route.name)),
+                : CommonActions.navigate(route.name) &&
+                  DrawerActions.closeDrawer()),
               target: state.key,
             });
           }}
