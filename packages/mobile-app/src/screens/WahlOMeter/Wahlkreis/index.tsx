@@ -6,11 +6,13 @@ import Svg, { Rect, Text as SvgText, G } from 'react-native-svg';
 // Components
 import Header from '../Header';
 import ChartNote from '../ChartNote';
-import VotedProceduresWrapper from './VotedProceduresWrapper';
+import VotedProceduresWrapper, { ChartData } from './VotedProceduresWrapper';
 import NoVotesPlaceholder from '../NoVotesPlaceholder';
 import PartyComponent from '../../Bundestag/Procedure/components/GovernmentVoteResults/Parties';
 import ChartLegend from '../../Bundestag/Procedure/components/Charts/ChartLegend';
 import { Segment } from '../../Bundestag/List/Components/Segment';
+import { ChainEntry } from '../../../lib/VotesLocal';
+import { VoteSelection } from '../../../../__generated__/globalTypes';
 
 const Wrapper = styled.View`
   padding-top: 18;
@@ -68,22 +70,33 @@ const ChartWrapper = styled.View`
 `;
 
 // Filtered Array of procedures voted local
-const getMatchingProcedures = ({ votedProcedures, localVotes }: any) =>
-  votedProcedures.filter(({ procedureId }: any) =>
-    localVotes.find(({ procedureId: pid }: any) => pid === procedureId),
+const getMatchingProcedures = ({ votedProcedures, localVotes }: ChartData) =>
+  votedProcedures.filter(({ procedureId }) =>
+    localVotes.find(({ procedureId: pid }) => pid === procedureId),
   );
 
-const pieChartData = ({ localVotes, matchingProcedures }: any) => {
+const pieChartData = ({
+  localVotes,
+  matchingProcedures,
+}: {
+  localVotes: ChainEntry[];
+  matchingProcedures: {
+    procedureId: string;
+    decision: VoteSelection;
+  }[];
+}) => {
   // Pie Chart Data Preparation
-  const pieDataRaw = matchingProcedures.map(
-    ({ decision, procedureId }: any) => ({
+  const pieDataRaw = matchingProcedures.map(({ decision, procedureId }) => {
+    const userVote = localVotes.find(
+      ({ procedureId: pid }) => pid === procedureId,
+    );
+    return {
       deputy: decision,
-      me: localVotes.find(({ procedureId: pid }: any) => pid === procedureId)
-        .selection,
-    }),
-  );
+      me: userVote ? userVote.selection : undefined,
+    };
+  });
   const pieData = pieDataRaw.reduce(
-    (pre: any, { deputy, me }: any) => {
+    (pre, { deputy, me }) => {
       if (me === deputy) {
         return { ...pre, matches: pre.matches + 1, count: pre.count + 1 };
       } else {
@@ -114,13 +127,12 @@ class Wahlkreis extends PureComponent {
   render() {
     return (
       <VotedProceduresWrapper
-        onProcedureListItemClick={() => Alert.alert('navigate to procedure')}
-        navigator={navigator}>
+        onProcedureListItemClick={() => Alert.alert('navigate to procedure')}>
         {({
           totalProcedures,
           chartData,
           deputy: { imgURL, party, constituency, name },
-        }: any) => {
+        }) => {
           const WIDTH = 300;
           const matchingProcedures = getMatchingProcedures(chartData);
           const preparedData = pieChartData({

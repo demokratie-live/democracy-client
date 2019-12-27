@@ -13,6 +13,7 @@ import PartyChart from './components/PartyChart';
 import Fade from './components/Animations/Fade';
 import { BundestagRootStackParamList } from '../../../../routes/Sidebar/Bundestag';
 import { RouteProp } from '@react-navigation/core';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -64,6 +65,11 @@ const BalloutBoxWrapper = styled.View`
   border-top-color: rgba(68, 148, 211, 0.1);
 `;
 
+type VoteVerificationScreenNavigationProp = StackNavigationProp<
+  BundestagRootStackParamList,
+  'Voting'
+>;
+
 type VoteVerificationScreenRouteProp = RouteProp<
   BundestagRootStackParamList,
   'Voting'
@@ -71,7 +77,7 @@ type VoteVerificationScreenRouteProp = RouteProp<
 
 interface Props {
   route: VoteVerificationScreenRouteProp;
-  navigation: any;
+  navigation: VoteVerificationScreenNavigationProp;
 }
 
 export class VoteVerification extends PureComponent<Props> {
