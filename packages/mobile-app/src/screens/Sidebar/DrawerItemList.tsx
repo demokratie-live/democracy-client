@@ -46,6 +46,11 @@ export default function DrawerItemList({
     const showCategoryLabel = curCategory !== preCategory;
     preCategory = curCategory;
 
+    const navigateToScreen = (screen: string) => {
+      DrawerActions.closeDrawer();
+      return CommonActions.navigate(screen);
+    };
+
     return (
       <View key={route.key}>
         {showCategoryLabel && <Space />}
@@ -69,7 +74,7 @@ export default function DrawerItemList({
             navigation.dispatch({
               ...(focused
                 ? DrawerActions.closeDrawer()
-                : CommonActions.navigate(route.name)),
+                : navigateToScreen(route.name)),
               target: state.key,
             });
           }}
