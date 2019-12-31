@@ -97,7 +97,7 @@ const ListItem: React.FC<Props> = ({
         >
           {title}
         </Title>
-        {subline && (
+        {!!subline && (
           <Subline
             // TODO title length function
             // numberOfLines={titleLines > 2 ? 1 : 2}
