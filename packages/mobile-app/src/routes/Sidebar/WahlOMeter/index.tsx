@@ -10,11 +10,17 @@ import { RootStackParamList } from '../..';
 import MenuIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Menu';
 import styled from 'styled-components/native';
 import WahlOMeter from '../../../screens/WahlOMeter';
-import { Procedure } from '../../../screens/Bundestag';
+import { Procedure, VoteVerification } from '../../../screens/Bundestag';
+import { VoteSelection } from '../../../../__generated__/globalTypes';
 
 export type WahlOMeterStackParamList = {
   WahlOMeter: undefined;
   Procedure: { procedureId: string; title: string };
+  Voting: {
+    selection: VoteSelection.YES | VoteSelection.ABSTINATION | VoteSelection.NO;
+    procedureId: string;
+    procedureObjId: string;
+  };
 };
 
 const WahlOMeterStack = createStackNavigator<WahlOMeterStackParamList>();
@@ -59,6 +65,7 @@ const WahlOMeterNavigation = () => {
         component={Procedure}
         options={({ route }) => ({ title: route.params.title })}
       />
+      <WahlOMeterStack.Screen name="Voting" component={VoteVerification} />
     </WahlOMeterStack.Navigator>
   );
 };
