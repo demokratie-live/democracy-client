@@ -9,6 +9,7 @@ import { InitialStateContext } from '../../context/InitialStates';
 import { Segment } from '../Bundestag/List/Components/Segment';
 import { ListItem } from './components/ListItem';
 import styled from 'styled-components/native';
+import { useNavigation } from '@react-navigation/core';
 
 const Text = styled.Text`
   font-size: 17;
@@ -37,13 +38,14 @@ type Props = {
 };
 
 export const Settings: React.FC<Props> = () => {
+  const navigation = useNavigation();
   const { constituency } = useContext(ConstituencyContext);
   const { isVerified } = useContext(InitialStateContext);
   const navigateTo = (screen: string) => () => {
     switch (screen) {
       case 'constituency':
         // TODO navigate to constituency selection
-        Alert.alert('navigate to constituency');
+        navigation.navigate('Constituency');
         break;
       case 'verificate':
         // TODO navigate to constituency selection
@@ -54,8 +56,6 @@ export const Settings: React.FC<Props> = () => {
         break;
     }
   };
-
-  const hasConstituency = !!constituency;
 
   const listData: List[] = [
     {
@@ -86,23 +86,6 @@ export const Settings: React.FC<Props> = () => {
         {
           title: 'Benachrichtigungen',
           onPress: navigateTo('notifications-settings'),
-        },
-        // { title: 'Newsletter' },
-      ],
-    },
-    {
-      title: 'Auswertungen',
-      data: [
-        { title: 'Wahl-O-Meter', onPress: navigateTo('wahl-o-meter') },
-        {
-          title: 'Abgeordnetenprofil',
-          onPress: hasConstituency
-            ? navigateTo('memberProfil')
-            : navigateTo('constituency'),
-        },
-        {
-          title: 'Persönliche Historie',
-          onPress: navigateTo('statistic'),
         },
       ],
     },

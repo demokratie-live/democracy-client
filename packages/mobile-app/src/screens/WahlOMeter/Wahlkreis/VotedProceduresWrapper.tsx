@@ -25,6 +25,7 @@ import { communityVoteData } from '../../../lib/helper/PieChartCommunityData';
 import { ListLoading } from '@democracy-deutschland/mobile-ui/src/components/shared/ListLoading';
 import { VoteSelection } from '../../../../__generated__/globalTypes';
 import { ChainEntry } from '../../../lib/VotesLocal';
+import { useNavigation } from '@react-navigation/core';
 
 // GraphQL
 // import GET_PROCEDURE_CHART_DATA from '../../../graphql/queries/getDeputyChartData';
@@ -63,6 +64,7 @@ const VotedProceduresWrapper: React.FC<Props> = ({
   onProcedureListItemClick,
   children,
 }) => {
+  const navigation = useNavigation();
   const { localVotes } = useContext(LocalVotesContext);
 
   // TODO get constituency by context api
@@ -92,7 +94,7 @@ const VotedProceduresWrapper: React.FC<Props> = ({
   });
 
   if (!constituency) {
-    return <VoteVarificationNoConstituency />;
+    return <VoteVarificationNoConstituency navigation={navigation as any} />;
   }
 
   let hasMore = true;
