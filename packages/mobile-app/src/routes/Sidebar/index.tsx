@@ -11,11 +11,13 @@ import IntroductionScreen from '../../screens/modals/Introduction';
 import { Sidebar } from '../../screens/Sidebar/Sidebar';
 import StatisticRootNavigation from './Statistic';
 import WahlOMeterNavigation from './WahlOMeter';
+import SettingsRootNavigation from './Settings';
 
 export type SidebarParamList = {
   Bundestag: undefined;
   Statistic: undefined;
   WahlOMeter: undefined;
+  Settings: undefined;
   Introduction: RootStackParamList['Introduction'];
 };
 
@@ -66,6 +68,17 @@ export const SidebarNavigation = () => {
         }}
         name="Statistic"
         component={StatisticRootNavigation}
+      />
+      <SidebarDrawer.Screen
+        options={{
+          drawerLabel: 'Mehr/Settings',
+          gestureEnabled: true,
+          drawerIcon: ({ color, size }) => (
+            <IncreaseArrowIcon width={size} height={size} color={color} />
+          ),
+        }}
+        name="Settings"
+        component={SettingsRootNavigation}
       />
       <SidebarDrawer.Screen
         options={{
