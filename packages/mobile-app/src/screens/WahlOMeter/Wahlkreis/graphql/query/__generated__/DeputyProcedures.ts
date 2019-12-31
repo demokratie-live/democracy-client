@@ -43,6 +43,7 @@ export interface DeputyProcedures_deputyProcedures_procedures_procedure {
   submissionDate: any | null;
   completed: boolean | null;
   voted: boolean;
+  type: string;
   voteResults: DeputyProcedures_deputyProcedures_procedures_procedure_voteResults | null;
   communityVotes: DeputyProcedures_deputyProcedures_procedures_procedure_communityVotes | null;
 }

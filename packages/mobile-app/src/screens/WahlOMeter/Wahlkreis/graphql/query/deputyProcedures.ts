@@ -24,6 +24,7 @@ export const DEPUTY_PROCEDURES = gql`
           submissionDate
           completed
           voted
+          type
           voteResults {
             governmentDecision
             yes

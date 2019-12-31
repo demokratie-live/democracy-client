@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import React, { useState, useContext } from 'react';
-import { Dimensions, SectionList, Alert, SafeAreaView } from 'react-native';
+import { Dimensions, SectionList, SafeAreaView } from 'react-native';
 import Chart from './Chart';
 import { useQuery } from '@apollo/react-hooks';
 import { VOTE_STATISTIC } from './graphql/query/getStatistic';
@@ -17,6 +17,9 @@ import { LocalVotesContext } from '../../context/LocalVotes';
 import { communityVoteData } from '../../lib/helper/PieChartCommunityData';
 import { Segment } from '../Bundestag/List/Components/Segment';
 import { Row } from '@democracy-deutschland/mobile-ui/src/components/Lists/Row';
+import { RouteProp } from '@react-navigation/core';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { StatisticRootStackParamList } from '../../routes/Sidebar/Statistic';
 
 const ScrollWrapper = styled.ScrollView`
   flex: 1;
@@ -50,7 +53,22 @@ const StatisticNumberDescription = styled.Text`
   color: #4a4a4a;
 `;
 
-export const Statistic: React.FC = () => {
+type StatisticScreenNavigationProp = StackNavigationProp<
+  StatisticRootStackParamList,
+  'Statistic'
+>;
+
+type StatisticScreenRouteProp = RouteProp<
+  StatisticRootStackParamList,
+  'Statistic'
+>;
+
+interface Props {
+  route: StatisticScreenRouteProp;
+  navigation: StatisticScreenNavigationProp;
+}
+
+export const Statistic: React.FC<Props> = ({ navigation }) => {
   const { data: voteStatisticData } = useQuery<VoteStatistic>(VOTE_STATISTIC);
   const { getLocalVoteSelection } = useContext(LocalVotesContext);
   const {
@@ -122,6 +140,7 @@ export const Statistic: React.FC = () => {
                   voteResults = null,
                   votedGovernment,
                   procedureId,
+                  type,
                 } = item;
                 let subline = null;
                 if (sessionTOPHeading) {
@@ -142,11 +161,10 @@ export const Statistic: React.FC = () => {
                 return (
                   <Row
                     onPress={() => {
-                      Alert.alert('navigate to procedure');
-                      // navigation.navigate('Procedure', {
-                      //   procedureId,
-                      //   title: type || procedureId,
-                      // })
+                      navigation.navigate('Procedure', {
+                        procedureId,
+                        title: type || procedureId,
+                      });
                     }}>
                     <ListItem
                       title={title}
