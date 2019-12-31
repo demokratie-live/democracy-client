@@ -25,15 +25,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { BundestagRootStackParamList } from '../../../../../routes/Sidebar/Bundestag';
 import Procedure from '../../graphql/query/Procedure';
 import { LocalVotesContext } from '../../../../../context/LocalVotes';
-
-// import VOTE from '../../graphql/mutations/vote';
-// import VOTE_LOCAL from '../../graphql/mutations/local/vote';
-// import VOTED from '../../graphql/queries/voted';
-// import VOTES from '../../graphql/queries/votes';
-// import VOTE_SELECTION_LOCAL from '../../graphql/queries/local/voteSelection';
-// import F_ACTIVITY_INDEX from '../../graphql/fragments/ProcedureActivityIndex';
-// import F_VOTED from '../../graphql/fragments/ProcedureVoted';
-// import VOTES_SELECTION_LOCAL from '../../graphql/queries/local/votesSelection';
+import { ConstituencyContext } from '../../../../../context/Constituency';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -104,8 +96,7 @@ const BalloutBox: React.FC<Props> = ({
     ],
   });
   const [isDraggable, setIsDraggable] = useState(true);
-
-  const constituency = '103';
+  const { constituency } = useContext(ConstituencyContext);
 
   const pan = React.useRef(new Animated.ValueXY({ x: 0, y: 0 })).current;
 
@@ -202,6 +193,7 @@ const BalloutBox: React.FC<Props> = ({
       navigation,
       setLocalVote,
       procedureObjId,
+      constituency,
     ],
   );
 
