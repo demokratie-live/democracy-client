@@ -1,12 +1,12 @@
-import React, { PureComponent } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components/native';
-import { Platform, ActivityIndicator } from 'react-native';
+import { Platform } from 'react-native';
 
 import BallotBox from './components/BallotBox';
 
 // Components
 import NoConstituency from './components/NoConstituency';
-import PartyChart from './components/PartyChart';
+// import PartyChart from './components/PartyChart';
 
 // GraphQL
 // import GET_CONSTITUENCY from '../../graphql/queries/local/constituency';
@@ -14,6 +14,7 @@ import Fade from './components/Animations/Fade';
 import { BundestagRootStackParamList } from '../../../../routes/Sidebar/Bundestag';
 import { RouteProp } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { ConstituencyContext } from '../../../../context/Constituency';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -80,49 +81,46 @@ interface Props {
   navigation: VoteVerificationScreenNavigationProp;
 }
 
-export class VoteVerification extends PureComponent<Props> {
-  state = {
-    showWarning: true,
-  };
+export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
+  const [showWarning, setShowWarning] = useState(true);
+  const { constituency } = useContext(ConstituencyContext);
 
-  onScroll = () => {
-    if (this.state.showWarning) {
-      this.setState({ showWarning: false });
+  const onScroll = () => {
+    if (showWarning) {
+      setShowWarning(false);
     }
   };
 
-  render() {
-    const { selection, procedureId, procedureObjId } = this.props.route.params;
-    // Load constituency from context api
-    const data = { constituency: { constituency: null }, loading: false };
-    return (
-      <Wrapper>
-        <ScrollWrapper onScroll={this.onScroll}>
-          <Title>Schon gewusst?</Title>
-          {data.loading && <ActivityIndicator size="large" />}
-          {!data.loading && !data.constituency.constituency && (
-            <NoConstituency navigation={this.props.navigation as any} />
-          )}
-          {!data.loading && data.constituency.constituency && <PartyChart />}
-        </ScrollWrapper>
-        <WarnWrapper pointerEvents="none">
-          <Fade visible={this.state.showWarning}>
-            <WarnTextWrapper>
-              <WarnText>
-                Deine Stimme ist verbindlich und kann nicht zurückgenommen
-                werden
-              </WarnText>
-            </WarnTextWrapper>
-          </Fade>
-        </WarnWrapper>
-        <BalloutBoxWrapper>
-          <BallotBox
-            selection={selection}
-            procedureId={procedureId}
-            procedureObjId={procedureObjId}
-          />
-        </BalloutBoxWrapper>
-      </Wrapper>
-    );
-  }
-}
+  console.log({ constituency });
+
+  const { selection, procedureId, procedureObjId } = route.params;
+  // Load constituency from context api
+  return (
+    <Wrapper>
+      <ScrollWrapper onScroll={onScroll}>
+        <Title>Schon gewusst?</Title>
+        {!constituency && <NoConstituency navigation={navigation as any} />}
+        {/* {!!constituency && <PartyChart />} */}
+        {
+          // TODO add party chart here
+        }
+      </ScrollWrapper>
+      <WarnWrapper pointerEvents="none">
+        <Fade visible={showWarning}>
+          <WarnTextWrapper>
+            <WarnText>
+              Deine Stimme ist verbindlich und kann nicht zurückgenommen werden
+            </WarnText>
+          </WarnTextWrapper>
+        </Fade>
+      </WarnWrapper>
+      <BalloutBoxWrapper>
+        <BallotBox
+          selection={selection}
+          procedureId={procedureId}
+          procedureObjId={procedureObjId}
+        />
+      </BalloutBoxWrapper>
+    </Wrapper>
+  );
+};
