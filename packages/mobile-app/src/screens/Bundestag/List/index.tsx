@@ -182,7 +182,10 @@ export const List = () => {
         keyExtractor={({ procedureId }) => procedureId}
         refreshing={networkStatus === 4}
         ListFooterComponent={() => (hasMore ? <ListLoading /> : null)}
-        onRefresh={refetch}
+        onRefresh={() => {
+          setHasMore(true);
+          refetch();
+        }}
         onEndReachedThreshold={0.5}
         onEndReached={() => {
           !loading &&
