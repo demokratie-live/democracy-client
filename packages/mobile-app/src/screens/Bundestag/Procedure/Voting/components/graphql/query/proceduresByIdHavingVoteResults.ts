@@ -24,6 +24,7 @@ export default gql`
         subjectGroups
         votedGovernment
         voted
+        type
         voteResults {
           governmentDecision
           yes

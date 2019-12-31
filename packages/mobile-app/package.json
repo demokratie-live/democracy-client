@@ -78,7 +78,7 @@
     "@types/jest": "^24.0.22",
     "@types/jwt-decode": "^2.2.1",
     "@types/lodash.unionby": "^4.8.6",
-    "@types/react": "16.9.16",
+    "@types/react": "16.9.17",
     "@types/react-native": "^0.60.25",
     "@types/react-test-renderer": "16.9.0",
     "@types/speakingurl": "^13.0.2",

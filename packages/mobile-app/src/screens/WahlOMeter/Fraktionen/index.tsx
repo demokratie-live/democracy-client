@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components/native';
-import { Dimensions, Alert } from 'react-native';
+import { Dimensions } from 'react-native';
 
 // Components
 
@@ -16,6 +16,7 @@ import {
   proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults_procedures,
   proceduresByIdHavingVoteResults,
 } from '../../Bundestag/Procedure/Voting/components/graphql/query/__generated__/proceduresByIdHavingVoteResults';
+import { WahlOMeterScreenNavigationProp } from '..';
 
 const Wrapper = styled.View`
   padding-top: 18;
@@ -30,7 +31,11 @@ const ChartWrapper = styled.View`
     Math.min(Dimensions.get('window').width, Dimensions.get('window').height)};
 `;
 
-class Fraktionen extends PureComponent {
+interface Props {
+  navigation: WahlOMeterScreenNavigationProp;
+}
+
+class Fraktionen extends PureComponent<Props> {
   state = {
     chartWidth: Math.min(
       Dimensions.get('screen').width,
@@ -174,7 +179,12 @@ class Fraktionen extends PureComponent {
 
     return (
       <VotedProceduresWrapper
-        onProcedureListItemClick={() => Alert.alert('navigate to procedure')}>
+        onProcedureListItemClick={({ item }) =>
+          this.props.navigation.navigate('Procedure', {
+            procedureId: item.procedureId,
+            title: item.type || item.procedureId,
+          })
+        }>
         {({ totalProcedures, chartData }) => {
           const matchingProcedures = this.getMatchingProcedures(chartData);
 

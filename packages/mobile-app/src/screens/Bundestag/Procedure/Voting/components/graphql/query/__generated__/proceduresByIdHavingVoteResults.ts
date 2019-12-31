@@ -44,6 +44,7 @@ export interface proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults
   completed: boolean | null;
   subjectGroups: string[] | null;
   voted: boolean;
+  type: string;
   voteResults: proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults_procedures_voteResults | null;
   communityVotes: proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults_procedures_communityVotes | null;
 }

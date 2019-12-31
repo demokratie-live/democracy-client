@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components/native';
-import { Dimensions, Alert } from 'react-native';
+import { Dimensions } from 'react-native';
 
 // Components
 import Header from '../Header';
@@ -12,6 +12,7 @@ import ChartLegend from '../../Bundestag/Procedure/components/Charts/ChartLegend
 import { Segment } from '../../Bundestag/List/Components/Segment';
 import { ChainEntry } from '../../../lib/VotesLocal';
 import { proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults_procedures } from '../../Bundestag/Procedure/Voting/components/graphql/query/__generated__/proceduresByIdHavingVoteResults';
+import { WahlOMeterScreenNavigationProp } from '..';
 
 const Wrapper = styled.View`
   padding-top: 18;
@@ -82,11 +83,21 @@ const pieChartData = ({
   ];
 };
 
-class Bundestag extends PureComponent {
+interface Props {
+  navigation: WahlOMeterScreenNavigationProp;
+}
+
+class Bundestag extends PureComponent<Props> {
   render() {
+    const { navigation } = this.props;
     return (
       <VotedProceduresWrapper
-        onProcedureListItemClick={() => Alert.alert('navigate to procedure')}>
+        onProcedureListItemClick={({ item }) =>
+          navigation.navigate('Procedure', {
+            procedureId: item.procedureId,
+            title: item.type || item.procedureId,
+          })
+        }>
         {({ totalProcedures, chartData }) => {
           const matchingProcedures = getMatchingProcedures(chartData);
           const preparedData = pieChartData({

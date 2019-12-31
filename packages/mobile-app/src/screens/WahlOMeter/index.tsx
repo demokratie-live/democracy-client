@@ -16,9 +16,9 @@ import MaterialTabs from 'react-native-material-tabs';
 import Bundestag from './Bundestag';
 import Fraktionen from './Fraktionen';
 import Wahlkreis from './Wahlkreis';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { SidebarParamList } from '../../routes/Sidebar';
 import { RouteProp } from '@react-navigation/core';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { WahlOMeterStackParamList } from '../../routes/Sidebar/WahlOMeter';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -46,12 +46,15 @@ const ScrollViewCmp = styled.ScrollView.attrs(() => ({
   flex: 1;
 `;
 
-type WahlOMeterScreenNavigationProp = DrawerNavigationProp<
-  SidebarParamList,
+export type WahlOMeterScreenNavigationProp = StackNavigationProp<
+  WahlOMeterStackParamList,
   'WahlOMeter'
 >;
 
-type WahlOMeterScreenRouteProp = RouteProp<SidebarParamList, 'WahlOMeter'>;
+type WahlOMeterScreenRouteProp = RouteProp<
+  WahlOMeterStackParamList,
+  'WahlOMeter'
+>;
 
 interface Props {
   route: WahlOMeterScreenRouteProp;
@@ -100,17 +103,17 @@ class WahlOMeter extends PureComponent<Props> {
     const { selectedIndex, width, routes } = this.state;
     const bundestagScreen = (
       <View key="bundestag" style={{ flex: 1, width: width }}>
-        <Bundestag />
+        <Bundestag navigation={this.props.navigation} />
       </View>
     );
     const fraktionenScreen = (
       <View key="fraktionen" style={{ flex: 1, width: width }}>
-        <Fraktionen />
+        <Fraktionen navigation={this.props.navigation} />
       </View>
     );
     const wahlkreisScreen = (
       <View key="wahlkreis" style={{ flex: 1, width: width }}>
-        <Wahlkreis />
+        <Wahlkreis navigation={this.props.navigation} />
       </View>
     );
     return (

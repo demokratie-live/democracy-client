@@ -1,15 +1,16 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import BundestagRootNavigation from './Bundestag';
-import IntroductionScreen from '../../screens/modals/Introduction';
-import { Sidebar } from '../../screens/Sidebar/Sidebar';
 import { RootStackParamList } from '..';
 import GovernmentIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Government';
 import IncreaseArrowIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/IncreaseArrow';
 import InfoArrowIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Info';
 import WaterDrop from '@democracy-deutschland/mobile-ui/src/components/Icons/WaterDrop';
-import { Statistic } from '../../screens/Statistic';
-import WahlOMeter from '../../screens/WahlOMeter';
+
+import IntroductionScreen from '../../screens/modals/Introduction';
+import { Sidebar } from '../../screens/Sidebar/Sidebar';
+import StatisticRootNavigation from './Statistic';
+import WahlOMeterNavigation from './WahlOMeter';
 
 export type SidebarParamList = {
   Bundestag: undefined;
@@ -53,7 +54,7 @@ export const SidebarNavigation = () => {
           ),
         }}
         name="WahlOMeter"
-        component={WahlOMeter}
+        component={WahlOMeterNavigation}
       />
       <SidebarDrawer.Screen
         options={{
@@ -64,7 +65,7 @@ export const SidebarNavigation = () => {
           ),
         }}
         name="Statistic"
-        component={Statistic}
+        component={StatisticRootNavigation}
       />
       <SidebarDrawer.Screen
         options={{

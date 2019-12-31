@@ -13,6 +13,7 @@ import ChartLegend from '../../Bundestag/Procedure/components/Charts/ChartLegend
 import { Segment } from '../../Bundestag/List/Components/Segment';
 import { ChainEntry } from '../../../lib/VotesLocal';
 import { VoteSelection } from '../../../../__generated__/globalTypes';
+import { WahlOMeterScreenNavigationProp } from '..';
 
 const Wrapper = styled.View`
   padding-top: 18;
@@ -123,11 +124,22 @@ const pieChartData = ({
   ];
 };
 
-class Wahlkreis extends PureComponent {
+interface Props {
+  navigation: WahlOMeterScreenNavigationProp;
+}
+
+class Wahlkreis extends PureComponent<Props> {
   render() {
     return (
       <VotedProceduresWrapper
-        onProcedureListItemClick={() => Alert.alert('navigate to procedure')}>
+        onProcedureListItemClick={({ item }) =>
+          item !== 'chart'
+            ? this.props.navigation.navigate('Procedure', {
+                procedureId: item.procedureId,
+                title: item.type || item.procedureId,
+              })
+            : null
+        }>
         {({
           totalProcedures,
           chartData,

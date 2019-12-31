@@ -47,7 +47,10 @@ export default function DrawerItemList({
     preCategory = curCategory;
 
     const navigateToScreen = (screen: string) => {
-      DrawerActions.closeDrawer();
+      navigation.dispatch({
+        ...DrawerActions.closeDrawer(),
+        target: state.key,
+      });
       return CommonActions.navigate(screen);
     };
 
