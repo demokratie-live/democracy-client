@@ -10,6 +10,7 @@ import DeviceInfo from 'react-native-device-info';
 import { InitialState } from '@react-navigation/core';
 import { SidebarNavigation } from './Sidebar';
 import { PdfScreen } from '../screens/modals/Pdf/Pdf';
+import { ConstituencyScreen } from '../screens/modals/Constituency';
 
 export type RootStackParamList = {
   Sidebar: undefined;
@@ -17,6 +18,7 @@ export type RootStackParamList = {
   Introduction: { done?: () => void; lastStartWithVersion?: string };
   Verification: {};
   Pdf: { url: string };
+  Constituency: undefined;
 };
 
 const RootStack = createStackNavigator<RootStackParamList>();
@@ -68,6 +70,11 @@ const App = () => {
         <RootStack.Screen
           name="Pdf"
           component={PdfScreen}
+          options={{ headerShown: true }}
+        />
+        <RootStack.Screen
+          name="Constituency"
+          component={ConstituencyScreen}
           options={{ headerShown: true }}
         />
         <RootStack.Screen

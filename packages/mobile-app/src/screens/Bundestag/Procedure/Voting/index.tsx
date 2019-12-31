@@ -101,7 +101,7 @@ export class VoteVerification extends PureComponent<Props> {
           <Title>Schon gewusst?</Title>
           {data.loading && <ActivityIndicator size="large" />}
           {!data.loading && !data.constituency.constituency && (
-            <NoConstituency />
+            <NoConstituency navigation={this.props.navigation as any} />
           )}
           {!data.loading && data.constituency.constituency && <PartyChart />}
         </ScrollWrapper>
