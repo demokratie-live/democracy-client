@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ActivityIndicator, Dimensions, Platform } from 'react-native';
 // eslint-disable-next-line import/default
 import Swiper from 'react-native-swiper'; // TODO Replace this library (it's not good maintained)
@@ -13,6 +13,7 @@ import PieChart from './Charts/PieChart';
 import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Folding';
 import ChartLegend from './Charts/ChartLegend';
 import { Procedure_procedure_communityVotes } from '../graphql/query/__generated__/Procedure';
+import { ConstituencyContext } from '../../../../context/Constituency';
 
 export const { width, height } = Dimensions.get('window');
 
@@ -61,7 +62,7 @@ interface Props {
 }
 
 export const CommunityVoteResults: React.FC<Props> = ({ voteResults }) => {
-  const myConstituency = ''; // TODO handle constituency from profile settings
+  const { constituency: myConstituency } = useContext(ConstituencyContext);
   const renderCommuntiyResult = (
     comunnityResults: Procedure_procedure_communityVotes,
   ) => {

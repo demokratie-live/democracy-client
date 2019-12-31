@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Platform } from 'react-native';
 import styled from 'styled-components/native';
 import {
@@ -13,6 +13,7 @@ import InfoIconComponent from '@democracy-deutschland/mobile-ui/src/components/I
 
 // GraphQl
 import { DEPUTY_VOTE_RESULT } from './graphql/query/deputyVoteResults';
+import { ConstituencyContext } from '../../../../../context/Constituency';
 
 const Wrapper = styled.View`
   width: 100%;
@@ -109,7 +110,7 @@ interface Props {
 }
 
 const DeputyVoteData: React.FC<Props> = ({ procedureId }) => {
-  const constituency = '103';
+  const { constituency } = useContext(ConstituencyContext);
   const { data, loading, error } = useQuery<
     DeputyVoteResults,
     DeputyVoteResultsVariables

@@ -26,6 +26,7 @@ import { ListLoading } from '@democracy-deutschland/mobile-ui/src/components/sha
 import { VoteSelection } from '../../../../__generated__/globalTypes';
 import { ChainEntry } from '../../../lib/VotesLocal';
 import { useNavigation } from '@react-navigation/core';
+import { ConstituencyContext } from '../../../context/Constituency';
 
 // GraphQL
 // import GET_PROCEDURE_CHART_DATA from '../../../graphql/queries/getDeputyChartData';
@@ -66,9 +67,7 @@ const VotedProceduresWrapper: React.FC<Props> = ({
 }) => {
   const navigation = useNavigation();
   const { localVotes } = useContext(LocalVotesContext);
-
-  // TODO get constituency by context api
-  const constituency = '103';
+  const { constituency } = useContext(ConstituencyContext);
 
   const { data: proceduresData } = useQuery<
     DeputyChartData,
