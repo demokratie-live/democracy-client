@@ -7,13 +7,16 @@ import { InitialStateProvider } from './context/InitialStates';
 import { LocalVotesProvider } from './context/LocalVotes';
 import { Apollo } from './lib/Apollo';
 import { ListFilterProvider } from './context/ListFilter';
+import { ConstituencyProvider } from './context/Constituency';
 
 export default () => (
   <Apollo>
     <InitialStateProvider>
       <LocalVotesProvider>
         <ListFilterProvider>
-          <Navigation />
+          <ConstituencyProvider>
+            <Navigation />
+          </ConstituencyProvider>
         </ListFilterProvider>
       </LocalVotesProvider>
     </InitialStateProvider>
