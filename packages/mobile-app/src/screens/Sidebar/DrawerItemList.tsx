@@ -46,12 +46,17 @@ export default function DrawerItemList({
     const showCategoryLabel = curCategory !== preCategory;
     preCategory = curCategory;
 
-    const navigateToScreen = (screen: string) => {
+    const handleClick = () => {
       navigation.dispatch({
         ...DrawerActions.closeDrawer(),
         target: state.key,
       });
-      return CommonActions.navigate(screen);
+      if (!focused) {
+        navigation.dispatch({
+          ...CommonActions.navigate(route.name),
+          target: state.key,
+        });
+      }
     };
 
     return (
@@ -73,14 +78,7 @@ export default function DrawerItemList({
           inactiveBackgroundColor={inactiveBackgroundColor}
           labelStyle={labelStyle}
           style={itemStyle}
-          onPress={() => {
-            navigation.dispatch({
-              ...(focused
-                ? DrawerActions.closeDrawer()
-                : navigateToScreen(route.name)),
-              target: state.key,
-            });
-          }}
+          onPress={handleClick}
         />
       </View>
     );
