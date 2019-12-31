@@ -22,13 +22,19 @@ export const ConstituencyContext = createContext<ConstituencyInterface>(
 const STORAGE_KEY_CONSTITUENCY = 'constituency';
 
 export const ConstituencyProvider: React.FC = ({ children }) => {
-  const [constituency, setConstituency] = useState('');
-
+  const [constituency, setConstituencyState] = useState('');
+  console.log('constituency context', constituency);
   useEffect(() => {
     AsyncStorage.getItem(STORAGE_KEY_CONSTITUENCY).then(constituencyData =>
-      constituencyData ? setConstituency(constituencyData) : null,
+      constituencyData ? setConstituencyState(constituencyData) : null,
     );
   }, []);
+
+  const setConstituency = (newConstituency: string) => {
+    AsyncStorage.setItem(STORAGE_KEY_CONSTITUENCY, newConstituency).then(() =>
+      setConstituencyState(newConstituency),
+    );
+  };
 
   return (
     <ConstituencyContext.Provider
