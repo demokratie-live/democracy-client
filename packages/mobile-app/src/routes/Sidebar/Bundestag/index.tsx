@@ -21,7 +21,6 @@ import FilterEmptyIcon from '@democracy-deutschland/mobile-ui/src/components/Ico
 import styled from 'styled-components/native';
 import { VoteSelection } from '../../../../__generated__/globalTypes';
 import { SearchProvider } from '../../../context/Search';
-import { SearchHeader } from '../../../screens/Bundestag/Search/Header';
 
 export type BundestagRootStackParamList = {
   TabView: undefined;
@@ -104,13 +103,7 @@ const BundestagRootNavigation = () => {
           }
         />
         <BundestagRootStack.Screen name="Filter" component={Filter} />
-        <BundestagRootStack.Screen
-          name="Search"
-          options={{
-            header: () => <SearchHeader />,
-          }}
-          component={() => <Search />}
-        />
+        <BundestagRootStack.Screen name="Search" component={() => <Search />} />
       </BundestagRootStack.Navigator>
     </SearchProvider>
   );
