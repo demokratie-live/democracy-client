@@ -27,6 +27,7 @@ import {
   FinishSearchVariables,
 } from './graphql/mutation/__generated__/FinishSearch';
 import { FINISH_SEARCH } from './graphql/mutation/finishSearch';
+import { SearchHeader } from './Header.ios';
 
 // import searchProcedures from '../../graphql/queries/searchProcedures';
 // import mostSearched from '../../graphql/queries/mostSearched';
@@ -172,14 +173,6 @@ export const Search: React.FC = () => {
     ];
   };
 
-  if (loading) {
-    return (
-      <LoadingWrapper>
-        <ActivityIndicator />
-      </LoadingWrapper>
-    );
-  }
-
   let sectionData: { title: string; data: any[] }[] = [];
   if (!term) {
     sectionData = [
@@ -200,46 +193,54 @@ export const Search: React.FC = () => {
 
   return (
     <Wrapper>
-      <SectionList<
-        string | SearchProcedures_searchProceduresAutocomplete_procedures
-      >
-        keyboardShouldPersistTaps={'always'}
-        sections={sectionData}
-        renderSectionHeader={({ section: { title, data } }) =>
-          data.length > 0 ? <Segment text={title} /> : null
-        }
-        renderItem={({ item, section: { title } }) => (
-          <Row onPress={onItemClick({ item, section: title })}>
-            <>
-              {title === 'Ergebnisse' && isProcedureGuard(item) && (
-                <ListItem
-                  {...item}
-                  votes={
-                    item.communityVotes ? item.communityVotes.total || 0 : 0
-                  }
-                  governmentVotes={pieChartGovernmentData(item)}
-                  communityVotes={communityVoteData(item)}
-                />
-              )}
-              {title === 'Zuletzt gesucht' && <ListText>{item}</ListText>}
-              {title === 'Vorschläge' && <ListText>{item}</ListText>}
-              {title === 'Meistgesucht' && <ListText>{item}</ListText>}
-            </>
-          </Row>
-        )}
-        keyExtractor={item => (!isProcedureGuard(item) ? item : item._id)}
-        ListEmptyComponent={() => {
-          if (term) {
-            return (
-              <NoResultsWrapper>
-                <Text>Leider nichts gefunden.</Text>
-                <NoResultsImage />
-              </NoResultsWrapper>
-            );
+      <SearchHeader />
+      {loading && (
+        <LoadingWrapper>
+          <ActivityIndicator />
+        </LoadingWrapper>
+      )}
+      {!loading && (
+        <SectionList<
+          string | SearchProcedures_searchProceduresAutocomplete_procedures
+        >
+          keyboardShouldPersistTaps={'always'}
+          sections={sectionData}
+          renderSectionHeader={({ section: { title, data } }) =>
+            data.length > 0 ? <Segment text={title} /> : null
           }
-          return null;
-        }}
-      />
+          renderItem={({ item, section: { title } }) => (
+            <Row onPress={onItemClick({ item, section: title })}>
+              <>
+                {title === 'Ergebnisse' && isProcedureGuard(item) && (
+                  <ListItem
+                    {...item}
+                    votes={
+                      item.communityVotes ? item.communityVotes.total || 0 : 0
+                    }
+                    governmentVotes={pieChartGovernmentData(item)}
+                    communityVotes={communityVoteData(item)}
+                  />
+                )}
+                {title === 'Zuletzt gesucht' && <ListText>{item}</ListText>}
+                {title === 'Vorschläge' && <ListText>{item}</ListText>}
+                {title === 'Meistgesucht' && <ListText>{item}</ListText>}
+              </>
+            </Row>
+          )}
+          keyExtractor={item => (!isProcedureGuard(item) ? item : item._id)}
+          ListEmptyComponent={() => {
+            if (term) {
+              return (
+                <NoResultsWrapper>
+                  <Text>Leider nichts gefunden.</Text>
+                  <NoResultsImage />
+                </NoResultsWrapper>
+              );
+            }
+            return null;
+          }}
+        />
+      )}
     </Wrapper>
   );
 };
