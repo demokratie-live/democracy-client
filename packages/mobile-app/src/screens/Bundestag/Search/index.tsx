@@ -27,7 +27,7 @@ import {
   FinishSearchVariables,
 } from './graphql/mutation/__generated__/FinishSearch';
 import { FINISH_SEARCH } from './graphql/mutation/finishSearch';
-import { SearchHeader } from './Header.ios';
+import { SearchHeader } from './Header';
 
 // import searchProcedures from '../../graphql/queries/searchProcedures';
 // import mostSearched from '../../graphql/queries/mostSearched';
@@ -52,9 +52,11 @@ const isProcedureGuard = (
   );
 };
 
-const Wrapper = styled.View`
+const Wrapper = styled.KeyboardAvoidingView.attrs({
+  behavior: Platform.OS === 'ios' ? 'padding' : undefined,
+  keyboardVerticalOffset: Platform.OS === 'ios' ? 87 : undefined,
+})`
   flex: 1;
-  margin-top: ${Platform.OS === 'android' ? 56 : 0};
   background-color: #fff;
 `;
 
@@ -130,7 +132,6 @@ export const Search: React.FC = () => {
     // Alert.alert(JSON.stringify(searchError));
   }
 
-  // TODO loading most searched ters
   const loading =
     (loadingMostSearched && history.length === 0) || loadingSearchProcedures;
 
