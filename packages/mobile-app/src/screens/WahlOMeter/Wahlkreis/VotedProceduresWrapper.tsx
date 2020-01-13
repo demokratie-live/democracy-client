@@ -166,7 +166,7 @@ const VotedProceduresWrapper: React.FC<Props> = ({
                   votes={
                     item.communityVotes ? item.communityVotes.total || 0 : 0
                   }
-                  governmentVotes={pieChartGovernmentData(item)}
+                  govermentChart={{ votes: pieChartGovernmentData(item) }}
                   communityVotes={communityVoteData(item)}
                 />
               </Row>

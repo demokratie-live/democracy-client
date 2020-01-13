@@ -62,7 +62,10 @@ export interface Props {
   voteDate: Date;
   endDate?: Date;
   communityVotes: Slice[];
-  governmentVotes?: Slice[];
+  govermentChart?: {
+    votes?: Slice[];
+    large?: boolean;
+  };
 }
 
 const ListItem: React.FC<Props> = ({
@@ -71,7 +74,7 @@ const ListItem: React.FC<Props> = ({
   voteDate,
   endDate,
   communityVotes,
-  governmentVotes,
+  govermentChart,
   // procedureId,
   // children,
   // activityIndex: { activityIndex, active },
@@ -109,9 +112,13 @@ const ListItem: React.FC<Props> = ({
       <SideWrapper>
         <VotesIndex votes={votes} voted={voted} />
         <ChartWrapper>
-          {governmentVotes && (
+          {!!govermentChart && !!govermentChart.votes && (
             <PaddingRight>
-              <PieChart data={governmentVotes} size={20} large />
+              <PieChart
+                data={govermentChart.votes}
+                size={20}
+                large={govermentChart.large}
+              />
             </PaddingRight>
           )}
           <PieChart data={communityVotes} size={20} />
