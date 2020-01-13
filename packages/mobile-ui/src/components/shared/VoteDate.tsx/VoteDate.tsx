@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import m from 'moment';
-import { StyleProp, TextStyle } from 'react-native';
+import { StyleProp } from 'react-native';
 
 interface Props {
   date: Date;
   endDate?: Date;
   long?: boolean;
-  style?: StyleProp<TextStyle>;
+  style?: StyleProp<any>;
 }
 
 const DateText = styled.Text<Pick<Props, 'date'> & { running: boolean }>`

@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components/native';
-import { SectionList, Alert } from 'react-native';
+import { SectionList, Platform } from 'react-native';
 import { SearchContext } from '../../../context/Search';
 import { Segment } from '../List/Components/Segment';
 import { Row } from '@democracy-deutschland/mobile-ui/src/components/Lists/Row';
 import { ListItem } from '@democracy-deutschland/mobile-ui/src/components/Lists/ListItem';
-import { useQuery, useLazyQuery } from '@apollo/react-hooks';
+import { useQuery, useLazyQuery, useMutation } from '@apollo/react-hooks';
 import { MOST_SEARCHED } from './graphql/query/mostSearched';
 import {
   MostSearched,
@@ -22,6 +22,12 @@ import { pieChartGovernmentData } from '../../../lib/helper/PieChartGovernmentDa
 import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
+import {
+  FinishSearch,
+  FinishSearchVariables,
+} from './graphql/mutation/__generated__/FinishSearch';
+import { FINISH_SEARCH } from './graphql/mutation/finishSearch';
+import { SearchHeader } from './Header';
 
 // import searchProcedures from '../../graphql/queries/searchProcedures';
 // import mostSearched from '../../graphql/queries/mostSearched';
@@ -46,7 +52,10 @@ const isProcedureGuard = (
   );
 };
 
-const Wrapper = styled.View`
+const Wrapper = styled.KeyboardAvoidingView.attrs({
+  behavior: Platform.OS === 'ios' ? 'padding' : undefined,
+  keyboardVerticalOffset: Platform.OS === 'ios' ? 87 : undefined,
+})`
   flex: 1;
   background-color: #fff;
 `;
@@ -89,6 +98,10 @@ export const Search: React.FC = () => {
   const navigation = useNavigation<
     StackNavigationProp<BundestagRootStackParamList>
   >();
+  const [executeFinishSearch] = useMutation<
+    FinishSearch,
+    FinishSearchVariables
+  >(FINISH_SEARCH);
   const { setTerm, term, history } = useContext(SearchContext);
   const { data: mostSearchedTerms, loading: loadingMostSearched } = useQuery<
     MostSearched
@@ -108,15 +121,17 @@ export const Search: React.FC = () => {
   useEffect(() => {
     if (term.length > 0) {
       executeSearch();
+      executeFinishSearch({
+        variables: { term },
+      });
     }
-  }, [term, executeSearch]);
+  }, [term, executeSearch, executeFinishSearch]);
 
   // TODO handle errors
   if (searchError) {
-    Alert.alert(JSON.stringify(searchError));
+    // Alert.alert(JSON.stringify(searchError));
   }
 
-  // TODO loading most searched ters
   const loading =
     (loadingMostSearched && history.length === 0) || loadingSearchProcedures;
 
@@ -159,14 +174,6 @@ export const Search: React.FC = () => {
     ];
   };
 
-  if (loading) {
-    return (
-      <LoadingWrapper>
-        <ActivityIndicator />
-      </LoadingWrapper>
-    );
-  }
-
   let sectionData: { title: string; data: any[] }[] = [];
   if (!term) {
     sectionData = [
@@ -187,46 +194,54 @@ export const Search: React.FC = () => {
 
   return (
     <Wrapper>
-      <SectionList<
-        string | SearchProcedures_searchProceduresAutocomplete_procedures
-      >
-        keyboardShouldPersistTaps={'always'}
-        sections={sectionData}
-        renderSectionHeader={({ section: { title, data } }) =>
-          data.length > 0 ? <Segment text={title} /> : null
-        }
-        renderItem={({ item, section: { title } }) => (
-          <Row onPress={onItemClick({ item, section: title })}>
-            <>
-              {title === 'Ergebnisse' && isProcedureGuard(item) && (
-                <ListItem
-                  {...item}
-                  votes={
-                    item.communityVotes ? item.communityVotes.total || 0 : 0
-                  }
-                  governmentVotes={pieChartGovernmentData(item)}
-                  communityVotes={communityVoteData(item)}
-                />
-              )}
-              {title === 'Zuletzt gesucht' && <ListText>{item}</ListText>}
-              {title === 'Vorschläge' && <ListText>{item}</ListText>}
-              {title === 'Meistgesucht' && <ListText>{item}</ListText>}
-            </>
-          </Row>
-        )}
-        keyExtractor={item => (!isProcedureGuard(item) ? item : item._id)}
-        ListEmptyComponent={() => {
-          if (term) {
-            return (
-              <NoResultsWrapper>
-                <Text>Leider nichts gefunden.</Text>
-                <NoResultsImage />
-              </NoResultsWrapper>
-            );
+      <SearchHeader />
+      {loading && (
+        <LoadingWrapper>
+          <ActivityIndicator />
+        </LoadingWrapper>
+      )}
+      {!loading && (
+        <SectionList<
+          string | SearchProcedures_searchProceduresAutocomplete_procedures
+        >
+          keyboardShouldPersistTaps={'always'}
+          sections={sectionData}
+          renderSectionHeader={({ section: { title, data } }) =>
+            data.length > 0 ? <Segment text={title} /> : null
           }
-          return null;
-        }}
-      />
+          renderItem={({ item, section: { title } }) => (
+            <Row onPress={onItemClick({ item, section: title })}>
+              <>
+                {title === 'Ergebnisse' && isProcedureGuard(item) && (
+                  <ListItem
+                    {...item}
+                    votes={
+                      item.communityVotes ? item.communityVotes.total || 0 : 0
+                    }
+                    governmentVotes={pieChartGovernmentData(item)}
+                    communityVotes={communityVoteData(item)}
+                  />
+                )}
+                {title === 'Zuletzt gesucht' && <ListText>{item}</ListText>}
+                {title === 'Vorschläge' && <ListText>{item}</ListText>}
+                {title === 'Meistgesucht' && <ListText>{item}</ListText>}
+              </>
+            </Row>
+          )}
+          keyExtractor={item => (!isProcedureGuard(item) ? item : item._id)}
+          ListEmptyComponent={() => {
+            if (term) {
+              return (
+                <NoResultsWrapper>
+                  <Text>Leider nichts gefunden.</Text>
+                  <NoResultsImage />
+                </NoResultsWrapper>
+              );
+            }
+            return null;
+          }}
+        />
+      )}
     </Wrapper>
   );
 };

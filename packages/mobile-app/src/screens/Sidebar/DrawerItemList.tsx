@@ -11,7 +11,12 @@ import {
   DrawerNavigationHelpers,
   DrawerDescriptorMap,
 } from '@react-navigation/drawer/lib/typescript/drawer/src/types';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import styled from 'styled-components/native';
+
+const Space = styled.View`
+  padding-bottom: 18;
+`;
 
 type Props = Omit<DrawerContentOptions, 'contentContainerStyle' | 'style'> & {
   state: DrawerNavigationState;
@@ -41,9 +46,22 @@ export default function DrawerItemList({
     const showCategoryLabel = curCategory !== preCategory;
     preCategory = curCategory;
 
+    const handleClick = () => {
+      navigation.dispatch({
+        ...DrawerActions.closeDrawer(),
+        target: state.key,
+      });
+      if (!focused) {
+        navigation.dispatch({
+          ...CommonActions.navigate(route.name),
+          target: state.key,
+        });
+      }
+    };
+
     return (
       <View key={route.key}>
-        {showCategoryLabel && <Text style={labelStyle}>{curCategory}</Text>}
+        {showCategoryLabel && <Space />}
         <DrawerItem
           label={
             label !== undefined
@@ -60,14 +78,7 @@ export default function DrawerItemList({
           inactiveBackgroundColor={inactiveBackgroundColor}
           labelStyle={labelStyle}
           style={itemStyle}
-          onPress={() => {
-            navigation.dispatch({
-              ...(focused
-                ? DrawerActions.closeDrawer()
-                : CommonActions.navigate(route.name)),
-              target: state.key,
-            });
-          }}
+          onPress={handleClick}
         />
       </View>
     );

@@ -1,18 +1,33 @@
-import React, { PureComponent } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components/native';
-import { Platform, ActivityIndicator } from 'react-native';
+import { Platform, Dimensions } from 'react-native';
 
 import BallotBox from './components/BallotBox';
 
 // Components
 import NoConstituency from './components/NoConstituency';
-import PartyChart from './components/PartyChart';
+// import PartyChart from './components/PartyChart';
 
 // GraphQL
-// import GET_CONSTITUENCY from '../../graphql/queries/local/constituency';
+import PROCEDURES_WITH_VOTE_RESULTS from './components/graphql/query/proceduresByIdHavingVoteResults';
 import Fade from './components/Animations/Fade';
 import { BundestagRootStackParamList } from '../../../../routes/Sidebar/Bundestag';
 import { RouteProp } from '@react-navigation/core';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { ConstituencyContext } from '../../../../context/Constituency';
+import PartyChart from '../components/GovernmentVoteResults/PartyChart/Component';
+import { ChartData } from '../../../WahlOMeter/VotedProceduresWrapper';
+import {
+  proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults_procedures,
+  proceduresByIdHavingVoteResults,
+  proceduresByIdHavingVoteResultsVariables,
+} from './components/graphql/query/__generated__/proceduresByIdHavingVoteResults';
+import { ChainEntry } from '../../../../lib/VotesLocal';
+import { LocalVotesContext } from '../../../../context/LocalVotes';
+import { useQuery } from '@apollo/react-hooks';
+import { ListLoading } from '@democracy-deutschland/mobile-ui/src/components/shared/ListLoading';
+import ChartLegend from '../components/Charts/ChartLegend';
+import NoVotesPlaceholder from '../../../WahlOMeter/NoVotesPlaceholder';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -23,6 +38,7 @@ const ScrollWrapper = styled.ScrollView.attrs({
   contentContainerStyle: {
     flexGrow: 1,
     paddingBottom: Platform.OS === 'android' ? 73 : 18,
+    justifyContent: 'space-around',
   },
 })`
   flex-grow: 1;
@@ -64,6 +80,11 @@ const BalloutBoxWrapper = styled.View`
   border-top-color: rgba(68, 148, 211, 0.1);
 `;
 
+type VoteVerificationScreenNavigationProp = StackNavigationProp<
+  BundestagRootStackParamList,
+  'Voting'
+>;
+
 type VoteVerificationScreenRouteProp = RouteProp<
   BundestagRootStackParamList,
   'Voting'
@@ -71,52 +92,199 @@ type VoteVerificationScreenRouteProp = RouteProp<
 
 interface Props {
   route: VoteVerificationScreenRouteProp;
-  navigation: any;
+  navigation: VoteVerificationScreenNavigationProp;
 }
 
-export class VoteVerification extends PureComponent<Props> {
-  state = {
-    showWarning: true,
-  };
+export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
+  const [chartWidth] = useState(
+    Math.min(Dimensions.get('screen').width, Dimensions.get('screen').height),
+  );
+  const [showWarning, setShowWarning] = useState(true);
+  const [selected, setSelected] = useState(0);
+  const { constituency } = useContext(ConstituencyContext);
+  const { localVotes } = useContext(LocalVotesContext);
+  const { data: proceduresData } = useQuery<
+    proceduresByIdHavingVoteResults,
+    proceduresByIdHavingVoteResultsVariables
+  >(PROCEDURES_WITH_VOTE_RESULTS, {
+    variables: {
+      procedureIds: localVotes.map(({ procedureId }) => procedureId),
+      pageSize: 999999,
+    },
+  });
 
-  onScroll = () => {
-    if (this.state.showWarning) {
-      this.setState({ showWarning: false });
+  const onScroll = () => {
+    if (showWarning) {
+      setShowWarning(false);
     }
   };
 
-  render() {
-    const { selection, procedureId, procedureObjId } = this.props.route.params;
-    // Load constituency from context api
-    const data = { constituency: { constituency: null }, loading: false };
-    return (
-      <Wrapper>
-        <ScrollWrapper onScroll={this.onScroll}>
-          <Title>Schon gewusst?</Title>
-          {data.loading && <ActivityIndicator size="large" />}
-          {!data.loading && !data.constituency.constituency && (
-            <NoConstituency />
-          )}
-          {!data.loading && data.constituency.constituency && <PartyChart />}
-        </ScrollWrapper>
-        <WarnWrapper pointerEvents="none">
-          <Fade visible={this.state.showWarning}>
-            <WarnTextWrapper>
-              <WarnText>
-                Deine Stimme ist verbindlich und kann nicht zurückgenommen
-                werden
-              </WarnText>
-            </WarnTextWrapper>
-          </Fade>
-        </WarnWrapper>
-        <BalloutBoxWrapper>
-          <BallotBox
-            selection={selection}
-            procedureId={procedureId}
-            procedureObjId={procedureObjId}
-          />
-        </BalloutBoxWrapper>
-      </Wrapper>
+  const { selection, procedureId, procedureObjId } = route.params;
+
+  const getMatchingProcedures = ({ votedProcedures }: ChartData) =>
+    votedProcedures.proceduresByIdHavingVoteResults.procedures.filter(
+      ({ procedureId: itemProcedureId }) =>
+        localVotes.find(({ procedureId: pid }) => pid === itemProcedureId),
     );
+
+  const partyChartData = ({
+    matchingProcedures,
+  }: {
+    matchingProcedures: proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults_procedures[];
+    votedProcedures: proceduresByIdHavingVoteResults;
+    localVotes: ChainEntry[];
+  }) => {
+    const chartData = matchingProcedures.reduce<{
+      [party: string]: { diffs: number; matches: number };
+    }>((prev, { voteResults, procedureId: itemProcedureId }) => {
+      if (!voteResults) {
+        return prev;
+      }
+      const { partyVotes } = voteResults;
+      const userVote = localVotes.find(
+        ({ procedureId: pid }) => pid === itemProcedureId,
+      );
+      const me = userVote ? userVote.selection : undefined;
+      partyVotes.forEach(({ party, main }) => {
+        if (party === 'fraktionslos') {
+          return prev;
+        }
+        let matched = false;
+        if (me === main) {
+          matched = true;
+        }
+
+        if (prev[party] && matched) {
+          prev = {
+            ...prev,
+            [party]: {
+              ...prev[party],
+              matches: prev[party].matches + 1,
+            },
+          };
+        } else if (prev[party] && !matched) {
+          prev = {
+            ...prev,
+            [party]: {
+              ...prev[party],
+              diffs: prev[party].diffs + 1,
+            },
+          };
+        } else if (!prev[party] && matched) {
+          prev = {
+            ...prev,
+            [party]: {
+              diffs: 0,
+              matches: 1,
+            },
+          };
+        } else if (!prev[party] && !matched) {
+          prev = {
+            ...prev,
+            [party]: {
+              matches: 0,
+              diffs: 1,
+            },
+          };
+        }
+      });
+      return prev;
+    }, {});
+    return Object.keys(chartData)
+      .map(key => ({
+        party: key,
+        values: [
+          {
+            label: 'Übereinstimmungen',
+            value: chartData[key].matches,
+            color: '#f5a623',
+          },
+          {
+            label: 'Differenzen',
+            value: chartData[key].diffs,
+            color: '#b1b3b4',
+          },
+        ],
+      }))
+      .sort((a, b) => b.values[0].value - a.values[0].value);
+  };
+
+  if (!proceduresData) {
+    return <ListLoading />;
   }
-}
+
+  const chartData = {
+    votedProcedures: proceduresData,
+    localVotes,
+  };
+
+  const matchingProcedures = getMatchingProcedures(chartData);
+
+  const preparedData = partyChartData({
+    ...chartData,
+    matchingProcedures,
+  });
+
+  const prepareCharLegendData = () => {
+    return [
+      {
+        label: 'Übereinstimmungen',
+        value: preparedData[selected].values[0].value,
+        color: '#f5a623',
+      },
+      {
+        label: 'Differenzen',
+        value: preparedData[selected].values[1].value,
+        color: '#b1b3b4',
+      },
+    ];
+  };
+
+  const onClick = (index: number) => () => {
+    setSelected(index);
+  };
+
+  return (
+    <Wrapper>
+      <ScrollWrapper onScroll={onScroll}>
+        <Title>Schon gewusst?</Title>
+        {!constituency && <NoConstituency navigation={navigation as any} />}
+        {!!constituency && !preparedData.length && (
+          <NoVotesPlaceholder subline="Fraktionen" />
+        )}
+        {!!constituency && !!preparedData.length && (
+          <>
+            <PartyChart
+              width={chartWidth}
+              chartData={preparedData}
+              onClick={onClick}
+              selected={selected}
+              showPercentage
+              colors={['#b1b3b4', '#f5a623']}
+            />
+            <ChartLegend data={prepareCharLegendData()} />
+          </>
+        )}
+        {
+          // TODO add party chart here
+        }
+      </ScrollWrapper>
+      <WarnWrapper pointerEvents="none">
+        <Fade visible={showWarning}>
+          <WarnTextWrapper>
+            <WarnText>
+              Deine Stimme ist verbindlich und kann nicht zurückgenommen werden
+            </WarnText>
+          </WarnTextWrapper>
+        </Fade>
+      </WarnWrapper>
+      <BalloutBoxWrapper>
+        <BallotBox
+          selection={selection}
+          procedureId={procedureId}
+          procedureObjId={procedureObjId}
+        />
+      </BalloutBoxWrapper>
+    </Wrapper>
+  );
+};

@@ -22,12 +22,25 @@ export default gql`
         submissionDate
         completed
         subjectGroups
+        votedGovernment
+        voted
+        type
         voteResults {
           governmentDecision
+          yes
+          abstination
+          no
+          notVoted
           partyVotes {
             party
             main
           }
+        }
+        communityVotes {
+          yes
+          abstination
+          no
+          total
         }
       }
     }

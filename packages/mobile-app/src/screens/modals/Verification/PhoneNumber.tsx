@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components/native';
-import { Alert } from 'react-native';
+import { Alert, Platform } from 'react-native';
 
 import Description from './Components/Description';
 import PhonenumberInput from './Components/PhonenumberInput';
@@ -18,7 +18,7 @@ import { VerificationRootStackParamList } from '../../../routes/Verification';
 import { VerificationContext } from '../../../context/Verification';
 
 const Container = styled.KeyboardAvoidingView.attrs(() => ({
-  behavior: 'padding',
+  behavior: Platform.OS === 'ios' ? 'padding' : undefined,
   keyboardVerticalOffset: 100,
   // enabled: true,
 }))`

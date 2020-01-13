@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Dimensions, Platform } from 'react-native';
 // eslint-disable-next-line import/default
 import Swiper from 'react-native-swiper';
@@ -16,6 +16,7 @@ import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Fold
 import PieChart from '../Charts/PieChart';
 import { Procedure_procedure_voteResults } from '../../graphql/query/__generated__/Procedure';
 import { PartyChartChartData } from './PartyChart/Component';
+import { ConstituencyContext } from '../../../../../context/Constituency';
 
 export const { width, height } = Dimensions.get('window');
 
@@ -86,7 +87,7 @@ export const GovernmentVoteResults: React.FC<Props> = ({
   const [pieChartWidth, setPieChartWidth] = useState(
     Math.min(Dimensions.get('window').width, Dimensions.get('window').height),
   );
-  const constituency = '103'; // TODO get by constituency context
+  const { constituency } = useContext(ConstituencyContext);
 
   const onLayout = () => {
     const newPieChartWidth = Math.min(
@@ -118,7 +119,6 @@ export const GovernmentVoteResults: React.FC<Props> = ({
   }
 
   const renderGovernmentVoteDetails = () => {
-    // const constituency = ''; // TODO Handle by constituency context
     const votes = // TODO improve server typesafety
       (voteResults.yes || 0) +
       (voteResults.no || 0) +

@@ -5,7 +5,8 @@ import styled from 'styled-components/native';
 import Constituency from './Constituency';
 import PieChart from '../../components/Charts/PieChart';
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
-import { Alert } from 'react-native';
+import { RootStackParamList } from '../../../../../routes';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 const Wrapper = styled.View<Pick<Props, 'noButton'>>`
   align-items: center;
@@ -34,8 +35,11 @@ const TextBold = styled.Text`
   color: #000;
 `;
 
+type ScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Sidebar'>;
+
 interface Props {
   noButton?: boolean;
+  navigation: ScreenNavigationProp;
 }
 
 class VoteVarificationNoConstituency extends PureComponent<Props> {
@@ -58,7 +62,7 @@ class VoteVarificationNoConstituency extends PureComponent<Props> {
 
     const navigateToSelectConstituency = () => {
       // TODO navigate to wahlkreissuche
-      Alert.alert('Navigate to wahlkreissuche');
+      this.props.navigation.navigate('Constituency');
     };
 
     return (

@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 // Components
-// import PartyChart from '../../components/Charts/PartyChart';
 import ChartLegend from '../../components/Charts/ChartLegend';
 // GraphQL
 // import VOTES_SELECTION_LOCAL from '../../graphql/queries/local/votesSelection';
@@ -71,7 +70,6 @@ class Fraktionen extends PureComponent<Props> {
     this.setState({ selected: index });
   };
 
-  // TODO replace this bad any
   partyChartData = ({
     votedProcedures,
     data,

@@ -31,7 +31,7 @@ export interface Procedure_procedure_communityVotes {
   abstination: number | null;
   no: number | null;
   total: number | null;
-  constituencies: (Procedure_procedure_communityVotes_constituencies | null)[] | null;
+  constituencies: Procedure_procedure_communityVotes_constituencies[];
 }
 
 export interface Procedure_procedure_voteResults_partyVotes_deviants {

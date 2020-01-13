@@ -20,6 +20,8 @@ import { ListType } from '../../../../__generated__/globalTypes';
 import { LocalVotesContext } from '../../../context/LocalVotes';
 import { communityVoteData } from '../../../lib/helper/PieChartCommunityData';
 import { pieChartGovernmentData } from '../../../lib/helper/PieChartGovernmentData';
+import { ListFilterContext } from '../../../context/ListFilter';
+import { NoConferenceWeekData } from './NoConferenceWeekData';
 
 type ListScreenRouteProp = RouteProp<
   TopTabParamList,
@@ -38,6 +40,7 @@ const Container = styled.View`
 
 export const List = () => {
   const { getLocalVoteSelection } = useContext(LocalVotesContext);
+  const { proceduresFilter } = useContext(ListFilterContext);
   const route = useRoute<ListScreenRouteProp>();
   const navigation = useNavigation<
     StackNavigationProp<BundestagRootStackParamList>
@@ -52,6 +55,7 @@ export const List = () => {
     variables: {
       listTypes: [route.params.list],
       pageSize: 10,
+      filter: proceduresFilter,
     },
   });
 
@@ -71,10 +75,7 @@ export const List = () => {
     route.params.list === ListType.CONFERENCEWEEKS_PLANNED &&
     data.procedures.length === 0
   ) {
-    // TODO missing UI
-    return (
-      <Text>Noch keine daten für die nächste Sitzungswoche vorhanden</Text>
-    );
+    return <NoConferenceWeekData />;
   }
   let segmentedData: SegmentedData[];
 
@@ -138,7 +139,6 @@ export const List = () => {
     });
 
     const localSelection = getLocalVoteSelection(procedureId);
-    // TODO improve Graphql Types
     const communityVoteSlices = communityVoteData({
       communityVotes,
       localSelection,
@@ -182,7 +182,10 @@ export const List = () => {
         keyExtractor={({ procedureId }) => procedureId}
         refreshing={networkStatus === 4}
         ListFooterComponent={() => (hasMore ? <ListLoading /> : null)}
-        onRefresh={refetch}
+        onRefresh={() => {
+          setHasMore(true);
+          refetch();
+        }}
         onEndReachedThreshold={0.5}
         onEndReached={() => {
           !loading &&

@@ -19,6 +19,7 @@ matrix:
         - yarn -version
         - gem install fastlane
         - echo -e "machine github.com\n  login $GITHUB_API_TOKEN" >> ~/.netrc
+        - n=$(which node);n=${n%/bin/node}; chmod -R 755 $n/bin/*; sudo cp -r $n/{bin,lib,share} /usr/local
       install:
         - yarn install
         - yarn pods

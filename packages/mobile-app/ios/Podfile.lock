@@ -233,18 +233,26 @@ PODS:
     - React
   - RNDeviceInfo (5.4.0):
     - React
-  - RNGestureHandler (1.5.2):
+  - RNGestureHandler (1.5.3):
     - React
-  - RNKeychain (4.0.4):
+  - RNKeychain (4.0.5):
     - React
   - RNReanimated (1.4.0):
     - React
-  - RNScreens (2.0.0-alpha.20):
+  - RNScreens (2.0.0-alpha.22):
     - React
+  - RNSearchBar (3.5.1):
+    - React
+  - RNSentry (1.2.1):
+    - React
+    - Sentry (~> 4.4.0)
   - RNSha256 (1.3.6):
     - React
   - RNSVG (9.13.6):
     - React
+  - Sentry (4.4.3):
+    - Sentry/Core (= 4.4.3)
+  - Sentry/Core (4.4.3)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -287,6 +295,8 @@ DEPENDENCIES:
   - RNKeychain (from `../../../node_modules/react-native-keychain`)
   - RNReanimated (from `../../../node_modules/react-native-reanimated`)
   - RNScreens (from `../../../node_modules/react-native-screens`)
+  - RNSearchBar (from `../../../node_modules/react-native-search-bar`)
+  - "RNSentry (from `../../../node_modules/@sentry/react-native`)"
   - RNSha256 (from `../../../node_modules/react-native-sha256`)
   - RNSVG (from `../../../node_modules/react-native-svg`)
   - Yoga (from `../../../node_modules/react-native/ReactCommon/yoga`)
@@ -294,6 +304,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - boost-for-react-native
+    - Sentry
 
 EXTERNAL SOURCES:
   BVLinearGradient:
@@ -368,6 +379,10 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../../../node_modules/react-native-screens"
+  RNSearchBar:
+    :path: "../../../node_modules/react-native-search-bar"
+  RNSentry:
+    :path: "../../../node_modules/@sentry/react-native"
   RNSha256:
     :path: "../../../node_modules/react-native-sha256"
   RNSVG:
@@ -409,12 +424,15 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: 44395cb9c7c1523104c2b499eb426ef7aff82bca
   RNCMaskedView: dd13f9f7b146a9ad82f9b7eb6c9b5548fcf6e990
   RNDeviceInfo: c7b1dc457611b9231bb780a882102e2c93edc7af
-  RNGestureHandler: 946a7691e41df61e2c4b1884deab41a4cdc3afff
-  RNKeychain: 79cfca6cd5030bbabcd1a2c009531b84e358116d
+  RNGestureHandler: 02905abe54e1f6e59c081a10b4bd689721e17aa6
+  RNKeychain: 840f8e6f13be0576202aefcdffd26a4f54bfe7b5
   RNReanimated: b2ab0b693dddd2339bd2f300e770f6302d2e960c
-  RNScreens: 36f8c83e5e23b6bfd5b912148453d81e335573eb
+  RNScreens: 6adf01eb4080f44af6cca551207c6b0505066857
+  RNSearchBar: 9860431356b7d12a8449d2fddb2b5f3c78d1e99f
+  RNSentry: 9b1d983b2d5d1c215ba6490348fd2a4cc23a8a9d
   RNSha256: c6f68c850bf8315c95e2508667e8c908bd9f8487
   RNSVG: 8ba35cbeb385a52fd960fd28db9d7d18b4c2974f
+  Sentry: 14bdd673870e8cf64932b149fad5bbbf39a9b390
   Yoga: ba3d99dbee6c15ea6bbe3783d1f0cb1ffb79af0f
 
 PODFILE CHECKSUM: d52b266dbb35f4d813f33aa6d1d7e5d6c057a218

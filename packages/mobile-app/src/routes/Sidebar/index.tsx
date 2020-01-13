@@ -1,36 +1,27 @@
-import React, { FC } from 'react';
-import {
-  createDrawerNavigator,
-  DrawerNavigationProp,
-} from '@react-navigation/drawer';
-import { Button, SafeAreaView } from 'react-native';
+import React from 'react';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import BundestagRootNavigation from './Bundestag';
-import IntroductionScreen from '../../screens/modals/Introduction';
-import { Sidebar } from '../../screens/Sidebar/Sidebar';
 import { RootStackParamList } from '..';
 import GovernmentIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Government';
 import IncreaseArrowIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/IncreaseArrow';
 import InfoArrowIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Info';
+import WaterDrop from '@democracy-deutschland/mobile-ui/src/components/Icons/WaterDrop';
+
+import IntroductionScreen from '../../screens/modals/Introduction';
+import { Sidebar } from '../../screens/Sidebar/Sidebar';
+import StatisticRootNavigation from './Statistic';
+import WahlOMeterNavigation from './WahlOMeter';
+import SettingsRootNavigation from './Settings';
 
 export type SidebarParamList = {
   Bundestag: undefined;
   Statistic: undefined;
+  WahlOMeter: undefined;
+  Settings: undefined;
   Introduction: RootStackParamList['Introduction'];
 };
 
 const SidebarDrawer = createDrawerNavigator<SidebarParamList>();
-
-interface MyStatisticScreenProps {
-  navigation: DrawerNavigationProp<SidebarParamList>;
-}
-
-const MyStatisticScreen: FC<MyStatisticScreenProps> = ({ navigation }) => {
-  return (
-    <SafeAreaView>
-      <Button onPress={() => navigation.goBack()} title="Go back home" />
-    </SafeAreaView>
-  );
-};
 
 export const SidebarNavigation = () => {
   return (
@@ -49,12 +40,23 @@ export const SidebarNavigation = () => {
         name="Bundestag"
         component={BundestagRootNavigation}
         options={{
-          drawerLabel: 'Listen/Bundestag',
+          drawerLabel: '/Bundestag',
           gestureEnabled: true,
           drawerIcon: ({ color, size }) => (
             <GovernmentIcon width={size} height={size} color={color} />
           ),
         }}
+      />
+      <SidebarDrawer.Screen
+        options={{
+          drawerLabel: 'Auswertungen/Wahl-O-Meter',
+          gestureEnabled: true,
+          drawerIcon: ({ color, size }) => (
+            <WaterDrop width={size} height={size} color={color} />
+          ),
+        }}
+        name="WahlOMeter"
+        component={WahlOMeterNavigation}
       />
       <SidebarDrawer.Screen
         options={{
@@ -65,7 +67,18 @@ export const SidebarNavigation = () => {
           ),
         }}
         name="Statistic"
-        component={MyStatisticScreen}
+        component={StatisticRootNavigation}
+      />
+      <SidebarDrawer.Screen
+        options={{
+          drawerLabel: 'Mehr/Settings',
+          gestureEnabled: true,
+          drawerIcon: ({ color, size }) => (
+            <IncreaseArrowIcon width={size} height={size} color={color} />
+          ),
+        }}
+        name="Settings"
+        component={SettingsRootNavigation}
       />
       <SidebarDrawer.Screen
         options={{

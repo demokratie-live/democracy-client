@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Platform } from 'react-native';
 import styled from 'styled-components/native';
 import {
@@ -13,6 +13,7 @@ import InfoIconComponent from '@democracy-deutschland/mobile-ui/src/components/I
 
 // GraphQl
 import { DEPUTY_VOTE_RESULT } from './graphql/query/deputyVoteResults';
+import { ConstituencyContext } from '../../../../../context/Constituency';
 
 const Wrapper = styled.View`
   width: 100%;
@@ -109,8 +110,8 @@ interface Props {
 }
 
 const DeputyVoteData: React.FC<Props> = ({ procedureId }) => {
-  const constituency = '103';
-  const { data, loading, error } = useQuery<
+  const { constituency } = useContext(ConstituencyContext);
+  const { data, error } = useQuery<
     DeputyVoteResults,
     DeputyVoteResultsVariables
   >(DEPUTY_VOTE_RESULT, {
@@ -119,7 +120,7 @@ const DeputyVoteData: React.FC<Props> = ({ procedureId }) => {
       procedureId: procedureId,
     },
   });
-  console.log('SHOW CONSTITUENCY', { loading }, error, data);
+
   if (error) {
     return <Text>{JSON.stringify(error)}</Text>;
   }
@@ -134,7 +135,7 @@ const DeputyVoteData: React.FC<Props> = ({ procedureId }) => {
       decision,
       deputy: { imgURL, name, party },
     } = data.procedure.voteResults.deputyVotes[0];
-    console.log('SHOW CONSTITUENCY');
+
     return (
       <Wrapper>
         <MemberImageWrapper
