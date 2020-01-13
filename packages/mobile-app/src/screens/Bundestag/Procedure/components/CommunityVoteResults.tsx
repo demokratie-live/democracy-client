@@ -12,7 +12,10 @@ import GermanySvgComponent from './svgs/GermanySVG';
 import PieChart from './Charts/PieChart';
 import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Folding';
 import ChartLegend from './Charts/ChartLegend';
-import { Procedure_procedure_communityVotes } from '../graphql/query/__generated__/Procedure';
+import {
+  Procedure_procedure_communityVotes,
+  Procedure_procedure_communityVotes_constituencies,
+} from '../graphql/query/__generated__/Procedure';
 import { ConstituencyContext } from '../../../../context/Constituency';
 
 export const { width, height } = Dimensions.get('window');
@@ -64,7 +67,9 @@ interface Props {
 export const CommunityVoteResults: React.FC<Props> = ({ voteResults }) => {
   const { constituency: myConstituency } = useContext(ConstituencyContext);
   const renderCommuntiyResult = (
-    comunnityResults: Procedure_procedure_communityVotes,
+    comunnityResults:
+      | Procedure_procedure_communityVotes
+      | Procedure_procedure_communityVotes_constituencies,
   ) => {
     if (
       comunnityResults &&
@@ -94,14 +99,18 @@ export const CommunityVoteResults: React.FC<Props> = ({ voteResults }) => {
         },
       ];
 
-      const DynSvgComp = !myConstituency
+      const isConstituencyChart = 'constituency' in comunnityResults;
+
+      const DynSvgComp = !isConstituencyChart
         ? GermanySvgComponent
         : getConstituencySvgs(myConstituency).default;
 
       return (
         <PieChartWrapper key={myConstituency ? 'goverment' : 'constituency'}>
           <CommunitySegmentText>
-            {!myConstituency ? 'Deutschland' : `Wahlkreis ${myConstituency}`}
+            {!isConstituencyChart
+              ? 'Deutschland'
+              : `Wahlkreis ${myConstituency}`}
           </CommunitySegmentText>
           <SvgWrapper>
             <DynSvgComp
@@ -127,9 +136,9 @@ export const CommunityVoteResults: React.FC<Props> = ({ voteResults }) => {
   }
 
   const screens = [renderCommuntiyResult(voteResults)];
-  // if (constituencies.length > 0 && voteResults.constituencies[0]) {
-  //   screens.push(renderCommuntiyResult(voteResults.constituencies[0]));
-  // }
+  if (myConstituency) {
+    screens.push(renderCommuntiyResult(voteResults.constituencies[0]));
+  }
   return (
     <Folding title="Communityergebnis" opened>
       <SwiperStyled loop={false}>{screens}</SwiperStyled>
