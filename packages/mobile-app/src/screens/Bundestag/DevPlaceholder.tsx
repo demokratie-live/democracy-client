@@ -12,6 +12,7 @@ import { RootStackParamList } from '../../routes';
 import { SidebarParamList } from '../../routes/Sidebar';
 import { TopTabParamList } from '../../routes/Sidebar/Bundestag/TabView';
 import { InitialStateContext } from '../../context/InitialStates';
+import VotesLocal from '../../lib/VotesLocal';
 
 const Container = styled.View`
   flex: 1;
@@ -58,6 +59,10 @@ export const DevPlaceholder: FC = () => {
       <Button
         title="Clear Async Storage"
         onPress={() => AsyncStorage.clear()}
+      />
+      <Button
+        title="Clear Local Votes Storage"
+        onPress={() => VotesLocal.reset()}
       />
       <Document width="32px" height="32px" color="black" />
     </Container>

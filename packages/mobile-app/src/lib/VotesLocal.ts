@@ -332,14 +332,15 @@ class VotesLocal {
 
   // Reset Chain
   // For Debug purposes only
-  /*
-  private static reset = async () => {
+
+  public static reset = async () => {
     console.log('reset');
     // Delete Chain
     // await Keychain.resetGenericPassword(VotesLocal.KEYCHAIN_VOTES_SERVICE_VERSION_0);
-    return await Keychain.resetGenericPassword(VotesLocal.KEYCHAIN_INDEX_SERVICE);
+    return await Keychain.resetGenericPassword({
+      service: VotesLocal.KEYCHAIN_INDEX_SERVICE,
+    });
   };
-  */
 }
 
 export default VotesLocal;
