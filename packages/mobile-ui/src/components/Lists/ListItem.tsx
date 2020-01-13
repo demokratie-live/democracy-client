@@ -111,7 +111,7 @@ const ListItem: React.FC<Props> = ({
         <ChartWrapper>
           {governmentVotes && (
             <PaddingRight>
-              <PieChart data={governmentVotes} size={20} />
+              <PieChart data={governmentVotes} size={20} large />
             </PaddingRight>
           )}
           <PieChart data={communityVotes} size={20} />

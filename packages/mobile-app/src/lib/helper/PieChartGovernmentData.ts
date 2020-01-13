@@ -20,17 +20,14 @@ export const pieChartGovernmentData = ({
       {
         color: '#99C93E',
         percent: (voteResults.yes || 0) / sumVotes,
-        large: voteResults.governmentDecision === 'YES',
       },
       {
         color: '#4CB0D8',
         percent: (voteResults.abstination || 0) / sumVotes,
-        large: voteResults.governmentDecision === 'ABSTINATION',
       },
       {
         color: '#D43194',
         percent: (voteResults.no || 0) / sumVotes,
-        large: voteResults.governmentDecision === 'NO',
       },
     ];
   }
