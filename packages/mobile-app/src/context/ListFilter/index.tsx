@@ -6,6 +6,7 @@ interface ListFilterInterface {
   filter: FilterData[];
   setFilter: (filter: FilterData[]) => void;
   proceduresFilter: ProcedureFilter;
+  active: boolean;
 }
 
 const defaults: ListFilterInterface = {
@@ -14,6 +15,7 @@ const defaults: ListFilterInterface = {
     throw new Error('ListFilterContext: setFilter function is not defined');
   },
   proceduresFilter: {},
+  active: false,
 };
 
 export const ListFilterContext = createContext<ListFilterInterface>(defaults);
@@ -64,12 +66,15 @@ export const ListFilterProvider: React.FC = ({ children }) => {
     setProceduresFilter(getFilterPrepared(rawData));
   };
 
+  const active = Object.keys(getFilterPrepared(filter)).length !== 0;
+
   return (
     <ListFilterContext.Provider
       value={{
         filter,
         setFilter: onSetFilter,
         proceduresFilter,
+        active,
       }}>
       {children}
     </ListFilterContext.Provider>

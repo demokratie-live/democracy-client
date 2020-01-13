@@ -334,7 +334,6 @@ class VotesLocal {
   // For Debug purposes only
 
   public static reset = async () => {
-    console.log('reset');
     // Delete Chain
     // await Keychain.resetGenericPassword(VotesLocal.KEYCHAIN_VOTES_SERVICE_VERSION_0);
     return await Keychain.resetGenericPassword({

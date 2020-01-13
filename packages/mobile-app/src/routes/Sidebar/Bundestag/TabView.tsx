@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { DevPlaceholder, List } from '../../../screens/Bundestag';
 import { ListType } from '../../../../__generated__/globalTypes';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { BundestagRootStackParamList, MenuButton } from '.';
+import styled from 'styled-components/native';
+import SearchIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Lens';
+import FilterEmptyIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/FunnelEmpty';
+import FilterIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Funnel';
+import { ListFilterContext } from '../../../context/ListFilter';
 
 export type TopTabParamList = {
   Sitzungswoche: { list: ListType };
@@ -12,7 +19,40 @@ export type TopTabParamList = {
 
 const TabNavigation = createMaterialTopTabNavigator<TopTabParamList>();
 
-export default () => {
+const HaderRightWrapper = styled.View`
+  flex-direction: row;
+  padding-right: 11;
+`;
+
+type ScreenNavigationProp = StackNavigationProp<
+  BundestagRootStackParamList,
+  'TabView'
+>;
+
+interface Props {
+  noButton?: boolean;
+  navigation: ScreenNavigationProp;
+}
+
+const TabViewNavigation: React.FC<Props> = ({ navigation }) => {
+  const { active: hasFilters } = useContext(ListFilterContext);
+
+  navigation.setOptions({
+    headerRight: () => (
+      <HaderRightWrapper>
+        <MenuButton onPress={() => navigation.navigate('Filter')}>
+          {!hasFilters && (
+            <FilterEmptyIcon width={18} height={18} color="#fff" />
+          )}
+          {!!hasFilters && <FilterIcon width={18} height={18} color="#fff" />}
+        </MenuButton>
+        <MenuButton onPress={() => navigation.navigate('Search')}>
+          <SearchIcon width={18} height={18} color="#fff" />
+        </MenuButton>
+      </HaderRightWrapper>
+    ),
+  });
+
   return (
     <TabNavigation.Navigator
       tabBarOptions={{
@@ -50,3 +90,5 @@ export default () => {
     </TabNavigation.Navigator>
   );
 };
+
+export default TabViewNavigation;

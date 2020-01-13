@@ -111,7 +111,7 @@ interface Props {
 
 const DeputyVoteData: React.FC<Props> = ({ procedureId }) => {
   const { constituency } = useContext(ConstituencyContext);
-  const { data, loading, error } = useQuery<
+  const { data, error } = useQuery<
     DeputyVoteResults,
     DeputyVoteResultsVariables
   >(DEPUTY_VOTE_RESULT, {
@@ -120,7 +120,7 @@ const DeputyVoteData: React.FC<Props> = ({ procedureId }) => {
       procedureId: procedureId,
     },
   });
-  console.log('SHOW CONSTITUENCY', { loading }, error, data);
+
   if (error) {
     return <Text>{JSON.stringify(error)}</Text>;
   }
@@ -135,7 +135,7 @@ const DeputyVoteData: React.FC<Props> = ({ procedureId }) => {
       decision,
       deputy: { imgURL, name, party },
     } = data.procedure.voteResults.deputyVotes[0];
-    console.log('SHOW CONSTITUENCY');
+
     return (
       <Wrapper>
         <MemberImageWrapper

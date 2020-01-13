@@ -23,7 +23,7 @@ const STORAGE_KEY_CONSTITUENCY = 'constituency';
 
 export const ConstituencyProvider: React.FC = ({ children }) => {
   const [constituency, setConstituencyState] = useState('');
-  console.log('constituency context', constituency);
+
   useEffect(() => {
     AsyncStorage.getItem(STORAGE_KEY_CONSTITUENCY).then(constituencyData =>
       constituencyData ? setConstituencyState(constituencyData) : null,

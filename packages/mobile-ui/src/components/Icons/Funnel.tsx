@@ -1,5 +1,14 @@
 import * as React from 'react';
-import { Svg, SvgProps, Defs, Path, G, Mask, Use } from 'react-native-svg';
+import {
+  Svg,
+  SvgProps,
+  Defs,
+  Path,
+  G,
+  Mask,
+  Use,
+  Circle,
+} from 'react-native-svg';
 
 const SvgFunnel = (props: SvgProps) => (
   <Svg width="1em" height="1em" viewBox="0 0 1024 1024" {...props}>
@@ -28,6 +37,7 @@ const SvgFunnel = (props: SvgProps) => (
           xlinkHref="#funnel_svg__path-1"
         />
       </G>
+      <Circle cx="864" cy="160" r="160" fill="#d0021b" />
     </G>
   </Svg>
 );

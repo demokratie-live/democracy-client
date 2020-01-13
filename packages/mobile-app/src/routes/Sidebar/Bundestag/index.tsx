@@ -15,9 +15,6 @@ import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { SidebarParamList } from '..';
 import { RootStackParamList } from '../..';
 import MenuIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Menu';
-import SearchIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Lens';
-// import FilterIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Funnel';
-import FilterEmptyIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/FunnelEmpty';
 import styled from 'styled-components/native';
 import { VoteSelection } from '../../../../__generated__/globalTypes';
 import { SearchProvider } from '../../../context/Search';
@@ -41,13 +38,8 @@ type BundestagNavigationProps = CompositeNavigationProp<
   StackNavigationProp<RootStackParamList>
 >;
 
-const MenuButton = styled.TouchableOpacity`
+export const MenuButton = styled.TouchableOpacity`
   padding-left: 11;
-`;
-
-const HaderRightWrapper = styled.View`
-  flex-direction: row;
-  padding-right: 11;
 `;
 
 const BundestagRootNavigation = () => {
@@ -75,17 +67,6 @@ const BundestagRootNavigation = () => {
                 <MenuIcon width={18} height={18} color="#fff" />
               </MenuButton>
             ),
-            headerRight: () => (
-              <HaderRightWrapper>
-                <MenuButton onPress={() => navigation.navigate('Filter')}>
-                  {/* <FilterIcon width={18} height={18} color="#fff" /> */}
-                  <FilterEmptyIcon width={18} height={18} color="#fff" />
-                </MenuButton>
-                <MenuButton onPress={() => navigation.navigate('Search')}>
-                  <SearchIcon width={18} height={18} color="#fff" />
-                </MenuButton>
-              </HaderRightWrapper>
-            ),
           }}
         />
         <BundestagRootStack.Screen
@@ -93,15 +74,7 @@ const BundestagRootNavigation = () => {
           component={Procedure}
           options={({ route }) => ({ title: route.params.title })}
         />
-        <BundestagRootStack.Screen
-          name="Voting"
-          component={VoteVerification}
-          options={
-            {
-              // gestureDirection: 'vertical',
-            }
-          }
-        />
+        <BundestagRootStack.Screen name="Voting" component={VoteVerification} />
         <BundestagRootStack.Screen name="Filter" component={Filter} />
         <BundestagRootStack.Screen name="Search" component={() => <Search />} />
       </BundestagRootStack.Navigator>
