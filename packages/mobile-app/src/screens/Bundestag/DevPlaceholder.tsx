@@ -31,6 +31,25 @@ type DevPlaceholderNavigationProps = CompositeNavigationProp<
   >
 >;
 
+const NotificationWrapper = styled.View`
+  background-color: lightblue;
+`;
+
+const NotificationDev = () => {
+  return (
+    <NotificationWrapper>
+      <Button
+        title="Notification in 10 seconds"
+        onPress={() => console.log('Notification in 10 seconds')}
+      />
+      <Button
+        title="Notification now"
+        onPress={() => console.log('Notification now')}
+      />
+    </NotificationWrapper>
+  );
+};
+
 export const DevPlaceholder: FC = () => {
   const { isVerified } = useContext(InitialStateContext);
   const navigation = useNavigation<DevPlaceholderNavigationProps>();
@@ -65,6 +84,7 @@ export const DevPlaceholder: FC = () => {
         onPress={() => VotesLocal.reset()}
       />
       <Document width="32px" height="32px" color="black" />
+      <NotificationDev />
     </Container>
   );
 };
