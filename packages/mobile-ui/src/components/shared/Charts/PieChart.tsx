@@ -5,11 +5,13 @@ export interface Slice {
   percent: number;
   color: string;
   large?: boolean;
+  space?: number | false;
 }
 
 interface Props {
   data: Slice[];
   size: number;
+  large?: boolean;
 }
 
 const getCoordinatesForPercent = (percent: number) => {
@@ -19,12 +21,13 @@ const getCoordinatesForPercent = (percent: number) => {
   return [x, y];
 };
 
-export const PieChart: React.FC<Props> = ({ data, size }) => {
+export const PieChart: React.FC<Props> = ({ data, size, large = false }) => {
   let cumulativePercent = 0;
   const getPathData = ({
     percent,
-    large,
-  }: Pick<Slice, 'percent' | 'large'>) => {
+    large: largeSlice,
+    space = 0.3,
+  }: Pick<Slice, 'percent' | 'large' | 'space'>) => {
     // destructuring assignment sets the two variables at once
     const [startX, startY] = getCoordinatesForPercent(cumulativePercent);
 
@@ -36,7 +39,7 @@ export const PieChart: React.FC<Props> = ({ data, size }) => {
     // if the slice is more than 50%, take the large arc (the long way around)
     const largeArcFlag = percent > 0.5 ? 1 : 0;
 
-    const larger = large ? 9 : 7.5;
+    const larger = largeSlice || large ? 9 : 7.5;
 
     // create an array and join it just for code readability
     const pathData = [
@@ -46,15 +49,15 @@ export const PieChart: React.FC<Props> = ({ data, size }) => {
       'L 0 0',
     ];
 
-    const space = 0.3;
+    const sliceSpace = space ? space : 0;
 
     return {
       path: pathData.join(','),
       // transform: large ? `${endY},${startX}` : '',
-      transform: large
-        ? `${((endY - startY) / percent) * space},${((startX - endX) /
+      transform: largeSlice
+        ? `${((endY - startY) / percent) * sliceSpace},${((startX - endX) /
             percent) *
-            space}`
+            sliceSpace}`
         : '',
     };
   };
@@ -64,8 +67,8 @@ export const PieChart: React.FC<Props> = ({ data, size }) => {
       width={size}
       viewBox="-10 -10 20 20"
       style={{ transform: [{ rotate: '-90deg' }] }}>
-      {data.map(({ color, percent, large }) => {
-        const slice = getPathData({ percent, large });
+      {data.map(({ color, percent, large: largeSlice }) => {
+        const slice = getPathData({ percent, large: largeSlice });
         return (
           <Path
             key={color}

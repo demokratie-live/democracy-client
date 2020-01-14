@@ -218,7 +218,10 @@ export const Search: React.FC = () => {
                     votes={
                       item.communityVotes ? item.communityVotes.total || 0 : 0
                     }
-                    governmentVotes={pieChartGovernmentData(item)}
+                    govermentChart={{
+                      votes: pieChartGovernmentData(item),
+                      large: true,
+                    }}
                     communityVotes={communityVoteData(item)}
                   />
                 )}

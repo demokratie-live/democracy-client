@@ -4,11 +4,13 @@ import { Slice } from '@democracy-deutschland/mobile-ui/src/components/shared/Ch
 interface Props {
   votedGovernment?: boolean | null;
   voteResults?: ProceduresList_procedures_voteResults | null;
+  largeDecision?: 'YES' | 'ABSTINATION' | 'NOTVOTED' | 'NO' | null;
 }
 
 export const pieChartGovernmentData = ({
   votedGovernment,
   voteResults,
+  largeDecision,
 }: Props): Slice[] | undefined => {
   if (votedGovernment && voteResults) {
     // TODO improve graphql types for this
@@ -20,17 +22,17 @@ export const pieChartGovernmentData = ({
       {
         color: '#99C93E',
         percent: (voteResults.yes || 0) / sumVotes,
-        large: voteResults.governmentDecision === 'YES',
+        large: largeDecision === 'YES',
       },
       {
         color: '#4CB0D8',
         percent: (voteResults.abstination || 0) / sumVotes,
-        large: voteResults.governmentDecision === 'ABSTINATION',
+        large: largeDecision === 'ABSTINATION',
       },
       {
         color: '#D43194',
         percent: (voteResults.no || 0) / sumVotes,
-        large: voteResults.governmentDecision === 'NO',
+        large: largeDecision === 'NO',
       },
     ];
   }

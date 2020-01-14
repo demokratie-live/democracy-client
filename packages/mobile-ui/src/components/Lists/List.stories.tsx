@@ -66,7 +66,9 @@ storiesOf('List', module)
               }}>
               <ListItem
                 communityVotes={communityVotes}
-                governmentVotes={governmentVotes}
+                govermentChart={{
+                  votes: governmentVotes,
+                }}
                 title={faker.lorem.sentence(faker.random.number(30))}
                 subline={faker.lorem.sentence(faker.random.number(30))}
                 voted={faker.random.boolean()}

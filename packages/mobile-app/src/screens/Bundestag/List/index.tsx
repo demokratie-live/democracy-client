@@ -160,7 +160,10 @@ export const List = () => {
           endDate={voteEnd}
           voted={voted}
           votes={communityVotes ? communityVotes.total || 0 : 0}
-          governmentVotes={govSlices}
+          govermentChart={{
+            votes: govSlices,
+            large: true,
+          }}
           communityVotes={communityVoteSlices}
         />
       </Row>

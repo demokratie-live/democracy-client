@@ -141,7 +141,7 @@ android {
         // react-native-notifications
         missingDimensionStrategy "RNNotifications.reactNativeVersion", "reactNative60" // See note below!
         
-        versionCode 102101
+        versionCode 102103
         versionName "1.2.3"
 
         // Wix Detox
