@@ -123,6 +123,8 @@ def enableHermes = project.ext.react.get("enableHermes", false);
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
+    flavorDimensions "default"
+
     dexOptions {
         preDexLibraries false
         javaMaxHeapSize "8g"
@@ -134,7 +136,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "de.democracydeutschland.app.refactor"
+        applicationId "de.democracydeutschland.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 102103
@@ -194,6 +196,33 @@ android {
                         versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
             }
 
+        }
+    }
+
+    productFlavors {
+        refactor {
+            minSdkVersion rootProject.ext.minSdkVersion
+            applicationId 'de.democracydeutschland.app.refactor'
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            resValue "string", "build_config_package", "de.democracydeutschland.app"
+        }
+        internal {
+            minSdkVersion rootProject.ext.minSdkVersion
+            applicationId 'de.democracydeutschland.app.internal'
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            resValue "string", "build_config_package", "de.democracydeutschland.app"
+        }
+        alpha {
+            minSdkVersion rootProject.ext.minSdkVersion
+            applicationId 'de.democracydeutschland.app.alpha'
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            resValue "string", "build_config_package", "de.democracydeutschland.app"
+        }
+        beta {
+            minSdkVersion rootProject.ext.minSdkVersion
+            applicationId 'de.democracydeutschland.app.beta'
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            resValue "string", "build_config_package", "de.democracydeutschland.app"
         }
     }
 }
