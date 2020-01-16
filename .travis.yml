@@ -35,7 +35,7 @@ matrix:
 
     # Android
     - language: android
-      if: branch = master AND commit_message !~ /(no-deploy)/
+      if: (branch = master OR branch = refactor) AND commit_message !~ /(no-deploy)/
       os: linux
       jdk: oraclejdk8
       sudo: required

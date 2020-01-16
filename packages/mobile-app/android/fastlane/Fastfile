@@ -44,6 +44,7 @@ platform :android do
       task: 'bundle',
       build_type: 'Release',
       print_command: false,
+      flavor: ENV["TRAVIS_BRANCH"],
       properties: {
         "android.injected.signing.store.file" => releaseFilePath,
         "android.injected.signing.store.password" => store_password,
