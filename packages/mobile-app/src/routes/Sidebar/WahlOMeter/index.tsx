@@ -41,6 +41,8 @@ const WahlOMeterNavigation = () => {
       screenOptions={{
         headerStyle: {
           backgroundColor: '#4494d3',
+          elevation: 0,
+          shadowOpacity: 0,
         },
         headerTintColor: '#fff',
       }}>
@@ -52,6 +54,8 @@ const WahlOMeterNavigation = () => {
           headerTintColor: '#fff',
           headerStyle: {
             backgroundColor: '#4494D3',
+            elevation: 0,
+            shadowOpacity: 0,
           },
           headerLeft: () => (
             <MenuButton onPress={navigation.toggleDrawer}>
