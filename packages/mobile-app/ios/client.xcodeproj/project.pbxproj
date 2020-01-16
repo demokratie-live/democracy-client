@@ -1004,7 +1004,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.refactor";
 				PRODUCT_NAME = DEMOCRACY;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development de.democracy-deutschland.clientapp.new";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1158,7 +1158,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.refactor";
 				PRODUCT_NAME = DEMOCRACY;
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore de.democracy-deutschland.clientapp.new";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1317,7 +1317,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.alpha";
 				PRODUCT_NAME = DEMOCRACY;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development de.democracy-deutschland.clientapp.new";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1471,7 +1471,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.alpha";
 				PRODUCT_NAME = DEMOCRACY;
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore de.democracy-deutschland.clientapp.new";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1630,7 +1630,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.beta";
 				PRODUCT_NAME = DEMOCRACY;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development de.democracy-deutschland.clientapp.new";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1784,7 +1784,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.beta";
 				PRODUCT_NAME = DEMOCRACY;
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore de.democracy-deutschland.clientapp.new";
 				VERSIONING_SYSTEM = "apple-generic";
