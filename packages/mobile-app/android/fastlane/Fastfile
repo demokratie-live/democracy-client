@@ -19,9 +19,11 @@ package = load_json(json_path: "../../../package.json")
 
 version_number = package["version"]
 
-package_name = "de.democracydeutschland.app"
+# TODO remove refactor suffix when new app is production ready
+package_name = "de.democracydeutschland.app.refactor"
 if ENV["TRAVIS_BRANCH"] != 'master'
-  package_name = package_name + "." + ENV["TRAVIS_BRANCH"]
+  # and change "de.democracydeutschland.app" to package_name
+  package_name = "de.democracydeutschland.app" + "." + ENV["TRAVIS_BRANCH"]
 end
 
 platform :android do
@@ -31,9 +33,15 @@ platform :android do
   end
 
   private_lane :build do
-    store_password = prompt(text: "Signing Store Password: ", secure_text: true, ci_input: ENV['ANDROID_KEYSTORE_PASSWORD'])
-    key_password = prompt(text: "Alias Key Password: ", secure_text: true, ci_input: ENV['ANDROID_KEYSTORE_PASSWORD'])
-    releaseFilePath = File.join(Dir.pwd, "..", "my-release-key.keystore")
+    store_password = prompt(text: "Signing Store Password: ", secure_text: true, ci_input: ENV['ANDROID_PASS'])
+    key_password = prompt(text: "Alias Key Password: ", secure_text: true, ci_input: ENV['ANDROID_PASS'])
+    releaseFilePath = File.join(Dir.pwd, "..", "democracy2-release-key.keystore")
+
+    if ENV["TRAVIS_BRANCH"] != 'refactor'
+      store_password = prompt(text: "Signing Store Password: ", secure_text: true, ci_input: ENV['ANDROID_KEYSTORE_PASSWORD'])
+      key_password = prompt(text: "Alias Key Password: ", secure_text: true, ci_input: ENV['ANDROID_KEYSTORE_PASSWORD'])
+      releaseFilePath = File.join(Dir.pwd, "..", "my-release-key.keystore")
+    end
 
     android_set_version_name(
       version_name: version_number
