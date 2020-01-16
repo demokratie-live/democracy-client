@@ -65,7 +65,6 @@ platform :android do
         "android.injected.signing.store.password" => store_password,
         "android.injected.signing.key.alias" => key_alias,
         "android.injected.signing.key.password" => key_password,
-        "versionversionCode" => 
       }
     )
   end
