@@ -60,7 +60,7 @@ platform :ios do
 
     build_app(
       workspace: "client.xcworkspace", 
-      scheme: "client",
+      scheme: "Refactor",
       clean: true,
     )
 

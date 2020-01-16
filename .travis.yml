@@ -3,7 +3,7 @@ matrix:
     - language: swift
       os: osx
       osx_image: xcode11.1
-      if: branch = master AND commit_message !~ /(no-deploy)/
+      if: (branch = master OR branch = alpha OR branch = refactor) AND commit_message !~ /(no-deploy)/
       cache:
         yarn: true
         directories:
