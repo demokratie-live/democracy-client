@@ -32,6 +32,8 @@ const VerificationRootNavigation = () => {
       screenOptions={{
         headerStyle: {
           backgroundColor: '#4494d3',
+          elevation: 0,
+          shadowOpacity: 0,
         },
         headerTintColor: '#fff',
       }}>

@@ -75,7 +75,15 @@ const App = () => {
         <RootStack.Screen
           name="Constituency"
           component={ConstituencyScreen}
-          options={{ headerShown: true }}
+          options={{
+            headerShown: true,
+            headerStyle: {
+              backgroundColor: '#4494d3',
+              elevation: 0,
+              shadowOpacity: 0,
+            },
+            headerTintColor: '#fff',
+          }}
         />
         <RootStack.Screen
           name="Verification"

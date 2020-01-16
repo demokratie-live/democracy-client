@@ -41,6 +41,8 @@ const StatisticRootNavigation = () => {
       screenOptions={{
         headerStyle: {
           backgroundColor: '#4494d3',
+          elevation: 0,
+          shadowOpacity: 0,
         },
         headerTintColor: '#fff',
       }}>
@@ -52,6 +54,8 @@ const StatisticRootNavigation = () => {
           headerTintColor: '#fff',
           headerStyle: {
             backgroundColor: '#4494D3',
+            elevation: 0,
+            shadowOpacity: 0,
           },
           headerLeft: () => (
             <MenuButton onPress={navigation.toggleDrawer}>
