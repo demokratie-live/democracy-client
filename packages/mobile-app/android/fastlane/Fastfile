@@ -37,7 +37,7 @@ platform :android do
     key_password = prompt(text: "Alias Key Password: ", secure_text: true, ci_input: ENV['ANDROID_PASS'])
     releaseFilePath = File.join(Dir.pwd, "..", "democracy2-release-key.keystore")
 
-    if ENV["TRAVIS_BRANCH"] != 'refactor'
+    if ENV["TRAVIS_BRANCH"] == 'refactor'
       store_password = prompt(text: "Signing Store Password: ", secure_text: true, ci_input: ENV['ANDROID_KEYSTORE_PASSWORD'])
       key_password = prompt(text: "Alias Key Password: ", secure_text: true, ci_input: ENV['ANDROID_KEYSTORE_PASSWORD'])
       releaseFilePath = File.join(Dir.pwd, "..", "my-release-key.keystore")
