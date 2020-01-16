@@ -19,6 +19,10 @@ package = load_json(json_path: "../../../package.json")
 
 version_number = package["version"]
 
+package_name = "de.democracydeutschland.app"
+if ENV["TRAVIS_BRANCH"] !== 'master'?
+	package_name = package_name + "." + ENV["TRAVIS_BRANCH"]
+
 platform :android do
   desc "Runs all the tests"
   lane :test do
@@ -60,6 +64,7 @@ platform :android do
     build
 
     upload_to_play_store(
+     package_name: package_name,
      track: 'internal',
      track_promote_to: 'internal'
     )
