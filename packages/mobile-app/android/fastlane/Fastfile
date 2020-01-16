@@ -20,7 +20,7 @@ package = load_json(json_path: "../../../package.json")
 version_number = package["version"]
 
 package_name = "de.democracydeutschland.app"
-if ENV["TRAVIS_BRANCH"] != 'master'?
+if ENV["TRAVIS_BRANCH"] != 'master'
   package_name = package_name + "." + ENV["TRAVIS_BRANCH"]
 end
 
