@@ -21,6 +21,12 @@ package = load_json(json_path: "../../../package.json")
 
 version_number = package["version"]
 
+# TODO change when production ready to "client"
+scheme_name = "Refactor"
+if ENV["TRAVIS_BRANCH"] == 'alpha'
+  scheme_name = "Alpha"
+end
+
 platform :ios do
   desc "Installs the certificates locally"
     private_lane :install_certificates do
@@ -60,7 +66,7 @@ platform :ios do
 
     build_app(
       workspace: "client.xcworkspace", 
-      scheme: "Refactor",
+      scheme: scheme_name,
       clean: true,
     )
 
