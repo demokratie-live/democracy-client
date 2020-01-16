@@ -31,7 +31,7 @@ end
 
 update_app_identifier(
   xcodeproj: "client.xcodeproj",
-  plist_path: "../client/Info.plist",
+  plist_path: "./Info.plist",
   app_identifier: app_identifier
 )
 
