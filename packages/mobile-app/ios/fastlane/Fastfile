@@ -23,9 +23,17 @@ version_number = package["version"]
 
 # TODO change when production ready to "client"
 scheme_name = "Refactor"
+app_identifier = "de.democracy-deutschland.clientapp.new"
 if ENV["TRAVIS_BRANCH"] == 'alpha'
   scheme_name = "Alpha"
+  app_identifier = "de.democracy-deutschland.clientapp.alpha"
 end
+
+update_app_identifier(
+  xcodeproj: "client.xcodeproj",
+  plist_path: "../client/Info.plist",
+  app_identifier: app_identifier
+)
 
 platform :ios do
   desc "Installs the certificates locally"
