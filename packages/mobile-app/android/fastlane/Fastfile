@@ -49,8 +49,8 @@ platform :android do
       version_name: version_number
     )
 
-    version_code = google_play_track_version_codes(
-      track: "internal"
+    increment_version_code(
+      gradle_file_path: "app/build.gradle"
     )
 
     gradle(task: 'clean')
@@ -65,7 +65,7 @@ platform :android do
         "android.injected.signing.store.password" => store_password,
         "android.injected.signing.key.alias" => key_alias,
         "android.injected.signing.key.password" => key_password,
-        "versionversionCode" => version_code + 1
+        "versionversionCode" => 
       }
     )
   end
