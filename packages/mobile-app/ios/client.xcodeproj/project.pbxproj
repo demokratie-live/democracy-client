@@ -54,28 +54,44 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = client/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = client/main.m; sourceTree = "<group>"; };
 		13DA10189BCB10FE64066558 /* Pods-clientTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-clientTests.debug.xcconfig"; path = "Target Support Files/Pods-clientTests/Pods-clientTests.debug.xcconfig"; sourceTree = "<group>"; };
+		18ED813865C95D0FA0057823 /* Pods-clientTests.alpha.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-clientTests.alpha.debug.xcconfig"; path = "Target Support Files/Pods-clientTests/Pods-clientTests.alpha.debug.xcconfig"; sourceTree = "<group>"; };
 		199F69096DC7C58943C4B418 /* Pods-clientTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-clientTests.release.xcconfig"; path = "Target Support Files/Pods-clientTests/Pods-clientTests.release.xcconfig"; sourceTree = "<group>"; };
 		1B0EDFAF44AAA4216CD8B35E /* Pods-client-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOS.release.xcconfig"; path = "Target Support Files/Pods-client-tvOS/Pods-client-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		1ECCE87100F7837C40967434 /* Pods-clientTests.refactor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-clientTests.refactor.debug.xcconfig"; path = "Target Support Files/Pods-clientTests/Pods-clientTests.refactor.debug.xcconfig"; sourceTree = "<group>"; };
+		26499E46281C132EB90BD003 /* Pods-clientTests.beta.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-clientTests.beta.debug.xcconfig"; path = "Target Support Files/Pods-clientTests/Pods-clientTests.beta.debug.xcconfig"; sourceTree = "<group>"; };
 		290B85208926B195E5596F2C /* Pods-client.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client.release.xcconfig"; path = "Target Support Files/Pods-client/Pods-client.release.xcconfig"; sourceTree = "<group>"; };
+		29484589E8084C11B2FAECE8 /* Pods-client-tvOS.beta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOS.beta.release.xcconfig"; path = "Target Support Files/Pods-client-tvOS/Pods-client-tvOS.beta.release.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* client-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "client-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* client-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "client-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		37DEA9EA9C42894B88A27009 /* Pods-client-tvOS.refactor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOS.refactor.debug.xcconfig"; path = "Target Support Files/Pods-client-tvOS/Pods-client-tvOS.refactor.debug.xcconfig"; sourceTree = "<group>"; };
+		37E2B3AF3A3670E5661DE8B5 /* Pods-client.beta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client.beta.release.xcconfig"; path = "Target Support Files/Pods-client/Pods-client.beta.release.xcconfig"; sourceTree = "<group>"; };
 		4298B2FF9129C796C4B65532 /* Pods-clientTests.refactor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-clientTests.refactor.release.xcconfig"; path = "Target Support Files/Pods-clientTests/Pods-clientTests.refactor.release.xcconfig"; sourceTree = "<group>"; };
+		48316CF553F2BE85BB7C6A1A /* Pods-clientTests.alpha.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-clientTests.alpha.release.xcconfig"; path = "Target Support Files/Pods-clientTests/Pods-clientTests.alpha.release.xcconfig"; sourceTree = "<group>"; };
 		4BAB4D2F54D1EA5D4F5A5117 /* Pods-client-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-client-tvOS/Pods-client-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		5527D3B5716709A4B4E435A3 /* Pods-client-tvOS.refactor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOS.refactor.release.xcconfig"; path = "Target Support Files/Pods-client-tvOS/Pods-client-tvOS.refactor.release.xcconfig"; sourceTree = "<group>"; };
 		5D15E8D7980434A138270732 /* libPods-clientTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-clientTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6AF994A2537601DD2483C16C /* Pods-clientTests.beta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-clientTests.beta.release.xcconfig"; path = "Target Support Files/Pods-clientTests/Pods-clientTests.beta.release.xcconfig"; sourceTree = "<group>"; };
 		6D50BD4195957A5FBF265A1F /* Pods-client.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client.debug.xcconfig"; path = "Target Support Files/Pods-client/Pods-client.debug.xcconfig"; sourceTree = "<group>"; };
+		7213DBB2C4FD77FB81D46247 /* Pods-client.alpha.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client.alpha.debug.xcconfig"; path = "Target Support Files/Pods-client/Pods-client.alpha.debug.xcconfig"; sourceTree = "<group>"; };
+		7905FA3AD822908E6B431B50 /* Pods-client-tvOSTests.beta.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOSTests.beta.debug.xcconfig"; path = "Target Support Files/Pods-client-tvOSTests/Pods-client-tvOSTests.beta.debug.xcconfig"; sourceTree = "<group>"; };
 		7EC8D9696DEAEED3698AAE44 /* Pods-client-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-client-tvOSTests/Pods-client-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		800B846E030BA5F3D2716867 /* libPods-client-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-client-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		808E339C9E7749600F553D8E /* Pods-client-tvOSTests.refactor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOSTests.refactor.debug.xcconfig"; path = "Target Support Files/Pods-client-tvOSTests/Pods-client-tvOSTests.refactor.debug.xcconfig"; sourceTree = "<group>"; };
+		82F8AC16D3CD9582D7AD9E70 /* Pods-client-tvOS.alpha.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOS.alpha.release.xcconfig"; path = "Target Support Files/Pods-client-tvOS/Pods-client-tvOS.alpha.release.xcconfig"; sourceTree = "<group>"; };
 		93635B3EDA508CCA6C584E30 /* libPods-client-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-client-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94F6F73778B76FFBE735A29D /* Pods-client.refactor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client.refactor.debug.xcconfig"; path = "Target Support Files/Pods-client/Pods-client.refactor.debug.xcconfig"; sourceTree = "<group>"; };
+		B11B71EBCB998E8B04E51A23 /* Pods-client-tvOSTests.alpha.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOSTests.alpha.release.xcconfig"; path = "Target Support Files/Pods-client-tvOSTests/Pods-client-tvOSTests.alpha.release.xcconfig"; sourceTree = "<group>"; };
 		C59B06D6F7200441822ACAC7 /* libPods-client.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-client.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6147E2B226507697DE44637 /* Pods-client-tvOSTests.beta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOSTests.beta.release.xcconfig"; path = "Target Support Files/Pods-client-tvOSTests/Pods-client-tvOSTests.beta.release.xcconfig"; sourceTree = "<group>"; };
+		DA6D5E7D7D272FB873CFEAA8 /* Pods-client-tvOSTests.alpha.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOSTests.alpha.debug.xcconfig"; path = "Target Support Files/Pods-client-tvOSTests/Pods-client-tvOSTests.alpha.debug.xcconfig"; sourceTree = "<group>"; };
 		E3003AE1E3714904AE002B63 /* libz.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		E38AEDB8B06ADAA800AE713D /* Pods-client.refactor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client.refactor.release.xcconfig"; path = "Target Support Files/Pods-client/Pods-client.refactor.release.xcconfig"; sourceTree = "<group>"; };
+		E770314BC1046C94C1FEEB84 /* Pods-client-tvOS.beta.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOS.beta.debug.xcconfig"; path = "Target Support Files/Pods-client-tvOS/Pods-client-tvOS.beta.debug.xcconfig"; sourceTree = "<group>"; };
+		EAC70A2F95B3DF04168D81CD /* Pods-client.beta.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client.beta.debug.xcconfig"; path = "Target Support Files/Pods-client/Pods-client.beta.debug.xcconfig"; sourceTree = "<group>"; };
+		ECB53234806121FC43AF5418 /* Pods-client-tvOS.alpha.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOS.alpha.debug.xcconfig"; path = "Target Support Files/Pods-client-tvOS/Pods-client-tvOS.alpha.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		F2CAF569098FB50BFDD9F002 /* Pods-client.alpha.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client.alpha.release.xcconfig"; path = "Target Support Files/Pods-client/Pods-client.alpha.release.xcconfig"; sourceTree = "<group>"; };
 		FE4DE01F75C3FC47A6A0C4DE /* Pods-client-tvOSTests.refactor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOSTests.refactor.release.xcconfig"; path = "Target Support Files/Pods-client-tvOSTests/Pods-client-tvOSTests.refactor.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -213,6 +229,22 @@
 				FE4DE01F75C3FC47A6A0C4DE /* Pods-client-tvOSTests.refactor.release.xcconfig */,
 				1ECCE87100F7837C40967434 /* Pods-clientTests.refactor.debug.xcconfig */,
 				4298B2FF9129C796C4B65532 /* Pods-clientTests.refactor.release.xcconfig */,
+				EAC70A2F95B3DF04168D81CD /* Pods-client.beta.debug.xcconfig */,
+				7213DBB2C4FD77FB81D46247 /* Pods-client.alpha.debug.xcconfig */,
+				37E2B3AF3A3670E5661DE8B5 /* Pods-client.beta.release.xcconfig */,
+				F2CAF569098FB50BFDD9F002 /* Pods-client.alpha.release.xcconfig */,
+				E770314BC1046C94C1FEEB84 /* Pods-client-tvOS.beta.debug.xcconfig */,
+				ECB53234806121FC43AF5418 /* Pods-client-tvOS.alpha.debug.xcconfig */,
+				29484589E8084C11B2FAECE8 /* Pods-client-tvOS.beta.release.xcconfig */,
+				82F8AC16D3CD9582D7AD9E70 /* Pods-client-tvOS.alpha.release.xcconfig */,
+				7905FA3AD822908E6B431B50 /* Pods-client-tvOSTests.beta.debug.xcconfig */,
+				DA6D5E7D7D272FB873CFEAA8 /* Pods-client-tvOSTests.alpha.debug.xcconfig */,
+				D6147E2B226507697DE44637 /* Pods-client-tvOSTests.beta.release.xcconfig */,
+				B11B71EBCB998E8B04E51A23 /* Pods-client-tvOSTests.alpha.release.xcconfig */,
+				26499E46281C132EB90BD003 /* Pods-clientTests.beta.debug.xcconfig */,
+				18ED813865C95D0FA0057823 /* Pods-clientTests.alpha.debug.xcconfig */,
+				6AF994A2537601DD2483C16C /* Pods-clientTests.beta.release.xcconfig */,
+				48316CF553F2BE85BB7C6A1A /* Pods-clientTests.alpha.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -675,7 +707,7 @@
 				BUNDLE_ID_SUFFIX = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 93;
+				CURRENT_PROJECT_VERSION = 94;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
@@ -685,7 +717,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.new";
 				PRODUCT_NAME = DEMOCRACY;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development de.democracy-deutschland.clientapp.new";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -700,7 +732,7 @@
 				BUNDLE_ID_SUFFIX = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 93;
+				CURRENT_PROJECT_VERSION = 94;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -709,7 +741,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.new";
 				PRODUCT_NAME = DEMOCRACY;
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore de.democracy-deutschland.clientapp.new";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -994,7 +1026,7 @@
 				BUNDLE_ID_SUFFIX = .new;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 93;
+				CURRENT_PROJECT_VERSION = 94;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
@@ -1004,7 +1036,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.refactor";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.new";
 				PRODUCT_NAME = DEMOCRACY;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development de.democracy-deutschland.clientapp.new";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1149,7 +1181,7 @@
 				BUNDLE_ID_SUFFIX = .new;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 93;
+				CURRENT_PROJECT_VERSION = 94;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1158,7 +1190,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.refactor";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.new";
 				PRODUCT_NAME = DEMOCRACY;
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore de.democracy-deutschland.clientapp.new";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1301,13 +1333,13 @@
 		};
 		C3E62E0423CF1E8D00EF5CA1 /* Alpha.Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6D50BD4195957A5FBF265A1F /* Pods-client.debug.xcconfig */;
+			baseConfigurationReference = 7213DBB2C4FD77FB81D46247 /* Pods-client.alpha.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_ID_SUFFIX = .alpha;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 93;
+				CURRENT_PROJECT_VERSION = 94;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
@@ -1317,7 +1349,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.alpha";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.new";
 				PRODUCT_NAME = DEMOCRACY;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development de.democracy-deutschland.clientapp.new";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1326,7 +1358,7 @@
 		};
 		C3E62E0523CF1E8D00EF5CA1 /* Alpha.Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 13DA10189BCB10FE64066558 /* Pods-clientTests.debug.xcconfig */;
+			baseConfigurationReference = 18ED813865C95D0FA0057823 /* Pods-clientTests.alpha.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
@@ -1351,7 +1383,7 @@
 		};
 		C3E62E0623CF1E8D00EF5CA1 /* Alpha.Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4BAB4D2F54D1EA5D4F5A5117 /* Pods-client-tvOS.debug.xcconfig */;
+			baseConfigurationReference = ECB53234806121FC43AF5418 /* Pods-client-tvOS.alpha.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1382,7 +1414,7 @@
 		};
 		C3E62E0723CF1E8D00EF5CA1 /* Alpha.Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 12E1481623FB4BF952F06015 /* Pods-client-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = DA6D5E7D7D272FB873CFEAA8 /* Pods-client-tvOSTests.alpha.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1456,13 +1488,13 @@
 		};
 		C3E62E0923CF1E9900EF5CA1 /* Alpha.Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 290B85208926B195E5596F2C /* Pods-client.release.xcconfig */;
+			baseConfigurationReference = F2CAF569098FB50BFDD9F002 /* Pods-client.alpha.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_ID_SUFFIX = .alpha;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 93;
+				CURRENT_PROJECT_VERSION = 94;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1471,7 +1503,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.alpha";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.new";
 				PRODUCT_NAME = DEMOCRACY;
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore de.democracy-deutschland.clientapp.new";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1480,7 +1512,7 @@
 		};
 		C3E62E0A23CF1E9900EF5CA1 /* Alpha.Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 199F69096DC7C58943C4B418 /* Pods-clientTests.release.xcconfig */;
+			baseConfigurationReference = 48316CF553F2BE85BB7C6A1A /* Pods-clientTests.alpha.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
@@ -1502,7 +1534,7 @@
 		};
 		C3E62E0B23CF1E9900EF5CA1 /* Alpha.Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1B0EDFAF44AAA4216CD8B35E /* Pods-client-tvOS.release.xcconfig */;
+			baseConfigurationReference = 82F8AC16D3CD9582D7AD9E70 /* Pods-client-tvOS.alpha.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1533,7 +1565,7 @@
 		};
 		C3E62E0C23CF1E9900EF5CA1 /* Alpha.Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7EC8D9696DEAEED3698AAE44 /* Pods-client-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = B11B71EBCB998E8B04E51A23 /* Pods-client-tvOSTests.alpha.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1614,13 +1646,13 @@
 		};
 		C3E62E0E23CF1EA500EF5CA1 /* Beta.Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6D50BD4195957A5FBF265A1F /* Pods-client.debug.xcconfig */;
+			baseConfigurationReference = EAC70A2F95B3DF04168D81CD /* Pods-client.beta.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_ID_SUFFIX = .beta;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 93;
+				CURRENT_PROJECT_VERSION = 94;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
@@ -1630,7 +1662,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.beta";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.new";
 				PRODUCT_NAME = DEMOCRACY;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development de.democracy-deutschland.clientapp.new";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1639,7 +1671,7 @@
 		};
 		C3E62E0F23CF1EA500EF5CA1 /* Beta.Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 13DA10189BCB10FE64066558 /* Pods-clientTests.debug.xcconfig */;
+			baseConfigurationReference = 26499E46281C132EB90BD003 /* Pods-clientTests.beta.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
@@ -1664,7 +1696,7 @@
 		};
 		C3E62E1023CF1EA500EF5CA1 /* Beta.Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4BAB4D2F54D1EA5D4F5A5117 /* Pods-client-tvOS.debug.xcconfig */;
+			baseConfigurationReference = E770314BC1046C94C1FEEB84 /* Pods-client-tvOS.beta.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1695,7 +1727,7 @@
 		};
 		C3E62E1123CF1EA500EF5CA1 /* Beta.Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 12E1481623FB4BF952F06015 /* Pods-client-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = 7905FA3AD822908E6B431B50 /* Pods-client-tvOSTests.beta.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1769,13 +1801,13 @@
 		};
 		C3E62E1323CF1EAF00EF5CA1 /* Beta.Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 290B85208926B195E5596F2C /* Pods-client.release.xcconfig */;
+			baseConfigurationReference = 37E2B3AF3A3670E5661DE8B5 /* Pods-client.beta.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_ID_SUFFIX = .beta;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 93;
+				CURRENT_PROJECT_VERSION = 94;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1784,7 +1816,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.beta";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.new";
 				PRODUCT_NAME = DEMOCRACY;
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore de.democracy-deutschland.clientapp.new";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1793,7 +1825,7 @@
 		};
 		C3E62E1423CF1EAF00EF5CA1 /* Beta.Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 199F69096DC7C58943C4B418 /* Pods-clientTests.release.xcconfig */;
+			baseConfigurationReference = 6AF994A2537601DD2483C16C /* Pods-clientTests.beta.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
@@ -1815,7 +1847,7 @@
 		};
 		C3E62E1523CF1EAF00EF5CA1 /* Beta.Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1B0EDFAF44AAA4216CD8B35E /* Pods-client-tvOS.release.xcconfig */;
+			baseConfigurationReference = 29484589E8084C11B2FAECE8 /* Pods-client-tvOS.beta.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1846,7 +1878,7 @@
 		};
 		C3E62E1623CF1EAF00EF5CA1 /* Beta.Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7EC8D9696DEAEED3698AAE44 /* Pods-client-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = D6147E2B226507697DE44637 /* Pods-client-tvOSTests.beta.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
