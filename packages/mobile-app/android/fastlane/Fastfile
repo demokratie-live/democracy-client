@@ -49,10 +49,6 @@ platform :android do
       version_name: version_number
     )
 
-    # increment_version_code(
-    #   gradle_file_path: "app/build.gradle"
-    # )
-
     version_code = google_play_track_version_codes(
       track: "internal"
     )
