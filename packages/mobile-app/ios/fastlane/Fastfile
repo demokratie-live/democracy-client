@@ -29,12 +29,6 @@ if ENV["TRAVIS_BRANCH"] == 'alpha'
   app_identifier = "de.democracy-deutschland.clientapp.alpha"
 end
 
-update_app_identifier(
-  xcodeproj: "client.xcodeproj",
-  plist_path: "client/Info.plist",
-  app_identifier: app_identifier
-)
-
 platform :ios do
   desc "Installs the certificates locally"
     private_lane :install_certificates do
@@ -78,7 +72,9 @@ platform :ios do
       clean: true,
     )
 
-    upload_to_testflight
+    upload_to_testflight(
+      app_identifier: app_identifier
+    )
 
     delete_keychain(name: "temporary_keychain")
   end
