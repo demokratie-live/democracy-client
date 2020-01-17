@@ -3,7 +3,7 @@ import { ApolloClient } from 'apollo-client';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
-import { Platform } from 'react-native';
+import { NativeModules } from 'react-native';
 import { ApolloLink } from 'apollo-link';
 import { authLinkMiddleware, authLinkAfterware } from './Auth';
 
@@ -21,10 +21,11 @@ const cache = new InMemoryCache({
 
 let graphQlUri = 'https://alpha.api.democracy-app.de';
 if (process.env.NODE_ENV === 'development') {
-  graphQlUri =
-    Platform.OS === 'android'
-      ? 'http://10.0.2.2:3000'
-      : 'http://localhost:3000';
+  // extract democracy api hostname from package bundler url
+  const scriptURL = NativeModules.SourceCode.scriptURL;
+  const address = scriptURL.split('://')[1].split('/')[0];
+  const hostname = address.split(':')[0];
+  graphQlUri = `http://${hostname}:3000`;
 }
 
 const httpLink = new HttpLink({
