@@ -6,6 +6,8 @@ matrix:
       if: (branch = master OR branch = alpha OR branch = refactor) AND commit_message !~ /(no-deploy)/
       cache:
         yarn: true
+        bundler: true
+        cocoapods: true
         directories:
           - "$HOME/.yarn-cache"
           - node_modules
