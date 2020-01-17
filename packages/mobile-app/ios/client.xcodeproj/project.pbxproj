@@ -1335,7 +1335,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7213DBB2C4FD77FB81D46247 /* Pods-client.alpha.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.alpha;
 				BUNDLE_ID_SUFFIX = .alpha;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -1490,7 +1490,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F2CAF569098FB50BFDD9F002 /* Pods-client.alpha.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.alpha;
 				BUNDLE_ID_SUFFIX = .alpha;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
