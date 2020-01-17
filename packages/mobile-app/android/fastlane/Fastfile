@@ -26,6 +26,12 @@ if ENV["TRAVIS_BRANCH"] != 'master'
   package_name = "de.democracydeutschland.app" + "." + ENV["TRAVIS_BRANCH"]
 end
 
+internalVersionCode = google_play_track_version_codes(package_name: package_name, track: 'internal')
+alphaVersionCode = google_play_track_version_codes(package_name: package_name, track: 'alpha')
+betaVersionCode = google_play_track_version_codes(package_name: package_name, track: 'beta')
+productionVersionCode = google_play_track_version_codes(package_name: package_name)
+version_code = [internalVersionCode,alphaVersionCode,betaVersionCode,productionVersionCode].max[0].to_i + 1
+
 platform :android do
   desc "Runs all the tests"
   lane :test do
@@ -50,7 +56,8 @@ platform :android do
     )
 
     increment_version_code(
-      gradle_file_path: "app/build.gradle"
+      gradle_file_path: "app/build.gradle",
+      version_code: version_code
     )
 
     gradle(task: 'clean')
