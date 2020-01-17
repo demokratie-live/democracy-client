@@ -1,4 +1,4 @@
-package de.democracydeutschland.app.refactor;
+package de.democracydeutschland.app;
 
 import com.wix.detox.Detox;
 

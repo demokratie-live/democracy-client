@@ -3,9 +3,11 @@ matrix:
     - language: swift
       os: osx
       osx_image: xcode11.1
-      if: branch = master AND commit_message !~ /(no-deploy)/
+      if: (branch = master OR branch = alpha OR branch = refactor) AND commit_message !~ /(no-deploy)/
       cache:
         yarn: true
+        bundler: true
+        cocoapods: true
         directories:
           - "$HOME/.yarn-cache"
           - node_modules
@@ -35,7 +37,7 @@ matrix:
 
     # Android
     - language: android
-      if: branch = master AND commit_message !~ /(no-deploy)/
+      if: (branch = master OR branch = alpha OR branch = refactor) AND commit_message !~ /(no-deploy)/
       os: linux
       jdk: oraclejdk8
       sudo: required
@@ -55,6 +57,7 @@ matrix:
       node_js: false
       before_install:
         - echo $SECURE_PASSWORD | gpg --passphrase-fd 0 packages/mobile-app/android/my-release-key.keystore.gpg
+        - echo $SECURE_PASSWORD | gpg --passphrase-fd 0 packages/mobile-app/android/democracy2-release-key.keystore.gpg
         - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo
           sysctl -p
         - nvm install 10

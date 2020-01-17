@@ -35,12 +35,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "de.democracydeutschland.app.refactor",
+    package = "de.democracydeutschland.app",
 )
 
 android_resource(
     name = "res",
-    package = "de.democracydeutschland.app.refactor",
+    package = "de.democracydeutschland.app",
     res = "src/main/res",
 )
 

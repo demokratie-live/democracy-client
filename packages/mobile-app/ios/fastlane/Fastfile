@@ -21,6 +21,14 @@ package = load_json(json_path: "../../../package.json")
 
 version_number = package["version"]
 
+# TODO change when production ready to "client"
+scheme_name = "Refactor"
+app_identifier = "de.democracy-deutschland.clientapp.new"
+if ENV["TRAVIS_BRANCH"] == 'alpha'
+  scheme_name = "Alpha"
+  app_identifier = "de.democracy-deutschland.clientapp.alpha"
+end
+
 platform :ios do
   desc "Installs the certificates locally"
     private_lane :install_certificates do
@@ -60,11 +68,13 @@ platform :ios do
 
     build_app(
       workspace: "client.xcworkspace", 
-      scheme: "client",
+      scheme: scheme_name,
       clean: true,
     )
 
-    upload_to_testflight
+    upload_to_testflight(
+      app_identifier: app_identifier
+    )
 
     delete_keychain(name: "temporary_keychain")
   end
