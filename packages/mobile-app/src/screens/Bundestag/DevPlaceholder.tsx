@@ -1,6 +1,6 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import styled from 'styled-components/native';
-import { Text, Button } from 'react-native';
+import { Text, Button, Clipboard, Alert } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useNavigation, CompositeNavigationProp } from '@react-navigation/core';
 import { BundestagRootStackParamList } from '../../routes/Sidebar/Bundestag';
@@ -14,10 +14,10 @@ import { TopTabParamList } from '../../routes/Sidebar/Bundestag/TabView';
 import { InitialStateContext } from '../../context/InitialStates';
 import VotesLocal from '../../lib/VotesLocal';
 
-const Container = styled.View`
+const Container = styled.ScrollView`
   flex: 1;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center; */
+  /* justify-content: center; */
 `;
 
 type DevPlaceholderNavigationProps = CompositeNavigationProp<
@@ -47,6 +47,26 @@ const NotificationDev = () => {
         onPress={() => console.log('Notification now')}
       />
     </NotificationWrapper>
+  );
+};
+
+const LocalVotes = () => {
+  const [localVotes, setLocalVotes] = useState('');
+  useEffect(() => {
+    VotesLocal.readKeychain().then(data => setLocalVotes(JSON.stringify(data)));
+  }, []);
+
+  return (
+    <>
+      <Text>LocalVotes: {localVotes}</Text>
+      <Button
+        title="Copy Local Votes"
+        onPress={() => {
+          Clipboard.setString(localVotes);
+          Alert.alert('local votes copied');
+        }}
+      />
+    </>
   );
 };
 
@@ -84,6 +104,7 @@ export const DevPlaceholder: FC = () => {
         onPress={() => VotesLocal.reset()}
       />
       <Document width="32px" height="32px" color="black" />
+      <LocalVotes />
       <NotificationDev />
     </Container>
   );
