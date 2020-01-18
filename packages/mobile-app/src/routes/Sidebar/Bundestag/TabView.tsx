@@ -80,13 +80,13 @@ const TabViewNavigation: React.FC<Props> = ({ navigation }) => {
         component={List}
         initialParams={{ list: ListType.TOP100 }}
       />
-      {__DEV__ && (
-        <TabNavigation.Screen
-          name="DEV"
-          component={DevPlaceholder}
-          initialParams={{ list: ListType.PREPARATION }}
-        />
-      )}
+      {/* {__DEV__ && ( */}
+      <TabNavigation.Screen
+        name="DEV"
+        component={DevPlaceholder}
+        initialParams={{ list: ListType.PREPARATION }}
+      />
+      {/* )} */}
     </TabNavigation.Navigator>
   );
 };
