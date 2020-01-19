@@ -1,9 +1,8 @@
-/* eslint-disable react-native/sort-styles */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable react-native/no-color-literals */
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import styled from 'styled-components/native';
-import { Text, Button, View, StyleSheet } from 'react-native';
+import { Text, Button, Clipboard, Alert, View, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useNavigation, CompositeNavigationProp } from '@react-navigation/core';
 import { BundestagRootStackParamList } from '../../routes/Sidebar/Bundestag';
@@ -26,10 +25,10 @@ import {
   RegistrationError,
 } from 'react-native-notifications';
 
-const Container = styled.View`
+const Container = styled.ScrollView`
   flex: 1;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center; */
+  /* justify-content: center; */
 `;
 
 type DevPlaceholderNavigationProps = CompositeNavigationProp<
@@ -47,6 +46,25 @@ interface State {
   notifications: any[];
   openedNotifications: any[];
 }
+
+const NotificationWrapper = styled.View`
+  background-color: lightblue;
+`;
+
+const NotificationDev = () => {
+  return (
+    <NotificationWrapper>
+      <Button
+        title="Notification in 10 seconds"
+        onPress={() => console.log('Notification in 10 seconds')}
+      />
+      <Button
+        title="Notification now"
+        onPress={() => console.log('Notification now')}
+      />
+    </NotificationWrapper>
+  );
+};
 
 class NotificationsExampleApp extends React.Component<any, State> {
   state = {
@@ -236,12 +254,32 @@ class NotificationsExampleApp extends React.Component<any, State> {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    flex: 1,
+    justifyContent: 'center',
   },
 });
+
+const LocalVotes = () => {
+  const [localVotes, setLocalVotes] = useState('');
+  useEffect(() => {
+    VotesLocal.readKeychain().then(data => setLocalVotes(JSON.stringify(data)));
+  }, []);
+
+  return (
+    <>
+      <Text>LocalVotes: {localVotes}</Text>
+      <Button
+        title="Copy Local Votes"
+        onPress={() => {
+          Clipboard.setString(localVotes);
+          Alert.alert('local votes copied');
+        }}
+      />
+    </>
+  );
+};
 
 export const DevPlaceholder: FC = () => {
   const { isVerified } = useContext(InitialStateContext);
@@ -277,6 +315,8 @@ export const DevPlaceholder: FC = () => {
         onPress={() => VotesLocal.reset()}
       />
       <Document width="32px" height="32px" color="black" />
+      <LocalVotes />
+      <NotificationDev />
       <NotificationsExampleApp />
     </Container>
   );

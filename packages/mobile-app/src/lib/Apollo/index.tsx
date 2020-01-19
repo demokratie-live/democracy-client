@@ -6,6 +6,7 @@ import { HttpLink } from 'apollo-link-http';
 import { NativeModules } from 'react-native';
 import { ApolloLink } from 'apollo-link';
 import { authLinkMiddleware, authLinkAfterware } from './Auth';
+import { GRAPHQL_URL, GRAPHQL_SERVER_LOCAL } from '../config';
 
 const cache = new InMemoryCache({
   dataIdFromObject: (o: any) => {
@@ -19,8 +20,8 @@ const cache = new InMemoryCache({
   },
 });
 
-let graphQlUri = 'https://alpha.api.democracy-app.de';
-if (process.env.NODE_ENV === 'development') {
+let graphQlUri = GRAPHQL_URL;
+if (process.env.NODE_ENV === 'development' && GRAPHQL_SERVER_LOCAL) {
   // extract democracy api hostname from package bundler url
   const scriptURL = NativeModules.SourceCode.scriptURL;
   const address = scriptURL.split('://')[1].split('/')[0];

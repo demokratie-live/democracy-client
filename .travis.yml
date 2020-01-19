@@ -1,3 +1,6 @@
+env:
+  global:
+    secure: "YlAPyA4FsWPpX5T5NMqYxq0obP5NJCo52G5xltPBAG5N3cWA624n4xE09xR56FuSjr88/MjOGv3VFh4di1/lWfJOuSFbAnzTND+b5+/ArSesR2aZuPSR0qmzncTp4spqMrE303wK5TIUaZjwAg0wRfl4zOw25Ib0YLRF91TjWjpDsR7XPvCkz73brMED+h13WyemlDRbThQsIV9qIkBUhuDCF5T5K0gvym8mK5aDZuIuJ/Rjh9AyihGJP00uqOc9zT4dCqSC+Siyje0llnpEphoLfc8RAbfr+R/3QHZhepPdfQ1HTSymhj+s71kNsIZmoMKDye/t6OEatzmHg/Y6ooqKW2DVU/ov2BdvWGBVYu4z5fZ+FeIr7UY6blHdpkulp1V/X24M/c9q1dyoVzIvSa9RJsPttzu7vpW22BX66r4puvRFw2/Ji1dTDQd2xbJw7CFurGqNTlfiqcLXy6FWslNGR06YptdZhAfqf+JNtdC+6117yPoN6fcO4sc2x2lMzG0FfppcHjfbX/Kj4MkNReUd30MpuIT3MyPgKsKGJ5g7QzA+W/sXigtSW+rG3Ia8k/IlqqZuYOH3Q5mTEo1kbq/2wadn2UEm2LJMi9HXXYhpDWjFu6FQG/E8hEDkfWfAiiQVpMdtxi4IFy/9qC0CtC9QW+7SDL1Ci22hdUmtzfo="
 matrix:
   include:
     - language: swift
@@ -15,6 +18,12 @@ matrix:
           - packages/mobile-ui/node_modules
       node_js: false
       before_install:
+        - gpg --version
+        - brew install gnupg@1.4
+        - gpg --version
+        - echo $super_secret_password | gpg1 --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
+        - echo $super_secret_password | gpg1 --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
+        - echo $super_secret_password | gpg1 --passphrase-fd 0 packages/mobile-app/.env.production.gpg
         - nvm install 10
         - node --version
         - npm install -g yarn
@@ -56,8 +65,12 @@ matrix:
           - extra-google-google_play_services
       node_js: false
       before_install:
-        - echo $SECURE_PASSWORD | gpg --passphrase-fd 0 packages/mobile-app/android/my-release-key.keystore.gpg
-        - echo $SECURE_PASSWORD | gpg --passphrase-fd 0 packages/mobile-app/android/democracy2-release-key.keystore.gpg
+        - gpg --version
+        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/my-release-key.keystore.gpg
+        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/democracy2-release-key.keystore.gpg
+        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
+        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
+        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/.env.production.gpg
         - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo
           sysctl -p
         - nvm install 10

@@ -82,7 +82,7 @@ class VotesLocal {
   static KEYCHAIN_VOTES_KEY = 'democracyVotes';
 
   // Read a v1 Chain
-  private static readKeychain = async (): Promise<Chain> => {
+  static readKeychain = async (): Promise<Chain> => {
     // Get Chain Index
     const keyindex = await Keychain.getGenericPassword({
       service: VotesLocal.KEYCHAIN_INDEX_SERVICE,

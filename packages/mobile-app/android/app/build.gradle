@@ -1,5 +1,14 @@
 apply plugin: "com.android.application"
 
+project.ext.envConfigFiles = [
+    debug: ".env.development",
+    release: ".env.production",
+    alpha: ".env.alpha",
+    beta: ".env.beta",
+]
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+
+
 import com.android.build.OutputFile
 
 /**
@@ -143,8 +152,9 @@ android {
         // react-native-notifications
         missingDimensionStrategy "RNNotifications.reactNativeVersion", "reactNative60" // See note below!
         
-        versionCode 103570
+        versionCode 103575
         versionName "1.2.3"
+        resValue "string", "build_config_package", "de.democracydeutschland.app"
 
         // Wix Detox
         testBuildType System.getProperty('testBuildType', 'debug')  // This will later be used to control the test apk build type
