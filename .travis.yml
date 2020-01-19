@@ -21,9 +21,9 @@ matrix:
         - gpg --version
         - brew install gnupg@1.4
         - gpg --version
-        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
-        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
-        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/.env.production.gpg
+        - echo $super_secret_password | gpg1 --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
+        - echo $super_secret_password | gpg1 --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
+        - echo $super_secret_password | gpg1 --passphrase-fd 0 packages/mobile-app/.env.production.gpg
         - nvm install 10
         - node --version
         - npm install -g yarn
