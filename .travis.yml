@@ -15,9 +15,6 @@ matrix:
           - packages/mobile-ui/node_modules
       node_js: false
       before_install:
-        - echo $SECURE_PASSWORD | gpg --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
-        - echo $SECURE_PASSWORD | gpg --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
-        - echo $SECURE_PASSWORD | gpg --passphrase-fd 0 packages/mobile-app/.env.production.gpg
         - nvm install 10
         - node --version
         - npm install -g yarn
@@ -32,6 +29,9 @@ matrix:
         - bundle install
         - cd $TRAVIS_BUILD_DIR
       script:
+        - echo $SECURE_PASSWORD | gpg --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
+        - echo $SECURE_PASSWORD | gpg --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
+        - echo $SECURE_PASSWORD | gpg --passphrase-fd 0 packages/mobile-app/.env.production.gpg
         - cd packages/mobile-app/ios
         - bundle exec fastlane ios beta
         - cd $TRAVIS_BUILD_DIR
