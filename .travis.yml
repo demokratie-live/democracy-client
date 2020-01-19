@@ -18,9 +18,10 @@ matrix:
           - packages/mobile-ui/node_modules
       node_js: false
       before_install:
-        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
-        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
-        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/.env.production.gpg
+        - brew install homebrew/versions/gnupg21
+        - echo $super_secret_password | gpg2 --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
+        - echo $super_secret_password | gpg2 --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
+        - echo $super_secret_password | gpg2 --passphrase-fd 0 packages/mobile-app/.env.production.gpg
         - nvm install 10
         - node --version
         - npm install -g yarn
