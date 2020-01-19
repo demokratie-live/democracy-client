@@ -70,5 +70,6 @@ artifacts
 # Configs
 .env*
 !.env.example
+!.env.*.example
 
 *.dSYM.zip
