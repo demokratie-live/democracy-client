@@ -19,7 +19,7 @@ matrix:
       node_js: false
       before_install:
         - gpg --version
-        - brew install gnupg
+        - brew install gnupg@1.4
         - gpg --version
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
