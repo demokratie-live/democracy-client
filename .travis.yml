@@ -15,6 +15,9 @@ matrix:
           - packages/mobile-ui/node_modules
       node_js: false
       before_install:
+        - echo $SECURE_PASSWORD | gpg --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
+        - echo $SECURE_PASSWORD | gpg --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
+        - echo $SECURE_PASSWORD | gpg --passphrase-fd 0 packages/mobile-app/.env.production.gpg
         - nvm install 10
         - node --version
         - npm install -g yarn
@@ -58,6 +61,9 @@ matrix:
       before_install:
         - echo $SECURE_PASSWORD | gpg --passphrase-fd 0 packages/mobile-app/android/my-release-key.keystore.gpg
         - echo $SECURE_PASSWORD | gpg --passphrase-fd 0 packages/mobile-app/android/democracy2-release-key.keystore.gpg
+        - echo $SECURE_PASSWORD | gpg --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
+        - echo $SECURE_PASSWORD | gpg --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
+        - echo $SECURE_PASSWORD | gpg --passphrase-fd 0 packages/mobile-app/.env.production.gpg
         - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo
           sysctl -p
         - nvm install 10
