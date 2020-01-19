@@ -71,5 +71,6 @@ artifacts
 .env*
 !.env.example
 !.env.*.example
+!.env.*.gpg
 
 *.dSYM.zip
