@@ -148,7 +148,7 @@ android {
         applicationId "de.democracydeutschland.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 103572
+        versionCode 103573
         versionName "1.2.3"
         resValue "string", "build_config_package", "de.democracydeutschland.app"
 
