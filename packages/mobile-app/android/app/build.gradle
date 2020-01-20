@@ -148,6 +148,7 @@ android {
         applicationId "de.democracydeutschland.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
+        multiDexEnabled true
 
         // react-native-notifications
         missingDimensionStrategy "RNNotifications.reactNativeVersion", "reactNative60" // See note below!
@@ -256,6 +257,9 @@ dependencies {
     // react-native-notifications
     implementation project(':reactnativenotifications')
     implementation 'com.google.firebase:firebase-core:16.0.0'
+
+    // Multidex
+    implementation 'com.android.support:multidex:1.0.3'
 
     if (enableHermes) {
         def hermesPath = "../../../../node_modules/hermes-engine/android/";
