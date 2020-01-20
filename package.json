@@ -12,6 +12,8 @@
     "app:start": "yarn workspace app start",
     "app:ios": "yarn workspace app ios",
     "app:android": "yarn workspace app android",
+    "app:device:ios": "yarn workspace app device:ios",
+    "app:device:android": "yarn workspace app device:android",
     "app:release:ios": "yarn workspace app release:ios",
     "app:release:android": "yarn workspace app release:android",
     "ui:start": "yarn workspace @democracy-deutschland/mobile-ui start",
