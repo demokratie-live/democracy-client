@@ -16210,9 +16210,9 @@ react-native-modal@^11.0.2:
     react-native-animatable "1.3.3"
 
 react-native-notifications@^3.0.0-beta.3:
-  version "3.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/react-native-notifications/-/react-native-notifications-3.0.0-beta.3.tgz#d8c7686fd24ed9f58eb0f3f8ed79ffce7afc89cd"
-  integrity sha512-L+7VJFrAkSfMgtZVxoK2SSz2T+F9zPhsE4LJOigDQQjVQrBAzxw1/LUv7dfguNDnAvmxn4xn2MtHGfQYeHd18A==
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-notifications/-/react-native-notifications-3.1.1.tgz#012db49f56779804c8c167af71ca5ad5fef355b5"
+  integrity sha512-aIrB23GQm0lTPuwJGxYwIaWao6q8YJp9hQxuu+kvfifIHWfJIOvu1b/Rb5rSCzXqFqzc5Ck1l7ngnxbQy6vi0Q==
 
 react-native-pdf@^6.0.0:
   version "6.0.1"

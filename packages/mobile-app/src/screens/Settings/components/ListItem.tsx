@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styled from 'styled-components/native';
 import { Text } from 'react-native';
 
@@ -19,6 +19,13 @@ const Value = styled.Text<{ arrow: boolean }>`
   padding-right: ${({ arrow }) => (arrow ? 5 : 12)};
 `;
 
+const Description = styled.Text`
+  font-size: 13;
+  color: #8f8e94;
+  padding-horizontal: 18;
+  padding-vertical: 8;
+`;
+
 // const NavigationIoniconsIcon = styled(Ionicons).attrs(() => ({
 //   size: 24,
 //   color: 'grey',
@@ -29,23 +36,31 @@ const Value = styled.Text<{ arrow: boolean }>`
 //   margin-top: 3;
 // `;
 
-interface Props {
+export interface Props {
   text?: string;
-  arrow: boolean;
+  arrow?: boolean;
   onPress: () => void;
+  component?: ReactNode;
+  description?: string;
 }
 
 export const ListItem: React.FC<Props> = ({
   children,
   text,
-  arrow,
+  arrow = false,
   onPress,
+  component,
+  description,
 }) => {
   return (
-    <Wrapper onPress={onPress}>
-      {children}
-      {text && <Value arrow={arrow}>{text}</Value>}
-      {arrow && <Text>&gt;</Text>}
-    </Wrapper>
+    <>
+      <Wrapper onPress={onPress}>
+        {children}
+        {!!text && <Value arrow={arrow}>{text}</Value>}
+        {!!arrow && <Text>&gt;</Text>}
+        {!!component && component}
+      </Wrapper>
+      {!!description && <Description>{description}</Description>}
+    </>
   );
 };

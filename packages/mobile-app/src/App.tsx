@@ -8,6 +8,7 @@ import { LocalVotesProvider } from './context/LocalVotes';
 import { Apollo } from './lib/Apollo';
 import { ListFilterProvider } from './context/ListFilter';
 import { ConstituencyProvider } from './context/Constituency';
+import { NotificationsProvider } from './context/Notifications';
 
 export default () => (
   <Apollo>
@@ -15,7 +16,9 @@ export default () => (
       <LocalVotesProvider>
         <ListFilterProvider>
           <ConstituencyProvider>
-            <Navigation />
+            <NotificationsProvider>
+              <Navigation />
+            </NotificationsProvider>
           </ConstituencyProvider>
         </ListFilterProvider>
       </LocalVotesProvider>

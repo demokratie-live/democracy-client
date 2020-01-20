@@ -45,6 +45,8 @@ type DevPlaceholderNavigationProps = CompositeNavigationProp<
 interface State {
   notifications: any[];
   openedNotifications: any[];
+  pushToken?: string | null;
+  hasPermissions: boolean;
 }
 
 const NotificationWrapper = styled.View`
@@ -70,6 +72,8 @@ class NotificationsExampleApp extends React.Component<any, State> {
   state = {
     notifications: [],
     openedNotifications: [],
+    pushToken: '',
+    hasPermissions: false,
   };
 
   constructor(props: any) {
@@ -77,10 +81,17 @@ class NotificationsExampleApp extends React.Component<any, State> {
 
     this.registerNotificationEvents();
     this.setCategories();
+    AsyncStorage.getItem('push-token').then(token => {
+      this.setState({ pushToken: token });
+      console.log('PUSH TOKEN', token);
+    });
+    Notifications.isRegisteredForRemoteNotifications().then(hasPermissions => {
+      this.setState({ hasPermissions });
+    });
   }
 
   registerNotificationEvents() {
-    Notifications.events().registerNotificationReceived(
+    Notifications.events().registerNotificationReceivedBackground(
       (notification, completion) => {
         this.setState({
           notifications: [...this.state.notifications, notification],
@@ -93,7 +104,20 @@ class NotificationsExampleApp extends React.Component<any, State> {
       },
     );
 
-    Notifications.events().registerRemoteNotificationOpened(
+    Notifications.events().registerNotificationReceivedForeground(
+      (notification, completion) => {
+        this.setState({
+          notifications: [...this.state.notifications, notification],
+        });
+        completion({
+          alert: notification.payload.showAlert,
+          sound: false,
+          badge: false,
+        });
+      },
+    );
+
+    Notifications.events().registerNotificationOpened(
       (notification, completion) => {
         this.setState({
           openedNotifications: [
@@ -231,6 +255,9 @@ class NotificationsExampleApp extends React.Component<any, State> {
     );
     return (
       <View style={styles.container}>
+        <Text>
+          Has Push permissions: {this.state.hasPermissions ? 'true' : 'false'}
+        </Text>
         <Button
           title={'Request permissions'}
           onPress={this.requestPermissions}
