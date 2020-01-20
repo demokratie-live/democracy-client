@@ -78,6 +78,24 @@ export const NotificationsProvider: React.FC = ({ children }) => {
             query: NOTIFICATION_SETTINGS,
           },
         ],
+        update: (proxy, { data: updateData }) => {
+          if (updateData && updateData.updateNotificationSettings) {
+            const notificationCacheData = proxy.readQuery<NotificationSettings>(
+              {
+                query: NOTIFICATION_SETTINGS,
+              },
+            );
+            if (notificationCacheData) {
+              proxy.writeQuery<NotificationSettings>({
+                query: NOTIFICATION_SETTINGS,
+                data: {
+                  ...notificationCacheData,
+                  ...options,
+                },
+              });
+            }
+          }
+        },
       });
     }
   };
