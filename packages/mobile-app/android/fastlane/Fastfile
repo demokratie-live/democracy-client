@@ -21,9 +21,11 @@ version_number = package["version"]
 
 # TODO remove refactor suffix when new app is production ready
 package_name = "de.democracydeutschland.app.refactor"
+ENV["ENVFILE"] = ".env.production"
 if ENV["TRAVIS_BRANCH"] != 'master'
   # and change "de.democracydeutschland.app" to package_name
   package_name = "de.democracydeutschland.app" + "." + ENV["TRAVIS_BRANCH"]
+  ENV["ENVFILE"] = ".env." + ENV["TRAVIS_BRANCH"]
 end
 
 internalVersionCode = google_play_track_version_codes(package_name: package_name, track: 'internal')
