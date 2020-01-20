@@ -4,5 +4,5 @@ yarn-error.log
 
 # Documentation
 .docz
-/packages/mobile-app/android/app/google-services.json
 /packages/mobile-app/ios/DEMOCRACY.app.dSYM.zip
+google-services.json

@@ -67,7 +67,8 @@ matrix:
       before_install:
         - gpg --version
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/my-release-key.keystore.gpg
-        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/app/google-services.json.gpg
+        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/app/src/refactor/google-services.json.gpg
+        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/app/src/alpha/google-services.json.gpg
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/democracy2-release-key.keystore.gpg
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
