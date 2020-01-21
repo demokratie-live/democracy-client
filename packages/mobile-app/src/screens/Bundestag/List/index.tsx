@@ -60,10 +60,8 @@ export const List = () => {
   });
 
   useEffect(() => {
-    if (!hasMore) {
-      setHasMore(true);
-    }
-  }, [proceduresFilter, hasMore]);
+    setHasMore(true);
+  }, [proceduresFilter]);
 
   if (loading) {
     return <ListLoading />;
