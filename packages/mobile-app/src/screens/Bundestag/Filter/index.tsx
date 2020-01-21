@@ -140,12 +140,9 @@ export const Filter: React.FC<Props> = ({ navigation }) => {
   }) => {
     const newData = data.map(category => {
       if (category.name === type) {
-        const allSelected = getValue({ type: category.name }) === true;
         const newEntryData = category.data.map(entry => {
           if (subType && (entry.name === subType || entry.title === subType)) {
-            return { ...entry, value: allSelected ? !value : value };
-          } else if (subType && allSelected) {
-            return { ...entry, value: allSelected ? value : !value };
+            return { ...entry, value: value };
           } else if (!subType) {
             return { ...entry, value };
           }
