@@ -6,7 +6,7 @@ matrix:
     - language: swift
       os: osx
       osx_image: xcode11.1
-      if: (branch = master OR branch = alpha OR branch = refactor) AND commit_message !~ /(no-deploy)/
+      if: (branch = alpha OR branch = refactor) AND commit_message !~ /(no-deploy)/
       cache:
         yarn: true
         bundler: true
@@ -46,7 +46,7 @@ matrix:
 
     # Android
     - language: android
-      if: (branch = master OR branch = alpha OR branch = refactor) AND commit_message !~ /(no-deploy)/
+      if: (branch = alpha OR branch = refactor) AND commit_message !~ /(no-deploy)/
       os: linux
       jdk: oraclejdk8
       sudo: required
@@ -67,6 +67,8 @@ matrix:
       before_install:
         - gpg --version
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/my-release-key.keystore.gpg
+        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/app/src/refactor/google-services.json.gpg
+        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/app/src/alpha/google-services.json.gpg
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/democracy2-release-key.keystore.gpg
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/.env.beta.gpg

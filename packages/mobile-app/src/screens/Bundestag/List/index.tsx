@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Text, ListRenderItem, SectionList } from 'react-native';
 import { useQuery } from '@apollo/react-hooks';
 import { procedures } from './graphql/query/procedures';
@@ -58,6 +58,10 @@ export const List = () => {
       filter: proceduresFilter,
     },
   });
+
+  useEffect(() => {
+    setHasMore(true);
+  }, [proceduresFilter]);
 
   if (loading) {
     return <ListLoading />;

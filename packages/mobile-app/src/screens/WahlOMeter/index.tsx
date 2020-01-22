@@ -169,7 +169,7 @@ class WahlOMeter extends PureComponent<Props> {
                 selectedIndex={selectedIndex}
                 onChange={newSelectedIndex => {
                   this.setState({
-                    newSelectedIndex,
+                    selectedIndex: newSelectedIndex,
                   });
                   this.scrollTo({
                     y: 0,
