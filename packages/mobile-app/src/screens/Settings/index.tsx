@@ -1,5 +1,5 @@
 import React, { useContext, ReactNode } from 'react';
-import { Alert, SectionList, Switch, Button } from 'react-native';
+import { SectionList, Switch, Button } from 'react-native';
 
 // GraphQL
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -46,19 +46,19 @@ export const Settings: React.FC<Props> = () => {
   const { isVerified } = useContext(InitialStateContext);
   const {
     hasPermissions,
+    alreadyDenied,
     notificationSettings,
     update: updateNotificationSettings,
+    requestToken,
   } = useContext(NotificationsContext);
 
   const navigateTo = (screen: string) => () => {
     switch (screen) {
       case 'constituency':
-        // TODO navigate to constituency selection
         navigation.navigate('Constituency');
         break;
       case 'verificate':
-        // TODO navigate to constituency selection
-        Alert.alert('navigate to verification');
+        navigation.navigate('Verification');
         break;
 
       default:
@@ -87,28 +87,27 @@ export const Settings: React.FC<Props> = () => {
           text: `WK ${constituency}`,
           onPress: navigateTo('constituency'),
         },
-        {
-          title: 'Benachrichtigungen',
-          onPress: navigateTo('notifications-settings'),
-          component: hasPermissions ? (
-            <Switch
-              value={!!notificationSettings.enabled}
-              onValueChange={value => {
-                updateNotificationSettings({
-                  enabled: value,
-                });
-              }}
-            />
-          ) : (
-            <Button
-              title="Aktivieren"
-              onPress={() => Alert.alert('aktivieren')}
-            />
-          ),
-        },
       ],
     },
   ];
+  if (isVerified) {
+    listData[0].data.push({
+      title: 'Benachrichtigungen',
+      onPress: navigateTo('notifications-settings'),
+      component: hasPermissions ? (
+        <Switch
+          value={!!notificationSettings.enabled}
+          onValueChange={value => {
+            updateNotificationSettings({
+              enabled: value,
+            });
+          }}
+        />
+      ) : (
+        <Button title="Aktivieren" onPress={requestToken} />
+      ),
+    });
+  }
 
   if (hasPermissions && notificationSettings.enabled) {
     listData.push(
@@ -210,6 +209,9 @@ export const Settings: React.FC<Props> = () => {
       renderSectionHeader={({ section: { title } }) => <Segment text={title} />}
       sections={listData}
       keyExtractor={item => item.title}
+      ListFooterComponent={
+        (!!alreadyDenied && <Text>Request code already denied</Text>) || null
+      }
     />
   );
 };
