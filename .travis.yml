@@ -38,6 +38,7 @@ matrix:
         - bundle install
         - cd $TRAVIS_BUILD_DIR
       script:
+        - chmod 0600 /home/travis/.netrc
         - cd packages/mobile-app/ios
         - bundle exec fastlane ios beta
         - cd $TRAVIS_BUILD_DIR
@@ -87,6 +88,7 @@ matrix:
         - bundle install
         - cd $TRAVIS_BUILD_DIR
       script:
+        - chmod 0600 /home/travis/.netrc
         - cd packages/mobile-app/android
         - bundle exec fastlane android internal
         - cd $TRAVIS_BUILD_DIR
