@@ -21,6 +21,11 @@ or alternatively using `brew cask install fastlane`
 fastlane android test
 ```
 Runs all the tests
+### android browserstack
+```
+fastlane android browserstack
+```
+Submit a new Build to Browserstack
 ### android internal
 ```
 fastlane android internal
