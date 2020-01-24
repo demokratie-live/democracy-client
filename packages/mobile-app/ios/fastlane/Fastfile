@@ -62,6 +62,11 @@ platform :ios do
       version: version_number,
       app_identifier: app_identifier
     )
+    build_number_local = get_build_number(xcodeproj: "client.xcodeproj")
+
+    if build_number_local > build_number
+      build_number = build_number_local
+    end
 
     increment_version_number(version_number: version_number)
     increment_build_number(
