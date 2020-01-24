@@ -23,6 +23,7 @@ import {
 } from './graphql/mutation/__generated__/AddToken';
 import { ADD_TOKEN } from './graphql/mutation/AddToken';
 import AsyncStorage from '@react-native-community/async-storage';
+import DeviceInfo from 'react-native-device-info';
 
 interface NotificationsInterface {
   hasPermissions: boolean;
@@ -127,7 +128,9 @@ export const NotificationsProvider: React.FC = ({ children }) => {
 
   const requestToken = () => {
     // TODO ensure that this function run's only once!
-    Notifications.registerRemoteNotifications();
+    if (!DeviceInfo.isEmulatorSync()) {
+      Notifications.registerRemoteNotifications();
+    }
   };
 
   // resend token when neccessary
