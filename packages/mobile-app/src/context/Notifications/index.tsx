@@ -125,6 +125,19 @@ export const NotificationsProvider: React.FC = ({ children }) => {
     }
   }, [sendToken]);
 
+  const requestToken = () => {
+    Notifications.registerRemoteNotifications();
+  };
+
+  // resend token when neccessary
+  useEffect(() => {
+    if (Platform.OS === 'ios' && hasPermissions) {
+      AsyncStorage.getItem('push-token').then(
+        token => !token && requestToken(),
+      );
+    }
+  }, [hasPermissions]);
+
   const update = (options: UpdateNotificationSettingsVariables) => {
     if (options) {
       return updateSettings({
@@ -154,10 +167,6 @@ export const NotificationsProvider: React.FC = ({ children }) => {
         },
       });
     }
-  };
-
-  const requestToken = () => {
-    Notifications.registerRemoteNotifications();
   };
 
   return (
