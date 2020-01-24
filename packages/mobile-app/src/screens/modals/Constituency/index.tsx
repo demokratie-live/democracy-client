@@ -149,13 +149,15 @@ export const ConstituencyScreen = () => {
 
   constituenciesData =
     term.length > 0
-      ? constituenciesData.filter(
-          ({ areacodes, name, selected, number }) =>
-            (areacodes.some(({ code }) => code.indexOf(term) === 0) ||
+      ? constituenciesData.filter(({ areacodes, name, selected, number }) => {
+          const termCode = `${parseInt(term, 10)}`;
+          return (
+            (areacodes.some(({ code }) => code.indexOf(termCode) === 0) ||
               name.toLowerCase().indexOf(term.toLowerCase()) !== -1 ||
               number === term) &&
-            !selected,
-        )
+            !selected
+          );
+        })
       : constituenciesData.filter(({ selected }) => !selected);
 
   if (selectedConstituency) {
