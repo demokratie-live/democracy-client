@@ -150,6 +150,7 @@ export const ConstituencyScreen = () => {
   constituenciesData =
     term.length > 0
       ? constituenciesData.filter(({ areacodes, name, selected, number }) => {
+          // remove starting zeros from search term
           const termCode = `${parseInt(term, 10)}`;
           return (
             (areacodes.some(({ code }) => code.indexOf(termCode) === 0) ||
