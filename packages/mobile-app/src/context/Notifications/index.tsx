@@ -126,6 +126,7 @@ export const NotificationsProvider: React.FC = ({ children }) => {
   }, [sendToken]);
 
   const requestToken = () => {
+    // TODO ensure that this function run's only once!
     Notifications.registerRemoteNotifications();
   };
 
