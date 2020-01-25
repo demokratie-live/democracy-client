@@ -76,6 +76,7 @@ const App = () => {
           name="Constituency"
           component={ConstituencyScreen}
           options={{
+            title: 'Wahlkreisssuche',
             headerShown: true,
             headerStyle: {
               backgroundColor: '#4494d3',
