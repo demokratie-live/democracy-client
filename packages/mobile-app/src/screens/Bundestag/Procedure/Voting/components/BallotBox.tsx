@@ -82,6 +82,8 @@ const BalloutBox: React.FC<Props> = ({
   procedureObjId,
 }) => {
   const { setLocalVote } = useContext(LocalVotesContext);
+  const { constituency } = useContext(ConstituencyContext);
+  const constituencies = constituency ? [constituency] : [];
   const navigation = useNavigation<
     StackNavigationProp<BundestagRootStackParamList, 'Voting'>
   >();
@@ -91,12 +93,12 @@ const BalloutBox: React.FC<Props> = ({
         query: Procedure,
         variables: {
           id: procedureId,
+          constituencies,
         },
       },
     ],
   });
   const [isDraggable, setIsDraggable] = useState(true);
-  const { constituency } = useContext(ConstituencyContext);
 
   const pan = React.useRef(new Animated.ValueXY({ x: 0, y: 0 })).current;
 
