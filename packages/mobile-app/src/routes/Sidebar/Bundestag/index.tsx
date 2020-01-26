@@ -39,7 +39,8 @@ type BundestagNavigationProps = CompositeNavigationProp<
 >;
 
 export const MenuButton = styled.TouchableOpacity`
-  padding-left: 11;
+  padding-vertical: 11;
+  padding-horizontal: 11;
 `;
 
 const BundestagRootNavigation = () => {
