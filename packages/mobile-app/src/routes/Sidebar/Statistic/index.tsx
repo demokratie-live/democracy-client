@@ -44,6 +44,7 @@ const StatisticRootNavigation = () => {
           elevation: 0,
           shadowOpacity: 0,
         },
+        headerBackTitleVisible: false,
         headerTintColor: '#fff',
       }}>
       <StatisticRootStack.Screen
