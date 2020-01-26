@@ -75,7 +75,7 @@ const BundestagRootNavigation = () => {
         />
         <BundestagRootStack.Screen name="Voting" component={VoteVerification} />
         <BundestagRootStack.Screen name="Filter" component={Filter} />
-        <BundestagRootStack.Screen name="Search" component={() => <Search />} />
+        <BundestagRootStack.Screen name="Search" component={Search} />
       </BundestagRootStack.Navigator>
     </SearchProvider>
   );
