@@ -35,6 +35,7 @@ const VerificationRootNavigation = () => {
           elevation: 0,
           shadowOpacity: 0,
         },
+        headerBackTitleVisible: false,
         headerTintColor: '#fff',
       }}>
       <VerificationRootStack.Screen

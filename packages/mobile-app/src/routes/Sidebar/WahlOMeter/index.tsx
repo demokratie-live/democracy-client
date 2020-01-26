@@ -44,6 +44,7 @@ const WahlOMeterNavigation = () => {
           elevation: 0,
           shadowOpacity: 0,
         },
+        headerBackTitleVisible: false,
         headerTintColor: '#fff',
       }}>
       <WahlOMeterStack.Screen
