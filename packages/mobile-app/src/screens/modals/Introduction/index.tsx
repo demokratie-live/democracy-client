@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, useState, useEffect } from 'react';
 import { useNavigation, RouteProp } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import styled from 'styled-components/native';
@@ -28,7 +28,15 @@ type Props = {
 const Introduction: FC<Props> = ({ route }) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const { isVerified } = useContext(InitialStateContext);
+  const [wasVerified] = useState(isVerified);
   const { lastStartWithVersion, done } = route.params;
+
+  // Close instructions if user verify himself within instructions
+  useEffect(() => {
+    if (!wasVerified && isVerified) {
+      navigation.goBack();
+    }
+  }, [isVerified, wasVerified, navigation]);
 
   const finishAction = () => {
     if (done) {

@@ -25,9 +25,11 @@ const RootStack = createStackNavigator<RootStackParamList>();
 
 const App = () => {
   const [currentVersion, setCurrentVersion] = useState();
-  const { lastStartWithVersion, setLastStartWithVersion } = useContext(
-    InitialStateContext,
-  );
+  const {
+    lastStartWithVersion,
+    setLastStartWithVersion,
+    isVerified,
+  } = useContext(InitialStateContext);
 
   useEffect(() => {
     setCurrentVersion(DeviceInfo.getVersion());
@@ -70,7 +72,16 @@ const App = () => {
         <RootStack.Screen
           name="Pdf"
           component={PdfScreen}
-          options={{ headerShown: true }}
+          options={{
+            headerShown: true,
+            headerStyle: {
+              backgroundColor: '#4494d3',
+              elevation: 0,
+              shadowOpacity: 0,
+            },
+            headerBackTitleVisible: false,
+            headerTintColor: '#fff',
+          }}
         />
         <RootStack.Screen
           name="Constituency"
@@ -85,17 +96,19 @@ const App = () => {
             headerTintColor: '#fff',
           }}
         />
-        <RootStack.Screen
-          name="Verification"
-          options={{
-            headerShown: false,
-          }}
-          component={() => (
-            <VerificationProvider>
-              <Verification />
-            </VerificationProvider>
-          )}
-        />
+        {!isVerified && (
+          <RootStack.Screen
+            name="Verification"
+            options={{
+              headerShown: false,
+            }}
+            component={() => (
+              <VerificationProvider>
+                <Verification />
+              </VerificationProvider>
+            )}
+          />
+        )}
       </RootStack.Navigator>
     </NavigationNativeContainer>
   );
