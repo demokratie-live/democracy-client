@@ -192,6 +192,8 @@ PODS:
     - React
   - react-native-safe-area-context (0.6.2):
     - React
+  - react-native-splash-screen (3.2.0):
+    - React
   - React-RCTActionSheet (0.61.4):
     - React-Core/RCTActionSheetHeaders (= 0.61.4)
   - React-RCTAnimation (0.61.4):
@@ -279,6 +281,7 @@ DEPENDENCIES:
   - react-native-notifications (from `../../../node_modules/react-native-notifications`)
   - react-native-pdf (from `../../../node_modules/react-native-pdf`)
   - react-native-safe-area-context (from `../../../node_modules/react-native-safe-area-context`)
+  - react-native-splash-screen (from `../../../node_modules/react-native-splash-screen`)
   - React-RCTActionSheet (from `../../../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../../../node_modules/react-native/Libraries/NativeAnimation`)
   - React-RCTBlob (from `../../../node_modules/react-native/Libraries/Blob`)
@@ -348,6 +351,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native-pdf"
   react-native-safe-area-context:
     :path: "../../../node_modules/react-native-safe-area-context"
+  react-native-splash-screen:
+    :path: "../../../node_modules/react-native-splash-screen"
   React-RCTActionSheet:
     :path: "../../../node_modules/react-native/Libraries/ActionSheetIOS"
   React-RCTAnimation:
@@ -416,6 +421,7 @@ SPEC CHECKSUMS:
   react-native-notifications: acf37b8cbeb5b05f274b25ffe6289119b65961c2
   react-native-pdf: 29a09815e99c92743aa8459a90564aaddd4065e0
   react-native-safe-area-context: 25260c5d0b9c53fd7aa88e569e2edae72af1f6a3
+  react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
   React-RCTActionSheet: 7369b7c85f99b6299491333affd9f01f5a130c22
   React-RCTAnimation: d07be15b2bd1d06d89417eb0343f98ffd2b099a7
   React-RCTBlob: 8e0b23d95c9baa98f6b0e127e07666aaafd96c34
