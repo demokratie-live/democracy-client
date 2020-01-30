@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components/native';
-import Chart from '../../Statistic/Chart';
+import Chart from '../HeaderChart';
 
 const Wrapper = styled.View`
   flex-direction: row;
