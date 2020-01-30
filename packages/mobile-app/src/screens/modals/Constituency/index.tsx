@@ -110,7 +110,7 @@ export const ConstituencyScreen = () => {
   };
 
   const getPlz = (item: Constituency) => {
-    const areacodes = item.areacodes.map(({ code }) => code);
+    const areacodes = item.areacodes.map(({ code }) => code.padStart(5, '0'));
     areacodes.sort((x, y) => {
       return x.indexOf(term) !== -1 ? -1 : y.indexOf(term) !== -1 ? 1 : 0;
     });
