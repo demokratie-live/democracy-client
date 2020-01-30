@@ -34,35 +34,37 @@ betaVersionCode = google_play_track_version_codes(package_name: package_name, tr
 productionVersionCode = google_play_track_version_codes(package_name: package_name)
 version_code = [internalVersionCode,alphaVersionCode,betaVersionCode,productionVersionCode].max[0].to_i + 1
 
+store_password = prompt(text: "Signing Store Password: ", secure_text: true, ci_input: ENV['ANDROID_PASS'])
+key_password = prompt(text: "Alias Key Password: ", secure_text: true, ci_input: ENV['ANDROID_PASS'])
+releaseFilePath = File.join(Dir.pwd, "..", "democracy2-release-key.keystore")
+key_alias = "democracy2-key-alias"
+
+if ENV["TRAVIS_BRANCH"] == 'refactor'
+  store_password = prompt(text: "Signing Store Password: ", secure_text: true, ci_input: ENV['ANDROID_KEYSTORE_PASSWORD'])
+  key_password = prompt(text: "Alias Key Password: ", secure_text: true, ci_input: ENV['ANDROID_KEYSTORE_PASSWORD'])
+  releaseFilePath = File.join(Dir.pwd, "..", "my-release-key.keystore")
+  key_alias = "my-key-alias"
+end
+
 platform :android do
   desc "Runs all the tests"
+
+  android_set_version_name(
+    version_name: version_number
+  )
+
+  increment_version_code(
+    gradle_file_path: "app/build.gradle",
+    version_code: version_code
+  )
+
+  gradle(task: 'clean')
+
   lane :test do
     gradle(task: "test")
   end
 
   private_lane :build do
-    store_password = prompt(text: "Signing Store Password: ", secure_text: true, ci_input: ENV['ANDROID_PASS'])
-    key_password = prompt(text: "Alias Key Password: ", secure_text: true, ci_input: ENV['ANDROID_PASS'])
-    releaseFilePath = File.join(Dir.pwd, "..", "democracy2-release-key.keystore")
-    key_alias = "democracy2-key-alias"
-
-    if ENV["TRAVIS_BRANCH"] == 'refactor'
-      store_password = prompt(text: "Signing Store Password: ", secure_text: true, ci_input: ENV['ANDROID_KEYSTORE_PASSWORD'])
-      key_password = prompt(text: "Alias Key Password: ", secure_text: true, ci_input: ENV['ANDROID_KEYSTORE_PASSWORD'])
-      releaseFilePath = File.join(Dir.pwd, "..", "my-release-key.keystore")
-      key_alias = "my-key-alias"
-    end
-
-    android_set_version_name(
-      version_name: version_number
-    )
-
-    increment_version_code(
-      gradle_file_path: "app/build.gradle",
-      version_code: version_code
-    )
-
-    gradle(task: 'clean')
 
     gradle(
       task: 'bundle',
@@ -78,6 +80,29 @@ platform :android do
     )
   end
 
+  desc "Submit a new Build to Browserstack"
+  private_lane :browserstack do
+
+    gradle(
+      task: 'assemble',
+      build_type: 'Release',
+      print_command: false,
+      flavor: ENV["TRAVIS_BRANCH"],
+      properties: {
+        "android.injected.signing.store.file" => releaseFilePath,
+        "android.injected.signing.store.password" => store_password,
+        "android.injected.signing.key.alias" => key_alias,
+        "android.injected.signing.key.password" => key_password,
+      }
+    )
+
+    upload_to_browserstack_app_live(
+      browserstack_username: ENV["BROWSERSTACK_USERNAME"],
+      browserstack_access_key: ENV["BROWSERSTACK_ACCESS_KEY"],
+    )
+
+    end
+
   desc "Submit a new Internal Build to Play Store"
   lane :internal do
 
@@ -88,5 +113,7 @@ platform :android do
      track: 'internal',
      track_promote_to: 'internal'
     )
+
+    browserstack
     end
 end

@@ -136,7 +136,7 @@ export const CommunityVoteResults: React.FC<Props> = ({ voteResults }) => {
   }
 
   const screens = [renderCommuntiyResult(voteResults)];
-  if (myConstituency) {
+  if (myConstituency && voteResults.constituencies[0]) {
     screens.push(renderCommuntiyResult(voteResults.constituencies[0]));
   }
   return (
