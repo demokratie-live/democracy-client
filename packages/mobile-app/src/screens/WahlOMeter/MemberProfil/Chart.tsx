@@ -1,25 +1,27 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components/native';
-
-import Chart from './HeaderChart';
+import Chart from '../../Statistic/Chart';
 
 const Wrapper = styled.View`
   flex-direction: row;
   padding-horizontal: 18;
-`;
-
-const TimeSelect = styled.View`
-  flex: 1;
+  padding-top: 18;
 `;
 
 const ProcedureCount = styled.View`
-  padding-right: 9;
+  padding-left: 18;
+  justify-content: space-around;
 `;
 
 const ProcedureCountText = styled.Text`
-  font-size: 15;
+  font-size: 20;
   color: #6d6d72;
   font-weight: 500;
+`;
+
+const Label = styled.Text`
+  font-size: 17;
+  color: #9b9b9b;
 `;
 
 interface Props {
@@ -27,24 +29,27 @@ interface Props {
   votedProceduresCount: number;
 }
 
-class WomHeader extends PureComponent<Props> {
+class MemberChart extends PureComponent<Props> {
   render() {
     const { totalProcedures, votedProceduresCount } = this.props;
     return (
       <Wrapper>
-        <TimeSelect />
+        <Chart
+          showValue
+          valueSize={8}
+          floatNumbers={0}
+          value={(votedProceduresCount / totalProcedures) * 100}
+          width={60}
+        />
         <ProcedureCount>
           <ProcedureCountText>
             {votedProceduresCount}/{totalProcedures}
           </ProcedureCountText>
+          <Label>Namentliche Abstimmungen</Label>
         </ProcedureCount>
-        <Chart
-          value={(votedProceduresCount / totalProcedures) * 100}
-          width={20}
-        />
       </Wrapper>
     );
   }
 }
 
-export default WomHeader;
+export default MemberChart;
