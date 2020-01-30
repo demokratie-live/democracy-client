@@ -12,6 +12,7 @@ import styled from 'styled-components/native';
 import WahlOMeter from '../../../screens/WahlOMeter';
 import { Procedure, VoteVerification } from '../../../screens/Bundestag';
 import { VoteSelection } from '../../../../__generated__/globalTypes';
+import { MemberProfil } from '../../../screens/WahlOMeter/MemberProfil';
 
 export type WahlOMeterStackParamList = {
   WahlOMeter: undefined;
@@ -21,6 +22,7 @@ export type WahlOMeterStackParamList = {
     procedureId: string;
     procedureObjId: string;
   };
+  MemberProfil: undefined;
 };
 
 const WahlOMeterStack = createStackNavigator<WahlOMeterStackParamList>();
@@ -70,6 +72,13 @@ const WahlOMeterNavigation = () => {
         options={({ route }) => ({ title: route.params.title })}
       />
       <WahlOMeterStack.Screen name="Voting" component={VoteVerification} />
+      <WahlOMeterStack.Screen
+        name="MemberProfil"
+        component={MemberProfil}
+        options={{
+          title: '',
+        }}
+      />
     </WahlOMeterStack.Navigator>
   );
 };

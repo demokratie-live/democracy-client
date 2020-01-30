@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components/native';
-import { Platform, Alert } from 'react-native';
+import { Platform } from 'react-native';
 import Svg, { Rect, Text as SvgText, G } from 'react-native-svg';
 
 // Components
@@ -176,16 +176,8 @@ class Wahlkreis extends PureComponent<Props> {
                 />
                 <ChartWrapper>
                   <MemberImageWrapper
-                    onPress={
-                      () => Alert.alert('Navigate to abgeordnetenprofil')
-                      // navigator.push({
-                      //   screen: 'democracy.MemberProfil',
-                      //   title: `Abgeordnetenprofil`,
-                      //   backButtonTitle: '',
-                      //   passProps: {
-                      //     noMenu: true,
-                      //   },
-                      // })
+                    onPress={() =>
+                      this.props.navigation.navigate('MemberProfil')
                     }>
                     <MemberImage source={{ uri: imgURL }} />
                     <Party party={party} />
@@ -198,17 +190,8 @@ class Wahlkreis extends PureComponent<Props> {
                       </TextLighGrey>
                     </NameWrapper>
                     <InfoIconButton
-                      onPress={
-                        () => () =>
-                          Alert.alert('Navigate to abgeordnetenprofil')
-                        // navigator.push({
-                        //   screen: 'democracy.MemberProfil',
-                        //   title: `Abgeordnetenprofil`,
-                        //   backButtonTitle: '',
-                        //   passProps: {
-                        //     noMenu: true,
-                        //   },
-                        // })
+                      onPress={() =>
+                        this.props.navigation.navigate('MemberProfil')
                       }>
                       <InfoIcon>Info</InfoIcon>
                     </InfoIconButton>
