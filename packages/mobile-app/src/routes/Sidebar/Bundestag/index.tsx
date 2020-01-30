@@ -54,6 +54,7 @@ const BundestagRootNavigation = () => {
             elevation: 0,
             shadowOpacity: 0,
           },
+          headerBackTitleVisible: false,
           headerTintColor: '#fff',
         }}>
         <BundestagRootStack.Screen
@@ -61,12 +62,6 @@ const BundestagRootNavigation = () => {
           component={TabView}
           options={{
             title: 'BUNDESTAG',
-            headerTintColor: '#fff',
-            headerStyle: {
-              backgroundColor: '#4494D3',
-              elevation: 0,
-              shadowOpacity: 0,
-            },
             headerLeft: () => (
               <MenuButton onPress={navigation.toggleDrawer}>
                 <MenuIcon width={18} height={18} color="#fff" />
@@ -81,7 +76,7 @@ const BundestagRootNavigation = () => {
         />
         <BundestagRootStack.Screen name="Voting" component={VoteVerification} />
         <BundestagRootStack.Screen name="Filter" component={Filter} />
-        <BundestagRootStack.Screen name="Search" component={() => <Search />} />
+        <BundestagRootStack.Screen name="Search" component={Search} />
       </BundestagRootStack.Navigator>
     </SearchProvider>
   );

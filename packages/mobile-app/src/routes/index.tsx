@@ -58,7 +58,17 @@ const App = () => {
 
   return (
     <NavigationNativeContainer initialState={initialState}>
-      <RootStack.Navigator mode="modal">
+      <RootStack.Navigator
+        mode="modal"
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: '#4494d3',
+            elevation: 0,
+            shadowOpacity: 0,
+          },
+          headerBackTitleVisible: false,
+          headerTintColor: '#fff',
+        }}>
         <RootStack.Screen
           name="Sidebar"
           component={SidebarNavigation}
@@ -69,32 +79,12 @@ const App = () => {
           component={Introduction}
           options={{ headerShown: false }}
         />
-        <RootStack.Screen
-          name="Pdf"
-          component={PdfScreen}
-          options={{
-            title: 'Wahlkreisssuche',
-            headerShown: true,
-            headerStyle: {
-              backgroundColor: '#4494d3',
-              elevation: 0,
-              shadowOpacity: 0,
-            },
-            headerBackTitleVisible: false,
-            headerTintColor: '#fff',
-          }}
-        />
+        <RootStack.Screen name="Pdf" component={PdfScreen} />
         <RootStack.Screen
           name="Constituency"
           component={ConstituencyScreen}
           options={{
-            headerShown: true,
-            headerStyle: {
-              backgroundColor: '#4494d3',
-              elevation: 0,
-              shadowOpacity: 0,
-            },
-            headerTintColor: '#fff',
+            title: 'Wahlkreisssuche',
           }}
         />
         {!isVerified && (
