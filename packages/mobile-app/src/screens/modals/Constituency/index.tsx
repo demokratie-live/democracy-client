@@ -91,7 +91,7 @@ const RowTextWrapper = styled.View`
 `;
 
 const Checkmark = styled.Text`
-  color: green;
+  color: #16c063;
   font-size: 18;
   font-weight: bold;
   margin-left: 8;
