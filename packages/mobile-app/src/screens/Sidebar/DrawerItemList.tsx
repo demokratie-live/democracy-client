@@ -7,12 +7,12 @@ import {
   DrawerNavigationState,
 } from '@react-navigation/routers';
 import { DrawerContentOptions, DrawerItem } from '@react-navigation/drawer';
+import { View } from 'react-native';
+import styled from 'styled-components/native';
 import {
   DrawerNavigationHelpers,
   DrawerDescriptorMap,
-} from '@react-navigation/drawer/lib/typescript/drawer/src/types';
-import { View } from 'react-native';
-import styled from 'styled-components/native';
+} from '@react-navigation/drawer/lib/typescript/src/types';
 
 const Space = styled.View`
   padding-bottom: 18;

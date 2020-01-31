@@ -14,6 +14,7 @@ import InfoIconComponent from '@democracy-deutschland/mobile-ui/src/components/I
 // GraphQl
 import { DEPUTY_VOTE_RESULT } from './graphql/query/deputyVoteResults';
 import { ConstituencyContext } from '../../../../../context/Constituency';
+import { useNavigation } from '@react-navigation/core';
 
 const Wrapper = styled.View`
   width: 100%;
@@ -110,6 +111,7 @@ interface Props {
 }
 
 const DeputyVoteData: React.FC<Props> = ({ procedureId }) => {
+  const navigation = useNavigation();
   const { constituency } = useContext(ConstituencyContext);
   const { data, error } = useQuery<
     DeputyVoteResults,
@@ -140,7 +142,7 @@ const DeputyVoteData: React.FC<Props> = ({ procedureId }) => {
       <Wrapper>
         <MemberImageWrapper
           onPress={() => {
-            // TODO navigate to abgeordnetenprofil
+            navigation.navigate('MemberProfil');
           }}>
           <MemberImage source={{ uri: imgURL }} />
           <Party party={party} />
@@ -150,10 +152,7 @@ const DeputyVoteData: React.FC<Props> = ({ procedureId }) => {
             <Text>{name}</Text>
             <TextLighGrey>Direktkandidat WK {constituency}</TextLighGrey>
           </NameWrapper>
-          <InfoIconButton
-            onPress={() => {
-              // TODO Link to abgeordnetenprofil
-            }}>
+          <InfoIconButton onPress={() => navigation.navigate('MemberProfil')}>
             <InfoIcon />
           </InfoIconButton>
         </DeputyDetailsWrapper>

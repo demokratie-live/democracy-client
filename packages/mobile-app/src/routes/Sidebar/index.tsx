@@ -9,13 +9,11 @@ import WaterDrop from '@democracy-deutschland/mobile-ui/src/components/Icons/Wat
 
 import IntroductionScreen from '../../screens/modals/Introduction';
 import { Sidebar } from '../../screens/Sidebar/Sidebar';
-import StatisticRootNavigation from './Statistic';
 import WahlOMeterNavigation from './WahlOMeter';
 import SettingsRootNavigation from './Settings';
 
 export type SidebarParamList = {
   Bundestag: undefined;
-  Statistic: undefined;
   WahlOMeter: undefined;
   Settings: undefined;
   Introduction: RootStackParamList['Introduction'];
@@ -57,17 +55,6 @@ export const SidebarNavigation = () => {
         }}
         name="WahlOMeter"
         component={WahlOMeterNavigation}
-      />
-      <SidebarDrawer.Screen
-        options={{
-          drawerLabel: 'Auswertungen/Statistik',
-          gestureEnabled: true,
-          drawerIcon: ({ color, size }) => (
-            <IncreaseArrowIcon width={size} height={size} color={color} />
-          ),
-        }}
-        name="Statistic"
-        component={StatisticRootNavigation}
       />
       <SidebarDrawer.Screen
         options={{

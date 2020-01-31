@@ -25,9 +25,11 @@ const RootStack = createStackNavigator<RootStackParamList>();
 
 const App = () => {
   const [currentVersion, setCurrentVersion] = useState();
-  const { lastStartWithVersion, setLastStartWithVersion } = useContext(
-    InitialStateContext,
-  );
+  const {
+    lastStartWithVersion,
+    setLastStartWithVersion,
+    isVerified,
+  } = useContext(InitialStateContext);
 
   useEffect(() => {
     setCurrentVersion(DeviceInfo.getVersion());
@@ -56,7 +58,17 @@ const App = () => {
 
   return (
     <NavigationNativeContainer initialState={initialState}>
-      <RootStack.Navigator mode="modal">
+      <RootStack.Navigator
+        mode="modal"
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: '#4494d3',
+            elevation: 0,
+            shadowOpacity: 0,
+          },
+          headerBackTitleVisible: false,
+          headerTintColor: '#fff',
+        }}>
         <RootStack.Screen
           name="Sidebar"
           component={SidebarNavigation}
@@ -67,35 +79,21 @@ const App = () => {
           component={Introduction}
           options={{ headerShown: false }}
         />
-        <RootStack.Screen
-          name="Pdf"
-          component={PdfScreen}
-          options={{ headerShown: true }}
-        />
-        <RootStack.Screen
-          name="Constituency"
-          component={ConstituencyScreen}
-          options={{
-            headerShown: true,
-            headerStyle: {
-              backgroundColor: '#4494d3',
-              elevation: 0,
-              shadowOpacity: 0,
-            },
-            headerTintColor: '#fff',
-          }}
-        />
-        <RootStack.Screen
-          name="Verification"
-          options={{
-            headerShown: false,
-          }}
-          component={() => (
-            <VerificationProvider>
-              <Verification />
-            </VerificationProvider>
-          )}
-        />
+        <RootStack.Screen name="Pdf" component={PdfScreen} />
+        <RootStack.Screen name="Constituency" component={ConstituencyScreen} />
+        {!isVerified && (
+          <RootStack.Screen
+            name="Verification"
+            options={{
+              headerShown: false,
+            }}
+            component={() => (
+              <VerificationProvider>
+                <Verification />
+              </VerificationProvider>
+            )}
+          />
+        )}
       </RootStack.Navigator>
     </NavigationNativeContainer>
   );
