@@ -191,7 +191,7 @@ export const ConstituencyScreen = () => {
                       {getPlz(item)}
                     </Plz>
                   </RowTextWrapper>
-                  {item.selected && <Checkmark>✓</Checkmark>}
+                  {item.selected && <Checkmark>{'\u2713'}</Checkmark>}
                 </>
               </Row>
             );
