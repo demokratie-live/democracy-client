@@ -86,7 +86,7 @@ const App = () => {
           name="Constituency"
           component={ConstituencyScreen}
           options={{
-            title: 'Wahlkreisssuche',
+            title: 'Wahlkreissuche',
           }}
         />
         {!isVerified && (
