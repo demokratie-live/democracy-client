@@ -91,7 +91,7 @@ const RowTextWrapper = styled.View`
 `;
 
 const Checkmark = styled.Text`
-  color: green;
+  color: #16c063;
   font-size: 18;
   font-weight: bold;
   margin-left: 8;
@@ -194,7 +194,7 @@ export const ConstituencyScreen = () => {
                       {getPlz(item)}
                     </Plz>
                   </RowTextWrapper>
-                  {item.selected && <Checkmark>✓</Checkmark>}
+                  {item.selected && <Checkmark>{'\u2713'}</Checkmark>}
                 </>
               </Row>
             );
