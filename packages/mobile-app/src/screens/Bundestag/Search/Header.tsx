@@ -8,6 +8,11 @@ import {
   FinishSearchVariables,
 } from './graphql/mutation/__generated__/FinishSearch';
 import debounce from 'lodash.debounce';
+import styled from 'styled-components/native';
+
+const Wrapper = styled.View`
+  background-color: #4494d3;
+`;
 
 export const SearchHeader: React.FC = () => {
   const { setTerm, term, addToHistory } = useContext(SearchContext);
@@ -29,16 +34,18 @@ export const SearchHeader: React.FC = () => {
   const onChangeText = debounce((text: string) => setTerm(text), 300);
 
   return (
-    <SearchBar
-      // ref="searchBar"
-      placeholder="Suche"
-      text={term}
-      onChangeText={onChangeText}
-      onSearchButtonPress={finishSearch}
-      showsCancelButton={false}
-      showsCancelButtonWhileEditing={false}
-      barTintColor="#4494d3"
-      textFieldBackgroundColor="rgba(255,255,255,.5)"
-    />
+    <Wrapper>
+      <SearchBar
+        // ref="searchBar"
+        placeholder="Suche"
+        text={term}
+        onChangeText={onChangeText}
+        onSearchButtonPress={finishSearch}
+        showsCancelButton={false}
+        showsCancelButtonWhileEditing={false}
+        textFieldBackgroundColor="rgba(255,255,255,.5)"
+        hideBackground
+      />
+    </Wrapper>
   );
 };

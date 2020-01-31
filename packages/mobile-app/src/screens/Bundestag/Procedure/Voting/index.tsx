@@ -38,7 +38,6 @@ const ScrollWrapper = styled.ScrollView.attrs({
   contentContainerStyle: {
     flexGrow: 1,
     paddingBottom: Platform.OS === 'android' ? 73 : 18,
-    justifyContent: 'space-around',
   },
 })`
   flex-grow: 1;

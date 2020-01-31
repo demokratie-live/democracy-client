@@ -31,13 +31,20 @@ export const PieChart: React.FC<Props> = ({ data, size, large = false }) => {
     // destructuring assignment sets the two variables at once
     const [startX, startY] = getCoordinatesForPercent(cumulativePercent);
 
+    const [labelX, labelY] = getCoordinatesForPercent(
+      cumulativePercent + percent / 2,
+    );
+
     // each slice starts where the last slice ended, so keep a cumulative percent
     cumulativePercent += percent;
 
-    const [endX, endY] = getCoordinatesForPercent(cumulativePercent);
+    const [endX, endY] =
+      percent === 1
+        ? [labelX, labelY]
+        : getCoordinatesForPercent(cumulativePercent);
 
     // if the slice is more than 50%, take the large arc (the long way around)
-    const largeArcFlag = percent > 0.5 ? 1 : 0;
+    const largeArcFlag = percent !== 1 && percent > 0.5 ? 1 : 0;
 
     const larger = largeSlice || large ? 9 : 7.5;
 
@@ -45,14 +52,17 @@ export const PieChart: React.FC<Props> = ({ data, size, large = false }) => {
     const pathData = [
       `M ${startX * larger} ${startY * larger}`,
       `A ${larger} ${larger} 0 ${largeArcFlag} 1 ${endX * larger} ${endY *
-        larger}`,
+        larger}`, // Arc
+      percent === 1
+        ? `A ${larger} ${larger} 0 ${largeArcFlag} 1 ${startX *
+            larger} ${startY * larger}`
+        : '', // Second half for 100%
       'L 0 0',
-    ];
+    ].join(' ');
 
     const sliceSpace = space ? space : 0;
-
     return {
-      path: pathData.join(','),
+      path: pathData,
       // transform: large ? `${endY},${startX}` : '',
       transform: largeSlice
         ? `${((endY - startY) / percent) * sliceSpace},${((startX - endX) /

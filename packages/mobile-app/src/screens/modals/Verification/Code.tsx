@@ -84,7 +84,7 @@ export const Code: React.FC = () => {
       if (res.data && res.data.requestVerification.succeeded) {
         AsyncStorage.setItem('auth_phoneHash', phoneNumberHash);
         Keyboard.dismiss();
-        navigation.resetRoot();
+        // navigation.popToTop(); // TODO go back to previous screen or close instructions
       } else if (res.data) {
         showNotification(res.data.requestVerification.reason || '');
       }
