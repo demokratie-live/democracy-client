@@ -36,6 +36,7 @@ const SettingsRootNavigation = () => {
           elevation: 0,
           shadowOpacity: 0,
         },
+        headerBackTitleVisible: false,
         headerTintColor: '#fff',
       }}>
       <SettingsRootStack.Screen
