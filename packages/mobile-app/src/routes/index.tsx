@@ -11,6 +11,7 @@ import { InitialState } from '@react-navigation/core';
 import { SidebarNavigation } from './Sidebar';
 import { PdfScreen } from '../screens/modals/Pdf/Pdf';
 import { ConstituencyScreen } from '../screens/modals/Constituency';
+import SplashScreen from 'react-native-splash-screen';
 
 export type RootStackParamList = {
   Sidebar: undefined;
@@ -33,6 +34,7 @@ const App = () => {
 
   useEffect(() => {
     setCurrentVersion(DeviceInfo.getVersion());
+    SplashScreen.hide();
   }, []);
 
   if (lastStartWithVersion === undefined || currentVersion === undefined) {
@@ -80,7 +82,13 @@ const App = () => {
           options={{ headerShown: false }}
         />
         <RootStack.Screen name="Pdf" component={PdfScreen} />
-        <RootStack.Screen name="Constituency" component={ConstituencyScreen} />
+        <RootStack.Screen
+          name="Constituency"
+          component={ConstituencyScreen}
+          options={{
+            title: 'Wahlkreissuche',
+          }}
+        />
         {!isVerified && (
           <RootStack.Screen
             name="Verification"

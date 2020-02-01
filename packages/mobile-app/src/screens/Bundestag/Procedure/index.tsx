@@ -22,6 +22,7 @@ import { GovernmentVoteResults } from './components/GovernmentVoteResults';
 import PrepareActions from './PrepareActions';
 import { InitialStateContext } from '../../../context/InitialStates';
 import { getShareLink } from '../../../lib/shareLink';
+import { ConstituencyContext } from '../../../context/Constituency';
 
 const Container = styled.ScrollView`
   background-color: #fff;
@@ -41,12 +42,15 @@ export const Procedure: FC<Props> = ({ route }) => {
   //   StackNavigationProp<BundestagRootStackParamList, 'TabView'>
   // >();
   const { isVerified } = useContext(InitialStateContext);
+  const { constituency } = useContext(ConstituencyContext);
+  const constituencies = constituency ? [constituency] : [];
   const { data, loading, error } = useQuery<
     ProcedureQueryObj,
     ProcedureVariables
   >(PROCEDURE, {
     variables: {
       id: route.params.procedureId,
+      constituencies,
     },
   });
   if (loading) {

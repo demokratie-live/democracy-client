@@ -72,7 +72,13 @@ const WahlOMeterNavigation = () => {
         component={Procedure}
         options={({ route }) => ({ title: route.params.title })}
       />
-      <WahlOMeterStack.Screen name="Voting" component={VoteVerification} />
+      <WahlOMeterStack.Screen
+        name="Voting"
+        component={VoteVerification}
+        options={{
+          title: 'Wahlurne',
+        }}
+      />
       <WahlOMeterStack.Screen
         name="MemberProfil"
         component={MemberProfil}

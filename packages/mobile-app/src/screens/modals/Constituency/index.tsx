@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components/native';
-import { Alert, Platform, Text, FlatList } from 'react-native';
+import { Alert, Platform, FlatList } from 'react-native';
 
 import SearchIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Lens';
 // constituencies plz list
@@ -90,6 +90,12 @@ const RowTextWrapper = styled.View`
   padding-left: 12;
 `;
 
+const Checkmark = styled.Text`
+  color: #16c063;
+  font-size: 18;
+  font-weight: bold;
+  margin-left: 8;
+`;
 export const ConstituencyScreen = () => {
   const { constituency, setConstituency } = useContext(ConstituencyContext);
   const [term, setTerm] = useState('');
@@ -110,7 +116,7 @@ export const ConstituencyScreen = () => {
   };
 
   const getPlz = (item: Constituency) => {
-    const areacodes = item.areacodes.map(({ code }) => code);
+    const areacodes = item.areacodes.map(({ code }) => code.padStart(5, '0'));
     areacodes.sort((x, y) => {
       return x.indexOf(term) !== -1 ? -1 : y.indexOf(term) !== -1 ? 1 : 0;
     });
@@ -149,13 +155,16 @@ export const ConstituencyScreen = () => {
 
   constituenciesData =
     term.length > 0
-      ? constituenciesData.filter(
-          ({ areacodes, name, selected, number }) =>
-            (areacodes.some(({ code }) => code.indexOf(term) === 0) ||
+      ? constituenciesData.filter(({ areacodes, name, selected, number }) => {
+          // remove starting zeros from search term
+          const termCode = `${parseInt(term, 10)}`;
+          return (
+            (areacodes.some(({ code }) => code.indexOf(termCode) === 0) ||
               name.toLowerCase().indexOf(term.toLowerCase()) !== -1 ||
               number === term) &&
-            !selected,
-        )
+            !selected
+          );
+        })
       : constituenciesData.filter(({ selected }) => !selected);
 
   if (selectedConstituency) {
@@ -178,7 +187,6 @@ export const ConstituencyScreen = () => {
               <Row onPress={selectConstituency(item)}>
                 <>
                   {getConstituency(item.number)}
-                  {item.selected && <Text>🌼</Text>}
                   <RowTextWrapper>
                     <Title>{item.name}</Title>
                     <Plz>
@@ -186,6 +194,7 @@ export const ConstituencyScreen = () => {
                       {getPlz(item)}
                     </Plz>
                   </RowTextWrapper>
+                  {item.selected && <Checkmark>{'\u2713'}</Checkmark>}
                 </>
               </Row>
             );
