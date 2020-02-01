@@ -28,6 +28,10 @@ if ENV["TRAVIS_BRANCH"] == 'alpha'
   scheme_name = "Alpha"
   app_identifier = "de.democracy-deutschland.clientapp.alpha"
 end
+if ENV["TRAVIS_BRANCH"] == 'internal'
+  scheme_name = "Internal"
+  app_identifier = "de.democracy-deutschland.clientapp.internal"
+end
 
 platform :ios do
   desc "Installs the certificates locally"

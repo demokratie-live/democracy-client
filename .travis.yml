@@ -21,6 +21,7 @@ matrix:
         - gpg --version
         - brew install gnupg@1.4
         - gpg --version
+        - echo $super_secret_password | gpg1 --passphrase-fd 0 packages/mobile-app/.env.internal.gpg
         - echo $super_secret_password | gpg1 --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
         - echo $super_secret_password | gpg1 --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
         - echo $super_secret_password | gpg1 --passphrase-fd 0 packages/mobile-app/.env.production.gpg
@@ -69,8 +70,10 @@ matrix:
         - gpg --version
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/my-release-key.keystore.gpg
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/app/src/refactor/google-services.json.gpg
+        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/app/src/internal/google-services.json.gpg
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/app/src/alpha/google-services.json.gpg
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/democracy2-release-key.keystore.gpg
+        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/.env.internal.gpg
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/.env.production.gpg
