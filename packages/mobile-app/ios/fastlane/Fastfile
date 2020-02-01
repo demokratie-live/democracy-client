@@ -65,10 +65,10 @@ platform :ios do
     build_number = latest_testflight_build_number(
       version: version_number,
       app_identifier: app_identifier
-    )
-    build_number_local = get_build_number(xcodeproj: "client.xcodeproj")
+    ).to_i
+    build_number_local = get_build_number(xcodeproj: "client.xcodeproj").to_i
 
-    if build_number_local.to_i > build_number.to_i
+    if build_number_local > build_number
       build_number = build_number_local
     end
 
