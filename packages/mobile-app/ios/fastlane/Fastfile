@@ -68,7 +68,7 @@ platform :ios do
     )
     build_number_local = get_build_number(xcodeproj: "client.xcodeproj")
 
-    if build_number_local > build_number
+    if build_number_local.to_i > build_number.to_i
       build_number = build_number_local
     end
 
