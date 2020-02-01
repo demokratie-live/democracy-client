@@ -61,7 +61,6 @@ class VoteVarificationNoConstituency extends PureComponent<Props> {
     ];
 
     const navigateToSelectConstituency = () => {
-      // TODO navigate to wahlkreissuche
       this.props.navigation.navigate('Constituency');
     };
 
