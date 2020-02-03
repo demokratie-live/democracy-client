@@ -80,14 +80,6 @@ class NotificationsExampleApp extends React.Component<any, State> {
     super(props);
 
     this.registerNotificationEvents();
-    this.setCategories();
-    AsyncStorage.getItem('push-token').then(token => {
-      this.setState({ pushToken: token });
-      console.log('PUSH TOKEN', token);
-    });
-    Notifications.isRegisteredForRemoteNotifications().then(hasPermissions => {
-      this.setState({ hasPermissions });
-    });
   }
 
   registerNotificationEvents() {
@@ -220,7 +212,13 @@ class NotificationsExampleApp extends React.Component<any, State> {
   }
 
   renderNotification(notification: Notification) {
-    console.log(notification);
+    console.log(
+      JSON.stringify(
+        JSON.parse(notification.payload.payload).procedureId,
+        null,
+        2,
+      ),
+    );
     return (
       <View style={{ backgroundColor: 'lightgray', margin: 10 }}>
         <Text>{`Title: ${notification.title}`}</Text>

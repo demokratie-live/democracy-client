@@ -1,13 +1,16 @@
 import 'react-native-gesture-handler'; // TODO remove workaround https://github.com/kmagiera/react-native-gesture-handler/issues/320#issuecomment-538190653
 import React, { useState, useContext, useEffect } from 'react';
-import { NavigationNativeContainer } from '@react-navigation/native';
+import {
+  NavigationNativeContainer,
+  useLinking,
+} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Introduction from '../screens/modals/Introduction';
 import Verification from './Verification';
 import { InitialStateContext } from '../context/InitialStates';
 import { VerificationProvider } from '../context/Verification';
 import DeviceInfo from 'react-native-device-info';
-import { InitialState } from '@react-navigation/core';
+import { NavigationContainerRef, InitialState } from '@react-navigation/core';
 import { SidebarNavigation } from './Sidebar';
 import { PdfScreen } from '../screens/modals/Pdf/Pdf';
 import { ConstituencyScreen } from '../screens/modals/Constituency';
@@ -24,6 +27,14 @@ export type RootStackParamList = {
 const RootStack = createStackNavigator<RootStackParamList>();
 
 const App = () => {
+  const ref = React.createRef<NavigationContainerRef>();
+  const { getInitialState } = useLinking(ref, {
+    prefixes: ['https://democracy-app.de', 'democracy://'],
+  });
+
+  const [isReady, setIsReady] = React.useState(false);
+  const [initialState, setInitialState] = React.useState<InitialState>();
+
   const [currentVersion, setCurrentVersion] = useState();
   const {
     lastStartWithVersion,
@@ -32,32 +43,102 @@ const App = () => {
   } = useContext(InitialStateContext);
 
   useEffect(() => {
+    getInitialState().then(state => {
+      console.log('initialState', JSON.stringify(state, null, 2));
+      // democracy://Sidebar/Bundestag/Procedure?procedureId=230576
+      if (state !== undefined) {
+        setInitialState({
+          ...state,
+          routes: [
+            {
+              name: 'Sidebar',
+              state: {
+                routes: [
+                  {
+                    name: 'Bundestag',
+                    state: {
+                      routes: [
+                        {
+                          name: 'TabView',
+                        },
+                        // ...state.routes[0].state!.routes[0].state!.routes,
+                        {
+                          name: 'Procedure',
+                          params: {
+                            procedureId: '230295',
+                            title: 'Antrag',
+                          },
+                        },
+                      ],
+                    },
+                  },
+                ],
+              },
+            },
+            {
+              name: 'Sidebar',
+              state: {
+                routes: [
+                  {
+                    name: 'Bundestag',
+                    state: {
+                      routes: [
+                        {
+                          name: 'TabView',
+                        },
+                        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                        ...state.routes[0].state!.routes[0].state!.routes,
+                      ],
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+        });
+      }
+
+      setIsReady(true);
+    });
+  }, [getInitialState]);
+
+  useEffect(() => {
     setCurrentVersion(DeviceInfo.getVersion());
   }, []);
 
-  if (lastStartWithVersion === undefined || currentVersion === undefined) {
+  useEffect(() => {
+    if (
+      lastStartWithVersion !== undefined &&
+      currentVersion !== undefined &&
+      currentVersion !== lastStartWithVersion
+    ) {
+      setInitialState({
+        routes: [
+          {
+            name: 'Sidebar',
+          },
+          {
+            name: 'Introduction',
+            params: {
+              done: () => setLastStartWithVersion(currentVersion),
+              lastStartWithVersion,
+            },
+          },
+        ],
+      });
+    }
+  }, [currentVersion, lastStartWithVersion, setLastStartWithVersion]);
+
+  if (
+    lastStartWithVersion === undefined ||
+    currentVersion === undefined ||
+    !isReady
+  ) {
     return null;
   }
 
-  const initialState: InitialState = {
-    routes: [
-      {
-        name: 'Sidebar',
-      },
-    ],
-  };
-  if (currentVersion !== lastStartWithVersion) {
-    initialState.routes.push({
-      name: 'Introduction',
-      params: {
-        done: () => setLastStartWithVersion(currentVersion),
-        lastStartWithVersion,
-      },
-    });
-  }
-
   return (
-    <NavigationNativeContainer initialState={initialState}>
+    <NavigationNativeContainer initialState={initialState} ref={ref}>
       <RootStack.Navigator
         mode="modal"
         screenOptions={{

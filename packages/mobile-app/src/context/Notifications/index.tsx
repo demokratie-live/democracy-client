@@ -86,16 +86,13 @@ export const NotificationsProvider: React.FC = ({ children }) => {
 
   // register notification events
   useEffect(() => {
-    console.log('REGISTER');
     Notifications.isRegisteredForRemoteNotifications().then(value => {
       setHasPermissions(value);
-      console.log('setHasPermissions', value);
     });
 
     Notifications.events().registerRemoteNotificationsRegistered(
       (event: Registered) => {
         const token = event.deviceToken || (event as any);
-        console.log('token', token);
         AsyncStorage.setItem('push-token', token);
         sendToken({
           variables: {
