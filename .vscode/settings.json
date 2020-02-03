@@ -17,6 +17,6 @@
     "**/__snapshots__": true
   },
   "eslint.enable": true,
-  "svg.preview.background": "white",
+  "svg.preview.background": "transparent",
   "typescript.tsdk": "node_modules/typescript/lib"
 }
