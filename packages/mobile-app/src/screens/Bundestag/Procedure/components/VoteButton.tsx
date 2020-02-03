@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { Text } from 'react-native';
+import Lock from '@democracy-deutschland/mobile-ui/src/components/Icons/Lock';
 
 const VoteIconButtonWrapper = styled.TouchableOpacity<
   Pick<Props, 'selection' | 'voteSelection' | 'voted'>
@@ -116,7 +116,7 @@ const VoteButton: React.FC<Props> = ({
       style={{ ...styleWrapper, ...style }}>
       {voted && (
         <LockIconWrapper>
-          <Text>lock icon</Text>
+          <Lock width={18} height={18} color="#bbb" />
         </LockIconWrapper>
       )}
       <VoteIconButton

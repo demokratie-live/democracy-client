@@ -105,13 +105,13 @@
     {
       "size" : "50x50",
       "idiom" : "ipad",
-      "filename" : "Icon-Small-50x50@1x.png",
+      "filename" : "Icon-App-50x50@1x.png",
       "scale" : "1x"
     },
     {
       "size" : "50x50",
       "idiom" : "ipad",
-      "filename" : "Icon-Small-50x50@2x.png",
+      "filename" : "Icon-App-50x50@2x.png",
       "scale" : "2x"
     },
     {
@@ -147,7 +147,7 @@
     {
       "size" : "1024x1024",
       "idiom" : "ios-marketing",
-      "filename" : "iOS_icon3-alpha_ohnealpha-1.png",
+      "filename" : "Icon-App.png",
       "scale" : "1x"
     }
   ],
