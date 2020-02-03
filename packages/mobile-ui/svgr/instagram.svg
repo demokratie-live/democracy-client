@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024px" height="1024px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 56.3 (81716) - https://sketch.com -->
+    <title>instagram</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M874,0 L150,0 C67.296876,0 0,67.296876 0,150 L0,874 C0,956.703124 67.296876,1024 150,1024 L874,1024 C956.703124,1024 1024,956.703124 1024,874 L1024,150 C1024,67.296876 956.703124,0 874,0 Z M514,780 C365.117188,780 244,658.882812 244,510 C244,361.117188 365.117188,240 514,240 C662.882812,240 784,361.117188 784,510 C784,658.882812 662.882812,780 514,780 Z M814,300 C764.375,300 724,259.625 724,210 C724,160.375 764.375,120 814,120 C863.625,120 904,160.375 904,210 C904,259.625 863.625,300 814,300 Z" id="path-1"></path>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="instagram">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+            <path d="M514,300 C398.21875,300 304,394.21875 304,510 C304,625.78125 398.21875,720 514,720 C629.78125,720 724,625.78125 724,510 C724,394.21875 629.78125,300 514,300 Z" id="Path" fill="#000000" fill-rule="nonzero" mask="url(#mask-2)"></path>
+        </g>
+    </g>
+</svg>
