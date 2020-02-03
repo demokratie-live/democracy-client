@@ -80,7 +80,13 @@ const App = () => {
           options={{ headerShown: false }}
         />
         <RootStack.Screen name="Pdf" component={PdfScreen} />
-        <RootStack.Screen name="Constituency" component={ConstituencyScreen} />
+        <RootStack.Screen
+          name="Constituency"
+          component={ConstituencyScreen}
+          options={{
+            title: 'Wahlkreissuche',
+          }}
+        />
         {!isVerified && (
           <RootStack.Screen
             name="Verification"
