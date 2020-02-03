@@ -61,18 +61,22 @@
 		26499E46281C132EB90BD003 /* Pods-clientTests.beta.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-clientTests.beta.debug.xcconfig"; path = "Target Support Files/Pods-clientTests/Pods-clientTests.beta.debug.xcconfig"; sourceTree = "<group>"; };
 		290B85208926B195E5596F2C /* Pods-client.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client.release.xcconfig"; path = "Target Support Files/Pods-client/Pods-client.release.xcconfig"; sourceTree = "<group>"; };
 		29484589E8084C11B2FAECE8 /* Pods-client-tvOS.beta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOS.beta.release.xcconfig"; path = "Target Support Files/Pods-client-tvOS/Pods-client-tvOS.beta.release.xcconfig"; sourceTree = "<group>"; };
+		2B635525423A3B5DCDFFBE9C /* Pods-clientTests.release.internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-clientTests.release.internal.xcconfig"; path = "Target Support Files/Pods-clientTests/Pods-clientTests.release.internal.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* client-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "client-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* client-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "client-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D51893EACC51688883B4E58 /* Pods-client-tvOSTests.release.internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOSTests.release.internal.xcconfig"; path = "Target Support Files/Pods-client-tvOSTests/Pods-client-tvOSTests.release.internal.xcconfig"; sourceTree = "<group>"; };
 		35A8F67D242263003C621EBF /* Pods-client-tvOS.release.internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOS.release.internal.xcconfig"; path = "Target Support Files/Pods-client-tvOS/Pods-client-tvOS.release.internal.xcconfig"; sourceTree = "<group>"; };
 		37DEA9EA9C42894B88A27009 /* Pods-client-tvOS.refactor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOS.refactor.debug.xcconfig"; path = "Target Support Files/Pods-client-tvOS/Pods-client-tvOS.refactor.debug.xcconfig"; sourceTree = "<group>"; };
 		37E2B3AF3A3670E5661DE8B5 /* Pods-client.beta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client.beta.release.xcconfig"; path = "Target Support Files/Pods-client/Pods-client.beta.release.xcconfig"; sourceTree = "<group>"; };
+		41948AF21F923ACD823793E5 /* Pods-client-tvOS.release.internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOS.release.internal.xcconfig"; path = "Target Support Files/Pods-client-tvOS/Pods-client-tvOS.release.internal.xcconfig"; sourceTree = "<group>"; };
 		4298B2FF9129C796C4B65532 /* Pods-clientTests.refactor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-clientTests.refactor.release.xcconfig"; path = "Target Support Files/Pods-clientTests/Pods-clientTests.refactor.release.xcconfig"; sourceTree = "<group>"; };
 		48316CF553F2BE85BB7C6A1A /* Pods-clientTests.alpha.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-clientTests.alpha.release.xcconfig"; path = "Target Support Files/Pods-clientTests/Pods-clientTests.alpha.release.xcconfig"; sourceTree = "<group>"; };
 		4AF770F6B086C9672C1C1501 /* Pods-clientTests.debug.internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-clientTests.debug.internal.xcconfig"; path = "Target Support Files/Pods-clientTests/Pods-clientTests.debug.internal.xcconfig"; sourceTree = "<group>"; };
 		4BAB4D2F54D1EA5D4F5A5117 /* Pods-client-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-client-tvOS/Pods-client-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		4BEB396FD74C14BAA225309B /* Pods-client.debug.internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client.debug.internal.xcconfig"; path = "Target Support Files/Pods-client/Pods-client.debug.internal.xcconfig"; sourceTree = "<group>"; };
 		5527D3B5716709A4B4E435A3 /* Pods-client-tvOS.refactor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOS.refactor.release.xcconfig"; path = "Target Support Files/Pods-client-tvOS/Pods-client-tvOS.refactor.release.xcconfig"; sourceTree = "<group>"; };
 		5D15E8D7980434A138270732 /* libPods-clientTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-clientTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DE74F37A3EF5725FB429655 /* Pods-clientTests.debug.internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-clientTests.debug.internal.xcconfig"; path = "Target Support Files/Pods-clientTests/Pods-clientTests.debug.internal.xcconfig"; sourceTree = "<group>"; };
 		6AF994A2537601DD2483C16C /* Pods-clientTests.beta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-clientTests.beta.release.xcconfig"; path = "Target Support Files/Pods-clientTests/Pods-clientTests.beta.release.xcconfig"; sourceTree = "<group>"; };
 		6D50BD4195957A5FBF265A1F /* Pods-client.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client.debug.xcconfig"; path = "Target Support Files/Pods-client/Pods-client.debug.xcconfig"; sourceTree = "<group>"; };
 		7213DBB2C4FD77FB81D46247 /* Pods-client.alpha.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client.alpha.debug.xcconfig"; path = "Target Support Files/Pods-client/Pods-client.alpha.debug.xcconfig"; sourceTree = "<group>"; };
@@ -81,11 +85,12 @@
 		800B846E030BA5F3D2716867 /* libPods-client-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-client-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		808E339C9E7749600F553D8E /* Pods-client-tvOSTests.refactor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOSTests.refactor.debug.xcconfig"; path = "Target Support Files/Pods-client-tvOSTests/Pods-client-tvOSTests.refactor.debug.xcconfig"; sourceTree = "<group>"; };
 		82F8AC16D3CD9582D7AD9E70 /* Pods-client-tvOS.alpha.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOS.alpha.release.xcconfig"; path = "Target Support Files/Pods-client-tvOS/Pods-client-tvOS.alpha.release.xcconfig"; sourceTree = "<group>"; };
-		8A9018D9D3C8F048275EAD87 /* Pods-client.release.internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client.release.internal.xcconfig"; path = "Target Support Files/Pods-client/Pods-client.release.internal.xcconfig"; sourceTree = "<group>"; };
-		91C45161FC99F23A4227867C /* Pods-client-tvOSTests.debug.internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOSTests.debug.internal.xcconfig"; path = "Target Support Files/Pods-client-tvOSTests/Pods-client-tvOSTests.debug.internal.xcconfig"; sourceTree = "<group>"; };
+		89721E0F9B17260C4C3ED069 /* Pods-client.release.internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client.release.internal.xcconfig"; path = "Target Support Files/Pods-client/Pods-client.release.internal.xcconfig"; sourceTree = "<group>"; };
 		93635B3EDA508CCA6C584E30 /* libPods-client-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-client-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94F6F73778B76FFBE735A29D /* Pods-client.refactor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client.refactor.debug.xcconfig"; path = "Target Support Files/Pods-client/Pods-client.refactor.debug.xcconfig"; sourceTree = "<group>"; };
-		99A4F787344338AFE50FA764 /* Pods-clientTests.release.internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-clientTests.release.internal.xcconfig"; path = "Target Support Files/Pods-clientTests/Pods-clientTests.release.internal.xcconfig"; sourceTree = "<group>"; };
+		99B1846CCC3D5376BFF5417D /* Pods-client-tvOSTests.debug.internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOSTests.debug.internal.xcconfig"; path = "Target Support Files/Pods-client-tvOSTests/Pods-client-tvOSTests.debug.internal.xcconfig"; sourceTree = "<group>"; };
+		A39F5BC9059B384D06A8DD82 /* Pods-client-tvOS.debug.internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOS.debug.internal.xcconfig"; path = "Target Support Files/Pods-client-tvOS/Pods-client-tvOS.debug.internal.xcconfig"; sourceTree = "<group>"; };
+		AC508905CE66CED9AD6EFD7A /* Pods-client-tvOSTests.release.internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOSTests.release.internal.xcconfig"; path = "Target Support Files/Pods-client-tvOSTests/Pods-client-tvOSTests.release.internal.xcconfig"; sourceTree = "<group>"; };
 		B11B71EBCB998E8B04E51A23 /* Pods-client-tvOSTests.alpha.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOSTests.alpha.release.xcconfig"; path = "Target Support Files/Pods-client-tvOSTests/Pods-client-tvOSTests.alpha.release.xcconfig"; sourceTree = "<group>"; };
 		BE87D27422C22B6DF0FD402B /* Pods-client.debug.internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client.debug.internal.xcconfig"; path = "Target Support Files/Pods-client/Pods-client.debug.internal.xcconfig"; sourceTree = "<group>"; };
 		C3E62E2E23D1A19E00EF5CA1 /* DEMOCRACY.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = DEMOCRACY.entitlements; path = client/DEMOCRACY.entitlements; sourceTree = "<group>"; };
@@ -255,14 +260,14 @@
 				18ED813865C95D0FA0057823 /* Pods-clientTests.alpha.debug.xcconfig */,
 				6AF994A2537601DD2483C16C /* Pods-clientTests.beta.release.xcconfig */,
 				48316CF553F2BE85BB7C6A1A /* Pods-clientTests.alpha.release.xcconfig */,
-				BE87D27422C22B6DF0FD402B /* Pods-client.debug.internal.xcconfig */,
-				8A9018D9D3C8F048275EAD87 /* Pods-client.release.internal.xcconfig */,
-				CD8DDB2DF0E7B28D67B52BDB /* Pods-client-tvOS.debug.internal.xcconfig */,
-				35A8F67D242263003C621EBF /* Pods-client-tvOS.release.internal.xcconfig */,
-				91C45161FC99F23A4227867C /* Pods-client-tvOSTests.debug.internal.xcconfig */,
-				2D51893EACC51688883B4E58 /* Pods-client-tvOSTests.release.internal.xcconfig */,
-				4AF770F6B086C9672C1C1501 /* Pods-clientTests.debug.internal.xcconfig */,
-				99A4F787344338AFE50FA764 /* Pods-clientTests.release.internal.xcconfig */,
+				4BEB396FD74C14BAA225309B /* Pods-client.debug.internal.xcconfig */,
+				89721E0F9B17260C4C3ED069 /* Pods-client.release.internal.xcconfig */,
+				A39F5BC9059B384D06A8DD82 /* Pods-client-tvOS.debug.internal.xcconfig */,
+				41948AF21F923ACD823793E5 /* Pods-client-tvOS.release.internal.xcconfig */,
+				99B1846CCC3D5376BFF5417D /* Pods-client-tvOSTests.debug.internal.xcconfig */,
+				AC508905CE66CED9AD6EFD7A /* Pods-client-tvOSTests.release.internal.xcconfig */,
+				5DE74F37A3EF5725FB429655 /* Pods-clientTests.debug.internal.xcconfig */,
+				2B635525423A3B5DCDFFBE9C /* Pods-clientTests.release.internal.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -985,7 +990,7 @@
 			};
 			name = Release;
 		};
-		C3555AFE23E845E900812DC5 /* Debug.Internal */ = {
+		C3555AFE23E845E900812DC5 /* Internal.Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1036,18 +1041,18 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
-			name = Debug.Internal;
+			name = Internal.Debug;
 		};
-		C3555AFF23E845E900812DC5 /* Debug.Internal */ = {
+		C3555AFF23E845E900812DC5 /* Internal.Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BE87D27422C22B6DF0FD402B /* Pods-client.debug.internal.xcconfig */;
+			baseConfigurationReference = 4BEB396FD74C14BAA225309B /* Pods-client.debug.internal.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.internal;
 				BUNDLE_ID_SUFFIX = .internal;
 				CODE_SIGN_ENTITLEMENTS = client/DEMOCRACY.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 130;
+				CURRENT_PROJECT_VERSION = 128;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
@@ -1059,14 +1064,14 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.internal";
 				PRODUCT_NAME = DEMOCRACY;
-				PROVISIONING_PROFILE_SPECIFIER = "match Development de.democracy-deutschland.clientapp";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development de.democracy-deutschland.clientapp.internal";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
-			name = Debug.Internal;
+			name = Internal.Debug;
 		};
-		C3555B0023E845E900812DC5 /* Debug.Internal */ = {
+		C3555B0023E845E900812DC5 /* Internal.Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4AF770F6B086C9672C1C1501 /* Pods-clientTests.debug.internal.xcconfig */;
+			baseConfigurationReference = 5DE74F37A3EF5725FB429655 /* Pods-clientTests.debug.internal.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
@@ -1087,11 +1092,11 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DEMOCRACY.app/DEMOCRACY";
 			};
-			name = Debug.Internal;
+			name = Internal.Debug;
 		};
-		C3555B0123E845E900812DC5 /* Debug.Internal */ = {
+		C3555B0123E845E900812DC5 /* Internal.Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CD8DDB2DF0E7B28D67B52BDB /* Pods-client-tvOS.debug.internal.xcconfig */;
+			baseConfigurationReference = A39F5BC9059B384D06A8DD82 /* Pods-client-tvOS.debug.internal.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1118,11 +1123,11 @@
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 			};
-			name = Debug.Internal;
+			name = Internal.Debug;
 		};
-		C3555B0223E845E900812DC5 /* Debug.Internal */ = {
+		C3555B0223E845E900812DC5 /* Internal.Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 91C45161FC99F23A4227867C /* Pods-client-tvOSTests.debug.internal.xcconfig */;
+			baseConfigurationReference = 99B1846CCC3D5376BFF5417D /* Pods-client-tvOSTests.debug.internal.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1146,9 +1151,9 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/client-tvOS.app/client-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
-			name = Debug.Internal;
+			name = Internal.Debug;
 		};
-		C3555B0323E845F400812DC5 /* Release.Internal */ = {
+		C3555B0323E845F400812DC5 /* Internal.Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1192,18 +1197,18 @@
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
-			name = Release.Internal;
+			name = Internal.Release;
 		};
-		C3555B0423E845F400812DC5 /* Release.Internal */ = {
+		C3555B0423E845F400812DC5 /* Internal.Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8A9018D9D3C8F048275EAD87 /* Pods-client.release.internal.xcconfig */;
+			baseConfigurationReference = 89721E0F9B17260C4C3ED069 /* Pods-client.release.internal.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.internal;
 				BUNDLE_ID_SUFFIX = .internal;
 				CODE_SIGN_ENTITLEMENTS = client/DEMOCRACY.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 130;
+				CURRENT_PROJECT_VERSION = 128;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1214,14 +1219,14 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.internal";
 				PRODUCT_NAME = DEMOCRACY;
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore de.democracy-deutschland.clientapp";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore de.democracy-deutschland.clientapp.internal";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
-			name = Release.Internal;
+			name = Internal.Release;
 		};
-		C3555B0523E845F400812DC5 /* Release.Internal */ = {
+		C3555B0523E845F400812DC5 /* Internal.Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 99A4F787344338AFE50FA764 /* Pods-clientTests.release.internal.xcconfig */;
+			baseConfigurationReference = 2B635525423A3B5DCDFFBE9C /* Pods-clientTests.release.internal.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
@@ -1239,11 +1244,11 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DEMOCRACY.app/DEMOCRACY";
 			};
-			name = Release.Internal;
+			name = Internal.Release;
 		};
-		C3555B0623E845F400812DC5 /* Release.Internal */ = {
+		C3555B0623E845F400812DC5 /* Internal.Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 35A8F67D242263003C621EBF /* Pods-client-tvOS.release.internal.xcconfig */;
+			baseConfigurationReference = 41948AF21F923ACD823793E5 /* Pods-client-tvOS.release.internal.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1270,11 +1275,11 @@
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 			};
-			name = Release.Internal;
+			name = Internal.Release;
 		};
-		C3555B0723E845F400812DC5 /* Release.Internal */ = {
+		C3555B0723E845F400812DC5 /* Internal.Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2D51893EACC51688883B4E58 /* Pods-client-tvOSTests.release.internal.xcconfig */;
+			baseConfigurationReference = AC508905CE66CED9AD6EFD7A /* Pods-client-tvOSTests.release.internal.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1298,7 +1303,7 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/client-tvOS.app/client-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
-			name = Release.Internal;
+			name = Internal.Release;
 		};
 		C3C906E123CECCE9004C622B /* Refactor.Debug */ = {
 			isa = XCBuildConfiguration;
@@ -2252,12 +2257,12 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
-				C3555B0023E845E900812DC5 /* Debug.Internal */,
+				C3555B0023E845E900812DC5 /* Internal.Debug */,
 				C3E62E0F23CF1EA500EF5CA1 /* Beta.Debug */,
 				C3E62E0523CF1E8D00EF5CA1 /* Alpha.Debug */,
 				C3C906E323CECCE9004C622B /* Refactor.Debug */,
 				00E356F71AD99517003FC87E /* Release */,
-				C3555B0523E845F400812DC5 /* Release.Internal */,
+				C3555B0523E845F400812DC5 /* Internal.Release */,
 				C3E62E1423CF1EAF00EF5CA1 /* Beta.Release */,
 				C3E62E0A23CF1E9900EF5CA1 /* Alpha.Release */,
 				C3C906E823CECCF7004C622B /* Refactor.Release */,
@@ -2269,12 +2274,12 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
-				C3555AFF23E845E900812DC5 /* Debug.Internal */,
+				C3555AFF23E845E900812DC5 /* Internal.Debug */,
 				C3E62E0E23CF1EA500EF5CA1 /* Beta.Debug */,
 				C3E62E0423CF1E8D00EF5CA1 /* Alpha.Debug */,
 				C3C906E223CECCE9004C622B /* Refactor.Debug */,
 				13B07F951A680F5B00A75B9A /* Release */,
-				C3555B0423E845F400812DC5 /* Release.Internal */,
+				C3555B0423E845F400812DC5 /* Internal.Release */,
 				C3E62E1323CF1EAF00EF5CA1 /* Beta.Release */,
 				C3E62E0923CF1E9900EF5CA1 /* Alpha.Release */,
 				C3C906E723CECCF7004C622B /* Refactor.Release */,
@@ -2286,12 +2291,12 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4971E0B4A5E006451C7 /* Debug */,
-				C3555B0123E845E900812DC5 /* Debug.Internal */,
+				C3555B0123E845E900812DC5 /* Internal.Debug */,
 				C3E62E1023CF1EA500EF5CA1 /* Beta.Debug */,
 				C3E62E0623CF1E8D00EF5CA1 /* Alpha.Debug */,
 				C3C906E423CECCE9004C622B /* Refactor.Debug */,
 				2D02E4981E0B4A5E006451C7 /* Release */,
-				C3555B0623E845F400812DC5 /* Release.Internal */,
+				C3555B0623E845F400812DC5 /* Internal.Release */,
 				C3E62E1523CF1EAF00EF5CA1 /* Beta.Release */,
 				C3E62E0B23CF1E9900EF5CA1 /* Alpha.Release */,
 				C3C906E923CECCF7004C622B /* Refactor.Release */,
@@ -2303,12 +2308,12 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4991E0B4A5E006451C7 /* Debug */,
-				C3555B0223E845E900812DC5 /* Debug.Internal */,
+				C3555B0223E845E900812DC5 /* Internal.Debug */,
 				C3E62E1123CF1EA500EF5CA1 /* Beta.Debug */,
 				C3E62E0723CF1E8D00EF5CA1 /* Alpha.Debug */,
 				C3C906E523CECCE9004C622B /* Refactor.Debug */,
 				2D02E49A1E0B4A5E006451C7 /* Release */,
-				C3555B0723E845F400812DC5 /* Release.Internal */,
+				C3555B0723E845F400812DC5 /* Internal.Release */,
 				C3E62E1623CF1EAF00EF5CA1 /* Beta.Release */,
 				C3E62E0C23CF1E9900EF5CA1 /* Alpha.Release */,
 				C3C906EA23CECCF7004C622B /* Refactor.Release */,
@@ -2320,12 +2325,12 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
-				C3555AFE23E845E900812DC5 /* Debug.Internal */,
+				C3555AFE23E845E900812DC5 /* Internal.Debug */,
 				C3E62E0D23CF1EA500EF5CA1 /* Beta.Debug */,
 				C3E62E0323CF1E8D00EF5CA1 /* Alpha.Debug */,
 				C3C906E123CECCE9004C622B /* Refactor.Debug */,
 				83CBBA211A601CBA00E9B192 /* Release */,
-				C3555B0323E845F400812DC5 /* Release.Internal */,
+				C3555B0323E845F400812DC5 /* Internal.Release */,
 				C3E62E1223CF1EAF00EF5CA1 /* Beta.Release */,
 				C3E62E0823CF1E9900EF5CA1 /* Alpha.Release */,
 				C3C906E623CECCF7004C622B /* Refactor.Release */,
