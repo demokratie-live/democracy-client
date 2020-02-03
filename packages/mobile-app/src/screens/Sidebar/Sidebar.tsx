@@ -4,10 +4,11 @@ import { Background } from '@democracy-deutschland/mobile-ui/src/components/Side
 import { Header } from '@democracy-deutschland/mobile-ui/src/components/Sidebar/Header';
 import DrawerItemList from './DrawerItemList';
 import { RootStackParamList } from '../../routes';
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation, CompositeNavigationProp } from '@react-navigation/core';
 import { InitialStateContext } from '../../context/InitialStates';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { Alert } from 'react-native';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { SidebarParamList } from '../../routes/Sidebar';
 
 const SafeAreaView = styled.SafeAreaView`
   flex: 1;
@@ -16,9 +17,9 @@ const SafeAreaView = styled.SafeAreaView`
 const Container = styled.View`
   flex: 1;
 `;
-type SidebarNavigationProps = StackNavigationProp<
-  RootStackParamList,
-  'Sidebar'
+type SidebarNavigationProps = CompositeNavigationProp<
+  StackNavigationProp<RootStackParamList, 'Sidebar'>,
+  DrawerNavigationProp<SidebarParamList>
 >;
 
 declare type Props = React.ComponentProps<typeof DrawerItemList>;
@@ -28,7 +29,7 @@ export const Sidebar: React.FC<Props> = props => {
   const { isVerified } = useContext(InitialStateContext);
   const handleHeaderClick = () => {
     if (isVerified) {
-      Alert.alert('add correct navigation');
+      navigation.navigate('Settings');
     } else {
       navigation.navigate('Verification');
     }
