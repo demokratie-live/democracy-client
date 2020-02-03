@@ -27,6 +27,7 @@ export { default as Info } from './Info';
 export { default as Lamp } from './Lamp';
 export { default as Lens } from './Lens';
 export { default as Locate } from './Locate';
+export { default as Lock } from './Lock';
 export { default as Magic } from './Magic';
 export { default as Mail } from './Mail';
 export { default as Menu } from './Menu';
