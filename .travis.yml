@@ -6,7 +6,7 @@ matrix:
     - language: swift
       os: osx
       osx_image: xcode11.1
-      if: (branch = alpha OR branch = refactor) AND commit_message !~ /(no-deploy)/
+      if: (branch = alpha ORbranch = internal OR branch = refactor) AND commit_message !~ /(no-deploy)/
       cache:
         yarn: true
         bundler: true
@@ -21,6 +21,7 @@ matrix:
         - gpg --version
         - brew install gnupg@1.4
         - gpg --version
+        - echo $super_secret_password | gpg1 --passphrase-fd 0 packages/mobile-app/.env.internal.gpg
         - echo $super_secret_password | gpg1 --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
         - echo $super_secret_password | gpg1 --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
         - echo $super_secret_password | gpg1 --passphrase-fd 0 packages/mobile-app/.env.production.gpg
@@ -47,7 +48,7 @@ matrix:
 
     # Android
     - language: android
-      if: (branch = alpha OR branch = refactor) AND commit_message !~ /(no-deploy)/
+      if: (branch = alpha OR branch = internal OR branch = refactor) AND commit_message !~ /(no-deploy)/
       os: linux
       jdk: oraclejdk8
       sudo: required
@@ -69,8 +70,10 @@ matrix:
         - gpg --version
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/my-release-key.keystore.gpg
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/app/src/refactor/google-services.json.gpg
+        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/app/src/internal/google-services.json.gpg
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/app/src/alpha/google-services.json.gpg
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/democracy2-release-key.keystore.gpg
+        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/.env.internal.gpg
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/.env.production.gpg
