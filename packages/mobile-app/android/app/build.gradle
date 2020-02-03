@@ -3,7 +3,6 @@ apply plugin: "com.android.application"
 project.ext.envConfigFiles = [
     debug: ".env.development",
     release: ".env.production",
-    internal: ".env.internal",
     alpha: ".env.alpha",
     beta: ".env.beta",
 ]
@@ -154,7 +153,7 @@ android {
         // react-native-notifications
         missingDimensionStrategy "RNNotifications.reactNativeVersion", "reactNative60" // See note below!
         
-        versionCode 103582
+        versionCode 103607
         versionName "1.2.3"
         resValue "string", "build_config_package", "de.democracydeutschland.app"
 
@@ -219,12 +218,6 @@ android {
         refactor {
             minSdkVersion rootProject.ext.minSdkVersion
             applicationId 'de.democracydeutschland.app.refactor'
-            targetSdkVersion rootProject.ext.targetSdkVersion
-            resValue "string", "build_config_package", "de.democracydeutschland.app"
-        }
-        internal {
-            minSdkVersion rootProject.ext.minSdkVersion
-            applicationId 'de.democracydeutschland.app.internal'
             targetSdkVersion rootProject.ext.targetSdkVersion
             resValue "string", "build_config_package", "de.democracydeutschland.app"
         }
