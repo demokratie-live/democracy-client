@@ -2,6 +2,9 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { ImageSourcePropType, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import Bell from '@democracy-deutschland/mobile-ui/src/components/Icons/Bell';
+import BellSlash from '@democracy-deutschland/mobile-ui/src/components/Icons/BellSlash';
+import ShareIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Share';
 
 // Pick<Slice, 'percent' | 'large'>
 const VoteIconButtonWrapper = styled.TouchableOpacity<
@@ -59,7 +62,7 @@ const ActionButton: React.FC<Props> = ({
   selection,
   voted,
   style,
-  // notify,
+  notify,
 }) => {
   let styleWrapper;
   let Icon;
@@ -78,13 +81,17 @@ const ActionButton: React.FC<Props> = ({
       styleWrapper = {
         borderColor: '#f5a623',
       };
-      Icon = <Text>notify</Text>;
+      Icon = !notify ? (
+        <Bell width={50} height={50} color="#fff" />
+      ) : (
+        <BellSlash width={50} height={50} color="#fff" />
+      );
       break;
     case 'SHARE':
       styleWrapper = {
         borderColor: '#b10dd3',
       };
-      Icon = <Text>share</Text>;
+      Icon = <ShareIcon width={40} height={40} color="#fff" />;
       break;
     case 'UNKNOWN':
       Icon = <Text>help</Text>;
