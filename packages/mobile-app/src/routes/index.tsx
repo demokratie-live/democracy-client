@@ -33,8 +33,7 @@ const App = () => {
   const { initialNotification } = useContext(PushNotificationContext);
   const { getInitialState } = useLinking(rootNavigationRef, {
     prefixes: ['https://democracy-app.de', 'democracy://'],
-    getStateFromPath: (path, options) => {
-      console.log('getStateFromPath', { path, options });
+    getStateFromPath: path => {
       return getNavInitStateForProcedure({
         // TODO make this deeplinking more save
         procedureId: path.substr(path.length - 6),
@@ -55,7 +54,6 @@ const App = () => {
 
   useEffect(() => {
     getInitialState().then(state => {
-      console.log('getInitialState', JSON.stringify(state, null, 2));
       // democracy://Sidebar/Bundestag/Procedure?procedureId=230576
       if (state !== undefined) {
         setInitialState(state);
@@ -116,7 +114,6 @@ const App = () => {
   return (
     <NavigationNativeContainer
       initialState={initialState}
-      // onStateChange={state => console.log(JSON.stringify(state, null, 2))}
       ref={rootNavigationRef}>
       <RootStack.Navigator
         mode="modal"

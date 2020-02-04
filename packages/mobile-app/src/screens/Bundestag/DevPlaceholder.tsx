@@ -1,27 +1,19 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-/* eslint-disable react-native/no-color-literals */
-import React, { FC, useContext, useEffect, useState } from 'react';
-import styled from 'styled-components/native';
-import { Text, Button, Clipboard, Alert, View, StyleSheet } from 'react-native';
+import Document from '@democracy-deutschland/mobile-ui/src/components/Icons/Document';
 import AsyncStorage from '@react-native-community/async-storage';
-import { useNavigation, CompositeNavigationProp } from '@react-navigation/core';
-import { BundestagRootStackParamList } from '../../routes/Sidebar/Bundestag';
-import { StackNavigationProp } from '@react-navigation/stack';
+import { CompositeNavigationProp, useNavigation } from '@react-navigation/core';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { MaterialTopTabNavigationProp } from '@react-navigation/material-top-tabs';
-import Document from '@democracy-deutschland/mobile-ui/src/components/Icons/Document';
-import { RootStackParamList } from '../../routes';
-import { SidebarParamList } from '../../routes/Sidebar';
-import { TopTabParamList } from '../../routes/Sidebar/Bundestag/TabView';
+import { StackNavigationProp } from '@react-navigation/stack';
+import React, { FC, useContext, useEffect, useState } from 'react';
+import { Alert, Button, Clipboard, Text } from 'react-native';
+import DeviceInfo from 'react-native-device-info';
+import styled from 'styled-components/native';
 import { InitialStateContext } from '../../context/InitialStates';
 import VotesLocal from '../../lib/VotesLocal';
-import {
-  Notifications,
-  NotificationAction,
-  NotificationTextInput,
-  NotificationCategory,
-  Notification,
-} from 'react-native-notifications';
+import { RootStackParamList } from '../../routes';
+import { SidebarParamList } from '../../routes/Sidebar';
+import { BundestagRootStackParamList } from '../../routes/Sidebar/Bundestag';
+import { TopTabParamList } from '../../routes/Sidebar/Bundestag/TabView';
 
 const Container = styled.ScrollView`
   flex: 1;
@@ -46,195 +38,6 @@ interface State {
   pushToken?: string | null;
   hasPermissions: boolean;
 }
-
-const NotificationWrapper = styled.View`
-  background-color: lightblue;
-`;
-
-const NotificationDev = () => {
-  return (
-    <NotificationWrapper>
-      <Button
-        title="Notification in 10 seconds"
-        onPress={() => console.log('Notification in 10 seconds')}
-      />
-      <Button
-        title="Notification now"
-        onPress={() => console.log('Notification now')}
-      />
-    </NotificationWrapper>
-  );
-};
-
-class NotificationsExampleApp extends React.Component<any, State> {
-  state = {
-    notifications: [],
-    openedNotifications: [],
-    pushToken: '',
-    hasPermissions: false,
-  };
-
-  constructor(props: any) {
-    super(props);
-
-    this.setCategories();
-    AsyncStorage.getItem('push-token').then(token => {
-      this.setState({ pushToken: token });
-      console.log('PUSH TOKEN', token);
-    });
-    Notifications.isRegisteredForRemoteNotifications().then(hasPermissions => {
-      console.log('isRegisteredForRemoteNotifications');
-      this.setState({ hasPermissions });
-    });
-  }
-
-  setCategories() {
-    // const notificationInputDummy: NotificationTextInput = {
-    //   buttonTitle: 'the Button title',
-    //   placeholder: 'PLU holder',
-    // };
-    // const upvoteAction = new NotificationAction(
-    //   'background',
-    //   'foreground',
-    //   String.fromCodePoint(0x1f44d),
-    //   true,
-    //   notificationInputDummy,
-    // );
-
-    const notificationInputReply: NotificationTextInput = {
-      buttonTitle: 'Reply now',
-      placeholder: 'Insert message',
-    };
-
-    const replyAction = new NotificationAction(
-      'REPLY_ACTION',
-      'destructive',
-      'Reply',
-      true,
-      notificationInputReply,
-    );
-
-    const category = new NotificationCategory('SOME_CATEGORY', [replyAction]);
-
-    Notifications.setCategories([category]);
-  }
-
-  sendLocalNotification() {
-    Notifications.postLocalNotification(
-      {
-        body: 'Local notificiation!',
-        title: 'Local Notification Title',
-        sound: 'chime.aiff',
-        badge: 3,
-        identifier: 'the_identifier',
-        payload: {
-          title: 'payload title',
-          link: 'a link',
-        },
-        // aps: {
-        //   alert: {
-        //     title: 'the alert title',
-        //     body: 'the alert body',
-        //   },
-        // },
-        thread: 'SOME_CATEGORY',
-        type: 'the type',
-        // category: 'SOME_CATEGORY',
-        // link: 'localNotificationLink',
-      },
-      Math.floor(Math.random() * 10),
-    );
-  }
-
-  // removeAllDeliveredNotifications() {
-  //   Notifications.removeAllDeliveredNotifications();
-  // }
-
-  async componentDidMount() {
-    // const initialNotification = await Notifications.getInitialNotification();
-    // if (initialNotification) {
-    //   console.log('initialNotification');
-    //   console.log(
-    //     'procedure',
-    //     JSON.parse(initialNotification.payload.payload).procedureId,
-    //   );
-    //   // rootNavigationRef.current!.reset(
-    //   //   getNavStateForProcedure({
-    //   //     procedureId: JSON.parse(initialNotification.payload.payload)
-    //   //       .procedureId,
-    //   //     title: 'Push initial',
-    //   //   }),
-    //   // );
-    //   // eslint-disable-next-line react/no-did-mount-set-state
-    //   this.setState({
-    //     notifications: [initialNotification, ...this.state.notifications],
-    //   });
-    // }
-  }
-
-  renderNotification(notification: Notification) {
-    console.log('renderNotification', notification);
-    return (
-      <View style={{ backgroundColor: 'lightgray', margin: 10 }}>
-        <Text>{`Title: ${notification.title}`}</Text>
-        <Text>{`Body: ${notification.body}`}</Text>
-        <Text>{`Extra Link Param: ${notification.payload.link}`}</Text>
-      </View>
-    );
-  }
-
-  renderOpenedNotification(notification: Notification) {
-    return (
-      <View style={{ backgroundColor: 'lightgray', margin: 10 }}>
-        <Text>{`Title: ${notification.title}`}</Text>
-        <Text>{`Body: ${notification.body}`}</Text>
-        <Text>{`Notification Clicked: ${notification.payload.link}`}</Text>
-      </View>
-    );
-  }
-
-  render() {
-    const notifications = this.state.notifications.map((notification, idx) => (
-      <View key={`notification_${idx}`}>
-        {this.renderNotification(notification)}
-      </View>
-    ));
-    const openedNotifications = this.state.openedNotifications.map(
-      (notification, idx) => (
-        <View key={`notification_${idx}`}>
-          {this.renderOpenedNotification(notification)}
-        </View>
-      ),
-    );
-    return (
-      <View style={styles.container}>
-        <Text>
-          Has Push permissions: {this.state.hasPermissions ? 'true' : 'false'}
-        </Text>
-        <Button
-          title={'Send local notification'}
-          onPress={this.sendLocalNotification}
-          testID={'sendLocalNotification'}
-        />
-        {/* <Button
-          title={'Remove all delivered notifications'}
-          onPress={this.removeAllDeliveredNotifications}
-        /> */}
-        {notifications}
-        {openedNotifications}
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-    flex: 1,
-    justifyContent: 'center',
-  },
-});
 
 const LocalVotes = () => {
   const [localVotes, setLocalVotes] = useState('');
@@ -261,7 +64,7 @@ export const DevPlaceholder: FC = () => {
   const navigation = useNavigation<DevPlaceholderNavigationProps>();
   return (
     <Container>
-      <Text>Bundestag Screen</Text>
+      <Text>{DeviceInfo.getBundleId()}</Text>
       <Button
         title="Go to Procedure"
         onPress={() =>
@@ -291,8 +94,6 @@ export const DevPlaceholder: FC = () => {
       />
       <Document width="32px" height="32px" color="black" />
       <LocalVotes />
-      <NotificationDev />
-      <NotificationsExampleApp />
     </Container>
   );
 };

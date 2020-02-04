@@ -85,14 +85,6 @@ export const getNavStateForProcedure = ({
   procedureId,
   title,
 }: Args): PartialState<NavigationState> => {
-  //   const curState = rootNavigationRef.current!.getRootState();
-  //   console.log('getNavStateForProcedure', JSON.stringify(curState, null, 2));
-  //   const newState: NavigationState | PartialState<NavigationState> = {
-  //     ...curState,
-  //     routes: curState.routes.map(state => ({
-  //       ...state,
-  //     })),
-  //   };
   return {
     type: 'stack',
     index: 0,

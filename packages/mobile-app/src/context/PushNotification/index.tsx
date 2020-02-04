@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { Notifications } from 'react-native-notifications';
-import { EmitterSubscription } from 'react-native';
+import { EmitterSubscription, Platform } from 'react-native';
 import { rootNavigationRef } from '../../routes/rootNavigationRef';
 import { getNavStateForProcedure } from '../../lib/getNavStateForProcedure';
 
@@ -18,13 +18,15 @@ export const PushNotificationContext = createContext<PushNotificationInterface>(
 
 export const PushNotificationProvider: React.FC = ({ children }) => {
   const [initialNotification, setInitialNotification] = useState();
-  console.log({ initialNotification });
 
   // Register initial app open push data
   useEffect(() => {
     Notifications.getInitialNotification().then((notification: any) => {
       if (notification) {
-        const payload = JSON.parse(notification.payload.payload);
+        const payload =
+          Platform.OS === 'ios'
+            ? notification.payload
+            : JSON.parse(notification.payload.payload);
         setInitialNotification(payload);
       } else {
         setInitialNotification(null);
@@ -39,12 +41,8 @@ export const PushNotificationProvider: React.FC = ({ children }) => {
     subscriptions.push(
       Notifications.events().registerNotificationReceivedBackground(
         (notification, completion) => {
-          console.log('registerNotificationReceivedBackground');
-          // this.setState({
-          //   notifications: [...this.state.notifications, notification],
-          // });
           completion({
-            alert: notification.payload.showAlert,
+            alert: true,
             sound: false,
             badge: false,
           });
@@ -55,13 +53,9 @@ export const PushNotificationProvider: React.FC = ({ children }) => {
     subscriptions.push(
       Notifications.events().registerNotificationReceivedForeground(
         (notification, completion) => {
-          console.log('registerNotificationReceivedForeground');
-          // this.setState({
-          //   notifications: [...this.state.notifications, notification],
-          // });
           completion({
-            alert: notification.payload.showAlert,
-            sound: false,
+            alert: true,
+            sound: true,
             badge: false,
           });
         },
@@ -71,10 +65,11 @@ export const PushNotificationProvider: React.FC = ({ children }) => {
     subscriptions.push(
       Notifications.events().registerNotificationOpened(
         (notification: any, completion) => {
-          console.log('registerNotificationOpened');
           if (rootNavigationRef.current) {
-            const payload = JSON.parse(notification.payload.payload);
-            console.log(JSON.stringify(payload, null, 2));
+            const payload =
+              Platform.OS === 'ios'
+                ? notification.payload
+                : JSON.parse(notification.payload.payload);
             rootNavigationRef.current.resetRoot(
               getNavStateForProcedure({
                 procedureId: payload.procedureId,
