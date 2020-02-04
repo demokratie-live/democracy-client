@@ -45,6 +45,7 @@
 		00E356EE1AD99517003FC87E /* clientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = clientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* clientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = clientTests.m; sourceTree = "<group>"; };
+		10D0DEF357085E77BBB08DA6 /* Pods-clientTests.internal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-clientTests.internal.debug.xcconfig"; path = "Target Support Files/Pods-clientTests/Pods-clientTests.internal.debug.xcconfig"; sourceTree = "<group>"; };
 		12E1481623FB4BF952F06015 /* Pods-client-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-client-tvOSTests/Pods-client-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* DEMOCRACY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DEMOCRACY.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = client/AppDelegate.h; sourceTree = "<group>"; };
@@ -61,9 +62,11 @@
 		26499E46281C132EB90BD003 /* Pods-clientTests.beta.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-clientTests.beta.debug.xcconfig"; path = "Target Support Files/Pods-clientTests/Pods-clientTests.beta.debug.xcconfig"; sourceTree = "<group>"; };
 		290B85208926B195E5596F2C /* Pods-client.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client.release.xcconfig"; path = "Target Support Files/Pods-client/Pods-client.release.xcconfig"; sourceTree = "<group>"; };
 		29484589E8084C11B2FAECE8 /* Pods-client-tvOS.beta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOS.beta.release.xcconfig"; path = "Target Support Files/Pods-client-tvOS/Pods-client-tvOS.beta.release.xcconfig"; sourceTree = "<group>"; };
+		2A784CD388EBBEF98DA64325 /* Pods-client-tvOS.internal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOS.internal.debug.xcconfig"; path = "Target Support Files/Pods-client-tvOS/Pods-client-tvOS.internal.debug.xcconfig"; sourceTree = "<group>"; };
 		2B635525423A3B5DCDFFBE9C /* Pods-clientTests.release.internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-clientTests.release.internal.xcconfig"; path = "Target Support Files/Pods-clientTests/Pods-clientTests.release.internal.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* client-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "client-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* client-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "client-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		32FAC4688705472E166EF48F /* Pods-client-tvOSTests.internal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOSTests.internal.release.xcconfig"; path = "Target Support Files/Pods-client-tvOSTests/Pods-client-tvOSTests.internal.release.xcconfig"; sourceTree = "<group>"; };
 		37DEA9EA9C42894B88A27009 /* Pods-client-tvOS.refactor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOS.refactor.debug.xcconfig"; path = "Target Support Files/Pods-client-tvOS/Pods-client-tvOS.refactor.debug.xcconfig"; sourceTree = "<group>"; };
 		37E2B3AF3A3670E5661DE8B5 /* Pods-client.beta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client.beta.release.xcconfig"; path = "Target Support Files/Pods-client/Pods-client.beta.release.xcconfig"; sourceTree = "<group>"; };
 		41948AF21F923ACD823793E5 /* Pods-client-tvOS.release.internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOS.release.internal.xcconfig"; path = "Target Support Files/Pods-client-tvOS/Pods-client-tvOS.release.internal.xcconfig"; sourceTree = "<group>"; };
@@ -82,13 +85,17 @@
 		800B846E030BA5F3D2716867 /* libPods-client-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-client-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		808E339C9E7749600F553D8E /* Pods-client-tvOSTests.refactor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOSTests.refactor.debug.xcconfig"; path = "Target Support Files/Pods-client-tvOSTests/Pods-client-tvOSTests.refactor.debug.xcconfig"; sourceTree = "<group>"; };
 		82F8AC16D3CD9582D7AD9E70 /* Pods-client-tvOS.alpha.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOS.alpha.release.xcconfig"; path = "Target Support Files/Pods-client-tvOS/Pods-client-tvOS.alpha.release.xcconfig"; sourceTree = "<group>"; };
+		85894F164DFE24E3A8C5469A /* Pods-clientTests.internal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-clientTests.internal.release.xcconfig"; path = "Target Support Files/Pods-clientTests/Pods-clientTests.internal.release.xcconfig"; sourceTree = "<group>"; };
 		89721E0F9B17260C4C3ED069 /* Pods-client.release.internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client.release.internal.xcconfig"; path = "Target Support Files/Pods-client/Pods-client.release.internal.xcconfig"; sourceTree = "<group>"; };
 		93635B3EDA508CCA6C584E30 /* libPods-client-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-client-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94F6F73778B76FFBE735A29D /* Pods-client.refactor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client.refactor.debug.xcconfig"; path = "Target Support Files/Pods-client/Pods-client.refactor.debug.xcconfig"; sourceTree = "<group>"; };
 		99B1846CCC3D5376BFF5417D /* Pods-client-tvOSTests.debug.internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOSTests.debug.internal.xcconfig"; path = "Target Support Files/Pods-client-tvOSTests/Pods-client-tvOSTests.debug.internal.xcconfig"; sourceTree = "<group>"; };
 		A39F5BC9059B384D06A8DD82 /* Pods-client-tvOS.debug.internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOS.debug.internal.xcconfig"; path = "Target Support Files/Pods-client-tvOS/Pods-client-tvOS.debug.internal.xcconfig"; sourceTree = "<group>"; };
+		A968873C4576D6EE9DDEA275 /* Pods-client.internal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client.internal.debug.xcconfig"; path = "Target Support Files/Pods-client/Pods-client.internal.debug.xcconfig"; sourceTree = "<group>"; };
 		AC508905CE66CED9AD6EFD7A /* Pods-client-tvOSTests.release.internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOSTests.release.internal.xcconfig"; path = "Target Support Files/Pods-client-tvOSTests/Pods-client-tvOSTests.release.internal.xcconfig"; sourceTree = "<group>"; };
+		AE7C0ED516FF6C3B64B99053 /* Pods-client-tvOS.internal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOS.internal.release.xcconfig"; path = "Target Support Files/Pods-client-tvOS/Pods-client-tvOS.internal.release.xcconfig"; sourceTree = "<group>"; };
 		B11B71EBCB998E8B04E51A23 /* Pods-client-tvOSTests.alpha.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOSTests.alpha.release.xcconfig"; path = "Target Support Files/Pods-client-tvOSTests/Pods-client-tvOSTests.alpha.release.xcconfig"; sourceTree = "<group>"; };
+		B5A101F9B30C9941F0C344F6 /* Pods-client-tvOSTests.internal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOSTests.internal.debug.xcconfig"; path = "Target Support Files/Pods-client-tvOSTests/Pods-client-tvOSTests.internal.debug.xcconfig"; sourceTree = "<group>"; };
 		C3E62E2E23D1A19E00EF5CA1 /* DEMOCRACY.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = DEMOCRACY.entitlements; path = client/DEMOCRACY.entitlements; sourceTree = "<group>"; };
 		C59B06D6F7200441822ACAC7 /* libPods-client.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-client.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6147E2B226507697DE44637 /* Pods-client-tvOSTests.beta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOSTests.beta.release.xcconfig"; path = "Target Support Files/Pods-client-tvOSTests/Pods-client-tvOSTests.beta.release.xcconfig"; sourceTree = "<group>"; };
@@ -101,6 +108,7 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F2CAF569098FB50BFDD9F002 /* Pods-client.alpha.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client.alpha.release.xcconfig"; path = "Target Support Files/Pods-client/Pods-client.alpha.release.xcconfig"; sourceTree = "<group>"; };
+		F6FBD09E066D860AE8782AA8 /* Pods-client.internal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client.internal.release.xcconfig"; path = "Target Support Files/Pods-client/Pods-client.internal.release.xcconfig"; sourceTree = "<group>"; };
 		FE4DE01F75C3FC47A6A0C4DE /* Pods-client-tvOSTests.refactor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOSTests.refactor.release.xcconfig"; path = "Target Support Files/Pods-client-tvOSTests/Pods-client-tvOSTests.refactor.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -263,6 +271,14 @@
 				AC508905CE66CED9AD6EFD7A /* Pods-client-tvOSTests.release.internal.xcconfig */,
 				5DE74F37A3EF5725FB429655 /* Pods-clientTests.debug.internal.xcconfig */,
 				2B635525423A3B5DCDFFBE9C /* Pods-clientTests.release.internal.xcconfig */,
+				A968873C4576D6EE9DDEA275 /* Pods-client.internal.debug.xcconfig */,
+				F6FBD09E066D860AE8782AA8 /* Pods-client.internal.release.xcconfig */,
+				2A784CD388EBBEF98DA64325 /* Pods-client-tvOS.internal.debug.xcconfig */,
+				AE7C0ED516FF6C3B64B99053 /* Pods-client-tvOS.internal.release.xcconfig */,
+				B5A101F9B30C9941F0C344F6 /* Pods-client-tvOSTests.internal.debug.xcconfig */,
+				32FAC4688705472E166EF48F /* Pods-client-tvOSTests.internal.release.xcconfig */,
+				10D0DEF357085E77BBB08DA6 /* Pods-clientTests.internal.debug.xcconfig */,
+				85894F164DFE24E3A8C5469A /* Pods-clientTests.internal.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1040,7 +1056,7 @@
 		};
 		C3555AFF23E845E900812DC5 /* Internal.Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4BEB396FD74C14BAA225309B /* Pods-client.debug.internal.xcconfig */;
+			baseConfigurationReference = A968873C4576D6EE9DDEA275 /* Pods-client.internal.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.internal;
 				BUNDLE_ID_SUFFIX = .internal;
@@ -1066,7 +1082,7 @@
 		};
 		C3555B0023E845E900812DC5 /* Internal.Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5DE74F37A3EF5725FB429655 /* Pods-clientTests.debug.internal.xcconfig */;
+			baseConfigurationReference = 10D0DEF357085E77BBB08DA6 /* Pods-clientTests.internal.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
@@ -1091,7 +1107,7 @@
 		};
 		C3555B0123E845E900812DC5 /* Internal.Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A39F5BC9059B384D06A8DD82 /* Pods-client-tvOS.debug.internal.xcconfig */;
+			baseConfigurationReference = 2A784CD388EBBEF98DA64325 /* Pods-client-tvOS.internal.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1122,7 +1138,7 @@
 		};
 		C3555B0223E845E900812DC5 /* Internal.Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 99B1846CCC3D5376BFF5417D /* Pods-client-tvOSTests.debug.internal.xcconfig */;
+			baseConfigurationReference = B5A101F9B30C9941F0C344F6 /* Pods-client-tvOSTests.internal.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1196,7 +1212,7 @@
 		};
 		C3555B0423E845F400812DC5 /* Internal.Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89721E0F9B17260C4C3ED069 /* Pods-client.release.internal.xcconfig */;
+			baseConfigurationReference = F6FBD09E066D860AE8782AA8 /* Pods-client.internal.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.internal;
 				BUNDLE_ID_SUFFIX = .internal;
@@ -1221,7 +1237,7 @@
 		};
 		C3555B0523E845F400812DC5 /* Internal.Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2B635525423A3B5DCDFFBE9C /* Pods-clientTests.release.internal.xcconfig */;
+			baseConfigurationReference = 85894F164DFE24E3A8C5469A /* Pods-clientTests.internal.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
@@ -1243,7 +1259,7 @@
 		};
 		C3555B0623E845F400812DC5 /* Internal.Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 41948AF21F923ACD823793E5 /* Pods-client-tvOS.release.internal.xcconfig */;
+			baseConfigurationReference = AE7C0ED516FF6C3B64B99053 /* Pods-client-tvOS.internal.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1274,7 +1290,7 @@
 		};
 		C3555B0723E845F400812DC5 /* Internal.Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AC508905CE66CED9AD6EFD7A /* Pods-client-tvOSTests.release.internal.xcconfig */;
+			baseConfigurationReference = 32FAC4688705472E166EF48F /* Pods-client-tvOSTests.internal.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -2244,321 +2260,6 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Beta.Release;
-		};
-		C3F17DA623E553DE00DA8276 /* Debug.Internal */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-			};
-			name = Debug.Internal;
-		};
-		C3F17DA723E553DE00DA8276 /* Debug.Internal */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6D50BD4195957A5FBF265A1F /* Pods-client.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.internal;
-				BUNDLE_ID_SUFFIX = .internal;
-				CODE_SIGN_ENTITLEMENTS = client/DEMOCRACY.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 124;
-				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = A4B84UJD7M;
-				INFOPLIST_FILE = client/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-					"-lc++",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.internal";
-				PRODUCT_NAME = DEMOCRACY;
-				PROVISIONING_PROFILE_SPECIFIER = "match Development de.democracy-deutschland.clientapp.internal";
-				VERSIONING_SYSTEM = "apple-generic";
-			};
-			name = Debug.Internal;
-		};
-		C3F17DA823E553DE00DA8276 /* Debug.Internal */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 13DA10189BCB10FE64066558 /* Pods-clientTests.debug.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
-				DEVELOPMENT_TEAM = A4B84UJD7M;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = clientTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-lc++",
-					"$(inherited)",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DEMOCRACY.app/DEMOCRACY";
-			};
-			name = Debug.Internal;
-		};
-		C3F17DA923E553DE00DA8276 /* Debug.Internal */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4BAB4D2F54D1EA5D4F5A5117 /* Pods-client-tvOS.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CODE_SIGN_STYLE = Manual;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = A4B84UJD7M;
-				ENABLE_TESTABILITY = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "client-tvOS/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-					"-lc++",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.client-tvOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = appletvos;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.2;
-			};
-			name = Debug.Internal;
-		};
-		C3F17DAA23E553DE00DA8276 /* Debug.Internal */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 12E1481623FB4BF952F06015 /* Pods-client-tvOSTests.debug.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = A4B84UJD7M;
-				ENABLE_TESTABILITY = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "client-tvOSTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-					"-lc++",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.client-tvOSTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/client-tvOS.app/client-tvOS";
-				TVOS_DEPLOYMENT_TARGET = 10.1;
-			};
-			name = Debug.Internal;
-		};
-		C3F17DAB23E553E900DA8276 /* Release.Internal */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release.Internal;
-		};
-		C3F17DAC23E553E900DA8276 /* Release.Internal */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 290B85208926B195E5596F2C /* Pods-client.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.internal;
-				BUNDLE_ID_SUFFIX = .internal;
-				CODE_SIGN_ENTITLEMENTS = client/DEMOCRACY.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 124;
-				DEVELOPMENT_TEAM = A4B84UJD7M;
-				INFOPLIST_FILE = client/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-					"-lc++",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.internal";
-				PRODUCT_NAME = DEMOCRACY;
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore de.democracy-deutschland.clientapp.internal";
-				VERSIONING_SYSTEM = "apple-generic";
-			};
-			name = Release.Internal;
-		};
-		C3F17DAD23E553E900DA8276 /* Release.Internal */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 199F69096DC7C58943C4B418 /* Pods-clientTests.release.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
-				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = A4B84UJD7M;
-				INFOPLIST_FILE = clientTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-lc++",
-					"$(inherited)",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DEMOCRACY.app/DEMOCRACY";
-			};
-			name = Release.Internal;
-		};
-		C3F17DAE23E553E900DA8276 /* Release.Internal */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1B0EDFAF44AAA4216CD8B35E /* Pods-client-tvOS.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CODE_SIGN_STYLE = Manual;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = A4B84UJD7M;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "client-tvOS/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-					"-lc++",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.client-tvOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = appletvos;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.2;
-			};
-			name = Release.Internal;
-		};
-		C3F17DAF23E553E900DA8276 /* Release.Internal */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7EC8D9696DEAEED3698AAE44 /* Pods-client-tvOSTests.release.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = A4B84UJD7M;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "client-tvOSTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-					"-lc++",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.client-tvOSTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/client-tvOS.app/client-tvOS";
-				TVOS_DEPLOYMENT_TARGET = 10.1;
-			};
-			name = Release.Internal;
 		};
 /* End XCBuildConfiguration section */
 
