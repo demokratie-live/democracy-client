@@ -38,9 +38,6 @@ type Props = {
 };
 
 export const Procedure: FC<Props> = ({ route }) => {
-  // const navigation = useNavigation<
-  //   StackNavigationProp<BundestagRootStackParamList, 'TabView'>
-  // >();
   const { isVerified } = useContext(InitialStateContext);
   const { constituency } = useContext(ConstituencyContext);
   const constituencies = constituency ? [constituency] : [];

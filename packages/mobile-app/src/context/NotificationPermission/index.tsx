@@ -16,7 +16,7 @@ import {
 } from './graphql/mutation/__generated__/UpdateNotificationSettings';
 import { UPDATE_NOTIFICATION_SETTINGS } from './graphql/mutation/UpdateNotificationSettings';
 import { ExecutionResult } from 'graphql';
-import { Platform } from 'react-native';
+import { Platform, EmitterSubscription } from 'react-native';
 import {
   AddToken,
   AddTokenVariables,
@@ -87,32 +87,34 @@ export const NotificationsProvider: React.FC = ({ children }) => {
 
   // register notification events
   useEffect(() => {
-    console.log('REGISTER');
+    const subscriptions: EmitterSubscription[] = [];
     Notifications.isRegisteredForRemoteNotifications().then(value => {
       setHasPermissions(value);
-      console.log('setHasPermissions', value);
     });
 
-    Notifications.events().registerRemoteNotificationsRegistered(
-      (event: Registered) => {
-        const token = event.deviceToken || (event as any);
-        console.log('token', token);
-        AsyncStorage.setItem('push-token', token);
-        sendToken({
-          variables: {
-            os: Platform.OS,
-            token,
-          },
-        });
-        setHasPermissions(true);
-      },
+    subscriptions.push(
+      Notifications.events().registerRemoteNotificationsRegistered(
+        (event: Registered) => {
+          const token = event.deviceToken || (event as any);
+          AsyncStorage.setItem('push-token', token);
+          sendToken({
+            variables: {
+              os: Platform.OS,
+              token,
+            },
+          });
+          setHasPermissions(true);
+        },
+      ),
     );
 
-    Notifications.events().registerRemoteNotificationsRegistrationFailed(
-      (event: RegistrationError) => {
-        console.error(event);
-        setAlreadyDenied(true);
-      },
+    subscriptions.push(
+      Notifications.events().registerRemoteNotificationsRegistrationFailed(
+        (event: RegistrationError) => {
+          console.error(event);
+          setAlreadyDenied(true);
+        },
+      ),
     );
 
     // request code for android on app start
@@ -124,6 +126,9 @@ export const NotificationsProvider: React.FC = ({ children }) => {
         token => !!token && Notifications.registerRemoteNotifications(),
       );
     }
+    return () => {
+      subscriptions.forEach(subscription => subscription.remove());
+    };
   }, [sendToken]);
 
   const requestToken = () => {
