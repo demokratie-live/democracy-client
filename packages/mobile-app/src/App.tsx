@@ -8,7 +8,8 @@ import { LocalVotesProvider } from './context/LocalVotes';
 import { Apollo } from './lib/Apollo';
 import { ListFilterProvider } from './context/ListFilter';
 import { ConstituencyProvider } from './context/Constituency';
-import { NotificationsProvider } from './context/Notifications';
+import { NotificationsProvider } from './context/NotificationPermission';
+import { PushNotificationProvider } from './context/PushNotification';
 
 export default () => (
   <Apollo>
@@ -17,7 +18,9 @@ export default () => (
         <ListFilterProvider>
           <ConstituencyProvider>
             <NotificationsProvider>
-              <Navigation />
+              <PushNotificationProvider>
+                <Navigation />
+              </PushNotificationProvider>
             </NotificationsProvider>
           </ConstituencyProvider>
         </ListFilterProvider>
