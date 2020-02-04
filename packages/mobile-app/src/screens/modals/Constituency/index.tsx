@@ -110,7 +110,7 @@ export const ConstituencyScreen = () => {
   };
 
   const getPlz = (item: Constituency) => {
-    const areacodes = item.areacodes.map(({ code }) => code);
+    const areacodes = item.areacodes.map(({ code }) => code.padStart(5, '0'));
     areacodes.sort((x, y) => {
       return x.indexOf(term) !== -1 ? -1 : y.indexOf(term) !== -1 ? 1 : 0;
     });
@@ -149,13 +149,16 @@ export const ConstituencyScreen = () => {
 
   constituenciesData =
     term.length > 0
-      ? constituenciesData.filter(
-          ({ areacodes, name, selected, number }) =>
-            (areacodes.some(({ code }) => code.indexOf(term) === 0) ||
+      ? constituenciesData.filter(({ areacodes, name, selected, number }) => {
+          // remove starting zeros from search term
+          const termCode = `${parseInt(term, 10)}`;
+          return (
+            (areacodes.some(({ code }) => code.indexOf(termCode) === 0) ||
               name.toLowerCase().indexOf(term.toLowerCase()) !== -1 ||
               number === term) &&
-            !selected,
-        )
+            !selected
+          );
+        })
       : constituenciesData.filter(({ selected }) => !selected);
 
   if (selectedConstituency) {

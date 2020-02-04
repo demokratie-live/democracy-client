@@ -74,7 +74,13 @@ const BundestagRootNavigation = () => {
           component={Procedure}
           options={({ route }) => ({ title: route.params.title })}
         />
-        <BundestagRootStack.Screen name="Voting" component={VoteVerification} />
+        <BundestagRootStack.Screen
+          name="Voting"
+          component={VoteVerification}
+          options={{
+            title: 'Wahlurne',
+          }}
+        />
         <BundestagRootStack.Screen name="Filter" component={Filter} />
         <BundestagRootStack.Screen name="Search" component={Search} />
       </BundestagRootStack.Navigator>
