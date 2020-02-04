@@ -10,10 +10,13 @@ import Verification from './Verification';
 import { InitialStateContext } from '../context/InitialStates';
 import { VerificationProvider } from '../context/Verification';
 import DeviceInfo from 'react-native-device-info';
-import { NavigationContainerRef, InitialState } from '@react-navigation/core';
+import { InitialState } from '@react-navigation/core';
 import { SidebarNavigation } from './Sidebar';
 import { PdfScreen } from '../screens/modals/Pdf/Pdf';
 import { ConstituencyScreen } from '../screens/modals/Constituency';
+import { rootNavigationRef } from './rootNavigationRef';
+import { getNavInitStateForProcedure } from '../lib/getNavStateForProcedure';
+import { PushNotificationContext } from '../context/PushNotification';
 
 export type RootStackParamList = {
   Sidebar: undefined;
@@ -27,9 +30,17 @@ export type RootStackParamList = {
 const RootStack = createStackNavigator<RootStackParamList>();
 
 const App = () => {
-  const ref = React.createRef<NavigationContainerRef>();
-  const { getInitialState } = useLinking(ref, {
+  const { initialNotification } = useContext(PushNotificationContext);
+  const { getInitialState } = useLinking(rootNavigationRef, {
     prefixes: ['https://democracy-app.de', 'democracy://'],
+    getStateFromPath: (path, options) => {
+      console.log('getStateFromPath', { path, options });
+      return getNavInitStateForProcedure({
+        // TODO make this deeplinking more save
+        procedureId: path.substr(path.length - 6),
+        title: 'getStateFromPath',
+      });
+    },
   });
 
   const [isReady, setIsReady] = React.useState(false);
@@ -44,58 +55,10 @@ const App = () => {
 
   useEffect(() => {
     getInitialState().then(state => {
-      console.log('initialState', JSON.stringify(state, null, 2));
+      console.log('getInitialState', JSON.stringify(state, null, 2));
       // democracy://Sidebar/Bundestag/Procedure?procedureId=230576
       if (state !== undefined) {
-        setInitialState({
-          ...state,
-          routes: [
-            {
-              name: 'Sidebar',
-              state: {
-                routes: [
-                  {
-                    name: 'Bundestag',
-                    state: {
-                      routes: [
-                        {
-                          name: 'TabView',
-                        },
-                        // ...state.routes[0].state!.routes[0].state!.routes,
-                        {
-                          name: 'Procedure',
-                          params: {
-                            procedureId: '230295',
-                            title: 'Antrag',
-                          },
-                        },
-                      ],
-                    },
-                  },
-                ],
-              },
-            },
-            {
-              name: 'Sidebar',
-              state: {
-                routes: [
-                  {
-                    name: 'Bundestag',
-                    state: {
-                      routes: [
-                        {
-                          name: 'TabView',
-                        },
-                        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                        ...state.routes[0].state!.routes[0].state!.routes,
-                      ],
-                    },
-                  },
-                ],
-              },
-            },
-          ],
-        });
+        setInitialState(state);
       }
 
       setIsReady(true);
@@ -129,16 +92,32 @@ const App = () => {
     }
   }, [currentVersion, lastStartWithVersion, setLastStartWithVersion]);
 
+  // call if app opened by push notification
+  useEffect(() => {
+    if (initialNotification) {
+      setInitialState(
+        getNavInitStateForProcedure({
+          procedureId: initialNotification.procedureId,
+          title: initialNotification.title,
+        }),
+      );
+    }
+  }, [initialNotification]);
+
   if (
     lastStartWithVersion === undefined ||
     currentVersion === undefined ||
+    initialNotification === undefined ||
     !isReady
   ) {
     return null;
   }
 
   return (
-    <NavigationNativeContainer initialState={initialState} ref={ref}>
+    <NavigationNativeContainer
+      initialState={initialState}
+      // onStateChange={state => console.log(JSON.stringify(state, null, 2))}
+      ref={rootNavigationRef}>
       <RootStack.Navigator
         mode="modal"
         screenOptions={{

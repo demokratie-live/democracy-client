@@ -21,8 +21,6 @@ import {
   NotificationTextInput,
   NotificationCategory,
   Notification,
-  Registered,
-  RegistrationError,
 } from 'react-native-notifications';
 
 const Container = styled.ScrollView`
@@ -79,64 +77,15 @@ class NotificationsExampleApp extends React.Component<any, State> {
   constructor(props: any) {
     super(props);
 
-    this.registerNotificationEvents();
-  }
-
-  registerNotificationEvents() {
-    Notifications.events().registerNotificationReceivedBackground(
-      (notification, completion) => {
-        this.setState({
-          notifications: [...this.state.notifications, notification],
-        });
-        completion({
-          alert: notification.payload.showAlert,
-          sound: false,
-          badge: false,
-        });
-      },
-    );
-
-    Notifications.events().registerNotificationReceivedForeground(
-      (notification, completion) => {
-        this.setState({
-          notifications: [...this.state.notifications, notification],
-        });
-        completion({
-          alert: notification.payload.showAlert,
-          sound: false,
-          badge: false,
-        });
-      },
-    );
-
-    Notifications.events().registerNotificationOpened(
-      (notification, completion) => {
-        this.setState({
-          openedNotifications: [
-            ...this.state.openedNotifications,
-            notification,
-          ],
-        });
-
-        completion();
-      },
-    );
-
-    Notifications.events().registerRemoteNotificationsRegistered(
-      (event: Registered) => {
-        // TODO: Send the token to my server so it could send back push notifications...
-        console.log('Device Token Received', event, event.deviceToken);
-      },
-    );
-    Notifications.events().registerRemoteNotificationsRegistrationFailed(
-      (event: RegistrationError) => {
-        console.error(event);
-      },
-    );
-  }
-
-  requestPermissions() {
-    Notifications.registerRemoteNotifications();
+    this.setCategories();
+    AsyncStorage.getItem('push-token').then(token => {
+      this.setState({ pushToken: token });
+      console.log('PUSH TOKEN', token);
+    });
+    Notifications.isRegisteredForRemoteNotifications().then(hasPermissions => {
+      console.log('isRegisteredForRemoteNotifications');
+      this.setState({ hasPermissions });
+    });
   }
 
   setCategories() {
@@ -197,28 +146,34 @@ class NotificationsExampleApp extends React.Component<any, State> {
     );
   }
 
-  removeAllDeliveredNotifications() {
-    Notifications.removeAllDeliveredNotifications();
-  }
+  // removeAllDeliveredNotifications() {
+  //   Notifications.removeAllDeliveredNotifications();
+  // }
 
   async componentDidMount() {
-    const initialNotification = await Notifications.getInitialNotification();
-    if (initialNotification) {
-      // eslint-disable-next-line react/no-did-mount-set-state
-      this.setState({
-        notifications: [initialNotification, ...this.state.notifications],
-      });
-    }
+    // const initialNotification = await Notifications.getInitialNotification();
+    // if (initialNotification) {
+    //   console.log('initialNotification');
+    //   console.log(
+    //     'procedure',
+    //     JSON.parse(initialNotification.payload.payload).procedureId,
+    //   );
+    //   // rootNavigationRef.current!.reset(
+    //   //   getNavStateForProcedure({
+    //   //     procedureId: JSON.parse(initialNotification.payload.payload)
+    //   //       .procedureId,
+    //   //     title: 'Push initial',
+    //   //   }),
+    //   // );
+    //   // eslint-disable-next-line react/no-did-mount-set-state
+    //   this.setState({
+    //     notifications: [initialNotification, ...this.state.notifications],
+    //   });
+    // }
   }
 
   renderNotification(notification: Notification) {
-    console.log(
-      JSON.stringify(
-        JSON.parse(notification.payload.payload).procedureId,
-        null,
-        2,
-      ),
-    );
+    console.log('renderNotification', notification);
     return (
       <View style={{ backgroundColor: 'lightgray', margin: 10 }}>
         <Text>{`Title: ${notification.title}`}</Text>
@@ -257,19 +212,14 @@ class NotificationsExampleApp extends React.Component<any, State> {
           Has Push permissions: {this.state.hasPermissions ? 'true' : 'false'}
         </Text>
         <Button
-          title={'Request permissions'}
-          onPress={this.requestPermissions}
-          testID={'requestPermissions'}
-        />
-        <Button
           title={'Send local notification'}
           onPress={this.sendLocalNotification}
           testID={'sendLocalNotification'}
         />
-        <Button
+        {/* <Button
           title={'Remove all delivered notifications'}
           onPress={this.removeAllDeliveredNotifications}
-        />
+        /> */}
         {notifications}
         {openedNotifications}
       </View>
