@@ -4,6 +4,8 @@ require_relative '../../../node_modules/@react-native-community/cli-platform-ios
 project 'client',
         'Refactor.Debug' => :debug,
         'Refactor.Release' => :release, 
+        'Internal.Debug' => :debug,
+        'Internal.Release' => :release, 
         'Alpha.Debug' => :debug,
         'Alpha.Release' => :release, 
         'Beta.Debug' => :debug,
