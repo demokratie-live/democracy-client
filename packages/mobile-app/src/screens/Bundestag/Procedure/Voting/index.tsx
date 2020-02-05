@@ -208,8 +208,7 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
       .sort((a, b) => b.values[0].value - a.values[0].value);
   };
 
-  // TODO replace this any
-  let preparedData: any;
+  let preparedData: ReturnType<typeof partyChartData> | null = null;
 
   if (proceduresData) {
     const chartData = {
@@ -225,16 +224,16 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
     });
   }
 
-  const prepareCharLegendData = () => {
+  const prepareCharLegendData = (data: ReturnType<typeof partyChartData>) => {
     return [
       {
         label: 'Übereinstimmungen',
-        value: preparedData[selected].values[0].value,
+        value: data[selected].values[0].value,
         color: '#f5a623',
       },
       {
         label: 'Differenzen',
-        value: preparedData[selected].values[1].value,
+        value: data[selected].values[1].value,
         color: '#b1b3b4',
       },
     ];
@@ -249,10 +248,10 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
       <ScrollWrapper onScroll={onScroll}>
         <Title>Schon gewusst?</Title>
         {!constituency && <NoConstituency navigation={navigation as any} />}
-        {!!constituency && !preparedData.length && (
+        {!!constituency && !!preparedData && !preparedData.length && (
           <NoVotesPlaceholder subline="Fraktionen" />
         )}
-        {!!constituency && !!preparedData.length && (
+        {!!constituency && !!preparedData && !!preparedData.length && (
           <>
             <PartyChart
               width={chartWidth}
@@ -262,7 +261,7 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
               showPercentage
               colors={['#b1b3b4', '#f5a623']}
             />
-            <ChartLegend data={prepareCharLegendData()} />
+            <ChartLegend data={prepareCharLegendData(preparedData)} />
           </>
         )}
         {
