@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Text, ListRenderItem, SectionList } from 'react-native';
 import { useQuery } from '@apollo/react-hooks';
-import { procedures } from './graphql/query/procedures';
+import { PROCEDURES_LIST } from './graphql/query/procedures';
 import {
   ProceduresList,
   ProceduresListVariables,
@@ -22,6 +22,7 @@ import { communityVoteData } from '../../../lib/helper/PieChartCommunityData';
 import { pieChartGovernmentData } from '../../../lib/helper/PieChartGovernmentData';
 import { ListFilterContext } from '../../../context/ListFilter';
 import { NoConferenceWeekData } from './NoConferenceWeekData';
+import { ConstituencyContext } from '../../../context/Constituency';
 
 type ListScreenRouteProp = RouteProp<
   TopTabParamList,
@@ -41,6 +42,8 @@ const Container = styled.View`
 export const List = () => {
   const { getLocalVoteSelection } = useContext(LocalVotesContext);
   const { proceduresFilter } = useContext(ListFilterContext);
+  const { constituency } = useContext(ConstituencyContext);
+  const constituencies = constituency ? [constituency] : [];
   const route = useRoute<ListScreenRouteProp>();
   const navigation = useNavigation<
     StackNavigationProp<BundestagRootStackParamList>
@@ -49,13 +52,14 @@ export const List = () => {
   const { loading, data, error, fetchMore, networkStatus, refetch } = useQuery<
     ProceduresList,
     ProceduresListVariables
-  >(procedures, {
+  >(PROCEDURES_LIST, {
     fetchPolicy: 'network-only',
     errorPolicy: 'all',
     variables: {
       listTypes: [route.params.list],
       pageSize: 10,
       filter: proceduresFilter,
+      constituencies,
     },
   });
 

@@ -89,4 +89,5 @@ export interface Procedure {
 
 export interface ProcedureVariables {
   id: string;
+  constituencies?: string[] | null;
 }
