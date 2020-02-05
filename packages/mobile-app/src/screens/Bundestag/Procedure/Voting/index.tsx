@@ -9,7 +9,7 @@ import NoConstituency from './components/NoConstituency';
 // import PartyChart from './components/PartyChart';
 
 // GraphQL
-import PROCEDURES_WITH_VOTE_RESULTS from './components/graphql/query/proceduresByIdHavingVoteResults';
+import { PROCEDURES_BY_HAVING_VOTE_RESULTS } from './components/graphql/query/proceduresByIdHavingVoteResults';
 import Fade from './components/Animations/Fade';
 import { BundestagRootStackParamList } from '../../../../routes/Sidebar/Bundestag';
 import { RouteProp } from '@react-navigation/core';
@@ -25,7 +25,6 @@ import {
 import { ChainEntry } from '../../../../lib/VotesLocal';
 import { LocalVotesContext } from '../../../../context/LocalVotes';
 import { useQuery } from '@apollo/react-hooks';
-import { ListLoading } from '@democracy-deutschland/mobile-ui/src/components/shared/ListLoading';
 import ChartLegend from '../components/Charts/ChartLegend';
 import NoVotesPlaceholder from '../../../WahlOMeter/NoVotesPlaceholder';
 
@@ -105,7 +104,8 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
   const { data: proceduresData } = useQuery<
     proceduresByIdHavingVoteResults,
     proceduresByIdHavingVoteResultsVariables
-  >(PROCEDURES_WITH_VOTE_RESULTS, {
+  >(PROCEDURES_BY_HAVING_VOTE_RESULTS, {
+    fetchPolicy: 'cache-and-network',
     variables: {
       procedureIds: localVotes.map(({ procedureId }) => procedureId),
       pageSize: 999999,
@@ -208,21 +208,22 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
       .sort((a, b) => b.values[0].value - a.values[0].value);
   };
 
-  if (!proceduresData) {
-    return <ListLoading />;
+  // TODO replace this any
+  let preparedData: any;
+
+  if (proceduresData) {
+    const chartData = {
+      votedProcedures: proceduresData,
+      localVotes,
+    };
+
+    const matchingProcedures = getMatchingProcedures(chartData);
+
+    preparedData = partyChartData({
+      ...chartData,
+      matchingProcedures,
+    });
   }
-
-  const chartData = {
-    votedProcedures: proceduresData,
-    localVotes,
-  };
-
-  const matchingProcedures = getMatchingProcedures(chartData);
-
-  const preparedData = partyChartData({
-    ...chartData,
-    matchingProcedures,
-  });
 
   const prepareCharLegendData = () => {
     return [
