@@ -23,6 +23,8 @@ import PrepareActions from './PrepareActions';
 import { InitialStateContext } from '../../../context/InitialStates';
 import { getShareLink } from '../../../lib/shareLink';
 import { ConstituencyContext } from '../../../context/Constituency';
+import { Centered } from '@democracy-deutschland/mobile-ui/src/components/shared/Centered';
+import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
 
 const Container = styled.ScrollView`
   background-color: #fff;
@@ -41,7 +43,7 @@ export const Procedure: FC<Props> = ({ route }) => {
   const { isVerified } = useContext(InitialStateContext);
   const { constituency } = useContext(ConstituencyContext);
   const constituencies = constituency ? [constituency] : [];
-  const { data, loading, error } = useQuery<
+  const { data, loading, error, refetch } = useQuery<
     ProcedureQueryObj,
     ProcedureVariables
   >(PROCEDURE, {
@@ -53,11 +55,23 @@ export const Procedure: FC<Props> = ({ route }) => {
   if (loading) {
     return <ListLoading />;
   }
-  if (error) {
-    return <Text>{JSON.stringify(error)}</Text>;
-  }
-  if (!data) {
-    return <Text>procedure not found</Text>;
+  if (error || !data) {
+    return (
+      <Centered>
+        <Text>Verbindungsfehler</Text>
+        <Button
+          onPress={() =>
+            refetch({
+              id: route.params.procedureId,
+              constituencies,
+            })
+          }
+          text="Nochmal versuchen"
+          textColor="blue"
+          backgroundColor="transparent"
+        />
+      </Centered>
+    );
   }
 
   const {

@@ -23,6 +23,8 @@ import { pieChartGovernmentData } from '../../../lib/helper/PieChartGovernmentDa
 import { ListFilterContext } from '../../../context/ListFilter';
 import { NoConferenceWeekData } from './NoConferenceWeekData';
 import { ConstituencyContext } from '../../../context/Constituency';
+import { Centered } from '@democracy-deutschland/mobile-ui/src/components/shared/Centered';
+import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
 
 type ListScreenRouteProp = RouteProp<
   TopTabParamList,
@@ -71,12 +73,25 @@ export const List = () => {
     return <ListLoading />;
   }
 
-  if (error) {
-    return <Text>some error: {error.message}</Text>;
-  }
-
-  if (!data) {
-    return <Text>some error: No Data</Text>;
+  if (error || !data) {
+    return (
+      <Centered>
+        <Text>Verbindungsfehler</Text>
+        <Button
+          onPress={() =>
+            refetch({
+              listTypes: [route.params.list],
+              pageSize: 10,
+              filter: proceduresFilter,
+              constituencies,
+            })
+          }
+          text="Nochmal versuchen"
+          textColor="blue"
+          backgroundColor="transparent"
+        />
+      </Centered>
+    );
   }
 
   if (
