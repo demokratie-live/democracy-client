@@ -59,4 +59,5 @@ export interface ProceduresListVariables {
   listTypes?: ListType[] | null;
   sort?: string | null;
   filter?: ProcedureFilter | null;
+  constituencies?: string[] | null;
 }
