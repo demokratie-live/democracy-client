@@ -14,7 +14,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashIcon" translatesAutoresizingMaskIntoConstraints="NO" id="h20-cX-kPS">
-                    <rect key="frame" x="90" y="90" width="300" height="300"/>
+                    <rect key="frame" x="165" y="165" width="150" height="150"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="0.35034078359999998" green="0.57101780179999995" blue="0.80787354710000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -28,6 +28,6 @@
         </view>
     </objects>
     <resources>
-        <image name="SplashIcon" width="300" height="300"/>
+        <image name="SplashIcon" width="150" height="150"/>
     </resources>
 </document>
