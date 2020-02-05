@@ -131,7 +131,10 @@ export const Procedure: FC<Props> = ({ route }) => {
         </Folding>
       )}
 
-      {communityVotes && <CommunityVoteResults voteResults={communityVotes} />}
+      {communityVotes &&
+        ((voteEnd && new Date(voteEnd) < new Date()) || voted) && (
+          <CommunityVoteResults voteResults={communityVotes} />
+        )}
       {voteResults && (
         <GovernmentVoteResults
           key="government"
