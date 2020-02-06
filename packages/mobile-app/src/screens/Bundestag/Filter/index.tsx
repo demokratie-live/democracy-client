@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { SectionList, View, Alert } from 'react-native';
+import { SectionList, View, Alert, Button } from 'react-native';
 import styled from 'styled-components/native';
 import { FilterData, FilterEntry } from '../../../context/ListFilter/initData';
 import { Segment } from '../List/Components/Segment';
@@ -8,7 +8,6 @@ import { ListFilterContext } from '../../../context/ListFilter';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
 import { InitialStateContext } from '../../../context/InitialStates';
-import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
 
 // import SegmentHeader from '../../../components/ListSectionHeader';
 // import Checkbox from '../../../components/Checkbox';
@@ -125,7 +124,7 @@ export const Filter: React.FC<Props> = ({ navigation }) => {
 
   navigation.setOptions({
     headerRight: () => (
-      <Button onPress={onSave} text="Speichern" textColor="white" />
+      <Button onPress={onSave} title="Speichern" color="#fff" />
     ),
   });
 
