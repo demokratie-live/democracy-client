@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-color-literals */
 import React, { useEffect, useState, useContext } from 'react';
 import { SectionList, View, Alert, Button } from 'react-native';
 import styled from 'styled-components/native';
@@ -20,21 +21,21 @@ const Container = styled.View`
 `;
 
 const ListRowMain = styled.View`
-  padding-horizontal: 18;
-  padding-vertical: 11;
+  /* padding-right: 18; */
+  /* padding-vertical: 11; */
   justify-content: center;
+  /* background-color: #ff000055; */
 `;
 
 const ListRowSub = styled.View`
   padding-left: 8;
-  padding-vertical: 11;
-  justify-content: center;
 `;
 
 const Row = styled.TouchableOpacity`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  /* background-color: #ffff0055; */
 `;
 
 const TitleMain = styled.Text`
@@ -170,7 +171,7 @@ export const Filter: React.FC<Props> = ({ navigation }) => {
               <Row
                 style={{
                   paddingVertical: 11,
-                  paddingHorizontal: 11,
+                  paddingHorizontal: 18,
                   borderBottomWidth: 1,
                   borderColor: lightgrey,
                 }}
@@ -197,6 +198,13 @@ export const Filter: React.FC<Props> = ({ navigation }) => {
             <ListRowMain>
               <ListRowSub key={subtitle}>
                 <Row
+                  style={{
+                    borderBottomWidth: 1,
+                    borderColor: 'rgba(0,0,0,0.1)',
+                    paddingLeft: 8,
+                    paddingVertical: 8,
+                    paddingRight: 18,
+                  }}
                   onPress={() => {
                     const curValue = getValue({
                       type: section.name,

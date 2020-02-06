@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { Text } from 'react-native';
+import { Text, Platform } from 'react-native';
 
 // TODO improve type
 const Wrapper = styled.View<{
@@ -26,8 +26,12 @@ const Checkmark = styled.View.attrs<{
   backgroundColor: 'transparent',
   name: 'ios-checkmark',
 }))<{ value: boolean | 'mixed'; disabledColor?: string }>`
-  margin-top: 2;
-  margin-left: 4;
+  align-items: center;
+  justify-content: center;
+  height: 24;
+  width: 24;
+  padding-bottom: ${() => (Platform.OS === 'ios' ? 1 : 3)};
+  padding-right: 1;
 `;
 
 interface Props {
