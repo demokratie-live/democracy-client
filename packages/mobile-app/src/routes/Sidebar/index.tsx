@@ -25,7 +25,6 @@ export const SidebarNavigation = () => {
   return (
     <SidebarDrawer.Navigator
       initialRouteName="Bundestag"
-      unmountInactiveScreens={true}
       drawerContent={props => <Sidebar {...props} />}
       hideStatusBar
       drawerContentOptions={{
@@ -43,6 +42,7 @@ export const SidebarNavigation = () => {
           drawerIcon: ({ color, size }) => (
             <GovernmentIcon width={size} height={size} color={color} />
           ),
+          unmountOnBlur: true,
         }}
       />
       <SidebarDrawer.Screen
@@ -52,6 +52,7 @@ export const SidebarNavigation = () => {
           drawerIcon: ({ color, size }) => (
             <WaterDrop width={size} height={size} color={color} />
           ),
+          unmountOnBlur: true,
         }}
         name="WahlOMeter"
         component={WahlOMeterNavigation}
