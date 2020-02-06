@@ -67,7 +67,7 @@ class WahlOMeter extends PureComponent<Props> {
     selectedIndex: 0,
     routes: ['Bundestag', 'Fraktionen', 'Wahlkreis'],
   };
-  scrollView = createRef<ScrollView>().current;
+  scrollView = createRef<ScrollView>();
 
   onScrollEndDrag = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
     const { contentOffset } = e.nativeEvent;
@@ -91,8 +91,8 @@ class WahlOMeter extends PureComponent<Props> {
   width = Dimensions.get('window').width;
 
   scrollTo = ({ x, y }: { x: number; y: number }) => {
-    if (this.scrollView) {
-      this.scrollView.scrollTo({
+    if (this.scrollView && this.scrollView.current) {
+      this.scrollView.current.scrollTo({
         y,
         x,
       });
@@ -150,11 +150,7 @@ class WahlOMeter extends PureComponent<Props> {
                 });
               }}
               onMomentumScrollEnd={this.onScrollEndDrag}
-              ref={e => {
-                if (e) {
-                  this.scrollView = e;
-                }
-              }}>
+              ref={this.scrollView}>
               {[bundestagScreen, fraktionenScreen, wahlkreisScreen]}
             </ScrollViewCmp>
           </>
@@ -186,9 +182,7 @@ class WahlOMeter extends PureComponent<Props> {
                 });
               }}
               onMomentumScrollEnd={this.onScrollEndDrag}
-              ref={e => {
-                this.scrollView = e;
-              }}>
+              ref={this.scrollView}>
               {[bundestagScreen, fraktionenScreen, wahlkreisScreen]}
             </ScrollViewCmp>
           </>

@@ -1,14 +1,10 @@
 import 'react-native-gesture-handler'; // TODO remove workaround https://github.com/kmagiera/react-native-gesture-handler/issues/320#issuecomment-538190653
 import React, { useState, useContext, useEffect } from 'react';
-import {
-  NavigationNativeContainer,
-  useLinking,
-} from '@react-navigation/native';
+import { useLinking, NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Introduction from '../screens/modals/Introduction';
-import Verification from './Verification';
+import { VerificationScreen } from './Verification';
 import { InitialStateContext } from '../context/InitialStates';
-import { VerificationProvider } from '../context/Verification';
 import DeviceInfo from 'react-native-device-info';
 import { InitialState } from '@react-navigation/core';
 import { SidebarNavigation } from './Sidebar';
@@ -54,14 +50,13 @@ const App = () => {
   } = useContext(InitialStateContext);
 
   useEffect(() => {
-    getInitialState().then(state => {
-      // democracy://Sidebar/Bundestag/Procedure?procedureId=230576
-      if (state !== undefined) {
-        setInitialState(state);
-      }
+    const state = getInitialState();
+    // democracy://Sidebar/Bundestag/Procedure?procedureId=230576
+    if (state && state.routes) {
+      setInitialState(state);
+    }
 
-      setIsReady(true);
-    });
+    setIsReady(true);
   }, [getInitialState]);
 
   useEffect(() => {
@@ -114,9 +109,7 @@ const App = () => {
   }
 
   return (
-    <NavigationNativeContainer
-      initialState={initialState}
-      ref={rootNavigationRef}>
+    <NavigationContainer initialState={initialState} ref={rootNavigationRef}>
       <RootStack.Navigator
         mode="modal"
         screenOptions={{
@@ -152,15 +145,11 @@ const App = () => {
             options={{
               headerShown: false,
             }}
-            component={() => (
-              <VerificationProvider>
-                <Verification />
-              </VerificationProvider>
-            )}
+            component={VerificationScreen}
           />
         )}
       </RootStack.Navigator>
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 };
 

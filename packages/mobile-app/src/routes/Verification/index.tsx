@@ -9,6 +9,7 @@ import { Code } from '../../screens/modals/Verification/Code';
 import { RootStackParamList } from '..';
 import { useNavigation } from '@react-navigation/core';
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
+import { VerificationProvider } from '../../context/Verification';
 
 export type VerificationRootStackParamList = {
   Start: undefined;
@@ -74,4 +75,10 @@ const VerificationRootNavigation = () => {
   );
 };
 
-export default VerificationRootNavigation;
+export const VerificationScreen = () => {
+  return (
+    <VerificationProvider>
+      <VerificationRootNavigation />
+    </VerificationProvider>
+  );
+};

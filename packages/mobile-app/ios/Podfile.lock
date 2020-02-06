@@ -190,7 +190,7 @@ PODS:
     - React
   - react-native-pdf (6.0.1):
     - React
-  - react-native-safe-area-context (0.6.2):
+  - react-native-safe-area-context (0.6.4):
     - React
   - react-native-splash-screen (3.2.0):
     - React
@@ -235,19 +235,19 @@ PODS:
     - React
   - RNCMaskedView (0.1.6):
     - React
-  - RNDeviceInfo (5.4.1):
+  - RNDeviceInfo (5.5.1):
     - React
-  - RNGestureHandler (1.5.3):
+  - RNGestureHandler (1.5.6):
     - React
   - RNKeychain (4.0.5):
     - React
   - RNReanimated (1.7.0):
     - React
-  - RNScreens (2.0.0-alpha.29):
+  - RNScreens (2.0.0-beta.2):
     - React
   - RNSearchBar (3.5.1):
     - React
-  - RNSentry (1.2.1):
+  - RNSentry (1.2.2):
     - React
     - Sentry (~> 4.4.0)
   - RNSha256 (1.3.6):
@@ -420,7 +420,7 @@ SPEC CHECKSUMS:
   react-native-config: f2c2ae45625a068c35681a16b9bfb1ca58b0adc7
   react-native-notifications: acf37b8cbeb5b05f274b25ffe6289119b65961c2
   react-native-pdf: 29a09815e99c92743aa8459a90564aaddd4065e0
-  react-native-safe-area-context: 25260c5d0b9c53fd7aa88e569e2edae72af1f6a3
+  react-native-safe-area-context: 52342d2d80ea8faadd0ffa76d83b6051f20c5329
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
   React-RCTActionSheet: 7369b7c85f99b6299491333affd9f01f5a130c22
   React-RCTAnimation: d07be15b2bd1d06d89417eb0343f98ffd2b099a7
@@ -435,13 +435,13 @@ SPEC CHECKSUMS:
   rn-fetch-blob: f525a73a78df9ed5d35e67ea65e79d53c15255bc
   RNCAsyncStorage: 44395cb9c7c1523104c2b499eb426ef7aff82bca
   RNCMaskedView: a88953beefbd347a29072d9eba90e42945fe291e
-  RNDeviceInfo: 0e40d9a9031252d2525d8b69a4b3fa8689efcea4
-  RNGestureHandler: 02905abe54e1f6e59c081a10b4bd689721e17aa6
+  RNDeviceInfo: 017aa2fd29a437fba26807cbe2fa51a149da70cd
+  RNGestureHandler: 911d3b110a7a233a34c4f800e7188a84b75319c6
   RNKeychain: 840f8e6f13be0576202aefcdffd26a4f54bfe7b5
   RNReanimated: 031fe8d9ea93c2bd689a40f05320ef9d96f74d7f
-  RNScreens: b20bdb598fe95ac37aada88a5e92f36622549e49
+  RNScreens: 5e4758109c6d35f9a009ce72af873df907548020
   RNSearchBar: 9860431356b7d12a8449d2fddb2b5f3c78d1e99f
-  RNSentry: 9b1d983b2d5d1c215ba6490348fd2a4cc23a8a9d
+  RNSentry: 9cfa3717b1e6bf9ad4b124683e78e3b98b01d3af
   RNSha256: c6f68c850bf8315c95e2508667e8c908bd9f8487
   RNSVG: 8ba35cbeb385a52fd960fd28db9d7d18b4c2974f
   Sentry: 14bdd673870e8cf64932b149fad5bbbf39a9b390
