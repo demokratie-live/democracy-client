@@ -60,6 +60,8 @@ const TabViewNavigation: React.FC<Props> = ({ navigation }) => {
         indicatorStyle: {
           backgroundColor: '#fff',
         },
+        activeTintColor: 'rgb(255,255,255)',
+        inactiveTintColor: 'rgba(255,255,255,.9)',
         style: {
           backgroundColor: '#4494D3',
         },
