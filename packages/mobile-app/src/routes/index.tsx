@@ -109,7 +109,19 @@ const App = () => {
   }
 
   return (
-    <NavigationContainer initialState={initialState} ref={rootNavigationRef}>
+    <NavigationContainer
+      initialState={initialState}
+      ref={rootNavigationRef}
+      theme={{
+        colors: {
+          background: '#fff',
+          primary: '#fff',
+          text: '#fff',
+          border: '#fff',
+          card: '#fff',
+        },
+        dark: false,
+      }}>
       <RootStack.Navigator
         mode="modal"
         screenOptions={{
