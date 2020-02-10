@@ -16139,6 +16139,11 @@ react-native-animatable@1.3.3:
   dependencies:
     prop-types "^15.7.2"
 
+react-native-appstate-hook@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-appstate-hook/-/react-native-appstate-hook-1.0.3.tgz#4f4f86e63127e7b06e53ccc286ec9a6e545d9d59"
+  integrity sha512-iVoTUMnlJiU4DldhoEdE0uecr9AuC84tq+ftvfCYbZowirPTxlqAkvi/42sjlUDMFsG6BB8PoWci94qmz15w5Q==
+
 react-native-clean-project@^3.2.4:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/react-native-clean-project/-/react-native-clean-project-3.3.0.tgz#89974c4a291123e6d1f72c32185a012a649f1fa8"
@@ -16229,6 +16234,11 @@ react-native-pdf@^6.0.0:
   dependencies:
     crypto-js "^3.1.9-1"
     prop-types "^15.5.10"
+
+react-native-permissions@^2.0.9:
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-2.0.9.tgz#5eabdaa952dd099d14e3790af691f49ff2de0895"
+  integrity sha512-64F95x4Y1RqsQiPco+Qs+OAm3rKUTRfWDMpp1f0If9YfRXOxxVFJqf7mSlVvlSY4pZAhZgLVydOmA7aTTduPUw==
 
 react-native-reanimated@^1.3.0:
   version "1.7.0"

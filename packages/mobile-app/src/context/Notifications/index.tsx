@@ -23,6 +23,8 @@ import {
 } from './graphql/mutation/__generated__/AddToken';
 import { ADD_TOKEN } from './graphql/mutation/AddToken';
 import AsyncStorage from '@react-native-community/async-storage';
+import { checkNotifications } from 'react-native-permissions';
+import useAppState from 'react-native-appstate-hook';
 
 interface NotificationsInterface {
   hasPermissions: boolean;
@@ -78,6 +80,20 @@ export const NotificationsProvider: React.FC = ({ children }) => {
   >(UPDATE_NOTIFICATION_SETTINGS);
   const [sendToken] = useMutation<AddToken, AddTokenVariables>(ADD_TOKEN);
 
+  const { appState } = useAppState({});
+
+  useEffect(() => {
+    checkNotifications().then(({ status }) => {
+      if (!alreadyDenied && status === 'blocked') {
+        setAlreadyDenied(true);
+        setHasPermissions(false);
+      } else if (alreadyDenied && status === 'granted') {
+        setAlreadyDenied(false);
+        setHasPermissions(true);
+      }
+    });
+  }, [appState, alreadyDenied]);
+
   useEffect(() => {
     if (data && data.notificationSettings) {
       setNotificationSettings(data.notificationSettings);
@@ -88,6 +104,7 @@ export const NotificationsProvider: React.FC = ({ children }) => {
   useEffect(() => {
     console.log('REGISTER');
     Notifications.isRegisteredForRemoteNotifications().then(value => {
+      console.log('isRegisteredForRemoteNotifications', value);
       setHasPermissions(value);
       console.log('setHasPermissions', value);
     });
@@ -110,7 +127,6 @@ export const NotificationsProvider: React.FC = ({ children }) => {
     Notifications.events().registerRemoteNotificationsRegistrationFailed(
       (event: RegistrationError) => {
         console.error(event);
-        setAlreadyDenied(true);
       },
     );
 
@@ -157,6 +173,7 @@ export const NotificationsProvider: React.FC = ({ children }) => {
   };
 
   const requestToken = () => {
+    console.log('handleActivate');
     Notifications.registerRemoteNotifications();
   };
 

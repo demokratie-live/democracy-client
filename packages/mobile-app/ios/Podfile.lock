@@ -21,6 +21,8 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
+  - Permission-Notifications (2.0.9):
+    - RNPermissions
   - RCTRequired (0.61.4)
   - RCTTypeSafety (0.61.4):
     - FBLazyVector (= 0.61.4)
@@ -239,6 +241,8 @@ PODS:
     - React
   - RNKeychain (4.0.5):
     - React
+  - RNPermissions (2.0.9):
+    - React
   - RNReanimated (1.7.0):
     - React
   - RNScreens (2.0.0-alpha.29):
@@ -264,6 +268,7 @@ DEPENDENCIES:
   - FBReactNativeSpec (from `../../../node_modules/react-native/Libraries/FBReactNativeSpec`)
   - Folly (from `../../../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../../../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - Permission-Notifications (from `../../../node_modules/react-native-permissions/ios/Notifications.podspec`)
   - RCTRequired (from `../../../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../../../node_modules/react-native/Libraries/TypeSafety`)
   - React (from `../../../node_modules/react-native/`)
@@ -296,6 +301,7 @@ DEPENDENCIES:
   - RNDeviceInfo (from `../../../node_modules/react-native-device-info`)
   - RNGestureHandler (from `../../../node_modules/react-native-gesture-handler`)
   - RNKeychain (from `../../../node_modules/react-native-keychain`)
+  - RNPermissions (from `../../../node_modules/react-native-permissions`)
   - RNReanimated (from `../../../node_modules/react-native-reanimated`)
   - RNScreens (from `../../../node_modules/react-native-screens`)
   - RNSearchBar (from `../../../node_modules/react-native-search-bar`)
@@ -322,6 +328,8 @@ EXTERNAL SOURCES:
     :podspec: "../../../node_modules/react-native/third-party-podspecs/Folly.podspec"
   glog:
     :podspec: "../../../node_modules/react-native/third-party-podspecs/glog.podspec"
+  Permission-Notifications:
+    :path: "../../../node_modules/react-native-permissions/ios/Notifications.podspec"
   RCTRequired:
     :path: "../../../node_modules/react-native/Libraries/RCTRequired"
   RCTTypeSafety:
@@ -380,6 +388,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native-gesture-handler"
   RNKeychain:
     :path: "../../../node_modules/react-native-keychain"
+  RNPermissions:
+    :path: "../../../node_modules/react-native-permissions"
   RNReanimated:
     :path: "../../../node_modules/react-native-reanimated"
   RNScreens:
@@ -403,6 +413,7 @@ SPEC CHECKSUMS:
   FBReactNativeSpec: 51477b84b1bf7ab6f9ef307c24e3dd675391be44
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
+  Permission-Notifications: 1e03f5c43612ac4f9cdcaf6504695fc4e15f33d9
   RCTRequired: f3b3fb6f4723e8e52facb229d0c75fdc76773849
   RCTTypeSafety: 2ec60de6abb1db050b56ecc4b60188026078fd10
   React: 10e0130b57e55a7cd8c3dee37c1261102ce295f4
@@ -432,6 +443,7 @@ SPEC CHECKSUMS:
   RNDeviceInfo: 0e40d9a9031252d2525d8b69a4b3fa8689efcea4
   RNGestureHandler: 02905abe54e1f6e59c081a10b4bd689721e17aa6
   RNKeychain: 840f8e6f13be0576202aefcdffd26a4f54bfe7b5
+  RNPermissions: 2f74237e97b08beda01e914301e12524ddddf5b8
   RNReanimated: 031fe8d9ea93c2bd689a40f05320ef9d96f74d7f
   RNScreens: b20bdb598fe95ac37aada88a5e92f36622549e49
   RNSearchBar: 9860431356b7d12a8449d2fddb2b5f3c78d1e99f
@@ -441,6 +453,6 @@ SPEC CHECKSUMS:
   Sentry: 14bdd673870e8cf64932b149fad5bbbf39a9b390
   Yoga: ba3d99dbee6c15ea6bbe3783d1f0cb1ffb79af0f
 
-PODFILE CHECKSUM: 2ed83c46967bff4ebab5f661a6253235fad5de86
+PODFILE CHECKSUM: 4e39ccaeb5dbb06c375a8633797aebefee6d8a63
 
 COCOAPODS: 1.8.4
