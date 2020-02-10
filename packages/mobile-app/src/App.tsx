@@ -1,4 +1,4 @@
-// import './lib/sentry';
+import './lib/sentry';
 import React from 'react';
 import { enableScreens } from 'react-native-screens';
 enableScreens();
