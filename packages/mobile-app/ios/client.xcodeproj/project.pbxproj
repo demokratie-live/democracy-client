@@ -747,6 +747,7 @@
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -772,6 +773,7 @@
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1068,6 +1070,7 @@
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1223,6 +1226,7 @@
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1383,6 +1387,7 @@
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1538,6 +1543,7 @@
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1698,6 +1704,7 @@
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1853,6 +1860,7 @@
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -2013,6 +2021,7 @@
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -2168,6 +2177,7 @@
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
