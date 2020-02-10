@@ -26,6 +26,7 @@ const Number = styled.TextInput.attrs(() => ({
 }))`
   flex: 1;
   font-size: 24;
+  color: #000;
   margin-bottom: 0;
   padding-bottom: 0;
   margin-left: 11;
