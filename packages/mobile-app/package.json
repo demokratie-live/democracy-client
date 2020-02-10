@@ -39,7 +39,7 @@
     "@react-navigation/material-top-tabs": "^5.0.0-alpha.35",
     "@react-navigation/native": "^5.0.0-alpha.29",
     "@react-navigation/stack": "^5.0.0-alpha.63",
-    "@sentry/react-native": "^1.2.1",
+    "@sentry/react-native": "^1.2.2",
     "apollo-cache-inmemory": "^1.6.3",
     "apollo-client": "^2.6.4",
     "apollo-link-context": "^1.0.19",

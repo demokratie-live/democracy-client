@@ -2540,7 +2540,7 @@
     "@sentry/types" "5.12.0"
     tslib "^1.9.3"
 
-"@sentry/react-native@^1.2.1":
+"@sentry/react-native@^1.2.2":
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/@sentry/react-native/-/react-native-1.2.2.tgz#1452db82efc3f6b7464a1986174e71d4e893bd91"
   integrity sha512-dnGPQPbqDHUizuxls/10bvXnBoe9JZyjAtozQc0fFpO6EqmQvbaluwtqFlrls0no50v1GdS67H3AqA4lFVCoRw==
