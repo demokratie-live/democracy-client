@@ -24,7 +24,9 @@ import { InitialStateContext } from '../../../context/InitialStates';
 import { getShareLink } from '../../../lib/shareLink';
 import { ConstituencyContext } from '../../../context/Constituency';
 
-const Container = styled.ScrollView`
+const Container = styled.ScrollView.attrs({
+  scrollIndicatorInsets: { right: 1 }, // TODO do cleanfix when there is a correct solution (already closed but not solved without workaround) https://github.com/facebook/react-native/issues/26610
+})`
   background-color: #fff;
 `;
 
