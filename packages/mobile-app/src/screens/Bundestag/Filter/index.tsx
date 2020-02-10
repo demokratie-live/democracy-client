@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-color-literals */
 import React, { useEffect, useState, useContext } from 'react';
-import { SectionList, View, Alert, Button } from 'react-native';
+import { SectionList, View, Alert } from 'react-native';
 import styled from 'styled-components/native';
 import { FilterData, FilterEntry } from '../../../context/ListFilter/initData';
 import { Segment } from '../List/Components/Segment';
@@ -15,6 +15,16 @@ import { InitialStateContext } from '../../../context/InitialStates';
 
 // import SET_FILTERS from '../../../graphql/mutations/local/setFilters';
 // import GET_FILTERS from '../../../graphql/queries/local/filters';
+
+const Save = styled.TouchableOpacity`
+  margin-right: 11;
+`;
+
+const SaveText = styled.Text`
+  color: #fff;
+  font-size: 16;
+  font-weight: 500;
+`;
 
 const Container = styled.View`
   background-color: #fff;
@@ -125,7 +135,9 @@ export const Filter: React.FC<Props> = ({ navigation }) => {
 
   navigation.setOptions({
     headerRight: () => (
-      <Button onPress={onSave} title="Speichern" color="#fff" />
+      <Save onPress={onSave}>
+        <SaveText>Speichern</SaveText>
+      </Save>
     ),
   });
 
