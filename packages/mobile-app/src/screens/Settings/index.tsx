@@ -1,5 +1,5 @@
 import React, { useContext, ReactNode } from 'react';
-import { SectionList, Switch, Button } from 'react-native';
+import { SectionList, Switch, Button, Linking, Alert } from 'react-native';
 
 // GraphQL
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -11,6 +11,7 @@ import { ListItem } from './components/ListItem';
 import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/core';
 import { NotificationsContext } from '../../context/NotificationPermission';
+import { getBundleId } from 'react-native-device-info';
 
 const Text = styled.Text`
   font-size: 17;
@@ -66,6 +67,31 @@ export const Settings: React.FC<Props> = () => {
     }
   };
 
+  const handleActivate = () => {
+    if (!alreadyDenied) {
+      requestToken();
+    } else {
+      Alert.alert(
+        'Benachrichtigungen',
+        'Bitte Mitteilungen in den Einstellungen aktivieren.',
+        [
+          {
+            text: 'Aktivieren',
+            onPress: () =>
+              Linking.openURL(`app-settings://notification/${getBundleId}`),
+          },
+          {
+            text: 'Später',
+            style: 'cancel',
+          },
+        ],
+        {
+          cancelable: true,
+        },
+      );
+    }
+  };
+
   const listData: List[] = [
     {
       title: '',
@@ -104,7 +130,7 @@ export const Settings: React.FC<Props> = () => {
           }}
         />
       ) : (
-        <Button title="Aktivieren" onPress={requestToken} />
+        <Button title="Aktivieren" onPress={handleActivate} />
       ),
     });
   }
@@ -209,9 +235,6 @@ export const Settings: React.FC<Props> = () => {
       renderSectionHeader={({ section: { title } }) => <Segment text={title} />}
       sections={listData}
       keyExtractor={item => item.title}
-      ListFooterComponent={
-        (!!alreadyDenied && <Text>Request code already denied</Text>) || null
-      }
     />
   );
 };
