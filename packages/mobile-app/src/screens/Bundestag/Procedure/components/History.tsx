@@ -1,8 +1,10 @@
 import React from 'react';
-import styled from 'styled-components/native';
 import { Procedure_procedure } from '../graphql/query/__generated__/Procedure';
+import { styled } from '../../../../styles';
 
-const Wrapper = styled.View``;
+const Wrapper = styled.View`
+  padding-horizontal: ${({ theme }) => theme.distances.secondary};
+`;
 
 const StateWrapper = styled.View`
   flex-direction: row;
@@ -36,7 +38,7 @@ const State = styled.Text`
 const Line = styled.View`
   position: absolute;
   width: 1;
-  left: 9;
+  left: 20;
   top: 18;
   bottom: 22;
   background-color: #979797;

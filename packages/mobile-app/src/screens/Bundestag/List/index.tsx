@@ -70,27 +70,33 @@ export const List = () => {
   }, [proceduresFilter]);
 
   if (loading) {
-    return <ListLoading />;
+    return (
+      <Container>
+        <ListLoading />
+      </Container>
+    );
   }
 
   if (error || !data) {
     return (
-      <Centered>
-        <Text>Verbindungsfehler</Text>
-        <Button
-          onPress={() =>
-            refetch({
-              listTypes: [route.params.list],
-              pageSize: 10,
-              filter: proceduresFilter,
-              constituencies,
-            })
-          }
-          text="Nochmal versuchen"
-          textColor="blue"
-          backgroundColor="transparent"
-        />
-      </Centered>
+      <Container>
+        <Centered>
+          <Text>Verbindungsfehler</Text>
+          <Button
+            onPress={() =>
+              refetch({
+                listTypes: [route.params.list],
+                pageSize: 10,
+                filter: proceduresFilter,
+                constituencies,
+              })
+            }
+            text="Nochmal versuchen"
+            textColor="blue"
+            backgroundColor="transparent"
+          />
+        </Centered>
+      </Container>
     );
   }
 

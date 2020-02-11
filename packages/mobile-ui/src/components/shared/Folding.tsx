@@ -11,8 +11,8 @@ const Wrapper = styled.View`
 
 const Header = styled.TouchableOpacity`
   flex-direction: row;
-  padding-vertical: 9;
-  padding-horizontal: 9;
+  padding-vertical: 4;
+  padding-horizontal: 18;
 `;
 
 const Headline = styled.Text`

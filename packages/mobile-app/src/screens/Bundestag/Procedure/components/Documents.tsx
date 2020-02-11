@@ -1,9 +1,11 @@
 import React from 'react';
-import styled from 'styled-components/native';
 import { DocumentItem } from './DocumentItem';
 import { Procedure_procedure_importantDocuments } from '../graphql/query/__generated__/Procedure';
+import { styled } from '../../../../styles';
 
-const Wrapper = styled.View``;
+const Wrapper = styled.View`
+  padding-horizontal: ${({ theme }) => theme.distances.secondary};
+`;
 
 interface Props {
   documents: Procedure_procedure_importantDocuments[]; // TODO Fix type

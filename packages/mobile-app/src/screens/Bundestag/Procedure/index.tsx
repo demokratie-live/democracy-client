@@ -13,7 +13,6 @@ import {
 } from './graphql/query/__generated__/Procedure';
 import PROCEDURE from './graphql/query/Procedure';
 import { Intro } from './components/Intro';
-import styled from 'styled-components/native';
 import Details from './components/Details';
 import Documents from './components/Documents';
 import { History } from './components/History';
@@ -25,6 +24,8 @@ import { getShareLink } from '../../../lib/shareLink';
 import { ConstituencyContext } from '../../../context/Constituency';
 import { Centered } from '@democracy-deutschland/mobile-ui/src/components/shared/Centered';
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { styled } from '../../../styles';
 
 const Container = styled.ScrollView.attrs({
   scrollIndicatorInsets: { right: 1 }, // TODO do cleanfix when there is a correct solution (already closed but not solved without workaround) https://github.com/facebook/react-native/issues/26610
@@ -32,13 +33,24 @@ const Container = styled.ScrollView.attrs({
   background-color: #fff;
 `;
 
+// const HaderRightWrapper = styled.View`
+//   flex-direction: row;
+//   padding-right: 11;
+// `;
+
 type ProcedureScreenRouteProp = RouteProp<
   BundestagRootStackParamList,
   'Procedure'
 >;
 
+type ScreenNavigationProp = StackNavigationProp<
+  BundestagRootStackParamList,
+  'TabView'
+>;
+
 type Props = {
   route: ProcedureScreenRouteProp;
+  navigation: ScreenNavigationProp;
 };
 
 export const Procedure: FC<Props> = ({ route }) => {
@@ -54,6 +66,23 @@ export const Procedure: FC<Props> = ({ route }) => {
       constituencies,
     },
   });
+
+  // TODO Actions oben rechts hinzufügen
+  // useEffect(() => {
+  //   navigation.setOptions({
+  //     headerRight: () => (
+  //       <HaderRightWrapper>
+  //         <MenuButton onPress={() => navigation.navigate('Filter')}>
+  //           <Text>Oh</Text>
+  //         </MenuButton>
+  //         <MenuButton onPress={() => navigation.navigate('Search')}>
+  //           <Text>ho</Text>
+  //         </MenuButton>
+  //       </HaderRightWrapper>
+  //     ),
+  //   });
+  // }, [navigation]);
+
   if (loading) {
     return <ListLoading />;
   }

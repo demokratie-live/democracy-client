@@ -42,19 +42,13 @@ const TabViewNavigation: React.FC<Props> = ({ navigation }) => {
   navigation.setOptions({
     headerRight: () => (
       <HaderRightWrapper>
-        <MenuButton
-          onPress={() => navigation.navigate('Filter')}
-          // style={{ backgroundColor: 'blue' }}
-        >
+        <MenuButton onPress={() => navigation.navigate('Filter')}>
           {!hasFilters && (
             <FilterEmptyIcon width={18} height={18} color="#fff" />
           )}
           {!!hasFilters && <FilterIcon width={18} height={18} color="#fff" />}
         </MenuButton>
-        <MenuButton
-          onPress={() => navigation.navigate('Search')}
-          // style={{ backgroundColor: 'red' }}
-        >
+        <MenuButton onPress={() => navigation.navigate('Search')}>
           <SearchIcon width={18} height={18} color="#fff" />
         </MenuButton>
       </HaderRightWrapper>
