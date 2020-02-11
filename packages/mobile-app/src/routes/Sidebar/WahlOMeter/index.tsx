@@ -53,7 +53,7 @@ const WahlOMeterNavigation = () => {
         name="WahlOMeter"
         component={WahlOMeter}
         options={{
-          title: 'WahlOMeter',
+          title: 'Wahl-O-Meter',
           headerTintColor: '#fff',
           headerStyle: {
             backgroundColor: '#4494D3',
