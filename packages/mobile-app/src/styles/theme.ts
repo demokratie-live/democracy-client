@@ -3,6 +3,7 @@ export interface ThemeInterface {
     main: string;
     secondary: string;
     headerText: string;
+    headerTextSecondary: string;
     background: {
       header: string;
       main: string;
@@ -23,6 +24,7 @@ const myTheme: ThemeInterface = {
     main: 'blue',
     secondary: 'red',
     headerText: '#fff',
+    headerTextSecondary: '#fffb',
     background: {
       header: '#4494d3',
       main: '#fff',

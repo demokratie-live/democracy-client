@@ -15,10 +15,10 @@ import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { SidebarParamList } from '..';
 import { RootStackParamList } from '../..';
 import MenuIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Menu';
-import styled from 'styled-components/native';
 import { VoteSelection } from '../../../../__generated__/globalTypes';
 import { SearchProvider } from '../../../context/Search';
 import { theme } from '../../../styles';
+import { BurgerMenuButton } from '../../../components/MenuButton';
 
 export type BundestagRootStackParamList = {
   TabView: undefined;
@@ -38,11 +38,6 @@ type BundestagNavigationProps = CompositeNavigationProp<
   DrawerNavigationProp<SidebarParamList, 'Bundestag'>,
   StackNavigationProp<RootStackParamList>
 >;
-
-export const MenuButton = styled.TouchableOpacity`
-  padding-vertical: 11;
-  padding-horizontal: 11;
-`;
 
 const BundestagRootNavigation = () => {
   const navigation = useNavigation<BundestagNavigationProps>();
@@ -64,9 +59,9 @@ const BundestagRootNavigation = () => {
           options={{
             title: 'BUNDESTAG',
             headerLeft: () => (
-              <MenuButton onPress={navigation.toggleDrawer}>
+              <BurgerMenuButton onPress={navigation.toggleDrawer}>
                 <MenuIcon width={18} height={18} color="#fff" />
-              </MenuButton>
+              </BurgerMenuButton>
             ),
           }}
         />
