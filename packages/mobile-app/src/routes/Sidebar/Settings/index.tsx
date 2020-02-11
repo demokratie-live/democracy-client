@@ -9,7 +9,8 @@ import { SidebarParamList } from '..';
 import { RootStackParamList } from '../..';
 import MenuIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Menu';
 import { Settings } from '../../../screens/Settings';
-import { theme, styled } from '../../../styles';
+import { theme } from '../../../styles';
+import { BurgerMenuButton } from '../../../components/MenuButton';
 
 export type SettingsRootStackParamList = {
   Settings: undefined;
@@ -21,10 +22,6 @@ type SettingsNavigationProps = CompositeNavigationProp<
   DrawerNavigationProp<SidebarParamList, 'Settings'>,
   StackNavigationProp<RootStackParamList>
 >;
-
-const MenuButton = styled.TouchableOpacity`
-  padding-left: 11;
-`;
 
 const SettingsRootNavigation = () => {
   const navigation = useNavigation<SettingsNavigationProps>();
@@ -51,9 +48,9 @@ const SettingsRootNavigation = () => {
             shadowOpacity: 0,
           },
           headerLeft: () => (
-            <MenuButton onPress={navigation.toggleDrawer}>
+            <BurgerMenuButton onPress={navigation.toggleDrawer}>
               <MenuIcon width={18} height={18} color="#fff" />
-            </MenuButton>
+            </BurgerMenuButton>
           ),
         }}
       />

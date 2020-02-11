@@ -14,12 +14,12 @@ import { linking } from '../../../../lib/linking';
 
 const Container = styled.View`
   flex-direction: row;
-  padding-top: 13;
 `;
 
 const ViewerButton = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
+  padding-top: 18;
 `;
 
 const Text = styled.Text`
@@ -29,6 +29,7 @@ const Text = styled.Text`
 `;
 
 const DownloadButton = styled.TouchableOpacity`
+  padding-top: 11;
   margin-left: auto;
 `;
 
@@ -62,7 +63,8 @@ export const DocumentItem: React.FC<Props> = ({
   const navigation = useNavigation<DevPlaceholderNavigationProps>();
   return (
     <Container>
-      <ViewerButton onPress={() => navigation.navigate('Pdf', { url })}>
+      <ViewerButton
+        onPress={() => navigation.navigate('Pdf', { url, title: type })}>
         <DocumentIcon width={18} height={18} color="#000" />
         <Text>{`${type} (${editor} ${number})`}</Text>
       </ViewerButton>

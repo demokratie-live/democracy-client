@@ -1,5 +1,6 @@
 import React from 'react';
 import { G, Text, Rect } from 'react-native-svg';
+import { theme } from '../../../../../../styles';
 
 const WIDTH = 235;
 
@@ -72,7 +73,7 @@ const PartyRow: React.FC<Props> = ({
         })}
         {showPercentage && (
           <Text
-            fill="#4a4a4a"
+            fill={theme.colors.tansparentSecondary}
             fontSize="12"
             x={
               rowValues[rowValues.length - 1].value > 18

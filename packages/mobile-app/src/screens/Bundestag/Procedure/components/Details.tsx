@@ -1,9 +1,11 @@
 import React from 'react';
-import styled from 'styled-components/native';
 import m from 'moment';
 import { View } from 'react-native';
+import { styled } from '../../../../styles';
 
-const Wrapper = styled.View``;
+const Wrapper = styled.View`
+  padding-horizontal: 11;
+`;
 
 const Head = styled.View`
   flex-direction: row;
@@ -29,6 +31,10 @@ const HeadRightDescr = styled.View`
 const DefTitle = styled.Text`
   font-size: 14;
   color: rgba(68, 148, 211, 0.9);
+`;
+
+const DefTitleSeperated = styled(DefTitle)`
+  padding-top: ${({ theme }) => theme.distances.secondary};
 `;
 
 const DefTitleRight = styled(DefTitle)`
@@ -104,7 +110,7 @@ export const Details: React.FC<Props> = ({
         </HeadRight>
       </Head>
 
-      <DefTitle>Aktueller Stand</DefTitle>
+      <DefTitleSeperated>Aktueller Stand</DefTitleSeperated>
       <DefDescr>{currentStatus}</DefDescr>
       <Content>
         {abstract && (

@@ -1,7 +1,6 @@
 /* eslint-disable react-native/no-color-literals */
 import React, { useEffect, useState, useContext } from 'react';
 import { SectionList, View, Alert } from 'react-native';
-import styled from 'styled-components/native';
 import { FilterData, FilterEntry } from '../../../context/ListFilter/initData';
 import { Segment } from '../List/Components/Segment';
 import Checkbox from './components/Checkbox';
@@ -9,6 +8,7 @@ import { ListFilterContext } from '../../../context/ListFilter';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
 import { InitialStateContext } from '../../../context/InitialStates';
+import { styled } from '../../../styles';
 
 // import SegmentHeader from '../../../components/ListSectionHeader';
 // import Checkbox from '../../../components/Checkbox';
@@ -17,7 +17,7 @@ import { InitialStateContext } from '../../../context/InitialStates';
 // import GET_FILTERS from '../../../graphql/queries/local/filters';
 
 const Save = styled.TouchableOpacity`
-  margin-right: 11;
+  margin-right: ${({ theme }) => theme.distances.secondary};
 `;
 
 const SaveText = styled.Text`
@@ -32,13 +32,13 @@ const Container = styled.View`
 
 const ListRowMain = styled.View`
   /* padding-right: 18; */
-  /* padding-vertical: 11; */
+  padding-vertical: 4;
   justify-content: center;
   /* background-color: #ff000055; */
 `;
 
 const ListRowSub = styled.View`
-  padding-left: 8;
+  padding-left: ${({ theme }) => theme.distances.main};
 `;
 
 const Row = styled.TouchableOpacity`

@@ -21,7 +21,7 @@ export type RootStackParamList = {
   Home: {};
   Introduction: { done?: () => void; lastStartWithVersion?: string };
   Verification: {};
-  Pdf: { url: string };
+  Pdf: { url: string; title: string };
   Constituency: undefined;
 };
 
@@ -144,7 +144,11 @@ const App = () => {
           component={Introduction}
           options={{ headerShown: false }}
         />
-        <RootStack.Screen name="Pdf" component={PdfScreen} />
+        <RootStack.Screen
+          name="Pdf"
+          component={PdfScreen}
+          options={({ route }) => ({ title: route.params.title })}
+        />
         <RootStack.Screen
           name="Constituency"
           component={ConstituencyScreen}

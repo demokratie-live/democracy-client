@@ -3,12 +3,14 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { DevPlaceholder, List } from '../../../screens/Bundestag';
 import { ListType } from '../../../../__generated__/globalTypes';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { BundestagRootStackParamList, MenuButton } from '.';
+import { BundestagRootStackParamList } from '.';
 import styled from 'styled-components/native';
 import SearchIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Lens';
 import FilterEmptyIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/FunnelEmpty';
 import FilterIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Funnel';
 import { ListFilterContext } from '../../../context/ListFilter';
+import { theme } from '../../../styles';
+import { MenuButton } from '../../../components/MenuButton';
 
 export type TopTabParamList = {
   Sitzungswoche: { list: ListType };
@@ -61,7 +63,7 @@ const TabViewNavigation: React.FC<Props> = ({ navigation }) => {
           backgroundColor: '#fff',
         },
         activeTintColor: 'rgb(255,255,255)',
-        inactiveTintColor: 'rgba(255,255,255,.9)',
+        inactiveTintColor: theme.colors.headerTextSecondary,
         style: {
           backgroundColor: '#4494D3',
         },

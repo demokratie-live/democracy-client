@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Platform } from 'react-native';
-import styled from 'styled-components/native';
 import {
   DeputyVoteResults,
   DeputyVoteResultsVariables,
@@ -15,6 +14,7 @@ import InfoIconComponent from '@democracy-deutschland/mobile-ui/src/components/I
 import { DEPUTY_VOTE_RESULT } from './graphql/query/deputyVoteResults';
 import { ConstituencyContext } from '../../../../../context/Constituency';
 import { useNavigation } from '@react-navigation/core';
+import { styled } from '../../../../../styles';
 
 const Wrapper = styled.View`
   width: 100%;
@@ -24,11 +24,11 @@ const Wrapper = styled.View`
 const InfoIconButton = styled.TouchableOpacity``;
 
 const InfoIcon = styled(InfoIconComponent).attrs(() => ({
-  width: 24,
-  height: 24,
+  width: 18,
+  height: 18,
   color: 'rgb(199, 199, 204)',
 }))`
-  padding-left: 9;
+  margin-left: ${({ theme }) => theme.distances.small};
 `;
 
 const DeputyDetailsWrapper = styled.View`
