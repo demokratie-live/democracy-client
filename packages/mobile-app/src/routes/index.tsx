@@ -11,6 +11,7 @@ import { InitialState } from '@react-navigation/core';
 import { SidebarNavigation } from './Sidebar';
 import { PdfScreen } from '../screens/modals/Pdf/Pdf';
 import { ConstituencyScreen } from '../screens/modals/Constituency';
+import { theme } from '../styles';
 
 export type RootStackParamList = {
   Sidebar: undefined;
@@ -62,12 +63,12 @@ const App = () => {
         mode="modal"
         screenOptions={{
           headerStyle: {
-            backgroundColor: '#4494d3',
+            backgroundColor: theme.colors.background.header,
             elevation: 0,
             shadowOpacity: 0,
           },
           headerBackTitleVisible: false,
-          headerTintColor: '#fff',
+          headerTintColor: theme.colors.headerText,
         }}>
         <RootStack.Screen
           name="Sidebar"
