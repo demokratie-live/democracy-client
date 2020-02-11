@@ -14,6 +14,7 @@ import { Segment } from '../../Bundestag/List/Components/Segment';
 import { ChainEntry } from '../../../lib/VotesLocal';
 import { VoteSelection } from '../../../../__generated__/globalTypes';
 import { WahlOMeterScreenNavigationProp } from '..';
+import InfoIconComponent from '@democracy-deutschland/mobile-ui/src/components/Icons/Info';
 
 const Wrapper = styled.View`
   padding-top: 18;
@@ -45,7 +46,13 @@ const Party = styled(PartyComponent)`
 
 const InfoIconButton = styled.TouchableOpacity``;
 
-const InfoIcon = styled.Text``;
+const InfoIcon = styled(InfoIconComponent).attrs(() => ({
+  width: 18,
+  height: 18,
+  color: 'rgb(199, 199, 204)',
+}))`
+  margin-left: ${({ theme }) => theme.distances.small};
+`;
 
 const DeputyDetailsWrapper = styled.View`
   flex-direction: row;
@@ -193,7 +200,7 @@ class Wahlkreis extends PureComponent<Props> {
                       onPress={() =>
                         this.props.navigation.navigate('MemberProfil')
                       }>
-                      <InfoIcon>Info</InfoIcon>
+                      <InfoIcon />
                     </InfoIconButton>
                   </DeputyDetailsWrapper>
                   <Svg
