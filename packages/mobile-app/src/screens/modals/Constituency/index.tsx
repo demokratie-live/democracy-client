@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import styled from 'styled-components/native';
 import { Alert, Platform, FlatList } from 'react-native';
 
 import SearchIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Lens';
@@ -8,15 +7,16 @@ import constituenciesList from './constituencies-list.json';
 import constituencies from '../../Bundestag/Procedure/components/svgs/constituencies';
 import { Constituency } from './constituencyData';
 import { ConstituencyContext } from '../../../context/Constituency';
+import { styled } from '../../../styles/index';
 
 const Wrapper = styled.View`
   flex: 1;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.colors.background.main};
 `;
 
 const SearchBox = styled.View`
   height: 44;
-  background-color: #4494d3;
+  background-color: ${({ theme }) => theme.colors.background.header};
 `;
 
 const SearchInputWrapper = styled.View`

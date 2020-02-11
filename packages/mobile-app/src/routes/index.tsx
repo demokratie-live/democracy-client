@@ -14,6 +14,7 @@ import { rootNavigationRef } from './rootNavigationRef';
 import { getNavInitStateForProcedure } from '../lib/getNavStateForProcedure';
 import { PushNotificationContext } from '../context/PushNotification';
 import SplashScreen from 'react-native-splash-screen';
+import { theme } from '../styles';
 
 export type RootStackParamList = {
   Sidebar: undefined;
@@ -126,12 +127,12 @@ const App = () => {
         mode="modal"
         screenOptions={{
           headerStyle: {
-            backgroundColor: '#4494d3',
+            backgroundColor: theme.colors.background.header,
             elevation: 0,
             shadowOpacity: 0,
           },
           headerBackTitleVisible: false,
-          headerTintColor: '#fff',
+          headerTintColor: theme.colors.headerText,
         }}>
         <RootStack.Screen
           name="Sidebar"

@@ -8,8 +8,8 @@ import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { SidebarParamList } from '..';
 import { RootStackParamList } from '../..';
 import MenuIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Menu';
-import styled from 'styled-components/native';
 import { Settings } from '../../../screens/Settings';
+import { theme, styled } from '../../../styles';
 
 export type SettingsRootStackParamList = {
   Settings: undefined;
@@ -32,12 +32,12 @@ const SettingsRootNavigation = () => {
     <SettingsRootStack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#4494d3',
+          backgroundColor: theme.colors.background.header,
           elevation: 0,
           shadowOpacity: 0,
         },
         headerBackTitleVisible: false,
-        headerTintColor: '#fff',
+        headerTintColor: theme.colors.headerText,
       }}>
       <SettingsRootStack.Screen
         name="Settings"

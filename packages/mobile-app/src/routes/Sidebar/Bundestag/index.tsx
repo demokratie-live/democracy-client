@@ -18,6 +18,7 @@ import MenuIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Menu
 import styled from 'styled-components/native';
 import { VoteSelection } from '../../../../__generated__/globalTypes';
 import { SearchProvider } from '../../../context/Search';
+import { theme } from '../../../styles';
 
 export type BundestagRootStackParamList = {
   TabView: undefined;
@@ -50,7 +51,7 @@ const BundestagRootNavigation = () => {
       <BundestagRootStack.Navigator
         screenOptions={{
           headerStyle: {
-            backgroundColor: '#4494d3',
+            backgroundColor: theme.colors.background.header,
             elevation: 0,
             shadowOpacity: 0,
           },

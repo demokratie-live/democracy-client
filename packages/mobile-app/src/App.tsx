@@ -11,6 +11,7 @@ import { ListFilterProvider } from './context/ListFilter';
 import { ConstituencyProvider } from './context/Constituency';
 import { NotificationsProvider } from './context/NotificationPermission';
 import { PushNotificationProvider } from './context/PushNotification';
+import { theme, ThemeProvider } from './styles';
 
 export default () => (
   <Apollo>
@@ -20,7 +21,9 @@ export default () => (
           <ConstituencyProvider>
             <NotificationsProvider>
               <PushNotificationProvider>
-                <Navigation />
+                <ThemeProvider theme={theme}>
+                  <Navigation />
+                </ThemeProvider>
               </PushNotificationProvider>
             </NotificationsProvider>
           </ConstituencyProvider>
