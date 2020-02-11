@@ -9,6 +9,7 @@ import { Code } from '../../screens/modals/Verification/Code';
 import { RootStackParamList } from '..';
 import { useNavigation } from '@react-navigation/core';
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
+import { theme } from '../../styles';
 
 export type VerificationRootStackParamList = {
   Start: undefined;
@@ -31,7 +32,7 @@ const VerificationRootNavigation = () => {
     <VerificationRootStack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#4494d3',
+          backgroundColor: theme.colors.background.header,
           elevation: 0,
           shadowOpacity: 0,
         },
