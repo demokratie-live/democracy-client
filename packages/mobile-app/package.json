@@ -50,6 +50,7 @@
     "jwt-decode": "^2.2.0",
     "lodash.debounce": "^4.0.8",
     "lodash.unionby": "^4.8.0",
+    "proxy-polyfill": "^0.3.0",
     "react": "16.9.0",
     "react-native": "0.61.4",
     "react-native-appstate-hook": "^1.0.3",

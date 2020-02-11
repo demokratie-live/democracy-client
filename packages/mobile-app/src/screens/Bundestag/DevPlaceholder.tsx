@@ -10,10 +10,10 @@ import DeviceInfo from 'react-native-device-info';
 import styled from 'styled-components/native';
 import { InitialStateContext } from '../../context/InitialStates';
 import VotesLocal from '../../lib/VotesLocal';
+import { RootStackParamList } from '../../routes';
 import { SidebarParamList } from '../../routes/Sidebar';
 import { BundestagRootStackParamList } from '../../routes/Sidebar/Bundestag';
 import { TopTabParamList } from '../../routes/Sidebar/Bundestag/TabView';
-import { RootStackParamList } from '../../routes';
 
 const Container = styled.ScrollView`
   flex: 1;
