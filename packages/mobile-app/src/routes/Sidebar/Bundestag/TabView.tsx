@@ -11,6 +11,7 @@ import FilterIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Fu
 import { ListFilterContext } from '../../../context/ListFilter';
 import { theme } from '../../../styles';
 import { MenuButton } from '../../../components/MenuButton';
+import Svg, { Circle } from 'react-native-svg';
 
 export type TopTabParamList = {
   Sitzungswoche: { list: ListType };
@@ -46,7 +47,18 @@ const TabViewNavigation: React.FC<Props> = ({ navigation }) => {
           {!hasFilters && (
             <FilterEmptyIcon width={18} height={18} color="#fff" />
           )}
-          {!!hasFilters && <FilterIcon width={18} height={18} color="#fff" />}
+          {!!hasFilters && (
+            <>
+              <FilterIcon width={18} height={18} color="#fff" />
+              <Svg
+                width="8"
+                height="8"
+                viewBox="0 0 10 10"
+                style={{ position: 'absolute', top: 8, right: 7 }}>
+                <Circle cx="5" cy="5" r="5" fill="#d0021b" />
+              </Svg>
+            </>
+          )}
         </MenuButton>
         <MenuButton onPress={() => navigation.navigate('Search')}>
           <SearchIcon width={18} height={18} color="#fff" />

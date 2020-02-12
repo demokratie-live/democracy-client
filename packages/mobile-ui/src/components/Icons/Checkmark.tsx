@@ -6,26 +6,18 @@ const SvgCheckmark = (props: SvgProps) => (
     <Defs>
       <Path
         d="M370 710l568-568 86 86-568 568-86 86L0 512l86-86 284 284z"
-        id="checkmark_svg__path-1"
+        id="checkmark_svg__a"
       />
     </Defs>
-    <G
-      id="checkmark_svg__Symbols"
-      stroke="none"
-      strokeWidth={1}
-      fill="none"
-      fillRule="evenodd">
-      <G id="checkmark_svg__checkmark">
-        <Mask id="checkmark_svg__mask-2" fill="#fff">
-          <Use xlinkHref="#checkmark_svg__path-1" />
-        </Mask>
-        <Use
-          id="checkmark_svg__Line-6"
-          fill={props.color}
-          fillRule="nonzero"
-          xlinkHref="#checkmark_svg__path-1"
-        />
-      </G>
+    <G fill="none" fillRule="evenodd">
+      <Mask id="checkmark_svg__b" fill="#fff">
+        <Use xlinkHref="#checkmark_svg__a" />
+      </Mask>
+      <Use
+        fill={props.color}
+        fillRule="nonzero"
+        xlinkHref="#checkmark_svg__a"
+      />
     </G>
   </Svg>
 );

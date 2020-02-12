@@ -3,7 +3,6 @@ import { Svg, SvgProps, Path } from 'react-native-svg';
 
 const SvgMenu = (props: SvgProps) => (
   <Svg
-    id="menu_svg__menu--burger"
     aria-labelledby="t-menu--burger d-menu--burger"
     viewBox="0 0 32 32"
     width="1em"
