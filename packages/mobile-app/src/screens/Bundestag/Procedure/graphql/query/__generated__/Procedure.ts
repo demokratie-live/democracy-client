@@ -57,6 +57,7 @@ export interface Procedure_procedure_voteResults {
   notVoted: number | null;
   decisionText: string | null;
   namedVote: boolean | null;
+  governmentDecision: VoteSelection | null;
   partyVotes: Procedure_procedure_voteResults_partyVotes[];
 }
 
@@ -78,6 +79,7 @@ export interface Procedure_procedure {
   currentStatus: string | null;
   currentStatusHistory: string[];
   voted: boolean;
+  votedGovernment: boolean | null;
   importantDocuments: Procedure_procedure_importantDocuments[];
   communityVotes: Procedure_procedure_communityVotes | null;
   voteResults: Procedure_procedure_voteResults | null;

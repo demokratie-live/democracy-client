@@ -19,6 +19,7 @@ export default gql`
       currentStatus
       currentStatusHistory
       voted
+      votedGovernment
       notify
       importantDocuments {
         editor
@@ -46,6 +47,7 @@ export default gql`
         notVoted
         decisionText
         namedVote
+        governmentDecision
         partyVotes {
           main
           party
