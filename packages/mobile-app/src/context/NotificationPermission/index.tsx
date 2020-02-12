@@ -105,7 +105,6 @@ export const NotificationsProvider: React.FC = ({ children }) => {
   useEffect(() => {
     const subscriptions: EmitterSubscription[] = [];
     Notifications.isRegisteredForRemoteNotifications().then(value => {
-      console.log('isRegisteredForRemoteNotifications', value);
       setHasPermissions(value);
     });
 
