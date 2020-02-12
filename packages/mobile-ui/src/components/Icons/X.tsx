@@ -6,26 +6,14 @@ const SvgX = (props: SvgProps) => (
     <Defs>
       <Path
         d="M508.5 413.5L911 11l113 113-402.5 402.5L995 900l-113 113-373.5-373.5L142 1006 29 893l366.5-366.5L0 131 113 18l395.5 395.5z"
-        id="x_svg__path-1"
+        id="x_svg__a"
       />
     </Defs>
-    <G
-      id="x_svg__Symbols"
-      stroke="none"
-      strokeWidth={1}
-      fill="none"
-      fillRule="evenodd">
-      <G id="x_svg__x">
-        <Mask id="x_svg__mask-2" fill="#fff">
-          <Use xlinkHref="#x_svg__path-1" />
-        </Mask>
-        <Use
-          id="x_svg__Line-6"
-          fill={props.color}
-          fillRule="nonzero"
-          xlinkHref="#x_svg__path-1"
-        />
-      </G>
+    <G fill="none" fillRule="evenodd">
+      <Mask id="x_svg__b" fill="#fff">
+        <Use xlinkHref="#x_svg__a" />
+      </Mask>
+      <Use fill={props.color} fillRule="nonzero" xlinkHref="#x_svg__a" />
     </G>
   </Svg>
 );

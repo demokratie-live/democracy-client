@@ -41,6 +41,7 @@ export { default as Planet } from './Planet';
 export { default as Puzzle } from './Puzzle';
 export { default as Rocket } from './Rocket';
 export { default as Settings } from './Settings';
+export { default as ShareIos } from './ShareIos';
 export { default as Share } from './Share';
 export { default as Shield } from './Shield';
 export { default as Sort } from './Sort';

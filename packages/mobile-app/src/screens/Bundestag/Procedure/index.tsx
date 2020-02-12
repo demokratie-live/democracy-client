@@ -1,15 +1,19 @@
-import React, { useContext, FC } from 'react';
+import React, { useContext, FC, useEffect } from 'react';
 import { Text, Platform, Share } from 'react-native';
 import { RouteProp } from '@react-navigation/core';
 import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
 
-import { useQuery } from '@apollo/react-hooks';
+import ShareIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Share';
+import ShareIconIos from '@democracy-deutschland/mobile-ui/src/components/Icons/ShareIos';
+
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Folding';
 import { ListLoading } from '@democracy-deutschland/mobile-ui/src/components/shared/ListLoading';
 import speakingurl from 'speakingurl';
 import {
   Procedure as ProcedureQueryObj,
   ProcedureVariables,
+  Procedure_procedure,
 } from './graphql/query/__generated__/Procedure';
 import PROCEDURE from './graphql/query/Procedure';
 import { Intro } from './components/Intro';
@@ -26,6 +30,14 @@ import { Centered } from '@democracy-deutschland/mobile-ui/src/components/shared
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { styled } from '../../../styles';
+import { MenuButton } from '../../../components/MenuButton';
+import SvgBellSlash from '@democracy-deutschland/mobile-ui/src/components/Icons/BellSlash';
+import SvgBell from '@democracy-deutschland/mobile-ui/src/components/Icons/Bell';
+import {
+  ToggleNotification,
+  ToggleNotificationVariables,
+} from './graphql/muatation/__generated__/ToggleNotification';
+import { TOGGLE_NOTIFICATION } from './graphql/muatation/toggleNotification';
 
 const Container = styled.ScrollView.attrs({
   scrollIndicatorInsets: { right: 1 }, // TODO do cleanfix when there is a correct solution (already closed but not solved without workaround) https://github.com/facebook/react-native/issues/26610
@@ -33,10 +45,10 @@ const Container = styled.ScrollView.attrs({
   background-color: #fff;
 `;
 
-// const HaderRightWrapper = styled.View`
-//   flex-direction: row;
-//   padding-right: 11;
-// `;
+const HaderRightWrapper = styled.View`
+  flex-direction: row;
+  padding-right: 11;
+`;
 
 type ProcedureScreenRouteProp = RouteProp<
   BundestagRootStackParamList,
@@ -53,7 +65,9 @@ type Props = {
   navigation: ScreenNavigationProp;
 };
 
-export const Procedure: FC<Props> = ({ route }) => {
+const ShareComponent = Platform.OS === 'ios' ? ShareIconIos : ShareIcon;
+
+export const Procedure: FC<Props> = ({ route, navigation }) => {
   const { isVerified } = useContext(InitialStateContext);
   const { constituency } = useContext(ConstituencyContext);
   const constituencies = constituency ? [constituency] : [];
@@ -67,21 +81,64 @@ export const Procedure: FC<Props> = ({ route }) => {
     },
   });
 
+  const share = ({
+    type,
+    procedureId,
+    title,
+  }: Pick<Procedure_procedure, 'type' | 'procedureId' | 'title'>) => {
+    const url = `${getShareLink()}/${type.toLowerCase()}/${procedureId}/${speakingurl(
+      title,
+    )}`;
+    const message = Platform.OS === 'ios' ? title : `${title} – ${url}`;
+    Share.share(
+      {
+        message,
+        url,
+        title: 'Weil Deine Stimme Zählt!',
+      },
+      {
+        // Android only:
+        dialogTitle: title,
+      },
+    );
+  };
+
+  const [toggleNotification] = useMutation<
+    ToggleNotification,
+    ToggleNotificationVariables
+  >(TOGGLE_NOTIFICATION, {
+    variables: {
+      procedureId: route.params.procedureId,
+    },
+    refetchQueries: [
+      {
+        query: PROCEDURE,
+        variables: {
+          id: route.params.procedureId,
+        },
+      },
+    ],
+  });
+
   // TODO Actions oben rechts hinzufügen
-  // useEffect(() => {
-  //   navigation.setOptions({
-  //     headerRight: () => (
-  //       <HaderRightWrapper>
-  //         <MenuButton onPress={() => navigation.navigate('Filter')}>
-  //           <Text>Oh</Text>
-  //         </MenuButton>
-  //         <MenuButton onPress={() => navigation.navigate('Search')}>
-  //           <Text>ho</Text>
-  //         </MenuButton>
-  //       </HaderRightWrapper>
-  //     ),
-  //   });
-  // }, [navigation]);
+  useEffect(() => {
+    if (data) {
+      const { notify, type, procedureId, title } = data.procedure;
+      const BellIcon = !notify ? SvgBell : SvgBellSlash;
+      navigation.setOptions({
+        headerRight: () => (
+          <HaderRightWrapper>
+            <MenuButton onPress={() => toggleNotification()}>
+              <BellIcon width={20} height={20} color="#fff" />
+            </MenuButton>
+            <MenuButton onPress={() => share({ type, procedureId, title })}>
+              <ShareComponent width={20} height={20} color="#fff" />
+            </MenuButton>
+          </HaderRightWrapper>
+        ),
+      });
+    }
+  }, [navigation, data, toggleNotification]);
 
   if (loading) {
     return <ListLoading />;
@@ -123,24 +180,6 @@ export const Procedure: FC<Props> = ({ route }) => {
     voted,
     notify,
   } = data.procedure;
-
-  const share = () => {
-    const url = `${getShareLink()}/${type.toLowerCase()}/${procedureId}/${speakingurl(
-      title,
-    )}`;
-    const message = Platform.OS === 'ios' ? title : `${title} – ${url}`;
-    Share.share(
-      {
-        message,
-        url,
-        title: 'Weil Deine Stimme Zählt!',
-      },
-      {
-        // Android only:
-        dialogTitle: title,
-      },
-    );
-  };
 
   return (
     <Container>
@@ -184,7 +223,7 @@ export const Procedure: FC<Props> = ({ route }) => {
         verified={isVerified}
         type={type}
         voted={voted}
-        share={share}
+        share={() => share({ type, procedureId, title })}
         notify={!!notify}
         procedureId={procedureId}
         procedureObjId={_id}
