@@ -52,7 +52,7 @@ const Subline = styled.Text`
 `;
 
 const PaddingRight = styled.View`
-  padding-right: 3;
+  padding-right: 3px;
 `;
 
 export interface Props {
