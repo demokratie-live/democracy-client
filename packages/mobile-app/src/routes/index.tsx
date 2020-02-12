@@ -51,13 +51,14 @@ const App = () => {
   } = useContext(InitialStateContext);
 
   useEffect(() => {
-    const state = getInitialState();
-    // democracy://Sidebar/Bundestag/Procedure?procedureId=230576
-    if (state && state.routes) {
-      setInitialState(state);
-    }
+    getInitialState().then(state => {
+      // democracy://Sidebar/Bundestag/Procedure?procedureId=230576
+      if (state && state.routes) {
+        setInitialState(state);
+      }
 
-    setIsReady(true);
+      setIsReady(true);
+    });
   }, [getInitialState]);
 
   useEffect(() => {
