@@ -24,7 +24,7 @@
     "lint": "yarn workspace @democracy-deutschland/mobile-ui lint && yarn workspace app lint",
     "docz": "docz dev",
     "docz:build": "docz build",
-    "postinstall:android-fix": "replace-in-file \"node ./node_modules/react-native/cli.js config\" \"node ../../node_modules/react-native/cli.js config\" node_modules/@react-native-community/cli-platform-android/native_modules.gradle",
+    "postinstall:android-fix": "npx replace-in-file \"node ./node_modules/react-native/cli.js config\" \"node ../../node_modules/react-native/cli.js config\" node_modules/@react-native-community/cli-platform-android/native_modules.gradle",
     "pods": "yarn workspace app pods && yarn workspace @democracy-deutschland/mobile-ui pods",
     "postinstall": "yarn postinstall:android-fix"
   },
@@ -35,7 +35,6 @@
     "docz": "2.0.0-rc.67",
     "husky": "^4.2.2",
     "lint-staged": "^10.0.7",
-    "replace-in-file": "^5.0.2",
     "typescript": "3.5.2"
   }
 }
