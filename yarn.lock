@@ -2385,10 +2385,10 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/masked-view/-/masked-view-0.1.6.tgz#c7f2ac187c1f25aa8c30d11baa8f4398eca3bb84"
   integrity sha512-PpMoeXwPUoldCRKDuSi+zK5rT+sJTW6ri6RdGPkSKRzU77Q1d9IaR0O5IKvBj0XSdL3p+dcOa05gk35aGDffBQ==
 
-"@react-navigation/core@^5.1.1":
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-5.1.1.tgz#0b2430e0e6c3658b2fb1e9a23e6abb7fd4103a7a"
-  integrity sha512-2/yerej7vjD2IOX8+P45oqkYXW6fhDSTJEdTc6FRsUHVbOH8goiSp9hoMdRRWx1HJIZXF0s4AWL0UDsMdQksIQ==
+"@react-navigation/core@^5.1.2":
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-5.1.2.tgz#1947449cb2f565cde8511ab953bb7170516c3e0f"
+  integrity sha512-0nQ46DTMzj5UjqUcc6g996qMQ2vSRSNgxd9LPlACVYHQRbwG2HHUq//NhfVf06dNpBHkQ0HYUITDHo+tifemjA==
   dependencies:
     "@react-navigation/routers" "^5.0.1"
     escape-string-regexp "^2.0.0"
@@ -2397,27 +2397,27 @@
     shortid "^2.2.15"
     use-subscription "^1.3.0"
 
-"@react-navigation/drawer@^5.0.2":
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/@react-navigation/drawer/-/drawer-5.0.2.tgz#738262d1b3bf2a5bff56f47a5472fa9a31a4c04f"
-  integrity sha512-FimBZPiNmNw3s7fZ7vX+6dzB/5NGpWB5zkL28owVMV3xgesTCS3RTBlTDAvy/hIVOL5EVGbYoqsd1aHcxc/EDQ==
+"@react-navigation/drawer@^5.0.3":
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/@react-navigation/drawer/-/drawer-5.0.3.tgz#cf30389c254d078738ca37dde8021a1bceaf449c"
+  integrity sha512-lNbt2UODJw2Ex8LyqlIvSC6yqs2brDwvidTZGvDlXfZ6vgvWEAXYYGC/6Rsv2pDcGjgEM8MjO2dhJu59PkWgsA==
   dependencies:
     color "^3.1.2"
     react-native-iphone-x-helper "^1.2.1"
 
-"@react-navigation/material-top-tabs@^5.0.2":
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/@react-navigation/material-top-tabs/-/material-top-tabs-5.0.2.tgz#1c49e6930bd7ba49d91020a3fc33ce3c9513dc30"
-  integrity sha512-3SWXd5axdXUnzmsqBVOiaeSQXNLivtw5DxtGnLHDsxnn0A/B49RIZYUtR/vGj7ntkz+pLSgkaunZ0m7FVNLrlw==
+"@react-navigation/material-top-tabs@^5.0.3":
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/@react-navigation/material-top-tabs/-/material-top-tabs-5.0.3.tgz#9e9c676d5fe9f24b53a09948bb948b79aa8dfb62"
+  integrity sha512-M/wSAoU3muX+VazsDYJHb1Y6j9qwlkTBvTjY7rmoL5GZdUlV79x4xMw/x+0HQ0q77oIDs2IqBhre5ot7SPH7wA==
   dependencies:
     color "^3.1.2"
 
-"@react-navigation/native@^5.0.2":
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-5.0.2.tgz#6812fe50b76a39a0a5d02bcdfeed2b573dce3b34"
-  integrity sha512-nav1zgAt4aYDDvVzlrdxrOIpha/KjhJcPu/pKoOqtATinYjpFI/eAu2SnxeM63V98/7fZH5yz7lPDngjJJ8HIg==
+"@react-navigation/native@^5.0.3":
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-5.0.3.tgz#6a16f50c41f62e27dafcff20848222c018a6b033"
+  integrity sha512-caJVWRkpTY6zFkpZvQE1Dg0gTu+a09XnleKaDEV9TOK8AxkBhp+X4GvCP/7sV9Ke8Cw8mvcnh9R1UCKIO4fTCQ==
   dependencies:
-    "@react-navigation/core" "^5.1.1"
+    "@react-navigation/core" "^5.1.2"
 
 "@react-navigation/routers@^5.0.1":
   version "5.0.1"
@@ -2426,10 +2426,10 @@
   dependencies:
     shortid "^2.2.15"
 
-"@react-navigation/stack@^5.0.2":
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/@react-navigation/stack/-/stack-5.0.2.tgz#d7969f5c4932f135db0db923ec4a68abc2297729"
-  integrity sha512-64goRUzZzxJxTvixa/JoVDl+N1s7k5ZL+7bO+rZUAkONqEsxF50pkZvCkhLuUZ+GgLkyZMoWvhhE0EIl3R2aiA==
+"@react-navigation/stack@^5.0.3":
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/@react-navigation/stack/-/stack-5.0.3.tgz#e3d0f27b83a6da50da98846de4cd180647597546"
+  integrity sha512-CAFfURsfY6/zmIQsUunDoiuCrvZLNqUwN5D1usN8I8VFkJg1kKCZbIxaVftAbZiPcfwORarsuWMxqkCVmVvEuA==
   dependencies:
     color "^3.1.2"
     react-native-iphone-x-helper "^1.2.1"
