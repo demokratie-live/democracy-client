@@ -2,6 +2,11 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { linking } from '../../../../../lib/linking';
 import { Contacts } from '../..';
+import PlanetIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Planet';
+import FacebookIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Facebook';
+import TwitterIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Twitter';
+import MailIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Mail';
+import InstagramIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Instagram';
 
 const ContactWrapper = styled.View`
   flex-wrap: wrap;
@@ -19,8 +24,6 @@ const IconWrapper = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
 `;
-
-const ContactIcons = styled.Text``;
 
 const ServiceWrapper = styled.View`
   align-items: center;
@@ -47,7 +50,7 @@ class ContactBox extends React.PureComponent<Props> {
         return (
           <ServiceWrapper key={url}>
             <IconWrapper onPress={linking(email)}>
-              <ContactIcons>E-Mail ICON</ContactIcons>
+              <MailIcon width={40} height={40} color="#000" />
             </IconWrapper>
           </ServiceWrapper>
         );
@@ -55,14 +58,28 @@ class ContactBox extends React.PureComponent<Props> {
 
       case 'facebook':
       case 'Facebook':
+        return (
+          <ServiceWrapper key={url}>
+            <IconWrapper onPress={linking(url)}>
+              <FacebookIcon width={40} height={40} color="#000" />
+            </IconWrapper>
+          </ServiceWrapper>
+        );
       case 'twitter':
       case 'Twitter':
+        return (
+          <ServiceWrapper key={url}>
+            <IconWrapper onPress={linking(url)}>
+              <TwitterIcon width={40} height={40} color="#000" />
+            </IconWrapper>
+          </ServiceWrapper>
+        );
       case 'instagram':
       case 'Instagram':
         return (
           <ServiceWrapper key={url}>
             <IconWrapper onPress={linking(url)}>
-              <ContactIcons>{name.toLowerCase()} ICON</ContactIcons>
+              <InstagramIcon width={40} height={40} color="#000" />
             </IconWrapper>
           </ServiceWrapper>
         );
@@ -71,7 +88,7 @@ class ContactBox extends React.PureComponent<Props> {
         return (
           <ServiceWrapper key={url}>
             <IconWrapper onPress={linking(url)}>
-              <ContactIcons>GLOBUS ICON</ContactIcons>
+              <PlanetIcon width={40} height={40} color="#000" />
             </IconWrapper>
             <Domain>{name}</Domain>
           </ServiceWrapper>
