@@ -70,7 +70,6 @@ export const Procedure: FC<Props> = ({ route }) => {
     title,
     voteDate,
     voteEnd,
-    sessionTOPHeading,
     procedureId,
     type,
     subjectGroups,
@@ -105,14 +104,7 @@ export const Procedure: FC<Props> = ({ route }) => {
 
   return (
     <Container>
-      <Intro
-        title={title}
-        date={voteDate}
-        endDate={voteEnd}
-        topHeading={sessionTOPHeading}
-        procedureId={procedureId}
-        type={type || ''} // TODO fix GraphQL TypeScript Safety
-      />
+      <Intro {...data.procedure} />
       <Folding title="Details" opened>
         <Details
           subjectGroups={subjectGroups}

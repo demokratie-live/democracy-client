@@ -89,7 +89,6 @@ export const NotificationsProvider: React.FC = ({ children }) => {
     console.log('REGISTER');
     Notifications.isRegisteredForRemoteNotifications().then(value => {
       setHasPermissions(value);
-      console.log('setHasPermissions', value);
     });
 
     Notifications.events().registerRemoteNotificationsRegistered(

@@ -24,6 +24,7 @@ const MainWrapper = styled.View`
 const SideWrapper = styled.View`
   align-items: flex-end;
   min-width: 50;
+  justify-content: space-between;
 `;
 
 const VotesIndex = styled(VotesIndexCmp)``;
@@ -39,7 +40,7 @@ const VoteDate = styled(VoteDateCmp)`
   padding-top: 18;
 `;
 
-const Title = styled.Text.attrs(() => ({ numberOfLines: 3 }))`
+const Title = styled.Text`
   font-size: 17;
   color: #030303;
 `;
@@ -56,6 +57,7 @@ const PaddingRight = styled.View`
 
 export interface Props {
   title: string;
+  isIntro?: boolean;
   subline?: string | null;
   voted: boolean;
   votes: number;
@@ -70,6 +72,7 @@ export interface Props {
 
 const ListItem: React.FC<Props> = ({
   title,
+  isIntro,
   subline,
   voteDate,
   endDate,
@@ -93,10 +96,11 @@ const ListItem: React.FC<Props> = ({
     /> */}
       <MainWrapper>
         <Title
-        // TODO title length function
-        // onTextLayout={({ nativeEvent: { lines } }) =>
-        //   setTitleLines(lines.length)
-        // }
+          numberOfLines={isIntro ? undefined : 3}
+          // TODO title length function
+          // onTextLayout={({ nativeEvent: { lines } }) =>
+          //   setTitleLines(lines.length)
+          // }
         >
           {title}
         </Title>
@@ -104,7 +108,7 @@ const ListItem: React.FC<Props> = ({
           <Subline
             // TODO title length function
             // numberOfLines={titleLines > 2 ? 1 : 2}
-            numberOfLines={2}>
+            numberOfLines={isIntro ? undefined : 2}>
             {subline}
           </Subline>
         )}
