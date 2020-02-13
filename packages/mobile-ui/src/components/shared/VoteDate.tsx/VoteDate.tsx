@@ -20,7 +20,6 @@ const DateText = styled.Text<Pick<Props, 'date'> & { running: boolean }>`
     return 'red';
   }};
   font-size: 12;
-  font-weight: ${soon => (soon ? 'bold' : 'normal')};
 `;
 
 const formatDate = ({ date, endDate, long }: Props) => {
