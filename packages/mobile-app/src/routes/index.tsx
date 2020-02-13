@@ -19,7 +19,7 @@ import { theme } from '../styles';
 export type RootStackParamList = {
   Sidebar: undefined;
   Home: {};
-  Introduction: { done?: () => void; lastStartWithVersion?: string };
+  Introduction: { done?: string; lastStartWithVersion?: string };
   Verification: {};
   Pdf: { url: string; title: string };
   Constituency: undefined;
@@ -40,7 +40,9 @@ const App = () => {
     },
   });
 
-  const [isReady, setIsReady] = React.useState(false);
+  const [isInitialReady, setIsInitialReady] = React.useState(false);
+  const [isPushReady, setIsPushReady] = React.useState(false);
+  const [isIntroductionReady, setIsIntroductionReady] = React.useState(false);
   const [initialState, setInitialState] = React.useState<InitialState>();
 
   const [currentVersion, setCurrentVersion] = useState();
@@ -57,7 +59,7 @@ const App = () => {
         setInitialState(state);
       }
 
-      setIsReady(true);
+      setIsInitialReady(true);
     });
   }, [getInitialState]);
 
@@ -80,12 +82,15 @@ const App = () => {
           {
             name: 'Introduction',
             params: {
-              done: () => setLastStartWithVersion(currentVersion),
+              done: 'SET_LAST_START_VERSION',
               lastStartWithVersion,
             },
           },
         ],
       });
+    }
+    if (lastStartWithVersion !== undefined && currentVersion !== undefined) {
+      setIsIntroductionReady(true);
     }
   }, [currentVersion, lastStartWithVersion, setLastStartWithVersion]);
 
@@ -99,13 +104,16 @@ const App = () => {
         }),
       );
     }
+    setIsPushReady(true);
   }, [initialNotification]);
 
   if (
     lastStartWithVersion === undefined ||
     currentVersion === undefined ||
     initialNotification === undefined ||
-    !isReady
+    !isInitialReady ||
+    !isPushReady ||
+    !isIntroductionReady
   ) {
     return null;
   }

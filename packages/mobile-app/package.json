@@ -98,7 +98,7 @@
     "@typescript-eslint/parser": "^2.19.2",
     "babel-jest": "24.9.0",
     "cross-env": "^7.0.0",
-    "detox": "^14.9.2",
+    "detox": "^15.2.1",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-better-styled-components": "^1.1.2",
@@ -127,12 +127,12 @@
     "configurations": {
       "ios.sim.debug": {
         "type": "ios.simulator",
-        "binaryPath": "ios/build/client/Build/Products/Debug-iphonesimulator/DEMOCRACY.app",
+        "binaryPath": "ios/build/Refactor/Build/Products/Refactor.Debug-iphonesimulator/DEMOCRACY.app",
+        "build": "xcodebuild -workspace ios/client.xcworkspace -scheme Refactor -configuration Refactor.Debug -sdk iphonesimulator -derivedDataPath ios/build",
         "device": {
           "type": "iPhone 11",
           "os": "13.3"
-        },
-        "build": "xcodebuild -workspace ios/client.xcworkspace -configuration Debug -scheme client -derivedDataPath build/client"
+        }
       },
       "android.emu.debug": {
         "binaryPath": "android/app/build/outputs/apk/debug/app-debug.apk",

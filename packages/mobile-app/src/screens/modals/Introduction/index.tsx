@@ -10,6 +10,7 @@ import { slidesData } from '@democracy-deutschland/mobile-ui/src/components/Intr
 import { Pager } from '@democracy-deutschland/mobile-ui/src/components/Pager';
 import { getSlides } from './utils/getSlides';
 import { InitialStateContext } from '../../../context/InitialStates';
+import { getVersion } from 'react-native-device-info';
 
 const SafeAreaView = styled.SafeAreaView`
   flex: 1;
@@ -27,7 +28,9 @@ type Props = {
 
 const Introduction: FC<Props> = ({ route }) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
-  const { isVerified } = useContext(InitialStateContext);
+  const { isVerified, setLastStartWithVersion } = useContext(
+    InitialStateContext,
+  );
   const [wasVerified] = useState(isVerified);
   const { lastStartWithVersion, done } = route.params;
 
@@ -39,15 +42,15 @@ const Introduction: FC<Props> = ({ route }) => {
   }, [isVerified, wasVerified, navigation]);
 
   const finishAction = () => {
-    if (done) {
-      done();
+    if (done === 'SET_LAST_START_VERSION') {
+      setLastStartWithVersion(getVersion());
     }
     navigation.goBack();
   };
 
   const verifyAction = () => {
-    if (done) {
-      done();
+    if (done === 'SET_LAST_START_VERSION') {
+      setLastStartWithVersion(getVersion());
     }
     navigation.push('Verification');
   };

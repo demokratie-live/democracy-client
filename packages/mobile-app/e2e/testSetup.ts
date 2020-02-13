@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+/* eslint-disable jest/no-jasmine-globals */
 import { cleanup, init, device } from 'detox';
 import adapter from 'detox/runners/jest/adapter';
 // const specReporter = require('detox/runners/jest/specReporter');

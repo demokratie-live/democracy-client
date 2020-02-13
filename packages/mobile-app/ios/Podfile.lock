@@ -261,6 +261,7 @@ PODS:
   - Sentry (4.4.3):
     - Sentry/Core (= 4.4.3)
   - Sentry/Core (4.4.3)
+  - SocketRocket (0.5.1)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -311,6 +312,7 @@ DEPENDENCIES:
   - "RNSentry (from `../../../node_modules/@sentry/react-native`)"
   - RNSha256 (from `../../../node_modules/react-native-sha256`)
   - RNSVG (from `../../../node_modules/react-native-svg`)
+  - SocketRocket (from `../node_modules/detox/ios_src/SocketRocket`)
   - Yoga (from `../../../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -407,6 +409,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native-sha256"
   RNSVG:
     :path: "../../../node_modules/react-native-svg"
+  SocketRocket:
+    :path: "../node_modules/detox/ios_src/SocketRocket"
   Yoga:
     :path: "../../../node_modules/react-native/ReactCommon/yoga"
 
@@ -457,6 +461,7 @@ SPEC CHECKSUMS:
   RNSha256: c6f68c850bf8315c95e2508667e8c908bd9f8487
   RNSVG: 67f1f12dae2cef6ed59a42cae74a6b8f5a9e7b46
   Sentry: 14bdd673870e8cf64932b149fad5bbbf39a9b390
+  SocketRocket: dbb1554b8fc288ef8ef370d6285aeca7361be31e
   Yoga: ba3d99dbee6c15ea6bbe3783d1f0cb1ffb79af0f
 
 PODFILE CHECKSUM: 4e39ccaeb5dbb06c375a8633797aebefee6d8a63
