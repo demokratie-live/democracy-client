@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
-import styled from 'styled-components/native';
-import { Alert, Platform, Text, FlatList } from 'react-native';
+import { Alert, Platform, FlatList } from 'react-native';
 
 import SearchIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Lens';
 // constituencies plz list
@@ -8,15 +7,16 @@ import constituenciesList from './constituencies-list.json';
 import constituencies from '../../Bundestag/Procedure/components/svgs/constituencies';
 import { Constituency } from './constituencyData';
 import { ConstituencyContext } from '../../../context/Constituency';
+import { styled } from '../../../styles/index';
 
 const Wrapper = styled.View`
   flex: 1;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.colors.background.main};
 `;
 
 const SearchBox = styled.View`
   height: 44;
-  background-color: #4494d3;
+  background-color: ${({ theme }) => theme.colors.background.header};
 `;
 
 const SearchInputWrapper = styled.View`
@@ -90,6 +90,12 @@ const RowTextWrapper = styled.View`
   padding-left: 12;
 `;
 
+const Checkmark = styled.Text`
+  color: #16c063;
+  font-size: 18;
+  font-weight: bold;
+  margin-left: 8;
+`;
 export const ConstituencyScreen = () => {
   const { constituency, setConstituency } = useContext(ConstituencyContext);
   const [term, setTerm] = useState('');
@@ -181,7 +187,6 @@ export const ConstituencyScreen = () => {
               <Row onPress={selectConstituency(item)}>
                 <>
                   {getConstituency(item.number)}
-                  {item.selected && <Text>🌼</Text>}
                   <RowTextWrapper>
                     <Title>{item.name}</Title>
                     <Plz>
@@ -189,6 +194,7 @@ export const ConstituencyScreen = () => {
                       {getPlz(item)}
                     </Plz>
                   </RowTextWrapper>
+                  {item.selected && <Checkmark>{'\u2713'}</Checkmark>}
                 </>
               </Row>
             );

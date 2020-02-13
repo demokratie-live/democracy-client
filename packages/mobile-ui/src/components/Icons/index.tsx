@@ -24,6 +24,7 @@ export { default as House } from './House';
 export { default as Image } from './Image';
 export { default as IncreaseArrow } from './IncreaseArrow';
 export { default as Info } from './Info';
+export { default as Instagram } from './Instagram';
 export { default as Lamp } from './Lamp';
 export { default as Lens } from './Lens';
 export { default as Locate } from './Locate';

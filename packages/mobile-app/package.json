@@ -20,7 +20,7 @@
     "lint:eslint": "eslint 'src/**/*.{ts,tsx,js,jsx}' --fix",
     "lint:ts": "tsc -p tsconfig.json --noEmit",
     "lint": " yarn lint:ts && yarn lint:eslint",
-    "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx}' && yarn lint:eslint --fix",
+    "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx}'",
     "format:check": "prettier -c 'src/**/*.{ts,tsx,js,jsx}'",
     "pods": "cd ios && pod install && cd .."
   },
@@ -49,6 +49,7 @@
     "jwt-decode": "^2.2.0",
     "lodash.debounce": "^4.0.8",
     "lodash.unionby": "^4.8.0",
+    "proxy-polyfill": "^0.3.0",
     "react": "16.9.0",
     "react-native": "0.61.4",
     "react-native-config": "^0.12.0",

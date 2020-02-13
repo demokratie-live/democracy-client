@@ -14,7 +14,6 @@ import { useNavigation, useRoute, RouteProp } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
 import { TopTabParamList } from '../../../routes/Sidebar/Bundestag/TabView';
-import styled from 'styled-components/native';
 import { Segment } from './Components/Segment';
 import { ListType } from '../../../../__generated__/globalTypes';
 import { LocalVotesContext } from '../../../context/LocalVotes';
@@ -23,6 +22,7 @@ import { pieChartGovernmentData } from '../../../lib/helper/PieChartGovernmentDa
 import { ListFilterContext } from '../../../context/ListFilter';
 import { NoConferenceWeekData } from './NoConferenceWeekData';
 import { ConstituencyContext } from '../../../context/Constituency';
+import { styled } from '../../../styles';
 
 type ListScreenRouteProp = RouteProp<
   TopTabParamList,
@@ -36,7 +36,7 @@ export interface SegmentedData {
 
 const Container = styled.View`
   flex: 1;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.colors.background.main};
 `;
 
 export const List = () => {

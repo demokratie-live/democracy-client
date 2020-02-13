@@ -69,6 +69,9 @@ const TabViewNavigation: React.FC<Props> = ({ navigation }) => {
         name="Sitzungswoche"
         component={List}
         initialParams={{ list: ListType.CONFERENCEWEEKS_PLANNED }}
+        options={{
+          title: 'Sitzungs\u200Bwoche',
+        }}
       />
       <TabNavigation.Screen
         name="Vergangen"
