@@ -50,6 +50,14 @@ const HaderRightWrapper = styled.View`
   padding-right: 11;
 `;
 
+const DetailsContainer = styled.View`
+  padding-horizontal: 8;
+  margin-top: 18;
+  padding-top: 11;
+  border-top-width: 1;
+  border-color: rgba(68, 148, 211, 0.1);
+`;
+
 type ProcedureScreenRouteProp = RouteProp<
   BundestagRootStackParamList,
   'Procedure'
@@ -184,7 +192,7 @@ export const Procedure: FC<Props> = ({ route, navigation }) => {
   return (
     <Container>
       <Intro {...data.procedure} />
-      <Folding title="Details" opened>
+      <DetailsContainer>
         <Details
           subjectGroups={subjectGroups}
           submissionDate={submissionDate}
@@ -194,7 +202,7 @@ export const Procedure: FC<Props> = ({ route, navigation }) => {
           currentStatus={currentStatus}
           type={type}
         />
-      </Folding>
+      </DetailsContainer>
       <Folding title="Dokumente">
         <Documents documents={importantDocuments} />
       </Folding>
