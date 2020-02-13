@@ -4,7 +4,6 @@ import { Alert, Platform } from 'react-native';
 
 import Description from './Components/Description';
 import PhonenumberInput from './Components/PhonenumberInput';
-import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
 
 import REQUEST_CODE from './graphql/mutation/requestCode';
 import { useMutation } from '@apollo/react-hooks';
@@ -16,6 +15,8 @@ import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { VerificationRootStackParamList } from '../../../routes/Verification';
 import { VerificationContext } from '../../../context/Verification';
+import { ButtonNext } from './Start';
+import SvgDemocracyBubble from '@democracy-deutschland/mobile-ui/src/components/Icons/DemocracyBubble';
 
 const Container = styled.KeyboardAvoidingView.attrs(() => ({
   behavior: Platform.OS === 'ios' ? 'padding' : undefined,
@@ -101,12 +102,14 @@ export const PhoneNumber: React.FC = () => {
   return (
     <Container>
       <ScrollView>
+        <SvgDemocracyBubble width="125" height="125" color="#000" />
         <Description text="Bitte gib Deine aktuelle Handynummer ein" />
         <PhonenumberInput
           phoneNumber={phoneNumberInputValue}
           onChange={setPhoneNumberInputValue}
         />
-        <Button
+        <ButtonNext
+          style={{ alignSelf: 'stretch' }}
           text="CODE ANFORDERN"
           onPress={sendNumber}
           disabled={phoneNumberInputValue.length < 10}

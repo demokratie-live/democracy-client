@@ -22,10 +22,11 @@ import {
 import { useNavigation, CompositeNavigationProp } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { VerificationRootStackParamList } from '../../../routes/Verification';
-import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
 import { RootStackParamList } from '../../../routes';
 import Me from '../../../context/InitialStates/graphql/query/Me';
 import { VerificationContext } from '../../../context/Verification';
+import { ButtonNext } from './Start';
+import SvgDemocracyBubble from '@democracy-deutschland/mobile-ui/src/components/Icons/DemocracyBubble';
 
 const Container = styled.KeyboardAvoidingView.attrs(() => ({
   behavior: Platform.OS === 'ios' ? 'padding' : undefined,
@@ -136,9 +137,11 @@ export const Code: React.FC = () => {
   return (
     <Container>
       <ScrollView keyboardShouldPersistTaps="always">
+        <SvgDemocracyBubble width="125" height="125" color="#000" />
         <Description text={`Bitte gib Deinen Code ein für\n${phoneNumber}`} />
         <CodeInput onChange={onChangeCode} code={code} />
-        <Button
+        <ButtonNext
+          style={{ alignSelf: 'stretch' }}
           text={buttonTitle}
           onPress={sendNumber}
           disabled={countdown === undefined || countdown > 0}

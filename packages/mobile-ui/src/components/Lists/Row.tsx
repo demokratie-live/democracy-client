@@ -5,8 +5,7 @@ const RowWrapper = styled.TouchableHighlight.attrs({
   underlayColor: 'rgba(68, 148, 211, 0.1)',
 })`
   padding-vertical: 14;
-  padding-left: 8;
-  padding-right: 14;
+  padding-horizontal: 18;
   border-bottom-color: #c8c7cc;
   border-bottom-width: 1;
 `;

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Svg, SvgProps, Defs, Path, G, Mask, Use } from 'react-native-svg';
+import { Svg, SvgProps, Defs, Path, Use } from 'react-native-svg';
 
 const SvgChat = (props: SvgProps) => (
   <Svg width="1em" height="1em" viewBox="0 0 1024 1024" {...props}>
@@ -9,12 +9,7 @@ const SvgChat = (props: SvgProps) => (
         id="chat_svg__a"
       />
     </Defs>
-    <G fill="none" fillRule="evenodd">
-      <Mask id="chat_svg__b" fill="#fff">
-        <Use xlinkHref="#chat_svg__a" />
-      </Mask>
-      <Use fill={props.color} fillRule="nonzero" xlinkHref="#chat_svg__a" />
-    </G>
+    <Use fill={props.color} fillRule="nonzero" xlinkHref="#chat_svg__a" />
   </Svg>
 );
 

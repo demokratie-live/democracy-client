@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Svg, SvgProps, Defs, Path, G, Mask, Use } from 'react-native-svg';
+import { Svg, SvgProps, Defs, Path, Use } from 'react-native-svg';
 
 const SvgCalculator = (props: SvgProps) => (
   <Svg width="1em" height="1em" viewBox="0 0 1024 1024" {...props}>
@@ -9,16 +9,7 @@ const SvgCalculator = (props: SvgProps) => (
         id="calculator_svg__a"
       />
     </Defs>
-    <G fill="none" fillRule="evenodd">
-      <Mask id="calculator_svg__b" fill="#fff">
-        <Use xlinkHref="#calculator_svg__a" />
-      </Mask>
-      <Use
-        fill={props.color}
-        fillRule="nonzero"
-        xlinkHref="#calculator_svg__a"
-      />
-    </G>
+    <Use fill={props.color} fillRule="nonzero" xlinkHref="#calculator_svg__a" />
   </Svg>
 );
 

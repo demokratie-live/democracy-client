@@ -31,10 +31,8 @@ const Container = styled.View`
 `;
 
 const ListRowMain = styled.View`
-  /* padding-right: 18; */
-  padding-vertical: 4;
+  padding-top: 4;
   justify-content: center;
-  /* background-color: #ff000055; */
 `;
 
 const ListRowSub = styled.View`
@@ -171,6 +169,7 @@ export const Filter: React.FC<Props> = ({ navigation }) => {
   return (
     <Container>
       <SectionList<FilterEntry>
+        scrollIndicatorInsets={{ right: 1 }}
         stickySectionHeadersEnabled={false}
         sections={data}
         renderSectionHeader={({ section: { title, name } }) => {

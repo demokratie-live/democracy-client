@@ -7,9 +7,8 @@ import { VerificationStart } from '../../screens/modals/Verification/Start';
 import { PhoneNumber } from '../../screens/modals/Verification/PhoneNumber';
 import { Code } from '../../screens/modals/Verification/Code';
 import { useNavigation } from '@react-navigation/core';
-import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
 import { VerificationProvider } from '../../context/Verification';
-import { theme } from '../../styles';
+import { theme, styled } from '../../styles';
 import { RootStackParamList } from '..';
 
 export type VerificationRootStackParamList = {
@@ -26,6 +25,16 @@ type VerificationNavigationProps = StackNavigationProp<
   RootStackParamList,
   'Verification'
 >;
+
+const HeaderButton = styled.TouchableOpacity`
+  margin-left: ${({ theme: t }) => t.distances.secondary};
+`;
+
+const HeaderButtonText = styled.Text`
+  color: #fff;
+  font-size: 16;
+  font-weight: 500;
+`;
 
 const VerificationRootNavigation = () => {
   const navigation = useNavigation<VerificationNavigationProps>();
@@ -44,14 +53,12 @@ const VerificationRootNavigation = () => {
         name="Start"
         component={VerificationStart}
         options={{
-          headerTitle: 'VERIFIZIEREN',
+          headerTitle: 'Verifizieren',
           headerLeft: () => {
             return (
-              <Button
-                onPress={navigation.goBack}
-                text="Später"
-                textColor="white"
-              />
+              <HeaderButton onPress={navigation.goBack}>
+                <HeaderButtonText>Später</HeaderButtonText>
+              </HeaderButton>
             );
           },
         }}
@@ -60,7 +67,7 @@ const VerificationRootNavigation = () => {
         name="PhoneNumberInput"
         component={PhoneNumber}
         options={{
-          headerTitle: 'VERIFIZIEREN',
+          headerTitle: 'Verifizieren',
           headerBackTitle: 'Zurück',
         }}
       />
@@ -68,7 +75,7 @@ const VerificationRootNavigation = () => {
         name="SmsCodeInput"
         component={Code}
         options={{
-          headerTitle: 'VERIFIZIEREN',
+          headerTitle: 'Verifizieren',
           headerBackTitle: 'Zurück',
         }}
       />

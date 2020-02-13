@@ -5,6 +5,7 @@ const Box = styled.View`
   width: 100%;
   border-radius: 6;
   border-color: #ced1d2;
+  /* padding-top: 18; */
 `;
 
 const Text = styled.Text`
