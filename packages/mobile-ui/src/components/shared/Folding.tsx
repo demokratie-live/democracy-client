@@ -40,7 +40,7 @@ const Divider = styled.View`
 `;
 
 const Content = styled.View`
-  padding-horizontal: 8;
+  padding-horizontal: 18;
   padding-vertical: 8;
 `;
 

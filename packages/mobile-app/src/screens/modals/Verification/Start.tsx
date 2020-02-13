@@ -5,7 +5,7 @@ import Description from './Components/Description';
 import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Folding';
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
 
-import DemocracyTextLogo from '@democracy-deutschland/mobile-ui/src/components/Icons/DemocracyTextLogo';
+import DemocracyBubble from '@democracy-deutschland/mobile-ui/src/components/Icons/DemocracyBubble';
 import { Centered } from '@democracy-deutschland/mobile-ui/src/components/shared/Centered';
 import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -15,8 +15,7 @@ import { linking } from '../../../lib/linking';
 
 const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: {
-    paddingHorizontal: 11,
-    paddingVertical: 11,
+    paddingVertical: 18,
   },
 }))`
   background-color: #fff;
@@ -34,6 +33,14 @@ const TextLink = styled.Text`
   text-decoration: underline;
 `;
 
+export const Space = styled.View`
+  padding-top: 18;
+`;
+
+export const ButtonNext = styled(Button)`
+  margin-horizontal: 18;
+`;
+
 export const VerificationStart: React.FC = () => {
   const navigation = useNavigation<
     StackNavigationProp<VerificationRootStackParamList>
@@ -43,8 +50,9 @@ export const VerificationStart: React.FC = () => {
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic">
       <Centered>
-        <DemocracyTextLogo width="274" height="48" color="#000" />
+        <DemocracyBubble width="125" height="125" color="#000" />
       </Centered>
+      <Space />
       <Description
         text={
           'Selbst Abstimmen und Ergebnisse vergleichen kannst Du in DEMOCRACY nur mit einer verifizierten Handynummer.\n\nAktiviere die Verifizierung, indem Du in zwei Schritten einen Zugangscode an Deine Handynummer anforderst.'
@@ -97,7 +105,7 @@ Zu unserer `}
         </Text>
       </Folding>
       {authCodeExpires && (
-        <Button
+        <ButtonNext
           onPress={() => navigation.push('SmsCodeInput')}
           text="CODE EINGEBEN"
           textColor="white"
@@ -105,7 +113,7 @@ Zu unserer `}
         />
       )}
 
-      <Button
+      <ButtonNext
         onPress={() => navigation.push('PhoneNumberInput')}
         text={`${
           authCodeExpires

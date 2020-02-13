@@ -12,6 +12,7 @@ export { default as Calculator } from './Calculator';
 export { default as Camera } from './Camera';
 export { default as Chat } from './Chat';
 export { default as Checkmark } from './Checkmark';
+export { default as DemocracyBubble } from './DemocracyBubble';
 export { default as Document } from './Document';
 export { default as Download } from './Download';
 export { default as Europe } from './Europe';

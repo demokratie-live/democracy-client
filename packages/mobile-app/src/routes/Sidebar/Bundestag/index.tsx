@@ -57,7 +57,7 @@ const BundestagRootNavigation = () => {
           name="TabView"
           component={TabView}
           options={{
-            title: 'BUNDESTAG',
+            title: 'Bundestag',
             headerLeft: () => (
               <BurgerMenuButton onPress={navigation.toggleDrawer}>
                 <MenuIcon width={18} height={18} color="#fff" />

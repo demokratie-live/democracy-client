@@ -53,7 +53,7 @@ const HaderRightWrapper = styled.View`
 const DetailsContainer = styled.View`
   padding-horizontal: 8;
   margin-top: 18;
-  padding-top: 11;
+  padding-vertical: 11;
   border-top-width: 1;
   border-color: rgba(68, 148, 211, 0.1);
 `;

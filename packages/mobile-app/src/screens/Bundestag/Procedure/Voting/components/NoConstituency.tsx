@@ -4,13 +4,13 @@ import styled from 'styled-components/native';
 // components
 import Constituency from './Constituency';
 import PieChart from '../../components/Charts/PieChart';
-import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
 import { RootStackParamList } from '../../../../../routes';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { ButtonNext, Space } from '../../../../modals/Verification/Start';
 
 const Wrapper = styled.View<Pick<Props, 'noButton'>>`
   align-items: center;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   min-height: ${({ noButton }) => (noButton ? 200 : 300)};
   flex: 1;
 `;
@@ -66,19 +66,23 @@ class VoteVarificationNoConstituency extends PureComponent<Props> {
 
     return (
       <Wrapper noButton={noButton}>
+        <Space />
         <ImageWrapper>
           <Constituency width={249} height={155} />
           <PieChartWrapper>
             <PieChart data={pieChartData} showPercentage={false} />
           </PieChartWrapper>
         </ImageWrapper>
+        <Space />
         <Text>
           Ab sofort können mit DEMOCRACY auch{' '}
           <TextBold>Wahlkreis-Community-Ergebnisse</TextBold> ermittelt werden.
           Mach mit und inspiriere Deinen Abgeordneten noch direkter!
         </Text>
+        <Space />
         {!noButton && (
-          <Button
+          <ButtonNext
+            style={{ alignSelf: 'stretch' }}
             text={'Wahlkreis einstellen'.toUpperCase()}
             textColor="white"
             backgroundColor="blue"
