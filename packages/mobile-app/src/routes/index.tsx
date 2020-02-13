@@ -58,7 +58,18 @@ const App = () => {
   }
 
   return (
-    <NavigationNativeContainer initialState={initialState}>
+    <NavigationNativeContainer
+      initialState={initialState}
+      theme={{
+        colors: {
+          background: '#fff',
+          primary: '#fff',
+          text: '#fff',
+          border: '#fff',
+          card: '#fff',
+        },
+        dark: false,
+      }}>
       <RootStack.Navigator
         mode="modal"
         screenOptions={{
