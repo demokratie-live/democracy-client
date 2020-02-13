@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-export default gql`
+export const PROCEDURES_BY_HAVING_VOTE_RESULTS = gql`
   query proceduresByIdHavingVoteResults(
     $procedureIds: [String!]
     $pageSize: Int
