@@ -12,7 +12,6 @@
                 <use xlink:href="#path-1"></use>
             </mask>
             <use id="use-as-wallpaper" fill="#000000" xlink:href="#path-1"></use>
-            <g id="null-mask" mask="url(#mask-2)"></g>
         </g>
     </g>
 </svg>

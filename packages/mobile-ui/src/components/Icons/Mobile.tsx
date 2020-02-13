@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Svg, SvgProps, Defs, Path, G, Mask, Use } from 'react-native-svg';
+import { Svg, SvgProps, Defs, Path, Use } from 'react-native-svg';
 
 const SvgMobile = (props: SvgProps) => (
   <Svg width="1em" height="1em" viewBox="0 0 1024 1024" {...props}>
@@ -9,12 +9,7 @@ const SvgMobile = (props: SvgProps) => (
         id="mobile_svg__a"
       />
     </Defs>
-    <G fill="none" fillRule="evenodd">
-      <Mask id="mobile_svg__b" fill="#fff">
-        <Use xlinkHref="#mobile_svg__a" />
-      </Mask>
-      <Use fill={props.color} xlinkHref="#mobile_svg__a" />
-    </G>
+    <Use fill={props.color} xlinkHref="#mobile_svg__a" fillRule="evenodd" />
   </Svg>
 );
 

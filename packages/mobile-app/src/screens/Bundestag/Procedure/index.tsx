@@ -4,7 +4,7 @@ import { RouteProp } from '@react-navigation/core';
 import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
 
 import ShareIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Share';
-import ShareIconIos from '@democracy-deutschland/mobile-ui/src/components/Icons/ShareIos';
+import ShareIconIosHeader from '@democracy-deutschland/mobile-ui/src/components/Icons/ShareIosHeader';
 
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Folding';
@@ -31,8 +31,8 @@ import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { styled } from '../../../styles';
 import { MenuButton } from '../../../components/MenuButton';
-import SvgBellSlash from '@democracy-deutschland/mobile-ui/src/components/Icons/BellSlash';
-import SvgBell from '@democracy-deutschland/mobile-ui/src/components/Icons/Bell';
+import SvgBellFilledHeader from '@democracy-deutschland/mobile-ui/src/components/Icons/BellFilledHeader';
+import SvgBellHeader from '@democracy-deutschland/mobile-ui/src/components/Icons/BellHeader';
 import {
   ToggleNotification,
   ToggleNotificationVariables,
@@ -73,7 +73,7 @@ type Props = {
   navigation: ScreenNavigationProp;
 };
 
-const ShareComponent = Platform.OS === 'ios' ? ShareIconIos : ShareIcon;
+const ShareComponent = Platform.OS === 'ios' ? ShareIconIosHeader : ShareIcon;
 
 export const Procedure: FC<Props> = ({ route, navigation }) => {
   const { isVerified } = useContext(InitialStateContext);
@@ -132,7 +132,7 @@ export const Procedure: FC<Props> = ({ route, navigation }) => {
   useEffect(() => {
     if (data) {
       const { notify, type, procedureId, title } = data.procedure;
-      const BellIcon = !notify ? SvgBell : SvgBellSlash;
+      const BellIcon = !notify ? SvgBellHeader : SvgBellFilledHeader;
       navigation.setOptions({
         headerRight: () => (
           <HaderRightWrapper>
