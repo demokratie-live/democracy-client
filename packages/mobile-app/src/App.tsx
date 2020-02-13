@@ -1,4 +1,6 @@
 // import './lib/sentry';
+import 'proxy-polyfill';
+import './lib/polyfills/string.polyfill.js';
 import React from 'react';
 import { enableScreens } from 'react-native-screens';
 enableScreens();
@@ -9,6 +11,7 @@ import { Apollo } from './lib/Apollo';
 import { ListFilterProvider } from './context/ListFilter';
 import { ConstituencyProvider } from './context/Constituency';
 import { NotificationsProvider } from './context/Notifications';
+import { theme, ThemeProvider } from './styles';
 
 export default () => (
   <Apollo>
@@ -17,7 +20,9 @@ export default () => (
         <ListFilterProvider>
           <ConstituencyProvider>
             <NotificationsProvider>
-              <Navigation />
+              <ThemeProvider theme={theme}>
+                <Navigation />
+              </ThemeProvider>
             </NotificationsProvider>
           </ConstituencyProvider>
         </ListFilterProvider>

@@ -1,12 +1,13 @@
 import gql from 'graphql-tag';
 
-export const procedures = gql`
+export const PROCEDURES_LIST = gql`
   query ProceduresList(
     $offset: Int
     $pageSize: Int
     $listTypes: [ListType!]
     $sort: String
     $filter: ProcedureFilter
+    $constituencies: [String!]
   ) {
     procedures(
       offset: $offset
@@ -37,7 +38,7 @@ export const procedures = gql`
         no
         governmentDecision
       }
-      communityVotes {
+      communityVotes(constituencies: $constituencies) {
         yes
         abstination
         no

@@ -8,10 +8,11 @@ import {
   FinishSearchVariables,
 } from './graphql/mutation/__generated__/FinishSearch';
 import debounce from 'lodash.debounce';
-import styled from 'styled-components/native';
+import { Platform } from 'react-native';
+import { styled } from '../../../styles';
 
 const Wrapper = styled.View`
-  background-color: #4494d3;
+  background-color: ${({ theme }) => theme.colors.background.header};
 `;
 
 export const SearchHeader: React.FC = () => {
@@ -31,7 +32,10 @@ export const SearchHeader: React.FC = () => {
   };
 
   // throttle to handle android enles changeing error
-  const onChangeText = debounce((text: string) => setTerm(text), 300);
+  const onChangeText =
+    Platform.OS === 'ios'
+      ? setTerm
+      : debounce((text: string) => setTerm(text), 300);
 
   return (
     <Wrapper>

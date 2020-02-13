@@ -13,6 +13,7 @@ import WahlOMeter from '../../../screens/WahlOMeter';
 import { Procedure, VoteVerification } from '../../../screens/Bundestag';
 import { VoteSelection } from '../../../../__generated__/globalTypes';
 import { MemberProfil } from '../../../screens/WahlOMeter/MemberProfil';
+import { theme } from '../../../styles';
 
 export type WahlOMeterStackParamList = {
   WahlOMeter: undefined;
@@ -42,7 +43,7 @@ const WahlOMeterNavigation = () => {
     <WahlOMeterStack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#4494d3',
+          backgroundColor: theme.colors.background.header,
           elevation: 0,
           shadowOpacity: 0,
         },
@@ -72,7 +73,13 @@ const WahlOMeterNavigation = () => {
         component={Procedure}
         options={({ route }) => ({ title: route.params.title })}
       />
-      <WahlOMeterStack.Screen name="Voting" component={VoteVerification} />
+      <WahlOMeterStack.Screen
+        name="Voting"
+        component={VoteVerification}
+        options={{
+          title: 'Wahlurne',
+        }}
+      />
       <WahlOMeterStack.Screen
         name="MemberProfil"
         component={MemberProfil}

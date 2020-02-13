@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 
 import VoteButton from './components/VoteButton';
 import ActionButton from './components/ActionButton';
-import { Alert, Text } from 'react-native';
+import { Alert } from 'react-native';
 import { useNavigation, CompositeNavigationProp } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
@@ -13,20 +13,13 @@ import { RootStackParamList } from '../../../routes';
 import { SidebarParamList } from '../../../routes/Sidebar';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { useMutation } from '@apollo/react-hooks';
+import Lock from '@democracy-deutschland/mobile-ui/src/components/Icons/Lock';
 import {
   ToggleNotification,
   ToggleNotificationVariables,
 } from './graphql/muatation/__generated__/ToggleNotification';
 import { TOGGLE_NOTIFICATION } from './graphql/muatation/toggleNotification';
 import Procedure from './graphql/query/Procedure';
-
-// GraphQL
-// import client from '../../graphql/client';
-// import VOTED from '../../graphql/queries/voted';
-// import VOTE_SELECTION_LOCAL from '../../graphql/queries/local/voteSelection';
-// import TOGGLE_NOTIFICATION from '../../graphql/mutations/toggleNotification';
-// import GET_PROCEDURE from '../../graphql/queries/getProcedure';
-// import ActivityIndexWrapper from '../../components/ActivityIndexWrapper';
 
 const SegmentWrapper = styled.View`
   padding-vertical: 10;
@@ -78,12 +71,6 @@ const VerificationTouch = styled.TouchableOpacity`
   position: absolute;
   z-index: 100;
 `;
-
-// const LockIcon = styled(Ionicons).attrs(() => ({
-//   size: 20,
-//   name: 'ios-lock-outline',
-//   color: 'grey',
-// }))``;
 
 // const InfoIcon = styled(Ionicons).attrs(() => ({
 //   size: 35,
@@ -246,7 +233,7 @@ const PrepareActions: React.FC<Props> = ({
             />
             <VoteButtonLabel>Abgestimmt</VoteButtonLabel>
             <LockIconWrapper>
-              <Text>info icon</Text>
+              <Lock width={18} height={18} color="#bbb" />
             </LockIconWrapper>
           </VoteButtonWrapper>
         )}
