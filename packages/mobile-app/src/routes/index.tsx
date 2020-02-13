@@ -11,6 +11,7 @@ import { InitialState } from '@react-navigation/core';
 import { SidebarNavigation } from './Sidebar';
 import { PdfScreen } from '../screens/modals/Pdf/Pdf';
 import { ConstituencyScreen } from '../screens/modals/Constituency';
+import SplashScreen from 'react-native-splash-screen';
 import { theme } from '../styles';
 
 export type RootStackParamList = {
@@ -34,6 +35,7 @@ const App = () => {
 
   useEffect(() => {
     setCurrentVersion(DeviceInfo.getVersion());
+    SplashScreen.hide();
   }, []);
 
   if (lastStartWithVersion === undefined || currentVersion === undefined) {
