@@ -8,13 +8,22 @@ import { ListFilterContext } from '../../../context/ListFilter';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
 import { InitialStateContext } from '../../../context/InitialStates';
-import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
 
 // import SegmentHeader from '../../../components/ListSectionHeader';
 // import Checkbox from '../../../components/Checkbox';
 
 // import SET_FILTERS from '../../../graphql/mutations/local/setFilters';
 // import GET_FILTERS from '../../../graphql/queries/local/filters';
+
+const Save = styled.TouchableOpacity`
+  margin-right: 11;
+`;
+
+const SaveText = styled.Text`
+  color: #fff;
+  font-size: 16;
+  font-weight: 500;
+`;
 
 const Container = styled.View`
   background-color: #fff;
@@ -125,7 +134,9 @@ export const Filter: React.FC<Props> = ({ navigation }) => {
 
   navigation.setOptions({
     headerRight: () => (
-      <Button onPress={onSave} text="Speichern" textColor="white" />
+      <Save onPress={onSave}>
+        <SaveText>Speichern</SaveText>
+      </Save>
     ),
   });
 
