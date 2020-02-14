@@ -5,7 +5,7 @@ import { Dimensions } from 'react-native';
 // Components
 import Header from '../Header';
 import ChartNote from '../ChartNote';
-import VotedProceduresWrapper, { ChartData } from '../VotedProceduresWrapper';
+import VotedProceduresWrapper, { ChartData } from './VotedProceduresWrapper';
 import NoVotesPlaceholder from '../NoVotesPlaceholder';
 import PieChart from '../../Bundestag/Procedure/components/Charts/PieChart';
 import ChartLegend from '../../Bundestag/Procedure/components/Charts/ChartLegend';
