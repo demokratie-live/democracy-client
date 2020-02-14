@@ -16,7 +16,6 @@ import { RouteProp } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { ConstituencyContext } from '../../../../context/Constituency';
 import PartyChart from '../components/GovernmentVoteResults/PartyChart/Component';
-import { ChartData } from '../../../WahlOMeter/VotedProceduresWrapper';
 import {
   proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults_procedures,
   proceduresByIdHavingVoteResults,
@@ -27,6 +26,7 @@ import { LocalVotesContext } from '../../../../context/LocalVotes';
 import { useQuery } from '@apollo/react-hooks';
 import ChartLegend from '../components/Charts/ChartLegend';
 import NoVotesPlaceholder from '../../../WahlOMeter/NoVotesPlaceholder';
+import { ChartData } from '../../../WahlOMeter/Fraktionen/FraktionenList';
 
 const Wrapper = styled.View`
   flex: 1;

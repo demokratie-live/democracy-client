@@ -3,24 +3,24 @@ import styled from 'styled-components/native';
 import unionBy from 'lodash.unionby';
 
 // Components
-import NoVotesPlaceholder from './NoVotesPlaceholder';
+import NoVotesPlaceholder from '../NoVotesPlaceholder';
 
 // GraphQL
-import { PROCEDURES_BY_HAVING_VOTE_RESULTS } from '../Bundestag/Procedure/Voting/components/graphql/query/proceduresByIdHavingVoteResults';
+import { PROCEDURES_BY_HAVING_VOTE_RESULTS } from '../../Bundestag/Procedure/Voting/components/graphql/query/proceduresByIdHavingVoteResults';
 import { FlatList } from 'react-native';
 import { ListLoading } from '@democracy-deutschland/mobile-ui/src/components/shared/ListLoading';
 import { ListItem } from '@democracy-deutschland/mobile-ui/src/components/Lists/ListItem';
 import { Row } from '@democracy-deutschland/mobile-ui/src/components/Lists/Row';
-import { LocalVotesContext } from '../../context/LocalVotes';
+import { LocalVotesContext } from '../../../context/LocalVotes';
 import {
   proceduresByIdHavingVoteResults,
   proceduresByIdHavingVoteResultsVariables,
   proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults_procedures,
-} from '../Bundestag/Procedure/Voting/components/graphql/query/__generated__/proceduresByIdHavingVoteResults';
+} from '../../Bundestag/Procedure/Voting/components/graphql/query/__generated__/proceduresByIdHavingVoteResults';
 import { useQuery } from '@apollo/react-hooks';
-import { pieChartGovernmentData } from '../../lib/helper/PieChartGovernmentData';
-import { communityVoteData } from '../../lib/helper/PieChartCommunityData';
-import { ChainEntry } from '../../lib/VotesLocal';
+import { pieChartGovernmentData } from '../../../lib/helper/PieChartGovernmentData';
+import { communityVoteData } from '../../../lib/helper/PieChartCommunityData';
+import { ChainEntry } from '../../../lib/VotesLocal';
 
 const Container = styled.View`
   background-color: #fff;
@@ -47,7 +47,7 @@ const VotedProceduresWrapper: React.FC<Props> = ({
   onProcedureListItemClick,
   children,
 }) => {
-  const { localVotes } = useContext(LocalVotesContext);
+  const { localVotes, getLocalVoteSelection } = useContext(LocalVotesContext);
   const { data: proceduresData } = useQuery<
     proceduresByIdHavingVoteResults,
     proceduresByIdHavingVoteResultsVariables
@@ -109,7 +109,10 @@ const VotedProceduresWrapper: React.FC<Props> = ({
                       : undefined,
                   }),
                 }}
-                communityVotes={communityVoteData(item)}
+                communityVotes={communityVoteData({
+                  ...item,
+                  localSelection: getLocalVoteSelection(item.procedureId),
+                })}
               />
             </Row>
           )

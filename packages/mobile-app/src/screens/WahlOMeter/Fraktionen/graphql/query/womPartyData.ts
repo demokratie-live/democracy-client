@@ -1,11 +1,7 @@
 import gql from 'graphql-tag';
 
-export const PROCEDURES_BY_HAVING_VOTE_RESULTS = gql`
-  query proceduresByIdHavingVoteResults(
-    $procedureIds: [String!]
-    $pageSize: Int
-    $offset: Int
-  ) {
+export const WOM_PARTY_DATA = gql`
+  query WomPartyData($procedureIds: [String!], $pageSize: Int, $offset: Int) {
     proceduresByIdHavingVoteResults(
       procedureIds: $procedureIds
       pageSize: $pageSize

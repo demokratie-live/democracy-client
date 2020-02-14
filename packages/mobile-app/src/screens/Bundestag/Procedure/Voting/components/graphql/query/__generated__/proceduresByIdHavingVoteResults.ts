@@ -2,20 +2,29 @@
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
-import { VoteSelection } from "./../../../../../../../../../__generated__/globalTypes";
+import { VoteSelection } from './../../../../../../../../../__generated__/globalTypes';
 
 // ====================================================
 // GraphQL query operation: proceduresByIdHavingVoteResults
 // ====================================================
 
+export interface proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults_procedures_voteResults_partyVotes_deviants {
+  __typename: 'Deviants';
+  yes: number | null;
+  abstination: number | null;
+  no: number | null;
+  notVoted: number | null;
+}
+
 export interface proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults_procedures_voteResults_partyVotes {
-  __typename: "PartyVote";
+  __typename: 'PartyVote';
   party: string;
   main: VoteSelection | null;
+  deviants: proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults_procedures_voteResults_partyVotes_deviants;
 }
 
 export interface proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults_procedures_voteResults {
-  __typename: "VoteResult";
+  __typename: 'VoteResult';
   governmentDecision: VoteSelection | null;
   yes: number | null;
   abstination: number | null;
@@ -25,7 +34,7 @@ export interface proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults
 }
 
 export interface proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults_procedures_communityVotes {
-  __typename: "CommunityVotes";
+  __typename: 'CommunityVotes';
   yes: number | null;
   abstination: number | null;
   no: number | null;
@@ -33,7 +42,7 @@ export interface proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults
 }
 
 export interface proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults_procedures {
-  __typename: "Procedure";
+  __typename: 'Procedure';
   _id: string;
   procedureId: string;
   title: string;
@@ -50,7 +59,7 @@ export interface proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults
 }
 
 export interface proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults {
-  __typename: "ProceduresHavingVoteResults";
+  __typename: 'ProceduresHavingVoteResults';
   total: number | null;
   procedures: proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults_procedures[];
 }
