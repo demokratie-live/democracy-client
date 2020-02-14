@@ -2,7 +2,10 @@ import React, { createContext, useEffect, useState } from 'react';
 import { Notifications } from 'react-native-notifications';
 import { EmitterSubscription, Platform } from 'react-native';
 import { rootNavigationRef } from '../../routes/rootNavigationRef';
-import { getNavStateForProcedure } from '../../lib/getNavStateForProcedure';
+import {
+  getNavStateForProcedure,
+  getNavStateForConferenceWeek,
+} from '../../lib/getNavStateForProcedure';
 
 interface PushNotificationInterface {
   initialNotification: any;
@@ -70,12 +73,17 @@ export const PushNotificationProvider: React.FC = ({ children }) => {
               Platform.OS === 'ios'
                 ? notification.payload
                 : JSON.parse(notification.payload.payload);
-            rootNavigationRef.current.resetRoot(
-              getNavStateForProcedure({
-                procedureId: payload.procedureId,
-                title: payload.title,
-              }),
-            );
+            if (payload.action === 'procedureBulk') {
+              rootNavigationRef.current.resetRoot(
+                getNavStateForConferenceWeek(),
+              );
+            } else {
+              rootNavigationRef.current.resetRoot(
+                getNavStateForProcedure({
+                  procedureId: payload.procedureId,
+                }),
+              );
+            }
           }
 
           completion();

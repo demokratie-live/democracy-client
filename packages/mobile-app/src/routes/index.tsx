@@ -39,7 +39,6 @@ const Navigation = () => {
       return getNavInitStateForProcedure({
         // TODO make this deeplinking more save
         procedureId: path.substr(path.length - 6),
-        title: 'getStateFromPath',
       });
     },
   });
@@ -99,7 +98,6 @@ const Navigation = () => {
       setInitialState(
         getNavInitStateForProcedure({
           procedureId: initialNotification.procedureId,
-          title: initialNotification.title,
         }),
       );
     }
