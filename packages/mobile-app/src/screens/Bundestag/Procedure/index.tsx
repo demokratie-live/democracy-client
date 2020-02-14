@@ -65,7 +65,7 @@ type ProcedureScreenRouteProp = RouteProp<
 
 type ScreenNavigationProp = StackNavigationProp<
   BundestagRootStackParamList,
-  'TabView'
+  'Procedure'
 >;
 
 type Props = {
@@ -147,6 +147,14 @@ export const Procedure: FC<Props> = ({ route, navigation }) => {
       });
     }
   }, [navigation, data, toggleNotification]);
+
+  useEffect(() => {
+    if (!route.params.title && data && data.procedure.type) {
+      navigation.setOptions({
+        title: data.procedure.type,
+      });
+    }
+  }, [data, route, navigation]);
 
   if (loading) {
     return <ListLoading />;

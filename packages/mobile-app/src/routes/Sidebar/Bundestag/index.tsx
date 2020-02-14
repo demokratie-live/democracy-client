@@ -13,12 +13,12 @@ import TabView from './TabView';
 import { CompositeNavigationProp, useNavigation } from '@react-navigation/core';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { SidebarParamList } from '..';
-import { RootStackParamList } from '../..';
 import MenuIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Menu';
 import { VoteSelection } from '../../../../__generated__/globalTypes';
 import { SearchProvider } from '../../../context/Search';
 import { theme } from '../../../styles';
 import { BurgerMenuButton } from '../../../components/MenuButton';
+import { RootStackParamList } from '../..';
 
 export type BundestagRootStackParamList = {
   TabView: undefined;
@@ -68,7 +68,7 @@ const BundestagRootNavigation = () => {
         <BundestagRootStack.Screen
           name="Procedure"
           component={Procedure}
-          options={({ route }) => ({ title: route.params.title })}
+          options={({ route }) => ({ title: route.params.title || '' })}
         />
         <BundestagRootStack.Screen
           name="Voting"

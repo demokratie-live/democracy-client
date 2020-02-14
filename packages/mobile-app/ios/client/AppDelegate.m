@@ -14,11 +14,11 @@
 // react-native-notifications
 #import "RNNotifications.h"
 
-// Splash screen
-#import "RNSplashScreen.h"
-
 // Deep Linking
 #import <React/RCTLinkingManager.h>
+
+// Splash screen
+#import "RNSplashScreen.h"
 
 @implementation AppDelegate
 

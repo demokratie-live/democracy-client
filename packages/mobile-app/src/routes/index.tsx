@@ -27,7 +27,7 @@ export type RootStackParamList = {
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
-const App = () => {
+const Navigation = () => {
   const { initialNotification } = useContext(PushNotificationContext);
   const { getInitialState } = useLinking(rootNavigationRef, {
     prefixes: ['https://democracy-app.de', 'democracy://'],
@@ -35,7 +35,6 @@ const App = () => {
       return getNavInitStateForProcedure({
         // TODO make this deeplinking more save
         procedureId: path.substr(path.length - 6),
-        title: 'getStateFromPath',
       });
     },
   });
@@ -100,7 +99,6 @@ const App = () => {
       setInitialState(
         getNavInitStateForProcedure({
           procedureId: initialNotification.procedureId,
-          title: initialNotification.title,
         }),
       );
     }
@@ -179,4 +177,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Navigation;
