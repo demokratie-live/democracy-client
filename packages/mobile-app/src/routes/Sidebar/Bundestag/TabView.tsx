@@ -60,6 +60,8 @@ const TabViewNavigation: React.FC<Props> = ({ navigation }) => {
         indicatorStyle: {
           backgroundColor: '#fff',
         },
+        activeTintColor: 'rgb(255,255,255)',
+        inactiveTintColor: 'rgba(255,255,255,.9)',
         style: {
           backgroundColor: '#4494D3',
         },
@@ -69,6 +71,9 @@ const TabViewNavigation: React.FC<Props> = ({ navigation }) => {
         name="Sitzungswoche"
         component={List}
         initialParams={{ list: ListType.CONFERENCEWEEKS_PLANNED }}
+        options={{
+          title: 'Sitzungs\u200Bwoche',
+        }}
       />
       <TabNavigation.Screen
         name="Vergangen"

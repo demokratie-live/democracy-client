@@ -19,6 +19,7 @@ const Number = styled.TextInput.attrs(() => ({
 }))`
   flex: 1;
   font-size: 24;
+  color: #000;
   text-align: center;
   margin-bottom: 0;
   padding-bottom: 0;

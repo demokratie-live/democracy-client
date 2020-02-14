@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  query Procedure($id: ID!) {
+  query Procedure($id: ID!, $constituencies: [String!]) {
     procedure(id: $id) {
       _id
       procedureId
@@ -19,6 +19,7 @@ export default gql`
       currentStatus
       currentStatusHistory
       voted
+      votedGovernment
       notify
       importantDocuments {
         editor
@@ -26,7 +27,7 @@ export default gql`
         url
         number
       }
-      communityVotes {
+      communityVotes(constituencies: $constituencies) {
         yes
         abstination
         no
@@ -46,6 +47,7 @@ export default gql`
         notVoted
         decisionText
         namedVote
+        governmentDecision
         partyVotes {
           main
           party

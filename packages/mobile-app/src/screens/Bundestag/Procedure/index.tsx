@@ -22,8 +22,11 @@ import { GovernmentVoteResults } from './components/GovernmentVoteResults';
 import PrepareActions from './PrepareActions';
 import { InitialStateContext } from '../../../context/InitialStates';
 import { getShareLink } from '../../../lib/shareLink';
+import { ConstituencyContext } from '../../../context/Constituency';
 
-const Container = styled.ScrollView`
+const Container = styled.ScrollView.attrs({
+  scrollIndicatorInsets: { right: 1 }, // TODO do cleanfix when there is a correct solution (already closed but not solved without workaround) https://github.com/facebook/react-native/issues/26610
+})`
   background-color: #fff;
 `;
 
@@ -38,12 +41,15 @@ type Props = {
 
 export const Procedure: FC<Props> = ({ route }) => {
   const { isVerified } = useContext(InitialStateContext);
+  const { constituency } = useContext(ConstituencyContext);
+  const constituencies = constituency ? [constituency] : [];
   const { data, loading, error } = useQuery<
     ProcedureQueryObj,
     ProcedureVariables
   >(PROCEDURE, {
     variables: {
       id: route.params.procedureId,
+      constituencies,
     },
   });
   if (loading) {
@@ -61,7 +67,6 @@ export const Procedure: FC<Props> = ({ route }) => {
     title,
     voteDate,
     voteEnd,
-    sessionTOPHeading,
     procedureId,
     type,
     subjectGroups,
@@ -96,14 +101,7 @@ export const Procedure: FC<Props> = ({ route }) => {
 
   return (
     <Container>
-      <Intro
-        title={title}
-        date={voteDate}
-        endDate={voteEnd}
-        topHeading={sessionTOPHeading}
-        procedureId={procedureId}
-        type={type || ''} // TODO fix GraphQL TypeScript Safety
-      />
+      <Intro {...data.procedure} />
       <Folding title="Details" opened>
         <Details
           subjectGroups={subjectGroups}
@@ -127,7 +125,10 @@ export const Procedure: FC<Props> = ({ route }) => {
         </Folding>
       )}
 
-      {communityVotes && <CommunityVoteResults voteResults={communityVotes} />}
+      {communityVotes &&
+        ((voteEnd && new Date(voteEnd) < new Date()) || voted) && (
+          <CommunityVoteResults voteResults={communityVotes} />
+        )}
       {voteResults && (
         <GovernmentVoteResults
           key="government"

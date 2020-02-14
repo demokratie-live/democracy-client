@@ -1,8 +1,8 @@
 import 'react-native-gesture-handler'; // TODO remove workaround https://github.com/kmagiera/react-native-gesture-handler/issues/320#issuecomment-538190653
 import React, { useState, useContext, useEffect } from 'react';
 import {
-  NavigationNativeContainer,
   useLinking,
+  NavigationNativeContainer,
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Introduction from '../screens/modals/Introduction';
@@ -17,6 +17,8 @@ import { ConstituencyScreen } from '../screens/modals/Constituency';
 import { rootNavigationRef } from './rootNavigationRef';
 import { getNavInitStateForProcedure } from '../lib/getNavStateForProcedure';
 import { PushNotificationContext } from '../context/PushNotification';
+import SplashScreen from 'react-native-splash-screen';
+import { theme } from '../styles';
 
 export type RootStackParamList = {
   Sidebar: undefined;
@@ -29,7 +31,7 @@ export type RootStackParamList = {
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
-const App = () => {
+const Navigation = () => {
   const { initialNotification } = useContext(PushNotificationContext);
   const { getInitialState } = useLinking(rootNavigationRef, {
     prefixes: ['https://democracy-app.de', 'democracy://'],
@@ -65,6 +67,7 @@ const App = () => {
 
   useEffect(() => {
     setCurrentVersion(DeviceInfo.getVersion());
+    SplashScreen.hide();
   }, []);
 
   useEffect(() => {
@@ -114,17 +117,27 @@ const App = () => {
   return (
     <NavigationNativeContainer
       initialState={initialState}
-      ref={rootNavigationRef}>
+      ref={rootNavigationRef}
+      theme={{
+        colors: {
+          background: '#fff',
+          primary: '#fff',
+          text: '#fff',
+          border: '#fff',
+          card: '#fff',
+        },
+        dark: false,
+      }}>
       <RootStack.Navigator
         mode="modal"
         screenOptions={{
           headerStyle: {
-            backgroundColor: '#4494d3',
+            backgroundColor: theme.colors.background.header,
             elevation: 0,
             shadowOpacity: 0,
           },
           headerBackTitleVisible: false,
-          headerTintColor: '#fff',
+          headerTintColor: theme.colors.headerText,
         }}>
         <RootStack.Screen
           name="Sidebar"
@@ -162,4 +175,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Navigation;

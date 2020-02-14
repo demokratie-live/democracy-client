@@ -6,7 +6,7 @@ import unionBy from 'lodash.unionby';
 import NoVotesPlaceholder from './NoVotesPlaceholder';
 
 // GraphQL
-import PROCEDURES_WITH_VOTE_RESULTS from '../Bundestag/Procedure/Voting/components/graphql/query/proceduresByIdHavingVoteResults';
+import { PROCEDURES_BY_HAVING_VOTE_RESULTS } from '../Bundestag/Procedure/Voting/components/graphql/query/proceduresByIdHavingVoteResults';
 import { FlatList } from 'react-native';
 import { ListLoading } from '@democracy-deutschland/mobile-ui/src/components/shared/ListLoading';
 import { ListItem } from '@democracy-deutschland/mobile-ui/src/components/Lists/ListItem';
@@ -51,7 +51,7 @@ const VotedProceduresWrapper: React.FC<Props> = ({
   const { data: proceduresData } = useQuery<
     proceduresByIdHavingVoteResults,
     proceduresByIdHavingVoteResultsVariables
-  >(PROCEDURES_WITH_VOTE_RESULTS, {
+  >(PROCEDURES_BY_HAVING_VOTE_RESULTS, {
     variables: {
       procedureIds: localVotes.map(({ procedureId }) => procedureId),
       pageSize: 999999,
@@ -60,7 +60,7 @@ const VotedProceduresWrapper: React.FC<Props> = ({
   const { data: procedurListData, fetchMore, networkStatus } = useQuery<
     proceduresByIdHavingVoteResults,
     proceduresByIdHavingVoteResultsVariables
-  >(PROCEDURES_WITH_VOTE_RESULTS, {
+  >(PROCEDURES_BY_HAVING_VOTE_RESULTS, {
     variables: { procedureIds: null, offset: 0 },
   });
   let hasMore = true;

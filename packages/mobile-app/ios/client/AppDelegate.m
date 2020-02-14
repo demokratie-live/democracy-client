@@ -17,6 +17,9 @@
 // Deep Linking
 #import <React/RCTLinkingManager.h>
 
+// Splash screen
+#import "RNSplashScreen.h"
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -34,6 +37,9 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
+  // Splash screen
+  [RNSplashScreen show];
   
   // react-native-notifications
   [RNNotifications startMonitorNotifications];

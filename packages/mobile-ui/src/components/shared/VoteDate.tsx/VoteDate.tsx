@@ -20,7 +20,6 @@ const DateText = styled.Text<Pick<Props, 'date'> & { running: boolean }>`
     return 'red';
   }};
   font-size: 12;
-  font-weight: ${soon => (soon ? 'bold' : 'normal')};
 `;
 
 const formatDate = ({ date, endDate, long }: Props) => {
@@ -57,6 +56,7 @@ const formatDate = ({ date, endDate, long }: Props) => {
       return 'morgen';
     }
 
+    // TODO Try without tryCatch block https://sentry.io/organizations/democracy-deutschland-ev/issues/1510466805/?project=1867209&query=is%3Aunresolved&statsPeriod=14d
     const hours = Math.floor(m.duration(m(date).diff(m())).asMinutes() / 60);
     const minutes = `${Math.floor(
       ((m.duration(m(date).diff(m())).asMinutes() / 60) % 1) * 60,

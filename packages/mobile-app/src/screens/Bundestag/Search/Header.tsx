@@ -8,14 +8,18 @@ import {
   FinishSearchVariables,
 } from './graphql/mutation/__generated__/FinishSearch';
 import debounce from 'lodash.debounce';
-import styled from 'styled-components/native';
 import { Platform } from 'react-native';
+import { styled } from '../../../styles';
 
 const Wrapper = styled.View`
-  background-color: #4494d3;
+  background-color: ${({ theme }) => theme.colors.background.header};
 `;
 
-export const SearchHeader: React.FC = () => {
+interface Props {
+  searchBarRef: React.RefObject<SearchBar>;
+}
+
+export const SearchHeader: React.FC<Props> = ({ searchBarRef }) => {
   const { setTerm, term, addToHistory } = useContext(SearchContext);
   const [executeFinishSearch] = useMutation<
     FinishSearch,
@@ -23,6 +27,7 @@ export const SearchHeader: React.FC = () => {
   >(FINISH_SEARCH);
 
   const finishSearch = () => {
+    searchBarRef.current ? searchBarRef.current.unFocus() : undefined;
     addToHistory(term);
     executeFinishSearch({
       variables: {
@@ -40,7 +45,7 @@ export const SearchHeader: React.FC = () => {
   return (
     <Wrapper>
       <SearchBar
-        // ref="searchBar"
+        ref={searchBarRef}
         placeholder="Suche"
         text={term}
         onChangeText={onChangeText}

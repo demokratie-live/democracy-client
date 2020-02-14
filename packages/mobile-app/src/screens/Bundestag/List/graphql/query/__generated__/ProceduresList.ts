@@ -2,19 +2,23 @@
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
-import { ListType, ProcedureFilter, VoteSelection } from "./../../../../../../../__generated__/globalTypes";
+import {
+  ListType,
+  ProcedureFilter,
+  VoteSelection,
+} from './../../../../../../../__generated__/globalTypes';
 
 // ====================================================
 // GraphQL query operation: ProceduresList
 // ====================================================
 
 export interface ProceduresList_procedures_activityIndex {
-  __typename: "ActivityIndex";
+  __typename: 'ActivityIndex';
   activityIndex: number;
 }
 
 export interface ProceduresList_procedures_voteResults {
-  __typename: "VoteResult";
+  __typename: 'VoteResult';
   yes: number | null;
   abstination: number | null;
   no: number | null;
@@ -22,7 +26,7 @@ export interface ProceduresList_procedures_voteResults {
 }
 
 export interface ProceduresList_procedures_communityVotes {
-  __typename: "CommunityVotes";
+  __typename: 'CommunityVotes';
   yes: number | null;
   abstination: number | null;
   no: number | null;
@@ -30,7 +34,7 @@ export interface ProceduresList_procedures_communityVotes {
 }
 
 export interface ProceduresList_procedures {
-  __typename: "Procedure";
+  __typename: 'Procedure';
   _id: string;
   title: string;
   procedureId: string;
@@ -59,4 +63,5 @@ export interface ProceduresListVariables {
   listTypes?: ListType[] | null;
   sort?: string | null;
   filter?: ProcedureFilter | null;
+  constituencies?: string[] | null;
 }

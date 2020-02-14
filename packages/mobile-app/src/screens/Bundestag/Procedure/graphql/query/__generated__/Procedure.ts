@@ -2,14 +2,17 @@
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
-import { ListType, VoteSelection } from "./../../../../../../../__generated__/globalTypes";
+import {
+  ListType,
+  VoteSelection,
+} from './../../../../../../../__generated__/globalTypes';
 
 // ====================================================
 // GraphQL query operation: Procedure
 // ====================================================
 
 export interface Procedure_procedure_importantDocuments {
-  __typename: "Document";
+  __typename: 'Document';
   editor: string;
   type: string;
   url: string;
@@ -17,7 +20,7 @@ export interface Procedure_procedure_importantDocuments {
 }
 
 export interface Procedure_procedure_communityVotes_constituencies {
-  __typename: "CommunityConstituencyVotes";
+  __typename: 'CommunityConstituencyVotes';
   yes: number;
   abstination: number;
   no: number;
@@ -26,7 +29,7 @@ export interface Procedure_procedure_communityVotes_constituencies {
 }
 
 export interface Procedure_procedure_communityVotes {
-  __typename: "CommunityVotes";
+  __typename: 'CommunityVotes';
   yes: number | null;
   abstination: number | null;
   no: number | null;
@@ -35,7 +38,7 @@ export interface Procedure_procedure_communityVotes {
 }
 
 export interface Procedure_procedure_voteResults_partyVotes_deviants {
-  __typename: "Deviants";
+  __typename: 'Deviants';
   yes: number | null;
   abstination: number | null;
   no: number | null;
@@ -43,25 +46,26 @@ export interface Procedure_procedure_voteResults_partyVotes_deviants {
 }
 
 export interface Procedure_procedure_voteResults_partyVotes {
-  __typename: "PartyVote";
+  __typename: 'PartyVote';
   main: VoteSelection | null;
   party: string;
   deviants: Procedure_procedure_voteResults_partyVotes_deviants;
 }
 
 export interface Procedure_procedure_voteResults {
-  __typename: "VoteResult";
+  __typename: 'VoteResult';
   yes: number | null;
   abstination: number | null;
   no: number | null;
   notVoted: number | null;
   decisionText: string | null;
   namedVote: boolean | null;
+  governmentDecision: VoteSelection | null;
   partyVotes: Procedure_procedure_voteResults_partyVotes[];
 }
 
 export interface Procedure_procedure {
-  __typename: "Procedure";
+  __typename: 'Procedure';
   _id: string;
   procedureId: string;
   title: string;
@@ -78,6 +82,7 @@ export interface Procedure_procedure {
   currentStatus: string | null;
   currentStatusHistory: string[];
   voted: boolean;
+  votedGovernment: boolean | null;
   importantDocuments: Procedure_procedure_importantDocuments[];
   communityVotes: Procedure_procedure_communityVotes | null;
   voteResults: Procedure_procedure_voteResults | null;
@@ -89,4 +94,5 @@ export interface Procedure {
 
 export interface ProcedureVariables {
   id: string;
+  constituencies?: string[] | null;
 }

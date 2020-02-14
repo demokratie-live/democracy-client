@@ -104,17 +104,17 @@ export const MemberProfil = () => {
     return [
       {
         label: 'Zustimmungen',
-        color: '#15C063',
+        color: '#99C93E',
         value: procedureCountByDecision.YES,
       },
       {
         label: 'Enthaltungen',
-        color: '#2C82E4',
+        color: '#4CB0D8',
         value: procedureCountByDecision.ABSTINATION,
       },
       {
         label: 'Ablehnungen',
-        color: '#EC3E31',
+        color: '#D43194',
         value: procedureCountByDecision.NO,
       },
       {

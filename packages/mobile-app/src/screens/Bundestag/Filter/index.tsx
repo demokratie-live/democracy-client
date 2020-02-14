@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-color-literals */
 import React, { useEffect, useState, useContext } from 'react';
 import { SectionList, View, Alert } from 'react-native';
 import styled from 'styled-components/native';
@@ -8,7 +9,6 @@ import { ListFilterContext } from '../../../context/ListFilter';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
 import { InitialStateContext } from '../../../context/InitialStates';
-import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
 
 // import SegmentHeader from '../../../components/ListSectionHeader';
 // import Checkbox from '../../../components/Checkbox';
@@ -16,26 +16,36 @@ import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
 // import SET_FILTERS from '../../../graphql/mutations/local/setFilters';
 // import GET_FILTERS from '../../../graphql/queries/local/filters';
 
+const Save = styled.TouchableOpacity`
+  margin-right: 11;
+`;
+
+const SaveText = styled.Text`
+  color: #fff;
+  font-size: 16;
+  font-weight: 500;
+`;
+
 const Container = styled.View`
   background-color: #fff;
 `;
 
 const ListRowMain = styled.View`
-  padding-horizontal: 18;
-  padding-vertical: 11;
+  /* padding-right: 18; */
+  /* padding-vertical: 11; */
   justify-content: center;
+  /* background-color: #ff000055; */
 `;
 
 const ListRowSub = styled.View`
   padding-left: 8;
-  padding-vertical: 11;
-  justify-content: center;
 `;
 
 const Row = styled.TouchableOpacity`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  /* background-color: #ffff0055; */
 `;
 
 const TitleMain = styled.Text`
@@ -125,7 +135,9 @@ export const Filter: React.FC<Props> = ({ navigation }) => {
 
   navigation.setOptions({
     headerRight: () => (
-      <Button onPress={onSave} text="Speichern" textColor="white" />
+      <Save onPress={onSave}>
+        <SaveText>Speichern</SaveText>
+      </Save>
     ),
   });
 
@@ -171,7 +183,7 @@ export const Filter: React.FC<Props> = ({ navigation }) => {
               <Row
                 style={{
                   paddingVertical: 11,
-                  paddingHorizontal: 11,
+                  paddingHorizontal: 18,
                   borderBottomWidth: 1,
                   borderColor: lightgrey,
                 }}
@@ -198,6 +210,13 @@ export const Filter: React.FC<Props> = ({ navigation }) => {
             <ListRowMain>
               <ListRowSub key={subtitle}>
                 <Row
+                  style={{
+                    borderBottomWidth: 1,
+                    borderColor: 'rgba(0,0,0,0.1)',
+                    paddingLeft: 8,
+                    paddingVertical: 8,
+                    paddingRight: 18,
+                  }}
                   onPress={() => {
                     const curValue = getValue({
                       type: section.name,

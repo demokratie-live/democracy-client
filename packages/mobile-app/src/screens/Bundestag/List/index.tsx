@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Text, ListRenderItem, SectionList } from 'react-native';
 import { useQuery } from '@apollo/react-hooks';
-import { procedures } from './graphql/query/procedures';
+import { PROCEDURES_LIST } from './graphql/query/procedures';
 import {
   ProceduresList,
   ProceduresListVariables,
@@ -14,7 +14,6 @@ import { useNavigation, useRoute, RouteProp } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
 import { TopTabParamList } from '../../../routes/Sidebar/Bundestag/TabView';
-import styled from 'styled-components/native';
 import { Segment } from './Components/Segment';
 import { ListType } from '../../../../__generated__/globalTypes';
 import { LocalVotesContext } from '../../../context/LocalVotes';
@@ -22,6 +21,8 @@ import { communityVoteData } from '../../../lib/helper/PieChartCommunityData';
 import { pieChartGovernmentData } from '../../../lib/helper/PieChartGovernmentData';
 import { ListFilterContext } from '../../../context/ListFilter';
 import { NoConferenceWeekData } from './NoConferenceWeekData';
+import { ConstituencyContext } from '../../../context/Constituency';
+import { styled } from '../../../styles';
 
 type ListScreenRouteProp = RouteProp<
   TopTabParamList,
@@ -35,12 +36,14 @@ export interface SegmentedData {
 
 const Container = styled.View`
   flex: 1;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.colors.background.main};
 `;
 
 export const List = () => {
   const { getLocalVoteSelection } = useContext(LocalVotesContext);
   const { proceduresFilter } = useContext(ListFilterContext);
+  const { constituency } = useContext(ConstituencyContext);
+  const constituencies = constituency ? [constituency] : [];
   const route = useRoute<ListScreenRouteProp>();
   const navigation = useNavigation<
     StackNavigationProp<BundestagRootStackParamList>
@@ -49,13 +52,14 @@ export const List = () => {
   const { loading, data, error, fetchMore, networkStatus, refetch } = useQuery<
     ProceduresList,
     ProceduresListVariables
-  >(procedures, {
+  >(PROCEDURES_LIST, {
     fetchPolicy: 'network-only',
     errorPolicy: 'all',
     variables: {
       listTypes: [route.params.list],
       pageSize: 10,
       filter: proceduresFilter,
+      constituencies,
     },
   });
 
