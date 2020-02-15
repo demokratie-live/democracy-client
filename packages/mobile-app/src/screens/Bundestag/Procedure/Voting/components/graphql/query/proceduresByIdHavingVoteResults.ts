@@ -34,12 +34,6 @@ export const PROCEDURES_BY_HAVING_VOTE_RESULTS = gql`
           partyVotes {
             party
             main
-            deviants {
-              yes
-              abstination
-              no
-              notVoted
-            }
           }
         }
         communityVotes {
