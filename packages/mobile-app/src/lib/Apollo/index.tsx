@@ -5,6 +5,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { NativeModules } from 'react-native';
 import { ApolloLink } from 'apollo-link';
+import { RestLink } from 'apollo-link-rest';
 import { authLinkMiddleware, authLinkAfterware } from './Auth';
 import { GRAPHQL_URL, GRAPHQL_SERVER_LOCAL } from '../config';
 
@@ -33,10 +34,20 @@ const httpLink = new HttpLink({
   uri: graphQlUri,
 });
 
-const link = ApolloLink.from([authLinkMiddleware, authLinkAfterware, httpLink]);
+const restLink = new RestLink({
+  uri: 'https://democracy-deutschland.de/api.php', // ?call=donation_status
+});
+
+const link = ApolloLink.from([
+  authLinkMiddleware,
+  authLinkAfterware,
+  restLink,
+  httpLink,
+]);
 
 const client = new ApolloClient({
   cache,
+
   link,
 });
 

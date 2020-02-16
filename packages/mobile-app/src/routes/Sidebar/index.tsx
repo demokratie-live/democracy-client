@@ -12,6 +12,7 @@ import SettingsRootNavigation from './Settings';
 import FaqRootNavigation from './Faq';
 import AboutRootNavigation from './About';
 import CredentialsRootNavigation from './Credentials';
+import DonateRootNavigation from './Donate';
 
 export type SidebarParamList = {
   Bundestag: undefined;
@@ -20,6 +21,7 @@ export type SidebarParamList = {
   Faq: undefined;
   About: undefined;
   Credentials: undefined;
+  Donate: undefined;
 };
 
 const SidebarDrawer = createDrawerNavigator<SidebarParamList>();
@@ -104,6 +106,17 @@ export const SidebarNavigation = () => {
         }}
         name={'Credentials'}
         component={CredentialsRootNavigation}
+      />
+      <SidebarDrawer.Screen
+        options={{
+          drawerLabel: 'hide/Donate',
+          gestureEnabled: true,
+          drawerIcon: ({ color, size }) => (
+            <InfoArrowIcon width={size} height={size} color={color} />
+          ),
+        }}
+        name={'Donate'}
+        component={DonateRootNavigation}
       />
     </SidebarDrawer.Navigator>
   );
