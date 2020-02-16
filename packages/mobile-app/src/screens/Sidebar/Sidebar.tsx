@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+/* eslint-disable react-native/no-color-literals */
+import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components/native';
 import { Background } from '@democracy-deutschland/mobile-ui/src/components/Sidebar/Background';
 import { Header } from '@democracy-deutschland/mobile-ui/src/components/Sidebar/Header';
@@ -9,6 +10,9 @@ import { InitialStateContext } from '../../context/InitialStates';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { SidebarParamList } from '../../routes/Sidebar';
+import { useQuery } from '@apollo/react-hooks';
+import { DONATION_STATUS } from './Donate/graphql/query/donationStatus';
+import DonatedBox from './Donate/DonatedBox';
 
 const SafeAreaView = styled.SafeAreaView`
   flex: 1;
@@ -22,11 +26,36 @@ type SidebarNavigationProps = CompositeNavigationProp<
   DrawerNavigationProp<SidebarParamList>
 >;
 
+const DonateBoxWrapper = styled.View`
+  height: 68;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+`;
+
+const DonationTouch = styled.TouchableOpacity`
+  flex: 1;
+  width: 100%;
+  height: 68;
+`;
+
 declare type Props = React.ComponentProps<typeof DrawerItemList>;
 
 export const Sidebar: React.FC<Props> = props => {
   const navigation = useNavigation<SidebarNavigationProps>();
   const { isVerified } = useContext(InitialStateContext);
+
+  const { data } = useQuery(DONATION_STATUS);
+  const [donationStatus, setDonationStatus] = useState<any>({});
+
+  useEffect(() => {
+    if (!donationStatus.result && data) {
+      setDonationStatus(data.donationStatus);
+    }
+  }, [data, donationStatus]);
+
   const handleHeaderClick = () => {
     if (isVerified) {
       navigation.navigate('Settings');
@@ -44,6 +73,19 @@ export const Sidebar: React.FC<Props> = props => {
         />
         <DrawerItemList {...props} />
       </SafeAreaView>
+      {donationStatus && donationStatus.result && (
+        <DonateBoxWrapper>
+          <DonationTouch onPress={() => navigation.navigate('Donate')}>
+            <DonatedBox
+              style={{ backgroundColor: '#4494d390' }}
+              descriptionTextStyle={{ color: '#fff' }}
+              moneyTextStyle={{ color: '#fff' }}
+              target={donationStatus.result.donation_value_goal}
+              occupied={donationStatus.result.donation_value}
+            />
+          </DonationTouch>
+        </DonateBoxWrapper>
+      )}
     </Container>
   );
 };
