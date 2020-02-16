@@ -7,6 +7,8 @@ import { getBuildNumber, getVersion } from 'react-native-device-info';
 import { MarkdownView } from 'react-native-markdown-view';
 import styled from 'styled-components/native';
 import { SidebarParamList } from '../../../routes/Sidebar';
+import SvgDemocracyBubble from '@democracy-deutschland/mobile-ui/src/components/Icons/DemocracyBubble';
+import { Space } from '../Verification/Start';
 
 const Wrapper = styled.ScrollView`
   padding-horizontal: 18;
@@ -74,8 +76,11 @@ export const AboutScreen: React.FC<Props> = () => {
   return (
     <Wrapper>
       <HeaderWrapper>
-        <Text>LOGO HIER</Text>
-        <Text>
+        <SvgDemocracyBubble width="125" height="125" color="#000" />
+        <Text
+          style={{
+            paddingTop: 18,
+          }}>
           Version {getVersion()} ({getBuildNumber()})
         </Text>
         <Text>Made with ❤ by DEMOCRACY Deutschland e.V.</Text>
@@ -133,6 +138,7 @@ Unsere Arbeit ist und bleibt unabhängig, überparteilich, allgemeinnützig und 
 Für mehr Informationen:[www.democracy-deutschland.de](https://www.democracy-deutschland.de)
 `}
       </Markdown>
+      <Space />
     </Wrapper>
   );
 };
