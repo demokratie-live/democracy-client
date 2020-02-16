@@ -15,6 +15,9 @@ import SvgMail from '@democracy-deutschland/mobile-ui/src/components/Icons/Mail'
 import SvgInstagram from '@democracy-deutschland/mobile-ui/src/components/Icons/Instagram';
 import styled from 'styled-components/native';
 import deepmerge from 'deepmerge';
+import { CompositeNavigationProp } from '@react-navigation/core';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../../routes';
 
 const phoneNumber =
   Platform.OS === 'ios'
@@ -102,7 +105,10 @@ const Markdown: React.FC<MarkdownProps> = ({ children, styles = {} }) => {
   );
 };
 
-type FaqScreenNavigationProp = DrawerNavigationProp<SidebarParamList, 'Faq'>;
+type FaqScreenNavigationProp = CompositeNavigationProp<
+  DrawerNavigationProp<SidebarParamList, 'Faq'>,
+  StackNavigationProp<RootStackParamList>
+>;
 
 type Props = {
   navigation: FaqScreenNavigationProp;
