@@ -1,5 +1,4 @@
-import React from 'react';
-import { styled } from '../../../styles';
+import React, { ComponentProps } from 'react';
 import { faqData } from './data';
 import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Folding';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
@@ -14,6 +13,8 @@ import SvgTwitter from '@democracy-deutschland/mobile-ui/src/components/Icons/Tw
 import SvgPlanet from '@democracy-deutschland/mobile-ui/src/components/Icons/Planet';
 import SvgMail from '@democracy-deutschland/mobile-ui/src/components/Icons/Mail';
 import SvgInstagram from '@democracy-deutschland/mobile-ui/src/components/Icons/Instagram';
+import styled from 'styled-components/native';
+import deepmerge from 'deepmerge';
 
 const phoneNumber =
   Platform.OS === 'ios'
@@ -28,12 +29,19 @@ const youtube = 'https://www.youtube.com/channel/UC2R4cGTq1LjFZ2DvDaVhDyg';
 const discord = 'https://discord.gg/Pdu3ZEV';
 const website = 'https://www.democracy-deutschland.de/';
 
-const Wrapper = styled.ScrollView``;
+const Wrapper = styled.ScrollView`
+  padding-horizontal: 18;
+`;
 
-const Headline = styled.Text``;
+const Headline = styled.Text`
+  padding-top: 18px;
+  color: grey;
+  font-size: 15;
+`;
 
 const ContactWrapper = styled.View`
   width: 100%;
+  align-self: center;
   flex-direction: row;
   justify-content: space-between;
   max-width: 300;
@@ -41,6 +49,7 @@ const ContactWrapper = styled.View`
 
 const SocialMediaWrapper = styled.View`
   padding-top: 25;
+  align-self: center;
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
@@ -61,16 +70,37 @@ const ContactIcons = styled.Text.attrs(() => ({
   color: '#000000',
 }))``;
 
-const Markdown: React.FC = ({ children }) => (
-  <MarkdownView
-    onLinkPress={url => {
-      Linking.openURL(url).catch(error =>
-        console.warn('An error occurred: ', error),
-      );
-    }}>
-    {children}
-  </MarkdownView>
-);
+const Spacer = styled.View`
+  padding-bottom: 36;
+`;
+
+interface MarkdownProps {
+  styles?: ComponentProps<typeof MarkdownView>['styles'];
+}
+
+const Markdown: React.FC<MarkdownProps> = ({ children, styles = {} }) => {
+  const markdownStyles = deepmerge(
+    {
+      paragraph: {
+        color: '#555',
+        ...(styles.paragraph || []),
+      },
+    },
+    styles,
+  );
+
+  return (
+    <MarkdownView
+      styles={markdownStyles}
+      onLinkPress={url => {
+        Linking.openURL(url).catch(error =>
+          console.warn('An error occurred: ', error),
+        );
+      }}>
+      {children}
+    </MarkdownView>
+  );
+};
 
 type FaqScreenNavigationProp = DrawerNavigationProp<SidebarParamList, 'Faq'>;
 
@@ -93,7 +123,12 @@ export const FaqScreen: React.FC<Props> = ({ navigation }) => {
         backgroundColor="blue"
         textColor="white"
       />
-      <Markdown>{`Ist noch etwas unklar? Der DEMOCRACY Support steht Dir bei Fragen zur Seite.
+      <Markdown
+        styles={{
+          paragraph: {
+            fontSize: 15,
+          },
+        }}>{`Ist noch etwas unklar? Der DEMOCRACY Support steht Dir bei Fragen zur Seite.
 
 Du möchtest einen Fehler melden?
 
@@ -101,6 +136,7 @@ Bitte gib uns möglichst viele Informationen zu den von Dir gefunden Fehlern ode
 
 Übermittele uns daher immer einen Screenshot, eine kurze Fehlerbeschreibung sowie Deine Plattform (iOS/Android) und Deine Gerätebezeichnung (z.B. iPhone SE), damit wir Dir schnellstmöglich helfen können. 
 `}</Markdown>
+      <Spacer />
       <ContactWrapper>
         <IconWrapper onPress={linking(phoneNumber)}>
           <ContactIcons>phone</ContactIcons>
@@ -134,6 +170,7 @@ Bitte gib uns möglichst viele Informationen zu den von Dir gefunden Fehlern ode
           <ContactIcons>discord</ContactIcons>
         </IconWrapper>
       </SocialMediaWrapper>
+      <Spacer />
     </Wrapper>
   );
 };
