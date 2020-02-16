@@ -32,7 +32,14 @@ const Introduction: FC<Props> = ({ route }) => {
     InitialStateContext,
   );
   const [wasVerified] = useState(isVerified);
-  const { lastStartWithVersion, done } = route.params;
+  let { lastStartWithVersion, done } = {
+    lastStartWithVersion: '',
+    done: undefined,
+  } as IntroductionScreenRouteProp['params'];
+  if (route && route.params) {
+    lastStartWithVersion = route.params.lastStartWithVersion || '';
+    done = route.params.done;
+  }
 
   // Close instructions if user verify himself within instructions
   useEffect(() => {
