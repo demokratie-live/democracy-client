@@ -11,11 +11,13 @@ import IntroductionScreen from '../../screens/modals/Introduction';
 import { Sidebar } from '../../screens/Sidebar/Sidebar';
 import WahlOMeterNavigation from './WahlOMeter';
 import SettingsRootNavigation from './Settings';
+import FaqRootNavigation from './Faq';
 
 export type SidebarParamList = {
   Bundestag: undefined;
   WahlOMeter: undefined;
   Settings: undefined;
+  Faq: undefined;
   Introduction: RootStackParamList['Introduction'];
 };
 
@@ -67,6 +69,18 @@ export const SidebarNavigation = () => {
         }}
         name="Settings"
         component={SettingsRootNavigation}
+      />
+      <SidebarDrawer.Screen
+        options={{
+          title: 'FAQ',
+          drawerLabel: 'Mehr/FAQ & Support',
+          gestureEnabled: true,
+          drawerIcon: ({ color, size }) => (
+            <InfoArrowIcon width={size} height={size} color={color} />
+          ),
+        }}
+        name={'Faq'}
+        component={FaqRootNavigation}
       />
       <SidebarDrawer.Screen
         options={{
