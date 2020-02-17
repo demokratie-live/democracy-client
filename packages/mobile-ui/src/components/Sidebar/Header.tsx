@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { HeadLogo } from './HeadLogo';
+import { ActivityIndicator } from 'react-native';
 
 const Container = styled.TouchableOpacity`
   flex-direction: row;
@@ -26,7 +27,8 @@ interface Props {
 
 export const Header: React.FC<Props> = ({ onPress, label }) => (
   <Container onPress={onPress}>
-    <HeadLogo />
+    {label !== 'verbindet…' && <HeadLogo />}
+    {label === 'verbindet…' && <ActivityIndicator size="large" />}
     <HeadTextWrapper>
       <HeadText>{label}</HeadText>
     </HeadTextWrapper>

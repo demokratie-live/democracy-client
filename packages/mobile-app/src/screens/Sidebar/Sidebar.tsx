@@ -45,7 +45,9 @@ declare type Props = React.ComponentProps<typeof DrawerItemList>;
 
 export const Sidebar: React.FC<Props> = props => {
   const navigation = useNavigation<SidebarNavigationProps>();
-  const { isVerified } = useContext(InitialStateContext);
+  const { isVerified, verificationQueryRunning } = useContext(
+    InitialStateContext,
+  );
 
   const { data } = useQuery(DONATION_STATUS);
   const [donationStatus, setDonationStatus] = useState<any>({});
@@ -63,14 +65,18 @@ export const Sidebar: React.FC<Props> = props => {
       navigation.navigate('Verification');
     }
   };
+
+  const headerLabel = verificationQueryRunning
+    ? 'verbindet…'
+    : isVerified
+    ? 'verifizierter Nutzer'
+    : 'unverifizierter Nutzer';
+
   return (
     <Container>
       <Background />
       <SafeAreaView>
-        <Header
-          onPress={handleHeaderClick}
-          label={isVerified ? 'verifizierter Nutzer' : 'unverifizierter Nutzer'}
-        />
+        <Header onPress={handleHeaderClick} label={headerLabel} />
         <DrawerItemList {...props} />
       </SafeAreaView>
       {donationStatus && donationStatus.result && (

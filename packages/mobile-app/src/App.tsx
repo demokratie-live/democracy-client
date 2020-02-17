@@ -13,9 +13,11 @@ import { NotificationsProvider } from './context/NotificationPermission';
 import { PushNotificationProvider } from './context/PushNotification';
 import { theme, ThemeProvider } from './styles';
 import Navigation from './routes/index';
+// import { ErrorScreen } from './screens/modals/Error';
 
 export default () => (
   <Apollo>
+    {/* <ErrorScreen /> */}
     <InitialStateProvider>
       <LocalVotesProvider>
         <ListFilterProvider>
