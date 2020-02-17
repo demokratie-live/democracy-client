@@ -5,8 +5,11 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { NativeModules } from 'react-native';
 import { ApolloLink } from 'apollo-link';
+import { onError } from 'apollo-link-error';
+import { RetryLink } from 'apollo-link-retry';
 import { authLinkMiddleware, authLinkAfterware } from './Auth';
 import { GRAPHQL_URL, GRAPHQL_SERVER_LOCAL } from '../config';
+import { RetryFunction } from 'apollo-link-retry/lib/retryFunction';
 
 const cache = new InMemoryCache({
   dataIdFromObject: (o: any) => {
@@ -33,7 +36,47 @@ const httpLink = new HttpLink({
   uri: graphQlUri,
 });
 
-const link = ApolloLink.from([authLinkMiddleware, authLinkAfterware, httpLink]);
+// Retry link
+const attempts: RetryFunction = (number, operation) => {
+  console.log(number, operation.operationName);
+  switch (operation.operationName) {
+    case 'Me':
+      return true;
+    default:
+      return false;
+  }
+};
+
+const retryLink = new RetryLink({
+  delay: {
+    initial: 3000,
+    max: 10000,
+    jitter: true,
+  },
+  attempts,
+});
+
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors) {
+    graphQLErrors.forEach(({ message, locations, path }) =>
+      console.log(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+      ),
+    );
+  }
+  if (networkError) {
+    const { message, name } = networkError;
+    console.log(`[Network error]: ${networkError}`, message, name);
+  }
+});
+
+const link = ApolloLink.from([
+  retryLink,
+  errorLink,
+  authLinkMiddleware,
+  authLinkAfterware,
+  httpLink,
+]);
 
 const client = new ApolloClient({
   cache,

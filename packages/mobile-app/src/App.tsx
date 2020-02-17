@@ -12,9 +12,11 @@ import { ListFilterProvider } from './context/ListFilter';
 import { ConstituencyProvider } from './context/Constituency';
 import { NotificationsProvider } from './context/Notifications';
 import { theme, ThemeProvider } from './styles';
+// import { ErrorScreen } from './screens/modals/Error';
 
 export default () => (
   <Apollo>
+    {/* <ErrorScreen /> */}
     <InitialStateProvider>
       <LocalVotesProvider>
         <ListFilterProvider>

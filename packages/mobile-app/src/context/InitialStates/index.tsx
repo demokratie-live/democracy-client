@@ -7,12 +7,14 @@ import ME from './graphql/query/Me';
 interface InitialStateInterface {
   lastStartWithVersion: string | undefined;
   isVerified: boolean;
+  verificationQueryRunning: boolean;
   setLastStartWithVersion: (version: string) => void;
 }
 
 const defaults: InitialStateInterface = {
   lastStartWithVersion: '',
   isVerified: false,
+  verificationQueryRunning: true,
   setLastStartWithVersion: () => {
     throw new Error(
       'InitialStateContext: setLastStartVersion function is not defined',
@@ -26,7 +28,7 @@ export const InitialStateContext = createContext<InitialStateInterface>(
 
 export const InitialStateProvider: FC = ({ children }) => {
   // TODO retry if bad connection or something else to avoid an app restart "apollo-link-retry"
-  const { data: meData } = useQuery<Me>(ME);
+  const { data: meData, loading: verificationQueryRunning } = useQuery<Me>(ME);
   const [isVerified, setIsVerified] = useState<boolean>(false);
   const [lastStartVersion, setLastStartVersion] = useState<
     InitialStateInterface['lastStartWithVersion']
@@ -53,6 +55,7 @@ export const InitialStateProvider: FC = ({ children }) => {
   return (
     <InitialStateContext.Provider
       value={{
+        verificationQueryRunning,
         lastStartWithVersion: lastStartVersion,
         setLastStartWithVersion,
         isVerified,

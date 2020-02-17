@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-native-testing-library';
 
-import { Button, Props } from '../Button';
+import { Button, Props } from '.';
 
 function renderButton(props: Partial<Props> = {}) {
   const defaultProps: Props = {
