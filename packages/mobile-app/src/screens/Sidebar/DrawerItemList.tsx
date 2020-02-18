@@ -45,6 +45,9 @@ export default function DrawerItemList({
     const [curCategory, label] = (drawerLabel as string).split('/');
     const showCategoryLabel = curCategory !== preCategory;
     preCategory = curCategory;
+    if (curCategory === 'hide') {
+      return null;
+    }
 
     const handleClick = () => {
       navigation.dispatch({
