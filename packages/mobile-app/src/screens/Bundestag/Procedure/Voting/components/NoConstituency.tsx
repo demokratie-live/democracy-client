@@ -5,8 +5,8 @@ import styled from 'styled-components/native';
 import Constituency from './Constituency';
 import PieChart from '../../components/Charts/PieChart';
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
-import { RootStackParamList } from '../../../../../routes';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../../../../routes';
 
 const Wrapper = styled.View<Pick<Props, 'noButton'>>`
   align-items: center;

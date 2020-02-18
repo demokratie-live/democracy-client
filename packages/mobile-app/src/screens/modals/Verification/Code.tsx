@@ -23,9 +23,9 @@ import { useNavigation, CompositeNavigationProp } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { VerificationRootStackParamList } from '../../../routes/Verification';
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
-import { RootStackParamList } from '../../../routes';
 import Me from '../../../context/InitialStates/graphql/query/Me';
 import { VerificationContext } from '../../../context/Verification';
+import { RootStackParamList } from '../../../routes';
 
 const Container = styled.KeyboardAvoidingView.attrs(() => ({
   behavior: Platform.OS === 'ios' ? 'padding' : undefined,

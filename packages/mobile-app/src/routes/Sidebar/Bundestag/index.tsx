@@ -73,7 +73,7 @@ const BundestagRootNavigation = () => {
         <BundestagRootStack.Screen
           name="Procedure"
           component={Procedure}
-          options={({ route }) => ({ title: route.params.title })}
+          options={({ route }) => ({ title: route.params.title || '' })}
         />
         <BundestagRootStack.Screen
           name="Voting"

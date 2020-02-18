@@ -6,6 +6,7 @@ import { MaterialTopTabNavigationProp } from '@react-navigation/material-top-tab
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { FC, useContext, useEffect, useState } from 'react';
 import { Alert, Button, Clipboard, Text } from 'react-native';
+import DeviceInfo from 'react-native-device-info';
 import styled from 'styled-components/native';
 import { InitialStateContext } from '../../context/InitialStates';
 import VotesLocal from '../../lib/VotesLocal';
@@ -38,25 +39,6 @@ interface State {
   hasPermissions: boolean;
 }
 
-const NotificationWrapper = styled.View`
-  background-color: lightblue;
-`;
-
-const NotificationDev = () => {
-  return (
-    <NotificationWrapper>
-      <Button
-        title="Notification in 10 seconds"
-        onPress={() => console.log('Notification in 10 seconds')}
-      />
-      <Button
-        title="Notification now"
-        onPress={() => console.log('Notification now')}
-      />
-    </NotificationWrapper>
-  );
-};
-
 const LocalVotes = () => {
   const [localVotes, setLocalVotes] = useState('');
   useEffect(() => {
@@ -82,7 +64,7 @@ export const DevPlaceholder: FC = () => {
   const navigation = useNavigation<DevPlaceholderNavigationProps>();
   return (
     <Container>
-      <Text>Bundestag Screen</Text>
+      <Text>{DeviceInfo.getBundleId()}</Text>
       <Button
         title="Go to Procedure"
         onPress={() =>
@@ -112,7 +94,6 @@ export const DevPlaceholder: FC = () => {
       />
       <Document width="32px" height="32px" color="black" />
       <LocalVotes />
-      <NotificationDev />
     </Container>
   );
 };

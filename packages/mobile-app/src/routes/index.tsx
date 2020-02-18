@@ -1,6 +1,9 @@
 import 'react-native-gesture-handler'; // TODO remove workaround https://github.com/kmagiera/react-native-gesture-handler/issues/320#issuecomment-538190653
 import React, { useState, useContext, useEffect } from 'react';
-import { NavigationNativeContainer } from '@react-navigation/native';
+import {
+  useLinking,
+  NavigationNativeContainer,
+} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Introduction from '../screens/modals/Introduction';
 import Verification from './Verification';
@@ -11,6 +14,9 @@ import { InitialState } from '@react-navigation/core';
 import { SidebarNavigation } from './Sidebar';
 import { PdfScreen } from '../screens/modals/Pdf/Pdf';
 import { ConstituencyScreen } from '../screens/modals/Constituency';
+import { rootNavigationRef } from './rootNavigationRef';
+import { getNavInitStateForProcedure } from '../lib/getNavStateForProcedure';
+import { PushNotificationContext } from '../context/PushNotification';
 import SplashScreen from 'react-native-splash-screen';
 import { theme } from '../styles';
 
@@ -25,7 +31,21 @@ export type RootStackParamList = {
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
-const App = () => {
+const Navigation = () => {
+  const { initialNotification } = useContext(PushNotificationContext);
+  const { getInitialState } = useLinking(rootNavigationRef, {
+    prefixes: ['https://democracy-app.de', 'democracy://'],
+    getStateFromPath: path => {
+      return getNavInitStateForProcedure({
+        // TODO make this deeplinking more save
+        procedureId: path.substr(path.length - 6),
+      });
+    },
+  });
+
+  const [isReady, setIsReady] = React.useState(false);
+  const [initialState, setInitialState] = React.useState<InitialState>();
+
   const [currentVersion, setCurrentVersion] = useState();
   const {
     lastStartWithVersion,
@@ -34,34 +54,68 @@ const App = () => {
   } = useContext(InitialStateContext);
 
   useEffect(() => {
+    getInitialState().then(state => {
+      // democracy://Sidebar/Bundestag/Procedure?procedureId=230576
+      if (state !== undefined) {
+        setInitialState(state);
+      }
+
+      setIsReady(true);
+    });
+  }, [getInitialState]);
+
+  useEffect(() => {
     setCurrentVersion(DeviceInfo.getVersion());
     SplashScreen.hide();
   }, []);
 
-  if (lastStartWithVersion === undefined || currentVersion === undefined) {
-    return null;
-  }
+  useEffect(() => {
+    if (
+      lastStartWithVersion !== undefined &&
+      currentVersion !== undefined &&
+      currentVersion !== lastStartWithVersion
+    ) {
+      setInitialState({
+        routes: [
+          {
+            name: 'Sidebar',
+          },
+          {
+            name: 'Introduction',
+            params: {
+              done: () => setLastStartWithVersion(currentVersion),
+              lastStartWithVersion,
+            },
+          },
+        ],
+      });
+    }
+  }, [currentVersion, lastStartWithVersion, setLastStartWithVersion]);
 
-  const initialState: InitialState = {
-    routes: [
-      {
-        name: 'Sidebar',
-      },
-    ],
-  };
-  if (currentVersion !== lastStartWithVersion) {
-    initialState.routes.push({
-      name: 'Introduction',
-      params: {
-        done: () => setLastStartWithVersion(currentVersion),
-        lastStartWithVersion,
-      },
-    });
+  // call if app opened by push notification
+  useEffect(() => {
+    if (initialNotification) {
+      setInitialState(
+        getNavInitStateForProcedure({
+          procedureId: initialNotification.procedureId,
+        }),
+      );
+    }
+  }, [initialNotification]);
+
+  if (
+    lastStartWithVersion === undefined ||
+    currentVersion === undefined ||
+    initialNotification === undefined ||
+    !isReady
+  ) {
+    return null;
   }
 
   return (
     <NavigationNativeContainer
       initialState={initialState}
+      ref={rootNavigationRef}
       theme={{
         colors: {
           background: '#fff',
@@ -119,4 +173,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Navigation;

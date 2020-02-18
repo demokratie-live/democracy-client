@@ -7,7 +7,7 @@
 // ====================================================
 
 export interface CurrentConferenceWeek_currentConferenceWeek {
-  __typename: "ConferenceWeek";
+  __typename: 'ConferenceWeek';
   start: any;
   end: any;
   calendarWeek: number;

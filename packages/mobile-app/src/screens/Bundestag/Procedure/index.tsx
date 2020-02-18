@@ -1,4 +1,4 @@
-import React, { useContext, FC } from 'react';
+import React, { useContext, FC, useEffect } from 'react';
 import { Text, Platform, Share } from 'react-native';
 import { RouteProp } from '@react-navigation/core';
 import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
@@ -23,6 +23,7 @@ import PrepareActions from './PrepareActions';
 import { InitialStateContext } from '../../../context/InitialStates';
 import { getShareLink } from '../../../lib/shareLink';
 import { ConstituencyContext } from '../../../context/Constituency';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 const Container = styled.ScrollView.attrs({
   scrollIndicatorInsets: { right: 1 }, // TODO do cleanfix when there is a correct solution (already closed but not solved without workaround) https://github.com/facebook/react-native/issues/26610
@@ -35,14 +36,17 @@ type ProcedureScreenRouteProp = RouteProp<
   'Procedure'
 >;
 
+type ScreenNavigationProp = StackNavigationProp<
+  BundestagRootStackParamList,
+  'Procedure'
+>;
+
 type Props = {
   route: ProcedureScreenRouteProp;
+  navigation: ScreenNavigationProp;
 };
 
-export const Procedure: FC<Props> = ({ route }) => {
-  // const navigation = useNavigation<
-  //   StackNavigationProp<BundestagRootStackParamList, 'TabView'>
-  // >();
+export const Procedure: FC<Props> = ({ route, navigation }) => {
   const { isVerified } = useContext(InitialStateContext);
   const { constituency } = useContext(ConstituencyContext);
   const constituencies = constituency ? [constituency] : [];
@@ -55,6 +59,15 @@ export const Procedure: FC<Props> = ({ route }) => {
       constituencies,
     },
   });
+
+  useEffect(() => {
+    if (!route.params.title && data && data.procedure.type) {
+      navigation.setOptions({
+        title: data.procedure.type,
+      });
+    }
+  }, [data, route, navigation]);
+
   if (loading) {
     return <ListLoading />;
   }

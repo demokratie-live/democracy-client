@@ -14,6 +14,9 @@
 // react-native-notifications
 #import "RNNotifications.h"
 
+// Deep Linking
+#import <React/RCTLinkingManager.h>
+
 // Splash screen
 #import "RNSplashScreen.h"
 
@@ -63,5 +66,13 @@
   [RNNotifications didFailToRegisterForRemoteNotificationsWithError:error];
 }
 // react-native-notifications END
+
+
+ // Deep Linking
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url
+ options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+ return [RCTLinkingManager application:app openURL:url options:options];
+}
 
 @end
