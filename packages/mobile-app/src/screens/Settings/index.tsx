@@ -1,5 +1,5 @@
 import React, { useContext, ReactNode } from 'react';
-import { SectionList, Switch, Button } from 'react-native';
+import { SectionList, Switch, Button, Linking, Alert } from 'react-native';
 
 // GraphQL
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -10,6 +10,7 @@ import { Segment } from '../Bundestag/List/Components/Segment';
 import { ListItem } from './components/ListItem';
 import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/core';
+import { getBundleId } from 'react-native-device-info';
 import { NotificationsContext } from '../../context/NotificationPermission';
 
 const Text = styled.Text`
@@ -66,6 +67,31 @@ export const Settings: React.FC<Props> = () => {
     }
   };
 
+  const handleActivate = () => {
+    if (!alreadyDenied) {
+      requestToken();
+    } else {
+      Alert.alert(
+        'Benachrichtigungen',
+        'Bitte Mitteilungen in den Einstellungen aktivieren.',
+        [
+          {
+            text: 'Aktivieren',
+            onPress: () =>
+              Linking.openURL(`app-settings://notification/${getBundleId}`),
+          },
+          {
+            text: 'Später',
+            style: 'cancel',
+          },
+        ],
+        {
+          cancelable: true,
+        },
+      );
+    }
+  };
+
   const listData: List[] = [
     {
       title: '',
@@ -104,93 +130,93 @@ export const Settings: React.FC<Props> = () => {
           }}
         />
       ) : (
-        <Button title="Aktivieren" onPress={requestToken} />
+        <Button title="Aktivieren" onPress={handleActivate} />
       ),
     });
-  }
 
-  if (hasPermissions && notificationSettings.enabled) {
-    listData.push(
-      {
-        title: 'Sitzungswoche',
-        data: [
-          {
-            title: 'Ankündigung',
-            onPress: navigateTo('notifications-settings'),
-            component: (
-              <Switch
-                value={!!notificationSettings.conferenceWeekPushs}
-                onValueChange={value => {
-                  updateNotificationSettings({
-                    conferenceWeekPushs: value,
-                  });
-                }}
-              />
-            ),
-            description:
-              'Werde Sonntags vor einer Sitzungswoche über die kommenden Abstimmungen informiert.',
-          },
-          {
-            title: 'Wichtige Abstimmungen',
-            onPress: navigateTo('notifications-settings'),
-            component: (
-              <Switch
-                value={!!notificationSettings.voteConferenceWeekPushs}
-                onValueChange={value => {
-                  updateNotificationSettings({
-                    voteConferenceWeekPushs: value,
-                  });
-                }}
-              />
-            ),
-            description:
-              'Werde täglich während einer laufenden Sitzungswoche, über eine populäre Abstimmung informiert.',
-          },
-        ],
-      },
-      {
-        title: 'Sitzungsfreie Zeit',
-        data: [
-          {
-            title: 'Populäre Abstimmungen',
-            onPress: navigateTo('notifications-settings'),
-            component: (
-              <Switch
-                value={!!notificationSettings.voteTOP100Pushs}
-                onValueChange={value => {
-                  updateNotificationSettings({
-                    voteTOP100Pushs: value,
-                  });
-                }}
-              />
-            ),
-            description:
-              'Challenge? Werde auch in der sitzungsfreien Zeit täglich über eine Abstimmung informiert, bei der Du noch nicht mitgemacht hast.',
-          },
-        ],
-      },
-      {
-        title: 'Individuelle Benachrichtungen',
-        data: [
-          {
-            title: 'Bundestagsergebnisse',
-            onPress: navigateTo('notifications-settings'),
-            component: (
-              <Switch
-                value={!!notificationSettings.outcomePushs}
-                onValueChange={value => {
-                  updateNotificationSettings({
-                    outcomePushs: value,
-                  });
-                }}
-              />
-            ),
-            description:
-              'Werde nach Deiner Abstimmung standardmäßig über das offizielle Ergebnis des Bundestages informiert, sobald dieses vorliegt.',
-          },
-        ],
-      },
-    );
+    if (hasPermissions && notificationSettings.enabled) {
+      listData.push(
+        {
+          title: 'Sitzungswoche',
+          data: [
+            {
+              title: 'Ankündigung',
+              onPress: navigateTo('notifications-settings'),
+              component: (
+                <Switch
+                  value={!!notificationSettings.conferenceWeekPushs}
+                  onValueChange={value => {
+                    updateNotificationSettings({
+                      conferenceWeekPushs: value,
+                    });
+                  }}
+                />
+              ),
+              description:
+                'Werde Sonntags vor einer Sitzungswoche über die kommenden Abstimmungen informiert.',
+            },
+            {
+              title: 'Wichtige Abstimmungen',
+              onPress: navigateTo('notifications-settings'),
+              component: (
+                <Switch
+                  value={!!notificationSettings.voteConferenceWeekPushs}
+                  onValueChange={value => {
+                    updateNotificationSettings({
+                      voteConferenceWeekPushs: value,
+                    });
+                  }}
+                />
+              ),
+              description:
+                'Werde täglich während einer laufenden Sitzungswoche, über eine populäre Abstimmung informiert.',
+            },
+          ],
+        },
+        {
+          title: 'Sitzungsfreie Zeit',
+          data: [
+            {
+              title: 'Populäre Abstimmungen',
+              onPress: navigateTo('notifications-settings'),
+              component: (
+                <Switch
+                  value={!!notificationSettings.voteTOP100Pushs}
+                  onValueChange={value => {
+                    updateNotificationSettings({
+                      voteTOP100Pushs: value,
+                    });
+                  }}
+                />
+              ),
+              description:
+                'Challenge? Werde auch in der sitzungsfreien Zeit täglich über eine Abstimmung informiert, bei der Du noch nicht mitgemacht hast.',
+            },
+          ],
+        },
+        {
+          title: 'Individuelle Benachrichtungen',
+          data: [
+            {
+              title: 'Bundestagsergebnisse',
+              onPress: navigateTo('notifications-settings'),
+              component: (
+                <Switch
+                  value={!!notificationSettings.outcomePushs}
+                  onValueChange={value => {
+                    updateNotificationSettings({
+                      outcomePushs: value,
+                    });
+                  }}
+                />
+              ),
+              description:
+                'Werde nach Deiner Abstimmung standardmäßig über das offizielle Ergebnis des Bundestages informiert, sobald dieses vorliegt.',
+            },
+          ],
+        },
+      );
+    }
   }
 
   return (
@@ -209,9 +235,6 @@ export const Settings: React.FC<Props> = () => {
       renderSectionHeader={({ section: { title } }) => <Segment text={title} />}
       sections={listData}
       keyExtractor={item => item.title}
-      ListFooterComponent={
-        (!!alreadyDenied && <Text>Request code already denied</Text>) || null
-      }
     />
   );
 };
