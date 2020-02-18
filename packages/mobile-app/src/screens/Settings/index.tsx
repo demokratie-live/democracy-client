@@ -10,8 +10,8 @@ import { Segment } from '../Bundestag/List/Components/Segment';
 import { ListItem } from './components/ListItem';
 import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/core';
-import { NotificationsContext } from '../../context/NotificationPermission';
 import { getBundleId } from 'react-native-device-info';
+import { NotificationsContext } from '../../context/NotificationPermission';
 
 const Text = styled.Text`
   font-size: 17;
