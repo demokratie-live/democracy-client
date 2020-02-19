@@ -251,7 +251,7 @@ PODS:
     - React
   - RNSearchBar (3.5.1):
     - React
-  - RNSentry (1.3.0):
+  - RNSentry (1.3.1):
     - React
     - Sentry (~> 4.4.0)
   - RNSha256 (1.3.6):
@@ -453,7 +453,7 @@ SPEC CHECKSUMS:
   RNReanimated: 031fe8d9ea93c2bd689a40f05320ef9d96f74d7f
   RNScreens: 5e4758109c6d35f9a009ce72af873df907548020
   RNSearchBar: 9860431356b7d12a8449d2fddb2b5f3c78d1e99f
-  RNSentry: ba3ec79ffc91a1d808ec689bf615ffc5f960baa4
+  RNSentry: 6458ba85aa3f8ae291abed4f72abbd7080839c71
   RNSha256: c6f68c850bf8315c95e2508667e8c908bd9f8487
   RNSVG: 67f1f12dae2cef6ed59a42cae74a6b8f5a9e7b46
   Sentry: 14bdd673870e8cf64932b149fad5bbbf39a9b390
