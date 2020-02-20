@@ -8,9 +8,9 @@ import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { SidebarParamList } from '..';
 import { RootStackParamList } from '../..';
 import MenuIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Menu';
-import styled from 'styled-components/native';
 import { theme } from '../../../styles';
 import { AboutScreen } from '../../../screens/modals/About';
+import { BurgerMenuButton } from '../../../components/MenuButton';
 
 export type AboutRootStackParamList = {
   About: undefined;
@@ -22,10 +22,6 @@ type AboutNavigationProps = CompositeNavigationProp<
   DrawerNavigationProp<SidebarParamList, 'About'>,
   StackNavigationProp<RootStackParamList>
 >;
-
-const MenuButton = styled.TouchableOpacity`
-  padding-left: 11;
-`;
 
 const AboutRootNavigation = () => {
   const navigation = useNavigation<AboutNavigationProps>();
@@ -44,7 +40,7 @@ const AboutRootNavigation = () => {
         name="About"
         component={AboutScreen}
         options={{
-          title: 'About & Support',
+          title: 'Über DEMOCRACY',
           headerTintColor: '#fff',
           headerStyle: {
             backgroundColor: '#4494D3',
@@ -52,9 +48,9 @@ const AboutRootNavigation = () => {
             shadowOpacity: 0,
           },
           headerLeft: () => (
-            <MenuButton onPress={navigation.toggleDrawer}>
+            <BurgerMenuButton onPress={navigation.toggleDrawer}>
               <MenuIcon width={18} height={18} color="#fff" />
-            </MenuButton>
+            </BurgerMenuButton>
           ),
         }}
       />
