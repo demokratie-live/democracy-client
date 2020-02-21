@@ -43,7 +43,7 @@ nachlesen.`,
     text: `DEMOCRACY ist eine gemeinnützige App, das heißt von Menschen für Menschen, um unsere Politik transparenter und zugänglicher zu machen. Da wir DEMOCRACY als eine werbefreie Plattform ohne Datenverkauf realisiert haben, kann unser Joker nur die gemeinschaftliche Finanzierung sein. Insofern wird DEMOCRACY, um die laufenden Kosten zu decken, auch nach dem initialen Crowdfunding durch Spenden finanziert.
 Finanziell unterstützen kannst Du via [https://www.democracy-deutschland.de/#!donate](https://www.democracy-deutschland.de/#!donate).`,
   },
-    {
+  {
     title: 'Was bedeuten die Beratungszustände?',
     text: `**Noch nicht beraten**
 Der Bundestag hat den Vorgang noch nicht beraten.
