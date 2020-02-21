@@ -13,6 +13,7 @@ import { SidebarParamList } from '../../routes/Sidebar';
 import { useQuery } from '@apollo/react-hooks';
 import { DONATION_STATUS } from './Donate/graphql/query/donationStatus';
 import DonatedBox from './Donate/DonatedBox';
+import { Space } from '../modals/Verification/Start';
 
 const SafeAreaView = styled.SafeAreaView`
   flex: 1;
@@ -39,6 +40,10 @@ const DonationTouch = styled.TouchableOpacity`
   flex: 1;
   width: 100%;
   height: 68;
+`;
+
+const NaviList = styled.ScrollView`
+  margin-bottom: 68;
 `;
 
 declare type Props = React.ComponentProps<typeof DrawerItemList>;
@@ -77,7 +82,10 @@ export const Sidebar: React.FC<Props> = props => {
       <Background />
       <SafeAreaView>
         <Header onPress={handleHeaderClick} label={headerLabel} />
-        <DrawerItemList {...props} />
+        <Space />
+        <NaviList>
+          <DrawerItemList {...props} />
+        </NaviList>
       </SafeAreaView>
       {donationStatus && donationStatus.result && (
         <DonateBoxWrapper>

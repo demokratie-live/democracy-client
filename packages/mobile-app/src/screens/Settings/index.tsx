@@ -8,10 +8,15 @@ import { ConstituencyContext } from '../../context/Constituency';
 import { InitialStateContext } from '../../context/InitialStates';
 import { Segment } from '../Bundestag/List/Components/Segment';
 import { ListItem } from './components/ListItem';
-import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/core';
 import { getBundleId } from 'react-native-device-info';
 import { NotificationsContext } from '../../context/NotificationPermission';
+import { styled } from '../../styles';
+
+const Wrapper = styled.View`
+  background-color: ${({ theme }) => theme.colors.background.secondary};
+  flex: 1;
+`;
 
 const Text = styled.Text`
   font-size: 17;
@@ -112,6 +117,7 @@ export const Settings: React.FC<Props> = () => {
           title: 'Wahlkreis',
           text: `WK ${constituency}`,
           onPress: navigateTo('constituency'),
+          arrow: true,
         },
       ],
     },
@@ -220,21 +226,25 @@ export const Settings: React.FC<Props> = () => {
   }
 
   return (
-    <SectionList<ListData>
-      renderItem={({ item, index }) => (
-        <ListItem
-          key={index}
-          text={item.text}
-          description={item.description}
-          arrow={item.arrow}
-          onPress={item.onPress}
-          component={item.component}>
-          <Text>{item.title}</Text>
-        </ListItem>
-      )}
-      renderSectionHeader={({ section: { title } }) => <Segment text={title} />}
-      sections={listData}
-      keyExtractor={item => item.title}
-    />
+    <Wrapper>
+      <SectionList<ListData>
+        renderItem={({ item, index }) => (
+          <ListItem
+            key={index}
+            text={item.text}
+            description={item.description}
+            arrow={item.arrow}
+            onPress={item.onPress}
+            component={item.component}>
+            <Text>{item.title}</Text>
+          </ListItem>
+        )}
+        renderSectionHeader={({ section: { title } }) => (
+          <Segment text={title} />
+        )}
+        sections={listData}
+        keyExtractor={item => item.title}
+      />
+    </Wrapper>
   );
 };

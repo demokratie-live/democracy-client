@@ -3,12 +3,13 @@ import styled from 'styled-components/native';
 
 // Components
 import WahlOMeterLogo from './WahlOMeterLogo';
+import { Space } from '../modals/Verification/Start';
 
 const NoVotesWrapper = styled.ScrollView.attrs({
   contentContainerStyle: {
     flexGrow: 1,
     alignItems: 'center',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
   },
 })`
   flex-grow: 1;
@@ -32,9 +33,11 @@ class NoVotesPlaceholder extends PureComponent<Props> {
     return (
       <NoVotesWrapper>
         <WahlOMeterLogo subline={subline} />
+        <Space />
         <Text>
           Diese Auswertung ist erst nach der ersten Abstimmung verfügbar
         </Text>
+        <Space />
       </NoVotesWrapper>
     );
   }

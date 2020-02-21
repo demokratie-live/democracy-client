@@ -86,6 +86,7 @@ export const NotificationsProvider: React.FC = ({ children }) => {
   useEffect(() => {
     checkNotifications().then(({ status }) => {
       if (!alreadyDenied && status === 'blocked') {
+        // TODO has permissions has an issue on initial activating
         setAlreadyDenied(true);
         setHasPermissions(false);
       } else if (alreadyDenied && status === 'granted') {

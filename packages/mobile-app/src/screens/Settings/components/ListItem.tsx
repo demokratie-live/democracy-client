@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import styled from 'styled-components/native';
-import { Text } from 'react-native';
+import ArrowIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Arrow';
 
 const Wrapper = styled.TouchableOpacity`
   flex-direction: row;
@@ -8,6 +8,7 @@ const Wrapper = styled.TouchableOpacity`
   height: 44;
   align-items: center;
   padding-left: 16;
+  padding-right: 11;
   border-bottom-width: 1;
   border-bottom-color: #c8c7cc;
   font-size: 17;
@@ -24,6 +25,14 @@ const Description = styled.Text`
   color: #8f8e94;
   padding-horizontal: 18;
   padding-vertical: 8;
+`;
+
+const Arrow = styled(ArrowIcon).attrs(() => ({
+  color: 'rgb(180, 180, 180)',
+  width: 17,
+  height: 17,
+}))`
+  transform: rotate(90deg);
 `;
 
 // const NavigationIoniconsIcon = styled(Ionicons).attrs(() => ({
@@ -57,7 +66,7 @@ export const ListItem: React.FC<Props> = ({
       <Wrapper onPress={onPress}>
         {children}
         {!!text && <Value arrow={arrow}>{text}</Value>}
-        {!!arrow && <Text>&gt;</Text>}
+        {!!arrow && <Arrow />}
         {!!component && component}
       </Wrapper>
       {!!description && <Description>{description}</Description>}

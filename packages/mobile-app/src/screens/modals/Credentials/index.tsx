@@ -14,6 +14,7 @@ import { linking } from '../../../lib/linking';
 import { RootStackParamList } from '../../../routes';
 import { SidebarParamList } from '../../../routes/Sidebar';
 import { credentialsData } from './data';
+import SvgPhone from '@democracy-deutschland/mobile-ui/src/components/Icons/Phone';
 
 const phoneNumber =
   Platform.OS === 'ios'
@@ -22,9 +23,7 @@ const phoneNumber =
 const email = `mailto:${'contact@democracy-deutschland.de'}`;
 const website = 'https://www.democracy-deutschland.de/';
 
-const Wrapper = styled.ScrollView`
-  padding-horizontal: 18;
-`;
+const Wrapper = styled.ScrollView``;
 
 const ContactWrapper = styled.View`
   width: 100%;
@@ -42,11 +41,6 @@ const IconWrapper = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
 `;
-
-const ContactIcons = styled.Text.attrs(() => ({
-  size: 40,
-  color: '#000000',
-}))``;
 
 const Spacer = styled.View`
   padding-bottom: 36;
@@ -100,7 +94,7 @@ export const CredentialsScreen: React.FC<Props> = () => {
       <Spacer />
       <ContactWrapper>
         <IconWrapper onPress={linking(phoneNumber)}>
-          <ContactIcons>phone</ContactIcons>
+          <SvgPhone color="#000" width={30} height={30} />
         </IconWrapper>
         <IconWrapper onPress={linking(email)}>
           <SvgMail color="#000" width={30} height={30} />

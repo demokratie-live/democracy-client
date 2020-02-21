@@ -5,9 +5,11 @@ export interface ThemeInterface {
     headerText: string;
     headerTextSecondary: string;
     tansparentSecondary: string;
+    description: string;
     background: {
       header: string;
       main: string;
+      secondary: string;
     };
   };
   distances: {
@@ -29,9 +31,11 @@ const myTheme: ThemeInterface = {
     headerText: '#fff',
     headerTextSecondary: '#fffb',
     tansparentSecondary: '#0009',
+    description: '#9B9B9B',
     background: {
       header: '#4494d3',
       main: '#fff',
+      secondary: '#EFEFF4',
     },
   },
 };

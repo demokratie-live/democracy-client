@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components/native';
-import { Alert } from 'react-native';
-import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
+import { Button } from 'react-native';
 import { useQuery } from '@apollo/react-hooks';
 import { CURRENT_CONFERENCE_WEEK } from './graphql/query/currentConferenceWeek';
 import { CurrentConferenceWeek } from './graphql/query/__generated__/CurrentConferenceWeek';
 import dateFormat from 'dateformat';
+import SvgConferenceWeekPlaceholder from '@democracy-deutschland/mobile-ui/src/components/Icons/ConferenceWeekPlaceholder';
+import { Space } from '../../modals/Verification/Start';
 
-const Container = styled.View`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-`;
+import { useNavigation } from '@react-navigation/core';
+import { NotificationsContext } from '../../../context/NotificationPermission';
+
+const Container = styled.ScrollView.attrs({
+  flex: 1,
+  alignItems: 'center',
+  justifyContent: 'center',
+})``;
 
 const Text = styled.Text`
   font-size: 15;
@@ -24,30 +28,46 @@ const TextGrey = styled(Text)`
   color: #9b9b9b;
 `;
 
+const Bold = styled.Text`
+  font-weight: bold;
+`;
+
+const IconWrapper = styled.View`
+  align-items: center;
+`;
+
 export const NoConferenceWeekData = () => {
   const { data } = useQuery<CurrentConferenceWeek>(CURRENT_CONFERENCE_WEEK);
+  const navigation = useNavigation();
+  const { notificationSettings } = useContext(NotificationsContext);
+  console.log(notificationSettings);
   return (
     <Container>
-      <Text>Es liegen derzeit noch keine Abstimmungsdaten vor.</Text>
+      <IconWrapper>
+        <SvgConferenceWeekPlaceholder width={150} height={150} color="#000" />
+      </IconWrapper>
+      <Space />
+      <Text>
+        Es liegen derzeit <Bold>{'noch keine\nAbstimmungsdaten'}</Bold> vor.
+      </Text>
       {!!data && (
         <TextGrey>
-          {`Die nächste Sitzungswoche findet gemäß Sitzungswochenkalener in KW ${
-            data.currentConferenceWeek.calendarWeek
-          } 
-(${dateFormat(data.currentConferenceWeek.start, 'dd.mm.yyyy')} – ${dateFormat(
-            data.currentConferenceWeek.end,
-            'dd.mm.yyyy',
-          )})
-statt.
-          `}
+          {`Die nächste Sitzungswoche findet gemäß Sitzungswochenkalener in KW ${data.currentConferenceWeek.calendarWeek}
+(`}
+          {dateFormat(data.currentConferenceWeek.start, 'dd.mm.yyyy')} –
+          {dateFormat(data.currentConferenceWeek.end, 'dd.mm.yyyy')}
+          {`)
+statt.`}
         </TextGrey>
       )}
       {/* TODO show button only if notifications not requested (show explanation for push) */}
-      <Button
-        text="Benachrichtigen"
-        textColor="blue"
-        onPress={() => Alert.alert('navigate to notifications')}
-      />
+      {(!notificationSettings.enabled ||
+        !notificationSettings.conferenceWeekPushs) && (
+        <Button
+          title="Benachrichtigen"
+          onPress={() => navigation.navigate('Settings')}
+        />
+      )}
     </Container>
   );
 };

@@ -15,6 +15,7 @@ import { getNavInitStateForProcedure } from '../lib/getNavStateForProcedure';
 import { PushNotificationContext } from '../context/PushNotification';
 import SplashScreen from 'react-native-splash-screen';
 import { theme } from '../styles';
+import { StatusBar } from 'react-native';
 
 export type RootStackParamList = {
   Sidebar: undefined;
@@ -117,63 +118,66 @@ const Navigation = () => {
   }
 
   return (
-    <NavigationContainer
-      initialState={initialState}
-      ref={rootNavigationRef}
-      theme={{
-        colors: {
-          background: '#fff',
-          primary: '#fff',
-          text: '#fff',
-          border: '#fff',
-          card: '#fff',
-        },
-        dark: false,
-      }}>
-      <RootStack.Navigator
-        mode="modal"
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: theme.colors.background.header,
-            elevation: 0,
-            shadowOpacity: 0,
+    <>
+      <StatusBar barStyle="light-content" />
+      <NavigationContainer
+        initialState={initialState}
+        ref={rootNavigationRef}
+        theme={{
+          colors: {
+            background: '#fff',
+            primary: '#fff',
+            text: '#fff',
+            border: '#fff',
+            card: '#fff',
           },
-          headerBackTitleVisible: false,
-          headerTintColor: theme.colors.headerText,
+          dark: false,
         }}>
-        <RootStack.Screen
-          name="Sidebar"
-          component={SidebarNavigation}
-          options={{ headerShown: false }}
-        />
-        <RootStack.Screen
-          name="Introduction"
-          component={Introduction}
-          options={{ headerShown: false }}
-        />
-        <RootStack.Screen
-          name="Pdf"
-          component={PdfScreen}
-          options={({ route }) => ({ title: route.params.title })}
-        />
-        <RootStack.Screen
-          name="Constituency"
-          component={ConstituencyScreen}
-          options={{
-            title: 'Wahlkreissuche',
-          }}
-        />
-        {!isVerified && (
+        <RootStack.Navigator
+          mode="modal"
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: theme.colors.background.header,
+              elevation: 0,
+              shadowOpacity: 0,
+            },
+            headerBackTitleVisible: false,
+            headerTintColor: theme.colors.headerText,
+          }}>
           <RootStack.Screen
-            name="Verification"
-            options={{
-              headerShown: false,
-            }}
-            component={VerificationScreen}
+            name="Sidebar"
+            component={SidebarNavigation}
+            options={{ headerShown: false }}
           />
-        )}
-      </RootStack.Navigator>
-    </NavigationContainer>
+          <RootStack.Screen
+            name="Introduction"
+            component={Introduction}
+            options={{ headerShown: false }}
+          />
+          <RootStack.Screen
+            name="Pdf"
+            component={PdfScreen}
+            options={({ route }) => ({ title: route.params.title })}
+          />
+          <RootStack.Screen
+            name="Constituency"
+            component={ConstituencyScreen}
+            options={{
+              title: 'Wahlkreissuche',
+            }}
+          />
+          {!isVerified && (
+            <RootStack.Screen
+              name="Verification"
+              options={{
+                headerShown: false,
+              }}
+              component={VerificationScreen}
+            />
+          )}
+        </RootStack.Navigator>
+      </NavigationContainer>
+    </>
   );
 };
 
