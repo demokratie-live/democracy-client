@@ -15,6 +15,7 @@ import { RootStackParamList } from '../../../routes';
 import { SidebarParamList } from '../../../routes/Sidebar';
 import { credentialsData } from './data';
 import SvgPhone from '@democracy-deutschland/mobile-ui/src/components/Icons/Phone';
+import { MadeWithLove } from '../../../components/MadeWithLove';
 
 const phoneNumber =
   Platform.OS === 'ios'
@@ -23,7 +24,9 @@ const phoneNumber =
 const email = `mailto:${'contact@democracy-deutschland.de'}`;
 const website = 'https://www.democracy-deutschland.de/';
 
-const Wrapper = styled.ScrollView``;
+const Wrapper = styled.ScrollView.attrs({
+  scrollIndicatorInsets: { right: 1 }, // TODO do cleanfix when there is a correct solution (already closed but not solved without workaround) https://github.com/facebook/react-native/issues/26610
+})``;
 
 const ContactWrapper = styled.View`
   width: 100%;
@@ -104,6 +107,7 @@ export const CredentialsScreen: React.FC<Props> = () => {
         </IconWrapper>
       </ContactWrapper>
       <Spacer />
+      <MadeWithLove />
     </Wrapper>
   );
 };

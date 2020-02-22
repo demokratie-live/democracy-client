@@ -3,9 +3,7 @@ import { DocumentItem } from './DocumentItem';
 import { Procedure_procedure_importantDocuments } from '../graphql/query/__generated__/Procedure';
 import { styled } from '../../../../styles';
 
-const Wrapper = styled.View`
-  padding-horizontal: ${({ theme }) => theme.distances.secondary};
-`;
+const Wrapper = styled.View``;
 
 interface Props {
   documents: Procedure_procedure_importantDocuments[]; // TODO Fix type

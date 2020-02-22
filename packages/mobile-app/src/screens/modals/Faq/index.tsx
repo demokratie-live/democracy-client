@@ -22,6 +22,7 @@ import deepmerge from 'deepmerge';
 import { CompositeNavigationProp } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../routes';
+import { MadeWithLove } from '../../../components/MadeWithLove';
 
 const phoneNumber =
   Platform.OS === 'ios'
@@ -36,7 +37,9 @@ const youtube = 'https://www.youtube.com/channel/UC2R4cGTq1LjFZ2DvDaVhDyg';
 const discord = 'https://discord.gg/Pdu3ZEV';
 const website = 'https://www.democracy-deutschland.de/';
 
-const Wrapper = styled.ScrollView`
+const Wrapper = styled.ScrollView.attrs({
+  scrollIndicatorInsets: { right: 1 }, // TODO do cleanfix when there is a correct solution (already closed but not solved without workaround) https://github.com/facebook/react-native/issues/26610
+})`
   /* padding-horizontal: 18; */
 `;
 
@@ -179,6 +182,7 @@ Bitte gib uns möglichst viele Informationen zu den von Dir gefunden Fehlern ode
         textColor="blue"
       />
       <Spacer />
+      <MadeWithLove />
     </Wrapper>
   );
 };

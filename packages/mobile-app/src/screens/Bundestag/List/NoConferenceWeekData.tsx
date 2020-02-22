@@ -54,7 +54,7 @@ export const NoConferenceWeekData = () => {
         <TextGrey>
           {`Die nächste Sitzungswoche findet gemäß Sitzungswochenkalener in KW ${data.currentConferenceWeek.calendarWeek}
 (`}
-          {dateFormat(data.currentConferenceWeek.start, 'dd.mm.yyyy')} –
+          {dateFormat(data.currentConferenceWeek.start, 'dd.mm.yyyy')} –{' '}
           {dateFormat(data.currentConferenceWeek.end, 'dd.mm.yyyy')}
           {`)
 statt.`}

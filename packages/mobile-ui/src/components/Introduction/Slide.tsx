@@ -35,9 +35,6 @@ const TextSub = styled.Text`
   color: #9b9b9b;
   font-size: 15;
   padding-top: 1;
-  font-family: ${Platform.OS === 'ios'
-    ? 'HelveticaNeue-Thin'
-    : 'sans-serif-light'};
   text-align: center;
   margin-bottom: 18;
 `;
