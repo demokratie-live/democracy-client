@@ -7,7 +7,7 @@ const SvgFunnelEmpty = (props: SvgProps) => (
       d="M402.86 722.104V414.8L72 92h880L636.61 414.8V933z"
       fillRule="nonzero"
       stroke={props.color}
-      strokeWidth={75}
+      strokeWidth={63}
       fill="none"
     />
   </Svg>

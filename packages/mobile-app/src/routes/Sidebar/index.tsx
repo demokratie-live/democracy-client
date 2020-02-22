@@ -2,9 +2,11 @@ import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import BundestagRootNavigation from './Bundestag';
 import GovernmentIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Government';
-import IncreaseArrowIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/IncreaseArrow';
-import InfoArrowIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Info';
-import WaterDrop from '@democracy-deutschland/mobile-ui/src/components/Icons/WaterDrop';
+import SvgSettings from '@democracy-deutschland/mobile-ui/src/components/Icons/Settings';
+import SvgWahlOMeter from '@democracy-deutschland/mobile-ui/src/components/Icons/WahlOMeter';
+import SvgFaqAndSupport from '@democracy-deutschland/mobile-ui/src/components/Icons/FaqAndSupport';
+import SvgAbout from '@democracy-deutschland/mobile-ui/src/components/Icons/About';
+import SvgLaw from '@democracy-deutschland/mobile-ui/src/components/Icons/Law';
 
 import { Sidebar } from '../../screens/Sidebar/Sidebar';
 import WahlOMeterNavigation from './WahlOMeter';
@@ -31,7 +33,8 @@ export const SidebarNavigation = () => {
     <SidebarDrawer.Navigator
       initialRouteName="Bundestag"
       drawerContent={props => <Sidebar {...props} />}
-      hideStatusBar
+      drawerType={'back'}
+      overlayColor="1"
       drawerContentOptions={{
         labelStyle: { color: '#fff' },
         activeTintColor: '#fff',
@@ -55,7 +58,7 @@ export const SidebarNavigation = () => {
           drawerLabel: 'Auswertungen/Wahl-O-Meter',
           gestureEnabled: true,
           drawerIcon: ({ color, size }) => (
-            <WaterDrop width={size} height={size} color={color} />
+            <SvgWahlOMeter width={size} height={size} color={color} />
           ),
           unmountOnBlur: true,
         }}
@@ -67,7 +70,7 @@ export const SidebarNavigation = () => {
           drawerLabel: 'Mehr/Settings',
           gestureEnabled: true,
           drawerIcon: ({ color, size }) => (
-            <IncreaseArrowIcon width={size} height={size} color={color} />
+            <SvgSettings width={size} height={size} color={color} />
           ),
         }}
         name="Settings"
@@ -79,7 +82,7 @@ export const SidebarNavigation = () => {
           drawerLabel: 'Mehr/FAQ & Support',
           gestureEnabled: true,
           drawerIcon: ({ color, size }) => (
-            <InfoArrowIcon width={size} height={size} color={color} />
+            <SvgFaqAndSupport width={size} height={size} color={color} />
           ),
         }}
         name={'Faq'}
@@ -91,7 +94,7 @@ export const SidebarNavigation = () => {
           drawerLabel: 'Mehr/Über DEMOCRACY',
           gestureEnabled: true,
           drawerIcon: ({ color, size }) => (
-            <InfoArrowIcon width={size} height={size} color={color} />
+            <SvgAbout width={size} height={size} color={color} />
           ),
         }}
         name={'About'}
@@ -102,7 +105,7 @@ export const SidebarNavigation = () => {
           drawerLabel: 'Mehr/Rechtliches',
           gestureEnabled: true,
           drawerIcon: ({ color, size }) => (
-            <InfoArrowIcon width={size} height={size} color={color} />
+            <SvgLaw width={size} height={size} color={color} />
           ),
         }}
         name={'Credentials'}
@@ -112,9 +115,6 @@ export const SidebarNavigation = () => {
         options={{
           drawerLabel: 'hide/Donate',
           gestureEnabled: true,
-          drawerIcon: ({ color, size }) => (
-            <InfoArrowIcon width={size} height={size} color={color} />
-          ),
         }}
         name={'Donate'}
         component={DonateRootNavigation}

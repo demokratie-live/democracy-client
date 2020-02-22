@@ -13,11 +13,16 @@ import SvgTwitter from '@democracy-deutschland/mobile-ui/src/components/Icons/Tw
 import SvgPlanet from '@democracy-deutschland/mobile-ui/src/components/Icons/Planet';
 import SvgMail from '@democracy-deutschland/mobile-ui/src/components/Icons/Mail';
 import SvgInstagram from '@democracy-deutschland/mobile-ui/src/components/Icons/Instagram';
+import SvgPhone from '@democracy-deutschland/mobile-ui/src/components/Icons/Phone';
+import SvgGithub from '@democracy-deutschland/mobile-ui/src/components/Icons/Github';
+import SvgYoutube from '@democracy-deutschland/mobile-ui/src/components/Icons/Youtube';
+import SvgDiscord from '@democracy-deutschland/mobile-ui/src/components/Icons/Discord';
 import styled from 'styled-components/native';
 import deepmerge from 'deepmerge';
 import { CompositeNavigationProp } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../routes';
+import { MadeWithLove } from '../../../components/MadeWithLove';
 
 const phoneNumber =
   Platform.OS === 'ios'
@@ -32,12 +37,15 @@ const youtube = 'https://www.youtube.com/channel/UC2R4cGTq1LjFZ2DvDaVhDyg';
 const discord = 'https://discord.gg/Pdu3ZEV';
 const website = 'https://www.democracy-deutschland.de/';
 
-const Wrapper = styled.ScrollView`
-  padding-horizontal: 18;
+const Wrapper = styled.ScrollView.attrs({
+  scrollIndicatorInsets: { right: 1 }, // TODO do cleanfix when there is a correct solution (already closed but not solved without workaround) https://github.com/facebook/react-native/issues/26610
+})`
+  /* padding-horizontal: 18; */
 `;
 
 const Headline = styled.Text`
-  padding-top: 18px;
+  padding-horizontal: 18;
+  padding-vertical: 18;
   color: grey;
   font-size: 15;
 `;
@@ -68,11 +76,6 @@ const IconWrapper = styled.TouchableOpacity`
   align-items: center;
 `;
 
-const ContactIcons = styled.Text.attrs(() => ({
-  size: 40,
-  color: '#000000',
-}))``;
-
 const Spacer = styled.View`
   padding-bottom: 36;
 `;
@@ -94,6 +97,7 @@ const Markdown: React.FC<MarkdownProps> = ({ children, styles = {} }) => {
 
   return (
     <MarkdownView
+      style={{ paddingHorizontal: 18 }}
       styles={markdownStyles}
       onLinkPress={url => {
         Linking.openURL(url).catch(error =>
@@ -123,12 +127,7 @@ export const FaqScreen: React.FC<Props> = ({ navigation }) => {
           <Markdown>{text}</Markdown>
         </Folding>
       ))}
-      <Button
-        text="Tutorial erneut ansehen"
-        onPress={() => navigation.navigate('Introduction')}
-        backgroundColor="blue"
-        textColor="white"
-      />
+      <Spacer />
       <Markdown
         styles={{
           paragraph: {
@@ -145,7 +144,7 @@ Bitte gib uns möglichst viele Informationen zu den von Dir gefunden Fehlern ode
       <Spacer />
       <ContactWrapper>
         <IconWrapper onPress={linking(phoneNumber)}>
-          <ContactIcons>phone</ContactIcons>
+          <SvgPhone color="#000" width={30} height={30} />
         </IconWrapper>
         <IconWrapper onPress={linking(email)}>
           <SvgMail color="#000" width={30} height={30} />
@@ -156,7 +155,7 @@ Bitte gib uns möglichst viele Informationen zu den von Dir gefunden Fehlern ode
       </ContactWrapper>
       <SocialMediaWrapper>
         <IconWrapper onPress={linking(github)}>
-          <ContactIcons>github</ContactIcons>
+          <SvgGithub color="#000" width={30} height={30} />
         </IconWrapper>
         <IconWrapper onPress={linking(twitter)}>
           <SvgTwitter color="#000" width={30} height={30} />
@@ -170,13 +169,20 @@ Bitte gib uns möglichst viele Informationen zu den von Dir gefunden Fehlern ode
           <SvgInstagram color="#000" width={30} height={30} />
         </IconWrapper>
         <IconWrapper onPress={linking(youtube)}>
-          <ContactIcons>youtube</ContactIcons>
+          <SvgYoutube color="#000" width={30} height={30} />
         </IconWrapper>
         <IconWrapper onPress={linking(discord)}>
-          <ContactIcons>discord</ContactIcons>
+          <SvgDiscord color="#000" width={30} height={30} />
         </IconWrapper>
       </SocialMediaWrapper>
+      <Button
+        text="Tutorial erneut ansehen"
+        onPress={() => navigation.navigate('Introduction')}
+        // backgroundColor=""
+        textColor="blue"
+      />
       <Spacer />
+      <MadeWithLove />
     </Wrapper>
   );
 };

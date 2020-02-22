@@ -6,6 +6,7 @@ import Bell from '@democracy-deutschland/mobile-ui/src/components/Icons/Bell';
 import BellSlash from '@democracy-deutschland/mobile-ui/src/components/Icons/BellSlash';
 import ShareIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Share';
 import ShareIconIos from '@democracy-deutschland/mobile-ui/src/components/Icons/ShareIos';
+import { theme } from '../../../../styles';
 
 // Pick<Slice, 'percent' | 'large'>
 const VoteIconButtonWrapper = styled.TouchableOpacity<
@@ -93,10 +94,26 @@ const ActionButton: React.FC<Props> = ({
       styleWrapper = {
         borderColor: '#b10dd3',
       };
-      Icon = <ShareComponent width={40} height={40} color="#fff" />;
+      Icon = (
+        <ShareComponent
+          width={45}
+          height={45}
+          color="#fff"
+          style={{ marginBottom: 8 }}
+        />
+      );
       break;
     case 'UNKNOWN':
-      Icon = <Text>help</Text>;
+      Icon = (
+        <Text
+          style={{
+            fontSize: 60,
+            color: theme.colors.headerText,
+            fontWeight: '200',
+          }}>
+          ?
+        </Text>
+      );
       break;
 
     default:

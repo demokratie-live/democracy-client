@@ -8,9 +8,9 @@ import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { SidebarParamList } from '..';
 import { RootStackParamList } from '../..';
 import MenuIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Menu';
-import styled from 'styled-components/native';
 import { theme } from '../../../styles';
 import { FaqScreen } from '../../../screens/modals/Faq';
+import { BurgerMenuButton } from '../../../components/MenuButton';
 
 export type FaqRootStackParamList = {
   Faq: undefined;
@@ -22,10 +22,6 @@ type FaqNavigationProps = CompositeNavigationProp<
   DrawerNavigationProp<SidebarParamList, 'Faq'>,
   StackNavigationProp<RootStackParamList>
 >;
-
-const MenuButton = styled.TouchableOpacity`
-  padding-left: 11;
-`;
 
 const FaqRootNavigation = () => {
   const navigation = useNavigation<FaqNavigationProps>();
@@ -44,7 +40,7 @@ const FaqRootNavigation = () => {
         name="Faq"
         component={FaqScreen}
         options={{
-          title: 'Faq & Support',
+          title: 'FAQ & Support',
           headerTintColor: '#fff',
           headerStyle: {
             backgroundColor: '#4494D3',
@@ -52,9 +48,9 @@ const FaqRootNavigation = () => {
             shadowOpacity: 0,
           },
           headerLeft: () => (
-            <MenuButton onPress={navigation.toggleDrawer}>
+            <BurgerMenuButton onPress={navigation.toggleDrawer}>
               <MenuIcon width={18} height={18} color="#fff" />
-            </MenuButton>
+            </BurgerMenuButton>
           ),
         }}
       />

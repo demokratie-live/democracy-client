@@ -6,7 +6,7 @@
     "android": "react-native run-android --variant=refactorDebug --appIdSuffix=refactor",
     "ios": "react-native run-ios --scheme Refactor --configuration Refactor.Debug",
     "device:ios": "react-native run-ios --device --scheme Refactor --configuration Refactor.Debug",
-    "device:android": "react-native run-android --device --variant=refactorDebug --appIdSuffix=refactor",
+    "device:android": "react-native run-android --variant=refactorDebug --appIdSuffix=refactor",
     "release:ios": "react-native run-ios --device --scheme Refactor --configuration Refactor.Release",
     "release:android": "react-native run-android --variant=refactorRelease --appIdSuffix=refactor",
     "start": "react-native start",

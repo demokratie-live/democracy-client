@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components/native';
-import { Alert, Platform } from 'react-native';
+import { Alert, Platform, Dimensions } from 'react-native';
 
 import Description from './Components/Description';
 import PhonenumberInput from './Components/PhonenumberInput';
@@ -35,6 +35,8 @@ const ScrollView = styled.ScrollView.attrs(() => ({
     flex: 1,
   },
 }))``;
+
+const DEVICE_HEIGT = Dimensions.get('window').height;
 
 export const PhoneNumber: React.FC = () => {
   const navigation = useNavigation<
@@ -102,7 +104,9 @@ export const PhoneNumber: React.FC = () => {
   return (
     <Container>
       <ScrollView>
-        <SvgDemocracyBubble width="125" height="125" color="#000" />
+        {DEVICE_HEIGT > 500 && (
+          <SvgDemocracyBubble width="125" height="125" color="#000" />
+        )}
         <Description text="Bitte gib Deine aktuelle Handynummer ein" />
         <PhonenumberInput
           phoneNumber={phoneNumberInputValue}
