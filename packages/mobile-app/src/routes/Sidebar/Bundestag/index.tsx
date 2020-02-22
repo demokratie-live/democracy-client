@@ -19,6 +19,7 @@ import { SearchProvider } from '../../../context/Search';
 import { theme } from '../../../styles';
 import { BurgerMenuButton } from '../../../components/MenuButton';
 import { RootStackParamList } from '../..';
+import { MemberProfil } from '../../../screens/WahlOMeter/MemberProfil';
 
 export type BundestagRootStackParamList = {
   TabView: undefined;
@@ -30,6 +31,7 @@ export type BundestagRootStackParamList = {
   };
   Filter: undefined;
   Search: undefined;
+  MemberProfil: undefined;
 };
 
 const BundestagRootStack = createStackNavigator<BundestagRootStackParamList>();
@@ -75,6 +77,13 @@ const BundestagRootNavigation = () => {
           component={VoteVerification}
           options={{
             title: 'Wahlurne',
+          }}
+        />
+        <BundestagRootStack.Screen
+          name="MemberProfil"
+          component={MemberProfil}
+          options={{
+            title: '',
           }}
         />
         <BundestagRootStack.Screen name="Filter" component={Filter} />
