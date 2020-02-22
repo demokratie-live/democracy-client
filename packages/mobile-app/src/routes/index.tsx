@@ -16,12 +16,14 @@ import { PushNotificationContext } from '../context/PushNotification';
 import SplashScreen from 'react-native-splash-screen';
 import { theme } from '../styles';
 import { StatusBar } from 'react-native';
+import { PushInstructions } from '../screens/modals/Introduction/PushInstructions';
 
 export type RootStackParamList = {
   Sidebar: undefined;
   Home: {};
   Introduction: { done?: string; lastStartWithVersion?: string };
   Verification: {};
+  PushInstructions: {};
   Pdf: { url: string; title: string };
   Constituency: undefined;
 };
@@ -165,6 +167,13 @@ const Navigation = () => {
             options={{
               title: 'Wahlkreissuche',
             }}
+          />
+          <RootStack.Screen
+            name="PushInstructions"
+            options={{
+              headerShown: false,
+            }}
+            component={PushInstructions}
           />
           {!isVerified && (
             <RootStack.Screen
