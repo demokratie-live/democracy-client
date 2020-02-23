@@ -97,7 +97,7 @@ const TextVerify = styled.Text`
 
 const ImageCircle = styled.Image``;
 
-const NewMarker = styled.Image.attrs({
+export const NewMarker = styled.Image.attrs({
   source: require('./assets/icon.new.png'),
 })`
   position: absolute;

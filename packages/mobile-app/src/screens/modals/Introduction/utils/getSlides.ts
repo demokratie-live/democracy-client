@@ -5,7 +5,6 @@ import {
 
 export const getSlides = ({
   lastVersion,
-  registered,
 }: {
   lastVersion: string | undefined;
   registered: boolean;
@@ -14,17 +13,12 @@ export const getSlides = ({
   switch (true) {
     case !lastVersion || lastVersion < '1.2.2':
       slides.push(
-        slidesData.Willkommen,
-        slidesData.Beobachte,
-        slidesData.Informiere,
+        slidesData.Waehle,
         slidesData.Stimme,
         slidesData.Vergleiche,
         slidesData.Analysiere,
       );
       break;
-  }
-  if (!registered) {
-    slides.push(slidesData.Registrieren);
   }
   return slides;
 };

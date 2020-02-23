@@ -11,7 +11,7 @@ storiesOf('Instruction', module)
     const slideSelected = select(
       'Slide',
       Object.keys(slidesData),
-      Screen.Willkommen,
+      Screen.Analysiere,
     ) as Screen;
     return (
       <Slide

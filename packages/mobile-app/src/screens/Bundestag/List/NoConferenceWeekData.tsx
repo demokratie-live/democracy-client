@@ -65,7 +65,7 @@ statt.`}
         !notificationSettings.conferenceWeekPushs) && (
         <Button
           title="Benachrichtigen"
-          onPress={() => navigation.navigate('Settings')}
+          onPress={() => navigation.navigate('PushInstructions')}
         />
       )}
     </Container>

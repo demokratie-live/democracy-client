@@ -15,7 +15,7 @@ interface DotsProps {
 
 const Dots = styled(DotsComponent)<DotsProps>`
   bottom: ${({ withButton }) => (withButton ? '70' : '20')};
-  background-color: #fff;
+  /* background-color: #fff; */
 `;
 
 interface PropsBase {

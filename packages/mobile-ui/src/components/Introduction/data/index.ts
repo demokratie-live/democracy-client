@@ -1,53 +1,24 @@
 import { Slide } from '../Slide';
 
 export enum Screen {
-  Willkommen = 'Willkommen',
-  Beobachte = 'Beobachte',
-  Informiere = 'Informiere',
+  Waehle = 'Waehle',
   Stimme = 'Stimme',
   Vergleiche = 'Vergleiche',
   Analysiere = 'Analysiere',
-  Registrieren = 'Registrieren',
 }
 
 type ScreenData = { [key in Screen]: Slide };
 
 export const slidesData: ScreenData = {
-  Willkommen: {
+  Waehle: {
     head: {
-      image: require('../assets/icon.logo.png'),
-      title: 'Willkommen bei DEMOCRACY',
-      description: 'Alles über die deutsche Politik in einer App',
+      image: require('../assets/icon.vergleiche.png'),
+      title: 'Wähle',
+      description: '…einen offiziellen Vorgang des Deutschen Bundestages',
     },
     images: {
-      center: require('../assets/screen.list.png'),
-      right: require('../assets/screen.detail.png'),
-    },
-  },
-  Beobachte: {
-    head: {
-      image: require('../assets/icon.beobachte.png'),
-      title: 'Beobachte',
-      description:
-        '…alle vergangenen, aktuellen und zukünftigen Abstimmungen des Bundestages',
-    },
-    images: {
-      center: require('../assets/screen.list.png'),
-      left: require('../assets/screen.list.png'),
-      right: require('../assets/screen.detail.png'),
-    },
-  },
-  Informiere: {
-    head: {
-      image: require('../assets/icon.informiere.png'),
-      title: 'Informiere Dich',
-      description:
-        '…über die Gesetzesvorlagen entlang der offiziellen Informationen des Bundestages',
-    },
-    images: {
-      center: require('../assets/screen.detail.png'),
-      left: require('../assets/screen.list.png'),
-      right: require('../assets/screen.vote.png'),
+      center: require('../assets/screen.waehle.png'),
+      right: require('../assets/screen.stimme.png'),
     },
   },
   Stimme: {
@@ -55,51 +26,36 @@ export const slidesData: ScreenData = {
       image: require('../assets/icon.stimme.png'),
       title: 'Stimme',
       description:
-        '…noch vor der offiziellen Bundestagsentscheidung selbst über den Antrag ab',
+        '…selbst über den Vorgang ab, als wärst Du Bundestagsabgeordneter',
     },
     images: {
-      center: require('../assets/screen.vote.png'),
-      left: require('../assets/screen.detail.png'),
-      right: require('../assets/screen.compare.png'),
+      center: require('../assets/screen.stimme.png'),
+      left: require('../assets/screen.waehle.png'),
+      right: require('../assets/screen.vergleiche.png'),
     },
   },
   Vergleiche: {
     head: {
-      image: require('../assets/icon.vergleiche.png'),
+      image: require('../assets/icon.beobachte.png'),
       title: 'Vergleiche',
       description:
-        '…Dein eigenes Abstimmungsverhalten mit dem Stimmungsbild in der Community und Deinem Wahlkreis',
+        '…Dein Abstimmungsverhalten mit der Community und dem Bundestag',
     },
     images: {
-      center: require('../assets/screen.compare.png'),
-      left: require('../assets/screen.vote.png'),
-      right: require('../assets/screen.analyse.png'),
+      center: require('../assets/screen.vergleiche.png'),
+      left: require('../assets/screen.waehle.png'),
+      right: require('../assets/screen.analysiere.png'),
     },
   },
   Analysiere: {
     head: {
       image: require('../assets/icon.analyse.png'),
       title: 'Analysiere',
-      description:
-        '…Deine Übereinstimmungen mit den im Bundestag vertretenen Parteien und Kandidaten',
+      description: '…Deine Übereinstimmungen mit den Parteien und Kandidaten',
     },
     images: {
-      center: require('../assets/screen.analyse.png'),
-      left: require('../assets/screen.compare.png'),
-    },
-    isNew: true,
-  },
-  Registrieren: {
-    head: {
-      image: require('../assets/icon.logo.png'),
-      title: 'Registriere Dich',
-      description: 'Zum Abstimmen musst Du Deine\nHandynummer verifizieren',
-    },
-    images: {
-      center: require('../assets/screen.registrieren.png'),
-    },
-    verify: () => {
-      console.log('press verify');
+      center: require('../assets/screen.analysiere.png'),
+      left: require('../assets/screen.vergleiche.png'),
     },
   },
 };

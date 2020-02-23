@@ -8,7 +8,7 @@ const Wrapper = styled.TouchableOpacity`
   height: 44;
   align-items: center;
   padding-left: 16;
-  padding-right: 11;
+  padding-right: 18;
   border-bottom-width: 1;
   border-bottom-color: #c8c7cc;
   font-size: 17;
