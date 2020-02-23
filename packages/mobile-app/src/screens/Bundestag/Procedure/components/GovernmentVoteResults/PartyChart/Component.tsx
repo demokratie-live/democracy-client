@@ -1,5 +1,5 @@
 import React from 'react';
-import Svg, { Rect } from 'react-native-svg';
+import Svg, { Rect, Circle } from 'react-native-svg';
 
 // Components
 import PartyRow, { PartyChartRowValues } from './PartyRow';
@@ -38,15 +38,16 @@ const PartyChart: React.FC<Props> = ({
     <SvgStyled
       width={width - 2 * 18}
       height={chartData.length * 46}
-      viewBox={`0 0 305 ${chartData.length * 46}`}>
+      viewBox={`0 0 335 ${chartData.length * 46}`}>
       <Rect
         y={selected * 46}
-        width="305"
+        width="335"
         rx="3"
         ry="3"
         height="36"
         fill="#ededed"
       />
+      <Circle cx="320" cy={18 + selected * 46} r="5" fill="#4494d3" />
       {chartData.map(({ party, values }, i) => (
         <PartyRow
           key={party}

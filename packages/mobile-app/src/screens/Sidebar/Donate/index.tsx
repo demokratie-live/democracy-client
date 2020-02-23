@@ -40,8 +40,11 @@ import {
 import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Folding';
 import { DONATION_STATUS } from './graphql/query/donationStatus';
 import { useQuery } from '@apollo/react-hooks';
+import { MadeWithLove } from '../../../components/MadeWithLove';
 
-const ScrollWrapper = styled.ScrollView`
+const ScrollWrapper = styled.ScrollView.attrs({
+  scrollIndicatorInsets: { right: 1 }, // TODO do cleanfix when there is a correct solution (already closed but not solved without workaround) https://github.com/facebook/react-native/issues/26610
+})`
   flex: 1;
   background-color: #ffffff;
 `;
@@ -257,6 +260,7 @@ export const DonateScreen: React.FC<Props> = () => {
           <Version>{version}</Version>
         </Wrapper>
       )}
+      <MadeWithLove />
     </ScrollWrapper>
   );
 };

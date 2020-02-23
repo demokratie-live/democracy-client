@@ -35,9 +35,6 @@ const TextSub = styled.Text`
   color: #9b9b9b;
   font-size: 15;
   padding-top: 1;
-  font-family: ${Platform.OS === 'ios'
-    ? 'HelveticaNeue-Thin'
-    : 'sans-serif-light'};
   text-align: center;
   margin-bottom: 18;
 `;
@@ -100,7 +97,7 @@ const TextVerify = styled.Text`
 
 const ImageCircle = styled.Image``;
 
-const NewMarker = styled.Image.attrs({
+export const NewMarker = styled.Image.attrs({
   source: require('./assets/icon.new.png'),
 })`
   position: absolute;

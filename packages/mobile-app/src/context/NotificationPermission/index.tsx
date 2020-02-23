@@ -85,7 +85,8 @@ export const NotificationsProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     checkNotifications().then(({ status }) => {
-      if (!alreadyDenied && status === 'blocked') {
+      console.log({ status, alreadyDenied });
+      if (!alreadyDenied && (status === 'blocked' || status === 'denied')) {
         setAlreadyDenied(true);
         setHasPermissions(false);
       } else if (alreadyDenied && status === 'granted') {

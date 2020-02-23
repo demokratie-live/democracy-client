@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components/native';
+import { styled } from '../../../../mobile-app/src/styles';
 
 const BackgroundWrapper = styled.View`
   position: absolute;
@@ -18,8 +18,17 @@ const BackgroundImage = styled.Image.attrs(() => ({
   padding-horizontal: 1;
 `;
 
+const Overlay = styled.View`
+  position: absolute;
+  background-color: ${({ theme }) => `${theme.colors.background.header}33`};
+
+  width: 100%;
+  height: 100%;
+`;
+
 export const Background = () => (
   <BackgroundWrapper>
     <BackgroundImage />
+    <Overlay />
   </BackgroundWrapper>
 );

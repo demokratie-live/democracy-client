@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components/native';
-import { Keyboard, Alert, Platform } from 'react-native';
+import { Keyboard, Alert, Platform, Dimensions } from 'react-native';
 import { sha256 } from 'react-native-sha256';
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -49,6 +49,8 @@ type DevPlaceholderNavigationProps = CompositeNavigationProp<
   StackNavigationProp<VerificationRootStackParamList, 'SmsCodeInput'>,
   StackNavigationProp<RootStackParamList>
 >;
+
+const DEVICE_HEIGT = Dimensions.get('window').height;
 
 export const Code: React.FC = () => {
   const { countdown, setExpireTime, setResendTime, phoneNumber } = useContext(
@@ -137,7 +139,9 @@ export const Code: React.FC = () => {
   return (
     <Container>
       <ScrollView keyboardShouldPersistTaps="always">
-        <SvgDemocracyBubble width="125" height="125" color="#000" />
+        {DEVICE_HEIGT > 500 && (
+          <SvgDemocracyBubble width="125" height="125" color="#000" />
+        )}
         <Description text={`Bitte gib Deinen Code ein für\n${phoneNumber}`} />
         <CodeInput onChange={onChangeCode} code={code} />
         <ButtonNext

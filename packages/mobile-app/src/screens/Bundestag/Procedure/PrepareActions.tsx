@@ -22,7 +22,7 @@ import { TOGGLE_NOTIFICATION } from './graphql/muatation/toggleNotification';
 import Procedure from './graphql/query/Procedure';
 
 const SegmentWrapper = styled.View`
-  padding-vertical: 10;
+  padding-vertical: 14;
   padding-horizontal: 18;
   flex-direction: row;
   border-bottom-width: 1;

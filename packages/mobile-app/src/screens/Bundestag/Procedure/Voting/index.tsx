@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import styled from 'styled-components/native';
 import { Platform, Dimensions } from 'react-native';
 
 import BallotBox from './components/BallotBox';
@@ -27,6 +26,7 @@ import { LocalVotesContext } from '../../../../context/LocalVotes';
 import { useQuery } from '@apollo/react-hooks';
 import ChartLegend from '../components/Charts/ChartLegend';
 import NoVotesPlaceholder from '../../../WahlOMeter/NoVotesPlaceholder';
+import { styled } from '../../../../styles';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -37,6 +37,7 @@ const ScrollWrapper = styled.ScrollView.attrs({
   contentContainerStyle: {
     flexGrow: 1,
     paddingBottom: Platform.OS === 'android' ? 73 : 18,
+    alignItems: 'center',
   },
 })`
   flex-grow: 1;
@@ -76,6 +77,12 @@ const BalloutBoxWrapper = styled.View`
   background-color: rgba(250, 250, 250, 0.9);
   border-top-width: 1;
   border-top-color: rgba(68, 148, 211, 0.1);
+`;
+
+const Description = styled.Text`
+  color: ${({ theme }) => theme.colors.description};
+  padding-horizontal: 18;
+  margin-bottom: 18;
 `;
 
 type VoteVerificationScreenNavigationProp = StackNavigationProp<
@@ -253,6 +260,9 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
         )}
         {!!constituency && !!preparedData && !!preparedData.length && (
           <>
+            <Description>
+              Deine derzeitige Übereinstimmung mit den Fraktionen
+            </Description>
             <PartyChart
               width={chartWidth}
               chartData={preparedData}

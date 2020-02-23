@@ -11,6 +11,8 @@ import { Pager } from '@democracy-deutschland/mobile-ui/src/components/Pager';
 import { getSlides } from './utils/getSlides';
 import { InitialStateContext } from '../../../context/InitialStates';
 import { getVersion } from 'react-native-device-info';
+import { PushInstructions } from './PushInstructions';
+import { NotificationsContext } from '../../../context/NotificationPermission';
 
 const SafeAreaView = styled.SafeAreaView`
   flex: 1;
@@ -30,6 +32,9 @@ const Introduction: FC<Props> = ({ route }) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const { isVerified, setLastStartWithVersion } = useContext(
     InitialStateContext,
+  );
+  const { notificationSettings, hasPermissions } = useContext(
+    NotificationsContext,
   );
   const [wasVerified] = useState(isVerified);
   let { lastStartWithVersion, done } = {
@@ -55,44 +60,38 @@ const Introduction: FC<Props> = ({ route }) => {
     navigation.goBack();
   };
 
-  const verifyAction = () => {
-    if (done === 'SET_LAST_START_VERSION') {
-      setLastStartWithVersion(getVersion());
-    }
-    navigation.push('Verification');
-  };
-
   const slides = getSlides({
     lastVersion: lastStartWithVersion,
     registered: isVerified,
   });
 
+  const slideScreens = slides.map((slide, i) => (
+    <Slide
+      key={slide.head.title}
+      head={slide.head}
+      images={slide.images}
+      isNew={slide.isNew}
+      nextSlide={
+        // TODO fix android next button click. does not work correctly
+        i + 1 === Object.keys(slidesData).length ? finishAction : undefined
+      }
+    />
+  ));
+  console.log(notificationSettings);
+  if (!notificationSettings.outcomePushs || !hasPermissions) {
+    slideScreens.push(
+      <PushInstructions key="push-instructions" finishAction={finishAction} />,
+    );
+  }
+
   return (
     <SafeAreaView testID="Introduction">
       <Pager
         nextButton
-        nextText="Weiter"
-        finishText="Los geht's"
+        nextText="Verstanden"
+        finishText="Später"
         finishAction={finishAction}>
-        {slides.map((slide, i) => (
-          <Slide
-            key={slide.head.title}
-            head={slide.head}
-            images={slide.images}
-            isNew={slide.isNew}
-            verify={
-              i + 1 === Object.keys(slidesData).length
-                ? verifyAction
-                : undefined
-            }
-            nextSlide={
-              // TODO fix android next button click. does not work correctly
-              i + 1 === Object.keys(slidesData).length
-                ? finishAction
-                : undefined
-            }
-          />
-        ))}
+        {slideScreens}
       </Pager>
     </SafeAreaView>
   );

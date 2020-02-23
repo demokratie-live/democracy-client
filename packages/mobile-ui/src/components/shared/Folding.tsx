@@ -18,6 +18,7 @@ const Header = styled.TouchableOpacity`
 const Headline = styled.Text`
   flex: 1;
   font-size: 17;
+  margin-right: 10;
 `;
 
 interface CollapseIconProps extends SvgProps {

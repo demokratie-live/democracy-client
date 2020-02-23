@@ -15,12 +15,15 @@ import { getNavInitStateForProcedure } from '../lib/getNavStateForProcedure';
 import { PushNotificationContext } from '../context/PushNotification';
 import SplashScreen from 'react-native-splash-screen';
 import { theme } from '../styles';
+import { StatusBar } from 'react-native';
+import { PushInstructions } from '../screens/modals/Introduction/PushInstructions';
 
 export type RootStackParamList = {
   Sidebar: undefined;
   Home: {};
   Introduction: { done?: string; lastStartWithVersion?: string };
   Verification: {};
+  PushInstructions: {};
   Pdf: { url: string; title: string };
   Constituency: undefined;
 };
@@ -117,63 +120,74 @@ const Navigation = () => {
   }
 
   return (
-    <NavigationContainer
-      initialState={initialState}
-      ref={rootNavigationRef}
-      theme={{
-        colors: {
-          background: '#fff',
-          primary: '#fff',
-          text: '#fff',
-          border: '#fff',
-          card: '#fff',
-        },
-        dark: false,
-      }}>
-      <RootStack.Navigator
-        mode="modal"
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: theme.colors.background.header,
-            elevation: 0,
-            shadowOpacity: 0,
+    <>
+      <StatusBar barStyle="light-content" />
+      <NavigationContainer
+        initialState={initialState}
+        // onStateChange={state => console.log(JSON.stringify(state))}
+        ref={rootNavigationRef}
+        theme={{
+          colors: {
+            background: '#fff',
+            primary: '#fff',
+            text: '#fff',
+            border: '#fff',
+            card: '#fff',
           },
-          headerBackTitleVisible: false,
-          headerTintColor: theme.colors.headerText,
+          dark: false,
         }}>
-        <RootStack.Screen
-          name="Sidebar"
-          component={SidebarNavigation}
-          options={{ headerShown: false }}
-        />
-        <RootStack.Screen
-          name="Introduction"
-          component={Introduction}
-          options={{ headerShown: false }}
-        />
-        <RootStack.Screen
-          name="Pdf"
-          component={PdfScreen}
-          options={({ route }) => ({ title: route.params.title })}
-        />
-        <RootStack.Screen
-          name="Constituency"
-          component={ConstituencyScreen}
-          options={{
-            title: 'Wahlkreissuche',
-          }}
-        />
-        {!isVerified && (
+        <RootStack.Navigator
+          mode="modal"
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: theme.colors.background.header,
+              elevation: 0,
+              shadowOpacity: 0,
+            },
+            headerBackTitleVisible: false,
+            headerTintColor: theme.colors.headerText,
+          }}>
           <RootStack.Screen
-            name="Verification"
+            name="Sidebar"
+            component={SidebarNavigation}
+            options={{ headerShown: false }}
+          />
+          <RootStack.Screen
+            name="Introduction"
+            component={Introduction}
+            options={{ headerShown: false }}
+          />
+          <RootStack.Screen
+            name="Pdf"
+            component={PdfScreen}
+            options={({ route }) => ({ title: route.params.title })}
+          />
+          <RootStack.Screen
+            name="Constituency"
+            component={ConstituencyScreen}
+            options={{
+              title: 'Wahlkreissuche',
+            }}
+          />
+          <RootStack.Screen
+            name="PushInstructions"
             options={{
               headerShown: false,
             }}
-            component={VerificationScreen}
+            component={PushInstructions}
           />
-        )}
-      </RootStack.Navigator>
-    </NavigationContainer>
+          {!isVerified && (
+            <RootStack.Screen
+              name="Verification"
+              options={{
+                headerShown: false,
+              }}
+              component={VerificationScreen}
+            />
+          )}
+        </RootStack.Navigator>
+      </NavigationContainer>
+    </>
   );
 };
 
