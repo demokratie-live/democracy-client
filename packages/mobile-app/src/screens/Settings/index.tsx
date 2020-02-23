@@ -122,107 +122,113 @@ export const Settings: React.FC<Props> = () => {
       ],
     },
   ];
-  if (isVerified) {
-    listData[0].data.push({
-      title: 'Benachrichtigungen',
-      onPress: navigateTo('notifications-settings'),
-      component: hasPermissions ? (
-        <Switch
-          value={!!notificationSettings.enabled}
-          onValueChange={value => {
-            updateNotificationSettings({
-              enabled: value,
-            });
-          }}
-        />
-      ) : (
-        <Button title="Aktivieren" onPress={handleActivate} />
-      ),
-    });
 
-    if (hasPermissions && notificationSettings.enabled) {
-      listData.push(
-        {
-          title: 'Sitzungswoche',
-          data: [
-            {
-              title: 'Ankündigung',
-              onPress: navigateTo('notifications-settings'),
-              component: (
-                <Switch
-                  value={!!notificationSettings.conferenceWeekPushs}
-                  onValueChange={value => {
-                    updateNotificationSettings({
-                      conferenceWeekPushs: value,
-                    });
-                  }}
-                />
-              ),
-              description:
-                'Werde Sonntags vor einer Sitzungswoche über die kommenden Abstimmungen informiert.',
-            },
-            {
-              title: 'Wichtige Abstimmungen',
-              onPress: navigateTo('notifications-settings'),
-              component: (
-                <Switch
-                  value={!!notificationSettings.voteConferenceWeekPushs}
-                  onValueChange={value => {
-                    updateNotificationSettings({
-                      voteConferenceWeekPushs: value,
-                    });
-                  }}
-                />
-              ),
-              description:
-                'Werde täglich während einer laufenden Sitzungswoche, über eine populäre Abstimmung informiert.',
-            },
-          ],
-        },
-        {
-          title: 'Sitzungsfreie Zeit',
-          data: [
-            {
-              title: 'Populäre Abstimmungen',
-              onPress: navigateTo('notifications-settings'),
-              component: (
-                <Switch
-                  value={!!notificationSettings.voteTOP100Pushs}
-                  onValueChange={value => {
-                    updateNotificationSettings({
-                      voteTOP100Pushs: value,
-                    });
-                  }}
-                />
-              ),
-              description:
-                'Challenge? Werde auch in der sitzungsfreien Zeit täglich über eine Abstimmung informiert, bei der Du noch nicht mitgemacht hast.',
-            },
-          ],
-        },
-        {
-          title: 'Individuelle Benachrichtungen',
-          data: [
-            {
-              title: 'Bundestagsergebnisse',
-              onPress: navigateTo('notifications-settings'),
-              component: (
-                <Switch
-                  value={!!notificationSettings.outcomePushs}
-                  onValueChange={value => {
-                    updateNotificationSettings({
-                      outcomePushs: value,
-                    });
-                  }}
-                />
-              ),
-              description:
-                'Werde nach Deiner Abstimmung standardmäßig über das offizielle Ergebnis des Bundestages informiert, sobald dieses vorliegt.',
-            },
-          ],
-        },
-      );
+  listData[0].data.push({
+    title: 'Benachrichtigungen',
+    onPress: navigateTo('notifications-settings'),
+    component: hasPermissions ? (
+      <Switch
+        value={!!notificationSettings.enabled}
+        onValueChange={value => {
+          updateNotificationSettings({
+            enabled: value,
+          });
+        }}
+      />
+    ) : (
+      <Button title="Aktivieren" onPress={handleActivate} />
+    ),
+  });
+
+  if (hasPermissions && notificationSettings.enabled) {
+    listData.push(
+      {
+        title: 'Individuelle Benachrichtungen',
+        data: [
+          {
+            title: 'Bundestagsergebnisse',
+            onPress: navigateTo('notifications-settings'),
+            component: (
+              <Switch
+                value={!!notificationSettings.outcomePushs}
+                onValueChange={value => {
+                  updateNotificationSettings({
+                    outcomePushs: value,
+                  });
+                }}
+              />
+            ),
+            description: isVerified
+              ? 'Werde nach Deiner Abstimmung standardmäßig über das offizielle Ergebnis des Bundestages informiert, sobald dieses vorliegt.'
+              : 'Werde über das offizielle Ergebnis des Bundestages informiert, sobald dieses vorliegt.',
+          },
+        ],
+      },
+      {
+        title: 'Sitzungswoche',
+        data: [
+          {
+            title: 'Ankündigung',
+            onPress: navigateTo('notifications-settings'),
+            component: (
+              <Switch
+                value={!!notificationSettings.conferenceWeekPushs}
+                onValueChange={value => {
+                  updateNotificationSettings({
+                    conferenceWeekPushs: value,
+                  });
+                }}
+              />
+            ),
+            description:
+              'Werde Sonntags vor einer Sitzungswoche über die kommenden Abstimmungen informiert.',
+          },
+        ],
+      },
+    );
+  }
+
+  if (isVerified) {
+    const tmp = listData.find(({ title }) => title === 'Sitzungswoche');
+    if (tmp) {
+      tmp.data.push({
+        title: 'Wichtige Abstimmungen',
+        onPress: navigateTo('notifications-settings'),
+        component: (
+          <Switch
+            value={!!notificationSettings.voteConferenceWeekPushs}
+            onValueChange={value => {
+              updateNotificationSettings({
+                voteConferenceWeekPushs: value,
+              });
+            }}
+          />
+        ),
+        description:
+          'Werde täglich während einer laufenden Sitzungswoche, über eine populäre Abstimmung informiert.',
+      });
     }
+    listData.push({
+      title: 'Sitzungsfreie Zeit',
+      data: [
+        {
+          title: 'Populäre Abstimmungen',
+          onPress: navigateTo('notifications-settings'),
+          component: (
+            <Switch
+              value={!!notificationSettings.voteTOP100Pushs}
+              onValueChange={value => {
+                updateNotificationSettings({
+                  voteTOP100Pushs: value,
+                });
+              }}
+            />
+          ),
+          description:
+            'Challenge? Werde auch in der sitzungsfreien Zeit täglich über eine Abstimmung informiert, bei der Du noch nicht mitgemacht hast.',
+        },
+      ],
+    });
   }
 
   return (

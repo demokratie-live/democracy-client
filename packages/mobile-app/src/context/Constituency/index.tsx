@@ -19,7 +19,7 @@ export const ConstituencyContext = createContext<ConstituencyInterface>(
   defaults,
 );
 
-const STORAGE_KEY_CONSTITUENCY = 'constituency';
+const STORAGE_KEY_CONSTITUENCY = 'Constituency';
 
 export const ConstituencyProvider: React.FC = ({ children }) => {
   const [constituency, setConstituencyState] = useState('');

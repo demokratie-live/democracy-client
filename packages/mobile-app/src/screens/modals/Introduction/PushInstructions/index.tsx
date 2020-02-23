@@ -1,47 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { styled } from '../../../../styles';
-import { NewMarker as NewMarkerCmp } from '@democracy-deutschland/mobile-ui/src/components/Introduction';
 import { NotificationBox } from './NotificationBox';
-import { Settings } from './Settings';
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
 import { defaultNotificationData } from './data';
 import { useNavigation } from '@react-navigation/core';
+import SvgIconAppIos from '@democracy-deutschland/mobile-ui/src/components/Icons/IconAppIos';
+import SvgNewMarker from '@democracy-deutschland/mobile-ui/src/components/Icons/Newmarker';
+import { Dimensions, Switch } from 'react-native';
+import { NotificationsContext } from '../../../../context/NotificationPermission';
 
-const Wrapper = styled.ScrollView`
-  width: 100%;
-  height: 100%;
+const DEVICE_WIDTH = Dimensions.get('window').width;
+
+const Wrapper = styled.View`
+  width: ${DEVICE_WIDTH};
+  align-items: center;
 `;
 
-const BackgroundStars = styled.ImageBackground.attrs({
-  source: require('@democracy-deutschland/mobile-ui/src/assets/SidebarBackground.png'),
-  imageStyle: {
-    resizeMode: 'repeat',
+const ScrollView = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    alignItems: 'center',
   },
-})`
-  width: 100%;
-  height: 350;
-  padding-top: 42;
-  padding-bottom: 18;
-`;
+})``;
 
 const Headline = styled.Text`
-  color: #fff;
+  color: #000;
   font-size: 22;
-  margin-bottom: 33;
-  align-self: center;
+  margin-vertical: 18;
 `;
 
-const NewMarker = styled(NewMarkerCmp)`
-  position: absolute;
-  top: 37;
-  left: 26;
-`;
-
-const NotificationDescription = styled.Text`
-  color: #fff;
+const Subtitle = styled.Text`
+  color: #9b9b9b;
+  font-size: 15;
   padding-top: 14;
   padding-bottom: 52;
   margin-horizontal: 18;
+  text-align: center;
+`;
+
+const SwitchWrapper = styled.View`
+  width: ${DEVICE_WIDTH};
+  flex-direction: row;
+  justify-content: space-between;
+  padding-horizontal: 18;
+  padding-top: 40;
+  padding-bottom: 31;
+`;
+
+const SwitchText = styled.Text`
+  font-size: 17;
+  flex: 1;
+  padding-right: 18;
 `;
 
 export interface Notification {
@@ -50,38 +58,71 @@ export interface Notification {
   description: string;
 }
 
-export const PushInstructions: React.FC = () => {
+interface Props {
+  finishAction: () => void;
+}
+
+export const PushInstructions: React.FC<Props> = ({ finishAction }) => {
   const navigation = useNavigation();
-  const [notification, setNotification] = useState<Notification>({
+  const [pushActive, setPushActive] = useState(true);
+  const [notification] = useState<Notification>({
     title: defaultNotificationData.outcomePushs.title,
     text: defaultNotificationData.outcomePushs.text,
     description: defaultNotificationData.outcomePushs.description,
   });
+  const { hasPermissions, requestToken } = useContext(NotificationsContext);
+  // return <SvgIconAppIos width={73} height={73} />;
+
+  const pressActivate = () => {
+    requestToken();
+  };
+
+  useEffect(() => {
+    if (hasPermissions) {
+      // finishAction();
+    }
+  }, [finishAction, hasPermissions, navigation]);
+
   return (
     <Wrapper>
-      <BackgroundStars>
-        <NewMarker />
-        <Headline>Benachrichtigungen</Headline>
+      <ScrollView>
+        <SvgNewMarker
+          width={58}
+          height={35}
+          color="#f568c4"
+          style={{ position: 'absolute', left: 18 }}
+        />
+        <SvgIconAppIos width={73} height={73} />
+        <Headline>Ergebnisse erhalten</Headline>
+        <Subtitle>
+          Werde nach Deiner Abstimmung automatisch über das offizielle Ergebnis
+          des Bundestages informiert, sobald dieses vorliegt, um es mit Deinem
+          vergleichen zu können.
+        </Subtitle>
         <NotificationBox
           icon={require('@democracy-deutschland/mobile-ui/src/components/Introduction/assets/icon.logo.png')}
           owner="DEMOCRACY"
           title={notification.title}
           text={notification.text}
         />
-        <NotificationDescription>
-          {notification.description}
-        </NotificationDescription>
-      </BackgroundStars>
-      <Settings onPress={setNotification} />
-      <Button
-        style={{
-          marginHorizontal: 18,
-        }}
-        backgroundColor="blue"
-        textColor="white"
-        text="Aktivieren"
-        onPress={navigation.goBack}
-      />
+        <SwitchWrapper>
+          <SwitchText>
+            Bundestagsergebnisse immer automatisch erhalten
+          </SwitchText>
+          <Switch value={pushActive} onValueChange={setPushActive} />
+        </SwitchWrapper>
+        <Button
+          style={{
+            marginHorizontal: 18,
+            width: DEVICE_WIDTH - 36,
+          }}
+          backgroundColor="blue"
+          textColor="white"
+          text="Aktivieren"
+          onPress={pressActivate}
+          disabled={!pushActive}
+        />
+      </ScrollView>
     </Wrapper>
   );
 };

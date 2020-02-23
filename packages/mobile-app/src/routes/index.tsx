@@ -124,6 +124,7 @@ const Navigation = () => {
       <StatusBar barStyle="light-content" />
       <NavigationContainer
         initialState={initialState}
+        // onStateChange={state => console.log(JSON.stringify(state))}
         ref={rootNavigationRef}
         theme={{
           colors: {

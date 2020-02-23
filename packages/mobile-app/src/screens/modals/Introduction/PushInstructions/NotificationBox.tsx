@@ -10,7 +10,7 @@ interface Props {
 }
 
 const Wrapper = styled.View`
-  background-color: #fff8;
+  background-color: #0007;
   margin-horizontal: 11;
   padding-horizontal: 11;
   padding-top: 11;
@@ -32,15 +32,18 @@ const Icon = styled.Image`
 
 const Owner = styled.Text`
   font-size: 13;
+  color: #fff;
 `;
 
 const Title = styled.Text`
   font-size: 15;
   font-weight: bold;
+  color: #fff;
 `;
 
 const Text = styled.Text`
   font-size: 15;
+  color: #fff;
 `;
 
 export const NotificationBox: React.FC<Props> = ({

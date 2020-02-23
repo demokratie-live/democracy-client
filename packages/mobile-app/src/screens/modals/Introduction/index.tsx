@@ -11,6 +11,8 @@ import { Pager } from '@democracy-deutschland/mobile-ui/src/components/Pager';
 import { getSlides } from './utils/getSlides';
 import { InitialStateContext } from '../../../context/InitialStates';
 import { getVersion } from 'react-native-device-info';
+import { PushInstructions } from './PushInstructions';
+import { NotificationsContext } from '../../../context/NotificationPermission';
 
 const SafeAreaView = styled.SafeAreaView`
   flex: 1;
@@ -30,6 +32,9 @@ const Introduction: FC<Props> = ({ route }) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const { isVerified, setLastStartWithVersion } = useContext(
     InitialStateContext,
+  );
+  const { notificationSettings, hasPermissions } = useContext(
+    NotificationsContext,
   );
   const [wasVerified] = useState(isVerified);
   let { lastStartWithVersion, done } = {
@@ -60,27 +65,33 @@ const Introduction: FC<Props> = ({ route }) => {
     registered: isVerified,
   });
 
+  const slideScreens = slides.map((slide, i) => (
+    <Slide
+      key={slide.head.title}
+      head={slide.head}
+      images={slide.images}
+      isNew={slide.isNew}
+      nextSlide={
+        // TODO fix android next button click. does not work correctly
+        i + 1 === Object.keys(slidesData).length ? finishAction : undefined
+      }
+    />
+  ));
+  console.log(notificationSettings);
+  if (!notificationSettings.outcomePushs || !hasPermissions) {
+    slideScreens.push(
+      <PushInstructions key="push-instructions" finishAction={finishAction} />,
+    );
+  }
+
   return (
     <SafeAreaView testID="Introduction">
       <Pager
         nextButton
         nextText="Verstanden"
-        finishText="Los geht's"
+        finishText="Später"
         finishAction={finishAction}>
-        {slides.map((slide, i) => (
-          <Slide
-            key={slide.head.title}
-            head={slide.head}
-            images={slide.images}
-            isNew={slide.isNew}
-            nextSlide={
-              // TODO fix android next button click. does not work correctly
-              i + 1 === Object.keys(slidesData).length
-                ? finishAction
-                : undefined
-            }
-          />
-        ))}
+        {slideScreens}
       </Pager>
     </SafeAreaView>
   );
