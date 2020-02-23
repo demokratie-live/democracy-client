@@ -55,13 +55,6 @@ const Introduction: FC<Props> = ({ route }) => {
     navigation.goBack();
   };
 
-  const verifyAction = () => {
-    if (done === 'SET_LAST_START_VERSION') {
-      setLastStartWithVersion(getVersion());
-    }
-    navigation.push('Verification');
-  };
-
   const slides = getSlides({
     lastVersion: lastStartWithVersion,
     registered: isVerified,
@@ -71,7 +64,7 @@ const Introduction: FC<Props> = ({ route }) => {
     <SafeAreaView testID="Introduction">
       <Pager
         nextButton
-        nextText="Weiter"
+        nextText="Verstanden"
         finishText="Los geht's"
         finishAction={finishAction}>
         {slides.map((slide, i) => (
@@ -80,11 +73,6 @@ const Introduction: FC<Props> = ({ route }) => {
             head={slide.head}
             images={slide.images}
             isNew={slide.isNew}
-            verify={
-              i + 1 === Object.keys(slidesData).length
-                ? verifyAction
-                : undefined
-            }
             nextSlide={
               // TODO fix android next button click. does not work correctly
               i + 1 === Object.keys(slidesData).length
