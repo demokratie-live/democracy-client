@@ -78,7 +78,11 @@ const Introduction: FC<Props> = ({ route }) => {
     />
   ));
   console.log(notificationSettings);
-  if (!notificationSettings.outcomePushs || !hasPermissions) {
+  if (
+    !notificationSettings.outcomePushs ||
+    !notificationSettings.enabled ||
+    !hasPermissions
+  ) {
     slideScreens.push(
       <PushInstructions key="push-instructions" finishAction={finishAction} />,
     );

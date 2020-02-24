@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { styled } from '../../../../styles';
 import { NotificationBox } from './NotificationBox';
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
@@ -63,10 +63,7 @@ interface Props {
   alreadyKnown?: boolean;
 }
 
-export const PushInstructions: React.FC<Props> = ({
-  finishAction,
-  alreadyKnown = false,
-}) => {
+export const PushInstructions: React.FC<Props> = ({ alreadyKnown = false }) => {
   const navigation = useNavigation();
   const [pushActive, setPushActive] = useState(true);
   const [notification] = useState<Notification>({
@@ -74,18 +71,20 @@ export const PushInstructions: React.FC<Props> = ({
     text: defaultNotificationData.outcomePushs.text,
     description: defaultNotificationData.outcomePushs.description,
   });
-  const { hasPermissions, requestToken } = useContext(NotificationsContext);
-  // return <SvgIconAppIos width={73} height={73} />;
+  const { requestToken, update: updateNotificationSettings } = useContext(
+    NotificationsContext,
+  );
 
   const pressActivate = () => {
     requestToken();
-  };
-
-  useEffect(() => {
-    if (hasPermissions) {
-      // finishAction();
+    if (!alreadyKnown) {
+      navigation.replace('Sidebar', { screen: 'Bundestag' });
     }
-  }, [finishAction, hasPermissions, navigation]);
+    updateNotificationSettings({
+      enabled: true,
+      outcomePushs: true,
+    });
+  };
 
   return (
     <Wrapper>

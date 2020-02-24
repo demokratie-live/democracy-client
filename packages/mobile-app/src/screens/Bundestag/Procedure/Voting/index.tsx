@@ -106,7 +106,9 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
   const [chartWidth] = useState(
     Math.min(Dimensions.get('screen').width, Dimensions.get('screen').height),
   );
-  const { notificationSettings } = useContext(NotificationsContext);
+  const { notificationSettings, hasPermissions } = useContext(
+    NotificationsContext,
+  );
   const [showWarning, setShowWarning] = useState(true);
   const [selected, setSelected] = useState(0);
   const { constituency } = useContext(ConstituencyContext);
@@ -254,7 +256,11 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
   };
 
   let Content = <NoConstituency navigation={navigation as any} />;
-  if (!notificationSettings.outcomePushs) {
+  if (
+    !notificationSettings.outcomePushs ||
+    !notificationSettings.enabled ||
+    !hasPermissions
+  ) {
     Content = (
       <PushInstructions finishAction={navigation.goBack} alreadyKnown={true} />
     );
@@ -282,26 +288,6 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
     <Wrapper>
       <ScrollWrapper onScroll={onScroll}>
         <Title>Schon gewusst?</Title>
-        {/* {!constituency && <NoConstituency navigation={navigation as any} />} */}
-        {/* {!!constituency && !!preparedData && !preparedData.length && (
-          <NoVotesPlaceholder subline="Fraktionen" />
-        )} */}
-        {/* {!!constituency && !!preparedData && !!preparedData.length && (
-          <>
-            <Description>
-              Deine derzeitige Übereinstimmung mit den Fraktionen
-            </Description>
-            <PartyChart
-              width={chartWidth}
-              chartData={preparedData}
-              onClick={onClick}
-              selected={selected}
-              showPercentage
-              colors={['#b1b3b4', '#f5a623']}
-            />
-            <ChartLegend data={prepareCharLegendData(preparedData)} />
-          </>
-        )} */}
         {Content}
       </ScrollWrapper>
       <WarnWrapper pointerEvents="none">
