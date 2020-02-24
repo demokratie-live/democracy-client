@@ -60,9 +60,13 @@ export interface Notification {
 
 interface Props {
   finishAction: () => void;
+  alreadyKnown?: boolean;
 }
 
-export const PushInstructions: React.FC<Props> = ({ finishAction }) => {
+export const PushInstructions: React.FC<Props> = ({
+  finishAction,
+  alreadyKnown = false,
+}) => {
   const navigation = useNavigation();
   const [pushActive, setPushActive] = useState(true);
   const [notification] = useState<Notification>({
@@ -86,19 +90,23 @@ export const PushInstructions: React.FC<Props> = ({ finishAction }) => {
   return (
     <Wrapper>
       <ScrollView>
-        <SvgNewMarker
-          width={58}
-          height={35}
-          color="#f568c4"
-          style={{ position: 'absolute', left: 18 }}
-        />
-        <SvgIconAppIos width={73} height={73} />
-        <Headline>Ergebnisse erhalten</Headline>
-        <Subtitle>
-          Werde nach Deiner Abstimmung automatisch über das offizielle Ergebnis
-          des Bundestages informiert, sobald dieses vorliegt, um es mit Deinem
-          vergleichen zu können.
-        </Subtitle>
+        {!alreadyKnown && (
+          <>
+            <SvgNewMarker
+              width={58}
+              height={35}
+              color="#f568c4"
+              style={{ position: 'absolute', left: 18 }}
+            />
+            <SvgIconAppIos width={73} height={73} />
+            <Headline>Ergebnisse erhalten</Headline>
+            <Subtitle>
+              Werde nach Deiner Abstimmung automatisch über das offizielle
+              Ergebnis des Bundestages informiert, sobald dieses vorliegt, um es
+              mit Deinem vergleichen zu können.
+            </Subtitle>
+          </>
+        )}
         <NotificationBox
           icon={require('@democracy-deutschland/mobile-ui/src/components/Introduction/assets/icon.logo.png')}
           owner="DEMOCRACY"

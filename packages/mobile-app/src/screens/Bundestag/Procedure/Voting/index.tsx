@@ -27,6 +27,8 @@ import { useQuery } from '@apollo/react-hooks';
 import ChartLegend from '../components/Charts/ChartLegend';
 import NoVotesPlaceholder from '../../../WahlOMeter/NoVotesPlaceholder';
 import { styled } from '../../../../styles';
+import { NotificationsContext } from '../../../../context/NotificationPermission';
+import { PushInstructions } from '../../../modals/Introduction/PushInstructions';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -104,6 +106,7 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
   const [chartWidth] = useState(
     Math.min(Dimensions.get('screen').width, Dimensions.get('screen').height),
   );
+  const { notificationSettings } = useContext(NotificationsContext);
   const [showWarning, setShowWarning] = useState(true);
   const [selected, setSelected] = useState(0);
   const { constituency } = useContext(ConstituencyContext);
@@ -250,15 +253,40 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
     setSelected(index);
   };
 
+  let Content = <NoConstituency navigation={navigation as any} />;
+  if (!notificationSettings.outcomePushs) {
+    Content = (
+      <PushInstructions finishAction={navigation.goBack} alreadyKnown={true} />
+    );
+  } else if (constituency && preparedData && !preparedData.length) {
+    Content = <NoVotesPlaceholder subline="Fraktionen" />;
+  } else if (constituency && preparedData && preparedData.length) {
+    Content = (
+      <>
+        <Description>
+          Deine derzeitige Übereinstimmung mit den Fraktionen
+        </Description>
+        <PartyChart
+          width={chartWidth}
+          chartData={preparedData}
+          onClick={onClick}
+          selected={selected}
+          showPercentage
+          colors={['#b1b3b4', '#f5a623']}
+        />
+        <ChartLegend data={prepareCharLegendData(preparedData)} />
+      </>
+    );
+  }
   return (
     <Wrapper>
       <ScrollWrapper onScroll={onScroll}>
         <Title>Schon gewusst?</Title>
-        {!constituency && <NoConstituency navigation={navigation as any} />}
-        {!!constituency && !!preparedData && !preparedData.length && (
+        {/* {!constituency && <NoConstituency navigation={navigation as any} />} */}
+        {/* {!!constituency && !!preparedData && !preparedData.length && (
           <NoVotesPlaceholder subline="Fraktionen" />
-        )}
-        {!!constituency && !!preparedData && !!preparedData.length && (
+        )} */}
+        {/* {!!constituency && !!preparedData && !!preparedData.length && (
           <>
             <Description>
               Deine derzeitige Übereinstimmung mit den Fraktionen
@@ -273,10 +301,8 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
             />
             <ChartLegend data={prepareCharLegendData(preparedData)} />
           </>
-        )}
-        {
-          // TODO add party chart here
-        }
+        )} */}
+        {Content}
       </ScrollWrapper>
       <WarnWrapper pointerEvents="none">
         <Fade visible={showWarning}>
