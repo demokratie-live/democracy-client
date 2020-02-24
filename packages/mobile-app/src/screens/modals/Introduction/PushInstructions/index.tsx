@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { styled } from '../../../../styles';
 import { NotificationBox } from './NotificationBox';
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
@@ -60,9 +60,10 @@ export interface Notification {
 
 interface Props {
   finishAction: () => void;
+  alreadyKnown?: boolean;
 }
 
-export const PushInstructions: React.FC<Props> = ({ finishAction }) => {
+export const PushInstructions: React.FC<Props> = ({ alreadyKnown = false }) => {
   const navigation = useNavigation();
   const [pushActive, setPushActive] = useState(true);
   const [notification] = useState<Notification>({
@@ -70,35 +71,41 @@ export const PushInstructions: React.FC<Props> = ({ finishAction }) => {
     text: defaultNotificationData.outcomePushs.text,
     description: defaultNotificationData.outcomePushs.description,
   });
-  const { hasPermissions, requestToken } = useContext(NotificationsContext);
-  // return <SvgIconAppIos width={73} height={73} />;
+  const { requestToken, update: updateNotificationSettings } = useContext(
+    NotificationsContext,
+  );
 
   const pressActivate = () => {
     requestToken();
-  };
-
-  useEffect(() => {
-    if (hasPermissions) {
-      // finishAction();
+    if (!alreadyKnown) {
+      navigation.replace('Sidebar', { screen: 'Bundestag' });
     }
-  }, [finishAction, hasPermissions, navigation]);
+    updateNotificationSettings({
+      enabled: true,
+      outcomePushs: true,
+    });
+  };
 
   return (
     <Wrapper>
       <ScrollView>
-        <SvgNewMarker
-          width={58}
-          height={35}
-          color="#f568c4"
-          style={{ position: 'absolute', left: 18 }}
-        />
-        <SvgIconAppIos width={73} height={73} />
-        <Headline>Ergebnisse erhalten</Headline>
-        <Subtitle>
-          Werde nach Deiner Abstimmung automatisch über das offizielle Ergebnis
-          des Bundestages informiert, sobald dieses vorliegt, um es mit Deinem
-          vergleichen zu können.
-        </Subtitle>
+        {!alreadyKnown && (
+          <>
+            <SvgNewMarker
+              width={58}
+              height={35}
+              color="#f568c4"
+              style={{ position: 'absolute', left: 18 }}
+            />
+            <SvgIconAppIos width={73} height={73} />
+            <Headline>Ergebnisse erhalten</Headline>
+            <Subtitle>
+              Werde nach Deiner Abstimmung automatisch über das offizielle
+              Ergebnis des Bundestages informiert, sobald dieses vorliegt, um es
+              mit Deinem vergleichen zu können.
+            </Subtitle>
+          </>
+        )}
         <NotificationBox
           icon={require('@democracy-deutschland/mobile-ui/src/components/Introduction/assets/icon.logo.png')}
           owner="DEMOCRACY"
