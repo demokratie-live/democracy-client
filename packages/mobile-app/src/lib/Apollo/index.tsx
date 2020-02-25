@@ -41,6 +41,9 @@ const httpLink = new HttpLink({
 // Retry link
 const attempts: RetryFunction = (number, operation) => {
   console.log(number, operation.operationName);
+  if (operation.operationName === 'NotificationSettings' && number === 1) {
+    return true;
+  }
   switch (operation.operationName) {
     case 'Me':
       return true;
