@@ -23,7 +23,6 @@ import { useNavigation, CompositeNavigationProp } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { VerificationRootStackParamList } from '../../../routes/Verification';
 import { RootStackParamList } from '../../../routes';
-import Me from '../../../context/InitialStates/graphql/query/Me';
 import { VerificationContext } from '../../../context/Verification';
 import { ButtonNext } from './Start';
 import SvgDemocracyBubble from '@democracy-deutschland/mobile-ui/src/components/Icons/DemocracyBubble';
@@ -63,9 +62,7 @@ export const Code: React.FC = () => {
   const [requestVerification] = useMutation<
     RequestVerification,
     RequestVerificationVariables
-  >(REQUEST_VERIFICATION, {
-    refetchQueries: [{ query: Me }],
-  });
+  >(REQUEST_VERIFICATION);
   const [code, setCode] = useState('');
 
   const showNotification = (message: string) => {
@@ -87,6 +84,7 @@ export const Code: React.FC = () => {
       if (res.data && res.data.requestVerification.succeeded) {
         AsyncStorage.setItem('auth_phoneHash', phoneNumberHash);
         Keyboard.dismiss();
+        navigation.navigate('SmsDonate');
         // navigation.popToTop(); // TODO go back to previous screen or close instructions
       } else if (res.data) {
         showNotification(res.data.requestVerification.reason || '');

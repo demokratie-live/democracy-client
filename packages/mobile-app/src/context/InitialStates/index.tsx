@@ -9,6 +9,7 @@ interface InitialStateInterface {
   isVerified: boolean;
   verificationQueryRunning: boolean;
   setLastStartWithVersion: (version: string) => void;
+  refetchMe: () => void;
 }
 
 const defaults: InitialStateInterface = {
@@ -20,6 +21,9 @@ const defaults: InitialStateInterface = {
       'InitialStateContext: setLastStartVersion function is not defined',
     );
   },
+  refetchMe: () => {
+    throw new Error('InitialStateContext: refetchMe function is not defined');
+  },
 };
 
 export const InitialStateContext = createContext<InitialStateInterface>(
@@ -28,7 +32,11 @@ export const InitialStateContext = createContext<InitialStateInterface>(
 
 export const InitialStateProvider: FC = ({ children }) => {
   // TODO retry if bad connection or something else to avoid an app restart "apollo-link-retry"
-  const { data: meData, loading: verificationQueryRunning } = useQuery<Me>(ME);
+  const {
+    data: meData,
+    loading: verificationQueryRunning,
+    refetch: refetchMe,
+  } = useQuery<Me>(ME);
   const [isVerified, setIsVerified] = useState<boolean>(false);
   const [lastStartVersion, setLastStartVersion] = useState<
     InitialStateInterface['lastStartWithVersion']
@@ -59,6 +67,7 @@ export const InitialStateProvider: FC = ({ children }) => {
         lastStartWithVersion: lastStartVersion,
         setLastStartWithVersion,
         isVerified,
+        refetchMe,
       }}>
       {children}
     </InitialStateContext.Provider>

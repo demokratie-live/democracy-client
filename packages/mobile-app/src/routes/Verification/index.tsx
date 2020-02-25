@@ -10,11 +10,13 @@ import { useNavigation } from '@react-navigation/core';
 import { VerificationProvider } from '../../context/Verification';
 import { theme, styled } from '../../styles';
 import { RootStackParamList } from '..';
+import { SmsDonate } from '../../screens/modals/Verification/Donate';
 
 export type VerificationRootStackParamList = {
   Start: undefined;
   PhoneNumberInput: undefined;
   SmsCodeInput: undefined;
+  SmsDonate: undefined;
 };
 
 const VerificationRootStack = createStackNavigator<
@@ -77,6 +79,18 @@ const VerificationRootNavigation = () => {
         options={{
           headerTitle: 'Verifizieren',
           headerBackTitle: 'Zurück',
+        }}
+      />
+      <VerificationRootStack.Screen
+        name="SmsDonate"
+        component={SmsDonate}
+        options={{
+          headerTitle: 'Spenden',
+          headerShown: false,
+          headerBackTitleVisible: false,
+          headerBackTitleStyle: {
+            color: 'red',
+          },
         }}
       />
     </VerificationRootStack.Navigator>

@@ -17,6 +17,7 @@ import { VerificationRootStackParamList } from '../../../routes/Verification';
 import { VerificationContext } from '../../../context/Verification';
 import { ButtonNext } from './Start';
 import SvgDemocracyBubble from '@democracy-deutschland/mobile-ui/src/components/Icons/DemocracyBubble';
+import { InitialStateContext } from '../../../context/InitialStates';
 
 const Container = styled.KeyboardAvoidingView.attrs(() => ({
   behavior: Platform.OS === 'ios' ? 'padding' : undefined,
@@ -39,6 +40,7 @@ const ScrollView = styled.ScrollView.attrs(() => ({
 const DEVICE_HEIGT = Dimensions.get('window').height;
 
 export const PhoneNumber: React.FC = () => {
+  const { refetchMe } = useContext(InitialStateContext);
   const navigation = useNavigation<
     StackNavigationProp<VerificationRootStackParamList>
   >();
@@ -88,6 +90,7 @@ export const PhoneNumber: React.FC = () => {
               setExpireTime(res.data.requestCode.expireTime);
               setResendTime(res.data.requestCode.resendTime);
               showNotification(res.data.requestCode.reason || '');
+              refetchMe();
             } else if (res.data) {
               // TODO: Navigate to Code Input if aut_code_expires is not yet expired
               // Contains a Date (String)
