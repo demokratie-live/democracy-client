@@ -52,6 +52,10 @@ const SwitchText = styled.Text`
   padding-right: 18;
 `;
 
+const Highlight = styled.Text`
+  color: #000;
+`;
+
 export interface Notification {
   title: string;
   text: string;
@@ -88,7 +92,9 @@ export const PushInstructions: React.FC<Props> = ({
       enabled: true,
       outcomePushs: true,
     });
-    finishAction();
+    if (!alreadyKnown) {
+      finishAction();
+    }
   };
 
   return (
@@ -117,6 +123,14 @@ export const PushInstructions: React.FC<Props> = ({
           title={notification.title}
           text={notification.text}
         />
+        {!!alreadyKnown && (
+          <Subtitle>
+            Ab sofort informiert DEMOCRACY Dich <Highlight>per Push</Highlight>{' '}
+            über das offizielle <Highlight>Ergebnis des Bundestages</Highlight>{' '}
+            zu Deiner Abstimmung, sobald dieses vorliegt, um es mit Deinem
+            vergleichen zu können.
+          </Subtitle>
+        )}
         <SwitchWrapper>
           <SwitchText>
             Bundestagsergebnisse immer automatisch erhalten
