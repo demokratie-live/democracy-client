@@ -19,6 +19,9 @@ const Wrapper = styled.View`
 const ScrollView = styled.ScrollView.attrs({
   contentContainerStyle: {
     alignItems: 'center',
+    justifyContent: 'space-around',
+    flexGrow: 1,
+    marginBottom: 40,
   },
 })``;
 
@@ -31,8 +34,8 @@ const Headline = styled.Text`
 const Subtitle = styled.Text`
   color: #9b9b9b;
   font-size: 15;
-  padding-top: 14;
-  padding-bottom: 52;
+  margin-top: 18;
+  margin-bottom: 18;
   margin-horizontal: 18;
   text-align: center;
 `;
@@ -42,8 +45,8 @@ const SwitchWrapper = styled.View`
   flex-direction: row;
   justify-content: space-between;
   padding-horizontal: 18;
-  padding-top: 40;
-  padding-bottom: 31;
+  margin-top: 18;
+  margin-bottom: 18;
 `;
 
 const SwitchText = styled.Text`
