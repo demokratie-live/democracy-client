@@ -107,6 +107,13 @@ export const DevPlaceholder: FC = () => {
 
       {__DEV__ && <Text>is verified {JSON.stringify(isVerified)}</Text>}
       <Button
+        title="Remove auth"
+        onPress={() => {
+          AsyncStorage.removeItem('auth_token');
+          AsyncStorage.removeItem('auth_refreshToken');
+        }}
+      />
+      <Button
         title="Clear Async Storage"
         onPress={() => AsyncStorage.clear()}
       />

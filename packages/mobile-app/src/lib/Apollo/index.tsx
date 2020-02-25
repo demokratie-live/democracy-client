@@ -11,6 +11,7 @@ import { RetryLink } from 'apollo-link-retry';
 import { authLinkMiddleware, authLinkAfterware } from './Auth';
 import { GRAPHQL_URL, GRAPHQL_SERVER_LOCAL } from '../config';
 import { RetryFunction } from 'apollo-link-retry/lib/retryFunction';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const cache = new InMemoryCache({
   dataIdFromObject: (o: any) => {
@@ -59,11 +60,20 @@ const retryLink = new RetryLink({
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
-    graphQLErrors.forEach(({ message, locations, path }) =>
+    graphQLErrors.forEach(({ message, locations, path }) => {
       console.log(
-        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
-      ),
-    );
+        `[GraphQL error]: Message: ${message}, Location: ${JSON.stringify(
+          locations,
+          null,
+          4,
+        )}, Path: ${path}`,
+      );
+
+      if (message === 'Permission Denied') {
+        AsyncStorage.removeItem('auth_token');
+        AsyncStorage.removeItem('auth_refreshToken');
+      }
+    });
   }
   if (networkError) {
     const { message, name } = networkError;
