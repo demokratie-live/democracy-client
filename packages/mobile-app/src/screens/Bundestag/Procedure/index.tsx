@@ -134,13 +134,16 @@ export const Procedure: FC<Props> = ({ route, navigation }) => {
   });
 
   const clickBell = useCallback(() => {
-    toggleNotification();
     if (
       !notificationSettings.enabled ||
       !notificationSettings.outcomePushs ||
       !hasPermissions
     ) {
-      navigation.navigate('NotificationInstruction');
+      navigation.navigate('NotificationInstruction', {
+        done: toggleNotification,
+      });
+    } else {
+      toggleNotification();
     }
   }, [
     hasPermissions,

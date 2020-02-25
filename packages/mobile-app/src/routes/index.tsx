@@ -26,7 +26,7 @@ export type RootStackParamList = {
   Verification: {};
   PushInstructions: {};
   Pdf: { url: string; title: string };
-  NotificationInstruction: undefined;
+  NotificationInstruction: { done: () => void };
   Constituency: undefined;
 };
 
