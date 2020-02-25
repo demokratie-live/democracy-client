@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Platform, Dimensions } from 'react-native';
+import { Platform, Dimensions, ActivityIndicator } from 'react-native';
 
 import BallotBox from './components/BallotBox';
 
@@ -29,6 +29,7 @@ import NoVotesPlaceholder from '../../../WahlOMeter/NoVotesPlaceholder';
 import { styled } from '../../../../styles';
 import { NotificationsContext } from '../../../../context/NotificationPermission';
 import { PushInstructions } from '../../../modals/Introduction/PushInstructions';
+import { Centered } from '@democracy-deutschland/mobile-ui/src/components/shared/Centered';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -255,7 +256,14 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
     setSelected(index);
   };
 
-  let Content = <NoConstituency navigation={navigation as any} />;
+  let Content = (
+    <Centered>
+      <ActivityIndicator size="large" />
+    </Centered>
+  );
+  if (!constituency) {
+    Content = <NoConstituency navigation={navigation as any} />;
+  }
   if (
     !notificationSettings.outcomePushs ||
     !notificationSettings.enabled ||
