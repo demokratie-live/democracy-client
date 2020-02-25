@@ -1,11 +1,19 @@
 import Document from '@democracy-deutschland/mobile-ui/src/components/Icons/Document';
 import AsyncStorage from '@react-native-community/async-storage';
-import { CompositeNavigationProp, useNavigation } from '@react-navigation/core';
+import { CompositeNavigationProp } from '@react-navigation/core';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { MaterialTopTabNavigationProp } from '@react-navigation/material-top-tabs';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { FC, useContext, useEffect, useState } from 'react';
-import { Alert, Button, Clipboard, Text } from 'react-native';
+import unionBy from 'lodash.unionby';
+import {
+  Alert,
+  Button,
+  Clipboard,
+  Text,
+  TextInput,
+  Platform,
+} from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import styled from 'styled-components/native';
 import { InitialStateContext } from '../../context/InitialStates';
@@ -15,7 +23,7 @@ import { SidebarParamList } from '../../routes/Sidebar';
 import { BundestagRootStackParamList } from '../../routes/Sidebar/Bundestag';
 import { TopTabParamList } from '../../routes/Sidebar/Bundestag/TabView';
 
-const Container = styled.ScrollView`
+const Container = styled.ScrollView.attrs({})`
   flex: 1;
   /* align-items: center; */
   /* justify-content: center; */
@@ -41,12 +49,43 @@ interface State {
 
 const LocalVotes = () => {
   const [localVotes, setLocalVotes] = useState('');
+  const [newVotes, setNewVotes] = useState('');
   useEffect(() => {
     VotesLocal.readKeychain().then(data => setLocalVotes(JSON.stringify(data)));
   }, []);
 
   return (
     <>
+      <TextInput
+        multiline
+        style={{
+          minHeight: Platform.OS === 'ios' && 3 ? 20 * 3 : 'none',
+          maxHeight: Platform.OS === 'ios' && 3 ? 20 * 3 : 'none',
+          borderWidth: 1,
+        }}
+        placeholder="Json Code"
+        placeholderTextColor="red"
+        numberOfLines={3}
+        onChangeText={setNewVotes}
+      />
+      <Button
+        title="add Local Votes"
+        onPress={() => {
+          const newVotesObj = JSON.parse(newVotes);
+          const localVotesObj = JSON.parse(localVotes);
+          const votes = {
+            ...localVotesObj,
+            d: [...unionBy(localVotesObj.d, newVotesObj.d, 'i')],
+          };
+
+          VotesLocal.writeKeychain(votes).then(() => {
+            Alert.alert('local votes added');
+            VotesLocal.readKeychain().then(data =>
+              setLocalVotes(JSON.stringify(data)),
+            );
+          });
+        }}
+      />
       <Text>LocalVotes: {localVotes}</Text>
       <Button
         title="Copy Local Votes"
@@ -61,29 +100,19 @@ const LocalVotes = () => {
 
 export const DevPlaceholder: FC = () => {
   const { isVerified } = useContext(InitialStateContext);
-  const navigation = useNavigation<DevPlaceholderNavigationProps>();
   return (
     <Container>
       <Text>{DeviceInfo.getBundleId()}</Text>
-      <Button
-        title="Go to Procedure"
-        onPress={() =>
-          navigation.navigate('Procedure', {
-            procedureId: '1',
-            title: 'Sitzungswoche',
-          })
-        }
-      />
-      <Button title="Voting" onPress={() => navigation.navigate('Voting')} />
-      <Button
-        title="Go to Introduction"
-        onPress={() => navigation.navigate('Introduction')}
-      />
-      <Button
-        title="Go to Verification"
-        onPress={() => navigation.navigate('Verification')}
-      />
+      <LocalVotes />
+
       {__DEV__ && <Text>is verified {JSON.stringify(isVerified)}</Text>}
+      <Button
+        title="Remove auth"
+        onPress={() => {
+          AsyncStorage.removeItem('auth_token');
+          AsyncStorage.removeItem('auth_refreshToken');
+        }}
+      />
       <Button
         title="Clear Async Storage"
         onPress={() => AsyncStorage.clear()}
@@ -93,7 +122,6 @@ export const DevPlaceholder: FC = () => {
         onPress={() => VotesLocal.reset()}
       />
       <Document width="32px" height="32px" color="black" />
-      <LocalVotes />
     </Container>
   );
 };

@@ -121,7 +121,7 @@ class VotesLocal {
   };
 
   // Write a v1 Chain
-  private static writeKeychain = async (data: Chain) => {
+  static writeKeychain = async (data: Chain) => {
     // Split Data into packages to avoid error on 65k
     // https://github.com/oblador/react-native-keychain/issues/184
     const index = [];
