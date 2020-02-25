@@ -63,7 +63,10 @@ interface Props {
   alreadyKnown?: boolean;
 }
 
-export const PushInstructions: React.FC<Props> = ({ alreadyKnown = false }) => {
+export const PushInstructions: React.FC<Props> = ({
+  alreadyKnown = false,
+  finishAction,
+}) => {
   const navigation = useNavigation();
   const [pushActive, setPushActive] = useState(true);
   const { requestToken, update: updateNotificationSettings } = useContext(
@@ -85,6 +88,7 @@ export const PushInstructions: React.FC<Props> = ({ alreadyKnown = false }) => {
       enabled: true,
       outcomePushs: true,
     });
+    finishAction();
   };
 
   return (
