@@ -17,6 +17,7 @@ import SplashScreen from 'react-native-splash-screen';
 import { theme } from '../styles';
 import { StatusBar } from 'react-native';
 import { PushInstructions } from '../screens/modals/Introduction/PushInstructions';
+import { NotificationInstructionScreen } from '../screens/modals/NotificationInstruction';
 
 export type RootStackParamList = {
   Sidebar: undefined;
@@ -25,6 +26,7 @@ export type RootStackParamList = {
   Verification: {};
   PushInstructions: {};
   Pdf: { url: string; title: string };
+  NotificationInstruction: { done: () => void };
   Constituency: undefined;
 };
 
@@ -161,6 +163,11 @@ const Navigation = () => {
             name="Pdf"
             component={PdfScreen}
             options={({ route }) => ({ title: route.params.title })}
+          />
+          <RootStack.Screen
+            name="NotificationInstruction"
+            component={NotificationInstructionScreen}
+            options={{ headerShown: false }}
           />
           <RootStack.Screen
             name="Constituency"

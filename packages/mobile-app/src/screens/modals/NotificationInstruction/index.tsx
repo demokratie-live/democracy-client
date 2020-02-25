@@ -1,17 +1,17 @@
 import React, { useState, useContext } from 'react';
-import { styled } from '../../../../styles';
-import { NotificationBox } from './NotificationBox';
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
-import { defaultNotificationData } from './data';
-import { useNavigation } from '@react-navigation/core';
-import SvgIconAppIos from '@democracy-deutschland/mobile-ui/src/components/Icons/IconAppIos';
+import { useNavigation, useRoute, RouteProp } from '@react-navigation/core';
 import SvgNewMarker from '@democracy-deutschland/mobile-ui/src/components/Icons/Newmarker';
-import { Dimensions, Switch } from 'react-native';
-import { NotificationsContext } from '../../../../context/NotificationPermission';
+import { Dimensions, Switch, Image } from 'react-native';
+import { styled } from '../../../styles';
+import { NotificationsContext } from '../../../context/NotificationPermission';
+import { defaultNotificationData } from '../Introduction/PushInstructions/data';
+import { NotificationBox } from '../Introduction/PushInstructions/NotificationBox';
+import { RootStackParamList } from '../../../routes';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 
-const Wrapper = styled.View`
+const Wrapper = styled.SafeAreaView`
   width: ${DEVICE_WIDTH};
   align-items: center;
 `;
@@ -52,22 +52,17 @@ const SwitchText = styled.Text`
   padding-right: 18;
 `;
 
+type RouteProps = RouteProp<RootStackParamList, 'NotificationInstruction'>;
+
 export interface Notification {
   title: string;
   text: string;
   description: string;
 }
 
-interface Props {
-  finishAction: () => void;
-  alreadyKnown?: boolean;
-}
-
-export const PushInstructions: React.FC<Props> = ({
-  alreadyKnown = false,
-  finishAction,
-}) => {
+export const NotificationInstructionScreen: React.FC = () => {
   const navigation = useNavigation();
+  const route = useRoute<RouteProps>();
   const [pushActive, setPushActive] = useState(true);
   const { requestToken, update: updateNotificationSettings } = useContext(
     NotificationsContext,
@@ -81,36 +76,34 @@ export const PushInstructions: React.FC<Props> = ({
 
   const pressActivate = () => {
     requestToken();
-    if (!alreadyKnown) {
-      navigation.replace('Sidebar', { screen: 'Bundestag' });
-    }
+    navigation.goBack();
+    route.params.done();
     updateNotificationSettings({
       enabled: true,
       outcomePushs: true,
     });
-    finishAction();
   };
 
   return (
     <Wrapper>
       <ScrollView>
-        {!alreadyKnown && (
-          <>
-            <SvgNewMarker
-              width={58}
-              height={35}
-              color="#f568c4"
-              style={{ position: 'absolute', left: 18 }}
-            />
-            <SvgIconAppIos width={73} height={73} />
-            <Headline>Ergebnisse erhalten</Headline>
-            <Subtitle>
-              Werde nach Deiner Abstimmung automatisch über das offizielle
-              Ergebnis des Bundestages informiert, sobald dieses vorliegt, um es
-              mit Deinem vergleichen zu können.
-            </Subtitle>
-          </>
-        )}
+        <>
+          <SvgNewMarker
+            width={58}
+            height={35}
+            color="#f568c4"
+            style={{ position: 'absolute', left: 18 }}
+          />
+          <Image
+            source={require('@democracy-deutschland/mobile-ui/src/components/Introduction/assets/icon.beobachte.png')}
+          />
+          <Headline>Du hast die Glocke aktiviert</Headline>
+          <Subtitle>
+            und wirst über das offizielle Ergebnis des Bundestages zu dieser
+            Abstimmung informiert, wenn Du uns erlaubst, Dir Mitteilungen zu
+            senden.
+          </Subtitle>
+        </>
         <NotificationBox
           icon={require('@democracy-deutschland/mobile-ui/src/components/Introduction/assets/icon.logo.png')}
           owner="DEMOCRACY"
@@ -118,9 +111,7 @@ export const PushInstructions: React.FC<Props> = ({
           text={notification.text}
         />
         <SwitchWrapper>
-          <SwitchText>
-            Bundestagsergebnisse immer automatisch erhalten
-          </SwitchText>
+          <SwitchText>Bundestagsergebnis erhalten</SwitchText>
           <Switch value={pushActive} onValueChange={setPushActive} />
         </SwitchWrapper>
         <Button
@@ -132,6 +123,16 @@ export const PushInstructions: React.FC<Props> = ({
           textColor="white"
           text="Aktivieren"
           onPress={pressActivate}
+          disabled={!pushActive}
+        />
+        <Button
+          style={{
+            marginHorizontal: 18,
+            width: DEVICE_WIDTH - 36,
+          }}
+          textColor="red"
+          text="Später"
+          onPress={navigation.goBack}
           disabled={!pushActive}
         />
       </ScrollView>

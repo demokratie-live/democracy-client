@@ -1,4 +1,4 @@
-import React, { FC, useContext, useState, useEffect } from 'react';
+import React, { FC, useContext } from 'react';
 import { useNavigation, RouteProp } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import styled from 'styled-components/native';
@@ -36,7 +36,6 @@ const Introduction: FC<Props> = ({ route }) => {
   const { notificationSettings, hasPermissions } = useContext(
     NotificationsContext,
   );
-  const [wasVerified] = useState(isVerified);
   let { lastStartWithVersion, done } = {
     lastStartWithVersion: '',
     done: undefined,
@@ -45,13 +44,6 @@ const Introduction: FC<Props> = ({ route }) => {
     lastStartWithVersion = route.params.lastStartWithVersion || '';
     done = route.params.done;
   }
-
-  // Close instructions if user verify himself within instructions
-  useEffect(() => {
-    if (!wasVerified && isVerified) {
-      navigation.goBack();
-    }
-  }, [isVerified, wasVerified, navigation]);
 
   const finishAction = () => {
     if (done === 'SET_LAST_START_VERSION') {
@@ -77,8 +69,12 @@ const Introduction: FC<Props> = ({ route }) => {
       }
     />
   ));
-  console.log(notificationSettings);
-  if (!notificationSettings.outcomePushs || !hasPermissions) {
+
+  if (
+    !notificationSettings.outcomePushs ||
+    !notificationSettings.enabled ||
+    !hasPermissions
+  ) {
     slideScreens.push(
       <PushInstructions key="push-instructions" finishAction={finishAction} />,
     );

@@ -1,6 +1,6 @@
-import React, { useContext, FC, useEffect } from 'react';
+import React, { useContext, FC, useEffect, useCallback } from 'react';
 import { Text, Platform, Share } from 'react-native';
-import { RouteProp } from '@react-navigation/core';
+import { RouteProp, CompositeNavigationProp } from '@react-navigation/core';
 import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
 
 import ShareIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Share';
@@ -38,6 +38,8 @@ import {
   ToggleNotificationVariables,
 } from './graphql/muatation/__generated__/ToggleNotification';
 import { TOGGLE_NOTIFICATION } from './graphql/muatation/toggleNotification';
+import { NotificationsContext } from '../../../context/NotificationPermission';
+import { RootStackParamList } from '../../../routes';
 
 const Container = styled.ScrollView.attrs({
   scrollIndicatorInsets: { right: 1 }, // TODO do cleanfix when there is a correct solution (already closed but not solved without workaround) https://github.com/facebook/react-native/issues/26610
@@ -63,9 +65,9 @@ type ProcedureScreenRouteProp = RouteProp<
   'Procedure'
 >;
 
-type ScreenNavigationProp = StackNavigationProp<
-  BundestagRootStackParamList,
-  'Procedure'
+type ScreenNavigationProp = CompositeNavigationProp<
+  StackNavigationProp<BundestagRootStackParamList, 'Procedure'>,
+  StackNavigationProp<RootStackParamList>
 >;
 
 type Props = {
@@ -76,6 +78,9 @@ type Props = {
 const ShareComponent = Platform.OS === 'ios' ? ShareIconIosHeader : ShareIcon;
 
 export const Procedure: FC<Props> = ({ route, navigation }) => {
+  const { notificationSettings, hasPermissions } = useContext(
+    NotificationsContext,
+  );
   const { isVerified } = useContext(InitialStateContext);
   const { constituency } = useContext(ConstituencyContext);
   const constituencies = constituency ? [constituency] : [];
@@ -128,6 +133,26 @@ export const Procedure: FC<Props> = ({ route, navigation }) => {
     ],
   });
 
+  const clickBell = useCallback(() => {
+    if (
+      !notificationSettings.enabled ||
+      !notificationSettings.outcomePushs ||
+      !hasPermissions
+    ) {
+      navigation.navigate('NotificationInstruction', {
+        done: toggleNotification,
+      });
+    } else {
+      toggleNotification();
+    }
+  }, [
+    hasPermissions,
+    navigation,
+    notificationSettings.enabled,
+    notificationSettings.outcomePushs,
+    toggleNotification,
+  ]);
+
   // TODO Actions oben rechts hinzufügen
   useEffect(() => {
     if (data) {
@@ -136,7 +161,7 @@ export const Procedure: FC<Props> = ({ route, navigation }) => {
       navigation.setOptions({
         headerRight: () => (
           <HaderRightWrapper>
-            <MenuButton onPress={() => toggleNotification()}>
+            <MenuButton onPress={clickBell}>
               <BellIcon width={20} height={20} color="#fff" />
             </MenuButton>
             <MenuButton onPress={() => share({ type, procedureId, title })}>
@@ -146,7 +171,7 @@ export const Procedure: FC<Props> = ({ route, navigation }) => {
         ),
       });
     }
-  }, [navigation, data, toggleNotification]);
+  }, [navigation, data, toggleNotification, clickBell]);
 
   useEffect(() => {
     if (!route.params.title && data && data.procedure.type) {

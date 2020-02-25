@@ -188,7 +188,7 @@ export const Settings: React.FC<Props> = () => {
     );
   }
 
-  if (isVerified) {
+  if (isVerified && notificationSettings.enabled) {
     const tmp = listData.find(({ title }) => title === 'Sitzungswoche');
     if (tmp) {
       tmp.data.push({
