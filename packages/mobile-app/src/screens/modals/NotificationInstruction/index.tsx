@@ -1,12 +1,13 @@
 import React, { useState, useContext } from 'react';
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation, useRoute, RouteProp } from '@react-navigation/core';
 import SvgNewMarker from '@democracy-deutschland/mobile-ui/src/components/Icons/Newmarker';
 import { Dimensions, Switch, Image } from 'react-native';
 import { styled } from '../../../styles';
 import { NotificationsContext } from '../../../context/NotificationPermission';
 import { defaultNotificationData } from '../Introduction/PushInstructions/data';
 import { NotificationBox } from '../Introduction/PushInstructions/NotificationBox';
+import { RootStackParamList } from '../../../routes';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 
@@ -51,6 +52,8 @@ const SwitchText = styled.Text`
   padding-right: 18;
 `;
 
+type RouteProps = RouteProp<RootStackParamList, 'NotificationInstruction'>;
+
 export interface Notification {
   title: string;
   text: string;
@@ -59,6 +62,7 @@ export interface Notification {
 
 export const NotificationInstructionScreen: React.FC = () => {
   const navigation = useNavigation();
+  const route = useRoute<RouteProps>();
   const [pushActive, setPushActive] = useState(true);
   const { requestToken, update: updateNotificationSettings } = useContext(
     NotificationsContext,
@@ -73,6 +77,7 @@ export const NotificationInstructionScreen: React.FC = () => {
   const pressActivate = () => {
     requestToken();
     navigation.goBack();
+    route.params.done();
     updateNotificationSettings({
       enabled: true,
       outcomePushs: true,
