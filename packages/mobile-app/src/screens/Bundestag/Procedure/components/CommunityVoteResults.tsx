@@ -123,7 +123,12 @@ export const CommunityVoteResults: React.FC<Props> = ({ voteResults }) => {
               }}
             />
           </SvgWrapper>
-          <PieChart data={data} label={`${votes}`} subLabel="Abstimmende" />
+          <PieChart
+            data={data}
+            label={`${votes}`}
+            subLabel="Abstimmende"
+            showPercentage
+          />
           <ChartLegend data={data} />
         </PieChartWrapper>
       );

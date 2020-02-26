@@ -118,6 +118,7 @@ class Bundestag extends PureComponent<Props> {
                     // colorScale={['#EAA844', '#B1B3B4']}
                     label="Bundestag"
                     subLabel="Wahl-O-Meter"
+                    showPercentage
                   />
                 </ChartWrapper>
                 <ChartLegend data={preparedData} />

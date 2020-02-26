@@ -194,6 +194,7 @@ export const GovernmentVoteResults: React.FC<Props> = ({
           label={`${
             voteResults.namedVote ? votes : voteResults.partyVotes.length
           }`}
+          showPercentage
         />
         <ChartLegend data={dataPieChart} />
       </PieChartWrapper>,
@@ -202,7 +203,7 @@ export const GovernmentVoteResults: React.FC<Props> = ({
         width={pieChartWidth}
         chartData={dataPartyChart}
         colors={partyColors}
-        showPercentage={true}
+        showPercentage
       />,
       <BarChart key="barChart" data={voteResults} legendData={dataPieChart} />,
     ];
