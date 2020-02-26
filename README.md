@@ -108,14 +108,14 @@ CMD+M and Configure Bundler Location to Host: 127.0.0.1 & Port: 8088
 ### Android
 
 ```
-cd mobile-ui
+cd packages/mobile-app
 yarn android
 ```
 
 ### iOS
 
 ```
-cd mobile-ui
+cd packages/mobile-app
 cd ios
 pod install
 cd ..
