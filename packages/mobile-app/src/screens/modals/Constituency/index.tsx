@@ -8,6 +8,8 @@ import constituencies from '../../Bundestag/Procedure/components/svgs/constituen
 import { Constituency } from './constituencyData';
 import { ConstituencyContext } from '../../../context/Constituency';
 import { styled } from '../../../styles/index';
+import { RouteProp, useNavigation } from '@react-navigation/core';
+import { RootStackParamList } from '../../../routes';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -96,7 +98,15 @@ const Checkmark = styled.Text`
   font-weight: bold;
   margin-left: 8;
 `;
-export const ConstituencyScreen = () => {
+
+type ConstituencScreenRouteProp = RouteProp<RootStackParamList, 'Constituency'>;
+
+interface Props {
+  route: ConstituencScreenRouteProp;
+}
+
+export const ConstituencyScreen: React.FC<Props> = ({ route }) => {
+  const navigation = useNavigation();
   const { constituency, setConstituency } = useContext(ConstituencyContext);
   const [term, setTerm] = useState('');
 
@@ -133,6 +143,7 @@ export const ConstituencyScreen = () => {
           text: 'Ja',
           onPress: () => {
             setConstituency(item.number);
+            route.params.goBack ? navigation.goBack() : undefined;
           },
         },
       ],

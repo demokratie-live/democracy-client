@@ -27,7 +27,7 @@ export type RootStackParamList = {
   PushInstructions: {};
   Pdf: { url: string; title: string };
   NotificationInstruction: { done: () => void };
-  Constituency: undefined;
+  Constituency: { goBack?: boolean };
 };
 
 const RootStack = createStackNavigator<RootStackParamList>();
