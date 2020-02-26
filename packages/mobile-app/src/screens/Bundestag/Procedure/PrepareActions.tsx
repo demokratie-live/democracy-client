@@ -118,7 +118,7 @@ type DetailScreenNavigationProps = CompositeNavigationProp<
 
 const PrepareActions: React.FC<Props> = ({
   verified,
-  voted,
+  voted: votedServer,
   procedureObjId,
   procedureId,
   type,
@@ -160,7 +160,7 @@ const PrepareActions: React.FC<Props> = ({
   };
 
   const voteSelection = getLocalVoteSelection(procedureId);
-
+  const voted = votedServer || !!voteSelection;
   return (
     <Wrapper>
       <SegmentWrapper>
