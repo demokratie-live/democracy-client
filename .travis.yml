@@ -1,0 +1,99 @@
+env:
+  global:
+    secure: "YlAPyA4FsWPpX5T5NMqYxq0obP5NJCo52G5xltPBAG5N3cWA624n4xE09xR56FuSjr88/MjOGv3VFh4di1/lWfJOuSFbAnzTND+b5+/ArSesR2aZuPSR0qmzncTp4spqMrE303wK5TIUaZjwAg0wRfl4zOw25Ib0YLRF91TjWjpDsR7XPvCkz73brMED+h13WyemlDRbThQsIV9qIkBUhuDCF5T5K0gvym8mK5aDZuIuJ/Rjh9AyihGJP00uqOc9zT4dCqSC+Siyje0llnpEphoLfc8RAbfr+R/3QHZhepPdfQ1HTSymhj+s71kNsIZmoMKDye/t6OEatzmHg/Y6ooqKW2DVU/ov2BdvWGBVYu4z5fZ+FeIr7UY6blHdpkulp1V/X24M/c9q1dyoVzIvSa9RJsPttzu7vpW22BX66r4puvRFw2/Ji1dTDQd2xbJw7CFurGqNTlfiqcLXy6FWslNGR06YptdZhAfqf+JNtdC+6117yPoN6fcO4sc2x2lMzG0FfppcHjfbX/Kj4MkNReUd30MpuIT3MyPgKsKGJ5g7QzA+W/sXigtSW+rG3Ia8k/IlqqZuYOH3Q5mTEo1kbq/2wadn2UEm2LJMi9HXXYhpDWjFu6FQG/E8hEDkfWfAiiQVpMdtxi4IFy/9qC0CtC9QW+7SDL1Ci22hdUmtzfo="
+matrix:
+  include:
+    - language: swift
+      os: osx
+      osx_image: xcode11.1
+      if: (branch = alpha OR branch = internal OR branch = refactor OR branch = master) AND commit_message !~ /(no-deploy)/
+      cache:
+        yarn: true
+        bundler: true
+        cocoapods: true
+        directories:
+          - "$HOME/.yarn-cache"
+          - node_modules
+          - packages/mobile-app/node_modules
+          - packages/mobile-ui/node_modules
+      node_js: false
+      before_install:
+        - gpg --version
+        - brew install gnupg@1.4
+        - gpg --version
+        - echo $super_secret_password | gpg1 --passphrase-fd 0 packages/mobile-app/.env.internal.gpg
+        - echo $super_secret_password | gpg1 --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
+        - echo $super_secret_password | gpg1 --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
+        - echo $super_secret_password | gpg1 --passphrase-fd 0 packages/mobile-app/.env.production.gpg
+        - nvm install 10
+        - node --version
+        - npm install -g yarn
+        - yarn -version
+        - gem install fastlane
+        - echo -e "machine github.com\n  login $GITHUB_API_TOKEN" >> ~/.netrc
+        - n=$(which node);n=${n%/bin/node}; chmod -R 755 $n/bin/*; sudo cp -r $n/{bin,lib,share} /usr/local
+      install:
+        - yarn install
+        - yarn pods
+        - cd packages/mobile-app/ios
+        - bundle install
+        - cd $TRAVIS_BUILD_DIR
+      script:
+        - chmod 0600 /Users/travis/.netrc
+        - cd packages/mobile-app/ios
+        - bundle exec fastlane ios beta
+        - cd $TRAVIS_BUILD_DIR
+      after_success:
+        - ".travis/push.sh"
+
+    # Android
+    - language: android
+      if: (branch = alpha OR branch = internal OR branch = refactor) AND commit_message !~ /(no-deploy)/
+      os: linux
+      jdk: oraclejdk8
+      sudo: required
+      android:
+        components:
+          - platform-tools
+          - tools
+          - build-tools-26.0.3
+          - build-tools-28.0.3
+          - android-21
+          - android-26
+          - android-28
+          - sys-img-armeabi-v7a-android-21
+          - extra-android-m2repository
+          - extra-google-m2repository
+          - extra-google-google_play_services
+      node_js: false
+      before_install:
+        - gpg --version
+        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/my-release-key.keystore.gpg
+        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/app/src/refactor/google-services.json.gpg
+        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/app/src/internal/google-services.json.gpg
+        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/app/src/alpha/google-services.json.gpg
+        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/democracy2-release-key.keystore.gpg
+        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/.env.internal.gpg
+        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
+        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
+        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/.env.production.gpg
+        - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo
+          sysctl -p
+        - nvm install 10
+        - node --version
+        - npm install -g yarn
+        - yarn -version
+        - gem install fastlane
+        - echo -e "machine github.com\n  login $GITHUB_API_TOKEN" >> ~/.netrc
+      install:
+        - yarn install --no-bin-links
+        - cd packages/mobile-app/android
+        - bundle install
+        - cd $TRAVIS_BUILD_DIR
+      script:
+        - chmod 0600 /home/travis/.netrc
+        - cd packages/mobile-app/android
+        - bundle exec fastlane android internal
+        - cd $TRAVIS_BUILD_DIR
+      after_success:
+        - ".travis/push.sh"
