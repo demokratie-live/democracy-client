@@ -19,7 +19,7 @@ import {
   ToggleNotificationVariables,
 } from './graphql/muatation/__generated__/ToggleNotification';
 import { TOGGLE_NOTIFICATION } from './graphql/muatation/toggleNotification';
-import Procedure from './graphql/query/Procedure';
+import { PROCEDURE } from './graphql/query/Procedure';
 
 const SegmentWrapper = styled.View`
   padding-vertical: 14;
@@ -137,7 +137,7 @@ const PrepareActions: React.FC<Props> = ({
     },
     refetchQueries: [
       {
-        query: Procedure,
+        query: PROCEDURE,
         variables: {
           id: procedureId,
         },
@@ -155,7 +155,7 @@ const PrepareActions: React.FC<Props> = ({
   };
 
   const verify = () => {
-    navigation.navigate('Verification');
+    navigation.navigate('Verification', { procedureId });
     // TODO go to verification
   };
 

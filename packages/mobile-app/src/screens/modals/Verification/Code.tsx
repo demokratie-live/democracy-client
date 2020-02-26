@@ -19,13 +19,21 @@ import {
   RequestSmsCode,
   RequestSmsCodeVariables,
 } from './graphql/mutation/__generated__/RequestSmsCode';
-import { useNavigation, CompositeNavigationProp } from '@react-navigation/core';
+import {
+  useNavigation,
+  CompositeNavigationProp,
+  RouteProp,
+} from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { VerificationRootStackParamList } from '../../../routes/Verification';
 import { RootStackParamList } from '../../../routes';
 import { VerificationContext } from '../../../context/Verification';
 import { ButtonNext } from './Start';
 import SvgDemocracyBubble from '@democracy-deutschland/mobile-ui/src/components/Icons/DemocracyBubble';
+import { ConstituencyContext } from '../../../context/Constituency';
+import { PROCEDURE } from '../../Bundestag/Procedure/graphql/query/Procedure';
+import { ListFilterContext } from '../../../context/ListFilter';
+import { PROCEDURES_LIST } from '../../Bundestag/List/graphql/query/procedures';
 
 const Container = styled.KeyboardAvoidingView.attrs(() => ({
   behavior: Platform.OS === 'ios' ? 'padding' : undefined,
@@ -51,10 +59,18 @@ type DevPlaceholderNavigationProps = CompositeNavigationProp<
 
 const DEVICE_HEIGT = Dimensions.get('window').height;
 
-export const Code: React.FC = () => {
+type RouteProps = RouteProp<VerificationRootStackParamList, 'SmsCodeInput'>;
+
+interface Props {
+  route: RouteProps;
+}
+
+export const Code: React.FC<Props> = ({ route }) => {
   const { countdown, setExpireTime, setResendTime, phoneNumber } = useContext(
     VerificationContext,
   );
+  const { proceduresFilter } = useContext(ListFilterContext);
+  const { constituency } = useContext(ConstituencyContext);
   const navigation = useNavigation<DevPlaceholderNavigationProps>();
   const [requestCode] = useMutation<RequestSmsCode, RequestSmsCodeVariables>(
     REQUEST_CODE,
@@ -73,12 +89,36 @@ export const Code: React.FC = () => {
     setCode(newCode);
     if (newCode.length === 6) {
       const phoneNumberHash = await sha256(phoneNumber);
+      const refetchQueries = [];
+      if (route.params.procedureId) {
+        // Detail View
+        refetchQueries.push({
+          query: PROCEDURE,
+          variables: {
+            constituency,
+            id: route.params.procedureId,
+          },
+        });
+      }
+      // Lists
+      ['CONFERENCEWEEKS_PLANNED', 'PAST', 'TOP100'].forEach(list => {
+        refetchQueries.push({
+          query: PROCEDURES_LIST,
+          variables: {
+            listTypes: [list],
+            pageSize: 10,
+            filter: proceduresFilter,
+            constituencies: constituency ? [constituency] : [],
+          },
+        });
+      });
       const res = await requestVerification({
         variables: {
           code: newCode,
           newPhoneHash: phoneNumberHash,
           newUser: true, // TODO ask user if he already used the App with same phone number
         },
+        refetchQueries,
       });
 
       if (res.data && res.data.requestVerification.succeeded) {

@@ -15,7 +15,7 @@ import {
   ProcedureVariables,
   Procedure_procedure,
 } from './graphql/query/__generated__/Procedure';
-import PROCEDURE from './graphql/query/Procedure';
+import { PROCEDURE } from './graphql/query/Procedure';
 import { Intro } from './components/Intro';
 import Details from './components/Details';
 import Documents from './components/Documents';

@@ -6,7 +6,7 @@ import {
 import { VerificationStart } from '../../screens/modals/Verification/Start';
 import { PhoneNumber } from '../../screens/modals/Verification/PhoneNumber';
 import { Code } from '../../screens/modals/Verification/Code';
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation, RouteProp } from '@react-navigation/core';
 import { VerificationProvider } from '../../context/Verification';
 import { theme, styled } from '../../styles';
 import { RootStackParamList } from '..';
@@ -15,7 +15,7 @@ import { SmsDonate } from '../../screens/modals/Verification/Donate';
 export type VerificationRootStackParamList = {
   Start: undefined;
   PhoneNumberInput: undefined;
-  SmsCodeInput: undefined;
+  SmsCodeInput: { procedureId?: string };
   SmsDonate: undefined;
 };
 
@@ -38,7 +38,13 @@ const HeaderButtonText = styled.Text`
   font-weight: 500;
 `;
 
-const VerificationRootNavigation = () => {
+interface VerificationRootNavigationProps {
+  procedureId?: string;
+}
+
+const VerificationRootNavigation: React.FC<VerificationRootNavigationProps> = ({
+  procedureId,
+}) => {
   const navigation = useNavigation<VerificationNavigationProps>();
   return (
     <VerificationRootStack.Navigator
@@ -80,6 +86,9 @@ const VerificationRootNavigation = () => {
           headerTitle: 'Verifizieren',
           headerBackTitle: 'Zurück',
         }}
+        initialParams={{
+          procedureId,
+        }}
       />
       <VerificationRootStack.Screen
         name="SmsDonate"
@@ -97,10 +106,17 @@ const VerificationRootNavigation = () => {
   );
 };
 
-export const VerificationScreen = () => {
+type RouteProps = RouteProp<RootStackParamList, 'Verification'>;
+
+interface Props {
+  route: RouteProps;
+}
+
+export const VerificationScreen: React.FC<Props> = ({ route }) => {
+  const procedureId = route.params ? route.params.procedureId : undefined;
   return (
     <VerificationProvider>
-      <VerificationRootNavigation />
+      <VerificationRootNavigation procedureId={procedureId} />
     </VerificationProvider>
   );
 };
