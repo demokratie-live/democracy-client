@@ -1,0 +1,18 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<svg xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <font id="DemocracyFont" horiz-adv-x="21">
+    <font-face font-family="DemocracyFont"
+      units-per-em="12" ascent="12"
+      descent="0" />
+    <missing-glyph horiz-adv-x="0" />
+    <glyph glyph-name="checkmark-double"
+      unicode="&#xE001;"
+      horiz-adv-x="21" d="M8.15040609 2.71650572L9.25846572 3.85837786L10.3271995 2.80503907L19.5471326 12L20.6433798 10.89332368L10.3271995 0.5532834zM0 5.88048292L1.13089135 6.96983384L5.32719954 2.80503907L14.5471326 12L15.6433798 10.89332368L5.32719954 0.5532834z" />
+    <glyph glyph-name="checkmark"
+      unicode="&#xE002;"
+      horiz-adv-x="16" d="M0 5.880483L1.130891 6.969834L5.3272 2.805039L14.547133 12L15.64338 10.893324L5.3272 0.553283z" />
+  </font>
+</defs>
+</svg>

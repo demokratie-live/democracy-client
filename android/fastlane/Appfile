@@ -1,0 +1,17 @@
+json_key_file("./Google_Play_Android_Developer.json") # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
+
+for_lane 'internal' do
+  package_name "de.democracydeutschland.app.internal"
+end
+
+for_lane 'alpha' do
+  package_name "de.democracydeutschland.app.alpha"
+end
+
+for_lane 'beta' do
+  package_name "de.democracydeutschland.app.beta"
+end
+
+for_lane 'production' do
+  package_name "de.democracydeutschland.app"
+end

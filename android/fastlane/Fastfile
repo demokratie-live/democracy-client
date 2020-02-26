@@ -1,0 +1,110 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc "Validate"
+  lane :validate do
+    supply(
+      validate_only: true
+    )
+  end
+
+  desc "Test"
+  lane :test do
+    gradle(
+      task: "clean assembleAlpha",
+      build_type: "Release"
+    )
+  end
+
+  desc "Submit a new Alpha Build to GooglePlayStore"
+
+  # Changelog
+  packageJSON = load_json(json_path: "../package.json")
+  version = packageJSON["version"];
+  changelog = read_changelog(
+    changelog_path: '../CHANGELOG.md',	# Specify path to CHANGELOG.md
+    section_identifier: "[" + version + "]"
+  )[0, 500]
+  buildNumber = ENV["BUILD_NUMBER"];
+
+  # Internal
+  lane :internal do
+    File.open("./metadata_internal/android/de-DE/changelogs/#{buildNumber}.txt", 'w') do |file|
+      file.write changelog
+    end
+    gradle(
+      task: "clean assembleInternal",
+      build_type: "Release"
+    )
+    upload_to_play_store(
+      track: 'internal',
+      track_promote_to: 'internal',
+      metadata_path: "./fastlane/metadata_internal/android"
+    )
+  end
+  
+  # Alpha
+  lane :alpha do
+    File.open("./metadata_alpha/android/de-DE/changelogs/#{buildNumber}.txt", 'w') do |file|
+      file.write changelog
+    end
+    gradle(
+      task: "clean assembleAlpha",
+      build_type: "Release"
+    )
+    upload_to_play_store(
+      track: 'alpha',
+      track_promote_to: 'alpha',
+      apk: "./app/build/outputs/apk/alpha/release/app-alpha-release.apk",
+      metadata_path: "./fastlane/metadata_alpha/android"
+    )
+  end
+
+  # Beta
+  desc "Submit a new Beta Build to GooglePlayStore"
+  lane :beta do
+    File.open("./metadata_beta/android/de-DE/changelogs/#{buildNumber}.txt", 'w') do |file|
+      file.write changelog
+    end
+    gradle(
+      task: "clean assembleBeta",
+      build_type: "Release"
+    )
+    upload_to_play_store(
+      track: 'beta',
+      track_promote_to: 'beta',
+      apk: "./app/build/outputs/apk/beta/release/app-beta-release.apk",
+      metadata_path: "./fastlane/metadata_beta/android"
+    )
+  end
+
+  # Production
+  desc "Submit a new Production Build to GooglePlayStore"
+  lane :production do
+    File.open("./metadata_beta/android/de-DE/changelogs/#{buildNumber}.txt", 'w') do |file|
+      file.write changelog
+    end
+    gradle(
+      task: "clean assembleProduction",
+      build_type: "Release"
+    )
+    upload_to_play_store(
+      track: 'internal',
+      track_promote_to: 'production',
+      apk: "./app/build/outputs/apk/production/release/app-production-release.apk",
+      metadata_path: "./fastlane/metadata/android"
+    )
+  end
+
+end
