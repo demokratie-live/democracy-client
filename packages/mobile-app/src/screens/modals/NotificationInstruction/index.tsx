@@ -133,7 +133,6 @@ export const NotificationInstructionScreen: React.FC = () => {
           textColor="red"
           text="Später"
           onPress={navigation.goBack}
-          disabled={!pushActive}
         />
       </ScrollView>
     </Wrapper>
