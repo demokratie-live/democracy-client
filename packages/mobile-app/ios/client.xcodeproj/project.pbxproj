@@ -742,7 +742,7 @@
 				CODE_SIGN_ENTITLEMENTS = client/DEMOCRACY.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 196;
+				CURRENT_PROJECT_VERSION = 198;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
@@ -770,7 +770,7 @@
 				CODE_SIGN_ENTITLEMENTS = client/DEMOCRACY.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 196;
+				CURRENT_PROJECT_VERSION = 198;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1067,7 +1067,7 @@
 				CODE_SIGN_ENTITLEMENTS = client/DEMOCRACY.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 196;
+				CURRENT_PROJECT_VERSION = 198;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
@@ -1225,7 +1225,7 @@
 				CODE_SIGN_ENTITLEMENTS = client/DEMOCRACY.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 196;
+				CURRENT_PROJECT_VERSION = 198;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1386,7 +1386,7 @@
 				CODE_SIGN_ENTITLEMENTS = client/DEMOCRACY.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 196;
+				CURRENT_PROJECT_VERSION = 198;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
@@ -1544,7 +1544,7 @@
 				CODE_SIGN_ENTITLEMENTS = client/DEMOCRACY.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 196;
+				CURRENT_PROJECT_VERSION = 198;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1705,7 +1705,7 @@
 				CODE_SIGN_ENTITLEMENTS = client/DEMOCRACY.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 196;
+				CURRENT_PROJECT_VERSION = 198;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
@@ -1863,7 +1863,7 @@
 				CODE_SIGN_ENTITLEMENTS = client/DEMOCRACY.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 196;
+				CURRENT_PROJECT_VERSION = 198;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2024,7 +2024,7 @@
 				CODE_SIGN_ENTITLEMENTS = client/DEMOCRACY.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 196;
+				CURRENT_PROJECT_VERSION = 198;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
@@ -2182,7 +2182,7 @@
 				CODE_SIGN_ENTITLEMENTS = client/DEMOCRACY.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 196;
+				CURRENT_PROJECT_VERSION = 198;
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				INFOPLIST_FILE = client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
