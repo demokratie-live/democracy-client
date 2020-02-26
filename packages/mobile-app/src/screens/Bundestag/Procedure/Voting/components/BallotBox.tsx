@@ -23,7 +23,7 @@ import { VoteSelection } from '../../../../../../__generated__/globalTypes';
 import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { BundestagRootStackParamList } from '../../../../../routes/Sidebar/Bundestag';
-import Procedure from '../../graphql/query/Procedure';
+import { PROCEDURE } from '../../graphql/query/Procedure';
 import { LocalVotesContext } from '../../../../../context/LocalVotes';
 import { ConstituencyContext } from '../../../../../context/Constituency';
 
@@ -90,7 +90,7 @@ const BalloutBox: React.FC<Props> = ({
   const [vote] = useMutation<Vote, VoteVariables>(VOTE, {
     refetchQueries: [
       {
-        query: Procedure,
+        query: PROCEDURE,
         variables: {
           id: procedureId,
           constituencies,

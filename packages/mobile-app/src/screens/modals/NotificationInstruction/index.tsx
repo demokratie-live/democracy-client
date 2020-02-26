@@ -8,6 +8,7 @@ import { NotificationsContext } from '../../../context/NotificationPermission';
 import { defaultNotificationData } from '../Introduction/PushInstructions/data';
 import { NotificationBox } from '../Introduction/PushInstructions/NotificationBox';
 import { RootStackParamList } from '../../../routes';
+import { InitialStateContext } from '../../../context/InitialStates';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 
@@ -67,6 +68,7 @@ export const NotificationInstructionScreen: React.FC = () => {
   const { requestToken, update: updateNotificationSettings } = useContext(
     NotificationsContext,
   );
+  const { isVerified } = useContext(InitialStateContext);
 
   const notification = {
     title: defaultNotificationData.outcomePushs.title,
@@ -83,6 +85,10 @@ export const NotificationInstructionScreen: React.FC = () => {
       outcomePushs: true,
     });
   };
+
+  const notificationTitle = isVerified
+    ? defaultNotificationData.outcomePushs.title
+    : 'Offizielles Ergebnis zur Abstimmung';
 
   return (
     <Wrapper>
@@ -107,7 +113,7 @@ export const NotificationInstructionScreen: React.FC = () => {
         <NotificationBox
           icon={require('@democracy-deutschland/mobile-ui/src/components/Introduction/assets/icon.logo.png')}
           owner="DEMOCRACY"
-          title={notification.title}
+          title={notificationTitle}
           text={notification.text}
         />
         <SwitchWrapper>
@@ -133,7 +139,6 @@ export const NotificationInstructionScreen: React.FC = () => {
           textColor="red"
           text="Später"
           onPress={navigation.goBack}
-          disabled={!pushActive}
         />
       </ScrollView>
     </Wrapper>

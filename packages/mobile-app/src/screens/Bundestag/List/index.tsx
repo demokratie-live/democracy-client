@@ -147,7 +147,7 @@ export const List = () => {
       subjectGroups,
       voteDate,
       voteEnd,
-      voted,
+      voted: votedServer,
       type,
       voteResults,
       votedGovernment,
@@ -168,6 +168,8 @@ export const List = () => {
     });
 
     const localSelection = getLocalVoteSelection(procedureId);
+    const voted = votedServer || !!localSelection;
+
     const communityVoteSlices = communityVoteData({
       communityVotes,
       localSelection,

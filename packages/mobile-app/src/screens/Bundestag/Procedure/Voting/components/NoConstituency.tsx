@@ -61,7 +61,9 @@ class VoteVarificationNoConstituency extends PureComponent<Props> {
     ];
 
     const navigateToSelectConstituency = () => {
-      this.props.navigation.navigate('Constituency');
+      this.props.navigation.navigate('Constituency', {
+        goBack: true,
+      });
     };
 
     return (
