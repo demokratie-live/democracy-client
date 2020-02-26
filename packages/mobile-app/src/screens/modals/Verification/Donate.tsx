@@ -32,7 +32,7 @@ const TextHead = styled.Text`
   padding-top: 25;
   text-align: center;
   font-family: ${Platform.OS === 'ios'
-    ? 'HelveticaNeue-Thin'
+    ? 'HelveticaNeue-Light'
     : 'sans-serif-light'};
 `;
 
@@ -50,7 +50,7 @@ const TextCenter = styled.Text`
   font-size: 17;
   padding-top: 50;
   font-family: ${Platform.OS === 'ios'
-    ? 'HelveticaNeue-Thin'
+    ? 'HelveticaNeue-Light'
     : 'sans-serif-light'};
   text-align: center;
   padding-bottom: 18;

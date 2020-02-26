@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-export default gql`
+export const PROCEDURE = gql`
   query Procedure($id: ID!, $constituencies: [String!]) {
     procedure(id: $id) {
       _id

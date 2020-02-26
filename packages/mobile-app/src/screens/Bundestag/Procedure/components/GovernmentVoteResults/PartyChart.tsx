@@ -31,6 +31,7 @@ const PartyChartGov: React.FC<Props> = ({ chartData, ...props }) => {
         {...props}
         onClick={partyChartClick}
         selected={partyChartSelected}
+        showPercentage
       />
       <ChartLegend data={chartData[partyChartSelected].values} />
     </Wrapper>

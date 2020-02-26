@@ -23,11 +23,11 @@ export type RootStackParamList = {
   Sidebar: undefined;
   Home: {};
   Introduction: { done?: string; lastStartWithVersion?: string };
-  Verification: {};
+  Verification: { procedureId?: string };
   PushInstructions: {};
   Pdf: { url: string; title: string };
   NotificationInstruction: { done: () => void };
-  Constituency: undefined;
+  Constituency: { goBack?: boolean };
 };
 
 const RootStack = createStackNavigator<RootStackParamList>();
