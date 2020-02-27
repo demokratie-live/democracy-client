@@ -37,13 +37,13 @@ matrix:
         - yarn pods
         - cd packages/mobile-app/ios
         - bundle install
+        - cd ..
+        - yarn react-native info
         - cd $TRAVIS_BUILD_DIR
       script:
         - chmod 0600 /Users/travis/.netrc
         - cd packages/mobile-app/ios
         - bundle exec fastlane ios beta
-        - cd ..
-        - yarn react-native info
         - cd $TRAVIS_BUILD_DIR
       after_success:
         - ".travis/push.sh"
@@ -91,13 +91,13 @@ matrix:
         - yarn install --no-bin-links
         - cd packages/mobile-app/android
         - bundle install
+        - cd ..
+        - yarn react-native info
         - cd $TRAVIS_BUILD_DIR
       script:
         - chmod 0600 /home/travis/.netrc
         - cd packages/mobile-app/android
         - bundle exec fastlane android internal
-        - cd ..
-        - yarn react-native info
         - cd $TRAVIS_BUILD_DIR
       after_success:
         - ".travis/push.sh"
