@@ -41,8 +41,8 @@ The Client for the DEMOCRACY App. This includes iOS and Android generated from t
 ## install dependencies
 
 ```
-git clone https://github.com/demokratie-live/democracy-app
-cd democracy-app
+git clone https://github.com/demokratie-live/democracy-client
+cd democracy-client
 yarn install
 yarn pods (macOS only)
 ```
