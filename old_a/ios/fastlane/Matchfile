@@ -1,9 +1,0 @@
-git_url(ENV["MATCH_GIT"] || 'https://bitbucket.org/democracy-detuschland/certificates.git')
-
-type("appstore") # The default type, can be: appstore, adhoc, enterprise or development
-
-app_identifier(["de.democracy-deutschland.clientapp", "de.democracy-deutschland.clientapp.alpha", "de.democracy-deutschland.clientapp.beta", "de.democracy-deutschland.clientapp.internal"])
-username("contact@democracy-deutschland.de") # Your Apple Developer Portal username
-
-# For all available options run `fastlane match --help`
-# Remove the # in the beginning of the line to enable the other options
