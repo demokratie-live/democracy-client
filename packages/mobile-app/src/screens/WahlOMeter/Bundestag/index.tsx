@@ -11,7 +11,7 @@ import PieChart from '../../Bundestag/Procedure/components/Charts/PieChart';
 import ChartLegend from '../../Bundestag/Procedure/components/Charts/ChartLegend';
 import { Segment } from '../../Bundestag/List/Components/Segment';
 import { ChainEntry } from '../../../lib/VotesLocal';
-import { proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults_procedures } from '../../Bundestag/Procedure/Voting/components/graphql/query/__generated__/proceduresByIdHavingVoteResults';
+import { PartyChartData_proceduresByIdHavingVoteResults_procedures } from '../../Bundestag/Procedure/Voting/components/graphql/query/__generated__/PartyChartData';
 import { WahlOMeterScreenNavigationProp } from '..';
 
 const Wrapper = styled.View`
@@ -43,7 +43,7 @@ const pieChartData = ({
   matchingProcedures,
 }: {
   localVotes: ChainEntry[];
-  matchingProcedures: proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults_procedures[];
+  matchingProcedures: PartyChartData_proceduresByIdHavingVoteResults_procedures[];
 }) => {
   // Pie Chart Data Preparation
   const pieDataRaw = matchingProcedures.map(({ voteResults, procedureId }) => {

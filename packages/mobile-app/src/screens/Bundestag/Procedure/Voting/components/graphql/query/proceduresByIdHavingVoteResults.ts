@@ -1,11 +1,7 @@
 import gql from 'graphql-tag';
 
-export const PROCEDURES_BY_HAVING_VOTE_RESULTS = gql`
-  query proceduresByIdHavingVoteResults(
-    $procedureIds: [String!]
-    $pageSize: Int
-    $offset: Int
-  ) {
+export const PARTY_CHART_DATA = gql`
+  query PartyChartData($procedureIds: [String!], $pageSize: Int, $offset: Int) {
     proceduresByIdHavingVoteResults(
       procedureIds: $procedureIds
       pageSize: $pageSize
@@ -15,32 +11,12 @@ export const PROCEDURES_BY_HAVING_VOTE_RESULTS = gql`
       procedures {
         _id
         procedureId
-        title
-        tags
-        voteDate
-        votedGovernment
-        submissionDate
-        completed
-        subjectGroups
-        votedGovernment
-        voted
-        type
         voteResults {
           governmentDecision
-          yes
-          abstination
-          no
-          notVoted
           partyVotes {
             party
             main
           }
-        }
-        communityVotes {
-          yes
-          abstination
-          no
-          total
         }
       }
     }

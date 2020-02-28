@@ -8,7 +8,7 @@ import NoConstituency from './components/NoConstituency';
 // import PartyChart from './components/PartyChart';
 
 // GraphQL
-import { PROCEDURES_BY_HAVING_VOTE_RESULTS } from './components/graphql/query/proceduresByIdHavingVoteResults';
+import { PARTY_CHART_DATA } from './components/graphql/query/proceduresByIdHavingVoteResults';
 import Fade from './components/Animations/Fade';
 import { BundestagRootStackParamList } from '../../../../routes/Sidebar/Bundestag';
 import { RouteProp } from '@react-navigation/core';
@@ -17,10 +17,10 @@ import { ConstituencyContext } from '../../../../context/Constituency';
 import PartyChart from '../components/GovernmentVoteResults/PartyChart/Component';
 import { ChartData } from '../../../WahlOMeter/VotedProceduresWrapper';
 import {
-  proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults_procedures,
-  proceduresByIdHavingVoteResults,
-  proceduresByIdHavingVoteResultsVariables,
-} from './components/graphql/query/__generated__/proceduresByIdHavingVoteResults';
+  PartyChartData,
+  PartyChartDataVariables,
+  PartyChartData_proceduresByIdHavingVoteResults_procedures,
+} from './components/graphql/query/__generated__/PartyChartData';
 import { ChainEntry } from '../../../../lib/VotesLocal';
 import { LocalVotesContext } from '../../../../context/LocalVotes';
 import { useQuery } from '@apollo/react-hooks';
@@ -114,16 +114,18 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
   const [selected, setSelected] = useState(0);
   const { constituency } = useContext(ConstituencyContext);
   const { localVotes } = useContext(LocalVotesContext);
-  const { data: proceduresData } = useQuery<
-    proceduresByIdHavingVoteResults,
-    proceduresByIdHavingVoteResultsVariables
-  >(PROCEDURES_BY_HAVING_VOTE_RESULTS, {
+  const { data: proceduresData, loading } = useQuery<
+    PartyChartData,
+    PartyChartDataVariables
+  >(PARTY_CHART_DATA, {
     fetchPolicy: 'cache-and-network',
     variables: {
       procedureIds: localVotes.map(({ procedureId }) => procedureId),
       pageSize: 999999,
     },
   });
+
+  console.log('IS LOADING', loading);
 
   const onScroll = () => {
     if (showWarning) {
@@ -142,8 +144,8 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
   const partyChartData = ({
     matchingProcedures,
   }: {
-    matchingProcedures: proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults_procedures[];
-    votedProcedures: proceduresByIdHavingVoteResults;
+    matchingProcedures: PartyChartData_proceduresByIdHavingVoteResults_procedures[];
+    votedProcedures: PartyChartData;
     localVotes: ChainEntry[];
   }) => {
     const chartData = matchingProcedures.reduce<{

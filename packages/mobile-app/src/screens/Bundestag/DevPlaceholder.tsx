@@ -75,7 +75,7 @@ const LocalVotes = () => {
           const localVotesObj = JSON.parse(localVotes);
           const votes = {
             ...localVotesObj,
-            d: [...unionBy(localVotesObj.d, newVotesObj.d, 'i')],
+            d: [...unionBy(newVotesObj.d, localVotesObj.d, 'i')],
           };
 
           VotesLocal.writeKeychain(votes).then(() => {
@@ -92,6 +92,13 @@ const LocalVotes = () => {
         onPress={() => {
           Clipboard.setString(localVotes);
           Alert.alert('local votes copied');
+        }}
+      />
+      <Button
+        title="Clear Local Votes Storage"
+        onPress={() => {
+          VotesLocal.reset();
+          setLocalVotes(')');
         }}
       />
     </>
@@ -116,10 +123,6 @@ export const DevPlaceholder: FC = () => {
       <Button
         title="Clear Async Storage"
         onPress={() => AsyncStorage.clear()}
-      />
-      <Button
-        title="Clear Local Votes Storage"
-        onPress={() => VotesLocal.reset()}
       />
       <Document width="32px" height="32px" color="black" />
     </Container>
