@@ -143,13 +143,57 @@ export const Procedure: FC<Props> = ({ route, navigation }) => {
         done: toggleNotification,
       });
     } else {
-      toggleNotification();
+      if (data) {
+        toggleNotification({
+          optimisticResponse: {
+            toggleNotification: {
+              __typename: 'Procedure',
+              notify: !data.procedure.notify,
+            },
+          },
+          update: (proxy, { data: mutationData }) => {
+            const procedureData = proxy.readQuery<
+              ProcedureQueryObj,
+              ProcedureVariables
+            >({
+              query: PROCEDURE,
+              variables: {
+                id: route.params.procedureId,
+                constituencies,
+              },
+            });
+            if (
+              procedureData &&
+              mutationData &&
+              mutationData.toggleNotification
+            ) {
+              proxy.writeQuery({
+                query: PROCEDURE,
+                variables: {
+                  id: route.params.procedureId,
+                  constituencies,
+                },
+                data: {
+                  ...procedureData,
+                  procedure: {
+                    ...procedureData.procedure,
+                    notify: mutationData.toggleNotification.notify,
+                  },
+                },
+              });
+            }
+          },
+        });
+      }
     }
   }, [
+    constituencies,
+    data,
     hasPermissions,
     navigation,
     notificationSettings.enabled,
     notificationSettings.outcomePushs,
+    route.params.procedureId,
     toggleNotification,
   ]);
 
