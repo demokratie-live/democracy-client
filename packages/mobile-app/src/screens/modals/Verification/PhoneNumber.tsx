@@ -116,7 +116,7 @@ export const PhoneNumber: React.FC = () => {
           style={{ alignSelf: 'stretch' }}
           text="CODE ANFORDERN"
           onPress={sendNumber}
-          disabled={phoneNumberInputValue.length < 10}
+          disabled={phoneNumberInputValue.length < 9}
           textColor="white"
           backgroundColor="blue"
         />
