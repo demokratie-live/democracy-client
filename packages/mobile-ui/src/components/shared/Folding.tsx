@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { SvgProps } from 'react-native-svg';
 import styled from 'styled-components/native';
 import ArrowIcon from '../Icons/Arrow';
-import { SvgProps } from 'react-native-svg';
 
 const Wrapper = styled.View`
   margin-top: 11;
@@ -52,6 +52,10 @@ interface Props {
 
 const Folding: React.FC<Props> = ({ title, opened = false, children }) => {
   const [open, setOpen] = useState(opened);
+
+  useEffect(() => {
+    setOpen(opened);
+  }, [opened]);
 
   return (
     <Wrapper>

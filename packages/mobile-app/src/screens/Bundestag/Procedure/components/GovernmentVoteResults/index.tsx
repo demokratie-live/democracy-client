@@ -17,6 +17,7 @@ import PieChart from '../Charts/PieChart';
 import { Procedure_procedure_voteResults } from '../../graphql/query/__generated__/Procedure';
 import { PartyChartChartData } from './PartyChart/Component';
 import { ConstituencyContext } from '../../../../../context/Constituency';
+import { InitialStateContext } from '../../../../../context/InitialStates';
 
 export const { width, height } = Dimensions.get('window');
 
@@ -77,16 +78,19 @@ interface Props {
   voteResults: Procedure_procedure_voteResults;
   currentStatus: string | null;
   procedureId: string;
+  voted: boolean;
 }
 
 export const GovernmentVoteResults: React.FC<Props> = ({
   voteResults,
   currentStatus,
   procedureId,
+  voted,
 }) => {
   const [pieChartWidth, setPieChartWidth] = useState(
     Math.min(Dimensions.get('window').width, Dimensions.get('window').height),
   );
+  const { isVerified } = useContext(InitialStateContext);
   const { constituency } = useContext(ConstituencyContext);
 
   const onLayout = () => {
@@ -107,7 +111,7 @@ export const GovernmentVoteResults: React.FC<Props> = ({
 
   if (currentStatus === 'Zurückgezogen') {
     return (
-      <Folding title="Bundestagsergebnis" opened>
+      <Folding title="Bundestagsergebnis" opened={!isVerified || voted}>
         <ScrollView>
           <PieChart
             data={[{ label: 'Zurückgezogen', percent: 1, color: '#B1B3B4' }]}
@@ -230,7 +234,7 @@ export const GovernmentVoteResults: React.FC<Props> = ({
       voteResults.abstination)
   ) {
     return (
-      <Folding title="Bundestagsergebnis" opened>
+      <Folding title="Bundestagsergebnis" opened={!isVerified || voted}>
         {renderGovernmentVoteDetails()}
 
         {voteResults.namedVote ? (

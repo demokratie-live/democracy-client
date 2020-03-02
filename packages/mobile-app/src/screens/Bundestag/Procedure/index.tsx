@@ -294,7 +294,7 @@ export const Procedure: FC<Props> = ({ route, navigation }) => {
 
       {communityVotes &&
         ((voteEnd && new Date(voteEnd) < new Date()) || voted) && (
-          <CommunityVoteResults voteResults={communityVotes} />
+          <CommunityVoteResults voteResults={communityVotes} voted={voted} />
         )}
       {voteResults && (
         <GovernmentVoteResults
@@ -302,6 +302,7 @@ export const Procedure: FC<Props> = ({ route, navigation }) => {
           voteResults={voteResults}
           procedureId={procedureId}
           currentStatus={currentStatus}
+          voted={voted}
         />
       )}
       <PrepareActions

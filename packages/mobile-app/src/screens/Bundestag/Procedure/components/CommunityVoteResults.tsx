@@ -17,6 +17,7 @@ import {
   Procedure_procedure_communityVotes_constituencies,
 } from '../graphql/query/__generated__/Procedure';
 import { ConstituencyContext } from '../../../../context/Constituency';
+import { InitialStateContext } from '../../../../context/InitialStates';
 
 export const { width, height } = Dimensions.get('window');
 
@@ -62,10 +63,15 @@ const SwiperStyled = styled(Swiper).attrs({
 
 interface Props {
   voteResults: Procedure_procedure_communityVotes;
+  voted: boolean;
 }
 
-export const CommunityVoteResults: React.FC<Props> = ({ voteResults }) => {
+export const CommunityVoteResults: React.FC<Props> = ({
+  voteResults,
+  voted,
+}) => {
   const { constituency: myConstituency } = useContext(ConstituencyContext);
+  const { isVerified } = useContext(InitialStateContext);
   const renderCommuntiyResult = (
     comunnityResults:
       | Procedure_procedure_communityVotes
@@ -145,7 +151,7 @@ export const CommunityVoteResults: React.FC<Props> = ({ voteResults }) => {
     screens.push(renderCommuntiyResult(voteResults.constituencies[0]));
   }
   return (
-    <Folding title="Communityergebnis" opened>
+    <Folding title="Communityergebnis" opened={!isVerified || voted}>
       <SwiperStyled loop={false}>{screens}</SwiperStyled>
       <RepresentativeText>
         Dieses Ergebnis wurde nicht auf seine Repräsentativität überprüft.
