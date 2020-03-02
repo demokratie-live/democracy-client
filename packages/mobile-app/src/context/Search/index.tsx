@@ -34,8 +34,6 @@ export const SearchProvider: React.FC = ({ children }) => {
   }, []);
 
   const addToHistory = (newTerm: string) => {
-    // TODO remove duplicates
-    // TODO handle max history length
     const termArray = [newTerm, ...history];
     const newHistory = termArray.reduce<string[]>((unique, item) => {
       return unique.includes(item) || unique.length >= 5

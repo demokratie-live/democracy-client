@@ -163,7 +163,6 @@ const PrepareActions: React.FC<Props> = ({
 
   const verify = () => {
     navigation.navigate('Verification', { procedureId });
-    // TODO go to verification
   };
 
   const voteSelection = getLocalVoteSelection(procedureId);

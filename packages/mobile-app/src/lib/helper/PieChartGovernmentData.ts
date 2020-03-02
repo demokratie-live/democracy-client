@@ -13,7 +13,6 @@ export const pieChartGovernmentData = ({
   largeDecision,
 }: Props): Slice[] | undefined => {
   if (votedGovernment && voteResults) {
-    // TODO improve graphql types for this
     const sumVotes =
       (voteResults.yes || 0) +
       (voteResults.abstination || 0) +

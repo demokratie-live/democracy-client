@@ -16,7 +16,7 @@ import {
 import styled from 'styled-components/native';
 
 import VoteButton from '../../components/VoteButton';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import { VOTE } from './graphql/mutation/vote';
 import { Vote, VoteVariables } from './graphql/mutation/__generated__/vote';
 import { VoteSelection } from '../../../../../../__generated__/globalTypes';
@@ -26,6 +26,11 @@ import { BundestagRootStackParamList } from '../../../../../routes/Sidebar/Bunde
 import { PROCEDURE } from '../../graphql/query/Procedure';
 import { LocalVotesContext } from '../../../../../context/LocalVotes';
 import { ConstituencyContext } from '../../../../../context/Constituency';
+import {
+  Procedure,
+  ProcedureVariables,
+} from '../../graphql/query/__generated__/Procedure';
+import { captureException } from '@sentry/react-native';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -98,6 +103,15 @@ const BalloutBox: React.FC<Props> = ({
       },
     ],
   });
+  const [refetchProcedure] = useLazyQuery<Procedure, ProcedureVariables>(
+    PROCEDURE,
+    {
+      variables: {
+        id: procedureId,
+        constituencies,
+      },
+    },
+  );
   const [isDraggable, setIsDraggable] = useState(true);
 
   const pan = React.useRef(new Animated.ValueXY({ x: 0, y: 0 })).current;
@@ -153,7 +167,6 @@ const BalloutBox: React.FC<Props> = ({
                   procedure: procedureObjId,
                   selection,
                 },
-                // TODO refetch procedure detail page
               })
                 .then(() => {
                   setLocalVote({
@@ -163,14 +176,11 @@ const BalloutBox: React.FC<Props> = ({
                   });
                   navigation.goBack();
                 })
-                .catch(voteError => {
-                  console.log(voteError);
-                  Alert.alert(JSON.stringify(voteError));
+                .catch(votingError => {
+                  refetchProcedure();
+                  captureException(votingError);
+                  navigation.goBack();
                 });
-              // TODO navigate back
-              // navigator.dismissAllModals({
-              //   animationType: 'slide-down', // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
-              // });
             } else {
               Animated.spring(pan, {
                 toValue: { x: 0, y: 0 },
@@ -189,13 +199,14 @@ const BalloutBox: React.FC<Props> = ({
       pan,
       isDraggable,
       vote,
-      procedureId,
-      selection,
-      previewAnimation,
-      navigation,
-      setLocalVote,
-      procedureObjId,
       constituency,
+      procedureObjId,
+      selection,
+      setLocalVote,
+      procedureId,
+      navigation,
+      refetchProcedure,
+      previewAnimation,
     ],
   );
 

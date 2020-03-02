@@ -1,4 +1,4 @@
-import { init, setTag, captureException } from '@sentry/react-native';
+import { init, setTag } from '@sentry/react-native';
 import DeviceInfo from 'react-native-device-info';
 import { Platform } from 'react-native';
 
@@ -29,12 +29,4 @@ if (!__DEV__) {
 
   setTag('buildNumber', DeviceInfo.getBuildNumber());
   setTag('bundleId', DeviceInfo.getBundleId());
-}
-
-// TODO Remove A TEST
-
-try {
-  throw new Error('ein test fehler');
-} catch (err) {
-  captureException(err);
 }
