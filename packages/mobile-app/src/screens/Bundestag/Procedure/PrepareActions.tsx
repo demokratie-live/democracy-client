@@ -20,6 +20,11 @@ import {
 } from './graphql/muatation/__generated__/ToggleNotification';
 import { TOGGLE_NOTIFICATION } from './graphql/muatation/toggleNotification';
 import { PROCEDURE } from './graphql/query/Procedure';
+import {
+  Procedure as ProcedureQuery,
+  ProcedureVariables,
+} from './graphql/query/__generated__/Procedure';
+import { ConstituencyContext } from '../../../context/Constituency';
 
 const SegmentWrapper = styled.View`
   padding-vertical: 14;
@@ -127,6 +132,8 @@ const PrepareActions: React.FC<Props> = ({
   share,
   // active,
 }) => {
+  const { constituency } = useContext(ConstituencyContext);
+  const constituencies = constituency ? [constituency] : [];
   const { getLocalVoteSelection } = useContext(LocalVotesContext);
   const [toggleNotification] = useMutation<
     ToggleNotification,
@@ -242,7 +249,48 @@ const PrepareActions: React.FC<Props> = ({
             <ActionButton
               selection="NOTIFY"
               notify={notify}
-              onPress={toggleNotification}
+              onPress={() =>
+                toggleNotification({
+                  optimisticResponse: {
+                    toggleNotification: {
+                      __typename: 'Procedure',
+                      notify: !notify,
+                    },
+                  },
+                  update: (proxy, { data: mutationData }) => {
+                    const data = proxy.readQuery<
+                      ProcedureQuery,
+                      ProcedureVariables
+                    >({
+                      query: PROCEDURE,
+                      variables: {
+                        id: procedureId,
+                        constituencies,
+                      },
+                    });
+                    if (
+                      data &&
+                      mutationData &&
+                      mutationData.toggleNotification
+                    ) {
+                      proxy.writeQuery({
+                        query: PROCEDURE,
+                        variables: {
+                          id: procedureId,
+                          constituencies,
+                        },
+                        data: {
+                          ...data,
+                          procedure: {
+                            ...data.procedure,
+                            notify: mutationData.toggleNotification.notify,
+                          },
+                        },
+                      });
+                    }
+                  },
+                })
+              }
             />
             <VoteButtonLabel>
               {notify ? 'Stumm schalten' : 'Benachrichtigen'}
