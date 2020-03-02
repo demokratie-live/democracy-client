@@ -6,7 +6,7 @@ import { styled } from '../../../../styles';
 const Wrapper = styled.View``;
 
 interface Props {
-  documents: Procedure_procedure_importantDocuments[]; // TODO Fix type
+  documents: Procedure_procedure_importantDocuments[];
 }
 
 const Documents: React.FC<Props> = ({ documents }) => (

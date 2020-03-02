@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { Text, Platform } from 'react-native';
 
-// TODO improve type
 const Wrapper = styled.View<{
   value: boolean | 'mixed';
   color?: string;

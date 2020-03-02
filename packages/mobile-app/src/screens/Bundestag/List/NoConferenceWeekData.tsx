@@ -60,7 +60,7 @@ export const NoConferenceWeekData = () => {
 statt.`}
         </TextGrey>
       )}
-      {/* TODO show button only if notifications not requested (show explanation for push) */}
+
       {(!notificationSettings.enabled ||
         !notificationSettings.conferenceWeekPushs) && (
         <Button

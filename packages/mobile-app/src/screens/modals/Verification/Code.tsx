@@ -125,7 +125,6 @@ export const Code: React.FC<Props> = ({ route }) => {
         AsyncStorage.setItem('auth_phoneHash', phoneNumberHash);
         Keyboard.dismiss();
         navigation.navigate('SmsDonate');
-        // navigation.popToTop(); // TODO go back to previous screen or close instructions
       } else if (res.data) {
         showNotification(res.data.requestVerification.reason || '');
       }

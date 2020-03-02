@@ -151,4 +151,3 @@ Für mehr Informationen:
     </Wrapper>
   );
 };
-// TODO CHECK DONATIONER LIST LINK
