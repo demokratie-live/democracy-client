@@ -13,9 +13,9 @@ import ChartLegend from '../../Bundestag/Procedure/components/Charts/ChartLegend
 import { Segment } from '../../Bundestag/List/Components/Segment';
 import { ChainEntry } from '../../../lib/VotesLocal';
 import {
-  proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults_procedures,
-  proceduresByIdHavingVoteResults,
-} from '../../Bundestag/Procedure/Voting/components/graphql/query/__generated__/proceduresByIdHavingVoteResults';
+  PartyChartData_proceduresByIdHavingVoteResults_procedures,
+  PartyChartData,
+} from '../../Bundestag/Procedure/Voting/components/graphql/query/__generated__/PartyChartData';
 import { WahlOMeterScreenNavigationProp } from '..';
 
 const Wrapper = styled.View`
@@ -70,8 +70,8 @@ class Fraktionen extends PureComponent<Props> {
     localVotes,
     matchingProcedures,
   }: {
-    matchingProcedures: proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults_procedures[];
-    votedProcedures: proceduresByIdHavingVoteResults;
+    matchingProcedures: PartyChartData_proceduresByIdHavingVoteResults_procedures[];
+    votedProcedures: PartyChartData;
     localVotes: ChainEntry[];
   }) => {
     const chartData = matchingProcedures.reduce<{

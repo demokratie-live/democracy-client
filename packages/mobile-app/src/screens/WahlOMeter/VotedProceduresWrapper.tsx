@@ -6,28 +6,33 @@ import unionBy from 'lodash.unionby';
 import NoVotesPlaceholder from './NoVotesPlaceholder';
 
 // GraphQL
-import { PROCEDURES_BY_HAVING_VOTE_RESULTS } from '../Bundestag/Procedure/Voting/components/graphql/query/proceduresByIdHavingVoteResults';
 import { FlatList } from 'react-native';
 import { ListLoading } from '@democracy-deutschland/mobile-ui/src/components/shared/ListLoading';
 import { ListItem } from '@democracy-deutschland/mobile-ui/src/components/Lists/ListItem';
 import { Row } from '@democracy-deutschland/mobile-ui/src/components/Lists/Row';
 import { LocalVotesContext } from '../../context/LocalVotes';
-import {
-  proceduresByIdHavingVoteResults,
-  proceduresByIdHavingVoteResultsVariables,
-  proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults_procedures,
-} from '../Bundestag/Procedure/Voting/components/graphql/query/__generated__/proceduresByIdHavingVoteResults';
 import { useQuery } from '@apollo/react-hooks';
 import { pieChartGovernmentData } from '../../lib/helper/PieChartGovernmentData';
 import { communityVoteData } from '../../lib/helper/PieChartCommunityData';
 import { ChainEntry } from '../../lib/VotesLocal';
+import { VOTED_PROCEDURES } from './graphql/queries/proceduresByIdHavingVoteResults';
+import {
+  VotedProcedures,
+  VotedProceduresVariables,
+  VotedProcedures_proceduresByIdHavingVoteResults_procedures,
+} from './graphql/queries/__generated__/VotedProcedures';
+import {
+  PartyChartData,
+  PartyChartDataVariables,
+} from '../Bundestag/Procedure/Voting/components/graphql/query/__generated__/PartyChartData';
+import { PARTY_CHART_DATA } from '../Bundestag/Procedure/Voting/components/graphql/query/proceduresByIdHavingVoteResults';
 
 const Container = styled.View`
   background-color: #fff;
 `;
 
 export interface ChartData {
-  votedProcedures: proceduresByIdHavingVoteResults;
+  votedProcedures: PartyChartData;
   localVotes: ChainEntry[];
 }
 interface ChildProps {
@@ -38,7 +43,7 @@ interface Props {
   onProcedureListItemClick: ({
     item,
   }: {
-    item: proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults_procedures;
+    item: VotedProcedures_proceduresByIdHavingVoteResults_procedures;
   }) => void;
   children: JSX.Element | ((props: ChildProps) => ReactElement);
 }
@@ -49,20 +54,22 @@ const VotedProceduresWrapper: React.FC<Props> = ({
 }) => {
   const { localVotes } = useContext(LocalVotesContext);
   const { data: proceduresData } = useQuery<
-    proceduresByIdHavingVoteResults,
-    proceduresByIdHavingVoteResultsVariables
-  >(PROCEDURES_BY_HAVING_VOTE_RESULTS, {
+    PartyChartData,
+    PartyChartDataVariables
+  >(PARTY_CHART_DATA, {
     variables: {
       procedureIds: localVotes.map(({ procedureId }) => procedureId),
       pageSize: 999999,
     },
   });
+
   const { data: procedurListData, fetchMore, networkStatus } = useQuery<
-    proceduresByIdHavingVoteResults,
-    proceduresByIdHavingVoteResultsVariables
-  >(PROCEDURES_BY_HAVING_VOTE_RESULTS, {
-    variables: { procedureIds: null, offset: 0 },
+    VotedProcedures,
+    VotedProceduresVariables
+  >(VOTED_PROCEDURES, {
+    variables: { offset: 0 },
   });
+
   let hasMore = true;
   if (!localVotes || localVotes.length === 0) {
     return <NoVotesPlaceholder subline="Bundestag" />;
@@ -83,8 +90,7 @@ const VotedProceduresWrapper: React.FC<Props> = ({
   return (
     <Container>
       <FlatList<
-        | 'chart'
-        | proceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults_procedures
+        'chart' | VotedProcedures_proceduresByIdHavingVoteResults_procedures
       >
         data={['chart', ...listData]}
         renderItem={({ item }) =>

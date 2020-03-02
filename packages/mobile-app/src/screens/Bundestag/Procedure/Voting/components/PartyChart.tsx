@@ -11,7 +11,7 @@ import PartyChart, {
   PartyChartChartData,
 } from '../../components/GovernmentVoteResults/PartyChart/Component';
 // import { SegmentedData } from '../../../List';
-import { proceduresByIdHavingVoteResults } from './graphql/query/__generated__/proceduresByIdHavingVoteResults';
+import { PartyChartData } from './graphql/query/__generated__/PartyChartData';
 import { PartyChartRowValues } from '../../components/GovernmentVoteResults/PartyChart/PartyRow';
 
 const Wrapper = styled.View`
@@ -74,7 +74,7 @@ class Fraktionen extends PureComponent<Props> {
     votedProcedures,
     data,
   }: {
-    votedProcedures: proceduresByIdHavingVoteResults;
+    votedProcedures: PartyChartData;
     data: LocalVoteData;
   }): PartyChartChartData[] => {
     const chartData = votedProcedures.proceduresByIdHavingVoteResults.procedures.reduce<
@@ -158,7 +158,7 @@ class Fraktionen extends PureComponent<Props> {
   render() {
     const { chartWidth, selected } = this.state;
 
-    const votedProcedures: proceduresByIdHavingVoteResults = {
+    const votedProcedures: PartyChartData = {
       proceduresByIdHavingVoteResults: {
         procedures: [],
         total: 0,
