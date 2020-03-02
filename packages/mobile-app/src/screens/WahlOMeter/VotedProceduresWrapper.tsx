@@ -21,7 +21,11 @@ import {
   VotedProceduresVariables,
   VotedProcedures_proceduresByIdHavingVoteResults_procedures,
 } from './graphql/queries/__generated__/VotedProcedures';
-import { PartyChartData } from '../Bundestag/Procedure/Voting/components/graphql/query/__generated__/PartyChartData';
+import {
+  PartyChartData,
+  PartyChartDataVariables,
+} from '../Bundestag/Procedure/Voting/components/graphql/query/__generated__/PartyChartData';
+import { PARTY_CHART_DATA } from '../Bundestag/Procedure/Voting/components/graphql/query/proceduresByIdHavingVoteResults';
 
 const Container = styled.View`
   background-color: #fff;
@@ -50,20 +54,22 @@ const VotedProceduresWrapper: React.FC<Props> = ({
 }) => {
   const { localVotes } = useContext(LocalVotesContext);
   const { data: proceduresData } = useQuery<
-    VotedProcedures,
-    VotedProceduresVariables
-  >(VOTED_PROCEDURES, {
+    PartyChartData,
+    PartyChartDataVariables
+  >(PARTY_CHART_DATA, {
     variables: {
       procedureIds: localVotes.map(({ procedureId }) => procedureId),
       pageSize: 999999,
     },
   });
+
   const { data: procedurListData, fetchMore, networkStatus } = useQuery<
     VotedProcedures,
     VotedProceduresVariables
   >(VOTED_PROCEDURES, {
-    variables: { procedureIds: [], offset: 0 },
+    variables: { offset: 0 },
   });
+
   let hasMore = true;
   if (!localVotes || localVotes.length === 0) {
     return <NoVotesPlaceholder subline="Bundestag" />;
