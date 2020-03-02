@@ -31,7 +31,6 @@ export const InitialStateContext = createContext<InitialStateInterface>(
 );
 
 export const InitialStateProvider: FC = ({ children }) => {
-  // TODO retry if bad connection or something else to avoid an app restart "apollo-link-retry"
   const {
     data: meData,
     loading: verificationQueryRunning,

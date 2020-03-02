@@ -74,9 +74,6 @@ export const PhoneNumber: React.FC = () => {
       [
         {
           text: 'Bearbeiten',
-          onPress: () => {
-            // TODO Edit phone number
-          },
           style: 'cancel',
         },
         {

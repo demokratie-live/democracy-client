@@ -21,7 +21,6 @@ package = load_json(json_path: "../../../package.json")
 
 version_number = package["version"]
 
-# TODO change when production ready to "client"
 scheme_name = "client"
 app_identifier = "de.democracy-deutschland.clientapp"
 if ENV["TRAVIS_BRANCH"] == 'alpha'

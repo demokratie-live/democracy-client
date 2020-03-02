@@ -197,7 +197,6 @@ export const Procedure: FC<Props> = ({ route, navigation }) => {
     toggleNotification,
   ]);
 
-  // TODO Actions oben rechts hinzufügen
   useEffect(() => {
     if (data) {
       const { notify, type, procedureId, title } = data.procedure;
