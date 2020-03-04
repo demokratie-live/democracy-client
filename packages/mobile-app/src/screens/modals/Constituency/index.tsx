@@ -143,7 +143,9 @@ export const ConstituencyScreen: React.FC<Props> = ({ route }) => {
           text: 'Ja',
           onPress: () => {
             setConstituency(item.number);
-            route.params.goBack ? navigation.goBack() : undefined;
+            route.params && route.params.goBack
+              ? navigation.goBack()
+              : undefined;
           },
         },
       ],
