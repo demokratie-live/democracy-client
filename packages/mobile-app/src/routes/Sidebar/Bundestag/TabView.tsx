@@ -39,7 +39,6 @@ interface Props {
 
 const TabViewNavigation: React.FC<Props> = ({ navigation }) => {
   const { active: hasFilters } = useContext(ListFilterContext);
-
   navigation.setOptions({
     headerRight: () => (
       <HaderRightWrapper>

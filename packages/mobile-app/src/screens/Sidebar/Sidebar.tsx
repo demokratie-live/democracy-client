@@ -67,7 +67,7 @@ export const Sidebar: React.FC<Props> = props => {
     if (isVerified) {
       navigation.navigate('Settings');
     } else {
-      navigation.navigate('Verification');
+      navigation.navigate('VerificationStart');
     }
   };
 

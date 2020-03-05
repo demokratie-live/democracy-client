@@ -7,6 +7,7 @@ import SvgIconappios from '@democracy-deutschland/mobile-ui/src/components/Icons
 import { useNavigation } from '@react-navigation/core';
 import { InitialStateContext } from '../../../context/InitialStates';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { NavigationContext } from '../../../context/Navigation';
 
 const Container = styled.ScrollView.attrs(() => ({
   contentContainerStyle: {
@@ -66,6 +67,7 @@ const ButtonContainer = styled.View`
 
 export const SmsDonate: React.FC = () => {
   const navigation = useNavigation();
+  const { reset } = useContext(NavigationContext);
   const { refetchMe } = useContext(InitialStateContext);
 
   useEffect(() => {
@@ -76,6 +78,7 @@ export const SmsDonate: React.FC = () => {
 
   const onClose = () => {
     refetchMe();
+    reset();
   };
 
   const onDonate = async () => {

@@ -40,7 +40,6 @@ export const NoConferenceWeekData = () => {
   const { data } = useQuery<CurrentConferenceWeek>(CURRENT_CONFERENCE_WEEK);
   const navigation = useNavigation();
   const { notificationSettings } = useContext(NotificationsContext);
-  console.log(notificationSettings);
   return (
     <Container>
       <IconWrapper>

@@ -13,11 +13,11 @@ import {
 } from './graphql/mutation/__generated__/RequestSmsCode';
 import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { VerificationRootStackParamList } from '../../../routes/Verification';
 import { VerificationContext } from '../../../context/Verification';
 import { ButtonNext } from './Start';
 import SvgDemocracyBubble from '@democracy-deutschland/mobile-ui/src/components/Icons/DemocracyBubble';
 import { InitialStateContext } from '../../../context/InitialStates';
+import { RootStackParamList } from '../../../routes';
 
 const Container = styled.KeyboardAvoidingView.attrs(() => ({
   behavior: Platform.OS === 'ios' ? 'padding' : undefined,
@@ -41,9 +41,7 @@ const DEVICE_HEIGT = Dimensions.get('window').height;
 
 export const PhoneNumber: React.FC = () => {
   const { refetchMe } = useContext(InitialStateContext);
-  const navigation = useNavigation<
-    StackNavigationProp<VerificationRootStackParamList>
-  >();
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const {
     phoneNumber,
     setPhoneNumber,
