@@ -76,6 +76,7 @@ export const SmsDonate: React.FC = () => {
 
   const onClose = () => {
     refetchMe();
+    navigation.goBack();
   };
 
   const onDonate = async () => {

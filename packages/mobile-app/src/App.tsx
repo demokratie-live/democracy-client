@@ -13,6 +13,7 @@ import { NotificationsProvider } from './context/NotificationPermission';
 import { PushNotificationProvider } from './context/PushNotification';
 import { theme, ThemeProvider } from './styles';
 import Navigation from './routes/index';
+import { VerificationProvider } from './context/Verification';
 // import { ErrorScreen } from './screens/modals/Error';
 
 export default () => (
@@ -24,9 +25,11 @@ export default () => (
           <ConstituencyProvider>
             <NotificationsProvider>
               <PushNotificationProvider>
-                <ThemeProvider theme={theme}>
-                  <Navigation />
-                </ThemeProvider>
+                <VerificationProvider>
+                  <ThemeProvider theme={theme}>
+                    <Navigation />
+                  </ThemeProvider>
+                </VerificationProvider>
               </PushNotificationProvider>
             </NotificationsProvider>
           </ConstituencyProvider>

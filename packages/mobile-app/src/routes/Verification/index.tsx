@@ -25,7 +25,7 @@ const VerificationRootStack = createStackNavigator<
 
 type VerificationNavigationProps = StackNavigationProp<
   RootStackParamList,
-  'Verification'
+  'VerificationStart'
 >;
 
 const HeaderButton = styled.TouchableOpacity`
@@ -106,7 +106,7 @@ const VerificationRootNavigation: React.FC<VerificationRootNavigationProps> = ({
   );
 };
 
-type RouteProps = RouteProp<RootStackParamList, 'Verification'>;
+type RouteProps = RouteProp<RootStackParamList, 'VerificationStart'>;
 
 interface Props {
   route: RouteProps;

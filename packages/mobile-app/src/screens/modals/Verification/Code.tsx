@@ -90,7 +90,7 @@ export const Code: React.FC<Props> = ({ route }) => {
     if (newCode.length === 6) {
       const phoneNumberHash = await sha256(phoneNumber);
       const refetchQueries = [];
-      if (route.params.procedureId) {
+      if (route.params && route.params.procedureId) {
         // Detail View
         refetchQueries.push({
           query: PROCEDURE,

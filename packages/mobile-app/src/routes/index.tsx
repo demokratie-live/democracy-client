@@ -3,7 +3,6 @@ import React, { useState, useContext, useEffect } from 'react';
 import { useLinking, NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Introduction from '../screens/modals/Introduction';
-import { VerificationScreen } from './Verification';
 import { InitialStateContext } from '../context/InitialStates';
 import DeviceInfo from 'react-native-device-info';
 import { InitialState } from '@react-navigation/core';
@@ -18,16 +17,26 @@ import { theme } from '../styles';
 import { StatusBar } from 'react-native';
 import { PushInstructions } from '../screens/modals/Introduction/PushInstructions';
 import { NotificationInstructionScreen } from '../screens/modals/NotificationInstruction';
+import { VerificationStart } from '../screens/modals/Verification/Start';
+import { PhoneNumber } from '../screens/modals/Verification/PhoneNumber';
+import { Code } from '../screens/modals/Verification/Code';
+import { SmsDonate } from '../screens/modals/Verification/Donate';
 
 export type RootStackParamList = {
   Sidebar: undefined;
   Home: {};
   Introduction: { done?: string; lastStartWithVersion?: string };
-  Verification: { procedureId?: string };
   PushInstructions: {};
   Pdf: { url: string; title: string };
   NotificationInstruction: { done: () => void };
   Constituency: { goBack?: boolean };
+  // Verification
+  // Verification: { procedureId?: string };
+  VerificationStart: { procedureId?: string };
+  Start: undefined;
+  PhoneNumberInput: undefined;
+  SmsCodeInput: undefined;
+  SmsDonate: undefined;
 };
 
 const RootStack = createStackNavigator<RootStackParamList>();
@@ -50,11 +59,9 @@ const Navigation = () => {
   const [initialState, setInitialState] = React.useState<InitialState>();
 
   const [currentVersion, setCurrentVersion] = useState();
-  const {
-    lastStartWithVersion,
-    setLastStartWithVersion,
-    isVerified,
-  } = useContext(InitialStateContext);
+  const { lastStartWithVersion, setLastStartWithVersion } = useContext(
+    InitialStateContext,
+  );
 
   useEffect(() => {
     getInitialState().then(state => {
@@ -139,7 +146,6 @@ const Navigation = () => {
           dark: false,
         }}>
         <RootStack.Navigator
-          mode="modal"
           screenOptions={{
             headerStyle: {
               backgroundColor: theme.colors.background.header,
@@ -183,7 +189,7 @@ const Navigation = () => {
             }}
             component={PushInstructions}
           />
-          {!isVerified && (
+          {/* {!isVerified && (
             <RootStack.Screen
               name="Verification"
               options={{
@@ -191,7 +197,42 @@ const Navigation = () => {
               }}
               component={VerificationScreen}
             />
-          )}
+          )} */}
+          <RootStack.Screen
+            name="VerificationStart"
+            component={VerificationStart}
+            options={{
+              headerTitle: 'Verifizieren',
+            }}
+          />
+          <RootStack.Screen
+            name="PhoneNumberInput"
+            component={PhoneNumber}
+            options={{
+              headerTitle: 'Verifizieren',
+              headerBackTitle: 'Zurück',
+            }}
+          />
+          <RootStack.Screen
+            name="SmsCodeInput"
+            component={Code}
+            options={{
+              headerTitle: 'Verifizieren',
+              headerBackTitle: 'Zurück',
+            }}
+          />
+          <RootStack.Screen
+            name="SmsDonate"
+            component={SmsDonate}
+            options={{
+              headerTitle: 'Spenden',
+              headerShown: false,
+              headerBackTitleVisible: false,
+              headerBackTitleStyle: {
+                color: 'red',
+              },
+            }}
+          />
         </RootStack.Navigator>
       </NavigationContainer>
     </>
