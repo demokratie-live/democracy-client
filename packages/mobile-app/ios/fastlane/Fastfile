@@ -95,6 +95,8 @@ platform :ios do
       browserstack_access_key: ENV["BROWSERSTACK_ACCESS_KEY"],
     )
 
+    # TODO Add deliver
+
     upload_to_testflight(
       app_identifier: app_identifier
     )
