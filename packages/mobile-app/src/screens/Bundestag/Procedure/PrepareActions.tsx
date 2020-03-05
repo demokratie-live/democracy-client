@@ -9,7 +9,6 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
 import { VoteSelection } from '../../../../__generated__/globalTypes';
 import { LocalVotesContext } from '../../../context/LocalVotes';
-import { RootStackParamList } from '../../../routes';
 import { SidebarParamList } from '../../../routes/Sidebar';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { useMutation } from '@apollo/react-hooks';
@@ -25,6 +24,8 @@ import {
   ProcedureVariables,
 } from './graphql/query/__generated__/Procedure';
 import { ConstituencyContext } from '../../../context/Constituency';
+import { NavigationContext } from '../../../context/Navigation';
+import { RootStackParamList } from '../../../routes';
 
 const SegmentWrapper = styled.View`
   padding-vertical: 14;
@@ -133,6 +134,7 @@ const PrepareActions: React.FC<Props> = ({
   // active,
 }) => {
   const { constituency } = useContext(ConstituencyContext);
+  const { saveState } = useContext(NavigationContext);
   const constituencies = constituency ? [constituency] : [];
   const { getLocalVoteSelection } = useContext(LocalVotesContext);
   const [toggleNotification] = useMutation<
@@ -162,7 +164,8 @@ const PrepareActions: React.FC<Props> = ({
   };
 
   const verify = () => {
-    navigation.navigate('Verification', { procedureId });
+    saveState();
+    navigation.navigate('VerificationStart', { procedureId });
   };
 
   const voteSelection = getLocalVoteSelection(procedureId);

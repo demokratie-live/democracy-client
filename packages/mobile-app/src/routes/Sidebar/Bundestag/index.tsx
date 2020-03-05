@@ -42,6 +42,7 @@ type BundestagNavigationProps = CompositeNavigationProp<
 >;
 
 const BundestagRootNavigation = () => {
+  console.log('Hier 4');
   const navigation = useNavigation<BundestagNavigationProps>();
   return (
     <SearchProvider>
