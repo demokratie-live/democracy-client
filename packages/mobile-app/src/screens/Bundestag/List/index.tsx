@@ -42,7 +42,6 @@ const Container = styled.View`
 `;
 
 export const List = () => {
-  console.log('hier 7');
   const { getLocalVoteSelection } = useContext(LocalVotesContext);
   const { proceduresFilter } = useContext(ListFilterContext);
   const { constituency } = useContext(ConstituencyContext);

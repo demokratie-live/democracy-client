@@ -24,15 +24,12 @@ export const NavigationProvider: React.FC = ({ children }) => {
   const [savedState, setSavedState] = useState<NavigationState>();
 
   const saveState = () => {
-    console.log('run saveState');
     if (rootNavigationRef.current) {
       setSavedState(rootNavigationRef.current.getRootState());
-      console.log(rootNavigationRef.current.getRootState());
     }
   };
 
   const reset = () => {
-    console.log('run reset');
     if (savedState && rootNavigationRef.current) {
       rootNavigationRef.current.reset(savedState);
     }

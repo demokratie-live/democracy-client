@@ -29,7 +29,6 @@ export type SidebarParamList = {
 const SidebarDrawer = createDrawerNavigator<SidebarParamList>();
 
 export const SidebarNavigation = () => {
-  console.log('HIER ´3');
   return (
     <SidebarDrawer.Navigator
       initialRouteName="Bundestag"

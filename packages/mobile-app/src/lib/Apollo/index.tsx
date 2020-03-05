@@ -33,7 +33,6 @@ if (process.env.NODE_ENV === 'development' && GRAPHQL_SERVER_LOCAL) {
   const address = scriptURL.split('://')[1].split('/')[0];
   const hostname = address.split(':')[0];
   graphQlUri = `http://${hostname}:3000`;
-  console.log(ANDROID_SERVER);
   if (Platform.OS === 'android' && !DeviceInfo.isEmulatorSync()) {
     graphQlUri = `http://${ANDROID_SERVER}:3000`;
   }
@@ -45,7 +44,6 @@ const httpLink = new HttpLink({
 
 // Retry link
 const attempts: RetryFunction = (number, operation) => {
-  console.log(number, operation.operationName);
   if (operation.operationName === 'NotificationSettings' && number === 1) {
     return true;
   }
