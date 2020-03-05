@@ -1,4 +1,4 @@
-app_identifier("de.democracy-deutschland.clientapp.new") # The bundle identifier of your app
+app_identifier("de.democracy-deutschland.clientapp") # The bundle identifier of your app
 apple_id("contact@democracy-deutschland.de") # Your Apple email address
 
 itc_team_id("118962308") # App Store Connect Team ID
