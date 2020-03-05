@@ -3,15 +3,16 @@ import { ApolloClient } from 'apollo-client';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
-import { NativeModules } from 'react-native';
+import { NativeModules, Platform } from 'react-native';
 import { ApolloLink } from 'apollo-link';
 import { RestLink } from 'apollo-link-rest';
 import { onError } from 'apollo-link-error';
 import { RetryLink } from 'apollo-link-retry';
 import { authLinkMiddleware, authLinkAfterware } from './Auth';
-import { GRAPHQL_URL, GRAPHQL_SERVER_LOCAL } from '../config';
+import { GRAPHQL_URL, GRAPHQL_SERVER_LOCAL, ANDROID_SERVER } from '../config';
 import { RetryFunction } from 'apollo-link-retry/lib/retryFunction';
 import AsyncStorage from '@react-native-community/async-storage';
+import DeviceInfo from 'react-native-device-info';
 
 const cache = new InMemoryCache({
   dataIdFromObject: (o: any) => {
@@ -32,6 +33,9 @@ if (process.env.NODE_ENV === 'development' && GRAPHQL_SERVER_LOCAL) {
   const address = scriptURL.split('://')[1].split('/')[0];
   const hostname = address.split(':')[0];
   graphQlUri = `http://${hostname}:3000`;
+  if (Platform.OS === 'android' && !DeviceInfo.isEmulatorSync()) {
+    graphQlUri = `http://${ANDROID_SERVER}:3000`;
+  }
 }
 
 const httpLink = new HttpLink({
@@ -40,7 +44,6 @@ const httpLink = new HttpLink({
 
 // Retry link
 const attempts: RetryFunction = (number, operation) => {
-  console.log(number, operation.operationName);
   if (operation.operationName === 'NotificationSettings' && number === 1) {
     return true;
   }

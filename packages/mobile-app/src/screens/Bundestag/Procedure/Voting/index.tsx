@@ -114,7 +114,7 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
   const [selected, setSelected] = useState(0);
   const { constituency } = useContext(ConstituencyContext);
   const { localVotes } = useContext(LocalVotesContext);
-  const { data: proceduresData, loading } = useQuery<
+  const { data: proceduresData } = useQuery<
     PartyChartData,
     PartyChartDataVariables
   >(PARTY_CHART_DATA, {
@@ -124,8 +124,6 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
       pageSize: 999999,
     },
   });
-
-  console.log('IS LOADING', loading);
 
   const onScroll = () => {
     if (showWarning) {

@@ -9,9 +9,9 @@ import DemocracyBubble from '@democracy-deutschland/mobile-ui/src/components/Ico
 import { Centered } from '@democracy-deutschland/mobile-ui/src/components/shared/Centered';
 import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { VerificationRootStackParamList } from '../../../routes/Verification';
 import { VerificationContext } from '../../../context/Verification';
 import { linking } from '../../../lib/linking';
+import { RootStackParamList } from '../../../routes';
 
 const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: {
@@ -42,9 +42,7 @@ export const ButtonNext = styled(Button)`
 `;
 
 export const VerificationStart: React.FC = () => {
-  const navigation = useNavigation<
-    StackNavigationProp<VerificationRootStackParamList>
-  >();
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const { countdown, expireTime } = useContext(VerificationContext);
   const authCodeExpires = expireTime > new Date();
   return (
