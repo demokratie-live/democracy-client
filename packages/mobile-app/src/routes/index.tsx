@@ -33,9 +33,8 @@ export type RootStackParamList = {
   // Verification
   // Verification: { procedureId?: string };
   VerificationStart: { procedureId?: string };
-  Start: undefined;
-  PhoneNumberInput: undefined;
-  SmsCodeInput: undefined;
+  PhoneNumberInput: { procedureId?: string };
+  SmsCodeInput: { procedureId?: string };
   SmsDonate: undefined;
 };
 
@@ -189,15 +188,7 @@ const Navigation = () => {
             }}
             component={PushInstructions}
           />
-          {/* {!isVerified && (
-            <RootStack.Screen
-              name="Verification"
-              options={{
-                headerShown: false,
-              }}
-              component={VerificationScreen}
-            />
-          )} */}
+          {/* Verification */}
           <RootStack.Screen
             name="VerificationStart"
             component={VerificationStart}

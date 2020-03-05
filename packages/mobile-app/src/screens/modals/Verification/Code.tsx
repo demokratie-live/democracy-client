@@ -19,14 +19,8 @@ import {
   RequestSmsCode,
   RequestSmsCodeVariables,
 } from './graphql/mutation/__generated__/RequestSmsCode';
-import {
-  useNavigation,
-  CompositeNavigationProp,
-  RouteProp,
-} from '@react-navigation/core';
+import { useNavigation, RouteProp } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { VerificationRootStackParamList } from '../../../routes/Verification';
-import { RootStackParamList } from '../../../routes';
 import { VerificationContext } from '../../../context/Verification';
 import { ButtonNext } from './Start';
 import SvgDemocracyBubble from '@democracy-deutschland/mobile-ui/src/components/Icons/DemocracyBubble';
@@ -34,6 +28,7 @@ import { ConstituencyContext } from '../../../context/Constituency';
 import { PROCEDURE } from '../../Bundestag/Procedure/graphql/query/Procedure';
 import { ListFilterContext } from '../../../context/ListFilter';
 import { PROCEDURES_LIST } from '../../Bundestag/List/graphql/query/procedures';
+import { RootStackParamList } from '../../../routes';
 
 const Container = styled.KeyboardAvoidingView.attrs(() => ({
   behavior: Platform.OS === 'ios' ? 'padding' : undefined,
@@ -52,14 +47,14 @@ const ScrollView = styled.ScrollView.attrs(() => ({
   },
 }))``;
 
-type DevPlaceholderNavigationProps = CompositeNavigationProp<
-  StackNavigationProp<VerificationRootStackParamList, 'SmsCodeInput'>,
-  StackNavigationProp<RootStackParamList>
+type DevPlaceholderNavigationProps = StackNavigationProp<
+  RootStackParamList,
+  'SmsCodeInput'
 >;
 
 const DEVICE_HEIGT = Dimensions.get('window').height;
 
-type RouteProps = RouteProp<VerificationRootStackParamList, 'SmsCodeInput'>;
+type RouteProps = RouteProp<RootStackParamList, 'SmsCodeInput'>;
 
 interface Props {
   route: RouteProps;
