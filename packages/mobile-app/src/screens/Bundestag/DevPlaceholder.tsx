@@ -59,8 +59,8 @@ const LocalVotes = () => {
       <TextInput
         multiline
         style={{
-          minHeight: Platform.OS === 'ios' && 3 ? 20 * 3 : 'none',
-          maxHeight: Platform.OS === 'ios' && 3 ? 20 * 3 : 'none',
+          minHeight: Platform.OS === 'ios' && 3 ? 20 * 3 : 0,
+          maxHeight: Platform.OS === 'ios' && 3 ? 20 * 3 : 0,
           borderWidth: 1,
         }}
         placeholder="Json Code"
