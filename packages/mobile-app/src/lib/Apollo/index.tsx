@@ -44,6 +44,9 @@ const httpLink = new HttpLink({
 
 // Retry link
 const attempts: RetryFunction = (number, operation) => {
+  if (number < 3) {
+    return true;
+  }
   if (operation.operationName === 'NotificationSettings' && number === 1) {
     return true;
   }
