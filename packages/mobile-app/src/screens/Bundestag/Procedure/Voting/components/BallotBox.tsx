@@ -31,6 +31,9 @@ import {
   ProcedureVariables,
 } from '../../graphql/query/__generated__/Procedure';
 import { captureException } from '@sentry/react-native';
+import { SEARCH_PROCEDURES } from '../../../Search/graphql/query/searchProcedures';
+import { SearchContext } from '../../../../../context/Search';
+import { PureQueryOptions } from 'apollo-client';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -88,10 +91,23 @@ const BalloutBox: React.FC<Props> = ({
 }) => {
   const { setLocalVote } = useContext(LocalVotesContext);
   const { constituency } = useContext(ConstituencyContext);
+  const { term } = useContext(SearchContext);
   const constituencies = constituency ? [constituency] : [];
   const navigation = useNavigation<
     StackNavigationProp<BundestagRootStackParamList, 'Voting'>
   >();
+  let searchRefetchQuery: PureQueryOptions[] = [];
+  if (term) {
+    searchRefetchQuery = [
+      {
+        query: SEARCH_PROCEDURES,
+        variables: {
+          term,
+        },
+      },
+    ];
+  }
+
   const [vote] = useMutation<Vote, VoteVariables>(VOTE, {
     refetchQueries: [
       {
@@ -101,6 +117,7 @@ const BalloutBox: React.FC<Props> = ({
           constituencies,
         },
       },
+      ...searchRefetchQuery,
     ],
   });
   const [refetchProcedure] = useLazyQuery<Procedure, ProcedureVariables>(
