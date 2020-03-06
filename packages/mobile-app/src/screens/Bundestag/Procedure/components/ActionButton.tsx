@@ -99,7 +99,7 @@ const ActionButton: React.FC<Props> = ({
           width={45}
           height={45}
           color="#fff"
-          style={{ marginBottom: 8 }}
+          style={{ marginBottom: Platform.OS === 'ios' ? 8 : 0 }}
         />
       );
       break;

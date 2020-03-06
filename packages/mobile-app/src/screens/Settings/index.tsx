@@ -12,6 +12,7 @@ import { useNavigation } from '@react-navigation/core';
 import { getBundleId } from 'react-native-device-info';
 import { NotificationsContext } from '../../context/NotificationPermission';
 import { styled } from '../../styles';
+import { NavigationContext } from '../../context/Navigation';
 
 const Wrapper = styled.View`
   background-color: ${({ theme }) => theme.colors.background.secondary};
@@ -50,6 +51,7 @@ export const Settings: React.FC<Props> = () => {
   const navigation = useNavigation();
   const { constituency } = useContext(ConstituencyContext);
   const { isVerified } = useContext(InitialStateContext);
+  const { saveState } = useContext(NavigationContext);
   const {
     hasPermissions,
     alreadyDenied,
@@ -64,7 +66,8 @@ export const Settings: React.FC<Props> = () => {
         navigation.navigate('Constituency');
         break;
       case 'verificate':
-        navigation.navigate('Verification');
+        saveState();
+        navigation.navigate('VerificationStart');
         break;
 
       default:

@@ -75,6 +75,7 @@ export const NotificationsProvider: React.FC = ({ children }) => {
     NotificationsInterface['notificationSettings']
   >(defaults.notificationSettings);
   const { data } = useQuery<NotificationSettings>(NOTIFICATION_SETTINGS);
+  console.log('NotificationSettings', data);
   const [updateSettings] = useMutation<
     UpdateNotificationSettings,
     UpdateNotificationSettingsVariables

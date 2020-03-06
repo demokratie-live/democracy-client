@@ -14,6 +14,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { DONATION_STATUS } from './Donate/graphql/query/donationStatus';
 import DonatedBox from './Donate/DonatedBox';
 import { Space } from '../modals/Verification/Start';
+import { NavigationContext } from '../../context/Navigation';
 
 const SafeAreaView = styled.SafeAreaView`
   flex: 1;
@@ -50,6 +51,7 @@ declare type Props = React.ComponentProps<typeof DrawerItemList>;
 
 export const Sidebar: React.FC<Props> = props => {
   const navigation = useNavigation<SidebarNavigationProps>();
+  const { saveState } = useContext(NavigationContext);
   const { isVerified, verificationQueryRunning } = useContext(
     InitialStateContext,
   );
@@ -67,6 +69,7 @@ export const Sidebar: React.FC<Props> = props => {
     if (isVerified) {
       navigation.navigate('Settings');
     } else {
+      saveState();
       navigation.navigate('VerificationStart');
     }
   };
