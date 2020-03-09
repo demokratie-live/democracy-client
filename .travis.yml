@@ -50,7 +50,7 @@ matrix:
 
     # Android
     - language: android
-      if: (branch = alpha OR branch = internal OR branch = refactor) AND commit_message !~ /(no-deploy)/
+      if: (branch = alpha OR branch = internal OR branch = refactor OR branch = master) AND commit_message !~ /(no-deploy)/
       os: linux
       jdk: oraclejdk8
       sudo: required
