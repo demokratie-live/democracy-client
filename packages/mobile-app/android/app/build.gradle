@@ -215,6 +215,12 @@ android {
     }
 
     productFlavors {
+        master {
+            minSdkVersion rootProject.ext.minSdkVersion
+            applicationId 'de.democracydeutschland.app'
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            resValue "string", "build_config_package", "de.democracydeutschland.app"
+        }
         refactor {
             minSdkVersion rootProject.ext.minSdkVersion
             applicationId 'de.democracydeutschland.app.refactor'
