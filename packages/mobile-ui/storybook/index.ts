@@ -9,7 +9,9 @@ configure(() => {
   loadStories();
 }, module);
 
-const StorybookUIRoot = getStorybookUI({});
+const StorybookUIRoot = getStorybookUI({
+  asyncStorage: require('@react-native-community/async-storage').default,
+});
 
 AppRegistry.registerComponent('democracyUI', () => StorybookUIRoot);
 
