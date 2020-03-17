@@ -27,11 +27,6 @@ if ENV["TRAVIS_BRANCH"] != 'master'
   ENV["ENVFILE"] = ".env." + ENV["TRAVIS_BRANCH"]
 end
 
-internalVersionCode = get_google_play_track_version_codes(package_name: package_name, track: 'internal')
-alphaVersionCode = get_google_play_track_version_codes(package_name: package_name, track: 'alpha')
-betaVersionCode = get_google_play_track_version_codes(package_name: package_name, track: 'beta')
-productionVersionCode = get_google_play_track_version_codes(package_name: package_name)
-version_code = [internalVersionCode,alphaVersionCode,betaVersionCode,productionVersionCode].max[0].to_i + 1
 
 store_password = prompt(text: "Signing Store Password: ", secure_text: true, ci_input: ENV['ANDROID_PASS'])
 key_password = prompt(text: "Alias Key Password: ", secure_text: true, ci_input: ENV['ANDROID_PASS'])
@@ -52,6 +47,13 @@ platform :android do
     version_name: version_number
   )
 
+
+  internalVersionCode = get_google_play_track_version_codes(package_name: package_name, track: 'internal')
+  alphaVersionCode = get_google_play_track_version_codes(package_name: package_name, track: 'alpha')
+  betaVersionCode = get_google_play_track_version_codes(package_name: package_name, track: 'beta')
+  productionVersionCode = get_google_play_track_version_codes(package_name: package_name)
+  version_code = [internalVersionCode,alphaVersionCode,betaVersionCode,productionVersionCode].max[0].to_i + 1
+
   increment_version_code(
     gradle_file_path: "app/build.gradle",
     version_code: version_code
@@ -66,7 +68,7 @@ platform :android do
   lane :get_google_play_track_version_codes do |options|
     track_version_codes = []
     begin
-      track_version_codes = get_google_play_track_version_codes(
+      track_version_codes = google_play_track_version_codes(
         package_name: options[:package_name],
         track: options[:track],
         json_key: options[:json_key],
