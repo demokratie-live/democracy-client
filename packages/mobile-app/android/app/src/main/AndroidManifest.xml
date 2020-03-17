@@ -28,7 +28,6 @@
       android:resource="@color/notification" />
 
     <activity android:name=".MainActivity" 
-      android:theme="@style/SplashTheme" 
       android:launchMode="singleTask" 
       android:label="@string/app_name" 
       android:configChanges="keyboard|keyboardHidden|orientation|screenSize" 
