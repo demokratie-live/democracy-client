@@ -63,7 +63,7 @@ platform :android do
     gradle(task: "test")
   end
 
-  private_lane :get_get_google_play_track_version_codes do |options|
+  lane :get_get_google_play_track_version_codes do |options|
     track_version_codes = []
     begin
       track_version_codes = get_google_play_track_version_codes(
