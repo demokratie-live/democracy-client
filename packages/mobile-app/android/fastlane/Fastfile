@@ -27,10 +27,10 @@ if ENV["TRAVIS_BRANCH"] != 'master'
   ENV["ENVFILE"] = ".env." + ENV["TRAVIS_BRANCH"]
 end
 
-internalVersionCode = google_play_track_version_codes(package_name: package_name, track: 'internal')
-alphaVersionCode = google_play_track_version_codes(package_name: package_name, track: 'alpha')
-betaVersionCode = google_play_track_version_codes(package_name: package_name, track: 'beta')
-productionVersionCode = google_play_track_version_codes(package_name: package_name)
+internalVersionCode = get_google_play_track_version_codes(package_name: package_name, track: 'internal')
+alphaVersionCode = get_google_play_track_version_codes(package_name: package_name, track: 'alpha')
+betaVersionCode = get_google_play_track_version_codes(package_name: package_name, track: 'beta')
+productionVersionCode = get_google_play_track_version_codes(package_name: package_name)
 version_code = [internalVersionCode,alphaVersionCode,betaVersionCode,productionVersionCode].max[0].to_i + 1
 
 store_password = prompt(text: "Signing Store Password: ", secure_text: true, ci_input: ENV['ANDROID_PASS'])
@@ -61,6 +61,22 @@ platform :android do
 
   lane :test do
     gradle(task: "test")
+  end
+
+  private_lane :get_get_google_play_track_version_codes do |options|
+    track_version_codes = []
+    begin
+      track_version_codes = get_google_play_track_version_codes(
+        package_name: options[:package_name],
+        track: options[:track],
+        json_key: options[:json_key],
+      )
+    rescue => gptvcError
+      if (gptvcError.class != Google::Apis::ClientError || gptvcError.status_code != 404)
+        raise gptvcError
+      end
+    end
+    track_version_codes
   end
 
   private_lane :build do
