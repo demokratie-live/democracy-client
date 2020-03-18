@@ -124,6 +124,12 @@ export const DevPlaceholder: FC = () => {
         title="Clear Async Storage"
         onPress={() => AsyncStorage.clear()}
       />
+      <Button
+        title="Throw error"
+        onPress={() => {
+          throw new Error('My first Sentry error!');
+        }}
+      />
       <Document width="32px" height="32px" color="black" />
     </Container>
   );

@@ -465,7 +465,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\nexport EXTRA_PACKAGER_ARGS=\"--entry-file packages/mobile-app/index.js\"\n../../../node_modules/react-native/scripts/react-native-xcode.sh\n";
+			shellScript = "export SENTRY_PROPERTIES=sentry.properties\nexport NODE_BINARY=node\nexport EXTRA_PACKAGER_ARGS=\"--entry-file packages/mobile-app/index.js\"\n../../../node_modules/@sentry/cli/bin/sentry-cli react-native xcode \n../../../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		0F77823BB4774FADB59B065C /* Upload Debug Symbols to Sentry */ = {
 			isa = PBXShellScriptBuildPhase;
