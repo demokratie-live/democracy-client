@@ -109,7 +109,8 @@ platform :android do
     supply(
      package_name: package_name,
      track: 'internal',
-     track_promote_to: 'internal'
+     track_promote_to: 'internal',
+     skip_upload_metadata: true
     )
 
     browserstack
