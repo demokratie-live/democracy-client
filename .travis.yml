@@ -30,7 +30,6 @@ matrix:
         - npm install -g yarn
         - yarn -version
         - gem install fastlane
-        - bundle update fastlane
         - echo -e "machine github.com\n  login $GITHUB_API_TOKEN" >> ~/.netrc
         - n=$(which node);n=${n%/bin/node}; chmod -R 755 $n/bin/*; sudo cp -r $n/{bin,lib,share} /usr/local
       install:
@@ -38,6 +37,7 @@ matrix:
         - yarn pods
         - cd packages/mobile-app/ios
         - bundle install
+        - bundle update fastlane
         - cd ..
         - cd $TRAVIS_BUILD_DIR
       script:
@@ -87,12 +87,12 @@ matrix:
         - npm install -g yarn
         - yarn -version
         - gem install fastlane
-        - bundle update fastlane
         - echo -e "machine github.com\n  login $GITHUB_API_TOKEN" >> ~/.netrc
       install:
         - yarn install --no-bin-links
         - cd packages/mobile-app/android
         - bundle install
+        - bundle update fastlane
         - cd ..
         - cd $TRAVIS_BUILD_DIR
       script:
