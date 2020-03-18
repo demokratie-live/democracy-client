@@ -30,6 +30,7 @@ matrix:
         - npm install -g yarn
         - yarn -version
         - gem install fastlane
+        - bundle update fastlane
         - echo -e "machine github.com\n  login $GITHUB_API_TOKEN" >> ~/.netrc
         - n=$(which node);n=${n%/bin/node}; chmod -R 755 $n/bin/*; sudo cp -r $n/{bin,lib,share} /usr/local
       install:
@@ -86,6 +87,7 @@ matrix:
         - npm install -g yarn
         - yarn -version
         - gem install fastlane
+        - bundle update fastlane
         - echo -e "machine github.com\n  login $GITHUB_API_TOKEN" >> ~/.netrc
       install:
         - yarn install --no-bin-links
