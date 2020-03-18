@@ -73,15 +73,19 @@ export const VerificationProvider: FC = ({ children }) => {
   }, [resendTime]);
 
   const setPhoneNumber = (value: string) => {
-    AsyncStorage.setItem('verification_code_resend_time', value).then(() => {
-      setPhoneNumberValue(value);
-    });
+    if (value) {
+      AsyncStorage.setItem('verification_code_resend_time', value).then(() => {
+        setPhoneNumberValue(value);
+      });
+    }
   };
 
   const setResendTime = (value: string) => {
-    AsyncStorage.setItem('verification_code_resend_time', value).then(() => {
-      setResendTimeValue(new Date(value));
-    });
+    if (value) {
+      AsyncStorage.setItem('verification_code_resend_time', value).then(() => {
+        setResendTimeValue(new Date(value));
+      });
+    }
   };
 
   const setExpireTime = (value: string) => {
