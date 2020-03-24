@@ -20,7 +20,7 @@ Nimm es als Chance, Deine (politischen) Einstellungen anhand der konkret vertret
   },
   {
     title: 'Gebt ihr meine Abstimmungsdaten an Dritte weiter?',
-    text: `Die Betreiber der App DEMOCRACY nehmen den Schutz Deiner persönlichen Daten sehr ernst.
+    text: `Nein. Die Betreiber der App DEMOCRACY nehmen den Schutz Deiner persönlichen Daten sehr ernst.
 Unserer Meinung nach sind Nutzerdaten gerade keine handelbaren Wirtschaftsgüter, sondern im Sinne des Grundgesetzes zu schützen. Deshalb behandeln wir Deine personenbezogenen wie Abstimmungsdaten vertraulich entsprechend den gesetzlichen Datenschutzrichtlinien und geben sie selbstverständlich nicht an Dritte weiter. Damit Du Dich bei der Nutzung unserer App sicher fühlst, informieren wir Dich in unserer Datenschutzrichtlinie ausführlich darüber, welche Daten wir warum erheben und wie wir diese verarbeiten und nutzen, vgl.
 [https://www.democracy-deutschland.de/#!datenschutz](https://www.democracy-deutschland.de/#!datenschutz)`,
   },
@@ -36,7 +36,7 @@ nachlesen.`,
   {
     title: 'Sensible Daten und Open Source – geht das?',
     text:
-      'Open Source bedeutet, dass der Quellcode frei und offen ist. Die Daten der Nutzer sind kein Bestandteil des Quellcodes, sondern der entsprechenden Installation des freien Programms auf einem Server. Insofern ist der unberechtigte Zugriff auf Nutzerdaten durch Dritte durch unsere Open-Source-Eigenschaft nicht angetastet. Überdies wird jede Änderung im Code, bevor sie in den Betrieb übergeht, von uns geprüft. Somit wird der hohe Anspruch an guter Programmierung gewahrt und auch verhindert, dass dubioser Code einfließen kann.',
+      'Ja. Open Source bedeutet, dass der Quellcode frei und offen ist. Die Daten der Nutzer sind kein Bestandteil des Quellcodes, sondern der entsprechenden Installation des freien Programms auf einem Server. Insofern ist der unberechtigte Zugriff auf Nutzerdaten durch Dritte durch unsere Open-Source-Eigenschaft nicht angetastet. Überdies wird jede Änderung im Code, bevor sie in den Betrieb übergeht, von uns geprüft. Somit wird der hohe Anspruch an guter Programmierung gewahrt und auch verhindert, dass dubioser Code einfließen kann.',
   },
   {
     title: 'Wie wird DEMOCRACY finanziert?',
