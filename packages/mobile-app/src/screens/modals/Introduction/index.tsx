@@ -80,6 +80,13 @@ const Introduction: FC<Props> = ({ route }) => {
     );
   }
 
+  if (slideScreens.length === 0) {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Sidebar' }],
+    });
+  }
+
   return (
     <SafeAreaView testID="Introduction">
       <Pager

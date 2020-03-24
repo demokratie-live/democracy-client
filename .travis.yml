@@ -37,8 +37,8 @@ matrix:
         - yarn pods
         - cd packages/mobile-app/ios
         - bundle install
+        - bundle update fastlane
         - cd ..
-        - npx react-native info
         - cd $TRAVIS_BUILD_DIR
       script:
         - chmod 0600 /Users/travis/.netrc
@@ -50,7 +50,7 @@ matrix:
 
     # Android
     - language: android
-      if: (branch = alpha OR branch = internal OR branch = refactor) AND commit_message !~ /(no-deploy)/
+      if: (branch = alpha OR branch = internal OR branch = refactor OR branch = master) AND commit_message !~ /(no-deploy)/
       os: linux
       jdk: oraclejdk8
       sudo: required
@@ -74,6 +74,7 @@ matrix:
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/app/src/refactor/google-services.json.gpg
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/app/src/internal/google-services.json.gpg
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/app/src/alpha/google-services.json.gpg
+        - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/app/google-services.json.gpg
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/android/democracy2-release-key.keystore.gpg
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/.env.internal.gpg
         - echo $super_secret_password | gpg --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
@@ -91,8 +92,8 @@ matrix:
         - yarn install --no-bin-links
         - cd packages/mobile-app/android
         - bundle install
+        - bundle update fastlane
         - cd ..
-        - npx react-native info
         - cd $TRAVIS_BUILD_DIR
       script:
         - chmod 0600 /home/travis/.netrc

@@ -19,8 +19,7 @@ package = load_json(json_path: "../../../package.json")
 
 version_number = package["version"]
 
-# TODO remove refactor suffix when new app is production ready
-package_name = "de.democracydeutschland.app.refactor"
+package_name = "de.democracydeutschland.app"
 ENV["ENVFILE"] = ".env.production"
 if ENV["TRAVIS_BRANCH"] != 'master'
   # and change "de.democracydeutschland.app" to package_name
@@ -30,9 +29,8 @@ end
 
 internalVersionCode = google_play_track_version_codes(package_name: package_name, track: 'internal')
 alphaVersionCode = google_play_track_version_codes(package_name: package_name, track: 'alpha')
-betaVersionCode = google_play_track_version_codes(package_name: package_name, track: 'beta')
 productionVersionCode = google_play_track_version_codes(package_name: package_name)
-version_code = [internalVersionCode,alphaVersionCode,betaVersionCode,productionVersionCode].max[0].to_i + 1
+version_code = [internalVersionCode,alphaVersionCode,productionVersionCode].max[0].to_i + 1
 
 store_password = prompt(text: "Signing Store Password: ", secure_text: true, ci_input: ENV['ANDROID_PASS'])
 key_password = prompt(text: "Alias Key Password: ", secure_text: true, ci_input: ENV['ANDROID_PASS'])
@@ -111,7 +109,11 @@ platform :android do
     supply(
      package_name: package_name,
      track: 'internal',
-     track_promote_to: 'internal'
+     track_promote_to: 'internal',
+     skip_upload_metadata: true,
+     skip_upload_changelogs: true,
+     skip_upload_images: true,
+     skip_upload_screenshots: true
     )
 
     browserstack

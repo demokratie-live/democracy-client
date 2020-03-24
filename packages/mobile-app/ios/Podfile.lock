@@ -21,7 +21,7 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
-  - Permission-Notifications (2.0.9):
+  - Permission-Notifications (2.0.10):
     - RNPermissions
   - RCTRequired (0.61.4)
   - RCTTypeSafety (0.61.4):
@@ -239,19 +239,19 @@ PODS:
     - React
   - RNDeviceInfo (5.5.3):
     - React
-  - RNGestureHandler (1.6.0):
+  - RNGestureHandler (1.6.1):
     - React
   - RNKeychain (4.0.5):
     - React
-  - RNPermissions (2.0.9):
+  - RNPermissions (2.0.10):
     - React
   - RNReanimated (1.7.0):
     - React
-  - RNScreens (2.2.0):
+  - RNScreens (2.4.0):
     - React
   - RNSearchBar (3.5.1):
     - React
-  - RNSentry (1.3.2):
+  - RNSentry (1.3.3):
     - React
     - Sentry (~> 4.4.0)
   - RNSha256 (1.3.6):
@@ -418,7 +418,7 @@ SPEC CHECKSUMS:
   FBReactNativeSpec: 51477b84b1bf7ab6f9ef307c24e3dd675391be44
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
-  Permission-Notifications: 1e03f5c43612ac4f9cdcaf6504695fc4e15f33d9
+  Permission-Notifications: c9eb3a2da68dc0f37a8dc67d37bd28d150c5041d
   RCTRequired: f3b3fb6f4723e8e52facb229d0c75fdc76773849
   RCTTypeSafety: 2ec60de6abb1db050b56ecc4b60188026078fd10
   React: 10e0130b57e55a7cd8c3dee37c1261102ce295f4
@@ -447,13 +447,13 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: 44395cb9c7c1523104c2b499eb426ef7aff82bca
   RNCMaskedView: 76c40a1d41c3e2535df09246a2b5487f04de0814
   RNDeviceInfo: 310c1f43d418d950a193c7650de2f9559c906048
-  RNGestureHandler: dde546180bf24af0b5f737c8ad04b6f3fa51609a
+  RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNKeychain: 840f8e6f13be0576202aefcdffd26a4f54bfe7b5
-  RNPermissions: 2f74237e97b08beda01e914301e12524ddddf5b8
+  RNPermissions: 1008d3511fee0e25739cf81c4af0d1b2248f1053
   RNReanimated: 031fe8d9ea93c2bd689a40f05320ef9d96f74d7f
-  RNScreens: 812b79d384e2bea7eebc4ec981469160d4948fd5
+  RNScreens: b5c0e1b2b04512919e78bd3898e144a157ce2363
   RNSearchBar: 9860431356b7d12a8449d2fddb2b5f3c78d1e99f
-  RNSentry: 2ec85f3e314c6a650b1c51b30ff764b6103ed7e2
+  RNSentry: 86baf0c87120cd5eb491d073989f8cbc1a2174c6
   RNSha256: c6f68c850bf8315c95e2508667e8c908bd9f8487
   RNSVG: 67f1f12dae2cef6ed59a42cae74a6b8f5a9e7b46
   Sentry: 14bdd673870e8cf64932b149fad5bbbf39a9b390
@@ -461,4 +461,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 4e39ccaeb5dbb06c375a8633797aebefee6d8a63
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.1
