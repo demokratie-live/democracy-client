@@ -18,7 +18,7 @@ switch (true) {
     break;
 }
 
-if (!__DEV__) {
+if (!__DEV__ && (stage === 'Alpha' || stage === 'Internal')) {
   init({
     dsn: 'https://1f5c046a7b0c4e7b84ebc0adc62c00ad@sentry.io/1867209',
     attachStacktrace: true,
