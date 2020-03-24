@@ -81,6 +81,7 @@ const Introduction: FC<Props> = ({ route }) => {
   }
 
   if (slideScreens.length === 0) {
+    setLastStartWithVersion(getVersion());
     navigation.reset({
       index: 0,
       routes: [{ name: 'Sidebar' }],
