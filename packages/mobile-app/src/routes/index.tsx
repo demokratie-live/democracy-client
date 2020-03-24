@@ -57,7 +57,7 @@ const Navigation = () => {
   const [isIntroductionReady, setIsIntroductionReady] = React.useState(false);
   const [initialState, setInitialState] = React.useState<InitialState>();
 
-  const [currentVersion, setCurrentVersion] = useState();
+  const [currentVersion, setCurrentVersion] = useState<string>();
   const { lastStartWithVersion, setLastStartWithVersion } = useContext(
     InitialStateContext,
   );

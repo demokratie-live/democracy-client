@@ -89,7 +89,10 @@ export const PushInstructions: React.FC<Props> = ({
   const pressActivate = () => {
     requestToken();
     if (!alreadyKnown) {
-      navigation.replace('Sidebar', { screen: 'Bundestag' });
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Sidebar' }],
+      });
     }
     updateNotificationSettings({
       enabled: true,
