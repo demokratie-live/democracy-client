@@ -14,6 +14,15 @@ Eines der Kernanliegen von DEMOCRACY ist es, den Wandel von einer personen- bzw.
 Nimm es als Chance, Deine (politischen) Einstellungen anhand der konkret vertretenen Inhalte nochmal zu überprüfen.`,
   },
   {
+    title: 'Worüber wird abgestimmt?',
+    text: `DEMOCRACY ermöglicht seinen Nutzern über die offiziellen Gesetze & Anträge des Bundestages abzustimmen, so als wären sie Bundestagsabgeordnete.
+
+Die (Nutzer-)Abstimmung in der App findet dabei immer über das Gesetz/den Antrag an sich (und nicht über die Beschlussempfehlung) statt. Im Plenarsaal des Bundestages wird allerdings oft über die Beschlussempfehlung abgestimmt. Eine Zustimmung zu einer Beschlussempfehlung, die eines Ablehnung des Vorgangs vorschlägt, ist insofern invers zu zählen.
+Innerhalb unserer Software haben wir einen Mechanismus implementiert, der die ggfs. notwendigen Umrechnungen vornimmt. 
+
+Sollten Sie Diskrepanzen zwischen dem Beschlusstext und unserer Ergebnisaufzeichnung feststellen, bitten wir Sie, diese an prototyping@democracy-deutschland.de zu reporten. `,
+  },
+  {
     title: 'Warum ist meine Stimme grau und enthält ein Fragezeichen?',
     text:
       'Die Aufrechterhaltung des Abstimmungs- bzw. Wahlgeheimnis ist zentraler Bestandteil der DNA der DEMOCRACY App. Unser Konzept sieht insofern vor, Deine konkrete Abstimmungsentscheidung (Zugestimmt, Enthalten, Ablehnt) nur lokal auf Deinem Handy zu speichern und ausschließlich anonymisierte Stimmdaten an unseren Server zu übersenden. Der graue Button mit weißem Fragezeichen zeigt Dir an, dass Deine Stimme korrekt an unseren Server übertragen wurde, aber auf Deinem Handy verlorengegangen ist. Dazu kann es kommen, wenn Du die Cache-Daten der DEMOCRACY App via App-Manager löschst. Ein nachträgliches Ändern Deiner Stimme ist leider nicht möglich.',
