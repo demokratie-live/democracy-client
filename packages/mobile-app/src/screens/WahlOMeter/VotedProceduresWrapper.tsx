@@ -106,6 +106,11 @@ const VotedProceduresWrapper: React.FC<Props> = ({
             <Row onPress={() => onProcedureListItemClick({ item })}>
               <ListItem
                 {...item}
+                subline={
+                  item.sessionTOPHeading
+                    ? item.sessionTOPHeading
+                    : item.subjectGroups.join(', ')
+                }
                 votes={item.communityVotes ? item.communityVotes.total || 0 : 0}
                 govermentChart={{
                   votes: pieChartGovernmentData({
