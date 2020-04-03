@@ -153,8 +153,8 @@ android {
         // react-native-notifications
         missingDimensionStrategy "RNNotifications.reactNativeVersion", "reactNative60" // See note below!
         
-        versionCode 103664
-        versionName "1.3.2"
+        versionCode 103672
+        versionName "1.3.3"
         resValue "string", "build_config_package", "de.democracydeutschland.app"
 
         // Wix Detox
