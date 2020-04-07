@@ -1,0 +1,17 @@
+name: Linting project
+
+on: [push]
+
+jobs:
+    build:
+        name: Build Project
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout
+            - name: Setup NodeJS
+              uses: actions/setup-node
+              with:
+                  node-version: "12.x"
+            - run: yarn install
+            - run: yarn lint
