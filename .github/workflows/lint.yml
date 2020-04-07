@@ -33,7 +33,7 @@ jobs:
 
     build-ios:
         name: Build ios
-        needs: lint
+        # needs: lint
         runs-on: macos-latest
         steps:
             - name: Checkout
