@@ -3,8 +3,8 @@ name: Linting project
 on: [push]
 
 jobs:
-    build:
-        name: Build Project
+    lint:
+        name: Lint Project
         runs-on: ubuntu-latest
         steps:
             - name: Checkout
@@ -30,3 +30,30 @@ jobs:
             - uses: stefanzweifel/git-auto-commit-action@v4.1.2
               with:
                   commit_message: Action – commit autofix changes
+
+    build-ios:
+        name: Build ios
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+
+            - name: Setup NodeJS
+              uses: actions/setup-node@v1
+              with:
+                  node-version: "12.x"
+
+            - run: yarn install
+              working-directory: packages/mobile-app
+
+            - run: pod install
+              working-directory: packages/mobile-app/ios
+
+            - name: Fastlane
+              uses: maierj/fastlane-action@v1.4.0
+              with:
+                  lane: "ios beta"
+                  subdirectory: "packages/mobile-app/ios"
+              env:
+                  TRAVIS_BRANCH: alpha
+                  TRAVIS: "true"
