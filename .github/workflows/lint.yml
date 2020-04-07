@@ -19,8 +19,14 @@ jobs:
 
             - name: Run ESLint on UI
               run: yarn workspace @democracy-deutschland/mobile-ui lint:eslint
+            - name: Run TSLint on UI
+              run: yarn workspace @democracy-deutschland/mobile-ui lint:ts
+
             - name: Run ESLint on App
               run: yarn workspace app lint:eslint
+            - name: Run TSLint on App
+              run: yarn workspace app lint:ts
+
             - uses: stefanzweifel/git-auto-commit-action@v4.1.2
               with:
-                  commit_message: Apply automatic changes
+                  commit_message: Action – commit autofix changes
