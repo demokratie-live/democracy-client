@@ -28,4 +28,11 @@ jobs:
                       ${{ runner.os }}-yarn-
 
             - run: yarn install
-            - run: yarn lint
+
+            - name: Run ESLint on UI
+              run: yarn workspace @democracy-deutschland/mobile-ui lint:es
+            - name: Run ESLint on App
+              run: yarn workspace app lint
+            - uses: stefanzweifel/git-auto-commit-action@v4.1.2
+              with:
+                  commit_message: Apply automatic changes
