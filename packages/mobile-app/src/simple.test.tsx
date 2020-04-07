@@ -9,6 +9,7 @@ function renderNavigation() {
 describe('<Text />', () => {
   test('should display a simple text', async () => {
     const { getByText } = renderNavigation();
+    const tsTest: string = 5;
 
     const button = await getByText('a simple Text!');
 
