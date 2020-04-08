@@ -117,7 +117,7 @@ jobs:
           echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
           echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.production.gpg
 
-      - name: Fastlane
+      - name: Test
         run: yarn e2e:android-debug
         working-directory: packages/mobile-app
         env:
