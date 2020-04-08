@@ -133,7 +133,7 @@
     "configurations": {
       "ios.sim.debug": {
         "type": "ios.simulator",
-        "binaryPath": "ios/build/Refactor/Build/Products/Refactor.Debug-iphonesimulator/DEMOCRACY.app",
+        "binaryPath": "ios/build/Build/Products/Refactor.Debug-iphonesimulator/DEMOCRACY.app",
         "build": "xcodebuild -workspace ios/client.xcworkspace -scheme Refactor -configuration Refactor.Debug -sdk iphonesimulator -derivedDataPath ios/build",
         "device": {
           "type": "iPhone 11",
