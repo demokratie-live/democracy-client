@@ -58,7 +58,7 @@ jobs:
     #               lane: "ios beta"
     #               subdirectory: "packages/mobile-app/ios"
     #           env:
-    #               TRAVIS_BRANCH: alpha
+    #               TRAVIS_BRANCH: internal
     #               TRAVIS: "true"
     #               MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
 
@@ -103,5 +103,8 @@ jobs:
                   lane: "android internal"
                   subdirectory: "packages/mobile-app/android"
               env:
-                  TRAVIS_BRANCH: alpha
+                  TRAVIS_BRANCH: internal
                   TRAVIS: "true"
+                  ANDROID_PASS: ${{ secrets.ANDROID_PASS }}
+                  BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+                  BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
