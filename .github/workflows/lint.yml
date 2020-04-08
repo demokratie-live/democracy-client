@@ -31,36 +31,36 @@ jobs:
               with:
                   commit_message: Action – commit autofix changes
 
-    # build-ios:
-    #     name: Build ios
-    #     # needs: lint
-    #     runs-on: macos-latest
-    #     steps:
-    #         - name: Checkout
-    #           uses: actions/checkout@v2
+    build-ios:
+        name: Build ios
+        # needs: lint
+        runs-on: macos-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
 
-    #         - name: Setup NodeJS
-    #           uses: actions/setup-node@v1
-    #           with:
-    #               node-version: "12.x"
+            - name: Setup NodeJS
+              uses: actions/setup-node@v1
+              with:
+                  node-version: "12.x"
 
-    #         - run: yarn install
+            - run: yarn install
 
-    #         - run: pod install
-    #           working-directory: packages/mobile-app/ios
+            - run: pod install
+              working-directory: packages/mobile-app/ios
 
-    #         # install fastlane dependencies
-    #         - run: gem install bundler
+            # install fastlane dependencies
+            - run: gem install bundler:1.17.3
 
-    #         - name: Fastlane
-    #           uses: maierj/fastlane-action@v1.4.0
-    #           with:
-    #               lane: "ios beta"
-    #               subdirectory: "packages/mobile-app/ios"
-    #           env:
-    #               TRAVIS_BRANCH: alpha
-    #               TRAVIS: "true"
-    #               MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+            - name: Fastlane
+              uses: maierj/fastlane-action@v1.4.0
+              with:
+                  lane: "ios beta"
+                  subdirectory: "packages/mobile-app/ios"
+              env:
+                  TRAVIS_BRANCH: alpha
+                  TRAVIS: "true"
+                  MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
 
     build-andriod:
         name: Build Android
@@ -85,6 +85,7 @@ jobs:
 
             - name: Encrypt GPG secure files
               run: |
+                  gpg --version
                   echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg --passphrase-fd 0 packages/mobile-app/android/my-release-key.keystore.gpg
                   echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg --passphrase-fd 0 packages/mobile-app/android/app/src/refactor/google-services.json.gpg
                   echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg --passphrase-fd 0 packages/mobile-app/android/app/src/internal/google-services.json.gpg
