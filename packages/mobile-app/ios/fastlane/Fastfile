@@ -48,7 +48,8 @@ platform :ios do
         type: "appstore",
         keychain_name: tmp_keychain,
         keychain_password: tmp_keychain,
-        readonly: true
+        readonly: true,
+        verbose: true
       )
     else	
       match(
