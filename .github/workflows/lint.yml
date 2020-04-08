@@ -85,20 +85,17 @@ jobs:
 
             - name: Encrypt GPG secure files
               run: |
-                  gpg --version
                   sudo apt-get install -y gnupg1
-                  gpg --version
-                  gpg1 --version
-                  echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg --passphrase-fd 0 packages/mobile-app/android/my-release-key.keystore.gpg
-                  echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg --passphrase-fd 0 packages/mobile-app/android/app/src/refactor/google-services.json.gpg
-                  echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg --passphrase-fd 0 packages/mobile-app/android/app/src/internal/google-services.json.gpg
-                  echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg --passphrase-fd 0 packages/mobile-app/android/app/src/alpha/google-services.json.gpg
-                  echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg --passphrase-fd 0 packages/mobile-app/android/app/google-services.json.gpg
-                  echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg --passphrase-fd 0 packages/mobile-app/android/democracy2-release-key.keystore.gpg
-                  echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg --passphrase-fd 0 packages/mobile-app/.env.internal.gpg
-                  echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
-                  echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
-                  echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg --passphrase-fd 0 packages/mobile-app/.env.production.gpg
+                  echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --passphrase-fd 0 packages/mobile-app/android/my-release-key.keystore.gpg
+                  echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --passphrase-fd 0 packages/mobile-app/android/app/src/refactor/google-services.json.gpg
+                  echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --passphrase-fd 0 packages/mobile-app/android/app/src/internal/google-services.json.gpg
+                  echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --passphrase-fd 0 packages/mobile-app/android/app/src/alpha/google-services.json.gpg
+                  echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --passphrase-fd 0 packages/mobile-app/android/app/google-services.json.gpg
+                  echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --passphrase-fd 0 packages/mobile-app/android/democracy2-release-key.keystore.gpg
+                  echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --passphrase-fd 0 packages/mobile-app/.env.internal.gpg
+                  echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
+                  echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
+                  echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --passphrase-fd 0 packages/mobile-app/.env.production.gpg
 
             - name: Fastlane
               uses: maierj/fastlane-action@v1.4.0
