@@ -86,7 +86,8 @@ jobs:
             - name: Encrypt GPG secure files
               run: |
                   gpg --version
-                  sudo apt-get install gnupg@1.4
+                  gpg1 --version
+                  sudo apt-get install gnupg@1.4.16
                   gpg --version
                   echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg --passphrase-fd 0 packages/mobile-app/android/my-release-key.keystore.gpg
                   echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg --passphrase-fd 0 packages/mobile-app/android/app/src/refactor/google-services.json.gpg
