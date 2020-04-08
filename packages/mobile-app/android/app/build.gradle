@@ -239,12 +239,12 @@ android {
             targetSdkVersion rootProject.ext.targetSdkVersion
             resValue "string", "build_config_package", "de.democracydeutschland.app"
         }
-        beta {
-            minSdkVersion rootProject.ext.minSdkVersion
-            applicationId 'de.democracydeutschland.app.beta'
-            targetSdkVersion rootProject.ext.targetSdkVersion
-            resValue "string", "build_config_package", "de.democracydeutschland.app"
-        }
+        // beta {
+        //     minSdkVersion rootProject.ext.minSdkVersion
+        //     applicationId 'de.democracydeutschland.app.beta'
+        //     targetSdkVersion rootProject.ext.targetSdkVersion
+        //     resValue "string", "build_config_package", "de.democracydeutschland.app"
+        // }
     }
 }
 
