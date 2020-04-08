@@ -73,7 +73,7 @@ jobs:
       # install fastlane dependencies
       - run: gem install bundler:1.17.3
 
-      - name: Fix Match prompt issue
+      - name: Fix match prompt issue
         run: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
 
       - name: Fastlane
