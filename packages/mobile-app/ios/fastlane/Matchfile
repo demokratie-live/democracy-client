@@ -1,4 +1,4 @@
-git_url("https://github.com/ManAnRuck/DEMOCRACY-match")
+git_url("git@github.com:ManAnRuck/DEMOCRACY-match.git")
 
 storage_mode("git")
 
