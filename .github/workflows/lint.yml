@@ -93,4 +93,3 @@ jobs:
               env:
                   TRAVIS_BRANCH: alpha
                   TRAVIS: "true"
-                  MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
