@@ -31,37 +31,37 @@ jobs:
               with:
                   commit_message: Action – commit autofix changes
 
-    build-ios:
-        name: Build ios
-        # needs: lint
-        runs-on: macos-latest
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v2
+    # build-ios:
+    #     name: Build ios
+    #     # needs: lint
+    #     runs-on: macos-latest
+    #     steps:
+    #         - name: Checkout
+    #           uses: actions/checkout@v2
 
-            - name: Setup NodeJS
-              uses: actions/setup-node@v1
-              with:
-                  node-version: "12.x"
+    #         - name: Setup NodeJS
+    #           uses: actions/setup-node@v1
+    #           with:
+    #               node-version: "12.x"
 
-            - run: yarn install
-              working-directory: packages/mobile-app
+    #         - run: yarn install
+    #           working-directory: packages/mobile-app
 
-            - run: pod install
-              working-directory: packages/mobile-app/ios
+    #         - run: pod install
+    #           working-directory: packages/mobile-app/ios
 
-            # install fastlane dependencies
-            - run: gem install bundler:1.17.3
+    #         # install fastlane dependencies
+    #         - run: gem install bundler:1.17.3
 
-            - name: Fastlane
-              uses: maierj/fastlane-action@v1.4.0
-              with:
-                  lane: "ios beta"
-                  subdirectory: "packages/mobile-app/ios"
-              env:
-                  TRAVIS_BRANCH: alpha
-                  TRAVIS: "true"
-                  MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+    #         - name: Fastlane
+    #           uses: maierj/fastlane-action@v1.4.0
+    #           with:
+    #               lane: "ios beta"
+    #               subdirectory: "packages/mobile-app/ios"
+    #           env:
+    #               TRAVIS_BRANCH: alpha
+    #               TRAVIS: "true"
+    #               MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
 
     build-andriod:
         name: Build Android
@@ -78,9 +78,6 @@ jobs:
 
             - run: yarn install
               working-directory: packages/mobile-app
-
-            - run: pod install
-              working-directory: packages/mobile-app/android
 
             # install fastlane dependencies
             - run: gem install bundler:1.17.3
