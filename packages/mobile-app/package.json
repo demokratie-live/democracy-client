@@ -104,7 +104,7 @@
     "@typescript-eslint/parser": "^2.19.2",
     "babel-jest": "24.9.0",
     "cross-env": "^7.0.0",
-    "detox": "^15.2.1",
+    "detox": "^16.1.1",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-better-styled-components": "^1.1.2",

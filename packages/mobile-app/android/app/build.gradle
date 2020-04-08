@@ -257,8 +257,7 @@ dependencies {
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'
 
     // Wix Detox
-    androidTestImplementation('com.wix:detox:+') { transitive = true } 
-    androidTestImplementation 'junit:junit:4.12'
+    androidTestImplementation('com.wix:detox:+')
 
     // react-native-notifications
     implementation project(':reactnativenotifications')
