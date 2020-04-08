@@ -49,6 +49,7 @@ platform :ios do
         keychain_name: tmp_keychain,
         keychain_password: tmp_keychain,
         readonly: true,
+        skip_confirmation: true,
         verbose: true
       )
     else	
