@@ -59,7 +59,12 @@ jobs:
       - run: pod install
         working-directory: packages/mobile-app/ios
 
-      - run: FORCE_BUNDLING=true yarn e2e:ios-debug
+      - run: npm install -g detox-cli
+
+      - run: FORCE_BUNDLING=true detox build -c ios.sim.debug
+        working-directory: packages/mobile-app
+
+      - run: detox test -c ios.sim.debug --record-videos all
         working-directory: packages/mobile-app
 
       - uses: actions/upload-artifact@v1
