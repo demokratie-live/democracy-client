@@ -130,6 +130,33 @@
   "detox": {
     "test-runner": "jest",
     "runner-config": "./e2e/jest.config.js",
+    "artifacts": {
+      "rootDir": "./artifacts",
+      "plugins": {
+        "instruments": {
+          "enabled": false
+        },
+        "log": {
+          "enabled": true
+        },
+        "screenshot": {
+          "shouldTakeAutomaticSnapshots": true,
+          "keepOnlyFailedTestsArtifacts": true,
+          "takeWhen": {
+            "testStart": true,
+            "testDone": true
+          }
+        },
+        "video": {
+          "android": {
+            "bitRate": 4000000
+          },
+          "simulator": {
+            "codec": "hevc"
+          }
+        }
+      }
+    },
     "configurations": {
       "ios.sim.debug": {
         "type": "ios.simulator",

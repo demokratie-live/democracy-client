@@ -62,6 +62,12 @@ jobs:
       - run: FORCE_BUNDLING=true yarn e2e:ios-debug
         working-directory: packages/mobile-app
 
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: Detox iOS
+          path: packages/mobile-app/artifacts
+
   build-ios:
     name: Build ios
     needs: test-ios
