@@ -46,6 +46,11 @@ jobs:
 
       - run: yarn install
 
+      - name: Prepare Detox
+        run: |
+          brew tap wix/brew
+          brew install applesimutils
+
       - run: pod install
         working-directory: packages/mobile-app/ios
 
