@@ -31,8 +31,6 @@ describe('Example', () => {
     await element(by.id('PagerNextButton')).tap();
     await element(by.id('PagerNextButton')).tap();
     await element(by.id('PagerNextButton')).tap();
-    await element(by.id('PagerNextButton')).tap();
-    await element(by.id('PagerNextButton')).tap();
     await waitFor(element(by.id('ListView'))).toBeVisible();
   });
 
