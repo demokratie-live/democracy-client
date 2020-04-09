@@ -50,7 +50,6 @@ platform :ios do
         keychain_password: tmp_keychain,
         readonly: true,
         skip_confirmation: true,
-        verbose: true
       )
     else	
       match(
