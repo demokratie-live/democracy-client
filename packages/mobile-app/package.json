@@ -137,12 +137,12 @@
         "build": "xcodebuild -workspace ios/client.xcworkspace -scheme Refactor -configuration Refactor.Debug -sdk iphonesimulator -derivedDataPath ios/build",
         "device": {
           "type": "iPhone 11",
-          "os": "13.4"
+          "os": "13.3"
         }
       },
       "android.emu.debug": {
         "binaryPath": "android/app/build/outputs/apk/debug/app-debug.apk",
-        "build": "cd android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug && cd ..",
+        "build": "cd android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug --warning-mode=all && cd ..",
         "type": "android.emulator",
         "device": {
           "avdName": "Pixel_2_API_28"
