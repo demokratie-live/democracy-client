@@ -137,7 +137,7 @@
         "build": "xcodebuild -workspace ios/client.xcworkspace -scheme Refactor -configuration Refactor.Debug -sdk iphonesimulator -derivedDataPath ios/build",
         "device": {
           "type": "iPhone 11",
-          "os": "13.3"
+          "os": "13.4"
         }
       },
       "android.emu.debug": {
