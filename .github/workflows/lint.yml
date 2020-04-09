@@ -64,7 +64,7 @@ jobs:
 
   build-ios:
     name: Build ios
-    # needs: test-ios
+    needs: test-ios
     runs-on: macos-latest
     env:
       DEVELOPER_DIR: /Applications/Xcode_11.4.app/Contents/Developer
