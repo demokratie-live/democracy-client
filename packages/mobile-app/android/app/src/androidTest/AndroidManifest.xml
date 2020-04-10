@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" 
+    xmlns:tools="http://schemas.android.com/tools" 
+    package="your.package.name">
+
+    <uses-sdk android:targetSdkVersion="27" 
+        android:minSdkVersion="18" 
+        tools:overrideLibrary="com.wix.detox, android.support.test.uiautomator.v18"/>
+
+</manifest>
