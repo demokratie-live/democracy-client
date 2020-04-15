@@ -13,7 +13,7 @@ buildscript {
     }
 
     // Wix Detox
-    ext.kotlinVersion = '1.3.10'
+    ext.kotlinVersion = '1.3.72'
 
     dependencies {
         classpath("com.android.tools.build:gradle:3.4.2")
