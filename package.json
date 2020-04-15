@@ -35,6 +35,6 @@
     "docz": "2.0.0-rc.67",
     "husky": "^3.1.0",
     "lint-staged": "^9.5.0",
-    "typescript": "3.5.2"
+    "typescript": "3.8.3"
   }
 }

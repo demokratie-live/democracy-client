@@ -48,10 +48,10 @@
     "@svgr/cli": "^5.1.0",
     "@testing-library/react": "^9.4.0",
     "@types/faker": "^4.1.9",
-    "@types/jest": "^24.9.1",
-    "@types/react": "16.9.17",
-    "@types/react-native": "^0.61.13",
-    "@types/react-test-renderer": "16.9.0",
+    "@types/jest": "^25.2.1",
+    "@types/react": "^16.9.34",
+    "@types/react-native": "^0.62.2",
+    "@types/react-test-renderer": "^16.9.2",
     "@types/styled-components": "^4.4.3",
     "@typescript-eslint/eslint-plugin": "^2.19.2",
     "@typescript-eslint/parser": "^2.19.2",
@@ -76,7 +76,7 @@
     "react-native-web-linear-gradient": "^1.1.1",
     "react-test-renderer": "16.9.0",
     "ts-jest": "^24.3.0",
-    "typescript": "3.5.2"
+    "typescript": "^3.8.3"
   },
   "config": {
     "react-native-storybook-loader": {
