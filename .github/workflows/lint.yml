@@ -159,12 +159,12 @@ jobs:
         run: npx replace-in-file "minSdkVersion = 16" "minSdkVersion = 18" packages/mobile-app/android/build.gradle packages/mobile-ui/android/build.gradle
 
       - name: Build Test
-        run: detox build -c android.emu.debug
+        run: detox build -c android.emu.internal.debug
         working-directory: packages/mobile-app
         env:
           ANDROID_PASS: ${{ secrets.ANDROID_PASS }}
       - name: Run Test
-        run: detox test -c android.emu.debug
+        run: detox test -c android.emu.internal.debug
         working-directory: packages/mobile-app
 
   build-andriod:

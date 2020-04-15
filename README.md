@@ -150,9 +150,9 @@ yarn detox test -c ios.sim.debug
 
 ```
 cd packages/mobile-app
-yarn detox build -c android.emu.debug
+yarn detox build -c android.emu.internal.debug
 yarn start
-yarn detox test -c android.emu.debug
+yarn detox test -c android.emu.internal.debug
 ```
 
 ## Deployment
