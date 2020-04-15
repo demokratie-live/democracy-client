@@ -37,7 +37,6 @@ describe('Example', () => {
       // android fallback
     }
     await waitFor(element(by.id('ListView'))).toBeVisible();
-    await expect(element(by.id('ListView'))).toBeVisible();
   });
 
   // it('should show hello screen after tap', async () => {
