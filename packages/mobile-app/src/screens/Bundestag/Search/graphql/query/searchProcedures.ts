@@ -7,6 +7,8 @@ export const SEARCH_PROCEDURES = gql`
         _id
         title
         procedureId
+        sessionTOPHeading
+        subjectGroups
         tags
         abstract
         voteDate

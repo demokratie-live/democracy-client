@@ -1,21 +1,22 @@
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
-import { VoteSelection } from "./../../../../../../../__generated__/globalTypes";
+import { VoteSelection } from './../../../../../../../__generated__/globalTypes';
 
 // ====================================================
 // GraphQL query operation: DeputyProcedures
 // ====================================================
 
 export interface DeputyProcedures_deputyProcedures_procedures_procedure_voteResults_partyVotes {
-  __typename: "PartyVote";
+  __typename: 'PartyVote';
   party: string;
-  main: VoteSelection | null;
+  main: VoteSelection;
 }
 
 export interface DeputyProcedures_deputyProcedures_procedures_procedure_voteResults {
-  __typename: "VoteResult";
+  __typename: 'VoteResult';
   governmentDecision: VoteSelection | null;
   yes: number | null;
   abstination: number | null;
@@ -25,7 +26,7 @@ export interface DeputyProcedures_deputyProcedures_procedures_procedure_voteResu
 }
 
 export interface DeputyProcedures_deputyProcedures_procedures_procedure_communityVotes {
-  __typename: "CommunityVotes";
+  __typename: 'CommunityVotes';
   yes: number | null;
   abstination: number | null;
   no: number | null;
@@ -33,11 +34,12 @@ export interface DeputyProcedures_deputyProcedures_procedures_procedure_communit
 }
 
 export interface DeputyProcedures_deputyProcedures_procedures_procedure {
-  __typename: "Procedure";
+  __typename: 'Procedure';
   _id: string;
   procedureId: string;
+  sessionTOPHeading: string | null;
   title: string;
-  subjectGroups: string[] | null;
+  subjectGroups: string[];
   voteDate: any | null;
   votedGovernment: boolean | null;
   submissionDate: any | null;
@@ -49,13 +51,13 @@ export interface DeputyProcedures_deputyProcedures_procedures_procedure {
 }
 
 export interface DeputyProcedures_deputyProcedures_procedures {
-  __typename: "DeputyProcedure";
+  __typename: 'DeputyProcedure';
   decision: VoteSelection;
   procedure: DeputyProcedures_deputyProcedures_procedures_procedure;
 }
 
 export interface DeputyProcedures_deputyProcedures {
-  __typename: "Deputy";
+  __typename: 'Deputy';
   totalProcedures: number | null;
   procedures: DeputyProcedures_deputyProcedures_procedures[];
 }

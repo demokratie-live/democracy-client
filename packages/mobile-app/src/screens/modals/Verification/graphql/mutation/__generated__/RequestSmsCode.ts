@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -7,7 +8,7 @@
 // ====================================================
 
 export interface RequestSmsCode_requestCode {
-  __typename: "CodeResult";
+  __typename: 'CodeResult';
   reason: string | null;
   allowNewUser: boolean | null;
   succeeded: boolean;
