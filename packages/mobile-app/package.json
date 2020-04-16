@@ -172,7 +172,7 @@
         "build": "cd android && ./gradlew assembleInternal assembleAndroidTest -DtestBuildType=debug --warning-mode=all && cd ..",
         "type": "android.emulator",
         "device": {
-          "avdName": "Pixel_2_API_28"
+          "avdName": "Nexus_5X_API_26"
         }
       },
       "android.emu.release": {
