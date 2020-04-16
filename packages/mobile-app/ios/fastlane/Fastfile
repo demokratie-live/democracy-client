@@ -21,6 +21,8 @@ package = load_json(json_path: "../../../package.json")
 
 version_number = package["version"]
 
+print("P TRAVIS_BRANCH" + ENV["TRAVIS_BRANCH"])
+
 scheme_name = "client"
 app_identifier = "de.democracy-deutschland.clientapp"
 if ENV["TRAVIS_BRANCH"] == 'alpha'
@@ -48,7 +50,8 @@ platform :ios do
         type: "appstore",
         keychain_name: tmp_keychain,
         keychain_password: tmp_keychain,
-        readonly: true
+        readonly: true,
+        skip_confirmation: true,
       )
     else	
       match(
