@@ -3,6 +3,13 @@ name: Linting project
 on: [push]
 
 jobs:
+  branch-name:
+    name: Get branch name
+    runs-on: macos-latest
+    steps:
+      - name: Print
+        run: echo ${{ github.ref }}
+
   lint:
     name: Lint Project
     runs-on: ubuntu-latest
@@ -75,8 +82,8 @@ jobs:
 
   build-ios:
     name: Build ios
-    # needs: test-ios
-    # if: github.ref == 'internal' || github.ref == 'alpha' || github.ref == 'beta'
+    needs: test-ios
+    if: github.ref == 'internal' || github.ref == 'alpha' || github.ref == 'beta'
     runs-on: macos-latest
     env:
       DEVELOPER_DIR: /Applications/Xcode_11.4.app/Contents/Developer
@@ -184,7 +191,7 @@ jobs:
 
   build-andriod:
     name: Build Android
-    # needs: test-android
+    needs: test-android
     if: github.ref == 'internal' || github.ref == 'alpha' || github.ref == 'beta'
     runs-on: ubuntu-latest
     steps:
