@@ -76,6 +76,10 @@ jobs:
   build-ios:
     name: Build ios
     needs: test-ios
+    if: |
+      ${{ github.ref }} == "internal" ||
+      ${{ github.ref }} == "alpha" ||
+      ${{ github.ref }} == "beta"
     runs-on: macos-latest
     env:
       DEVELOPER_DIR: /Applications/Xcode_11.4.app/Contents/Developer
@@ -113,7 +117,7 @@ jobs:
           lane: "ios beta"
           subdirectory: "packages/mobile-app/ios"
         env:
-          TRAVIS_BRANCH: internal
+          TRAVIS_BRANCH: ${{ github.ref }}
           TRAVIS: "true"
           MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
@@ -184,6 +188,10 @@ jobs:
   build-andriod:
     name: Build Android
     needs: test-android
+    if: |
+      ${{ github.ref }} == "internal" ||
+      ${{ github.ref }} == "alpha" ||
+      ${{ github.ref }} == "beta"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -210,13 +218,14 @@ jobs:
           echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
           echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
           echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.production.gpg
+
       - name: Fastlane
         uses: maierj/fastlane-action@v1.4.0
         with:
           lane: "android internal"
           subdirectory: "packages/mobile-app/android"
         env:
-          TRAVIS_BRANCH: internal
+          TRAVIS_BRANCH: ${{ github.ref }}
           TRAVIS: "true"
           ANDROID_PASS: ${{ secrets.ANDROID_PASS }}
           BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
