@@ -10,6 +10,8 @@ jobs:
       - name: Print
         run: echo ${{ github.ref }}
 
+      - run: echo ${GITHUB_REF##*/}
+
   lint:
     name: Lint Project
     runs-on: ubuntu-latest
