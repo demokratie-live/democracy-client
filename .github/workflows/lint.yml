@@ -6,7 +6,7 @@ jobs:
   branch-name:
     name: Get branch name
     runs-on: macos-latest
-    if: ${GITHUB_REF:11} == '2020/#1141-github-actions'
+    if: (${GITHUB_REF:11}) == '2020/#1141-github-actions'
     steps:
       - name: Print
         run: echo ${{ github.ref }}
