@@ -155,13 +155,17 @@ jobs:
       - name: Prepare minSdkVerson for Wix DETOX
         run: npx replace-in-file "minSdkVersion = 16" "minSdkVersion = 18" packages/mobile-app/android/build.gradle packages/mobile-ui/android/build.gradle
 
-      - name: install emulator
-        uses: reactivecircus/android-emulator-runner@v2
+      - name: Use specific Java version for sdkmanager to work
+        uses: joschi/setup-jdk@v1
         with:
-          api-level: 26
-          profile: Nexus 5X
-          script: ./gradlew connectedCheck
-          working-directory: packages/mobile-app/android
+          java-version: "openjdk8"
+          architecture: "x64"
+
+      - name: Download Android Emulator Image
+        run: |
+          echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-29;google_apis;x86"
+          echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd --force --name emu --device "Nexus 5X" -k 'system-images;android-29;google_apis;x86'
+          $ANDROID_HOME/emulator/emulator -list-avds
 
       - name: Build Test
         run: detox build -c android.emu.internal.debug
