@@ -228,7 +228,7 @@ jobs:
           echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.production.gpg
 
       - name: Prepare Fastlane metadata
-        run: ditto fastlane/metadata/${{ github.ref }} fastlane/metadata/android/de-DE/
+        run: ditto fastlane/metadata/${GITHUB_REF:11} fastlane/metadata/android/de-DE/
         working-directory: packages/mobile-app/android
 
       - name: Fastlane
