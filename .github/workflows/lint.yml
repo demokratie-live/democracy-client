@@ -75,51 +75,51 @@ jobs:
           name: Detox iOS
           path: packages/mobile-app/artifacts
 
-  build-ios:
-    name: Build ios
-    # needs: test-ios
-    runs-on: macos-latest
-    env:
-      DEVELOPER_DIR: /Applications/Xcode_11.4.app/Contents/Developer
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+  # build-ios:
+  #   name: Build ios
+  #   # needs: test-ios
+  #   runs-on: macos-latest
+  #   env:
+  #     DEVELOPER_DIR: /Applications/Xcode_11.4.app/Contents/Developer
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
 
-      - name: Setup NodeJS
-        uses: actions/setup-node@v1
-        with:
-          node-version: "12.x"
+  #     - name: Setup NodeJS
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: "12.x"
 
-      - run: yarn install
+  #     - run: yarn install
 
-      - run: pod install
-        working-directory: packages/mobile-app/ios
+  #     - run: pod install
+  #       working-directory: packages/mobile-app/ios
 
-      # install fastlane dependencies
-      - run: gem install bundler:1.17.3
+  #     # install fastlane dependencies
+  #     - run: gem install bundler:1.17.3
 
-      - name: Encrypt GPG secure files
-        run: |
-          brew install gnupg@1.4
-          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.internal.gpg
-          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
-          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
-          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.production.gpg
+  #     - name: Encrypt GPG secure files
+  #       run: |
+  #         brew install gnupg@1.4
+  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.internal.gpg
+  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
+  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
+  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.production.gpg
 
-      - name: Fix match prompt issue
-        run: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+  #     - name: Fix match prompt issue
+  #       run: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
 
-      - name: Fastlane
-        uses: maierj/fastlane-action@v1.4.0
-        with:
-          lane: "ios beta"
-          subdirectory: "packages/mobile-app/ios"
-        env:
-          TRAVIS_BRANCH: internal
-          TRAVIS: "true"
-          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
-          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
-          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+  #     - name: Fastlane
+  #       uses: maierj/fastlane-action@v1.4.0
+  #       with:
+  #         lane: "ios beta"
+  #         subdirectory: "packages/mobile-app/ios"
+  #       env:
+  #         TRAVIS_BRANCH: internal
+  #         TRAVIS: "true"
+  #         MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+  #         FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+  #         MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
 
   test-android:
     name: Test detox Android
@@ -155,12 +155,13 @@ jobs:
       - name: Prepare minSdkVerson for Wix DETOX
         run: npx replace-in-file "minSdkVersion = 16" "minSdkVersion = 18" packages/mobile-app/android/build.gradle packages/mobile-ui/android/build.gradle
 
-      - name: run tests
+      - name: install emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 26
           profile: Nexus 5X
           script: ./gradlew connectedCheck
+          working-directory: packages/mobile-app/android
 
       - name: Build Test
         run: detox build -c android.emu.internal.debug
@@ -170,44 +171,43 @@ jobs:
       - name: Run Test
         run: detox test -c android.emu.internal.debug
         working-directory: packages/mobile-app
-
-  build-andriod:
-    name: Build Android
-    # needs: test-android
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup NodeJS
-        uses: actions/setup-node@v1
-        with:
-          node-version: "12.x"
-      - run: yarn install
-      # install fastlane dependencies
-      - run: sudo gem install bundler:1.17.2
-      - name: Setup kernel for react native, increase watchers
-        run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-      - name: Encrypt GPG secure files
-        run: |
-          sudo apt-get install -y gnupg1
-          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/my-release-key.keystore.gpg
-          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/app/src/refactor/google-services.json.gpg
-          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/app/src/internal/google-services.json.gpg
-          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/app/src/alpha/google-services.json.gpg
-          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/app/google-services.json.gpg
-          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/democracy2-release-key.keystore.gpg
-          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.internal.gpg
-          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
-          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
-          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.production.gpg
-      - name: Fastlane
-        uses: maierj/fastlane-action@v1.4.0
-        with:
-          lane: "android internal"
-          subdirectory: "packages/mobile-app/android"
-        env:
-          TRAVIS_BRANCH: internal
-          TRAVIS: "true"
-          ANDROID_PASS: ${{ secrets.ANDROID_PASS }}
-          BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
-          BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+  # build-andriod:
+  #   name: Build Android
+  #   # needs: test-android
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #     - name: Setup NodeJS
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: "12.x"
+  #     - run: yarn install
+  #     # install fastlane dependencies
+  #     - run: sudo gem install bundler:1.17.2
+  #     - name: Setup kernel for react native, increase watchers
+  #       run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+  #     - name: Encrypt GPG secure files
+  #       run: |
+  #         sudo apt-get install -y gnupg1
+  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/my-release-key.keystore.gpg
+  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/app/src/refactor/google-services.json.gpg
+  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/app/src/internal/google-services.json.gpg
+  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/app/src/alpha/google-services.json.gpg
+  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/app/google-services.json.gpg
+  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/democracy2-release-key.keystore.gpg
+  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.internal.gpg
+  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
+  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
+  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.production.gpg
+  #     - name: Fastlane
+  #       uses: maierj/fastlane-action@v1.4.0
+  #       with:
+  #         lane: "android internal"
+  #         subdirectory: "packages/mobile-app/android"
+  #       env:
+  #         TRAVIS_BRANCH: internal
+  #         TRAVIS: "true"
+  #         ANDROID_PASS: ${{ secrets.ANDROID_PASS }}
+  #         BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+  #         BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
