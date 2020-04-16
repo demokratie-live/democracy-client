@@ -173,7 +173,7 @@ jobs:
         env:
           ANDROID_PASS: ${{ secrets.ANDROID_PASS }}
       - name: Run Test
-        run: detox test -c android.emu.internal.debug
+        run: yarn start & detox test -c android.emu.internal.debug
         working-directory: packages/mobile-app
   # build-andriod:
   #   name: Build Android
