@@ -127,7 +127,7 @@ jobs:
           lane: "ios beta"
           subdirectory: "packages/mobile-app/ios"
         env:
-          TRAVIS_BRANCH: ${GITHUB_REF:11}
+          TRAVIS_BRANCH: ${{ github.ref }}
           TRAVIS: "true"
           MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
