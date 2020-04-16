@@ -12,6 +12,10 @@ jobs:
 
       - run: echo ${GITHUB_REF:11}
 
+      - run: export CUR_BRANCH=${GITHUB_REF:11}
+
+      - run: echo $CUR_BRANCH
+
   lint:
     name: Lint Project
     runs-on: ubuntu-latest
@@ -123,7 +127,7 @@ jobs:
           lane: "ios beta"
           subdirectory: "packages/mobile-app/ios"
         env:
-          TRAVIS_BRANCH: ${GITHUB_REF:11}
+          TRAVIS_BRANCH: ${{ GITHUB_REF:11 }}
           TRAVIS: "true"
           MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
@@ -232,7 +236,7 @@ jobs:
           lane: "android internal"
           subdirectory: "packages/mobile-app/android"
         env:
-          TRAVIS_BRANCH: ${GITHUB_REF:11}
+          TRAVIS_BRANCH: ${{ GITHUB_REF:11 }}
           TRAVIS: "true"
           ANDROID_PASS: ${{ secrets.ANDROID_PASS }}
           BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}

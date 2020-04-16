@@ -23,8 +23,8 @@ version_number = package["version"]
 
 print("P TRAVIS_BRANCH" + ENV["TRAVIS_BRANCH"])
 
-scheme_name = "client"
-app_identifier = "de.democracy-deutschland.clientapp"
+scheme_name = "Refactor"
+app_identifier = "de.democracy-deutschland.clientapp.refactor"
 if ENV["TRAVIS_BRANCH"] == 'alpha'
   scheme_name = "Alpha"
   app_identifier = "de.democracy-deutschland.clientapp.alpha"
@@ -32,6 +32,10 @@ end
 if ENV["TRAVIS_BRANCH"] == 'internal'
   scheme_name = "Internal"
   app_identifier = "de.democracy-deutschland.clientapp.internal"
+end
+if ENV["TRAVIS_BRANCH"] == 'master'
+  scheme_name = "client"
+  app_identifier = "de.democracy-deutschland.clientapp"
 end
 
 platform :ios do
