@@ -246,6 +246,8 @@ jobs:
           echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
           echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
           echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.production.gpg
+
+      # TODO ditto path seems to be wrong
       - name: Prepare Fastlane metadata
         run: ditto fastlane/metadata/$GITHUB_REF_NAME fastlane/metadata/android/de-DE/
         working-directory: packages/mobile-app/android
