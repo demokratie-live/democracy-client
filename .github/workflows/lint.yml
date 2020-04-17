@@ -226,13 +226,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
       - name: Setup NodeJS
         uses: actions/setup-node@v1
         with:
           node-version: "12.x"
+
       - run: yarn install
       # install fastlane dependencies
+
       - run: sudo gem install bundler:1.17.3
+
       - name: Encrypt GPG secure files
         run: |
           brew install gnupg@1.4
@@ -246,11 +250,17 @@ jobs:
           echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
           echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
           echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.production.gpg
+
       - name: Prepare Fastlane metadata
         run: ditto fastlane/metadata/${GITHUB_REF:11} fastlane/metadata/android/de-DE/
         working-directory: packages/mobile-app/android
+
       - run: ls -l fastlane/metadata/${GITHUB_REF:11}
+        working-directory: packages/mobile-app/android
+
       - run: pwd fastlane/metadata/${GITHUB_REF:11}
+        working-directory: packages/mobile-app/android
+
       - name: Fastlane
         uses: maierj/fastlane-action@v1.4.0
         with:
