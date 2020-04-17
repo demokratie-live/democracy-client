@@ -12,6 +12,8 @@ jobs:
 
       - run: echo ${GITHUB_REF:11}
 
+      - run: echo ${{GITHUB_REF:11}}
+
       - run: export CUR_BRANCH=${GITHUB_REF:11}
 
       - run: echo $CUR_BRANCH
