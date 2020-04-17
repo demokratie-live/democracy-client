@@ -29,6 +29,6 @@ describe('Example', () => {
       // android fallback
     }
     // await waitFor(element(by.id('ListView'))).toBeVisible();
-    await expect(element(by.id('NoConferenceWeekData'))).toBeVisible();
+    await expect(element(by.id('PagerNextButton'))).toBeNotVisible();
   });
 });
