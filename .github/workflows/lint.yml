@@ -190,7 +190,9 @@ jobs:
 
       - run: ls -l $ANDROID_HOME/emulator/emulator
 
-      - run: ls -l ~/.android/avd
+      - run: ls -l ~/.android/avd/emu.avd
+
+      - run: cat ~/.android/avd/emu.avd/config.ini
 
       - name: Build Test
         run: detox build -c android.emu.internal.debug
