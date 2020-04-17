@@ -190,6 +190,8 @@ jobs:
 
       - run: ls -l $ANDROID_HOME/emulator/emulator
 
+      - run: ls -l ~/.android/avd
+
       - name: Build Test
         run: detox build -c android.emu.internal.debug
         working-directory: packages/mobile-app
