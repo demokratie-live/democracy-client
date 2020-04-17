@@ -216,12 +216,6 @@ jobs:
           name: Detox Android
           path: packages/mobile-app/artifacts
 
-      - uses: actions/upload-artifact@v1
-        if: always()
-        with:
-          name: Detox Android Build
-          path: packages/mobile-app/android/app/build/outputs/apk/internal/debug/app-internal-debug.apk
-
   build-andriod:
     name: Build Android
     needs: test-android
