@@ -149,7 +149,7 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        sdk: [28, 29]
+        sdk: [29]
         device: ["Nexus 5X", "Nexus 10", "Nexus One"]
     steps:
       - name: Checkout
