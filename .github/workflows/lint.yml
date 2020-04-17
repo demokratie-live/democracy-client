@@ -223,7 +223,7 @@ jobs:
           path: packages/mobile-app/android/app/build/outputs/apk/internal/debug/app-internal-debug.apk
 
   test-android-fast:
-    name: Test detox Android
+    name: Test detox Android FAST
     # needs: lint
     runs-on: macos-latest
     steps:
