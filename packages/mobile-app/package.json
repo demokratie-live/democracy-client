@@ -103,7 +103,7 @@
     "@types/styled-components": "^4.4.3",
     "@typescript-eslint/eslint-plugin": "^2.19.2",
     "@typescript-eslint/parser": "^2.19.2",
-    "babel-jest": "24.9.0",
+    "babel-jest": "25.3.0",
     "cross-env": "^7.0.0",
     "detox": "^16.1.1",
     "eslint": "^6.8.0",
@@ -118,7 +118,7 @@
     "eslint-plugin-react-hooks": "^2.3.0",
     "eslint-plugin-react-native": "^3.8.1",
     "husky": "^3.1.0",
-    "jest": "^24.9.0",
+    "jest": "^25.3.0",
     "lint-staged": "^9.5.0",
     "metro-react-native-babel-preset": "0.56.0",
     "patch-package": "^6.2.2",
@@ -127,7 +127,7 @@
     "react-native-clean-project": "^3.3.0",
     "react-native-testing-library": "^1.12.0",
     "react-test-renderer": "16.9.0",
-    "ts-jest": "^24.3.0",
+    "ts-jest": "^25.4.0",
     "typescript": "^3.8.3"
   },
   "detox": {
@@ -168,6 +168,14 @@
         "device": {
           "type": "iPhone 11",
           "os": "13.4"
+        }
+      },
+      "android.emu.internal.local": {
+        "binaryPath": "android/app/build/outputs/apk/internal/debug/app-internal-debug.apk",
+        "build": "cd android && ./gradlew assembleInternal assembleAndroidTest -DtestBuildType=debug --warning-mode=all && cd ..",
+        "type": "android.emulator",
+        "device": {
+          "avdName": "Pixel_2_API_28"
         }
       },
       "android.emu.internal.debug": {
