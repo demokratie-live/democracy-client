@@ -173,7 +173,6 @@ jobs:
           echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.production.gpg
           cp packages/mobile-app/.env.internal packages/mobile-app/.env
           cp packages/mobile-app/.env.internal packages/mobile-app/.env.development
-
       - name: Prepare minSdkVerson for Wix DETOX
         run: npx replace-in-file "minSdkVersion = 16" "minSdkVersion = 18" packages/mobile-app/android/build.gradle packages/mobile-ui/android/build.gradle
 
@@ -186,10 +185,8 @@ jobs:
       - name: Download Android Emulator Image
         run: |
           echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-28;google_apis;x86"
-          echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd -n Pixel_API_28_AOSP --name emu -d pixel --package "system-images;android-28;default;x86_64"
+          echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd --force --name emu --device "Nexus 5X" -k 'system-images;android-28;google_apis;x86'
           $ANDROID_HOME/emulator/emulator -list-avds
-      # echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd --force --name emu --device "Nexus 5X" -k 'system-images;android-28;google_apis;x86'
-
       - name: Build Test
         run: detox build -c android.emu.internal.debug
         working-directory: packages/mobile-app
