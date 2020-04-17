@@ -147,6 +147,10 @@ jobs:
     name: Test detox Android
     needs: lint
     runs-on: macos-latest
+    strategy:
+      matrix:
+        sdk: [28, 29]
+        device: ["Nexus 5X", "Nexus 10", "Nexus One"]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -186,8 +190,8 @@ jobs:
 
       - name: Download Android Emulator Image
         run: |
-          echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-28;google_apis;x86"
-          echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd --force --name emu --device "Nexus 5X" -k 'system-images;android-28;google_apis;x86'
+          echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-${{ matrix.sdk }};google_apis;x86"
+          echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd --force --name emu --device "${{ matrix.device }}" -k 'system-images;android-${{ matrix.sdk }};google_apis;x86'
           $ANDROID_HOME/emulator/emulator -list-avds
 
       - run: ls -l $ANDROID_HOME/emulator/emulator
@@ -215,7 +219,7 @@ jobs:
       - uses: actions/upload-artifact@v1
         if: always()
         with:
-          name: Detox Android
+          name: Detox Android (${{ matrix.sdk }} - ${{ matrix.device }})
           path: packages/mobile-app/artifacts
 
   build-andriod:
