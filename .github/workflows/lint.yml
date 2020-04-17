@@ -192,6 +192,12 @@ jobs:
 
       - run: ls -l ~/.android/avd/emu.avd
 
+      - name: edit emulator config
+        run: |
+          echo "hw.ramSize=4096" >> ~/.android/avd/emu.avd/config.ini
+          echo "vm.heapSize=576" >> ~/.android/avd/emu.avd/config.ini
+          echo "disk.dataPartition.size=2048M" >> ~/.android/avd/emu.avd/config.ini
+
       - run: cat ~/.android/avd/emu.avd/config.ini
 
       - name: Build Test
