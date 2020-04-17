@@ -22,7 +22,8 @@
     "lint": " yarn lint:ts && yarn lint:eslint",
     "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx}'",
     "format:check": "prettier -c 'src/**/*.{ts,tsx,js,jsx}'",
-    "pods": "cd ios && pod install && cd .."
+    "pods": "cd ios && pod install && cd ..",
+    "postinstall": "patch-package"
   },
   "workspaces": {
     "nohoist": [
@@ -120,6 +121,8 @@
     "jest": "^24.9.0",
     "lint-staged": "^9.5.0",
     "metro-react-native-babel-preset": "0.56.0",
+    "patch-package": "^6.2.2",
+    "postinstall-postinstall": "^2.1.0",
     "prettier": "^1.19.1",
     "react-native-clean-project": "^3.3.0",
     "react-native-testing-library": "^1.12.0",
