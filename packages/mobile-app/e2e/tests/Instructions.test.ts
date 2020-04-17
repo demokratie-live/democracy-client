@@ -17,14 +17,6 @@ describe('Example', () => {
     await expect(element(by.id('PagerNextButton'))).toBeVisible();
   });
 
-  // it('should have welcome screen', async () => {
-  //   await element(by.text('Weiter')).tap();
-  //   await element(by.text('Weiter')).tap();
-  //   await element(by.text('Weiter')).tap();
-  //   await element(by.text('Weiter')).tap();
-  //   await expect(element(by.text('Vergleiche'))).toBeVisible();
-  // });
-
   it('click throw all screens', async () => {
     await element(by.id('PagerNextButton')).tap();
     await element(by.id('PagerNextButton')).tap();
@@ -37,15 +29,6 @@ describe('Example', () => {
       // android fallback
     }
     await waitFor(element(by.id('ListView'))).toBeVisible();
+    await expect(element(by.id('ListView'))).toBeVisible();
   });
-
-  // it('should show hello screen after tap', async () => {
-  //   await element(by.id('hello_button')).tap();
-  //   await expect(element(by.text('Hello!!!'))).toBeVisible();
-  // });
-
-  // it('should show world screen after tap', async () => {
-  //   await element(by.id('world_button')).tap();
-  //   await expect(element(by.text('World!!!'))).toBeVisible();
-  // });
 });
