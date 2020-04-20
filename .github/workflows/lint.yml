@@ -215,6 +215,7 @@ jobs:
 
       - name: ANR Fix
         run: ./e2e/android-anr-fix.sh & exit
+        working-directory: packages/mobile-app
 
       - name: Run Test
         run: |
