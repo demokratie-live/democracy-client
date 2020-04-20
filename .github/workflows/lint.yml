@@ -214,7 +214,7 @@ jobs:
           ANDROID_PASS: ${{ secrets.ANDROID_PASS }}
 
       - name: Run Test
-        run: ./.travis/android-anr-fix.sh & yarn start & detox test -c android.emu.internal.debug --record-videos all --loglevel trace
+        run: ./e2e/android-anr-fix.sh & yarn start & detox test -c android.emu.internal.debug --record-videos all --loglevel trace
         working-directory: packages/mobile-app
 
       - uses: actions/upload-artifact@v1
