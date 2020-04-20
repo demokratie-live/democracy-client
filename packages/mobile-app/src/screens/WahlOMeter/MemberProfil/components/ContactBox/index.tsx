@@ -58,29 +58,38 @@ class ContactBox extends React.PureComponent<Props> {
 
       case 'facebook':
       case 'Facebook':
+      var regex = /(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:#!\/)?@?([^\/\?\s]*)/;
+      var user = regex.exec(url);
         return (
           <ServiceWrapper key={url}>
             <IconWrapper onPress={linking(url)}>
               <FacebookIcon width={40} height={40} color="#000" />
             </IconWrapper>
+            <Domain>{user[1]}</Domain>
           </ServiceWrapper>
         );
       case 'twitter':
       case 'Twitter':
+      var regex = /(?:https?:\/\/)?(?:www\.)?twitter\.com\/(?:#!\/)?@?([^\/\?\s]*)/;
+      var user = regex.exec(url);
         return (
           <ServiceWrapper key={url}>
             <IconWrapper onPress={linking(url)}>
               <TwitterIcon width={40} height={40} color="#000" />
             </IconWrapper>
+            <Domain>{user[1]}</Domain>
           </ServiceWrapper>
         );
       case 'instagram':
       case 'Instagram':
+      var regex = /(?:https?:\/\/)?(?:www\.)?instagram\.com\/(?:#!\/)?@?([^\/\?\s]*)/;
+      var user = regex.exec(url);
         return (
           <ServiceWrapper key={url}>
             <IconWrapper onPress={linking(url)}>
               <InstagramIcon width={40} height={40} color="#000" />
             </IconWrapper>
+            <Domain>{user[1]}</Domain>
           </ServiceWrapper>
         );
 
