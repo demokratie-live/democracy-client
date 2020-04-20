@@ -179,6 +179,7 @@ jobs:
           echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.production.gpg
           cp packages/mobile-app/.env.internal packages/mobile-app/.env
           cp packages/mobile-app/.env.internal packages/mobile-app/.env.development
+
       - name: Prepare minSdkVerson for Wix DETOX
         run: npx replace-in-file "minSdkVersion = 16" "minSdkVersion = 18" packages/mobile-app/android/build.gradle packages/mobile-ui/android/build.gradle
 
@@ -211,6 +212,8 @@ jobs:
         working-directory: packages/mobile-app
         env:
           ANDROID_PASS: ${{ secrets.ANDROID_PASS }}
+
+      - run: ./.travis/android-anr-fix.sh
 
       - name: Run Test
         run: yarn start & detox test -c android.emu.internal.debug --record-videos all --loglevel trace
