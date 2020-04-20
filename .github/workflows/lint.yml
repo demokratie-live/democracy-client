@@ -145,7 +145,7 @@ jobs:
 
   test-android:
     name: Test detox Android
-    # needs: lint
+    needs: lint
     runs-on: macos-latest
     strategy:
       matrix:
