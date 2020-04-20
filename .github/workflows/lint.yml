@@ -46,55 +46,55 @@ jobs:
         with:
           commit_message: Action – commit autofix changes
 
-  test-ios:
-    name: Test detox ios
-    needs: lint
-    runs-on: macos-latest
-    env:
-      DEVELOPER_DIR: /Applications/Xcode_11.4.app/Contents/Developer
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+  # test-ios:
+  #   name: Test detox ios
+  #   needs: lint
+  #   runs-on: macos-latest
+  #   env:
+  #     DEVELOPER_DIR: /Applications/Xcode_11.4.app/Contents/Developer
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
 
-      - name: Setup NodeJS
-        uses: actions/setup-node@v1
-        with:
-          node-version: "12.x"
+  #     - name: Setup NodeJS
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: "12.x"
 
-      - run: yarn install
+  #     - run: yarn install
 
-      - name: Prepare Detox
-        run: |
-          brew tap wix/brew
-          brew install applesimutils
+  #     - name: Prepare Detox
+  #       run: |
+  #         brew tap wix/brew
+  #         brew install applesimutils
 
-      - name: list devices
-        run: applesimutils --list
+  #     - name: list devices
+  #       run: applesimutils --list
 
-      - run: pod install
-        working-directory: packages/mobile-app/ios
+  #     - run: pod install
+  #       working-directory: packages/mobile-app/ios
 
-      - name: Encrypt GPG secure files
-        run: |
-          brew install gnupg@1.4
-          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.internal.gpg
-          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
-          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
-          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.production.gpg
+  #     - name: Encrypt GPG secure files
+  #       run: |
+  #         brew install gnupg@1.4
+  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.internal.gpg
+  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
+  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
+  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.production.gpg
 
-      - run: npm install -g detox-cli
+  #     - run: npm install -g detox-cli
 
-      - run: FORCE_BUNDLING=true detox build -c ios.sim.debug
-        working-directory: packages/mobile-app
+  #     - run: FORCE_BUNDLING=true detox build -c ios.sim.debug
+  #       working-directory: packages/mobile-app
 
-      - run: detox test -c ios.sim.debug --record-videos all
-        working-directory: packages/mobile-app
+  #     - run: detox test -c ios.sim.debug --record-videos all
+  #       working-directory: packages/mobile-app
 
-      - uses: actions/upload-artifact@v1
-        if: always()
-        with:
-          name: Detox iOS
-          path: packages/mobile-app/artifacts
+  #     - uses: actions/upload-artifact@v1
+  #       if: always()
+  #       with:
+  #         name: Detox iOS
+  #         path: packages/mobile-app/artifacts
 
   build-ios:
     name: Build ios
@@ -145,7 +145,7 @@ jobs:
 
   test-android:
     name: Test detox Android
-    needs: lint
+    # needs: lint
     runs-on: macos-latest
     strategy:
       matrix:
@@ -213,10 +213,8 @@ jobs:
         env:
           ANDROID_PASS: ${{ secrets.ANDROID_PASS }}
 
-      - run: ./.travis/android-anr-fix.sh
-
       - name: Run Test
-        run: yarn start & detox test -c android.emu.internal.debug --record-videos all --loglevel trace
+        run: ./.travis/android-anr-fix.sh & yarn start & detox test -c android.emu.internal.debug --record-videos all --loglevel trace
         working-directory: packages/mobile-app
 
       - uses: actions/upload-artifact@v1
