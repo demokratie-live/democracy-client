@@ -21,7 +21,7 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
-  - Permission-Notifications (2.1.1):
+  - Permission-Notifications (2.1.2):
     - RNPermissions
   - RCTRequired (0.61.5)
   - RCTTypeSafety (0.61.5):
@@ -243,11 +243,11 @@ PODS:
     - React
   - RNKeychain (4.0.5):
     - React
-  - RNPermissions (2.1.1):
+  - RNPermissions (2.1.2):
     - React
   - RNReanimated (1.8.0):
     - React
-  - RNScreens (2.4.0):
+  - RNScreens (2.5.0):
     - React
   - RNSearchBar (3.5.1):
     - React
@@ -418,7 +418,7 @@ SPEC CHECKSUMS:
   FBReactNativeSpec: 118d0d177724c2d67f08a59136eb29ef5943ec75
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
-  Permission-Notifications: ce3c8648a2dd45af1d8daca246e37f141436b650
+  Permission-Notifications: 2f2ff1d01fe7677c3858c8f0a0bd3f3accdbb6bb
   RCTRequired: b153add4da6e7dbc44aebf93f3cf4fcae392ddf1
   RCTTypeSafety: 9aa1b91d7f9310fc6eadc3cf95126ffe818af320
   React: b6a59ef847b2b40bb6e0180a97d0ca716969ac78
@@ -449,9 +449,9 @@ SPEC CHECKSUMS:
   RNDeviceInfo: d2ca97023bb1c2a49cd7adb3f956e14c048ea028
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNKeychain: 840f8e6f13be0576202aefcdffd26a4f54bfe7b5
-  RNPermissions: 18cf517660d0247a4b66d21b6f85272fd1870cd2
+  RNPermissions: a96580116f7894146552e92b000ac30bf1661947
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
-  RNScreens: b5c0e1b2b04512919e78bd3898e144a157ce2363
+  RNScreens: ac02d0e4529f08ced69f5580d416f968a6ec3a1d
   RNSearchBar: 9860431356b7d12a8449d2fddb2b5f3c78d1e99f
   RNSentry: 370623102247ebea20191b5fb549ecc7a275b324
   RNSha256: c6f68c850bf8315c95e2508667e8c908bd9f8487
