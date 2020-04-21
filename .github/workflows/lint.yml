@@ -34,11 +34,13 @@ jobs:
 
       - name: Run ESLint on UI
         run: yarn workspace @democracy-deutschland/mobile-ui lint:eslint
+
       - name: Run TSLint on UI
         run: yarn workspace @democracy-deutschland/mobile-ui lint:ts
 
       - name: Run ESLint on App
         run: yarn workspace app lint:eslint
+
       - name: Run TSLint on App
         run: yarn workspace app lint:ts
 
