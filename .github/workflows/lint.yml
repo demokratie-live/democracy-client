@@ -96,53 +96,6 @@ jobs:
           name: Detox iOS
           path: packages/mobile-app/artifacts
 
-  build-ios:
-    name: Build ios
-    needs: test-ios
-    if: github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta'
-    runs-on: macos-latest
-    env:
-      DEVELOPER_DIR: /Applications/Xcode_11.4.app/Contents/Developer
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Setup NodeJS
-        uses: actions/setup-node@v1
-        with:
-          node-version: "12.x"
-
-      - run: yarn install
-
-      - run: pod install
-        working-directory: packages/mobile-app/ios
-
-      # install fastlane dependencies
-      - run: gem install bundler:1.17.3
-
-      - name: Encrypt GPG secure files
-        run: |
-          brew install gnupg@1.4
-          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.internal.gpg
-          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
-          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
-          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.production.gpg
-
-      - name: Fix match prompt issue
-        run: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
-
-      - name: Fastlane
-        uses: maierj/fastlane-action@v1.4.0
-        with:
-          lane: "ios beta"
-          subdirectory: "packages/mobile-app/ios"
-        env:
-          TRAVIS_BRANCH: ${{ github.ref }}
-          TRAVIS: "true"
-          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
-          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
-          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-
   test-android:
     name: Test detox Android
     needs: lint
@@ -226,9 +179,56 @@ jobs:
           name: Detox Android (${{ matrix.sdk }} - ${{ matrix.device }})
           path: packages/mobile-app/artifacts
 
+  build-ios:
+    name: Build ios
+    needs: [test-ios, test-android]
+    if: github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta'
+    runs-on: macos-latest
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_11.4.app/Contents/Developer
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+
+      - run: yarn install
+
+      - run: pod install
+        working-directory: packages/mobile-app/ios
+
+      # install fastlane dependencies
+      - run: gem install bundler:1.17.3
+
+      - name: Encrypt GPG secure files
+        run: |
+          brew install gnupg@1.4
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.internal.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.production.gpg
+
+      - name: Fix match prompt issue
+        run: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+
+      - name: Fastlane
+        uses: maierj/fastlane-action@v1.4.0
+        with:
+          lane: "ios beta"
+          subdirectory: "packages/mobile-app/ios"
+        env:
+          TRAVIS_BRANCH: ${{ github.ref }}
+          TRAVIS: "true"
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+
   build-andriod:
     name: Build Android
-    needs: test-android
+    needs: [test-ios, test-android]
     if: github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta'
     runs-on: macos-latest
     steps:
