@@ -196,6 +196,12 @@ Copyright © 2017-present DEMOCRACY Deutschland e.V.. This source code is licens
   <tbody>
 </table>
 
+## Toolset
+
+<img src="http://www.browserstack.com/images/layout/browserstack-logo-600x315.png" width="280"/>
+
+[BrowserStack](http://www.browserstack.com) is supporting DEMOCRACY, allowing us to use their service. Thank you for supporting the open source community! ❤️
+
 ---
 
 Made with ♥ by Team DEMOCRACY ([democracy-deutschland.de](https://www.democracy-deutschland.de)), [startnext contributors](https://www.startnext.com/democracy/unterstuetzer/) and [contributors](https://github.com/demokratie-live/democracy-client/graphs/contributors)
