@@ -159,6 +159,9 @@ jobs:
           echo "hw.ramSize=4096" >> ~/.android/avd/emu.avd/config.ini
           echo "vm.heapSize=576" >> ~/.android/avd/emu.avd/config.ini
           echo "disk.dataPartition.size=2048M" >> ~/.android/avd/emu.avd/config.ini
+          echo "fastboot.forceColdBoot=no" >> ~/.android/avd/emu.avd/config.ini
+          echo "fastboot.forceFastBoot=yes" >> ~/.android/avd/emu.avd/config.ini
+          echo "saveOnExit=true" >> ~/.android/avd/quickbootChoice.ini
 
       - run: cat ~/.android/avd/emu.avd/config.ini
 
