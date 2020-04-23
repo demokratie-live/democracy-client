@@ -1,4 +1,4 @@
-import { by, device, expect, element, init, waitFor } from 'detox';
+import { by, device, expect, element, init } from 'detox';
 const config = require('../../package.json').detox;
 
 describe('Example', () => {
@@ -23,7 +23,6 @@ describe('Example', () => {
     await element(by.id('PagerNextButton')).tap();
     await element(by.id('PagerNextButton')).tap();
     await element(by.id('PagerNextButton')).tap();
-    // await waitFor(element(by.id('ListView'))).toBeVisible();
     await expect(element(by.id('PagerNextButton'))).toBeNotVisible();
   });
 });
