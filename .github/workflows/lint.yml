@@ -1,23 +1,8 @@
-name: Linting project
+name: Test & Deploy
 
 on: [push]
 
 jobs:
-  branch-name:
-    name: Get branch name
-    runs-on: macos-latest
-    env:
-      BRANCH_NAME: ${GITHUB_REF:11}
-    steps:
-      - name: Print
-        run: echo ${{ github.ref }}
-
-      - run: echo ${GITHUB_REF:11}
-
-      - run: export CUR_BRANCH=${GITHUB_REF:11}
-
-      - run: echo $CUR_BRANCH
-
   lint:
     name: Lint Project
     runs-on: ubuntu-latest
@@ -150,10 +135,6 @@ jobs:
           echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd --force --name emu --device "${{ matrix.device }}" -k 'system-images;android-${{ matrix.sdk }};google_apis;x86'
           $ANDROID_HOME/emulator/emulator -list-avds
 
-      - run: ls -l $ANDROID_HOME/emulator/emulator
-
-      - run: ls -l ~/.android/avd/emu.avd
-
       - name: edit emulator config
         run: |
           echo "hw.ramSize=4096" >> ~/.android/avd/emu.avd/config.ini
@@ -163,7 +144,9 @@ jobs:
           echo "fastboot.forceFastBoot=yes" >> ~/.android/avd/emu.avd/config.ini
           echo "saveOnExit=true" >> ~/.android/avd/quickbootChoice.ini
 
-      - run: cat ~/.android/avd/emu.avd/config.ini
+      - run: |
+          cat ~/.android/avd/emu.avd/config.ini
+          cat ~/.android/avd/quickbootChoice.ini
 
       - name: Build Test
         run: detox build -c android.emu.internal.debug
@@ -246,7 +229,6 @@ jobs:
           node-version: "12.x"
 
       - run: yarn install
-      # install fastlane dependencies
 
       - run: sudo gem install bundler:1.17.3
 
