@@ -90,7 +90,7 @@ jobs:
     strategy:
       matrix:
         sdk: [29]
-        device: ["Nexus 5X", "Nexus 10", "Nexus One"]
+        device: ["Nexus 5X"]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
