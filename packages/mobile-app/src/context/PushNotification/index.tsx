@@ -20,7 +20,7 @@ export const PushNotificationContext = createContext<PushNotificationInterface>(
 );
 
 export const PushNotificationProvider: React.FC = ({ children }) => {
-  const [initialNotification, setInitialNotification] = useState();
+  const [initialNotification, setInitialNotification] = useState<any>();
 
   // Register initial app open push data
   useEffect(() => {

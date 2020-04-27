@@ -21,15 +21,21 @@ package = load_json(json_path: "../../../package.json")
 
 version_number = package["version"]
 
-scheme_name = "client"
-app_identifier = "de.democracy-deutschland.clientapp"
-if ENV["TRAVIS_BRANCH"] == 'alpha'
+print("P TRAVIS_BRANCH" + ENV["TRAVIS_BRANCH"])
+
+scheme_name = "Refactor"
+app_identifier = "de.democracy-deutschland.clientapp.refactor"
+if ENV["TRAVIS_BRANCH"] == 'refs/heads/alpha'
   scheme_name = "Alpha"
   app_identifier = "de.democracy-deutschland.clientapp.alpha"
 end
-if ENV["TRAVIS_BRANCH"] == 'internal'
+if ENV["TRAVIS_BRANCH"] == 'refs/heads/internal'
   scheme_name = "Internal"
   app_identifier = "de.democracy-deutschland.clientapp.internal"
+end
+if ENV["TRAVIS_BRANCH"] == 'refs/heads/master'
+  scheme_name = "client"
+  app_identifier = "de.democracy-deutschland.clientapp"
 end
 
 platform :ios do
@@ -48,7 +54,8 @@ platform :ios do
         type: "appstore",
         keychain_name: tmp_keychain,
         keychain_password: tmp_keychain,
-        readonly: true
+        readonly: true,
+        skip_confirmation: true,
       )
     else	
       match(

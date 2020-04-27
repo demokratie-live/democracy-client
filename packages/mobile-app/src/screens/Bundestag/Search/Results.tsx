@@ -211,6 +211,11 @@ export const Results: React.FC<Props> = ({ searchBarRef }) => {
                 {title === 'Ergebnisse' && isProcedureGuard(item) && (
                   <ListItem
                     {...item}
+                    subline={
+                      item.sessionTOPHeading
+                        ? item.sessionTOPHeading
+                        : item.subjectGroups.join(', ')
+                    }
                     votes={
                       item.communityVotes ? item.communityVotes.total || 0 : 0
                     }
