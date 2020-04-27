@@ -41,7 +41,7 @@ export const NoConferenceWeekData = () => {
   const navigation = useNavigation();
   const { notificationSettings } = useContext(NotificationsContext);
   return (
-    <Container>
+    <Container testID={'NoConferenceWeekData'}>
       <IconWrapper>
         <SvgConferenceWeekPlaceholder width={150} height={150} color="#000" />
       </IconWrapper>

@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 import { VoteSelection } from './../../../../../../__generated__/globalTypes';
@@ -36,13 +37,14 @@ export interface VotedProcedures_proceduresByIdHavingVoteResults_procedures {
   __typename: 'Procedure';
   _id: string;
   procedureId: string;
+  sessionTOPHeading: string | null;
   title: string;
   tags: (string | null)[] | null;
   voteDate: any | null;
   votedGovernment: boolean | null;
   submissionDate: any | null;
   completed: boolean | null;
-  subjectGroups: string[] | null;
+  subjectGroups: string[];
   voted: boolean;
   type: string;
   voteResults: VotedProcedures_proceduresByIdHavingVoteResults_procedures_voteResults | null;
