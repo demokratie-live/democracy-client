@@ -173,7 +173,7 @@ jobs:
     if: github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta'
     runs-on: macos-latest
     env:
-      DEVELOPER_DIR: /Applications/Xcode_11.4.app/Contents/Developer
+      DEVELOPER_DIR: /Applications/Xcode_11.4.1.app/Contents/Developer
     steps:
       - name: Checkout
         uses: actions/checkout@v2

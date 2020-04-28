@@ -56,6 +56,7 @@ export const PhonenumberInput: React.FC<Props> = ({
         value={phoneNumber}
         textContentType="telephoneNumber"
         underlineColorAndroid="transparent"
+        testID="VerificationPhoneInput"
       />
     </Container>
   );

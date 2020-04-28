@@ -7,6 +7,7 @@ describe('Example', () => {
       await init(config);
     }
     // await device.reloadReactNative();
+    await device.launchApp({ newInstance: true });
   });
 
   it('should have introduction screen', async () => {
