@@ -9,11 +9,11 @@ describe('Verification', () => {
     await device.launchApp({ delete: true });
 
     // click throw instructions
-    await element(by.id('PagerNextButton')).tap();
-    await element(by.id('PagerNextButton')).tap();
-    await element(by.id('PagerNextButton')).tap();
-    await element(by.id('PagerNextButton')).tap();
-    await element(by.id('PagerNextButton')).tap();
+    try {
+      while (true) {
+        await element(by.id('PagerNextButton')).tap();
+      }
+    } catch (e) {}
   });
 
   it('Szenario 1: Verifizieren via BurgerMenu/Profil', async () => {

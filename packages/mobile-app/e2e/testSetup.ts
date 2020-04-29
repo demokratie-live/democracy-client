@@ -17,11 +17,7 @@ jasmine.getEnv().addReporter(specReporter);
 jasmine.getEnv().addReporter(assignReporter);
 
 beforeAll(async () => {
-  await init(config, { launchApp: true, initGlobals: false });
-  await device.launchApp({
-    newInstance: true,
-    launchArgs: { detoxPrintBusyIdleResources: 'YES' },
-  });
+  await init(config, { initGlobals: false });
 });
 
 beforeEach(async () => {

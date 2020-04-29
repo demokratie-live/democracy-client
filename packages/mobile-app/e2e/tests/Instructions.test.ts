@@ -1,29 +1,20 @@
 import { by, device, expect, element, init } from 'detox';
 const config = require('../../package.json').detox;
 
-describe('Example', () => {
+describe('Instructions', () => {
   beforeEach(async () => {
     if (typeof device === 'undefined') {
       await init(config);
     }
-    // await device.reloadReactNative();
-    await device.launchApp({ newInstance: true });
-  });
-
-  it('should have introduction screen', async () => {
-    await expect(element(by.id('Introduction'))).toBeVisible();
-  });
-
-  it('should have introduction nex button', async () => {
-    await expect(element(by.id('PagerNextButton'))).toBeVisible();
+    await device.launchApp({ delete: true });
   });
 
   it('click throw all screens', async () => {
-    await element(by.id('PagerNextButton')).tap();
-    await element(by.id('PagerNextButton')).tap();
-    await element(by.id('PagerNextButton')).tap();
-    await element(by.id('PagerNextButton')).tap();
-    await element(by.id('PagerNextButton')).tap();
+    try {
+      while (true) {
+        await element(by.id('PagerNextButton')).tap();
+      }
+    } catch (e) {}
     await expect(element(by.id('PagerNextButton'))).toBeNotVisible();
   });
 });
