@@ -51,6 +51,9 @@ describe('Verification', () => {
     await element(by.id('BurgerMenuButton')).tap();
 
     await element(by.text('Settings')).tap();
+    await waitFor(element(by.id('Verifizieren')))
+      .toBeVisible()
+      .withTimeout(10000);
     await element(by.id('Verifizieren')).tap();
 
     await waitFor(element(by.id('StartVerificationButton')))
