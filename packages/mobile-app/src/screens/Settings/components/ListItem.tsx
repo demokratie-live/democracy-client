@@ -51,6 +51,7 @@ export interface Props {
   onPress: () => void;
   component?: ReactNode;
   description?: string;
+  testID?: string;
 }
 
 export const ListItem: React.FC<Props> = ({
@@ -60,10 +61,11 @@ export const ListItem: React.FC<Props> = ({
   onPress,
   component,
   description,
+  testID,
 }) => {
   return (
     <>
-      <Wrapper onPress={onPress}>
+      <Wrapper onPress={onPress} testID={testID}>
         {children}
         {!!text && <Value arrow={arrow}>{text}</Value>}
         {!!arrow && <Arrow />}

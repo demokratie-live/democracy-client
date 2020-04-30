@@ -1,6 +1,12 @@
 import { by, device, expect, element, init, waitFor } from 'detox';
 const config = require('../../package.json').detox;
 
+const getRandomNumber = () => {
+  const min = 111111111;
+  const max = 9999999999999;
+  return (Math.random() * (max - min) + min).toString();
+};
+
 describe('Verification', () => {
   beforeEach(async () => {
     if (typeof device === 'undefined') {
@@ -23,10 +29,10 @@ describe('Verification', () => {
 
     await waitFor(element(by.id('StartVerificationButton')))
       .toBeVisible()
-      .withTimeout(200000);
+      .withTimeout(10000);
     await element(by.id('StartVerificationButton')).tap();
 
-    await element(by.id('VerificationPhoneInput')).typeText('8899887313');
+    await element(by.id('VerificationPhoneInput')).typeText(getRandomNumber());
     await element(by.id('VerificationCodeButton')).tap();
 
     await element(by.text('Ja')).tap();
@@ -39,5 +45,58 @@ describe('Verification', () => {
     await element(by.text('Später')).tap();
 
     await expect(element(by.text('verifizierter Nutzer'))).toBeVisible();
+  });
+
+  it('Szenario 2: Verifizieren via BurgerMenu/Settings', async () => {
+    await element(by.id('BurgerMenuButton')).tap();
+
+    await element(by.text('Settings')).tap();
+    await element(by.id('Verifizieren')).tap();
+
+    await waitFor(element(by.id('StartVerificationButton')))
+      .toBeVisible()
+      .withTimeout(10000);
+    await element(by.id('StartVerificationButton')).tap();
+
+    await element(by.id('VerificationPhoneInput')).typeText(getRandomNumber());
+    await element(by.id('VerificationCodeButton')).tap();
+
+    await element(by.text('Ja')).tap();
+    await element(by.id('VerificationCodeInput')).typeText('000001');
+    await element(by.text('OK')).tap();
+    await element(by.id('VerificationCodeInput')).clearText();
+
+    await element(by.id('VerificationCodeInput')).typeText('000000');
+
+    await element(by.text('Später')).tap();
+
+    await expect(element(by.text('Verifiziert'))).toBeVisible();
+  });
+
+  it('Szenario 3: Verifizieren via Abstimmen', async () => {
+    await element(by.id('ListItem-CONFERENCEWEEKS_PLANNED-0')).tap();
+
+    await element(by.id('ProcedureScrollView')).scrollTo('bottom');
+
+    await element(by.id('VerificationTouch')).tap();
+
+    await waitFor(element(by.id('StartVerificationButton')))
+      .toBeVisible()
+      .withTimeout(10000);
+    await element(by.id('StartVerificationButton')).tap();
+
+    await element(by.id('VerificationPhoneInput')).typeText(getRandomNumber());
+    await element(by.id('VerificationCodeButton')).tap();
+
+    await element(by.text('Ja')).tap();
+    await element(by.id('VerificationCodeInput')).typeText('000001');
+    await element(by.text('OK')).tap();
+    await element(by.id('VerificationCodeInput')).clearText();
+
+    await element(by.id('VerificationCodeInput')).typeText('000000');
+
+    await element(by.text('Später')).tap();
+
+    await expect(element(by.text('VerificationTouch'))).toBeNotVisible();
   });
 });
