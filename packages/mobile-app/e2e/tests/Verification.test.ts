@@ -36,6 +36,8 @@ describe('Verification', () => {
 
     await element(by.id('VerificationCodeInput')).typeText('000000');
 
-    await expect(element(by.id('PagerNextButton'))).toBeNotVisible();
+    await element(by.text('Später')).tap();
+
+    await expect(element(by.text('verifizierter Nutzer'))).toBeVisible();
   });
 });
