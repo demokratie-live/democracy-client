@@ -22,6 +22,7 @@
     "pods": "cd ios && pod install && cd .."
   },
   "dependencies": {
+    "@react-native-community/async-storage": "1.7.1",
     "faker": "^4.1.0",
     "react": "16.9.0",
     "react-art": "^16.12.0",
