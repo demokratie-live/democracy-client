@@ -4,8 +4,6 @@
 
     <uses-permission tools:node="replace" 
         android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission tools:node="replace" 
-        android:name="android.permission.INTERNET"/>
 
     <application android:usesCleartextTraffic="true" 
         tools:targetApi="28" 
