@@ -93,6 +93,19 @@ platform :android do
   desc "Submit a new Build to Browserstack"
   private_lane :browserstack do
 
+    gradle(
+      task: 'assemble',
+      build_type: 'Release',
+      print_command: false,
+      flavor: flavor,
+      properties: {
+        "android.injected.signing.store.file" => releaseFilePath,
+        "android.injected.signing.store.password" => store_password,
+        "android.injected.signing.key.alias" => key_alias,
+        "android.injected.signing.key.password" => key_password,
+      }
+    )
+
     upload_to_browserstack_app_live(
       browserstack_username: ENV["BROWSERSTACK_USERNAME"],
       browserstack_access_key: ENV["BROWSERSTACK_ACCESS_KEY"],
