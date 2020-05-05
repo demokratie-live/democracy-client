@@ -41,7 +41,7 @@ export const NoConferenceWeekData = () => {
   const navigation = useNavigation();
   const { notificationSettings } = useContext(NotificationsContext);
   return (
-    <Container>
+    <Container testID={'NoConferenceWeekData'}>
       <IconWrapper>
         <SvgConferenceWeekPlaceholder width={150} height={150} color="#000" />
       </IconWrapper>
@@ -51,7 +51,7 @@ export const NoConferenceWeekData = () => {
       </Text>
       {!!data && (
         <TextGrey>
-          {`Die nächste Sitzungswoche findet gemäß Sitzungswochenkalener in KW ${data.currentConferenceWeek.calendarWeek}
+          {`Die nächste Sitzungswoche findet gemäß Sitzungswochenkalender in KW ${data.currentConferenceWeek.calendarWeek}
 (`}
           {dateFormat(data.currentConferenceWeek.start, 'dd.mm.yyyy')} –{' '}
           {dateFormat(data.currentConferenceWeek.end, 'dd.mm.yyyy')}

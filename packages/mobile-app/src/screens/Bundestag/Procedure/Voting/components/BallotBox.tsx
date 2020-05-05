@@ -144,11 +144,13 @@ const BalloutBox: React.FC<Props> = ({
     Animated.timing(pan, {
       toValue: { x: 50, y: 0 },
       duration: 1500,
+      useNativeDriver: true,
     }).start(({ finished }) => {
       if (finished) {
         Animated.timing(pan, {
           toValue: { x: 0, y: 0 },
           duration: 300,
+          useNativeDriver: true,
         }).start();
       }
     });
@@ -159,8 +161,14 @@ const BalloutBox: React.FC<Props> = ({
       PanResponder.create({
         onStartShouldSetPanResponder: () => true,
         onPanResponderMove: (e, gestureState) => {
-          Animated.timing(pan, { toValue: { x: 0, y: 0 } }).stop();
-          Animated.spring(pan, { toValue: { x: 0, y: 0 } }).stop();
+          Animated.timing(pan, {
+            toValue: { x: 0, y: 0 },
+            useNativeDriver: true,
+          }).stop();
+          Animated.spring(pan, {
+            toValue: { x: 0, y: 0 },
+            useNativeDriver: true,
+          }).stop();
           if (isDraggable) {
             Animated.event([null, { dx: pan.x }])(e, gestureState);
           }
@@ -174,6 +182,7 @@ const BalloutBox: React.FC<Props> = ({
                   y: 0,
                 },
                 friction: 5,
+                useNativeDriver: true,
               }).start();
               setIsDraggable(false);
 
@@ -202,6 +211,7 @@ const BalloutBox: React.FC<Props> = ({
               Animated.spring(pan, {
                 toValue: { x: 0, y: 0 },
                 friction: 5,
+                useNativeDriver: true,
               }).start(({ finished }) => {
                 if (finished) {
                   previewAnimation();
@@ -242,6 +252,7 @@ const BalloutBox: React.FC<Props> = ({
           x: width - 94 - 2 * 18,
           y: 0,
         },
+        useNativeDriver: true,
       }).start();
     }
   };

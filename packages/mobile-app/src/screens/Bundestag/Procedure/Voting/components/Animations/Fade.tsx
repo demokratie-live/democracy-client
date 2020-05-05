@@ -22,6 +22,7 @@ class Fade extends PureComponent<Props> {
         {
           toValue: visible ? 1 : 0, // Animate to opacity: 1 (opaque)
           duration, // Make it take a while
+          useNativeDriver: true,
         },
       ).start();
     }

@@ -1,6 +1,6 @@
 {
   "name": "democracy",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "license": "MIT",
   "private": true,
   "workspaces": {
@@ -25,16 +25,20 @@
     "docz": "docz dev",
     "docz:build": "docz build",
     "postinstall:android-fix": "npx replace-in-file \"node ./node_modules/react-native/cli.js config\" \"node ../../node_modules/react-native/cli.js config\" node_modules/@react-native-community/cli-platform-android/native_modules.gradle",
+    "postinstall:patch-package": "patch-package",
+    "postinstall:app": "yarn workspace app postinstall",
     "pods": "yarn workspace app pods && yarn workspace @democracy-deutschland/mobile-ui pods",
-    "postinstall": "yarn postinstall:android-fix"
+    "postinstall": "yarn postinstall:android-fix && yarn postinstall:patch-package && yarn postinstall:app"
   },
   "dependencies": {
-    "react-native": "0.61.4"
+    "react-native": "0.61.5"
   },
   "devDependencies": {
     "docz": "2.0.0-rc.67",
     "husky": "^3.1.0",
     "lint-staged": "^9.5.0",
-    "typescript": "3.5.2"
+    "patch-package": "^6.2.2",
+    "postinstall-postinstall": "^2.1.0",
+    "typescript": "3.8.3"
   }
 }

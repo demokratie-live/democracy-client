@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/native';
-import { Platform, Linking, Alert, View } from 'react-native';
+import { Platform, Linking, View } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 
 // Components
 import DonatedBox from './DonatedBox';
 import Entry from './Entry';
 import { EntryHeader } from './EntryHeader';
-
-// GraphQl
-
-const URL_DONATE =
-  'https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=contact@democracy-deutschland.de&lc=DE&no_note=0&cn=&currency_code=EUR&bn=PP-DonationsBF:btn_donateCC_LG.gif:NonHosted';
 
 import {
   donate1Head,
@@ -28,8 +23,6 @@ import {
   donate3Text5,
   donate3Text6,
   donate3Text7,
-  donate4Head,
-  donate4Text,
   donateList1Head,
   donateList1Text,
   donateList2Head,
@@ -97,19 +90,6 @@ const DefinitionListDescription = styled.Text`
   color: #8f8e94;
 `;
 
-const DonateTouchable = styled.TouchableOpacity`
-  align-items: center;
-  padding-top: 15;
-`;
-
-const DonateImage = styled.Image.attrs(() => ({
-  source: require('./assets/PayPal-Donate-Button-Transparent.png'),
-  resizeMode: 'contain',
-}))`
-  height: 100;
-  width: 80%;
-`;
-
 interface Props {
   // navigator: PropTypes.instanceOf(Navigator).isRequired,
   onClose?: () => void;
@@ -125,21 +105,6 @@ export const DonateScreen: React.FC<Props> = () => {
       setDonationStatus(data.donationStatus);
     }
   }, [data, donationStatus]);
-
-  const linking = (url: string) => () => {
-    Linking.canOpenURL(url).then(supported => {
-      if (supported) {
-        Linking.openURL(url).catch(() => null);
-      } else {
-        Alert.alert(
-          'Nicht unterstützt',
-          'Diese Operation wird auf deinem Gerät zurzeit nicht unterstützt!',
-          [{ text: 'OK' }],
-          { cancelable: false },
-        );
-      }
-    });
-  };
 
   const renderEntryHeadline = (entry: any) => (
     <EntryHeader
@@ -252,11 +217,6 @@ export const DonateScreen: React.FC<Props> = () => {
             </TextLink>
             <Text>{donate3Text7}</Text>
           </Text>
-          <Headline style={{ paddingTop: 18 }}>{donate4Head}</Headline>
-          <Text>{donate4Text}</Text>
-          <DonateTouchable onPress={linking(URL_DONATE)}>
-            <DonateImage />
-          </DonateTouchable>
           <Version>{version}</Version>
         </Wrapper>
       )}

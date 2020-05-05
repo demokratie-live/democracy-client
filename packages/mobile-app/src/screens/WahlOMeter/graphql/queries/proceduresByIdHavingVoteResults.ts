@@ -15,6 +15,7 @@ export const VOTED_PROCEDURES = gql`
       procedures {
         _id
         procedureId
+        sessionTOPHeading
         title
         tags
         voteDate
