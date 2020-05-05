@@ -45,6 +45,7 @@ describe('Verification', () => {
     await element(by.text('Später')).tap();
 
     await expect(element(by.text('verifizierter Nutzer'))).toBeVisible();
+    await new Promise((resolve) => setTimeout(() => resolve, 3000));
   });
 
   it('Szenario 2: Verifizieren via BurgerMenu/Settings', async () => {
@@ -74,7 +75,7 @@ describe('Verification', () => {
     await element(by.text('Später')).tap();
 
     await expect(element(by.text('Verifiziert'))).toBeVisible();
-  });
+    await new Promise((resolve) => setTimeout(() => resolve, 3000));
 
   it('Szenario 3: Verifizieren via Abstimmen', async () => {
     await element(by.id('ListItem-CONFERENCEWEEKS_PLANNED-0')).tap();
@@ -101,5 +102,6 @@ describe('Verification', () => {
     await element(by.text('Später')).tap();
 
     await expect(element(by.text('VerificationTouch'))).toBeNotVisible();
+    await new Promise((resolve) => setTimeout(() => resolve, 3000));
   });
 });
