@@ -145,7 +145,7 @@ jobs:
         run: |
           ./e2e/android-anr-fix.sh & 
           yarn start & 
-          detox test -c android.emu.internal.debug --device-name test --record-videos all --take-screenshots all
+          detox test -c android.emu.internal.debug --device-name test --record-videos all --take-screenshots all --loglevel trace
         working-directory: packages/mobile-app
 
       - uses: actions/upload-artifact@v1
