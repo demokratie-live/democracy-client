@@ -139,7 +139,8 @@ jobs:
       - run: adb devices
       - run: echo $ANDROID_HOME
       - run: echo $ANDROID_EMULATOR_HOME
-      - run: ls -l $ANDROID_EMULATOR_HOME
+      - run: ls -l ~/.android
+      - run: ls -l ~/.android/avd
 
       - name: Download Android Emulator Image
         run: |
