@@ -127,7 +127,7 @@ jobs:
         uses: joschi/setup-jdk@v1
         with:
           java-version: "openjdk8"
-          architecture: "x64"
+          architecture: "x86"
 
       - name: Download Android Emulator Image
         run: |
