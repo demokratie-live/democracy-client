@@ -126,6 +126,8 @@ jobs:
       - uses: malinskiy/action-android/install-sdk@release/0.0.5
       - run: adb devices
       - run: echo $ANDROID_HOME
+      - run: echo $ANDROID_EMULATOR_HOME
+      - run: ls -l $ANDROID_EMULATOR_HOME
 
       - name: Download Android Emulator Image
         run: |
