@@ -123,11 +123,9 @@ jobs:
       - name: Prepare minSdkVerson for Wix DETOX
         run: yarn postinstall:android-e2e-fix
 
-      - name: Use specific Java version for sdkmanager to work
-        uses: joschi/setup-jdk@v1
-        with:
-          java-version: "openjdk8"
-          architecture: "x86"
+      - uses: malinskiy/action-android/install-sdk@release/0.0.5
+      - run: adb devices
+      - run: echo $ANDROID_HOME
 
       - name: Download Android Emulator Image
         run: |
