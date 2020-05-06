@@ -48,6 +48,18 @@ jobs:
         with:
           node-version: "12.x"
 
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Cache Yarn
+        uses: actions/cache@v1
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
       - run: yarn install
 
       - name: Prepare Detox
@@ -74,7 +86,7 @@ jobs:
       - run: FORCE_BUNDLING=true detox build -c ios.sim.debug
         working-directory: packages/mobile-app
 
-      - run: detox test -c ios.sim.debug --record-videos all
+      - run: detox test -c ios.sim.debug --record-videos all --take-screenshots all
         working-directory: packages/mobile-app
 
       - uses: actions/upload-artifact@v1
@@ -85,7 +97,7 @@ jobs:
 
   test-android:
     name: Test detox Android
-    needs: lint
+    # needs: lint
     runs-on: macos-latest
     strategy:
       matrix:
@@ -99,6 +111,18 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "12.x"
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Cache Yarn
+        uses: actions/cache@v1
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
 
       - run: yarn install
 
@@ -121,34 +145,40 @@ jobs:
           cp packages/mobile-app/.env.internal packages/mobile-app/.env.development
 
       - name: Prepare minSdkVerson for Wix DETOX
-        run: npx replace-in-file "minSdkVersion = 16" "minSdkVersion = 18" packages/mobile-app/android/build.gradle packages/mobile-ui/android/build.gradle
+        run: yarn postinstall:android-e2e-fix
 
-      - name: Use specific Java version for sdkmanager to work
-        uses: joschi/setup-jdk@v1
+      - uses: malinskiy/action-android/install-sdk@release/0.0.5
+      - run: adb devices
+      - run: echo $ANDROID_HOME
+      - run: ls -l ~/.android
+
+      - name: Create Emulator
+        uses: ManAnRuck/action-create-emulator@master
         with:
-          java-version: "openjdk8"
-          architecture: "x64"
+          package: system-images;android-${{ matrix.sdk }};google_apis;x86
+          device: "${{ matrix.device }}"
 
-      - name: Download Android Emulator Image
-        run: |
-          echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-${{ matrix.sdk }};google_apis;x86"
-          echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd --force --name emu --device "${{ matrix.device }}" -k 'system-images;android-${{ matrix.sdk }};google_apis;x86'
-          $ANDROID_HOME/emulator/emulator -list-avds
+      # - name: Download Android Emulator Image
+      #   run: |
+      #     echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-${{ matrix.sdk }};google_apis;x86"
+      #     echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd --force --name emu --device "${{ matrix.device }}" -k 'system-images;android-${{ matrix.sdk }};google_apis;x86'
+      #     $ANDROID_HOME/emulator/emulator -list-avds
 
-      - name: edit emulator config
-        run: |
-          echo "hw.ramSize=4096" >> ~/.android/avd/emu.avd/config.ini
-          echo "vm.heapSize=576" >> ~/.android/avd/emu.avd/config.ini
-          echo "disk.dataPartition.size=2048M" >> ~/.android/avd/emu.avd/config.ini
-          echo "fastboot.forceColdBoot=no" >> ~/.android/avd/emu.avd/config.ini
-          echo "fastboot.forceFastBoot=yes" >> ~/.android/avd/emu.avd/config.ini
-          echo "saveOnExit=true" >> ~/.android/avd/quickbootChoice.ini
+      # - name: edit emulator config
+      #   run: |
+      #     echo "hw.ramSize=4096" >> ~/.android/avd/emu.avd/config.ini
+      #     echo "vm.heapSize=576" >> ~/.android/avd/emu.avd/config.ini
+      #     echo "disk.dataPartition.size=2048M" >> ~/.android/avd/emu.avd/config.ini
+      #     echo "fastboot.forceColdBoot=no" >> ~/.android/avd/emu.avd/config.ini
+      #     echo "fastboot.forceFastBoot=yes" >> ~/.android/avd/emu.avd/config.ini
+      #     echo "saveOnExit=true" >> ~/.android/avd/quickbootChoice.ini
 
-      - run: |
-          cat ~/.android/avd/emu.avd/config.ini
-          cat ~/.android/avd/quickbootChoice.ini
+      # - run: |
+      #     cat ~/.android/avd/emu.avd/config.ini
+      #     cat ~/.android/avd/quickbootChoice.ini
 
       - name: Build Test
+        if: ${{ success() }} || ${{ failure() }}
         run: detox build -c android.emu.internal.debug
         working-directory: packages/mobile-app
         env:
@@ -158,7 +188,7 @@ jobs:
         run: |
           ./e2e/android-anr-fix.sh & 
           yarn start & 
-          detox test -c android.emu.internal.debug --record-videos all
+          detox test -c android.emu.internal.debug --device-name test --record-videos all --take-screenshots all
         working-directory: packages/mobile-app
 
       - uses: actions/upload-artifact@v1

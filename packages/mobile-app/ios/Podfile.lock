@@ -21,7 +21,7 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
-  - Permission-Notifications (2.1.3):
+  - Permission-Notifications (2.1.4):
     - RNPermissions
   - RCTRequired (0.61.5)
   - RCTTypeSafety (0.61.5):
@@ -190,7 +190,7 @@ PODS:
     - React
   - react-native-notifications (3.1.4):
     - React
-  - react-native-pdf (6.1.1):
+  - react-native-pdf (6.1.2):
     - React
   - react-native-safe-area-context (0.7.3):
     - React
@@ -237,17 +237,17 @@ PODS:
     - React
   - RNCMaskedView (0.1.10):
     - React
-  - RNDeviceInfo (5.5.5):
+  - RNDeviceInfo (5.5.7):
     - React
   - RNGestureHandler (1.6.1):
     - React
   - RNKeychain (4.0.5):
     - React
-  - RNPermissions (2.1.3):
+  - RNPermissions (2.1.4):
     - React
   - RNReanimated (1.8.0):
     - React
-  - RNScreens (2.5.0):
+  - RNScreens (2.7.0):
     - React
   - RNSearchBar (3.5.1):
     - React
@@ -418,7 +418,7 @@ SPEC CHECKSUMS:
   FBReactNativeSpec: 118d0d177724c2d67f08a59136eb29ef5943ec75
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
-  Permission-Notifications: 5d8c88b22dbbf1f0fe278b223caae0d0675c11bc
+  Permission-Notifications: d437cafc026900006d35981d35a2d694f883f44e
   RCTRequired: b153add4da6e7dbc44aebf93f3cf4fcae392ddf1
   RCTTypeSafety: 9aa1b91d7f9310fc6eadc3cf95126ffe818af320
   React: b6a59ef847b2b40bb6e0180a97d0ca716969ac78
@@ -430,7 +430,7 @@ SPEC CHECKSUMS:
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
   react-native-config: f2c2ae45625a068c35681a16b9bfb1ca58b0adc7
   react-native-notifications: 36929512507417ba0021659bd2f9e0184dda2489
-  react-native-pdf: 530cb9e571ec889b531798aca79d03af3234a386
+  react-native-pdf: 7d76a6619f76a6ebfb2f82a4f2feeb17826ba8b4
   react-native-safe-area-context: e200d4433aba6b7e60b52da5f37af11f7a0b0392
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76
@@ -446,12 +446,12 @@ SPEC CHECKSUMS:
   rn-fetch-blob: f525a73a78df9ed5d35e67ea65e79d53c15255bc
   RNCAsyncStorage: 44395cb9c7c1523104c2b499eb426ef7aff82bca
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
-  RNDeviceInfo: d2ca97023bb1c2a49cd7adb3f956e14c048ea028
+  RNDeviceInfo: e2102056bde3ad5d137fd029d8d431510a00486a
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNKeychain: 840f8e6f13be0576202aefcdffd26a4f54bfe7b5
-  RNPermissions: 6772df08e03565f718f7e140d9fccae441b8ca8b
+  RNPermissions: 3635b407c15f2fe591bd2101c8f20aa0912caba8
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
-  RNScreens: ac02d0e4529f08ced69f5580d416f968a6ec3a1d
+  RNScreens: cf198f915f8a2bf163de94ca9f5bfc8d326c3706
   RNSearchBar: 9860431356b7d12a8449d2fddb2b5f3c78d1e99f
   RNSentry: 370623102247ebea20191b5fb549ecc7a275b324
   RNSha256: c6f68c850bf8315c95e2508667e8c908bd9f8487

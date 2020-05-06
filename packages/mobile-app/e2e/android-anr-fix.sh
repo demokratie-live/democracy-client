@@ -5,14 +5,14 @@ echo "[Waiting for launcher to start]"
 LAUNCHER_READY=
 while [[ -z ${LAUNCHER_READY} ]]; do
     UI_FOCUS=`adb shell dumpsys window windows 2>/dev/null | grep -i mCurrentFocus`
-    echo "(DEBUG) Current focus: ${UI_FOCUS}"
+    # echo "(DEBUG) Current focus: ${UI_FOCUS}"
 
     case $UI_FOCUS in
     *"Launcher"*)
         LAUNCHER_READY=true
     ;;
     "")
-        echo "Waiting for window service..."
+        # echo "Waiting for window service..."
         sleep 3
     ;;
     *"Not Responding"*)
