@@ -152,11 +152,14 @@ jobs:
       - run: echo $ANDROID_HOME
       - run: ls -l ~/.android
 
-      - name: Download Android Emulator Image
-        run: |
-          echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-${{ matrix.sdk }};google_apis;x86"
-          echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd --force --name emu --device "${{ matrix.device }}" -k 'system-images;android-${{ matrix.sdk }};google_apis;x86'
-          $ANDROID_HOME/emulator/emulator -list-avds
+      - name: Create Emulator
+        uses: rigor789/action-create-emulator@master
+
+      # - name: Download Android Emulator Image
+      #   run: |
+      #     echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-${{ matrix.sdk }};google_apis;x86"
+      #     echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd --force --name emu --device "${{ matrix.device }}" -k 'system-images;android-${{ matrix.sdk }};google_apis;x86'
+      #     $ANDROID_HOME/emulator/emulator -list-avds
 
       # - name: edit emulator config
       #   run: |
@@ -171,9 +174,6 @@ jobs:
       #     cat ~/.android/avd/emu.avd/config.ini
       #     cat ~/.android/avd/quickbootChoice.ini
 
-      - name: WarmUp Emulator
-        run: emulator -avd emu
-
       - name: Build Test
         if: ${{ success() }} || ${{ failure() }}
         run: detox build -c android.emu.internal.debug
@@ -185,7 +185,7 @@ jobs:
         run: |
           ./e2e/android-anr-fix.sh & 
           yarn start & 
-          detox test -c android.emu.internal.debug --record-videos all --loglevel trace
+          detox test -c android.emu.internal.debug --device-name test --record-videos all --take-screenshots all --loglevel trace
         working-directory: packages/mobile-app
 
       - uses: actions/upload-artifact@v1
