@@ -29,7 +29,7 @@ describe('Verification', () => {
 
     await waitFor(element(by.id('StartVerificationButton')))
       .toBeVisible()
-      .withTimeout(10000);
+      .withTimeout(20000);
     await element(by.id('StartVerificationButton')).tap();
 
     await element(by.id('VerificationPhoneInput')).typeText(getRandomNumber());
@@ -54,12 +54,12 @@ describe('Verification', () => {
     await element(by.text('Settings')).tap();
     await waitFor(element(by.id('Verifizieren')))
       .toBeVisible()
-      .withTimeout(10000);
+      .withTimeout(20000);
     await element(by.id('Verifizieren')).tap();
 
     await waitFor(element(by.id('StartVerificationButton')))
       .toBeVisible()
-      .withTimeout(10000);
+      .withTimeout(20000);
     await element(by.id('StartVerificationButton')).tap();
 
     await element(by.id('VerificationPhoneInput')).typeText(getRandomNumber());
@@ -87,7 +87,7 @@ describe('Verification', () => {
 
     await waitFor(element(by.id('StartVerificationButton')))
       .toBeVisible()
-      .withTimeout(10000);
+      .withTimeout(20000);
     await element(by.id('StartVerificationButton')).tap();
 
     await element(by.id('VerificationPhoneInput')).typeText(getRandomNumber());
