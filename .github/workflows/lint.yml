@@ -86,7 +86,7 @@ jobs:
       - run: FORCE_BUNDLING=true detox build -c ios.sim.debug
         working-directory: packages/mobile-app
 
-      - run: detox test -c ios.sim.debug --record-videos all
+      - run: detox test -c ios.sim.debug --record-videos all --take-screenshots all
         working-directory: packages/mobile-app
 
       - uses: actions/upload-artifact@v1
