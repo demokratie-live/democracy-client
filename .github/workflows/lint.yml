@@ -48,18 +48,6 @@ jobs:
         with:
           node-version: "12.x"
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - name: Cache Yarn
-        uses: actions/cache@v1
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
       - run: yarn install
 
       - name: Prepare Detox
@@ -112,18 +100,6 @@ jobs:
         with:
           node-version: "12.x"
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - name: Cache Yarn
-        uses: actions/cache@v1
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
       - run: yarn install
 
       - run: npm install -g detox-cli
@@ -157,25 +133,6 @@ jobs:
         with:
           package: system-images;android-${{ matrix.sdk }};google_apis;x86
           device: "${{ matrix.device }}"
-
-      # - name: Download Android Emulator Image
-      #   run: |
-      #     echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-${{ matrix.sdk }};google_apis;x86"
-      #     echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd --force --name emu --device "${{ matrix.device }}" -k 'system-images;android-${{ matrix.sdk }};google_apis;x86'
-      #     $ANDROID_HOME/emulator/emulator -list-avds
-
-      # - name: edit emulator config
-      #   run: |
-      #     echo "hw.ramSize=4096" >> ~/.android/avd/emu.avd/config.ini
-      #     echo "vm.heapSize=576" >> ~/.android/avd/emu.avd/config.ini
-      #     echo "disk.dataPartition.size=2048M" >> ~/.android/avd/emu.avd/config.ini
-      #     echo "fastboot.forceColdBoot=no" >> ~/.android/avd/emu.avd/config.ini
-      #     echo "fastboot.forceFastBoot=yes" >> ~/.android/avd/emu.avd/config.ini
-      #     echo "saveOnExit=true" >> ~/.android/avd/quickbootChoice.ini
-
-      # - run: |
-      #     cat ~/.android/avd/emu.avd/config.ini
-      #     cat ~/.android/avd/quickbootChoice.ini
 
       - name: Build Test
         if: ${{ success() }} || ${{ failure() }}
