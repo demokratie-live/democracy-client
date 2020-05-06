@@ -153,6 +153,7 @@ export const List = () => {
       votedGovernment,
       communityVotes,
     },
+    index,
   }) => {
     // If no session top headings available use subject groups
     let subline = null;
@@ -183,7 +184,8 @@ export const List = () => {
             procedureId,
             title: type || procedureId,
           })
-        }>
+        }
+        testID={`ListItem-${route.params.list}-${index}`}>
         <ListItem
           title={title}
           subline={subline}

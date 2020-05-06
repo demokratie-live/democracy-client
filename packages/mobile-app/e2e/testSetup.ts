@@ -7,7 +7,7 @@ import assignReporter from 'detox/runners/jest/assignReporter';
 const config = require('../package.json').detox;
 
 // Set the default timeout
-jest.setTimeout(1000000);
+jest.setTimeout(600000);
 jasmine.getEnv().addReporter(adapter);
 
 // This takes care of generating status logs on a per-spec basis. By default, jest only reports at file-level.
@@ -17,11 +17,7 @@ jasmine.getEnv().addReporter(specReporter);
 jasmine.getEnv().addReporter(assignReporter);
 
 beforeAll(async () => {
-  await init(config, { launchApp: true, initGlobals: false });
-  await device.launchApp({
-    newInstance: true,
-    launchArgs: { detoxPrintBusyIdleResources: 'YES' },
-  });
+  await init(config, { initGlobals: false });
 });
 
 beforeEach(async () => {

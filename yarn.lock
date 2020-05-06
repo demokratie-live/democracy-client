@@ -7075,7 +7075,7 @@ detect-port@^1.3.0:
     address "^1.0.1"
     debug "^2.6.0"
 
-detox@^16.1.1:
+detox@^16.3.0:
   version "16.4.0"
   resolved "https://registry.yarnpkg.com/detox/-/detox-16.4.0.tgz#f4279fe725b020dadd6f2327bf6b5427a9f2d902"
   integrity sha512-2dB6bJ9GCM7BuZCWubSRQLX1QLaKvPue9zu4+jcDMhhbQL08KKIClb2yelMalSyjtM04hX7OUw+SBArIwU13Dg==

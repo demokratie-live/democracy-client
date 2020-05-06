@@ -44,6 +44,7 @@ export interface Props {
   backgroundColor?: keyof typeof BackgroundColors;
   disabled?: boolean;
   style?: any; // TODO improve typescript
+  testID?: string;
 }
 
 export const Button: React.FC<Props> = ({
@@ -53,13 +54,14 @@ export const Button: React.FC<Props> = ({
   backgroundColor = 'transparent',
   disabled,
   style,
+  testID,
 }) => (
   <Container
     style={style}
     disabled={disabled}
-    testID="Button"
     onPress={onPress}
-    color={backgroundColor}>
+    color={backgroundColor}
+    testID={testID}>
     <ButtonText testID="ButtonText" color={textColor}>
       {text}
     </ButtonText>

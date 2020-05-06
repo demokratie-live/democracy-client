@@ -84,7 +84,11 @@ export const Sidebar: React.FC<Props> = props => {
     <Container>
       <Background />
       <SafeAreaView>
-        <Header onPress={handleHeaderClick} label={headerLabel} />
+        <Header
+          onPress={handleHeaderClick}
+          label={headerLabel}
+          testID="HeaderButton"
+        />
         <Space />
         <NaviList>
           <DrawerItemList {...props} />

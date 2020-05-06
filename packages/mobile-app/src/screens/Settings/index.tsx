@@ -36,6 +36,7 @@ interface ListData {
   onPress: () => void;
   component?: ReactNode;
   description?: string;
+  testID?: string;
 }
 
 interface List {
@@ -115,6 +116,7 @@ export const Settings: React.FC<Props> = () => {
           arrow: isVerified === false,
           onPress:
             isVerified === false ? navigateTo('verificate') : () => undefined,
+          testID: isVerified === false ? 'Verifizieren' : 'Verifiziert',
         },
         {
           title: 'Wahlkreis',
@@ -244,7 +246,8 @@ export const Settings: React.FC<Props> = () => {
             description={item.description}
             arrow={item.arrow}
             onPress={item.onPress}
-            component={item.component}>
+            component={item.component}
+            testID={item.testID}>
             <Text>{item.title}</Text>
           </ListItem>
         )}
