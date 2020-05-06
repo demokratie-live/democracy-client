@@ -266,7 +266,7 @@ export const Procedure: FC<Props> = ({ route, navigation }) => {
   } = data.procedure;
 
   return (
-    <Container>
+    <Container testID="ProcedureScrollView">
       <Intro {...data.procedure} />
       <DetailsContainer>
         <Details

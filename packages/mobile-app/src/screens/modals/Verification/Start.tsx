@@ -112,6 +112,7 @@ Zu unserer `}
       )}
 
       <ButtonNext
+        testID="StartVerificationButton"
         onPress={() => navigation.push('PhoneNumberInput')}
         text={`${
           authCodeExpires

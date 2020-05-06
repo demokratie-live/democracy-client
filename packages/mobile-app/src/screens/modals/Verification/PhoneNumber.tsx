@@ -117,6 +117,7 @@ export const PhoneNumber: React.FC = () => {
           disabled={phoneNumberInputValue.length < 9}
           textColor="white"
           backgroundColor="blue"
+          testID="VerificationCodeButton"
         />
       </ScrollView>
     </Container>

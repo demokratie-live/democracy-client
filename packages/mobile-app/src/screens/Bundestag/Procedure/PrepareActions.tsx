@@ -176,7 +176,9 @@ const PrepareActions: React.FC<Props> = ({
         <Title>{voted ? 'Abgestimmt' : 'Abstimmen'}</Title>
         <TitleAddition>über {type}</TitleAddition>
       </SegmentWrapper>
-      {!verified ? <VerificationTouch onPress={verify} /> : null}
+      {!verified ? (
+        <VerificationTouch onPress={verify} testID="VerificationTouch" />
+      ) : null}
       <VoteWrapper>
         {(!voted || (voted && voteSelection === 'YES')) && (
           <VoteButtonWrapper>
