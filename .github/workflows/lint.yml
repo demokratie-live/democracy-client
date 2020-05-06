@@ -153,9 +153,10 @@ jobs:
       - run: ls -l ~/.android
 
       - name: Create Emulator
-        uses: rigor789/action-create-emulator@master
+        uses: ManAnRuck/action-create-emulator@master
         with:
           package: system-images;android-${{ matrix.sdk }};google_apis;x86
+          device: "${{ matrix.device }}"
 
       # - name: Download Android Emulator Image
       #   run: |
