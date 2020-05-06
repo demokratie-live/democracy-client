@@ -150,7 +150,7 @@ jobs:
         run: emulator -avd emu
 
       - name: Build Test
-        if: succeeded() || failed()
+        if: ${{ success() }} || ${{ failure() }}
         run: detox build -c android.emu.internal.debug
         working-directory: packages/mobile-app
         env:
