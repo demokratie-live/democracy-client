@@ -148,6 +148,9 @@ jobs:
           cat ~/.android/avd/emu.avd/config.ini
           cat ~/.android/avd/quickbootChoice.ini
 
+      - name: WarmUp Emulator
+        run: emulator -avd emu
+
       - name: Build Test
         run: detox build -c android.emu.internal.debug
         working-directory: packages/mobile-app
