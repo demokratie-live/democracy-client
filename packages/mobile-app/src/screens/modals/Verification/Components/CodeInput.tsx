@@ -44,6 +44,7 @@ export const CodeInput: React.FC<Props> = ({ code, onChange }) => {
         onChangeText={onChangeText}
         value={code}
         underlineColorAndroid="transparent"
+        testID="VerificationCodeInput"
       />
     </Container>
   );

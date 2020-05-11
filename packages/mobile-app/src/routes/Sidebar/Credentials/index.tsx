@@ -50,7 +50,9 @@ const CredentialsRootNavigation = () => {
             shadowOpacity: 0,
           },
           headerLeft: () => (
-            <BurgerMenuButton onPress={navigation.toggleDrawer}>
+            <BurgerMenuButton
+              onPress={navigation.toggleDrawer}
+              testID="BurgerMenuButton">
               <MenuIcon width={18} height={18} color="#fff" />
             </BurgerMenuButton>
           ),

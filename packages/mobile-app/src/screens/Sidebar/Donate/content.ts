@@ -30,8 +30,3 @@ export const donate3Link3 =
   'https://www.democracy-deutschland.de/files/download/Vereinfachter_Zuwendungsnachweis.pdf';
 export const donate3Text7 =
   '. Wenn Du eine separate Zuwendungsbestätigung benötigst, schreib uns bitte eine E-Mail oder gib in Deiner Überweisung Deine Wohnadresse an.';
-export const donate4Head = 'Spenden via PayPal';
-export const donate4Text = `1,5% Deines Spendenbetrags + 0,35 EUR pro Transaktion verbleiben bei PayPal.
-Bitte bedenke, dass von einer monatlichen 1€-Spende insofern nur 0,63€ bei uns ankommen. 
-
-Damit Deine Spende zu 100% wirksam wird und für Dich jederzeit kontrollierbar ist, empfehlen wir einen Dauerauftrag á Konto einzurichten.`;

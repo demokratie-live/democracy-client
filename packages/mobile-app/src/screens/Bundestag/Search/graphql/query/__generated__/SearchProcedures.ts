@@ -1,15 +1,16 @@
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
-import { VoteSelection } from "./../../../../../../../__generated__/globalTypes";
+import { VoteSelection } from './../../../../../../../__generated__/globalTypes';
 
 // ====================================================
 // GraphQL query operation: SearchProcedures
 // ====================================================
 
 export interface SearchProcedures_searchProceduresAutocomplete_procedures_voteResults {
-  __typename: "VoteResult";
+  __typename: 'VoteResult';
   yes: number | null;
   abstination: number | null;
   no: number | null;
@@ -17,7 +18,7 @@ export interface SearchProcedures_searchProceduresAutocomplete_procedures_voteRe
 }
 
 export interface SearchProcedures_searchProceduresAutocomplete_procedures_communityVotes {
-  __typename: "CommunityVotes";
+  __typename: 'CommunityVotes';
   yes: number | null;
   abstination: number | null;
   no: number | null;
@@ -25,11 +26,13 @@ export interface SearchProcedures_searchProceduresAutocomplete_procedures_commun
 }
 
 export interface SearchProcedures_searchProceduresAutocomplete_procedures {
-  __typename: "Procedure";
+  __typename: 'Procedure';
   _id: string;
   title: string;
   procedureId: string;
-  tags: (string | null)[] | null;
+  sessionTOPHeading: string | null;
+  subjectGroups: string[];
+  tags: string[];
   abstract: string | null;
   voteDate: any | null;
   votedGovernment: boolean | null;
@@ -42,7 +45,7 @@ export interface SearchProcedures_searchProceduresAutocomplete_procedures {
 }
 
 export interface SearchProcedures_searchProceduresAutocomplete {
-  __typename: "SearchProcedures";
+  __typename: 'SearchProcedures';
   procedures: SearchProcedures_searchProceduresAutocomplete_procedures[];
   autocomplete: string[];
 }

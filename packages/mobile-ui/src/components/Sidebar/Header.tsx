@@ -25,6 +25,7 @@ const HeadText = styled.Text`
 interface Props {
   onPress: () => void;
   label: string;
+  testID?: string;
 }
 
 export const Header: React.FC<Props> = ({ onPress, label }) => {

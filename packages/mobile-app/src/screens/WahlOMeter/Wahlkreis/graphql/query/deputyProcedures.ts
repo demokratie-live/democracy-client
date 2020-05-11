@@ -17,6 +17,7 @@ export const DEPUTY_PROCEDURES = gql`
         procedure {
           _id
           procedureId
+          sessionTOPHeading
           title
           subjectGroups
           voteDate

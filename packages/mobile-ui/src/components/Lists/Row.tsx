@@ -12,10 +12,13 @@ const RowWrapper = styled.TouchableHighlight.attrs({
 
 interface Props {
   onPress: () => void;
+  testID?: string;
 }
 
-const Row: React.FC<Props> = ({ children, onPress }) => (
-  <RowWrapper onPress={onPress}>{children}</RowWrapper>
+const Row: React.FC<Props> = ({ children, onPress, testID }) => (
+  <RowWrapper onPress={onPress} testID={testID}>
+    {children}
+  </RowWrapper>
 );
 
 export { Row };
