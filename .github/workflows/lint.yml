@@ -156,7 +156,7 @@ jobs:
 
   build-ios:
     name: Build ios
-    needs: [test-ios, test-android]
+    # needs: [test-ios, test-android]
     if: github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta'
     runs-on: macos-latest
     env:
@@ -203,7 +203,7 @@ jobs:
 
   build-andriod:
     name: Build Android
-    needs: [test-ios, test-android]
+    # needs: [test-ios, test-android]
     if: github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta'
     runs-on: macos-latest
     steps:
