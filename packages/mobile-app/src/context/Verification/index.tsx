@@ -48,6 +48,9 @@ export const VerificationProvider: FC = ({ children }) => {
     AsyncStorage.getItem('verification_code_expire_time').then(value =>
       value ? setExpireTimeValue(new Date(value)) : undefined,
     );
+    AsyncStorage.getItem('verification_tmp_phone_number').then(value => {
+      value ? setPhoneNumberValue(value) : '';
+    });
   }, []);
 
   useEffect(() => {
@@ -71,6 +74,10 @@ export const VerificationProvider: FC = ({ children }) => {
       };
     }
   }, [resendTime]);
+
+  useEffect(() => {
+    AsyncStorage.setItem('verification_tmp_phone_number', phoneNumber);
+  }, [phoneNumber]);
 
   const setPhoneNumber = (value: string) => {
     if (value) {

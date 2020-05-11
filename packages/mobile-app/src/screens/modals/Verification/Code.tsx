@@ -118,6 +118,7 @@ export const Code: React.FC<Props> = ({ route }) => {
 
       if (res.data && res.data.requestVerification.succeeded) {
         AsyncStorage.setItem('auth_phoneHash', phoneNumberHash);
+        AsyncStorage.removeItem('verification_tmp_phone_number');
         Keyboard.dismiss();
         navigation.navigate('SmsDonate');
       } else if (res.data) {
