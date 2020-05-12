@@ -161,10 +161,10 @@
       }
     },
     "configurations": {
-      "ios.sim.debug": {
+      "ios.sim.release": {
         "type": "ios.simulator",
-        "binaryPath": "ios/build/Build/Products/Internal.Debug-iphonesimulator/DEMOCRACY.app",
-        "build": "xcodebuild -workspace ios/client.xcworkspace -scheme Internal -configuration Internal.Debug -sdk iphonesimulator -derivedDataPath ios/build",
+        "binaryPath": "ios/build/Build/Products/Internal.Release-iphonesimulator/DEMOCRACY.app",
+        "build": "xcodebuild -workspace ios/client.xcworkspace -scheme Internal -configuration Internal.Release -sdk iphonesimulator -derivedDataPath ios/build",
         "device": {
           "type": "iPhone 11",
           "os": "13.4.1"
@@ -184,13 +184,11 @@
         "type": "android.emulator",
         "name": "emu"
       },
-      "android.emu.release": {
-        "binaryPath": "android/app/build/outputs/apk/release/app-release.apk",
-        "build": "cd android && ./gradlew assembleRelease assembleAndroidTest -DtestBuildType=release && cd ..",
+      "android.emu.internal.release": {
+        "binaryPath": "android/app/build/outputs/apk/internal/release/app-internal-release.apk",
+        "build": "cd android && ./gradlew assembleInternalRelease assembleAndroidTest -DtestBuildType=release && cd ..",
         "type": "android.emulator",
-        "device": {
-          "avdName": "Nexus_5X_API_26"
-        }
+        "name": "emu"
       }
     }
   }

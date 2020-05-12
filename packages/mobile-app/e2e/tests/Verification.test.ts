@@ -36,6 +36,10 @@ describe('Verification', () => {
     await element(by.id('VerificationCodeButton')).tap();
 
     await element(by.text('Ja')).tap();
+
+    await waitFor(element(by.id('VerificationCodeInput')))
+      .toBeVisible()
+      .withTimeout(20000);
     await element(by.id('VerificationCodeInput')).typeText('000001');
     await element(by.text('OK')).tap();
     await element(by.id('VerificationCodeInput')).clearText();
