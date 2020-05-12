@@ -1,5 +1,5 @@
 /* eslint-disable jest/no-jasmine-globals */
-import { cleanup, init, device } from 'detox';
+import { cleanup, init } from 'detox';
 import adapter from 'detox/runners/jest/adapter';
 import specReporter from 'detox/runners/jest/specReporter';
 import assignReporter from 'detox/runners/jest/assignReporter';
