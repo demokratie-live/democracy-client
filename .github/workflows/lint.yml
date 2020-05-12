@@ -71,10 +71,10 @@ jobs:
 
       - run: npm install -g detox-cli
 
-      - run: FORCE_BUNDLING=true detox build -c ios.sim.debug
+      - run: FORCE_BUNDLING=true detox build -c ios.sim.release
         working-directory: packages/mobile-app
 
-      - run: detox test -c ios.sim.debug --record-videos all --take-screenshots all
+      - run: detox test -c ios.sim.release --record-videos all --take-screenshots all
         working-directory: packages/mobile-app
 
       - uses: actions/upload-artifact@v1
