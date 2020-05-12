@@ -17,6 +17,9 @@ describe('Verification', () => {
     // click throw instructions
     try {
       while (true) {
+        await waitFor(element(by.id('PagerNextButton')))
+          .toBeVisible()
+          .withTimeout(20000);
         await element(by.id('PagerNextButton')).tap();
       }
     } catch (e) {}
