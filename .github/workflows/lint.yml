@@ -249,3 +249,12 @@ jobs:
           ANDROID_PASS: ${{ secrets.ANDROID_PASS }}
           BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
           BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+      - name: List builds
+        if: always()
+        run: ls -R app/build/outputs
+        working-directory: packages/mobile-app/android
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: Android Builds
+          path: packages/mobile-app/android/app/build/outputs
