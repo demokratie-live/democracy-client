@@ -35,7 +35,6 @@ jobs:
 
   test-ios:
     name: Test detox ios
-    needs: lint
     runs-on: macos-latest
     env:
       DEVELOPER_DIR: /Applications/Xcode_11.4.1.app/Contents/Developer
@@ -85,7 +84,6 @@ jobs:
 
   test-android:
     name: Test detox Android
-    # needs: lint
     runs-on: macos-latest
     strategy:
       matrix:
@@ -156,7 +154,7 @@ jobs:
 
   build-ios:
     name: Build ios
-    needs: [test-ios, test-android]
+    needs: [lint, test-ios, test-android]
     if: github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta' || github.ref == 'refs/heads/master'
     runs-on: macos-latest
     env:
@@ -203,7 +201,7 @@ jobs:
 
   build-andriod:
     name: Build Android
-    needs: [test-ios, test-android]
+    needs: [lint, test-ios, test-android]
     if: github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta' || github.ref == 'refs/heads/master'
     runs-on: macos-latest
     steps:
