@@ -1,17 +1,8 @@
-![Screenshot](https://github.com/demokratie-live/democracy-assets/blob/master/images/forfb2.png)
-
-# Democracy-Client &nbsp; <a href="https://github.com/kriasoft/nodejs-api-starter/stargazers" target="_blank"><img src="https://img.shields.io/github/stars/demokratie-live/democracy-client.svg?style=social&label=Star&maxAge=3600" height="20"/></a> <a href="https://twitter.com/democracy_de" target="_blank"><img src="https://img.shields.io/twitter/follow/democracy_de.svg?style=social&label=Follow&maxAge=3600" height="20"/></a> <a href="https://www.facebook.com/democracygermany/" target="_blank"><img src="https://github.com/demokratie-live/democracy-assets/blob/master/docu/facebook.png" height="20"/></a> <a href="https://discord.gg/Pdu3ZEV" target="_blank"><img src="https://github.com/demokratie-live/democracy-assets/blob/master/docu/discord.png" height="20"/></a>
+# DEMOCRACY-Client &nbsp; <a href="https://github.com/kriasoft/nodejs-api-starter/stargazers" target="_blank"><img src="https://img.shields.io/github/stars/demokratie-live/democracy-client.svg?style=social&label=Star&maxAge=3600" height="20"/></a> <a href="https://twitter.com/democracy_de" target="_blank"><img src="https://img.shields.io/twitter/follow/democracy_de.svg?style=social&label=Follow&maxAge=3600" height="20"/></a> <a href="https://www.facebook.com/democracygermany/" target="_blank"><img src="https://github.com/demokratie-live/democracy-assets/blob/master/docu/facebook.png" height="20"/></a> <a href="https://discord.gg/Pdu3ZEV" target="_blank"><img src="https://github.com/demokratie-live/democracy-assets/blob/master/docu/discord.png" height="20"/></a>
 
 [![Build Status](https://travis-ci.org/demokratie-live/democracy-client.svg?branch=master)](https://travis-ci.org/demokratie-live/democracy-client)
 
 The Client for the DEMOCRACY App. This includes iOS and Android generated from the same Codebase.
-
-:movie_camera: <a href="https://www.youtube.com/watch?v=H6oJA4MUVW0">Video des Entwicklungsstandes 26.02.2018</a><br>
-:movie_camera: <a href="https://www.youtube.com/watch?v=oTX59JhDmXU">Video des Entwicklungsstandes 15.12.2017</a><br>
-<br>
-<a href="https://www.youtube.com/watch?v=H6oJA4MUVW0"><img src="https://github.com/demokratie-live/democracy-assets/blob/master/screenshots/Developer%20Demo%20Video%20-%20480p-spring4-optimized.gif" width="100%"></a>
-
-[Entwicklertagebuch](https://github.com/demokratie-live/democracy-client/wiki/Entwicklertagebuch)
 
 ## Systemmap
 
@@ -195,6 +186,12 @@ Copyright © 2017-present DEMOCRACY Deutschland e.V.. This source code is licens
     </tr>
   <tbody>
 </table>
+
+## Toolset
+
+<img src="http://www.browserstack.com/images/layout/browserstack-logo-600x315.png" width="280"/>
+
+[BrowserStack](http://www.browserstack.com) is supporting DEMOCRACY, allowing us to use their service. Thank you for supporting the open source community! ❤️
 
 ---
 

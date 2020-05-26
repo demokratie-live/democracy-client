@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/native';
-import { Platform, Linking, View } from 'react-native';
+import { Platform, Linking, View, Image, TouchableOpacity } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 
 // Components
@@ -174,11 +174,12 @@ export const DonateScreen: React.FC<Props> = () => {
       )}
       {Platform.OS === 'ios' ? (
         <Wrapper>
-          <Text>
-            {
-              'Die verbleibende Seite steht unter iOS leider nicht zur Verfügung.\n'
-            }
-          </Text>
+          <TouchableOpacity
+            onPress={() =>
+              Linking.openURL('https://donorbox.org/democracy-app')
+            }>
+            <Image source={require('./assets/DonateButton.png')} />
+          </TouchableOpacity>
           <Version>{version}</Version>
         </Wrapper>
       ) : (

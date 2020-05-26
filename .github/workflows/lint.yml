@@ -157,7 +157,7 @@ jobs:
   build-ios:
     name: Build ios
     # needs: [test-ios, test-android]
-    if: github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta'
+    if: github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta' || github.ref == 'refs/heads/master'
     runs-on: macos-latest
     env:
       DEVELOPER_DIR: /Applications/Xcode_11.4.1.app/Contents/Developer
@@ -204,7 +204,7 @@ jobs:
   build-andriod:
     name: Build Android
     # needs: [test-ios, test-android]
-    if: github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta'
+    if: github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta' || github.ref == 'refs/heads/master'
     runs-on: macos-latest
     steps:
       - name: Checkout
@@ -249,3 +249,12 @@ jobs:
           ANDROID_PASS: ${{ secrets.ANDROID_PASS }}
           BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
           BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+      - name: List builds
+        if: always()
+        run: ls -R app/build/outputs
+        working-directory: packages/mobile-app/android
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: Android Builds
+          path: packages/mobile-app/android/app/build/outputs
