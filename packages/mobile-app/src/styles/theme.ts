@@ -12,6 +12,11 @@ export interface ThemeInterface {
       secondary: string;
     };
   };
+  textColors: {
+    primary: string;
+    secondary: string;
+    inverted: string;
+  };
   distances: {
     main: number;
     secondary: number;
@@ -24,6 +29,11 @@ const myTheme: ThemeInterface = {
     main: 18,
     secondary: 11,
     small: 4,
+  },
+  textColors: {
+    primary: 'pink',
+    secondary: '#777',
+    inverted: 'orange',
   },
   colors: {
     main: 'blue',

@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
-import styled from 'styled-components/native';
 import ArrowIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Arrow';
+import { styled } from '../../../styles';
 
 const Wrapper = styled.TouchableOpacity`
   flex-direction: row;
@@ -16,13 +16,13 @@ const Wrapper = styled.TouchableOpacity`
 
 const Value = styled.Text<{ arrow: boolean }>`
   font-size: 17;
-  color: #8f8e94;
+  color: ${({ theme }) => theme.textColors.secondary};
   padding-right: ${({ arrow }) => (arrow ? 5 : 12)};
 `;
 
 const Description = styled.Text`
   font-size: 13;
-  color: #8f8e94;
+  color: ${({ theme }) => theme.textColors.secondary};
   padding-horizontal: 18;
   padding-vertical: 8;
 `;
