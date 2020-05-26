@@ -30,7 +30,6 @@ import {
   Procedure,
   ProcedureVariables,
 } from '../../graphql/query/__generated__/Procedure';
-import { captureException } from '@sentry/react-native';
 import { SEARCH_PROCEDURES } from '../../../Search/graphql/query/searchProcedures';
 import { SearchContext } from '../../../../../context/Search';
 import { PureQueryOptions } from 'apollo-client';
@@ -202,9 +201,8 @@ const BalloutBox: React.FC<Props> = ({
                   });
                   navigation.goBack();
                 })
-                .catch(votingError => {
+                .catch(() => {
                   refetchProcedure();
-                  captureException(votingError);
                   navigation.goBack();
                 });
             } else {

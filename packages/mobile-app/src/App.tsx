@@ -1,4 +1,3 @@
-import './lib/sentry';
 import 'proxy-polyfill';
 import './lib/polyfills/string.polyfill.js';
 import React from 'react';

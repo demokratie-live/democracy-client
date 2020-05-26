@@ -13,7 +13,6 @@ import { GRAPHQL_URL, GRAPHQL_SERVER_LOCAL, ANDROID_SERVER } from '../config';
 import { RetryFunction } from 'apollo-link-retry/lib/retryFunction';
 import AsyncStorage from '@react-native-community/async-storage';
 import DeviceInfo from 'react-native-device-info';
-import { captureException } from '@sentry/react-native';
 
 const cache = new InMemoryCache({
   dataIdFromObject: (o: any) => {
@@ -70,7 +69,6 @@ const retryLink = new RetryLink({
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
-    captureException(graphQLErrors);
     graphQLErrors.forEach(({ message, locations, path }) => {
       console.log(
         `[GraphQL error]: Message: ${message}, Location: ${JSON.stringify(
@@ -89,7 +87,6 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (networkError) {
     const { message, name } = networkError;
     console.log(`[Network error]: ${networkError}`, message, name);
-    captureException(networkError);
   }
 });
 
