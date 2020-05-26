@@ -1,6 +1,5 @@
 // TODO move this to mobile-ui library
 import React, { useContext } from 'react';
-import styled from 'styled-components/native';
 import Description from './Components/Description';
 import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Folding';
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
@@ -12,6 +11,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { VerificationContext } from '../../../context/Verification';
 import { linking } from '../../../lib/linking';
 import { RootStackParamList } from '../../../routes';
+import { styled } from '../../../styles';
 
 const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: {
@@ -23,7 +23,7 @@ const ScrollView = styled.ScrollView.attrs(() => ({
 
 const Text = styled.Text`
   font-size: 15;
-  color: #8f8e94;
+  color: ${({ theme }) => theme.textColors.secondary};
 `;
 
 const TextLink = styled.Text`
