@@ -129,6 +129,10 @@ describe('Verification', () => {
     await element(by.text('Ja')).tap();
 
     await device.launchApp({ newInstance: true });
+
+    await waitFor(element(by.id('BurgerMenuButton')))
+      .toBeVisible()
+      .withTimeout(20000);
     await element(by.id('BurgerMenuButton')).tap();
 
     await element(by.text('unverifizierter Nutzer')).tap();
