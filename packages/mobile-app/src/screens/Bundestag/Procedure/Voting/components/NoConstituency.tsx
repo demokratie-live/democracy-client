@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import styled from 'styled-components/native';
 
 // components
 import Constituency from './Constituency';
@@ -7,6 +6,7 @@ import PieChart from '../../components/Charts/PieChart';
 import { RootStackParamList } from '../../../../../routes';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { ButtonNext, Space } from '../../../../modals/Verification/Start';
+import { styled } from '../../../../../styles';
 
 const Wrapper = styled.View<Pick<Props, 'noButton'>>`
   align-items: center;
@@ -26,7 +26,7 @@ const PieChartWrapper = styled.View`
 
 const Text = styled.Text`
   font-size: 13;
-  color: #9b9b9b;
+  color: ${({ theme }) => theme.textColors.secondary};
   text-align: center;
   padding-horizontal: 18;
 `;
