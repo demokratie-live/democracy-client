@@ -32,7 +32,7 @@ const myTheme: ThemeInterface = {
   },
   textColors: {
     primary: 'pink',
-    secondary: '#777',
+    secondary: '#555',
     inverted: 'orange',
   },
   colors: {
