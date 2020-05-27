@@ -49,6 +49,10 @@ describe('Verification', () => {
 
     await element(by.id('VerificationCodeInput')).typeText('000000');
 
+    await waitFor(element(by.text('Später')))
+      .toBeVisible()
+      .withTimeout(20000);
+
     await element(by.text('Später')).tap();
 
     await expect(element(by.text('verifizierter Nutzer'))).toBeVisible();
