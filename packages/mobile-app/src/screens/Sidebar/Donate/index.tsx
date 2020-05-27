@@ -175,6 +175,9 @@ export const DonateScreen: React.FC<Props> = () => {
       {Platform.OS === 'ios' ? (
         <Wrapper>
           <TouchableOpacity
+            style={{
+              alignItems: 'center',
+            }}
             onPress={() =>
               Linking.openURL('https://donorbox.org/democracy-app')
             }>
