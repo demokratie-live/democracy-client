@@ -27,8 +27,6 @@ import { useQuery } from '@apollo/react-hooks';
 import ChartLegend from '../components/Charts/ChartLegend';
 import NoVotesPlaceholder from '../../../WahlOMeter/NoVotesPlaceholder';
 import { styled } from '../../../../styles';
-import { NotificationsContext } from '../../../../context/NotificationPermission';
-import { PushInstructions } from '../../../modals/Introduction/PushInstructions';
 import { Centered } from '@democracy-deutschland/mobile-ui/src/components/shared/Centered';
 
 const Wrapper = styled.View`
@@ -107,9 +105,6 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
   const [chartWidth] = useState(
     Math.min(Dimensions.get('screen').width, Dimensions.get('screen').height),
   );
-  const { notificationSettings, hasPermissions } = useContext(
-    NotificationsContext,
-  );
   const [showWarning, setShowWarning] = useState(true);
   const [selected, setSelected] = useState(0);
   const { constituency } = useContext(ConstituencyContext);
@@ -131,7 +126,7 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
     }
   };
 
-  const { selection, procedureId, procedureObjId } = route.params;
+  const { selection, procedureId, procedureObjId, title } = route.params;
 
   const getMatchingProcedures = ({ votedProcedures }: ChartData) =>
     votedProcedures.proceduresByIdHavingVoteResults.procedures.filter(
@@ -264,15 +259,8 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
   if (!constituency) {
     Content = <NoConstituency navigation={navigation as any} />;
   }
-  if (
-    !notificationSettings.outcomePushs ||
-    !notificationSettings.enabled ||
-    !hasPermissions
-  ) {
-    Content = (
-      <PushInstructions finishAction={navigation.goBack} alreadyKnown={true} />
-    );
-  } else if (constituency && preparedData && !preparedData.length) {
+
+  if (constituency && preparedData && !preparedData.length) {
     Content = <NoVotesPlaceholder subline="Fraktionen" />;
   } else if (constituency && preparedData && preparedData.length) {
     Content = (
@@ -312,6 +300,7 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
           selection={selection}
           procedureId={procedureId}
           procedureObjId={procedureObjId}
+          title={title}
         />
       </BalloutBoxWrapper>
     </Wrapper>

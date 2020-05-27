@@ -30,6 +30,7 @@ import useAppState from 'react-native-appstate-hook';
 interface NotificationsInterface {
   hasPermissions: boolean;
   alreadyDenied: boolean;
+  outcomePushsDenied: boolean;
   notificationSettings: Pick<
     NotificationSettings_notificationSettings,
     | 'conferenceWeekPushs'
@@ -42,11 +43,13 @@ interface NotificationsInterface {
     options: UpdateNotificationSettingsVariables,
   ) => Promise<ExecutionResult<UpdateNotificationSettings>> | void;
   requestToken: () => void;
+  setOutcomePushsDenied: (value: boolean) => void;
 }
 
 const defaults: NotificationsInterface = {
   hasPermissions: false,
   alreadyDenied: false,
+  outcomePushsDenied: false,
   notificationSettings: {
     conferenceWeekPushs: false,
     enabled: false,
@@ -62,6 +65,11 @@ const defaults: NotificationsInterface = {
       'NotificationsContext: requestToken function is not defined',
     );
   },
+  setOutcomePushsDenied: () => {
+    throw new Error(
+      'NotificationsContext: setOutcomePushsDenied function is not defined',
+    );
+  },
 };
 
 export const NotificationsContext = createContext<NotificationsInterface>(
@@ -71,6 +79,7 @@ export const NotificationsContext = createContext<NotificationsInterface>(
 export const NotificationsProvider: React.FC = ({ children }) => {
   const [hasPermissions, setHasPermissions] = useState(defaults.hasPermissions);
   const [alreadyDenied, setAlreadyDenied] = useState(false);
+  const [outcomePushsDenied, setOutcomePushsDenied] = useState(false);
   const [notificationSettings, setNotificationSettings] = useState<
     NotificationsInterface['notificationSettings']
   >(defaults.notificationSettings);
@@ -95,6 +104,20 @@ export const NotificationsProvider: React.FC = ({ children }) => {
       }
     });
   }, [appState, alreadyDenied]);
+
+  useEffect(() => {
+    AsyncStorage.getItem('PUSH_OUTCOME_DENIED').then(value => {
+      if (value) {
+        setOutcomePushsDenied(true);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    if (outcomePushsDenied) {
+      AsyncStorage.setItem('PUSH_OUTCOME_DENIED', 'true');
+    }
+  }, [outcomePushsDenied]);
 
   useEffect(() => {
     if (data && data.notificationSettings) {
@@ -201,6 +224,8 @@ export const NotificationsProvider: React.FC = ({ children }) => {
         notificationSettings,
         update,
         requestToken,
+        outcomePushsDenied,
+        setOutcomePushsDenied,
       }}>
       {children}
     </NotificationsContext.Provider>

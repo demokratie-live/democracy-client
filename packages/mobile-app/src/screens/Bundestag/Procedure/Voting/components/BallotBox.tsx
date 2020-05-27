@@ -34,6 +34,7 @@ import { captureException } from '@sentry/react-native';
 import { SEARCH_PROCEDURES } from '../../../Search/graphql/query/searchProcedures';
 import { SearchContext } from '../../../../../context/Search';
 import { PureQueryOptions } from 'apollo-client';
+import { NotificationsContext } from '../../../../../context/NotificationPermission';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -82,13 +83,20 @@ interface Props {
   selection: VoteSelection.YES | VoteSelection.ABSTINATION | VoteSelection.NO;
   procedureId: string;
   procedureObjId: string;
+  title: string;
 }
 
 const BalloutBox: React.FC<Props> = ({
   selection,
   procedureId,
   procedureObjId,
+  title,
 }) => {
+  const {
+    notificationSettings,
+    hasPermissions,
+    outcomePushsDenied,
+  } = useContext(NotificationsContext);
   const { setLocalVote } = useContext(LocalVotesContext);
   const { constituency } = useContext(ConstituencyContext);
   const { term } = useContext(SearchContext);
@@ -200,7 +208,20 @@ const BalloutBox: React.FC<Props> = ({
                     constituency,
                     selection,
                   });
-                  navigation.goBack();
+                  if (
+                    (!notificationSettings.outcomePushs ||
+                      !notificationSettings.enabled ||
+                      !hasPermissions) &&
+                    !outcomePushsDenied
+                  ) {
+                    navigation.replace('OutcomePush', {
+                      finishAction: () => navigation.goBack(),
+                      procedureId: procedureId,
+                      title,
+                    });
+                  } else {
+                    navigation.goBack();
+                  }
                 })
                 .catch(votingError => {
                   refetchProcedure();
@@ -231,7 +252,12 @@ const BalloutBox: React.FC<Props> = ({
       selection,
       setLocalVote,
       procedureId,
+      notificationSettings.outcomePushs,
+      notificationSettings.enabled,
+      hasPermissions,
+      outcomePushsDenied,
       navigation,
+      title,
       refetchProcedure,
       previewAnimation,
     ],

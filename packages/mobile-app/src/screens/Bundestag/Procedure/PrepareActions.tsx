@@ -112,6 +112,7 @@ interface Props {
   notify: boolean;
   share: () => void;
   // active: boolean;
+  title: string;
 }
 
 type DetailScreenNavigationProps = CompositeNavigationProp<
@@ -132,6 +133,7 @@ const PrepareActions: React.FC<Props> = ({
   notify,
   share,
   // active,
+  title,
 }) => {
   const { constituency } = useContext(ConstituencyContext);
   const { saveState } = useContext(NavigationContext);
@@ -191,6 +193,7 @@ const PrepareActions: React.FC<Props> = ({
                   selection: VoteSelection.YES,
                   procedureId,
                   procedureObjId,
+                  title,
                 });
               }}
             />
@@ -210,6 +213,7 @@ const PrepareActions: React.FC<Props> = ({
                   selection: VoteSelection.ABSTINATION,
                   procedureId,
                   procedureObjId,
+                  title,
                 });
               }}
             />
@@ -227,6 +231,7 @@ const PrepareActions: React.FC<Props> = ({
                   selection: VoteSelection.NO,
                   procedureId,
                   procedureObjId,
+                  title,
                 });
               }}
             />

@@ -141,6 +141,7 @@ export const Procedure: FC<Props> = ({ route, navigation }) => {
     ) {
       navigation.navigate('NotificationInstruction', {
         done: toggleNotification,
+        title: data?.procedure.title,
       });
     } else {
       if (data) {
@@ -312,6 +313,7 @@ export const Procedure: FC<Props> = ({ route, navigation }) => {
         notify={!!notify}
         procedureId={procedureId}
         procedureObjId={_id}
+        title={title}
       />
     </Container>
   );
