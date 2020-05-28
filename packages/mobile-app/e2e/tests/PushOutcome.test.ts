@@ -13,7 +13,7 @@ describe('Push Outcome', () => {
     });
   });
 
-  it('disable push settings', async () => {
+  it(':ios: disable push settings', async () => {
     await clickThrowInstructions();
 
     await element(by.id('BurgerMenuButton')).tap();
