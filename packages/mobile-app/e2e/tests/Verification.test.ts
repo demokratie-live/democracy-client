@@ -1,11 +1,10 @@
 import { by, device, expect, element, init, waitFor } from 'detox';
+import {
+  clickThrowInstructions,
+  verifyBySidemenu,
+  getRandomNumber,
+} from '../helpers';
 const config = require('../../package.json').detox;
-
-const getRandomNumber = () => {
-  const min = 111111111;
-  const max = 9999999999999;
-  return (Math.random() * (max - min) + min).toString();
-};
 
 describe('Verification', () => {
   beforeEach(async () => {
@@ -15,11 +14,18 @@ describe('Verification', () => {
     await device.launchApp({ delete: true });
 
     // click throw instructions
-    try {
-      while (true) {
-        await element(by.id('PagerNextButton')).tap();
-      }
-    } catch (e) {}
+    await clickThrowInstructions({ element, by });
+    // try {
+    //   while (true) {
+    //     await element(by.id('PagerNextButton')).tap();
+    //   }
+    // } catch (e) {}
+  });
+
+  it('Basic auth', async () => {
+    await verifyBySidemenu();
+    await element(by.id('BurgerMenuButton')).tap();
+    await expect(element(by.text('verifizierter Nutzer'))).toBeVisible();
   });
 
   it('Szenario 1: Verifizieren via BurgerMenu/Profil', async () => {

@@ -171,9 +171,7 @@ export const NotificationsProvider: React.FC = ({ children }) => {
   }, [sendToken]);
 
   const requestToken = () => {
-    if (!DeviceInfo.isEmulatorSync()) {
-      Notifications.registerRemoteNotifications();
-    }
+    Notifications.registerRemoteNotifications();
   };
 
   // resend token when neccessary
