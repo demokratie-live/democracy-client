@@ -14,7 +14,7 @@ describe('Verification', () => {
     await device.launchApp({ delete: true });
 
     // click throw instructions
-    await clickThrowInstructions({ element, by });
+    await clickThrowInstructions();
     // try {
     //   while (true) {
     //     await element(by.id('PagerNextButton')).tap();

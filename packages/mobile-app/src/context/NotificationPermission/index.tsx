@@ -23,7 +23,6 @@ import {
 } from './graphql/mutation/__generated__/AddToken';
 import { ADD_TOKEN } from './graphql/mutation/AddToken';
 import AsyncStorage from '@react-native-community/async-storage';
-import DeviceInfo from 'react-native-device-info';
 import { checkNotifications } from 'react-native-permissions';
 import useAppState from 'react-native-appstate-hook';
 

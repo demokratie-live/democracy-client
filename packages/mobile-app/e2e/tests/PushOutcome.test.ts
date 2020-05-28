@@ -1,5 +1,5 @@
 import { by, device, expect, element, init } from 'detox';
-import { clickThrowInstructions, verifyBySidemenu } from '../helpers';
+import { clickThrowInstructions } from '../helpers';
 const config = require('../../package.json').detox;
 
 describe('Push Outcome', () => {
