@@ -36,7 +36,7 @@ const ScrollView = styled.ScrollView.attrs({
 
 const Headline = styled.Text`
   color: #000;
-  font-size: 22;
+  font-size: 25;
   margin-vertical: 18;
 `;
 
@@ -132,7 +132,7 @@ export const OutcomePushs: React.FC<Props> = ({ finishAction }) => {
             width={58}
             height={35}
             color="#f568c4"
-            style={{ position: 'absolute', left: 18 }}
+            style={{ position: 'absolute', left: 18, top: 18 }}
           />
           <SvgIconAppIos width={73} height={73} />
           <Headline>Ergebnisse erhalten</Headline>
@@ -178,7 +178,17 @@ export const OutcomePushs: React.FC<Props> = ({ finishAction }) => {
             onPress={pressDenie}
           />
         )}
-        <Button textColor="blue" text="Überspringen" onPress={doneAction} />
+
+        {!pushActive && (
+          <Subtitle>
+            Du kannst die Benachrichtigungen jederzeit in den App-Einstellungen
+            aktivieren
+          </Subtitle>
+        )}
+
+        {pushActive && (
+          <Button textColor="blue" text="Überspringen" onPress={doneAction} />
+        )}
       </ScrollView>
     </Wrapper>
   );
