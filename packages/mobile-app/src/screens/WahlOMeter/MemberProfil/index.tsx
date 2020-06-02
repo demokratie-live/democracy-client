@@ -61,7 +61,7 @@ const TextGrey = styled(Text)`
 `;
 
 const TextLighGrey = styled(Text)`
-  color: #9b9b9b;
+  color: ${({ theme }) => theme.textColors.secondary};
 `;
 
 const SegmentWrapper = styled.View`

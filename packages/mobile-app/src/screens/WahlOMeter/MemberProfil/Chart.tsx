@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
-import styled from 'styled-components/native';
+
 import Chart from '../HeaderChart';
+import { styled } from '../../../styles';
 
 const Wrapper = styled.View`
   flex-direction: row;
@@ -21,7 +22,7 @@ const ProcedureCountText = styled.Text`
 
 const Label = styled.Text`
   font-size: 17;
-  color: #9b9b9b;
+  color: ${({ theme }) => theme.textColors.secondary};
 `;
 
 interface Props {

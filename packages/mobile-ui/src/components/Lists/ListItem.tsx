@@ -1,8 +1,8 @@
 import React from 'react';
-import styled from 'styled-components/native';
 import { VotesIndex as VotesIndexCmp } from '../VotesIndex';
 import VoteDateCmp from '../shared/VoteDate.tsx/VoteDate';
 import { PieChart, Slice } from '../shared/Charts/PieChart';
+import { styled } from '../../../../mobile-app/src/styles';
 
 // import ActivityIndex from './ActivityIndex';
 // import DemocracyIconComponent from '../../iconfont/DemocracyFont';
@@ -46,7 +46,7 @@ const Title = styled.Text`
 const Subline = styled.Text`
   padding-top: 8;
   font-size: 15;
-  color: #8f8e94;
+  color: ${({ theme }) => theme.textColors.secondary};
 `;
 
 const PaddingRight = styled.View`

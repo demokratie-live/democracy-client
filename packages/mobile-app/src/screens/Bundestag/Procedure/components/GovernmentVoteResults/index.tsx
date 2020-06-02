@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import { Dimensions, Platform } from 'react-native';
 // eslint-disable-next-line import/default
 import Swiper from 'react-native-swiper';
-import styled from 'styled-components/native';
 
 // Components
 import BarChart from './BarChart';
@@ -18,6 +17,7 @@ import { Procedure_procedure_voteResults } from '../../graphql/query/__generated
 import { PartyChartChartData } from './PartyChart/Component';
 import { ConstituencyContext } from '../../../../../context/Constituency';
 import { InitialStateContext } from '../../../../../context/InitialStates';
+import { styled } from '../../../../../styles';
 
 export const { width, height } = Dimensions.get('window');
 
@@ -58,7 +58,7 @@ const DecisionText = styled.Text`
 `;
 
 const RepresentativeText = styled.Text`
-  color: #9b9b9b;
+  color: ${({ theme }) => theme.textColors.secondary};
   text-align: center;
   font-size: 12;
 `;

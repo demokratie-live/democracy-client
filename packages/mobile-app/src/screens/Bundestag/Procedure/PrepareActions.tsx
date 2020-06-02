@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import styled from 'styled-components/native';
 
 import VoteButton from './components/VoteButton';
 import ActionButton from './components/ActionButton';
@@ -26,6 +25,7 @@ import {
 import { ConstituencyContext } from '../../../context/Constituency';
 import { NavigationContext } from '../../../context/Navigation';
 import { RootStackParamList } from '../../../routes';
+import { styled } from '../../../styles';
 
 const SegmentWrapper = styled.View`
   padding-vertical: 14;
@@ -58,7 +58,7 @@ const VoteButtonWrapper = styled.View`
 const VoteButtonLabel = styled.Text`
   padding-top: 11;
   font-size: 12;
-  color: rgb(150, 150, 150);
+  color: ${({ theme }) => theme.textColors.secondary};
 `;
 
 const Title = styled.Text`

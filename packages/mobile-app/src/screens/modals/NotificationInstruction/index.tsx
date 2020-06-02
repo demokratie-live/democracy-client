@@ -27,7 +27,7 @@ const Headline = styled.Text`
 `;
 
 const Subtitle = styled.Text`
-  color: #9b9b9b;
+  color: ${({ theme }) => theme.textColors.secondary};
   font-size: 15;
   padding-top: 14;
   padding-bottom: 52;
