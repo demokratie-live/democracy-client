@@ -91,7 +91,7 @@ describe('Verification', () => {
     try {
       await element(by.label('VERGANGEN VERGANGEN')).tap();
     } catch (error) {
-      await element(by.text('VERGANGEN')).tap();
+      await element(by.id('tabBarPastItem')).tap();
     }
 
     await element(by.id('ListItem-PAST-0')).tap();
