@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Dimensions } from 'react-native';
-import styled from 'styled-components/native';
+
 // Components
 import ChartLegend from '../../components/Charts/ChartLegend';
 // GraphQL
@@ -13,6 +13,7 @@ import PartyChart, {
 // import { SegmentedData } from '../../../List';
 import { PartyChartData } from './graphql/query/__generated__/PartyChartData';
 import { PartyChartRowValues } from '../../components/GovernmentVoteResults/PartyChart/PartyRow';
+import { styled } from '../../../../../styles';
 
 const Wrapper = styled.View`
   align-items: center;
@@ -20,7 +21,7 @@ const Wrapper = styled.View`
 
 const Text = styled.Text`
   padding-bottom: 18;
-  color: #9b9b9b;
+  color: ${({ theme }) => theme.textColors.secondary};
   font-size: 14;
   text-align: center;
 `;
