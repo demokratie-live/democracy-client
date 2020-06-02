@@ -1,4 +1,5 @@
 import { by, device, expect, element, init } from 'detox';
+import { clickThrowInstructions } from '../helpers';
 const config = require('../../package.json').detox;
 
 describe('Instructions', () => {
@@ -10,11 +11,7 @@ describe('Instructions', () => {
   });
 
   it('click throw all screens', async () => {
-    try {
-      while (true) {
-        await element(by.id('PagerNextButton')).tap();
-      }
-    } catch (e) {}
+    await clickThrowInstructions();
     await expect(element(by.id('PagerNextButton'))).toBeNotVisible();
   });
 });
