@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components/native';
+import { styled } from '../../../styles';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -30,9 +30,8 @@ const DueDate = styled.Text`
 
 const Description = styled.Text`
   font-size: 13;
-  color: #5f5f5b;
+  color: ${({ theme }) => theme.textColors.secondary};
 `;
-// color: #9b9b9b;
 
 interface Props {
   money: string;

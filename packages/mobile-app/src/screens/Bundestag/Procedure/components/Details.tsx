@@ -43,7 +43,7 @@ const DefTitleRight = styled(DefTitle)`
 
 const DefDescr = styled.Text`
   font-size: 14;
-  color: rgb(150, 150, 150);
+  color: ${({ theme }) => theme.textColors.secondary};
 `;
 
 const Content = styled.View`

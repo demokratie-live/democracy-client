@@ -10,7 +10,7 @@ const Wrapper = styled.TouchableOpacity`
 `;
 
 const Text = styled.Text`
-  color: #8f8e94;
+  color: ${({ theme }) => theme.textColors.secondary};
 `;
 
 const LinkColorText = styled.Text`

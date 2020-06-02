@@ -70,7 +70,7 @@ const Text = styled.Text`
 `;
 
 const TextLighGrey = styled(Text)`
-  color: #9b9b9b;
+  color: ${({ theme }) => theme.textColors.secondary};
 `;
 
 const ChartWrapper = styled.View`

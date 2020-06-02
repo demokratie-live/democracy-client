@@ -1,8 +1,9 @@
 import React from 'react';
-import styled from 'styled-components/native';
+
 import { Dimensions, Platform, Image, ImageSourcePropType } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { PageProps } from '../Pager';
+import { styled } from '../../../../mobile-app/src/styles';
 
 const Container = styled.View`
   flex: 1;
@@ -32,7 +33,7 @@ const TextHead = styled.Text`
 `;
 
 const TextSub = styled.Text`
-  color: #9b9b9b;
+  color: ${({ theme }) => theme.textColors.secondary};
   font-size: 15;
   padding-top: 1;
   text-align: center;
