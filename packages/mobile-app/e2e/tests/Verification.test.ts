@@ -85,7 +85,9 @@ describe('Verification', () => {
   });
 
   it('Szenario 3: Verifizieren via Abstimmen', async () => {
-    await element(by.id('ListItem-CONFERENCEWEEKS_PLANNED-0')).tap();
+    await element(by.label('VERGANGEN VERGANGEN')).tap();
+
+    await element(by.id('ListItem-PAST-0')).tap();
 
     await element(by.id('ProcedureScrollView')).scrollTo('bottom');
 
