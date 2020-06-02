@@ -85,7 +85,11 @@ describe('Verification', () => {
   });
 
   it('Szenario 3: Verifizieren via Abstimmen', async () => {
-    await element(by.label('VERGANGEN VERGANGEN')).tap();
+    try {
+      await element(by.label('VERGANGEN VERGANGEN')).tap();
+    } catch (error) {
+      await element(by.text('VERGANGEN')).tap();
+    }
 
     await element(by.id('ListItem-PAST-0')).tap();
 
