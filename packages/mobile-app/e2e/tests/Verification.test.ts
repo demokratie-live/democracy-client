@@ -1,11 +1,10 @@
 import { by, device, expect, element, init, waitFor } from 'detox';
+import {
+  clickThrowInstructions,
+  verifyBySidemenu,
+  getRandomNumber,
+} from '../helpers';
 const config = require('../../package.json').detox;
-
-const getRandomNumber = () => {
-  const min = 111111111;
-  const max = 9999999999999;
-  return (Math.random() * (max - min) + min).toString();
-};
 
 describe('Verification', () => {
   beforeEach(async () => {
@@ -15,14 +14,13 @@ describe('Verification', () => {
     await device.launchApp({ delete: true });
 
     // click throw instructions
-    try {
-      while (true) {
-        await waitFor(element(by.id('PagerNextButton')))
-          .toBeVisible()
-          .withTimeout(20000);
-        await element(by.id('PagerNextButton')).tap();
-      }
-    } catch (e) {}
+    await clickThrowInstructions();
+  });
+
+  it('Basic auth', async () => {
+    await verifyBySidemenu();
+    await element(by.id('BurgerMenuButton')).tap();
+    await expect(element(by.text('verifizierter Nutzer'))).toBeVisible();
   });
 
   it('Szenario 1: Verifizieren via BurgerMenu/Profil', async () => {
@@ -90,7 +88,13 @@ describe('Verification', () => {
   });
 
   it('Szenario 3: Verifizieren via Abstimmen', async () => {
-    await element(by.id('ListItem-CONFERENCEWEEKS_PLANNED-0')).tap();
+    try {
+      await element(by.label('VERGANGEN VERGANGEN')).tap();
+    } catch (error) {
+      await element(by.text('VERGANGEN')).tap();
+    }
+
+    await element(by.id('ListItem-PAST-0')).tap();
 
     await element(by.id('ProcedureScrollView')).scrollTo('bottom');
 

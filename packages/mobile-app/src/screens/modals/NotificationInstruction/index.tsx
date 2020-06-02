@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/core';
 import SvgNewMarker from '@democracy-deutschland/mobile-ui/src/components/Icons/Newmarker';
-import { Dimensions, Switch, Image } from 'react-native';
+import { Switch, Image } from 'react-native';
 import { styled } from '../../../styles';
 import { NotificationsContext } from '../../../context/NotificationPermission';
 import { defaultNotificationData } from '../Introduction/PushInstructions/data';
@@ -10,18 +10,15 @@ import { NotificationBox } from '../Introduction/PushInstructions/NotificationBo
 import { RootStackParamList } from '../../../routes';
 import { InitialStateContext } from '../../../context/InitialStates';
 
-const DEVICE_WIDTH = Dimensions.get('window').width;
-
 const Wrapper = styled.SafeAreaView`
-  width: ${DEVICE_WIDTH};
-  align-items: center;
+  flex: 1;
 `;
 
-const ScrollView = styled.ScrollView.attrs({
-  contentContainerStyle: {
-    alignItems: 'center',
-  },
-})``;
+const ScrollView = styled.ScrollView.attrs({})``;
+
+const HeaderWrapper = styled.View`
+  align-items: center;
+`;
 
 const Headline = styled.Text`
   color: #000;
@@ -39,7 +36,6 @@ const Subtitle = styled.Text`
 `;
 
 const SwitchWrapper = styled.View`
-  width: ${DEVICE_WIDTH};
   flex-direction: row;
   justify-content: space-between;
   padding-horizontal: 18;
@@ -72,7 +68,7 @@ export const NotificationInstructionScreen: React.FC = () => {
 
   const notification = {
     title: defaultNotificationData.outcomePushs.title,
-    text: defaultNotificationData.outcomePushs.text,
+    text: route.params.title || defaultNotificationData.outcomePushs.text,
     description: defaultNotificationData.outcomePushs.description,
   };
 
@@ -93,7 +89,7 @@ export const NotificationInstructionScreen: React.FC = () => {
   return (
     <Wrapper>
       <ScrollView>
-        <>
+        <HeaderWrapper>
           <SvgNewMarker
             width={58}
             height={35}
@@ -109,7 +105,7 @@ export const NotificationInstructionScreen: React.FC = () => {
             Abstimmung informiert, wenn Du uns erlaubst, Dir Mitteilungen zu
             senden.
           </Subtitle>
-        </>
+        </HeaderWrapper>
         <NotificationBox
           icon={require('@democracy-deutschland/mobile-ui/src/components/Introduction/assets/icon.logo.png')}
           owner="DEMOCRACY"
@@ -123,7 +119,6 @@ export const NotificationInstructionScreen: React.FC = () => {
         <Button
           style={{
             marginHorizontal: 18,
-            width: DEVICE_WIDTH - 36,
           }}
           backgroundColor="blue"
           textColor="white"
@@ -134,7 +129,6 @@ export const NotificationInstructionScreen: React.FC = () => {
         <Button
           style={{
             marginHorizontal: 18,
-            width: DEVICE_WIDTH - 36,
           }}
           textColor="red"
           text="Später"
