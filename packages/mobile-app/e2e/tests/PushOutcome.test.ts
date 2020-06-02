@@ -22,7 +22,8 @@ describe('Push Outcome', () => {
     try {
       await expect(element(by.id('outcomePushsSwitch'))).toHaveValue('0');
     } catch (error) {
-      await element(by.id('outcomePushsSwitch')).tap();
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      await element(by.id('outcomePushsSwitch')).longPress();
     }
     await new Promise(resolve => setTimeout(resolve, 1000));
     await expect(element(by.id('outcomePushsSwitch'))).toHaveValue('0');
@@ -41,7 +42,7 @@ describe('Push Outcome', () => {
     await expect(element(by.id('outcomePushsSwitch'))).toHaveValue('1');
 
     await new Promise(resolve => setTimeout(resolve, 1000));
-    await element(by.id('outcomePushsSwitch')).tap();
+    await element(by.id('outcomePushsSwitch')).longPress();
 
     await new Promise(resolve => setTimeout(resolve, 1000));
     await expect(element(by.id('outcomePushsSwitch'))).toHaveValue('0');
