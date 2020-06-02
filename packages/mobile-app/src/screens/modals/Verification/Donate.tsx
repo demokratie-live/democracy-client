@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import styled from 'styled-components/native';
+
 import { Platform } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/core';
 import { InitialStateContext } from '../../../context/InitialStates';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NavigationContext } from '../../../context/Navigation';
+import { styled } from '../../../styles';
 
 const Container = styled.ScrollView.attrs(() => ({
   contentContainerStyle: {
@@ -47,7 +48,7 @@ const TextCenter = styled.Text`
   align-content: center;
   justify-content: space-between;
   flex: 1;
-  color: #9b9b9b;
+  color: ${({ theme }) => theme.textColors.secondary};
   font-size: 17;
   padding-top: 50;
   font-family: ${Platform.OS === 'ios'

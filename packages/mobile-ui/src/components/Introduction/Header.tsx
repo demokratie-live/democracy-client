@@ -1,6 +1,7 @@
 import React from 'react';
-import styled from 'styled-components/native';
+
 import { Platform, ImageSourcePropType } from 'react-native';
+import { styled } from '../../../../mobile-app/src/styles';
 
 const ContainerHead = styled.View``;
 
@@ -24,7 +25,7 @@ const TextHead = styled.Text`
 `;
 
 const TextSub = styled.Text`
-  color: #9b9b9b;
+  color: ${({ theme }) => theme.textColors.secondary};
   font-size: 15;
   padding-top: 1;
   /* font-family: ${

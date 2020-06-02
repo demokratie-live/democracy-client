@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components/native';
+import { styled } from '../../../mobile-app/src/styles';
 
 interface Props {
   voted: boolean;
@@ -7,7 +7,8 @@ interface Props {
 }
 
 const Number = styled.Text<Pick<Props, 'voted'>>`
-  color: ${({ voted }) => (voted ? '#4494d3' : '#8f8e94')};
+  color: ${({ voted, theme }) =>
+    voted ? '#4494d3' : theme.textColors.secondary};
   font-weight: bold;
 `;
 

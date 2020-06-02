@@ -1,6 +1,6 @@
 {
   "name": "app",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "private": true,
   "scripts": {
     "android": "react-native run-android --variant=refactorDebug --appIdSuffix=refactor",
@@ -169,6 +169,15 @@
           "os": "13.4.1"
         }
       },
+      "ios.sim.release": {
+        "type": "ios.simulator",
+        "binaryPath": "ios/build/Build/Products/Internal.Release-iphonesimulator/DEMOCRACY.app",
+        "build": "xcodebuild -workspace ios/client.xcworkspace -scheme Internal -configuration Internal.Release -sdk iphonesimulator -derivedDataPath ios/build",
+        "device": {
+          "type": "iPhone 11",
+          "os": "13.4.1"
+        }
+      },
       "android.emu.internal.local": {
         "binaryPath": "android/app/build/outputs/apk/internal/debug/app-internal-debug.apk",
         "build": "cd android && ./gradlew assembleInternal assembleAndroidTest -DtestBuildType=debug --warning-mode=all && cd ..",
@@ -183,13 +192,11 @@
         "type": "android.emulator",
         "name": "emu"
       },
-      "android.emu.release": {
-        "binaryPath": "android/app/build/outputs/apk/release/app-release.apk",
-        "build": "cd android && ./gradlew assembleRelease assembleAndroidTest -DtestBuildType=release && cd ..",
+      "android.emu.internal.release": {
+        "binaryPath": "android/app/build/outputs/apk/internal/release/app-internal-release.apk",
+        "build": "cd android && ./gradlew assembleInternalRelease assembleAndroidTest -DtestBuildType=release && cd ..",
         "type": "android.emulator",
-        "device": {
-          "avdName": "Nexus_5X_API_26"
-        }
+        "name": "emu"
       }
     }
   }
