@@ -92,6 +92,7 @@ const TabViewNavigation: React.FC<Props> = ({ navigation }) => {
         name="Vergangen"
         component={List}
         initialParams={{ list: ListType.PAST }}
+        options={{ tabBarTestID: 'tabBarPastItem' }}
       />
       <TabNavigation.Screen
         name="Top 100"

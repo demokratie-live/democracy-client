@@ -184,7 +184,7 @@
         "build": "cd android && ./gradlew assembleInternal assembleAndroidTest -DtestBuildType=debug --warning-mode=all && cd ..",
         "type": "android.emulator",
         "device": {
-          "avdName": "Pixel_2_API_28"
+          "avdName": "Pixel_3a_API_29"
         }
       },
       "android.emu.internal.debug": {

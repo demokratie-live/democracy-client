@@ -15,11 +15,6 @@ describe('Verification', () => {
 
     // click throw instructions
     await clickThrowInstructions();
-    // try {
-    //   while (true) {
-    //     await element(by.id('PagerNextButton')).tap();
-    //   }
-    // } catch (e) {}
   });
 
   it('Basic auth', async () => {
@@ -88,7 +83,7 @@ describe('Verification', () => {
     try {
       await element(by.label('VERGANGEN VERGANGEN')).tap();
     } catch (error) {
-      await element(by.text('VERGANGEN')).tap();
+      await element(by.id('tabBarPastItem')).tap();
     }
 
     await element(by.id('ListItem-PAST-0')).tap();
