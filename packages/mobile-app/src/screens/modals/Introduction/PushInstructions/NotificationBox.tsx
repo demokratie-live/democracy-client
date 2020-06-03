@@ -25,12 +25,6 @@ const Head = styled.View`
   margin-bottom: 8;
 `;
 
-const Icon = styled.Image`
-  width: 20;
-  height: 20;
-  margin-right: 5;
-`;
-
 const Owner = styled.Text`
   font-size: 13;
   padding-left: 8;
@@ -58,7 +52,7 @@ export const NotificationBox: React.FC<Props> = ({
     <Wrapper>
       {(!!icon || !!owner) && (
         <Head>
-          <SvgIconappios width={18} height={18} />
+          <SvgIconappios width={20} height={20} />
           {!!owner && <Owner>{owner}</Owner>}
         </Head>
       )}
