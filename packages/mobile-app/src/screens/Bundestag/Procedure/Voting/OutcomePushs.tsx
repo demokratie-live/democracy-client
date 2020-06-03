@@ -22,7 +22,6 @@ const DEVICE_WIDTH = Dimensions.get('window').width;
 type RoutePropOP = RouteProp<BundestagRootStackParamList, 'OutcomePush'>;
 
 const Wrapper = styled.View`
-  /* width: 100%; */
   align-items: center;
 `;
 
@@ -127,12 +126,12 @@ export const OutcomePushs: React.FC<Props> = ({ finishAction }) => {
   return (
     <Wrapper>
       <ScrollView>
-        <View style={{ paddingTop: 18, alignItems: 'center' }}>
+        <View style={{ paddingTop: 36, alignItems: 'center' }}>
           <SvgNewMarker
             width={58}
             height={35}
             color="#f568c4"
-            style={{ position: 'absolute', left: 18, top: 18 }}
+            style={{ position: 'absolute', left: 18, top: 36 }}
           />
           <SvgIconAppIos width={73} height={73} />
           <Headline>Ergebnisse erhalten</Headline>
