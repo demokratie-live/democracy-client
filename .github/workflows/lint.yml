@@ -139,6 +139,7 @@ jobs:
         run: detox build -c android.emu.internal.release
         working-directory: packages/mobile-app
         env:
+          NODE_OPTIONS: --max_old_space_size=4096
           ANDROID_PASS: ${{ secrets.ANDROID_PASS }}
 
       - name: Run Test
