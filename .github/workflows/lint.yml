@@ -35,6 +35,7 @@ jobs:
 
   test-ios:
     name: Test detox ios
+    needs: lint
     runs-on: macos-latest
     env:
       DEVELOPER_DIR: /Applications/Xcode_11.4.1.app/Contents/Developer
@@ -84,6 +85,7 @@ jobs:
 
   test-android:
     name: Test detox Android
+    needs: lint
     runs-on: macos-latest
     strategy:
       matrix:
@@ -137,6 +139,7 @@ jobs:
         run: detox build -c android.emu.internal.release
         working-directory: packages/mobile-app
         env:
+          NODE_OPTIONS: --max_old_space_size=4096
           ANDROID_PASS: ${{ secrets.ANDROID_PASS }}
 
       - name: Run Test
@@ -185,7 +188,7 @@ jobs:
           echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.production.gpg
 
       - name: Fix match prompt issue
-        run: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+        run: echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
 
       - name: Fastlane
         uses: maierj/fastlane-action@v1.4.0
