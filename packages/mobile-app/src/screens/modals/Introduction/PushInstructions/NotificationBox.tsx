@@ -26,7 +26,7 @@ const Head = styled.View`
 `;
 
 const Owner = styled.Text`
-  font-size: 13;
+  font-size: 15;
   padding-left: 8;
   color: #fff;
 `;
@@ -38,6 +38,7 @@ const Title = styled.Text`
 `;
 
 const Text = styled.Text`
+  padding-top: 3;
   font-size: 15;
   color: #fff;
 `;
