@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import styled from 'styled-components/native';
 
 import VoteButton from './components/VoteButton';
 import ActionButton from './components/ActionButton';
@@ -26,6 +25,7 @@ import {
 import { ConstituencyContext } from '../../../context/Constituency';
 import { NavigationContext } from '../../../context/Navigation';
 import { RootStackParamList } from '../../../routes';
+import { styled } from '../../../styles';
 
 const SegmentWrapper = styled.View`
   padding-vertical: 14;
@@ -58,7 +58,7 @@ const VoteButtonWrapper = styled.View`
 const VoteButtonLabel = styled.Text`
   padding-top: 11;
   font-size: 12;
-  color: rgb(150, 150, 150);
+  color: ${({ theme }) => theme.textColors.secondary};
 `;
 
 const Title = styled.Text`
@@ -112,6 +112,7 @@ interface Props {
   notify: boolean;
   share: () => void;
   // active: boolean;
+  title: string;
 }
 
 type DetailScreenNavigationProps = CompositeNavigationProp<
@@ -132,6 +133,7 @@ const PrepareActions: React.FC<Props> = ({
   notify,
   share,
   // active,
+  title,
 }) => {
   const { constituency } = useContext(ConstituencyContext);
   const { saveState } = useContext(NavigationContext);
@@ -191,6 +193,7 @@ const PrepareActions: React.FC<Props> = ({
                   selection: VoteSelection.YES,
                   procedureId,
                   procedureObjId,
+                  title,
                 });
               }}
             />
@@ -210,6 +213,7 @@ const PrepareActions: React.FC<Props> = ({
                   selection: VoteSelection.ABSTINATION,
                   procedureId,
                   procedureObjId,
+                  title,
                 });
               }}
             />
@@ -227,6 +231,7 @@ const PrepareActions: React.FC<Props> = ({
                   selection: VoteSelection.NO,
                   procedureId,
                   procedureObjId,
+                  title,
                 });
               }}
             />

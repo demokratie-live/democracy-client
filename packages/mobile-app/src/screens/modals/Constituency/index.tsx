@@ -65,7 +65,7 @@ const Plz = styled.Text.attrs({
   numberOfLines: 1,
 })`
   font-size: 15;
-  color: #8e8e93;
+  color: ${({ theme }) => theme.textColors.secondary};
 `;
 
 const Row = styled.TouchableOpacity`

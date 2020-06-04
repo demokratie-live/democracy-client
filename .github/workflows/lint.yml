@@ -33,130 +33,131 @@ jobs:
         with:
           commit_message: Action – commit autofix changes
 
-  # test-ios:
-  #   name: Test detox ios
-  #   needs: lint
-  #   runs-on: macos-latest
-  #   env:
-  #     DEVELOPER_DIR: /Applications/Xcode_11.4.1.app/Contents/Developer
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
+  test-ios:
+    name: Test detox ios
+    needs: lint
+    runs-on: macos-latest
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_11.4.1.app/Contents/Developer
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-  #     - name: Setup NodeJS
-  #       uses: actions/setup-node@v1
-  #       with:
-  #         node-version: "12.x"
+      - name: Setup NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
 
-  #     - run: yarn install
+      - run: yarn install
 
-  #     - name: Prepare Detox
-  #       run: |
-  #         brew tap wix/brew
-  #         brew install applesimutils
+      - name: Prepare Detox
+        run: |
+          brew tap wix/brew
+          brew install applesimutils
 
-  #     - name: list devices
-  #       run: applesimutils --list
+      - name: list devices
+        run: applesimutils --list
 
-  #     - run: pod install
-  #       working-directory: packages/mobile-app/ios
+      - run: pod install
+        working-directory: packages/mobile-app/ios
 
-  #     - name: Encrypt GPG secure files
-  #       run: |
-  #         brew install gnupg@1.4
-  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.internal.gpg
-  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
-  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
-  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.production.gpg
+      - name: Encrypt GPG secure files
+        run: |
+          brew install gnupg@1.4
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.internal.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.production.gpg
 
-  #     - run: npm install -g detox-cli
+      - run: npm install -g detox-cli
 
-  #     - run: FORCE_BUNDLING=true detox build -c ios.sim.debug
-  #       working-directory: packages/mobile-app
+      - run: FORCE_BUNDLING=true detox build -c ios.sim.release
+        working-directory: packages/mobile-app
 
-  #     - run: detox test -c ios.sim.debug --record-videos all --take-screenshots all
-  #       working-directory: packages/mobile-app
+      - run: detox test -c ios.sim.release --record-videos all --take-screenshots all
+        working-directory: packages/mobile-app
 
-  #     - uses: actions/upload-artifact@v1
-  #       if: always()
-  #       with:
-  #         name: Detox iOS
-  #         path: packages/mobile-app/artifacts
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: Detox iOS
+          path: packages/mobile-app/artifacts
 
-  # test-android:
-  #   name: Test detox Android
-  #   needs: lint
-  #   runs-on: macos-latest
-  #   strategy:
-  #     matrix:
-  #       sdk: [29]
-  #       device: ["Nexus 5X"]
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
+  test-android:
+    name: Test detox Android
+    needs: lint
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        sdk: [29]
+        device: ["Nexus 5X"]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-  #     - name: Setup NodeJS
-  #       uses: actions/setup-node@v1
-  #       with:
-  #         node-version: "12.x"
+      - name: Setup NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
 
-  #     - run: yarn install
+      - run: yarn install
 
-  #     - run: npm install -g detox-cli
+      - run: npm install -g detox-cli
 
-  #     - name: Encrypt GPG secure files
-  #       run: |
-  #         brew install gnupg@1.4
-  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/my-release-key.keystore.gpg
-  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/app/src/refactor/google-services.json.gpg
-  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/app/src/internal/google-services.json.gpg
-  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/app/src/alpha/google-services.json.gpg
-  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/app/google-services.json.gpg
-  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/democracy2-release-key.keystore.gpg
-  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.internal.gpg
-  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
-  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
-  #         echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.production.gpg
-  #         cp packages/mobile-app/.env.internal packages/mobile-app/.env
-  #         cp packages/mobile-app/.env.internal packages/mobile-app/.env.development
+      - name: Encrypt GPG secure files
+        run: |
+          brew install gnupg@1.4
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/my-release-key.keystore.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/app/src/refactor/google-services.json.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/app/src/internal/google-services.json.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/app/src/alpha/google-services.json.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/app/google-services.json.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/democracy2-release-key.keystore.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.internal.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.production.gpg
+          cp packages/mobile-app/.env.internal packages/mobile-app/.env
+          cp packages/mobile-app/.env.internal packages/mobile-app/.env.development
 
-  #     - name: Prepare minSdkVerson for Wix DETOX
-  #       run: yarn postinstall:android-e2e-fix
+      - name: Prepare minSdkVerson for Wix DETOX
+        run: yarn postinstall:android-e2e-fix
 
-  #     - uses: malinskiy/action-android/install-sdk@release/0.0.5
-  #     - run: adb devices
-  #     - run: echo $ANDROID_HOME
-  #     - run: ls -l ~/.android
+      - uses: malinskiy/action-android/install-sdk@release/0.0.5
+      - run: adb devices
+      - run: echo $ANDROID_HOME
+      - run: ls -l ~/.android
 
-  #     - name: Create Emulator
-  #       uses: ManAnRuck/action-create-emulator@master
-  #       with:
-  #         package: system-images;android-${{ matrix.sdk }};google_apis;x86
-  #         device: "${{ matrix.device }}"
+      - name: Create Emulator
+        uses: ManAnRuck/action-create-emulator@master
+        with:
+          package: system-images;android-${{ matrix.sdk }};google_apis;x86
+          device: "${{ matrix.device }}"
 
-  #     - name: Build Test
-  #       if: ${{ success() }} || ${{ failure() }}
-  #       run: detox build -c android.emu.internal.debug
-  #       working-directory: packages/mobile-app
-  #       env:
-  #         ANDROID_PASS: ${{ secrets.ANDROID_PASS }}
+      - name: Build Test
+        if: ${{ success() }} || ${{ failure() }}
+        run: detox build -c android.emu.internal.release
+        working-directory: packages/mobile-app
+        env:
+          NODE_OPTIONS: --max_old_space_size=4096
+          ANDROID_PASS: ${{ secrets.ANDROID_PASS }}
 
-  #     - name: Run Test
-  #       run: |
-  #         ./e2e/android-anr-fix.sh &
-  #         yarn start &
-  #         detox test -c android.emu.internal.debug --device-name test --record-videos all --take-screenshots all
-  #       working-directory: packages/mobile-app
+      - name: Run Test
+        run: |
+          ./e2e/android-anr-fix.sh &
+          yarn start &
+          detox test -c android.emu.internal.release --device-name test --record-videos all --take-screenshots all
+        working-directory: packages/mobile-app
 
-  #     - uses: actions/upload-artifact@v1
-  #       if: always()
-  #       with:
-  #         name: Detox Android (${{ matrix.sdk }} - ${{ matrix.device }})
-  #         path: packages/mobile-app/artifacts
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: Detox Android (${{ matrix.sdk }} - ${{ matrix.device }})
+          path: packages/mobile-app/artifacts
 
   build-ios:
     name: Build ios
-    # needs: [test-ios, test-android]
+    needs: [lint, test-ios, test-android]
     if: github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta' || github.ref == 'refs/heads/master'
     runs-on: macos-latest
     env:
@@ -187,7 +188,7 @@ jobs:
           echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.production.gpg
 
       - name: Fix match prompt issue
-        run: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+        run: echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
 
       - name: Fastlane
         uses: maierj/fastlane-action@v1.4.0
@@ -203,7 +204,7 @@ jobs:
 
   build-andriod:
     name: Build Android
-    # needs: [test-ios, test-android]
+    needs: [lint, test-ios, test-android]
     if: github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta' || github.ref == 'refs/heads/master'
     runs-on: macos-latest
     steps:

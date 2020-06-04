@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { ActivityIndicator, Dimensions, Platform } from 'react-native';
 // eslint-disable-next-line import/default
 import Swiper from 'react-native-swiper'; // TODO Replace this library (it's not good maintained)
-import styled from 'styled-components/native';
 // Components
 import getConstituencySvgs from './svgs/constituencies';
 import GermanySvgComponent from './svgs/GermanySVG';
@@ -18,11 +17,12 @@ import {
 } from '../graphql/query/__generated__/Procedure';
 import { ConstituencyContext } from '../../../../context/Constituency';
 import { InitialStateContext } from '../../../../context/InitialStates';
+import { styled } from '../../../../styles';
 
 export const { width, height } = Dimensions.get('window');
 
 const RepresentativeText = styled.Text`
-  color: #9b9b9b;
+  color: ${({ theme }) => theme.textColors.secondary};
   text-align: center;
   font-size: 12;
   padding-bottom: 18;

@@ -155,6 +155,7 @@ export const Settings: React.FC<Props> = () => {
             onPress: navigateTo('notifications-settings'),
             component: (
               <Switch
+                testID="outcomePushsSwitch"
                 value={!!notificationSettings.outcomePushs}
                 onValueChange={value => {
                   updateNotificationSettings({

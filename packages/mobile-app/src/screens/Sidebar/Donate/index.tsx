@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components/native';
-import { Platform, Linking, View } from 'react-native';
+import { Platform, Linking, View, Image, TouchableOpacity } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 
 // Components
@@ -34,6 +33,7 @@ import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Fold
 import { DONATION_STATUS } from './graphql/query/donationStatus';
 import { useQuery } from '@apollo/react-hooks';
 import { MadeWithLove } from '../../../components/MadeWithLove';
+import { styled } from '../../../styles';
 
 const ScrollWrapper = styled.ScrollView.attrs({
   scrollIndicatorInsets: { right: 1 }, // TODO do cleanfix when there is a correct solution (already closed but not solved without workaround) https://github.com/facebook/react-native/issues/26610
@@ -51,13 +51,13 @@ const Wrapper = styled.View`
 const Headline = styled.Text`
   font-weight: bold;
   font-size: 15;
-  color: #8f8e94;
+  color: ${({ theme }) => theme.textColors.secondary};
   padding-bottom: 6;
 `;
 
 const Text = styled.Text`
   font-size: 15;
-  color: #8f8e94;
+  color: ${({ theme }) => theme.textColors.secondary};
 `;
 
 const TextLink = styled.Text`
@@ -68,7 +68,7 @@ const TextLink = styled.Text`
 
 const Version = styled.Text`
   font-size: 15;
-  color: #8f8e94;
+  color: ${({ theme }) => theme.textColors.secondary};
   padding-top: 28;
   padding-bottom: 11;
   text-align: center;
@@ -82,12 +82,12 @@ const DefinitionListWrapper = styled.View`
 const DefinitionListTitle = styled.Text`
   width: 30%;
   font-weight: 600;
-  color: #8f8e94;
+  color: ${({ theme }) => theme.textColors.secondary};
 `;
 
 const DefinitionListDescription = styled.Text`
   width: 70%;
-  color: #8f8e94;
+  color: ${({ theme }) => theme.textColors.secondary};
 `;
 
 interface Props {
@@ -174,11 +174,15 @@ export const DonateScreen: React.FC<Props> = () => {
       )}
       {Platform.OS === 'ios' ? (
         <Wrapper>
-          <Text>
-            {
-              'Die verbleibende Seite steht unter iOS leider nicht zur Verfügung.\n'
-            }
-          </Text>
+          <TouchableOpacity
+            style={{
+              alignItems: 'center',
+            }}
+            onPress={() =>
+              Linking.openURL('https://donorbox.org/democracy-app')
+            }>
+            <Image source={require('./assets/DonateButton.png')} />
+          </TouchableOpacity>
           <Version>{version}</Version>
         </Wrapper>
       ) : (

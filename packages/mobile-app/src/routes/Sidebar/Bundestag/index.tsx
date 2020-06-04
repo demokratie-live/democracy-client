@@ -8,6 +8,7 @@ import {
   Search,
   Procedure,
   VoteVerification,
+  OutcomePushs,
 } from '../../../screens/Bundestag';
 import TabView from './TabView';
 import { CompositeNavigationProp, useNavigation } from '@react-navigation/core';
@@ -28,10 +29,12 @@ export type BundestagRootStackParamList = {
     selection: VoteSelection.YES | VoteSelection.ABSTINATION | VoteSelection.NO;
     procedureId: string;
     procedureObjId: string;
+    title: string;
   };
   Filter: undefined;
   Search: undefined;
   MemberProfil: undefined;
+  OutcomePush: { finishAction: () => void; title: string; procedureId: string };
 };
 
 const BundestagRootStack = createStackNavigator<BundestagRootStackParamList>();
@@ -79,6 +82,13 @@ const BundestagRootNavigation = () => {
           component={VoteVerification}
           options={{
             title: 'Wahlurne',
+          }}
+        />
+        <BundestagRootStack.Screen
+          name="OutcomePush"
+          component={OutcomePushs}
+          options={{
+            headerShown: false,
           }}
         />
         <BundestagRootStack.Screen

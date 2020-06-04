@@ -28,7 +28,7 @@ export type RootStackParamList = {
   Introduction: { done?: string; lastStartWithVersion?: string };
   PushInstructions: {};
   Pdf: { url: string; title: string };
-  NotificationInstruction: { done: () => void };
+  NotificationInstruction: { done: () => void; title?: string };
   Constituency: { goBack?: boolean };
   // Verification
   // Verification: { procedureId?: string };

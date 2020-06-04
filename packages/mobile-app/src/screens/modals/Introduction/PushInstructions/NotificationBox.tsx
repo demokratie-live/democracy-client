@@ -1,6 +1,7 @@
 import React from 'react';
 import { styled } from '../../../../styles';
 import { ImageSourcePropType } from 'react-native';
+import SvgIconappios from '@democracy-deutschland/mobile-ui/src/components/Icons/IconAppIos';
 
 interface Props {
   icon?: ImageSourcePropType;
@@ -10,8 +11,8 @@ interface Props {
 }
 
 const Wrapper = styled.View`
+  width: 100%;
   background-color: #0007;
-  margin-horizontal: 11;
   padding-horizontal: 11;
   padding-top: 11;
   padding-bottom: 18;
@@ -24,14 +25,9 @@ const Head = styled.View`
   margin-bottom: 8;
 `;
 
-const Icon = styled.Image`
-  width: 20;
-  height: 20;
-  margin-right: 5;
-`;
-
 const Owner = styled.Text`
-  font-size: 13;
+  font-size: 15;
+  padding-left: 8;
   color: #fff;
 `;
 
@@ -42,6 +38,7 @@ const Title = styled.Text`
 `;
 
 const Text = styled.Text`
+  padding-top: 3;
   font-size: 15;
   color: #fff;
 `;
@@ -56,7 +53,7 @@ export const NotificationBox: React.FC<Props> = ({
     <Wrapper>
       {(!!icon || !!owner) && (
         <Head>
-          {!!icon && <Icon source={icon} />}
+          <SvgIconappios width={20} height={20} />
           {!!owner && <Owner>{owner}</Owner>}
         </Head>
       )}
