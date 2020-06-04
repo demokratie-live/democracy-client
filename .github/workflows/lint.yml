@@ -37,6 +37,7 @@ jobs:
     name: Test detox ios
     needs: lint
     runs-on: macos-latest
+    if: ${{ github.event_name == 'pull_request' || github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta' || github.ref == 'refs/heads/master' }}
     env:
       DEVELOPER_DIR: /Applications/Xcode_11.4.1.app/Contents/Developer
     steps:
@@ -87,6 +88,7 @@ jobs:
     name: Test detox Android
     needs: lint
     runs-on: macos-latest
+    if: ${{ github.event_name == 'pull_request' || github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta' || github.ref == 'refs/heads/master' }}
     strategy:
       matrix:
         sdk: [29]
