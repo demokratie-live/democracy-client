@@ -11,8 +11,8 @@ interface Props {
 }
 
 const Wrapper = styled.View`
+  width: 100%;
   background-color: #0007;
-  margin-horizontal: 11;
   padding-horizontal: 11;
   padding-top: 11;
   padding-bottom: 18;
