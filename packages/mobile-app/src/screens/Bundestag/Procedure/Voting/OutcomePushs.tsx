@@ -21,16 +21,12 @@ const DEVICE_WIDTH = Dimensions.get('window').width;
 
 type RoutePropOP = RouteProp<BundestagRootStackParamList, 'OutcomePush'>;
 
-const Wrapper = styled.View`
-  /* width: 100%; */
-  align-items: center;
-`;
-
 const ScrollView = styled.ScrollView.attrs({
   contentContainerStyle: {
     alignItems: 'center',
     justifyContent: 'space-around',
     flexGrow: 1,
+    marginHorizontal: 18,
   },
 })``;
 
@@ -45,14 +41,12 @@ const Subtitle = styled.Text`
   font-size: 15;
   margin-top: 18;
   margin-bottom: 18;
-  margin-horizontal: 18;
   text-align: center;
 `;
 
 const SwitchWrapper = styled.SafeAreaView`
   flex-direction: row;
   justify-content: space-between;
-  padding-horizontal: 18;
   margin-top: 18;
 `;
 
@@ -125,71 +119,67 @@ export const OutcomePushs: React.FC<Props> = ({ finishAction }) => {
   };
 
   return (
-    <Wrapper>
-      <ScrollView>
-        <View style={{ paddingTop: 18, alignItems: 'center' }}>
-          <SvgNewMarker
-            width={58}
-            height={35}
-            color="#f568c4"
-            style={{ position: 'absolute', left: 18, top: 18 }}
-          />
-          <SvgIconAppIos width={73} height={73} />
-          <Headline>Ergebnisse erhalten</Headline>
-          <Subtitle>
-            Werde nach Deiner Abstimmung automatisch über das offizielle
-            Ergebnis des Bundestages informiert, sobald dieses vorliegt, um es
-            mit Deinem vergleichen zu können.
-          </Subtitle>
-        </View>
-        <NotificationBox
-          icon={require('@democracy-deutschland/mobile-ui/src/components/Introduction/assets/icon.logo.png')}
-          owner="DEMOCRACY"
-          title={notification.title}
-          text={notification.text}
+    <ScrollView>
+      <View style={{ paddingTop: 36, alignItems: 'center' }}>
+        <SvgNewMarker
+          width={58}
+          height={35}
+          color="#f568c4"
+          style={{ position: 'absolute', left: 0, top: 36 }}
         />
-        <SwitchWrapper>
-          <SwitchText>
-            Bundestagsergebnisse immer automatisch erhalten
-          </SwitchText>
-          <Switch value={pushActive} onValueChange={setPushActive} />
-        </SwitchWrapper>
-        {pushActive && (
-          <Button
-            style={{
-              marginHorizontal: 18,
-              width: DEVICE_WIDTH - 36,
-            }}
-            backgroundColor="blue"
-            textColor="white"
-            text="Aktivieren"
-            onPress={pressActivate}
-          />
-        )}
-        {!pushActive && (
-          <Button
-            style={{
-              marginHorizontal: 18,
-              width: DEVICE_WIDTH - 36,
-            }}
-            backgroundColor="red"
-            textColor="white"
-            text="Nicht mehr anzeigen"
-            onPress={pressDenie}
-          />
-        )}
+        <SvgIconAppIos width={73} height={73} />
+        <Headline>Ergebnisse erhalten</Headline>
+        <Subtitle>
+          Werde nach Deiner Abstimmung automatisch über das offizielle Ergebnis
+          des Bundestages informiert, sobald dieses vorliegt, um es mit Deinem
+          vergleichen zu können.
+        </Subtitle>
+      </View>
+      <NotificationBox
+        icon={require('@democracy-deutschland/mobile-ui/src/components/Introduction/assets/icon.logo.png')}
+        owner="DEMOCRACY"
+        title={notification.title}
+        text={notification.text}
+      />
+      <SwitchWrapper>
+        <SwitchText>Bundestagsergebnisse immer automatisch erhalten</SwitchText>
+        <Switch value={pushActive} onValueChange={setPushActive} />
+      </SwitchWrapper>
+      {pushActive && (
+        <Button
+          style={{
+            marginHorizontal: 18,
+            width: DEVICE_WIDTH - 36,
+          }}
+          backgroundColor="blue"
+          textColor="white"
+          text="Aktivieren"
+          onPress={pressActivate}
+        />
+      )}
+      {!pushActive && (
+        <Button
+          style={{
+            marginHorizontal: 18,
+            width: DEVICE_WIDTH - 36,
+          }}
+          backgroundColor="red"
+          textColor="white"
+          text="Nicht mehr anzeigen"
+          onPress={pressDenie}
+        />
+      )}
 
-        {!pushActive && (
-          <Subtitle>
-            Du kannst die Benachrichtigungen jederzeit in den App-Einstellungen
-            aktivieren
-          </Subtitle>
-        )}
+      {!pushActive && (
+        <Subtitle>
+          Du kannst die Benachrichtigungen jederzeit in den App-Einstellungen
+          aktivieren
+        </Subtitle>
+      )}
 
-        {pushActive && (
-          <Button textColor="blue" text="Überspringen" onPress={doneAction} />
-        )}
-      </ScrollView>
-    </Wrapper>
+      {pushActive && (
+        <Button textColor="blue" text="Überspringen" onPress={doneAction} />
+      )}
+    </ScrollView>
   );
 };
