@@ -52,6 +52,7 @@ const Content = styled.View`
 
 const ContentText = styled(DefDescr)`
   font-size: 14;
+  color: ${({ theme }) => theme.textColors.tertiary};
 `;
 
 const renderType = (type: string) => {
