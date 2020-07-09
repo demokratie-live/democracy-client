@@ -1,0 +1,2 @@
+to apply the fdroid patch run:
+git apply patches/fdroid.patch
