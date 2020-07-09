@@ -1,0 +1,2034 @@
+diff --git a/packages/mobile-app/android/app/build.gradle b/packages/mobile-app/android/app/build.gradle
+index 5a4ad026..2694abc6 100644
+--- a/packages/mobile-app/android/app/build.gradle
++++ b/packages/mobile-app/android/app/build.gradle
+@@ -149,9 +149,6 @@ android {
+         minSdkVersion rootProject.ext.minSdkVersion
+         targetSdkVersion rootProject.ext.targetSdkVersion
+         multiDexEnabled true
+-
+-        // react-native-notifications
+-        missingDimensionStrategy "RNNotifications.reactNativeVersion", "reactNative60" // See note below!
+         
+         versionCode 103675
+         versionName "1.3.3"
+@@ -259,10 +256,6 @@ dependencies {
+     // Wix Detox
+     androidTestImplementation('com.wix:detox:+')
+ 
+-    // react-native-notifications
+-    implementation project(':reactnativenotifications')
+-    implementation 'com.google.firebase:firebase-core:16.0.0'
+-
+     // Multidex
+     implementation 'com.android.support:multidex:1.0.3'
+ 
+@@ -275,9 +268,6 @@ dependencies {
+     }
+ }
+ 
+-// react-native-notifications
+-apply plugin: 'com.google.gms.google-services'
+-
+ // Run this once to be able to run the application with BUCK
+ // puts all compile dependencies into folder libs for BUCK to use
+ task copyDownloadableDepsToLibs(type: Copy) {
+diff --git a/packages/mobile-app/android/app/src/main/AndroidManifest.xml b/packages/mobile-app/android/app/src/main/AndroidManifest.xml
+index 7bcfe089..55d68ce1 100755
+--- a/packages/mobile-app/android/app/src/main/AndroidManifest.xml
++++ b/packages/mobile-app/android/app/src/main/AndroidManifest.xml
+@@ -29,12 +29,6 @@
+     android:allowBackup="false" 
+     android:theme="@style/AppTheme">
+ 
+-    <meta-data android:name="com.google.firebase.messaging.default_notification_icon" 
+-      android:resource="@drawable/notification_icon" />
+-
+-    <meta-data android:name="com.google.firebase.messaging.default_notification_color" 
+-      android:resource="@color/notification" />
+-
+     <activity android:name=".MainActivity" 
+       android:launchMode="singleTask" 
+       android:label="@string/app_name" 
+diff --git a/packages/mobile-app/android/app/src/main/java/de/democracydeutschland/app/MainApplication.java b/packages/mobile-app/android/app/src/main/java/de/democracydeutschland/app/MainApplication.java
+index fbda0cdb..8f755441 100644
+--- a/packages/mobile-app/android/app/src/main/java/de/democracydeutschland/app/MainApplication.java
++++ b/packages/mobile-app/android/app/src/main/java/de/democracydeutschland/app/MainApplication.java
+@@ -10,9 +10,6 @@ import com.facebook.soloader.SoLoader;
+ import java.lang.reflect.InvocationTargetException;
+ import java.util.List;
+ 
+-// react-native-notifications
+-import com.wix.reactnativenotifications.RNNotificationsPackage;
+-
+ public class MainApplication extends MultiDexApplication implements ReactApplication {
+ 
+   private final ReactNativeHost mReactNativeHost =
+@@ -28,9 +25,6 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
+           List<ReactPackage> packages = new PackageList(this).getPackages();
+           // Packages that cannot be autolinked yet can be added manually here, for example:
+           // packages.add(new MyReactNativePackage());
+-
+-          // react-native-notifications
+-          packages.add(new RNNotificationsPackage(MainApplication.this));
+           
+           return packages;
+         }
+diff --git a/packages/mobile-app/android/build.gradle b/packages/mobile-app/android/build.gradle
+index b44a3697..b818060e 100644
+--- a/packages/mobile-app/android/build.gradle
++++ b/packages/mobile-app/android/build.gradle
+@@ -23,9 +23,6 @@ buildscript {
+         
+         // Wix Detox
+         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+-
+-        // react-native-notifications
+-        classpath 'com.google.gms:google-services:4.0.0'
+     }
+ 
+ }
+@@ -50,20 +47,4 @@ allprojects {
+         jcenter()
+         maven { url 'https://jitpack.io' }
+     }
+-}
+-
+-// react-native-notifications
+-subprojects { subproject ->
+-    afterEvaluate {
+-            if ((subproject.plugins.hasPlugin('android') || subproject.plugins.hasPlugin('android-library'))) {
+-                android {
+-                    variantFilter { variant ->
+-                    def names = variant.flavors*.name
+-                    if (names.contains("reactNative59")) {
+-                        setIgnore(true)
+-                    }
+-                }
+-            }
+-        }
+-    }
+ }
+\ No newline at end of file
+diff --git a/packages/mobile-app/android/settings.gradle b/packages/mobile-app/android/settings.gradle
+index 116fb215..bbd22b55 100755
+--- a/packages/mobile-app/android/settings.gradle
++++ b/packages/mobile-app/android/settings.gradle
+@@ -1,8 +1,4 @@
+ rootProject.name = 'client'
+ apply from: file("../../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); 
+ applyNativeModulesSettingsGradle(settings)
+-include ':app'
+-
+-// react-native-notifications
+-include ':reactnativenotifications'
+-project(':reactnativenotifications').projectDir = new File(rootProject.projectDir, '../../../node_modules/react-native-notifications/lib/android/app')
+\ No newline at end of file
++include ':app'
+\ No newline at end of file
+diff --git a/packages/mobile-app/ios/Podfile.lock b/packages/mobile-app/ios/Podfile.lock
+index 7657d116..1eda7adc 100644
+--- a/packages/mobile-app/ios/Podfile.lock
++++ b/packages/mobile-app/ios/Podfile.lock
+@@ -188,8 +188,6 @@ PODS:
+   - React-jsinspector (0.61.5)
+   - react-native-config (0.12.0):
+     - React
+-  - react-native-notifications (3.1.4):
+-    - React
+   - react-native-pdf (6.1.2):
+     - React
+   - react-native-safe-area-context (0.7.3):
+@@ -283,7 +281,6 @@ DEPENDENCIES:
+   - React-jsiexecutor (from `../../../node_modules/react-native/ReactCommon/jsiexecutor`)
+   - React-jsinspector (from `../../../node_modules/react-native/ReactCommon/jsinspector`)
+   - react-native-config (from `../../../node_modules/react-native-config`)
+-  - react-native-notifications (from `../../../node_modules/react-native-notifications`)
+   - react-native-pdf (from `../../../node_modules/react-native-pdf`)
+   - react-native-safe-area-context (from `../../../node_modules/react-native-safe-area-context`)
+   - react-native-splash-screen (from `../../../node_modules/react-native-splash-screen`)
+@@ -353,8 +350,6 @@ EXTERNAL SOURCES:
+     :path: "../../../node_modules/react-native/ReactCommon/jsinspector"
+   react-native-config:
+     :path: "../../../node_modules/react-native-config"
+-  react-native-notifications:
+-    :path: "../../../node_modules/react-native-notifications"
+   react-native-pdf:
+     :path: "../../../node_modules/react-native-pdf"
+   react-native-safe-area-context:
+@@ -429,7 +424,6 @@ SPEC CHECKSUMS:
+   React-jsiexecutor: d5525f9ed5f782fdbacb64b9b01a43a9323d2386
+   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
+   react-native-config: f2c2ae45625a068c35681a16b9bfb1ca58b0adc7
+-  react-native-notifications: 36929512507417ba0021659bd2f9e0184dda2489
+   react-native-pdf: 7d76a6619f76a6ebfb2f82a4f2feeb17826ba8b4
+   react-native-safe-area-context: e200d4433aba6b7e60b52da5f37af11f7a0b0392
+   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
+diff --git a/packages/mobile-app/package.json b/packages/mobile-app/package.json
+index 2772d152..314ceb47 100644
+--- a/packages/mobile-app/package.json
++++ b/packages/mobile-app/package.json
+@@ -67,7 +67,6 @@
+     "react-native-linear-gradient": "^2.5.6",
+     "react-native-markdown-view": "https://github.com/Benjamin-Dobell/react-native-markdown-view",
+     "react-native-material-tabs": "^4.1.2",
+-    "react-native-notifications": "^3.1.2",
+     "react-native-pdf": "^6.0.1",
+     "react-native-permissions": "^2.0.9",
+     "react-native-reanimated": "^1.7.0",
+diff --git a/packages/mobile-app/react-native.config.js b/packages/mobile-app/react-native.config.js
+index f2f58549..f053ebf7 100644
+--- a/packages/mobile-app/react-native.config.js
++++ b/packages/mobile-app/react-native.config.js
+@@ -1,9 +1 @@
+-module.exports = {
+-  dependencies: {
+-    'react-native-notifications': {
+-      platforms: {
+-        android: null, // disable Android platform, other platforms will still autolink if provided
+-      },
+-    },
+-  },
+-};
++module.exports = {};
+diff --git a/packages/mobile-app/src/App.tsx b/packages/mobile-app/src/App.tsx
+index bebb7e2e..0d1aded9 100644
+--- a/packages/mobile-app/src/App.tsx
++++ b/packages/mobile-app/src/App.tsx
+@@ -9,8 +9,6 @@ import { LocalVotesProvider } from './context/LocalVotes';
+ import { Apollo } from './lib/Apollo';
+ import { ListFilterProvider } from './context/ListFilter';
+ import { ConstituencyProvider } from './context/Constituency';
+-import { NotificationsProvider } from './context/NotificationPermission';
+-import { PushNotificationProvider } from './context/PushNotification';
+ import { theme, ThemeProvider } from './styles';
+ import Navigation from './routes/index';
+ import { VerificationProvider } from './context/Verification';
+@@ -24,17 +22,13 @@ export default () => (
+       <LocalVotesProvider>
+         <ListFilterProvider>
+           <ConstituencyProvider>
+-            <NotificationsProvider>
+-              <PushNotificationProvider>
+-                <VerificationProvider>
+-                  <NavigationProvider>
+-                    <ThemeProvider theme={theme}>
+-                      <Navigation />
+-                    </ThemeProvider>
+-                  </NavigationProvider>
+-                </VerificationProvider>
+-              </PushNotificationProvider>
+-            </NotificationsProvider>
++            <VerificationProvider>
++              <NavigationProvider>
++                <ThemeProvider theme={theme}>
++                  <Navigation />
++                </ThemeProvider>
++              </NavigationProvider>
++            </VerificationProvider>
+           </ConstituencyProvider>
+         </ListFilterProvider>
+       </LocalVotesProvider>
+diff --git a/packages/mobile-app/src/context/NotificationPermission/graphql/mutation/AddToken.ts b/packages/mobile-app/src/context/NotificationPermission/graphql/mutation/AddToken.ts
+deleted file mode 100644
+index 85858b36..00000000
+--- a/packages/mobile-app/src/context/NotificationPermission/graphql/mutation/AddToken.ts
++++ /dev/null
+@@ -1,9 +0,0 @@
+-import gql from 'graphql-tag';
+-
+-export const ADD_TOKEN = gql`
+-  mutation AddToken($token: String!, $os: String!) {
+-    addToken(token: $token, os: $os) {
+-      succeeded
+-    }
+-  }
+-`;
+diff --git a/packages/mobile-app/src/context/NotificationPermission/graphql/mutation/UpdateNotificationSettings.ts b/packages/mobile-app/src/context/NotificationPermission/graphql/mutation/UpdateNotificationSettings.ts
+deleted file mode 100644
+index bc7707ac..00000000
+--- a/packages/mobile-app/src/context/NotificationPermission/graphql/mutation/UpdateNotificationSettings.ts
++++ /dev/null
+@@ -1,25 +0,0 @@
+-import gql from 'graphql-tag';
+-
+-export const UPDATE_NOTIFICATION_SETTINGS = gql`
+-  mutation UpdateNotificationSettings(
+-    $enabled: Boolean
+-    $conferenceWeekPushs: Boolean
+-    $voteConferenceWeekPushs: Boolean
+-    $voteTOP100Pushs: Boolean
+-    $outcomePushs: Boolean
+-  ) {
+-    updateNotificationSettings(
+-      enabled: $enabled
+-      conferenceWeekPushs: $conferenceWeekPushs
+-      voteConferenceWeekPushs: $voteConferenceWeekPushs
+-      voteTOP100Pushs: $voteTOP100Pushs
+-      outcomePushs: $outcomePushs
+-    ) {
+-      enabled
+-      conferenceWeekPushs
+-      voteConferenceWeekPushs
+-      voteTOP100Pushs
+-      outcomePushs
+-    }
+-  }
+-`;
+diff --git a/packages/mobile-app/src/context/NotificationPermission/graphql/mutation/__generated__/AddToken.ts b/packages/mobile-app/src/context/NotificationPermission/graphql/mutation/__generated__/AddToken.ts
+deleted file mode 100644
+index adf25b17..00000000
+--- a/packages/mobile-app/src/context/NotificationPermission/graphql/mutation/__generated__/AddToken.ts
++++ /dev/null
+@@ -1,21 +0,0 @@
+-/* tslint:disable */
+-/* eslint-disable */
+-// This file was automatically generated and should not be edited.
+-
+-// ====================================================
+-// GraphQL mutation operation: AddToken
+-// ====================================================
+-
+-export interface AddToken_addToken {
+-  __typename: "TokenResult";
+-  succeeded: boolean | null;
+-}
+-
+-export interface AddToken {
+-  addToken: AddToken_addToken | null;
+-}
+-
+-export interface AddTokenVariables {
+-  token: string;
+-  os: string;
+-}
+diff --git a/packages/mobile-app/src/context/NotificationPermission/graphql/mutation/__generated__/UpdateNotificationSettings.ts b/packages/mobile-app/src/context/NotificationPermission/graphql/mutation/__generated__/UpdateNotificationSettings.ts
+deleted file mode 100644
+index ad354ae1..00000000
+--- a/packages/mobile-app/src/context/NotificationPermission/graphql/mutation/__generated__/UpdateNotificationSettings.ts
++++ /dev/null
+@@ -1,28 +0,0 @@
+-/* tslint:disable */
+-/* eslint-disable */
+-// This file was automatically generated and should not be edited.
+-
+-// ====================================================
+-// GraphQL mutation operation: UpdateNotificationSettings
+-// ====================================================
+-
+-export interface UpdateNotificationSettings_updateNotificationSettings {
+-  __typename: "NotificationSettings";
+-  enabled: boolean | null;
+-  conferenceWeekPushs: boolean | null;
+-  voteConferenceWeekPushs: boolean | null;
+-  voteTOP100Pushs: boolean | null;
+-  outcomePushs: boolean | null;
+-}
+-
+-export interface UpdateNotificationSettings {
+-  updateNotificationSettings: UpdateNotificationSettings_updateNotificationSettings | null;
+-}
+-
+-export interface UpdateNotificationSettingsVariables {
+-  enabled?: boolean | null;
+-  conferenceWeekPushs?: boolean | null;
+-  voteConferenceWeekPushs?: boolean | null;
+-  voteTOP100Pushs?: boolean | null;
+-  outcomePushs?: boolean | null;
+-}
+diff --git a/packages/mobile-app/src/context/NotificationPermission/graphql/query/NotificationSettings.ts b/packages/mobile-app/src/context/NotificationPermission/graphql/query/NotificationSettings.ts
+deleted file mode 100644
+index 1160e33f..00000000
+--- a/packages/mobile-app/src/context/NotificationPermission/graphql/query/NotificationSettings.ts
++++ /dev/null
+@@ -1,13 +0,0 @@
+-import gql from 'graphql-tag';
+-
+-export const NOTIFICATION_SETTINGS = gql`
+-  query NotificationSettings {
+-    notificationSettings {
+-      enabled
+-      conferenceWeekPushs
+-      voteConferenceWeekPushs
+-      voteTOP100Pushs
+-      outcomePushs
+-    }
+-  }
+-`;
+diff --git a/packages/mobile-app/src/context/NotificationPermission/graphql/query/__generated__/NotificationSettings.ts b/packages/mobile-app/src/context/NotificationPermission/graphql/query/__generated__/NotificationSettings.ts
+deleted file mode 100644
+index 8e40eeb5..00000000
+--- a/packages/mobile-app/src/context/NotificationPermission/graphql/query/__generated__/NotificationSettings.ts
++++ /dev/null
+@@ -1,20 +0,0 @@
+-/* tslint:disable */
+-/* eslint-disable */
+-// This file was automatically generated and should not be edited.
+-
+-// ====================================================
+-// GraphQL query operation: NotificationSettings
+-// ====================================================
+-
+-export interface NotificationSettings_notificationSettings {
+-  __typename: "NotificationSettings";
+-  enabled: boolean | null;
+-  conferenceWeekPushs: boolean | null;
+-  voteConferenceWeekPushs: boolean | null;
+-  voteTOP100Pushs: boolean | null;
+-  outcomePushs: boolean | null;
+-}
+-
+-export interface NotificationSettings {
+-  notificationSettings: NotificationSettings_notificationSettings | null;
+-}
+diff --git a/packages/mobile-app/src/context/NotificationPermission/index.tsx b/packages/mobile-app/src/context/NotificationPermission/index.tsx
+deleted file mode 100644
+index 37a451d1..00000000
+--- a/packages/mobile-app/src/context/NotificationPermission/index.tsx
++++ /dev/null
+@@ -1,208 +0,0 @@
+-import React, { createContext, useState, useEffect } from 'react';
+-import {
+-  Notifications,
+-  Registered,
+-  RegistrationError,
+-} from 'react-native-notifications';
+-import { useQuery, useMutation } from '@apollo/react-hooks';
+-import { NOTIFICATION_SETTINGS } from './graphql/query/NotificationSettings';
+-import {
+-  NotificationSettings_notificationSettings,
+-  NotificationSettings,
+-} from './graphql/query/__generated__/NotificationSettings';
+-import {
+-  UpdateNotificationSettings,
+-  UpdateNotificationSettingsVariables,
+-} from './graphql/mutation/__generated__/UpdateNotificationSettings';
+-import { UPDATE_NOTIFICATION_SETTINGS } from './graphql/mutation/UpdateNotificationSettings';
+-import { ExecutionResult } from 'graphql';
+-import { Platform, EmitterSubscription } from 'react-native';
+-import {
+-  AddToken,
+-  AddTokenVariables,
+-} from './graphql/mutation/__generated__/AddToken';
+-import { ADD_TOKEN } from './graphql/mutation/AddToken';
+-import AsyncStorage from '@react-native-community/async-storage';
+-import DeviceInfo from 'react-native-device-info';
+-import { checkNotifications } from 'react-native-permissions';
+-import useAppState from 'react-native-appstate-hook';
+-
+-interface NotificationsInterface {
+-  hasPermissions: boolean;
+-  alreadyDenied: boolean;
+-  notificationSettings: Pick<
+-    NotificationSettings_notificationSettings,
+-    | 'conferenceWeekPushs'
+-    | 'enabled'
+-    | 'voteConferenceWeekPushs'
+-    | 'voteTOP100Pushs'
+-    | 'outcomePushs'
+-  >;
+-  update: (
+-    options: UpdateNotificationSettingsVariables,
+-  ) => Promise<ExecutionResult<UpdateNotificationSettings>> | void;
+-  requestToken: () => void;
+-}
+-
+-const defaults: NotificationsInterface = {
+-  hasPermissions: false,
+-  alreadyDenied: false,
+-  notificationSettings: {
+-    conferenceWeekPushs: false,
+-    enabled: false,
+-    voteConferenceWeekPushs: false,
+-    voteTOP100Pushs: false,
+-    outcomePushs: false,
+-  },
+-  update: () => {
+-    throw new Error('NotificationsContext: update function is not defined');
+-  },
+-  requestToken: () => {
+-    throw new Error(
+-      'NotificationsContext: requestToken function is not defined',
+-    );
+-  },
+-};
+-
+-export const NotificationsContext = createContext<NotificationsInterface>(
+-  defaults,
+-);
+-
+-export const NotificationsProvider: React.FC = ({ children }) => {
+-  const [hasPermissions, setHasPermissions] = useState(defaults.hasPermissions);
+-  const [alreadyDenied, setAlreadyDenied] = useState(false);
+-  const [notificationSettings, setNotificationSettings] = useState<
+-    NotificationsInterface['notificationSettings']
+-  >(defaults.notificationSettings);
+-  const { data } = useQuery<NotificationSettings>(NOTIFICATION_SETTINGS);
+-
+-  const [updateSettings] = useMutation<
+-    UpdateNotificationSettings,
+-    UpdateNotificationSettingsVariables
+-  >(UPDATE_NOTIFICATION_SETTINGS);
+-  const [sendToken] = useMutation<AddToken, AddTokenVariables>(ADD_TOKEN);
+-
+-  const { appState } = useAppState({});
+-
+-  useEffect(() => {
+-    checkNotifications().then(({ status }) => {
+-      if (!alreadyDenied && status === 'blocked') {
+-        setAlreadyDenied(true);
+-        setHasPermissions(false);
+-      } else if (alreadyDenied && status === 'granted') {
+-        setAlreadyDenied(false);
+-        setHasPermissions(true);
+-      }
+-    });
+-  }, [appState, alreadyDenied]);
+-
+-  useEffect(() => {
+-    if (data && data.notificationSettings) {
+-      setNotificationSettings(data.notificationSettings);
+-    }
+-  }, [data]);
+-
+-  // register notification events
+-  useEffect(() => {
+-    const subscriptions: EmitterSubscription[] = [];
+-    Notifications.isRegisteredForRemoteNotifications().then(value => {
+-      setHasPermissions(value);
+-    });
+-
+-    subscriptions.push(
+-      Notifications.events().registerRemoteNotificationsRegistered(
+-        (event: Registered) => {
+-          const token = event.deviceToken || (event as any);
+-          AsyncStorage.setItem('push-token', token);
+-          sendToken({
+-            variables: {
+-              os: Platform.OS,
+-              token,
+-            },
+-          });
+-          setHasPermissions(true);
+-        },
+-      ),
+-    );
+-
+-    subscriptions.push(
+-      Notifications.events().registerRemoteNotificationsRegistrationFailed(
+-        (event: RegistrationError) => {
+-          console.error(event);
+-        },
+-      ),
+-    );
+-
+-    // request code for android on app start
+-    if (Platform.OS === 'android') {
+-      Notifications.registerRemoteNotifications();
+-    } else {
+-      // if token already send send again
+-      AsyncStorage.getItem('push-token').then(
+-        token => !!token && Notifications.registerRemoteNotifications(),
+-      );
+-    }
+-    return () => {
+-      subscriptions.forEach(subscription => subscription.remove());
+-    };
+-  }, [sendToken]);
+-
+-  const requestToken = () => {
+-    if (!DeviceInfo.isEmulatorSync()) {
+-      Notifications.registerRemoteNotifications();
+-    }
+-  };
+-
+-  // resend token when neccessary
+-  useEffect(() => {
+-    if (Platform.OS === 'ios' && hasPermissions) {
+-      AsyncStorage.getItem('push-token').then(
+-        token => !token && requestToken(),
+-      );
+-    }
+-  }, [hasPermissions]);
+-
+-  const update = (options: UpdateNotificationSettingsVariables) => {
+-    if (options) {
+-      return updateSettings({
+-        variables: options,
+-        refetchQueries: [
+-          {
+-            query: NOTIFICATION_SETTINGS,
+-          },
+-        ],
+-        update: (proxy, { data: updateData }) => {
+-          if (updateData && updateData.updateNotificationSettings) {
+-            const notificationCacheData = proxy.readQuery<NotificationSettings>(
+-              {
+-                query: NOTIFICATION_SETTINGS,
+-              },
+-            );
+-            if (notificationCacheData) {
+-              proxy.writeQuery<NotificationSettings>({
+-                query: NOTIFICATION_SETTINGS,
+-                data: {
+-                  ...notificationCacheData,
+-                  ...options,
+-                },
+-              });
+-            }
+-          }
+-        },
+-      });
+-    }
+-  };
+-
+-  return (
+-    <NotificationsContext.Provider
+-      value={{
+-        hasPermissions,
+-        alreadyDenied,
+-        notificationSettings,
+-        update,
+-        requestToken,
+-      }}>
+-      {children}
+-    </NotificationsContext.Provider>
+-  );
+-};
+diff --git a/packages/mobile-app/src/context/PushNotification/index.tsx b/packages/mobile-app/src/context/PushNotification/index.tsx
+deleted file mode 100644
+index 7c3e6e9a..00000000
+--- a/packages/mobile-app/src/context/PushNotification/index.tsx
++++ /dev/null
+@@ -1,106 +0,0 @@
+-import React, { createContext, useEffect, useState } from 'react';
+-import { Notifications } from 'react-native-notifications';
+-import { EmitterSubscription, Platform } from 'react-native';
+-import { rootNavigationRef } from '../../routes/rootNavigationRef';
+-import {
+-  getNavStateForProcedure,
+-  getNavStateForConferenceWeek,
+-} from '../../lib/getNavStateForProcedure';
+-
+-interface PushNotificationInterface {
+-  initialNotification: any;
+-}
+-
+-const defaults: PushNotificationInterface = {
+-  initialNotification: undefined,
+-};
+-
+-export const PushNotificationContext = createContext<PushNotificationInterface>(
+-  defaults,
+-);
+-
+-export const PushNotificationProvider: React.FC = ({ children }) => {
+-  const [initialNotification, setInitialNotification] = useState<any>();
+-
+-  // Register initial app open push data
+-  useEffect(() => {
+-    Notifications.getInitialNotification().then((notification: any) => {
+-      if (notification) {
+-        const payload =
+-          Platform.OS === 'ios'
+-            ? notification.payload
+-            : JSON.parse(notification.payload.payload);
+-        setInitialNotification(payload);
+-      } else {
+-        setInitialNotification(null);
+-      }
+-    });
+-  }, []);
+-
+-  // Register Events
+-  useEffect(() => {
+-    const subscriptions: EmitterSubscription[] = [];
+-
+-    subscriptions.push(
+-      Notifications.events().registerNotificationReceivedBackground(
+-        (notification, completion) => {
+-          completion({
+-            alert: true,
+-            sound: false,
+-            badge: false,
+-          });
+-        },
+-      ),
+-    );
+-
+-    subscriptions.push(
+-      Notifications.events().registerNotificationReceivedForeground(
+-        (notification, completion) => {
+-          completion({
+-            alert: true,
+-            sound: true,
+-            badge: false,
+-          });
+-        },
+-      ),
+-    );
+-
+-    subscriptions.push(
+-      Notifications.events().registerNotificationOpened(
+-        (notification: any, completion) => {
+-          if (rootNavigationRef.current) {
+-            const payload =
+-              Platform.OS === 'ios'
+-                ? notification.payload
+-                : JSON.parse(notification.payload.payload);
+-            if (payload.action === 'procedureBulk') {
+-              rootNavigationRef.current.resetRoot(
+-                getNavStateForConferenceWeek(),
+-              );
+-            } else {
+-              rootNavigationRef.current.resetRoot(
+-                getNavStateForProcedure({
+-                  procedureId: payload.procedureId,
+-                }),
+-              );
+-            }
+-          }
+-
+-          completion();
+-        },
+-      ),
+-    );
+-
+-    return () => {
+-      subscriptions.forEach(subscription => subscription.remove());
+-    };
+-  }, []);
+-  return (
+-    <PushNotificationContext.Provider
+-      value={{
+-        initialNotification,
+-      }}>
+-      {children}
+-    </PushNotificationContext.Provider>
+-  );
+-};
+diff --git a/packages/mobile-app/src/routes/index.tsx b/packages/mobile-app/src/routes/index.tsx
+index 5bc541ac..c3088014 100644
+--- a/packages/mobile-app/src/routes/index.tsx
++++ b/packages/mobile-app/src/routes/index.tsx
+@@ -11,12 +11,9 @@ import { PdfScreen } from '../screens/modals/Pdf/Pdf';
+ import { ConstituencyScreen } from '../screens/modals/Constituency';
+ import { rootNavigationRef } from './rootNavigationRef';
+ import { getNavInitStateForProcedure } from '../lib/getNavStateForProcedure';
+-import { PushNotificationContext } from '../context/PushNotification';
+ import SplashScreen from 'react-native-splash-screen';
+ import { theme } from '../styles';
+ import { StatusBar } from 'react-native';
+-import { PushInstructions } from '../screens/modals/Introduction/PushInstructions';
+-import { NotificationInstructionScreen } from '../screens/modals/NotificationInstruction';
+ import { VerificationStart } from '../screens/modals/Verification/Start';
+ import { PhoneNumber } from '../screens/modals/Verification/PhoneNumber';
+ import { Code } from '../screens/modals/Verification/Code';
+@@ -26,9 +23,7 @@ export type RootStackParamList = {
+   Sidebar: undefined;
+   Home: {};
+   Introduction: { done?: string; lastStartWithVersion?: string };
+-  PushInstructions: {};
+   Pdf: { url: string; title: string };
+-  NotificationInstruction: { done: () => void };
+   Constituency: { goBack?: boolean };
+   // Verification
+   // Verification: { procedureId?: string };
+@@ -41,7 +36,6 @@ export type RootStackParamList = {
+ const RootStack = createStackNavigator<RootStackParamList>();
+ 
+ const Navigation = () => {
+-  const { initialNotification } = useContext(PushNotificationContext);
+   const { getInitialState } = useLinking(rootNavigationRef, {
+     prefixes: ['https://democracy-app.de', 'democracy://'],
+     getStateFromPath: path => {
+@@ -53,7 +47,6 @@ const Navigation = () => {
+   });
+ 
+   const [isInitialReady, setIsInitialReady] = React.useState(false);
+-  const [isPushReady, setIsPushReady] = React.useState(false);
+   const [isIntroductionReady, setIsIntroductionReady] = React.useState(false);
+   const [initialState, setInitialState] = React.useState<InitialState>();
+ 
+@@ -104,24 +97,10 @@ const Navigation = () => {
+     }
+   }, [currentVersion, lastStartWithVersion, setLastStartWithVersion]);
+ 
+-  // call if app opened by push notification
+-  useEffect(() => {
+-    if (initialNotification) {
+-      setInitialState(
+-        getNavInitStateForProcedure({
+-          procedureId: initialNotification.procedureId,
+-        }),
+-      );
+-    }
+-    setIsPushReady(true);
+-  }, [initialNotification]);
+-
+   if (
+     lastStartWithVersion === undefined ||
+     currentVersion === undefined ||
+-    initialNotification === undefined ||
+     !isInitialReady ||
+-    !isPushReady ||
+     !isIntroductionReady
+   ) {
+     return null;
+@@ -168,11 +147,6 @@ const Navigation = () => {
+             component={PdfScreen}
+             options={({ route }) => ({ title: route.params.title })}
+           />
+-          <RootStack.Screen
+-            name="NotificationInstruction"
+-            component={NotificationInstructionScreen}
+-            options={{ headerShown: false }}
+-          />
+           <RootStack.Screen
+             name="Constituency"
+             component={ConstituencyScreen}
+@@ -180,13 +154,6 @@ const Navigation = () => {
+               title: 'Wahlkreissuche',
+             }}
+           />
+-          <RootStack.Screen
+-            name="PushInstructions"
+-            options={{
+-              headerShown: false,
+-            }}
+-            component={PushInstructions}
+-          />
+           {/* Verification */}
+           <RootStack.Screen
+             name="VerificationStart"
+diff --git a/packages/mobile-app/src/screens/Bundestag/List/NoConferenceWeekData.tsx b/packages/mobile-app/src/screens/Bundestag/List/NoConferenceWeekData.tsx
+index 7f24652d..e2831021 100644
+--- a/packages/mobile-app/src/screens/Bundestag/List/NoConferenceWeekData.tsx
++++ b/packages/mobile-app/src/screens/Bundestag/List/NoConferenceWeekData.tsx
+@@ -1,6 +1,5 @@
+-import React, { useContext } from 'react';
++import React from 'react';
+ import styled from 'styled-components/native';
+-import { Button } from 'react-native';
+ import { useQuery } from '@apollo/react-hooks';
+ import { CURRENT_CONFERENCE_WEEK } from './graphql/query/currentConferenceWeek';
+ import { CurrentConferenceWeek } from './graphql/query/__generated__/CurrentConferenceWeek';
+@@ -8,9 +7,6 @@ import dateFormat from 'dateformat';
+ import SvgConferenceWeekPlaceholder from '@democracy-deutschland/mobile-ui/src/components/Icons/ConferenceWeekPlaceholder';
+ import { Space } from '../../modals/Verification/Start';
+ 
+-import { useNavigation } from '@react-navigation/core';
+-import { NotificationsContext } from '../../../context/NotificationPermission';
+-
+ const Container = styled.ScrollView.attrs({
+   flex: 1,
+   alignItems: 'center',
+@@ -38,8 +34,6 @@ const IconWrapper = styled.View`
+ 
+ export const NoConferenceWeekData = () => {
+   const { data } = useQuery<CurrentConferenceWeek>(CURRENT_CONFERENCE_WEEK);
+-  const navigation = useNavigation();
+-  const { notificationSettings } = useContext(NotificationsContext);
+   return (
+     <Container testID={'NoConferenceWeekData'}>
+       <IconWrapper>
+@@ -59,14 +53,6 @@ export const NoConferenceWeekData = () => {
+ statt.`}
+         </TextGrey>
+       )}
+-
+-      {(!notificationSettings.enabled ||
+-        !notificationSettings.conferenceWeekPushs) && (
+-        <Button
+-          title="Benachrichtigen"
+-          onPress={() => navigation.navigate('PushInstructions')}
+-        />
+-      )}
+     </Container>
+   );
+ };
+diff --git a/packages/mobile-app/src/screens/Bundestag/Procedure/PrepareActions.tsx b/packages/mobile-app/src/screens/Bundestag/Procedure/PrepareActions.tsx
+index 5018e28a..57a0c36b 100644
+--- a/packages/mobile-app/src/screens/Bundestag/Procedure/PrepareActions.tsx
++++ b/packages/mobile-app/src/screens/Bundestag/Procedure/PrepareActions.tsx
+@@ -11,19 +11,7 @@ import { VoteSelection } from '../../../../__generated__/globalTypes';
+ import { LocalVotesContext } from '../../../context/LocalVotes';
+ import { SidebarParamList } from '../../../routes/Sidebar';
+ import { DrawerNavigationProp } from '@react-navigation/drawer';
+-import { useMutation } from '@apollo/react-hooks';
+ import Lock from '@democracy-deutschland/mobile-ui/src/components/Icons/Lock';
+-import {
+-  ToggleNotification,
+-  ToggleNotificationVariables,
+-} from './graphql/muatation/__generated__/ToggleNotification';
+-import { TOGGLE_NOTIFICATION } from './graphql/muatation/toggleNotification';
+-import { PROCEDURE } from './graphql/query/Procedure';
+-import {
+-  Procedure as ProcedureQuery,
+-  ProcedureVariables,
+-} from './graphql/query/__generated__/Procedure';
+-import { ConstituencyContext } from '../../../context/Constituency';
+ import { NavigationContext } from '../../../context/Navigation';
+ import { RootStackParamList } from '../../../routes';
+ 
+@@ -133,26 +121,9 @@ const PrepareActions: React.FC<Props> = ({
+   share,
+   // active,
+ }) => {
+-  const { constituency } = useContext(ConstituencyContext);
+   const { saveState } = useContext(NavigationContext);
+-  const constituencies = constituency ? [constituency] : [];
+   const { getLocalVoteSelection } = useContext(LocalVotesContext);
+-  const [toggleNotification] = useMutation<
+-    ToggleNotification,
+-    ToggleNotificationVariables
+-  >(TOGGLE_NOTIFICATION, {
+-    variables: {
+-      procedureId,
+-    },
+-    refetchQueries: [
+-      {
+-        query: PROCEDURE,
+-        variables: {
+-          id: procedureId,
+-        },
+-      },
+-    ],
+-  });
++
+   const navigation = useNavigation<DetailScreenNavigationProps>();
+ 
+   const showUnknownVoteNotification = () => {
+@@ -253,48 +224,11 @@ const PrepareActions: React.FC<Props> = ({
+             <ActionButton
+               selection="NOTIFY"
+               notify={notify}
+-              onPress={() =>
+-                toggleNotification({
+-                  optimisticResponse: {
+-                    toggleNotification: {
+-                      __typename: 'Procedure',
+-                      notify: !notify,
+-                    },
+-                  },
+-                  update: (proxy, { data: mutationData }) => {
+-                    const data = proxy.readQuery<
+-                      ProcedureQuery,
+-                      ProcedureVariables
+-                    >({
+-                      query: PROCEDURE,
+-                      variables: {
+-                        id: procedureId,
+-                        constituencies,
+-                      },
+-                    });
+-                    if (
+-                      data &&
+-                      mutationData &&
+-                      mutationData.toggleNotification
+-                    ) {
+-                      proxy.writeQuery({
+-                        query: PROCEDURE,
+-                        variables: {
+-                          id: procedureId,
+-                          constituencies,
+-                        },
+-                        data: {
+-                          ...data,
+-                          procedure: {
+-                            ...data.procedure,
+-                            notify: mutationData.toggleNotification.notify,
+-                          },
+-                        },
+-                      });
+-                    }
+-                  },
+-                })
+-              }
++              onPress={() => {
++                Alert.alert(
++                  'Benachrichtigungen werden derzeit nicht über FDroid unterstützt.',
++                );
++              }}
+             />
+             <VoteButtonLabel>
+               {notify ? 'Stumm schalten' : 'Benachrichtigen'}
+diff --git a/packages/mobile-app/src/screens/Bundestag/Procedure/Voting/index.tsx b/packages/mobile-app/src/screens/Bundestag/Procedure/Voting/index.tsx
+index 2a0009d9..3258abd8 100644
+--- a/packages/mobile-app/src/screens/Bundestag/Procedure/Voting/index.tsx
++++ b/packages/mobile-app/src/screens/Bundestag/Procedure/Voting/index.tsx
+@@ -27,8 +27,6 @@ import { useQuery } from '@apollo/react-hooks';
+ import ChartLegend from '../components/Charts/ChartLegend';
+ import NoVotesPlaceholder from '../../../WahlOMeter/NoVotesPlaceholder';
+ import { styled } from '../../../../styles';
+-import { NotificationsContext } from '../../../../context/NotificationPermission';
+-import { PushInstructions } from '../../../modals/Introduction/PushInstructions';
+ import { Centered } from '@democracy-deutschland/mobile-ui/src/components/shared/Centered';
+ 
+ const Wrapper = styled.View`
+@@ -107,9 +105,6 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
+   const [chartWidth] = useState(
+     Math.min(Dimensions.get('screen').width, Dimensions.get('screen').height),
+   );
+-  const { notificationSettings, hasPermissions } = useContext(
+-    NotificationsContext,
+-  );
+   const [showWarning, setShowWarning] = useState(true);
+   const [selected, setSelected] = useState(0);
+   const { constituency } = useContext(ConstituencyContext);
+@@ -264,15 +259,7 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
+   if (!constituency) {
+     Content = <NoConstituency navigation={navigation as any} />;
+   }
+-  if (
+-    !notificationSettings.outcomePushs ||
+-    !notificationSettings.enabled ||
+-    !hasPermissions
+-  ) {
+-    Content = (
+-      <PushInstructions finishAction={navigation.goBack} alreadyKnown={true} />
+-    );
+-  } else if (constituency && preparedData && !preparedData.length) {
++  if (constituency && preparedData && !preparedData.length) {
+     Content = <NoVotesPlaceholder subline="Fraktionen" />;
+   } else if (constituency && preparedData && preparedData.length) {
+     Content = (
+diff --git a/packages/mobile-app/src/screens/Bundestag/Procedure/index.tsx b/packages/mobile-app/src/screens/Bundestag/Procedure/index.tsx
+index 6c467305..b74bca3b 100644
+--- a/packages/mobile-app/src/screens/Bundestag/Procedure/index.tsx
++++ b/packages/mobile-app/src/screens/Bundestag/Procedure/index.tsx
+@@ -1,12 +1,12 @@
+ import React, { useContext, FC, useEffect, useCallback } from 'react';
+-import { Text, Platform, Share } from 'react-native';
++import { Text, Platform, Share, Alert } from 'react-native';
+ import { RouteProp, CompositeNavigationProp } from '@react-navigation/core';
+ import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
+ 
+ import ShareIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Share';
+ import ShareIconIosHeader from '@democracy-deutschland/mobile-ui/src/components/Icons/ShareIosHeader';
+ 
+-import { useQuery, useMutation } from '@apollo/react-hooks';
++import { useQuery } from '@apollo/react-hooks';
+ import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Folding';
+ import { ListLoading } from '@democracy-deutschland/mobile-ui/src/components/shared/ListLoading';
+ import speakingurl from 'speakingurl';
+@@ -33,12 +33,6 @@ import { styled } from '../../../styles';
+ import { MenuButton } from '../../../components/MenuButton';
+ import SvgBellFilledHeader from '@democracy-deutschland/mobile-ui/src/components/Icons/BellFilledHeader';
+ import SvgBellHeader from '@democracy-deutschland/mobile-ui/src/components/Icons/BellHeader';
+-import {
+-  ToggleNotification,
+-  ToggleNotificationVariables,
+-} from './graphql/muatation/__generated__/ToggleNotification';
+-import { TOGGLE_NOTIFICATION } from './graphql/muatation/toggleNotification';
+-import { NotificationsContext } from '../../../context/NotificationPermission';
+ import { RootStackParamList } from '../../../routes';
+ 
+ const Container = styled.ScrollView.attrs({
+@@ -78,9 +72,6 @@ type Props = {
+ const ShareComponent = Platform.OS === 'ios' ? ShareIconIosHeader : ShareIcon;
+ 
+ export const Procedure: FC<Props> = ({ route, navigation }) => {
+-  const { notificationSettings, hasPermissions } = useContext(
+-    NotificationsContext,
+-  );
+   const { isVerified } = useContext(InitialStateContext);
+   const { constituency } = useContext(ConstituencyContext);
+   const constituencies = constituency ? [constituency] : [];
+@@ -116,86 +107,11 @@ export const Procedure: FC<Props> = ({ route, navigation }) => {
+     );
+   };
+ 
+-  const [toggleNotification] = useMutation<
+-    ToggleNotification,
+-    ToggleNotificationVariables
+-  >(TOGGLE_NOTIFICATION, {
+-    variables: {
+-      procedureId: route.params.procedureId,
+-    },
+-    refetchQueries: [
+-      {
+-        query: PROCEDURE,
+-        variables: {
+-          id: route.params.procedureId,
+-        },
+-      },
+-    ],
+-  });
+-
+   const clickBell = useCallback(() => {
+-    if (
+-      !notificationSettings.enabled ||
+-      !notificationSettings.outcomePushs ||
+-      !hasPermissions
+-    ) {
+-      navigation.navigate('NotificationInstruction', {
+-        done: toggleNotification,
+-      });
+-    } else {
+-      if (data) {
+-        toggleNotification({
+-          optimisticResponse: {
+-            toggleNotification: {
+-              __typename: 'Procedure',
+-              notify: !data.procedure.notify,
+-            },
+-          },
+-          update: (proxy, { data: mutationData }) => {
+-            const procedureData = proxy.readQuery<
+-              ProcedureQueryObj,
+-              ProcedureVariables
+-            >({
+-              query: PROCEDURE,
+-              variables: {
+-                id: route.params.procedureId,
+-                constituencies,
+-              },
+-            });
+-            if (
+-              procedureData &&
+-              mutationData &&
+-              mutationData.toggleNotification
+-            ) {
+-              proxy.writeQuery({
+-                query: PROCEDURE,
+-                variables: {
+-                  id: route.params.procedureId,
+-                  constituencies,
+-                },
+-                data: {
+-                  ...procedureData,
+-                  procedure: {
+-                    ...procedureData.procedure,
+-                    notify: mutationData.toggleNotification.notify,
+-                  },
+-                },
+-              });
+-            }
+-          },
+-        });
+-      }
+-    }
+-  }, [
+-    constituencies,
+-    data,
+-    hasPermissions,
+-    navigation,
+-    notificationSettings.enabled,
+-    notificationSettings.outcomePushs,
+-    route.params.procedureId,
+-    toggleNotification,
+-  ]);
++    Alert.alert(
++      'Benachrichtigungen werden derzeit leider nicht über FDroid unterstützt',
++    );
++  }, []);
+ 
+   useEffect(() => {
+     if (data) {
+@@ -214,7 +130,7 @@ export const Procedure: FC<Props> = ({ route, navigation }) => {
+         ),
+       });
+     }
+-  }, [navigation, data, toggleNotification, clickBell]);
++  }, [navigation, data, clickBell]);
+ 
+   useEffect(() => {
+     if (!route.params.title && data && data.procedure.type) {
+diff --git a/packages/mobile-app/src/screens/Settings/index.tsx b/packages/mobile-app/src/screens/Settings/index.tsx
+index f776064e..87a7aa17 100644
+--- a/packages/mobile-app/src/screens/Settings/index.tsx
++++ b/packages/mobile-app/src/screens/Settings/index.tsx
+@@ -1,5 +1,5 @@
+ import React, { useContext, ReactNode } from 'react';
+-import { SectionList, Switch, Button, Linking, Alert } from 'react-native';
++import { SectionList } from 'react-native';
+ 
+ // GraphQL
+ import { StackNavigationProp } from '@react-navigation/stack';
+@@ -9,8 +9,6 @@ import { InitialStateContext } from '../../context/InitialStates';
+ import { Segment } from '../Bundestag/List/Components/Segment';
+ import { ListItem } from './components/ListItem';
+ import { useNavigation } from '@react-navigation/core';
+-import { getBundleId } from 'react-native-device-info';
+-import { NotificationsContext } from '../../context/NotificationPermission';
+ import { styled } from '../../styles';
+ import { NavigationContext } from '../../context/Navigation';
+ 
+@@ -53,13 +51,6 @@ export const Settings: React.FC<Props> = () => {
+   const { constituency } = useContext(ConstituencyContext);
+   const { isVerified } = useContext(InitialStateContext);
+   const { saveState } = useContext(NavigationContext);
+-  const {
+-    hasPermissions,
+-    alreadyDenied,
+-    notificationSettings,
+-    update: updateNotificationSettings,
+-    requestToken,
+-  } = useContext(NotificationsContext);
+ 
+   const navigateTo = (screen: string) => () => {
+     switch (screen) {
+@@ -76,31 +67,6 @@ export const Settings: React.FC<Props> = () => {
+     }
+   };
+ 
+-  const handleActivate = () => {
+-    if (!alreadyDenied) {
+-      requestToken();
+-    } else {
+-      Alert.alert(
+-        'Benachrichtigungen',
+-        'Bitte Mitteilungen in den Einstellungen aktivieren.',
+-        [
+-          {
+-            text: 'Aktivieren',
+-            onPress: () =>
+-              Linking.openURL(`app-settings://notification/${getBundleId}`),
+-          },
+-          {
+-            text: 'Später',
+-            style: 'cancel',
+-          },
+-        ],
+-        {
+-          cancelable: true,
+-        },
+-      );
+-    }
+-  };
+-
+   const listData: List[] = [
+     {
+       title: '',
+@@ -128,114 +94,6 @@ export const Settings: React.FC<Props> = () => {
+     },
+   ];
+ 
+-  listData[0].data.push({
+-    title: 'Benachrichtigungen',
+-    onPress: navigateTo('notifications-settings'),
+-    component: hasPermissions ? (
+-      <Switch
+-        value={!!notificationSettings.enabled}
+-        onValueChange={value => {
+-          updateNotificationSettings({
+-            enabled: value,
+-          });
+-        }}
+-      />
+-    ) : (
+-      <Button title="Aktivieren" onPress={handleActivate} />
+-    ),
+-  });
+-
+-  if (hasPermissions && notificationSettings.enabled) {
+-    listData.push(
+-      {
+-        title: 'Individuelle Benachrichtungen',
+-        data: [
+-          {
+-            title: 'Bundestagsergebnisse',
+-            onPress: navigateTo('notifications-settings'),
+-            component: (
+-              <Switch
+-                value={!!notificationSettings.outcomePushs}
+-                onValueChange={value => {
+-                  updateNotificationSettings({
+-                    outcomePushs: value,
+-                  });
+-                }}
+-              />
+-            ),
+-            description: isVerified
+-              ? 'Werde nach Deiner Abstimmung standardmäßig über das offizielle Ergebnis des Bundestages informiert, sobald dieses vorliegt.'
+-              : 'Werde über das offizielle Ergebnis des Bundestages informiert, sobald dieses vorliegt.',
+-          },
+-        ],
+-      },
+-      {
+-        title: 'Sitzungswoche',
+-        data: [
+-          {
+-            title: 'Ankündigung',
+-            onPress: navigateTo('notifications-settings'),
+-            component: (
+-              <Switch
+-                value={!!notificationSettings.conferenceWeekPushs}
+-                onValueChange={value => {
+-                  updateNotificationSettings({
+-                    conferenceWeekPushs: value,
+-                  });
+-                }}
+-              />
+-            ),
+-            description:
+-              'Werde Sonntags vor einer Sitzungswoche über die kommenden Abstimmungen informiert.',
+-          },
+-        ],
+-      },
+-    );
+-  }
+-
+-  if (isVerified && notificationSettings.enabled) {
+-    const tmp = listData.find(({ title }) => title === 'Sitzungswoche');
+-    if (tmp) {
+-      tmp.data.push({
+-        title: 'Wichtige Abstimmungen',
+-        onPress: navigateTo('notifications-settings'),
+-        component: (
+-          <Switch
+-            value={!!notificationSettings.voteConferenceWeekPushs}
+-            onValueChange={value => {
+-              updateNotificationSettings({
+-                voteConferenceWeekPushs: value,
+-              });
+-            }}
+-          />
+-        ),
+-        description:
+-          'Werde täglich während einer laufenden Sitzungswoche, über eine populäre Abstimmung informiert.',
+-      });
+-    }
+-    listData.push({
+-      title: 'Sitzungsfreie Zeit',
+-      data: [
+-        {
+-          title: 'Populäre Abstimmungen',
+-          onPress: navigateTo('notifications-settings'),
+-          component: (
+-            <Switch
+-              value={!!notificationSettings.voteTOP100Pushs}
+-              onValueChange={value => {
+-                updateNotificationSettings({
+-                  voteTOP100Pushs: value,
+-                });
+-              }}
+-            />
+-          ),
+-          description:
+-            'Challenge? Werde auch in der sitzungsfreien Zeit täglich über eine Abstimmung informiert, bei der Du noch nicht mitgemacht hast.',
+-        },
+-      ],
+-    });
+-  }
+-
+   return (
+     <Wrapper>
+       <SectionList<ListData>
+diff --git a/packages/mobile-app/src/screens/modals/Introduction/PushInstructions/NotificationBox.tsx b/packages/mobile-app/src/screens/modals/Introduction/PushInstructions/NotificationBox.tsx
+deleted file mode 100644
+index eb68e80d..00000000
+--- a/packages/mobile-app/src/screens/modals/Introduction/PushInstructions/NotificationBox.tsx
++++ /dev/null
+@@ -1,67 +0,0 @@
+-import React from 'react';
+-import { styled } from '../../../../styles';
+-import { ImageSourcePropType } from 'react-native';
+-
+-interface Props {
+-  icon?: ImageSourcePropType;
+-  owner?: string;
+-  title: string;
+-  text?: string;
+-}
+-
+-const Wrapper = styled.View`
+-  background-color: #0007;
+-  margin-horizontal: 11;
+-  padding-horizontal: 11;
+-  padding-top: 11;
+-  padding-bottom: 18;
+-  border-radius: 12;
+-`;
+-
+-const Head = styled.View`
+-  flex-direction: row;
+-  align-items: center;
+-  margin-bottom: 8;
+-`;
+-
+-const Icon = styled.Image`
+-  width: 20;
+-  height: 20;
+-  margin-right: 5;
+-`;
+-
+-const Owner = styled.Text`
+-  font-size: 13;
+-  color: #fff;
+-`;
+-
+-const Title = styled.Text`
+-  font-size: 15;
+-  font-weight: bold;
+-  color: #fff;
+-`;
+-
+-const Text = styled.Text`
+-  font-size: 15;
+-  color: #fff;
+-`;
+-
+-export const NotificationBox: React.FC<Props> = ({
+-  title,
+-  text,
+-  icon,
+-  owner,
+-}) => {
+-  return (
+-    <Wrapper>
+-      {(!!icon || !!owner) && (
+-        <Head>
+-          {!!icon && <Icon source={icon} />}
+-          {!!owner && <Owner>{owner}</Owner>}
+-        </Head>
+-      )}
+-      <Title>{title}</Title>
+-      {!!text && <Text>{text}</Text>}
+-    </Wrapper>
+-  );
+-};
+diff --git a/packages/mobile-app/src/screens/modals/Introduction/PushInstructions/Settings.tsx b/packages/mobile-app/src/screens/modals/Introduction/PushInstructions/Settings.tsx
+deleted file mode 100644
+index c26501c4..00000000
+--- a/packages/mobile-app/src/screens/modals/Introduction/PushInstructions/Settings.tsx
++++ /dev/null
+@@ -1,230 +0,0 @@
+-import React, { ReactNode, useState } from 'react';
+-import { SectionList, Switch } from 'react-native';
+-
+-// GraphQL
+-import { StackNavigationProp } from '@react-navigation/stack';
+-import { SettingsRootStackParamList } from '../../../../routes/Sidebar/Settings';
+-import { Segment } from '../../../Bundestag/List/Components/Segment';
+-import { styled } from '../../../../styles';
+-import { ListItem } from '../../../Settings/components/ListItem';
+-import { NotificationSettings_notificationSettings } from '../../../../context/NotificationPermission/graphql/query/__generated__/NotificationSettings';
+-import { Notification } from '.';
+-import { defaultNotificationData } from './data';
+-
+-const Wrapper = styled.View`
+-  background-color: ${({ theme }) => theme.colors.background.secondary};
+-  flex: 1;
+-`;
+-
+-const Text = styled.Text`
+-  font-size: 17;
+-  margin-right: auto;
+-`;
+-
+-type FilterScreenNavigationProp = StackNavigationProp<
+-  SettingsRootStackParamList,
+-  'Settings'
+->;
+-
+-interface ListData {
+-  title: string;
+-  text?: string;
+-  arrow?: boolean;
+-  onPress?: () => void;
+-  component?: ReactNode;
+-  description?: string;
+-}
+-
+-interface List {
+-  title: string;
+-  data: ListData[];
+-}
+-
+-type Settings = Partial<
+-  Pick<
+-    NotificationSettings_notificationSettings,
+-    | 'conferenceWeekPushs'
+-    | 'outcomePushs'
+-    | 'voteConferenceWeekPushs'
+-    | 'voteTOP100Pushs'
+-  >
+->;
+-
+-type Props = {
+-  navigation?: FilterScreenNavigationProp;
+-  notificationSettings?: Settings;
+-  onPress?: (data: Notification) => void;
+-};
+-
+-export const Settings: React.FC<Props> = ({
+-  notificationSettings = {
+-    outcomePushs: true,
+-  },
+-  onPress,
+-}) => {
+-  const [settings, setNotificationSettings] = useState<Settings>(
+-    notificationSettings,
+-  );
+-
+-  const listData: List[] = [
+-    {
+-      title: 'Sitzungswoche',
+-      data: [
+-        {
+-          title: 'Ankündigung',
+-          component: (
+-            <Switch
+-              value={!!settings.conferenceWeekPushs}
+-              onValueChange={value => {
+-                setNotificationSettings({
+-                  ...settings,
+-                  conferenceWeekPushs: value,
+-                });
+-                !!onPress &&
+-                  onPress({
+-                    title: defaultNotificationData.conferenceWeekPushs.title,
+-                    text: defaultNotificationData.conferenceWeekPushs.text,
+-                    description:
+-                      defaultNotificationData.conferenceWeekPushs.description,
+-                  });
+-              }}
+-            />
+-          ),
+-          onPress: () =>
+-            !!onPress &&
+-            onPress({
+-              title: defaultNotificationData.conferenceWeekPushs.title,
+-              text: defaultNotificationData.conferenceWeekPushs.text,
+-              description:
+-                defaultNotificationData.conferenceWeekPushs.description,
+-            }),
+-        },
+-        {
+-          title: 'Wichtige Abstimmungen',
+-          onPress: () =>
+-            !!onPress &&
+-            onPress({
+-              title: defaultNotificationData.voteConferenceWeekPushs.title,
+-              text: defaultNotificationData.voteConferenceWeekPushs.text,
+-              description:
+-                defaultNotificationData.voteConferenceWeekPushs.description,
+-            }),
+-          component: (
+-            <Switch
+-              value={!!settings.voteConferenceWeekPushs}
+-              onValueChange={value => {
+-                setNotificationSettings({
+-                  ...settings,
+-                  voteConferenceWeekPushs: value,
+-                });
+-                !!onPress &&
+-                  onPress({
+-                    title:
+-                      defaultNotificationData.voteConferenceWeekPushs.title,
+-                    text: defaultNotificationData.voteConferenceWeekPushs.text,
+-                    description:
+-                      defaultNotificationData.voteConferenceWeekPushs
+-                        .description,
+-                  });
+-              }}
+-            />
+-          ),
+-        },
+-      ],
+-    },
+-    {
+-      title: 'Sitzungsfreie Zeit',
+-      data: [
+-        {
+-          title: 'Populäre Abstimmungen',
+-          onPress: () => {
+-            if (onPress) {
+-              onPress({
+-                title: defaultNotificationData.voteTOP100Pushs.title,
+-                text: defaultNotificationData.voteTOP100Pushs.text,
+-                description:
+-                  defaultNotificationData.voteTOP100Pushs.description,
+-              });
+-            }
+-          },
+-
+-          component: (
+-            <Switch
+-              value={!!settings.voteTOP100Pushs}
+-              onValueChange={value => {
+-                setNotificationSettings({
+-                  ...settings,
+-                  voteTOP100Pushs: value,
+-                });
+-                !!onPress &&
+-                  onPress({
+-                    title: defaultNotificationData.voteTOP100Pushs.title,
+-                    text: defaultNotificationData.voteTOP100Pushs.text,
+-                    description:
+-                      defaultNotificationData.voteTOP100Pushs.description,
+-                  });
+-              }}
+-            />
+-          ),
+-        },
+-      ],
+-    },
+-    {
+-      title: 'Individuelle Benachrichtungen',
+-      data: [
+-        {
+-          title: 'Bundestagsergebnisse',
+-          onPress: () =>
+-            !!onPress &&
+-            onPress({
+-              title: defaultNotificationData.outcomePushs.title,
+-              text: defaultNotificationData.outcomePushs.text,
+-              description: defaultNotificationData.outcomePushs.description,
+-            }),
+-
+-          component: (
+-            <Switch
+-              value={!!settings.outcomePushs}
+-              onValueChange={value => {
+-                setNotificationSettings({
+-                  ...settings,
+-                  outcomePushs: value,
+-                });
+-                !!onPress &&
+-                  onPress({
+-                    title: defaultNotificationData.outcomePushs.title,
+-                    text: defaultNotificationData.outcomePushs.text,
+-                    description:
+-                      defaultNotificationData.outcomePushs.description,
+-                  });
+-              }}
+-            />
+-          ),
+-        },
+-      ],
+-    },
+-  ];
+-
+-  return (
+-    <Wrapper>
+-      <SectionList<ListData>
+-        renderItem={({ item, index }) => (
+-          <ListItem
+-            key={index}
+-            text={item.text}
+-            description={item.description}
+-            arrow={item.arrow}
+-            onPress={item.onPress ? item.onPress : () => undefined}
+-            component={item.component}>
+-            <Text>{item.title}</Text>
+-          </ListItem>
+-        )}
+-        renderSectionHeader={({ section: { title } }) => (
+-          <Segment text={title} />
+-        )}
+-        sections={listData}
+-        keyExtractor={item => item.title}
+-      />
+-    </Wrapper>
+-  );
+-};
+diff --git a/packages/mobile-app/src/screens/modals/Introduction/PushInstructions/data.ts b/packages/mobile-app/src/screens/modals/Introduction/PushInstructions/data.ts
+deleted file mode 100644
+index 1f2be1fa..00000000
+--- a/packages/mobile-app/src/screens/modals/Introduction/PushInstructions/data.ts
++++ /dev/null
+@@ -1,27 +0,0 @@
+-export const defaultNotificationData = {
+-  conferenceWeekPushs: {
+-    title: 'Kommende Woche ist Sitzungswoche!',
+-    text: 'Es warten 13 spannende Themen auf Dich. Viel Spaß beim Abstimmen.',
+-    description:
+-      'Werde Sonntags vor einer Sitzungswoche über die kommenden Abstimmungen informiert.',
+-  },
+-  voteConferenceWeekPushs: {
+-    title: 'Diese Woche im Bundestag: Jetzt Abstimmen!',
+-    text:
+-      'Gesetz zu dem Abkommen vom 7. November 2018 zwischen der Bundesrepublik Deutschland und der Ukraine über Soziale Sicherheit',
+-    description:
+-      'Werde täglich während einer laufenden Sitzungswoche, über eine populäre Abstimmung informiert.',
+-  },
+-  voteTOP100Pushs: {
+-    title: 'Top 100 – #1 Jetzt Abstimmen!',
+-    text: 'Kosmetik ohne Mikroplastik - Dem Vorbild Schwedens folgen',
+-    description:
+-      'Challenge? Werde auch in der sitzungsfreien Zeit täglich über eine populäre Abstimmung informiert, bei der Du noch nicht mitgemacht hast.',
+-  },
+-  outcomePushs: {
+-    title: 'Offizielles Ergebnis zu Deiner Abstimmung',
+-    text: 'Sozialstaat stärken - Hartz IV sofort auf 582 Euro erhöhen',
+-    description:
+-      'Werde nach Deiner Abstimmung standardmäßig über das offizielle Ergebnis des Bundestages informiert, sobald dieses vorliegt.',
+-  },
+-};
+diff --git a/packages/mobile-app/src/screens/modals/Introduction/PushInstructions/index.tsx b/packages/mobile-app/src/screens/modals/Introduction/PushInstructions/index.tsx
+deleted file mode 100644
+index bfdaa470..00000000
+--- a/packages/mobile-app/src/screens/modals/Introduction/PushInstructions/index.tsx
++++ /dev/null
+@@ -1,160 +0,0 @@
+-import React, { useState, useContext } from 'react';
+-import { styled } from '../../../../styles';
+-import { NotificationBox } from './NotificationBox';
+-import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
+-import { defaultNotificationData } from './data';
+-import { useNavigation } from '@react-navigation/core';
+-import SvgIconAppIos from '@democracy-deutschland/mobile-ui/src/components/Icons/IconAppIos';
+-import SvgNewMarker from '@democracy-deutschland/mobile-ui/src/components/Icons/Newmarker';
+-import { Dimensions, Switch } from 'react-native';
+-import { NotificationsContext } from '../../../../context/NotificationPermission';
+-
+-const DEVICE_WIDTH = Dimensions.get('window').width;
+-
+-const Wrapper = styled.View`
+-  width: ${DEVICE_WIDTH};
+-  align-items: center;
+-`;
+-
+-const ScrollView = styled.ScrollView.attrs({
+-  contentContainerStyle: {
+-    alignItems: 'center',
+-    justifyContent: 'space-around',
+-    flexGrow: 1,
+-    marginBottom: 40,
+-  },
+-})``;
+-
+-const Headline = styled.Text`
+-  color: #000;
+-  font-size: 22;
+-  margin-vertical: 18;
+-`;
+-
+-const Subtitle = styled.Text`
+-  color: #9b9b9b;
+-  font-size: 15;
+-  margin-top: 18;
+-  margin-bottom: 18;
+-  margin-horizontal: 18;
+-  text-align: center;
+-`;
+-
+-const SwitchWrapper = styled.View`
+-  width: ${DEVICE_WIDTH};
+-  flex-direction: row;
+-  justify-content: space-between;
+-  padding-horizontal: 18;
+-  margin-top: 18;
+-  margin-bottom: 18;
+-`;
+-
+-const SwitchText = styled.Text`
+-  font-size: 17;
+-  flex: 1;
+-  padding-right: 18;
+-`;
+-
+-const Highlight = styled.Text`
+-  color: #000;
+-`;
+-
+-export interface Notification {
+-  title: string;
+-  text: string;
+-  description: string;
+-}
+-
+-interface Props {
+-  finishAction: () => void;
+-  alreadyKnown?: boolean;
+-}
+-
+-export const PushInstructions: React.FC<Props> = ({
+-  alreadyKnown = false,
+-  finishAction,
+-}) => {
+-  const navigation = useNavigation();
+-  const [pushActive, setPushActive] = useState(true);
+-  const { requestToken, update: updateNotificationSettings } = useContext(
+-    NotificationsContext,
+-  );
+-
+-  const notification = {
+-    title: defaultNotificationData.outcomePushs.title,
+-    text: defaultNotificationData.outcomePushs.text,
+-    description: defaultNotificationData.outcomePushs.description,
+-  };
+-
+-  const pressActivate = () => {
+-    requestToken();
+-    if (!alreadyKnown) {
+-      navigation.reset({
+-        index: 0,
+-        routes: [{ name: 'Sidebar' }],
+-      });
+-    }
+-    updateNotificationSettings({
+-      enabled: true,
+-      outcomePushs: true,
+-    });
+-    if (!alreadyKnown) {
+-      finishAction();
+-    }
+-  };
+-
+-  return (
+-    <Wrapper>
+-      <ScrollView>
+-        {!alreadyKnown && (
+-          <>
+-            <SvgNewMarker
+-              width={58}
+-              height={35}
+-              color="#f568c4"
+-              style={{ position: 'absolute', left: 18 }}
+-            />
+-            <SvgIconAppIos width={73} height={73} />
+-            <Headline>Ergebnisse erhalten</Headline>
+-            <Subtitle>
+-              Werde nach Deiner Abstimmung automatisch über das offizielle
+-              Ergebnis des Bundestages informiert, sobald dieses vorliegt, um es
+-              mit Deinem vergleichen zu können.
+-            </Subtitle>
+-          </>
+-        )}
+-        <NotificationBox
+-          icon={require('@democracy-deutschland/mobile-ui/src/components/Introduction/assets/icon.logo.png')}
+-          owner="DEMOCRACY"
+-          title={notification.title}
+-          text={notification.text}
+-        />
+-        {!!alreadyKnown && (
+-          <Subtitle>
+-            Ab sofort informiert DEMOCRACY Dich <Highlight>per Push</Highlight>{' '}
+-            über das offizielle <Highlight>Ergebnis des Bundestages</Highlight>{' '}
+-            zu Deiner Abstimmung, sobald dieses vorliegt, um es mit Deinem
+-            vergleichen zu können.
+-          </Subtitle>
+-        )}
+-        <SwitchWrapper>
+-          <SwitchText>
+-            Bundestagsergebnisse immer automatisch erhalten
+-          </SwitchText>
+-          <Switch value={pushActive} onValueChange={setPushActive} />
+-        </SwitchWrapper>
+-        <Button
+-          style={{
+-            marginHorizontal: 18,
+-            width: DEVICE_WIDTH - 36,
+-          }}
+-          backgroundColor="blue"
+-          textColor="white"
+-          text="Aktivieren"
+-          onPress={pressActivate}
+-          disabled={!pushActive}
+-        />
+-      </ScrollView>
+-    </Wrapper>
+-  );
+-};
+diff --git a/packages/mobile-app/src/screens/modals/Introduction/index.tsx b/packages/mobile-app/src/screens/modals/Introduction/index.tsx
+index 53205278..a6065cf2 100644
+--- a/packages/mobile-app/src/screens/modals/Introduction/index.tsx
++++ b/packages/mobile-app/src/screens/modals/Introduction/index.tsx
+@@ -11,8 +11,6 @@ import { Pager } from '@democracy-deutschland/mobile-ui/src/components/Pager';
+ import { getSlides } from './utils/getSlides';
+ import { InitialStateContext } from '../../../context/InitialStates';
+ import { getVersion } from 'react-native-device-info';
+-import { PushInstructions } from './PushInstructions';
+-import { NotificationsContext } from '../../../context/NotificationPermission';
+ 
+ const SafeAreaView = styled.SafeAreaView`
+   flex: 1;
+@@ -33,9 +31,6 @@ const Introduction: FC<Props> = ({ route }) => {
+   const { isVerified, setLastStartWithVersion } = useContext(
+     InitialStateContext,
+   );
+-  const { notificationSettings, hasPermissions } = useContext(
+-    NotificationsContext,
+-  );
+   let { lastStartWithVersion, done } = {
+     lastStartWithVersion: '',
+     done: undefined,
+@@ -70,16 +65,6 @@ const Introduction: FC<Props> = ({ route }) => {
+     />
+   ));
+ 
+-  if (
+-    !notificationSettings.outcomePushs ||
+-    !notificationSettings.enabled ||
+-    !hasPermissions
+-  ) {
+-    slideScreens.push(
+-      <PushInstructions key="push-instructions" finishAction={finishAction} />,
+-    );
+-  }
+-
+   if (slideScreens.length === 0) {
+     setLastStartWithVersion(getVersion());
+     navigation.reset({
+diff --git a/packages/mobile-app/src/screens/modals/NotificationInstruction/index.tsx b/packages/mobile-app/src/screens/modals/NotificationInstruction/index.tsx
+deleted file mode 100644
+index ce2f6b5e..00000000
+--- a/packages/mobile-app/src/screens/modals/NotificationInstruction/index.tsx
++++ /dev/null
+@@ -1,146 +0,0 @@
+-import React, { useState, useContext } from 'react';
+-import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
+-import { useNavigation, useRoute, RouteProp } from '@react-navigation/core';
+-import SvgNewMarker from '@democracy-deutschland/mobile-ui/src/components/Icons/Newmarker';
+-import { Dimensions, Switch, Image } from 'react-native';
+-import { styled } from '../../../styles';
+-import { NotificationsContext } from '../../../context/NotificationPermission';
+-import { defaultNotificationData } from '../Introduction/PushInstructions/data';
+-import { NotificationBox } from '../Introduction/PushInstructions/NotificationBox';
+-import { RootStackParamList } from '../../../routes';
+-import { InitialStateContext } from '../../../context/InitialStates';
+-
+-const DEVICE_WIDTH = Dimensions.get('window').width;
+-
+-const Wrapper = styled.SafeAreaView`
+-  width: ${DEVICE_WIDTH};
+-  align-items: center;
+-`;
+-
+-const ScrollView = styled.ScrollView.attrs({
+-  contentContainerStyle: {
+-    alignItems: 'center',
+-  },
+-})``;
+-
+-const Headline = styled.Text`
+-  color: #000;
+-  font-size: 22;
+-  margin-vertical: 18;
+-`;
+-
+-const Subtitle = styled.Text`
+-  color: #9b9b9b;
+-  font-size: 15;
+-  padding-top: 14;
+-  padding-bottom: 52;
+-  margin-horizontal: 18;
+-  text-align: center;
+-`;
+-
+-const SwitchWrapper = styled.View`
+-  width: ${DEVICE_WIDTH};
+-  flex-direction: row;
+-  justify-content: space-between;
+-  padding-horizontal: 18;
+-  padding-top: 40;
+-  padding-bottom: 31;
+-`;
+-
+-const SwitchText = styled.Text`
+-  font-size: 17;
+-  flex: 1;
+-  padding-right: 18;
+-`;
+-
+-type RouteProps = RouteProp<RootStackParamList, 'NotificationInstruction'>;
+-
+-export interface Notification {
+-  title: string;
+-  text: string;
+-  description: string;
+-}
+-
+-export const NotificationInstructionScreen: React.FC = () => {
+-  const navigation = useNavigation();
+-  const route = useRoute<RouteProps>();
+-  const [pushActive, setPushActive] = useState(true);
+-  const { requestToken, update: updateNotificationSettings } = useContext(
+-    NotificationsContext,
+-  );
+-  const { isVerified } = useContext(InitialStateContext);
+-
+-  const notification = {
+-    title: defaultNotificationData.outcomePushs.title,
+-    text: defaultNotificationData.outcomePushs.text,
+-    description: defaultNotificationData.outcomePushs.description,
+-  };
+-
+-  const pressActivate = () => {
+-    requestToken();
+-    navigation.goBack();
+-    route.params.done();
+-    updateNotificationSettings({
+-      enabled: true,
+-      outcomePushs: true,
+-    });
+-  };
+-
+-  const notificationTitle = isVerified
+-    ? defaultNotificationData.outcomePushs.title
+-    : 'Offizielles Ergebnis zur Abstimmung';
+-
+-  return (
+-    <Wrapper>
+-      <ScrollView>
+-        <>
+-          <SvgNewMarker
+-            width={58}
+-            height={35}
+-            color="#f568c4"
+-            style={{ position: 'absolute', left: 18 }}
+-          />
+-          <Image
+-            source={require('@democracy-deutschland/mobile-ui/src/components/Introduction/assets/icon.beobachte.png')}
+-          />
+-          <Headline>Du hast die Glocke aktiviert</Headline>
+-          <Subtitle>
+-            und wirst über das offizielle Ergebnis des Bundestages zu dieser
+-            Abstimmung informiert, wenn Du uns erlaubst, Dir Mitteilungen zu
+-            senden.
+-          </Subtitle>
+-        </>
+-        <NotificationBox
+-          icon={require('@democracy-deutschland/mobile-ui/src/components/Introduction/assets/icon.logo.png')}
+-          owner="DEMOCRACY"
+-          title={notificationTitle}
+-          text={notification.text}
+-        />
+-        <SwitchWrapper>
+-          <SwitchText>Bundestagsergebnis erhalten</SwitchText>
+-          <Switch value={pushActive} onValueChange={setPushActive} />
+-        </SwitchWrapper>
+-        <Button
+-          style={{
+-            marginHorizontal: 18,
+-            width: DEVICE_WIDTH - 36,
+-          }}
+-          backgroundColor="blue"
+-          textColor="white"
+-          text="Aktivieren"
+-          onPress={pressActivate}
+-          disabled={!pushActive}
+-        />
+-        <Button
+-          style={{
+-            marginHorizontal: 18,
+-            width: DEVICE_WIDTH - 36,
+-          }}
+-          textColor="red"
+-          text="Später"
+-          onPress={navigation.goBack}
+-        />
+-      </ScrollView>
+-    </Wrapper>
+-  );
+-};
+diff --git a/yarn.lock b/yarn.lock
+index 98d2d6ac..43d6edd3 100644
+--- a/yarn.lock
++++ b/yarn.lock
+@@ -16156,11 +16156,6 @@ react-native-modal@^11.0.2:
+     prop-types "^15.6.2"
+     react-native-animatable "1.3.3"
+ 
+-react-native-notifications@^3.1.2:
+-  version "3.1.4"
+-  resolved "https://registry.yarnpkg.com/react-native-notifications/-/react-native-notifications-3.1.4.tgz#0b78985bfe23801c05f57031f918a553853c70c4"
+-  integrity sha512-aGYczr6yXACYnO5mdzWVAMars4llI9jwWPs4HVj+Pj/wnhX9rXR9dJP++HN5RG0LFh2RI6SYS4dpInKJjSgIew==
+-
+ react-native-pdf@^6.0.1:
+   version "6.1.2"
+   resolved "https://registry.yarnpkg.com/react-native-pdf/-/react-native-pdf-6.1.2.tgz#b1ef263a47ff5e3a24d0428960edf56b57dddcad"
