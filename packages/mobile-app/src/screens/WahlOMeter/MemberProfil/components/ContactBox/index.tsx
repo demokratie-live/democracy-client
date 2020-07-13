@@ -38,12 +38,25 @@ const Domain = styled.Text`
   padding-top: 5;
 `;
 
+const Username = styled.Text`
+  font-size: 12;
+  padding-top: 5;
+`;
+
 interface Props {
   contacts: Contacts[];
 }
 
 class ContactBox extends React.PureComponent<Props> {
-  getIcon = ({ name, url }: { name: string; url: string }) => {
+  getIcon = ({
+    name,
+    url,
+    username,
+  }: {
+    name: string;
+    url: string;
+    username?: string;
+  }) => {
     switch (name) {
       case 'email': {
         const email = `mailto:${url}`;
@@ -63,6 +76,7 @@ class ContactBox extends React.PureComponent<Props> {
             <IconWrapper onPress={linking(url)}>
               <FacebookIcon width={40} height={40} color="#000" />
             </IconWrapper>
+            {!!username && <Username>{username}</Username>}
           </ServiceWrapper>
         );
       case 'twitter':
@@ -72,6 +86,7 @@ class ContactBox extends React.PureComponent<Props> {
             <IconWrapper onPress={linking(url)}>
               <TwitterIcon width={40} height={40} color="#000" />
             </IconWrapper>
+            {!!username && <Username>{username}</Username>}
           </ServiceWrapper>
         );
       case 'instagram':
@@ -81,6 +96,7 @@ class ContactBox extends React.PureComponent<Props> {
             <IconWrapper onPress={linking(url)}>
               <InstagramIcon width={40} height={40} color="#000" />
             </IconWrapper>
+            {!!username && <Username>{username}</Username>}
           </ServiceWrapper>
         );
 
@@ -100,7 +116,9 @@ class ContactBox extends React.PureComponent<Props> {
     const { contacts } = this.props;
     return (
       <ContactWrapper>
-        {contacts.map(({ name, URL }) => this.getIcon({ name, url: URL }))}
+        {contacts.map(({ name, URL, username }) =>
+          this.getIcon({ name, url: URL, username }),
+        )}
       </ContactWrapper>
     );
   }

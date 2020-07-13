@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface RequestSmsCode_requestCode {
-  __typename: 'CodeResult';
+  __typename: "CodeResult";
   reason: string | null;
   allowNewUser: boolean | null;
   succeeded: boolean;

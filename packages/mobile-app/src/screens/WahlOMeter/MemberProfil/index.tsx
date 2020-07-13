@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from 'react';
 import { ActivityIndicator } from 'react-native';
-import styled from 'styled-components/native';
 import ContactBox from './components/ContactBox';
 // Components
 import PartyComponent from '../../Bundestag/Procedure/components/GovernmentVoteResults/Parties';
@@ -17,6 +16,7 @@ import {
 } from './graphql/query/__generated__/GetDeputyProfile';
 import { ConstituencyContext } from '../../../context/Constituency';
 import { useNavigation } from '@react-navigation/core';
+import { styled } from '../../../styles';
 
 const ScrollWrapper = styled.ScrollView.attrs({
   contentContainerStyle: {
@@ -72,6 +72,7 @@ const SegmentWrapper = styled.View`
 export interface Contacts {
   name: string;
   URL: string;
+  username?: string;
 }
 
 export const MemberProfil = () => {
@@ -159,8 +160,19 @@ export const MemberProfil = () => {
   let contacts: Contacts[] = [];
   if (contact) {
     contacts = contact.email
-      ? [{ name: 'email', URL: contact.email }, ...contact.links]
-      : [...contact.links];
+      ? [
+          { name: 'email', URL: contact.email },
+          ...contact.links.map(link => ({
+            ...link,
+            username: link.username ? link.username : undefined,
+          })),
+        ]
+      : [
+          ...contact.links.map(link => ({
+            ...link,
+            username: link.username ? link.username : undefined,
+          })),
+        ];
   }
 
   const procedureCountByDecision = getProcedureCountByDecision(procedures);

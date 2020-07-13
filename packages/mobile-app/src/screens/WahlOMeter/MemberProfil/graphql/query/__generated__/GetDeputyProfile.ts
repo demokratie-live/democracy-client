@@ -3,38 +3,39 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { VoteSelection } from './../../../../../../../__generated__/globalTypes';
+import { VoteSelection } from "./../../../../../../../__generated__/globalTypes";
 
 // ====================================================
 // GraphQL query operation: GetDeputyProfile
 // ====================================================
 
 export interface GetDeputyProfile_deputiesOfConstituency_procedures_procedure {
-  __typename: 'Procedure';
+  __typename: "Procedure";
   procedureId: string;
 }
 
 export interface GetDeputyProfile_deputiesOfConstituency_procedures {
-  __typename: 'DeputyProcedure';
+  __typename: "DeputyProcedure";
   decision: VoteSelection;
   procedure: GetDeputyProfile_deputiesOfConstituency_procedures_procedure;
 }
 
 export interface GetDeputyProfile_deputiesOfConstituency_contact_links {
-  __typename: 'DeputyLink';
+  __typename: "DeputyLink";
   name: string;
   URL: string;
+  username: string | null;
 }
 
 export interface GetDeputyProfile_deputiesOfConstituency_contact {
-  __typename: 'DeputyContact';
+  __typename: "DeputyContact";
   address: string | null;
   email: string | null;
   links: GetDeputyProfile_deputiesOfConstituency_contact_links[];
 }
 
 export interface GetDeputyProfile_deputiesOfConstituency {
-  __typename: 'Deputy';
+  __typename: "Deputy";
   name: string;
   imgURL: string;
   party: string | null;
