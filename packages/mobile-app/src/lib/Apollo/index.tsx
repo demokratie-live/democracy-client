@@ -13,6 +13,7 @@ import { GRAPHQL_URL, GRAPHQL_SERVER_LOCAL, ANDROID_SERVER } from '../config';
 import { RetryFunction } from 'apollo-link-retry/lib/retryFunction';
 import AsyncStorage from '@react-native-community/async-storage';
 import DeviceInfo from 'react-native-device-info';
+import { versionLinkMiddleware } from './Version';
 
 const cache = new InMemoryCache({
   dataIdFromObject: (o: any) => {
@@ -97,6 +98,7 @@ const restLink = new RestLink({
 const link = ApolloLink.from([
   retryLink,
   errorLink,
+  versionLinkMiddleware,
   authLinkMiddleware,
   authLinkAfterware,
   restLink,
