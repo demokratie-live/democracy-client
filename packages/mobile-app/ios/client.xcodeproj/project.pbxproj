@@ -19,6 +19,7 @@
 		44433F6EA3B446CA0C3301E8 /* libPods-client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C59B06D6F7200441822ACAC7 /* libPods-client.a */; };
 		51D3D9DBDDC54DA29DAA51A7 /* libPods-clientTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D15E8D7980434A138270732 /* libPods-clientTests.a */; };
 		7B305EA43801CA47E24897BB /* libPods-client-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 800B846E030BA5F3D2716867 /* libPods-client-tvOS.a */; };
+		C346941624BCB3BE000E06B7 /* push.aiff in Resources */ = {isa = PBXBuildFile; fileRef = C346941524BCB3BE000E06B7 /* push.aiff */; };
 		C374DDF5622B4B45A4A53805 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E3003AE1E3714904AE002B63 /* libz.tbd */; };
 		D8910E8C116A66280AEE4712 /* libPods-client-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93635B3EDA508CCA6C584E30 /* libPods-client-tvOSTests.a */; };
 /* End PBXBuildFile section */
@@ -92,6 +93,7 @@
 		A39F5BC9059B384D06A8DD82 /* Pods-client-tvOS.debug.internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOS.debug.internal.xcconfig"; path = "Target Support Files/Pods-client-tvOS/Pods-client-tvOS.debug.internal.xcconfig"; sourceTree = "<group>"; };
 		AC508905CE66CED9AD6EFD7A /* Pods-client-tvOSTests.release.internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOSTests.release.internal.xcconfig"; path = "Target Support Files/Pods-client-tvOSTests/Pods-client-tvOSTests.release.internal.xcconfig"; sourceTree = "<group>"; };
 		B11B71EBCB998E8B04E51A23 /* Pods-client-tvOSTests.alpha.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-tvOSTests.alpha.release.xcconfig"; path = "Target Support Files/Pods-client-tvOSTests/Pods-client-tvOSTests.alpha.release.xcconfig"; sourceTree = "<group>"; };
+		C346941524BCB3BE000E06B7 /* push.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = push.aiff; sourceTree = "<group>"; };
 		C3E62E2E23D1A19E00EF5CA1 /* DEMOCRACY.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = DEMOCRACY.entitlements; path = client/DEMOCRACY.entitlements; sourceTree = "<group>"; };
 		C59B06D6F7200441822ACAC7 /* libPods-client.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-client.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C60E57A4C64E8D422333D24D /* Pods-clientTests.internal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-clientTests.internal.debug.xcconfig"; path = "Target Support Files/Pods-clientTests/Pods-clientTests.internal.debug.xcconfig"; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				C346941524BCB3BE000E06B7 /* push.aiff */,
 				13B07FAE1A68108700A75B9A /* client */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* clientTests */,
@@ -430,6 +433,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				C346941624BCB3BE000E06B7 /* push.aiff in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
