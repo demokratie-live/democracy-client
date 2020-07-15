@@ -102,7 +102,7 @@ export const Details: React.FC<Props> = ({
           </HeadRightTitle>
           <HeadRightDescr>
             {type && <DefDescr>{renderType(type)}</DefDescr>}
-            <DefDescr>{procedureId}</DefDescr>
+            <DefDescr selectable={true}>{procedureId}</DefDescr>
             <DefDescr>
               {submissionDate && m(submissionDate).format('DD.MM.YY')}
             </DefDescr>
@@ -117,7 +117,7 @@ export const Details: React.FC<Props> = ({
         {abstract && (
           <View>
             <DefTitle>Inhalt</DefTitle>
-            <ContentText>{abstract}</ContentText>
+            <ContentText selectable={true}>{abstract}</ContentText>
           </View>
         )}
       </Content>

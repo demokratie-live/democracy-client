@@ -196,13 +196,13 @@ export const DonateScreen: React.FC<Props> = () => {
           </DefinitionListWrapper>
           <DefinitionListWrapper>
             <DefinitionListTitle>{donateList2Head}</DefinitionListTitle>
-            <DefinitionListDescription>
+            <DefinitionListDescription selectable={true}>
               {donateList2Text}
             </DefinitionListDescription>
           </DefinitionListWrapper>
           <DefinitionListWrapper style={{ paddingBottom: 18 }}>
             <DefinitionListTitle>{donateList3Head}</DefinitionListTitle>
-            <DefinitionListDescription>
+            <DefinitionListDescription selectable={true}>
               {donateList3Text}
             </DefinitionListDescription>
           </DefinitionListWrapper>
