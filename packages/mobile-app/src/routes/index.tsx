@@ -140,6 +140,7 @@ const Navigation = () => {
             text: '#fff',
             border: '#fff',
             card: '#fff',
+            notification: '#fff',
           },
           dark: false,
         }}>

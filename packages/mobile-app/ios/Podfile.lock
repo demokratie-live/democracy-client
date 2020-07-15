@@ -186,7 +186,7 @@ PODS:
     - React-cxxreact (= 0.61.5)
     - React-jsi (= 0.61.5)
   - React-jsinspector (0.61.5)
-  - react-native-config (0.12.0):
+  - react-native-config (1.3.1):
     - React
   - react-native-notifications (3.2.2):
     - React
@@ -418,7 +418,7 @@ SPEC CHECKSUMS:
   React-jsi: cb2cd74d7ccf4cffb071a46833613edc79cdf8f7
   React-jsiexecutor: d5525f9ed5f782fdbacb64b9b01a43a9323d2386
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
-  react-native-config: f2c2ae45625a068c35681a16b9bfb1ca58b0adc7
+  react-native-config: 54f023214af396f21ff0a9e0fed22620d676c8a1
   react-native-notifications: 3d1c66c8a3eb1857577f283f9f6e9aa505f16346
   react-native-pdf: 909cd849e6a806731b2135263189fea39494b55e
   react-native-safe-area-context: e200d4433aba6b7e60b52da5f37af11f7a0b0392

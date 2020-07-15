@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-ignore */
 // @ts-ignore
 
 const constituencies: { [key: string]: any } = {

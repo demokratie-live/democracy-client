@@ -3,7 +3,6 @@ import { faqData } from './data';
 import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Folding';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { SidebarParamList } from '../../../routes/Sidebar';
-// eslint-disable-next-line import/named
 import { MarkdownView } from 'react-native-markdown-view';
 import { Linking, Platform } from 'react-native';
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
@@ -177,7 +176,7 @@ Bitte gib uns möglichst viele Informationen zu den von Dir gefunden Fehlern ode
       </SocialMediaWrapper>
       <Button
         text="Tutorial erneut ansehen"
-        onPress={() => navigation.navigate('Introduction')}
+        onPress={() => navigation.navigate('Introduction', {})}
         // backgroundColor=""
         textColor="blue"
       />
