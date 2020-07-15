@@ -22,6 +22,7 @@ import { RootStackParamList } from '../../routes';
 import { SidebarParamList } from '../../routes/Sidebar';
 import { BundestagRootStackParamList } from '../../routes/Sidebar/Bundestag';
 import { TopTabParamList } from '../../routes/Sidebar/Bundestag/TabView';
+import { Notifications } from 'react-native-notifications';
 
 const Container = styled.ScrollView.attrs({})`
   flex: 1;
@@ -53,6 +54,17 @@ const LocalVotes = () => {
   useEffect(() => {
     VotesLocal.readKeychain().then(data => setLocalVotes(JSON.stringify(data)));
   }, []);
+
+  const push = () => {
+    Notifications.postLocalNotification(
+      {
+        body: 'Local notification!',
+        title: 'Local Notification Title',
+        sound: 'push.aiff',
+      },
+      1,
+    );
+  };
 
   return (
     <>
@@ -101,6 +113,7 @@ const LocalVotes = () => {
           setLocalVotes(')');
         }}
       />
+      <Button title="Push" onPress={push} />
     </>
   );
 };
