@@ -190,7 +190,7 @@ PODS:
     - React
   - react-native-notifications (3.2.2):
     - React
-  - react-native-pdf (6.1.2):
+  - react-native-pdf (6.2.0):
     - React
   - react-native-safe-area-context (0.7.3):
     - React
@@ -237,7 +237,7 @@ PODS:
     - React
   - RNCMaskedView (0.1.10):
     - React
-  - RNDeviceInfo (5.6.1):
+  - RNDeviceInfo (5.6.2):
     - React
   - RNGestureHandler (1.6.1):
     - React
@@ -247,7 +247,7 @@ PODS:
     - React
   - RNReanimated (1.9.0):
     - React
-  - RNScreens (2.8.0):
+  - RNScreens (2.9.0):
     - React
   - RNSearchBar (3.5.1):
     - React
@@ -420,7 +420,7 @@ SPEC CHECKSUMS:
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
   react-native-config: f2c2ae45625a068c35681a16b9bfb1ca58b0adc7
   react-native-notifications: 3d1c66c8a3eb1857577f283f9f6e9aa505f16346
-  react-native-pdf: 7d76a6619f76a6ebfb2f82a4f2feeb17826ba8b4
+  react-native-pdf: 909cd849e6a806731b2135263189fea39494b55e
   react-native-safe-area-context: e200d4433aba6b7e60b52da5f37af11f7a0b0392
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76
@@ -436,12 +436,12 @@ SPEC CHECKSUMS:
   rn-fetch-blob: f525a73a78df9ed5d35e67ea65e79d53c15255bc
   RNCAsyncStorage: 44395cb9c7c1523104c2b499eb426ef7aff82bca
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
-  RNDeviceInfo: b6e650fbd234732c759544218657d549b4339038
+  RNDeviceInfo: ed8557a8bd6443cbc0ab5d375e6808a38a279744
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNKeychain: 840f8e6f13be0576202aefcdffd26a4f54bfe7b5
   RNPermissions: ad71dd4f767ec254f2cd57592fbee02afee75467
   RNReanimated: b5ccb50650ba06f6e749c7c329a1bc3ae0c88b43
-  RNScreens: 62211832af51e0aebcf6e8c36bcf7dd65592f244
+  RNScreens: c526239bbe0e957b988dacc8d75ac94ec9cb19da
   RNSearchBar: 9860431356b7d12a8449d2fddb2b5f3c78d1e99f
   RNSha256: c6f68c850bf8315c95e2508667e8c908bd9f8487
   RNSVG: 67f1f12dae2cef6ed59a42cae74a6b8f5a9e7b46
@@ -449,4 +449,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 4e39ccaeb5dbb06c375a8633797aebefee6d8a63
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.9.3
