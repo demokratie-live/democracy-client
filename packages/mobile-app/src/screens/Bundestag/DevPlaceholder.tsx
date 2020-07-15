@@ -61,6 +61,11 @@ const LocalVotes = () => {
         body: 'Local notification!',
         title: 'Local Notification Title',
         sound: 'push.aiff',
+        identifier: `${new Date()}`,
+        payload: '',
+        badge: 0,
+        thread: '',
+        type: '',
       },
       1,
     );
