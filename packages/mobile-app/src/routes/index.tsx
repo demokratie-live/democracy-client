@@ -21,6 +21,7 @@ import { VerificationStart } from '../screens/modals/Verification/Start';
 import { PhoneNumber } from '../screens/modals/Verification/PhoneNumber';
 import { Code } from '../screens/modals/Verification/Code';
 import { SmsDonate } from '../screens/modals/Verification/Donate';
+import SyncVotes from '../screens/Settings/SyncVotes';
 
 export type RootStackParamList = {
   Sidebar: undefined;
@@ -36,6 +37,7 @@ export type RootStackParamList = {
   PhoneNumberInput: { procedureId?: string };
   SmsCodeInput: { procedureId?: string };
   SmsDonate: undefined;
+  SyncVotes: undefined;
 };
 
 const RootStack = createStackNavigator<RootStackParamList>();
@@ -221,6 +223,13 @@ const Navigation = () => {
               headerBackTitleStyle: {
                 color: 'red',
               },
+            }}
+          />
+          <RootStack.Screen
+            name="SyncVotes"
+            component={SyncVotes}
+            options={{
+              headerTitle: 'Stimmen übertragen',
             }}
           />
         </RootStack.Navigator>
