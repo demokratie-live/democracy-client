@@ -3,38 +3,38 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { VoteSelection } from './../../../../../../../__generated__/globalTypes';
+import { VoteSelection } from "./../../../../../../../__generated__/globalTypes";
 
 // ====================================================
 // GraphQL query operation: DeputyProcedures
 // ====================================================
 
 export interface DeputyProcedures_deputyProcedures_procedures_procedure_voteResults_partyVotes {
-  __typename: 'PartyVote';
+  __typename: "PartyVote";
   party: string;
   main: VoteSelection;
 }
 
 export interface DeputyProcedures_deputyProcedures_procedures_procedure_voteResults {
-  __typename: 'VoteResult';
-  governmentDecision: VoteSelection | null;
-  yes: number | null;
-  abstination: number | null;
-  no: number | null;
+  __typename: "VoteResult";
+  governmentDecision: VoteSelection;
+  yes: number;
+  abstination: number;
+  no: number;
   notVoted: number | null;
   partyVotes: DeputyProcedures_deputyProcedures_procedures_procedure_voteResults_partyVotes[];
 }
 
 export interface DeputyProcedures_deputyProcedures_procedures_procedure_communityVotes {
-  __typename: 'CommunityVotes';
-  yes: number | null;
-  abstination: number | null;
-  no: number | null;
-  total: number | null;
+  __typename: "CommunityVotes";
+  yes: number;
+  abstination: number;
+  no: number;
+  total: number;
 }
 
 export interface DeputyProcedures_deputyProcedures_procedures_procedure {
-  __typename: 'Procedure';
+  __typename: "Procedure";
   _id: string;
   procedureId: string;
   sessionTOPHeading: string | null;
@@ -51,13 +51,13 @@ export interface DeputyProcedures_deputyProcedures_procedures_procedure {
 }
 
 export interface DeputyProcedures_deputyProcedures_procedures {
-  __typename: 'DeputyProcedure';
+  __typename: "DeputyProcedure";
   decision: VoteSelection;
   procedure: DeputyProcedures_deputyProcedures_procedures_procedure;
 }
 
 export interface DeputyProcedures_deputyProcedures {
-  __typename: 'Deputy';
+  __typename: "Deputy";
   totalProcedures: number | null;
   procedures: DeputyProcedures_deputyProcedures_procedures[];
 }

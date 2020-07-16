@@ -24,6 +24,7 @@ export const GET_DEPUTY_PROFILE = gql`
         links {
           name
           URL
+          username
         }
       }
     }

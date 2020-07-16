@@ -153,7 +153,7 @@ export const GovernmentVoteResults: React.FC<Props> = ({
       dataPieChart.push({
         label: 'Abwesend',
         percent: (voteResults.notVoted || 0) / votes,
-        value: voteResults.notVoted,
+        value: voteResults.notVoted || 0,
         color: '#B1B3B4',
       });
     }

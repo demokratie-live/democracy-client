@@ -3,7 +3,7 @@ module.exports = {
     includes: ["./packages/mobile-app/src/**/*.ts"],
     service: {
       name: "DEMOCRACY API Local",
-      url: "http://localhost:3000/",
+      url: "https://internal.api.democracy-app.de",
       skipSSLValidation: true
     }
   }

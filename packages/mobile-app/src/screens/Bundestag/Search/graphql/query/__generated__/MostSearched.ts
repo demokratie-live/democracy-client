@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface MostSearched_mostSearched {
-  __typename: 'SearchTerm';
+  __typename: "SearchTerm";
   term: string;
 }
 
