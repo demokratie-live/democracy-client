@@ -150,6 +150,7 @@ class WahlOMeter extends PureComponent<Props> {
                 });
               }}
               onMomentumScrollEnd={this.onScrollEndDrag}
+              // @ts-ignore
               ref={this.scrollView}>
               {[bundestagScreen, fraktionenScreen, wahlkreisScreen]}
             </ScrollViewCmp>
@@ -182,6 +183,7 @@ class WahlOMeter extends PureComponent<Props> {
                 });
               }}
               onMomentumScrollEnd={this.onScrollEndDrag}
+              // @ts-ignore
               ref={this.scrollView}>
               {[bundestagScreen, fraktionenScreen, wahlkreisScreen]}
             </ScrollViewCmp>

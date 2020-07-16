@@ -91,7 +91,7 @@ export const PhoneNumber: React.FC = () => {
               // Contains a Date (String)
               setExpireTime(res.data.requestCode.expireTime);
               setResendTime(res.data.requestCode.resendTime);
-              navigation.push('SmsCodeInput');
+              navigation.push('SmsCodeInput', {});
             }
           },
         },

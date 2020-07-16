@@ -6,7 +6,7 @@ import { defaultNotificationData } from './data';
 import { useNavigation } from '@react-navigation/core';
 import SvgIconAppIos from '@democracy-deutschland/mobile-ui/src/components/Icons/IconAppIos';
 import SvgNewMarker from '@democracy-deutschland/mobile-ui/src/components/Icons/Newmarker';
-import { Dimensions, Switch } from 'react-native';
+import { Dimensions, Switch, View } from 'react-native';
 import { NotificationsContext } from '../../../../context/NotificationPermission';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
@@ -123,12 +123,14 @@ export const PushInstructions: React.FC<Props> = ({
             </Subtitle>
           </>
         )}
-        <NotificationBox
-          icon={require('@democracy-deutschland/mobile-ui/src/components/Introduction/assets/icon.logo.png')}
-          owner="DEMOCRACY"
-          title={notification.title}
-          text={notification.text}
-        />
+        <View>
+          <NotificationBox
+            icon={require('@democracy-deutschland/mobile-ui/src/components/Introduction/assets/icon.logo.png')}
+            owner="DEMOCRACY"
+            title={notification.title}
+            text={notification.text}
+          />
+        </View>
         {!!alreadyKnown && (
           <Subtitle>
             Ab sofort informiert DEMOCRACY Dich <Highlight>per Push</Highlight>{' '}

@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 import { VoteSelection } from "./../../../../../../../../../__generated__/globalTypes";
@@ -10,11 +11,11 @@ import { VoteSelection } from "./../../../../../../../../../__generated__/global
 
 export interface Vote_vote {
   __typename: "Vote";
-  voted: boolean | null;
+  voted: boolean;
 }
 
 export interface Vote {
-  vote: Vote_vote | null;
+  vote: Vote_vote;
 }
 
 export interface VoteVariables {

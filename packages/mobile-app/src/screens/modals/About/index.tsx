@@ -3,7 +3,6 @@ import deepmerge from 'deepmerge';
 import React, { ComponentProps } from 'react';
 import { Linking, Text } from 'react-native';
 import { getBuildNumber, getVersion } from 'react-native-device-info';
-// eslint-disable-next-line import/named
 import { MarkdownView } from 'react-native-markdown-view';
 import styled from 'styled-components/native';
 import { SidebarParamList } from '../../../routes/Sidebar';

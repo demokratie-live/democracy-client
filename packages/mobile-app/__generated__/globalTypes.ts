@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 //==============================================================
@@ -23,10 +24,10 @@ export enum VoteSelection {
 }
 
 export interface ProcedureFilter {
-  subjectGroups?: (string | null)[] | null;
-  status?: (string | null)[] | null;
-  type?: (string | null)[] | null;
-  activity?: (string | null)[] | null;
+  subjectGroups?: string[] | null;
+  status?: string[] | null;
+  type?: string[] | null;
+  activity?: string[] | null;
 }
 
 //==============================================================

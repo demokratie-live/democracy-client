@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 import { VoteSelection } from "./../../../../../../../../../__generated__/globalTypes";
@@ -19,7 +20,7 @@ export interface DeputyVoteResults_procedure_voteResults_deputyVotes_deputy {
 export interface DeputyVoteResults_procedure_voteResults_deputyVotes {
   __typename: "DeputyVote";
   deputy: DeputyVoteResults_procedure_voteResults_deputyVotes_deputy;
-  decision: VoteSelection | null;
+  decision: VoteSelection;
 }
 
 export interface DeputyVoteResults_procedure_voteResults {

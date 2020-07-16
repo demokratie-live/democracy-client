@@ -36,6 +36,7 @@ module.exports = {
     // TODO check to enable it again
     'jsx-a11y/accessible-emoji': 0,
     '@typescript-eslint/explicit-function-return-type': 0,
+    '@typescript-eslint/ban-ts-ignore': 0,
     '@typescript-eslint/camelcase': 0,
     'react-native/no-raw-text': 0,
     'import/no-named-as-default': 0,
