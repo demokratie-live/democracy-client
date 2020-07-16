@@ -7,7 +7,6 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import deepmerge from 'deepmerge';
 import React, { ComponentProps } from 'react';
 import { Linking, Platform } from 'react-native';
-// eslint-disable-next-line import/named
 import { MarkdownView } from 'react-native-markdown-view';
 import styled from 'styled-components/native';
 import { linking } from '../../../lib/linking';

@@ -70,7 +70,7 @@ export const Sidebar: React.FC<Props> = props => {
       navigation.navigate('Settings');
     } else {
       saveState();
-      navigation.navigate('VerificationStart');
+      navigation.navigate('VerificationStart', {});
     }
   };
 
