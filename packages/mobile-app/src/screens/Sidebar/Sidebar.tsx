@@ -15,6 +15,8 @@ import { DONATION_STATUS } from './Donate/graphql/query/donationStatus';
 import DonatedBox from './Donate/DonatedBox';
 import { Space } from '../modals/Verification/Start';
 import { NavigationContext } from '../../context/Navigation';
+import { Text } from 'react-native-svg';
+import { rateApp } from '../../lib/rateApp';
 
 const SafeAreaView = styled.SafeAreaView`
   flex: 1;
@@ -35,6 +37,20 @@ const DonateBoxWrapper = styled.View`
   left: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.8);
+`;
+
+const RateBoxWrapper = styled.TouchableOpacity`
+  position: absolute;
+  justify-content: space-between;
+  padding-horizontal: 70;
+  bottom: 80;
+  left: 0;
+  right: 0;
+  flex-direction: row;
+`;
+
+const Smile = styled.Text`
+  font-size: 20;
 `;
 
 const DonationTouch = styled.TouchableOpacity`
@@ -94,6 +110,13 @@ export const Sidebar: React.FC<Props> = props => {
           <DrawerItemList {...props} />
         </NaviList>
       </SafeAreaView>
+      <RateBoxWrapper onPress={rateApp}>
+        <Smile>😡</Smile>
+        <Smile>😕</Smile>
+        <Smile>🤔</Smile>
+        <Smile>😊</Smile>
+        <Smile>🤩</Smile>
+      </RateBoxWrapper>
       {donationStatus && donationStatus.result && (
         <DonateBoxWrapper>
           <DonationTouch onPress={() => navigation.navigate('Donate')}>
