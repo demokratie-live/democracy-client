@@ -15,7 +15,6 @@ import { DONATION_STATUS } from './Donate/graphql/query/donationStatus';
 import DonatedBox from './Donate/DonatedBox';
 import { Space } from '../modals/Verification/Start';
 import { NavigationContext } from '../../context/Navigation';
-import { Text } from 'react-native-svg';
 import { rateApp } from '../../lib/rateApp';
 
 const SafeAreaView = styled.SafeAreaView`
