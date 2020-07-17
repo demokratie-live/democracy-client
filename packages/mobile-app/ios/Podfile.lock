@@ -190,7 +190,7 @@ PODS:
     - React
   - react-native-notifications (3.2.2):
     - React
-  - react-native-pdf (6.2.0):
+  - react-native-pdf (6.0.1):
     - React
   - react-native-safe-area-context (0.7.3):
     - React
@@ -420,7 +420,7 @@ SPEC CHECKSUMS:
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
   react-native-config: 54f023214af396f21ff0a9e0fed22620d676c8a1
   react-native-notifications: 3d1c66c8a3eb1857577f283f9f6e9aa505f16346
-  react-native-pdf: 909cd849e6a806731b2135263189fea39494b55e
+  react-native-pdf: 29a09815e99c92743aa8459a90564aaddd4065e0
   react-native-safe-area-context: e200d4433aba6b7e60b52da5f37af11f7a0b0392
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76

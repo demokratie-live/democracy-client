@@ -2252,16 +2252,6 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/masked-view/-/masked-view-0.1.10.tgz#5dda643e19e587793bc2034dd9bf7398ad43d401"
   integrity sha512-rk4sWFsmtOw8oyx8SD3KSvawwaK7gRBSEIy2TAwURyGt+3TizssXP1r8nx3zY+R7v2vYYHXZ+k2/GULAT/bcaQ==
 
-"@react-native-community/progress-bar-android@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@react-native-community/progress-bar-android/-/progress-bar-android-1.0.3.tgz#a6adc7be7a531269869d653ad9e0cd3d093d7c1c"
-  integrity sha512-Xy+nTCibCLQ6Jy0YNlVwrO+m/j2el6PN8nVQcdgVqp+Jm1XTguq7xjxUV5spzYmVDIVx+zW7WKfkeSbhUk91Tg==
-
-"@react-native-community/progress-view@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@react-native-community/progress-view/-/progress-view-1.0.3.tgz#6aaafd2d885771de6ef3a15e04f988af824dfa8b"
-  integrity sha512-zpOop2VvkPHtomWtKbs62hhUhxzzpZsuo8tybxwaF6J+qY77rvYG9esDMOb0twXpa0i1jD+8nGyoiMS/Rx8Vtg==
-
 "@react-navigation/core@^5.12.0", "@react-navigation/core@^5.2.1":
   version "5.12.0"
   resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-5.12.0.tgz#0d3dab1ae8403b83f9387eaaee3f270dd8eadcfa"
@@ -6811,7 +6801,7 @@ crypto-browserify@^3.11.0:
     randombytes "^2.0.0"
     randomfill "^1.0.3"
 
-crypto-js@^3.2.0:
+crypto-js@^3.1.9-1:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-3.3.0.tgz#846dd1cce2f68aacfa156c8578f926a609b7976b"
   integrity sha512-DIT51nX0dCfKltpRiXV+/TVZq+Qq2NgF4644+K7Ttnla7zEzqc+kjJyiB96BHNyUTBxyjzRcZYpUdZa+QAqi6Q==
@@ -16570,15 +16560,13 @@ react-native-notifications@^3.1.2:
   resolved "https://registry.yarnpkg.com/react-native-notifications/-/react-native-notifications-3.2.2.tgz#d215992b5593ed0afb81276fed8b711cf4db9617"
   integrity sha512-MZt3Y9vTDQpPWAHOGCgehKn/RwZzJTk2WfKiLV01GU8Rp5I8u68Djum9ogxK9nXkRznkbyifSb+54UPGzqa9DA==
 
-react-native-pdf@^6.0.1:
-  version "6.2.0"
-  resolved "https://registry.yarnpkg.com/react-native-pdf/-/react-native-pdf-6.2.0.tgz#e6da125b407338b7bca15d7f776b70773c37304f"
-  integrity sha512-OSgF3+PryUl0GIPvZhCXT7VDv9LbvjC7LJgH3aFObCq0WRiiSGf9W1yrhaYmNV3FvL7ZARKF08h+k4LuFcTPNg==
+react-native-pdf@~6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-pdf/-/react-native-pdf-6.0.1.tgz#a7991846d276b1564c53525bd777d61a8e75a7e2"
+  integrity sha512-Hom5h11Hrtp+S0OzPQxSxzJ5MNQ9nT2iMl4SWBrNND240KSOh1x4eKRSWvRYbsxaXCCBr9F3zJdcsrbYVx043g==
   dependencies:
-    "@react-native-community/progress-bar-android" "^1.0.3"
-    "@react-native-community/progress-view" "^1.0.3"
-    crypto-js "^3.2.0"
-    prop-types "^15.7.2"
+    crypto-js "^3.1.9-1"
+    prop-types "^15.5.10"
 
 react-native-permissions@^2.0.9:
   version "2.1.5"
