@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/core';
 import SvgNewMarker from '@democracy-deutschland/mobile-ui/src/components/Icons/Newmarker';
-import { Switch, Image } from 'react-native';
+import { Switch, Image, View } from 'react-native';
 import { styled } from '../../../styles';
 import { NotificationsContext } from '../../../context/NotificationPermission';
 import { defaultNotificationData } from '../Introduction/PushInstructions/data';
@@ -106,12 +106,14 @@ export const NotificationInstructionScreen: React.FC = () => {
             senden.
           </Subtitle>
         </HeaderWrapper>
-        <NotificationBox
-          icon={require('@democracy-deutschland/mobile-ui/src/components/Introduction/assets/icon.logo.png')}
-          owner="DEMOCRACY"
-          title={notificationTitle}
-          text={notification.text}
-        />
+        <View style={{ paddingHorizontal: 18 }}>
+          <NotificationBox
+            icon={require('@democracy-deutschland/mobile-ui/src/components/Introduction/assets/icon.logo.png')}
+            owner="DEMOCRACY"
+            title={notificationTitle}
+            text={notification.text}
+          />
+        </View>
         <SwitchWrapper>
           <SwitchText>Bundestagsergebnis erhalten</SwitchText>
           <Switch value={pushActive} onValueChange={setPushActive} />
