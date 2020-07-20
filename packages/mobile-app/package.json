@@ -184,7 +184,7 @@
         "build": "xcodebuild -workspace ios/client.xcworkspace -scheme Internal -configuration Internal.Release -sdk iphonesimulator -derivedDataPath ios/build",
         "device": {
           "type": "iPhone 11",
-          "os": "13.4.1"
+          "os": "13.6"
         }
       },
       "android.emu.internal.local": {
