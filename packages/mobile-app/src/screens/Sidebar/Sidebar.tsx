@@ -40,13 +40,9 @@ const DonateBoxWrapper = styled.View`
 
 const RateBoxWrapper = styled.View`
   position: absolute;
-  /* justify-content: space-between; */
-  /* padding-horizontal: 70; */
   bottom: 80;
   left: 0;
   right: 0;
-  /* background-color: rgba(0, 0, 0, 0.2); */
-  /* flex-direction: row; */
 `;
 
 const DonationTouch = styled.TouchableOpacity`
