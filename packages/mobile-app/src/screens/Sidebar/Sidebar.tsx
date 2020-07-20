@@ -8,7 +8,7 @@ import { RootStackParamList } from '../../routes';
 import { useNavigation, CompositeNavigationProp } from '@react-navigation/core';
 import { InitialStateContext } from '../../context/InitialStates';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { DrawerNavigationProp, DrawerItem } from '@react-navigation/drawer';
 import { SidebarParamList } from '../../routes/Sidebar';
 import { useQuery } from '@apollo/react-hooks';
 import { DONATION_STATUS } from './Donate/graphql/query/donationStatus';
@@ -38,18 +38,15 @@ const DonateBoxWrapper = styled.View`
   background-color: rgba(0, 0, 0, 0.8);
 `;
 
-const RateBoxWrapper = styled.TouchableOpacity`
+const RateBoxWrapper = styled.View`
   position: absolute;
-  justify-content: space-between;
-  padding-horizontal: 70;
+  /* justify-content: space-between; */
+  /* padding-horizontal: 70; */
   bottom: 80;
   left: 0;
   right: 0;
-  flex-direction: row;
-`;
-
-const Smile = styled.Text`
-  font-size: 20;
+  /* background-color: rgba(0, 0, 0, 0.2); */
+  /* flex-direction: row; */
 `;
 
 const DonationTouch = styled.TouchableOpacity`
@@ -109,12 +106,12 @@ export const Sidebar: React.FC<Props> = props => {
           <DrawerItemList {...props} />
         </NaviList>
       </SafeAreaView>
-      <RateBoxWrapper onPress={rateApp}>
-        <Smile>😡</Smile>
-        <Smile>😕</Smile>
-        <Smile>🤔</Smile>
-        <Smile>😊</Smile>
-        <Smile>🤩</Smile>
+      <RateBoxWrapper>
+        <DrawerItem
+          label="⭐️  App Bewerten"
+          onPress={rateApp}
+          labelStyle={{ fontSize: 16, color: '#ddd' }}
+        />
       </RateBoxWrapper>
       {donationStatus && donationStatus.result && (
         <DonateBoxWrapper>
