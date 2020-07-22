@@ -245,6 +245,8 @@ PODS:
     - React
   - RNPermissions (2.1.5):
     - React
+  - RNRate (1.2.1):
+    - React
   - RNReanimated (1.9.0):
     - React
   - RNScreens (2.9.0):
@@ -299,6 +301,7 @@ DEPENDENCIES:
   - RNGestureHandler (from `../../../node_modules/react-native-gesture-handler`)
   - RNKeychain (from `../../../node_modules/react-native-keychain`)
   - RNPermissions (from `../../../node_modules/react-native-permissions`)
+  - RNRate (from `../../../node_modules/react-native-rate`)
   - RNReanimated (from `../../../node_modules/react-native-reanimated`)
   - RNScreens (from `../../../node_modules/react-native-screens`)
   - RNSearchBar (from `../../../node_modules/react-native-search-bar`)
@@ -387,6 +390,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native-keychain"
   RNPermissions:
     :path: "../../../node_modules/react-native-permissions"
+  RNRate:
+    :path: "../../../node_modules/react-native-rate"
   RNReanimated:
     :path: "../../../node_modules/react-native-reanimated"
   RNScreens:
@@ -440,6 +445,7 @@ SPEC CHECKSUMS:
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNKeychain: 840f8e6f13be0576202aefcdffd26a4f54bfe7b5
   RNPermissions: ad71dd4f767ec254f2cd57592fbee02afee75467
+  RNRate: a39ac26dc9daf3f9b639ce274b7f80672ae36db1
   RNReanimated: b5ccb50650ba06f6e749c7c329a1bc3ae0c88b43
   RNScreens: c526239bbe0e957b988dacc8d75ac94ec9cb19da
   RNSearchBar: 9860431356b7d12a8449d2fddb2b5f3c78d1e99f
