@@ -6,7 +6,9 @@ import { Dimensions } from 'react-native';
 
 import Header from '../Header';
 import ChartNote from '../ChartNote';
-import VotedProceduresWrapper, { ChartData } from '../VotedProceduresWrapper';
+import VotedPartyProceduresWrapper, {
+  ChartData,
+} from './VotedProceduresWrapper';
 import NoVotesPlaceholder from '../NoVotesPlaceholder';
 import PartyChart from '../../Bundestag/Procedure/components/GovernmentVoteResults/PartyChart/Component';
 import ChartLegend from '../../Bundestag/Procedure/components/Charts/ChartLegend';
@@ -42,7 +44,9 @@ class Fraktionen extends PureComponent<Props> {
       Dimensions.get('screen').height,
     ),
     selected: 0,
+    party: undefined,
   };
+
   onLayout = () => {
     const chartWidth = Math.min(
       Dimensions.get('screen').width,
@@ -55,8 +59,8 @@ class Fraktionen extends PureComponent<Props> {
     }
   };
 
-  onClick = (index: number) => () => {
-    this.setState({ selected: index });
+  onClick = (selected: number, party: string) => () => {
+    this.setState({ selected, party });
   };
 
   // Filtered Array of procedures voted local
@@ -175,10 +179,10 @@ class Fraktionen extends PureComponent<Props> {
   };
 
   render() {
-    const { chartWidth, selected } = this.state;
-
+    const { chartWidth, selected, party } = this.state;
     return (
-      <VotedProceduresWrapper
+      <VotedPartyProceduresWrapper
+        party={party}
         onProcedureListItemClick={({ item }) =>
           this.props.navigation.navigate('Procedure', {
             procedureId: item.procedureId,
@@ -193,6 +197,10 @@ class Fraktionen extends PureComponent<Props> {
             matchingProcedures,
           });
 
+          if (!this.state.party) {
+            this.setState({ party: preparedData[0].party });
+          }
+
           if (matchingProcedures.length > 0) {
             return (
               <Wrapper>
@@ -204,7 +212,9 @@ class Fraktionen extends PureComponent<Props> {
                   <PartyChart
                     width={chartWidth}
                     chartData={preparedData}
-                    onClick={this.onClick}
+                    onClick={index =>
+                      this.onClick(index, preparedData[index].party)
+                    }
                     selected={selected}
                     showPercentage
                     colors={['#b1b3b4', '#f5a623']}
@@ -230,7 +240,7 @@ class Fraktionen extends PureComponent<Props> {
             </>
           );
         }}
-      </VotedProceduresWrapper>
+      </VotedPartyProceduresWrapper>
     );
   }
 }

@@ -81,7 +81,7 @@ export const PieChart: React.FC<Props> = ({ data, size, large = false }) => {
         const slice = getPathData({ percent, large: largeSlice });
         return (
           <Path
-            key={color}
+            key={`${color}-${largeSlice}`}
             d={slice.path}
             fill={color}
             transform={{ translate: slice.transform }}
