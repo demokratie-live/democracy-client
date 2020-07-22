@@ -8,7 +8,7 @@ import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { SidebarParamList } from '..';
 import { RootStackParamList } from '../..';
 import MenuIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Menu';
-import WahlOMeter from '../../../screens/WahlOMeter';
+import TabView from './TabView';
 import { Procedure, VoteVerification } from '../../../screens/Bundestag';
 import { VoteSelection } from '../../../../__generated__/globalTypes';
 import { MemberProfil } from '../../../screens/WahlOMeter/MemberProfil';
@@ -16,7 +16,7 @@ import { theme } from '../../../styles';
 import { BurgerMenuButton } from '../../../components/MenuButton';
 
 export type WahlOMeterStackParamList = {
-  WahlOMeter: undefined;
+  TabView: undefined;
   Procedure: { procedureId: string; title: string };
   Voting: {
     selection: VoteSelection.YES | VoteSelection.ABSTINATION | VoteSelection.NO;
@@ -47,8 +47,8 @@ const WahlOMeterNavigation = () => {
         headerTintColor: '#fff',
       }}>
       <WahlOMeterStack.Screen
-        name="WahlOMeter"
-        component={WahlOMeter}
+        name="TabView"
+        component={TabView}
         options={{
           title: 'Wahl-O-Meter',
           headerTintColor: '#fff',

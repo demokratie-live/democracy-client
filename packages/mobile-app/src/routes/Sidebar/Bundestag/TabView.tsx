@@ -68,6 +68,7 @@ const TabViewNavigation: React.FC<Props> = ({ navigation }) => {
 
   return (
     <TabNavigation.Navigator
+      lazy={true}
       tabBarOptions={{
         scrollEnabled: false,
         indicatorStyle: {

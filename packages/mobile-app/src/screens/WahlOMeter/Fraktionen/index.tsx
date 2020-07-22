@@ -16,7 +16,7 @@ import {
   PartyChartData_proceduresByIdHavingVoteResults_procedures,
   PartyChartData,
 } from '../../Bundestag/Procedure/Voting/components/graphql/query/__generated__/PartyChartData';
-import { WahlOMeterScreenNavigationProp } from '..';
+import { ScreenNavigationProp } from '../../../routes/Sidebar/WahlOMeter/TabView';
 
 const Wrapper = styled.View`
   padding-top: 18;
@@ -32,7 +32,7 @@ const ChartWrapper = styled.View`
 `;
 
 interface Props {
-  navigation: WahlOMeterScreenNavigationProp;
+  navigation: ScreenNavigationProp;
 }
 
 class Fraktionen extends PureComponent<Props> {

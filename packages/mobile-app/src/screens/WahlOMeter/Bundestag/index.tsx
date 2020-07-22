@@ -12,7 +12,7 @@ import ChartLegend from '../../Bundestag/Procedure/components/Charts/ChartLegend
 import { Segment } from '../../Bundestag/List/Components/Segment';
 import { ChainEntry } from '../../../lib/VotesLocal';
 import { PartyChartData_proceduresByIdHavingVoteResults_procedures } from '../../Bundestag/Procedure/Voting/components/graphql/query/__generated__/PartyChartData';
-import { WahlOMeterScreenNavigationProp } from '..';
+import { ScreenNavigationProp } from '../../../routes/Sidebar/WahlOMeter/TabView';
 
 const Wrapper = styled.View`
   padding-top: 18;
@@ -84,7 +84,7 @@ const pieChartData = ({
 };
 
 interface Props {
-  navigation: WahlOMeterScreenNavigationProp;
+  navigation: ScreenNavigationProp;
 }
 
 class Bundestag extends PureComponent<Props> {
