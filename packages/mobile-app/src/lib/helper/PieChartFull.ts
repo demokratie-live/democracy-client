@@ -5,37 +5,45 @@ interface Props {
 }
 
 export const pieChartFull = ({ decision }: Props): Slice[] => {
-  if (decision) {
-    switch (decision) {
-      case 'YES':
-        return [
-          {
-            color: '#99C93E',
-            percent: (1 || 0) / 1,
-          },
-        ];
-      case 'NO':
-        return [
-          {
-            color: '#D43194',
-            percent: (1 || 0) / 1,
-          },
-        ];
-      case 'ABSTINATION':
-        return [
-          {
-            color: '#4CB0D8',
-            percent: (1 || 0) / 1,
-          },
-        ];
-      default:
-        return [
-          {
-            color: '#B1B3B4',
-            percent: (1 || 0) / 1,
-          },
-        ];
-    }
+  switch (decision) {
+    case 'YES':
+      return [
+        {
+          color: '#99C93E',
+          percent: (1 || 0) / 1,
+          large: true,
+        },
+      ];
+    case 'NO':
+      return [
+        {
+          color: '#D43194',
+          percent: (1 || 0) / 1,
+          large: true,
+        },
+      ];
+    case 'ABSTINATION':
+      return [
+        {
+          color: '#4CB0D8',
+          percent: (1 || 0) / 1,
+          large: true,
+        },
+      ];
+    case 'NOTVOTED':
+      return [
+        {
+          color: '#B1B3B4',
+          percent: (1 || 0) / 1,
+          large: true,
+        },
+      ];
+    default:
+      return [
+        {
+          color: '#d8d8d8',
+          percent: (1 || 0) / 1,
+        },
+      ];
   }
-  return [];
 };

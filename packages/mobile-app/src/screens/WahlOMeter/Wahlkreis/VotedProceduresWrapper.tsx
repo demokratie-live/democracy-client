@@ -186,7 +186,7 @@ const VotedProceduresWrapper: React.FC<Props> = ({
                     }),
                   }}
                   communityVotes={pieChartFull({
-                    decision: localSelection || 'NOTVOTED',
+                    decision: localSelection,
                   })}
                   // communityVotes={communityVoteData({
                   //   ...item,
