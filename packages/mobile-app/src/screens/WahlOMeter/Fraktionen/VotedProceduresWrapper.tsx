@@ -74,7 +74,7 @@ const VotedPartyProceduresWrapper: React.FC<Props> = ({
 
   let hasMore = true;
   if (!localVotes || localVotes.length === 0) {
-    return <NoVotesPlaceholder subline="Bundestag" />;
+    return <NoVotesPlaceholder subline="Fraktionen" />;
   }
   let totalProcedures = 0;
   if (proceduresData && proceduresData.proceduresByIdHavingVoteResults) {

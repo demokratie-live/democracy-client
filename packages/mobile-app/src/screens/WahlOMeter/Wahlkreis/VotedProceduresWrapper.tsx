@@ -167,7 +167,6 @@ const VotedProceduresWrapper: React.FC<Props> = ({
             return renderedChild;
           } else {
             const localSelection = getLocalVoteSelection(item.procedureId);
-            console.log('pid', deputyVotes[item.procedureId]);
             return (
               <Row onPress={() => onProcedureListItemClick({ item })}>
                 <ListItem
