@@ -52,7 +52,7 @@ const VotedProceduresWrapper: React.FC<Props> = ({
   onProcedureListItemClick,
   children,
 }) => {
-  const { localVotes } = useContext(LocalVotesContext);
+  const { localVotes, getLocalVoteSelection } = useContext(LocalVotesContext);
   const { data: proceduresData } = useQuery<
     PartyChartData,
     PartyChartDataVariables
@@ -93,8 +93,13 @@ const VotedProceduresWrapper: React.FC<Props> = ({
         'chart' | VotedProcedures_proceduresByIdHavingVoteResults_procedures
       >
         data={['chart', ...listData]}
-        renderItem={({ item }) =>
-          item === 'chart' ? (
+        renderItem={({ item }) => {
+          const localSelection =
+            item !== 'chart'
+              ? getLocalVoteSelection(item.procedureId)
+              : undefined;
+          const voted = !!localSelection;
+          return item === 'chart' ? (
             (children as (props: ChildProps) => ReactElement)({
               totalProcedures,
               chartData: {
@@ -120,11 +125,15 @@ const VotedProceduresWrapper: React.FC<Props> = ({
                       : undefined,
                   }),
                 }}
-                communityVotes={communityVoteData(item)}
+                communityVotes={communityVoteData({
+                  ...item,
+                  localSelection,
+                  voted,
+                })}
               />
             </Row>
-          )
-        }
+          );
+        }}
         ListFooterComponent={() =>
           networkStatus === 3 ? <ListLoading /> : null
         }

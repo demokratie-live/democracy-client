@@ -66,7 +66,7 @@ const VotedProceduresWrapper: React.FC<Props> = ({
   children,
 }) => {
   const navigation = useNavigation();
-  const { localVotes } = useContext(LocalVotesContext);
+  const { localVotes, getLocalVoteSelection } = useContext(LocalVotesContext);
   const { constituency } = useContext(ConstituencyContext);
 
   const { data: proceduresData } = useQuery<
@@ -159,6 +159,8 @@ const VotedProceduresWrapper: React.FC<Props> = ({
             });
             return renderedChild;
           } else {
+            const localSelection = getLocalVoteSelection(item.procedureId);
+            const voted = !!localSelection;
             return (
               <Row onPress={() => onProcedureListItemClick({ item })}>
                 <ListItem
@@ -172,7 +174,11 @@ const VotedProceduresWrapper: React.FC<Props> = ({
                     item.communityVotes ? item.communityVotes.total || 0 : 0
                   }
                   govermentChart={{ votes: pieChartGovernmentData(item) }}
-                  communityVotes={communityVoteData(item)}
+                  communityVotes={communityVoteData({
+                    ...item,
+                    localSelection,
+                    voted,
+                  })}
                 />
               </Row>
             );
