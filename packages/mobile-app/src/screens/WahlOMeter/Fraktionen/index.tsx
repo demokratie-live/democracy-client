@@ -198,7 +198,9 @@ class Fraktionen extends PureComponent<Props> {
           });
 
           if (!this.state.party) {
-            this.setState({ party: preparedData[0].party });
+            if (preparedData[0]) {
+              this.setState({ party: preparedData[0].party });
+            }
           }
 
           if (matchingProcedures.length > 0) {

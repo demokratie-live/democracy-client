@@ -26,6 +26,7 @@ import { ChainEntry } from '../../../lib/VotesLocal';
 import { useNavigation } from '@react-navigation/core';
 import { ConstituencyContext } from '../../../context/Constituency';
 import { pieChartFull } from '../../../lib/helper/PieChartFull';
+import { styled } from '../../../styles';
 
 // GraphQL
 // import GET_PROCEDURE_CHART_DATA from '../../../graphql/queries/getDeputyChartData';
@@ -33,6 +34,13 @@ import { pieChartFull } from '../../../lib/helper/PieChartFull';
 // import VOTES_SELECTION_LOCAL from '../../../graphql/queries/local/votesSelection';
 // import GET_CONSTITUENCY from '../../../graphql/queries/local/constituency';
 // import VoteVarificationNoConstituency from '../../VoteVarification/NoConstituency';
+
+const VoteVarificationNoConstituencyWrapper = styled.View`
+  flex: 1;
+  /* align-items: center; */
+  justify-content: center;
+  margin-bottom: 80px;
+`;
 
 export interface ChartData {
   votedProcedures: {
@@ -94,13 +102,17 @@ const VotedProceduresWrapper: React.FC<Props> = ({
   });
 
   if (!constituency) {
-    return <VoteVarificationNoConstituency navigation={navigation as any} />;
+    return (
+      <VoteVarificationNoConstituencyWrapper>
+        <VoteVarificationNoConstituency navigation={navigation as any} />
+      </VoteVarificationNoConstituencyWrapper>
+    );
   }
 
   let hasMore = true;
-  if (localVotes.length === 0) {
-    return <NoVotesPlaceholder subline="Wahlkreis" />;
-  }
+  // if (localVotes.length === 0) {
+  //   return <NoVotesPlaceholder subline="Wahlkreis" />;
+  // }
   let totalProcedures = 0;
   if (
     proceduresData &&
@@ -202,6 +214,7 @@ const VotedProceduresWrapper: React.FC<Props> = ({
         }
         onEndReached={() =>
           hasMore &&
+          listData &&
           listData.length > 0 &&
           fetchMore({
             variables: {

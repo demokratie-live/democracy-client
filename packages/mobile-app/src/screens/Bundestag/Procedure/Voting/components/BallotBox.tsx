@@ -32,7 +32,7 @@ import {
 } from '../../graphql/query/__generated__/Procedure';
 import { SEARCH_PROCEDURES } from '../../../Search/graphql/query/searchProcedures';
 import { SearchContext } from '../../../../../context/Search';
-import { PureQueryOptions } from 'apollo-client';
+import { PureQueryOptions } from '@apollo/client';
 import { NotificationsContext } from '../../../../../context/NotificationPermission';
 
 const Wrapper = styled.View`

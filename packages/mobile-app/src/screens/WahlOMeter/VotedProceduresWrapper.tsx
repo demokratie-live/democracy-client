@@ -2,9 +2,6 @@ import React, { useContext, ReactElement } from 'react';
 import styled from 'styled-components/native';
 import unionBy from 'lodash.unionby';
 
-// Components
-import NoVotesPlaceholder from './NoVotesPlaceholder';
-
 // GraphQL
 import { FlatList } from 'react-native';
 import { ListLoading } from '@democracy-deutschland/mobile-ui/src/components/shared/ListLoading';
@@ -71,9 +68,9 @@ const VotedProceduresWrapper: React.FC<Props> = ({
   });
 
   let hasMore = true;
-  if (!localVotes || localVotes.length === 0) {
-    return <NoVotesPlaceholder subline="Bundestag" />;
-  }
+  // if (!localVotes || localVotes.length === 0) {
+  //   return <NoVotesPlaceholder subline="Bundestag" />;
+  // }
   let totalProcedures = 0;
   if (proceduresData && proceduresData.proceduresByIdHavingVoteResults) {
     totalProcedures = proceduresData.proceduresByIdHavingVoteResults.total || 0;

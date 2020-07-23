@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import { procedureVoteResultPartyVoteDeviants } from '../fragments/deviants';
 
 export const VOTED_PARTY_PROCEDURES = gql`
   query VotedPartyProcedures(
@@ -6,7 +7,7 @@ export const VOTED_PARTY_PROCEDURES = gql`
     $pageSize: Int
     $offset: Int
   ) {
-    proceduresByIdHavingVoteResults(
+    votedPartyProcedures: proceduresByIdHavingVoteResults(
       procedureIds: $procedureIds
       pageSize: $pageSize
       offset: $offset
@@ -35,12 +36,7 @@ export const VOTED_PARTY_PROCEDURES = gql`
           partyVotes {
             party
             main
-            deviants {
-              yes
-              no
-              abstination
-              notVoted
-            }
+            ...DeviantsPartyVote
           }
         }
         communityVotes {
@@ -52,4 +48,5 @@ export const VOTED_PARTY_PROCEDURES = gql`
       }
     }
   }
+  ${procedureVoteResultPartyVoteDeviants}
 `;

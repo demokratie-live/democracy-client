@@ -1,9 +1,6 @@
-import React, { useContext, ReactElement } from 'react';
+import React, { useContext, ReactElement, useRef } from 'react';
 import styled from 'styled-components/native';
 import unionBy from 'lodash.unionby';
-
-// Components
-import NoVotesPlaceholder from './../NoVotesPlaceholder';
 
 // GraphQL
 import { FlatList } from 'react-native';
@@ -24,7 +21,7 @@ import { VOTED_PARTY_PROCEDURES } from './graphql/queries/proceduresByIdHavingVo
 import {
   VotedPartyProceduresVariables,
   VotedPartyProcedures,
-  VotedPartyProcedures_proceduresByIdHavingVoteResults_procedures,
+  VotedPartyProcedures_votedPartyProcedures_procedures,
 } from './graphql/queries/__generated__/VotedPartyProcedures';
 
 const Container = styled.View`
@@ -44,7 +41,7 @@ interface Props {
   onProcedureListItemClick: ({
     item,
   }: {
-    item: VotedPartyProcedures_proceduresByIdHavingVoteResults_procedures;
+    item: VotedPartyProcedures_votedPartyProcedures_procedures;
   }) => void;
   children: JSX.Element | ((props: ChildProps) => ReactElement);
 }
@@ -54,6 +51,9 @@ const VotedPartyProceduresWrapper: React.FC<Props> = ({
   children,
   party,
 }) => {
+  const list = useRef<
+    FlatList<'chart' | VotedPartyProcedures_votedPartyProcedures_procedures>
+  >(null);
   const { localVotes, getLocalVoteSelection } = useContext(LocalVotesContext);
   const { data: proceduresData } = useQuery<
     PartyChartData,
@@ -65,17 +65,22 @@ const VotedPartyProceduresWrapper: React.FC<Props> = ({
     },
   });
 
-  const { data: procedurListData, fetchMore, networkStatus } = useQuery<
-    VotedPartyProcedures,
-    VotedPartyProceduresVariables
-  >(VOTED_PARTY_PROCEDURES, {
-    variables: { offset: 0 },
-  });
+  const {
+    data: procedurListData,
+    fetchMore,
+    networkStatus,
+    refetch,
+  } = useQuery<VotedPartyProcedures, VotedPartyProceduresVariables>(
+    VOTED_PARTY_PROCEDURES,
+    {
+      variables: { offset: 0, pageSize: 20 },
+    },
+  );
 
   let hasMore = true;
-  if (!localVotes || localVotes.length === 0) {
-    return <NoVotesPlaceholder subline="Fraktionen" />;
-  }
+  // if (!localVotes || localVotes.length === 0) {
+  //   return <NoVotesPlaceholder subline="Fraktionen" />;
+  // }
   let totalProcedures = 0;
   if (proceduresData && proceduresData.proceduresByIdHavingVoteResults) {
     totalProcedures = proceduresData.proceduresByIdHavingVoteResults.total || 0;
@@ -85,16 +90,14 @@ const VotedPartyProceduresWrapper: React.FC<Props> = ({
   }
   const listData =
     procedurListData &&
-    procedurListData.proceduresByIdHavingVoteResults &&
-    procedurListData.proceduresByIdHavingVoteResults.procedures
-      ? procedurListData.proceduresByIdHavingVoteResults.procedures
+    procedurListData.votedPartyProcedures &&
+    procedurListData.votedPartyProcedures.procedures
+      ? procedurListData.votedPartyProcedures.procedures
       : [];
   return (
     <Container>
-      <FlatList<
-        | 'chart'
-        | VotedPartyProcedures_proceduresByIdHavingVoteResults_procedures
-      >
+      <FlatList<'chart' | VotedPartyProcedures_votedPartyProcedures_procedures>
+        ref={list}
         data={['chart', ...listData]}
         renderItem={({ item }) => {
           const localSelection =
@@ -142,40 +145,62 @@ const VotedPartyProceduresWrapper: React.FC<Props> = ({
         ListFooterComponent={() =>
           networkStatus === 3 ? <ListLoading /> : null
         }
-        onEndReached={() =>
-          hasMore &&
-          listData.length > 0 &&
-          fetchMore({
-            variables: {
-              offset:
-                procedurListData.proceduresByIdHavingVoteResults.procedures
-                  .length,
-            },
-            updateQuery: (prev, { fetchMoreResult }) => {
-              if (!fetchMoreResult) {
-                return prev;
-              }
-              if (
-                hasMore &&
-                fetchMoreResult.proceduresByIdHavingVoteResults.procedures
-                  .length === 0
-              ) {
-                hasMore = false;
-              }
-              prev.proceduresByIdHavingVoteResults.procedures;
-              return Object.assign({}, prev, {
-                proceduresByIdHavingVoteResults: {
-                  ...prev.proceduresByIdHavingVoteResults,
-                  procedures: unionBy(
-                    prev.proceduresByIdHavingVoteResults.procedures,
-                    fetchMoreResult.proceduresByIdHavingVoteResults.procedures,
-                    '_id',
-                  ),
+        onEndReached={() => {
+          console.log(hasMore, listData.length);
+          try {
+            if (hasMore && listData.length > 0) {
+              fetchMore({
+                query: VOTED_PARTY_PROCEDURES,
+                variables: {
+                  offset:
+                    procedurListData.votedPartyProcedures.procedures.length,
+                },
+                updateQuery: (prev, { fetchMoreResult }) => {
+                  if (!prev) {
+                    throw new Error('prev is undefined');
+                  }
+                  console.log(prev);
+                  // if (!prev) {
+                  //   console.log('ERROR !!!', prev);
+                  //   const fallbackQuery = client.readQuery<
+                  //     VotedPartyProcedures,
+                  //     VotedPartyProceduresVariables
+                  //   >({
+                  //     query: VOTED_PARTY_PROCEDURES,
+                  //   });
+
+                  //   console.log('ERROR !!!', fallbackQuery);
+
+                  //   return fallbackQuery;
+                  // }
+                  if (!fetchMoreResult) {
+                    return prev;
+                  }
+                  if (
+                    hasMore &&
+                    fetchMoreResult.votedPartyProcedures.procedures.length === 0
+                  ) {
+                    hasMore = false;
+                  }
+                  prev.votedPartyProcedures.procedures;
+                  return Object.assign({}, prev, {
+                    votedPartyProcedures: {
+                      ...prev.votedPartyProcedures,
+                      procedures: unionBy(
+                        prev.votedPartyProcedures.procedures,
+                        fetchMoreResult.votedPartyProcedures.procedures,
+                        '_id',
+                      ),
+                    },
+                  });
                 },
               });
-            },
-          })
-        }
+            }
+          } catch (error) {
+            // console.error(error);
+            refetch();
+          }
+        }}
         keyExtractor={item => (item === 'chart' ? item : item.procedureId)}
       />
     </Container>

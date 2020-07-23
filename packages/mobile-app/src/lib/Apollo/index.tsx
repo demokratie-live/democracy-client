@@ -1,10 +1,7 @@
 import React, { FC } from 'react';
-import { ApolloClient } from 'apollo-client';
 import { ApolloProvider } from '@apollo/react-hooks';
-import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { NativeModules, Platform } from 'react-native';
-import { ApolloLink } from 'apollo-link';
 import { RestLink } from 'apollo-link-rest';
 import { onError } from 'apollo-link-error';
 import { RetryLink } from 'apollo-link-retry';
@@ -14,17 +11,28 @@ import { RetryFunction } from 'apollo-link-retry/lib/retryFunction';
 import AsyncStorage from '@react-native-community/async-storage';
 import DeviceInfo from 'react-native-device-info';
 import { versionLinkMiddleware } from './Version';
+import { ApolloClient, InMemoryCache, ApolloLink } from '@apollo/client';
+// import { relayStylePagination } from '@apollo/client/utilities';
 
 const cache = new InMemoryCache({
-  dataIdFromObject: (o: any) => {
-    switch (o.__typename) {
-      case 'Procedure':
-        return o.procedureId;
-
-      default:
-        return o._id;
-    }
-  },
+  // dataIdFromObject: (o: any) => {
+  //   switch (o.__typename) {
+  //     case 'Procedure':
+  //       return o.procedureId;
+  //     default:
+  //       return o._id;
+  //   }
+  // },
+  // typePolicies: {
+  //   Query: {
+  //     fields: {
+  //       // Reusable helper function to generate a field
+  //       // policy for the Query.search field, keyed by
+  //       // search query:
+  //       proceduresByIdHavingVoteResults: relayStylePagination(['query']),
+  //     },
+  //   },
+  // },
 });
 
 let graphQlUri = GRAPHQL_URL;
@@ -39,7 +47,7 @@ if (process.env.NODE_ENV === 'development' && GRAPHQL_SERVER_LOCAL) {
   }
 }
 
-const httpLink = new HttpLink({
+const httpLink: any = new HttpLink({
   uri: graphQlUri,
 });
 
@@ -59,7 +67,7 @@ const attempts: RetryFunction = (number, operation) => {
   }
 };
 
-const retryLink = new RetryLink({
+const retryLink: any = new RetryLink({
   delay: {
     initial: 3000,
     max: 10000,
@@ -68,7 +76,7 @@ const retryLink = new RetryLink({
   attempts,
 });
 
-const errorLink = onError(({ graphQLErrors, networkError }) => {
+const errorLink: any = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
     graphQLErrors.forEach(({ message, locations, path }) => {
       console.log(
@@ -91,7 +99,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   }
 });
 
-const restLink = new RestLink({
+const restLink: any = new RestLink({
   uri: 'https://democracy-deutschland.de/api.php', // ?call=donation_status
 });
 
@@ -105,9 +113,8 @@ const link = ApolloLink.from([
   httpLink,
 ]);
 
-const client = new ApolloClient({
+export const client = new ApolloClient({
   cache,
-
   link,
 });
 

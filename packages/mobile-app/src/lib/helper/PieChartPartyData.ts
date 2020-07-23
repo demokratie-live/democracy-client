@@ -1,12 +1,12 @@
 import { Slice } from '@democracy-deutschland/mobile-ui/src/components/shared/Charts/PieChart';
-import { VotedPartyProcedures_proceduresByIdHavingVoteResults_procedures_voteResults_partyVotes } from '../../screens/WahlOMeter/Fraktionen/graphql/queries/__generated__/VotedPartyProcedures';
+import { VotedPartyProcedures_votedPartyProcedures_procedures_voteResults_partyVotes } from '../../screens/WahlOMeter/Fraktionen/graphql/queries/__generated__/VotedPartyProcedures';
 import { ProceduresList_procedures_voteResults } from '../../screens/Bundestag/List/graphql/query/__generated__/ProceduresList';
 
 interface Props {
   votedGovernment?: boolean | null;
   voteResults?: ProceduresList_procedures_voteResults | null;
   partyVotes?:
-    | VotedPartyProcedures_proceduresByIdHavingVoteResults_procedures_voteResults_partyVotes[]
+    | VotedPartyProcedures_votedPartyProcedures_procedures_voteResults_partyVotes[]
     | null;
   selectedParty: string;
 }
