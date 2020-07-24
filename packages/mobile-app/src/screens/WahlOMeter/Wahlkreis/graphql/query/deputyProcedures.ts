@@ -1,4 +1,5 @@
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
+import { procedureVoteResultPartyVoteDeviants } from '../../../Fraktionen/graphql/fragments/deviants';
 
 export const DEPUTY_PROCEDURES = gql`
   query DeputyProcedures(
@@ -35,6 +36,7 @@ export const DEPUTY_PROCEDURES = gql`
             partyVotes {
               party
               main
+              ...DeviantsPartyVote
             }
           }
           communityVotes {
@@ -47,4 +49,5 @@ export const DEPUTY_PROCEDURES = gql`
       }
     }
   }
+  ${procedureVoteResultPartyVoteDeviants}
 `;

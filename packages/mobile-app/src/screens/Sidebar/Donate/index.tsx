@@ -31,7 +31,7 @@ import {
 } from './content';
 import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Folding';
 import { DONATION_STATUS } from './graphql/query/donationStatus';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { MadeWithLove } from '../../../components/MadeWithLove';
 import { styled } from '../../../styles';
 

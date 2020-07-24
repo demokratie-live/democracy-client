@@ -1,5 +1,6 @@
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
 import { procedureVoteResultPartyVoteDeviants } from '../fragments/deviants';
+import { ListItemData } from '../../../graphql/fragments/ListItemFragment';
 
 export const VOTED_PARTY_PROCEDURES = gql`
   query VotedPartyProcedures(
@@ -7,46 +8,22 @@ export const VOTED_PARTY_PROCEDURES = gql`
     $pageSize: Int
     $offset: Int
   ) {
-    votedPartyProcedures: proceduresByIdHavingVoteResults(
+    procedurecForWomPartyList: proceduresByIdHavingVoteResults(
       procedureIds: $procedureIds
       pageSize: $pageSize
       offset: $offset
     ) {
       total
       procedures {
-        _id
-        procedureId
-        sessionTOPHeading
-        title
-        tags
-        voteDate
-        votedGovernment
-        submissionDate
-        completed
-        subjectGroups
-        votedGovernment
-        voted
-        type
+        ...ListItemData
         voteResults {
-          governmentDecision
-          yes
-          abstination
-          no
-          notVoted
           partyVotes {
-            party
-            main
             ...DeviantsPartyVote
           }
-        }
-        communityVotes {
-          yes
-          abstination
-          no
-          total
         }
       }
     }
   }
   ${procedureVoteResultPartyVoteDeviants}
+  ${ListItemData}
 `;

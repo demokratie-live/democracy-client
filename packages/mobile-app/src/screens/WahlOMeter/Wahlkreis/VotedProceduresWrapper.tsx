@@ -6,7 +6,7 @@ import NoVotesPlaceholder from '../NoVotesPlaceholder';
 import { FlatList } from 'react-native';
 import VoteVarificationNoConstituency from '../../Bundestag/Procedure/Voting/components/NoConstituency';
 import { LocalVotesContext } from '../../../context/LocalVotes';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { DEPUTY_CHART_DATA } from './graphql/query/deputyChartData';
 import {
   DeputyChartData,
@@ -93,11 +93,12 @@ const VotedProceduresWrapper: React.FC<Props> = ({
     DeputyProcedures,
     DeputyProceduresVariables
   >(DEPUTY_PROCEDURES, {
+    returnPartialData: true,
     variables: {
       constituency,
       directCandidate: true,
       offset: 0,
-      pageSize: 10,
+      pageSize: 11,
     },
   });
 
@@ -194,10 +195,12 @@ const VotedProceduresWrapper: React.FC<Props> = ({
                   govermentChart={{
                     votes: pieChartFull({
                       decision: deputyVotes[item.procedureId],
+                      colorSchema: 'GOVERNMENT',
                     }),
                   }}
                   communityVotes={pieChartFull({
                     decision: localSelection,
+                    colorSchema: 'COMMUNITY',
                   })}
                   // communityVotes={communityVoteData({
                   //   ...item,

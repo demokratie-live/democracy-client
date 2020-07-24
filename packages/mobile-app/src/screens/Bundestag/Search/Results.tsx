@@ -5,7 +5,7 @@ import { SearchContext } from '../../../context/Search';
 import { Segment } from '../List/Components/Segment';
 import { Row } from '@democracy-deutschland/mobile-ui/src/components/Lists/Row';
 import { ListItem } from '@democracy-deutschland/mobile-ui/src/components/Lists/ListItem';
-import { useQuery, useLazyQuery, useMutation } from '@apollo/react-hooks';
+import { useQuery, useLazyQuery, useMutation } from '@apollo/client';
 import { MOST_SEARCHED } from './graphql/query/mostSearched';
 import {
   MostSearched,

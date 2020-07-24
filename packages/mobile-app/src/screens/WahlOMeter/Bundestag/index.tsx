@@ -5,13 +5,13 @@ import { Dimensions } from 'react-native';
 // Components
 import Header from '../Header';
 import ChartNote from '../ChartNote';
-import VotedProceduresWrapper, { ChartData } from '../VotedProceduresWrapper';
+import VotedProceduresWrapper, { ChartData } from './VotedProceduresWrapper';
 import NoVotesPlaceholder from '../NoVotesPlaceholder';
 import PieChart from '../../Bundestag/Procedure/components/Charts/PieChart';
 import ChartLegend from '../../Bundestag/Procedure/components/Charts/ChartLegend';
 import { Segment } from '../../Bundestag/List/Components/Segment';
 import { ChainEntry } from '../../../lib/VotesLocal';
-import { PartyChartData_proceduresByIdHavingVoteResults_procedures } from '../../Bundestag/Procedure/Voting/components/graphql/query/__generated__/PartyChartData';
+import { PartyChartData_partyChartProcedures_procedures } from '../../Bundestag/Procedure/Voting/components/graphql/query/__generated__/PartyChartData';
 import { ScreenNavigationProp } from '../../../routes/Sidebar/WahlOMeter/TabView';
 
 const Wrapper = styled.View`
@@ -33,9 +33,8 @@ const ChartWrapper = styled.View`
 
 // Filtered Array of procedures voted local
 const getMatchingProcedures = ({ votedProcedures, localVotes }: ChartData) =>
-  votedProcedures.proceduresByIdHavingVoteResults.procedures.filter(
-    ({ procedureId }) =>
-      localVotes.find(({ procedureId: pid }) => pid === procedureId),
+  votedProcedures.partyChartProcedures.procedures.filter(({ procedureId }) =>
+    localVotes.find(({ procedureId: pid }) => pid === procedureId),
   );
 
 const pieChartData = ({
@@ -43,7 +42,7 @@ const pieChartData = ({
   matchingProcedures,
 }: {
   localVotes: ChainEntry[];
-  matchingProcedures: PartyChartData_proceduresByIdHavingVoteResults_procedures[];
+  matchingProcedures: PartyChartData_partyChartProcedures_procedures[];
 }) => {
   // Pie Chart Data Preparation
   const pieDataRaw = matchingProcedures.map(({ voteResults, procedureId }) => {

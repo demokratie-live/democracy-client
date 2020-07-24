@@ -7,22 +7,22 @@ import { FlatList } from 'react-native';
 import { ListLoading } from '@democracy-deutschland/mobile-ui/src/components/shared/ListLoading';
 import { ListItem } from '@democracy-deutschland/mobile-ui/src/components/Lists/ListItem';
 import { Row } from '@democracy-deutschland/mobile-ui/src/components/Lists/Row';
-import { LocalVotesContext } from '../../context/LocalVotes';
-import { useQuery } from '@apollo/react-hooks';
-import { pieChartGovernmentData } from '../../lib/helper/PieChartGovernmentData';
-import { communityVoteData } from '../../lib/helper/PieChartCommunityData';
-import { ChainEntry } from '../../lib/VotesLocal';
-import { VOTED_PROCEDURES } from './graphql/queries/proceduresByIdHavingVoteResults';
+import { LocalVotesContext } from '../../../context/LocalVotes';
+import { pieChartGovernmentData } from '../../../lib/helper/PieChartGovernmentData';
+import { communityVoteData } from '../../../lib/helper/PieChartCommunityData';
+import { ChainEntry } from '../../../lib/VotesLocal';
+import { PROCEDURES_BY_HAVING_VOTE_RESULTS } from '../graphql/queries/proceduresByIdHavingVoteResults';
 import {
-  VotedProcedures,
-  VotedProceduresVariables,
-  VotedProcedures_proceduresByIdHavingVoteResults_procedures,
-} from './graphql/queries/__generated__/VotedProcedures';
+  ProceduresByIdHavingVoteResultsVariables,
+  ProceduresByIdHavingVoteResults,
+  ProceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults3_procedures,
+} from '../graphql/queries/__generated__/ProceduresByIdHavingVoteResults';
 import {
   PartyChartData,
   PartyChartDataVariables,
-} from '../Bundestag/Procedure/Voting/components/graphql/query/__generated__/PartyChartData';
-import { PARTY_CHART_DATA } from '../Bundestag/Procedure/Voting/components/graphql/query/proceduresByIdHavingVoteResults';
+} from '../../Bundestag/Procedure/Voting/components/graphql/query/__generated__/PartyChartData';
+import { PARTY_CHART_DATA } from '../../Bundestag/Procedure/Voting/components/graphql/query/proceduresByIdHavingVoteResults';
+import { useQuery } from '@apollo/client';
 
 const Container = styled.View`
   background-color: #fff;
@@ -40,7 +40,7 @@ interface Props {
   onProcedureListItemClick: ({
     item,
   }: {
-    item: VotedProcedures_proceduresByIdHavingVoteResults_procedures;
+    item: ProceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults3_procedures;
   }) => void;
   children: JSX.Element | ((props: ChildProps) => ReactElement);
 }
@@ -61,10 +61,11 @@ const VotedProceduresWrapper: React.FC<Props> = ({
   });
 
   const { data: procedurListData, fetchMore, networkStatus } = useQuery<
-    VotedProcedures,
-    VotedProceduresVariables
-  >(VOTED_PROCEDURES, {
-    variables: { offset: 0 },
+    ProceduresByIdHavingVoteResults,
+    ProceduresByIdHavingVoteResultsVariables
+  >(PROCEDURES_BY_HAVING_VOTE_RESULTS, {
+    variables: { offset: 0, pageSize: 5 },
+    returnPartialData: true,
   });
 
   let hasMore = true;
@@ -72,22 +73,24 @@ const VotedProceduresWrapper: React.FC<Props> = ({
   //   return <NoVotesPlaceholder subline="Bundestag" />;
   // }
   let totalProcedures = 0;
-  if (proceduresData && proceduresData.proceduresByIdHavingVoteResults) {
-    totalProcedures = proceduresData.proceduresByIdHavingVoteResults.total || 0;
+  if (proceduresData && proceduresData.partyChartProcedures) {
+    totalProcedures = proceduresData.partyChartProcedures.total || 0;
   }
   if (!procedurListData || !proceduresData) {
     return <ListLoading />;
   }
   const listData =
     procedurListData &&
-    procedurListData.proceduresByIdHavingVoteResults &&
-    procedurListData.proceduresByIdHavingVoteResults.procedures
-      ? procedurListData.proceduresByIdHavingVoteResults.procedures
+    procedurListData.proceduresByIdHavingVoteResults3 &&
+    procedurListData.proceduresByIdHavingVoteResults3.procedures
+      ? procedurListData.proceduresByIdHavingVoteResults3.procedures
       : [];
+
   return (
     <Container>
       <FlatList<
-        'chart' | VotedProcedures_proceduresByIdHavingVoteResults_procedures
+        | 'chart'
+        | ProceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults3_procedures
       >
         data={['chart', ...listData]}
         renderItem={({ item }) => {
@@ -140,7 +143,7 @@ const VotedProceduresWrapper: React.FC<Props> = ({
           fetchMore({
             variables: {
               offset:
-                procedurListData.proceduresByIdHavingVoteResults.procedures
+                procedurListData.proceduresByIdHavingVoteResults3.procedures
                   .length,
             },
             updateQuery: (prev, { fetchMoreResult }) => {
@@ -149,18 +152,18 @@ const VotedProceduresWrapper: React.FC<Props> = ({
               }
               if (
                 hasMore &&
-                fetchMoreResult.proceduresByIdHavingVoteResults.procedures
+                fetchMoreResult.proceduresByIdHavingVoteResults3.procedures
                   .length === 0
               ) {
                 hasMore = false;
               }
-              prev.proceduresByIdHavingVoteResults.procedures;
+              prev.proceduresByIdHavingVoteResults3.procedures;
               return Object.assign({}, prev, {
-                proceduresByIdHavingVoteResults: {
-                  ...prev.proceduresByIdHavingVoteResults,
+                proceduresByIdHavingVoteResults3: {
+                  ...prev.proceduresByIdHavingVoteResults3,
                   procedures: unionBy(
-                    prev.proceduresByIdHavingVoteResults.procedures,
-                    fetchMoreResult.proceduresByIdHavingVoteResults.procedures,
+                    prev.proceduresByIdHavingVoteResults3.procedures,
+                    fetchMoreResult.proceduresByIdHavingVoteResults3.procedures,
                     '_id',
                   ),
                 },

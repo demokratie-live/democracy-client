@@ -9,7 +9,7 @@ import { VoteSelection } from "./../../../../../../../__generated__/globalTypes"
 // GraphQL query operation: VotedPartyProcedures
 // ====================================================
 
-export interface VotedPartyProcedures_votedPartyProcedures_procedures_voteResults_partyVotes_deviants {
+export interface VotedPartyProcedures_procedurecForWomPartyList_procedures_voteResults_partyVotes_deviants {
   __typename: "Deviants";
   yes: number;
   no: number;
@@ -17,24 +17,24 @@ export interface VotedPartyProcedures_votedPartyProcedures_procedures_voteResult
   notVoted: number | null;
 }
 
-export interface VotedPartyProcedures_votedPartyProcedures_procedures_voteResults_partyVotes {
+export interface VotedPartyProcedures_procedurecForWomPartyList_procedures_voteResults_partyVotes {
   __typename: "PartyVote";
   party: string;
   main: VoteSelection;
-  deviants: VotedPartyProcedures_votedPartyProcedures_procedures_voteResults_partyVotes_deviants;
+  deviants: VotedPartyProcedures_procedurecForWomPartyList_procedures_voteResults_partyVotes_deviants;
 }
 
-export interface VotedPartyProcedures_votedPartyProcedures_procedures_voteResults {
+export interface VotedPartyProcedures_procedurecForWomPartyList_procedures_voteResults {
   __typename: "VoteResult";
   governmentDecision: VoteSelection;
   yes: number;
   abstination: number;
   no: number;
   notVoted: number | null;
-  partyVotes: VotedPartyProcedures_votedPartyProcedures_procedures_voteResults_partyVotes[];
+  partyVotes: VotedPartyProcedures_procedurecForWomPartyList_procedures_voteResults_partyVotes[];
 }
 
-export interface VotedPartyProcedures_votedPartyProcedures_procedures_communityVotes {
+export interface VotedPartyProcedures_procedurecForWomPartyList_procedures_communityVotes {
   __typename: "CommunityVotes";
   yes: number;
   abstination: number;
@@ -42,7 +42,7 @@ export interface VotedPartyProcedures_votedPartyProcedures_procedures_communityV
   total: number;
 }
 
-export interface VotedPartyProcedures_votedPartyProcedures_procedures {
+export interface VotedPartyProcedures_procedurecForWomPartyList_procedures {
   __typename: "Procedure";
   _id: string;
   procedureId: string;
@@ -56,18 +56,18 @@ export interface VotedPartyProcedures_votedPartyProcedures_procedures {
   subjectGroups: string[];
   voted: boolean;
   type: string;
-  voteResults: VotedPartyProcedures_votedPartyProcedures_procedures_voteResults | null;
-  communityVotes: VotedPartyProcedures_votedPartyProcedures_procedures_communityVotes | null;
+  voteResults: VotedPartyProcedures_procedurecForWomPartyList_procedures_voteResults | null;
+  communityVotes: VotedPartyProcedures_procedurecForWomPartyList_procedures_communityVotes | null;
 }
 
-export interface VotedPartyProcedures_votedPartyProcedures {
+export interface VotedPartyProcedures_procedurecForWomPartyList {
   __typename: "ProceduresHavingVoteResults";
   total: number;
-  procedures: VotedPartyProcedures_votedPartyProcedures_procedures[];
+  procedures: VotedPartyProcedures_procedurecForWomPartyList_procedures[];
 }
 
 export interface VotedPartyProcedures {
-  votedPartyProcedures: VotedPartyProcedures_votedPartyProcedures;
+  procedurecForWomPartyList: VotedPartyProcedures_procedurecForWomPartyList;
 }
 
 export interface VotedPartyProceduresVariables {

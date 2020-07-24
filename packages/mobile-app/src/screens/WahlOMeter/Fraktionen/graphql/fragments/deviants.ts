@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
 
 // Procedure.VoteResult.PartyVote.fragments = {
 export const procedureVoteResultPartyVoteDeviants = gql`

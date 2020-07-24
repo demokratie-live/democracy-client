@@ -1,6 +1,4 @@
 import React, { FC } from 'react';
-import { ApolloProvider } from '@apollo/react-hooks';
-import { HttpLink } from 'apollo-link-http';
 import { NativeModules, Platform } from 'react-native';
 import { RestLink } from 'apollo-link-rest';
 import { onError } from 'apollo-link-error';
@@ -11,28 +9,24 @@ import { RetryFunction } from 'apollo-link-retry/lib/retryFunction';
 import AsyncStorage from '@react-native-community/async-storage';
 import DeviceInfo from 'react-native-device-info';
 import { versionLinkMiddleware } from './Version';
-import { ApolloClient, InMemoryCache, ApolloLink } from '@apollo/client';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloLink,
+  ApolloProvider,
+  HttpLink,
+} from '@apollo/client';
 // import { relayStylePagination } from '@apollo/client/utilities';
 
 const cache = new InMemoryCache({
-  // dataIdFromObject: (o: any) => {
-  //   switch (o.__typename) {
-  //     case 'Procedure':
-  //       return o.procedureId;
-  //     default:
-  //       return o._id;
-  //   }
-  // },
-  // typePolicies: {
-  //   Query: {
-  //     fields: {
-  //       // Reusable helper function to generate a field
-  //       // policy for the Query.search field, keyed by
-  //       // search query:
-  //       proceduresByIdHavingVoteResults: relayStylePagination(['query']),
-  //     },
-  //   },
-  // },
+  dataIdFromObject: (o: any) => {
+    switch (o.__typename) {
+      case 'Procedure':
+        return o.procedureId;
+      default:
+        return o._id;
+    }
+  },
 });
 
 let graphQlUri = GRAPHQL_URL;

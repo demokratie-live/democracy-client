@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { SearchContext } from '../../../context/Search';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import { FINISH_SEARCH } from './graphql/mutation/finishSearch';
 import SearchBar from 'react-native-search-bar';
 import {

@@ -4,7 +4,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { WahlOMeterStackParamList } from '.';
 import { theme } from '../../../styles';
 import Bundestag from '../../../screens/WahlOMeter/Bundestag';
-import Fraktionen from '../../../screens/WahlOMeter/Fraktionen';
+import { WomParty } from '../../../screens/WahlOMeter/Fraktionen';
 import Wahlkreis from '../../../screens/WahlOMeter/Wahlkreis';
 
 export type TopTabParamList = {
@@ -42,7 +42,7 @@ const TabViewNavigation: React.FC<Props> = () => {
       }}
       initialRouteName={'Bundestag'}>
       <TabNavigation.Screen name="Bundestag" component={Bundestag} />
-      <TabNavigation.Screen name="Fraktionen" component={Fraktionen} />
+      <TabNavigation.Screen name="Fraktionen" component={WomParty} />
       <TabNavigation.Screen name="Wahlkreis" component={Wahlkreis} />
     </TabNavigation.Navigator>
   );
