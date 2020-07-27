@@ -35,7 +35,7 @@ const ChartWrapper = styled.View`
 export const WomPartyChart: React.FC = () => {
   const { localVotes } = useContext(LocalVotesContext);
   const [selectedPartyIndex, setSelectedPartyIndex] = useState(0);
-  const { setWomParty } = useContext(WomPartyContext);
+  const { setWomParty, party: womParty } = useContext(WomPartyContext);
   const { data: proceduresData } = useQuery<
     PartyChartData,
     PartyChartDataVariables
@@ -166,6 +166,10 @@ export const WomPartyChart: React.FC = () => {
   };
 
   const preparedData = partyChartData();
+
+  if (!womParty) {
+    setWomParty(preparedData[selectedPartyIndex].party);
+  }
 
   const onClick = (index: number) => () => {
     setSelectedPartyIndex(index);
