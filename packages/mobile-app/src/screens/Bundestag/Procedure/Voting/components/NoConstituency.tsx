@@ -12,7 +12,7 @@ const Wrapper = styled.View<Pick<Props, 'noButton'>>`
   align-items: center;
   /* justify-content: space-around; */
   min-height: ${({ noButton }) => (noButton ? 200 : 300)};
-  flex: 1;
+  /* flex: 1; */
 `;
 
 const ImageWrapper = styled.View``;

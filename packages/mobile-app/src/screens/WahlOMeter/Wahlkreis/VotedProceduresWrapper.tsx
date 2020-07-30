@@ -6,7 +6,7 @@ import NoVotesPlaceholder from '../NoVotesPlaceholder';
 import { FlatList } from 'react-native';
 import VoteVarificationNoConstituency from '../../Bundestag/Procedure/Voting/components/NoConstituency';
 import { LocalVotesContext } from '../../../context/LocalVotes';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { DEPUTY_CHART_DATA } from './graphql/query/deputyChartData';
 import {
   DeputyChartData,
@@ -20,13 +20,13 @@ import {
 } from './graphql/query/__generated__/DeputyProcedures';
 import { ListItem } from '@democracy-deutschland/mobile-ui/src/components/Lists/ListItem';
 import { Row } from '@democracy-deutschland/mobile-ui/src/components/Lists/Row';
-import { pieChartGovernmentData } from '../../../lib/helper/PieChartGovernmentData';
-import { communityVoteData } from '../../../lib/helper/PieChartCommunityData';
 import { ListLoading } from '@democracy-deutschland/mobile-ui/src/components/shared/ListLoading';
 import { VoteSelection } from '../../../../__generated__/globalTypes';
 import { ChainEntry } from '../../../lib/VotesLocal';
 import { useNavigation } from '@react-navigation/core';
 import { ConstituencyContext } from '../../../context/Constituency';
+import { pieChartFull } from '../../../lib/helper/PieChartFull';
+import { styled } from '../../../styles';
 
 // GraphQL
 // import GET_PROCEDURE_CHART_DATA from '../../../graphql/queries/getDeputyChartData';
@@ -34,6 +34,13 @@ import { ConstituencyContext } from '../../../context/Constituency';
 // import VOTES_SELECTION_LOCAL from '../../../graphql/queries/local/votesSelection';
 // import GET_CONSTITUENCY from '../../../graphql/queries/local/constituency';
 // import VoteVarificationNoConstituency from '../../VoteVarification/NoConstituency';
+
+const VoteVarificationNoConstituencyWrapper = styled.View`
+  flex: 1;
+  /* align-items: center; */
+  justify-content: center;
+  margin-bottom: 80px;
+`;
 
 export interface ChartData {
   votedProcedures: {
@@ -66,8 +73,10 @@ const VotedProceduresWrapper: React.FC<Props> = ({
   children,
 }) => {
   const navigation = useNavigation();
-  const { localVotes } = useContext(LocalVotesContext);
+  const { localVotes, getLocalVoteSelection } = useContext(LocalVotesContext);
   const { constituency } = useContext(ConstituencyContext);
+
+  let deputyVotes: { [procedureId: string]: VoteSelection } = {};
 
   const { data: proceduresData } = useQuery<
     DeputyChartData,
@@ -84,22 +93,27 @@ const VotedProceduresWrapper: React.FC<Props> = ({
     DeputyProcedures,
     DeputyProceduresVariables
   >(DEPUTY_PROCEDURES, {
+    returnPartialData: true,
     variables: {
       constituency,
       directCandidate: true,
       offset: 0,
-      pageSize: 10,
+      pageSize: 11,
     },
   });
 
   if (!constituency) {
-    return <VoteVarificationNoConstituency navigation={navigation as any} />;
+    return (
+      <VoteVarificationNoConstituencyWrapper>
+        <VoteVarificationNoConstituency navigation={navigation as any} />
+      </VoteVarificationNoConstituencyWrapper>
+    );
   }
 
   let hasMore = true;
-  if (localVotes.length === 0) {
-    return <NoVotesPlaceholder subline="Wahlkreis" />;
-  }
+  // if (localVotes.length === 0) {
+  //   return <NoVotesPlaceholder subline="Wahlkreis" />;
+  // }
   let totalProcedures = 0;
   if (
     proceduresData &&
@@ -140,6 +154,12 @@ const VotedProceduresWrapper: React.FC<Props> = ({
             ({ procedure }) => procedure,
           )
         : [];
+
+    deputyVotes = procedurListData.deputyProcedures[0].procedures.reduce<{
+      [procedureId: string]: VoteSelection;
+    }>((prev, procedure) => {
+      return { ...prev, [procedure.procedure.procedureId]: procedure.decision };
+    }, {});
     return (
       <FlatList<
         'chart' | DeputyProcedures_deputyProcedures_procedures_procedure
@@ -159,6 +179,7 @@ const VotedProceduresWrapper: React.FC<Props> = ({
             });
             return renderedChild;
           } else {
+            const localSelection = getLocalVoteSelection(item.procedureId);
             return (
               <Row onPress={() => onProcedureListItemClick({ item })}>
                 <ListItem
@@ -171,8 +192,21 @@ const VotedProceduresWrapper: React.FC<Props> = ({
                   votes={
                     item.communityVotes ? item.communityVotes.total || 0 : 0
                   }
-                  govermentChart={{ votes: pieChartGovernmentData(item) }}
-                  communityVotes={communityVoteData(item)}
+                  govermentChart={{
+                    votes: pieChartFull({
+                      decision: deputyVotes[item.procedureId],
+                      colorSchema: 'GOVERNMENT',
+                    }),
+                  }}
+                  communityVotes={pieChartFull({
+                    decision: localSelection,
+                    colorSchema: 'COMMUNITY',
+                  })}
+                  // communityVotes={communityVoteData({
+                  //   ...item,
+                  //   localSelection,
+                  //   voted,
+                  // })}
                 />
               </Row>
             );
@@ -183,6 +217,7 @@ const VotedProceduresWrapper: React.FC<Props> = ({
         }
         onEndReached={() =>
           hasMore &&
+          listData &&
           listData.length > 0 &&
           fetchMore({
             variables: {

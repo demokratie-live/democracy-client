@@ -13,8 +13,8 @@ import ChartLegend from '../../Bundestag/Procedure/components/Charts/ChartLegend
 import { Segment } from '../../Bundestag/List/Components/Segment';
 import { ChainEntry } from '../../../lib/VotesLocal';
 import { VoteSelection } from '../../../../__generated__/globalTypes';
-import { WahlOMeterScreenNavigationProp } from '..';
 import InfoIconComponent from '@democracy-deutschland/mobile-ui/src/components/Icons/Info';
+import { ScreenNavigationProp } from '../../../routes/Sidebar/WahlOMeter/TabView';
 
 const Wrapper = styled.View`
   padding-top: 18;
@@ -132,7 +132,7 @@ const pieChartData = ({
 };
 
 interface Props {
-  navigation: WahlOMeterScreenNavigationProp;
+  navigation: ScreenNavigationProp;
 }
 
 class Wahlkreis extends PureComponent<Props> {

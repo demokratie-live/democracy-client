@@ -4,7 +4,7 @@ import {
   Registered,
   RegistrationError,
 } from 'react-native-notifications';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/client';
 import { NOTIFICATION_SETTINGS } from './graphql/query/NotificationSettings';
 import {
   NotificationSettings_notificationSettings,

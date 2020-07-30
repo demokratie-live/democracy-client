@@ -39,11 +39,12 @@ export interface DeputyProcedures_deputyProcedures_procedures_procedure {
   procedureId: string;
   sessionTOPHeading: string | null;
   title: string;
-  subjectGroups: string[];
+  tags: string[];
   voteDate: any | null;
   votedGovernment: boolean | null;
   submissionDate: any | null;
   completed: boolean | null;
+  subjectGroups: string[];
   voted: boolean;
   type: string;
   voteResults: DeputyProcedures_deputyProcedures_procedures_procedure_voteResults | null;

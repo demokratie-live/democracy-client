@@ -10,7 +10,7 @@ import { InitialStateContext } from '../../context/InitialStates';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { DrawerNavigationProp, DrawerItem } from '@react-navigation/drawer';
 import { SidebarParamList } from '../../routes/Sidebar';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { DONATION_STATUS } from './Donate/graphql/query/donationStatus';
 import DonatedBox from './Donate/DonatedBox';
 import { Space } from '../modals/Verification/Start';

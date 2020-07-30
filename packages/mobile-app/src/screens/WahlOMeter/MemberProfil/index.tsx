@@ -7,7 +7,7 @@ import Chart from './Chart';
 import ChartLegend from '../../Bundestag/Procedure/components/Charts/ChartLegend';
 import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Folding';
 // GraphQL
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { GET_DEPUTY_PROFILE } from './graphql/query/getDeputyProfile';
 import {
   GetDeputyProfile,

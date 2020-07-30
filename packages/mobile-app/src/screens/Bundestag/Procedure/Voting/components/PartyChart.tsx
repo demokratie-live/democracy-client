@@ -78,7 +78,7 @@ class Fraktionen extends PureComponent<Props> {
     votedProcedures: PartyChartData;
     data: LocalVoteData;
   }): PartyChartChartData[] => {
-    const chartData = votedProcedures.proceduresByIdHavingVoteResults.procedures.reduce<
+    const chartData = votedProcedures.partyChartProcedures.procedures.reduce<
       PartyVotesData
     >((prev, { voteResults, procedureId }) => {
       if (!voteResults || !procedureId) {
@@ -160,7 +160,7 @@ class Fraktionen extends PureComponent<Props> {
     const { chartWidth, selected } = this.state;
 
     const votedProcedures: PartyChartData = {
-      proceduresByIdHavingVoteResults: {
+      partyChartProcedures: {
         procedures: [],
         total: 0,
         __typename: 'ProceduresHavingVoteResults',

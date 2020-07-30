@@ -9,33 +9,33 @@ import { VoteSelection } from "./../../../../../../../../../__generated__/global
 // GraphQL query operation: PartyChartData
 // ====================================================
 
-export interface PartyChartData_proceduresByIdHavingVoteResults_procedures_voteResults_partyVotes {
+export interface PartyChartData_partyChartProcedures_procedures_voteResults_partyVotes {
   __typename: "PartyVote";
   party: string;
   main: VoteSelection;
 }
 
-export interface PartyChartData_proceduresByIdHavingVoteResults_procedures_voteResults {
+export interface PartyChartData_partyChartProcedures_procedures_voteResults {
   __typename: "VoteResult";
   governmentDecision: VoteSelection;
-  partyVotes: PartyChartData_proceduresByIdHavingVoteResults_procedures_voteResults_partyVotes[];
+  partyVotes: PartyChartData_partyChartProcedures_procedures_voteResults_partyVotes[];
 }
 
-export interface PartyChartData_proceduresByIdHavingVoteResults_procedures {
+export interface PartyChartData_partyChartProcedures_procedures {
   __typename: "Procedure";
   _id: string;
   procedureId: string;
-  voteResults: PartyChartData_proceduresByIdHavingVoteResults_procedures_voteResults | null;
+  voteResults: PartyChartData_partyChartProcedures_procedures_voteResults | null;
 }
 
-export interface PartyChartData_proceduresByIdHavingVoteResults {
+export interface PartyChartData_partyChartProcedures {
   __typename: "ProceduresHavingVoteResults";
   total: number;
-  procedures: PartyChartData_proceduresByIdHavingVoteResults_procedures[];
+  procedures: PartyChartData_partyChartProcedures_procedures[];
 }
 
 export interface PartyChartData {
-  proceduresByIdHavingVoteResults: PartyChartData_proceduresByIdHavingVoteResults;
+  partyChartProcedures: PartyChartData_partyChartProcedures;
 }
 
 export interface PartyChartDataVariables {

@@ -10,7 +10,7 @@ import { VoteSelection } from '../../../../__generated__/globalTypes';
 import { LocalVotesContext } from '../../../context/LocalVotes';
 import { SidebarParamList } from '../../../routes/Sidebar';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import Lock from '@democracy-deutschland/mobile-ui/src/components/Icons/Lock';
 import {
   ToggleNotification,
