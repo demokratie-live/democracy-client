@@ -29,7 +29,9 @@ The Client for the DEMOCRACY App. This includes iOS and Android generated from t
 
 # Contribute
 
-## install dependencies
+**Note-** It is necessary to copy the .env.example to .env to start the local development.
+
+## Install Dependencies
 
 ```
 git clone https://github.com/demokratie-live/democracy-client
@@ -52,7 +54,7 @@ with
 def command = "node ../../node_modules/react-native/cli.js config"
 ```
 
-## start developing UI
+## Start Developing UI
 
 ### Android
 
@@ -94,7 +96,7 @@ CMD+M and Configure Bundler Location to Host: 127.0.0.1 & Port: 8088
 (error should be solved)
 ```
 
-## start developing App
+## Start Developing App
 
 ### Android
 
