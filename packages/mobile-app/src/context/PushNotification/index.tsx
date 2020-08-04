@@ -46,7 +46,7 @@ export const PushNotificationProvider: React.FC = ({ children }) => {
         (notification, completion) => {
           completion({
             alert: true,
-            sound: false,
+            sound: true,
             badge: false,
           });
         },

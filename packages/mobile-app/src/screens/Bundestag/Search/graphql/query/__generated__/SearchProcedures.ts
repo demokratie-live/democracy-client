@@ -3,30 +3,30 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { VoteSelection } from './../../../../../../../__generated__/globalTypes';
+import { VoteSelection } from "./../../../../../../../__generated__/globalTypes";
 
 // ====================================================
 // GraphQL query operation: SearchProcedures
 // ====================================================
 
 export interface SearchProcedures_searchProceduresAutocomplete_procedures_voteResults {
-  __typename: 'VoteResult';
-  yes: number | null;
-  abstination: number | null;
-  no: number | null;
-  governmentDecision: VoteSelection | null;
+  __typename: "VoteResult";
+  yes: number;
+  abstination: number;
+  no: number;
+  governmentDecision: VoteSelection;
 }
 
 export interface SearchProcedures_searchProceduresAutocomplete_procedures_communityVotes {
-  __typename: 'CommunityVotes';
-  yes: number | null;
-  abstination: number | null;
-  no: number | null;
-  total: number | null;
+  __typename: "CommunityVotes";
+  yes: number;
+  abstination: number;
+  no: number;
+  total: number;
 }
 
 export interface SearchProcedures_searchProceduresAutocomplete_procedures {
-  __typename: 'Procedure';
+  __typename: "Procedure";
   _id: string;
   title: string;
   procedureId: string;
@@ -45,7 +45,7 @@ export interface SearchProcedures_searchProceduresAutocomplete_procedures {
 }
 
 export interface SearchProcedures_searchProceduresAutocomplete {
-  __typename: 'SearchProcedures';
+  __typename: "SearchProcedures";
   procedures: SearchProcedures_searchProceduresAutocomplete_procedures[];
   autocomplete: string[];
 }

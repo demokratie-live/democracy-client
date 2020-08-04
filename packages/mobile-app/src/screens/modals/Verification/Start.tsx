@@ -104,7 +104,7 @@ Zu unserer `}
       </Folding>
       {authCodeExpires && (
         <ButtonNext
-          onPress={() => navigation.push('SmsCodeInput')}
+          onPress={() => navigation.push('SmsCodeInput', {})}
           text="CODE EINGEBEN"
           textColor="white"
           backgroundColor="blue"
@@ -113,7 +113,7 @@ Zu unserer `}
 
       <ButtonNext
         testID="StartVerificationButton"
-        onPress={() => navigation.push('PhoneNumberInput')}
+        onPress={() => navigation.push('PhoneNumberInput', {})}
         text={`${
           authCodeExpires
             ? `Neuen Code senden${countdown ? ` (${countdown})` : ''}`

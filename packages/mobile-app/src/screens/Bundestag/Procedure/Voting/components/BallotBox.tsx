@@ -16,7 +16,7 @@ import {
 import styled from 'styled-components/native';
 
 import VoteButton from '../../components/VoteButton';
-import { useMutation, useLazyQuery } from '@apollo/react-hooks';
+import { useMutation, useLazyQuery, PureQueryOptions } from '@apollo/client';
 import { VOTE } from './graphql/mutation/vote';
 import { Vote, VoteVariables } from './graphql/mutation/__generated__/vote';
 import { VoteSelection } from '../../../../../../__generated__/globalTypes';
@@ -32,7 +32,7 @@ import {
 } from '../../graphql/query/__generated__/Procedure';
 import { SEARCH_PROCEDURES } from '../../../Search/graphql/query/searchProcedures';
 import { SearchContext } from '../../../../../context/Search';
-import { PureQueryOptions } from 'apollo-client';
+
 import { NotificationsContext } from '../../../../../context/NotificationPermission';
 
 const Wrapper = styled.View`

@@ -15,15 +15,15 @@ import { RouteProp } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { ConstituencyContext } from '../../../../context/Constituency';
 import PartyChart from '../components/GovernmentVoteResults/PartyChart/Component';
-import { ChartData } from '../../../WahlOMeter/VotedProceduresWrapper';
+import { ChartData } from '../../../WahlOMeter/Bundestag/VotedProceduresWrapper';
 import {
   PartyChartData,
   PartyChartDataVariables,
-  PartyChartData_proceduresByIdHavingVoteResults_procedures,
+  PartyChartData_partyChartProcedures_procedures,
 } from './components/graphql/query/__generated__/PartyChartData';
 import { ChainEntry } from '../../../../lib/VotesLocal';
 import { LocalVotesContext } from '../../../../context/LocalVotes';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import ChartLegend from '../components/Charts/ChartLegend';
 import NoVotesPlaceholder from '../../../WahlOMeter/NoVotesPlaceholder';
 import { styled } from '../../../../styles';
@@ -129,7 +129,7 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
   const { selection, procedureId, procedureObjId, title } = route.params;
 
   const getMatchingProcedures = ({ votedProcedures }: ChartData) =>
-    votedProcedures.proceduresByIdHavingVoteResults.procedures.filter(
+    votedProcedures.partyChartProcedures.procedures.filter(
       ({ procedureId: itemProcedureId }) =>
         localVotes.find(({ procedureId: pid }) => pid === itemProcedureId),
     );
@@ -137,7 +137,7 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
   const partyChartData = ({
     matchingProcedures,
   }: {
-    matchingProcedures: PartyChartData_proceduresByIdHavingVoteResults_procedures[];
+    matchingProcedures: PartyChartData_partyChartProcedures_procedures[];
     votedProcedures: PartyChartData;
     localVotes: ChainEntry[];
   }) => {

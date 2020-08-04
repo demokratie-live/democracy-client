@@ -31,7 +31,7 @@ import {
 } from './content';
 import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Folding';
 import { DONATION_STATUS } from './graphql/query/donationStatus';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { MadeWithLove } from '../../../components/MadeWithLove';
 import { styled } from '../../../styles';
 
@@ -196,13 +196,13 @@ export const DonateScreen: React.FC<Props> = () => {
           </DefinitionListWrapper>
           <DefinitionListWrapper>
             <DefinitionListTitle>{donateList2Head}</DefinitionListTitle>
-            <DefinitionListDescription>
+            <DefinitionListDescription selectable={true}>
               {donateList2Text}
             </DefinitionListDescription>
           </DefinitionListWrapper>
           <DefinitionListWrapper style={{ paddingBottom: 18 }}>
             <DefinitionListTitle>{donateList3Head}</DefinitionListTitle>
-            <DefinitionListDescription>
+            <DefinitionListDescription selectable={true}>
               {donateList3Text}
             </DefinitionListDescription>
           </DefinitionListWrapper>

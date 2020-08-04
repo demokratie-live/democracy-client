@@ -6,7 +6,7 @@ import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
 import ShareIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Share';
 import ShareIconIosHeader from '@democracy-deutschland/mobile-ui/src/components/Icons/ShareIosHeader';
 
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/client';
 import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Folding';
 import { ListLoading } from '@democracy-deutschland/mobile-ui/src/components/shared/ListLoading';
 import speakingurl from 'speakingurl';

@@ -5,6 +5,7 @@ const {
   default: styled,
   css,
   ThemeProvider,
+  // @ts-ignore
 } = styledComponents as styledComponents.ReactNativeThemedStyledComponentsModule<
   ThemeInterface
 >;

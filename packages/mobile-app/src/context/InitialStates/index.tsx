@@ -1,6 +1,6 @@
 import React, { createContext, useState, FC, useEffect } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { Me } from './graphql/query/__generated__/Me';
 import ME from './graphql/query/Me';
 

@@ -12,6 +12,7 @@ const NoVotesWrapper = styled.ScrollView.attrs({
     justifyContent: 'center',
   },
 })`
+  padding-top: 18px;
   flex-grow: 1;
   min-height: 300;
 `;
