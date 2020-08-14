@@ -264,7 +264,7 @@ dependencies {
 
     // react-native-notifications
     implementation project(':reactnativenotifications')
-    implementation 'com.google.firebase:firebase-core:17.0.0'
+    implementation 'com.google.firebase:firebase-core:16.0.0'
 
     // Multidex
     implementation 'com.android.support:multidex:1.0.3'
@@ -290,3 +290,5 @@ task copyDownloadableDepsToLibs(type: Copy) {
 
 apply from: file("../../../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); 
 applyNativeModulesAppBuildGradle(project)
+
+com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true
