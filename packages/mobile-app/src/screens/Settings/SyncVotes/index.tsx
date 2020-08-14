@@ -4,6 +4,7 @@ import QRCode from 'react-native-qrcode-svg';
 import VotesLocal from '../../../lib/VotesLocal';
 import { styled } from '../../../styles';
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
+import { useNavigation } from '@react-navigation/core';
 
 const Container = styled.View`
   align-items: center;
@@ -28,6 +29,14 @@ const ListText = styled.Text`
   color: ${({ theme }) => theme.textColors.tertiary};
 `;
 
+export interface SyncObj {
+  procedures: string;
+  meta: {
+    sum: number;
+    current: number;
+  };
+}
+
 const ListElement = ({ label, text }: { label: string; text: string }) => {
   return (
     <ListContainer>
@@ -37,8 +46,11 @@ const ListElement = ({ label, text }: { label: string; text: string }) => {
   );
 };
 
+const QR_DATA_LENGTH = 2;
+
 const SyncVotes = () => {
-  const [localVotes, setLocalVotes] = useState<string[]>([]);
+  const navigation = useNavigation();
+  const [localVotes, setLocalVotes] = useState<SyncObj[]>([]);
   const [iterator, setIterator] = useState<number>(0);
   const qrSize =
     (Dimensions.get('window').width < Dimensions.get('window').height
@@ -46,20 +58,33 @@ const SyncVotes = () => {
       : Dimensions.get('window').height) - 36;
   useEffect(() => {
     VotesLocal.readKeychain().then(data => {
+      const sumQrCodes = Math.ceil(data.d.length / QR_DATA_LENGTH);
       setLocalVotes(
-        data.d.reduce<string[]>((prev, { i, s, t, c }, index) => {
-          const arrayIndey = Math.floor(index / 25);
-
+        data.d.reduce<SyncObj[]>((prev, { i, s, t, c }, index) => {
+          const arrayIndey = Math.floor(index / QR_DATA_LENGTH);
+          const timestamp = new Date(t).getTime();
           if (prev[arrayIndey]) {
-            prev[arrayIndey] = `${prev[arrayIndey]}:${i}.${s}.${new Date(
-              t,
-            ).getTime()}.${c}`;
+            prev[arrayIndey] = {
+              procedures: `${prev[arrayIndey].procedures}:${i}.${s}.${timestamp}.${c}`,
+              meta: {
+                sum: sumQrCodes,
+                current: arrayIndey + 1,
+              },
+            };
+            // prev[arrayIndey] = `${prev[arrayIndey]}:${i}.${s}.${new Date(
+            //   t,
+            // ).getTime()}.${c}`;
           } else {
-            prev[arrayIndey - 1] = `${prev[arrayIndey - 1]}:MORE`;
-            prev[arrayIndey] = `${i}.${s}.${t}.${c}`;
+            prev[arrayIndey] = {
+              procedures: `${i}.${s}.${timestamp}.${c}`,
+              meta: {
+                sum: sumQrCodes,
+                current: arrayIndey + 1,
+              },
+            };
           }
           return prev;
-        }, [] as string[]),
+        }, [] as SyncObj[]),
       );
     });
   }, []);
@@ -83,7 +108,9 @@ const SyncVotes = () => {
       <Text>
         So synchronisiert Du Deine lokalen Stimmen mit einem neuen Gerät:
       </Text>
-      {!!localVotes && <QRCode size={qrSize} value={localVotes[iterator]} />}
+      {!!localVotes && !!localVotes[iterator] && (
+        <QRCode size={qrSize} value={JSON.stringify(localVotes[iterator])} />
+      )}
       <ListElement label="1." text="Öffne DEMOCRACY auf deinem neuen Gerät" />
       <ListElement
         label="2."
@@ -99,7 +126,7 @@ const SyncVotes = () => {
         backgroundColor="blue"
         style={{ width: '100%' }}
         onPress={() => {
-          console.log('TODO');
+          navigation.navigate('SyncVotesCapture');
         }}
       />
     </Container>
