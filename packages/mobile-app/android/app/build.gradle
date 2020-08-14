@@ -150,6 +150,9 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         multiDexEnabled true
 
+        // react-native-camera
+        missingDimensionStrategy 'react-native-camera', 'general'
+
         // react-native-notifications
         missingDimensionStrategy "RNNotifications.reactNativeVersion", "reactNative60" // See note below!
         
