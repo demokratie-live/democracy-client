@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+// eslint-disable-next-line import/namespace
 import { RNCamera, BarCodeReadEvent } from 'react-native-camera';
 import { styled } from '../../../../styles';
 import { SyncObj } from '..';
