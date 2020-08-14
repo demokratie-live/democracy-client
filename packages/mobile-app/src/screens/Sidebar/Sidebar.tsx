@@ -8,13 +8,14 @@ import { RootStackParamList } from '../../routes';
 import { useNavigation, CompositeNavigationProp } from '@react-navigation/core';
 import { InitialStateContext } from '../../context/InitialStates';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { DrawerNavigationProp, DrawerItem } from '@react-navigation/drawer';
 import { SidebarParamList } from '../../routes/Sidebar';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { DONATION_STATUS } from './Donate/graphql/query/donationStatus';
 import DonatedBox from './Donate/DonatedBox';
 import { Space } from '../modals/Verification/Start';
 import { NavigationContext } from '../../context/Navigation';
+import { rateApp } from '../../lib/rateApp';
 
 const SafeAreaView = styled.SafeAreaView`
   flex: 1;
@@ -35,6 +36,13 @@ const DonateBoxWrapper = styled.View`
   left: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.8);
+`;
+
+const RateBoxWrapper = styled.View`
+  position: absolute;
+  bottom: 80;
+  left: 0;
+  right: 0;
 `;
 
 const DonationTouch = styled.TouchableOpacity`
@@ -70,7 +78,7 @@ export const Sidebar: React.FC<Props> = props => {
       navigation.navigate('Settings');
     } else {
       saveState();
-      navigation.navigate('VerificationStart');
+      navigation.navigate('VerificationStart', {});
     }
   };
 
@@ -94,6 +102,13 @@ export const Sidebar: React.FC<Props> = props => {
           <DrawerItemList {...props} />
         </NaviList>
       </SafeAreaView>
+      <RateBoxWrapper>
+        <DrawerItem
+          label="⭐️  App Bewerten"
+          onPress={rateApp}
+          labelStyle={{ fontSize: 16, color: '#ddd' }}
+        />
+      </RateBoxWrapper>
       {donationStatus && donationStatus.result && (
         <DonateBoxWrapper>
           <DonationTouch onPress={() => navigation.navigate('Donate')}>

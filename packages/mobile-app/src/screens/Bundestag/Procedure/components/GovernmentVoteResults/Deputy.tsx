@@ -4,7 +4,7 @@ import {
   DeputyVoteResults,
   DeputyVoteResultsVariables,
 } from './graphql/query/__generated__/DeputyVoteResults';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 
 // Components
 import PartyComponent from './Parties';

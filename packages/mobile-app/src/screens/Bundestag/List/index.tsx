@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Text, ListRenderItem, SectionList } from 'react-native';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { PROCEDURES_LIST } from './graphql/query/procedures';
 import {
   ProceduresList,

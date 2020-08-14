@@ -6,7 +6,7 @@ import Description from './Components/Description';
 import PhonenumberInput from './Components/PhonenumberInput';
 
 import REQUEST_CODE from './graphql/mutation/requestCode';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import {
   RequestSmsCode,
   RequestSmsCodeVariables,
@@ -91,7 +91,7 @@ export const PhoneNumber: React.FC = () => {
               // Contains a Date (String)
               setExpireTime(res.data.requestCode.expireTime);
               setResendTime(res.data.requestCode.resendTime);
-              navigation.push('SmsCodeInput');
+              navigation.push('SmsCodeInput', {});
             }
           },
         },

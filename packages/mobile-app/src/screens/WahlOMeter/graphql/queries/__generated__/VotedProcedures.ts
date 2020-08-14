@@ -3,43 +3,43 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { VoteSelection } from './../../../../../../__generated__/globalTypes';
+import { VoteSelection } from "./../../../../../../__generated__/globalTypes";
 
 // ====================================================
 // GraphQL query operation: VotedProcedures
 // ====================================================
 
 export interface VotedProcedures_proceduresByIdHavingVoteResults_procedures_voteResults_partyVotes {
-  __typename: 'PartyVote';
+  __typename: "PartyVote";
   party: string;
-  main: VoteSelection | null;
+  main: VoteSelection;
 }
 
 export interface VotedProcedures_proceduresByIdHavingVoteResults_procedures_voteResults {
-  __typename: 'VoteResult';
-  governmentDecision: VoteSelection | null;
-  yes: number | null;
-  abstination: number | null;
-  no: number | null;
+  __typename: "VoteResult";
+  governmentDecision: VoteSelection;
+  yes: number;
+  abstination: number;
+  no: number;
   notVoted: number | null;
   partyVotes: VotedProcedures_proceduresByIdHavingVoteResults_procedures_voteResults_partyVotes[];
 }
 
 export interface VotedProcedures_proceduresByIdHavingVoteResults_procedures_communityVotes {
-  __typename: 'CommunityVotes';
-  yes: number | null;
-  abstination: number | null;
-  no: number | null;
-  total: number | null;
+  __typename: "CommunityVotes";
+  yes: number;
+  abstination: number;
+  no: number;
+  total: number;
 }
 
 export interface VotedProcedures_proceduresByIdHavingVoteResults_procedures {
-  __typename: 'Procedure';
+  __typename: "Procedure";
   _id: string;
   procedureId: string;
   sessionTOPHeading: string | null;
   title: string;
-  tags: (string | null)[] | null;
+  tags: string[];
   voteDate: any | null;
   votedGovernment: boolean | null;
   submissionDate: any | null;
@@ -52,8 +52,8 @@ export interface VotedProcedures_proceduresByIdHavingVoteResults_procedures {
 }
 
 export interface VotedProcedures_proceduresByIdHavingVoteResults {
-  __typename: 'ProceduresHavingVoteResults';
-  total: number | null;
+  __typename: "ProceduresHavingVoteResults";
+  total: number;
   procedures: VotedProcedures_proceduresByIdHavingVoteResults_procedures[];
 }
 

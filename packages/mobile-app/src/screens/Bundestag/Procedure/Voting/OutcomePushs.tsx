@@ -9,7 +9,7 @@ import { NotificationsContext } from '../../../../context/NotificationPermission
 import { BundestagRootStackParamList } from '../../../../routes/Sidebar/Bundestag';
 import { TOGGLE_NOTIFICATION } from '../../../Bundestag/Procedure/graphql/muatation/toggleNotification';
 import { PROCEDURE } from '../../../Bundestag/Procedure/graphql/query/Procedure';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import {
   ToggleNotification,
   ToggleNotificationVariables,

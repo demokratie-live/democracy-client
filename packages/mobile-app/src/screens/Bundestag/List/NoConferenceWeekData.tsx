@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components/native';
 import { Button } from 'react-native';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { CURRENT_CONFERENCE_WEEK } from './graphql/query/currentConferenceWeek';
 import { CurrentConferenceWeek } from './graphql/query/__generated__/CurrentConferenceWeek';
 import dateFormat from 'dateformat';

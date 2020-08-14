@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface RequestVerification_requestVerification {
-  __typename: 'VerificationResult';
+  __typename: "VerificationResult";
   reason: string | null;
   succeeded: boolean;
 }
