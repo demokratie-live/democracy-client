@@ -264,7 +264,7 @@ dependencies {
 
     // react-native-notifications
     implementation project(':reactnativenotifications')
-    implementation 'com.google.firebase:firebase-core:16.0.0'
+    implementation 'com.google.firebase:firebase-core:17.0.0'
 
     // Multidex
     implementation 'com.android.support:multidex:1.0.3'
