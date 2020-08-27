@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Dimensions } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
-import VotesLocal from '../../../lib/VotesLocal';
+import VotesLocal, { ChainEntryRaw } from '../../../lib/VotesLocal';
 import { styled } from '../../../styles';
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
 import { useNavigation } from '@react-navigation/core';
@@ -30,10 +30,12 @@ const ListText = styled.Text`
 `;
 
 export interface SyncObj {
-  procedures: string;
+  procedures: ChainEntryRaw[];
   meta: {
     sum: number;
     current: number;
+    identifier: string;
+    v: number;
   };
 }
 
@@ -46,7 +48,7 @@ const ListElement = ({ label, text }: { label: string; text: string }) => {
   );
 };
 
-const QR_DATA_LENGTH = 2;
+const QR_DATA_LENGTH = 5;
 
 const SyncVotes = () => {
   const navigation = useNavigation();
@@ -59,16 +61,20 @@ const SyncVotes = () => {
   useEffect(() => {
     VotesLocal.readKeychain().then(data => {
       const sumQrCodes = Math.ceil(data.d.length / QR_DATA_LENGTH);
+      const randomIdentifieer = Math.random()
+        .toString(36)
+        .substring(7);
       setLocalVotes(
-        data.d.reduce<SyncObj[]>((prev, { i, s, t, c }, index) => {
+        data.d.reduce<SyncObj[]>((prev, procedures, index) => {
           const arrayIndey = Math.floor(index / QR_DATA_LENGTH);
-          const timestamp = new Date(t).getTime();
           if (prev[arrayIndey]) {
             prev[arrayIndey] = {
-              procedures: `${prev[arrayIndey].procedures}:${i}.${s}.${timestamp}.${c}`,
+              procedures: [...prev[arrayIndey].procedures, procedures],
               meta: {
                 sum: sumQrCodes,
                 current: arrayIndey + 1,
+                identifier: randomIdentifieer,
+                v: data.v,
               },
             };
             // prev[arrayIndey] = `${prev[arrayIndey]}:${i}.${s}.${new Date(
@@ -76,10 +82,12 @@ const SyncVotes = () => {
             // ).getTime()}.${c}`;
           } else {
             prev[arrayIndey] = {
-              procedures: `${i}.${s}.${timestamp}.${c}`,
+              procedures: [procedures],
               meta: {
                 sum: sumQrCodes,
                 current: arrayIndey + 1,
+                identifier: randomIdentifieer,
+                v: data.v,
               },
             };
           }
