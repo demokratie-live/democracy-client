@@ -1,5 +1,8 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { Notifications } from 'react-native-notifications';
+import {
+  Notifications,
+  NotificationBackgroundFetchResult,
+} from 'react-native-notifications';
 import { EmitterSubscription, Platform } from 'react-native';
 import { rootNavigationRef } from '../../routes/rootNavigationRef';
 import {
@@ -44,11 +47,7 @@ export const PushNotificationProvider: React.FC = ({ children }) => {
     subscriptions.push(
       Notifications.events().registerNotificationReceivedBackground(
         (notification, completion) => {
-          completion({
-            alert: true,
-            sound: true,
-            badge: false,
-          });
+          completion(NotificationBackgroundFetchResult.NEW_DATA);
         },
       ),
     );

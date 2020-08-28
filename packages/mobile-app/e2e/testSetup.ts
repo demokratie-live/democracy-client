@@ -8,12 +8,15 @@ const config = require('../package.json').detox;
 
 // Set the default timeout
 jest.setTimeout(600000);
+// @ts-ignore
 jasmine.getEnv().addReporter(adapter);
 
 // This takes care of generating status logs on a per-spec basis. By default, jest only reports at file-level.
 // This is strictly optional.
+// @ts-ignore
 jasmine.getEnv().addReporter(specReporter);
 
+// @ts-ignore
 jasmine.getEnv().addReporter(assignReporter);
 
 beforeAll(async () => {
