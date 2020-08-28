@@ -55,7 +55,6 @@ const WomPartyList: React.FC<Props> = ({ onProcedureListItemClick }) => {
   } = useQuery<VotedPartyProcedures, VotedPartyProceduresVariables>(
     VOTED_PARTY_PROCEDURES,
     {
-      returnPartialData: true,
       variables: { offset: 0, pageSize: 20 },
     },
   );

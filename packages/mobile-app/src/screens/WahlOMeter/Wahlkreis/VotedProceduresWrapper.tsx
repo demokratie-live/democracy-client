@@ -93,7 +93,6 @@ const VotedProceduresWrapper: React.FC<Props> = ({
     DeputyProcedures,
     DeputyProceduresVariables
   >(DEPUTY_PROCEDURES, {
-    returnPartialData: true,
     variables: {
       constituency,
       directCandidate: true,
