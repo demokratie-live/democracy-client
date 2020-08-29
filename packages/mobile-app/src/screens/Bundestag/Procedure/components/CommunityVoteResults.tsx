@@ -24,21 +24,21 @@ export const { width, height } = Dimensions.get('window');
 const RepresentativeText = styled.Text`
   color: ${({ theme }) => theme.textColors.secondary};
   text-align: center;
-  font-size: 12;
-  padding-bottom: 18;
-  padding-horizontal: 24;
+  font-size: 12px;
+  padding-bottom: 18px;
+  padding-horizontal: 24px;
 `;
 
 const CommunitySegmentText = styled.Text`
   color: rgb(142, 142, 147);
-  font-size: 12;
-  padding-top: 8;
-  padding-bottom: 16;
+  font-size: 12px;
+  padding-top: 8px;
+  padding-bottom: 16px;
 `;
 
 const PieChartWrapper = styled.View`
   align-self: center;
-  padding-horizontal: 36;
+  padding-horizontal: 36px;
   width: 100%;
   max-width: ${() =>
     Math.min(
@@ -58,7 +58,7 @@ const SwiperStyled = styled(Swiper).attrs({
   paginationStyle: { bottom: 14 },
 })`
   height: ${Platform.OS === 'ios' ? 'auto' : 430};
-  max-height: 430;
+  max-height: 430px;
 `;
 
 interface Props {

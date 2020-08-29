@@ -22,15 +22,15 @@ const HeaderWrapper = styled.View`
 
 const Headline = styled.Text`
   color: #000;
-  font-size: 22;
+  font-size: 22px;
   margin-vertical: 18;
 `;
 
 const Subtitle = styled.Text`
   color: ${({ theme }) => theme.textColors.secondary};
-  font-size: 15;
-  padding-top: 14;
-  padding-bottom: 52;
+  font-size: 15px;
+  padding-top: 14px;
+  padding-bottom: 52px;
   margin-horizontal: 18;
   text-align: center;
 `;
@@ -38,15 +38,15 @@ const Subtitle = styled.Text`
 const SwitchWrapper = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  padding-horizontal: 18;
-  padding-top: 40;
-  padding-bottom: 31;
+  padding-horizontal: 18px;
+  padding-top: 40px;
+  padding-bottom: 31px;
 `;
 
 const SwitchText = styled.Text`
-  font-size: 17;
+  font-size: 17px;
   flex: 1;
-  padding-right: 18;
+  padding-right: 18px;
 `;
 
 type RouteProps = RouteProp<RootStackParamList, 'NotificationInstruction'>;

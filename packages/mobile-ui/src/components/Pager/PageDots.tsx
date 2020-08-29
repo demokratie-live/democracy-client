@@ -19,7 +19,7 @@ const DotsWrapper = styled.View`
   flex-direction: row;
   justify-content: center;
   position: relative;
-  bottom: 20;
+  bottom: 20px;
   width: 100%;
 `;
 

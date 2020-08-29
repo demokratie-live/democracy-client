@@ -7,8 +7,8 @@ import { pieChartGovernmentData } from '../../../../lib/helper/PieChartGovernmen
 import { Procedure_procedure } from '../graphql/query/__generated__/Procedure';
 
 const Container = styled.View`
-  padding-top: 18;
-  padding-horizontal: 18;
+  padding-top: 18px;
+  padding-horizontal: 18px;
 `;
 type Props = Procedure_procedure;
 

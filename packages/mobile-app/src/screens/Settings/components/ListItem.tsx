@@ -5,26 +5,26 @@ import { styled } from '../../../styles';
 const Wrapper = styled.TouchableOpacity`
   flex-direction: row;
   background-color: #fff;
-  height: 44;
+  height: 44px;
   align-items: center;
-  padding-left: 16;
-  padding-right: 18;
-  border-bottom-width: 1;
+  padding-left: 16px;
+  padding-right: 18px;
+  border-bottom-width: 1px;
   border-bottom-color: #c8c7cc;
-  font-size: 17;
+  font-size: 17px;
 `;
 
 const Value = styled.Text<{ arrow: boolean }>`
-  font-size: 17;
+  font-size: 17px;
   color: ${({ theme }) => theme.textColors.secondary};
   padding-right: ${({ arrow }) => (arrow ? 5 : 12)};
 `;
 
 const Description = styled.Text`
-  font-size: 13;
+  font-size: 13px;
   color: ${({ theme }) => theme.textColors.secondary};
-  padding-horizontal: 18;
-  padding-vertical: 8;
+  padding-horizontal: 18px;
+  padding-vertical: 8px;
 `;
 
 const Arrow = styled(ArrowIcon).attrs(() => ({
@@ -40,9 +40,9 @@ const Arrow = styled(ArrowIcon).attrs(() => ({
 //   color: 'grey',
 // }))`
 //   text-align: center;
-//   width: 24;
-//   padding-right: 10;
-//   margin-top: 3;
+//   width: 24px;
+//   padding-right: 10px;
+//   margin-top: 3px;
 // `;
 
 export interface Props {

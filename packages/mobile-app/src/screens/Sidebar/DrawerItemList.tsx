@@ -15,7 +15,7 @@ import {
 import { styled } from '../../styles';
 
 const Space = styled.View`
-  padding-bottom: 18;
+  padding-bottom: 18px;
 `;
 
 type Props = Omit<DrawerContentOptions, 'contentContainerStyle' | 'style'> & {

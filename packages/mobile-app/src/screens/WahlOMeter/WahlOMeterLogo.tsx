@@ -7,7 +7,7 @@ const Wrapper = styled.View`
   width: ${CIRCLE_SIZE};
   height: ${CIRCLE_SIZE};
   border-radius: ${CIRCLE_SIZE / 2};
-  border-width: 2;
+  border-width: 2px;
   border-style: solid;
   border-color: #979797;
   justify-content: center;
@@ -15,12 +15,12 @@ const Wrapper = styled.View`
 `;
 
 const Headline = styled.Text`
-  font-size: 27;
+  font-size: 27px;
   color: #000;
 `;
 
 const Subline = styled.Text`
-  font-size: 15;
+  font-size: 15px;
   color: #db9522;
 `;
 

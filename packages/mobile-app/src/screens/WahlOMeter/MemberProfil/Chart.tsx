@@ -5,23 +5,23 @@ import { styled } from '../../../styles';
 
 const Wrapper = styled.View`
   flex-direction: row;
-  padding-horizontal: 18;
-  padding-top: 18;
+  padding-horizontal: 18px;
+  padding-top: 18px;
 `;
 
 const ProcedureCount = styled.View`
-  padding-left: 18;
+  padding-left: 18px;
   justify-content: space-around;
 `;
 
 const ProcedureCountText = styled.Text`
-  font-size: 20;
+  font-size: 20px;
   color: #6d6d72;
   font-weight: 500;
 `;
 
 const Label = styled.Text`
-  font-size: 17;
+  font-size: 17px;
   color: ${({ theme }) => theme.textColors.secondary};
 `;
 

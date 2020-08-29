@@ -30,29 +30,29 @@ type SidebarNavigationProps = CompositeNavigationProp<
 >;
 
 const DonateBoxWrapper = styled.View`
-  height: 68;
+  height: 68px;
   position: absolute;
-  bottom: 0;
-  left: 0;
+  bottom: 0px;
+  left: 0px;
   right: 0;
   background-color: rgba(0, 0, 0, 0.8);
 `;
 
 const RateBoxWrapper = styled.View`
   position: absolute;
-  bottom: 80;
-  left: 0;
+  bottom: 80px;
+  left: 0px;
   right: 0;
 `;
 
 const DonationTouch = styled.TouchableOpacity`
   flex: 1;
   width: 100%;
-  height: 68;
+  height: 68px;
 `;
 
 const NaviList = styled.ScrollView`
-  margin-bottom: 68;
+  margin-bottom: 68px;
 `;
 
 declare type Props = React.ComponentProps<typeof DrawerItemList>;

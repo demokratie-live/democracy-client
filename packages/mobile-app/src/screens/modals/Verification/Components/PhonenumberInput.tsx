@@ -3,18 +3,18 @@ import { Platform } from 'react-native';
 import styled from 'styled-components/native';
 
 const Container = styled.View`
-  border-bottom-width: 1;
+  border-bottom-width: 1px;
   border-color: #979797;
-  padding-bottom: 0;
+  padding-bottom: 0px;
   flex-direction: row;
   margin-horizontal: 9;
-  max-width: 300;
+  max-width: 300px;
 `;
 
 const CountryNumber = styled.Text`
-  font-size: 24;
-  margin-bottom: 0;
-  padding-bottom: 0;
+  font-size: 24px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
   padding-top: ${Platform.OS === 'ios' ? 0 : 7};
 `;
 
@@ -25,11 +25,11 @@ const Number = styled.TextInput.attrs(() => ({
   returnKeyType: 'next',
 }))`
   flex: 1;
-  font-size: 24;
+  font-size: 24px;
   color: #000;
-  margin-bottom: 0;
-  padding-bottom: 0;
-  margin-left: 11;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  margin-left: 11px;
 `;
 
 interface Props {

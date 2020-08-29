@@ -21,7 +21,7 @@ const MainWrapper = styled.View`
 
 const SideWrapper = styled.View`
   align-items: flex-end;
-  min-width: 50;
+  min-width: 50px;
   justify-content: space-between;
 `;
 
@@ -30,22 +30,22 @@ const VotesIndex = styled(VotesIndexCmp)``;
 const ChartWrapper = styled.View`
   flex-direction: row;
   justify-content: flex-end;
-  /* min-width: 45; */
-  padding-top: 18;
+  /* min-width: 45px; */
+  padding-top: 18px;
 `;
 
 const VoteDate = styled(VoteDateCmp)`
-  padding-top: 18;
+  padding-top: 18px;
 `;
 
 const Title = styled.Text`
-  font-size: 17;
+  font-size: 17px;
   color: #030303;
 `;
 
 const Subline = styled.Text`
-  padding-top: 8;
-  font-size: 15;
+  padding-top: 8px;
+  font-size: 15px;
   color: ${({ theme }) => theme.textColors.secondary};
 `;
 

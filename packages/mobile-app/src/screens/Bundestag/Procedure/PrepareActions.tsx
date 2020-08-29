@@ -28,10 +28,10 @@ import { RootStackParamList } from '../../../routes';
 import { styled } from '../../../styles';
 
 const SegmentWrapper = styled.View`
-  padding-vertical: 14;
-  padding-horizontal: 18;
+  padding-vertical: 14px;
+  padding-horizontal: 18px;
   flex-direction: row;
-  border-bottom-width: 1;
+  border-bottom-width: 1px;
   border-bottom-color: rgba(68, 148, 211, 0.1);
   align-items: center;
 `;
@@ -45,10 +45,10 @@ const VoteWrapper = styled.View`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  max-width: 500;
+  max-width: 500px;
   align-self: center;
-  padding-horizontal: 18;
-  padding-vertical: 11;
+  padding-horizontal: 18px;
+  padding-vertical: 11px;
 `;
 
 const VoteButtonWrapper = styled.View`
@@ -56,19 +56,19 @@ const VoteButtonWrapper = styled.View`
 `;
 
 const VoteButtonLabel = styled.Text`
-  padding-top: 11;
-  font-size: 12;
+  padding-top: 11px;
+  font-size: 12px;
   color: ${({ theme }) => theme.textColors.secondary};
 `;
 
 const Title = styled.Text`
-  font-size: 18;
+  font-size: 18px;
 `;
 
 const TitleAddition = styled.Text`
-  font-size: 18;
+  font-size: 18px;
   color: grey;
-  padding-left: 5;
+  padding-left: 5px;
 `;
 
 const VerificationTouch = styled.TouchableOpacity`
@@ -91,12 +91,12 @@ const LockIconWrapper = styled.View`
   top: -3;
   right: -3;
   background-color: rgba(255, 255, 255, 0.9);
-  width: 30;
-  height: 30;
+  width: 30px;
+  height: 30px;
   align-items: center;
   justify-content: center;
-  border-radius: 14;
-  border-width: 1;
+  border-radius: 14px;
+  border-width: 1px;
   border-style: dashed;
   border-color: rgba(0, 0, 0, 0.3);
 `;

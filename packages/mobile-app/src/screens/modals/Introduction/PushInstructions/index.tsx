@@ -27,15 +27,15 @@ const ScrollView = styled.ScrollView.attrs({
 
 const Headline = styled.Text`
   color: #000;
-  font-size: 22;
+  font-size: 22px;
   margin-vertical: 18;
 `;
 
 const Subtitle = styled.Text`
   color: ${({ theme }) => theme.textColors.secondary};
-  font-size: 15;
-  margin-top: 18;
-  margin-bottom: 18;
+  font-size: 15px;
+  margin-top: 18px;
+  margin-bottom: 18px;
   margin-horizontal: 18;
   text-align: center;
 `;
@@ -44,15 +44,15 @@ const SwitchWrapper = styled.View`
   width: ${DEVICE_WIDTH};
   flex-direction: row;
   justify-content: space-between;
-  padding-horizontal: 18;
-  margin-top: 18;
-  margin-bottom: 18;
+  padding-horizontal: 18px;
+  margin-top: 18px;
+  margin-bottom: 18px;
 `;
 
 const SwitchText = styled.Text`
-  font-size: 17;
+  font-size: 17px;
   flex: 1;
-  padding-right: 18;
+  padding-right: 18px;
 `;
 
 const Highlight = styled.Text`

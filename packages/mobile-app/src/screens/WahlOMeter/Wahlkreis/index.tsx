@@ -17,23 +17,23 @@ import InfoIconComponent from '@democracy-deutschland/mobile-ui/src/components/I
 import { ScreenNavigationProp } from '../../../routes/Sidebar/WahlOMeter/TabView';
 
 const Wrapper = styled.View`
-  padding-top: 18;
+  padding-top: 18px;
 `;
 
 const MemberImageWrapper = styled.TouchableOpacity`
-  width: 200;
-  height: 275;
+  width: 200px;
+  height: 275px;
   align-items: center;
-  padding-bottom: 8;
+  padding-bottom: 8px;
 `;
 
 const MemberImage = styled.Image.attrs({
   resizeMode: 'contain',
 })`
   flex: 1;
-  height: 175;
-  width: 200;
-  border-radius: 100;
+  height: 175px;
+  width: 200px;
+  border-radius: 100px;
   border-width: ${() => (Platform.OS === 'ios' ? 1 : 0)};
   border-color: lightgray;
 `;
@@ -41,7 +41,7 @@ const MemberImage = styled.Image.attrs({
 const Party = styled(PartyComponent)`
   position: absolute;
   right: 0;
-  bottom: 30;
+  bottom: 30px;
 `;
 
 const InfoIconButton = styled.TouchableOpacity``;
@@ -58,7 +58,7 @@ const DeputyDetailsWrapper = styled.View`
   flex-direction: row;
   align-items: center;
   position: relative;
-  left: 20;
+  left: 20px;
 `;
 
 const NameWrapper = styled.View`
@@ -66,7 +66,7 @@ const NameWrapper = styled.View`
 `;
 
 const Text = styled.Text`
-  font-size: 15;
+  font-size: 15px;
 `;
 
 const TextLighGrey = styled(Text)`

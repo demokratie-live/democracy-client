@@ -15,12 +15,12 @@ import { PartyChartData_partyChartProcedures_procedures } from '../../Bundestag/
 import { ScreenNavigationProp } from '../../../routes/Sidebar/WahlOMeter/TabView';
 
 const Wrapper = styled.View`
-  padding-top: 18;
+  padding-top: 18px;
 `;
 
 const ChartWrapper = styled.View`
-  padding-horizontal: 36;
-  padding-top: 18;
+  padding-horizontal: 36px;
+  padding-top: 18px;
   align-self: center;
   width: 100%;
   max-width: ${() =>

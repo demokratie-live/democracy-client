@@ -32,28 +32,28 @@ const ScrollView = styled.ScrollView.attrs({
 
 const Headline = styled.Text`
   color: #000;
-  font-size: 25;
+  font-size: 25px;
   margin-vertical: 18;
 `;
 
 const Subtitle = styled.Text`
   color: #9b9b9b;
-  font-size: 15;
-  margin-top: 18;
-  margin-bottom: 18;
+  font-size: 15px;
+  margin-top: 18px;
+  margin-bottom: 18px;
   text-align: center;
 `;
 
 const SwitchWrapper = styled.SafeAreaView`
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 18;
+  margin-top: 18px;
 `;
 
 const SwitchText = styled.Text`
-  font-size: 17;
+  font-size: 17px;
   flex: 1;
-  padding-right: 18;
+  padding-right: 18px;
 `;
 
 export interface Notification {

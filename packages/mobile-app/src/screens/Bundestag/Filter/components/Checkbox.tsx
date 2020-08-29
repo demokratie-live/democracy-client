@@ -7,12 +7,12 @@ const Wrapper = styled.View<{
   color?: string;
   disabledColor?: string;
 }>`
-  width: 24;
-  height: 24;
-  border-radius: 12;
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
   background-color: ${({ value, color, disabledColor }) =>
     value ? color : disabledColor};
-  border-width: 1;
+  border-width: 1px;
   border-color: rgba(74, 74, 74, 0.2);
 `;
 
@@ -27,10 +27,10 @@ const Checkmark = styled.View.attrs<{
 }))<{ value: boolean | 'mixed'; disabledColor?: string }>`
   align-items: center;
   justify-content: center;
-  height: 24;
-  width: 24;
+  height: 24px;
+  width: 24px;
   padding-bottom: ${() => (Platform.OS === 'ios' ? 1 : 3)};
-  padding-right: 1;
+  padding-right: 1px;
 `;
 
 interface Props {

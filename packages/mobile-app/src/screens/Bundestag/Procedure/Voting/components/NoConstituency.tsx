@@ -20,15 +20,15 @@ const ImageWrapper = styled.View``;
 const PieChartWrapper = styled.View`
   position: absolute;
   right: 18;
-  bottom: 0;
-  width: 100;
+  bottom: 0px;
+  width: 100px;
 `;
 
 const Text = styled.Text`
-  font-size: 13;
+  font-size: 13px;
   color: ${({ theme }) => theme.textColors.secondary};
   text-align: center;
-  padding-horizontal: 18;
+  padding-horizontal: 18px;
 `;
 
 const TextBold = styled.Text`

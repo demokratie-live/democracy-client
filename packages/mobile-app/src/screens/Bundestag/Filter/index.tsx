@@ -22,7 +22,7 @@ const Save = styled.TouchableOpacity`
 
 const SaveText = styled.Text`
   color: #fff;
-  font-size: 16;
+  font-size: 16px;
   font-weight: 500;
 `;
 
@@ -31,7 +31,7 @@ const Container = styled.View`
 `;
 
 const ListRowMain = styled.View`
-  padding-top: 4;
+  padding-top: 4px;
   justify-content: center;
 `;
 
@@ -47,12 +47,12 @@ const Row = styled.TouchableOpacity`
 `;
 
 const TitleMain = styled.Text`
-  font-size: 17;
+  font-size: 17px;
 `;
 
 const TitleSub = styled.Text`
   flex: 0.98;
-  font-size: 15;
+  font-size: 15px;
 `;
 
 type FilterScreenNavigationProp = StackNavigationProp<
