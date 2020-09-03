@@ -9,7 +9,7 @@ export interface ChainEntry {
   constituency: string | null;
 }
 
-interface ChainEntryRaw {
+export interface ChainEntryRaw {
   i: string;
   s: null | 1 | 2 | 3;
   t: string;
@@ -18,7 +18,7 @@ interface ChainEntryRaw {
 
 type ChainOldEntryValueRaw = null | 0 | 1 | 2 | 3;
 
-interface Chain {
+export interface Chain {
   v: number;
   d: ChainEntryRaw[];
   i?: any;
@@ -148,6 +148,20 @@ class VotesLocal {
       JSON.stringify(data),
       { service: VotesLocal.KEYCHAIN_INDEX_SERVICE },
     );
+  };
+
+  static mergeKeychains = async (newChain: Chain): Promise<Chain> => {
+    const currentKeychain = await VotesLocal.readKeychain();
+    // remove votes which are already voted in old chain (new phone)
+    const cleandNewChain = newChain.d.filter(
+      ({ i }) => !currentKeychain.d.some(({ i: ci }) => ci === i),
+    );
+    const mergedChain = {
+      ...currentKeychain,
+      d: [...cleandNewChain, ...currentKeychain.d],
+    };
+    await VotesLocal.writeKeychain(mergedChain);
+    return mergedChain;
   };
 
   // Get Version of given chain

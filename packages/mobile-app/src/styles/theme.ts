@@ -17,6 +17,7 @@ export interface ThemeInterface {
     secondary: string;
     tertiary: string;
     inverted: string;
+    warn: string;
   };
   distances: {
     main: number;
@@ -36,6 +37,7 @@ const myTheme: ThemeInterface = {
     secondary: '#9B9B9B',
     tertiary: '#555',
     inverted: 'orange',
+    warn: 'red',
   },
   colors: {
     main: 'blue',
