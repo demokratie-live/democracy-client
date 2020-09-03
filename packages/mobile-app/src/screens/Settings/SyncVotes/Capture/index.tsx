@@ -15,6 +15,7 @@ const Container = styled.View`
 
 const DescriptionContainer = styled.View`
   margin-bottom: 18px;
+  margin-horizontal: 18px;
 `;
 
 const Bar = styled(BarCmp)`
@@ -110,7 +111,7 @@ const CaptureSyncVotes: React.FC<Props> = ({ navigation }) => {
 
   useEffect(() => {
     if (syncComplete) {
-      Alert.alert('Fertig', 'Synchronisation abgeschlossen 🥳', [
+      Alert.alert('Fertig', 'Übertragung abgeschlossen 🥳', [
         { text: 'OK', onPress: () => navigation.goBack() },
       ]);
     }
@@ -121,7 +122,7 @@ const CaptureSyncVotes: React.FC<Props> = ({ navigation }) => {
       {
         <>
           <Text>
-            Scanne den QR-Code auf Deinem alten Gerät, bis die Synchronisation
+            Scanne den QR-Code auf Deinem alten Gerät, bis die Übertragung
             abgeschlossen ist
           </Text>
           <Camera captureAudio={false} onBarCodeRead={handleBarcode} />
@@ -140,7 +141,7 @@ const CaptureSyncVotes: React.FC<Props> = ({ navigation }) => {
       }
       <DescriptionContainer>
         <TextRed>
-          Die Synchronisation erfolgt einmalig und kann nicht rückgängig gemacht
+          Die Übertragung erfolgt einmalig und kann nicht rückgängig gemacht
           werden
         </TextRed>
       </DescriptionContainer>

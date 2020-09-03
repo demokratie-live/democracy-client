@@ -6,21 +6,30 @@ import { styled } from '../../../styles';
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
 import { useNavigation } from '@react-navigation/core';
 
-const Container = styled.View`
-  align-items: center;
-  padding-horizontal: 18px;
+const Container = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    alignItems: 'center',
+    marginHorizontal: 18,
+    marginVertical: 18,
+  },
+})``;
+
+const QrContainer = styled.View`
+  margin-top: 11px;
+  margin-bottom: 11px;
 `;
 
 const Text = styled.Text`
-  padding-top: 11px;
-  padding-bottom: 11px;
+  margin-top: 11px;
+  margin-bottom: 11px;
   text-align: center;
   color: ${({ theme }) => theme.textColors.tertiary};
 `;
 
 const ListContainer = styled.View`
   flex-direction: row;
-  width: 100%;
+  align-self: flex-start;
+  padding-right: 18px;
 `;
 
 const ListText = styled.Text`
@@ -113,11 +122,11 @@ const SyncVotes = () => {
 
   return (
     <Container>
-      <Text>
-        So synchronisiert Du Deine lokalen Stimmen mit einem neuen Gerät:
-      </Text>
+      <Text>So überträgst Du Deine lokalen Stimmen auf dein neues Gerät:</Text>
       {!!localVotes && !!localVotes[iterator] && (
-        <QRCode size={qrSize} value={JSON.stringify(localVotes[iterator])} />
+        <QrContainer>
+          <QRCode size={qrSize} value={JSON.stringify(localVotes[iterator])} />
+        </QrContainer>
       )}
       <ListElement label="1." text="Öffne DEMOCRACY auf deinem neuen Gerät" />
       <ListElement
@@ -126,10 +135,10 @@ const SyncVotes = () => {
       />
       <ListElement
         label="3."
-        text="Tippe auf dem neuen Gerät den Button Stimmen synchronisieren und richte es auf diesen Bildschirm, um den QR-Code zu scannen"
+        text="Tippe auf dem neuen Gerät den Button Stimmen empfangen und richte es auf diesen Bildschirm, um den QR-Code zu scannen"
       />
       <Button
-        text="Stimmen übertragen"
+        text="Stimmen empfangen"
         textColor="white"
         backgroundColor="blue"
         style={{ width: '100%' }}

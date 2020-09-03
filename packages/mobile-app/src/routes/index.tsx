@@ -239,7 +239,7 @@ const Navigation = () => {
             name="SyncVotesCapture"
             component={CaptureSyncVotes}
             options={{
-              headerTitle: 'Stimmen empfangeen',
+              headerTitle: 'Stimmen empfangen',
             }}
           />
         </RootStack.Navigator>
