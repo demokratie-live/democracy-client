@@ -9,8 +9,8 @@ import { useNavigation } from '@react-navigation/core';
 const Container = styled.ScrollView.attrs({
   contentContainerStyle: {
     alignItems: 'center',
-    marginHorizontal: 18,
-    marginVertical: 18,
+    paddingHorizontal: 18,
+    paddingVertical: 18,
   },
 })``;
 
