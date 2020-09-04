@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 // eslint-disable-next-line import/namespace
 import { RNCamera, BarCodeReadEvent } from 'react-native-camera';
 import { Bar as BarCmp } from 'react-native-progress';
@@ -8,6 +8,7 @@ import VotesLocal, { Chain } from '../../../../lib/VotesLocal';
 import { Alert, ActivityIndicator } from 'react-native';
 import { RootStackParamList } from '../../../../routes';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { LocalVotesContext } from '../../../../context/LocalVotes';
 
 const Container = styled.View`
   flex: 1;
@@ -64,6 +65,7 @@ const CaptureSyncVotes: React.FC<Props> = ({ navigation }) => {
   const [allCaptured, setAllCaptured] = useState<boolean>(false);
   const [syncComplete, setSyncComplete] = useState<boolean>(false);
   const [identifier, setIdentifier] = useState<string>();
+  const { updateLocalVotesStore } = useContext(LocalVotesContext);
   const handleBarcode = (event: BarCodeReadEvent) => {
     try {
       const qrData: SyncObj = JSON.parse(event.data);
@@ -105,9 +107,11 @@ const CaptureSyncVotes: React.FC<Props> = ({ navigation }) => {
           d: [],
         },
       );
-      VotesLocal.mergeKeychains(votesData).then(() => setSyncComplete(true));
+      VotesLocal.mergeKeychains(votesData)
+        .then(updateLocalVotesStore)
+        .then(() => setSyncComplete(true));
     }
-  }, [allCaptured, data]);
+  }, [allCaptured, data, updateLocalVotesStore]);
 
   useEffect(() => {
     if (syncComplete) {
