@@ -70,6 +70,10 @@ export const Settings: React.FC<Props> = () => {
         saveState();
         navigation.navigate('VerificationStart');
         break;
+      case 'SyncVotes':
+        saveState();
+        navigation.navigate('SyncVotes');
+        break;
 
       default:
         break;
@@ -122,6 +126,11 @@ export const Settings: React.FC<Props> = () => {
           title: 'Wahlkreis',
           text: `WK ${constituency}`,
           onPress: navigateTo('constituency'),
+          arrow: true,
+        },
+        {
+          title: 'Stimmen übertragen',
+          onPress: navigateTo('SyncVotes'),
           arrow: true,
         },
       ],

@@ -150,6 +150,9 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         multiDexEnabled true
 
+        // react-native-camera
+        missingDimensionStrategy 'react-native-camera', 'general'
+
         // react-native-notifications
         missingDimensionStrategy "RNNotifications.reactNativeVersion", "reactNative60" // See note below!
         
@@ -287,3 +290,5 @@ task copyDownloadableDepsToLibs(type: Copy) {
 
 apply from: file("../../../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); 
 applyNativeModulesAppBuildGradle(project)
+
+com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true
