@@ -11,6 +11,7 @@ interface LocalVotesInterface {
   getLocalVoteSelection: (
     procedureId: string,
   ) => ChainEntry['selection'] | undefined;
+  updateLocalVotesStore: () => Promise<void>;
 }
 
 const defaults: LocalVotesInterface = {
@@ -21,6 +22,11 @@ const defaults: LocalVotesInterface = {
   getLocalVoteSelection: () => {
     throw new Error(
       'LocalVotesContext: getLocalVoteSelection function is not defined',
+    );
+  },
+  updateLocalVotesStore: () => {
+    throw new Error(
+      'LocalVotesContext: updateLocalVotesStore function is not defined',
     );
   },
 };
@@ -60,12 +66,19 @@ export const LocalVotesProvider: FC = ({ children }) => {
     return;
   };
 
+  const updateLocalVotesStore = () => {
+    return VotesLocal.getVotes().then(votes => {
+      setLocalVotes(votes);
+    });
+  };
+
   return (
     <LocalVotesContext.Provider
       value={{
         localVotes,
         setLocalVote,
         getLocalVoteSelection,
+        updateLocalVotesStore,
       }}>
       {children}
     </LocalVotesContext.Provider>
