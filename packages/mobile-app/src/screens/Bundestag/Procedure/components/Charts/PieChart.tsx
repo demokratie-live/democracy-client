@@ -41,8 +41,9 @@ export const PieChart: React.FC<Props> = ({
   };
 
   const getCoordinatesForPercent = (percent: number) => {
-    const x = Math.cos(2 * Math.PI * percent) * 100;
-    const y = Math.sin(2 * Math.PI * percent) * 100;
+    const percentageEnshured = percent ? percent : 0;
+    const x = Math.cos(2 * Math.PI * percentageEnshured) * 100;
+    const y = Math.sin(2 * Math.PI * percentageEnshured) * 100;
     return [x, y];
   };
 
