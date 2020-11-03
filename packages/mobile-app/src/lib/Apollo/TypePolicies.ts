@@ -39,7 +39,7 @@ export const typePolicies: TypedTypePolicies = {
             if (!existingPartyVote) {
               return partyVote;
             }
-            return mergeObjects(existingPartyVote, partyVote);
+            return mergeObjects(existingPartyVote as any, partyVote);
           });
         },
       },
