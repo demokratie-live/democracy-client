@@ -166,7 +166,9 @@ export const WomPartyChart: React.FC = () => {
   };
 
   const preparedData = partyChartData();
-
+  if (!preparedData[selectedPartyIndex]) {
+    return null;
+  }
   if (!womParty) {
     setWomParty(preparedData[selectedPartyIndex].party);
   }

@@ -9,10 +9,19 @@ import { VoteSelection } from "./../../../../../../../__generated__/globalTypes"
 // GraphQL query operation: DeputyProcedures
 // ====================================================
 
+export interface DeputyProcedures_deputyProcedures_procedures_procedure_voteResults_partyVotes_deviants {
+  __typename: "Deviants";
+  yes: number;
+  no: number;
+  abstination: number;
+  notVoted: number | null;
+}
+
 export interface DeputyProcedures_deputyProcedures_procedures_procedure_voteResults_partyVotes {
   __typename: "PartyVote";
   party: string;
   main: VoteSelection;
+  deviants: DeputyProcedures_deputyProcedures_procedures_procedure_voteResults_partyVotes_deviants;
 }
 
 export interface DeputyProcedures_deputyProcedures_procedures_procedure_voteResults {
@@ -39,12 +48,11 @@ export interface DeputyProcedures_deputyProcedures_procedures_procedure {
   procedureId: string;
   sessionTOPHeading: string | null;
   title: string;
-  tags: string[];
+  subjectGroups: string[];
   voteDate: any | null;
   votedGovernment: boolean | null;
   submissionDate: any | null;
   completed: boolean | null;
-  subjectGroups: string[];
   voted: boolean;
   type: string;
   voteResults: DeputyProcedures_deputyProcedures_procedures_procedure_voteResults | null;
