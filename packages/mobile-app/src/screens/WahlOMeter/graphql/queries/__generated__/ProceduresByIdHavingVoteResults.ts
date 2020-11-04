@@ -9,10 +9,19 @@ import { VoteSelection } from "./../../../../../../__generated__/globalTypes";
 // GraphQL query operation: ProceduresByIdHavingVoteResults
 // ====================================================
 
+export interface ProceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults3_procedures_voteResults_partyVotes_deviants {
+  __typename: "Deviants";
+  yes: number;
+  no: number;
+  abstination: number;
+  notVoted: number | null;
+}
+
 export interface ProceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults3_procedures_voteResults_partyVotes {
   __typename: "PartyVote";
   party: string;
   main: VoteSelection;
+  deviants: ProceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults3_procedures_voteResults_partyVotes_deviants;
 }
 
 export interface ProceduresByIdHavingVoteResults_proceduresByIdHavingVoteResults3_procedures_voteResults {

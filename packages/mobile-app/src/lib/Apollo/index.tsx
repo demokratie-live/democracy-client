@@ -16,6 +16,7 @@ import {
   ApolloProvider,
   HttpLink,
 } from '@apollo/client';
+import { typePolicies } from './TypePolicies';
 // import { relayStylePagination } from '@apollo/client/utilities';
 
 const cache = new InMemoryCache({
@@ -27,6 +28,7 @@ const cache = new InMemoryCache({
         return o._id;
     }
   },
+  typePolicies,
 });
 
 let graphQlUri = GRAPHQL_URL;
