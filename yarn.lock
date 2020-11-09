@@ -18287,10 +18287,10 @@ react-native-modal@^11.0.2:
     prop-types "^15.6.2"
     react-native-animatable "1.3.3"
 
-react-native-notifications@^3.1.2:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/react-native-notifications/-/react-native-notifications-3.4.0.tgz#edadbeba7de23a4495c8b38b4afc6d3bc8015aec"
-  integrity sha512-6eDwwfuw8jdHVUOd+gEbbvM4rlLGwNhPR0N80k+3Vd/ywAZhR915H9oRveq8yUS+28jCJvzGiDwaT2Dt9pvzcw==
+react-native-notifications@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/react-native-notifications/-/react-native-notifications-3.2.2.tgz#d215992b5593ed0afb81276fed8b711cf4db9617"
+  integrity sha512-MZt3Y9vTDQpPWAHOGCgehKn/RwZzJTk2WfKiLV01GU8Rp5I8u68Djum9ogxK9nXkRznkbyifSb+54UPGzqa9DA==
 
 react-native-pdf@~6.0.1:
   version "6.0.1"
