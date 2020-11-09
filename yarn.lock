@@ -3,9 +3,9 @@
 
 
 "@apollo/client@^3.3.0-beta.17":
-  version "3.3.0-beta.17"
-  resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.3.0-beta.17.tgz#d6e601ed379a80965b0370f7e77ad43bcf241930"
-  integrity sha512-Xwkefgn7aX2LO6tZtxkaTQrkEYdYKThvfJghycHAJnIR0yGQevmod86V0ewUpZv1XzGlgMaWZypxSNqHwpJ+EQ==
+  version "3.3.0-rc.0"
+  resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.3.0-rc.0.tgz#f6fcb27e41bb750f77625b752e2db73e5f14d41b"
+  integrity sha512-YjyGGZcfzmQki3PoH8Od5ggQQUMpMDLh2u1L28kFCbGpZ9B2TC8PgRCnqyYWOrz0mk17L4bhirNRVG879jM3tQ==
   dependencies:
     "@graphql-typed-document-node/core" "^3.0.0"
     "@types/zen-observable" "^0.8.0"
