@@ -212,7 +212,7 @@
       },
       "android.emu.internal.release": {
         "binaryPath": "android/app/build/outputs/apk/internal/release/app-internal-release.apk",
-        "build": "cd android && ./gradlew assembleInternalRelease assembleAndroidTest -DtestBuildType=release && cd ..",
+        "build": "cd android && ./gradlew assembleInternalRelease assembleAndroidTest -DtestBuildType=release --stacktrace --warning-mode=all && cd ..",
         "type": "android.emulator",
         "name": "emu"
       }
