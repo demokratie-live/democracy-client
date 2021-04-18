@@ -9,7 +9,7 @@ const Centered = styled.View`
   background-color: #f5fcff;
 `;
 
-const CenterView: DecoratorFunction<{}> = storyFn => {
+const CenterView: DecoratorFunction<React.ReactNode> = storyFn => {
   return <Centered>{storyFn()}</Centered>;
 };
 

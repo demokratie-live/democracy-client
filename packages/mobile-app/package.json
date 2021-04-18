@@ -14,7 +14,8 @@
     "test": "jest -c jest.config.js --coverage",
     "test:watch": "yarn test --watch",
     "e2e:ios-debug": "detox build -c ios.sim.debug && detox test -c ios.sim.debug",
-    "e2e:android-debug": "detox build -c android.emu.internal.debug && detox test -c android.emu.internal.debug",
+    "e2e:android:build": "detox build -c android.emu.internal.debug",
+    "e2e:android:debug": "detox test -c android.emu.internal.debug",
     "apollo:codegen": "apollo client:codegen --excludes=node_modules/* --excludes=**/*/donationStatus.ts --target typescript --globalTypesFile=./__generated__/globalTypes.ts",
     "apollo:generate": "graphql-codegen",
     "coverage": "yarn run test --coverage",
@@ -105,6 +106,7 @@
     "@types/react-test-renderer": "^16.9.2",
     "@types/speakingurl": "^13.0.2",
     "@types/styled-components": "^5.1.1",
+    "@types/styled-components-react-native": "^5.1.1",
     "@typescript-eslint/eslint-plugin": "^2.19.2",
     "@typescript-eslint/parser": "^2.19.2",
     "apollo": "^2.30.1",
@@ -199,7 +201,7 @@
         "build": "cd android && ./gradlew assembleInternal assembleAndroidTest -DtestBuildType=debug --warning-mode=all && cd ..",
         "type": "android.emulator",
         "device": {
-          "avdName": "Pixel_3a_API_29"
+          "avdName": "emu"
         }
       },
       "android.emu.internal.debug": {
@@ -210,7 +212,7 @@
       },
       "android.emu.internal.release": {
         "binaryPath": "android/app/build/outputs/apk/internal/release/app-internal-release.apk",
-        "build": "cd android && ./gradlew assembleInternalRelease assembleAndroidTest -DtestBuildType=release && cd ..",
+        "build": "cd android && ./gradlew assembleInternalRelease assembleAndroidTest -DtestBuildType=release --stacktrace --warning-mode=all && cd ..",
         "type": "android.emulator",
         "name": "emu"
       }
