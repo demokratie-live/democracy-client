@@ -14,7 +14,8 @@
     "test": "jest -c jest.config.js --coverage",
     "test:watch": "yarn test --watch",
     "e2e:ios-debug": "detox build -c ios.sim.debug && detox test -c ios.sim.debug",
-    "e2e:android-debug": "detox build -c android.emu.internal.debug && detox test -c android.emu.internal.debug",
+    "e2e:android:build": "detox build -c android.emu.internal.debug",
+    "e2e:android:debug": "detox test -c android.emu.internal.debug",
     "apollo:codegen": "apollo client:codegen --excludes=node_modules/* --excludes=**/*/donationStatus.ts --target typescript --globalTypesFile=./__generated__/globalTypes.ts",
     "apollo:generate": "graphql-codegen",
     "coverage": "yarn run test --coverage",
@@ -200,7 +201,7 @@
         "build": "cd android && ./gradlew assembleInternal assembleAndroidTest -DtestBuildType=debug --warning-mode=all && cd ..",
         "type": "android.emulator",
         "device": {
-          "avdName": "Pixel_3a_API_29"
+          "avdName": "emu"
         }
       },
       "android.emu.internal.debug": {
