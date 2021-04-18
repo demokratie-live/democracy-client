@@ -125,7 +125,7 @@ jobs:
       - name: Prepare minSdkVerson for Wix DETOX
         run: yarn postinstall:android-e2e-fix
 
-      - uses: malinskiy/action-android/install-sdk@release/0.0.5
+      - uses: malinskiy/action-android/install-sdk@release/0.1.1
       - run: adb devices
       - run: echo $ANDROID_HOME
       - run: ls -l ~/.android
