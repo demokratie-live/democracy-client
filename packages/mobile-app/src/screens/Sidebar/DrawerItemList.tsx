@@ -5,6 +5,7 @@ import { CommonActions } from '@react-navigation/core';
 import {
   DrawerActions,
   DrawerNavigationState,
+  ParamListBase,
 } from '@react-navigation/routers';
 import { DrawerContentOptions, DrawerItem } from '@react-navigation/drawer';
 import { View } from 'react-native';
@@ -19,7 +20,7 @@ const Space = styled.View`
 `;
 
 type Props = Omit<DrawerContentOptions, 'contentContainerStyle' | 'style'> & {
-  state: DrawerNavigationState;
+  state: DrawerNavigationState<ParamListBase>;
   navigation: DrawerNavigationHelpers;
   descriptors: DrawerDescriptorMap;
 };
