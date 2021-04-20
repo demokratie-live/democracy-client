@@ -206,7 +206,7 @@ jobs:
 
       - uses: actions/setup-ruby@v1
         with:
-          ruby-version: "2.7.2"
+          ruby-version: "2.x"
 
       - name: Fastlane
         uses: maierj/fastlane-action@v2.0.1
