@@ -170,7 +170,7 @@ jobs:
 
   build-ios:
     name: Build ios
-    needs: [lint, test-ios, test-android]
+    # needs: [lint, test-ios, test-android]
     if: github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta' || github.ref == 'refs/heads/master'
     runs-on: macos-latest
     env:
