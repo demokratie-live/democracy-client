@@ -58,6 +58,4 @@ const myTheme: ThemeInterface = {
 
 type TheTheme = ThemeInterface & DefaultTheme;
 
-const theme: TheTheme = { ...myTheme, ...lightTheme };
-
-export { theme };
+export const theme: TheTheme = { ...myTheme, ...lightTheme };
