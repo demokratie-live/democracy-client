@@ -22,6 +22,7 @@ export interface DeputyChartData_chartData_procedures {
 
 export interface DeputyChartData_chartData {
   __typename: "Deputy";
+  _id: string;
   totalProcedures: number | null;
   party: string | null;
   imgURL: string;

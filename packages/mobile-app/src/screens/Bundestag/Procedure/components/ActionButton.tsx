@@ -108,7 +108,7 @@ const ActionButton: React.FC<Props> = ({
         <Text
           style={{
             fontSize: 60,
-            color: theme.colors.headerText,
+            color: theme.oldColors.headerText,
             fontWeight: '200',
           }}>
           ?

@@ -36,6 +36,7 @@ export interface GetDeputyProfile_deputiesOfConstituency_contact {
 
 export interface GetDeputyProfile_deputiesOfConstituency {
   __typename: "Deputy";
+  _id: string;
   name: string;
   imgURL: string;
   party: string | null;

@@ -35,7 +35,7 @@ const TabViewNavigation: React.FC<Props> = () => {
           backgroundColor: '#fff',
         },
         activeTintColor: 'rgb(255,255,255)',
-        inactiveTintColor: theme.colors.headerTextSecondary,
+        inactiveTintColor: theme.oldColors.headerTextSecondary,
         style: {
           backgroundColor: '#4494D3',
         },

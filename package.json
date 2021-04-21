@@ -26,10 +26,11 @@
     "docz:build": "docz build",
     "postinstall:android-fix": "replace-in-file \"node ./node_modules/react-native/cli.js config\" \"node ../../node_modules/react-native/cli.js config\" node_modules/@react-native-community/cli-platform-android/native_modules.gradle",
     "postinstall:android-e2e-fix": "replace-in-file \"minSdkVersion = 16\" \"minSdkVersion = 21\" packages/mobile-app/android/build.gradle packages/mobile-ui/android/build.gradle",
+    "postinstall:ios-asset-display": "sed -ie \"s/_currentFrame.CGImage;/_currentFrame.CGImage ;} else { [super displayLayer:layer];/\" node_modules/react-native/Libraries/Image/RCTUIImageViewAnimated.m",
     "postinstall:patch-package": "patch-package",
     "postinstall:app": "yarn workspace app postinstall",
     "pods": "yarn workspace app pods && yarn workspace @democracy-deutschland/mobile-ui pods",
-    "postinstall": "yarn postinstall:android-fix && yarn postinstall:patch-package && yarn postinstall:app"
+    "postinstall": "yarn postinstall:android-fix && yarn postinstall:patch-package && yarn postinstall:app && yarn postinstall:ios-asset-display"
   },
   "dependencies": {
     "react-native": "0.61.5"

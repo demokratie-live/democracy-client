@@ -64,11 +64,13 @@ const SwiperStyled = styled(Swiper).attrs({
 interface Props {
   voteResults: Procedure_procedure_communityVotes;
   voted: boolean;
+  countryMap: React.ReactElement;
 }
 
 export const CommunityVoteResults: React.FC<Props> = ({
   voteResults,
   voted,
+  countryMap,
 }) => {
   const { constituency: myConstituency } = useContext(ConstituencyContext);
   const { isVerified } = useContext(InitialStateContext);
@@ -146,7 +148,7 @@ export const CommunityVoteResults: React.FC<Props> = ({
     return null;
   }
 
-  const screens = [renderCommuntiyResult(voteResults)];
+  const screens = [renderCommuntiyResult(voteResults), countryMap];
   if (myConstituency && voteResults.constituencies[0]) {
     screens.push(renderCommuntiyResult(voteResults.constituencies[0]));
   }
