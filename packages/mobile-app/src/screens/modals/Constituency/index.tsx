@@ -13,12 +13,12 @@ import { RootStackParamList } from '../../../routes';
 
 const Wrapper = styled.View`
   flex: 1;
-  background-color: ${({ theme }) => theme.colors.background.main};
+  background-color: ${({ theme }) => theme.oldColors.background.main};
 `;
 
 const SearchBox = styled.View`
   height: 44;
-  background-color: ${({ theme }) => theme.colors.background.header};
+  background-color: ${({ theme }) => theme.oldColors.background.header};
 `;
 
 const SearchInputWrapper = styled.View`

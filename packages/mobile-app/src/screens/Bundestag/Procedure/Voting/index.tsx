@@ -81,7 +81,7 @@ const BalloutBoxWrapper = styled.View`
 `;
 
 const Description = styled.Text`
-  color: ${({ theme }) => theme.colors.description};
+  color: ${({ theme }) => theme.oldColors.description};
   padding-horizontal: 18;
   margin-bottom: 18;
 `;

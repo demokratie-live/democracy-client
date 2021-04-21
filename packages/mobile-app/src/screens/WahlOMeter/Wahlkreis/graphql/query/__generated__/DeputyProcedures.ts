@@ -67,6 +67,7 @@ export interface DeputyProcedures_deputyProcedures_procedures {
 
 export interface DeputyProcedures_deputyProcedures {
   __typename: "Deputy";
+  _id: string;
   totalProcedures: number | null;
   procedures: DeputyProcedures_deputyProcedures_procedures[];
 }

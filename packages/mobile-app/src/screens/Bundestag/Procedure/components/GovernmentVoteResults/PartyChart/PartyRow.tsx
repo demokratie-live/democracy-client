@@ -73,7 +73,7 @@ const PartyRow: React.FC<Props> = ({
         })}
         {showPercentage && (
           <Text
-            fill={theme.colors.tansparentSecondary}
+            fill={theme.oldColors.tansparentSecondary}
             fontSize="12"
             x={
               rowValues[rowValues.length - 1].value > 18

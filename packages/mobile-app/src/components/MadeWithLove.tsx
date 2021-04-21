@@ -14,7 +14,7 @@ const Text = styled.Text`
 `;
 
 const LinkColorText = styled.Text`
-  color: ${({ theme }) => theme.colors.background.header};
+  color: ${({ theme }) => theme.oldColors.background.header};
 `;
 
 export const MadeWithLove: React.FC = () => (

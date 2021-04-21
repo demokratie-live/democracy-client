@@ -15,7 +15,7 @@ import { styled } from '../../styles';
 import { NavigationContext } from '../../context/Navigation';
 
 const Wrapper = styled.View`
-  background-color: ${({ theme }) => theme.colors.background.secondary};
+  background-color: ${({ theme }) => theme.oldColors.background.secondary};
   flex: 1;
 `;
 

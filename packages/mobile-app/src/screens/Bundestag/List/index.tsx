@@ -38,7 +38,7 @@ export interface SegmentedData {
 
 const Container = styled.View`
   flex: 1;
-  background-color: ${({ theme }) => theme.colors.background.main};
+  background-color: ${({ theme }) => theme.oldColors.background.main};
 `;
 
 export const List = () => {

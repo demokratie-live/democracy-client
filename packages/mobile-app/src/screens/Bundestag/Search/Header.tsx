@@ -12,7 +12,7 @@ import { Platform } from 'react-native';
 import { styled } from '../../../styles';
 
 const Wrapper = styled.View`
-  background-color: ${({ theme }) => theme.colors.background.header};
+  background-color: ${({ theme }) => theme.oldColors.background.header};
 `;
 
 interface Props {

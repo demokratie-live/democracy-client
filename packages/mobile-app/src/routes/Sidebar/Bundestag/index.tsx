@@ -51,7 +51,7 @@ const BundestagRootNavigation = () => {
       <BundestagRootStack.Navigator
         screenOptions={{
           headerStyle: {
-            backgroundColor: theme.colors.background.header,
+            backgroundColor: theme.oldColors.background.header,
             elevation: 0,
             shadowOpacity: 0,
           },

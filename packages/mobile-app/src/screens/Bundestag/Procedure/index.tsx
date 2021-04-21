@@ -40,6 +40,7 @@ import {
 import { TOGGLE_NOTIFICATION } from './graphql/muatation/toggleNotification';
 import { NotificationsContext } from '../../../context/NotificationPermission';
 import { RootStackParamList } from '../../../routes';
+import { CountryMap } from './components/CountryMap';
 
 const Container = styled.ScrollView.attrs({
   scrollIndicatorInsets: { right: 1 }, // TODO do cleanfix when there is a correct solution (already closed but not solved without workaround) https://github.com/facebook/react-native/issues/26610
@@ -294,7 +295,11 @@ export const Procedure: FC<Props> = ({ route, navigation }) => {
 
       {communityVotes &&
         ((voteEnd && new Date(voteEnd) < new Date()) || voted) && (
-          <CommunityVoteResults voteResults={communityVotes} voted={voted} />
+          <CommunityVoteResults
+            countryMap={<CountryMap {...{ procedureId }} />}
+            voteResults={communityVotes}
+            voted={voted}
+          />
         )}
       {voteResults && (
         <GovernmentVoteResults

@@ -138,7 +138,7 @@ const CaptureSyncVotes: React.FC<Props> = ({ navigation }) => {
           />
           {data.length > 0 && (
             <SpinnerContainer>
-              <Spinner size="large" color={appTheme.colors.headerText} />
+              <Spinner size="large" color={appTheme.oldColors.headerText} />
             </SpinnerContainer>
           )}
         </>

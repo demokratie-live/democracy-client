@@ -1,5 +1,7 @@
+import { lightTheme, DefaultTheme } from '@democracy-deutschland/ui';
+
 export interface ThemeInterface {
-  colors: {
+  oldColors: {
     main: string;
     secondary: string;
     headerText: string;
@@ -39,7 +41,7 @@ const myTheme: ThemeInterface = {
     inverted: 'orange',
     warn: 'red',
   },
-  colors: {
+  oldColors: {
     main: 'blue',
     secondary: 'red',
     headerText: '#fff',
@@ -54,6 +56,8 @@ const myTheme: ThemeInterface = {
   },
 };
 
-const theme: ThemeInterface = myTheme;
+type TheTheme = ThemeInterface & DefaultTheme;
+
+const theme: TheTheme = { ...myTheme, ...lightTheme };
 
 export { theme };
