@@ -1,4 +1,4 @@
-import { lightTheme, darkTheme, DefaultTheme } from '@democracy-deutschland/ui';
+import { lightTheme, DefaultTheme } from '@democracy-deutschland/ui';
 
 export interface ThemeInterface {
   oldColors: {
