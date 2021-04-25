@@ -22,8 +22,6 @@
     "ui:release:ios": "yarn workspace @democracy-deutschland/mobile-ui release:ios",
     "ui:release:android": "yarn workspace @democracy-deutschland/mobile-ui release:android",
     "lint": "yarn workspace @democracy-deutschland/mobile-ui lint && yarn workspace app lint",
-    "docz": "docz dev",
-    "docz:build": "docz build",
     "postinstall:android-fix": "replace-in-file \"node ./node_modules/react-native/cli.js config\" \"node ../../node_modules/react-native/cli.js config\" node_modules/@react-native-community/cli-platform-android/native_modules.gradle",
     "postinstall:android-e2e-fix": "replace-in-file \"minSdkVersion = 16\" \"minSdkVersion = 21\" packages/mobile-app/android/build.gradle packages/mobile-ui/android/build.gradle",
     "postinstall:ios-asset-display": "sed -ie \"s/_currentFrame.CGImage;/_currentFrame.CGImage ;} else { [super displayLayer:layer];/\" node_modules/react-native/Libraries/Image/RCTUIImageViewAnimated.m",
@@ -36,7 +34,6 @@
     "react-native": "0.61.5"
   },
   "devDependencies": {
-    "docz": "2.0.0-rc.67",
     "husky": "^3.1.0",
     "lint-staged": "^9.5.0",
     "patch-package": "^6.2.2",
