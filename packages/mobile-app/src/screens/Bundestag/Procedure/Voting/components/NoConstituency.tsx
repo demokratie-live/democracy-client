@@ -11,7 +11,7 @@ import { styled } from '../../../../../styles';
 const Wrapper = styled.View<Pick<Props, 'noButton'>>`
   align-items: center;
   /* justify-content: space-around; */
-  min-height: ${({ noButton }) => (noButton ? 200 : 300)};
+  min-height: ${({ noButton }) => (noButton ? 200 : 300)}px;
   /* flex: 1; */
 `;
 
@@ -19,16 +19,16 @@ const ImageWrapper = styled.View``;
 
 const PieChartWrapper = styled.View`
   position: absolute;
-  right: 18;
-  bottom: 0;
-  width: 100;
+  right: 18px;
+  bottom: 0px;
+  width: 100px;
 `;
 
 const Text = styled.Text`
-  font-size: 13;
+  font-size: 13px;
   color: ${({ theme }) => theme.textColors.secondary};
   text-align: center;
-  padding-horizontal: 18;
+  padding-horizontal: 18px;
 `;
 
 const TextBold = styled.Text`

@@ -24,14 +24,14 @@ const Container = styled.ScrollView.attrs(() => ({
       return 36;
     }
     return Platform.OS === 'ios' ? 24 : 8;
-  }};
-  padding-horizontal: 18;
+  }}px;
+  padding-horizontal: 18px;
 `;
 
 const TextHead = styled.Text`
   color: #000;
-  font-size: 22;
-  padding-top: 25;
+  font-size: 22px;
+  padding-top: 25px;
   text-align: center;
   font-family: ${Platform.OS === 'ios'
     ? 'HelveticaNeue-Light'
@@ -49,21 +49,21 @@ const TextCenter = styled.Text`
   justify-content: space-between;
   flex: 1;
   color: ${({ theme }) => theme.textColors.secondary};
-  font-size: 17;
-  padding-top: 50;
+  font-size: 17px;
+  padding-top: 50px;
   font-family: ${Platform.OS === 'ios'
     ? 'HelveticaNeue-Light'
     : 'sans-serif-light'};
   text-align: center;
-  padding-bottom: 18;
+  padding-bottom: 18px;
 `;
 
 const ButtonContainer = styled.View`
   flex: 1;
   width: 100%;
-  padding-right: 25;
-  padding-left: 25;
-  padding-bottom: 25;
+  padding-right: 25px;
+  padding-left: 25px;
+  padding-bottom: 25px;
 `;
 
 export const SmsDonate: React.FC = () => {

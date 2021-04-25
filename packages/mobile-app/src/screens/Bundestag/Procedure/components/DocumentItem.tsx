@@ -19,17 +19,17 @@ const Container = styled.View`
 const ViewerButton = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
-  padding-top: 18;
+  padding-top: 18px;
 `;
 
 const Text = styled.Text`
-  padding-left: 14;
-  font-size: 13;
+  padding-left: 14px;
+  font-size: 13px;
   color: rgb(0, 118, 255);
 `;
 
 const DownloadButton = styled.TouchableOpacity`
-  padding-top: 11;
+  padding-top: 11px;
   margin-left: auto;
 `;
 

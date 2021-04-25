@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 const Wrapper = styled.View`
   flex: 1;
   width: 100%;
-  height: 68;
+  height: 68px;
   background-color: rgba(68, 148, 211, 0.25);
   justify-content: center;
   align-items: center;
@@ -20,12 +20,12 @@ const FillBox = styled.View<{ width: number }>`
 `;
 
 const Money = styled.Text`
-  font-size: 17;
+  font-size: 17px;
 `;
 
 const Description = styled.Text`
-  font-size: 13;
-  padding-top: 5;
+  font-size: 13px;
+  padding-top: 5px;
   color: #4f4f4b;
 `; // color: rgb(0, 118, 255);
 

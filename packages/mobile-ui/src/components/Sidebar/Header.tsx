@@ -7,9 +7,9 @@ import constituencies from '../../../../mobile-app/src/screens/Bundestag/Procedu
 
 const Container = styled.TouchableOpacity`
   flex-direction: row;
-  padding-top: 16;
-  padding-left: 16;
-  padding-bottom: 8;
+  padding-top: 16px;
+  padding-left: 16px;
+  padding-bottom: 8px;
 `;
 
 const HeadTextWrapper = styled.View`
@@ -18,8 +18,8 @@ const HeadTextWrapper = styled.View`
 
 const HeadText = styled.Text`
   color: #fff;
-  font-size: 17;
-  padding-left: 16;
+  font-size: 17px;
+  padding-left: 16px;
 `;
 
 interface Props {

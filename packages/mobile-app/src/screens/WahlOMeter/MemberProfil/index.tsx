@@ -31,29 +31,29 @@ const ScrollWrapper = styled.ScrollView.attrs({
 
 const MemberImageWrapper = styled.View`
   width: 100%;
-  max-width: 284;
-  height: 379;
+  max-width: 284px;
+  height: 379px;
   align-items: center;
-  padding-bottom: 8;
+  padding-bottom: 8px;
 `;
 
 const MemberImage = styled.Image.attrs({
   resizeMode: 'contain',
 })`
   flex: 1;
-  height: 379;
-  width: 284;
-  border-radius: 142;
+  height: 379px;
+  width: 284px;
+  border-radius: 142px;
 `;
 
 const Party = styled(PartyComponent)`
   position: absolute;
-  right: 0;
-  bottom: 30;
+  right: 0px;
+  bottom: 30px;
 `;
 
 const Text = styled.Text`
-  font-size: 15;
+  font-size: 15px;
 `;
 
 const TextGrey = styled(Text)`
@@ -66,7 +66,7 @@ const TextLighGrey = styled(Text)`
 
 const SegmentWrapper = styled.View`
   width: 100%;
-  padding-top: 18;
+  padding-top: 18px;
 `;
 
 export interface Contacts {

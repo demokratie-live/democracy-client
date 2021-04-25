@@ -22,23 +22,23 @@ const ScrollView = styled.ScrollView.attrs(() => ({
 `;
 
 const Text = styled.Text`
-  font-size: 15;
+  font-size: 15px;
   color: ${({ theme }) => theme.textColors.secondary};
 `;
 
 const TextLink = styled.Text`
-  font-size: 15;
-  padding-bottom: 8;
+  font-size: 15px;
+  padding-bottom: 8px;
   color: rgb(68, 148, 211);
   text-decoration: underline;
 `;
 
 export const Space = styled.View`
-  padding-top: 18;
+  padding-top: 18px;
 `;
 
 export const ButtonNext = styled(Button)`
-  margin-horizontal: 18;
+  margin-horizontal: 18px;
 `;
 
 export const VerificationStart: React.FC = () => {

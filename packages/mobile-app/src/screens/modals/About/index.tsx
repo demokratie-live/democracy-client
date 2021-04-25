@@ -15,11 +15,11 @@ const Wrapper = styled.ScrollView.attrs({
 })``;
 
 const Content = styled.View`
-  padding-horizontal: 18;
+  padding-horizontal: 18px;
 `;
 
 const HeaderWrapper = styled.View`
-  padding-vertical: 18;
+  padding-vertical: 18px;
   align-items: center;
 `;
 
@@ -28,9 +28,9 @@ const QuotWrapper = styled.View`
 `;
 
 const Quot = styled.Text`
-  font-size: 100;
+  font-size: 100px;
   color: #4494d3;
-  top: -18;
+  top: -18px;
 `;
 
 interface MarkdownProps {

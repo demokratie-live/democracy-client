@@ -20,7 +20,7 @@ const Wrapper = styled.View`
 `;
 
 const Text = styled.Text`
-  font-size: 17;
+  font-size: 17px;
   margin-right: auto;
 `;
 

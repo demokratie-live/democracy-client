@@ -11,14 +11,14 @@ const ContainerText = styled.View`
 `;
 
 const Image = styled.Image`
-  width: 65;
-  height: 65;
+  width: 65px;
+  height: 65px;
 `;
 
 const TextHead = styled.Text`
   color: #000;
-  font-size: 22;
-  padding-top: 15;
+  font-size: 22px;
+  padding-top: 15px;
   /* font-family: ${
     Platform.OS === 'ios' ? 'HelveticaNeue-Thin' : 'sans-serif-light'
   }; */
@@ -26,13 +26,13 @@ const TextHead = styled.Text`
 
 const TextSub = styled.Text`
   color: ${({ theme }) => theme.textColors.secondary};
-  font-size: 15;
-  padding-top: 1;
+  font-size: 15px;
+  padding-top: 1px;
   /* font-family: ${
     Platform.OS === 'ios' ? 'HelveticaNeue-Thin' : 'sans-serif-light'
   }; */
   text-align: center;
-  margin-bottom: 18;
+  margin-bottom: 18px;
 `;
 
 interface Props {
