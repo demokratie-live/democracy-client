@@ -9,17 +9,17 @@ interface DotProps {
 export const Dot = styled.View<DotProps>`
   background-color: ${({ active }) =>
     active ? 'rgba(68, 148, 211, 1)' : 'rgba(68, 148, 211, 0.5)'};
-  width: ${({ size }) => size};
-  height: ${({ size }) => size};
-  border-radius: ${({ size }) => size};
-  margin-horizontal: 5;
+  width: ${({ size }) => size}px;
+  height: ${({ size }) => size}px;
+  border-radius: ${({ size }) => size}px;
+  margin-horizontal: 5px;
 `;
 
 const DotsWrapper = styled.View`
   flex-direction: row;
   justify-content: center;
   position: relative;
-  bottom: 20;
+  bottom: 20px;
   width: 100%;
 `;
 

@@ -10,17 +10,17 @@ import InstagramIcon from '@democracy-deutschland/mobile-ui/src/components/Icons
 
 const ContactWrapper = styled.View`
   flex-wrap: wrap;
-  padding-top: 18;
+  padding-top: 18px;
   width: 100%;
   flex-direction: row;
   justify-content: space-around;
 `;
 
 const IconWrapper = styled.TouchableOpacity`
-  width: 65;
-  height: 65;
-  border-width: 2;
-  border-radius: 33;
+  width: 65px;
+  height: 65px;
+  border-width: 2px;
+  border-radius: 33px;
   justify-content: center;
   align-items: center;
 `;
@@ -28,19 +28,19 @@ const IconWrapper = styled.TouchableOpacity`
 const ServiceWrapper = styled.View`
   align-items: center;
   flex: 1;
-  min-width: 80;
-  max-width: 200;
-  height: 100;
+  min-width: 80px;
+  max-width: 200px;
+  height: 100px;
 `;
 
 const Domain = styled.Text`
-  font-size: 12;
-  padding-top: 5;
+  font-size: 12px;
+  padding-top: 5px;
 `;
 
 const Username = styled.Text`
-  font-size: 12;
-  padding-top: 5;
+  font-size: 12px;
+  padding-top: 5px;
 `;
 
 interface Props {

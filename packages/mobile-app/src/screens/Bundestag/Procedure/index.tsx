@@ -50,14 +50,14 @@ const Container = styled.ScrollView.attrs({
 
 const HaderRightWrapper = styled.View`
   flex-direction: row;
-  padding-right: 11;
+  padding-right: 11px;
 `;
 
 const DetailsContainer = styled.View`
-  padding-horizontal: 8;
-  margin-top: 18;
-  padding-vertical: 11;
-  border-top-width: 1;
+  padding-horizontal: 8px;
+  margin-top: 18px;
+  padding-vertical: 11px;
+  border-top-width: 1px;
   border-color: rgba(68, 148, 211, 0.1);
 `;
 
@@ -296,7 +296,7 @@ export const Procedure: FC<Props> = ({ route, navigation }) => {
       {communityVotes &&
         ((voteEnd && new Date(voteEnd) < new Date()) || voted) && (
           <CommunityVoteResults
-            countryMap={<CountryMap {...{ procedureId }} />}
+            countryMap={<CountryMap key="countryMap" {...{ procedureId }} />}
             voteResults={communityVotes}
             voted={voted}
           />

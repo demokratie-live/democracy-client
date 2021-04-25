@@ -5,7 +5,7 @@ import Chart from './HeaderChart';
 
 const Wrapper = styled.View`
   flex-direction: row;
-  padding-horizontal: 18;
+  padding-horizontal: 18px;
 `;
 
 const TimeSelect = styled.View`
@@ -13,11 +13,11 @@ const TimeSelect = styled.View`
 `;
 
 const ProcedureCount = styled.View`
-  padding-right: 9;
+  padding-right: 9px;
 `;
 
 const ProcedureCountText = styled.Text`
-  font-size: 15;
+  font-size: 15px;
   color: #6d6d72;
   font-weight: 500;
 `;

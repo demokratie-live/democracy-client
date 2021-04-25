@@ -45,24 +45,24 @@ const ScrollWrapper = styled.ScrollView.attrs({
 `;
 
 const Title = styled.Text`
-  padding-top: 9;
-  padding-horizontal: 18;
-  font-size: 34;
-  padding-bottom: 9;
+  padding-top: 9px;
+  padding-horizontal: 18px;
+  font-size: 34px;
+  padding-bottom: 9px;
 `;
 
 const WarnWrapper = styled.View`
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 130;
+  left: 0px;
+  right: 0px;
+  bottom: 130px;
   background-color: rgba(0, 0, 0, 0);
 `;
 
 const WarnTextWrapper = styled.View`
   align-items: center;
   justify-content: center;
-  padding-vertical: 11;
+  padding-vertical: 11px;
   background-color: rgb(255, 255, 255);
   opacity: 0.9;
 `;
@@ -70,20 +70,20 @@ const WarnTextWrapper = styled.View`
 const WarnText = styled.Text`
   text-align: center;
   color: rgb(0, 0, 0);
-  font-size: 13;
+  font-size: 13px;
 `;
 
 const BalloutBoxWrapper = styled.View`
-  height: 130;
+  height: 130px;
   background-color: rgba(250, 250, 250, 0.9);
-  border-top-width: 1;
+  border-top-width: 1px;
   border-top-color: rgba(68, 148, 211, 0.1);
 `;
 
 const Description = styled.Text`
   color: ${({ theme }) => theme.oldColors.description};
-  padding-horizontal: 18;
-  margin-bottom: 18;
+  padding-horizontal: 18px;
+  margin-bottom: 18px;
 `;
 
 type VoteVerificationScreenNavigationProp = StackNavigationProp<

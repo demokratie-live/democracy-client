@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import { ActivityIndicator } from 'react-native';
 
 const Loading = styled.View`
-  height: 50;
+  height: 50px;
   align-items: center;
   justify-content: center;
 `;

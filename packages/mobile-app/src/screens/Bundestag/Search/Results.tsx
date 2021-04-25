@@ -53,13 +53,13 @@ const isProcedureGuard = (
 };
 
 const ListText = styled.Text`
-  font-size: 18;
+  font-size: 18px;
   color: grey;
-  padding-left: 8;
+  padding-left: 8px;
 `;
 
 const Text = styled.Text`
-  font-size: 18;
+  font-size: 18px;
   color: grey;
 `;
 
@@ -70,12 +70,12 @@ const ActivityIndicator = styled.ActivityIndicator.attrs(() => ({
 const LoadingWrapper = styled.View`
   flex: 1;
   background-color: #ffffff;
-  padding-top: 18;
+  padding-top: 18px;
 `;
 
 const NoResultsWrapper = styled.View`
   flex: 1;
-  padding-top: 18;
+  padding-top: 18px;
   align-items: center;
 `;
 
@@ -83,7 +83,7 @@ const NoResultsImage = styled.Image.attrs(() => ({
   source: require('./assets/search_no_results.png'),
   opacity: 0.2,
 }))`
-  margin-top: 18;
+  margin-top: 18px;
 `;
 
 interface Props {

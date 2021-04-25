@@ -13,33 +13,33 @@ interface Props {
 const Wrapper = styled.View`
   width: 100%;
   background-color: #0007;
-  padding-horizontal: 11;
-  padding-top: 11;
-  padding-bottom: 18;
-  border-radius: 12;
+  padding-horizontal: 11px;
+  padding-top: 11px;
+  padding-bottom: 18px;
+  border-radius: 12px;
 `;
 
 const Head = styled.View`
   flex-direction: row;
   align-items: center;
-  margin-bottom: 8;
+  margin-bottom: 8px;
 `;
 
 const Owner = styled.Text`
-  font-size: 15;
-  padding-left: 8;
+  font-size: 15px;
+  padding-left: 8px;
   color: #fff;
 `;
 
 const Title = styled.Text`
-  font-size: 15;
+  font-size: 15px;
   font-weight: bold;
   color: #fff;
 `;
 
 const Text = styled.Text`
-  padding-top: 3;
-  font-size: 15;
+  padding-top: 3px;
+  font-size: 15px;
   color: #fff;
 `;
 

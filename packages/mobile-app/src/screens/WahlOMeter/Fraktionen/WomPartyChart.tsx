@@ -27,7 +27,10 @@ const ChartWrapper = styled.View`
   align-self: center;
   width: 100%;
   max-width: ${() =>
-    Math.min(Dimensions.get('window').width, Dimensions.get('window').height)};
+    Math.min(
+      Dimensions.get('window').width,
+      Dimensions.get('window').height,
+    )}px;
 `;
 
 // interface Props {}

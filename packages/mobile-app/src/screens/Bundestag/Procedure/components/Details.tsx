@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { styled } from '../../../../styles';
 
 const Wrapper = styled.View`
-  padding-horizontal: 11;
+  padding-horizontal: 11px;
 `;
 
 const Head = styled.View`
@@ -25,16 +25,16 @@ const HeadRightTitle = styled.View`
 `;
 
 const HeadRightDescr = styled.View`
-  padding-left: 8;
+  padding-left: 8px;
 `;
 
 const DefTitle = styled.Text`
-  font-size: 14;
+  font-size: 14px;
   color: rgba(68, 148, 211, 0.9);
 `;
 
 const DefTitleSeperated = styled(DefTitle)`
-  padding-top: ${({ theme }) => theme.distances.secondary};
+  padding-top: ${({ theme }) => theme.distances.secondary}px;
 `;
 
 const DefTitleRight = styled(DefTitle)`
@@ -42,16 +42,16 @@ const DefTitleRight = styled(DefTitle)`
 `;
 
 const DefDescr = styled.Text`
-  font-size: 14;
+  font-size: 14px;
   color: ${({ theme }) => theme.textColors.secondary};
 `;
 
 const Content = styled.View`
-  padding-top: 11;
+  padding-top: 11px;
 `;
 
 const ContentText = styled(DefDescr)`
-  font-size: 14;
+  font-size: 14px;
   color: ${({ theme }) => theme.textColors.tertiary};
 `;
 

@@ -44,39 +44,39 @@ const ScrollWrapper = styled.ScrollView.attrs({
 
 const Wrapper = styled.View`
   flex: 1;
-  padding-top: 18;
-  padding-horizontal: 18;
+  padding-top: 18px;
+  padding-horizontal: 18px;
 `;
 
 const Headline = styled.Text`
   font-weight: bold;
-  font-size: 15;
+  font-size: 15px;
   color: ${({ theme }) => theme.textColors.secondary};
-  padding-bottom: 6;
+  padding-bottom: 6px;
 `;
 
 const Text = styled.Text`
-  font-size: 15;
+  font-size: 15px;
   color: ${({ theme }) => theme.textColors.secondary};
 `;
 
 const TextLink = styled.Text`
-  font-size: 15;
+  font-size: 15px;
   color: rgb(68, 148, 211);
   text-decoration: underline;
 `;
 
 const Version = styled.Text`
-  font-size: 15;
+  font-size: 15px;
   color: ${({ theme }) => theme.textColors.secondary};
-  padding-top: 28;
-  padding-bottom: 11;
+  padding-top: 28px;
+  padding-bottom: 11px;
   text-align: center;
 `;
 
 const DefinitionListWrapper = styled.View`
   flex-direction: row;
-  padding-vertical: 3;
+  padding-vertical: 3px;
 `;
 
 const DefinitionListTitle = styled.Text`
