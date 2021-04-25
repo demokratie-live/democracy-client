@@ -17,12 +17,12 @@ import { styled } from '../../../styles';
 // import GET_FILTERS from '../../../graphql/queries/local/filters';
 
 const Save = styled.TouchableOpacity`
-  margin-right: ${({ theme }) => theme.distances.secondary};
+  margin-right: ${({ theme }) => theme.distances.secondary}px;
 `;
 
 const SaveText = styled.Text`
   color: #fff;
-  font-size: 16;
+  font-size: 16px;
   font-weight: 500;
 `;
 
@@ -31,12 +31,12 @@ const Container = styled.View`
 `;
 
 const ListRowMain = styled.View`
-  padding-top: 4;
+  padding-top: 4px;
   justify-content: center;
 `;
 
 const ListRowSub = styled.View`
-  padding-left: ${({ theme }) => theme.distances.main};
+  padding-left: ${({ theme }) => theme.distances.main}px;
 `;
 
 const Row = styled.TouchableOpacity`
@@ -47,12 +47,12 @@ const Row = styled.TouchableOpacity`
 `;
 
 const TitleMain = styled.Text`
-  font-size: 17;
+  font-size: 17px;
 `;
 
 const TitleSub = styled.Text`
   flex: 0.98;
-  font-size: 15;
+  font-size: 15px;
 `;
 
 type FilterScreenNavigationProp = StackNavigationProp<

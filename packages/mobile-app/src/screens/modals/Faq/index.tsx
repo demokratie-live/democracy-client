@@ -39,14 +39,14 @@ const website = 'https://www.democracy-deutschland.de/';
 const Wrapper = styled.ScrollView.attrs({
   scrollIndicatorInsets: { right: 1 }, // TODO do cleanfix when there is a correct solution (already closed but not solved without workaround) https://github.com/facebook/react-native/issues/26610
 })`
-  /* padding-horizontal: 18; */
+  /* padding-horizontal: 18px; */
 `;
 
 const Headline = styled.Text`
-  padding-horizontal: 18;
-  padding-vertical: 18;
+  padding-horizontal: 18px;
+  padding-vertical: 18px;
   color: grey;
-  font-size: 15;
+  font-size: 15px;
 `;
 
 const ContactWrapper = styled.View`
@@ -54,29 +54,29 @@ const ContactWrapper = styled.View`
   align-self: center;
   flex-direction: row;
   justify-content: space-between;
-  max-width: 300;
+  max-width: 300px;
 `;
 
 const SocialMediaWrapper = styled.View`
-  padding-top: 25;
+  padding-top: 25px;
   align-self: center;
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
-  max-width: 300;
+  max-width: 300px;
 `;
 
 const IconWrapper = styled.TouchableOpacity`
-  width: 65;
-  height: 65;
-  border-width: 2;
-  border-radius: 33;
+  width: 65px;
+  height: 65px;
+  border-width: 2px;
+  border-radius: 33px;
   justify-content: center;
   align-items: center;
 `;
 
 const Spacer = styled.View`
-  padding-bottom: 36;
+  padding-bottom: 36px;
 `;
 
 interface MarkdownProps {

@@ -39,15 +39,15 @@ const Wrapper = styled.View`
   flex: 1;
   flex-direction: row;
   align-items: center;
-  padding-horizontal: 18;
+  padding-horizontal: 18px;
   background-color: #fafafa;
 `;
 
 const DropZone = styled.TouchableOpacity`
   position: absolute;
-  right: 18;
-  width: 100;
-  height: 100;
+  right: 18px;
+  width: 100px;
+  height: 100px;
   align-items: center;
   justify-content: center;
 `;
@@ -61,13 +61,13 @@ const CheckIcon = styled.Image.attrs(() => ({
 //   color: "#000000",
 //   name: "check"
 // }))`
-//   padding-top: 5;
+//   padding-top: 5px;
 // `;
 
 const LineWrapper = styled.View`
   position: absolute;
-  left: 120;
-  right: 120;
+  left: 120px;
+  right: 120px;
   overflow: hidden;
   justify-content: center;
   align-items: center;

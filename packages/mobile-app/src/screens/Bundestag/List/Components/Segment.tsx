@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 const SegmentWrapper = styled.View`
-  padding-vertical: 5;
-  padding-horizontal: 18;
+  padding-vertical: 5px;
+  padding-horizontal: 18px;
   flex-direction: row;
   background-color: #efeff4;
   align-items: center;

@@ -4,15 +4,15 @@ import styled from 'styled-components/native';
 
 const Button = styled.TouchableOpacity`
   background-color: #fcfcfc;
-  height: 60;
+  height: 60px;
   justify-content: center;
 `;
 
 const ButtonText = styled.Text`
   text-align: center;
   color: #0076ff;
-  font-size: 20;
-  line-height: 24;
+  font-size: 20px;
+  line-height: 24px;
 `;
 
 interface Props {

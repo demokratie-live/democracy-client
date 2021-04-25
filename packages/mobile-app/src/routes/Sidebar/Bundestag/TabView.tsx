@@ -24,7 +24,7 @@ const TabNavigation = createMaterialTopTabNavigator<TopTabParamList>();
 
 const HaderRightWrapper = styled.View`
   flex-direction: row;
-  padding-right: 11;
+  padding-right: 11px;
 `;
 
 type ScreenNavigationProp = StackNavigationProp<

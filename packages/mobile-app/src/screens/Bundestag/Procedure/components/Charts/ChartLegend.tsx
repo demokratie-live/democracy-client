@@ -8,11 +8,11 @@ const VoteResultsWrapper = styled.View`
 `;
 
 const VoteResultNumbers = styled.View`
-  width: ${() => Dimensions.get('window').width - 18 * 2};
-  max-width: 464;
+  width: ${() => Dimensions.get('window').width - 18 * 2}px;
+  max-width: 464px;
   flex-direction: row;
   justify-content: space-around;
-  padding-top: 18;
+  padding-top: 18px;
 `;
 
 const VoteResult = styled.View`
@@ -26,22 +26,22 @@ const VoteResultCircleNumber = styled.View`
 
 const VoteResultNumber = styled.Text`
   color: #4a4a4a;
-  font-size: 12;
-  padding-top: 1;
+  font-size: 12px;
+  padding-top: 1px;
 `;
 const VoteResultLabel = styled.Text`
   color: rgb(142, 142, 147);
-  font-size: 12;
-  padding-top: 6;
+  font-size: 12px;
+  padding-top: 6px;
 `;
 
 const VoteResultCircle = styled.View<{ color: string }>`
-  width: 11;
-  height: 11;
-  border-radius: 5;
+  width: 11px;
+  height: 11px;
+  border-radius: 5px;
   background-color: ${({ color }) => color};
-  margin-top: 3;
-  margin-right: 5;
+  margin-top: 3px;
+  margin-right: 5px;
 `;
 
 export interface ChartLegendData {

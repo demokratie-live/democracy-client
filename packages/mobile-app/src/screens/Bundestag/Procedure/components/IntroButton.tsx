@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 const Button = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
-  width: 40;
+  width: 40px;
 `;
 
 interface Props {

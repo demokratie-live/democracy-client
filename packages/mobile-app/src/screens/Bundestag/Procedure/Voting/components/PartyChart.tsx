@@ -20,9 +20,9 @@ const Wrapper = styled.View`
 `;
 
 const Text = styled.Text`
-  padding-bottom: 18;
+  padding-bottom: 18px;
   color: ${({ theme }) => theme.textColors.secondary};
-  font-size: 14;
+  font-size: 14px;
   text-align: center;
 `;
 

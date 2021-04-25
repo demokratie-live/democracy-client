@@ -14,14 +14,14 @@ const NoVotesWrapper = styled.ScrollView.attrs({
 })`
   padding-top: 18px;
   flex-grow: 1;
-  min-height: 300;
+  min-height: 300px;
 `;
 
 const Text = styled.Text`
-  font-size: 15;
+  font-size: 15px;
   color: #4a4a4a;
   text-align: center;
-  padding-horizontal: 18;
+  padding-horizontal: 18px;
 `;
 
 interface Props {

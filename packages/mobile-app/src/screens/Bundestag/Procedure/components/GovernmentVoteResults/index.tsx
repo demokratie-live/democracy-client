@@ -29,38 +29,38 @@ const ScrollView = styled.ScrollView.attrs(() => ({
 
 const PieChartWrapper = styled.View`
   align-self: center;
-  padding-top: 9;
-  padding-horizontal: 36;
+  padding-top: 9px;
+  padding-horizontal: 36px;
   width: 100%;
   max-width: ${() =>
     Math.min(
       380,
       Dimensions.get('window').width,
       Dimensions.get('window').height,
-    )};
+    )}px;
 `;
 
 const DecisionTextView = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  padding-horizontal: 25;
-  padding-bottom: 20;
+  padding-horizontal: 25px;
+  padding-bottom: 20px;
 `;
 
 const DecisionTextHeadline = styled.Text`
-  font-size: 17;
+  font-size: 17px;
 `;
 
 const DecisionText = styled.Text`
   color: rgb(142, 142, 147);
-  padding-top: 18;
+  padding-top: 18px;
 `;
 
 const RepresentativeText = styled.Text`
   color: ${({ theme }) => theme.textColors.secondary};
   text-align: center;
-  font-size: 12;
+  font-size: 12px;
 `;
 
 const RepresentativeTextBlack = styled(RepresentativeText)`
@@ -70,7 +70,7 @@ const RepresentativeTextBlack = styled(RepresentativeText)`
 const SwiperStyled = styled(Carousel).attrs({
   paginationStyle: { bottom: 14 },
 })`
-  max-height: 400;
+  max-height: 400px;
 `;
 
 interface Props {
