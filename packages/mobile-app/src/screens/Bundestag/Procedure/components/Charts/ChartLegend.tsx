@@ -4,6 +4,7 @@ import styled from 'styled-components/native';
 
 const VoteResultsWrapper = styled.View`
   align-items: center;
+  padding-bottom: 11px;
 `;
 
 const VoteResultNumbers = styled.View`
@@ -12,7 +13,6 @@ const VoteResultNumbers = styled.View`
   flex-direction: row;
   justify-content: space-around;
   padding-top: 18;
-  height: 40;
 `;
 
 const VoteResult = styled.View`

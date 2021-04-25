@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
-import { ActivityIndicator, Dimensions, Platform } from 'react-native';
-// eslint-disable-next-line import/default
-import Swiper from 'react-native-swiper'; // TODO Replace this library (it's not good maintained)
+import { ActivityIndicator, Dimensions } from 'react-native';
+import Carousel from 'react-native-snap-carousel';
 // Components
 import getConstituencySvgs from './svgs/constituencies';
 import GermanySvgComponent from './svgs/GermanySVG';
@@ -54,10 +53,9 @@ const SvgWrapper = styled.View`
   right: 22;
 `;
 
-const SwiperStyled = styled(Swiper).attrs({
+const SwiperStyled = styled(Carousel).attrs({
   paginationStyle: { bottom: 14 },
 })`
-  height: ${Platform.OS === 'ios' ? 'auto' : 430};
   max-height: 430;
 `;
 
@@ -153,9 +151,19 @@ export const CommunityVoteResults: React.FC<Props> = ({
     screens.push(renderCommuntiyResult(voteResults.constituencies[0]));
   }
   screens.push(countryMap);
+
+  const renderItem = ({ item }: any) => item;
   return (
-    <Folding title="Communityergebnis" opened={!isVerified || voted}>
-      <SwiperStyled loop={false}>{screens}</SwiperStyled>
+    <Folding
+      title="Communityergebnis"
+      opened={!isVerified || voted}
+      paddingHorizontal={0}>
+      <SwiperStyled
+        data={screens}
+        renderItem={renderItem}
+        sliderWidth={Dimensions.get('window').width}
+        itemWidth={Dimensions.get('window').width}
+      />
       <RepresentativeText>
         Dieses Ergebnis wurde nicht auf seine Repräsentativität überprüft.
       </RepresentativeText>

@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
-import { Dimensions, Platform } from 'react-native';
+import { Dimensions } from 'react-native';
 // eslint-disable-next-line import/default
-import Swiper from 'react-native-swiper';
+import Carousel from 'react-native-snap-carousel';
 
 // Components
 import BarChart from './BarChart';
@@ -67,10 +67,9 @@ const RepresentativeTextBlack = styled(RepresentativeText)`
   color: #000;
 `;
 
-const SwiperStyled = styled(Swiper).attrs({
+const SwiperStyled = styled(Carousel).attrs({
   paginationStyle: { bottom: 14 },
 })`
-  height: ${Platform.OS === 'ios' ? 'auto' : 400};
   max-height: 400;
 `;
 
@@ -223,7 +222,16 @@ export const GovernmentVoteResults: React.FC<Props> = ({
         </DecisionTextView>,
       );
     }
-    return <SwiperStyled loop={false}>{screens}</SwiperStyled>;
+    const renderItem = ({ item }: any) => item;
+
+    return (
+      <SwiperStyled
+        data={screens}
+        renderItem={renderItem}
+        sliderWidth={Dimensions.get('window').width}
+        itemWidth={Dimensions.get('window').width}
+      />
+    );
   };
 
   if (
@@ -234,7 +242,10 @@ export const GovernmentVoteResults: React.FC<Props> = ({
       voteResults.abstination)
   ) {
     return (
-      <Folding title="Bundestagsergebnis" opened={!isVerified || voted}>
+      <Folding
+        title="Bundestagsergebnis"
+        opened={!isVerified || voted}
+        paddingHorizontal={0}>
         {renderGovernmentVoteDetails()}
 
         {voteResults.namedVote ? (
