@@ -1712,10 +1712,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@democracy-deutschland/ui@0.0.3-alpha.16":
-  version "0.0.3-alpha.16"
-  resolved "https://registry.yarnpkg.com/@democracy-deutschland/ui/-/ui-0.0.3-alpha.16.tgz#895d978f0724f5c4cc2a5772d32652118c74a19e"
-  integrity sha512-OnPu1PCw0LJj+rspOAa6iMJzot2/B1wgo2dpEHghj2FfonlrKWfp/v3i7Bq6D2N5sv1J8Ryt0eNo3b9CD3Zcvg==
+"@democracy-deutschland/ui@0.0.3-alpha.17":
+  version "0.0.3-alpha.17"
+  resolved "https://registry.yarnpkg.com/@democracy-deutschland/ui/-/ui-0.0.3-alpha.17.tgz#84eedcb5e6b7996955d020944de6aed7bcdb71b2"
+  integrity sha512-3/xZHbDDywDcWxdh1dXAIlpYl4eMBgxTwuAoXtB8PfXzqtmf6djXLWIrndquwsCHq/rfGIe+eRMFL8ORbp2BbA==
 
 "@egjs/hammerjs@^2.0.17":
   version "2.0.17"
