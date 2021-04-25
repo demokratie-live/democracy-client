@@ -148,10 +148,11 @@ export const CommunityVoteResults: React.FC<Props> = ({
     return null;
   }
 
-  const screens = [renderCommuntiyResult(voteResults), countryMap];
+  const screens = [renderCommuntiyResult(voteResults)];
   if (myConstituency && voteResults.constituencies[0]) {
     screens.push(renderCommuntiyResult(voteResults.constituencies[0]));
   }
+  screens.push(countryMap);
   return (
     <Folding title="Communityergebnis" opened={!isVerified || voted}>
       <SwiperStyled loop={false}>{screens}</SwiperStyled>

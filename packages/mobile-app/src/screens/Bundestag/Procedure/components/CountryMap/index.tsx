@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components/native';
-import { useLazyQuery } from '@apollo/client';
+import { useLazyQuery, useQuery } from '@apollo/client';
 import {
   CountryMapConstituencies,
   CountryMapConstituenciesVariables,
@@ -18,7 +18,7 @@ interface Props {
 }
 
 export const CountryMap: React.FC<Props> = ({ procedureId }) => {
-  const [loadConstituencies, { data }] = useLazyQuery<
+  const { data } = useQuery<
     CountryMapConstituencies,
     CountryMapConstituenciesVariables
   >(CountryMapConstituenciesQuery, {
@@ -26,15 +26,6 @@ export const CountryMap: React.FC<Props> = ({ procedureId }) => {
       procedureId,
     },
   });
-  // const [loadConstituencies, { data }] = useCountryMapConstituenciesLazyQuery({
-  //   variables: {
-  //     procedureId,
-  //   },
-  //   fetchPolicy: 'network-only',
-  // });
-  useEffect(() => {
-    loadConstituencies();
-  }, [loadConstituencies]);
 
   if (!data?.procedure.communityVotes) {
     return null;
