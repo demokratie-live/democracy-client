@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
 import { Dimensions } from 'react-native';
-// eslint-disable-next-line import/default
 import Carousel from 'react-native-snap-carousel';
 
 // Components
@@ -18,6 +17,7 @@ import { PartyChartChartData } from './PartyChart/Component';
 import { ConstituencyContext } from '../../../../../context/Constituency';
 import { InitialStateContext } from '../../../../../context/InitialStates';
 import { styled } from '../../../../../styles';
+import { CarouselPagination } from '../../../../../components/misc/Pagination';
 
 export const { width, height } = Dimensions.get('window');
 
@@ -86,6 +86,7 @@ export const GovernmentVoteResults: React.FC<Props> = ({
   procedureId,
   voted,
 }) => {
+  const [activeSlide, setActiveSlide] = useState<number>(0);
   const [pieChartWidth, setPieChartWidth] = useState(
     Math.min(Dimensions.get('window').width, Dimensions.get('window').height),
   );
@@ -225,12 +226,16 @@ export const GovernmentVoteResults: React.FC<Props> = ({
     const renderItem = ({ item }: any) => item;
 
     return (
-      <SwiperStyled
-        data={screens}
-        renderItem={renderItem}
-        sliderWidth={Dimensions.get('window').width}
-        itemWidth={Dimensions.get('window').width}
-      />
+      <>
+        <SwiperStyled
+          data={screens}
+          renderItem={renderItem}
+          sliderWidth={Dimensions.get('window').width}
+          itemWidth={Dimensions.get('window').width}
+          onSnapToItem={setActiveSlide}
+        />
+        <CarouselPagination length={screens.length} active={activeSlide} />
+      </>
     );
   };
 

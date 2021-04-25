@@ -43,6 +43,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 0,
     'jsx-a11y/no-autofocus': 0,
     'react-native/no-inline-styles': 0,
+    'react-native/no-color-literals': 0,
   },
   env: {
     jest: true,

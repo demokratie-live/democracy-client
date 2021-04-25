@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { ActivityIndicator, Dimensions } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 // Components
@@ -17,6 +17,7 @@ import {
 import { ConstituencyContext } from '../../../../context/Constituency';
 import { InitialStateContext } from '../../../../context/InitialStates';
 import { styled } from '../../../../styles';
+import { CarouselPagination } from '../../../../components/misc/Pagination';
 
 export const { width, height } = Dimensions.get('window');
 
@@ -72,6 +73,8 @@ export const CommunityVoteResults: React.FC<Props> = ({
 }) => {
   const { constituency: myConstituency } = useContext(ConstituencyContext);
   const { isVerified } = useContext(InitialStateContext);
+  const [activeSlide, setActiveSlide] = useState<number>(0);
+
   const renderCommuntiyResult = (
     comunnityResults:
       | Procedure_procedure_communityVotes
@@ -163,7 +166,9 @@ export const CommunityVoteResults: React.FC<Props> = ({
         renderItem={renderItem}
         sliderWidth={Dimensions.get('window').width}
         itemWidth={Dimensions.get('window').width}
+        onSnapToItem={setActiveSlide}
       />
+      <CarouselPagination length={screens.length} active={activeSlide} />
       <RepresentativeText>
         Dieses Ergebnis wurde nicht auf seine Repräsentativität überprüft.
       </RepresentativeText>
