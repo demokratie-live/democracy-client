@@ -1712,10 +1712,8 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@democracy-deutschland/ui@0.0.3-alpha.20":
-  version "0.0.3-alpha.20"
-  resolved "https://registry.yarnpkg.com/@democracy-deutschland/ui/-/ui-0.0.3-alpha.20.tgz#b263b2570cf12c52af1b92478af180c3877d9171"
-  integrity sha512-MWEkK+GeW0kLLVTEFrD2wxxFCfhl0/dduB+L6KNG3WcKQ+H8rv0VPSaXGWmZ9z3cU6KWimq0NP9FltjcbIVa/Q==
+"@democracy-deutschland/ui@file:packages/mobile-app/.yalc/@democracy-deutschland/ui":
+  version "0.0.3-alpha.22"
 
 "@egjs/hammerjs@^2.0.17":
   version "2.0.17"

@@ -14,7 +14,6 @@ import { BundestagRootStackParamList } from '../../../../routes/Sidebar/Bundesta
 import { RouteProp } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { ConstituencyContext } from '../../../../context/Constituency';
-import PartyChart from '../components/GovernmentVoteResults/PartyChart/Component';
 import { ChartData } from '../../../WahlOMeter/Bundestag/VotedProceduresWrapper';
 import {
   PartyChartData,
@@ -26,8 +25,13 @@ import { LocalVotesContext } from '../../../../context/LocalVotes';
 import { useQuery } from '@apollo/client';
 import ChartLegend from '../components/Charts/ChartLegend';
 import NoVotesPlaceholder from '../../../WahlOMeter/NoVotesPlaceholder';
-import { styled } from '../../../../styles';
+import { styled, theme } from '../../../../styles';
 import { Centered } from '@democracy-deutschland/mobile-ui/src/components/shared/Centered';
+import {
+  BarChart,
+  ChartLegendData,
+  WomPartyChartData,
+} from '@democracy-deutschland/ui';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -140,7 +144,7 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
     matchingProcedures: PartyChartData_partyChartProcedures_procedures[];
     votedProcedures: PartyChartData;
     localVotes: ChainEntry[];
-  }) => {
+  }): WomPartyChartData[] => {
     const chartData = matchingProcedures.reduce<{
       [party: string]: { diffs: number; matches: number };
     }>((prev, { voteResults, procedureId: itemProcedureId }) => {
@@ -198,9 +202,9 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
       return prev;
     }, {});
     return Object.keys(chartData)
-      .map(key => ({
+      .map<WomPartyChartData>(key => ({
         party: key,
-        values: [
+        deviants: [
           {
             label: 'Übereinstimmungen',
             value: chartData[key].matches,
@@ -213,10 +217,10 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
           },
         ],
       }))
-      .sort((a, b) => b.values[0].value - a.values[0].value);
+      .sort((a, b) => b.deviants[0].value - a.deviants[0].value);
   };
 
-  let preparedData: ReturnType<typeof partyChartData> | null = null;
+  let preparedData: WomPartyChartData[] | null = null;
 
   if (proceduresData) {
     const chartData = {
@@ -232,22 +236,25 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
     });
   }
 
-  const prepareCharLegendData = (data: ReturnType<typeof partyChartData>) => {
+  const prepareCharLegendData = (
+    data: ReturnType<typeof partyChartData>,
+  ): ChartLegendData[] => {
     return [
       {
         label: 'Übereinstimmungen',
-        value: data[selected].values[0].value,
-        color: '#f5a623',
+        color: theme.colors.vote.wom.match,
+        value: data[selected].deviants[0].value,
       },
       {
         label: 'Differenzen',
-        value: data[selected].values[1].value,
-        color: '#b1b3b4',
+        color: theme.colors.vote.wom.missmatch,
+        value: data[selected].deviants[1].value,
       },
     ];
   };
 
   const onClick = (index: number) => () => {
+    console.log('onClick', index);
     setSelected(index);
   };
 
@@ -268,13 +275,11 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
         <Description>
           Deine derzeitige Übereinstimmung mit den Fraktionen
         </Description>
-        <PartyChart
-          width={chartWidth}
-          chartData={preparedData}
-          onClick={onClick}
-          selected={selected}
-          showPercentage
-          colors={['#b1b3b4', '#f5a623']}
+        <BarChart
+          size={chartWidth - 36}
+          data={preparedData}
+          setSelectedParty={onClick}
+          selectedParty={selected}
         />
         <ChartLegend data={prepareCharLegendData(preparedData)} />
       </>
