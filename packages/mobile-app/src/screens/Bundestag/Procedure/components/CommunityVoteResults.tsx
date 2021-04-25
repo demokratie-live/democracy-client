@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
-import { ActivityIndicator, Dimensions, Platform } from 'react-native';
-// eslint-disable-next-line import/default
-import Swiper from 'react-native-swiper'; // TODO Replace this library (it's not good maintained)
+import React, { useContext, useState } from 'react';
+import { ActivityIndicator, Dimensions } from 'react-native';
+import Carousel from 'react-native-snap-carousel';
 // Components
 import getConstituencySvgs from './svgs/constituencies';
 import GermanySvgComponent from './svgs/GermanySVG';
@@ -18,6 +17,7 @@ import {
 import { ConstituencyContext } from '../../../../context/Constituency';
 import { InitialStateContext } from '../../../../context/InitialStates';
 import { styled } from '../../../../styles';
+import { CarouselPagination } from '../../../../components/misc/Pagination';
 
 export const { width, height } = Dimensions.get('window');
 
@@ -54,10 +54,9 @@ const SvgWrapper = styled.View`
   right: 22px;
 `;
 
-const SwiperStyled = styled(Swiper).attrs({
+const SwiperStyled = styled(Carousel).attrs({
   paginationStyle: { bottom: 14 },
 })`
-  height: ${Platform.OS === 'ios' ? 'auto' : '430px'};
   max-height: 430px;
 `;
 
@@ -74,6 +73,8 @@ export const CommunityVoteResults: React.FC<Props> = ({
 }) => {
   const { constituency: myConstituency } = useContext(ConstituencyContext);
   const { isVerified } = useContext(InitialStateContext);
+  const [activeSlide, setActiveSlide] = useState<number>(0);
+
   const renderCommuntiyResult = (
     comunnityResults:
       | Procedure_procedure_communityVotes
@@ -153,9 +154,21 @@ export const CommunityVoteResults: React.FC<Props> = ({
     screens.push(renderCommuntiyResult(voteResults.constituencies[0]));
   }
   screens.push(countryMap);
+
+  const renderItem = ({ item }: any) => item;
   return (
-    <Folding title="Communityergebnis" opened={!isVerified || voted}>
-      <SwiperStyled loop={false}>{screens}</SwiperStyled>
+    <Folding
+      title="Communityergebnis"
+      opened={!isVerified || voted}
+      paddingHorizontal={0}>
+      <SwiperStyled
+        data={screens}
+        renderItem={renderItem}
+        sliderWidth={Dimensions.get('window').width}
+        itemWidth={Dimensions.get('window').width}
+        onSnapToItem={setActiveSlide}
+      />
+      <CarouselPagination length={screens.length} active={activeSlide} />
       <RepresentativeText>
         Dieses Ergebnis wurde nicht auf seine Repräsentativität überprüft.
       </RepresentativeText>

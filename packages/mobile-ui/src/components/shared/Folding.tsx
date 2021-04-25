@@ -40,17 +40,23 @@ const Divider = styled.View`
   margin-top: 9px;
 `;
 
-const Content = styled.View`
-  padding-horizontal: 18px;
+const Content = styled.View<{ paddingHorizontal: number }>`
+  padding-horizontal: ${({ paddingHorizontal }) => paddingHorizontal}px;
   padding-vertical: 8px;
 `;
 
 interface Props {
   title: string;
   opened?: boolean;
+  paddingHorizontal?: number;
 }
 
-const Folding: React.FC<Props> = ({ title, opened = false, children }) => {
+const Folding: React.FC<Props> = ({
+  title,
+  opened = false,
+  paddingHorizontal = 18,
+  children,
+}) => {
   const [open, setOpen] = useState(opened);
 
   useEffect(() => {
@@ -66,7 +72,7 @@ const Folding: React.FC<Props> = ({ title, opened = false, children }) => {
       {open && (
         <>
           <Divider />
-          <Content>{children}</Content>
+          <Content paddingHorizontal={paddingHorizontal}>{children}</Content>
         </>
       )}
       <Divider />

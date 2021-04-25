@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
-import { Dimensions, Platform } from 'react-native';
-// eslint-disable-next-line import/default
-import Swiper from 'react-native-swiper';
+import { Dimensions } from 'react-native';
+import Carousel from 'react-native-snap-carousel';
 
 // Components
 import BarChart from './BarChart';
@@ -18,6 +17,7 @@ import { PartyChartChartData } from './PartyChart/Component';
 import { ConstituencyContext } from '../../../../../context/Constituency';
 import { InitialStateContext } from '../../../../../context/InitialStates';
 import { styled } from '../../../../../styles';
+import { CarouselPagination } from '../../../../../components/misc/Pagination';
 
 export const { width, height } = Dimensions.get('window');
 
@@ -67,10 +67,9 @@ const RepresentativeTextBlack = styled(RepresentativeText)`
   color: #000;
 `;
 
-const SwiperStyled = styled(Swiper).attrs({
+const SwiperStyled = styled(Carousel).attrs({
   paginationStyle: { bottom: 14 },
 })`
-  height: ${Platform.OS === 'ios' ? 'auto' : '400px'};
   max-height: 400px;
 `;
 
@@ -87,6 +86,7 @@ export const GovernmentVoteResults: React.FC<Props> = ({
   procedureId,
   voted,
 }) => {
+  const [activeSlide, setActiveSlide] = useState<number>(0);
   const [pieChartWidth, setPieChartWidth] = useState(
     Math.min(Dimensions.get('window').width, Dimensions.get('window').height),
   );
@@ -223,7 +223,20 @@ export const GovernmentVoteResults: React.FC<Props> = ({
         </DecisionTextView>,
       );
     }
-    return <SwiperStyled loop={false}>{screens}</SwiperStyled>;
+    const renderItem = ({ item }: any) => item;
+
+    return (
+      <>
+        <SwiperStyled
+          data={screens}
+          renderItem={renderItem}
+          sliderWidth={Dimensions.get('window').width}
+          itemWidth={Dimensions.get('window').width}
+          onSnapToItem={setActiveSlide}
+        />
+        <CarouselPagination length={screens.length} active={activeSlide} />
+      </>
+    );
   };
 
   if (
@@ -234,7 +247,10 @@ export const GovernmentVoteResults: React.FC<Props> = ({
       voteResults.abstination)
   ) {
     return (
-      <Folding title="Bundestagsergebnis" opened={!isVerified || voted}>
+      <Folding
+        title="Bundestagsergebnis"
+        opened={!isVerified || voted}
+        paddingHorizontal={0}>
         {renderGovernmentVoteDetails()}
 
         {voteResults.namedVote ? (
