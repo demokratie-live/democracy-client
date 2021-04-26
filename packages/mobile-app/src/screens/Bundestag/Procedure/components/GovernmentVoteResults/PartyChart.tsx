@@ -1,9 +1,7 @@
+import { BarChart } from '@democracy-deutschland/ui';
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
 
-import PartyChartComponent, {
-  PartyChartChartData,
-} from './PartyChart/Component';
 import ChartLegend from '../Charts/ChartLegend';
 
 const Wrapper = styled.View`
@@ -12,26 +10,29 @@ const Wrapper = styled.View`
 
 interface Props {
   width: number;
-  chartData: PartyChartChartData[];
+  chartData: {
+    party: string;
+    values: {
+      label: string;
+      value: number;
+      color: string;
+    }[];
+  }[];
   colors: string[];
   showPercentage: boolean;
 }
 
-const PartyChartGov: React.FC<Props> = ({ chartData, ...props }) => {
+const PartyChartGov: React.FC<Props> = ({ chartData, width, ...props }) => {
   const [partyChartSelected, setPartyChartSelected] = useState(0);
-
-  const partyChartClick = (index: number) => () => {
-    setPartyChartSelected(index);
-  };
 
   return (
     <Wrapper>
-      <PartyChartComponent
-        chartData={chartData}
+      <BarChart
+        data={chartData.map(item => ({ ...item, deviants: item.values }))}
         {...props}
-        onClick={partyChartClick}
-        selected={partyChartSelected}
-        showPercentage
+        setSelectedParty={setPartyChartSelected}
+        selectedParty={partyChartSelected}
+        size={width - 36}
       />
       <ChartLegend data={chartData[partyChartSelected].values} />
     </Wrapper>

@@ -13,7 +13,6 @@ import ChartLegend from '../Charts/ChartLegend';
 import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Folding';
 import PieChart from '../Charts/PieChart';
 import { Procedure_procedure_voteResults } from '../../graphql/query/__generated__/Procedure';
-import { PartyChartChartData } from './PartyChart/Component';
 import { ConstituencyContext } from '../../../../../context/Constituency';
 import { InitialStateContext } from '../../../../../context/InitialStates';
 import { styled } from '../../../../../styles';
@@ -157,34 +156,32 @@ export const GovernmentVoteResults: React.FC<Props> = ({
         color: '#B1B3B4',
       });
     }
-    const dataPartyChart: PartyChartChartData[] = voteResults.partyVotes.map(
-      ({ party, deviants }) => {
-        const partyData: PartyChartChartData = {
-          party: party === 'fraktionslos' ? 'Andere' : party,
-          values: [
-            {
-              label: 'Zustimmungen',
-              value: deviants.yes || 0,
-              color: '#99C93E',
-            },
-            {
-              label: 'Enthaltungen',
-              value: deviants.abstination || 0,
-              color: '#4CB0D8',
-            },
-            { label: 'Ablehnungen', value: deviants.no || 0, color: '#D43194' },
-          ],
-        };
-        if (voteResults.namedVote) {
-          partyData.values.push({
-            label: 'Abwesend',
-            value: deviants.notVoted || 0,
-            color: '#B1B3B4',
-          });
-        }
-        return partyData;
-      },
-    );
+    const dataPartyChart = voteResults.partyVotes.map(({ party, deviants }) => {
+      const partyData = {
+        party: party === 'fraktionslos' ? 'Andere' : party,
+        values: [
+          {
+            label: 'Zustimmungen',
+            value: deviants.yes || 0,
+            color: '#99C93E',
+          },
+          {
+            label: 'Enthaltungen',
+            value: deviants.abstination || 0,
+            color: '#4CB0D8',
+          },
+          { label: 'Ablehnungen', value: deviants.no || 0, color: '#D43194' },
+        ],
+      };
+      if (voteResults.namedVote) {
+        partyData.values.push({
+          label: 'Abwesend',
+          value: deviants.notVoted || 0,
+          color: '#B1B3B4',
+        });
+      }
+      return partyData;
+    });
     const partyColors = ['#D43194', '#4CB0D8', '#99C93E'];
     if (voteResults.namedVote) {
       partyColors.unshift('#B1B3B4');
