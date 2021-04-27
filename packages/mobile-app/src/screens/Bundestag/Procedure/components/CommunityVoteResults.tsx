@@ -55,6 +55,7 @@ const SvgWrapper = styled.View`
 `;
 
 const SwiperStyled = styled(Carousel).attrs({
+  paddingTop: 10,
   paginationStyle: { bottom: 14 },
 })`
   max-height: 430px;
