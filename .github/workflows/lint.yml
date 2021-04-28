@@ -36,7 +36,7 @@ jobs:
   test-ios:
     name: Test detox ios
     needs: lint
-    runs-on: macos-11.0
+    runs-on: macos-latest
     if: ${{ github.event_name == 'pull_request' || github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta' || github.ref == 'refs/heads/master' }}
     steps:
       - name: Checkout
@@ -85,7 +85,7 @@ jobs:
   test-android:
     name: Test detox Android
     needs: lint
-    runs-on: macos-11.0
+    runs-on: macos-latest
     if: ${{ github.event_name == 'pull_request' || github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta' || github.ref == 'refs/heads/master' }}
     strategy:
       matrix:
@@ -170,7 +170,7 @@ jobs:
     name: Build ios
     needs: [lint, test-ios, test-android]
     if: github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta' || github.ref == 'refs/heads/master'
-    runs-on: macos-11.0
+    runs-on: macos-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -220,7 +220,7 @@ jobs:
     name: Build Android
     needs: [lint, test-ios, test-android]
     if: github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta' || github.ref == 'refs/heads/master'
-    runs-on: macos-11.0
+    runs-on: macos-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
