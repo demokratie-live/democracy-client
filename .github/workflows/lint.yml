@@ -38,6 +38,8 @@ jobs:
     needs: lint
     runs-on: macos-latest
     if: ${{ github.event_name == 'pull_request' || github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta' || github.ref == 'refs/heads/master' }}
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_11.6.app/Contents/Developer
     steps:
       - name: Checkout
         uses: actions/checkout@v2
