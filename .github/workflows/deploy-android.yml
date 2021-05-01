@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy Android
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-andriod:
-    name: Build Android
+    name: Deploy Android
     if: github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta' || github.ref == 'refs/heads/master'
     runs-on: macos-latest
     steps:
