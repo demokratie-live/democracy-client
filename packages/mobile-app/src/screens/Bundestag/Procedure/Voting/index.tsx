@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Platform, Dimensions, ActivityIndicator } from 'react-native';
+import { Platform, ActivityIndicator, LayoutChangeEvent } from 'react-native';
 
 import BallotBox from './components/BallotBox';
 
@@ -36,6 +36,7 @@ import {
 const Wrapper = styled.View`
   flex: 1;
   background-color: #fff;
+  margin-horizontal: 18px;
 `;
 
 const ScrollWrapper = styled.ScrollView.attrs({
@@ -106,11 +107,8 @@ interface Props {
 }
 
 export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
-  const [chartWidth] = useState(
-    Math.min(Dimensions.get('screen').width, Dimensions.get('screen').height),
-  );
   const [showWarning, setShowWarning] = useState(true);
-  const [selected, setSelected] = useState(0);
+  const [selectedParty, setSelectedParty] = useState(0);
   const { constituency } = useContext(ConstituencyContext);
   const { localVotes } = useContext(LocalVotesContext);
   const { data: proceduresData } = useQuery<
@@ -123,6 +121,12 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
       pageSize: 999999,
     },
   });
+  const [chartWidth, setChartDimensions] = useState(0);
+
+  const onLayout = (event: LayoutChangeEvent) => {
+    const { width: newWidth } = event.nativeEvent.layout;
+    setChartDimensions(newWidth);
+  };
 
   const onScroll = () => {
     if (showWarning) {
@@ -243,19 +247,14 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
       {
         label: 'Übereinstimmungen',
         color: theme.colors.vote.wom.match,
-        value: data[selected].deviants[0].value,
+        value: data[selectedParty].deviants[0].value,
       },
       {
         label: 'Differenzen',
         color: theme.colors.vote.wom.missmatch,
-        value: data[selected].deviants[1].value,
+        value: data[selectedParty].deviants[1].value,
       },
     ];
-  };
-
-  const onClick = (index: number) => () => {
-    console.log('onClick', index);
-    setSelected(index);
   };
 
   let Content = (
@@ -276,18 +275,19 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
           Deine derzeitige Übereinstimmung mit den Fraktionen
         </Description>
         <BarChart
-          size={chartWidth - 36}
+          width={chartWidth}
+          height={chartWidth}
           data={preparedData}
-          setSelectedParty={onClick}
-          selectedParty={selected}
+          setSelectedParty={setSelectedParty}
+          selectedParty={selectedParty}
         />
         <ChartLegend data={prepareCharLegendData(preparedData)} />
       </>
     );
   }
   return (
-    <Wrapper>
-      <ScrollWrapper onScroll={onScroll}>
+    <Wrapper {...{ onLayout }}>
+      <ScrollWrapper onScroll={onScroll} scrollEventThrottle={1000}>
         <Title>Schon gewusst?</Title>
         {Content}
       </ScrollWrapper>
