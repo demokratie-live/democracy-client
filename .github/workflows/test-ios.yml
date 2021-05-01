@@ -1,10 +1,10 @@
-name: Test
+name: Test iOS
 
 on: pull_request
 
 jobs:
   test-ios:
-    name: Test detox ios
+    name: Test detox iOS
     runs-on: macos-latest
     if: ${{ github.event_name == 'pull_request' || github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta' || github.ref == 'refs/heads/master' }}
     env:
