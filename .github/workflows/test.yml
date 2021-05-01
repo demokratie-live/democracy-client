@@ -1,17 +1,10 @@
 name: Test
 
-on:
-  pull_request:
-    branches-ignore:
-      - internal
-      - alpha
-      - beta
-      - master
+on: pull_request
 
 jobs:
   test-ios:
     name: Test detox ios
-    needs: lint
     runs-on: macos-latest
     if: ${{ github.event_name == 'pull_request' || github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta' || github.ref == 'refs/heads/master' }}
     env:
@@ -62,7 +55,6 @@ jobs:
 
   test-android:
     name: Test detox Android
-    needs: lint
     runs-on: macos-latest
     if: ${{ github.event_name == 'pull_request' || github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta' || github.ref == 'refs/heads/master' }}
     strategy:
