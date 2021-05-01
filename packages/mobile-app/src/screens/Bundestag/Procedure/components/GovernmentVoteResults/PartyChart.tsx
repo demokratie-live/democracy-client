@@ -41,7 +41,7 @@ const PartyChartGov: React.FC<Props> = ({ chartData, width, ...props }) => {
         setSelectedParty={setPartyChartSelected}
         selectedParty={partyChartSelected}
         width={chartWidth}
-        height={chartWidth}
+        height={315}
       />
       <ChartLegend data={chartData[partyChartSelected].values} />
     </Wrapper>

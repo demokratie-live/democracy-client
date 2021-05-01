@@ -195,7 +195,7 @@ export const WomPartyChart: React.FC = () => {
       <ChartWrapper>
         <BarChart
           width={chartWidth - 36}
-          height={chartWidth}
+          height={315}
           data={preparedData}
           setSelectedParty={onClick}
           selectedParty={selectedPartyIndex}
