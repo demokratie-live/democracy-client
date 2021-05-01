@@ -1,0 +1,115 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - internal
+      - alpha
+      - beta
+      - master
+
+jobs:
+  build-ios:
+    name: Build ios
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: "14.x"
+
+      - run: yarn install
+
+      - run: pod install
+        working-directory: packages/mobile-app/ios
+
+      # install fastlane dependencies
+      - run: gem install bundler
+
+      - name: Encrypt GPG secure files
+        run: |
+          brew install gnupg@1.4
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.internal.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.production.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/ios/AuthKey_3Q9U495BMY.p8.gpg
+
+      - name: Fix match prompt issue
+        run: echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: "2.x"
+
+      - name: Fastlane
+        uses: maierj/fastlane-action@v2.0.1
+        with:
+          lane: "ios beta"
+          subdirectory: "packages/mobile-app/ios"
+        env:
+          TRAVIS_BRANCH: ${{ github.ref }}
+          TRAVIS: "true"
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+
+  build-andriod:
+    name: Build Android
+    if: github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta' || github.ref == 'refs/heads/master'
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: "14.x"
+
+      - run: yarn install
+
+      - run: sudo gem install bundler:1.17.3
+
+      - name: Encrypt GPG secure files
+        run: |
+          brew install gnupg@1.4
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/my-release-key.keystore.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/app/src/refactor/google-services.json.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/app/src/internal/google-services.json.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/app/src/alpha/google-services.json.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/app/google-services.json.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/democracy2-release-key.keystore.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.internal.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.production.gpg
+
+      - name: Prepare Fastlane metadata
+        if: github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta'
+        run: ditto fastlane/metadata/${GITHUB_REF:11} fastlane/metadata/android/de-DE/
+        working-directory: packages/mobile-app/android
+
+      - name: Fastlane
+        uses: maierj/fastlane-action@v1.4.0
+        with:
+          lane: "android internal"
+          subdirectory: "packages/mobile-app/android"
+        env:
+          TRAVIS_BRANCH: ${{ github.ref }}
+          TRAVIS: "true"
+          ANDROID_PASS: ${{ secrets.ANDROID_PASS }}
+          BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+          BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+      - name: List builds
+        if: always()
+        run: ls -R app/build/outputs
+        working-directory: packages/mobile-app/android
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: Android Builds
+          path: packages/mobile-app/android/app/build/outputs
