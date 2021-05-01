@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, LayoutChangeEvent } from 'react-native';
 import Header from '../Header';
 import ChartNote from '../ChartNote';
 import { styled } from '../../../styles';
@@ -28,9 +28,9 @@ const Wrapper = styled.View`
 `;
 
 const ChartWrapper = styled.View`
-  padding-horizontal: 18px;
   padding-top: 18px;
-  align-self: center;
+
+  align-items: center;
   width: 100%;
   max-width: ${() =>
     Math.min(
@@ -54,6 +54,12 @@ export const WomPartyChart: React.FC = () => {
       pageSize: 999999,
     },
   });
+  const [chartWidth, setChartDimensions] = useState(0);
+
+  const onLayout = (event: LayoutChangeEvent) => {
+    const { width: newWidth } = event.nativeEvent.layout;
+    setChartDimensions(newWidth);
+  };
 
   let totalProcedures = 0;
   if (proceduresData && proceduresData.partyChartProcedures) {
@@ -175,20 +181,21 @@ export const WomPartyChart: React.FC = () => {
     setWomParty(preparedData[selectedPartyIndex].party);
   }
 
-  const onClick = (index: number) => () => {
+  const onClick = (index: number) => {
     setSelectedPartyIndex(index);
     setWomParty(preparedData[index].party);
   };
 
   return (
-    <Wrapper>
+    <Wrapper {...{ onLayout }}>
       <Header
         totalProcedures={totalProcedures}
         votedProceduresCount={matchingProcedures.length}
       />
       <ChartWrapper>
         <BarChart
-          size={Dimensions.get('window').width - 36}
+          width={chartWidth - 36}
+          height={chartWidth}
           data={preparedData}
           setSelectedParty={onClick}
           selectedParty={selectedPartyIndex}
