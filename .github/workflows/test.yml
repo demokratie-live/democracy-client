@@ -1,0 +1,145 @@
+name: Test
+
+on:
+  pull_request:
+    branches-ignore:
+      - internal
+      - alpha
+      - beta
+      - master
+
+jobs:
+  test-ios:
+    name: Test detox ios
+    needs: lint
+    runs-on: macos-latest
+    if: ${{ github.event_name == 'pull_request' || github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta' || github.ref == 'refs/heads/master' }}
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_11.6.app/Contents/Developer
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: "14.x"
+
+      - run: yarn install
+
+      - name: Prepare Detox
+        run: |
+          brew tap wix/brew
+          brew install applesimutils
+
+      - name: list devices
+        run: applesimutils --list
+
+      - run: pod install
+        working-directory: packages/mobile-app/ios
+
+      - name: Encrypt GPG secure files
+        run: |
+          brew install gnupg@1.4
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.internal.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.production.gpg
+
+      - run: npm install -g detox-cli
+
+      - run: FORCE_BUNDLING=true detox build -c ios.sim.release
+        working-directory: packages/mobile-app
+
+      - run: detox test -c ios.sim.release --record-videos all --take-screenshots all
+        working-directory: packages/mobile-app
+
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: Detox iOS
+          path: packages/mobile-app/artifacts
+
+  test-android:
+    name: Test detox Android
+    needs: lint
+    runs-on: macos-latest
+    if: ${{ github.event_name == 'pull_request' || github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta' || github.ref == 'refs/heads/master' }}
+    strategy:
+      matrix:
+        sdk: [29]
+        device: ["Nexus 5X"]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: "14.x"
+
+      - run: yarn install
+
+      - run: npm install -g detox-cli
+
+      - name: Encrypt GPG secure files
+        run: |
+          brew install gnupg@1.4
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/my-release-key.keystore.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/app/src/refactor/google-services.json.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/app/src/internal/google-services.json.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/app/src/alpha/google-services.json.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/app/google-services.json.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/android/democracy2-release-key.keystore.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.internal.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.production.gpg
+          cp packages/mobile-app/.env.internal packages/mobile-app/.env
+          cp packages/mobile-app/.env.internal packages/mobile-app/.env.development
+
+      - name: Prepare minSdkVerson for Wix DETOX
+        run: yarn postinstall:android-e2e-fix
+
+      - name: Use specific Java version for sdkmanager to work
+        uses: joschi/setup-jdk@v2
+        with:
+          java-version: "8"
+          architecture: "x64"
+
+      - name: Download Android Emulator Image
+        run: |
+          echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-${{ matrix.sdk }};google_apis;x86"
+          echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd --force --name emu --device "${{ matrix.device }}" -k 'system-images;android-${{ matrix.sdk }};google_apis;x86'
+          $ANDROID_HOME/emulator/emulator -list-avds
+
+      - name: Build Test
+        if: ${{ success() }} || ${{ failure() }}
+        run: detox build -c android.emu.internal.release
+        working-directory: packages/mobile-app
+        env:
+          NODE_OPTIONS: --max_old_space_size=4096
+          ANDROID_PASS: ${{ secrets.ANDROID_PASS }}
+
+      - name: Android Emulator
+        timeout-minutes: 10
+        continue-on-error: true
+        run: |
+          echo "Starting emulator"
+          nohup $ANDROID_HOME/emulator/emulator -avd emu -no-audio -no-snapshot -no-window &
+          $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
+          $ANDROID_HOME/platform-tools/adb devices
+          echo "Emulator started"
+
+      - name: Run Test
+        run: |
+          ./e2e/android-anr-fix.sh &
+          yarn start &
+          detox test -c android.emu.internal.release --device-name emu --record-videos all --take-screenshots all
+        working-directory: packages/mobile-app
+
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: Detox Android (${{ matrix.sdk }} - ${{ matrix.device }})
+          path: packages/mobile-app/artifacts
