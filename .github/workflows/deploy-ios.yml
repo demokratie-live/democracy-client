@@ -1,0 +1,58 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - internal
+      - alpha
+      - beta
+      - master
+
+jobs:
+  build-ios:
+    name: Build ios
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: "14.x"
+
+      - run: yarn install
+
+      - run: pod install
+        working-directory: packages/mobile-app/ios
+
+      # install fastlane dependencies
+      - run: gem install bundler
+
+      - name: Encrypt GPG secure files
+        run: |
+          brew install gnupg@1.4
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.internal.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.production.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/ios/AuthKey_3Q9U495BMY.p8.gpg
+
+      - name: Fix match prompt issue
+        run: echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: "2.x"
+
+      - name: Fastlane
+        uses: maierj/fastlane-action@v2.0.1
+        with:
+          lane: "ios beta"
+          subdirectory: "packages/mobile-app/ios"
+        env:
+          TRAVIS_BRANCH: ${{ github.ref }}
+          TRAVIS: "true"
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
