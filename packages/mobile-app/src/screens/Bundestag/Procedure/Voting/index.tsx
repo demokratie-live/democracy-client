@@ -89,6 +89,7 @@ const Description = styled.Text`
   color: ${({ theme }) => theme.oldColors.description};
   padding-horizontal: 18px;
   margin-bottom: 18px;
+  text-align: center;
 `;
 
 type VoteVerificationScreenNavigationProp = StackNavigationProp<
