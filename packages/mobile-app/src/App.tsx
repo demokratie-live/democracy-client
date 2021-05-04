@@ -1,11 +1,12 @@
 import 'proxy-polyfill';
 import './lib/polyfills/string.polyfill.js';
 import React from 'react';
-import { Platform } from 'react-native';
-import { enableScreens } from 'react-native-screens';
-if (Platform.OS === 'ios') {
-  enableScreens();
-}
+// TODO reanable it for performance
+// import { Platform } from 'react-native';
+// import { enableScreens } from 'react-native-screens';
+// if (Platform.OS === 'ios') {
+//   enableScreens();
+// }
 import { InitialStateProvider } from './context/InitialStates';
 import { LocalVotesProvider } from './context/LocalVotes';
 import { Apollo } from './lib/Apollo';
