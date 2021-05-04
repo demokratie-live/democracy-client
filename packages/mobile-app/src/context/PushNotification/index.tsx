@@ -41,17 +41,17 @@ export const PushNotificationProvider: React.FC = ({ children }) => {
   useEffect(() => {
     const subscriptions: EmitterSubscription[] = [];
 
-    subscriptions.push(
-      Notifications.events().registerNotificationReceivedBackground(
-        (notification, completion) => {
-          completion({
-            alert: true,
-            sound: true,
-            badge: false,
-          });
-        },
-      ),
-    );
+    // subscriptions.push(
+    //   Notifications.events().registerNotificationReceivedBackground(
+    //     (notification, completion) => {
+    //       completion({
+    //         alert: true,
+    //         sound: true,
+    //         badge: false,
+    //       });
+    //     },
+    //   ),
+    // );
 
     subscriptions.push(
       Notifications.events().registerNotificationReceivedForeground(

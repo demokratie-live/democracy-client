@@ -18,10 +18,10 @@ const Container = styled.ScrollView.attrs({
 })``;
 
 const Text = styled.Text`
-  font-size: 15;
+  font-size: 15px;
   text-align: center;
-  padding-horizontal: 18;
-  padding-bottom: 11;
+  padding-horizontal: 18px;
+  padding-bottom: 11px;
 `;
 
 const TextGrey = styled(Text)`

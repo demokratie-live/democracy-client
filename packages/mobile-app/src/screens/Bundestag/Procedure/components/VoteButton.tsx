@@ -5,11 +5,11 @@ import Lock from '@democracy-deutschland/mobile-ui/src/components/Icons/Lock';
 const VoteIconButtonWrapper = styled.TouchableOpacity<
   Pick<Props, 'selection' | 'voteSelection' | 'voted'>
 >`
-  width: 88;
-  height: 88;
+  width: 88px;
+  height: 88px;
 
   border-color: rgba(21, 192, 99, 0.8);
-  border-radius: ${88 / 2};
+  border-radius: ${88 / 2}px;
   align-items: center;
   justify-content: center;
   background-color: ${({ selection, voteSelection, voted }) => {
@@ -31,15 +31,15 @@ const VoteIconButtonWrapper = styled.TouchableOpacity<
 
 const LockIconWrapper = styled.View`
   position: absolute;
-  top: -3;
-  right: -3;
+  top: -3px;
+  right: -3px;
   background-color: rgba(255, 255, 255, 0.9);
-  width: 30;
-  height: 30;
+  width: 30px;
+  height: 30px;
   align-items: center;
   justify-content: center;
-  border-radius: 14;
-  border-width: 1;
+  border-radius: 14px;
+  border-width: 1px;
   border-style: dashed;
   border-color: rgba(0, 0, 0, 0.3);
 `;
@@ -50,8 +50,8 @@ const VoteIconButton = styled.Image.attrs(() => ({
   width: null,
   height: null,
 }))`
-  width: 40;
-  height: 40;
+  width: 40px;
+  height: 40px;
 `;
 
 interface Props {

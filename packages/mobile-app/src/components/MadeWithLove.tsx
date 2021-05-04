@@ -5,8 +5,8 @@ import { linking } from '../lib/linking';
 const Wrapper = styled.TouchableOpacity`
   background-color: #efeff4;
   align-items: center;
-  padding-top: 11;
-  height: 50;
+  padding-top: 11px;
+  height: 50px;
 `;
 
 const Text = styled.Text`
@@ -14,7 +14,7 @@ const Text = styled.Text`
 `;
 
 const LinkColorText = styled.Text`
-  color: ${({ theme }) => theme.colors.background.header};
+  color: ${({ theme }) => theme.oldColors.background.header};
 `;
 
 export const MadeWithLove: React.FC = () => (

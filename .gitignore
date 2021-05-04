@@ -7,3 +7,5 @@ yarn-error.log
 /packages/mobile-app/ios/DEMOCRACY.app.dSYM.zip
 google-services.json
 /packages/mobile-app/android/fastlane/release_manager.json
+
+*.p8

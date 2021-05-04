@@ -18,6 +18,9 @@ export const verifyBySidemenu = async () => {
     .withTimeout(20000);
   await element(by.id('StartVerificationButton')).tap();
 
+  await waitFor(element(by.id('VerificationPhoneInput')))
+    .toBeVisible()
+    .withTimeout(20000);
   await element(by.id('VerificationPhoneInput')).typeText(getRandomNumber());
   await element(by.id('VerificationCodeButton')).tap();
 
@@ -25,6 +28,9 @@ export const verifyBySidemenu = async () => {
 
   await element(by.id('VerificationCodeInput')).typeText('000000');
 
+  await waitFor(element(by.text('Später')))
+    .toBeVisible()
+    .withTimeout(20000);
   await element(by.text('Später')).tap();
 
   await element(by.id('BurgerMenuButton')).tap();

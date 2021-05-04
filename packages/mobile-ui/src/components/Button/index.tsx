@@ -15,10 +15,10 @@ interface ContainerProps {
 const Container = styled.TouchableOpacity<ContainerProps>`
   background-color: ${({ color, disabled }) =>
     disabled ? '#979797' : BackgroundColors[color]};
-  height: 60;
+  height: 60px;
   justify-content: center;
-  border-radius: 2;
-  margin-top: 11;
+  border-radius: 2px;
+  margin-top: 11px;
 `;
 
 enum TextColors {
@@ -33,8 +33,8 @@ interface TextProps {
 const ButtonText = styled.Text<TextProps>`
   text-align: center;
   color: ${({ color }) => TextColors[color]};
-  font-size: 17;
-  padding-horizontal: 11;
+  font-size: 17px;
+  padding-horizontal: 11px;
 `;
 
 export interface Props {

@@ -3,12 +3,12 @@ import { Platform } from 'react-native';
 import styled from 'styled-components/native';
 
 const Container = styled.View`
-  border-bottom-width: 1;
+  border-bottom-width: 1px;
   border-color: #979797;
-  padding-bottom: 0;
+  padding-bottom: 0px;
   flex-direction: row;
-  margin-horizontal: 9;
-  max-width: 300;
+  margin-horizontal: 9px;
+  max-width: 300px;
 `;
 
 const Number = styled.TextInput.attrs(() => ({
@@ -18,11 +18,11 @@ const Number = styled.TextInput.attrs(() => ({
   returnKeyType: 'next',
 }))`
   flex: 1;
-  font-size: 24;
+  font-size: 24px;
   color: #000;
   text-align: center;
-  margin-bottom: 0;
-  padding-bottom: 0;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
 `;
 
 interface Props {

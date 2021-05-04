@@ -4,21 +4,21 @@ import styled from 'styled-components/native';
 import ArrowIcon from '../Icons/Arrow';
 
 const Wrapper = styled.View`
-  margin-top: 11;
+  margin-top: 11px;
   background-color: #fff;
-  border-radius: 5;
+  border-radius: 5px;
 `;
 
 const Header = styled.TouchableOpacity`
   flex-direction: row;
-  padding-vertical: 4;
-  padding-horizontal: 18;
+  padding-vertical: 4px;
+  padding-horizontal: 18px;
 `;
 
 const Headline = styled.Text`
   flex: 1;
-  font-size: 17;
-  margin-right: 10;
+  font-size: 17px;
+  margin-right: 10px;
 `;
 
 interface CollapseIconProps extends SvgProps {
@@ -35,22 +35,28 @@ const CollapseIcon = styled(ArrowIcon).attrs(() => ({
 `;
 
 const Divider = styled.View`
-  height: 1;
+  height: 1px;
   background-color: #efeff4;
-  margin-top: 9;
+  margin-top: 9px;
 `;
 
-const Content = styled.View`
-  padding-horizontal: 18;
-  padding-vertical: 8;
+const Content = styled.View<{ paddingHorizontal: number }>`
+  padding-horizontal: ${({ paddingHorizontal }) => paddingHorizontal}px;
+  padding-vertical: 8px;
 `;
 
 interface Props {
   title: string;
   opened?: boolean;
+  paddingHorizontal?: number;
 }
 
-const Folding: React.FC<Props> = ({ title, opened = false, children }) => {
+const Folding: React.FC<Props> = ({
+  title,
+  opened = false,
+  paddingHorizontal = 18,
+  children,
+}) => {
   const [open, setOpen] = useState(opened);
 
   useEffect(() => {
@@ -66,7 +72,7 @@ const Folding: React.FC<Props> = ({ title, opened = false, children }) => {
       {open && (
         <>
           <Divider />
-          <Content>{children}</Content>
+          <Content paddingHorizontal={paddingHorizontal}>{children}</Content>
         </>
       )}
       <Divider />

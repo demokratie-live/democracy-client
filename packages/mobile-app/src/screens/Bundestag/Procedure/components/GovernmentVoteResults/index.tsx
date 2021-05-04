@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
-import { Dimensions, Platform } from 'react-native';
-// eslint-disable-next-line import/default
-import Swiper from 'react-native-swiper';
+import { Dimensions } from 'react-native';
+import Carousel from 'react-native-snap-carousel';
 
 // Components
 import BarChart from './BarChart';
@@ -14,10 +13,10 @@ import ChartLegend from '../Charts/ChartLegend';
 import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Folding';
 import PieChart from '../Charts/PieChart';
 import { Procedure_procedure_voteResults } from '../../graphql/query/__generated__/Procedure';
-import { PartyChartChartData } from './PartyChart/Component';
 import { ConstituencyContext } from '../../../../../context/Constituency';
 import { InitialStateContext } from '../../../../../context/InitialStates';
 import { styled } from '../../../../../styles';
+import { CarouselPagination } from '../../../../../components/misc/Pagination';
 
 export const { width, height } = Dimensions.get('window');
 
@@ -29,49 +28,48 @@ const ScrollView = styled.ScrollView.attrs(() => ({
 
 const PieChartWrapper = styled.View`
   align-self: center;
-  padding-top: 9;
-  padding-horizontal: 36;
+  padding-top: 9px;
+  padding-horizontal: 36px;
   width: 100%;
   max-width: ${() =>
     Math.min(
       380,
       Dimensions.get('window').width,
       Dimensions.get('window').height,
-    )};
+    )}px;
 `;
 
 const DecisionTextView = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  padding-horizontal: 25;
-  padding-bottom: 20;
+  padding-horizontal: 25px;
+  padding-bottom: 20px;
 `;
 
 const DecisionTextHeadline = styled.Text`
-  font-size: 17;
+  font-size: 17px;
 `;
 
 const DecisionText = styled.Text`
   color: rgb(142, 142, 147);
-  padding-top: 18;
+  padding-top: 18px;
 `;
 
 const RepresentativeText = styled.Text`
   color: ${({ theme }) => theme.textColors.secondary};
   text-align: center;
-  font-size: 12;
+  font-size: 12px;
 `;
 
 const RepresentativeTextBlack = styled(RepresentativeText)`
   color: #000;
 `;
 
-const SwiperStyled = styled(Swiper).attrs({
+const SwiperStyled = styled(Carousel).attrs({
   paginationStyle: { bottom: 14 },
 })`
-  height: ${Platform.OS === 'ios' ? 'auto' : 400};
-  max-height: 400;
+  max-height: 400px;
 `;
 
 interface Props {
@@ -87,6 +85,7 @@ export const GovernmentVoteResults: React.FC<Props> = ({
   procedureId,
   voted,
 }) => {
+  const [activeSlide, setActiveSlide] = useState<number>(0);
   const [pieChartWidth, setPieChartWidth] = useState(
     Math.min(Dimensions.get('window').width, Dimensions.get('window').height),
   );
@@ -157,34 +156,32 @@ export const GovernmentVoteResults: React.FC<Props> = ({
         color: '#B1B3B4',
       });
     }
-    const dataPartyChart: PartyChartChartData[] = voteResults.partyVotes.map(
-      ({ party, deviants }) => {
-        const partyData: PartyChartChartData = {
-          party: party === 'fraktionslos' ? 'Andere' : party,
-          values: [
-            {
-              label: 'Zustimmungen',
-              value: deviants.yes || 0,
-              color: '#99C93E',
-            },
-            {
-              label: 'Enthaltungen',
-              value: deviants.abstination || 0,
-              color: '#4CB0D8',
-            },
-            { label: 'Ablehnungen', value: deviants.no || 0, color: '#D43194' },
-          ],
-        };
-        if (voteResults.namedVote) {
-          partyData.values.push({
-            label: 'Abwesend',
-            value: deviants.notVoted || 0,
-            color: '#B1B3B4',
-          });
-        }
-        return partyData;
-      },
-    );
+    const dataPartyChart = voteResults.partyVotes.map(({ party, deviants }) => {
+      const partyData = {
+        party: party === 'fraktionslos' ? 'Andere' : party,
+        values: [
+          {
+            label: 'Zustimmungen',
+            value: deviants.yes || 0,
+            color: '#99C93E',
+          },
+          {
+            label: 'Enthaltungen',
+            value: deviants.abstination || 0,
+            color: '#4CB0D8',
+          },
+          { label: 'Ablehnungen', value: deviants.no || 0, color: '#D43194' },
+        ],
+      };
+      if (voteResults.namedVote) {
+        partyData.values.push({
+          label: 'Abwesend',
+          value: deviants.notVoted || 0,
+          color: '#B1B3B4',
+        });
+      }
+      return partyData;
+    });
     const partyColors = ['#D43194', '#4CB0D8', '#99C93E'];
     if (voteResults.namedVote) {
       partyColors.unshift('#B1B3B4');
@@ -223,7 +220,20 @@ export const GovernmentVoteResults: React.FC<Props> = ({
         </DecisionTextView>,
       );
     }
-    return <SwiperStyled loop={false}>{screens}</SwiperStyled>;
+    const renderItem = ({ item }: any) => item;
+
+    return (
+      <>
+        <SwiperStyled
+          data={screens}
+          renderItem={renderItem}
+          sliderWidth={Dimensions.get('window').width}
+          itemWidth={Dimensions.get('window').width}
+          onSnapToItem={setActiveSlide}
+        />
+        <CarouselPagination length={screens.length} active={activeSlide} />
+      </>
+    );
   };
 
   if (
@@ -234,7 +244,10 @@ export const GovernmentVoteResults: React.FC<Props> = ({
       voteResults.abstination)
   ) {
     return (
-      <Folding title="Bundestagsergebnis" opened={!isVerified || voted}>
+      <Folding
+        title="Bundestagsergebnis"
+        opened={!isVerified || voted}
+        paddingHorizontal={0}>
         {renderGovernmentVoteDetails()}
 
         {voteResults.namedVote ? (

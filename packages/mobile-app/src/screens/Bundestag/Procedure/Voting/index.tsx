@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Platform, Dimensions, ActivityIndicator } from 'react-native';
+import { Platform, ActivityIndicator, LayoutChangeEvent } from 'react-native';
 
 import BallotBox from './components/BallotBox';
 
@@ -14,7 +14,6 @@ import { BundestagRootStackParamList } from '../../../../routes/Sidebar/Bundesta
 import { RouteProp } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { ConstituencyContext } from '../../../../context/Constituency';
-import PartyChart from '../components/GovernmentVoteResults/PartyChart/Component';
 import { ChartData } from '../../../WahlOMeter/Bundestag/VotedProceduresWrapper';
 import {
   PartyChartData,
@@ -26,12 +25,18 @@ import { LocalVotesContext } from '../../../../context/LocalVotes';
 import { useQuery } from '@apollo/client';
 import ChartLegend from '../components/Charts/ChartLegend';
 import NoVotesPlaceholder from '../../../WahlOMeter/NoVotesPlaceholder';
-import { styled } from '../../../../styles';
+import { styled, theme } from '../../../../styles';
 import { Centered } from '@democracy-deutschland/mobile-ui/src/components/shared/Centered';
+import {
+  BarChart,
+  ChartLegendData,
+  WomPartyChartData,
+} from '@democracy-deutschland/ui';
 
 const Wrapper = styled.View`
   flex: 1;
   background-color: #fff;
+  margin-horizontal: 18px;
 `;
 
 const ScrollWrapper = styled.ScrollView.attrs({
@@ -45,24 +50,24 @@ const ScrollWrapper = styled.ScrollView.attrs({
 `;
 
 const Title = styled.Text`
-  padding-top: 9;
-  padding-horizontal: 18;
-  font-size: 34;
-  padding-bottom: 9;
+  padding-top: 9px;
+  padding-horizontal: 18px;
+  font-size: 34px;
+  padding-bottom: 9px;
 `;
 
 const WarnWrapper = styled.View`
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 130;
+  left: 0px;
+  right: 0px;
+  bottom: 130px;
   background-color: rgba(0, 0, 0, 0);
 `;
 
 const WarnTextWrapper = styled.View`
   align-items: center;
   justify-content: center;
-  padding-vertical: 11;
+  padding-vertical: 11px;
   background-color: rgb(255, 255, 255);
   opacity: 0.9;
 `;
@@ -70,20 +75,21 @@ const WarnTextWrapper = styled.View`
 const WarnText = styled.Text`
   text-align: center;
   color: rgb(0, 0, 0);
-  font-size: 13;
+  font-size: 13px;
 `;
 
 const BalloutBoxWrapper = styled.View`
-  height: 130;
+  height: 130px;
   background-color: rgba(250, 250, 250, 0.9);
-  border-top-width: 1;
+  border-top-width: 1px;
   border-top-color: rgba(68, 148, 211, 0.1);
 `;
 
 const Description = styled.Text`
-  color: ${({ theme }) => theme.colors.description};
-  padding-horizontal: 18;
-  margin-bottom: 18;
+  color: ${({ theme }) => theme.oldColors.description};
+  padding-horizontal: 18px;
+  margin-bottom: 18px;
+  text-align: center;
 `;
 
 type VoteVerificationScreenNavigationProp = StackNavigationProp<
@@ -102,11 +108,8 @@ interface Props {
 }
 
 export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
-  const [chartWidth] = useState(
-    Math.min(Dimensions.get('screen').width, Dimensions.get('screen').height),
-  );
   const [showWarning, setShowWarning] = useState(true);
-  const [selected, setSelected] = useState(0);
+  const [selectedParty, setSelectedParty] = useState(0);
   const { constituency } = useContext(ConstituencyContext);
   const { localVotes } = useContext(LocalVotesContext);
   const { data: proceduresData } = useQuery<
@@ -119,6 +122,12 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
       pageSize: 999999,
     },
   });
+  const [chartWidth, setChartDimensions] = useState(0);
+
+  const onLayout = (event: LayoutChangeEvent) => {
+    const { width: newWidth } = event.nativeEvent.layout;
+    setChartDimensions(newWidth);
+  };
 
   const onScroll = () => {
     if (showWarning) {
@@ -140,7 +149,7 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
     matchingProcedures: PartyChartData_partyChartProcedures_procedures[];
     votedProcedures: PartyChartData;
     localVotes: ChainEntry[];
-  }) => {
+  }): WomPartyChartData[] => {
     const chartData = matchingProcedures.reduce<{
       [party: string]: { diffs: number; matches: number };
     }>((prev, { voteResults, procedureId: itemProcedureId }) => {
@@ -198,9 +207,9 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
       return prev;
     }, {});
     return Object.keys(chartData)
-      .map(key => ({
+      .map<WomPartyChartData>(key => ({
         party: key,
-        values: [
+        deviants: [
           {
             label: 'Übereinstimmungen',
             value: chartData[key].matches,
@@ -213,10 +222,10 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
           },
         ],
       }))
-      .sort((a, b) => b.values[0].value - a.values[0].value);
+      .sort((a, b) => b.deviants[0].value - a.deviants[0].value);
   };
 
-  let preparedData: ReturnType<typeof partyChartData> | null = null;
+  let preparedData: WomPartyChartData[] | null = null;
 
   if (proceduresData) {
     const chartData = {
@@ -232,23 +241,21 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
     });
   }
 
-  const prepareCharLegendData = (data: ReturnType<typeof partyChartData>) => {
+  const prepareCharLegendData = (
+    data: ReturnType<typeof partyChartData>,
+  ): ChartLegendData[] => {
     return [
       {
         label: 'Übereinstimmungen',
-        value: data[selected].values[0].value,
-        color: '#f5a623',
+        color: theme.colors.vote.wom.match,
+        value: data[selectedParty].deviants[0].value,
       },
       {
         label: 'Differenzen',
-        value: data[selected].values[1].value,
-        color: '#b1b3b4',
+        color: theme.colors.vote.wom.missmatch,
+        value: data[selectedParty].deviants[1].value,
       },
     ];
-  };
-
-  const onClick = (index: number) => () => {
-    setSelected(index);
   };
 
   let Content = (
@@ -268,21 +275,20 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
         <Description>
           Deine derzeitige Übereinstimmung mit den Fraktionen
         </Description>
-        <PartyChart
+        <BarChart
           width={chartWidth}
-          chartData={preparedData}
-          onClick={onClick}
-          selected={selected}
-          showPercentage
-          colors={['#b1b3b4', '#f5a623']}
+          height={chartWidth}
+          data={preparedData}
+          setSelectedParty={setSelectedParty}
+          selectedParty={selectedParty}
         />
         <ChartLegend data={prepareCharLegendData(preparedData)} />
       </>
     );
   }
   return (
-    <Wrapper>
-      <ScrollWrapper onScroll={onScroll}>
+    <Wrapper {...{ onLayout }}>
+      <ScrollWrapper onScroll={onScroll} scrollEventThrottle={1000}>
         <Title>Schon gewusst?</Title>
         {Content}
       </ScrollWrapper>

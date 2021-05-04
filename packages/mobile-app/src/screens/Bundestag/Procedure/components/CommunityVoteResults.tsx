@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
-import { ActivityIndicator, Dimensions, Platform } from 'react-native';
-// eslint-disable-next-line import/default
-import Swiper from 'react-native-swiper'; // TODO Replace this library (it's not good maintained)
+import React, { useContext, useState } from 'react';
+import { ActivityIndicator, Dimensions } from 'react-native';
+import Carousel from 'react-native-snap-carousel';
 // Components
 import getConstituencySvgs from './svgs/constituencies';
 import GermanySvgComponent from './svgs/GermanySVG';
@@ -18,60 +17,65 @@ import {
 import { ConstituencyContext } from '../../../../context/Constituency';
 import { InitialStateContext } from '../../../../context/InitialStates';
 import { styled } from '../../../../styles';
+import { CarouselPagination } from '../../../../components/misc/Pagination';
 
 export const { width, height } = Dimensions.get('window');
 
 const RepresentativeText = styled.Text`
   color: ${({ theme }) => theme.textColors.secondary};
   text-align: center;
-  font-size: 12;
-  padding-bottom: 18;
-  padding-horizontal: 24;
+  font-size: 12px;
+  padding-bottom: 18px;
+  padding-horizontal: 24px;
 `;
 
 const CommunitySegmentText = styled.Text`
   color: rgb(142, 142, 147);
-  font-size: 12;
-  padding-top: 8;
-  padding-bottom: 16;
+  font-size: 12px;
+  padding-top: 8px;
+  padding-bottom: 16px;
 `;
 
 const PieChartWrapper = styled.View`
   align-self: center;
-  padding-horizontal: 36;
+  padding-horizontal: 36px;
   width: 100%;
   max-width: ${() =>
     Math.min(
       380,
       Dimensions.get('window').width,
       Dimensions.get('window').height,
-    )};
+    )}px;
 `;
 
 const SvgWrapper = styled.View`
   position: absolute;
-  top: 8;
-  right: 22;
+  top: 8px;
+  right: 22px;
 `;
 
-const SwiperStyled = styled(Swiper).attrs({
+const SwiperStyled = styled(Carousel).attrs({
+  paddingTop: 10,
   paginationStyle: { bottom: 14 },
 })`
-  height: ${Platform.OS === 'ios' ? 'auto' : 430};
-  max-height: 430;
+  max-height: 430px;
 `;
 
 interface Props {
   voteResults: Procedure_procedure_communityVotes;
   voted: boolean;
+  countryMap: React.ReactElement;
 }
 
 export const CommunityVoteResults: React.FC<Props> = ({
   voteResults,
   voted,
+  countryMap,
 }) => {
   const { constituency: myConstituency } = useContext(ConstituencyContext);
   const { isVerified } = useContext(InitialStateContext);
+  const [activeSlide, setActiveSlide] = useState<number>(0);
+
   const renderCommuntiyResult = (
     comunnityResults:
       | Procedure_procedure_communityVotes
@@ -150,9 +154,22 @@ export const CommunityVoteResults: React.FC<Props> = ({
   if (myConstituency && voteResults.constituencies[0]) {
     screens.push(renderCommuntiyResult(voteResults.constituencies[0]));
   }
+  screens.push(countryMap);
+
+  const renderItem = ({ item }: any) => item;
   return (
-    <Folding title="Communityergebnis" opened={!isVerified || voted}>
-      <SwiperStyled loop={false}>{screens}</SwiperStyled>
+    <Folding
+      title="Communityergebnis"
+      opened={!isVerified || voted}
+      paddingHorizontal={0}>
+      <SwiperStyled
+        data={screens}
+        renderItem={renderItem}
+        sliderWidth={Dimensions.get('window').width}
+        itemWidth={Dimensions.get('window').width}
+        onSnapToItem={setActiveSlide}
+      />
+      <CarouselPagination length={screens.length} active={activeSlide} />
       <RepresentativeText>
         Dieses Ergebnis wurde nicht auf seine Repräsentativität überprüft.
       </RepresentativeText>

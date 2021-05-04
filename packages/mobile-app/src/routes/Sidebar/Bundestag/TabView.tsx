@@ -24,7 +24,7 @@ const TabNavigation = createMaterialTopTabNavigator<TopTabParamList>();
 
 const HaderRightWrapper = styled.View`
   flex-direction: row;
-  padding-right: 11;
+  padding-right: 11px;
 `;
 
 type ScreenNavigationProp = StackNavigationProp<
@@ -75,7 +75,7 @@ const TabViewNavigation: React.FC<Props> = ({ navigation }) => {
           backgroundColor: '#fff',
         },
         activeTintColor: 'rgb(255,255,255)',
-        inactiveTintColor: theme.colors.headerTextSecondary,
+        inactiveTintColor: theme.oldColors.headerTextSecondary,
         style: {
           backgroundColor: '#4494D3',
         },

@@ -40,6 +40,7 @@ import {
 import { TOGGLE_NOTIFICATION } from './graphql/muatation/toggleNotification';
 import { NotificationsContext } from '../../../context/NotificationPermission';
 import { RootStackParamList } from '../../../routes';
+import { CountryMap } from './components/CountryMap';
 
 const Container = styled.ScrollView.attrs({
   scrollIndicatorInsets: { right: 1 }, // TODO do cleanfix when there is a correct solution (already closed but not solved without workaround) https://github.com/facebook/react-native/issues/26610
@@ -49,14 +50,14 @@ const Container = styled.ScrollView.attrs({
 
 const HaderRightWrapper = styled.View`
   flex-direction: row;
-  padding-right: 11;
+  padding-right: 11px;
 `;
 
 const DetailsContainer = styled.View`
-  padding-horizontal: 8;
-  margin-top: 18;
-  padding-vertical: 11;
-  border-top-width: 1;
+  padding-horizontal: 8px;
+  margin-top: 18px;
+  padding-vertical: 11px;
+  border-top-width: 1px;
   border-color: rgba(68, 148, 211, 0.1);
 `;
 
@@ -294,7 +295,11 @@ export const Procedure: FC<Props> = ({ route, navigation }) => {
 
       {communityVotes &&
         ((voteEnd && new Date(voteEnd) < new Date()) || voted) && (
-          <CommunityVoteResults voteResults={communityVotes} voted={voted} />
+          <CommunityVoteResults
+            countryMap={<CountryMap key="countryMap" {...{ procedureId }} />}
+            voteResults={communityVotes}
+            voted={voted}
+          />
         )}
       {voteResults && (
         <GovernmentVoteResults

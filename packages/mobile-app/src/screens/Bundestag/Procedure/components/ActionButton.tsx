@@ -12,11 +12,11 @@ import { theme } from '../../../../styles';
 const VoteIconButtonWrapper = styled.TouchableOpacity<
   Pick<Props, 'selection' | 'voteSelection' | 'voted'>
 >`
-  width: 88;
-  height: 88;
+  width: 88px;
+  height: 88px;
 
   border-color: rgba(21, 192, 99, 0.8);
-  border-radius: ${88 / 2};
+  border-radius: ${88 / 2}px;
   align-items: center;
   justify-content: center;
   background-color: ${({ selection, voteSelection, voted }) => {
@@ -45,8 +45,8 @@ const VoteIconButton = styled.Image.attrs<{ source: ImageSourcePropType }>(
     height: null,
   }),
 )`
-  width: 45;
-  height: 45;
+  width: 45px;
+  height: 45px;
 `;
 
 interface Props {
@@ -108,7 +108,7 @@ const ActionButton: React.FC<Props> = ({
         <Text
           style={{
             fontSize: 60,
-            color: theme.colors.headerText,
+            color: theme.oldColors.headerText,
             fontWeight: '200',
           }}>
           ?

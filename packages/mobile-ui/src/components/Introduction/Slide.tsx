@@ -11,9 +11,9 @@ const Container = styled.View`
   background: #fff;
   padding-top: ${() => {
     return Platform.OS === 'ios' ? 24 : 8;
-  }};
-  padding-left: 18;
-  padding-right: 18;
+  }}px;
+  padding-left: 18px;
+  padding-right: 18px;
 `;
 
 const ContainerHead = styled.View``;
@@ -25,8 +25,8 @@ const ContainerText = styled.View`
 
 const TextHead = styled.Text`
   color: #000;
-  font-size: 22;
-  padding-top: 15;
+  font-size: 22px;
+  padding-top: 15px;
   font-family: ${Platform.OS === 'ios'
     ? 'HelveticaNeue-Thin'
     : 'sans-serif-light'};
@@ -34,19 +34,19 @@ const TextHead = styled.Text`
 
 const TextSub = styled.Text`
   color: ${({ theme }) => theme.textColors.secondary};
-  font-size: 15;
-  padding-top: 1;
+  font-size: 15px;
+  padding-top: 1px;
   text-align: center;
-  margin-bottom: 18;
+  margin-bottom: 18px;
 `;
 
 const ContainerImages = styled.View`
   flex: 1;
   width: 100%;
-  max-width: 600;
+  max-width: 600px;
   justify-content: center;
   align-items: center;
-  min-height: 518;
+  min-height: 518px;
 `;
 
 const ContainerCenterImage = styled.View`
@@ -57,40 +57,40 @@ const ContainerCenterImage = styled.View`
 const ImageTranspContainer = styled.View`
   position: absolute;
   background-color: #fff;
-  border-radius: 40;
+  border-radius: 40px;
 `;
 
 const ImageLeft = styled.Image`
   opacity: 0.4;
-  margin-top: 50;
+  margin-top: 50px;
 `;
 
 const ImageRight = styled.Image`
   opacity: 0.4;
-  margin-top: 50;
+  margin-top: 50px;
 `;
 
 const ImageCenter = styled.Image``;
 
 const ButtonCircle = styled.TouchableOpacity`
   position: absolute;
-  right: -20;
-  top: 165;
+  right: -20px;
+  top: 165px;
 `;
 const ButtonVerify = styled.TouchableOpacity`
-  bottom: 175;
+  bottom: 175px;
   background-color: rgb(126, 211, 33);
-  border-radius: 8;
-  width: 180;
-  height: 41;
+  border-radius: 8px;
+  width: 180px;
+  height: 41px;
   position: absolute;
 `;
 
 const TextVerify = styled.Text`
   color: #fff;
-  font-size: 22;
+  font-size: 22px;
   text-align: center;
-  padding-top: 6;
+  padding-top: 6px;
   font-family: ${Platform.OS === 'ios'
     ? 'HelveticaNeue-Thin'
     : 'sans-serif-light'};
@@ -102,8 +102,8 @@ export const NewMarker = styled.Image.attrs({
   source: require('./assets/icon.new.png'),
 })`
   position: absolute;
-  top: 28;
-  left: 18;
+  top: 28px;
+  left: 18px;
 `;
 
 export interface Slide {

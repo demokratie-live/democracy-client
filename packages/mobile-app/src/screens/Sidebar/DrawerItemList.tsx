@@ -5,6 +5,7 @@ import { CommonActions } from '@react-navigation/core';
 import {
   DrawerActions,
   DrawerNavigationState,
+  ParamListBase,
 } from '@react-navigation/routers';
 import { DrawerContentOptions, DrawerItem } from '@react-navigation/drawer';
 import { View } from 'react-native';
@@ -15,11 +16,11 @@ import {
 import { styled } from '../../styles';
 
 const Space = styled.View`
-  padding-bottom: 18;
+  padding-bottom: 18px;
 `;
 
 type Props = Omit<DrawerContentOptions, 'contentContainerStyle' | 'style'> & {
-  state: DrawerNavigationState;
+  state: DrawerNavigationState<ParamListBase>;
   navigation: DrawerNavigationHelpers;
   descriptors: DrawerDescriptorMap;
 };

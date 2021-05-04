@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components/native';
 import { Platform } from 'react-native';
-import Svg, { Rect, Text as SvgText, G } from 'react-native-svg';
+import Svg from 'react-native-svg';
 
 // Components
 import Header from '../Header';
@@ -15,33 +15,35 @@ import { ChainEntry } from '../../../lib/VotesLocal';
 import { VoteSelection } from '../../../../__generated__/globalTypes';
 import InfoIconComponent from '@democracy-deutschland/mobile-ui/src/components/Icons/Info';
 import { ScreenNavigationProp } from '../../../routes/Sidebar/WahlOMeter/TabView';
+import { Bar } from '@democracy-deutschland/ui';
+import { theme as appTheme } from '../../../styles';
 
 const Wrapper = styled.View`
-  padding-top: 18;
+  padding-top: 18px;
 `;
 
 const MemberImageWrapper = styled.TouchableOpacity`
-  width: 200;
-  height: 275;
+  width: 200px;
+  height: 275px;
   align-items: center;
-  padding-bottom: 8;
+  padding-bottom: 8px;
 `;
 
 const MemberImage = styled.Image.attrs({
   resizeMode: 'contain',
 })`
   flex: 1;
-  height: 175;
-  width: 200;
-  border-radius: 100;
-  border-width: ${() => (Platform.OS === 'ios' ? 1 : 0)};
+  height: 175px;
+  width: 200px;
+  border-radius: 100px;
+  border-width: ${() => (Platform.OS === 'ios' ? 1 : 0)}px;
   border-color: lightgray;
 `;
 
 const Party = styled(PartyComponent)`
   position: absolute;
-  right: 0;
-  bottom: 30;
+  right: 0px;
+  bottom: 30px;
 `;
 
 const InfoIconButton = styled.TouchableOpacity``;
@@ -51,14 +53,14 @@ const InfoIcon = styled(InfoIconComponent).attrs(() => ({
   height: 18,
   color: 'rgb(199, 199, 204)',
 }))`
-  margin-left: ${({ theme }) => theme.distances.small};
+  margin-left: ${({ theme }) => theme.distances.small}px;
 `;
 
 const DeputyDetailsWrapper = styled.View`
   flex-direction: row;
   align-items: center;
   position: relative;
-  left: 20;
+  left: 20px;
 `;
 
 const NameWrapper = styled.View`
@@ -66,7 +68,7 @@ const NameWrapper = styled.View`
 `;
 
 const Text = styled.Text`
-  font-size: 15;
+  font-size: 15px;
 `;
 
 const TextLighGrey = styled(Text)`
@@ -74,6 +76,11 @@ const TextLighGrey = styled(Text)`
 `;
 
 const ChartWrapper = styled.View`
+  align-items: center;
+`;
+
+const BarSvgWrapper = styled(Svg)`
+  margin-top: 11px;
   align-items: center;
 `;
 
@@ -152,27 +159,11 @@ class Wahlkreis extends PureComponent<Props> {
           chartData,
           deputy: { imgURL, party, constituency, name },
         }) => {
-          const WIDTH = 300;
           const matchingProcedures = getMatchingProcedures(chartData);
           const preparedData = pieChartData({
             ...chartData,
             matchingProcedures,
           });
-
-          // Prepare Data
-          let preValues = 0;
-          let rowValues = preparedData.map(rowChartData => {
-            const width =
-              (rowChartData.value / rowChartData.total) * 100 + preValues;
-            preValues = width;
-            return {
-              ...rowChartData,
-              value: width,
-            };
-          });
-          rowValues = [...rowValues].reverse();
-
-          const getPercentagePosition = (WIDTH / 100) * rowValues[1].value;
 
           if (matchingProcedures.length > 0) {
             return (
@@ -203,45 +194,24 @@ class Wahlkreis extends PureComponent<Props> {
                       <InfoIcon />
                     </InfoIconButton>
                   </DeputyDetailsWrapper>
-                  <Svg
-                    viewBox={`0 0 ${WIDTH} 37`}
-                    style={{ width: '100%', height: 37, marginTop: 8 }}
-                    preserveAspectRatio={'false'}>
-                    <G x="0" y="8">
-                      {rowValues.map(({ label, value, color }) => {
-                        return (
-                          <Rect
-                            key={label}
-                            x="0"
-                            y="0"
-                            width={(WIDTH / 100) * value}
-                            rx="3"
-                            ry="3"
-                            height="20"
-                            fill={color}
-                          />
-                        );
-                      })}
-                      {
-                        <SvgText
-                          fill="#4a4a4a"
-                          fontSize="12"
-                          x={
-                            rowValues[1].value > 18
-                              ? getPercentagePosition - 5
-                              : getPercentagePosition + 5
-                          }
-                          y="15"
-                          textAnchor={
-                            rowValues[1].value > 18 ? 'end' : 'start'
-                          }>
-                          {`${rowValues[1].value
-                            .toFixed(1)
-                            .replace('.', ',')}%`}
-                        </SvgText>
-                      }
-                    </G>
-                  </Svg>
+
+                  <BarSvgWrapper width={300} height={30}>
+                    <Bar
+                      width={300}
+                      height={30}
+                      data={[
+                        {
+                          value: 1,
+                          color: appTheme.colors.vote.wom.match,
+                        },
+                        {
+                          value: 2,
+                          color: appTheme.colors.vote.wom.missmatch,
+                        },
+                      ]}
+                      active
+                    />
+                  </BarSvgWrapper>
                 </ChartWrapper>
                 <ChartLegend data={preparedData} />
                 <ChartNote>

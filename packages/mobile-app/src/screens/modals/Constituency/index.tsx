@@ -13,24 +13,24 @@ import { RootStackParamList } from '../../../routes';
 
 const Wrapper = styled.View`
   flex: 1;
-  background-color: ${({ theme }) => theme.colors.background.main};
+  background-color: ${({ theme }) => theme.oldColors.background.main};
 `;
 
 const SearchBox = styled.View`
-  height: 44;
-  background-color: ${({ theme }) => theme.colors.background.header};
+  height: 44px;
+  background-color: ${({ theme }) => theme.oldColors.background.header};
 `;
 
 const SearchInputWrapper = styled.View`
   flex: 1;
   background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 5.5;
+  border-radius: 5.5px;
   flex-direction: row;
   align-items: center;
-  padding-left: 6;
-  height: 15;
-  margin-horizontal: 8;
-  margin-vertical: 8;
+  padding-left: 6px;
+  height: 15px;
+  margin-horizontal: 8px;
+  margin-vertical: 8px;
 `;
 
 const SearchInputIcon = styled(SearchIcon).attrs(() => ({
@@ -49,29 +49,29 @@ const SearchInput = styled.TextInput.attrs(() => ({
   autoCorrect: false,
 }))`
   flex: 1;
-  font-size: 14;
-  height: ${Platform.OS === 'ios' ? 28 : 50};
-  padding-horizontal: 6;
+  font-size: 14px;
+  height: ${Platform.OS === 'ios' ? 28 : 50}px;
+  padding-horizontal: 6px;
   color: #000;
 `;
 
 const FlatListWrapper = styled.View``;
 
 const Title = styled.Text`
-  font-size: 17;
+  font-size: 17px;
 `;
 
 const Plz = styled.Text.attrs({
   numberOfLines: 1,
 })`
-  font-size: 15;
+  font-size: 15px;
   color: ${({ theme }) => theme.textColors.secondary};
 `;
 
 const Row = styled.TouchableOpacity`
   flex-direction: row;
-  padding-vertical: 12;
-  padding-horizontal: 12;
+  padding-vertical: 12px;
+  padding-horizontal: 12px;
   border-bottom-color: #bcbbc1;
   border-bottom-width: 0.5;
   align-items: center;
@@ -83,20 +83,20 @@ const Row = styled.TouchableOpacity`
 //   name: 'ios-checkmark-circle',
 // }))`
 //   position: absolute;
-//   left: 50;
-//   bottom: 10;
+//   left: 50px;
+//   bottom: 10px;
 // `;
 
 const RowTextWrapper = styled.View`
   flex: 1;
-  padding-left: 12;
+  padding-left: 12px;
 `;
 
 const Checkmark = styled.Text`
   color: #16c063;
-  font-size: 18;
+  font-size: 18px;
   font-weight: bold;
-  margin-left: 8;
+  margin-left: 8px;
 `;
 
 type ConstituencScreenRouteProp = RouteProp<RootStackParamList, 'Constituency'>;

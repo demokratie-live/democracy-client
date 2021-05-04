@@ -12,12 +12,12 @@ import { Notification } from '.';
 import { defaultNotificationData } from './data';
 
 const Wrapper = styled.View`
-  background-color: ${({ theme }) => theme.colors.background.secondary};
+  background-color: ${({ theme }) => theme.oldColors.background.secondary};
   flex: 1;
 `;
 
 const Text = styled.Text`
-  font-size: 17;
+  font-size: 17px;
   margin-right: auto;
 `;
 

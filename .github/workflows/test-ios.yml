@@ -1,0 +1,54 @@
+name: Test iOS
+
+on: pull_request
+
+jobs:
+  test-ios:
+    name: Test detox iOS
+    runs-on: macos-latest
+    if: ${{ github.event_name == 'pull_request' || github.ref == 'refs/heads/internal' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta' || github.ref == 'refs/heads/master' }}
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_11.6.app/Contents/Developer
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: "14.x"
+
+      - run: yarn install
+
+      - name: Prepare Detox
+        run: |
+          brew tap wix/brew
+          brew install applesimutils
+
+      - name: list devices
+        run: applesimutils --list
+
+      - run: pod install
+        working-directory: packages/mobile-app/ios
+
+      - name: Encrypt GPG secure files
+        run: |
+          brew install gnupg@1.4
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.internal.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.alpha.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.beta.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 packages/mobile-app/.env.production.gpg
+
+      - run: npm install -g detox-cli
+
+      - run: FORCE_BUNDLING=true detox build -c ios.sim.release
+        working-directory: packages/mobile-app
+
+      - run: detox test -c ios.sim.release --record-videos all --take-screenshots all
+        working-directory: packages/mobile-app
+
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: Detox iOS
+          path: packages/mobile-app/artifacts

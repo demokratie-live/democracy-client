@@ -1,8 +1,7 @@
 import React, { useContext, useState } from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, LayoutChangeEvent } from 'react-native';
 import Header from '../Header';
 import ChartNote from '../ChartNote';
-import PartyChart from '../../Bundestag/Procedure/components/GovernmentVoteResults/PartyChart/Component';
 import { styled } from '../../../styles';
 import {
   PartyChartData,
@@ -15,19 +14,29 @@ import { ListLoading } from '@democracy-deutschland/mobile-ui/src/components/sha
 import { ChartData } from '../Bundestag/VotedProceduresWrapper';
 import { Segment } from '../../Bundestag/List/Components/Segment';
 import { WomPartyContext } from './context';
-import ChartLegend from '../../Bundestag/Procedure/components/Charts/ChartLegend';
+import ChartLegend, {
+  ChartLegendData,
+} from '../../Bundestag/Procedure/components/Charts/ChartLegend';
+import {
+  BarChart,
+  BarChartProps,
+  WomPartyChartData,
+} from '@democracy-deutschland/ui';
 
 const Wrapper = styled.View`
   padding-top: 18px;
 `;
 
 const ChartWrapper = styled.View`
-  padding-horizontal: 18px;
   padding-top: 18px;
-  align-self: center;
+
+  align-items: center;
   width: 100%;
   max-width: ${() =>
-    Math.min(Dimensions.get('window').width, Dimensions.get('window').height)};
+    Math.min(
+      Dimensions.get('window').width,
+      Dimensions.get('window').height,
+    )}px;
 `;
 
 // interface Props {}
@@ -45,6 +54,12 @@ export const WomPartyChart: React.FC = () => {
       pageSize: 999999,
     },
   });
+  const [chartWidth, setChartDimensions] = useState(0);
+
+  const onLayout = (event: LayoutChangeEvent) => {
+    const { width: newWidth } = event.nativeEvent.layout;
+    setChartDimensions(newWidth);
+  };
 
   let totalProcedures = 0;
   if (proceduresData && proceduresData.partyChartProcedures) {
@@ -65,7 +80,7 @@ export const WomPartyChart: React.FC = () => {
     localVotes,
   });
 
-  const partyChartData = () => {
+  const partyChartData = (): BarChartProps['data'] => {
     const chartData = matchingProcedures.reduce<{
       [party: string]: { diffs: number; matches: number };
     }>((prev, { voteResults, procedureId: itemProcedureId }) => {
@@ -125,7 +140,7 @@ export const WomPartyChart: React.FC = () => {
     return Object.keys(chartData)
       .map(key => ({
         party: key,
-        values: [
+        deviants: [
           {
             label: 'Übereinstimmungen',
             value: chartData[key].matches,
@@ -138,28 +153,21 @@ export const WomPartyChart: React.FC = () => {
           },
         ],
       }))
-      .sort((a, b) => b.values[0].value - a.values[0].value);
+      .sort((a, b) => b.deviants[0].value - a.deviants[0].value);
   };
 
   const prepareCharLegendData = (
-    preparedData: {
-      party: string;
-      values: {
-        label: string;
-        value: number;
-        color: string;
-      }[];
-    }[],
-  ) => {
+    preparedData: WomPartyChartData[],
+  ): ChartLegendData[] => {
     return [
       {
         label: 'Übereinstimmungen',
-        value: preparedData[selectedPartyIndex].values[0].value,
+        value: preparedData[selectedPartyIndex].deviants[0].value,
         color: '#f5a623',
       },
       {
         label: 'Differenzen',
-        value: preparedData[selectedPartyIndex].values[1].value,
+        value: preparedData[selectedPartyIndex].deviants[1].value,
         color: '#b1b3b4',
       },
     ];
@@ -173,25 +181,24 @@ export const WomPartyChart: React.FC = () => {
     setWomParty(preparedData[selectedPartyIndex].party);
   }
 
-  const onClick = (index: number) => () => {
+  const onClick = (index: number) => {
     setSelectedPartyIndex(index);
     setWomParty(preparedData[index].party);
   };
 
   return (
-    <Wrapper>
+    <Wrapper {...{ onLayout }}>
       <Header
         totalProcedures={totalProcedures}
         votedProceduresCount={matchingProcedures.length}
       />
       <ChartWrapper>
-        <PartyChart
-          width={Dimensions.get('window').width}
-          chartData={preparedData}
-          onClick={onClick}
-          selected={selectedPartyIndex}
-          showPercentage
-          colors={['#b1b3b4', '#f5a623']}
+        <BarChart
+          width={chartWidth - 36}
+          height={315}
+          data={preparedData}
+          setSelectedParty={onClick}
+          selectedParty={selectedPartyIndex}
         />
         <ChartLegend data={prepareCharLegendData(preparedData)} />
         <ChartNote>
