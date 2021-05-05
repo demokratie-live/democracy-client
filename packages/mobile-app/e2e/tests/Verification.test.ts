@@ -106,6 +106,9 @@ describe('Verification', () => {
       await element(by.id('tabBarPastItem')).tap();
     }
 
+    await waitFor(element(by.id('ListItem-PAST-1')))
+      .toBeVisible()
+      .withTimeout(20000);
     await element(by.id('ListItem-PAST-1')).tap();
 
     await element(by.id('ProcedureScrollView')).scrollTo('bottom');
