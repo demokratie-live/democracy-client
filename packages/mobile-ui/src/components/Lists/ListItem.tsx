@@ -2,7 +2,7 @@ import React from 'react';
 import { VotesIndex as VotesIndexCmp } from '../VotesIndex';
 import VoteDateCmp from '../shared/VoteDate.tsx/VoteDate';
 import { PieChart, Slice } from '../shared/Charts/PieChart';
-import { styled } from '../../../../mobile-app/src/styles';
+import { styled } from '../../styles';
 
 // import ActivityIndex from './ActivityIndex';
 // import DemocracyIconComponent from '../../iconfont/DemocracyFont';

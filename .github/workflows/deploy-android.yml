@@ -23,6 +23,9 @@ jobs:
           node-version: "14.x"
 
       - run: yarn install
+      
+      - run: yarn install
+        working-directory: packages/mobile-app
 
       - run: sudo gem install bundler:1.17.3
 

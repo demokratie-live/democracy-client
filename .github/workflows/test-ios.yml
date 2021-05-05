@@ -20,6 +20,9 @@ jobs:
 
       - run: yarn install
 
+      - run: yarn install
+        working-directory: packages/mobile-app
+
       - name: Prepare Detox
         run: |
           brew tap wix/brew

@@ -1,5 +1,5 @@
 import React from 'react';
-import { styled } from '../../../mobile-app/src/styles';
+import { styled } from '../styles';
 
 interface Props {
   voted: boolean;

@@ -22,18 +22,15 @@ jobs:
           node-version: "14.x"
 
       - run: yarn install
-
-      - name: Run ESLint on UI
-        run: yarn workspace @democracy-deutschland/mobile-ui lint:eslint
-
-      - name: Run TSLint on UI
-        run: yarn workspace @democracy-deutschland/mobile-ui lint:ts
+        working-directory: packages/mobile-app
 
       - name: Run ESLint on App
-        run: yarn workspace app lint:eslint
+        run: yarn lint:eslint
+        working-directory: packages/mobile-app
 
       - name: Run TSLint on App
-        run: yarn workspace app lint:ts
+        run: yarn lint:ts
+        working-directory: packages/mobile-app
 
       - uses: stefanzweifel/git-auto-commit-action@v4.1.2
         with:

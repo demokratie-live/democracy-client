@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import styled from 'styled-components/native';
 import { HeadLogo } from './HeadLogo';
 import { ActivityIndicator } from 'react-native';
-import { ConstituencyContext } from '../../../../mobile-app/src/context/Constituency';
-import constituencies from '../../../../mobile-app/src/screens/Bundestag/Procedure/components/svgs/constituencies';
+import { ConstituencyContext } from '../../context/Constituency';
+import constituencies from '../../svgs/constituencies';
 
 const Container = styled.TouchableOpacity`
   flex-direction: row;

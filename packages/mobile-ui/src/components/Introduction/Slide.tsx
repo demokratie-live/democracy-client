@@ -3,7 +3,7 @@ import React from 'react';
 import { Dimensions, Platform, Image, ImageSourcePropType } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { PageProps } from '../Pager';
-import { styled } from '../../../../mobile-app/src/styles';
+import { styled } from '../../styles';
 
 const Container = styled.View`
   flex: 1;

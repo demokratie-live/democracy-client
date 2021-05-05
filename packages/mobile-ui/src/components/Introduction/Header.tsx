@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Platform, ImageSourcePropType } from 'react-native';
-import { styled } from '../../../../mobile-app/src/styles';
+import { styled } from '../../styles';
 
 const ContainerHead = styled.View``;
 
