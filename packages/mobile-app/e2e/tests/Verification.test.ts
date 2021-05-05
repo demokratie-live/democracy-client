@@ -99,48 +99,48 @@ describe('Verification', () => {
     await new Promise(resolve => setTimeout(resolve, 3000));
   });
 
-  it('Szenario 3: Verifizieren via Abstimmen', async () => {
-    try {
-      await element(by.label('VERGANGEN VERGANGEN')).tap();
-    } catch (error) {
-      await element(by.id('tabBarPastItem')).tap();
-    }
+  // it('Szenario 3: Verifizieren via Abstimmen', async () => {
+  //   try {
+  //     await element(by.label('VERGANGEN VERGANGEN')).tap();
+  //   } catch (error) {
+  //     await element(by.id('tabBarPastItem')).tap();
+  //   }
 
-    await waitFor(element(by.id('ListItem-PAST-1')))
-      .toBeVisible()
-      .withTimeout(20000);
-    await element(by.id('ListItem-PAST-1')).tap();
+  //   await waitFor(element(by.id('ListItem-PAST-1')))
+  //     .toBeVisible()
+  //     .withTimeout(20000);
+  //   await element(by.id('ListItem-PAST-1')).tap();
 
-    await element(by.id('ProcedureScrollView')).scrollTo('bottom');
+  //   await element(by.id('ProcedureScrollView')).scrollTo('bottom');
 
-    await element(by.id('VerificationTouch')).tap();
+  //   await element(by.id('VerificationTouch')).tap();
 
-    await waitFor(element(by.id('StartVerificationButton')))
-      .toBeVisible()
-      .withTimeout(20000);
-    await element(by.id('StartVerificationButton')).tap();
+  //   await waitFor(element(by.id('StartVerificationButton')))
+  //     .toBeVisible()
+  //     .withTimeout(20000);
+  //   await element(by.id('StartVerificationButton')).tap();
 
-    await waitFor(element(by.id('VerificationPhoneInput')))
-      .toBeVisible()
-      .withTimeout(20000);
-    await element(by.id('VerificationPhoneInput')).typeText(getRandomNumber());
-    await element(by.id('VerificationCodeButton')).tap();
+  //   await waitFor(element(by.id('VerificationPhoneInput')))
+  //     .toBeVisible()
+  //     .withTimeout(20000);
+  //   await element(by.id('VerificationPhoneInput')).typeText(getRandomNumber());
+  //   await element(by.id('VerificationCodeButton')).tap();
 
-    await element(by.text('Ja')).tap();
-    await element(by.id('VerificationCodeInput')).typeText('000001');
-    await element(by.text('OK')).tap();
-    await element(by.id('VerificationCodeInput')).clearText();
+  //   await element(by.text('Ja')).tap();
+  //   await element(by.id('VerificationCodeInput')).typeText('000001');
+  //   await element(by.text('OK')).tap();
+  //   await element(by.id('VerificationCodeInput')).clearText();
 
-    await element(by.id('VerificationCodeInput')).typeText('000000');
+  //   await element(by.id('VerificationCodeInput')).typeText('000000');
 
-    await waitFor(element(by.text('Später')))
-      .toBeVisible()
-      .withTimeout(20000);
-    await element(by.text('Später')).tap();
+  //   await waitFor(element(by.text('Später')))
+  //     .toBeVisible()
+  //     .withTimeout(20000);
+  //   await element(by.text('Später')).tap();
 
-    await expect(element(by.text('VerificationTouch'))).toBeNotVisible();
-    await new Promise(resolve => setTimeout(resolve, 3000));
-  });
+  //   await expect(element(by.text('VerificationTouch'))).toBeNotVisible();
+  //   await new Promise(resolve => setTimeout(resolve, 3000));
+  // });
 
   it('Szenario 4: Verifizieren with quit app before code input', async () => {
     await element(by.id('BurgerMenuButton')).tap();
