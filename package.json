@@ -22,7 +22,7 @@
     "postinstall:patch-package": "patch-package",
     "postinstall:app": "yarn workspace app postinstall",
     "pods": "yarn workspace app pods && yarn workspace @democracy-deutschland/mobile-ui pods",
-    "postinstall": "yarn postinstall:android-fix && yarn postinstall:patch-package && yarn postinstall:app && yarn postinstall:ios-asset-display"
+    "postinstall": "yarn postinstall:ios-asset-display"
   },
   "dependencies": {
     "react-native": "0.61.5"
