@@ -857,10 +857,10 @@
     react-native-web "^0.11.7"
     styled-components "5.1.1"
 
-"@democracy-deutschland/ui@0.0.4-alpha.3":
-  version "0.0.4-alpha.3"
-  resolved "https://registry.yarnpkg.com/@democracy-deutschland/ui/-/ui-0.0.4-alpha.3.tgz#dda38b82f8aeb3f3bfd57439bbeae7863992451b"
-  integrity sha512-Qe+9+GrBV4MlVWPZzbC6vVwAJZiw+H33oWplRABxNCMjwUYNP4kynDAmm/FjIzrefWZyMX5ZNtKBcpdTChI9DQ==
+"@democracy-deutschland/ui@0.0.4-alpha.4":
+  version "0.0.4-alpha.4"
+  resolved "https://registry.yarnpkg.com/@democracy-deutschland/ui/-/ui-0.0.4-alpha.4.tgz#5e55c77a8d00951a2f67d0ee6ae8d94fdd6e187c"
+  integrity sha512-KJ6NucWdJPQQDjIcN3PxtmlemXOtTPH7U3HhqUBTokWbJQ2A3y7jdmBZCaE+ApdNgEOPNP3+Bnj4RukimnhHOQ==
 
 "@egjs/hammerjs@^2.0.17":
   version "2.0.17"
@@ -9929,7 +9929,7 @@ react-native-safe-area-context@^0.7.3:
   resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-0.7.3.tgz#ad6bd4abbabe195332c53810e4ce5851eb21aa2a"
   integrity sha512-9Uqu1vlXPi+2cKW/CW6OnHxA76mWC4kF3wvlqzq4DY8hn37AeiXtLFs2WkxH4yXQRrnJdP6ivc65Lz+MqwRZAA==
 
-react-native-screens@^2.2.0:
+react-native-screens@^2.18.1:
   version "2.18.1"
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.18.1.tgz#47b9991c6f762d00d0ed3233e5283d523e859885"
   integrity sha512-r5WZLpmx2hHjC1RgMdPq5YpSU9tEhBpUaZ5M1SUtNIONyiLqQVxabhRCINdebIk4depJiIl7yw2Q85zJyeX6fw==
