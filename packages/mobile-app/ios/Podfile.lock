@@ -186,13 +186,13 @@ PODS:
     - React-cxxreact (= 0.61.5)
     - React-jsi (= 0.61.5)
   - React-jsinspector (0.61.5)
-  - react-native-camera (3.43.5):
+  - react-native-camera (3.43.6):
     - React-Core
-    - react-native-camera/RCT (= 3.43.5)
-    - react-native-camera/RN (= 3.43.5)
-  - react-native-camera/RCT (3.43.5):
+    - react-native-camera/RCT (= 3.43.6)
+    - react-native-camera/RN (= 3.43.6)
+  - react-native-camera/RCT (3.43.6):
     - React-Core
-  - react-native-camera/RN (3.43.5):
+  - react-native-camera/RN (3.43.6):
     - React-Core
   - react-native-config (1.4.2):
     - react-native-config/App (= 1.4.2)
@@ -245,7 +245,7 @@ PODS:
     - React-Core
   - RNCAsyncStorage (1.7.1):
     - React
-  - RNCMaskedView (0.1.10):
+  - RNCMaskedView (0.1.11):
     - React
   - RNDeviceInfo (5.6.5):
     - React
@@ -436,7 +436,7 @@ SPEC CHECKSUMS:
   React-jsi: cb2cd74d7ccf4cffb071a46833613edc79cdf8f7
   React-jsiexecutor: d5525f9ed5f782fdbacb64b9b01a43a9323d2386
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
-  react-native-camera: 04a9a85b63d169094db5fd13a0c786101238e925
+  react-native-camera: 9e55a09596b8c4e41eb7d4cce7c39826990c3cac
   react-native-config: c98128a72bc2c3a1ca72caec0b021f0fa944aa29
   react-native-notifications: 51ed8167f70f01c5000ba81a4465ea98b4612e23
   react-native-pdf: 29a09815e99c92743aa8459a90564aaddd4065e0
@@ -454,7 +454,7 @@ SPEC CHECKSUMS:
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   rn-fetch-blob: f525a73a78df9ed5d35e67ea65e79d53c15255bc
   RNCAsyncStorage: 44395cb9c7c1523104c2b499eb426ef7aff82bca
-  RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
+  RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
   RNDeviceInfo: c5f8f3a456adcbba405ace475254b08febc4c095
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNKeychain: 840f8e6f13be0576202aefcdffd26a4f54bfe7b5

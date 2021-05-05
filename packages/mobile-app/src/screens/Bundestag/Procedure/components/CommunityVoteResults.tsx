@@ -21,6 +21,12 @@ import { CarouselPagination } from '../../../../components/misc/Pagination';
 
 export const { width, height } = Dimensions.get('window');
 
+const MAX_WIDTH = Math.min(
+  380,
+  Dimensions.get('window').width,
+  Dimensions.get('window').height,
+);
+
 const RepresentativeText = styled.Text`
   color: ${({ theme }) => theme.textColors.secondary};
   text-align: center;
@@ -40,12 +46,7 @@ const PieChartWrapper = styled.View`
   align-self: center;
   padding-horizontal: 36px;
   width: 100%;
-  max-width: ${() =>
-    Math.min(
-      380,
-      Dimensions.get('window').width,
-      Dimensions.get('window').height,
-    )}px;
+  max-width: ${MAX_WIDTH}px;
 `;
 
 const SvgWrapper = styled.View`
@@ -166,7 +167,7 @@ export const CommunityVoteResults: React.FC<Props> = ({
         data={screens}
         renderItem={renderItem}
         sliderWidth={Dimensions.get('window').width}
-        itemWidth={Dimensions.get('window').width}
+        itemWidth={MAX_WIDTH}
         onSnapToItem={setActiveSlide}
       />
       <CarouselPagination length={screens.length} active={activeSlide} />
