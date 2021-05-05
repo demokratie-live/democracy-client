@@ -2,7 +2,7 @@ module.exports = {
   displayName: 'mobile-app',
   preset: 'react-native',
   transform: {
-    '\\.js$': '<rootDir>/../../node_modules/react-native/jest/preprocessor.js',
+    '\\.js$': '<rootDir>/./node_modules/react-native/jest/preprocessor.js',
   },
   cacheDirectory: '.jest/cache',
   testPathIgnorePatterns: ['<rootDir>/e2e/', '<rootDir>/node_modules/'],
@@ -24,7 +24,7 @@ module.exports = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
 
   setupFiles: [
-    '../../node_modules/react-native-gesture-handler/jestSetup.js',
+    './node_modules/react-native-gesture-handler/jestSetup.js',
     '<rootDir>/test/jestSetup.js',
   ],
 };
