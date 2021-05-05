@@ -9,7 +9,6 @@ import {
 } from './graphql/query/__generated__/ProceduresList';
 import { ListItem } from '@democracy-deutschland/mobile-ui/src/components/Lists/ListItem';
 import { Row } from '@democracy-deutschland/mobile-ui/src/components/Lists/Row';
-import { ListLoading } from '@democracy-deutschland/mobile-ui/src/components/shared/ListLoading';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
@@ -25,6 +24,7 @@ import { ConstituencyContext } from '../../../context/Constituency';
 import { Centered } from '@democracy-deutschland/mobile-ui/src/components/shared/Centered';
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
 import { styled } from '../../../styles';
+import { ListContentLoader } from '@democracy-deutschland/ui';
 
 type ListScreenRouteProp = RouteProp<
   TopTabParamList,
@@ -72,7 +72,7 @@ export const List = () => {
   if (loading) {
     return (
       <Container>
-        <ListLoading />
+        <ListContentLoader />
       </Container>
     );
   }
@@ -217,7 +217,7 @@ export const List = () => {
         renderItem={renderItem}
         keyExtractor={({ procedureId }) => procedureId}
         refreshing={networkStatus === 4}
-        ListFooterComponent={() => (hasMore ? <ListLoading /> : null)}
+        ListFooterComponent={() => (hasMore ? <ListContentLoader /> : null)}
         onRefresh={() => {
           setHasMore(true);
           refetch();

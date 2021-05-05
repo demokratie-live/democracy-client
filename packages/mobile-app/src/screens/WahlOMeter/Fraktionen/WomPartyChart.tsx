@@ -10,7 +10,6 @@ import {
 import { useQuery } from '@apollo/client';
 import { PARTY_CHART_DATA } from '../../Bundestag/Procedure/Voting/components/graphql/query/proceduresByIdHavingVoteResults';
 import { LocalVotesContext } from '../../../context/LocalVotes';
-import { ListLoading } from '@democracy-deutschland/mobile-ui/src/components/shared/ListLoading';
 import { ChartData } from '../Bundestag/VotedProceduresWrapper';
 import { Segment } from '../../Bundestag/List/Components/Segment';
 import { WomPartyContext } from './context';
@@ -21,6 +20,7 @@ import {
   BarChart,
   BarChartProps,
   WomPartyChartData,
+  ListContentLoader,
 } from '@democracy-deutschland/ui';
 
 const MAX_WIDTH = Math.min(
@@ -61,7 +61,7 @@ export const WomPartyChart: React.FC = () => {
     totalProcedures = proceduresData.partyChartProcedures.total || 0;
   }
   if (!proceduresData) {
-    return <ListLoading />;
+    return <ListContentLoader />;
   }
 
   // Filtered Array of procedures voted local

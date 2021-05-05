@@ -20,7 +20,7 @@ import {
 } from './graphql/query/__generated__/DeputyProcedures';
 import { ListItem } from '@democracy-deutschland/mobile-ui/src/components/Lists/ListItem';
 import { Row } from '@democracy-deutschland/mobile-ui/src/components/Lists/Row';
-import { ListLoading } from '@democracy-deutschland/mobile-ui/src/components/shared/ListLoading';
+import { ListContentLoader } from '@democracy-deutschland/ui';
 import { VoteSelection } from '../../../../__generated__/globalTypes';
 import { ChainEntry } from '../../../lib/VotesLocal';
 import { useNavigation } from '@react-navigation/core';
@@ -213,7 +213,7 @@ const VotedProceduresWrapper: React.FC<Props> = ({
           }
         }}
         ListFooterComponent={() =>
-          networkStatus === 3 ? <ListLoading /> : null
+          networkStatus === 3 ? <ListContentLoader /> : null
         }
         onEndReached={() =>
           hasMore &&

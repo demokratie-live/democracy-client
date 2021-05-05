@@ -8,7 +8,7 @@ import ShareIconIosHeader from '@democracy-deutschland/mobile-ui/src/components/
 
 import { useQuery, useMutation } from '@apollo/client';
 import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Folding';
-import { ListLoading } from '@democracy-deutschland/mobile-ui/src/components/shared/ListLoading';
+import { ListContentLoader } from '@democracy-deutschland/ui';
 import speakingurl from 'speakingurl';
 import {
   Procedure as ProcedureQueryObj,
@@ -227,7 +227,7 @@ export const Procedure: FC<Props> = ({ route, navigation }) => {
   }, [data, route, navigation]);
 
   if (loading) {
-    return <ListLoading />;
+    return <ListContentLoader />;
   }
   if (error || !data) {
     return (

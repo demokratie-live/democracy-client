@@ -4,7 +4,7 @@ import unionBy from 'lodash.unionby';
 
 // GraphQL
 import { FlatList } from 'react-native';
-import { ListLoading } from '@democracy-deutschland/mobile-ui/src/components/shared/ListLoading';
+import { ListContentLoader } from '@democracy-deutschland/ui';
 import { ListItem } from '@democracy-deutschland/mobile-ui/src/components/Lists/ListItem';
 import { Row } from '@democracy-deutschland/mobile-ui/src/components/Lists/Row';
 import { LocalVotesContext } from '../../../context/LocalVotes';
@@ -77,7 +77,7 @@ const VotedProceduresWrapper: React.FC<Props> = ({
     totalProcedures = proceduresData.partyChartProcedures.total || 0;
   }
   if (!procedurListData || !proceduresData) {
-    return <ListLoading />;
+    return <ListContentLoader />;
   }
   const listData =
     procedurListData &&
@@ -135,7 +135,7 @@ const VotedProceduresWrapper: React.FC<Props> = ({
           );
         }}
         ListFooterComponent={() =>
-          networkStatus === 3 ? <ListLoading /> : null
+          networkStatus === 3 ? <ListContentLoader /> : null
         }
         onEndReached={() =>
           hasMore &&
