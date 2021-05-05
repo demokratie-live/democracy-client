@@ -33,7 +33,7 @@ export const CountryMap: React.FC<Props> = ({ procedureId }) => {
 
   return (
     <Container>
-      <CountryMapCmp data={data} />
+      <CountryMapCmp data={data} width={380} />
     </Container>
   );
 };
