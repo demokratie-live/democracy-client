@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-import { ActivityIndicator, Dimensions } from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
+import { ActivityIndicator, Dimensions, ScaledSize } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 // Components
 import getConstituencySvgs from './svgs/constituencies';
@@ -19,7 +19,7 @@ import { InitialStateContext } from '../../../../context/InitialStates';
 import { styled } from '../../../../styles';
 import { CarouselPagination } from '../../../../components/misc/Pagination';
 
-export const { width, height } = Dimensions.get('window');
+export const { width: initWidth } = Dimensions.get('window');
 
 const MAX_WIDTH = Math.min(
   380,
@@ -76,6 +76,18 @@ export const CommunityVoteResults: React.FC<Props> = ({
   const { constituency: myConstituency } = useContext(ConstituencyContext);
   const { isVerified } = useContext(InitialStateContext);
   const [activeSlide, setActiveSlide] = useState<number>(0);
+  const [width, setWidth] = useState<number>(initWidth);
+
+  const onChange = ({ screen }: { window: ScaledSize; screen: ScaledSize }) => {
+    setWidth(screen.width);
+  };
+
+  useEffect(() => {
+    Dimensions.addEventListener('change', onChange);
+    return () => {
+      Dimensions.removeEventListener('change', onChange);
+    };
+  });
 
   const renderCommuntiyResult = (
     comunnityResults:
@@ -158,6 +170,7 @@ export const CommunityVoteResults: React.FC<Props> = ({
   screens.push(countryMap);
 
   const renderItem = ({ item }: any) => item;
+
   return (
     <Folding
       title="Communityergebnis"
@@ -166,7 +179,7 @@ export const CommunityVoteResults: React.FC<Props> = ({
       <SwiperStyled
         data={screens}
         renderItem={renderItem}
-        sliderWidth={Dimensions.get('window').width}
+        sliderWidth={width}
         itemWidth={MAX_WIDTH}
         onSnapToItem={setActiveSlide}
       />

@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
-import { Dimensions } from 'react-native';
+import React, { useState, useContext, useEffect } from 'react';
+import { Dimensions, ScaledSize } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 
 // Components
@@ -18,7 +18,7 @@ import { InitialStateContext } from '../../../../../context/InitialStates';
 import { styled } from '../../../../../styles';
 import { CarouselPagination } from '../../../../../components/misc/Pagination';
 
-export const { width, height } = Dimensions.get('window');
+export const { width: initWidth } = Dimensions.get('window');
 
 const ScrollView = styled.ScrollView.attrs(() => ({
   horizontal: true,
@@ -86,21 +86,21 @@ export const GovernmentVoteResults: React.FC<Props> = ({
   voted,
 }) => {
   const [activeSlide, setActiveSlide] = useState<number>(0);
-  const [pieChartWidth, setPieChartWidth] = useState(
-    Math.min(Dimensions.get('window').width, Dimensions.get('window').height),
-  );
   const { isVerified } = useContext(InitialStateContext);
   const { constituency } = useContext(ConstituencyContext);
 
-  const onLayout = () => {
-    const newPieChartWidth = Math.min(
-      Dimensions.get('window').width,
-      Dimensions.get('window').height,
-    );
-    if (newPieChartWidth !== pieChartWidth) {
-      setPieChartWidth(newPieChartWidth);
-    }
+  const [width, setWidth] = useState<number>(initWidth);
+
+  const onChange = ({ screen }: { window: ScaledSize; screen: ScaledSize }) => {
+    setWidth(screen.width);
   };
+
+  useEffect(() => {
+    Dimensions.addEventListener('change', onChange);
+    return () => {
+      Dimensions.removeEventListener('change', onChange);
+    };
+  });
 
   // FIXME Sollte nur im falle von Fehlerhaften Daten vom server ausgelöst werden.
   // https://github.com/demokratie-live/democracy-client/issues/714
@@ -188,7 +188,7 @@ export const GovernmentVoteResults: React.FC<Props> = ({
     }
 
     const screens = [
-      <PieChartWrapper key="pieChart" onLayout={onLayout}>
+      <PieChartWrapper key="pieChart">
         <PieChart
           data={dataPieChart}
           subLabel={voteResults.namedVote ? 'Abgeordnete' : 'Fraktionen'}
@@ -201,7 +201,7 @@ export const GovernmentVoteResults: React.FC<Props> = ({
       </PieChartWrapper>,
       <PartyChart
         key="partyChart"
-        width={pieChartWidth}
+        width={width}
         chartData={dataPartyChart}
         colors={partyColors}
         showPercentage
@@ -227,8 +227,8 @@ export const GovernmentVoteResults: React.FC<Props> = ({
         <SwiperStyled
           data={screens}
           renderItem={renderItem}
-          sliderWidth={Dimensions.get('window').width}
-          itemWidth={Dimensions.get('window').width}
+          sliderWidth={width}
+          itemWidth={Math.min(width, 380)}
           onSnapToItem={setActiveSlide}
         />
         <CarouselPagination length={screens.length} active={activeSlide} />
