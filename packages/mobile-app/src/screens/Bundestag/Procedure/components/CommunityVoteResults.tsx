@@ -19,8 +19,6 @@ import { InitialStateContext } from '../../../../context/InitialStates';
 import { styled } from '../../../../styles';
 import { CarouselPagination } from '../../../../components/misc/Pagination';
 
-export const { width: initWidth } = Dimensions.get('window');
-
 const MAX_WIDTH = Math.min(
   380,
   Dimensions.get('window').width,
@@ -76,7 +74,11 @@ export const CommunityVoteResults: React.FC<Props> = ({
   const { constituency: myConstituency } = useContext(ConstituencyContext);
   const { isVerified } = useContext(InitialStateContext);
   const [activeSlide, setActiveSlide] = useState<number>(0);
-  const [width, setWidth] = useState<number>(initWidth);
+  const [width, setWidth] = useState<number>(380);
+
+  useEffect(() => {
+    setWidth(Dimensions.get('screen').width);
+  }, []);
 
   const onChange = ({ screen }: { window: ScaledSize; screen: ScaledSize }) => {
     setWidth(screen.width);

@@ -18,8 +18,6 @@ import { InitialStateContext } from '../../../../../context/InitialStates';
 import { styled } from '../../../../../styles';
 import { CarouselPagination } from '../../../../../components/misc/Pagination';
 
-export const { width: initWidth } = Dimensions.get('window');
-
 const ScrollView = styled.ScrollView.attrs(() => ({
   horizontal: true,
   pagingEnabled: true,
@@ -89,11 +87,15 @@ export const GovernmentVoteResults: React.FC<Props> = ({
   const { isVerified } = useContext(InitialStateContext);
   const { constituency } = useContext(ConstituencyContext);
 
-  const [width, setWidth] = useState<number>(initWidth);
+  const [width, setWidth] = useState<number>(380);
 
   const onChange = ({ screen }: { window: ScaledSize; screen: ScaledSize }) => {
     setWidth(screen.width);
   };
+
+  useEffect(() => {
+    setWidth(Dimensions.get('screen').width);
+  }, []);
 
   useEffect(() => {
     Dimensions.addEventListener('change', onChange);
