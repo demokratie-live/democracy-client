@@ -138,6 +138,19 @@ const pieChartData = ({
   ];
 };
 
+interface PreparedData {
+  label: string;
+  percent: number;
+  value: number;
+  total: number;
+  color: string;
+}
+
+interface BarData {
+  matches: PreparedData;
+  missmatches: PreparedData;
+}
+
 interface Props {
   navigation: ScreenNavigationProp;
 }
@@ -164,6 +177,16 @@ class Wahlkreis extends PureComponent<Props> {
             ...chartData,
             matchingProcedures,
           });
+
+          const barChartData = preparedData.reduce<BarData>(
+            (prev, renderer) => {
+              prev[
+                renderer.label === 'Differenzen' ? 'missmatches' : 'matches'
+              ] = renderer;
+              return prev;
+            },
+            {} as BarData,
+          );
 
           if (matchingProcedures.length > 0) {
             return (
@@ -201,11 +224,11 @@ class Wahlkreis extends PureComponent<Props> {
                       height={30}
                       data={[
                         {
-                          value: 1,
+                          value: barChartData.matches.value,
                           color: appTheme.colors.vote.wom.match,
                         },
                         {
-                          value: 2,
+                          value: barChartData.missmatches.value,
                           color: appTheme.colors.vote.wom.missmatch,
                         },
                       ]}
