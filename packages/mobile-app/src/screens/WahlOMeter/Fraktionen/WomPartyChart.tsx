@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Dimensions, LayoutChangeEvent } from 'react-native';
+import { Dimensions } from 'react-native';
 import Header from '../Header';
 import ChartNote from '../ChartNote';
 import { styled } from '../../../styles';
@@ -23,20 +23,21 @@ import {
   WomPartyChartData,
 } from '@democracy-deutschland/ui';
 
+const MAX_WIDTH = Math.min(
+  380,
+  Dimensions.get('window').width,
+  Dimensions.get('window').height,
+);
+
 const Wrapper = styled.View`
   padding-top: 18px;
+  align-self: stretch;
 `;
 
 const ChartWrapper = styled.View`
   padding-top: 18px;
-
-  align-items: center;
   width: 100%;
-  max-width: ${() =>
-    Math.min(
-      Dimensions.get('window').width,
-      Dimensions.get('window').height,
-    )}px;
+  align-items: center;
 `;
 
 // interface Props {}
@@ -54,12 +55,6 @@ export const WomPartyChart: React.FC = () => {
       pageSize: 999999,
     },
   });
-  const [chartWidth, setChartDimensions] = useState(0);
-
-  const onLayout = (event: LayoutChangeEvent) => {
-    const { width: newWidth } = event.nativeEvent.layout;
-    setChartDimensions(newWidth);
-  };
 
   let totalProcedures = 0;
   if (proceduresData && proceduresData.partyChartProcedures) {
@@ -187,14 +182,14 @@ export const WomPartyChart: React.FC = () => {
   };
 
   return (
-    <Wrapper {...{ onLayout }}>
+    <Wrapper>
       <Header
         totalProcedures={totalProcedures}
         votedProceduresCount={matchingProcedures.length}
       />
       <ChartWrapper>
         <BarChart
-          width={chartWidth - 36}
+          width={MAX_WIDTH}
           height={315}
           data={preparedData}
           setSelectedParty={onClick}
