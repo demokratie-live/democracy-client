@@ -106,10 +106,10 @@ platform :ios do
       clean: true,
     )
 
-    # upload_to_browserstack_app_live(
-    #   browserstack_username: ENV["BROWSERSTACK_USERNAME"],
-    #   browserstack_access_key: ENV["BROWSERSTACK_ACCESS_KEY"],
-    # )
+    upload_to_browserstack_app_live(
+      browserstack_username: ENV["BROWSERSTACK_USERNAME"],
+      browserstack_access_key: ENV["BROWSERSTACK_ACCESS_KEY"],
+    )
 
     # TODO Add deliver
 
