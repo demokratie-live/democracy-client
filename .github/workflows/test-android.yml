@@ -77,7 +77,7 @@ jobs:
         run: |
           ./e2e/android-anr-fix.sh &
           yarn start &
-          detox test -c android.emu.internal.release --device-name emu --record-videos all --take-screenshots all
+          detox test -c android.emu.internal.release --device-name emu
         working-directory: packages/mobile-app
 
       - uses: actions/upload-artifact@v1
