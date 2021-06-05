@@ -15,8 +15,6 @@
   <uses-permission tools:node="remove"
     android:name="android.vending.CHECK_LICENSE" />
   <uses-permission tools:node="remove"
-    android:name="android.permission.WAKE_LOCK" />
-  <uses-permission tools:node="remove"
     android:name="android.permission.ACCESS_WIFI_STATE" />
 
 
