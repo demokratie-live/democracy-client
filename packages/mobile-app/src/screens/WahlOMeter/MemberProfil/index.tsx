@@ -17,6 +17,7 @@ import {
 import { ConstituencyContext } from '../../../context/Constituency';
 import { useNavigation } from '@react-navigation/core';
 import { styled } from '../../../styles';
+import { ProfileImage } from '@democracy-deutschland/ui';
 
 const ScrollWrapper = styled.ScrollView.attrs({
   contentContainerStyle: {
@@ -35,15 +36,6 @@ const MemberImageWrapper = styled.View`
   height: 379px;
   align-items: center;
   padding-bottom: 8px;
-`;
-
-const MemberImage = styled.Image.attrs({
-  resizeMode: 'contain',
-})`
-  flex: 1;
-  height: 379px;
-  width: 284px;
-  border-radius: 142px;
 `;
 
 const Party = styled(PartyComponent)`
@@ -185,7 +177,11 @@ export const MemberProfil = () => {
       {constituency && (
         <>
           <MemberImageWrapper>
-            <MemberImage source={{ uri: imgURL }} />
+            <ProfileImage
+              height={379}
+              variant="oval"
+              source={{ uri: imgURL }}
+            />
             <Party party={party} />
           </MemberImageWrapper>
           <Text>{name}</Text>
