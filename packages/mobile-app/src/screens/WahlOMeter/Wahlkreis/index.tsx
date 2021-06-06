@@ -15,7 +15,7 @@ import { ChainEntry } from '../../../lib/VotesLocal';
 import { VoteSelection } from '../../../../__generated__/globalTypes';
 import InfoIconComponent from '@democracy-deutschland/mobile-ui/src/components/Icons/Info';
 import { ScreenNavigationProp } from '../../../routes/Sidebar/WahlOMeter/TabView';
-import { Bar } from '@democracy-deutschland/ui';
+import { Bar, ProfileImage } from '@democracy-deutschland/ui';
 import { theme as appTheme } from '../../../styles';
 
 const Wrapper = styled.View`
@@ -29,13 +29,10 @@ const MemberImageWrapper = styled.TouchableOpacity`
   padding-bottom: 8px;
 `;
 
-const MemberImage = styled.Image.attrs({
-  resizeMode: 'contain',
+const MemberImage = styled(ProfileImage).attrs({
+  height: 270,
+  variant: 'oval',
 })`
-  flex: 1;
-  height: 175px;
-  width: 200px;
-  border-radius: 100px;
   border-width: ${() => (Platform.OS === 'ios' ? 1 : 0)}px;
   border-color: lightgray;
 `;
