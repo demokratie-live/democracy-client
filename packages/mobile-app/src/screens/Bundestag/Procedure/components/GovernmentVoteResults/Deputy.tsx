@@ -15,6 +15,7 @@ import { DEPUTY_VOTE_RESULT } from './graphql/query/deputyVoteResults';
 import { ConstituencyContext } from '../../../../../context/Constituency';
 import { useNavigation } from '@react-navigation/core';
 import { styled } from '../../../../../styles';
+import { ProfileImage } from '@democracy-deutschland/ui';
 
 const Wrapper = styled.View`
   width: 100%;
@@ -49,13 +50,10 @@ const MemberImageWrapper = styled.TouchableOpacity`
   padding-bottom: 8px;
 `;
 
-const MemberImage = styled.Image.attrs({
-  resizeMode: 'contain',
+const MemberImage = styled(ProfileImage).attrs({
+  height: 270,
+  variant: 'oval',
 })`
-  flex: 1;
-  height: 175px;
-  width: 200px;
-  border-radius: 100px;
   border-width: ${() => (Platform.OS === 'ios' ? 1 : 0)}px;
   border-color: lightgray;
 `;

@@ -1559,10 +1559,12 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@democracy-deutschland/ui@^0.0.4-alpha.4":
-  version "0.0.4-alpha.4"
-  resolved "https://registry.yarnpkg.com/@democracy-deutschland/ui/-/ui-0.0.4-alpha.4.tgz#5e55c77a8d00951a2f67d0ee6ae8d94fdd6e187c"
-  integrity sha512-KJ6NucWdJPQQDjIcN3PxtmlemXOtTPH7U3HhqUBTokWbJQ2A3y7jdmBZCaE+ApdNgEOPNP3+Bnj4RukimnhHOQ==
+"@democracy-deutschland/ui@^0.0.4-alpha.7":
+  version "0.0.4-alpha.7"
+  resolved "https://registry.yarnpkg.com/@democracy-deutschland/ui/-/ui-0.0.4-alpha.7.tgz#d733ec56df8f54cefa99063458e591cb46e2c5d0"
+  integrity sha512-tpFzWYpAFWnJr4VRZXF23K+v7XyLN3NMPvH0VeP8donGloyBFMa8DeAiq9yIqNgv9V8hGDe5M4xys9iLBNdy0w==
+  dependencies:
+    react-content-loader "^6.0.3"
 
 "@egjs/hammerjs@^2.0.17":
   version "2.0.17"
@@ -14349,6 +14351,11 @@ react-color@^2.17.0:
     prop-types "^15.5.10"
     reactcss "^1.2.0"
     tinycolor2 "^1.4.1"
+
+react-content-loader@^6.0.3:
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/react-content-loader/-/react-content-loader-6.0.3.tgz#32e28ca7120e0a2552fc26655d0d4448cc1fc0c5"
+  integrity sha512-CIRgTHze+ls+jGDIfCitw27YkW2XcaMpsYORTUdBxsMFiKuUYMnlvY76dZE4Lsaa9vFXVw+41ieBEK7SJt0nug==
 
 react-dev-utils@^9.0.0:
   version "9.1.0"
