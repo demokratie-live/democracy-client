@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components/native';
-import { Platform } from 'react-native';
 import Svg from 'react-native-svg';
 
 // Components
@@ -8,14 +7,13 @@ import Header from '../Header';
 import ChartNote from '../ChartNote';
 import VotedProceduresWrapper, { ChartData } from './VotedProceduresWrapper';
 import NoVotesPlaceholder from '../NoVotesPlaceholder';
-import PartyComponent from '../../Bundestag/Procedure/components/GovernmentVoteResults/Parties';
 import ChartLegend from '../../Bundestag/Procedure/components/Charts/ChartLegend';
 import { Segment } from '../../Bundestag/List/Components/Segment';
 import { ChainEntry } from '../../../lib/VotesLocal';
 import { VoteSelection } from '../../../../__generated__/globalTypes';
 import InfoIconComponent from '@democracy-deutschland/mobile-ui/src/components/Icons/Info';
 import { ScreenNavigationProp } from '../../../routes/Sidebar/WahlOMeter/TabView';
-import { Bar, ProfileImage } from '@democracy-deutschland/ui';
+import { Avatar, Bar } from '@democracy-deutschland/ui';
 import { theme as appTheme } from '../../../styles';
 
 const Wrapper = styled.View`
@@ -27,20 +25,7 @@ const MemberImageWrapper = styled.TouchableOpacity`
   height: 275px;
   align-items: center;
   padding-bottom: 8px;
-`;
-
-const MemberImage = styled(ProfileImage).attrs({
-  height: 270,
-  variant: 'oval',
-})`
-  border-width: ${() => (Platform.OS === 'ios' ? 1 : 0)}px;
-  border-color: lightgray;
-`;
-
-const Party = styled(PartyComponent)`
-  position: absolute;
-  right: 0px;
-  bottom: 30px;
+  padding-left: 80px;
 `;
 
 const InfoIconButton = styled.TouchableOpacity``;
@@ -197,8 +182,17 @@ class Wahlkreis extends PureComponent<Props> {
                     onPress={() =>
                       this.props.navigation.navigate('MemberProfil')
                     }>
-                    <MemberImage source={{ uri: imgURL }} />
-                    <Party party={party} />
+                    <Avatar
+                      partyLogo={{
+                        party: party as any,
+                        width: 200,
+                      }}
+                      profileImage={{
+                        height: 270,
+                        variant: 'oval',
+                        source: { uri: imgURL },
+                      }}
+                    />
                   </MemberImageWrapper>
                   <DeputyDetailsWrapper>
                     <NameWrapper>

@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from 'react';
 import { ActivityIndicator } from 'react-native';
 import ContactBox from './components/ContactBox';
 // Components
-import PartyComponent from '../../Bundestag/Procedure/components/GovernmentVoteResults/Parties';
 import Chart from './Chart';
 import ChartLegend from '../../Bundestag/Procedure/components/Charts/ChartLegend';
 import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Folding';
@@ -17,7 +16,7 @@ import {
 import { ConstituencyContext } from '../../../context/Constituency';
 import { useNavigation } from '@react-navigation/core';
 import { styled } from '../../../styles';
-import { ProfileImage } from '@democracy-deutschland/ui';
+import { Avatar } from '@democracy-deutschland/ui';
 
 const ScrollWrapper = styled.ScrollView.attrs({
   contentContainerStyle: {
@@ -32,16 +31,10 @@ const ScrollWrapper = styled.ScrollView.attrs({
 
 const MemberImageWrapper = styled.View`
   width: 100%;
-  max-width: 284px;
-  height: 379px;
+  /* height: 379px; */
   align-items: center;
   padding-bottom: 8px;
-`;
-
-const Party = styled(PartyComponent)`
-  position: absolute;
-  right: 0px;
-  bottom: 30px;
+  padding-left: 60px;
 `;
 
 const Text = styled.Text`
@@ -177,12 +170,17 @@ export const MemberProfil = () => {
       {constituency && (
         <>
           <MemberImageWrapper>
-            <ProfileImage
-              height={379}
-              variant="oval"
-              source={{ uri: imgURL }}
+            <Avatar
+              partyLogo={{
+                party: party as any,
+                width: 200,
+              }}
+              profileImage={{
+                height: 280,
+                variant: 'oval',
+                source: { uri: imgURL },
+              }}
             />
-            <Party party={party} />
           </MemberImageWrapper>
           <Text>{name}</Text>
           <TextLighGrey>Direktkadidat WK {constituency}</TextLighGrey>

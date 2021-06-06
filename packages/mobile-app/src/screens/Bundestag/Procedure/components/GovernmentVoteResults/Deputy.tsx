@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { Platform } from 'react-native';
 import {
   DeputyVoteResults,
   DeputyVoteResultsVariables,
@@ -7,7 +6,6 @@ import {
 import { useQuery } from '@apollo/client';
 
 // Components
-import PartyComponent from './Parties';
 import InfoIconComponent from '@democracy-deutschland/mobile-ui/src/components/Icons/Info';
 
 // GraphQl
@@ -15,7 +13,7 @@ import { DEPUTY_VOTE_RESULT } from './graphql/query/deputyVoteResults';
 import { ConstituencyContext } from '../../../../../context/Constituency';
 import { useNavigation } from '@react-navigation/core';
 import { styled } from '../../../../../styles';
-import { ProfileImage } from '@democracy-deutschland/ui';
+import { Avatar } from '@democracy-deutschland/ui';
 
 const Wrapper = styled.View`
   width: 100%;
@@ -48,20 +46,7 @@ const MemberImageWrapper = styled.TouchableOpacity`
   height: 275px;
   align-items: center;
   padding-bottom: 8px;
-`;
-
-const MemberImage = styled(ProfileImage).attrs({
-  height: 270,
-  variant: 'oval',
-})`
-  border-width: ${() => (Platform.OS === 'ios' ? 1 : 0)}px;
-  border-color: lightgray;
-`;
-
-const Party = styled(PartyComponent)`
-  position: absolute;
-  right: 0px;
-  bottom: 30px;
+  padding-left: 80px;
 `;
 
 const Text = styled.Text`
@@ -142,8 +127,17 @@ const DeputyVoteData: React.FC<Props> = ({ procedureId }) => {
           onPress={() => {
             navigation.navigate('MemberProfil');
           }}>
-          <MemberImage source={{ uri: imgURL }} />
-          <Party party={party} />
+          <Avatar
+            partyLogo={{
+              party: party as any,
+              width: 180,
+            }}
+            profileImage={{
+              height: 268,
+              variant: 'oval',
+              source: { uri: imgURL },
+            }}
+          />
         </MemberImageWrapper>
         <DeputyDetailsWrapper>
           <NameWrapper>
