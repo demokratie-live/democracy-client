@@ -1559,10 +1559,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@democracy-deutschland/ui@^0.0.4-alpha.15":
-  version "0.0.4-alpha.15"
-  resolved "https://registry.yarnpkg.com/@democracy-deutschland/ui/-/ui-0.0.4-alpha.15.tgz#2934d406d4b603117f60d49e9de82bf671ed27bf"
-  integrity sha512-mTZ72rZPzGkDiqN3MowfSTLcCz1oS0BQ33amd07CSm8hccXT7kRMkFPatrJdOKZDisdFgp9bhZMEVfUG7zYd8g==
+"@democracy-deutschland/ui@^0.0.4-alpha.21":
+  version "0.0.4-alpha.21"
+  resolved "https://registry.yarnpkg.com/@democracy-deutschland/ui/-/ui-0.0.4-alpha.21.tgz#910db5851f32948ca7a008214760ad0345604ce1"
+  integrity sha512-/VJp6RoLYYPkojKP7xnd6Ruq/kDHoCocW7br53AmmTlhVq7t33KnKVsIZbjohHMQCSyWC+huH78uzfOo2pkm3A==
   dependencies:
     react-content-loader "^6.0.3"
 
@@ -14657,13 +14657,6 @@ react-native-screens@^2.18.1:
   version "2.18.1"
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.18.1.tgz#47b9991c6f762d00d0ed3233e5283d523e859885"
   integrity sha512-r5WZLpmx2hHjC1RgMdPq5YpSU9tEhBpUaZ5M1SUtNIONyiLqQVxabhRCINdebIk4depJiIl7yw2Q85zJyeX6fw==
-
-react-native-search-bar@^3.5.1:
-  version "3.5.1"
-  resolved "https://registry.yarnpkg.com/react-native-search-bar/-/react-native-search-bar-3.5.1.tgz#b05e12ecbe747e0fa43d19084b06db006f7b8097"
-  integrity sha512-L+y2gQZstApb2DavE8se6Mzj3CgxZiHxM0DezAdT4kb6+kV4+WeTN8jPxvrP6zgwbGcjuYKaHrASKnBmhuWmhA==
-  dependencies:
-    prop-types "^15.5.10"
 
 react-native-sha256@^1.3.6:
   version "1.4.7"

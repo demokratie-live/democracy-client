@@ -261,8 +261,6 @@ PODS:
     - React-Core
   - RNScreens (2.18.1):
     - React-Core
-  - RNSearchBar (3.5.1):
-    - React
   - RNSha256 (1.4.7):
     - React
   - RNSVG (12.1.1):
@@ -315,7 +313,6 @@ DEPENDENCIES:
   - RNRate (from `../../../node_modules/react-native-rate`)
   - RNReanimated (from `../../../node_modules/react-native-reanimated`)
   - RNScreens (from `../../../node_modules/react-native-screens`)
-  - RNSearchBar (from `../../../node_modules/react-native-search-bar`)
   - RNSha256 (from `../../../node_modules/react-native-sha256`)
   - RNSVG (from `../../../node_modules/react-native-svg`)
   - Yoga (from `../../../node_modules/react-native/ReactCommon/yoga`)
@@ -409,8 +406,6 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../../../node_modules/react-native-screens"
-  RNSearchBar:
-    :path: "../../../node_modules/react-native-search-bar"
   RNSha256:
     :path: "../../../node_modules/react-native-sha256"
   RNSVG:
@@ -462,7 +457,6 @@ SPEC CHECKSUMS:
   RNRate: 15b861025a7821730761fce7f44561ce7e0b2de0
   RNReanimated: 514a11da3a2bcc6c3dfd9de32b38e2b9bf101926
   RNScreens: f7ad633b2e0190b77b6a7aab7f914fad6f198d8d
-  RNSearchBar: 9860431356b7d12a8449d2fddb2b5f3c78d1e99f
   RNSha256: bf2c90a9e0cec6dcbcc4100e4e19715ae7feaa34
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b

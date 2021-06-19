@@ -1,9 +1,8 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import { Platform } from 'react-native';
 import { SearchHeader } from './Header';
 import { Results } from './Results';
-import SearchBar from 'react-native-search-bar';
 
 const Wrapper = styled.KeyboardAvoidingView.attrs({
   behavior: Platform.OS === 'ios' ? 'padding' : undefined,
@@ -15,11 +14,10 @@ const Wrapper = styled.KeyboardAvoidingView.attrs({
 `;
 
 export const Search: React.FC = () => {
-  const searchBar = useRef<SearchBar>(null);
   return (
     <Wrapper>
-      <SearchHeader searchBarRef={searchBar} />
-      <Results searchBarRef={searchBar} />
+      <SearchHeader />
+      <Results />
     </Wrapper>
   );
 };
