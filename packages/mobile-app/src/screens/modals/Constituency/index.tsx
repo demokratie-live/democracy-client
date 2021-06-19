@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
-import { Alert, Platform, FlatList } from 'react-native';
+import { Alert, FlatList } from 'react-native';
+import { SearchBar } from '@democracy-deutschland/ui';
 
-import SearchIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Lens';
 // constituencies plz list
 import constituenciesList from './constituencies-list.json';
 import constituencies from '../../Bundestag/Procedure/components/svgs/constituencies';
@@ -14,45 +14,6 @@ import { RootStackParamList } from '../../../routes';
 const Wrapper = styled.View`
   flex: 1;
   background-color: ${({ theme }) => theme.oldColors.background.main};
-`;
-
-const SearchBox = styled.View`
-  height: 44px;
-  background-color: ${({ theme }) => theme.oldColors.background.header};
-`;
-
-const SearchInputWrapper = styled.View`
-  flex: 1;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 5.5px;
-  flex-direction: row;
-  align-items: center;
-  padding-left: 6px;
-  height: 15px;
-  margin-horizontal: 8px;
-  margin-vertical: 8px;
-`;
-
-const SearchInputIcon = styled(SearchIcon).attrs(() => ({
-  color: '#7a797b',
-  width: 16,
-  height: 16,
-}))``;
-
-const SearchInput = styled.TextInput.attrs(() => ({
-  clearButtonMode: 'always',
-  autoFocus: true,
-  placeholderTextColor: '#7a797b',
-  underlineColorAndroid: 'transparent',
-  selectionColor: '#000',
-  returnKeyType: 'search',
-  autoCorrect: false,
-}))`
-  flex: 1;
-  font-size: 14px;
-  height: ${Platform.OS === 'ios' ? 28 : 50}px;
-  padding-horizontal: 6px;
-  color: #000;
 `;
 
 const FlatListWrapper = styled.View``;
@@ -186,12 +147,9 @@ export const ConstituencyScreen: React.FC<Props> = ({ route }) => {
 
   return (
     <Wrapper>
-      <SearchBox>
-        <SearchInputWrapper>
-          <SearchInputIcon />
-          <SearchInput placeholder="PLZ eingeben" onChangeText={onChangePlz} />
-        </SearchInputWrapper>
-      </SearchBox>
+      <SearchBar
+        textInput={{ placeholder: 'PLZ eingeben', onChangeText: onChangePlz }}
+      />
       <FlatListWrapper>
         <FlatList
           data={constituenciesData}
