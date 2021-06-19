@@ -27,7 +27,6 @@ import {
   FinishSearchVariables,
 } from './graphql/mutation/__generated__/FinishSearch';
 import { FINISH_SEARCH } from './graphql/mutation/finishSearch';
-import SearchBar from 'react-native-search-bar';
 
 // import searchProcedures from '../../graphql/queries/searchProcedures';
 // import mostSearched from '../../graphql/queries/mostSearched';
@@ -86,11 +85,7 @@ const NoResultsImage = styled.Image.attrs(() => ({
   margin-top: 18px;
 `;
 
-interface Props {
-  searchBarRef: React.RefObject<SearchBar>;
-}
-
-export const Results: React.FC<Props> = ({ searchBarRef }) => {
+export const Results: React.FC = () => {
   const navigation = useNavigation<
     StackNavigationProp<BundestagRootStackParamList>
   >();
@@ -141,7 +136,6 @@ export const Results: React.FC<Props> = ({ searchBarRef }) => {
       | MostSearched_mostSearched;
     section: string;
   }) => () => {
-    searchBarRef.current ? searchBarRef.current.unFocus() : undefined;
     if (section === 'Ergebnisse' && isProcedureGuard(item)) {
       navigation.navigate('Procedure', {
         procedureId: item.procedureId,
