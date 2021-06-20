@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 // GraphQL
 // import { ConstituencyContext } from '../../context/Constituency';
 // import { InitialStateContext } from '../../context/InitialStates';
-// import { useNavigation } from '@react-navigation/core';
+import { useNavigation } from '@react-navigation/core';
 import { styled } from '../../styles';
 import { DeputyList, SearchBar } from '@democracy-deutschland/ui';
+import { AbgeordneteListContext } from '../../lib/states/Abgeordnete/context';
+import { Button, View } from 'react-native';
 
 const Wrapper = styled.View`
   background-color: ${({ theme }) => theme.oldColors.background.main};
@@ -13,9 +15,28 @@ const Wrapper = styled.View`
 `;
 
 export const Abgeordnete: React.FC = () => {
-  // const navigation = useNavigation();
+  const { state, dispatch } = useContext(AbgeordneteListContext);
+  const navigation = useNavigation();
   // const { constituency } = useContext(ConstituencyContext);
   // const { isVerified } = useContext(InitialStateContext);
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <View style={{ paddingRight: 11 }}>
+          <Button
+            onPress={() =>
+              dispatch({
+                type: 'ToggleEditMode',
+              })
+            }
+            title={state.editMode ? 'Fertig' : 'Bearbeiten'}
+            color="#FFF"
+          />
+        </View>
+      ),
+    });
+  }, [dispatch, navigation, state.editMode]);
 
   return (
     <Wrapper>
@@ -26,10 +47,11 @@ export const Abgeordnete: React.FC = () => {
         }}
       />
       <DeputyList
+        editMode={state.editMode}
         deputies={[
           {
             id: '522694',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Achim Post',
             subtitle: 'SPD, Minden-Lübbecke I (WK 134)',
             avatar: {
@@ -49,7 +71,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518722',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Agnieszka Brugger',
             subtitle: 'Bündnis 90/Die Grünen, Ravensburg (WK 294)',
             avatar: {
@@ -69,7 +91,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524480',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Albert H. Weiler',
             subtitle:
               'CDU/CSU, Saalfeld-Rudolstadt – Saale-Holzland-Kreis – Saale-Orla-Kreis (WK 195)',
@@ -90,7 +112,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523834',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Albert Stegemann',
             subtitle: 'CDU/CSU, Mittelems (WK 31)',
             avatar: {
@@ -110,7 +132,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519746',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Albrecht Glaser',
             subtitle: 'AfD, Schwalm-Eder (WK 170)',
             avatar: {
@@ -130,7 +152,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519076',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Alexander Dobrindt',
             subtitle: 'CDU/CSU, Weilheim (WK 226)',
             avatar: {
@@ -150,7 +172,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521462',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Alexander Graf Lambsdorff',
             subtitle: 'FDP, Bonn (WK 96)',
             avatar: {
@@ -170,7 +192,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520440',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Alexander Hoffmann',
             subtitle: 'CDU/CSU, Main-Spessart (WK 249)',
             avatar: {
@@ -190,7 +212,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521288',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Alexander Krauß',
             subtitle: 'CDU/CSU, Erzgebirgskreis I (WK 164)',
             avatar: {
@@ -210,7 +232,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521412',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Alexander Kulitz',
             subtitle: 'FDP, Ulm (WK 291)',
             avatar: {
@@ -230,7 +252,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522152',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Alexander Müller',
             subtitle: 'FDP, Rheingau-Taunus – Limburg (WK 178)',
             avatar: {
@@ -250,7 +272,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522774',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Alexander Radwan',
             subtitle: 'CDU/CSU, Bad Tölz-Wolfratshausen – Miesbach (WK 223)',
             avatar: {
@@ -270,7 +292,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524108',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Alexander Throm',
             subtitle: 'CDU/CSU, Heilbronn (WK 267)',
             avatar: {
@@ -290,7 +312,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524216',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Alexander Ulrich',
             subtitle: 'Die Linke, Kaiserslautern (WK 209)',
             avatar: {
@@ -310,7 +332,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519712',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Alois Gerig',
             subtitle: 'CDU/CSU, Odenwald – Tauber (WK 276)',
             avatar: {
@@ -330,7 +352,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522782',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Alois Rainer',
             subtitle: 'CDU/CSU, Straubing (WK 231)',
             avatar: {
@@ -350,7 +372,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522090',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Amira Mohamed Ali',
             subtitle: 'Die Linke, Oldenburg – Ammerland (WK 27)',
             avatar: {
@@ -370,7 +392,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521636',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Andrea Lindholz',
             subtitle: 'CDU/CSU, Aschaffenburg (WK 247)',
             avatar: {
@@ -390,7 +412,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518460',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Andreas Bleck',
             subtitle: 'AfD, Neuwied (WK 197)',
             avatar: {
@@ -410,7 +432,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520742',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Andreas Jung',
             subtitle: 'CDU/CSU, Konstanz (WK 287)',
             avatar: {
@@ -430,7 +452,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521576',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Andreas Lenz',
             subtitle: 'CDU/CSU, Erding – Ebersberg (WK 213)',
             avatar: {
@@ -450,7 +472,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521446',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Andreas Lämmel',
             subtitle: 'CDU/CSU, Dresden I (WK 159)',
             avatar: {
@@ -470,7 +492,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521896',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Andreas Mattfeldt',
             subtitle: 'CDU/CSU, Osterholz – Verden (WK 34)',
             avatar: {
@@ -490,7 +512,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522140',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Andreas Mrosek',
             subtitle: 'AfD, Dessau – Wittenberg (WK 70)',
             avatar: {
@@ -510,7 +532,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522336',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Andreas Nick',
             subtitle: 'CDU/CSU, Montabaur (WK 204)',
             avatar: {
@@ -530,7 +552,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522944',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Andreas Rimkus',
             subtitle: 'SPD, Düsseldorf II (WK 107)',
             avatar: {
@@ -550,7 +572,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523234',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Andreas Scheuer',
             subtitle: 'CDU/CSU, Passau (WK 229)',
             avatar: {
@@ -570,7 +592,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523582',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Andreas Schwarz',
             subtitle: 'SPD, Bamberg (WK 236)',
             avatar: {
@@ -590,7 +612,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523844',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Andreas Steier',
             subtitle: 'CDU/CSU, Trier (WK 203)',
             avatar: {
@@ -610,7 +632,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524350',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Andreas Wagner',
             subtitle: 'Die Linke, Bad Tölz-Wolfratshausen – Miesbach (WK 223)',
             avatar: {
@@ -630,7 +652,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520578',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Andrej Hunko',
             subtitle: 'Die Linke, Aachen I (WK 87)',
             avatar: {
@@ -650,7 +672,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518334',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'André Berghegger',
             subtitle: 'CDU/CSU, Osnabrück-Land (WK 38)',
             avatar: {
@@ -670,7 +692,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520042',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'André Hahn',
             subtitle: 'Die Linke, Sächsische Schweiz-Osterzgebirge (WK 158)',
             avatar: {
@@ -690,7 +712,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521278',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Anette Kramme',
             subtitle: 'SPD, Bayreuth (WK 237)',
             avatar: {
@@ -710,7 +732,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519756',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Angelika Glöckner',
             subtitle: 'SPD, Pirmasens (WK 210)',
             avatar: {
@@ -730,7 +752,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523162',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Anita Schäfer',
             subtitle: 'CDU/CSU, Pirmasens (WK 210)',
             avatar: {
@@ -750,7 +772,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520052',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Anja Hajduk',
             subtitle: 'Bündnis 90/Die Grünen, Hamburg-Nord (WK 21)',
             avatar: {
@@ -770,7 +792,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520850',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Anja Karliczek',
             subtitle: 'CDU/CSU, Steinfurt III (WK 128)',
             avatar: {
@@ -790,7 +812,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524506',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Anja Weisgerber',
             subtitle: 'CDU/CSU, Schweinfurt (WK 250)',
             avatar: {
@@ -810,7 +832,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519106',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Anke Domscheit-Berg',
             subtitle:
               'Die Linke, Brandenburg an der Havel – Potsdam-Mittelmark I – Havelland III – Teltow-Fläming I (WK 60)',
@@ -831,7 +853,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518880',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Anna Christmann',
             subtitle: 'Bündnis 90/Die Grünen, Stuttgart II (WK 259)',
             avatar: {
@@ -851,7 +873,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518092',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Annalena Baerbock',
             subtitle:
               'Bündnis 90/Die Grünen, Potsdam – Potsdam-Mittelmark II – Teltow-Fläming II (WK 61)',
@@ -872,7 +894,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524580',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Annette Widmann-Mauz',
             subtitle: 'CDU/CSU, Tübingen (WK 290)',
             avatar: {
@@ -892,7 +914,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520360',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ansgar Heveling',
             subtitle: 'CDU/CSU, Krefeld I – Neuss II (WK 110)',
             avatar: {
@@ -912,7 +934,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521608',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Antje Lezius',
             subtitle: 'CDU/CSU, Kreuznach (WK 201)',
             avatar: {
@@ -932,7 +954,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524124',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Antje Tillmann',
             subtitle: 'CDU/CSU, Erfurt – Weimar – Weimarer Land II (WK 193)',
             avatar: {
@@ -952,7 +974,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520476',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Anton Hofreiter',
             subtitle: 'Bündnis 90/Die Grünen, München-Land (WK 221)',
             avatar: {
@@ -972,7 +994,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523552',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Armin Schuster',
             subtitle: 'CDU/CSU, Lörrach – Müllheim (WK 282)',
             avatar: {
@@ -992,7 +1014,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520072',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Armin-Paulus Hampel',
             subtitle: 'AfD, Hameln-Pyrmont – Holzminden (WK 46)',
             avatar: {
@@ -1012,7 +1034,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521034',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Arno Klare',
             subtitle: 'SPD, Mülheim – Essen I (WK 118)',
             avatar: {
@@ -1032,7 +1054,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524242',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Arnold Vaatz',
             subtitle: 'CDU/CSU, Dresden II – Bautzen II (WK 160)',
             avatar: {
@@ -1052,7 +1074,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518012',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Artur Auernhammer',
             subtitle: 'CDU/CSU, Ansbach (WK 241)',
             avatar: {
@@ -1072,7 +1094,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518968',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Astrid Damerow',
             subtitle: 'CDU/CSU, Nordfriesland – Dithmarschen Nord (WK 2)',
             avatar: {
@@ -1092,7 +1114,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519912',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Astrid Grotelüschen',
             subtitle:
               'CDU/CSU, Delmenhorst – Wesermarsch – Oldenburg-Land (WK 28)',
@@ -1113,7 +1135,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519454',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Axel E. Fischer',
             subtitle: 'CDU/CSU, Karlsruhe-Land (WK 272)',
             avatar: {
@@ -1133,7 +1155,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521114',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Axel Knoerig',
             subtitle: 'CDU/CSU, Diepholz – Nienburg I (WK 33)',
             avatar: {
@@ -1153,7 +1175,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522156',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Axel Müller',
             subtitle: 'CDU/CSU, Ravensburg (WK 294)',
             avatar: {
@@ -1173,7 +1195,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523166',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Axel Schäfer',
             subtitle: 'SPD, Bochum I (WK 140)',
             avatar: {
@@ -1193,7 +1215,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522462',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Aydan Özoğuz',
             subtitle: 'SPD, Hamburg-Wandsbek (WK 22)',
             avatar: {
@@ -1213,7 +1235,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520278',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Barbara Hendricks',
             subtitle: 'SPD, Kleve (WK 112)',
             avatar: {
@@ -1233,7 +1255,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522148',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Beate Müller-Gemmeke',
             subtitle: 'Bündnis 90/Die Grünen, Reutlingen (WK 289)',
             avatar: {
@@ -1253,7 +1275,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524392',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Beate Walter-Rosenheimer',
             subtitle: 'Bündnis 90/Die Grünen, Fürstenfeldbruck (WK 215)',
             avatar: {
@@ -1273,7 +1295,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523916',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Beatrix von Storch',
             subtitle: 'AfD, Berlin-Mitte (WK 75)',
             avatar: {
@@ -1293,7 +1315,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518064',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Bela Bach',
             subtitle: 'SPD, München-Land (WK 221)',
             avatar: {
@@ -1313,7 +1335,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523936',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Benjamin Strasser',
             subtitle: 'FDP, Ravensburg (WK 294)',
             avatar: {
@@ -1333,7 +1355,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519260',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Berengar Elsner von Gronow',
             subtitle: 'AfD, Soest (WK 146)',
             avatar: {
@@ -1353,7 +1375,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518202',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Bernd Baumann',
             subtitle: 'AfD, Hamburg-Altona (WK 19)',
             avatar: {
@@ -1373,7 +1395,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522906',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Bernd Reuther',
             subtitle: 'FDP, Wesel I (WK 113)',
             avatar: {
@@ -1393,7 +1415,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522940',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Bernd Riexinger',
             subtitle: 'Die Linke, Stuttgart II (WK 259)',
             avatar: {
@@ -1413,7 +1435,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523076',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Bernd Rützel',
             subtitle: 'SPD, Main-Spessart (WK 249)',
             avatar: {
@@ -1433,7 +1455,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523678',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Bernd Siebert',
             subtitle: 'CDU/CSU, Schwalm-Eder (WK 170)',
             avatar: {
@@ -1453,7 +1475,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524560',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Bernd Westphal',
             subtitle: 'SPD, Hildesheim (WK 48)',
             avatar: {
@@ -1473,7 +1495,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518964',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Bernhard Daldrup',
             subtitle: 'SPD, Warendorf (WK 130)',
             avatar: {
@@ -1493,7 +1515,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521692',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Bernhard Loos',
             subtitle: 'CDU/CSU, München-Nord (WK 217)',
             avatar: {
@@ -1513,7 +1535,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520028',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Bettina Hagedorn',
             subtitle: 'SPD, Ostholstein – Stormarn-Nord (WK 9)',
             avatar: {
@@ -1533,7 +1555,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524594',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Bettina Margarethe Wiesmann',
             subtitle: 'CDU/CSU, Frankfurt am Main II (WK 183)',
             avatar: {
@@ -1553,7 +1575,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522160',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Bettina Müller',
             subtitle: 'SPD, Main-Kinzig – Wetterau II – Schotten (WK 175)',
             avatar: {
@@ -1573,7 +1595,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523812',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Bettina Stark-Watzinger',
             subtitle: 'FDP, Main-Taunus (WK 181)',
             avatar: {
@@ -1593,7 +1615,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519072',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Bijan Djir-Sarai',
             subtitle: 'FDP, Neuss I (WK 108)',
             avatar: {
@@ -1613,7 +1635,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518796',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Birke Bull-Bischoff',
             subtitle: 'Die Linke, Burgenland – Saalekreis (WK 73)',
             avatar: {
@@ -1633,7 +1655,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523698',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Björn Simon',
             subtitle: 'CDU/CSU, Offenbach (WK 185)',
             avatar: {
@@ -1653,7 +1675,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519522',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Brigitte Freihold',
             subtitle: 'Die Linke, Pirmasens (WK 210)',
             avatar: {
@@ -1673,7 +1695,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520132',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Britta Haßelmann',
             subtitle:
               'Bündnis 90/Die Grünen, Bielefeld – Gütersloh II (WK 132)',
@@ -1694,7 +1716,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518978',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Britta Katharina Dassler',
             subtitle: 'FDP, Erlangen (WK 242)',
             avatar: {
@@ -1714,7 +1736,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521668',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Burkhard Lischka',
             subtitle: 'SPD',
             avatar: {
@@ -1734,7 +1756,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518186',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Bärbel Bas',
             subtitle: 'SPD, Duisburg I (WK 115)',
             avatar: {
@@ -1754,7 +1776,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521198',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Bärbel Kofler',
             subtitle: 'SPD, Traunstein (WK 225)',
             avatar: {
@@ -1774,7 +1796,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518240',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Canan Bayram',
             subtitle:
               'Bündnis 90/Die Grünen, Berlin-Friedrichshain-Kreuzberg – Prenzlauer Berg Ost (WK 83)',
@@ -1795,7 +1817,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521022',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Cansel Kiziltepe',
             subtitle:
               'SPD, Berlin-Friedrichshain-Kreuzberg – Prenzlauer Berg Ost (WK 83)',
@@ -1816,7 +1838,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521512',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Caren Lay',
             subtitle: 'Die Linke, Bautzen I (WK 156)',
             avatar: {
@@ -1836,7 +1858,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521862',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Caren Marks',
             subtitle: 'SPD, Hannover-Land I (WK 43)',
             avatar: {
@@ -1856,7 +1878,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521218',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Carina Konrad',
             subtitle: 'FDP, Mosel/Rhein-Hunsrück (WK 200)',
             avatar: {
@@ -1876,7 +1898,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518932',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Carl-Julius Cronenberg',
             subtitle: 'FDP, Hochsauerlandkreis (WK 147)',
             avatar: {
@@ -1896,7 +1918,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521176',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Carsten Körber',
             subtitle: 'CDU/CSU, Zwickau (WK 165)',
             avatar: {
@@ -1916,7 +1938,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522166',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Carsten Müller',
             subtitle: 'CDU/CSU, Braunschweig (WK 50)',
             avatar: {
@@ -1936,7 +1958,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523400',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Carsten Schneider',
             subtitle: 'SPD, Erfurt – Weimar – Weimarer Land II (WK 193)',
             avatar: {
@@ -1956,7 +1978,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524144',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Carsten Träger',
             subtitle: 'SPD, Fürth (WK 243)',
             avatar: {
@@ -1976,7 +1998,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522452',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Cem Özdemir',
             subtitle: 'Bündnis 90/Die Grünen, Stuttgart I (WK 258)',
             avatar: {
@@ -1996,7 +2018,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523408',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Charlotte Schneidewind-Hartnagel',
             subtitle: 'Bündnis 90/Die Grünen, Odenwald – Tauber (WK 276)',
             avatar: {
@@ -2016,7 +2038,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519160',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Christian Dürr',
             subtitle: 'FDP, Delmenhorst – Wesermarsch – Oldenburg-Land (WK 28)',
             avatar: {
@@ -2036,7 +2058,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519998',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Christian Haase',
             subtitle: 'CDU/CSU, Höxter – Lippe II (WK 136)',
             avatar: {
@@ -2056,7 +2078,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520396',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Christian Hirte',
             subtitle:
               'CDU/CSU, Eisenach – Wartburgkreis – Unstrut-Hainich-Kreis (WK 190)',
@@ -2077,7 +2099,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521382',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Christian Kühn',
             subtitle: 'Bündnis 90/Die Grünen, Tübingen (WK 290)',
             avatar: {
@@ -2097,7 +2119,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521480',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Christian Lange',
             subtitle: 'SPD, Backnang – Schwäbisch Gmünd (WK 269)',
             avatar: {
@@ -2117,7 +2139,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521640',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Christian Lindner',
             subtitle: 'FDP, Rheinisch-Bergischer Kreis (WK 100)',
             avatar: {
@@ -2137,7 +2159,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522272',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Christian Natterer',
             subtitle: 'CDU/CSU',
             avatar: {
@@ -2157,7 +2179,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522602',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Christian Petry',
             subtitle: 'SPD, St. Wendel (WK 298)',
             avatar: {
@@ -2177,7 +2199,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523142',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Christian Sauter',
             subtitle: 'FDP, Lippe I (WK 135)',
             avatar: {
@@ -2197,7 +2219,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523326',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Christian Schmidt',
             subtitle: 'CDU/CSU, Fürth (WK 243)',
             avatar: {
@@ -2217,7 +2239,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523882',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Christian von Stetten',
             subtitle: 'CDU/CSU, Schwäbisch Hall – Hohenlohe (WK 268)',
             avatar: {
@@ -2237,7 +2259,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '517986',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Christine Aschenberg-Dugnus',
             subtitle: 'FDP, Rendsburg-Eckernförde (WK 4)',
             avatar: {
@@ -2257,7 +2279,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518756',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Christine Buchholz',
             subtitle: 'Die Linke, Offenbach (WK 185)',
             avatar: {
@@ -2277,7 +2299,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521460',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Christine Lambrecht',
             subtitle: 'SPD, Bergstraße (WK 188)',
             avatar: {
@@ -2297,7 +2319,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518364',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Christoph Bernstiel',
             subtitle: 'CDU/CSU, Halle (WK 72)',
             avatar: {
@@ -2317,7 +2339,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521892',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Christoph Matschie',
             subtitle: 'SPD, Jena – Sömmerda – Weimarer Land I (WK 191)',
             avatar: {
@@ -2337,7 +2359,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521996',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Christoph Meyer',
             subtitle: 'FDP, Berlin-Charlottenburg-Wilmersdorf (WK 80)',
             avatar: {
@@ -2357,7 +2379,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522308',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Christoph Neumann',
             subtitle: 'AfD, Leipzig I (WK 152)',
             avatar: {
@@ -2377,7 +2399,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524318',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Christopher de Vries',
             subtitle: 'CDU/CSU, Hamburg-Mitte (WK 18)',
             avatar: {
@@ -2397,7 +2419,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522100',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Claudia Moll',
             subtitle: 'SPD, Aachen II (WK 88)',
             avatar: {
@@ -2417,7 +2439,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522168',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Claudia Müller',
             subtitle:
               'Bündnis 90/Die Grünen, Vorpommern-Rügen – Vorpommern-Greifswald I (WK 15)',
@@ -2438,7 +2460,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523038',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Claudia Roth',
             subtitle: 'Bündnis 90/Die Grünen, Augsburg-Stadt (WK 252)',
             avatar: {
@@ -2458,7 +2480,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524036',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Claudia Tausend',
             subtitle: 'SPD, München-Ost (WK 218)',
             avatar: {
@@ -2478,7 +2500,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522010',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Corinna Miazga',
             subtitle: 'AfD',
             avatar: {
@@ -2498,7 +2520,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523068',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Corinna Rüffer',
             subtitle: 'Bündnis 90/Die Grünen, Trier (WK 203)',
             avatar: {
@@ -2518,7 +2540,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522070',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Cornelia Möhring',
             subtitle: 'Die Linke, Pinneberg (WK 7)',
             avatar: {
@@ -2538,7 +2560,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519528',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dagmar Freitag',
             subtitle: 'SPD, Märkischer Kreis II (WK 150)',
             avatar: {
@@ -2558,7 +2580,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523330',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dagmar Schmidt',
             subtitle: 'SPD, Lahn-Dill (WK 172)',
             avatar: {
@@ -2578,7 +2600,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524770',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dagmar Ziegler',
             subtitle:
               'SPD, Prignitz – Ostprignitz-Ruppin – Havelland I (WK 56)',
@@ -2599,7 +2621,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519490',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Daniel Föst',
             subtitle: 'FDP, München-Nord (WK 217)',
             avatar: {
@@ -2619,7 +2641,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521098',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Daniela Kluckert',
             subtitle: 'FDP, Berlin-Pankow (WK 76)',
             avatar: {
@@ -2639,7 +2661,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521206',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Daniela Kolbe',
             subtitle: 'SPD, Leipzig I (WK 152)',
             avatar: {
@@ -2659,7 +2681,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521736',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Daniela Ludwig',
             subtitle: 'CDU/CSU, Rosenheim (WK 222)',
             avatar: {
@@ -2679,7 +2701,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524354',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Daniela Wagner',
             subtitle: 'Bündnis 90/Die Grünen, Darmstadt (WK 186)',
             avatar: {
@@ -2699,7 +2721,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523006',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dennis Rohde',
             subtitle: 'SPD, Oldenburg – Ammerland (WK 27)',
             avatar: {
@@ -2719,7 +2741,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522172',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Detlef Müller',
             subtitle: 'SPD, Chemnitz (WK 162)',
             avatar: {
@@ -2739,7 +2761,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523638',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Detlef Seif',
             subtitle: 'CDU/CSU, Euskirchen – Rhein-Erft-Kreis II (WK 92)',
             avatar: {
@@ -2759,7 +2781,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522650',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Detlev Pilger',
             subtitle: 'SPD, Koblenz (WK 199)',
             avatar: {
@@ -2779,7 +2801,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523752',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Detlev Spangenberg',
             subtitle: 'AfD, Nordsachsen (WK 151)',
             avatar: {
@@ -2799,7 +2821,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520658',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dieter Janecek',
             subtitle: 'Bündnis 90/Die Grünen, München-West/Mitte (WK 220)',
             avatar: {
@@ -2819,7 +2841,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523890',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dieter Stier',
             subtitle: 'CDU/CSU, Burgenland – Saalekreis (WK 73)',
             avatar: {
@@ -2839,7 +2861,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518988',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Diether Dehm',
             subtitle: 'Die Linke, Hannover-Land I (WK 43)',
             avatar: {
@@ -2859,7 +2881,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519550',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dietmar Friedhoff',
             subtitle: 'AfD, Hannover-Land I (WK 43)',
             avatar: {
@@ -2879,7 +2901,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522362',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dietmar Nietan',
             subtitle: 'SPD, Düren (WK 90)',
             avatar: {
@@ -2899,7 +2921,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522106',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dietrich Monstadt',
             subtitle:
               'CDU/CSU, Schwerin – Ludwigslust-Parchim I – Nordwestmecklenburg I (WK 12)',
@@ -2920,7 +2942,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520186',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dirk Heidenblut',
             subtitle: 'SPD, Essen II (WK 119)',
             avatar: {
@@ -2940,7 +2962,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524278',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dirk Vöpel',
             subtitle: 'SPD, Oberhausen – Wesel III (WK 117)',
             avatar: {
@@ -2960,7 +2982,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524592',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dirk Wiese',
             subtitle: 'SPD, Hochsauerlandkreis (WK 147)',
             avatar: {
@@ -2980,7 +3002,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '517820',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Doris Achelwilm',
             subtitle: 'Die Linke',
             avatar: {
@@ -3000,7 +3022,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518140',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Doris Barnett',
             subtitle: 'SPD, Ludwigshafen/Frankenthal (WK 207)',
             avatar: {
@@ -3020,7 +3042,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518098',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dorothee Bär',
             subtitle: 'CDU/CSU, Bad Kissingen (WK 248)',
             avatar: {
@@ -3040,7 +3062,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521872',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dorothee Martin',
             subtitle: 'SPD, Hamburg-Nord (WK 21)',
             avatar: {
@@ -3060,7 +3082,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522420',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr . Georg Nüßlein',
             subtitle: 'fraktionslos, Neu-Ulm (WK 255)',
             avatar: {
@@ -3077,7 +3099,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520972',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Achim Kessler',
             subtitle: 'Die Linke, Frankfurt am Main I (WK 182)',
             avatar: {
@@ -3097,7 +3119,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519654',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Alexander Gauland',
             subtitle: 'AfD, Frankfurt (Oder) – Oder-Spree (WK 63)',
             avatar: {
@@ -3117,7 +3139,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522326',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Alexander S. Neu',
             subtitle: 'Die Linke, Rhein-Sieg-Kreis I (WK 97)',
             avatar: {
@@ -3137,7 +3159,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524466',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Alice Weidel',
             subtitle: 'AfD, Bodensee (WK 293)',
             avatar: {
@@ -3157,7 +3179,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521968',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Angela Merkel',
             subtitle:
               'CDU/CSU, Vorpommern-Rügen – Vorpommern-Greifswald I (WK 15)',
@@ -3178,7 +3200,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519566',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Anton Friesen',
             subtitle: 'AfD',
             avatar: {
@@ -3198,7 +3220,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '650158',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Astrid Freudenstein',
             subtitle: 'CDU/CSU',
             avatar: {
@@ -3218,7 +3240,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519540',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Astrid Freudenstein',
             subtitle: 'CDU/CSU',
             avatar: {
@@ -3238,7 +3260,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521848',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Astrid Mannes',
             subtitle: 'CDU/CSU, Darmstadt (WK 186)',
             avatar: {
@@ -3258,7 +3280,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524168',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Axel Troost',
             subtitle: 'Die Linke, Leipzig-Land (WK 154)',
             avatar: {
@@ -3278,7 +3300,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518750',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Bernd Buchholz',
             subtitle: 'FDP, Herzogtum Lauenburg – Stormarn-Süd (WK 10)',
             avatar: {
@@ -3298,7 +3320,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520448',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Bettina Hoffmann',
             subtitle: 'Bündnis 90/Die Grünen, Schwalm-Eder (WK 170)',
             avatar: {
@@ -3318,7 +3340,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521834',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Birgit Malsack-Winkemann',
             subtitle: 'AfD',
             avatar: {
@@ -3338,7 +3360,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520490',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Bruno Hollnagel',
             subtitle: 'AfD, Herzogtum Lauenburg – Stormarn-Süd (WK 10)',
             avatar: {
@@ -3358,7 +3380,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522854',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Carola Reimann',
             subtitle: 'SPD, Braunschweig (WK 50)',
             avatar: {
@@ -3378,7 +3400,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518712',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Carsten Brodesser',
             subtitle: 'CDU/CSU, Oberbergischer Kreis (WK 99)',
             avatar: {
@@ -3398,7 +3420,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521654',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Carsten Linnemann',
             subtitle: 'CDU/CSU, Paderborn – Gütersloh III (WK 137)',
             avatar: {
@@ -3418,7 +3440,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520744',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Christian Jung',
             subtitle: 'FDP, Karlsruhe-Land (WK 272)',
             avatar: {
@@ -3438,7 +3460,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524632',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Christian Wirth',
             subtitle: 'AfD',
             avatar: {
@@ -3458,7 +3480,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520450',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Christoph Hoffmann',
             subtitle: 'FDP, Lörrach – Müllheim (WK 282)',
             avatar: {
@@ -3478,7 +3500,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522662',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Christoph Ploß',
             subtitle: 'CDU/CSU, Hamburg-Nord (WK 21)',
             avatar: {
@@ -3498,7 +3520,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519806',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Christopher Gohl',
             subtitle: 'FDP, Tübingen (WK 290)',
             avatar: {
@@ -3518,7 +3540,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522918',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Daniela de Ridder',
             subtitle: 'SPD, Mittelems (WK 31)',
             avatar: {
@@ -3538,7 +3560,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518234',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Danyal Bayaz',
             subtitle: 'Bündnis 90/Die Grünen, Bruchsal – Schwetzingen (WK 278)',
             avatar: {
@@ -3558,7 +3580,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524114',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Dietlind Tiemann',
             subtitle:
               'CDU/CSU, Brandenburg an der Havel – Potsdam-Mittelmark I – Havelland III – Teltow-Fläming I (WK 60)',
@@ -3579,7 +3601,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518176',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Dietmar Bartsch',
             subtitle: 'Die Linke, Rostock – Landkreis Rostock II (WK 14)',
             avatar: {
@@ -3599,7 +3621,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523754',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Dirk Spaniel',
             subtitle: 'AfD, Stuttgart I (WK 258)',
             avatar: {
@@ -3619,7 +3641,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '829864',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Dr. h. c. Bernd Fabritius',
             subtitle: 'CDU/CSU',
             avatar: {
@@ -3639,7 +3661,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518648',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Eberhard Brecht',
             subtitle: 'SPD, Harz (WK 68)',
             avatar: {
@@ -3659,7 +3681,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519500',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Edgar Franke',
             subtitle: 'SPD, Schwalm-Eder (WK 170)',
             avatar: {
@@ -3679,7 +3701,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520418',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Eva Högl',
             subtitle: 'SPD, Berlin-Mitte (WK 75)',
             avatar: {
@@ -3699,7 +3721,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524140',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Florian Toncar',
             subtitle: 'FDP, Böblingen (WK 260)',
             avatar: {
@@ -3719,7 +3741,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522604',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Frauke Petry',
             subtitle: 'fraktionslos, Sächsische Schweiz-Osterzgebirge (WK 158)',
             avatar: {
@@ -3736,7 +3758,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523340',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Frithjof Schmidt',
             subtitle: 'Bündnis 90/Die Grünen, Bochum I (WK 140)',
             avatar: {
@@ -3756,7 +3778,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520408',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Gero Hocker',
             subtitle: 'FDP, Osterholz – Verden (WK 34)',
             avatar: {
@@ -3776,7 +3798,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519578',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Götz Frömming',
             subtitle: 'AfD',
             avatar: {
@@ -3796,7 +3818,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521318',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Günter Krings',
             subtitle: 'CDU/CSU, Mönchengladbach (WK 109)',
             avatar: {
@@ -3816,7 +3838,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524596',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Heiko Wildberg',
             subtitle: 'AfD, Südpfalz (WK 211)',
             avatar: {
@@ -3836,7 +3858,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520516',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Hendrik Hoppenstedt',
             subtitle: 'CDU/CSU, Hannover-Land I (WK 43)',
             avatar: {
@@ -3856,7 +3878,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523724',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Hermann Otto Solms',
             subtitle: 'FDP, Gießen (WK 173)',
             avatar: {
@@ -3876,7 +3898,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524040',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Hermann-Josef Tebroke',
             subtitle: 'CDU/CSU, Rheinisch-Bergischer Kreis (WK 100)',
             avatar: {
@@ -3896,7 +3918,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518586',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Jens Brandenburg',
             subtitle: 'FDP, Rhein-Neckar (WK 277)',
             avatar: {
@@ -3916,7 +3938,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524794',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Jens Zimmermann',
             subtitle: 'SPD, Odenwald (WK 187)',
             avatar: {
@@ -3936,7 +3958,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524492',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Joe Weingarten',
             subtitle: 'SPD, Kreuznach (WK 201)',
             avatar: {
@@ -3956,7 +3978,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521868',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Jürgen Martens',
             subtitle: 'FDP, Zwickau (WK 165)',
             avatar: {
@@ -3976,7 +3998,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520828',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Kirsten Kappert-Gonther',
             subtitle: 'Bündnis 90/Die Grünen, Bremen I (WK 54)',
             avatar: {
@@ -3996,7 +4018,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523520',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Klaus-Peter Schulze',
             subtitle: 'CDU/CSU, Cottbus – Spree-Neiße (WK 64)',
             avatar: {
@@ -4016,7 +4038,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523480',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Manja Schüle',
             subtitle:
               'SPD, Potsdam – Potsdam-Mittelmark II – Teltow-Fläming II (WK 61)',
@@ -4037,7 +4059,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523046',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Manuela Rottmann',
             subtitle: 'Bündnis 90/Die Grünen, Bad Kissingen (WK 248)',
             avatar: {
@@ -4057,7 +4079,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520722',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Marc Jongen',
             subtitle: 'AfD, Neckar-Zaber (WK 266)',
             avatar: {
@@ -4077,7 +4099,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521084',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Marcel Klinge',
             subtitle: 'FDP, Schwarzwald-Baar (WK 286)',
             avatar: {
@@ -4097,7 +4119,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518832',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Marco Buschmann',
             subtitle: 'FDP, Gelsenkirchen (WK 123)',
             avatar: {
@@ -4117,7 +4139,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519344',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Marcus Faber',
             subtitle: 'FDP, Altmark (WK 66)',
             avatar: {
@@ -4137,7 +4159,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523928',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Marie-Agnes Strack-Zimmermann',
             subtitle: 'FDP, Düsseldorf I (WK 106)',
             avatar: {
@@ -4157,7 +4179,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520192',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Matthias Heider',
             subtitle: 'CDU/CSU, Olpe – Märkischer Kreis I (WK 149)',
             avatar: {
@@ -4177,7 +4199,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519326',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Michael Espendiller',
             subtitle: 'AfD, Steinfurt III (WK 128)',
             avatar: {
@@ -4197,7 +4219,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523382',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Nils Schmid',
             subtitle: 'SPD, Nürtingen (WK 262)',
             avatar: {
@@ -4217,7 +4239,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523000',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Norbert Röttgen',
             subtitle: 'CDU/CSU, Rhein-Sieg-Kreis II (WK 98)',
             avatar: {
@@ -4237,7 +4259,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522790',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Peter Ramsauer',
             subtitle: 'CDU/CSU, Traunstein (WK 225)',
             avatar: {
@@ -4257,7 +4279,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524032',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Peter Tauber',
             subtitle: 'CDU/CSU, Main-Kinzig – Wetterau II – Schotten (WK 175)',
             avatar: {
@@ -4277,7 +4299,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523708',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Petra Sitte',
             subtitle: 'Die Linke, Halle (WK 72)',
             avatar: {
@@ -4297,7 +4319,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521270',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Rainer Kraft',
             subtitle: 'AfD, Augsburg-Land (WK 253)',
             avatar: {
@@ -4317,7 +4339,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523302',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Robby Schlund',
             subtitle: 'AfD, Gera – Greiz – Altenburger Land (WK 194)',
             avatar: {
@@ -4337,7 +4359,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520122',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Roland Hartwig',
             subtitle: 'AfD, Rheinisch-Bergischer Kreis (WK 100)',
             avatar: {
@@ -4357,7 +4379,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524346',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Sahra Wagenknecht',
             subtitle: 'Die Linke, Düsseldorf II (WK 107)',
             avatar: {
@@ -4377,7 +4399,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521740',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Saskia Ludwig',
             subtitle:
               'CDU/CSU, Potsdam – Potsdam-Mittelmark II – Teltow-Fläming II (WK 61)',
@@ -4398,7 +4420,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523086',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Stefan Ruppert',
             subtitle: 'FDP, Hochtaunus (WK 176)',
             avatar: {
@@ -4418,7 +4440,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520100',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Stephan Harbarth',
             subtitle: 'CDU/CSU, Rhein-Neckar (WK 277)',
             avatar: {
@@ -4438,7 +4460,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519672',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Thomas Gebhart',
             subtitle: 'CDU/CSU, Südpfalz (WK 211)',
             avatar: {
@@ -4458,7 +4480,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522490',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Tim Ostermann',
             subtitle: 'CDU/CSU, Herford – Minden-Lübbecke II (WK 133)',
             avatar: {
@@ -4478,7 +4500,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521602',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Ursula von der Leyen',
             subtitle: 'CDU/CSU, Stadt Hannover II (WK 42)',
             avatar: {
@@ -4498,7 +4520,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524212',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Volker Ullrich',
             subtitle: 'CDU/CSU, Augsburg-Stadt (WK 252)',
             avatar: {
@@ -4518,7 +4540,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519320',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Wiebke Esdar',
             subtitle: 'SPD, Bielefeld – Gütersloh II (WK 132)',
             avatar: {
@@ -4538,7 +4560,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523274',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Wieland Schinnenburg',
             subtitle: 'FDP, Hamburg-Wandsbek (WK 22)',
             avatar: {
@@ -4558,7 +4580,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523184',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Wolfgang Schäuble',
             subtitle: 'CDU/CSU, Offenburg (WK 284)',
             avatar: {
@@ -4578,7 +4600,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523830',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Wolfgang Stefinger',
             subtitle: 'CDU/CSU, München-Ost (WK 218)',
             avatar: {
@@ -4598,7 +4620,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523944',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Dr. Wolfgang Stengmann-Kuhn',
             subtitle: 'Bündnis 90/Die Grünen, Offenbach (WK 185)',
             avatar: {
@@ -4618,7 +4640,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519728',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Eberhard Gienger',
             subtitle: 'CDU/CSU, Neckar-Zaber (WK 266)',
             avatar: {
@@ -4638,7 +4660,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519760',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Eckhard Gnodtke',
             subtitle: 'CDU/CSU, Altmark (WK 66)',
             avatar: {
@@ -4658,7 +4680,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522682',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Eckhard Pols',
             subtitle: 'CDU/CSU, Lüchow-Dannenberg – Lüneburg (WK 37)',
             avatar: {
@@ -4678,7 +4700,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522826',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Eckhardt Rehberg',
             subtitle:
               'CDU/CSU, Mecklenburgische Seenplatte II – Landkreis Rostock III (WK 17)',
@@ -4699,7 +4721,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518994',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ekin Deligöz',
             subtitle: 'Bündnis 90/Die Grünen, Neu-Ulm (WK 255)',
             avatar: {
@@ -4719,7 +4741,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520786',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Elisabeth Kaiser',
             subtitle: 'SPD, Gera – Greiz – Altenburger Land (WK 194)',
             avatar: {
@@ -4739,7 +4761,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522132',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Elisabeth Motschmann',
             subtitle: 'CDU/CSU, Bremen I (WK 54)',
             avatar: {
@@ -4759,7 +4781,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524618',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Elisabeth Winkelmeier-Becker',
             subtitle: 'CDU/CSU, Rhein-Sieg-Kreis I (WK 97)',
             avatar: {
@@ -4779,7 +4801,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521238',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Elvan Korkmaz-Emre',
             subtitle: 'SPD, Gütersloh I (WK 131)',
             avatar: {
@@ -4799,7 +4821,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524762',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Emmi Zeulner',
             subtitle: 'CDU/CSU, Kulmbach (WK 240)',
             avatar: {
@@ -4819,7 +4841,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519418',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Enak Ferlemann',
             subtitle: 'CDU/CSU, Cuxhaven – Stade II (WK 29)',
             avatar: {
@@ -4839,7 +4861,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521216',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Enrico Komning',
             subtitle:
               'AfD, Mecklenburgische Seenplatte I – Vorpommern-Greifswald II (WK 16)',
@@ -4860,7 +4882,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519936',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Erhard Grundl',
             subtitle: 'Bündnis 90/Die Grünen, Straubing (WK 231)',
             avatar: {
@@ -4880,7 +4902,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520618',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Erich Irlstorfer',
             subtitle: 'CDU/CSU, Freising (WK 214)',
             avatar: {
@@ -4900,7 +4922,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523026',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ernst Dieter Rossmann',
             subtitle: 'SPD, Pinneberg (WK 7)',
             avatar: {
@@ -4920,7 +4942,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '517818',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ernst-Michael von Abercron',
             subtitle: 'CDU/CSU, Pinneberg (WK 7)',
             avatar: {
@@ -4940,7 +4962,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523064',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Erwin Rüddel',
             subtitle: 'CDU/CSU, Neuwied (WK 197)',
             avatar: {
@@ -4960,7 +4982,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519056',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Esther Dilcher',
             subtitle: 'SPD, Waldeck (WK 167)',
             avatar: {
@@ -4980,7 +5002,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523460',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Eva-Maria Schreiber',
             subtitle: 'Die Linke, München-Land (WK 221)',
             avatar: {
@@ -5000,7 +5022,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523548',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ewald Schurer',
             subtitle: 'SPD, Erding – Ebersberg (WK 213)',
             avatar: {
@@ -5020,7 +5042,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520638',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Fabian Jacobi',
             subtitle: 'AfD, Köln I (WK 93)',
             avatar: {
@@ -5040,7 +5062,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521884',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Fabio De Masi',
             subtitle: 'Die Linke',
             avatar: {
@@ -5060,7 +5082,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522094',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Falko Mohrs',
             subtitle: 'SPD, Helmstedt – Wolfsburg (WK 51)',
             avatar: {
@@ -5080,7 +5102,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523462',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Felix Schreiner',
             subtitle: 'CDU/CSU, Waldshut (WK 288)',
             avatar: {
@@ -5100,7 +5122,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522678',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Filiz Polat',
             subtitle: 'Bündnis 90/Die Grünen, Osnabrück-Land (WK 38)',
             avatar: {
@@ -5120,7 +5142,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520046',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Florian Hahn',
             subtitle: 'CDU/CSU, München-Land (WK 221)',
             avatar: {
@@ -5140,7 +5162,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522698',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Florian Post',
             subtitle: 'SPD, München-Nord (WK 217)',
             avatar: {
@@ -5160,7 +5182,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522720',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Florian Pronold',
             subtitle: 'SPD, Rottal-Inn (WK 230)',
             avatar: {
@@ -5180,7 +5202,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520234',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Frank Heinrich',
             subtitle: 'CDU/CSU, Chemnitz (WK 162)',
             avatar: {
@@ -5200,7 +5222,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520734',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Frank Junge',
             subtitle:
               'SPD, Ludwigslust-Parchim II – Nordwestmecklenburg II – Landkreis Rostock I (WK 13)',
@@ -5221,7 +5243,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521796',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Frank Magnitz',
             subtitle: 'AfD, Bremen II – Bremerhaven (WK 55)',
             avatar: {
@@ -5241,7 +5263,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522208',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Frank Müller-Rosentritt',
             subtitle: 'FDP, Chemnitz (WK 162)',
             avatar: {
@@ -5261,7 +5283,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522548',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Frank Pasemann',
             subtitle: 'fraktionslos, Magdeburg (WK 69)',
             avatar: {
@@ -5278,7 +5300,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523178',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Frank Schäffler',
             subtitle: 'FDP, Minden-Lübbecke I (WK 134)',
             avatar: {
@@ -5298,7 +5320,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523704',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Frank Sitta',
             subtitle: 'FDP, Halle (WK 72)',
             avatar: {
@@ -5318,7 +5340,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523820',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Frank Steffel',
             subtitle: 'CDU/CSU, Berlin-Reinickendorf (WK 77)',
             avatar: {
@@ -5338,7 +5360,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518622',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Franziska Brantner',
             subtitle: 'Bündnis 90/Die Grünen, Heidelberg (WK 274)',
             avatar: {
@@ -5358,7 +5380,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519758',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Franziska Gminder',
             subtitle: 'AfD',
             avatar: {
@@ -5378,7 +5400,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522482',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Friedrich Ostendorff',
             subtitle: 'Bündnis 90/Die Grünen, Coesfeld – Steinfurt II (WK 127)',
             avatar: {
@@ -5398,7 +5420,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523930',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Friedrich Straetmanns',
             subtitle: 'Die Linke, Bielefeld – Gütersloh II (WK 132)',
             avatar: {
@@ -5418,7 +5440,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519406',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Fritz Felgentreu',
             subtitle: 'SPD, Berlin-Neukölln (WK 82)',
             avatar: {
@@ -5438,7 +5460,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519962',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Fritz Güntzler',
             subtitle: 'CDU/CSU, Göttingen (WK 53)',
             avatar: {
@@ -5458,7 +5480,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524448',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Gabi Weber',
             subtitle: 'SPD, Montabaur (WK 204)',
             avatar: {
@@ -5478,7 +5500,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520238',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Gabriela Heinrich',
             subtitle: 'SPD, Nürnberg-Nord (WK 244)',
             avatar: {
@@ -5498,7 +5520,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520376',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Gabriele Hiller-Ohm',
             subtitle: 'SPD, Lübeck (WK 11)',
             avatar: {
@@ -5518,7 +5540,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520884',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Gabriele Katzmarek',
             subtitle: 'SPD, Rastatt (WK 273)',
             avatar: {
@@ -5538,7 +5560,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521008',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Georg Kippels',
             subtitle: 'CDU/CSU, Rhein-Erft-Kreis I (WK 91)',
             avatar: {
@@ -5558,7 +5580,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524206',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Gerald Ullrich',
             subtitle:
               'FDP, Suhl – Schmalkalden-Meiningen – Hildburghausen – Sonneberg (WK 196)',
@@ -5579,7 +5601,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522180',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Gerd Müller',
             subtitle: 'CDU/CSU, Oberallgäu (WK 256)',
             avatar: {
@@ -5599,7 +5621,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523240',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Gerhard Schick',
             subtitle: 'Bündnis 90/Die Grünen, Mannheim (WK 275)',
             avatar: {
@@ -5619,7 +5641,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524764',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Gerhard Zickenheiner',
             subtitle: 'Bündnis 90/Die Grünen, Lörrach – Müllheim (WK 282)',
             avatar: {
@@ -5639,7 +5661,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523920',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Gero Storjohann',
             subtitle: 'CDU/CSU, Segeberg – Stormarn-Mitte (WK 8)',
             avatar: {
@@ -5659,7 +5681,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522500',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Gerold Otten',
             subtitle: 'AfD, München-Land (WK 221)',
             avatar: {
@@ -5679,7 +5701,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521686',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Gesine Lötzsch',
             subtitle: 'Die Linke, Berlin-Lichtenberg (WK 86)',
             avatar: {
@@ -5699,7 +5721,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521840',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Gisela Manderla',
             subtitle: 'CDU/CSU, Köln III (WK 95)',
             avatar: {
@@ -5719,7 +5741,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518902',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Gitta Connemann',
             subtitle: 'CDU/CSU, Unterems (WK 25)',
             avatar: {
@@ -5739,7 +5761,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518934',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Gottfried Curio',
             subtitle: 'AfD',
             avatar: {
@@ -5759,7 +5781,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519984',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Gregor Gysi',
             subtitle: 'Die Linke, Berlin-Treptow-Köpenick (WK 84)',
             avatar: {
@@ -5779,7 +5801,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '517836',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Grigorios Aggelidis',
             subtitle: 'FDP, Hannover-Land I (WK 43)',
             avatar: {
@@ -5799,7 +5821,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521310',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Gunther Krichbaum',
             subtitle: 'CDU/CSU, Pforzheim (WK 279)',
             avatar: {
@@ -5819,7 +5841,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520344',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Gustav Herzog',
             subtitle: 'SPD, Kaiserslautern (WK 209)',
             avatar: {
@@ -5839,7 +5861,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520698',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Gyde Jensen',
             subtitle: 'FDP',
             avatar: {
@@ -5859,7 +5881,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '517852',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Gökay Akbulut',
             subtitle: 'Die Linke, Mannheim (WK 275)',
             avatar: {
@@ -5879,7 +5901,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524724',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Gülistan Yüksel',
             subtitle: 'SPD, Mönchengladbach (WK 109)',
             avatar: {
@@ -5899,7 +5921,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522862',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Hagen Reinhold',
             subtitle: 'FDP, Rostock – Landkreis Rostock II (WK 14)',
             avatar: {
@@ -5919,7 +5941,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522016',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Hans Michelbach',
             subtitle: 'CDU/CSU, Coburg (WK 238)',
             avatar: {
@@ -5939,7 +5961,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519590',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Hans-Joachim Fuchtel',
             subtitle: 'CDU/CSU, Calw (WK 280)',
             avatar: {
@@ -5959,7 +5981,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520624',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Hans-Jürgen Irmer',
             subtitle: 'CDU/CSU, Lahn-Dill (WK 172)',
             avatar: {
@@ -5979,7 +6001,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524094',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Hans-Jürgen Thies',
             subtitle: 'CDU/CSU, Soest (WK 146)',
             avatar: {
@@ -5999,7 +6021,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519560',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Hans-Peter Friedrich',
             subtitle: 'CDU/CSU, Hof (WK 239)',
             avatar: {
@@ -6019,7 +6041,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519170',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Hansjörg Durz',
             subtitle: 'CDU/CSU, Augsburg-Land (WK 253)',
             avatar: {
@@ -6039,7 +6061,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522184',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Hansjörg Müller',
             subtitle: 'AfD, Traunstein (WK 225)',
             avatar: {
@@ -6059,7 +6081,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519194',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Harald Ebner',
             subtitle:
               'Bündnis 90/Die Grünen, Schwäbisch Hall – Hohenlohe (WK 268)',
@@ -6080,7 +6102,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524486',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Harald Weinberg',
             subtitle: 'Die Linke, Ansbach (WK 241)',
             avatar: {
@@ -6100,7 +6122,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519180',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Hartmut Ebbing',
             subtitle: 'FDP, Berlin-Steglitz-Zehlendorf (WK 79)',
             avatar: {
@@ -6120,7 +6142,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518490',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Heidrun Bluhm-Förster',
             subtitle:
               'Die Linke, Mecklenburgische Seenplatte II – Landkreis Rostock III (WK 17)',
@@ -6141,7 +6163,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518086',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Heike Baehrens',
             subtitle: 'SPD, Göppingen (WK 263)',
             avatar: {
@@ -6161,7 +6183,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518658',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Heike Brehmer',
             subtitle: 'CDU/CSU, Harz (WK 68)',
             avatar: {
@@ -6181,7 +6203,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521782',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Heiko Maas',
             subtitle: 'SPD, Saarlouis (WK 297)',
             avatar: {
@@ -6201,7 +6223,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518636',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Helge Braun',
             subtitle: 'CDU/CSU, Gießen (WK 173)',
             avatar: {
@@ -6221,7 +6243,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521638',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Helge Lindh',
             subtitle: 'SPD, Wuppertal I (WK 102)',
             avatar: {
@@ -6241,7 +6263,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523732',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Helin Evrim Sommer',
             subtitle: 'Die Linke',
             avatar: {
@@ -6261,7 +6283,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522506',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Henning Otte',
             subtitle: 'CDU/CSU, Celle – Uelzen (WK 44)',
             avatar: {
@@ -6281,7 +6303,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520400',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Heribert Hirte',
             subtitle: 'CDU/CSU, Köln II (WK 94)',
             avatar: {
@@ -6301,7 +6323,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519352',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Hermann Färber',
             subtitle: 'CDU/CSU, Göppingen (WK 263)',
             avatar: {
@@ -6321,7 +6343,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519870',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Hermann Gröhe',
             subtitle: 'CDU/CSU, Neuss I (WK 108)',
             avatar: {
@@ -6341,7 +6363,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521900',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Hilde Mattheis',
             subtitle: 'SPD, Ulm (WK 291)',
             avatar: {
@@ -6361,7 +6383,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '809300',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Hiltrud Lotze',
             subtitle: 'SPD, Lüchow-Dannenberg – Lüneburg (WK 37)',
             avatar: {
@@ -6381,7 +6403,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520210',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Hubertus Heil',
             subtitle: 'SPD, Gifhorn – Peine (WK 45)',
             avatar: {
@@ -6401,7 +6423,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524740',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Hubertus Zdebel',
             subtitle: 'Die Linke, Münster (WK 129)',
             avatar: {
@@ -6421,7 +6443,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520020',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Hänsel Heike',
             subtitle: 'Die Linke, Tübingen (WK 290)',
             avatar: {
@@ -6441,7 +6463,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520748',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ingmar Jung',
             subtitle: 'CDU/CSU, Wiesbaden (WK 179)',
             avatar: {
@@ -6461,7 +6483,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519630',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ingo Gädechens',
             subtitle: 'CDU/CSU, Ostholstein – Stormarn-Nord (WK 9)',
             avatar: {
@@ -6481,7 +6503,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524522',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ingo Wellenreuther',
             subtitle: 'CDU/CSU, Karlsruhe-Stadt (WK 271)',
             avatar: {
@@ -6501,7 +6523,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '517974',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ingrid Arndt-Brauer',
             subtitle: 'SPD, Steinfurt I – Borken I (WK 124)',
             avatar: {
@@ -6521,7 +6543,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522290',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ingrid Nestle',
             subtitle:
               'Bündnis 90/Die Grünen, Steinburg – Dithmarschen Süd (WK 3)',
@@ -6542,7 +6564,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522528',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ingrid Pahlmann',
             subtitle: 'CDU/CSU, Gifhorn – Peine (WK 45)',
             avatar: {
@@ -6562,7 +6584,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522878',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ingrid Remmers',
             subtitle: 'Die Linke, Gelsenkirchen (WK 123)',
             avatar: {
@@ -6582,7 +6604,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522036',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Irene Mihalic',
             subtitle: 'Bündnis 90/Die Grünen, Gelsenkirchen (WK 123)',
             avatar: {
@@ -6602,7 +6624,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521786',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Isabel Mackensen-Geis',
             subtitle: 'SPD, Neustadt – Speyer (WK 208)',
             avatar: {
@@ -6622,7 +6644,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521242',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Jan Korte',
             subtitle: 'Die Linke, Anhalt (WK 71)',
             avatar: {
@@ -6642,7 +6664,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521988',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Jan Metzler',
             subtitle: 'CDU/CSU, Worms (WK 206)',
             avatar: {
@@ -6662,7 +6684,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522390',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Jan Nolte',
             subtitle: 'AfD, Waldeck (WK 167)',
             avatar: {
@@ -6682,7 +6704,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521730',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Jan-Marco Luczak',
             subtitle: 'CDU/CSU, Berlin-Tempelhof-Schöneberg (WK 81)',
             avatar: {
@@ -6702,7 +6724,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523268',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Jana Schimke',
             subtitle:
               'CDU/CSU, Dahme-Spreewald – Teltow-Fläming III – Oberspreewald-Lausitz I (WK 62)',
@@ -6723,7 +6745,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518958',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Janosch Dahmen',
             subtitle: 'Bündnis 90/Die Grünen, Ennepe-Ruhr-Kreis II (WK 139)',
             avatar: {
@@ -6743,7 +6765,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518256',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Jens Beeck',
             subtitle: 'FDP, Mittelems (WK 31)',
             avatar: {
@@ -6763,7 +6785,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520974',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Jens Kestner',
             subtitle: 'AfD, Goslar – Northeim – Osterode (WK 52)',
             avatar: {
@@ -6783,7 +6805,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521170',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Jens Koeppen',
             subtitle: 'CDU/CSU, Uckermark – Barnim I (WK 57)',
             avatar: {
@@ -6803,7 +6825,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521530',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Jens Lehmann',
             subtitle: 'CDU/CSU, Leipzig I (WK 152)',
             avatar: {
@@ -6823,7 +6845,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521808',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Jens Maier',
             subtitle: 'AfD, Dresden I (WK 159)',
             avatar: {
@@ -6843,7 +6865,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523750',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Jens Spahn',
             subtitle: 'CDU/CSU, Steinfurt I – Borken I (WK 124)',
             avatar: {
@@ -6863,7 +6885,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524028',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Jessica Tatti',
             subtitle: 'Die Linke, Reutlingen (WK 289)',
             avatar: {
@@ -6883,7 +6905,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523530',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Jimmy Schulz',
             subtitle: 'FDP, München-Land (WK 221)',
             avatar: {
@@ -6903,7 +6925,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522616',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Joachim Pfeiffer',
             subtitle: 'CDU/CSU, Waiblingen (WK 264)',
             avatar: {
@@ -6923,7 +6945,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518922',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Joana Cotar',
             subtitle: 'AfD',
             avatar: {
@@ -6943,7 +6965,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520146',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Jochen Haug',
             subtitle: 'AfD, Köln II (WK 94)',
             avatar: {
@@ -6963,7 +6985,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523108',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Johann Saathoff',
             subtitle: 'SPD, Aurich – Emden (WK 24)',
             avatar: {
@@ -6983,7 +7005,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524332',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Johann Wadephul',
             subtitle: 'CDU/CSU, Rendsburg-Eckernförde (WK 4)',
             avatar: {
@@ -7003,7 +7025,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519374',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Johannes Fechner',
             subtitle: 'SPD, Emmendingen – Lahr (WK 283)',
             avatar: {
@@ -7023,7 +7045,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520544',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Johannes Huber',
             subtitle: 'AfD, Freising (WK 214)',
             avatar: {
@@ -7043,7 +7065,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520784',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Johannes Kahrs',
             subtitle: 'SPD, Hamburg-Mitte (WK 18)',
             avatar: {
@@ -7063,7 +7085,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523456',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Johannes Schraps',
             subtitle: 'SPD, Hameln-Pyrmont – Holzminden (WK 46)',
             avatar: {
@@ -7083,7 +7105,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523646',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Johannes Selle',
             subtitle: 'CDU/CSU, Jena – Sömmerda – Weimarer Land I (WK 191)',
             avatar: {
@@ -7103,7 +7125,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523860',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Johannes Steiniger',
             subtitle: 'CDU/CSU, Neustadt – Speyer (WK 208)',
             avatar: {
@@ -7123,7 +7145,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524280',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Johannes Vogel',
             subtitle: 'FDP, Olpe – Märkischer Kreis I (WK 149)',
             avatar: {
@@ -7143,7 +7165,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522496',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Josef Oster',
             subtitle: 'CDU/CSU, Koblenz (WK 199)',
             avatar: {
@@ -7163,7 +7185,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522930',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Josef Rief',
             subtitle: 'CDU/CSU, Biberach (WK 292)',
             avatar: {
@@ -7183,7 +7205,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522474',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Josephine Ortleb',
             subtitle: 'SPD, Saarbrücken (WK 296)',
             avatar: {
@@ -7203,7 +7225,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520758',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Josip Juratovic',
             subtitle: 'SPD, Heilbronn (WK 267)',
             avatar: {
@@ -7223,7 +7245,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523710',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Judith Skudelny',
             subtitle: 'FDP, Stuttgart I (WK 258)',
             avatar: {
@@ -7243,7 +7265,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524256',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Julia Verlinden',
             subtitle:
               'Bündnis 90/Die Grünen, Lüchow-Dannenberg – Lüneburg (WK 37)',
@@ -7264,7 +7286,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521296',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Jutta Krellmann',
             subtitle: 'Die Linke, Hameln-Pyrmont – Holzminden (WK 46)',
             avatar: {
@@ -7284,7 +7306,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518870',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Jörg Cezanne',
             subtitle: 'Die Linke, Groß-Gerau (WK 184)',
             avatar: {
@@ -7304,7 +7326,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523406',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Jörg Schneider',
             subtitle: 'AfD, Gelsenkirchen (WK 123)',
             avatar: {
@@ -7324,7 +7346,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521164',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Jörn König',
             subtitle: 'AfD, Stadt Hannover I (WK 41)',
             avatar: {
@@ -7344,7 +7366,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518640',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Jürgen Braun',
             subtitle: 'AfD, Waiblingen (WK 264)',
             avatar: {
@@ -7364,7 +7386,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522674',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Jürgen H. Pohl',
             subtitle: 'AfD, Eichsfeld – Nordhausen – Kyffhäuserkreis (WK 189)',
             avatar: {
@@ -7384,7 +7406,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520110',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Jürgen Hardt',
             subtitle: 'CDU/CSU, Solingen – Remscheid – Wuppertal II (WK 103)',
             avatar: {
@@ -7404,7 +7426,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524164',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Jürgen Trittin',
             subtitle: 'Bündnis 90/Die Grünen, Göttingen (WK 53)',
             avatar: {
@@ -7424,7 +7446,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519682',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Kai Gehring',
             subtitle: 'Bündnis 90/Die Grünen, Essen III (WK 120)',
             avatar: {
@@ -7444,7 +7466,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524464',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Kai Wegner',
             subtitle: 'CDU/CSU, Berlin-Spandau – Charlottenburg Nord (WK 78)',
             avatar: {
@@ -7464,7 +7486,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524576',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Kai Whittaker',
             subtitle: 'CDU/CSU, Rastatt (WK 273)',
             avatar: {
@@ -7484,7 +7506,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519016',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Karamba Diaby',
             subtitle: 'SPD, Halle (WK 72)',
             avatar: {
@@ -7504,7 +7526,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521780',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Karin Maag',
             subtitle: 'CDU/CSU, Stuttgart II (WK 259)',
             avatar: {
@@ -7524,7 +7546,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521466',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Karl A. Lamers',
             subtitle: 'CDU/CSU, Heidelberg (WK 274)',
             avatar: {
@@ -7544,7 +7566,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520854',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Karl Alois',
             subtitle: 'CDU/CSU, Amberg (WK 232)',
             avatar: {
@@ -7564,7 +7586,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520494',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Karl Holmeier',
             subtitle: 'CDU/CSU, Schwandorf (WK 234)',
             avatar: {
@@ -7584,7 +7606,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521508',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Karl Lauterbach',
             subtitle: 'SPD, Leverkusen – Köln IV (WK 101)',
             avatar: {
@@ -7604,7 +7626,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518734',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Karl-Heinz Brunner',
             subtitle: 'SPD, Neu-Ulm (WK 255)',
             avatar: {
@@ -7624,7 +7646,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518838',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Karlheinz Busen',
             subtitle: 'FDP, Borken II (WK 126)',
             avatar: {
@@ -7644,7 +7666,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520382',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Karsten Hilse',
             subtitle: 'AfD, Bautzen I (WK 156)',
             avatar: {
@@ -7664,7 +7686,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521060',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Karsten Klein',
             subtitle: 'FDP, Aschaffenburg (WK 247)',
             avatar: {
@@ -7684,7 +7706,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522086',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Karsten Möring',
             subtitle: 'CDU/CSU, Köln I (WK 93)',
             avatar: {
@@ -7704,7 +7726,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518134',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Katarina Barley',
             subtitle: 'SPD, Trier (WK 203)',
             avatar: {
@@ -7724,7 +7746,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519146',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Katharina Dröge',
             subtitle: 'Bündnis 90/Die Grünen, Köln III (WK 95)',
             avatar: {
@@ -7744,7 +7766,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521472',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Katharina Landgraf',
             subtitle: 'CDU/CSU, Leipzig-Land (WK 154)',
             avatar: {
@@ -7764,7 +7786,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521088',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Katharina Willkomm',
             subtitle: 'FDP, Düren (WK 90)',
             avatar: {
@@ -7784,7 +7806,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524288',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Kathrin Vogler',
             subtitle: 'Die Linke, Steinfurt III (WK 128)',
             avatar: {
@@ -7804,7 +7826,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519088',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Katja Dörner',
             subtitle: 'Bündnis 90/Die Grünen, Bonn (WK 96)',
             avatar: {
@@ -7824,7 +7846,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520346',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Katja Hessel',
             subtitle: 'FDP, Nürnberg-Nord (WK 244)',
             avatar: {
@@ -7844,7 +7866,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520978',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Katja Keul',
             subtitle: 'Bündnis 90/Die Grünen, Nienburg II – Schaumburg (WK 40)',
             avatar: {
@@ -7864,7 +7886,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521012',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Katja Kipping',
             subtitle: 'Die Linke, Dresden I (WK 159)',
             avatar: {
@@ -7884,7 +7906,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521554',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Katja Leikert',
             subtitle: 'CDU/CSU, Hanau (WK 180)',
             avatar: {
@@ -7904,7 +7926,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521890',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Katja Mast',
             subtitle: 'SPD, Pforzheim (WK 279)',
             avatar: {
@@ -7924,7 +7946,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523980',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Katja Suding',
             subtitle: 'FDP, Hamburg-Altona (WK 19)',
             avatar: {
@@ -7944,7 +7966,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518760',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Katrin Budde',
             subtitle: 'SPD, Mansfeld (WK 74)',
             avatar: {
@@ -7964,7 +7986,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519782',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Katrin Göring-Eckardt',
             subtitle:
               'Bündnis 90/Die Grünen, Erfurt – Weimar – Weimarer Land II (WK 193)',
@@ -7985,7 +8007,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520262',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Katrin Helling-Plahr',
             subtitle: 'FDP, Hagen – Ennepe-Ruhr-Kreis I (WK 138)',
             avatar: {
@@ -8005,7 +8027,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523796',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Katrin Staffler',
             subtitle: 'CDU/CSU, Fürstenfeldbruck (WK 215)',
             avatar: {
@@ -8025,7 +8047,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524548',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Katrin Werner',
             subtitle: 'Die Linke, Trier (WK 203)',
             avatar: {
@@ -8045,7 +8067,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519824',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Kay Gottschalk',
             subtitle: 'AfD, Viersen (WK 111)',
             avatar: {
@@ -8065,7 +8087,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524322',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Kees de Vries',
             subtitle: 'CDU/CSU, Anhalt (WK 71)',
             avatar: {
@@ -8085,7 +8107,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523864',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Kersten Steinke',
             subtitle:
               'Die Linke, Eichsfeld – Nordhausen – Kyffhäuserkreis (WK 189)',
@@ -8106,7 +8128,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '517928',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Kerstin Andreae',
             subtitle: 'Bündnis 90/Die Grünen, Freiburg (WK 281)',
             avatar: {
@@ -8126,7 +8148,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519850',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Kerstin Griese',
             subtitle: 'SPD, Mettmann II (WK 105)',
             avatar: {
@@ -8146,7 +8168,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520872',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Kerstin Kassner',
             subtitle:
               'Die Linke, Vorpommern-Rügen – Vorpommern-Greifswald I (WK 15)',
@@ -8167,7 +8189,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524014',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Kerstin Tack',
             subtitle: 'SPD, Stadt Hannover I (WK 41)',
             avatar: {
@@ -8187,7 +8209,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524262',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Kerstin Vieregge',
             subtitle: 'CDU/CSU, Lippe I (WK 135)',
             avatar: {
@@ -8207,7 +8229,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521754',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Kirsten Lühmann',
             subtitle: 'SPD, Celle – Uelzen (WK 44)',
             avatar: {
@@ -8227,7 +8249,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524010',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Kirsten Tackmann',
             subtitle:
               'Die Linke, Prignitz – Ostprignitz-Ruppin – Havelland I (WK 56)',
@@ -8248,7 +8270,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519312',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Klaus Ernst',
             subtitle: 'Die Linke, Schweinfurt (WK 250)',
             avatar: {
@@ -8268,7 +8290,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522046',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Klaus Mindrup',
             subtitle: 'SPD, Berlin-Pankow (WK 76)',
             avatar: {
@@ -8288,7 +8310,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519874',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Klaus-Dieter Gröhler',
             subtitle: 'CDU/CSU, Berlin-Charlottenburg-Wilmersdorf (WK 80)',
             avatar: {
@@ -8308,7 +8330,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524612',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Klaus-Peter Willsch',
             subtitle: 'CDU/CSU, Rheingau-Taunus – Limburg (WK 178)',
             avatar: {
@@ -8328,7 +8350,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521404',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Konstantin Kuhle',
             subtitle: 'FDP, Göttingen (WK 53)',
             avatar: {
@@ -8348,7 +8370,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522400',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Konstantin von Notz',
             subtitle:
               'Bündnis 90/Die Grünen, Herzogtum Lauenburg – Stormarn-Süd (WK 10)',
@@ -8369,7 +8391,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '829232',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Kordula Kovac',
             subtitle: 'CDU/CSU',
             avatar: {
@@ -8389,7 +8411,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523514',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Kordula Schulz-Asche',
             subtitle: 'Bündnis 90/Die Grünen, Main-Taunus (WK 181)',
             avatar: {
@@ -8409,7 +8431,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523226',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Kristina Nordt',
             subtitle: 'CDU/CSU',
             avatar: {
@@ -8429,7 +8451,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518862',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Lars Castelluci',
             subtitle: 'SPD, Rhein-Neckar (WK 277)',
             avatar: {
@@ -8449,7 +8471,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520336',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Lars Herrmann',
             subtitle: 'fraktionslos, Leipzig-Land (WK 154)',
             avatar: {
@@ -8466,7 +8488,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521076',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Lars Klingbeil',
             subtitle: 'SPD, Rotenburg I – Heidekreis (WK 35)',
             avatar: {
@@ -8486,7 +8508,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520498',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Leif-Erik Holm',
             subtitle: 'AfD, Vorpommern-Rügen – Vorpommern-Greifswald I (WK 15)',
             avatar: {
@@ -8506,7 +8528,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518680',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Leni Breymaier',
             subtitle: 'SPD, Aalen – Heidenheim (WK 270)',
             avatar: {
@@ -8526,7 +8548,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521594',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Leutert Michael',
             subtitle: 'Die Linke, Chemnitz (WK 162)',
             avatar: {
@@ -8546,7 +8568,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524066',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Linda Teuteberg',
             subtitle:
               'FDP, Potsdam – Potsdam-Mittelmark II – Teltow-Fläming II (WK 61)',
@@ -8567,7 +8589,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524852',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Lisa Badum',
             subtitle: 'Bündnis 90/Die Grünen, Bamberg (WK 236)',
             avatar: {
@@ -8587,7 +8609,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522568',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Lisa Paus',
             subtitle:
               'Bündnis 90/Die Grünen, Berlin-Charlottenburg-Wilmersdorf (WK 80)',
@@ -8608,7 +8630,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518390',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Lorenz Gösta Beutin',
             subtitle: 'Die Linke, Plön – Neumünster (WK 6)',
             avatar: {
@@ -8628,7 +8650,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518422',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Lothar Binding',
             subtitle: 'SPD, Heidelberg (WK 274)',
             avatar: {
@@ -8648,7 +8670,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522922',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Lothar Riebsamen',
             subtitle: 'CDU/CSU, Bodensee (WK 293)',
             avatar: {
@@ -8668,7 +8690,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '517914',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Luise Amtsberg',
             subtitle: 'Bündnis 90/Die Grünen, Kiel (WK 5)',
             avatar: {
@@ -8688,7 +8710,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521144',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Lukas Köhler',
             subtitle: 'FDP, München-West/Mitte (WK 220)',
             avatar: {
@@ -8708,7 +8730,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522456',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Mahmut Özdemir',
             subtitle: 'SPD, Duisburg II (WK 116)',
             avatar: {
@@ -8728,7 +8750,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518266',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Maik Beermann',
             subtitle: 'CDU/CSU, Nienburg II – Schaumburg (WK 40)',
             avatar: {
@@ -8748,7 +8770,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519564',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Maika Friemann-Jennert',
             subtitle: 'CDU/CSU',
             avatar: {
@@ -8768,7 +8790,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518278',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Manfred Behrens',
             subtitle: 'CDU/CSU, Börde – Jerichower Land (WK 67)',
             avatar: {
@@ -8788,7 +8810,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519946',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Manfred Grund',
             subtitle:
               'CDU/CSU, Eichsfeld – Nordhausen – Kyffhäuserkreis (WK 189)',
@@ -8809,7 +8831,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524134',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Manfred Todtenhausen',
             subtitle: 'FDP, Wuppertal I (WK 102)',
             avatar: {
@@ -8829,7 +8851,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520414',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Manuel Höferlin',
             subtitle: 'FDP, Worms (WK 206)',
             avatar: {
@@ -8849,7 +8871,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523126',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Manuel Sarrazin',
             subtitle:
               'Bündnis 90/Die Grünen, Hamburg-Bergedorf – Harburg (WK 23)',
@@ -8870,7 +8892,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518352',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Marc Bernhard',
             subtitle: 'AfD, Karlsruhe-Stadt (WK 271)',
             avatar: {
@@ -8890,7 +8912,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518398',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Marc Biadacz',
             subtitle: 'CDU/CSU, Böblingen (WK 260)',
             avatar: {
@@ -8910,7 +8932,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520304',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Marc Henrichmann',
             subtitle: 'CDU/CSU, Coesfeld – Steinfurt II (WK 127)',
             avatar: {
@@ -8930,7 +8952,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519272',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Marcel Emmerich',
             subtitle: 'Bündnis 90/Die Grünen, Ulm (WK 291)',
             avatar: {
@@ -8950,7 +8972,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518782',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Marco Bülow',
             subtitle: 'fraktionslos, Dortmund I (WK 142)',
             avatar: {
@@ -8967,7 +8989,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524416',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Marco Wanderwitz',
             subtitle:
               'CDU/CSU, Chemnitzer Umland – Erzgebirgskreis II (WK 163)',
@@ -8988,7 +9010,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518774',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Marcus Bühl',
             subtitle: 'AfD',
             avatar: {
@@ -9008,7 +9030,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520248',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Marcus Held',
             subtitle: 'SPD, Worms (WK 206)',
             avatar: {
@@ -9028,7 +9050,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524490',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Marcus Weinberg',
             subtitle: 'CDU/CSU, Hamburg-Altona (WK 19)',
             avatar: {
@@ -9048,7 +9070,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518228',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Margarete Bause',
             subtitle: 'Bündnis 90/Die Grünen, München-Ost (WK 218)',
             avatar: {
@@ -9068,7 +9090,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523974',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Margit Stumpp',
             subtitle: 'Bündnis 90/Die Grünen, Aalen – Heidenheim (WK 270)',
             avatar: {
@@ -9088,7 +9110,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519466',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Maria Flachsbarth',
             subtitle: 'CDU/CSU, Hannover-Land II (WK 47)',
             avatar: {
@@ -9108,7 +9130,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521066',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Maria Klein-Schmeink',
             subtitle: 'Bündnis 90/Die Grünen, Münster (WK 129)',
             avatar: {
@@ -9128,7 +9150,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524538',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Marian Wendt',
             subtitle: 'CDU/CSU, Nordsachsen (WK 151)',
             avatar: {
@@ -9148,7 +9170,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520106',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Mariana Harder-Kühnel',
             subtitle: 'AfD, Main-Kinzig – Wetterau II – Schotten (WK 175)',
             avatar: {
@@ -9168,7 +9190,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523244',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Marianne Schieder',
             subtitle: 'SPD, Schwandorf (WK 234)',
             avatar: {
@@ -9188,7 +9210,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519098',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Marie-Luise Dött',
             subtitle: 'CDU/CSU, Oberhausen – Wesel III (WK 117)',
             avatar: {
@@ -9208,7 +9230,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518588',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Mario Brandenburg',
             subtitle: 'FDP, Südpfalz (WK 211)',
             avatar: {
@@ -9228,7 +9250,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522032',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Mario Mieruch',
             subtitle: 'fraktionslos, Steinfurt I – Borken I (WK 124)',
             avatar: {
@@ -9245,7 +9267,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524274',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Marja-Liisa Völlers',
             subtitle: 'SPD, Nienburg II – Schaumburg (WK 40)',
             avatar: {
@@ -9265,7 +9287,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520150',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Mark Hauptmann',
             subtitle:
               'CDU/CSU, Suhl – Schmalkalden-Meiningen – Hildburghausen – Sonneberg (WK 196)',
@@ -9286,7 +9308,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520256',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Mark Helfrich',
             subtitle: 'CDU/CSU, Steinburg – Dithmarschen Süd (WK 3)',
             avatar: {
@@ -9306,7 +9328,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519582',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Markus Frohnmaier',
             subtitle: 'AfD, Böblingen (WK 260)',
             avatar: {
@@ -9326,7 +9348,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519922',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Markus Grübel',
             subtitle: 'CDU/CSU, Esslingen (WK 261)',
             avatar: {
@@ -9346,7 +9368,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520314',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Markus Herbrand',
             subtitle: 'FDP, Euskirchen – Rhein-Erft-Kreis II (WK 92)',
             avatar: {
@@ -9366,7 +9388,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521224',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Markus Koob',
             subtitle: 'CDU/CSU, Hochtaunus (WK 176)',
             avatar: {
@@ -9386,7 +9408,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521422',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Markus Kurth',
             subtitle: 'Bündnis 90/Die Grünen, Dortmund I (WK 142)',
             avatar: {
@@ -9406,7 +9428,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '666032',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Markus Paschke',
             subtitle: 'SPD, Unterems (WK 25)',
             avatar: {
@@ -9426,7 +9448,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524156',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Markus Tressel',
             subtitle: 'Bündnis 90/Die Grünen, Saarlouis (WK 297)',
             avatar: {
@@ -9446,7 +9468,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524136',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Markus Töns',
             subtitle: 'SPD, Gelsenkirchen (WK 123)',
             avatar: {
@@ -9466,7 +9488,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524198',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Markus Uhl',
             subtitle: 'CDU/CSU, Homburg (WK 299)',
             avatar: {
@@ -9486,7 +9508,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522114',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Marlene Mortler',
             subtitle: 'CDU/CSU, Roth (WK 246)',
             avatar: {
@@ -9506,7 +9528,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518822',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Martin Burkert',
             subtitle: 'SPD, Nürnberg-Süd (WK 245)',
             avatar: {
@@ -9526,7 +9548,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522880',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Martin Erwin Renner',
             subtitle: 'AfD, Mettmann I (WK 104)',
             avatar: {
@@ -9546,7 +9568,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519720',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Martin Gerster',
             subtitle: 'SPD, Biberach (WK 292)',
             avatar: {
@@ -9566,7 +9588,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520164',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Martin Hebner',
             subtitle: 'AfD, Starnberg – Landsberg am Lech (WK 224)',
             avatar: {
@@ -9586,7 +9608,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520352',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Martin Hess',
             subtitle: 'AfD, Ludwigsburg (WK 265)',
             avatar: {
@@ -9606,7 +9628,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520486',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Martin Hohmann',
             subtitle: 'AfD, Fulda (WK 174)',
             avatar: {
@@ -9626,7 +9648,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522552',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Martin Patzelt',
             subtitle: 'CDU/CSU, Frankfurt (Oder) – Oder-Spree (WK 63)',
             avatar: {
@@ -9646,7 +9668,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522760',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Martin Rabanus',
             subtitle: 'SPD, Rheingau-Taunus – Limburg (WK 178)',
             avatar: {
@@ -9666,7 +9688,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522836',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Martin Reichardt',
             subtitle: 'AfD',
             avatar: {
@@ -9686,7 +9708,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523020',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Martin Rosemann',
             subtitle: 'SPD, Tübingen (WK 290)',
             avatar: {
@@ -9706,7 +9728,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523528',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Martin Schulz',
             subtitle: 'SPD',
             avatar: {
@@ -9726,7 +9748,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523672',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Martin Sichert',
             subtitle: 'AfD, Nürnberg-Nord (WK 244)',
             avatar: {
@@ -9746,7 +9768,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522884',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Martina Renner',
             subtitle: 'Die Linke, Erfurt – Weimar – Weimarer Land II (WK 193)',
             avatar: {
@@ -9766,7 +9788,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523806',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Martina Stamm-Fibich',
             subtitle: 'SPD, Erlangen (WK 242)',
             avatar: {
@@ -9786,7 +9808,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521880',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Marwitz',
             subtitle: 'CDU/CSU, Märkisch-Oderland – Barnim II (WK 59)',
             avatar: {
@@ -9806,7 +9828,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518402',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Matern von Marschall',
             subtitle: 'CDU/CSU, Freiburg (WK 281)',
             avatar: {
@@ -9826,7 +9848,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522026',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Mathias Middelberg',
             subtitle: 'CDU/CSU, Stadt Osnabrück (WK 39)',
             avatar: {
@@ -9846,7 +9868,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523866',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Mathias Stein',
             subtitle: 'SPD, Kiel (WK 5)',
             avatar: {
@@ -9866,7 +9888,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518164',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Matthias Bartke',
             subtitle: 'SPD, Hamburg-Altona (WK 19)',
             avatar: {
@@ -9886,7 +9908,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518432',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Matthias Birkwald',
             subtitle: 'Die Linke, Köln II (WK 94)',
             avatar: {
@@ -9906,7 +9928,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518792',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Matthias Büttner',
             subtitle: 'AfD, Altmark (WK 66)',
             avatar: {
@@ -9926,7 +9948,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519648',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Matthias Gastel',
             subtitle: 'Bündnis 90/Die Grünen, Nürtingen (WK 262)',
             avatar: {
@@ -9946,7 +9968,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520142',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Matthias Hauer',
             subtitle: 'CDU/CSU, Essen III (WK 120)',
             avatar: {
@@ -9966,7 +9988,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520420',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Matthias Höhn',
             subtitle: 'Die Linke, Altmark (WK 66)',
             avatar: {
@@ -9986,7 +10008,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522030',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Matthias Miersch',
             subtitle: 'SPD, Hannover-Land II (WK 47)',
             avatar: {
@@ -10006,7 +10028,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522378',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Matthias Nölke',
             subtitle: 'FDP, Kassel (WK 168)',
             avatar: {
@@ -10026,7 +10048,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523620',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Matthias Seestern-Pauly',
             subtitle: 'FDP, Osnabrück-Land (WK 38)',
             avatar: {
@@ -10046,7 +10068,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524810',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Matthias Zimmer',
             subtitle: 'CDU/CSU, Frankfurt am Main I (WK 182)',
             avatar: {
@@ -10066,7 +10088,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523940',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Max Straubinger',
             subtitle: 'CDU/CSU, Rottal-Inn (WK 230)',
             avatar: {
@@ -10086,7 +10108,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520216',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Mechthild Heil',
             subtitle: 'CDU/CSU, Ahrweiler (WK 198)',
             avatar: {
@@ -10106,7 +10128,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518360',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Melanie Bernstein',
             subtitle: 'CDU/CSU, Plön – Neumünster (WK 6)',
             avatar: {
@@ -10126,7 +10148,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520058',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Metin Hakverdi',
             subtitle: 'SPD, Hamburg-Bergedorf – Harburg (WK 23)',
             avatar: {
@@ -10146,7 +10168,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518618',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Michael Brand',
             subtitle: 'CDU/CSU, Fulda (WK 174)',
             avatar: {
@@ -10166,7 +10188,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519112',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Michael Donth',
             subtitle: 'CDU/CSU, Reutlingen (WK 289)',
             avatar: {
@@ -10186,7 +10208,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519570',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Michael Frieser',
             subtitle: 'CDU/CSU, Nürnberg-Süd (WK 245)',
             avatar: {
@@ -10206,7 +10228,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521650',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Michael Georg Link',
             subtitle: 'FDP, Heilbronn (WK 267)',
             avatar: {
@@ -10226,7 +10248,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519708',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Michael Gerdes',
             subtitle: 'SPD, Bottrop – Recklinghausen III (WK 125)',
             avatar: {
@@ -10246,7 +10268,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519908',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Michael Gross',
             subtitle: 'SPD, Recklinghausen II (WK 122)',
             avatar: {
@@ -10266,7 +10288,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519894',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Michael Grosse-Brömer',
             subtitle: 'CDU/CSU, Harburg (WK 36)',
             avatar: {
@@ -10286,7 +10308,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520992',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Michael Hannes Kießling',
             subtitle: 'CDU/CSU, Starnberg – Landsberg am Lech (WK 224)',
             avatar: {
@@ -10306,7 +10328,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520300',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Michael Hennrich',
             subtitle: 'CDU/CSU, Nürtingen (WK 262)',
             avatar: {
@@ -10326,7 +10348,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521398',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Michael Kuffer',
             subtitle: 'CDU/CSU, München-Süd (WK 219)',
             avatar: {
@@ -10346,7 +10368,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521950',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Michael Meister',
             subtitle: 'CDU/CSU, Bergstraße (WK 188)',
             avatar: {
@@ -10366,7 +10388,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523042',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Michael Roth',
             subtitle: 'SPD, Werra-Meißner – Hersfeld-Rotenburg (WK 169)',
             avatar: {
@@ -10386,7 +10408,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523468',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Michael Schrodi',
             subtitle: 'SPD, Fürstenfeldbruck (WK 215)',
             avatar: {
@@ -10406,7 +10428,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523966',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Michael Stübgen',
             subtitle: 'CDU/CSU, Elbe-Elster – Oberspreewald-Lausitz II (WK 65)',
             avatar: {
@@ -10426,7 +10448,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524076',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Michael Theurer',
             subtitle: 'FDP, Karlsruhe-Stadt (WK 271)',
             avatar: {
@@ -10446,7 +10468,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524080',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Michael Thews',
             subtitle: 'SPD, Hamm – Unna II (WK 145)',
             avatar: {
@@ -10466,7 +10488,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522382',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Michaela Noll',
             subtitle: 'CDU/CSU, Mettmann I (WK 104)',
             avatar: {
@@ -10486,7 +10508,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518612',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Michel Brandt',
             subtitle: 'Die Linke, Karlsruhe-Stadt (WK 271)',
             avatar: {
@@ -10506,7 +10528,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522228',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Michelle Müntefering',
             subtitle: 'SPD, Herne – Bochum II (WK 141)',
             avatar: {
@@ -10526,7 +10548,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519928',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Monika Grütters',
             subtitle: 'CDU/CSU, Berlin-Marzahn-Hellersdorf (WK 85)',
             avatar: {
@@ -10546,7 +10568,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521516',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Monika Lazar',
             subtitle: 'Bündnis 90/Die Grünen, Leipzig II (WK 153)',
             avatar: {
@@ -10566,7 +10588,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523428',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Nadine Schön',
             subtitle: 'CDU/CSU, St. Wendel (WK 298)',
             avatar: {
@@ -10586,7 +10608,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522264',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Nahles',
             subtitle: 'SPD, Ahrweiler (WK 198)',
             avatar: {
@@ -10606,7 +10628,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518120',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Nezahat Baradari',
             subtitle: 'SPD, Olpe – Märkischer Kreis I (WK 149)',
             avatar: {
@@ -10626,7 +10648,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518270',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Nicola Beer',
             subtitle: 'FDP, Frankfurt am Main I (WK 182)',
             avatar: {
@@ -10646,7 +10668,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518192',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Nicole Bauer',
             subtitle: 'FDP, Landshut (WK 228)',
             avatar: {
@@ -10666,7 +10688,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519802',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Nicole Gohlke',
             subtitle: 'Die Linke, München-Süd (WK 219)',
             avatar: {
@@ -10686,7 +10708,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520412',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Nicole Höchst',
             subtitle: 'AfD, Kreuznach (WK 201)',
             avatar: {
@@ -10706,7 +10728,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524556',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Nicole Westig',
             subtitle: 'FDP, Rhein-Sieg-Kreis II (WK 98)',
             avatar: {
@@ -10726,7 +10748,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '517946',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Niels Annen',
             subtitle: 'SPD, Hamburg-Eimsbüttel (WK 20)',
             avatar: {
@@ -10746,7 +10768,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522136',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Niema Movassat',
             subtitle: 'Die Linke, Oberhausen – Wesel III (WK 117)',
             avatar: {
@@ -10766,7 +10788,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521676',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Nikolas Löbel',
             subtitle: 'fraktionslos, Mannheim (WK 275)',
             avatar: {
@@ -10783,7 +10805,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523200',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Nina Scheer',
             subtitle: 'SPD, Herzogtum Lauenburg – Stormarn-Süd (WK 10)',
             avatar: {
@@ -10803,7 +10825,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '583208',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Nina Warken',
             subtitle: 'CDU/CSU',
             avatar: {
@@ -10823,7 +10845,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '517882',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Norbert Altenkamp',
             subtitle: 'CDU/CSU, Main-Taunus (WK 181)',
             avatar: {
@@ -10843,7 +10865,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518156',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Norbert Barthle',
             subtitle: 'CDU/CSU, Backnang – Schwäbisch Gmünd (WK 269)',
             avatar: {
@@ -10863,7 +10885,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518566',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Norbert Brackmann',
             subtitle: 'CDU/CSU, Herzogtum Lauenburg – Stormarn-Süd (WK 10)',
             avatar: {
@@ -10883,7 +10905,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521050',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Norbert Kleinwächter',
             subtitle: 'AfD',
             avatar: {
@@ -10903,7 +10925,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522202',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Norbert Müller',
             subtitle:
               'Die Linke, Potsdam – Potsdam-Mittelmark II – Teltow-Fläming II (WK 61)',
@@ -10924,7 +10946,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522394',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Nord',
             subtitle: 'Die Linke, Frankfurt (Oder) – Oder-Spree (WK 63)',
             avatar: {
@@ -10944,7 +10966,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518260',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Olaf in der Beek',
             subtitle: 'FDP, Bochum I (WK 140)',
             avatar: {
@@ -10964,7 +10986,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519978',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Olav Gutting',
             subtitle: 'CDU/CSU, Bruchsal – Schwetzingen (WK 278)',
             avatar: {
@@ -10984,7 +11006,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519940',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Oliver Grundemann',
             subtitle: 'CDU/CSU, Stade I – Rotenburg II (WK 30)',
             avatar: {
@@ -11004,7 +11026,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520772',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Oliver Kaczmarek',
             subtitle: 'SPD, Unna I (WK 144)',
             avatar: {
@@ -11024,7 +11046,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521322',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Oliver Krischer',
             subtitle: 'Bündnis 90/Die Grünen, Düren (WK 90)',
             avatar: {
@@ -11044,7 +11066,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521764',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Oliver Luksic',
             subtitle: 'FDP, St. Wendel (WK 298)',
             avatar: {
@@ -11064,7 +11086,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524644',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Oliver Wittke',
             subtitle: 'CDU/CSU, Gelsenkirchen (WK 123)',
             avatar: {
@@ -11084,7 +11106,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522404',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Omid Nouripour',
             subtitle: 'Bündnis 90/Die Grünen, Frankfurt am Main II (WK 183)',
             avatar: {
@@ -11104,7 +11126,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524250',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Oswin Veith',
             subtitle: 'CDU/CSU, Wetterau I (WK 177)',
             avatar: {
@@ -11124,7 +11146,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520504',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ottmar von Holtz',
             subtitle: 'Bündnis 90/Die Grünen, Hildesheim (WK 48)',
             avatar: {
@@ -11144,7 +11166,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519542',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Otto Fricke',
             subtitle: 'FDP, Krefeld I – Neuss II (WK 110)',
             avatar: {
@@ -11164,7 +11186,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522478',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Oßner',
             subtitle: 'CDU/CSU, Landshut (WK 228)',
             avatar: {
@@ -11184,7 +11206,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521126',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Pascal Kober',
             subtitle: 'FDP, Reutlingen (WK 289)',
             avatar: {
@@ -11204,7 +11226,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521944',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Pascal Meiser',
             subtitle:
               'Die Linke, Berlin-Friedrichshain-Kreuzberg – Prenzlauer Berg Ost (WK 83)',
@@ -11225,7 +11247,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521664',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Patricia Lips',
             subtitle: 'CDU/CSU, Odenwald (WK 187)',
             avatar: {
@@ -11245,7 +11267,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523412',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Patrick Schnieder',
             subtitle: 'CDU/CSU, Bitburg (WK 202)',
             avatar: {
@@ -11265,7 +11287,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521542',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Paul Lehrieder',
             subtitle: 'CDU/CSU, Würzburg (WK 251)',
             avatar: {
@@ -11285,7 +11307,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522664',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Paul Viktor Podolay',
             subtitle: 'AfD, Erlangen (WK 242)',
             avatar: {
@@ -11305,7 +11327,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524780',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Paul Ziemiak',
             subtitle: 'CDU/CSU, Herne – Bochum II (WK 141)',
             avatar: {
@@ -11325,7 +11347,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '517888',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Peter Altmaier',
             subtitle: 'CDU/CSU, Saarlouis (WK 297)',
             avatar: {
@@ -11345,7 +11367,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518024',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Peter Aumer',
             subtitle: 'CDU/CSU, Regensburg (WK 233)',
             avatar: {
@@ -11365,7 +11387,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518396',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Peter Beyer',
             subtitle: 'CDU/CSU, Mettmann II (WK 105)',
             avatar: {
@@ -11385,7 +11407,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518466',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Peter Bleser',
             subtitle: 'CDU/CSU, Mosel/Rhein-Hunsrück (WK 200)',
             avatar: {
@@ -11405,7 +11427,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518516',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Peter Boehringer',
             subtitle: 'AfD, Amberg (WK 232)',
             avatar: {
@@ -11425,7 +11447,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519410',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Peter Felser',
             subtitle: 'AfD, Oberallgäu (WK 256)',
             avatar: {
@@ -11445,7 +11467,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520198',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Peter Heidt',
             subtitle: 'FDP, Wetterau I (WK 177)',
             avatar: {
@@ -11465,7 +11487,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523870',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Peter Stein',
             subtitle: 'CDU/CSU, Rostock – Landkreis Rostock II (WK 14)',
             avatar: {
@@ -11485,7 +11507,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524514',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Peter Weiß',
             subtitle: 'CDU/CSU, Emmendingen – Lahr (WK 283)',
             avatar: {
@@ -11505,7 +11527,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518846',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Petr Bystron',
             subtitle: 'AfD, München-Nord (WK 217)',
             avatar: {
@@ -11525,7 +11547,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522344',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Petra Niclolaisen',
             subtitle: 'CDU/CSU, Flensburg – Schleswig (WK 1)',
             avatar: {
@@ -11545,7 +11567,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522572',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Petra Pau',
             subtitle: 'Die Linke, Berlin-Marzahn-Hellersdorf (WK 85)',
             avatar: {
@@ -11565,7 +11587,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '517908',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Philipp Amthor',
             subtitle:
               'CDU/CSU, Mecklenburgische Seenplatte I – Vorpommern-Greifswald II (WK 16)',
@@ -11586,7 +11608,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524798',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Pia Zimmermann',
             subtitle: 'Die Linke, Helmstedt – Wolfsburg (WK 51)',
             avatar: {
@@ -11606,7 +11628,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524204',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Prof. Dr. Andrew Ullmann',
             subtitle: 'FDP, Würzburg (WK 251)',
             avatar: {
@@ -11626,7 +11648,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519684',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Prof. Dr. Axel Gehrke',
             subtitle: 'AfD, Ostholstein – Stormarn-Nord (WK 9)',
             avatar: {
@@ -11646,7 +11668,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523318',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Prof. Dr. Claudia Schmidtke',
             subtitle: 'CDU/CSU, Lübeck (WK 11)',
             avatar: {
@@ -11666,7 +11688,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524572',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Prof. Dr. Harald Weyel',
             subtitle: 'AfD',
             avatar: {
@@ -11686,7 +11708,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520348',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Prof. Dr. Heiko Heßenkemper',
             subtitle: 'AfD, Mittelsachsen (WK 161)',
             avatar: {
@@ -11706,7 +11728,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521812',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Prof. Dr. Lothar Maier',
             subtitle: 'AfD, Stuttgart II (WK 259)',
             avatar: {
@@ -11726,7 +11748,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522314',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Prof. Dr. Martin Neumann',
             subtitle: 'FDP, Elbe-Elster – Oberspreewald-Lausitz II (WK 65)',
             avatar: {
@@ -11746,7 +11768,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523668',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Prof. Dr. Patrick Sensburg',
             subtitle: 'CDU/CSU, Hochsauerlandkreis (WK 147)',
             avatar: {
@@ -11766,7 +11788,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522768',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Radomski',
             subtitle: 'CDU/CSU, Krefeld II – Wesel II (WK 114)',
             avatar: {
@@ -11786,7 +11808,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523774',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Rainer Spiering',
             subtitle: 'SPD, Osnabrück-Land (WK 38)',
             avatar: {
@@ -11806,7 +11828,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518630',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ralf Brauksiepe',
             subtitle: 'CDU/CSU, Ennepe-Ruhr-Kreis II (WK 139)',
             avatar: {
@@ -11826,7 +11848,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520834',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ralf Kapschack',
             subtitle: 'SPD, Ennepe-Ruhr-Kreis II (WK 139)',
             avatar: {
@@ -11846,7 +11868,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518692',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ralph Brinkhaus',
             subtitle: 'CDU/CSU, Gütersloh I (WK 131)',
             avatar: {
@@ -11866,7 +11888,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521572',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ralph Lenkert',
             subtitle: 'Die Linke, Jena – Sömmerda – Weimarer Land I (WK 191)',
             avatar: {
@@ -11886,7 +11908,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522814',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Rawert',
             subtitle: 'SPD, Berlin-Tempelhof-Schöneberg (WK 81)',
             avatar: {
@@ -11906,7 +11928,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520086',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Reginald Hanke',
             subtitle:
               'FDP, Saalfeld-Rudolstadt – Saale-Holzland-Kreis – Saale-Orla-Kreis (WK 195)',
@@ -11927,7 +11949,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518598',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Reinhard Brandl',
             subtitle: 'CDU/CSU, Ingolstadt (WK 216)',
             avatar: {
@@ -11947,7 +11969,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520538',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Reinhard Houben',
             subtitle: 'FDP, Köln I (WK 93)',
             avatar: {
@@ -11967,7 +11989,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523658',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Reinhold Sendker',
             subtitle: 'CDU/CSU, Warendorf (WK 130)',
             avatar: {
@@ -11987,7 +12009,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '517892',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Renata Alt',
             subtitle: 'FDP, Nürtingen (WK 262)',
             avatar: {
@@ -12007,7 +12029,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521392',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Renate Künast',
             subtitle:
               'Bündnis 90/Die Grünen, Berlin-Tempelhof-Schöneberg (WK 81)',
@@ -12028,7 +12050,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522992',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Rene Röspel',
             subtitle: 'SPD, Hagen – Ennepe-Ruhr-Kreis I (WK 138)',
             avatar: {
@@ -12048,7 +12070,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523784',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'René Springer',
             subtitle:
               'AfD, Potsdam – Potsdam-Mittelmark II – Teltow-Fläming II (WK 61)',
@@ -12069,7 +12091,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520038',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Rita Hagl-Kehl',
             subtitle: 'SPD, Deggendorf (WK 227)',
             avatar: {
@@ -12089,7 +12111,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523572',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Rita Schwarzelühr-Sutter',
             subtitle: 'SPD, Waldshut (WK 288)',
             avatar: {
@@ -12109,7 +12131,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520990',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Roderich Kiesewetter',
             subtitle: 'CDU/CSU, Aalen – Heidenheim (WK 270)',
             avatar: {
@@ -12129,7 +12151,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522238',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Rolf Mützenich',
             subtitle: 'SPD, Köln III (WK 95)',
             avatar: {
@@ -12149,7 +12171,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522162',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Roman Müller-Böhm',
             subtitle: 'FDP, Oberhausen – Wesel III (WK 117)',
             avatar: {
@@ -12169,7 +12191,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522898',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Roman Reusch',
             subtitle: 'AfD',
             avatar: {
@@ -12189,7 +12211,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520934',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ronja Kemmer',
             subtitle: 'CDU/CSU, Ulm (WK 291)',
             avatar: {
@@ -12209,7 +12231,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521378',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Roy Kühne',
             subtitle: 'CDU/CSU, Goslar – Northeim – Osterode (WK 52)',
             avatar: {
@@ -12229,7 +12251,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520294',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Rudolf Henke',
             subtitle: 'CDU/CSU, Aachen I (WK 87)',
             avatar: {
@@ -12249,7 +12271,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523090',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Rupprecht',
             subtitle: 'CDU/CSU, Weiden (WK 235)',
             avatar: {
@@ -12269,7 +12291,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523096',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ryglewski',
             subtitle: 'SPD, Bremen I (WK 54)',
             avatar: {
@@ -12289,7 +12311,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522980',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Röring Johannes',
             subtitle: 'CDU/CSU, Borken II (WK 126)',
             avatar: {
@@ -12309,7 +12331,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521358',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Rüdiger Kruse',
             subtitle: 'CDU/CSU, Hamburg-Eimsbüttel (WK 20)',
             avatar: {
@@ -12329,7 +12351,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521724',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Rüdiger Lucassen',
             subtitle: 'AfD, Euskirchen – Rhein-Erft-Kreis II (WK 92)',
             avatar: {
@@ -12349,7 +12371,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519068',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Sabine Dittmar',
             subtitle: 'SPD, Bad Kissingen (WK 248)',
             avatar: {
@@ -12369,7 +12391,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521550',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Sabine Leidig',
             subtitle: 'Die Linke, Werra-Meißner – Hersfeld-Rotenburg (WK 169)',
             avatar: {
@@ -12389,7 +12411,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522688',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Sabine Poschmann',
             subtitle: 'SPD, Dortmund II (WK 143)',
             avatar: {
@@ -12409,7 +12431,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524518',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Sabine Weiss',
             subtitle: 'CDU/CSU, Wesel I (WK 113)',
             avatar: {
@@ -12429,7 +12451,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518748',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Sandra Bubendorfer-Licht',
             subtitle: 'FDP, Altötting (WK 212)',
             avatar: {
@@ -12449,7 +12471,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524458',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Sandra Weeser',
             subtitle: 'FDP, Neuwied (WK 197)',
             avatar: {
@@ -12469,7 +12491,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522750',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Sascha Raabe',
             subtitle: 'SPD, Hanau (WK 180)',
             avatar: {
@@ -12489,7 +12511,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519324',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Saskia Esken',
             subtitle: 'SPD, Calw (WK 280)',
             avatar: {
@@ -12509,7 +12531,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523250',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Schiefner',
             subtitle: 'SPD, Viersen (WK 111)',
             avatar: {
@@ -12529,7 +12551,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523558',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Schwabe',
             subtitle: 'SPD, Recklinghausen I (WK 121)',
             avatar: {
@@ -12549,7 +12571,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518666',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Sebastian Brehm',
             subtitle: 'CDU/CSU, Nürnberg-Nord (WK 244)',
             avatar: {
@@ -12569,7 +12591,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520118',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Sebastian Hartmann',
             subtitle: 'SPD, Rhein-Sieg-Kreis I (WK 97)',
             avatar: {
@@ -12589,7 +12611,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522230',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Sebastian Münzenmaier',
             subtitle: 'AfD, Mainz (WK 205)',
             avatar: {
@@ -12609,7 +12631,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523848',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Sebastian Steineke',
             subtitle:
               'CDU/CSU, Prignitz – Ostprignitz-Ruppin – Havelland I (WK 56)',
@@ -12630,7 +12652,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522214',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Sepp Müller',
             subtitle: 'CDU/CSU, Dessau – Wittenberg (WK 70)',
             avatar: {
@@ -12650,7 +12672,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518950',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Sevim Dağdelen',
             subtitle: 'Die Linke, Bochum I (WK 140)',
             avatar: {
@@ -12670,7 +12692,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519150',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Siegbert Droese',
             subtitle: 'AfD, Leipzig II (WK 153)',
             avatar: {
@@ -12690,7 +12712,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522078',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Siemtje Möller',
             subtitle: 'SPD, Friesland – Wilhelmshaven – Wittmund (WK 26)',
             avatar: {
@@ -12710,7 +12732,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519626',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Sigmar Gabriel',
             subtitle: 'SPD, Salzgitter – Wolfenbüttel (WK 49)',
             avatar: {
@@ -12730,7 +12752,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521504',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Silke Launert',
             subtitle: 'CDU/CSU, Bayreuth (WK 237)',
             avatar: {
@@ -12750,7 +12772,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518654',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Silvia Breher',
             subtitle: 'CDU/CSU, Cloppenburg – Vechta (WK 32)',
             avatar: {
@@ -12770,7 +12792,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518148',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Simone Barrientos',
             subtitle: 'Die Linke, Würzburg (WK 251)',
             avatar: {
@@ -12790,7 +12812,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523824',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Sonja Amalie Steffen',
             subtitle: 'SPD, Vorpommern-Rügen – Vorpommern-Greifswald I (WK 15)',
             avatar: {
@@ -12810,7 +12832,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519698',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Stefan Gelbhaar',
             subtitle: 'Bündnis 90/Die Grünen, Berlin-Pankow (WK 76)',
             avatar: {
@@ -12830,7 +12852,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520904',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Stefan Kaufmann',
             subtitle: 'CDU/CSU, Stuttgart I (WK 258)',
             avatar: {
@@ -12850,7 +12872,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520980',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Stefan Keuter',
             subtitle: 'AfD, Essen III (WK 120)',
             avatar: {
@@ -12870,7 +12892,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521618',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Stefan Liebich',
             subtitle: 'Die Linke, Berlin-Pankow (WK 76)',
             avatar: {
@@ -12890,7 +12912,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522218',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Stefan Müller',
             subtitle: 'CDU/CSU, Erlangen (WK 242)',
             avatar: {
@@ -12910,7 +12932,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523048',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Stefan Rouenhoff',
             subtitle: 'CDU/CSU, Kleve (WK 112)',
             avatar: {
@@ -12930,7 +12952,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523140',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Stefan Sauer',
             subtitle: 'CDU/CSU, Groß-Gerau (WK 184)',
             avatar: {
@@ -12950,7 +12972,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523368',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Stefan Schmidt',
             subtitle: 'Bündnis 90/Die Grünen, Regensburg (WK 233)',
             avatar: {
@@ -12970,7 +12992,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523568',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Stefan Schwartze',
             subtitle: 'SPD, Herford – Minden-Lübbecke II (WK 133)',
             avatar: {
@@ -12990,7 +13012,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524784',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Stefan Zierke',
             subtitle: 'SPD, Uckermark – Barnim I (WK 57)',
             avatar: {
@@ -13010,7 +13032,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518410',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Steffen Bilger',
             subtitle: 'CDU/CSU, Ludwigsburg (WK 265)',
             avatar: {
@@ -13030,7 +13052,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521250',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Steffen Kotré',
             subtitle: 'AfD',
             avatar: {
@@ -13050,7 +13072,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521560',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Steffi Lemke',
             subtitle: 'Bündnis 90/Die Grünen, Dessau – Wittenberg (WK 70)',
             avatar: {
@@ -13070,7 +13092,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '517864',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Stephan Albani',
             subtitle: 'CDU/CSU, Oldenburg – Ammerland (WK 27)',
             avatar: {
@@ -13090,7 +13112,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518604',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Stephan Brandner',
             subtitle: 'AfD, Erfurt – Weimar – Weimarer Land II (WK 193)',
             avatar: {
@@ -13110,7 +13132,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521388',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Stephan Kühn',
             subtitle: 'Bündnis 90/Die Grünen, Dresden II – Bautzen II (WK 160)',
             avatar: {
@@ -13130,7 +13152,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521916',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Stephan Mayer',
             subtitle: 'CDU/CSU, Altötting (WK 212)',
             avatar: {
@@ -13150,7 +13172,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522652',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Stephan Pilsinger',
             subtitle: 'CDU/CSU, München-West/Mitte (WK 220)',
             avatar: {
@@ -13170,7 +13192,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522722',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Stephan Protschka',
             subtitle: 'AfD, Rottal-Inn (WK 230)',
             avatar: {
@@ -13190,7 +13212,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523926',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Stephan Stracke',
             subtitle: 'CDU/CSU, Ostallgäu (WK 257)',
             avatar: {
@@ -13210,7 +13232,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524102',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Stephan Thomae',
             subtitle: 'FDP, Oberallgäu (WK 256)',
             avatar: {
@@ -13230,7 +13252,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523948',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Strenz',
             subtitle:
               'CDU/CSU, Ludwigslust-Parchim II – Nordwestmecklenburg II – Landkreis Rostock I (WK 13)',
@@ -13251,7 +13273,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523072',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Susann Rüthrich',
             subtitle: 'SPD, Meißen (WK 155)',
             avatar: {
@@ -13271,7 +13293,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519424',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Susanne Ferschl',
             subtitle: 'Die Linke, Ostallgäu (WK 257)',
             avatar: {
@@ -13291,7 +13313,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522058',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Susanne Mittag',
             subtitle: 'SPD, Delmenhorst – Wesermarsch – Oldenburg-Land (WK 28)',
             avatar: {
@@ -13311,7 +13333,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521536',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Sven Lehmann',
             subtitle: 'Bündnis 90/Die Grünen, Köln II (WK 94)',
             avatar: {
@@ -13331,7 +13353,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521000',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Sven-Christian Kindler',
             subtitle: 'Bündnis 90/Die Grünen, Stadt Hannover II (WK 42)',
             avatar: {
@@ -13351,7 +13373,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523794',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Svenja Stadler',
             subtitle: 'SPD, Harburg (WK 36)',
             avatar: {
@@ -13371,7 +13393,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523534',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Swen Schulz',
             subtitle: 'SPD, Berlin-Spandau – Charlottenburg Nord (WK 78)',
             avatar: {
@@ -13391,7 +13413,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518308',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Sybille Benning',
             subtitle: 'CDU/CSU, Münster (WK 129)',
             avatar: {
@@ -13411,7 +13433,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519618',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Sylvia Gabelmann',
             subtitle: 'Die Linke, Siegen-Wittgenstein (WK 148)',
             avatar: {
@@ -13431,7 +13453,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521256',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Sylvia Kotting-Uhl',
             subtitle: 'Bündnis 90/Die Grünen, Karlsruhe-Stadt (WK 271)',
             avatar: {
@@ -13451,7 +13473,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521538',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Sylvia Lehmann',
             subtitle:
               'SPD, Dahme-Spreewald – Teltow-Fläming III – Oberspreewald-Lausitz I (WK 62)',
@@ -13472,7 +13494,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522534',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Sylvia Pantel',
             subtitle: 'CDU/CSU, Düsseldorf II (WK 107)',
             avatar: {
@@ -13492,7 +13514,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522962',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Sönke Rix',
             subtitle: 'SPD, Rendsburg-Eckernförde (WK 4)',
             avatar: {
@@ -13512,7 +13534,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518170',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Sören Bartol',
             subtitle: 'SPD, Marburg (WK 171)',
             avatar: {
@@ -13532,7 +13554,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522580',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Sören Pellmann',
             subtitle: 'Die Linke, Leipzig II (WK 153)',
             avatar: {
@@ -13552,7 +13574,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522996',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Tabea Rößner',
             subtitle: 'Bündnis 90/Die Grünen, Mainz (WK 205)',
             avatar: {
@@ -13572,7 +13594,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523278',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Tankred Schipanski',
             subtitle: 'CDU/CSU, Gotha – Ilm-Kreis (WK 192)',
             avatar: {
@@ -13592,7 +13614,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518130',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Thomas Bareiß',
             subtitle: 'CDU/CSU, Zollernalb – Sigmaringen (WK 295)',
             avatar: {
@@ -13612,7 +13634,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519228',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Thomas Ehrhorn',
             subtitle: 'AfD, Celle – Uelzen (WK 44)',
             avatar: {
@@ -13632,7 +13654,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519306',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Thomas Erndl',
             subtitle: 'CDU/CSU, Deggendorf (WK 227)',
             avatar: {
@@ -13652,7 +13674,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520008',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Thomas Hacker',
             subtitle: 'FDP, Bayreuth (WK 237)',
             avatar: {
@@ -13672,7 +13694,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520204',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Thomas Heilmann',
             subtitle: 'CDU/CSU, Berlin-Steglitz-Zehlendorf (WK 79)',
             avatar: {
@@ -13692,7 +13714,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520406',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Thomas Hitschler',
             subtitle: 'SPD, Südpfalz (WK 211)',
             avatar: {
@@ -13712,7 +13734,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520684',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Thomas Jarzombek',
             subtitle: 'CDU/CSU, Düsseldorf I (WK 106)',
             avatar: {
@@ -13732,7 +13754,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520762',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Thomas Jurk',
             subtitle: 'SPD, Görlitz (WK 157)',
             avatar: {
@@ -13752,7 +13774,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520930',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Thomas L. Kemmerich',
             subtitle: 'FDP, Erfurt – Weimar – Weimarer Land II (WK 193)',
             avatar: {
@@ -13772,7 +13794,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521770',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Thomas Lutze',
             subtitle: 'Die Linke',
             avatar: {
@@ -13792,7 +13814,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522472',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Thomas Oppermann',
             subtitle: 'SPD, Göttingen (WK 53)',
             avatar: {
@@ -13812,7 +13834,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522764',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Thomas Rachel',
             subtitle: 'CDU/CSU, Düren (WK 90)',
             avatar: {
@@ -13832,7 +13854,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523134',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Thomas Sattelberger',
             subtitle: 'FDP, München-Süd (WK 219)',
             avatar: {
@@ -13852,7 +13874,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523642',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Thomas Seitz',
             subtitle: 'AfD, Emmendingen – Lahr (WK 283)',
             avatar: {
@@ -13872,7 +13894,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523692',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Thomas Silberhorn',
             subtitle: 'CDU/CSU, Bamberg (WK 236)',
             avatar: {
@@ -13892,7 +13914,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524266',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Thomas Viesehon',
             subtitle: 'CDU/CSU, Waldeck (WK 167)',
             avatar: {
@@ -13912,7 +13934,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521820',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Thomas de Maizière',
             subtitle: 'CDU/CSU, Meißen (WK 155)',
             avatar: {
@@ -13932,7 +13954,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519532',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Thorsten Frei',
             subtitle: 'CDU/CSU, Schwarzwald-Baar (WK 286)',
             avatar: {
@@ -13952,7 +13974,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521854',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Till Mansmann',
             subtitle: 'FDP, Bergstraße (WK 188)',
             avatar: {
@@ -13972,7 +13994,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519844',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Timon Gremmels',
             subtitle: 'SPD, Kassel (WK 168)',
             avatar: {
@@ -13992,7 +14014,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518884',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Tino Chrupalla',
             subtitle: 'AfD, Görlitz (WK 157)',
             avatar: {
@@ -14012,7 +14034,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523744',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Tino Sorge',
             subtitle: 'CDU/CSU, Magdeburg (WK 69)',
             avatar: {
@@ -14032,7 +14054,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521644',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Tobias Lindner',
             subtitle: 'Bündnis 90/Die Grünen, Südpfalz (WK 211)',
             avatar: {
@@ -14052,7 +14074,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522594',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Tobias Peterka',
             subtitle: 'AfD, Bayreuth (WK 237)',
             avatar: {
@@ -14072,7 +14094,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522622',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Tobias Pflüger',
             subtitle: 'Die Linke, Freiburg (WK 281)',
             avatar: {
@@ -14092,7 +14114,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524744',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Tobias Zech',
             subtitle: 'CDU/CSU',
             avatar: {
@@ -14112,7 +14134,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520862',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Torbjörn Kartes',
             subtitle: 'CDU/CSU, Ludwigshafen/Frankenthal (WK 207)',
             avatar: {
@@ -14132,7 +14154,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520316',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Torsten Herbst',
             subtitle: 'FDP, Bautzen I (WK 156)',
             avatar: {
@@ -14152,7 +14174,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523596',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Torsten Schweiger',
             subtitle: 'CDU/CSU, Mansfeld (WK 74)',
             avatar: {
@@ -14172,7 +14194,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520272',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Udo Hemmelgarn',
             subtitle: 'AfD, Gütersloh I (WK 131)',
             avatar: {
@@ -14192,7 +14214,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519882',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Uli Grötsch',
             subtitle: 'SPD, Weiden (WK 235)',
             avatar: {
@@ -14212,7 +14234,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520606',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ulla Ihnen',
             subtitle: 'FDP, Stadt Hannover II (WK 42)',
             avatar: {
@@ -14232,7 +14254,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520694',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ulla Jelpke',
             subtitle: 'Die Linke, Dortmund I (WK 142)',
             avatar: {
@@ -14252,7 +14274,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523374',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ulla Schmidt',
             subtitle: 'SPD, Aachen I (WK 87)',
             avatar: {
@@ -14272,7 +14294,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523196',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ulle Schauws',
             subtitle: 'Bündnis 90/Die Grünen, Krefeld II – Wesel II (WK 114)',
             avatar: {
@@ -14292,7 +14314,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522370',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ulli Nissen',
             subtitle: 'SPD, Frankfurt am Main II (WK 183)',
             avatar: {
@@ -14312,7 +14334,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519516',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ulrich Freese',
             subtitle: 'SPD, Cottbus – Spree-Neiße (WK 64)',
             avatar: {
@@ -14332,7 +14354,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520922',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ulrich Kelber',
             subtitle: 'SPD, Bonn (WK 96)',
             avatar: {
@@ -14352,7 +14374,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521486',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ulrich Lange',
             subtitle: 'CDU/CSU, Donau-Ries (WK 254)',
             avatar: {
@@ -14372,7 +14394,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521524',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ulrich Lechte',
             subtitle: 'FDP, Regensburg (WK 233)',
             avatar: {
@@ -14392,7 +14414,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522440',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ulrich Oehme',
             subtitle: 'AfD, Chemnitzer Umland – Erzgebirgskreis II (WK 163)',
             avatar: {
@@ -14412,7 +14434,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518112',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ulrike Bahr',
             subtitle: 'SPD, Augsburg-Stadt (WK 252)',
             avatar: {
@@ -14432,7 +14454,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523252',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ulrike Schielke-Ziesing',
             subtitle:
               'AfD, Mecklenburgische Seenplatte II – Landkreis Rostock III (WK 17)',
@@ -14453,7 +14475,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519866',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ursula Groden-Kranich',
             subtitle: 'CDU/CSU, Mainz (WK 205)',
             avatar: {
@@ -14473,7 +14495,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523508',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ursula Schulte',
             subtitle: 'SPD, Borken II (WK 126)',
             avatar: {
@@ -14493,7 +14515,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524294',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Ute Vogt',
             subtitle: 'SPD, Stuttgart I (WK 258)',
             avatar: {
@@ -14513,7 +14535,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519380',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Uwe Feiler',
             subtitle: 'CDU/CSU, Oberhavel – Havelland II (WK 58)',
             avatar: {
@@ -14533,7 +14555,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520808',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Uwe Kamann',
             subtitle: 'fraktionslos, Oberhausen – Wesel III (WK 117)',
             avatar: {
@@ -14550,7 +14572,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520918',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Uwe Kekeritz',
             subtitle: 'Bündnis 90/Die Grünen, Fürth (WK 243)',
             avatar: {
@@ -14570,7 +14592,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523376',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Uwe Schmidt',
             subtitle: 'SPD, Bremen II – Bremerhaven (WK 55)',
             avatar: {
@@ -14590,7 +14612,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523538',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Uwe Schulz',
             subtitle: 'AfD, Gießen (WK 173)',
             avatar: {
@@ -14610,7 +14632,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '523544',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Uwe Schummer',
             subtitle: 'CDU/CSU, Viersen (WK 111)',
             avatar: {
@@ -14630,7 +14652,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524648',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Uwe Witt',
             subtitle: 'AfD',
             avatar: {
@@ -14650,7 +14672,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520120',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Verena Hartmann',
             subtitle: 'fraktionslos',
             avatar: {
@@ -14667,7 +14689,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '518290',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Veronika Bellmann',
             subtitle: 'CDU/CSU, Mittelsachsen (WK 161)',
             avatar: {
@@ -14687,7 +14709,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522586',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Victor Perli',
             subtitle: 'Die Linke, Salzgitter – Wolfenbüttel (WK 49)',
             avatar: {
@@ -14707,7 +14729,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520888',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Volker Kauder',
             subtitle: 'CDU/CSU, Rottweil – Tuttlingen (WK 285)',
             avatar: {
@@ -14727,7 +14749,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522234',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Volker Münz',
             subtitle: 'AfD, Göppingen (WK 263)',
             avatar: {
@@ -14747,7 +14769,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521070',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Volkmar Klein',
             subtitle: 'CDU/CSU, Siegen-Wittgenstein (WK 148)',
             avatar: {
@@ -14767,7 +14789,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524284',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Volkmar Vogel',
             subtitle: 'CDU/CSU, Gera – Greiz – Altenburger Land (WK 194)',
             avatar: {
@@ -14787,7 +14809,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520322',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Waldemar Herdt',
             subtitle: 'AfD, Osnabrück-Land (WK 38)',
             avatar: {
@@ -14807,7 +14829,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522444',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Wilfried Oellers',
             subtitle: 'CDU/CSU, Heinsberg (WK 89)',
             avatar: {
@@ -14827,7 +14849,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519822',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Wilhelm von Gottberg',
             subtitle: 'AfD',
             avatar: {
@@ -14847,7 +14869,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '520270',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Wolfgang Hellmich',
             subtitle: 'SPD, Soest (WK 146)',
             avatar: {
@@ -14867,7 +14889,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521368',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Wolfgang Kubicki',
             subtitle: 'FDP, Steinburg – Dithmarschen Süd (WK 3)',
             avatar: {
@@ -14887,7 +14909,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524570',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Wolfgang Wetzel',
             subtitle: 'Bündnis 90/Die Grünen, Zwickau (WK 165)',
             avatar: {
@@ -14907,7 +14929,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '524588',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Wolfgang Wiehle',
             subtitle: 'AfD, München-Süd (WK 219)',
             avatar: {
@@ -14927,7 +14949,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '519354',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Yasmin Fahimi',
             subtitle: 'SPD, Stadt Hannover II (WK 42)',
             avatar: {
@@ -14947,7 +14969,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '521800',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Yvonne Magwas',
             subtitle: 'CDU/CSU, Vogtlandkreis (WK 166)',
             avatar: {
@@ -14967,7 +14989,7 @@ export const Abgeordnete: React.FC = () => {
           },
           {
             id: '522270',
-            onPress: () => undefined,
+            onPress: () => navigation.navigate('MemberProfil'),
             title: 'Zaklin Nastic',
             subtitle: 'Die Linke, Hamburg-Eimsbüttel (WK 20)',
             avatar: {
