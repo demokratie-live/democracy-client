@@ -15,6 +15,8 @@ import FaqRootNavigation from './Faq';
 import AboutRootNavigation from './About';
 import CredentialsRootNavigation from './Credentials';
 import DonateRootNavigation from './Donate';
+import { AvatarIcon } from '@democracy-deutschland/ui';
+import AbgeordneteRootNavigation from './Abgeordnete';
 
 export type SidebarParamList = {
   Bundestag: undefined;
@@ -24,6 +26,7 @@ export type SidebarParamList = {
   About: undefined;
   Credentials: undefined;
   Donate: undefined;
+  Abgeordnete: undefined;
 };
 
 const SidebarDrawer = createDrawerNavigator<SidebarParamList>();
@@ -64,6 +67,18 @@ export const SidebarNavigation = () => {
         }}
         name="WahlOMeter"
         component={WahlOMeterNavigation}
+      />
+      <SidebarDrawer.Screen
+        options={{
+          drawerLabel: 'Auswertungen/Abgeordnete',
+          gestureEnabled: true,
+          drawerIcon: ({ color, size }) => (
+            <AvatarIcon width={size} height={size} fill={color} />
+          ),
+          unmountOnBlur: true,
+        }}
+        name="Abgeordnete"
+        component={AbgeordneteRootNavigation}
       />
       <SidebarDrawer.Screen
         options={{
