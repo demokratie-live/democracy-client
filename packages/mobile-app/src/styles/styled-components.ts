@@ -1,5 +1,6 @@
 import * as styledComponents from 'styled-components/native';
 import { ThemeInterface } from './theme';
+import { DefaultTheme } from '@democracy-deutschland/ui';
 
 const {
   default: styled,
@@ -7,7 +8,7 @@ const {
   ThemeProvider,
   // @ts-ignore
 } = styledComponents as styledComponents.ReactNativeThemedStyledComponentsModule<
-  ThemeInterface
+  ThemeInterface & DefaultTheme
 >;
 
 export { css, ThemeProvider, styled };
