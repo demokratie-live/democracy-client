@@ -11,9 +11,12 @@ import MenuIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Menu
 import { Abgeordnete } from '../../../screens/Abgeordnete';
 import { theme } from '../../../styles';
 import { BurgerMenuButton } from '../../../components/MenuButton';
+import { AbgeordneteListProvider } from '../../../lib/states/Abgeordnete/context';
+import { MemberProfil } from '../../../screens/WahlOMeter/MemberProfil';
 
 export type AbgeordneteRootStackParamList = {
   Abgeordnete: undefined;
+  MemberProfil?: { id: number };
 };
 
 const AbgeordneteRootStack = createStackNavigator<
@@ -28,37 +31,46 @@ type AbgeordneteNavigationProps = CompositeNavigationProp<
 const AbgeordneteRootNavigation = () => {
   const navigation = useNavigation<AbgeordneteNavigationProps>();
   return (
-    <AbgeordneteRootStack.Navigator
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: theme.oldColors.background.header,
-          elevation: 0,
-          shadowOpacity: 0,
-        },
-        headerBackTitleVisible: false,
-        headerTintColor: theme.oldColors.headerText,
-      }}>
-      <AbgeordneteRootStack.Screen
-        name="Abgeordnete"
-        component={Abgeordnete}
-        options={{
-          title: 'Abgeordnete',
-          headerTintColor: '#fff',
+    <AbgeordneteListProvider>
+      <AbgeordneteRootStack.Navigator
+        screenOptions={{
           headerStyle: {
-            backgroundColor: '#4494D3',
+            backgroundColor: theme.oldColors.background.header,
             elevation: 0,
             shadowOpacity: 0,
           },
-          headerLeft: () => (
-            <BurgerMenuButton
-              onPress={navigation.toggleDrawer}
-              testID="BurgerMenuButton">
-              <MenuIcon width={18} height={18} color="#fff" />
-            </BurgerMenuButton>
-          ),
-        }}
-      />
-    </AbgeordneteRootStack.Navigator>
+          headerBackTitleVisible: false,
+          headerTintColor: theme.oldColors.headerText,
+        }}>
+        <AbgeordneteRootStack.Screen
+          name="Abgeordnete"
+          component={Abgeordnete}
+          options={{
+            title: 'Abgeordnete',
+            headerTintColor: '#fff',
+            headerStyle: {
+              backgroundColor: '#4494D3',
+              elevation: 0,
+              shadowOpacity: 0,
+            },
+            headerLeft: () => (
+              <BurgerMenuButton
+                onPress={navigation.toggleDrawer}
+                testID="BurgerMenuButton">
+                <MenuIcon width={18} height={18} color="#fff" />
+              </BurgerMenuButton>
+            ),
+          }}
+        />
+        <AbgeordneteRootStack.Screen
+          name="MemberProfil"
+          component={MemberProfil}
+          options={{
+            title: '',
+          }}
+        />
+      </AbgeordneteRootStack.Navigator>
+    </AbgeordneteListProvider>
   );
 };
 
