@@ -5,11 +5,11 @@ import React, { useContext } from 'react';
 // import { InitialStateContext } from '../../context/InitialStates';
 import { useNavigation } from '@react-navigation/core';
 import { styled } from '../../styles';
-import { DeputyList, SearchBar } from '@democracy-deutschland/ui';
+import { SearchBar } from '@democracy-deutschland/ui';
 import { AbgeordneteListContext } from '../../lib/states/Abgeordnete/context';
 import { Button, View } from 'react-native';
-import { deputies } from './deputies.data';
-import { useFavorizedDeputies } from '../../lib/hooks/FavorizedDeputies';
+// import { deputies } from './deputies.data';
+import { DeputyListController } from './DeputyListController';
 
 const Wrapper = styled.View`
   background-color: ${({ theme }) => theme.oldColors.background.main};
@@ -18,11 +18,7 @@ const Wrapper = styled.View`
 
 export const Abgeordnete: React.FC = () => {
   const { state, dispatch } = useContext(AbgeordneteListContext);
-  const {
-    favorizedDeputies,
-    addFavorizedDeputy,
-    removeFavorizedDeputy,
-  } = useFavorizedDeputies();
+  const [searchTerm, setSearchTerm] = React.useState('');
   const navigation = useNavigation();
   // const { constituency } = useContext(ConstituencyContext);
   // const { isVerified } = useContext(InitialStateContext);
@@ -45,30 +41,16 @@ export const Abgeordnete: React.FC = () => {
     });
   }, [dispatch, navigation, state.editMode]);
 
-  const deputiesData = deputies.map(d => ({
-    ...d,
-    onPress: () => navigation.navigate('MemberProfil'),
-    onStatePress: () =>
-      favorizedDeputies.includes(d.id)
-        ? removeFavorizedDeputy(d.id)
-        : addFavorizedDeputy(d.id),
-  }));
-
-  console.log('favorizedDeputies', favorizedDeputies);
-
   return (
     <Wrapper>
       <SearchBar
         textInput={{
           autoFocus: false,
           placeholder: 'Name, Partei, Wahlkreis, PLZ, Ort eingeben',
+          onChangeText: setSearchTerm,
         }}
       />
-      <DeputyList
-        editMode={state.editMode}
-        deputies={deputiesData}
-        favorizedDeputies={[...favorizedDeputies]}
-      />
+      <DeputyListController editMode={state.editMode} searchTerm={searchTerm} />
     </Wrapper>
   );
 };

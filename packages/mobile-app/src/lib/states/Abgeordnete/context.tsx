@@ -20,7 +20,7 @@ export const AbgeordneteListProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <AbgeordneteListContext.Provider value={{ state, dispatch }}>
+    <AbgeordneteListContext.Provider value={{ state: { ...state }, dispatch }}>
       {children}
     </AbgeordneteListContext.Provider>
   );
