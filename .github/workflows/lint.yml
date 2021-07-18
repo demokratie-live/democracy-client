@@ -34,7 +34,6 @@ jobs:
 
       - name: Run TSLint on App
         run: yarn workspace app lint:ts
-
-      - uses: stefanzweifel/git-auto-commit-action@v4.1.2
-        with:
-          commit_message: Action – commit autofix changes
+      # - uses: stefanzweifel/git-auto-commit-action@v4.1.2
+      #   with:
+      #     commit_message: Action – commit autofix changes
