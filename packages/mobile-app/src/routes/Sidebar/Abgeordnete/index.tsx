@@ -12,18 +12,18 @@ import { Abgeordnete } from '../../../screens/Abgeordnete';
 import { theme } from '../../../styles';
 import { BurgerMenuButton } from '../../../components/MenuButton';
 import { AbgeordneteListProvider } from '../../../lib/states/Abgeordnete/context';
-import { MemberProfil } from '../../../screens/WahlOMeter/MemberProfil';
+import { DeputyProfil } from '../../../screens/DeputyProfile';
 
 export type AbgeordneteRootStackParamList = {
   Abgeordnete: undefined;
-  MemberProfil?: { id: number };
+  DeputyProfile: { id: string };
 };
 
 const AbgeordneteRootStack = createStackNavigator<
   AbgeordneteRootStackParamList
 >();
 
-type AbgeordneteNavigationProps = CompositeNavigationProp<
+export type AbgeordneteNavigationProps = CompositeNavigationProp<
   DrawerNavigationProp<SidebarParamList, 'Abgeordnete'>,
   StackNavigationProp<RootStackParamList>
 >;
@@ -63,8 +63,8 @@ const AbgeordneteRootNavigation = () => {
           }}
         />
         <AbgeordneteRootStack.Screen
-          name="MemberProfil"
-          component={MemberProfil}
+          name="DeputyProfile"
+          component={DeputyProfil}
           options={{
             title: '',
           }}

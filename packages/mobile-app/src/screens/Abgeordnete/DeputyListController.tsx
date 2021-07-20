@@ -3,12 +3,16 @@ import {
   DeputyList,
   DeputyListRenderItemProps,
 } from '@democracy-deutschland/ui';
-import { useNavigation } from '@react-navigation/core';
+import { CompositeNavigationProp, useNavigation } from '@react-navigation/core';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { StackNavigationProp } from '@react-navigation/stack';
 import unionBy from 'lodash.unionby';
 import React, { useEffect } from 'react';
 import { ActivityIndicator } from 'react-native';
 import styled from 'styled-components/native';
 import { useFavorizedDeputies } from '../../lib/hooks/FavorizedDeputies';
+import { SidebarParamList } from '../../routes/Sidebar';
+import { AbgeordneteRootStackParamList } from '../../routes/Sidebar/Abgeordnete';
 import { DEPUTY_FAVOURITES, DEPUTY_SEARCH } from './graphql/query/deputies';
 import {
   Deputies,
@@ -26,12 +30,17 @@ interface DeputyListControllerProps {
   searchTerm?: string;
 }
 
+export type DeputyListNavigationProps = CompositeNavigationProp<
+  StackNavigationProp<AbgeordneteRootStackParamList, 'Abgeordnete'>,
+  DrawerNavigationProp<SidebarParamList>
+>;
+
 export const DeputyListController: React.FC<DeputyListControllerProps> = ({
   editMode,
   searchTerm,
   ...props
 }) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<DeputyListNavigationProps>();
   const {
     favorizedDeputies,
     addFavorizedDeputy,
@@ -104,7 +113,7 @@ export const DeputyListController: React.FC<DeputyListControllerProps> = ({
 
   const deputiesData = deputies.map(d => ({
     ...d,
-    onPress: () => navigation.navigate('MemberProfil'),
+    onPress: () => navigation.navigate('DeputyProfile', { id: d.id }),
     onStatePress: () =>
       favorizedDeputies.includes(d.id)
         ? removeFavorizedDeputy(d.id)
