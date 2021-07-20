@@ -4,8 +4,8 @@ import {
   DeputyListRenderItemProps,
 } from '@democracy-deutschland/ui';
 import { useNavigation } from '@react-navigation/core';
-import React from 'react';
-import { useEffect } from 'react';
+import unionBy from 'lodash.unionby';
+import React, { useEffect } from 'react';
 import { ActivityIndicator } from 'react-native';
 import styled from 'styled-components/native';
 import { useFavorizedDeputies } from '../../lib/hooks/FavorizedDeputies';
@@ -62,13 +62,10 @@ export const DeputyListController: React.FC<DeputyListControllerProps> = ({
   });
 
   useEffect(() => {
-    console.log({ searchTerm });
     refetch({
       filterTerm: searchTerm ?? undefined,
     });
   }, [refetch, searchTerm]);
-
-  console.log(favData?.deputies, favorizedDeputies);
 
   const deputies =
     [...(favData?.deputies ?? []), ...(data?.deputies ?? [])].map<
@@ -95,8 +92,15 @@ export const DeputyListController: React.FC<DeputyListControllerProps> = ({
         },
       },
       title: deputy.name,
-      subtitle: deputy.party || undefined,
+      subtitle:
+        deputy.party && deputy.constituency
+          ? `${deputy.party}, Wahlkreis: ${deputy.constituency}`
+          : deputy.party
+          ? deputy.party
+          : undefined,
     })) || [];
+
+  unionBy(deputies, deputy => deputy.id);
 
   const deputiesData = deputies.map(d => ({
     ...d,
