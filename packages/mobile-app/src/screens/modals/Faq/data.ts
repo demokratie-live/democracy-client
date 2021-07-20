@@ -4,8 +4,18 @@ interface Faq {
 }
 
 export const faqData: Faq[] = [
+ {
+    title: 'Was ist der Wahl-O-Meter?',
+    text: `Der Wahl-O-Meter ist ein Analysetool zur persönlichen Repräsentationsmessung innerhalb der DEMOCRACY App.
+
+Im Unterschied zum zukunftsorientierten Wahl-O-Mat von der Bundeszentrale für politische Bildung, der in Vorbereitung auf eine anstehende Wahl die eigenen Stellungnahmen zu vordefinierten Fragen mit den Wahlversprechen der verschiedenen Parteien abgleicht, vergleicht der Wahl-O-Meter retrospektiv das tatsächliche Abstimmungsverhalten der Parteien und Politiker in den Parlamenten mit Deinen Präferenzen. In Anlehnung an die bekannte Bezeichnung des Wahl-O-Mats ("Wahl-Automat"), werden vom Wahl-O-Meter (meter = messen) also die tatsächlichen Handlungen der Poltiker in den Fokus genommen, sodass Du Deine du deine Wahlentscheidung nicht nur auf Wahlversprechen, sondern auf das gesicherte Handeln von Politikern und Parteien stützen kannst.
+
+Mathematisch bildet der Wahl-O-Meter dafür die Mittelwerte der eigenen Zustimmungen, Ablehnungen und neutralen Antworten innerhalb der DEMOCRACY App mit den Zustimmungen, Ablehnungen und neutralen Antworten jeder Partei / jedes Abgeordneten und sortiert diese Mittelwerte absteigend. 
+
+Mehr Informationen dazu findest Du auf unserer Website [https://democracy-deutschland.de/wahlometer](https://democracy-deutschland.de/wahlometer) & im Paper [https://github.com/demokratie-live/democracy-docu/wiki/Wahl-o-Meter](https://github.com/demokratie-live/democracy-docu/wiki/Wahl-o-Meter)`,
+  },
   {
-    title: 'Warum fehlt der Antragsteller?',
+    title: 'Warum fehlt bei den Details eines Vorgangs der Antragsteller?',
     text: `Immer wieder kam und kommt die Frage auf, warum wir den Antragsteller eines Papiers nicht ebenfalls unter den Detailinformationen eines Vorgangs anzeigen.
 
 Dies hat einen ganz einfachen Grund: 
@@ -20,12 +30,39 @@ Nimm es als Chance, Deine (politischen) Einstellungen anhand der konkret vertret
 Die (Nutzer-)Abstimmung in der App findet dabei immer über das Gesetz/den Antrag an sich (und nicht über die Beschlussempfehlung) statt. Im Plenarsaal des Bundestages wird allerdings oft über die Beschlussempfehlung abgestimmt. Eine Zustimmung zu einer Beschlussempfehlung, die eines Ablehnung des Vorgangs vorschlägt, ist insofern invers zu zählen.
 Innerhalb unserer Software haben wir einen Mechanismus implementiert, der die ggfs. notwendigen Umrechnungen vornimmt. 
 
-Sollten Sie Diskrepanzen zwischen dem Beschlusstext und unserer Ergebnisaufzeichnung feststellen, bitten wir Sie, diese an prototyping@democracy-deutschland.de zu reporten. `,
+Solltest Du Diskrepanzen zwischen dem Beschlusstext und unserer Ergebnisaufzeichnung feststellen, bitten wir Dich, diese an prototyping@democracy-deutschland.de zu reporten. `,
   },
   {
-    title: 'Warum ist meine Stimme grau und enthält ein Fragezeichen?',
+    title: 'Wo ist der Reiter Sitzungswoche?',
     text:
-      'Die Aufrechterhaltung des Abstimmungs- bzw. Wahlgeheimnis ist zentraler Bestandteil der DNA der DEMOCRACY App. Unser Konzept sieht insofern vor, Deine konkrete Abstimmungsentscheidung (Zugestimmt, Enthalten, Ablehnt) nur lokal auf Deinem Handy zu speichern und ausschließlich anonymisierte Stimmdaten an unseren Server zu übersenden. Der graue Button mit weißem Fragezeichen zeigt Dir an, dass Deine Stimme korrekt an unseren Server übertragen wurde, aber auf Deinem Handy verlorengegangen ist. Dazu kann es kommen, wenn Du die Cache-Daten der DEMOCRACY App via App-Manager löschst. Ein nachträgliches Ändern Deiner Stimme ist leider nicht möglich.',
+      'In der Bundestagswahl-Version der App haben wir den Reiter "Sitzungswoche" durch "Empfohlen" ersetzt. Da die letzte Sitzungswoche des 19. Bundestages Ende Juni stattfand, wäre dieser Bereich bis zur nächsten Sitzungswoche des 20. Bundestages nach der Wahl leer geblieben. ',
+  },
+  {
+    title: 'Welche Vorgänge zeigt ihr in "Empfohlen"?',
+    text:
+      'Unter ‘Empfohlen’ findest Du eine – nach Themenkategorien sortierte – Liste an besonders interessanten Gesetzentwürfen und Anträgen der endenden 19. Legislaturperiode des Bundestages. Diese Liste wurde von DEMOCRACY Deutschland e.V. redaktionell zusammengestellt. ',
+  },
+  {
+    title: 'Wie habt ihr die Empfehlungen ausgewählt?',
+    text: 'DEMOCRACY Deutschland e.V. hat sich beim Erstellen der Empfehlungen an folgenden Kriterien orientiert:
+
+1. _Inhaltliche / thematische Breite_: Unsere Empfehlungen bilden ein breites Spektrum politischer Inhalte ab. Für die Kategorien haben wir uns am [ZDF-Parlameter](https://parlameter.zdf.de/) orientiert. Innerhalb der Kategorien porträtieren wir die größtmögliche inhaltliche Variation an politischen Positionen.
+2. _Verständlichkeit / Zugänglichkeit_: Für die meisten Gesetze, die wir ausgewählt haben, liegen Zusammenfassungen des Bundestages vor. Bei Anträgen, ohne Inhaltszusammenfassungen, haben wir uns daran orientiert, dass der Titel den Inhalt passend beschreibt.
+3. _Fraktionelle Ausgeglichenheit_: Wir haben so ausgewählt, dass alle Fraktionen quantitativ gleichmäßig berücksichtigt werden. Dabei haben wir sowohl die eigenen Vorgänge der Fraktionen sowie das Stimmverhalten mit Vorgängen anderer Fraktionen berücksichtigt.
+4. _Öffentliche Aufmerksamkeit_: Die gewählten Gesetzentwürfe und Anträge haben in den Medien und der allgemeinen politischen Debatte viel Aufmerksamkeit erhalten, als sie zur Abstimmung standen. ',
+  },
+  {
+    title: 'Wie sehe ich alle Gesetze der vergangenen Legislaturperiode?',
+    text: 'In der Bundestagswahl-Version der App haben wir den Reiter "Vergangen" durch "Alle" ersetzt, da die letzte Sitzungswoche des 19. Bundestages Ende Juni stattfand. Dort werden sämtliche Vorgänge der endenden 19. Legislaturperiode chronologisch nach Sitzungswochen gruppiert, angezeigt. Ein konkretes Thema findest Du auch über die Suche. ',
+  },
+  {
+    title: 'Habt ihr die App zur Bundestagswahl verändert?',
+    text: 'Ja. Der neue Reiter "Empfohlen" soll Dir Stoff für den faktenbasierten Wahlhelfer (Wahl-O-Meter) liefern, anstatt Dich mit einem leeren Sitzungswochen-Reiter und den langen Listen "Top 100" und "Vergangen" zu überfordern. 
+    Außerdem enthält die neue Version eine Abgeordnetensuche, womit Du jeden Politiker auf Anhieb finden kannst, sowie den ersten retrospektiven Kandidatenckeck, der Dein Abstimmungsverhalten mit den Handlungen aller Kandidaten des Bundestages abgleicht. ',
+  },
+  {
+    title: 'Gibt es nach der Wahl wieder die bekannte Version der App?',
+    text: 'Ja und Nein. Nach der Bundestagswahl am 26. September 2021 wird die App um eine neue Liste mit der 20. Legislaturperiode ergänzt. Dort wird aus "Empfohlen" wieder "Sitzungswoche", um bei den aktuellen Abstimmungen des Bundestages auf dem Laufenden bleiben zu können. Die alten Abstimmungen, Listen und der Wahl-O-Meter aus der vergangenen 19. Legislaturperiode bleiben Dir selbstverständlich erhalten und können in den Einstellungen ein- und ausgeblendet werden. ',
   },
   {
     title: 'Gebt ihr meine Abstimmungsdaten an Dritte weiter?',
@@ -49,89 +86,25 @@ nachlesen.`,
   },
   {
     title: 'Wie wird DEMOCRACY finanziert?',
-    text: `DEMOCRACY ist eine gemeinnützige App, das heißt von Menschen für Menschen, um unsere Politik transparenter und zugänglicher zu machen. Da wir DEMOCRACY als eine werbefreie Plattform ohne Datenverkauf realisiert haben, kann unser Joker nur die gemeinschaftliche Finanzierung sein. Insofern wird DEMOCRACY, um die laufenden Kosten zu decken, auch nach dem initialen Crowdfunding durch Spenden finanziert.
+    text: `DEMOCRACY ist eine gemeinnützige App, das heißt von Menschen für Menschen, um unsere Politik transparenter und demokratischer zu machen. Da wir DEMOCRACY als eine werbefreie Plattform ohne Datenverkauf realisiert haben, kann unser Joker nur die gemeinschaftliche Finanzierung sein. Insofern wird DEMOCRACY, um die laufenden Kosten zu decken, auch nach dem [initialen Crowdfunding](https://www.startnext.com/democracy) durch Spenden finanziert.
 Finanziell unterstützen kannst Du via [https://www.democracy-deutschland.de/#!donate](https://www.democracy-deutschland.de/#!donate).`,
   },
   {
-    title: 'Was bedeuten die Beratungszustände?',
-    text: `**Noch nicht beraten**
-Der Bundestag hat den Vorgang noch nicht beraten.
-
-**1.Beratung**
-Vorrangiges Ziel der ersten Lesung ist es, auf Basis der Empfehlungen des Ältestenrates einen oder mehrere Ausschüsse zu bestimmen, die sich mit dem Gesetzentwurf fachlich auseinandersetzen und ihn für die zweite Lesung vorbereiten.
-Werden mehrere Ausschüsse bestimmt, so erhält ein Ausschuss die Federführung. Er ist somit verantwortlich für den Fortgang des Verfahrens. Die anderen Ausschüsse haben mitberatende Funktion.
-
-**Überwiesen**
-Das Ziel der ersten Lesung ist erreicht: auf Basis der Empfehlungen des Ältestenrates wurde einer oder mehrere Ausschüsse bestimmt, die sich mit dem Gesetzentwurf fachlich auseinandersetzen und ihn für die zweite Lesung vorbereiten.
-
-**Beschlussempfehlung liegt vor**
-Die Detailarbeit der Gesetzgebung findet in den ständigen Ausschüssen statt, die nach den Mehrheitsverhältnissen des Plenums mit Abgeordneten aller Fraktionen besetzt sind. Die Ausschussmitglieder arbeiten sich in die Materie ein und beraten sich in Sitzungen. Sie können auch Interessenvertreter und Experten zu öffentlichen Anhörungen einladen. Parallel zur Ausschussarbeit bilden die Fraktionen Arbeitsgruppen und Arbeitskreise, in denen sie ihre eigenen Positionen fachlich erarbeiten und definieren. In den Ausschüssen werden nicht selten Brücken zwischen den Fraktionen gebaut. Im Zusammenspiel von Regierungs- und Oppositionsfraktionen werden die meisten Gesetzentwürfe mehr oder weniger stark überarbeitet.
-Nach Abschluss der Beratungen legt der federführende Ausschuss dem Plenum einen Bericht über den Verlauf und die Ergebnisse der Beratungen vor. Seine Beschlussempfehlungen sind die Grundlage für die nun folgende zweite Lesung im Plenum.
-
-**2.Beratung**
-Vor der zweiten Lesung haben alle Abgeordneten die veröffentlichte Beschlussempfehlung in gedruckter Form erhalten. Außerdem haben die Fraktionen zuvor in internen Sitzungen ihre Position noch einmal abgestimmt. Nach der allgemeinen Aussprache können alle Bestimmungen des Gesetzentwurfs einzeln aufgerufen werden. In der Regel wird aber direkt über den gesamten Gesetzentwurf abgestimmt.
-Jedes Mitglied des Parlaments kann Änderungsanträge stellen, die dann im Plenum direkt behandelt werden. Beschließt das Plenum Änderungen, muss die neue Fassung des Gesetzentwurfs zunächst gedruckt und verteilt werden. Mit der Zustimmung von zwei Dritteln der anwesenden Mitglieder kann dieses Verfahren jedoch abgekürzt werden. Dann kann unmittelbar die dritte Lesung beginnen.
-
-**3.Beratung**
-In der dritten Lesung findet eine erneute Aussprache nur dann statt, wenn dies von einer Fraktion oder von mindestens fünf Prozent der Abgeordneten verlangt wird. Auch Änderungsanträge sind nun nicht mehr von einzelnen Abgeordneten, sondern nur noch von Fraktionen oder fünf Prozent der Mitglieder des Bundestages und auch nur zu Änderungen aus der zweiten Lesung zulässig.
-Am Ende der dritten Lesung erfolgt die Schlussabstimmung. Auf die Frage des Bundestagspräsidenten nach Zustimmung, Gegenstimmen und Enthaltungen erheben sich die Abgeordneten von ihren Plätzen.
-
-**Abgelehnt**
-Hat der Gesetzentwurf die notwendige Mehrheit im Bundestag nicht gefunden, gilt das Verfahren als abgelehnt. Das Gesetzgebungsverfahren gilt somit als beendet.
-
-**Angenommen**
-Hat der Gesetzentwurf die notwendige Mehrheit im Bundestag gefunden, gilt er als angenommen und wird  als Gesetz dem Bundesrat zugeleitet.
-
-**Unterrichtung des BR durch BT**
-Durch den Bundesrat wirken die Länder bei jedem Gesetz mit. Ihre Mitwirkungsrechte sind dabei genau festgelegt.
-Der Bundesrat kann keine Änderungen an dem vom Bundestag beschlossenen Gesetz vornehmen. Stimmt er dem Gesetz aber nicht zu, so kann er den Vermittlungsausschuss anrufen. Im Vermittlungsausschuss sitzen in gleicher Anzahl Mitglieder des Bundestages und des Bundesrates.
-Bei Zustimmungsgesetzen ist die Zustimmung des Bundesrates zwingend erforderlich. Das sind zum Beispiel Gesetze, die die Finanzen und Verwaltungszuständigkeit der Länder betreffen. Zustimmungsbedürftig sind insbesondere verfassungsändernde Gesetze im Sinne des Artikels 79 Absatz 2 des Grundgesetzes.
-Bei Einspruchsgesetzen kann der Bundestag ein Gesetz auch dann in Kraft treten lassen, wenn es im Vermittlungsausschuss zu keiner Einigung gekommen ist. Dazu ist aber in einer erneuten Abstimmung im Bundestag eine absolute Mehrheit erforderlich.
-
-**Verabschiedet**
-Hat der Bundesrat den Vermittlungsausschuss nicht angerufen oder dem Gesetz zugestimmt, gilt das Gesetz als verabschiedet.
-
-In inhaltlicher Anlehnung an: [https://www.bundestag.de/parlament/aufgaben/gesetzgebung_neu/gesetzgebung/weg/255468](https://www.bundestag.de/parlament/aufgaben/gesetzgebung_neu/gesetzgebung/weg/255468)
-
-`,
-  },
-  {
-    title: 'Was ist der Wahl-o-Meter?',
-    text: `Du kennst sicher den Wahl-o-Mat. In Vorbereitung auf eine anstehende Wahl ermöglicht Dir dieses Tool, die eigenen Stellungnahmen zu vordefinierten Fragen mit den autorisierten Antworten der verschiedenen Parteien zu vergleichen. Der Wahl-o-Mat kreuzt insofern die Wahlversprechen der Parteien mit Deinen Politik-Erwartungen. Vom Wahl-o-Mat nicht abgebildet wird dann allerdings das tatsächliche Abstimmungsverhalten der Parteien und PoltikerInnen in der darauffolgenden Legislaturperiode. Offen bleibt für Dich als BürgerIn insofern:
-
-- Haben die Parteien das Versprochene umgesetzt und
-- wie hat der von mir gewählte Direktkandidat / die von mir gewählte Partei (in mir wichtigen Belangen) abgestimmt?
-
-Der **Wahl-o-Meter** setzt genau an diesem Punkt an.
-Entsprechend des Wahl-O-Mats, bekommst Du mit dem Wahl-o-Meter eine Auswertungsmöglichkeit zur Verfügung gestellt, die Dir für den parlamentarischen Echtbetrieb zeigt, mit welcher (Bundestagas-)Partei Du wie stark übereinstimmst. Mathematisch bildet der Wahl-o-Meter dafür ebenfalls Mittelwerte Deiner Zustimmungen, Ablehnungen und neutralen Antworten mit den Zustimmungen, Ablehnungen und neutralen Antworten jeder Partei und sortiert diese Mittelwerte absteigend. 
-
-Mehr Informationen dazu findest Du unter:
-[https://github.com/demokratie-live/democracy-docu/wiki/Wahl-o-Meter](https://github.com/demokratie-live/democracy-docu/wiki/Wahl-o-Meter)`,
-  },
-  {
     title: 'Wie kann ich Mithelfen?',
-    text: `Spenden und Daueraufträge sind nur eine Möglichkeit, uns zu unterstützen. Hier haben wir eine Liste von Tätigkeiten aufgeführt, die Du sofort angehen kannst, wenn Du bei DEMOCRACY mithelfen möchtest.
+    text: `[Spenden und Daueraufträge](https://www.democracy-deutschland.de/#!donate) sind nur eine Möglichkeit, uns zu unterstützen. Hier haben wir eine Liste von Tätigkeiten aufgeführt, die Du sofort angehen kannst, wenn Du bei DEMOCRACY mithelfen möchtest.
 
 **LEVEL 1 – Für Einsteiger**
-- Benutze DEMOCRACY und stimme app
-- Teile unseren DEMOCRACY Erklärfilm mit einem kleinen, persönlichen, für Deine Freunde motivierenden Text bei Facebook, Twitter oder dem Sozialen Netzwerk Deiner Wahl
-- Kommentiere DEMOCRACY-Beiträge und stelle Fragen auf Social Media
+- Benutze DEMOCRACY und hol Dir Deine faktenbasierte Wahlhilfe zur Bundestagswahl 2021
+- Sprich mit Deinen Freunden über uns
+- Teile unsere [Wahl-O-Meter-Erklärfilm](https://www.youtube.com/watch?v=DFXcnRdXA7k) mit Deinen Freunden im Sozialen Netzwerk Deiner Wahl
+- Kommentiere, like und teile DEMOCRACY-Beiträge in Social Media. Alle Social-Media-Accounts findest Du im Side-Menu unter "Über DEMOCRACY"
 - Bewerte DEMOCRACY im App- bzw. PlayStore mit bis zu 5 Sternen
-- Teile einen für Dich relevanten Bundestagsvorgang mit Deinen engsten Freuden via Messenger (WhatsApp, Telegram, …)
-- Like unsere [Facebook-Seite](https://www.facebook.com/democracygermany/)
-- Folge uns bei [Twitter](https://twitter.com/democracy_de)
 - Entwickler-Special: Gib uns einen [Stern auf Github](https://github.com/demokratie-live/democracy-client)
 
-**LEVEL 2 – Für Fortgeschrittene**
-- Teile regelmäßig konkrete Bundestagsvorgänge via Facebook, Twitter oder per Messenger
-- Sprich beim nächsten Abendessen mit Deinen Bekannten das Thema DEMOCRACY an und diskutiere mit ihnen über die Möglichkeit, per App am Bundestag teilzunehmen. Für jeden überzeugten neuen Nutzer gib Dir selbst einen Punkt. 
-- Lass ein Foto von Dir machen wie Du DEMOCRACY benutzt und teile es auf Instagram & Co mit den Hashtags #democracymatters und #appstimmen
-
-**LEVEL 3 – Für Profis**
+**LEVEL 2 – Für Profis**
 - Schreibe über DEMOCRACY auf Deiner eigenen Seite/Blog/Timeline
-- Tritt in direkte Kommunikation mit uns via [Discord](https://discordapp.com/invite/Pdu3ZEV) oder [per Mail](mailto:contact@democracy-deutschland.de)
-- Überlege Dir, zu welchen strategischen Partnern oder Multiplikatoren Du als ScharniernetzwerkerIn für DEMOCRACY botschaften kannst 
-- Sprich diese Netzwerke auf eigene Initiative an – für fachliche Rückfragen stehen wir jederzeit zur Verfügung
+- Überlege Dir, zu welchen strategischen Partnern oder Multiplikatoren Du als Scharniernetzwerker für DEMOCRACY botschaften könntest, um die Reichweite von DEMOCRACY zu erhöhen
+- Sprich diese Netzwerke auf eigene Initiative an – für fachliche Rückfragen stehen wir jederzeit zur Verfügung. Tritt dafür gerne mit uns in in direkte Kommunikation z.B. über [Discord](https://discordapp.com/invite/Pdu3ZEV) oder [per Mail](mailto:contact@democracy-deutschland.de)
 - Schlage selbst ein Feature vor, dass Du in einer künftigen Version von DEMOCRACY umgesetzt sehen willst
 - Entwickler-Special: Prüfe unseren [Code](https://github.com/demokratie-live) und/oder entwickle mit.
 
