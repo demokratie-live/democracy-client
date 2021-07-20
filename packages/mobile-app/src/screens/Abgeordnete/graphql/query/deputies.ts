@@ -18,6 +18,7 @@ export const DEPUTY_SEARCH = gql`
       party
       webId
       imgURL
+      constituency
     }
   }
 `;
@@ -34,6 +35,7 @@ export const DEPUTY_FAVOURITES = gql`
       party
       webId
       imgURL
+      constituency
     }
   }
 `;

@@ -14,6 +14,7 @@ export interface Deputies_deputies {
   party: string | null;
   webId: string;
   imgURL: string;
+  constituency: string | null;
 }
 
 export interface Deputies {
