@@ -160,12 +160,13 @@ export type ProceduresHavingVoteResultsFieldPolicy = {
 	total?: FieldPolicy<any> | FieldReadFunction<any>,
 	procedures?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type QueryKeySpecifier = ('activityIndex' | 'currentConferenceWeek' | 'deputiesOfConstituency' | 'deputies' | 'notificationSettings' | 'procedure' | 'procedures' | 'proceduresById' | 'proceduresByIdHavingVoteResults' | 'notifiedProcedures' | 'searchProcedures' | 'searchProceduresAutocomplete' | 'votedProcedures' | 'proceduresWithVoteResults' | 'mostSearched' | 'me' | 'votes' | 'communityVotes' | 'voteStatistic' | QueryKeySpecifier)[];
+export type QueryKeySpecifier = ('activityIndex' | 'currentConferenceWeek' | 'deputiesOfConstituency' | 'deputies' | 'deputy' | 'notificationSettings' | 'procedure' | 'procedures' | 'proceduresById' | 'proceduresByIdHavingVoteResults' | 'notifiedProcedures' | 'searchProcedures' | 'searchProceduresAutocomplete' | 'votedProcedures' | 'proceduresWithVoteResults' | 'mostSearched' | 'me' | 'votes' | 'communityVotes' | 'voteStatistic' | QueryKeySpecifier)[];
 export type QueryFieldPolicy = {
 	activityIndex?: FieldPolicy<any> | FieldReadFunction<any>,
 	currentConferenceWeek?: FieldPolicy<any> | FieldReadFunction<any>,
 	deputiesOfConstituency?: FieldPolicy<any> | FieldReadFunction<any>,
 	deputies?: FieldPolicy<any> | FieldReadFunction<any>,
+	deputy?: FieldPolicy<any> | FieldReadFunction<any>,
 	notificationSettings?: FieldPolicy<any> | FieldReadFunction<any>,
 	procedure?: FieldPolicy<any> | FieldReadFunction<any>,
 	procedures?: FieldPolicy<any> | FieldReadFunction<any>,
