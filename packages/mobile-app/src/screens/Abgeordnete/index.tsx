@@ -1,19 +1,25 @@
 import React, { useContext } from 'react';
 
-// GraphQL
-// import { ConstituencyContext } from '../../context/Constituency';
-// import { InitialStateContext } from '../../context/InitialStates';
 import { useNavigation } from '@react-navigation/core';
 import { styled } from '../../styles';
 import { SearchBar } from '@democracy-deutschland/ui';
 import { AbgeordneteListContext } from '../../lib/states/Abgeordnete/context';
-import { Button, View } from 'react-native';
-// import { deputies } from './deputies.data';
+
 import { DeputyListController } from './DeputyListController';
 
 const Wrapper = styled.View`
   background-color: ${({ theme }) => theme.oldColors.background.main};
   flex: 1;
+`;
+
+const Edit = styled.TouchableOpacity`
+  margin-right: ${({ theme }) => theme.distances.secondary}px;
+`;
+
+const EditText = styled.Text`
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
 `;
 
 export const Abgeordnete: React.FC = () => {
@@ -26,17 +32,14 @@ export const Abgeordnete: React.FC = () => {
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <View style={{ paddingRight: 11 }}>
-          <Button
-            onPress={() =>
-              dispatch({
-                type: 'ToggleEditMode',
-              })
-            }
-            title={state.editMode ? 'Fertig' : 'Bearbeiten'}
-            color="#FFF"
-          />
-        </View>
+        <Edit
+          onPress={() =>
+            dispatch({
+              type: 'ToggleEditMode',
+            })
+          }>
+          <EditText>{state.editMode ? 'Fertig' : 'Bearbeiten'}</EditText>
+        </Edit>
       ),
     });
   }, [dispatch, navigation, state.editMode]);
