@@ -21,6 +21,8 @@ import {
   AbgeordneteNavigationProps,
   AbgeordneteRootStackParamList,
 } from '../../routes/Sidebar/Abgeordnete';
+import { LocalVotesContext } from '../../context/LocalVotes';
+import { MatchesBar } from './components/MatchBar';
 
 const ScrollWrapper = styled.ScrollView.attrs({
   contentContainerStyle: {
@@ -74,6 +76,7 @@ type Props = {
 };
 
 export const DeputyProfil: React.FC<Props> = ({ route }) => {
+  const { localVotes } = useContext(LocalVotesContext);
   const navigation = useNavigation<AbgeordneteNavigationProps>();
   const { constituency } = useContext(ConstituencyContext);
   const { data, loading } = useQuery<GetDeputy, GetDeputyVariables>(
@@ -81,6 +84,7 @@ export const DeputyProfil: React.FC<Props> = ({ route }) => {
     {
       variables: {
         id: route.params.id,
+        votedProcedureIds: localVotes.map(({ procedureId }) => procedureId),
       },
     },
   );
@@ -210,6 +214,7 @@ export const DeputyProfil: React.FC<Props> = ({ route }) => {
             votedProceduresCount={votedProceduresCount}
           />
           <ChartLegend data={getVotingData(procedureCountByDecision)} />
+          <MatchesBar decisions={data.deputy.matchesBar} />
           <SegmentWrapper>
             <Folding title="Biographie">
               <TextGrey>{biography}</TextGrey>
