@@ -34,6 +34,17 @@ export interface GetDeputy_deputy_contact {
   links: GetDeputy_deputy_contact_links[];
 }
 
+export interface GetDeputy_deputy_matchesBar_procedure {
+  __typename: "Procedure";
+  procedureId: string;
+}
+
+export interface GetDeputy_deputy_matchesBar {
+  __typename: "DeputyProcedure";
+  decision: VoteSelection;
+  procedure: GetDeputy_deputy_matchesBar_procedure;
+}
+
 export interface GetDeputy_deputy {
   __typename: "Deputy";
   _id: string;
@@ -45,6 +56,7 @@ export interface GetDeputy_deputy {
   totalProcedures: number | null;
   procedures: GetDeputy_deputy_procedures[];
   contact: GetDeputy_deputy_contact | null;
+  matchesBar: GetDeputy_deputy_matchesBar[];
 }
 
 export interface GetDeputy {
@@ -53,4 +65,5 @@ export interface GetDeputy {
 
 export interface GetDeputyVariables {
   id: string;
+  votedProcedureIds: string[];
 }
