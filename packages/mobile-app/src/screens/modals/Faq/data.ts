@@ -4,7 +4,7 @@ interface Faq {
 }
 
 export const faqData: Faq[] = [
- {
+  {
     title: 'Was ist der Wahl-O-Meter?',
     text: `Der Wahl-O-Meter ist ein Analysetool zur persönlichen Repräsentationsmessung innerhalb der DEMOCRACY App.
 
@@ -44,25 +44,27 @@ Solltest Du Diskrepanzen zwischen dem Beschlusstext und unserer Ergebnisaufzeich
   },
   {
     title: 'Wie habt ihr die Empfehlungen ausgewählt?',
-    text: 'DEMOCRACY Deutschland e.V. hat sich beim Erstellen der Empfehlungen an folgenden Kriterien orientiert:
+    text: `DEMOCRACY Deutschland e.V. hat sich beim Erstellen der Empfehlungen an folgenden Kriterien orientiert:
 
 1. _Inhaltliche / thematische Breite_: Unsere Empfehlungen bilden ein breites Spektrum politischer Inhalte ab. Für die Kategorien haben wir uns am [ZDF-Parlameter](https://parlameter.zdf.de/) orientiert. Innerhalb der Kategorien porträtieren wir die größtmögliche inhaltliche Variation an politischen Positionen.
 2. _Verständlichkeit / Zugänglichkeit_: Für die meisten Gesetze, die wir ausgewählt haben, liegen Zusammenfassungen des Bundestages vor. Bei Anträgen, ohne Inhaltszusammenfassungen, haben wir uns daran orientiert, dass der Titel den Inhalt passend beschreibt.
 3. _Fraktionelle Ausgeglichenheit_: Wir haben so ausgewählt, dass alle Fraktionen quantitativ gleichmäßig berücksichtigt werden. Dabei haben wir sowohl die eigenen Vorgänge der Fraktionen sowie das Stimmverhalten mit Vorgängen anderer Fraktionen berücksichtigt.
-4. _Öffentliche Aufmerksamkeit_: Die gewählten Gesetzentwürfe und Anträge haben in den Medien und der allgemeinen politischen Debatte viel Aufmerksamkeit erhalten, als sie zur Abstimmung standen. ',
+4. _Öffentliche Aufmerksamkeit_: Die gewählten Gesetzentwürfe und Anträge haben in den Medien und der allgemeinen politischen Debatte viel Aufmerksamkeit erhalten, als sie zur Abstimmung standen. `,
   },
   {
     title: 'Wie sehe ich alle Gesetze der vergangenen Legislaturperiode?',
-    text: 'In der Bundestagswahl-Version der App haben wir den Reiter "Vergangen" durch "Alle" ersetzt, da die letzte Sitzungswoche des 19. Bundestages Ende Juni stattfand. Dort werden sämtliche Vorgänge der endenden 19. Legislaturperiode chronologisch nach Sitzungswochen gruppiert, angezeigt. Ein konkretes Thema findest Du auch über die Suche. ',
+    text:
+      'In der Bundestagswahl-Version der App haben wir den Reiter "Vergangen" durch "Alle" ersetzt, da die letzte Sitzungswoche des 19. Bundestages Ende Juni stattfand. Dort werden sämtliche Vorgänge der endenden 19. Legislaturperiode chronologisch nach Sitzungswochen gruppiert, angezeigt. Ein konkretes Thema findest Du auch über die Suche. ',
   },
   {
     title: 'Habt ihr die App zur Bundestagswahl verändert?',
-    text: 'Ja. Der neue Reiter "Empfohlen" soll Dir Stoff für den faktenbasierten Wahlhelfer (Wahl-O-Meter) liefern, anstatt Dich mit einem leeren Sitzungswochen-Reiter und den langen Listen "Top 100" und "Vergangen" zu überfordern. 
-    Außerdem enthält die neue Version eine Abgeordnetensuche, womit Du jeden Politiker auf Anhieb finden kannst, sowie den ersten retrospektiven Kandidatenckeck, der Dein Abstimmungsverhalten mit den Handlungen aller Kandidaten des Bundestages abgleicht. ',
+    text: `Ja. Der neue Reiter "Empfohlen" soll Dir Stoff für den faktenbasierten Wahlhelfer (Wahl-O-Meter) liefern, anstatt Dich mit einem leeren Sitzungswochen-Reiter und den langen Listen "Top 100" und "Vergangen" zu überfordern. 
+Außerdem enthält die neue Version eine Abgeordnetensuche, womit Du jeden Politiker auf Anhieb finden kannst, sowie den ersten retrospektiven Kandidatenckeck, der Dein Abstimmungsverhalten mit den Handlungen aller Kandidaten des Bundestages abgleicht.`,
   },
   {
     title: 'Gibt es nach der Wahl wieder die bekannte Version der App?',
-    text: 'Ja und Nein. Nach der Bundestagswahl am 26. September 2021 wird die App um eine neue Liste mit der 20. Legislaturperiode ergänzt. Dort wird aus "Empfohlen" wieder "Sitzungswoche", um bei den aktuellen Abstimmungen des Bundestages auf dem Laufenden bleiben zu können. Die alten Abstimmungen, Listen und der Wahl-O-Meter aus der vergangenen 19. Legislaturperiode bleiben Dir selbstverständlich erhalten und können in den Einstellungen ein- und ausgeblendet werden. ',
+    text:
+      'Ja und Nein. Nach der Bundestagswahl am 26. September 2021 wird die App um eine neue Liste mit der 20. Legislaturperiode ergänzt. Dort wird aus "Empfohlen" wieder "Sitzungswoche", um bei den aktuellen Abstimmungen des Bundestages auf dem Laufenden bleiben zu können. Die alten Abstimmungen, Listen und der Wahl-O-Meter aus der vergangenen 19. Legislaturperiode bleiben Dir selbstverständlich erhalten und können in den Einstellungen ein- und ausgeblendet werden. ',
   },
   {
     title: 'Gebt ihr meine Abstimmungsdaten an Dritte weiter?',
