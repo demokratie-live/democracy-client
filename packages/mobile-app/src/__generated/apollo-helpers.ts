@@ -38,6 +38,12 @@ export type ConferenceWeekFieldPolicy = {
 	end?: FieldPolicy<any> | FieldReadFunction<any>,
 	calendarWeek?: FieldPolicy<any> | FieldReadFunction<any>
 };
+export type DeputiesResultKeySpecifier = ('total' | 'hasMore' | 'data' | DeputiesResultKeySpecifier)[];
+export type DeputiesResultFieldPolicy = {
+	total?: FieldPolicy<any> | FieldReadFunction<any>,
+	hasMore?: FieldPolicy<any> | FieldReadFunction<any>,
+	data?: FieldPolicy<any> | FieldReadFunction<any>
+};
 export type DeputyKeySpecifier = ('_id' | 'webId' | 'imgURL' | 'name' | 'party' | 'job' | 'biography' | 'constituency' | 'directCandidate' | 'contact' | 'totalProcedures' | 'procedures' | DeputyKeySpecifier)[];
 export type DeputyFieldPolicy = {
 	_id?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -260,6 +266,10 @@ export type TypedTypePolicies = TypePolicies & {
 	ConferenceWeek?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | ConferenceWeekKeySpecifier | (() => undefined | ConferenceWeekKeySpecifier),
 		fields?: ConferenceWeekFieldPolicy,
+	},
+	DeputiesResult?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | DeputiesResultKeySpecifier | (() => undefined | DeputiesResultKeySpecifier),
+		fields?: DeputiesResultFieldPolicy,
 	},
 	Deputy?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | DeputyKeySpecifier | (() => undefined | DeputyKeySpecifier),

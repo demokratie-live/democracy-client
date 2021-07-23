@@ -13,12 +13,15 @@ export const DEPUTY_SEARCH = gql`
       filterTerm: $filterTerm
       excludeIds: $excludeIds
     ) {
-      _id
-      name
-      party
-      webId
-      imgURL
-      constituency
+      hasMore
+      data {
+        _id
+        name
+        party
+        webId
+        imgURL
+        constituency
+      }
     }
   }
 `;
@@ -30,12 +33,15 @@ export const DEPUTY_FAVOURITES = gql`
     $filterIds: [String!]
   ) {
     deputies(limit: $limit, filterTerm: $filterTerm, filterIds: $filterIds) {
-      _id
-      name
-      party
-      webId
-      imgURL
-      constituency
+      hasMore
+      data {
+        _id
+        name
+        party
+        webId
+        imgURL
+        constituency
+      }
     }
   }
 `;

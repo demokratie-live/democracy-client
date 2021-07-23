@@ -7,7 +7,7 @@
 // GraphQL query operation: Deputies
 // ====================================================
 
-export interface Deputies_deputies {
+export interface Deputies_deputies_data {
   __typename: "Deputy";
   _id: string;
   name: string;
@@ -17,8 +17,14 @@ export interface Deputies_deputies {
   constituency: string | null;
 }
 
+export interface Deputies_deputies {
+  __typename: "DeputiesResult";
+  hasMore: boolean;
+  data: Deputies_deputies_data[];
+}
+
 export interface Deputies {
-  deputies: Deputies_deputies[];
+  deputies: Deputies_deputies;
 }
 
 export interface DeputiesVariables {
