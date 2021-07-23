@@ -1,7 +1,7 @@
 import { TypedTypePolicies } from '../../__generated/apollo-helpers';
 import { Procedure_procedure_voteResults_partyVotes } from '../../screens/Bundestag/Procedure/graphql/query/__generated__/Procedure';
 import { uniqBy } from 'lodash';
-import { offsetLimitPagination } from '@apollo/client/utilities';
+import { Deputies_deputies } from '../../screens/Abgeordnete/graphql/query/__generated__/Deputies';
 
 export const typePolicies: TypedTypePolicies = {
   Query: {
@@ -14,11 +14,22 @@ export const typePolicies: TypedTypePolicies = {
           });
         },
       },
-      deputies: offsetLimitPagination([
-        'filterTerm',
-        'excludeIds',
-        'filterIds',
-      ]),
+      deputies: {
+        keyArgs: ['filterTerm', 'excludeIds', 'filterIds'],
+        merge(existing = { data: [] }, incoming: Deputies_deputies) {
+          return {
+            ...incoming,
+            data: uniqBy([...existing.data, ...incoming.data], deputy => {
+              return deputy.__ref;
+            }),
+          };
+        },
+      },
+      // deputies: offsetLimitPagination([
+      //   'filterTerm',
+      //   'excludeIds',
+      //   'filterIds',
+      // ]),
     },
   },
   Procedure: {

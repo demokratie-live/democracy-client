@@ -7,7 +7,7 @@
 // GraphQL query operation: FavouriteDeputies
 // ====================================================
 
-export interface FavouriteDeputies_deputies {
+export interface FavouriteDeputies_deputies_data {
   __typename: "Deputy";
   _id: string;
   name: string;
@@ -17,8 +17,14 @@ export interface FavouriteDeputies_deputies {
   constituency: string | null;
 }
 
+export interface FavouriteDeputies_deputies {
+  __typename: "DeputiesResult";
+  hasMore: boolean;
+  data: FavouriteDeputies_deputies_data[];
+}
+
 export interface FavouriteDeputies {
-  deputies: FavouriteDeputies_deputies[];
+  deputies: FavouriteDeputies_deputies;
 }
 
 export interface FavouriteDeputiesVariables {
