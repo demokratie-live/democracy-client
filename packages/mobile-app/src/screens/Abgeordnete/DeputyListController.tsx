@@ -77,7 +77,7 @@ export const DeputyListController: React.FC<DeputyListControllerProps> = ({
   }, [refetch, searchTerm]);
 
   const deputies =
-    [...(favData?.deputies ?? []), ...(data?.deputies ?? [])].map<
+    [...(favData?.deputies.data ?? []), ...(data?.deputies.data ?? [])].map<
       Omit<DeputyListRenderItemProps, 'onPress'>
     >(deputy => ({
       id: deputy.webId,
@@ -121,7 +121,7 @@ export const DeputyListController: React.FC<DeputyListControllerProps> = ({
   }));
 
   const handleOnEndReached = () => {
-    if (!loading) {
+    if (!loading && data?.deputies.hasMore) {
       fetchMore({
         variables: { offset: deputiesData.length },
       });
