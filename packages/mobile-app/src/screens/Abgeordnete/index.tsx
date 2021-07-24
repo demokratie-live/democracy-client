@@ -49,7 +49,7 @@ export const Abgeordnete: React.FC = () => {
       <SearchBar
         textInput={{
           autoFocus: false,
-          placeholder: 'Name, Partei, Wahlkreis, PLZ, Ort eingeben',
+          placeholder: 'Name, Fraktion, Wahlkreis eingeben',
           onChangeText: setSearchTerm,
         }}
       />
