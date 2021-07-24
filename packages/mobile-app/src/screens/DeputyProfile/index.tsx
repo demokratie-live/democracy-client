@@ -13,7 +13,6 @@ import {
   GetDeputyVariables,
   GetDeputy_deputy_procedures,
 } from './graphql/query/__generated__/GetDeputy';
-import { ConstituencyContext } from '../../context/Constituency';
 import { RouteProp, useNavigation } from '@react-navigation/core';
 import { styled } from '../../styles';
 import { Avatar } from '@democracy-deutschland/ui';
@@ -78,7 +77,6 @@ type Props = {
 export const DeputyProfil: React.FC<Props> = ({ route }) => {
   const { localVotes } = useContext(LocalVotesContext);
   const navigation = useNavigation<AbgeordneteNavigationProps>();
-  const { constituency } = useContext(ConstituencyContext);
   const { data, loading } = useQuery<GetDeputy, GetDeputyVariables>(
     GET_DEPUTY,
     {
@@ -164,6 +162,7 @@ export const DeputyProfil: React.FC<Props> = ({ route }) => {
     contact,
     procedures,
     totalProcedures,
+    constituency,
   } = data.deputy;
 
   let contacts: Contacts[] = [];
@@ -191,41 +190,47 @@ export const DeputyProfil: React.FC<Props> = ({ route }) => {
 
   return (
     <ScrollWrapper>
-      {constituency && (
-        <>
-          <MemberImageWrapper>
-            <Avatar
-              partyLogo={{
-                party: party as any,
-                width: 200,
-              }}
-              profileImage={{
-                height: 280,
-                variant: 'oval',
-                source: { uri: imgURL },
-              }}
-            />
-          </MemberImageWrapper>
-          <Text>{name}</Text>
-          <TextLighGrey>Direktkadidat WK {constituency}</TextLighGrey>
-          <TextGrey>{job}</TextGrey>
-          <Chart
-            totalProcedures={totalProcedures || 0}
-            votedProceduresCount={votedProceduresCount}
+      <>
+        <MemberImageWrapper>
+          <Avatar
+            partyLogo={{
+              party: party as any,
+              width: 200,
+            }}
+            profileImage={{
+              height: 280,
+              variant: 'oval',
+              source: { uri: imgURL },
+            }}
           />
-          <ChartLegend data={getVotingData(procedureCountByDecision)} />
-          <MatchesBar decisions={data.deputy.matchesBar} />
+        </MemberImageWrapper>
+        <Text>{name}</Text>
+        {constituency ? (
+          <TextLighGrey>Direktkadidat WK {constituency}</TextLighGrey>
+        ) : null}
+        <TextGrey>{job}</TextGrey>
+        <Chart
+          totalProcedures={totalProcedures || 0}
+          votedProceduresCount={votedProceduresCount}
+        />
+        <ChartLegend data={getVotingData(procedureCountByDecision)} />
+        <MatchesBar decisions={data.deputy.matchesBar} />
+        {biography || contact ? (
           <SegmentWrapper>
-            <Folding title="Biographie">
-              <TextGrey>{biography}</TextGrey>
-            </Folding>
-            <Folding title="Kontakt" opened>
-              {!!contact && <TextGrey>{contact.address}</TextGrey>}
-              {contacts.length !== 0 && <ContactBox contacts={contacts} />}
-            </Folding>
+            {biography ? (
+              <Folding title="Biographie">
+                <TextGrey>{biography}</TextGrey>
+              </Folding>
+            ) : null}
+            {contact || contacts.length !== 0 ? (
+              <Folding title="Kontakt" opened>
+                {contact ? <TextGrey>{contact.address}</TextGrey> : null}
+                {contacts.length !== 0 && <ContactBox contacts={contacts} />}
+              </Folding>
+            ) : null}
           </SegmentWrapper>
-        </>
-      )}
+        ) : null}
+      </>
     </ScrollWrapper>
   );
 };
