@@ -11,6 +11,7 @@ export const GET_DEPUTY = gql`
       job
       biography
       totalProcedures
+      constituency
       procedures {
         decision
         procedure {

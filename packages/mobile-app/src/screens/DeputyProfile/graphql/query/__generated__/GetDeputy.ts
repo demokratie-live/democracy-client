@@ -54,6 +54,7 @@ export interface GetDeputy_deputy {
   job: string | null;
   biography: string | null;
   totalProcedures: number | null;
+  constituency: string | null;
   procedures: GetDeputy_deputy_procedures[];
   contact: GetDeputy_deputy_contact | null;
   matchesBar: GetDeputy_deputy_matchesBar[];
