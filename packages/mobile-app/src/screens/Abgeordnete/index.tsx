@@ -9,7 +9,7 @@ import { DeputyListController } from './DeputyListController';
 
 const Wrapper = styled.View`
   background-color: ${({ theme }) => theme.oldColors.background.main};
-  flex: 1;
+  flex-grow: 1;
 `;
 
 const Edit = styled.TouchableOpacity`
