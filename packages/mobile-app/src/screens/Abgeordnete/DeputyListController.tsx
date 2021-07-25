@@ -63,7 +63,7 @@ export const DeputyListController: React.FC<DeputyListControllerProps> = ({
     FavouriteDeputiesVariables
   >(DEPUTY_FAVOURITES, {
     variables: {
-      limit: favorizedDeputies.length,
+      limit: Math.min(favorizedDeputies.length, 100),
       filterIds: favorizedDeputies,
       filterTerm: searchTerm ?? undefined,
     },

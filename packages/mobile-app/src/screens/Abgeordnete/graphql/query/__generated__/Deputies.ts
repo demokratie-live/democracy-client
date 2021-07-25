@@ -31,5 +31,6 @@ export interface DeputiesVariables {
   limit?: number | null;
   offset?: number | null;
   filterTerm?: string | null;
+  filterConstituency?: string | null;
   excludeIds?: string[] | null;
 }
