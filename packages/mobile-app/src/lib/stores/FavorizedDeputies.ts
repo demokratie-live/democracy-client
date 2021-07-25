@@ -38,17 +38,12 @@ const getInitialFavorizedDeputies = async () => {
       .query<Deputies, DeputiesVariables>({
         query: DEPUTY_SEARCH,
         variables: {
-          limit: 5,
+          limit: 100,
           offset: 0,
-          filterTerm: constituency,
+          filterConstituency: constituency,
         },
       })
       .then(({ data }) => {
-        console.log('fav', data, {
-          limit: 5,
-          offset: 0,
-          filterTerm: constituency,
-        });
         return data.deputies.data.length > 0
           ? data.deputies.data.map(deputy => deputy.webId)
           : [];
