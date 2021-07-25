@@ -14,6 +14,8 @@ import { VoteSelection } from '../../../../__generated__/globalTypes';
 import { MemberProfil } from '../../../screens/WahlOMeter/MemberProfil';
 import { theme } from '../../../styles';
 import { BurgerMenuButton } from '../../../components/MenuButton';
+import { DeputyProfil } from '../../../screens/DeputyProfile';
+import AbgeordneteRootNavigation from '../Abgeordnete';
 
 export type WahlOMeterStackParamList = {
   TabView: undefined;
@@ -24,11 +26,13 @@ export type WahlOMeterStackParamList = {
     procedureObjId: string;
   };
   MemberProfil: undefined;
+  DeputyProfile: { id: string };
+  EditDeputyList: { editMode: boolean };
 };
 
 const WahlOMeterStack = createStackNavigator<WahlOMeterStackParamList>();
 
-type WahlOMeterNavigationProps = CompositeNavigationProp<
+export type WahlOMeterNavigationProps = CompositeNavigationProp<
   DrawerNavigationProp<SidebarParamList, 'WahlOMeter'>,
   StackNavigationProp<RootStackParamList>
 >;
@@ -83,6 +87,24 @@ const WahlOMeterNavigation = () => {
         component={MemberProfil}
         options={{
           title: '',
+        }}
+      />
+      <WahlOMeterStack.Screen
+        name="DeputyProfile"
+        component={DeputyProfil}
+        options={{
+          title: '',
+        }}
+      />
+      <WahlOMeterStack.Screen
+        name="EditDeputyList"
+        component={AbgeordneteRootNavigation}
+        options={{
+          title: '',
+          headerShown: false,
+        }}
+        initialParams={{
+          editMode: true,
         }}
       />
     </WahlOMeterStack.Navigator>

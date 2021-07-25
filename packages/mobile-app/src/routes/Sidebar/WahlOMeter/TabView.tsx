@@ -5,12 +5,12 @@ import { WahlOMeterStackParamList } from '.';
 import { theme } from '../../../styles';
 import Bundestag from '../../../screens/WahlOMeter/Bundestag';
 import { WomParty } from '../../../screens/WahlOMeter/Fraktionen';
-import Wahlkreis from '../../../screens/WahlOMeter/Wahlkreis';
+import { Deputies } from '../../../screens/WahlOMeter/Deputies';
 
 export type TopTabParamList = {
   Bundestag: undefined;
   Fraktionen: undefined;
-  Wahlkreis: undefined;
+  Deputies: undefined;
 };
 
 const TabNavigation = createMaterialTopTabNavigator<TopTabParamList>();
@@ -43,7 +43,13 @@ const TabViewNavigation: React.FC<Props> = () => {
       initialRouteName={'Bundestag'}>
       <TabNavigation.Screen name="Bundestag" component={Bundestag} />
       <TabNavigation.Screen name="Fraktionen" component={WomParty} />
-      <TabNavigation.Screen name="Wahlkreis" component={Wahlkreis} />
+      <TabNavigation.Screen
+        name="Deputies"
+        options={{
+          title: 'Abgeordnete',
+        }}
+        component={Deputies}
+      />
     </TabNavigation.Navigator>
   );
 };
