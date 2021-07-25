@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-import { useNavigation } from '@react-navigation/core';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/core';
 import { styled } from '../../styles';
 import { SearchBar } from '@democracy-deutschland/ui';
 import { AbgeordneteListContext } from '../../lib/states/Abgeordnete/context';
@@ -23,6 +23,7 @@ const EditText = styled.Text`
 `;
 
 export const Abgeordnete: React.FC = () => {
+  const route = useRoute<RouteProp<any, ''>>();
   const { state, dispatch } = useContext(AbgeordneteListContext);
   const [searchTerm, setSearchTerm] = React.useState('');
   const navigation = useNavigation();
@@ -34,15 +35,21 @@ export const Abgeordnete: React.FC = () => {
       headerRight: () => (
         <Edit
           onPress={() =>
-            dispatch({
-              type: 'ToggleEditMode',
-            })
+            !route?.params?.editMode
+              ? dispatch({
+                  type: 'ToggleEditMode',
+                })
+              : navigation.goBack()
           }>
-          <EditText>{state.editMode ? 'Fertig' : 'Bearbeiten'}</EditText>
+          <EditText>
+            {route?.params?.editMode || state.editMode
+              ? 'Fertig'
+              : 'Bearbeiten'}
+          </EditText>
         </Edit>
       ),
     });
-  }, [dispatch, navigation, state.editMode]);
+  }, [dispatch, navigation, route, state.editMode]);
 
   return (
     <Wrapper>
@@ -53,7 +60,10 @@ export const Abgeordnete: React.FC = () => {
           onChangeText: setSearchTerm,
         }}
       />
-      <DeputyListController editMode={state.editMode} searchTerm={searchTerm} />
+      <DeputyListController
+        editMode={state.editMode || route?.params?.editMode}
+        searchTerm={searchTerm}
+      />
     </Wrapper>
   );
 };
