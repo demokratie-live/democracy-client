@@ -5,12 +5,14 @@ export const DEPUTY_SEARCH = gql`
     $limit: Int
     $offset: Int
     $filterTerm: String
+    $filterConstituency: String
     $excludeIds: [String!]
   ) {
     deputies(
       limit: $limit
       offset: $offset
       filterTerm: $filterTerm
+      filterConstituency: $filterConstituency
       excludeIds: $excludeIds
     ) {
       hasMore
