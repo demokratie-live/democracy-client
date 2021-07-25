@@ -18,6 +18,7 @@ import { theme, ThemeProvider } from './styles';
 import Navigation from './routes/index';
 import { VerificationProvider } from './context/Verification';
 import { NavigationProvider } from './context/Navigation';
+import { AbgeordneteListProvider } from './lib/states/Abgeordnete/context';
 // import { ErrorScreen } from './screens/modals/Error';
 
 export default () => (
@@ -30,11 +31,13 @@ export default () => (
             <NotificationsProvider>
               <PushNotificationProvider>
                 <VerificationProvider>
-                  <NavigationProvider>
-                    <ThemeProvider theme={theme}>
-                      <Navigation />
-                    </ThemeProvider>
-                  </NavigationProvider>
+                  <AbgeordneteListProvider>
+                    <NavigationProvider>
+                      <ThemeProvider theme={theme}>
+                        <Navigation />
+                      </ThemeProvider>
+                    </NavigationProvider>
+                  </AbgeordneteListProvider>
                 </VerificationProvider>
               </PushNotificationProvider>
             </NotificationsProvider>

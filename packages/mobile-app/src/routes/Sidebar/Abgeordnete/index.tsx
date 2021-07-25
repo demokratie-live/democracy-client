@@ -3,7 +3,12 @@ import {
   createStackNavigator,
   StackNavigationProp,
 } from '@react-navigation/stack';
-import { CompositeNavigationProp, useNavigation } from '@react-navigation/core';
+import {
+  CompositeNavigationProp,
+  RouteProp,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/core';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { SidebarParamList } from '..';
 import { RootStackParamList } from '../..';
@@ -11,11 +16,10 @@ import MenuIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Menu
 import { Abgeordnete } from '../../../screens/Abgeordnete';
 import { theme } from '../../../styles';
 import { BurgerMenuButton } from '../../../components/MenuButton';
-import { AbgeordneteListProvider } from '../../../lib/states/Abgeordnete/context';
 import { DeputyProfil } from '../../../screens/DeputyProfile';
 
 export type AbgeordneteRootStackParamList = {
-  Abgeordnete: undefined;
+  Abgeordnete: { editMode: boolean };
   DeputyProfile: { id: string };
 };
 
@@ -30,47 +34,51 @@ export type AbgeordneteNavigationProps = CompositeNavigationProp<
 
 const AbgeordneteRootNavigation = () => {
   const navigation = useNavigation<AbgeordneteNavigationProps>();
+  const route = useRoute<RouteProp<any, ''>>();
+
   return (
-    <AbgeordneteListProvider>
-      <AbgeordneteRootStack.Navigator
-        screenOptions={{
+    <AbgeordneteRootStack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: theme.oldColors.background.header,
+          elevation: 0,
+          shadowOpacity: 0,
+        },
+        headerBackTitleVisible: false,
+        headerTintColor: theme.oldColors.headerText,
+      }}>
+      <AbgeordneteRootStack.Screen
+        name="Abgeordnete"
+        component={Abgeordnete}
+        options={{
+          title: 'Abgeordnete',
+          headerTintColor: '#fff',
           headerStyle: {
-            backgroundColor: theme.oldColors.background.header,
+            backgroundColor: '#4494D3',
             elevation: 0,
             shadowOpacity: 0,
           },
-          headerBackTitleVisible: false,
-          headerTintColor: theme.oldColors.headerText,
-        }}>
-        <AbgeordneteRootStack.Screen
-          name="Abgeordnete"
-          component={Abgeordnete}
-          options={{
-            title: 'Abgeordnete',
-            headerTintColor: '#fff',
-            headerStyle: {
-              backgroundColor: '#4494D3',
-              elevation: 0,
-              shadowOpacity: 0,
-            },
-            headerLeft: () => (
+          headerLeft: () =>
+            !route?.params?.editMode ? (
               <BurgerMenuButton
                 onPress={navigation.toggleDrawer}
                 testID="BurgerMenuButton">
                 <MenuIcon width={18} height={18} color="#fff" />
               </BurgerMenuButton>
-            ),
-          }}
-        />
-        <AbgeordneteRootStack.Screen
-          name="DeputyProfile"
-          component={DeputyProfil}
-          options={{
-            title: '',
-          }}
-        />
-      </AbgeordneteRootStack.Navigator>
-    </AbgeordneteListProvider>
+            ) : null,
+        }}
+        initialParams={{
+          editMode: route?.params?.editMode,
+        }}
+      />
+      <AbgeordneteRootStack.Screen
+        name="DeputyProfile"
+        component={DeputyProfil}
+        options={{
+          title: '',
+        }}
+      />
+    </AbgeordneteRootStack.Navigator>
   );
 };
 
