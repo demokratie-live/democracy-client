@@ -1,16 +1,11 @@
+import { PlusIcon } from '@democracy-deutschland/ui';
 import { useIsFocused, useNavigation } from '@react-navigation/core';
 import React, { useEffect } from 'react';
 import { Text } from 'react-native';
-import { styled } from '../../../styles';
+import { styled, theme } from '../../../styles';
 
 const Edit = styled.TouchableOpacity`
-  margin-right: ${({ theme }) => theme.distances.secondary}px;
-`;
-
-const EditText = styled.Text`
-  color: #fff;
-  font-size: 16px;
-  font-weight: 500;
+  margin-right: ${theme.distances.secondary}px;
 `;
 
 export const Deputies: React.FC = () => {
@@ -22,7 +17,11 @@ export const Deputies: React.FC = () => {
       navigation.dangerouslyGetParent()?.setOptions({
         headerRight: () => (
           <Edit onPress={() => navigation.navigate('EditDeputyList')}>
-            <EditText>Bearbeiten</EditText>
+            <PlusIcon
+              width={20}
+              height={20}
+              fill={theme.colors.text.secondary}
+            />
           </Edit>
         ),
       });

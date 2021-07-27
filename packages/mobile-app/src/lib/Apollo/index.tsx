@@ -24,6 +24,8 @@ const cache = new InMemoryCache({
     switch (o.__typename) {
       case 'Procedure':
         return o.procedureId;
+      case 'Deputy':
+        return o.webId;
       default:
         return o._id;
     }

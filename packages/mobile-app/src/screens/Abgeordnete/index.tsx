@@ -1,19 +1,20 @@
 import React, { useContext } from 'react';
 
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/core';
-import { styled } from '../../styles';
-import { SearchBar } from '@democracy-deutschland/ui';
+import { styled, theme } from '../../styles';
+import { SearchBar, PlusIcon } from '@democracy-deutschland/ui';
 import { AbgeordneteListContext } from '../../lib/states/Abgeordnete/context';
 
 import { DeputyListController } from './DeputyListController';
+import { FavorizedDeputiesContext } from '../../lib/states/FavorizedDeputies';
 
 const Wrapper = styled.View`
-  background-color: ${({ theme }) => theme.oldColors.background.main};
+  background-color: ${theme.oldColors.background.main};
   flex-grow: 1;
 `;
 
 const Edit = styled.TouchableOpacity`
-  margin-right: ${({ theme }) => theme.distances.secondary}px;
+  margin-right: ${theme.distances.secondary}px;
 `;
 
 const EditText = styled.Text`
@@ -27,6 +28,7 @@ export const Abgeordnete: React.FC = () => {
   const { state, dispatch } = useContext(AbgeordneteListContext);
   const [searchTerm, setSearchTerm] = React.useState('');
   const navigation = useNavigation();
+  const { favorizedDeputies } = useContext(FavorizedDeputiesContext);
   // const { constituency } = useContext(ConstituencyContext);
   // const { isVerified } = useContext(InitialStateContext);
 
@@ -41,15 +43,23 @@ export const Abgeordnete: React.FC = () => {
                 })
               : navigation.goBack()
           }>
-          <EditText>
-            {route?.params?.editMode || state.editMode
-              ? 'Fertig'
-              : 'Bearbeiten'}
-          </EditText>
+          {route?.params?.editMode || state.editMode ? (
+            <EditText>Fertig</EditText>
+          ) : (
+            <PlusIcon
+              width={20}
+              height={20}
+              fill={theme.colors.text.secondary}
+            />
+          )}
         </Edit>
       ),
     });
   }, [dispatch, navigation, route, state.editMode]);
+
+  if (!favorizedDeputies) {
+    return null;
+  }
 
   return (
     <Wrapper>
@@ -63,6 +73,7 @@ export const Abgeordnete: React.FC = () => {
       <DeputyListController
         editMode={state.editMode || route?.params?.editMode}
         searchTerm={searchTerm}
+        favorizedDeputies={favorizedDeputies}
       />
     </Wrapper>
   );
