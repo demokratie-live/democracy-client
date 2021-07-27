@@ -7,10 +7,11 @@ import { CompositeNavigationProp, useNavigation } from '@react-navigation/core';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { StackNavigationProp } from '@react-navigation/stack';
 import unionBy from 'lodash.unionby';
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { ActivityIndicator } from 'react-native';
 import styled from 'styled-components/native';
-import { useFavorizedDeputies } from '../../lib/hooks/FavorizedDeputies';
+import { FavorizedDeputiesContext } from '../../lib/states/FavorizedDeputies';
+import { FavorizedDeputiesStore } from '../../lib/stores/FavorizedDeputies';
 import { SidebarParamList } from '../../routes/Sidebar';
 import { AbgeordneteRootStackParamList } from '../../routes/Sidebar/Abgeordnete';
 import { DEPUTY_FAVOURITES, DEPUTY_SEARCH } from './graphql/query/deputies';
@@ -28,6 +29,7 @@ const Spinner = styled(ActivityIndicator)``;
 interface DeputyListControllerProps {
   editMode: boolean;
   searchTerm?: string;
+  favorizedDeputies: FavorizedDeputiesStore;
 }
 
 export type DeputyListNavigationProps = CompositeNavigationProp<
@@ -38,14 +40,13 @@ export type DeputyListNavigationProps = CompositeNavigationProp<
 export const DeputyListController: React.FC<DeputyListControllerProps> = ({
   editMode,
   searchTerm,
+  favorizedDeputies,
   ...props
 }) => {
-  const navigation = useNavigation<DeputyListNavigationProps>();
-  const {
-    favorizedDeputies,
-    addFavorizedDeputy,
-    removeFavorizedDeputy,
-  } = useFavorizedDeputies();
+  const navigation = useNavigation();
+  const { addFavorizedDeputy, removeFavorizedDeputy } = useContext(
+    FavorizedDeputiesContext,
+  );
   const { data, fetchMore, loading, refetch } = useQuery<
     Deputies,
     DeputiesVariables
@@ -123,7 +124,7 @@ export const DeputyListController: React.FC<DeputyListControllerProps> = ({
   const handleOnEndReached = () => {
     if (!loading && data?.deputies.hasMore) {
       fetchMore({
-        variables: { offset: deputiesData.length },
+        variables: { offset: data.deputies.data.length },
       });
     }
   };

@@ -19,6 +19,7 @@ import Navigation from './routes/index';
 import { VerificationProvider } from './context/Verification';
 import { NavigationProvider } from './context/Navigation';
 import { AbgeordneteListProvider } from './lib/states/Abgeordnete/context';
+import { FavourizedDeputiesProvider } from './lib/states/FavorizedDeputies';
 // import { ErrorScreen } from './screens/modals/Error';
 
 export default () => (
@@ -32,11 +33,13 @@ export default () => (
               <PushNotificationProvider>
                 <VerificationProvider>
                   <AbgeordneteListProvider>
-                    <NavigationProvider>
-                      <ThemeProvider theme={theme}>
-                        <Navigation />
-                      </ThemeProvider>
-                    </NavigationProvider>
+                    <FavourizedDeputiesProvider>
+                      <NavigationProvider>
+                        <ThemeProvider theme={theme}>
+                          <Navigation />
+                        </ThemeProvider>
+                      </NavigationProvider>
+                    </FavourizedDeputiesProvider>
                   </AbgeordneteListProvider>
                 </VerificationProvider>
               </PushNotificationProvider>
