@@ -15,7 +15,12 @@ export const typePolicies: TypedTypePolicies = {
         },
       },
       deputies: {
-        keyArgs: ['filterTerm', 'excludeIds', 'filterIds'],
+        keyArgs: [
+          'filterTerm',
+          'excludeIds',
+          'filterIds',
+          'filterConstituency',
+        ],
         merge(existing = { data: [] }, incoming: Deputies_deputies) {
           return {
             ...incoming,
@@ -25,11 +30,6 @@ export const typePolicies: TypedTypePolicies = {
           };
         },
       },
-      // deputies: offsetLimitPagination([
-      //   'filterTerm',
-      //   'excludeIds',
-      //   'filterIds',
-      // ]),
     },
   },
   Procedure: {

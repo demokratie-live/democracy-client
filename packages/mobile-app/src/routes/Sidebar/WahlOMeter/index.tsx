@@ -15,7 +15,7 @@ import { MemberProfil } from '../../../screens/WahlOMeter/MemberProfil';
 import { theme } from '../../../styles';
 import { BurgerMenuButton } from '../../../components/MenuButton';
 import { DeputyProfil } from '../../../screens/DeputyProfile';
-import AbgeordneteRootNavigation from '../Abgeordnete';
+import { Abgeordnete } from '../../../screens/Abgeordnete';
 
 export type WahlOMeterStackParamList = {
   TabView: undefined;
@@ -98,10 +98,9 @@ const WahlOMeterNavigation = () => {
       />
       <WahlOMeterStack.Screen
         name="EditDeputyList"
-        component={AbgeordneteRootNavigation}
+        component={Abgeordnete}
         options={{
-          title: '',
-          headerShown: false,
+          title: 'Abgeordnete',
         }}
         initialParams={{
           editMode: true,
