@@ -1,8 +1,8 @@
 import { PlusIcon } from '@democracy-deutschland/ui';
 import { useIsFocused, useNavigation } from '@react-navigation/core';
 import React, { useEffect } from 'react';
-import { Text } from 'react-native';
 import { styled, theme } from '../../../styles';
+import { WomDeputyList } from './DeputyList';
 
 const Edit = styled.TouchableOpacity`
   margin-right: ${theme.distances.secondary}px;
@@ -32,5 +32,5 @@ export const Deputies: React.FC = () => {
     }
   }, [isFocused, navigation]);
 
-  return <Text>{isFocused ? 'focused' : 'unfocused'}</Text>;
+  return <WomDeputyList />;
 };
