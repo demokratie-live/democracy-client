@@ -11,8 +11,8 @@ import {
   WomDeputyListQueryVariables,
 } from './graphql/queries/__generated__/WomDeputyListQuery';
 import { useNavigation } from '@react-navigation/core';
-import { MatchesBar } from '../../DeputyProfile/components/MatchBar';
 import { LocalVotesContext } from '../../../context/LocalVotes';
+import { MatchesBar } from './MatchBar';
 
 export const WomDeputyList: React.FC = () => {
   const navigation = useNavigation();

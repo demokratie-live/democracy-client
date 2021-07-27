@@ -29,9 +29,9 @@ interface Props {
 
 class WomHeader extends PureComponent<Props> {
   render() {
-    const { totalProcedures, votedProceduresCount } = this.props;
+    const { totalProcedures, votedProceduresCount, ...props } = this.props;
     return (
-      <Wrapper>
+      <Wrapper {...props}>
         <TimeSelect />
         <ProcedureCount>
           <ProcedureCountText>
