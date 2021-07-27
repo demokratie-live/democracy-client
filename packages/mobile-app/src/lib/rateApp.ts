@@ -1,9 +1,10 @@
+import DeviceInfo from 'react-native-device-info';
 import Rate, { AndroidMarket } from 'react-native-rate';
 
 export const rateApp = () => {
   const options = {
     AppleAppID: '1341311162',
-    GooglePackageName: 'de.democracydeutschland.app',
+    GooglePackageName: DeviceInfo.getBundleId(),
     preferredAndroidMarket: AndroidMarket.Google,
     preferInApp: true,
   };
