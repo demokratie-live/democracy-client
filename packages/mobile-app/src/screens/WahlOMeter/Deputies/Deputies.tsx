@@ -4,6 +4,8 @@ import React, { useEffect } from 'react';
 import { styled, theme } from '../../../styles';
 import { WomDeputyList } from './DeputyList';
 
+const Wrapper = styled.View``;
+
 const Edit = styled.TouchableOpacity`
   margin-right: ${theme.distances.secondary}px;
 `;
@@ -32,5 +34,9 @@ export const Deputies: React.FC = () => {
     }
   }, [isFocused, navigation]);
 
-  return <WomDeputyList />;
+  return (
+    <Wrapper>
+      <WomDeputyList />
+    </Wrapper>
+  );
 };
