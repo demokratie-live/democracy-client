@@ -4,7 +4,9 @@ import React, { useEffect } from 'react';
 import { styled, theme } from '../../../styles';
 import { WomDeputyList } from './DeputyList';
 
-const Wrapper = styled.View``;
+const Wrapper = styled.View`
+  flex-grow: 1;
+`;
 
 const Edit = styled.TouchableOpacity`
   margin-right: ${theme.distances.secondary}px;
