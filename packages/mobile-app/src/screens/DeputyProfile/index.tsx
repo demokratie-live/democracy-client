@@ -22,6 +22,8 @@ import {
 } from '../../routes/Sidebar/Abgeordnete';
 import { LocalVotesContext } from '../../context/LocalVotes';
 import { MatchesBar } from './components/MatchBar';
+import WomHeader from '../WahlOMeter/Header';
+import { getMatchingProcedures } from './components/MatchBar/MatchesBar.utils';
 
 const Wrapper = styled.View`
   background-color: ${theme.oldColors.background.main};
@@ -193,10 +195,28 @@ export const DeputyProfil: React.FC<Props> = ({ route }) => {
   const votedProceduresCount =
     procedures.length - procedureCountByDecision.NOTVOTED;
 
+  const votedProcedures = data.deputy.matchesBar.map(
+    ({ procedure, decision }) => ({
+      procedureId: procedure.procedureId,
+      decision,
+    }),
+  );
+
+  const chartData = {
+    localVotes,
+    votedProcedures,
+  };
+
+  const matchingProcedures = getMatchingProcedures(chartData);
+
   return (
     <Wrapper>
       <ScrollWrapper>
         <>
+          <WomHeader
+            totalProcedures={totalProcedures ?? 0}
+            votedProceduresCount={matchingProcedures.length}
+          />
           <MemberImageWrapper>
             <Avatar
               partyLogo={{
