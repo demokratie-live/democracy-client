@@ -16,6 +16,7 @@ import { ScreenNavigationProp } from '../../../routes/Sidebar/WahlOMeter/TabView
 
 const Wrapper = styled.View`
   padding-top: 18px;
+  flex-grow: 1;
 `;
 
 const ChartWrapper = styled.View`

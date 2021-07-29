@@ -7,6 +7,7 @@ import { VotedPartyProcedures_procedurecForWomPartyList_procedures } from './gra
 
 const Container = styled.View`
   background-color: #fff;
+  flex-grow: 1;
 `;
 
 interface Props {
@@ -24,10 +25,10 @@ export const WomParty: React.FC<Props> = ({ navigation }) => {
       title: item.type || item.procedureId,
     });
   return (
-    <WomPartyProvider>
-      <Container>
+    <Container>
+      <WomPartyProvider>
         <WomPartyList onProcedureListItemClick={onProcedureListItemClick} />
-      </Container>
-    </WomPartyProvider>
+      </WomPartyProvider>
+    </Container>
   );
 };
