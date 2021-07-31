@@ -13,14 +13,14 @@ import { theme } from '../../../styles';
 import { MenuButton } from '../../../components/MenuButton';
 import Svg, { Circle } from 'react-native-svg';
 
-export type TopTabParamList = {
+export type BundestagTopTabParamList = {
   Sitzungswoche: { list: ListType };
   Vergangen: { list: ListType };
   'Top 100': { list: ListType };
   DEV: { list: ListType };
 };
 
-const TabNavigation = createMaterialTopTabNavigator<TopTabParamList>();
+const TabNavigation = createMaterialTopTabNavigator<BundestagTopTabParamList>();
 
 const HaderRightWrapper = styled.View`
   flex-direction: row;
