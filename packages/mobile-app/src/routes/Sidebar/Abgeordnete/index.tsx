@@ -17,10 +17,12 @@ import { Abgeordnete } from '../../../screens/Abgeordnete';
 import { theme } from '../../../styles';
 import { BurgerMenuButton } from '../../../components/MenuButton';
 import { DeputyProfil } from '../../../screens/DeputyProfile';
+import { Procedure } from '../../../screens/Bundestag';
 
 export type AbgeordneteRootStackParamList = {
   Abgeordnete: { editMode: boolean };
   DeputyProfile: { id: string };
+  Procedure: { procedureId: string; title: string };
 };
 
 const AbgeordneteRootStack = createStackNavigator<
@@ -77,6 +79,11 @@ const AbgeordneteRootNavigation = () => {
         options={{
           title: '',
         }}
+      />
+      <AbgeordneteRootStack.Screen
+        name="Procedure"
+        component={Procedure}
+        options={({ route }) => ({ title: route.params.title })}
       />
     </AbgeordneteRootStack.Navigator>
   );
