@@ -21,7 +21,6 @@ import {
 import { RouteProp, useNavigation } from '@react-navigation/core';
 import { styled, theme } from '../../styles';
 import { Avatar, ProcedureListItem } from '@democracy-deutschland/ui';
-import { AbgeordneteRootStackParamList } from '../../routes/Sidebar/Abgeordnete';
 import { LocalVotesContext } from '../../context/LocalVotes';
 import { MatchesBar } from './components/MatchBar';
 import WomHeader from '../WahlOMeter/Header';
@@ -33,11 +32,7 @@ import {
   GetDeputyProcedures_deputy_procedures,
 } from './graphql/query/__generated__/GetDeputyProcedures';
 import * as S from './Foldable.styled';
-
-const Wrapper = styled.View`
-  background-color: ${theme.oldColors.background.main};
-  flex-grow: 1;
-`;
+import { AbgeordneteRootStackParamList } from '../../routes/Sidebar/Abgeordnete';
 
 const MemberImageWrapper = styled.View`
   width: 100%;
@@ -222,145 +217,141 @@ export const DeputyProfil: React.FC<Props> = ({ route }) => {
   const matchingProcedures = getMatchingProcedures(chartData);
 
   return (
-    <Wrapper>
-      <FlatList<GetDeputyProcedures_deputy_procedures>
-        onEndReached={() =>
-          !proceduresLoading &&
-          showProcedures &&
-          fetchMore({
-            variables: { offset: proceduresData?.deputy?.procedures.length },
-          })
+    <FlatList<GetDeputyProcedures_deputy_procedures>
+      onEndReached={() =>
+        !proceduresLoading &&
+        showProcedures &&
+        fetchMore({
+          variables: { offset: proceduresData?.deputy?.procedures.length },
+        })
+      }
+      ListHeaderComponent={() => (
+        <View style={{ alignItems: 'center', paddingVertical: 11 }}>
+          <WomHeader
+            totalProcedures={totalProcedures ?? 0}
+            votedProceduresCount={matchingProcedures.length}
+          />
+          <MemberImageWrapper>
+            <Avatar
+              partyLogo={{
+                party: party as any,
+                width: 200,
+              }}
+              profileImage={{
+                height: 280,
+                variant: 'oval',
+                source: { uri: imgURL },
+              }}
+            />
+          </MemberImageWrapper>
+          <Text>{name}</Text>
+          {constituency ? (
+            <TextLighGrey>Direktkadidat WK {constituency}</TextLighGrey>
+          ) : null}
+          <TextGrey>{job}</TextGrey>
+          <Chart
+            totalProcedures={totalProcedures || 0}
+            votedProceduresCount={votedProceduresCount}
+          />
+          <ChartLegend data={getVotingData(procedureCountByDecision)} />
+          {data.deputy ? (
+            <MatchesBar decisions={data.deputy.matchesBar} />
+          ) : null}
+          <S.Wrapper>
+            <S.Header onPress={() => setShowProcedures(!showProcedures)}>
+              <S.Headline>Abstimmungen</S.Headline>
+              <S.CollapseIcon open={showProcedures} />
+            </S.Header>
+            <S.Divider />
+          </S.Wrapper>
+        </View>
+      )}
+      ListFooterComponent={() => (
+        <>
+          {biography || contact ? (
+            <SegmentWrapper>
+              {biography ? (
+                <Folding title="Biographie">
+                  <TextGrey>{biography}</TextGrey>
+                </Folding>
+              ) : null}
+              {contact || contacts.length !== 0 ? (
+                <Folding title="Kontakt" opened>
+                  {contact ? <TextGrey>{contact.address}</TextGrey> : null}
+                  {contacts.length !== 0 && <ContactBox contacts={contacts} />}
+                </Folding>
+              ) : null}
+            </SegmentWrapper>
+          ) : null}
+        </>
+      )}
+      data={proceduresData?.deputy?.procedures ?? []}
+      keyExtractor={item => item.procedure.procedureId}
+      renderItem={({ item }) => {
+        if (!showProcedures) {
+          return null;
         }
-        ListHeaderComponent={() => (
-          <View style={{ alignItems: 'center', paddingVertical: 11 }}>
-            <WomHeader
-              totalProcedures={totalProcedures ?? 0}
-              votedProceduresCount={matchingProcedures.length}
+        const localProcedure = localVotes.find(
+          ({ procedureId }) => item.procedure.procedureId === procedureId,
+        );
+        const decision = localProcedure?.selection;
+        return (
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('Procedure', {
+                procedureId: item.procedure.procedureId,
+                title: item.procedure.type,
+              })
+            }>
+            <ProcedureListItem
+              date={new Date()}
+              title={item.procedure.title}
+              subtitle={item.procedure.subjectGroups.join(', ')}
+              voted={item.procedure.voted}
+              votes={item.procedure.activityIndex.activityIndex}
+              governmentChart={{
+                data: [
+                  {
+                    color:
+                      item.decision === 'YES'
+                        ? theme.colors.vote.government.yes
+                        : item.decision === 'ABSTINATION'
+                        ? theme.colors.vote.government.abstination
+                        : item.decision === 'NO'
+                        ? theme.colors.vote.government.no
+                        : theme.colors.vote.government.notVoted,
+                    highlight: true,
+                    name: item.decision,
+                    value: 1,
+                  },
+                ],
+                size: 20,
+              }}
+              communityChart={
+                decision
+                  ? {
+                      data: [
+                        {
+                          color:
+                            decision === 'YES'
+                              ? theme.colors.vote.community.yes
+                              : decision === 'ABSTINATION'
+                              ? theme.colors.vote.community.abstination
+                              : theme.colors.vote.community.no,
+                          highlight: true,
+                          name: 'yes',
+                          value: 1,
+                        },
+                      ],
+                      size: 20,
+                    }
+                  : undefined
+              }
             />
-            <MemberImageWrapper>
-              <Avatar
-                partyLogo={{
-                  party: party as any,
-                  width: 200,
-                }}
-                profileImage={{
-                  height: 280,
-                  variant: 'oval',
-                  source: { uri: imgURL },
-                }}
-              />
-            </MemberImageWrapper>
-            <Text>{name}</Text>
-            {constituency ? (
-              <TextLighGrey>Direktkadidat WK {constituency}</TextLighGrey>
-            ) : null}
-            <TextGrey>{job}</TextGrey>
-            <Chart
-              totalProcedures={totalProcedures || 0}
-              votedProceduresCount={votedProceduresCount}
-            />
-            <ChartLegend data={getVotingData(procedureCountByDecision)} />
-            {data.deputy ? (
-              <MatchesBar decisions={data.deputy.matchesBar} />
-            ) : null}
-            <S.Wrapper>
-              <S.Header onPress={() => setShowProcedures(!showProcedures)}>
-                <S.Headline>Abstimmungen</S.Headline>
-                <S.CollapseIcon open={showProcedures} />
-              </S.Header>
-              <S.Divider />
-            </S.Wrapper>
-          </View>
-        )}
-        ListFooterComponent={() => (
-          <>
-            {biography || contact ? (
-              <SegmentWrapper>
-                {biography ? (
-                  <Folding title="Biographie">
-                    <TextGrey>{biography}</TextGrey>
-                  </Folding>
-                ) : null}
-                {contact || contacts.length !== 0 ? (
-                  <Folding title="Kontakt" opened>
-                    {contact ? <TextGrey>{contact.address}</TextGrey> : null}
-                    {contacts.length !== 0 && (
-                      <ContactBox contacts={contacts} />
-                    )}
-                  </Folding>
-                ) : null}
-              </SegmentWrapper>
-            ) : null}
-          </>
-        )}
-        data={proceduresData?.deputy?.procedures ?? []}
-        keyExtractor={item => item.procedure.procedureId}
-        renderItem={({ item }) => {
-          if (!showProcedures) {
-            return null;
-          }
-          const localProcedure = localVotes.find(
-            ({ procedureId }) => item.procedure.procedureId === procedureId,
-          );
-          const decision = localProcedure?.selection;
-          return (
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate('Procedure', {
-                  procedureId: item.procedure.procedureId,
-                  title: item.procedure.type,
-                })
-              }>
-              <ProcedureListItem
-                date={new Date()}
-                title={item.procedure.title}
-                subtitle={item.procedure.subjectGroups.join(', ')}
-                voted={item.procedure.voted}
-                votes={item.procedure.activityIndex.activityIndex}
-                governmentChart={{
-                  data: [
-                    {
-                      color:
-                        item.decision === 'YES'
-                          ? theme.colors.vote.government.yes
-                          : item.decision === 'ABSTINATION'
-                          ? theme.colors.vote.government.abstination
-                          : item.decision === 'NO'
-                          ? theme.colors.vote.government.no
-                          : theme.colors.vote.government.notVoted,
-                      highlight: true,
-                      name: item.decision,
-                      value: 1,
-                    },
-                  ],
-                  size: 20,
-                }}
-                communityChart={
-                  decision
-                    ? {
-                        data: [
-                          {
-                            color:
-                              decision === 'YES'
-                                ? theme.colors.vote.community.yes
-                                : decision === 'ABSTINATION'
-                                ? theme.colors.vote.community.abstination
-                                : theme.colors.vote.community.no,
-                            highlight: true,
-                            name: 'yes',
-                            value: 1,
-                          },
-                        ],
-                        size: 20,
-                      }
-                    : undefined
-                }
-              />
-              <S.Divider />
-            </TouchableOpacity>
-          );
-        }}
-      />
-    </Wrapper>
+            <S.Divider />
+          </TouchableOpacity>
+        );
+      }}
+    />
   );
 };

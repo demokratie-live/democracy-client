@@ -4,7 +4,7 @@ import DocumentIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/
 import { useNavigation, CompositeNavigationProp } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { MaterialTopTabNavigationProp } from '@react-navigation/material-top-tabs';
-import { TopTabParamList } from '../../../../routes/Sidebar/Bundestag/TabView';
+import { BundestagTopTabParamList } from '../../../../routes/Sidebar/Bundestag/TabView';
 import { BundestagRootStackParamList } from '../../../../routes/Sidebar/Bundestag';
 import { SidebarParamList } from '../../../../routes/Sidebar';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
@@ -35,7 +35,7 @@ const DownloadButton = styled.TouchableOpacity`
 
 type DevPlaceholderNavigationProps = CompositeNavigationProp<
   MaterialTopTabNavigationProp<
-    TopTabParamList,
+    BundestagTopTabParamList,
     'DEV' | 'Sitzungswoche' | 'Top 100' | 'Vergangen'
   >,
   CompositeNavigationProp<
