@@ -1,7 +1,6 @@
 import React, { useContext, FC, useEffect, useCallback } from 'react';
 import { Text, Platform, Share } from 'react-native';
-import { RouteProp, CompositeNavigationProp } from '@react-navigation/core';
-import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
+import { RouteProp } from '@react-navigation/core';
 
 import ShareIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Share';
 import ShareIconIosHeader from '@democracy-deutschland/mobile-ui/src/components/Icons/ShareIosHeader';
@@ -61,15 +60,9 @@ const DetailsContainer = styled.View`
   border-color: rgba(68, 148, 211, 0.1);
 `;
 
-type ProcedureScreenRouteProp = RouteProp<
-  BundestagRootStackParamList,
-  'Procedure'
->;
+type ProcedureScreenRouteProp = RouteProp<RootStackParamList, 'Procedure'>;
 
-type ScreenNavigationProp = CompositeNavigationProp<
-  StackNavigationProp<BundestagRootStackParamList, 'Procedure'>,
-  StackNavigationProp<RootStackParamList>
->;
+type ScreenNavigationProp = StackNavigationProp<RootStackParamList>;
 
 type Props = {
   route: ProcedureScreenRouteProp;

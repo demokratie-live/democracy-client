@@ -6,7 +6,6 @@ import {
 import {
   Filter,
   Search,
-  Procedure,
   VoteVerification,
   OutcomePushs,
 } from '../../../screens/Bundestag';
@@ -24,7 +23,6 @@ import { MemberProfil } from '../../../screens/WahlOMeter/MemberProfil';
 
 export type BundestagRootStackParamList = {
   TabView: undefined;
-  Procedure: { procedureId: string; title: string };
   Voting: {
     selection: VoteSelection.YES | VoteSelection.ABSTINATION | VoteSelection.NO;
     procedureId: string;
@@ -39,7 +37,7 @@ export type BundestagRootStackParamList = {
 
 const BundestagRootStack = createStackNavigator<BundestagRootStackParamList>();
 
-type BundestagNavigationProps = CompositeNavigationProp<
+export type BundestagNavigationProps = CompositeNavigationProp<
   DrawerNavigationProp<SidebarParamList, 'Bundestag'>,
   StackNavigationProp<RootStackParamList>
 >;
@@ -71,11 +69,6 @@ const BundestagRootNavigation = () => {
               </BurgerMenuButton>
             ),
           }}
-        />
-        <BundestagRootStack.Screen
-          name="Procedure"
-          component={Procedure}
-          options={({ route }) => ({ title: route.params.title || '' })}
         />
         <BundestagRootStack.Screen
           name="Voting"

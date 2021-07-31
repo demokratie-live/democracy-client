@@ -21,7 +21,7 @@ import VotesLocal from '../../lib/VotesLocal';
 import { RootStackParamList } from '../../routes';
 import { SidebarParamList } from '../../routes/Sidebar';
 import { BundestagRootStackParamList } from '../../routes/Sidebar/Bundestag';
-import { TopTabParamList } from '../../routes/Sidebar/Bundestag/TabView';
+import { BundestagTopTabParamList } from '../../routes/Sidebar/Bundestag/TabView';
 import { Notifications } from 'react-native-notifications';
 
 const Container = styled.ScrollView.attrs({})`
@@ -31,7 +31,7 @@ const Container = styled.ScrollView.attrs({})`
 `;
 
 type DevPlaceholderNavigationProps = CompositeNavigationProp<
-  MaterialTopTabNavigationProp<TopTabParamList, 'DEV'>,
+  MaterialTopTabNavigationProp<BundestagTopTabParamList, 'DEV'>,
   CompositeNavigationProp<
     StackNavigationProp<BundestagRootStackParamList, 'TabView'>,
     CompositeNavigationProp<

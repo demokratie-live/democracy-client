@@ -23,7 +23,7 @@ import { Code } from '../screens/modals/Verification/Code';
 import { SmsDonate } from '../screens/modals/Verification/Donate';
 import SyncVotes from '../screens/Settings/SyncVotes';
 import CaptureSyncVotes from '../screens/Settings/SyncVotes/Capture';
-import { VoteVerification } from '../screens/Bundestag';
+import { Procedure, VoteVerification } from '../screens/Bundestag';
 import { VoteSelection } from '../../__generated__/globalTypes';
 import { MemberProfil } from '../screens/WahlOMeter/MemberProfil';
 
@@ -49,6 +49,7 @@ export type RootStackParamList = {
     procedureObjId: string;
   };
   MemberProfil: undefined;
+  Procedure: { procedureId: string; title: string };
 };
 
 const RootStack = createStackNavigator<RootStackParamList>();
@@ -264,6 +265,11 @@ const Navigation = () => {
             options={{
               title: '',
             }}
+          />
+          <RootStack.Screen
+            name="Procedure"
+            component={Procedure}
+            options={({ route }) => ({ title: route.params.title || '' })}
           />
         </RootStack.Navigator>
       </NavigationContainer>

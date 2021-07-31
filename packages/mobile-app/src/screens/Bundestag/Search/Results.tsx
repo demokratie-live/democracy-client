@@ -21,12 +21,12 @@ import { communityVoteData } from '../../../lib/helper/PieChartCommunityData';
 import { pieChartGovernmentData } from '../../../lib/helper/PieChartGovernmentData';
 import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
 import {
   FinishSearch,
   FinishSearchVariables,
 } from './graphql/mutation/__generated__/FinishSearch';
 import { FINISH_SEARCH } from './graphql/mutation/finishSearch';
+import { RootStackParamList } from '../../../routes';
 
 // import searchProcedures from '../../graphql/queries/searchProcedures';
 // import mostSearched from '../../graphql/queries/mostSearched';
@@ -86,9 +86,7 @@ const NoResultsImage = styled.Image.attrs(() => ({
 `;
 
 export const Results: React.FC = () => {
-  const navigation = useNavigation<
-    StackNavigationProp<BundestagRootStackParamList>
-  >();
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const [executeFinishSearch] = useMutation<
     FinishSearch,
     FinishSearchVariables

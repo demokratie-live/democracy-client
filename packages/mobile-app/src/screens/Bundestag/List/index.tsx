@@ -11,9 +11,8 @@ import { ListItem } from '@democracy-deutschland/mobile-ui/src/components/Lists/
 import { Row } from '@democracy-deutschland/mobile-ui/src/components/Lists/Row';
 import { ListLoading } from '@democracy-deutschland/mobile-ui/src/components/shared/ListLoading';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/core';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { BundestagRootStackParamList } from '../../../routes/Sidebar/Bundestag';
-import { TopTabParamList } from '../../../routes/Sidebar/Bundestag/TabView';
+import { BundestagNavigationProps } from '../../../routes/Sidebar/Bundestag';
+import { BundestagTopTabParamList } from '../../../routes/Sidebar/Bundestag/TabView';
 import { Segment } from './Components/Segment';
 import { ListType } from '../../../../__generated__/globalTypes';
 import { LocalVotesContext } from '../../../context/LocalVotes';
@@ -27,7 +26,7 @@ import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
 import { styled } from '../../../styles';
 
 type ListScreenRouteProp = RouteProp<
-  TopTabParamList,
+  BundestagTopTabParamList,
   'DEV' | 'Sitzungswoche' | 'Top 100' | 'Vergangen'
 >;
 
@@ -47,9 +46,7 @@ export const List = () => {
   const { constituency } = useContext(ConstituencyContext);
   const constituencies = constituency ? [constituency] : [];
   const route = useRoute<ListScreenRouteProp>();
-  const navigation = useNavigation<
-    StackNavigationProp<BundestagRootStackParamList>
-  >();
+  const navigation = useNavigation<BundestagNavigationProps>();
   const [hasMore, setHasMore] = useState(true);
   const { loading, data, error, fetchMore, networkStatus, refetch } = useQuery<
     ProceduresList,
