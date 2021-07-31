@@ -11,7 +11,6 @@ import MenuIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Menu
 import TabView from './TabView';
 import { Procedure, VoteVerification } from '../../../screens/Bundestag';
 import { VoteSelection } from '../../../../__generated__/globalTypes';
-import { MemberProfil } from '../../../screens/WahlOMeter/MemberProfil';
 import { theme } from '../../../styles';
 import { BurgerMenuButton } from '../../../components/MenuButton';
 import { DeputyProfil } from '../../../screens/DeputyProfile';
@@ -25,7 +24,6 @@ export type WahlOMeterStackParamList = {
     procedureId: string;
     procedureObjId: string;
   };
-  MemberProfil: undefined;
   DeputyProfile: { id: string };
   EditDeputyList: { editMode: boolean };
 };
@@ -80,13 +78,6 @@ const WahlOMeterNavigation = () => {
         component={VoteVerification}
         options={{
           title: 'Wahlurne',
-        }}
-      />
-      <WahlOMeterStack.Screen
-        name="MemberProfil"
-        component={MemberProfil}
-        options={{
-          title: '',
         }}
       />
       <WahlOMeterStack.Screen
