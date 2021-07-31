@@ -30,6 +30,9 @@ export const typePolicies: TypedTypePolicies = {
           };
         },
       },
+      deputy: {
+        keyArgs: ['id', 'votedProcedureIds'],
+      },
     },
   },
   Procedure: {

@@ -5,6 +5,7 @@ export const GET_DEPUTY = gql`
   query GetDeputy($id: String!, $votedProcedureIds: [String!]!) {
     deputy(id: $id) {
       _id
+      webId
       name
       imgURL
       party

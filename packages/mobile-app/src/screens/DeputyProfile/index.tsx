@@ -1,5 +1,10 @@
-import React, { useContext, useEffect } from 'react';
-import { ActivityIndicator } from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
+import {
+  ActivityIndicator,
+  FlatList,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import ContactBox from './components/ContactBox';
 // Components
 import Chart from './Chart';
@@ -15,30 +20,23 @@ import {
 } from './graphql/query/__generated__/GetDeputy';
 import { RouteProp, useNavigation } from '@react-navigation/core';
 import { styled, theme } from '../../styles';
-import { Avatar } from '@democracy-deutschland/ui';
-import {
-  AbgeordneteNavigationProps,
-  AbgeordneteRootStackParamList,
-} from '../../routes/Sidebar/Abgeordnete';
+import { Avatar, ProcedureListItem } from '@democracy-deutschland/ui';
+import { AbgeordneteRootStackParamList } from '../../routes/Sidebar/Abgeordnete';
 import { LocalVotesContext } from '../../context/LocalVotes';
 import { MatchesBar } from './components/MatchBar';
 import WomHeader from '../WahlOMeter/Header';
 import { getMatchingProcedures } from './components/MatchBar/MatchesBar.utils';
+import { GET_DEPUTY_PROCEDURES } from './graphql/query/getProcedures';
+import {
+  GetDeputyProcedures,
+  GetDeputyProceduresVariables,
+  GetDeputyProcedures_deputy_procedures,
+} from './graphql/query/__generated__/GetDeputyProcedures';
+import * as S from './Foldable.styled';
 
 const Wrapper = styled.View`
   background-color: ${theme.oldColors.background.main};
   flex-grow: 1;
-`;
-
-const ScrollWrapper = styled.ScrollView.attrs({
-  contentContainerStyle: {
-    flexGrow: 1,
-    alignItems: 'center',
-    paddingVertical: 18,
-  },
-})`
-  flex-grow: 1;
-  background-color: #fff;
 `;
 
 const MemberImageWrapper = styled.View`
@@ -58,12 +56,11 @@ const TextGrey = styled(Text)`
 `;
 
 const TextLighGrey = styled(Text)`
-  color: ${({ theme }) => theme.textColors.secondary};
+  color: ${theme.textColors.secondary};
 `;
 
 const SegmentWrapper = styled.View`
   width: 100%;
-  padding-top: 18px;
 `;
 
 export interface Contacts {
@@ -82,14 +79,29 @@ type Props = {
 };
 
 export const DeputyProfil: React.FC<Props> = ({ route }) => {
+  const [showProcedures, setShowProcedures] = useState(true);
   const { localVotes } = useContext(LocalVotesContext);
-  const navigation = useNavigation<AbgeordneteNavigationProps>();
+  const navigation = useNavigation();
   const { data, loading } = useQuery<GetDeputy, GetDeputyVariables>(
     GET_DEPUTY,
     {
       variables: {
         id: route.params.id,
         votedProcedureIds: localVotes.map(({ procedureId }) => procedureId),
+      },
+    },
+  );
+  const {
+    data: proceduresData,
+    loading: proceduresLoading,
+    fetchMore,
+  } = useQuery<GetDeputyProcedures, GetDeputyProceduresVariables>(
+    GET_DEPUTY_PROCEDURES,
+    {
+      variables: {
+        id: route.params.id,
+        limit: 10,
+        offset: 0,
       },
     },
   );
@@ -211,53 +223,144 @@ export const DeputyProfil: React.FC<Props> = ({ route }) => {
 
   return (
     <Wrapper>
-      <ScrollWrapper>
-        <>
-          <WomHeader
-            totalProcedures={totalProcedures ?? 0}
-            votedProceduresCount={matchingProcedures.length}
-          />
-          <MemberImageWrapper>
-            <Avatar
-              partyLogo={{
-                party: party as any,
-                width: 200,
-              }}
-              profileImage={{
-                height: 280,
-                variant: 'oval',
-                source: { uri: imgURL },
-              }}
+      <FlatList<GetDeputyProcedures_deputy_procedures>
+        onEndReached={() =>
+          !proceduresLoading &&
+          showProcedures &&
+          fetchMore({
+            variables: { offset: proceduresData?.deputy?.procedures.length },
+          })
+        }
+        ListHeaderComponent={() => (
+          <View style={{ alignItems: 'center', paddingVertical: 11 }}>
+            <WomHeader
+              totalProcedures={totalProcedures ?? 0}
+              votedProceduresCount={matchingProcedures.length}
             />
-          </MemberImageWrapper>
-          <Text>{name}</Text>
-          {constituency ? (
-            <TextLighGrey>Direktkadidat WK {constituency}</TextLighGrey>
-          ) : null}
-          <TextGrey>{job}</TextGrey>
-          <Chart
-            totalProcedures={totalProcedures || 0}
-            votedProceduresCount={votedProceduresCount}
-          />
-          <ChartLegend data={getVotingData(procedureCountByDecision)} />
-          <MatchesBar decisions={data.deputy.matchesBar} />
-          {biography || contact ? (
-            <SegmentWrapper>
-              {biography ? (
-                <Folding title="Biographie">
-                  <TextGrey>{biography}</TextGrey>
-                </Folding>
-              ) : null}
-              {contact || contacts.length !== 0 ? (
-                <Folding title="Kontakt" opened>
-                  {contact ? <TextGrey>{contact.address}</TextGrey> : null}
-                  {contacts.length !== 0 && <ContactBox contacts={contacts} />}
-                </Folding>
-              ) : null}
-            </SegmentWrapper>
-          ) : null}
-        </>
-      </ScrollWrapper>
+            <MemberImageWrapper>
+              <Avatar
+                partyLogo={{
+                  party: party as any,
+                  width: 200,
+                }}
+                profileImage={{
+                  height: 280,
+                  variant: 'oval',
+                  source: { uri: imgURL },
+                }}
+              />
+            </MemberImageWrapper>
+            <Text>{name}</Text>
+            {constituency ? (
+              <TextLighGrey>Direktkadidat WK {constituency}</TextLighGrey>
+            ) : null}
+            <TextGrey>{job}</TextGrey>
+            <Chart
+              totalProcedures={totalProcedures || 0}
+              votedProceduresCount={votedProceduresCount}
+            />
+            <ChartLegend data={getVotingData(procedureCountByDecision)} />
+            {data.deputy ? (
+              <MatchesBar decisions={data.deputy.matchesBar} />
+            ) : null}
+            <S.Wrapper>
+              <S.Header onPress={() => setShowProcedures(!showProcedures)}>
+                <S.Headline>Abstimmungen</S.Headline>
+                <S.CollapseIcon open={showProcedures} />
+              </S.Header>
+              <S.Divider />
+            </S.Wrapper>
+          </View>
+        )}
+        ListFooterComponent={() => (
+          <>
+            {biography || contact ? (
+              <SegmentWrapper>
+                {biography ? (
+                  <Folding title="Biographie">
+                    <TextGrey>{biography}</TextGrey>
+                  </Folding>
+                ) : null}
+                {contact || contacts.length !== 0 ? (
+                  <Folding title="Kontakt" opened>
+                    {contact ? <TextGrey>{contact.address}</TextGrey> : null}
+                    {contacts.length !== 0 && (
+                      <ContactBox contacts={contacts} />
+                    )}
+                  </Folding>
+                ) : null}
+              </SegmentWrapper>
+            ) : null}
+          </>
+        )}
+        data={proceduresData?.deputy?.procedures ?? []}
+        keyExtractor={item => item.procedure.procedureId}
+        renderItem={({ item }) => {
+          if (!showProcedures) {
+            return null;
+          }
+          const localProcedure = localVotes.find(
+            ({ procedureId }) => item.procedure.procedureId === procedureId,
+          );
+          const decision = localProcedure?.selection;
+          return (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('Procedure', {
+                  procedureId: item.procedure.procedureId,
+                  title: item.procedure.type,
+                })
+              }>
+              <ProcedureListItem
+                date={new Date()}
+                title={item.procedure.title}
+                subtitle={item.procedure.subjectGroups.join(', ')}
+                voted={item.procedure.voted}
+                votes={item.procedure.activityIndex.activityIndex}
+                governmentChart={{
+                  data: [
+                    {
+                      color:
+                        item.decision === 'YES'
+                          ? theme.colors.vote.government.yes
+                          : item.decision === 'ABSTINATION'
+                          ? theme.colors.vote.government.abstination
+                          : item.decision === 'NO'
+                          ? theme.colors.vote.government.no
+                          : theme.colors.vote.government.notVoted,
+                      highlight: true,
+                      name: item.decision,
+                      value: 1,
+                    },
+                  ],
+                  size: 20,
+                }}
+                communityChart={
+                  decision
+                    ? {
+                        data: [
+                          {
+                            color:
+                              decision === 'YES'
+                                ? theme.colors.vote.community.yes
+                                : decision === 'ABSTINATION'
+                                ? theme.colors.vote.community.abstination
+                                : theme.colors.vote.community.no,
+                            highlight: true,
+                            name: 'yes',
+                            value: 1,
+                          },
+                        ],
+                        size: 20,
+                      }
+                    : undefined
+                }
+              />
+              <S.Divider />
+            </TouchableOpacity>
+          );
+        }}
+      />
     </Wrapper>
   );
 };

@@ -48,6 +48,7 @@ export interface GetDeputy_deputy_matchesBar {
 export interface GetDeputy_deputy {
   __typename: "Deputy";
   _id: string;
+  webId: string;
   name: string;
   imgURL: string;
   party: string | null;
