@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { DevPlaceholder, List } from '../../../screens/Bundestag';
+import { List } from '../../../screens/Bundestag';
 import { ListType } from '../../../../__generated__/globalTypes';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { BundestagRootStackParamList } from '.';
@@ -12,8 +12,13 @@ import { ListFilterContext } from '../../../context/ListFilter';
 import { theme } from '../../../styles';
 import { MenuButton } from '../../../components/MenuButton';
 import Svg, { Circle } from 'react-native-svg';
+import { Recommended } from '../../../screens/Bundestag/Recomended';
+import { useQuery } from '@apollo/client';
+import { ShowRecommendations } from './graphql/__generated__/ShowRecommendations';
+import { SHOW_RECOMMENDED } from './graphql/showRecommendations';
 
 export type BundestagTopTabParamList = {
+  Empfohlen: undefined;
   Sitzungswoche: { list: ListType };
   Vergangen: { list: ListType };
   'Top 100': { list: ListType };
@@ -39,6 +44,9 @@ interface Props {
 
 const TabViewNavigation: React.FC<Props> = ({ navigation }) => {
   const { active: hasFilters } = useContext(ListFilterContext);
+  const { data: showRecommendations } = useQuery<ShowRecommendations>(
+    SHOW_RECOMMENDED,
+  );
   navigation.setOptions({
     headerRight: () => (
       <HaderRightWrapper>
@@ -81,14 +89,24 @@ const TabViewNavigation: React.FC<Props> = ({ navigation }) => {
         },
       }}
       initialRouteName={'Sitzungswoche'}>
-      <TabNavigation.Screen
-        name="Sitzungswoche"
-        component={List}
-        initialParams={{ list: ListType.CONFERENCEWEEKS_PLANNED }}
-        options={{
-          title: 'Sitzungs\u200Bwoche',
-        }}
-      />
+      {showRecommendations ? (
+        <TabNavigation.Screen
+          name="Empfohlen"
+          component={Recommended}
+          options={{
+            title: 'Empfohlen',
+          }}
+        />
+      ) : (
+        <TabNavigation.Screen
+          name="Sitzungswoche"
+          component={List}
+          initialParams={{ list: ListType.CONFERENCEWEEKS_PLANNED }}
+          options={{
+            title: 'Sitzungs\u200Bwoche',
+          }}
+        />
+      )}
       <TabNavigation.Screen
         name="Vergangen"
         component={List}
@@ -100,13 +118,13 @@ const TabViewNavigation: React.FC<Props> = ({ navigation }) => {
         component={List}
         initialParams={{ list: ListType.TOP100 }}
       />
-      {__DEV__ && (
+      {/* {__DEV__ && (
         <TabNavigation.Screen
           name="DEV"
           component={DevPlaceholder}
           initialParams={{ list: ListType.PREPARATION }}
         />
-      )}
+      )} */}
     </TabNavigation.Navigator>
   );
 };
