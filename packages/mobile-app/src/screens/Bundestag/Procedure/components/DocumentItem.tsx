@@ -1,14 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import DocumentIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Document';
-import { useNavigation, CompositeNavigationProp } from '@react-navigation/core';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { MaterialTopTabNavigationProp } from '@react-navigation/material-top-tabs';
-import { BundestagTopTabParamList } from '../../../../routes/Sidebar/Bundestag/TabView';
-import { BundestagRootStackParamList } from '../../../../routes/Sidebar/Bundestag';
-import { SidebarParamList } from '../../../../routes/Sidebar';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { RootStackParamList } from '../../../../routes';
+import { useNavigation } from '@react-navigation/core';
 import DownloadIcon from '@democracy-deutschland/mobile-ui/src/components/Icons/Download';
 import { linking } from '../../../../lib/linking';
 
@@ -33,20 +26,6 @@ const DownloadButton = styled.TouchableOpacity`
   margin-left: auto;
 `;
 
-type DevPlaceholderNavigationProps = CompositeNavigationProp<
-  MaterialTopTabNavigationProp<
-    BundestagTopTabParamList,
-    'DEV' | 'Sitzungswoche' | 'Top 100' | 'Vergangen'
-  >,
-  CompositeNavigationProp<
-    StackNavigationProp<BundestagRootStackParamList, 'TabView'>,
-    CompositeNavigationProp<
-      DrawerNavigationProp<SidebarParamList, 'Bundestag'>,
-      StackNavigationProp<RootStackParamList>
-    >
-  >
->;
-
 interface Props {
   editor: string;
   type: string;
@@ -60,7 +39,7 @@ export const DocumentItem: React.FC<Props> = ({
   number,
   url,
 }) => {
-  const navigation = useNavigation<DevPlaceholderNavigationProps>();
+  const navigation = useNavigation();
   return (
     <Container>
       <ViewerButton
