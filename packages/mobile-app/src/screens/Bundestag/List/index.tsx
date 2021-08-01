@@ -11,7 +11,6 @@ import { ListItem } from '@democracy-deutschland/mobile-ui/src/components/Lists/
 import { Row } from '@democracy-deutschland/mobile-ui/src/components/Lists/Row';
 import { ListLoading } from '@democracy-deutschland/mobile-ui/src/components/shared/ListLoading';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/core';
-import { BundestagNavigationProps } from '../../../routes/Sidebar/Bundestag';
 import { BundestagTopTabParamList } from '../../../routes/Sidebar/Bundestag/TabView';
 import { Segment } from './Components/Segment';
 import { ListType } from '../../../../__generated__/globalTypes';
@@ -46,7 +45,7 @@ export const List = () => {
   const { constituency } = useContext(ConstituencyContext);
   const constituencies = constituency ? [constituency] : [];
   const route = useRoute<ListScreenRouteProp>();
-  const navigation = useNavigation<BundestagNavigationProps>();
+  const navigation = useNavigation();
   const [hasMore, setHasMore] = useState(true);
   const { loading, data, error, fetchMore, networkStatus, refetch } = useQuery<
     ProceduresList,

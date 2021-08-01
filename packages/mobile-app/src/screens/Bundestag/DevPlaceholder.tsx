@@ -1,9 +1,5 @@
 import Document from '@democracy-deutschland/mobile-ui/src/components/Icons/Document';
 import AsyncStorage from '@react-native-community/async-storage';
-import { CompositeNavigationProp } from '@react-navigation/core';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { MaterialTopTabNavigationProp } from '@react-navigation/material-top-tabs';
-import { StackNavigationProp } from '@react-navigation/stack';
 import React, { FC, useContext, useEffect, useState } from 'react';
 import unionBy from 'lodash.unionby';
 import {
@@ -18,10 +14,6 @@ import DeviceInfo from 'react-native-device-info';
 import styled from 'styled-components/native';
 import { InitialStateContext } from '../../context/InitialStates';
 import VotesLocal from '../../lib/VotesLocal';
-import { RootStackParamList } from '../../routes';
-import { SidebarParamList } from '../../routes/Sidebar';
-import { BundestagRootStackParamList } from '../../routes/Sidebar/Bundestag';
-import { BundestagTopTabParamList } from '../../routes/Sidebar/Bundestag/TabView';
 import { Notifications } from 'react-native-notifications';
 
 const Container = styled.ScrollView.attrs({})`
@@ -29,17 +21,6 @@ const Container = styled.ScrollView.attrs({})`
   /* align-items: center; */
   /* justify-content: center; */
 `;
-
-type DevPlaceholderNavigationProps = CompositeNavigationProp<
-  MaterialTopTabNavigationProp<BundestagTopTabParamList, 'DEV'>,
-  CompositeNavigationProp<
-    StackNavigationProp<BundestagRootStackParamList, 'TabView'>,
-    CompositeNavigationProp<
-      DrawerNavigationProp<SidebarParamList, 'Bundestag'>,
-      StackNavigationProp<RootStackParamList>
-    >
-  >
->;
 
 interface State {
   notifications: any[];
