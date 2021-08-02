@@ -12,7 +12,7 @@ Im Unterschied zum zukunftsorientierten Wahl-O-Mat von der Bundeszentrale für p
 
 Mathematisch bildet der Wahl-O-Meter dafür die Mittelwerte der eigenen Zustimmungen, Ablehnungen und neutralen Antworten innerhalb der DEMOCRACY App mit den Zustimmungen, Ablehnungen und neutralen Antworten jeder Partei / jedes Abgeordneten und sortiert diese Mittelwerte absteigend. 
 
-Mehr Informationen dazu findest Du auf unserer Website [https://democracy-deutschland.de/wahlometer](https://democracy-deutschland.de/wahlometer) & im Paper [https://github.com/demokratie-live/democracy-docu/wiki/Wahl-o-Meter](https://github.com/demokratie-live/democracy-docu/wiki/Wahl-o-Meter)`,
+Mehr Informationen dazu findest Du auf unserer Website [https://democracy-deutschland.de/#!wahlometer](https://democracy-deutschland.de/#!wahlometer).`,
   },
   {
     title: 'Warum fehlt bei den Details eines Vorgangs der Antragsteller?',
@@ -30,7 +30,7 @@ Nimm es als Chance, Deine (politischen) Einstellungen anhand der konkret vertret
 Die (Nutzer-)Abstimmung in der App findet dabei immer über das Gesetz/den Antrag an sich (und nicht über die Beschlussempfehlung) statt. Im Plenarsaal des Bundestages wird allerdings oft über die Beschlussempfehlung abgestimmt. Eine Zustimmung zu einer Beschlussempfehlung, die eines Ablehnung des Vorgangs vorschlägt, ist insofern invers zu zählen.
 Innerhalb unserer Software haben wir einen Mechanismus implementiert, der die ggfs. notwendigen Umrechnungen vornimmt. 
 
-Solltest Du Diskrepanzen zwischen dem Beschlusstext und unserer Ergebnisaufzeichnung feststellen, bitten wir Dich, diese an prototyping@democracy-deutschland.de zu reporten. `,
+Solltest Du Diskrepanzen zwischen dem Beschlusstext und unserer Ergebnisaufzeichnung feststellen, bitten wir Dich, diese an [prototyping@democracy-deutschland.de](mailto:prototyping@democracy-deutschland.de) zu reporten. `,
   },
   {
     title: 'Wo ist der Reiter Sitzungswoche?',
@@ -38,9 +38,9 @@ Solltest Du Diskrepanzen zwischen dem Beschlusstext und unserer Ergebnisaufzeich
       'In der Bundestagswahl-Version der App haben wir den Reiter "Sitzungswoche" durch "Empfohlen" ersetzt. Da die letzte Sitzungswoche des 19. Bundestages Ende Juni stattfand, wäre dieser Bereich bis zur nächsten Sitzungswoche des 20. Bundestages nach der Wahl leer geblieben. ',
   },
   {
-    title: 'Welche Vorgänge zeigt ihr in "Empfohlen"?',
+    title: 'Welche Vorgänge zeigt ihr in Empfohlen?',
     text:
-      'Unter ‘Empfohlen’ findest Du eine – nach Themenkategorien sortierte – Liste an besonders interessanten Gesetzentwürfen und Anträgen der endenden 19. Legislaturperiode des Bundestages. Diese Liste wurde von DEMOCRACY Deutschland e.V. redaktionell zusammengestellt. ',
+      'Unter "Empfohlen" findest Du eine – nach Themenkategorien sortierte – Liste an besonders interessanten Gesetzentwürfen und Anträgen der endenden 19. Legislaturperiode des Bundestages. Diese Liste wurde von DEMOCRACY Deutschland e.V. redaktionell zusammengestellt. ',
   },
   {
     title: 'Wie habt ihr die Empfehlungen ausgewählt?',
@@ -54,7 +54,9 @@ Solltest Du Diskrepanzen zwischen dem Beschlusstext und unserer Ergebnisaufzeich
   {
     title: 'Wie sehe ich alle Gesetze der vergangenen Legislaturperiode?',
     text:
-      'In der Bundestagswahl-Version der App haben wir den Reiter "Vergangen" durch "Alle" ersetzt, da die letzte Sitzungswoche des 19. Bundestages Ende Juni stattfand. Dort werden sämtliche Vorgänge der endenden 19. Legislaturperiode chronologisch nach Sitzungswochen gruppiert, angezeigt. Ein konkretes Thema findest Du auch über die Suche. ',
+      `In der Bundestagswahl-Version der App haben wir den Reiter "Vergangen" durch "Alle" ersetzt, da die letzte Sitzungswoche des 19. Bundestages Ende Juni stattfand. Dort werden sämtliche Vorgänge der endenden 19. Legislaturperiode chronologisch nach Sitzungswochen gruppiert, angezeigt. 
+      
+      Ein konkretes Thema findest Du auch über die Suche. `,
   },
   {
     title: 'Habt ihr die App zur Bundestagswahl verändert?',
@@ -77,9 +79,8 @@ Unserer Meinung nach sind Nutzerdaten gerade keine handelbaren Wirtschaftsgüter
     text: `Wahlgeheimnis bedeutet, dass während und nach einer Wahl keine Information bekannt werden darf, die darauf schließen lässt, was ein Wähler gewählt hat. Im Konkreten geht es also um die Trennung von Person und Stimme in Urnenbuch und Auszählung. Die Aufrechterhaltung dieses Abstimmungs- bzw. Wahlgeheimnis ist zentraler Bestandteil der DNA der DEMOCRACY App.
 Unser Konzept sieht daher vor, jede Deiner Abstimmungsentscheidungen (Ja, Enthaltung, Nein als Stimme) von Deinen personenbezogenen Identifikationsdaten ( – dem Urnenbuch) zu trennen. DEMOCRACY speichert insofern lediglich eine Quittung Deiner Abstimmungsentscheidung lokal auf Deinem Handy, an den Server werden ausschließlich anonymisierte und nicht kommerziell nutzbare Daten übersendet. 
 
-Das vollständige Konzept zur Stimmanonymisierung kannst du hier
-[https://github.com/demokratie-live/democracy-docu/wiki/Stimmanonymität](https://github.com/demokratie-live/democracy-docu/wiki/Stimmanonymität)
-nachlesen.`,
+Das vollständige Konzept zur Stimmanonymisierung kannst du hier nachlesen:
+[https://github.com/demokratie-live/democracy-docu/wiki/Stimmanonymität](https://github.com/demokratie-live/democracy-docu/wiki/Stimmanonymität)`,
   },
   {
     title: 'Sensible Daten und Open Source – geht das?',
@@ -98,8 +99,8 @@ Finanziell unterstützen kannst Du via [https://www.democracy-deutschland.de/#!d
 **LEVEL 1 – Für Einsteiger**
 - Benutze DEMOCRACY und hol Dir Deine faktenbasierte Wahlhilfe zur Bundestagswahl 2021
 - Sprich mit Deinen Freunden über uns
-- Teile unsere [Wahl-O-Meter-Erklärfilm](https://www.youtube.com/watch?v=DFXcnRdXA7k) mit Deinen Freunden im Sozialen Netzwerk Deiner Wahl
-- Kommentiere, like und teile DEMOCRACY-Beiträge in Social Media. Alle Social-Media-Accounts findest Du im Side-Menu unter "Über DEMOCRACY"
+- Teile unsere [Wahl-O-Meter-Erklärfilm](https://www.youtube.com/watch?v=uWwQquy_MD0) mit Deinen Freunden im Sozialen Netzwerk Deiner Wahl
+- Kommentiere, like und teile DEMOCRACY-Beiträge in Social Media.
 - Bewerte DEMOCRACY im App- bzw. PlayStore mit bis zu 5 Sternen
 - Entwickler-Special: Gib uns einen [Stern auf Github](https://github.com/demokratie-live/democracy-client)
 
@@ -110,7 +111,7 @@ Finanziell unterstützen kannst Du via [https://www.democracy-deutschland.de/#!d
 - Schlage selbst ein Feature vor, dass Du in einer künftigen Version von DEMOCRACY umgesetzt sehen willst
 - Entwickler-Special: Prüfe unseren [Code](https://github.com/demokratie-live) und/oder entwickle mit.
 
-Außerdem suchen wir ständig motivierte Menschen für die aktive Mitarbeit in unserem Projekt! Du hast Interesse Deine Fähigkeiten einzubringen – wir freuen uns über Anregungen, Fragen und Kritik. Hier kannst Du Dich als Freiwilliger melden – [https://www.democracy-deutschland.de/#!engineering#help](https://www.democracy-deutschland.de/#!engineering#help)
+Außerdem suchen wir ständig motivierte Menschen für die aktive Mitarbeit in unserem Projekt! Du hast Interesse Deine Fähigkeiten einzubringen – wir freuen uns über Anregungen, Fragen und Kritik. Hier kannst Du Dich [als Freiwilliger melden](https://www.democracy-deutschland.de/#!engineering#help)
 `,
   },
 ];
