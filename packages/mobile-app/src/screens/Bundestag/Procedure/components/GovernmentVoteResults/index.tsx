@@ -5,7 +5,6 @@ import Carousel from 'react-native-snap-carousel';
 // Components
 import BarChart from './BarChart';
 import PartyChart from './PartyChart';
-import DeputyVoteData from './Deputy';
 
 // GraphQL
 import ChartLegend from '../Charts/ChartLegend';
@@ -13,7 +12,6 @@ import ChartLegend from '../Charts/ChartLegend';
 import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Folding';
 import PieChart from '../Charts/PieChart';
 import { Procedure_procedure_voteResults } from '../../graphql/query/__generated__/Procedure';
-import { ConstituencyContext } from '../../../../../context/Constituency';
 import { InitialStateContext } from '../../../../../context/InitialStates';
 import { styled } from '../../../../../styles';
 import { CarouselPagination } from '../../../../../components/misc/Pagination';
@@ -80,12 +78,10 @@ interface Props {
 export const GovernmentVoteResults: React.FC<Props> = ({
   voteResults,
   currentStatus,
-  procedureId,
   voted,
 }) => {
   const [activeSlide, setActiveSlide] = useState<number>(0);
   const { isVerified } = useContext(InitialStateContext);
-  const { constituency } = useContext(ConstituencyContext);
 
   const [width, setWidth] = useState<number>(380);
 
