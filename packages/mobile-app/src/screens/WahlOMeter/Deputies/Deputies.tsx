@@ -22,8 +22,8 @@ export const Deputies: React.FC = () => {
         headerRight: () => (
           <Edit onPress={() => navigation.navigate('EditDeputyList')}>
             <PlusIcon
-              width={20}
-              height={20}
+              width={17}
+              height={17}
               fill={theme.colors.text.secondary}
             />
           </Edit>

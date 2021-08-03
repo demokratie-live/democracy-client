@@ -51,7 +51,7 @@ export const Recommended = () => {
               voted={item.voted}
               votes={item.activityIndex.activityIndex}
               communityChart={
-                item.communityVotes
+                item.voted && item.communityVotes
                   ? {
                       size: 20,
                       data: [
@@ -84,7 +84,7 @@ export const Recommended = () => {
                   : undefined
               }
               governmentChart={
-                item.voteResults
+                item.voted && item.voteResults
                   ? {
                       size: 20,
                       data: [
@@ -92,23 +92,19 @@ export const Recommended = () => {
                           name: 'yes',
                           value: item.voteResults.yes,
                           color: theme.colors.vote.government.yes,
-                          highlight:
-                            item.voteResults.governmentDecision === 'YES',
+                          highlight: true,
                         },
                         {
                           name: 'abstination',
                           value: item.voteResults.abstination,
                           color: theme.colors.vote.government.abstination,
-                          highlight:
-                            item.voteResults.governmentDecision ===
-                            'ABSTINATION',
+                          highlight: true,
                         },
                         {
                           name: 'no',
                           value: item.voteResults.no,
                           color: theme.colors.vote.government.no,
-                          highlight:
-                            item.voteResults.governmentDecision === 'NO',
+                          highlight: true,
                         },
                       ],
                     }
