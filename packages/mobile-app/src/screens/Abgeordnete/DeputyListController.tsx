@@ -114,7 +114,12 @@ export const DeputyListController: React.FC<DeputyListControllerProps> = ({
 
   const deputiesData = deputies.map(d => ({
     ...d,
-    onPress: () => navigation.navigate('DeputyProfile', { id: d.id }),
+    onPress: () =>
+      !editMode
+        ? navigation.navigate('DeputyProfile', { id: d.id })
+        : favorizedDeputies.includes(d.id)
+        ? removeFavorizedDeputy(d.id)
+        : addFavorizedDeputy(d.id),
     onStatePress: () =>
       favorizedDeputies.includes(d.id)
         ? removeFavorizedDeputy(d.id)
@@ -131,6 +136,7 @@ export const DeputyListController: React.FC<DeputyListControllerProps> = ({
 
   return (
     <DeputyList
+      style={{ flex: 1 }}
       editMode={editMode}
       deputies={deputiesData}
       favorizedDeputies={favorizedDeputies}
