@@ -29,6 +29,9 @@ jobs:
       # install fastlane dependencies
       - run: gem install bundler
 
+      - run: bundle update fastlane
+        working-directory: packages/mobile-app/ios
+
       - name: Encrypt GPG secure files
         run: |
           brew install gnupg@1.4
