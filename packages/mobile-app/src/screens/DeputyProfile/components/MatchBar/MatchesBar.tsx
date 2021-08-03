@@ -5,6 +5,7 @@ import { getMatchingProcedures, pieChartData } from './MatchesBar.utils';
 import { LocalVotesContext } from '../../../../context/LocalVotes';
 import { GetDeputy_deputy_matchesBar } from '../../graphql/query/__generated__/GetDeputy';
 import { theme } from '../../../../styles';
+import { useWindowDimensions } from 'react-native';
 
 interface PreparedData {
   label: string;
@@ -24,6 +25,7 @@ export interface MatchesBarProps {
 }
 
 export const MatchesBar: React.FC<MatchesBarProps> = ({ decisions }) => {
+  const { width } = useWindowDimensions();
   const { localVotes } = useContext(LocalVotesContext);
   const votedProcedures = decisions.map(({ procedure, decision }) => ({
     procedureId: procedure.procedureId,
@@ -49,11 +51,13 @@ export const MatchesBar: React.FC<MatchesBarProps> = ({ decisions }) => {
     return prev;
   }, {} as BarData);
 
+  const barWidth = Math.min(width - 28 * 2, 464);
+
   return (
     <S.Wrapper>
-      <S.BarWrapper width={300} height={30}>
+      <S.BarWrapper width={barWidth} height={30}>
         <Bar
-          width={300}
+          width={barWidth}
           height={30}
           data={[
             {
