@@ -122,10 +122,10 @@ platform :android do
      package_name: package_name,
      track: 'internal',
      track_promote_to: 'internal',
-    #  skip_upload_metadata: true,
-    #  skip_upload_changelogs: true,
-    #  skip_upload_images: true,
-    #  skip_upload_screenshots: true
+     skip_upload_metadata: true,
+     skip_upload_changelogs: true,
+     skip_upload_images: true,
+     skip_upload_screenshots: true
     )
 
     browserstack
