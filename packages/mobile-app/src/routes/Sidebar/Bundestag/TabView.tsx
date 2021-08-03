@@ -108,15 +108,15 @@ const TabViewNavigation: React.FC<Props> = ({ navigation }) => {
         />
       )}
       <TabNavigation.Screen
-        name="Vergangen"
-        component={List}
-        initialParams={{ list: ListType.PAST }}
-        options={{ tabBarTestID: 'tabBarPastItem' }}
-      />
-      <TabNavigation.Screen
         name="Top 100"
         component={List}
         initialParams={{ list: ListType.TOP100 }}
+      />
+      <TabNavigation.Screen
+        name="Vergangen"
+        component={List}
+        initialParams={{ list: ListType.PAST }}
+        options={{ tabBarTestID: 'tabBarPastItem', title: 'Alle' }}
       />
       {/* {__DEV__ && (
         <TabNavigation.Screen

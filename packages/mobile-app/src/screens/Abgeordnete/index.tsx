@@ -47,8 +47,8 @@ export const Abgeordnete: React.FC = () => {
             <EditText>Fertig</EditText>
           ) : (
             <PlusIcon
-              width={20}
-              height={20}
+              width={17}
+              height={17}
               fill={theme.colors.text.secondary}
             />
           )}

@@ -211,9 +211,6 @@ export const GovernmentVoteResults: React.FC<Props> = ({
       <BarChart key="barChart" data={voteResults} legendData={dataPieChart} />,
     ];
 
-    if (voteResults.namedVote && constituency) {
-      screens.push(<DeputyVoteData key="deputy" procedureId={procedureId} />);
-    }
     if (voteResults.decisionText) {
       screens.push(
         <DecisionTextView key="decisionText">
