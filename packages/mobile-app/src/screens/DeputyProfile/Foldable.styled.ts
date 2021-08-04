@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import SvgArrow from '../../../../mobile-ui/src/components/Icons/Arrow';
 
 export const Wrapper = styled.View`
-  margin-top: 18px;
+  margin-top: 24px;
   background-color: #fff;
   border-radius: 5px;
   width: 100%;
