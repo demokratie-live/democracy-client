@@ -226,7 +226,7 @@ export const DeputyProfil: React.FC<Props> = ({ route }) => {
         })
       }
       ListHeaderComponent={() => (
-        <View style={{ alignItems: 'center', paddingVertical: 11 }}>
+        <View style={{ alignItems: 'center', paddingTop: 11 }}>
           <WomHeader
             totalProcedures={totalProcedures ?? 0}
             votedProceduresCount={matchingProcedures.length}
