@@ -16,6 +16,7 @@ import { GET_DEPUTY } from './graphql/query/getDeputy';
 import {
   GetDeputy,
   GetDeputyVariables,
+  GetDeputy_deputy,
   GetDeputy_deputy_procedures,
 } from './graphql/query/__generated__/GetDeputy';
 import { RouteProp, useNavigation } from '@react-navigation/core';
@@ -77,7 +78,7 @@ export const DeputyProfil: React.FC<Props> = ({ route }) => {
   const [showProcedures, setShowProcedures] = useState(true);
   const { localVotes } = useContext(LocalVotesContext);
   const navigation = useNavigation();
-  const { data, loading } = useQuery<GetDeputy, GetDeputyVariables>(
+  const { data, previousData } = useQuery<GetDeputy, GetDeputyVariables>(
     GET_DEPUTY,
     {
       variables: {
@@ -163,7 +164,10 @@ export const DeputyProfil: React.FC<Props> = ({ route }) => {
     );
   };
 
-  if (loading || !data?.deputy) {
+  const deputyData = (data?.deputy || previousData?.deputy) as GetDeputy_deputy;
+
+  if (!deputyData) {
+    console.log('return getActivityIndicator();');
     return getActivityIndicator();
   }
 
@@ -177,7 +181,7 @@ export const DeputyProfil: React.FC<Props> = ({ route }) => {
     procedures,
     totalProcedures,
     constituency,
-  } = data.deputy;
+  } = deputyData;
 
   let contacts: Contacts[] = [];
   if (contact) {
@@ -202,7 +206,7 @@ export const DeputyProfil: React.FC<Props> = ({ route }) => {
   const votedProceduresCount =
     procedures.length - procedureCountByDecision.NOTVOTED;
 
-  const votedProcedures = data.deputy.matchesBar.map(
+  const votedProcedures = deputyData.matchesBar.map(
     ({ procedure, decision }) => ({
       procedureId: procedure.procedureId,
       decision,
@@ -254,9 +258,7 @@ export const DeputyProfil: React.FC<Props> = ({ route }) => {
             votedProceduresCount={votedProceduresCount}
           />
           <ChartLegend data={getVotingData(procedureCountByDecision)} />
-          {data.deputy ? (
-            <MatchesBar decisions={data.deputy.matchesBar} />
-          ) : null}
+          {deputyData ? <MatchesBar decisions={deputyData.matchesBar} /> : null}
           <S.Wrapper>
             <S.Header onPress={() => setShowProcedures(!showProcedures)}>
               <S.Headline>Abstimmungen</S.Headline>
