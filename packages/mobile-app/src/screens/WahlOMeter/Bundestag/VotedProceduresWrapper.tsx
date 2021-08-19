@@ -50,23 +50,40 @@ const VotedProceduresWrapper: React.FC<Props> = ({
   children,
 }) => {
   const { localVotes, getLocalVoteSelection } = useContext(LocalVotesContext);
-  const { data: proceduresData } = useQuery<
-    PartyChartData,
-    PartyChartDataVariables
-  >(PARTY_CHART_DATA, {
+  const {
+    data: proceduresDataNew,
+    previousData: proceduresDataPrev,
+  } = useQuery<PartyChartData, PartyChartDataVariables>(PARTY_CHART_DATA, {
     variables: {
       procedureIds: localVotes.map(({ procedureId }) => procedureId),
       pageSize: 999999,
     },
   });
 
-  const { data: procedurListData, fetchMore, networkStatus } = useQuery<
+  const proceduresData = proceduresDataNew?.partyChartProcedures
+    ? proceduresDataNew
+    : proceduresDataPrev?.partyChartProcedures
+    ? proceduresDataPrev
+    : undefined;
+
+  const {
+    data: procedurListDataNew,
+    previousData: procedurListDataPrev,
+    fetchMore,
+    networkStatus,
+  } = useQuery<
     ProceduresByIdHavingVoteResults,
     ProceduresByIdHavingVoteResultsVariables
   >(PROCEDURES_BY_HAVING_VOTE_RESULTS, {
     variables: { offset: 0, pageSize: 10 },
     returnPartialData: true,
   });
+
+  const procedurListData = procedurListDataNew?.proceduresByIdHavingVoteResults3
+    ? procedurListDataNew
+    : procedurListDataPrev?.proceduresByIdHavingVoteResults3
+    ? procedurListDataPrev
+    : undefined;
 
   let hasMore = true;
   // if (!localVotes || localVotes.length === 0) {
@@ -76,6 +93,7 @@ const VotedProceduresWrapper: React.FC<Props> = ({
   if (proceduresData && proceduresData.partyChartProcedures) {
     totalProcedures = proceduresData.partyChartProcedures.total || 0;
   }
+
   if (!procedurListData || !proceduresData) {
     return <ListLoading />;
   }
