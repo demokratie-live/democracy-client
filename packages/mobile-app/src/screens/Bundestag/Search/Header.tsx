@@ -7,8 +7,6 @@ import {
   FinishSearch,
   FinishSearchVariables,
 } from './graphql/mutation/__generated__/FinishSearch';
-import debounce from 'lodash.debounce';
-import { Platform } from 'react-native';
 import { styled } from '../../../styles';
 
 const Wrapper = styled.View`
@@ -34,12 +32,8 @@ export const SearchHeader: React.FC = () => {
 
   // throttle to handle android endless changing error
   const onChangeText = (text: string) => {
-    console.log(typeof term, term);
     if (typeof term === 'string') {
-      console.log('onChangeText', text);
-      Platform.OS === 'ios'
-        ? setTerm(text)
-        : debounce(() => setTerm(text), 300);
+      setTerm(text);
     }
   };
   return (
