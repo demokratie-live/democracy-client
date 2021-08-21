@@ -53,7 +53,7 @@ export const Recommended = () => {
               communityChart={
                 item.voted && item.communityVotes
                   ? {
-                      size: 20,
+                      size: 18,
                       data: [
                         {
                           name: 'yes',
@@ -86,7 +86,7 @@ export const Recommended = () => {
               governmentChart={
                 item.voted && item.voteResults
                   ? {
-                      size: 20,
+                      size: 18,
                       data: [
                         {
                           name: 'yes',
