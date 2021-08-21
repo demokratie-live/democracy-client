@@ -327,7 +327,7 @@ export const DeputyProfil: React.FC<Props> = ({ route }) => {
                     value: 1,
                   },
                 ],
-                size: 20,
+                size: 18,
               }}
               communityChart={
                 decision
@@ -345,7 +345,7 @@ export const DeputyProfil: React.FC<Props> = ({ route }) => {
                           value: 1,
                         },
                       ],
-                      size: 20,
+                      size: 18,
                     }
                   : undefined
               }
