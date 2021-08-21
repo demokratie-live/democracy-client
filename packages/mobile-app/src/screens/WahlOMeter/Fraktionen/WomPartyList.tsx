@@ -47,8 +47,8 @@ const WomPartyList: React.FC<Props> = ({ onProcedureListItemClick }) => {
   const { getLocalVoteSelection } = useContext(LocalVotesContext);
 
   const {
-    data: procedurListData,
-    loading,
+    data: procedurListDataNew,
+    previousData: procedurListDataPrev,
     error,
     fetchMore,
     networkStatus,
@@ -60,15 +60,18 @@ const WomPartyList: React.FC<Props> = ({ onProcedureListItemClick }) => {
     },
   );
 
+  const procedurListData = procedurListDataNew?.procedurecForWomPartyList
+    ? procedurListDataNew
+    : procedurListDataPrev?.procedurecForWomPartyList
+    ? procedurListDataPrev
+    : undefined;
+
   let hasMore = true;
   if (error) {
     return <Text>ERROR</Text>;
   }
-  if (loading) {
+  if (!procedurListData?.procedurecForWomPartyList) {
     return <ListLoading />;
-  }
-  if (!procedurListData) {
-    return <Text>No_DATA</Text>;
   }
   const listData =
     procedurListData &&
