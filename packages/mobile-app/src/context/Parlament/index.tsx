@@ -47,11 +47,8 @@ const parlaments: Parlaments = {
     screens: {
       procedures: {
         inVote: true,
-        top100: true,
-        past: true,
-      },
-      wom: {
-        institution: true,
+        top100: false,
+        past: false,
       },
     },
   },

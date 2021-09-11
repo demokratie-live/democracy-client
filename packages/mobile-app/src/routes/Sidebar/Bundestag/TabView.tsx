@@ -13,9 +13,7 @@ import { theme } from '../../../styles';
 import { MenuButton } from '../../../components/MenuButton';
 import Svg, { Circle } from 'react-native-svg';
 import { Recommended } from '../../../screens/Bundestag/Recomended';
-import { useQuery } from '@apollo/client';
-import { ShowRecommendations } from './graphql/__generated__/ShowRecommendations';
-import { SHOW_RECOMMENDED } from './graphql/showRecommendations';
+import { ParlamentContext } from '../../../context/Parlament';
 
 export type BundestagTopTabParamList = {
   Empfohlen: undefined;
@@ -44,9 +42,8 @@ interface Props {
 
 const TabViewNavigation: React.FC<Props> = ({ navigation }) => {
   const { active: hasFilters } = useContext(ListFilterContext);
-  const { data: showRecommendations } = useQuery<ShowRecommendations>(
-    SHOW_RECOMMENDED,
-  );
+  const { parlament } = useContext(ParlamentContext);
+
   navigation.setOptions({
     headerRight: () => (
       <HaderRightWrapper>
@@ -89,7 +86,7 @@ const TabViewNavigation: React.FC<Props> = ({ navigation }) => {
         },
       }}
       initialRouteName={'Sitzungswoche'}>
-      {showRecommendations ? (
+      {parlament.screens.procedures.recomended ? (
         <TabNavigation.Screen
           name="Empfohlen"
           component={Recommended}
@@ -97,7 +94,9 @@ const TabViewNavigation: React.FC<Props> = ({ navigation }) => {
             title: 'Empfohlen',
           }}
         />
-      ) : (
+      ) : null}
+
+      {parlament.screens.procedures.inVote ? (
         <TabNavigation.Screen
           name="Sitzungswoche"
           component={List}
@@ -106,18 +105,25 @@ const TabViewNavigation: React.FC<Props> = ({ navigation }) => {
             title: 'Sitzungs\u200Bwoche',
           }}
         />
-      )}
-      <TabNavigation.Screen
-        name="Top 100"
-        component={List}
-        initialParams={{ list: ListType.TOP100 }}
-      />
-      <TabNavigation.Screen
-        name="Vergangen"
-        component={List}
-        initialParams={{ list: ListType.PAST }}
-        options={{ tabBarTestID: 'tabBarPastItem', title: 'Alle' }}
-      />
+      ) : null}
+      {parlament.screens.procedures.top100 ? (
+        <TabNavigation.Screen
+          name="Top 100"
+          component={List}
+          initialParams={{ list: ListType.TOP100 }}
+        />
+      ) : null}
+      {parlament.screens.procedures.past || parlament.screens.procedures.all ? (
+        <TabNavigation.Screen
+          name="Vergangen"
+          component={List}
+          initialParams={{ list: ListType.PAST }}
+          options={{
+            tabBarTestID: 'tabBarPastItem',
+            title: parlament.screens.procedures.past ? 'Vergangen' : 'Alle',
+          }}
+        />
+      ) : null}
       {/* {__DEV__ && (
         <TabNavigation.Screen
           name="DEV"

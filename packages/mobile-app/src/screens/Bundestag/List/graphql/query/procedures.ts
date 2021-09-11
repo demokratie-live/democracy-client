@@ -8,6 +8,7 @@ export const PROCEDURES_LIST = gql`
     $sort: String
     $filter: ProcedureFilter
     $constituencies: [String!]
+    $period: Int!
   ) {
     procedures(
       offset: $offset
@@ -15,6 +16,7 @@ export const PROCEDURES_LIST = gql`
       listTypes: $listTypes
       sort: $sort
       filter: $filter
+      period: $period
     ) {
       _id
       title
