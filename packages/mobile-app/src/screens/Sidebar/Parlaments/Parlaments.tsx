@@ -74,48 +74,54 @@ export const Parlaments: React.FC<ListsProps> = ({
         return (
           <S.List key={parl.identifier}>
             <S.Headline>{`${parl.institution} LP ${parl.period}`}</S.Headline>
-            <DrawerItem
-              label="Vorgänge"
-              icon={({ color, size }) => (
-                <GovernmentIcon width={size} height={size} color={color} />
-              )}
-              onPress={handleClick(
-                { name: 'Bundestag' },
-                { parlamentIdentifier: parl.identifier },
-              )}
-              focused={isFocused('Bundestag', {
-                parlamentIdentifier: parl.identifier,
-              })}
-              {...drawerItemProps}
-            />
-            <DrawerItem
-              label="Wahl-O-Meter"
-              icon={({ color, size }) => (
-                <SvgWahlOMeter width={size} height={size} color={color} />
-              )}
-              onPress={handleClick(
-                { name: 'WahlOMeter' },
-                { parlamentIdentifier: parl.identifier },
-              )}
-              focused={isFocused('WahlOMeter', {
-                parlamentIdentifier: parl.identifier,
-              })}
-              {...drawerItemProps}
-            />
-            <DrawerItem
-              label="Abgeordnete"
-              icon={({ color, size }) => (
-                <AvatarIcon width={size} height={size} fill={color} />
-              )}
-              onPress={handleClick(
-                { name: 'Abgeordnete' },
-                { parlamentIdentifier: parl.identifier },
-              )}
-              focused={isFocused('Abgeordnete', {
-                parlamentIdentifier: parl.identifier,
-              })}
-              {...drawerItemProps}
-            />
+            {parl.screens.procedures ? (
+              <DrawerItem
+                label="Vorgänge"
+                icon={({ color, size }) => (
+                  <GovernmentIcon width={size} height={size} color={color} />
+                )}
+                onPress={handleClick(
+                  { name: 'Bundestag' },
+                  { parlamentIdentifier: parl.identifier },
+                )}
+                focused={isFocused('Bundestag', {
+                  parlamentIdentifier: parl.identifier,
+                })}
+                {...drawerItemProps}
+              />
+            ) : null}
+            {parl.screens.wom ? (
+              <DrawerItem
+                label="Wahl-O-Meter"
+                icon={({ color, size }) => (
+                  <SvgWahlOMeter width={size} height={size} color={color} />
+                )}
+                onPress={handleClick(
+                  { name: 'WahlOMeter' },
+                  { parlamentIdentifier: parl.identifier },
+                )}
+                focused={isFocused('WahlOMeter', {
+                  parlamentIdentifier: parl.identifier,
+                })}
+                {...drawerItemProps}
+              />
+            ) : null}
+            {parl.screens.deputies ? (
+              <DrawerItem
+                label="Abgeordnete"
+                icon={({ color, size }) => (
+                  <AvatarIcon width={size} height={size} fill={color} />
+                )}
+                onPress={handleClick(
+                  { name: 'Abgeordnete' },
+                  { parlamentIdentifier: parl.identifier },
+                )}
+                focused={isFocused('Abgeordnete', {
+                  parlamentIdentifier: parl.identifier,
+                })}
+                {...drawerItemProps}
+              />
+            ) : null}
           </S.List>
         );
       })}
