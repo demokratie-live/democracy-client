@@ -4,10 +4,29 @@ import AsyncStorage from '@react-native-community/async-storage';
 export type ParlamentIdentifier = 'BT-20' | 'BT-19' | 'BT-18';
 type Institutions = 'Bundestag';
 
+interface ParlamentProceduresScreen {
+  inVote?: boolean;
+  recomended?: boolean;
+  top100?: boolean;
+  past?: boolean;
+  all?: boolean;
+}
+
+interface ParlamentWomScreen {
+  institution?: boolean;
+  fractions?: boolean;
+  deputies?: boolean;
+}
+interface ParlamentScreens {
+  procedures: ParlamentProceduresScreen;
+  wom?: false | ParlamentWomScreen;
+  deputies?: boolean;
+}
 interface Parlament {
   identifier: ParlamentIdentifier;
   institution: Institutions;
   period: number;
+  screens: ParlamentScreens;
 }
 
 type Parlaments = {
@@ -25,16 +44,44 @@ const parlaments: Parlaments = {
     identifier: 'BT-20',
     institution: 'Bundestag',
     period: 20,
+    screens: {
+      procedures: {
+        inVote: true,
+        top100: true,
+        past: true,
+      },
+      wom: {
+        institution: true,
+      },
+    },
   },
   'BT-19': {
     identifier: 'BT-19',
     institution: 'Bundestag',
     period: 19,
+    screens: {
+      procedures: {
+        recomended: true,
+        top100: true,
+        all: true,
+      },
+      wom: {
+        institution: true,
+        fractions: true,
+        deputies: true,
+      },
+      deputies: true,
+    },
   },
   'BT-18': {
     identifier: 'BT-18',
     institution: 'Bundestag',
     period: 18,
+    screens: {
+      procedures: {
+        all: true,
+      },
+    },
   },
 };
 
