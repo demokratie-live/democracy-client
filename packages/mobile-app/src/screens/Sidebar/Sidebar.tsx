@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-color-literals */
 import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components/native';
 import { Background } from '@democracy-deutschland/mobile-ui/src/components/Sidebar/Background';
@@ -16,6 +15,7 @@ import DonatedBox from './Donate/DonatedBox';
 import { Space } from '../modals/Verification/Start';
 import { NavigationContext } from '../../context/Navigation';
 import { rateApp } from '../../lib/rateApp';
+import { Parlaments } from './Parlaments/Parlaments';
 
 const SafeAreaView = styled.SafeAreaView`
   flex: 1;
@@ -38,13 +38,6 @@ const DonateBoxWrapper = styled.View`
   background-color: rgba(0, 0, 0, 0.8);
 `;
 
-const RateBoxWrapper = styled.View`
-  position: absolute;
-  bottom: 80px;
-  left: 0px;
-  right: 0px;
-`;
-
 const DonationTouch = styled.TouchableOpacity`
   flex: 1;
   width: 100%;
@@ -52,12 +45,12 @@ const DonationTouch = styled.TouchableOpacity`
 `;
 
 const NaviList = styled.ScrollView`
-  margin-bottom: 68px;
+  margin-bottom: 34px;
 `;
 
-declare type Props = React.ComponentProps<typeof DrawerItemList>;
+export type SidebarProps = React.ComponentProps<typeof DrawerItemList>;
 
-export const Sidebar: React.FC<Props> = props => {
+export const Sidebar: React.FC<SidebarProps> = props => {
   const navigation = useNavigation<SidebarNavigationProps>();
   const { saveState } = useContext(NavigationContext);
   const { isVerified, verificationQueryRunning } = useContext(
@@ -99,16 +92,15 @@ export const Sidebar: React.FC<Props> = props => {
         />
         <Space />
         <NaviList>
+          <Parlaments {...props} />
           <DrawerItemList {...props} />
+          <DrawerItem
+            label="⭐️  App Bewerten"
+            onPress={rateApp}
+            labelStyle={{ fontSize: 16, color: '#ddd' }}
+          />
         </NaviList>
       </SafeAreaView>
-      <RateBoxWrapper>
-        <DrawerItem
-          label="⭐️  App Bewerten"
-          onPress={rateApp}
-          labelStyle={{ fontSize: 16, color: '#ddd' }}
-        />
-      </RateBoxWrapper>
       {donationStatus && donationStatus.result && (
         <DonateBoxWrapper>
           <DonationTouch onPress={() => navigation.navigate('Donate')}>
