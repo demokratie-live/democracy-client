@@ -23,6 +23,7 @@ import { ConstituencyContext } from '../../../context/Constituency';
 import { Centered } from '@democracy-deutschland/mobile-ui/src/components/shared/Centered';
 import { Button } from '@democracy-deutschland/mobile-ui/src/components/Button';
 import { styled } from '../../../styles';
+import { ParlamentContext } from '../../../context/Parlament';
 
 type ListScreenRouteProp = RouteProp<
   BundestagTopTabParamList,
@@ -43,6 +44,7 @@ export const List = () => {
   const { getLocalVoteSelection } = useContext(LocalVotesContext);
   const { proceduresFilter } = useContext(ListFilterContext);
   const { constituency } = useContext(ConstituencyContext);
+  const { parlament } = useContext(ParlamentContext);
   const constituencies = constituency ? [constituency] : [];
   const route = useRoute<ListScreenRouteProp>();
   const navigation = useNavigation();
@@ -58,6 +60,7 @@ export const List = () => {
       pageSize: 10,
       filter: proceduresFilter,
       constituencies,
+      period: parlament.period,
     },
   });
 

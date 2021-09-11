@@ -61,4 +61,5 @@ export interface ProceduresListVariables {
   sort?: string | null;
   filter?: ProcedureFilter | null;
   constituencies?: string[] | null;
+  period: number;
 }
