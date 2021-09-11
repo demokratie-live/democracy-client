@@ -48,7 +48,7 @@ export const SidebarNavigation = () => {
         name="Bundestag"
         component={BundestagRootNavigation}
         options={{
-          drawerLabel: '/Bundestag',
+          drawerLabel: 'hide/Bundestag',
           gestureEnabled: true,
           drawerIcon: ({ color, size }) => (
             <GovernmentIcon width={size} height={size} color={color} />
@@ -58,7 +58,7 @@ export const SidebarNavigation = () => {
       />
       <SidebarDrawer.Screen
         options={{
-          drawerLabel: 'Auswertungen/Wahl-O-Meter',
+          drawerLabel: 'hide/Wahl-O-Meter',
           gestureEnabled: true,
           drawerIcon: ({ color, size }) => (
             <SvgWahlOMeter width={size} height={size} color={color} />
@@ -70,7 +70,7 @@ export const SidebarNavigation = () => {
       />
       <SidebarDrawer.Screen
         options={{
-          drawerLabel: 'Auswertungen/Abgeordnete',
+          drawerLabel: 'hide/Abgeordnete',
           gestureEnabled: true,
           drawerIcon: ({ color, size }) => (
             <AvatarIcon width={size} height={size} fill={color} />

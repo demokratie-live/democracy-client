@@ -20,6 +20,7 @@ import { VerificationProvider } from './context/Verification';
 import { NavigationProvider } from './context/Navigation';
 import { AbgeordneteListProvider } from './lib/states/Abgeordnete/context';
 import { FavourizedDeputiesProvider } from './lib/states/FavorizedDeputies';
+import { ParlamentProvider } from './context/Parlament';
 // import { ErrorScreen } from './screens/modals/Error';
 
 export default () => (
@@ -34,11 +35,13 @@ export default () => (
                 <VerificationProvider>
                   <AbgeordneteListProvider>
                     <FavourizedDeputiesProvider>
-                      <NavigationProvider>
-                        <ThemeProvider theme={theme}>
-                          <Navigation />
-                        </ThemeProvider>
-                      </NavigationProvider>
+                      <ParlamentProvider>
+                        <NavigationProvider>
+                          <ThemeProvider theme={theme}>
+                            <Navigation />
+                          </ThemeProvider>
+                        </NavigationProvider>
+                      </ParlamentProvider>
                     </FavourizedDeputiesProvider>
                   </AbgeordneteListProvider>
                 </VerificationProvider>
