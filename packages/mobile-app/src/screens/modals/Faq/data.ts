@@ -53,8 +53,7 @@ Solltest Du Diskrepanzen zwischen dem Beschlusstext und unserer Ergebnisaufzeich
   },
   {
     title: 'Wie sehe ich alle Gesetze der vergangenen Legislaturperiode?',
-    text:
-      `In der Bundestagswahl-Version der App haben wir den Reiter "Vergangen" durch "Alle" ersetzt, da die letzte Sitzungswoche des 19. Bundestages Ende Juni stattfand. Dort werden sämtliche Vorgänge der endenden 19. Legislaturperiode chronologisch nach Sitzungswochen gruppiert, angezeigt. 
+    text: `In der Bundestagswahl-Version der App haben wir den Reiter "Vergangen" durch "Alle" ersetzt, da die letzte Sitzungswoche des 19. Bundestages Ende Juni stattfand. Dort werden sämtliche Vorgänge der endenden 19. Legislaturperiode chronologisch nach Sitzungswochen gruppiert, angezeigt. 
       
       Ein konkretes Thema findest Du auch über die Suche. `,
   },

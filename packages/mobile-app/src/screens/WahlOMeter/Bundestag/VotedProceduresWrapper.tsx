@@ -23,6 +23,7 @@ import {
 } from '../../Bundestag/Procedure/Voting/components/graphql/query/__generated__/PartyChartData';
 import { PARTY_CHART_DATA } from '../../Bundestag/Procedure/Voting/components/graphql/query/proceduresByIdHavingVoteResults';
 import { useQuery } from '@apollo/client';
+import { ParlamentContext } from '../../../context/Parlament';
 
 const Container = styled.View`
   background-color: #fff;
@@ -49,6 +50,7 @@ const VotedProceduresWrapper: React.FC<Props> = ({
   onProcedureListItemClick,
   children,
 }) => {
+  const { parlament } = useContext(ParlamentContext);
   const { localVotes, getLocalVoteSelection } = useContext(LocalVotesContext);
   const {
     data: proceduresDataNew,
@@ -57,6 +59,7 @@ const VotedProceduresWrapper: React.FC<Props> = ({
     variables: {
       procedureIds: localVotes.map(({ procedureId }) => procedureId),
       pageSize: 999999,
+      period: parlament.period,
     },
   });
 
@@ -75,7 +78,7 @@ const VotedProceduresWrapper: React.FC<Props> = ({
     ProceduresByIdHavingVoteResults,
     ProceduresByIdHavingVoteResultsVariables
   >(PROCEDURES_BY_HAVING_VOTE_RESULTS, {
-    variables: { offset: 0, pageSize: 10 },
+    variables: { offset: 0, pageSize: 10, period: parlament.period },
     returnPartialData: true,
   });
 

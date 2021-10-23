@@ -7,11 +7,13 @@ export const PROCEDURES_BY_HAVING_VOTE_RESULTS = gql`
     $procedureIds: [String!]
     $pageSize: Int
     $offset: Int
+    $period: Int!
   ) {
     proceduresByIdHavingVoteResults3: proceduresByIdHavingVoteResults(
       procedureIds: $procedureIds
       pageSize: $pageSize
       offset: $offset
+      period: $period
     ) {
       total
       procedures {
