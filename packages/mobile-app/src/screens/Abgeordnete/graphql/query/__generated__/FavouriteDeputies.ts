@@ -31,4 +31,5 @@ export interface FavouriteDeputiesVariables {
   limit?: number | null;
   filterTerm?: string | null;
   filterIds?: string[] | null;
+  period?: number | null;
 }

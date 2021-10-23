@@ -20,6 +20,7 @@ export const typePolicies: TypedTypePolicies = {
           'excludeIds',
           'filterIds',
           'filterConstituency',
+          'period',
         ],
         merge(existing = { data: [] }, incoming: Deputies_deputies) {
           return {

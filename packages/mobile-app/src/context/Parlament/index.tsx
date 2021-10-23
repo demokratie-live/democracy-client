@@ -50,6 +50,7 @@ const parlaments: Parlaments = {
         top100: false,
         past: false,
       },
+      deputies: true,
     },
   },
   'BT-19': {
@@ -78,6 +79,7 @@ const parlaments: Parlaments = {
       procedures: {
         all: true,
       },
+      deputies: true,
     },
   },
 };

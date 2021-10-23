@@ -33,4 +33,5 @@ export interface DeputiesVariables {
   filterTerm?: string | null;
   filterConstituency?: string | null;
   excludeIds?: string[] | null;
+  period?: number | null;
 }
