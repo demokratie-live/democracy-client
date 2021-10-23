@@ -7,6 +7,7 @@ export const DEPUTY_SEARCH = gql`
     $filterTerm: String
     $filterConstituency: String
     $excludeIds: [String!]
+    $period: Int
   ) {
     deputies(
       limit: $limit
@@ -14,6 +15,7 @@ export const DEPUTY_SEARCH = gql`
       filterTerm: $filterTerm
       filterConstituency: $filterConstituency
       excludeIds: $excludeIds
+      period: $period
     ) {
       hasMore
       data {
@@ -33,8 +35,14 @@ export const DEPUTY_FAVOURITES = gql`
     $limit: Int
     $filterTerm: String
     $filterIds: [String!]
+    $period: Int
   ) {
-    deputies(limit: $limit, filterTerm: $filterTerm, filterIds: $filterIds) {
+    deputies(
+      limit: $limit
+      filterTerm: $filterTerm
+      filterIds: $filterIds
+      period: $period
+    ) {
       hasMore
       data {
         _id

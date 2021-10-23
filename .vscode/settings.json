@@ -10,5 +10,8 @@
     "**/__snapshots__": true
   },
   "svg.preview.background": "transparent",
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

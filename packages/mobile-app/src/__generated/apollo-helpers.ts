@@ -44,7 +44,7 @@ export type DeputiesResultFieldPolicy = {
 	hasMore?: FieldPolicy<any> | FieldReadFunction<any>,
 	data?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type DeputyKeySpecifier = ('_id' | 'webId' | 'imgURL' | 'name' | 'party' | 'job' | 'biography' | 'constituency' | 'directCandidate' | 'contact' | 'totalProcedures' | 'procedures' | DeputyKeySpecifier)[];
+export type DeputyKeySpecifier = ('_id' | 'webId' | 'imgURL' | 'name' | 'party' | 'job' | 'biography' | 'constituency' | 'directCandidate' | 'contact' | 'totalProcedures' | 'procedures' | 'period' | DeputyKeySpecifier)[];
 export type DeputyFieldPolicy = {
 	_id?: FieldPolicy<any> | FieldReadFunction<any>,
 	webId?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -57,7 +57,8 @@ export type DeputyFieldPolicy = {
 	directCandidate?: FieldPolicy<any> | FieldReadFunction<any>,
 	contact?: FieldPolicy<any> | FieldReadFunction<any>,
 	totalProcedures?: FieldPolicy<any> | FieldReadFunction<any>,
-	procedures?: FieldPolicy<any> | FieldReadFunction<any>
+	procedures?: FieldPolicy<any> | FieldReadFunction<any>,
+	period?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type DeputyContactKeySpecifier = ('address' | 'email' | 'links' | DeputyContactKeySpecifier)[];
 export type DeputyContactFieldPolicy = {

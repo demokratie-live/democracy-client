@@ -10,6 +10,7 @@ import unionBy from 'lodash.unionby';
 import React, { useEffect, useContext } from 'react';
 import { ActivityIndicator } from 'react-native';
 import styled from 'styled-components/native';
+import { ParlamentContext } from '../../context/Parlament';
 import { FavorizedDeputiesContext } from '../../lib/states/FavorizedDeputies';
 import { FavorizedDeputiesStore } from '../../lib/stores/FavorizedDeputies';
 import { SidebarParamList } from '../../routes/Sidebar';
@@ -44,6 +45,7 @@ export const DeputyListController: React.FC<DeputyListControllerProps> = ({
   ...props
 }) => {
   const navigation = useNavigation();
+  const { parlament } = useContext(ParlamentContext);
   const { addFavorizedDeputy, removeFavorizedDeputy } = useContext(
     FavorizedDeputiesContext,
   );
@@ -56,6 +58,7 @@ export const DeputyListController: React.FC<DeputyListControllerProps> = ({
       offset: 0,
       filterTerm: searchTerm ?? undefined,
       excludeIds: favorizedDeputies,
+      period: parlament.period,
     },
     notifyOnNetworkStatusChange: true,
   });
@@ -67,6 +70,7 @@ export const DeputyListController: React.FC<DeputyListControllerProps> = ({
       limit: Math.min(favorizedDeputies.length, 100),
       filterIds: favorizedDeputies,
       filterTerm: searchTerm ?? undefined,
+      period: parlament.period,
     },
     notifyOnNetworkStatusChange: true,
   });
