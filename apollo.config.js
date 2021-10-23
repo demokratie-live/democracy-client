@@ -6,7 +6,8 @@ module.exports = {
     ],
     service: {
       name: "DEMOCRACY API Local",
-      url: "https://internal.api.democracy-app.de",
+      // url: "https://internal.api.democracy-app.de",
+      url: "http://localhost:3000",
       skipSSLValidation: true,
     },
   },

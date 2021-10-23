@@ -22,6 +22,7 @@ import {
   BarChartProps,
   WomPartyChartData,
 } from '@democracy-deutschland/ui';
+import { ParlamentContext } from '../../../context/Parlament';
 
 const MAX_WIDTH = Math.min(
   380,
@@ -43,6 +44,7 @@ const ChartWrapper = styled.View`
 // interface Props {}
 
 export const WomPartyChart: React.FC = () => {
+  const { parlament } = useContext(ParlamentContext);
   const { localVotes } = useContext(LocalVotesContext);
   const [selectedPartyIndex, setSelectedPartyIndex] = useState(0);
   const { setWomParty, party: womParty } = useContext(WomPartyContext);
@@ -53,6 +55,7 @@ export const WomPartyChart: React.FC = () => {
     variables: {
       procedureIds: localVotes.map(({ procedureId }) => procedureId),
       pageSize: 999999,
+      period: parlament.period,
     },
   });
 

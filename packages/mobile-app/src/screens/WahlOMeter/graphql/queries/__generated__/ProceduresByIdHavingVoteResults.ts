@@ -74,4 +74,5 @@ export interface ProceduresByIdHavingVoteResultsVariables {
   procedureIds?: string[] | null;
   pageSize?: number | null;
   offset?: number | null;
+  period: number;
 }

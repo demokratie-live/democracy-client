@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { WahlOMeterStackParamList } from '.';
@@ -6,6 +6,7 @@ import { theme } from '../../../styles';
 import Bundestag from '../../../screens/WahlOMeter/Bundestag';
 import { WomParty } from '../../../screens/WahlOMeter/Fraktionen';
 import { Deputies } from '../../../screens/WahlOMeter/Deputies';
+import { ParlamentContext } from '../../../context/Parlament';
 
 export type TopTabParamList = {
   Bundestag: undefined;
@@ -26,6 +27,9 @@ interface Props {
 }
 
 const TabViewNavigation: React.FC<Props> = () => {
+  const { parlament } = useContext(ParlamentContext);
+  const wom = parlament.screens.wom ? parlament.screens.wom : undefined;
+
   return (
     <TabNavigation.Navigator
       lazy={true}
@@ -41,15 +45,21 @@ const TabViewNavigation: React.FC<Props> = () => {
         },
       }}
       initialRouteName={'Bundestag'}>
-      <TabNavigation.Screen name="Bundestag" component={Bundestag} />
-      <TabNavigation.Screen name="Fraktionen" component={WomParty} />
-      <TabNavigation.Screen
-        name="Deputies"
-        options={{
-          title: 'Abgeordnete',
-        }}
-        component={Deputies}
-      />
+      {wom?.institution ? (
+        <TabNavigation.Screen name="Bundestag" component={Bundestag} />
+      ) : null}
+      {wom?.fractions ? (
+        <TabNavigation.Screen name="Fraktionen" component={WomParty} />
+      ) : null}
+      {wom?.deputies ? (
+        <TabNavigation.Screen
+          name="Deputies"
+          options={{
+            title: 'Abgeordnete',
+          }}
+          component={Deputies}
+        />
+      ) : null}
     </TabNavigation.Navigator>
   );
 };

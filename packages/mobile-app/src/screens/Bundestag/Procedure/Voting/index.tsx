@@ -32,6 +32,7 @@ import {
   ChartLegendData,
   WomPartyChartData,
 } from '@democracy-deutschland/ui';
+import { ParlamentContext } from '../../../../context/Parlament';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -108,6 +109,7 @@ interface Props {
 }
 
 export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
+  const { parlament } = useContext(ParlamentContext);
   const [showWarning, setShowWarning] = useState(true);
   const [selectedParty, setSelectedParty] = useState(0);
   const { constituency } = useContext(ConstituencyContext);
@@ -120,6 +122,7 @@ export const VoteVerification: React.FC<Props> = ({ route, navigation }) => {
     variables: {
       procedureIds: localVotes.map(({ procedureId }) => procedureId),
       pageSize: 999999,
+      period: parlament.period,
     },
   });
   const [chartWidth, setChartDimensions] = useState(0);

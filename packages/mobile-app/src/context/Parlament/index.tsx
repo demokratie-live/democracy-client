@@ -79,6 +79,11 @@ const parlaments: Parlaments = {
       procedures: {
         all: true,
       },
+      wom: {
+        institution: true,
+        fractions: false,
+        deputies: false,
+      },
       deputies: true,
     },
   },

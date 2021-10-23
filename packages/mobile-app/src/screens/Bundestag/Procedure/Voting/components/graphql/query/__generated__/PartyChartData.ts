@@ -40,6 +40,7 @@ export interface PartyChartData {
 
 export interface PartyChartDataVariables {
   procedureIds?: string[] | null;
+  period: number;
   pageSize?: number | null;
   offset?: number | null;
 }
