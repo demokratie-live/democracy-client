@@ -27,6 +27,7 @@ import {
 } from './graphql/mutation/__generated__/FinishSearch';
 import { FINISH_SEARCH } from './graphql/mutation/finishSearch';
 import { RootStackParamList } from '../../../routes';
+import { ParlamentContext } from '../../../context/Parlament';
 
 // import searchProcedures from '../../graphql/queries/searchProcedures';
 // import mostSearched from '../../graphql/queries/mostSearched';
@@ -87,6 +88,7 @@ const NoResultsImage = styled.Image.attrs(() => ({
 
 export const Results: React.FC = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const { parlament } = useContext(ParlamentContext);
   const [executeFinishSearch] = useMutation<
     FinishSearch,
     FinishSearchVariables
@@ -103,6 +105,7 @@ export const Results: React.FC = () => {
     {
       variables: {
         term,
+        period: parlament.period,
       },
     },
   );

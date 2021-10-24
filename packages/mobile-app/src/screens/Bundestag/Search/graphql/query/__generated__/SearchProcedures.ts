@@ -56,4 +56,5 @@ export interface SearchProcedures {
 
 export interface SearchProceduresVariables {
   term: string;
+  period: number;
 }
