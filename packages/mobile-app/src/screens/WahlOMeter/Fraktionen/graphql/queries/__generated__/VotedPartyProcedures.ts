@@ -74,4 +74,5 @@ export interface VotedPartyProceduresVariables {
   procedureIds?: string[] | null;
   pageSize?: number | null;
   offset?: number | null;
+  period: number;
 }
