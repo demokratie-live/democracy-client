@@ -106,6 +106,17 @@ const TabViewNavigation: React.FC<Props> = ({ navigation }) => {
           }}
         />
       ) : null}
+      {parlament.screens.procedures.past ? (
+        <TabNavigation.Screen
+          name="Vergangen"
+          component={List}
+          initialParams={{ list: ListType.PAST }}
+          options={{
+            tabBarTestID: 'tabBarPastItem',
+            title: 'Vergangen',
+          }}
+        />
+      ) : null}
       {parlament.screens.procedures.top100 ? (
         <TabNavigation.Screen
           name="Top 100"
@@ -113,14 +124,14 @@ const TabViewNavigation: React.FC<Props> = ({ navigation }) => {
           initialParams={{ list: ListType.TOP100 }}
         />
       ) : null}
-      {parlament.screens.procedures.past || parlament.screens.procedures.all ? (
+      {parlament.screens.procedures.all ? (
         <TabNavigation.Screen
           name="Vergangen"
           component={List}
           initialParams={{ list: ListType.PAST }}
           options={{
             tabBarTestID: 'tabBarPastItem',
-            title: parlament.screens.procedures.past ? 'Vergangen' : 'Alle',
+            title: 'Alle',
           }}
         />
       ) : null}

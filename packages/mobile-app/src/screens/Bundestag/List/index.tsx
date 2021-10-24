@@ -99,10 +99,7 @@ export const List = () => {
     );
   }
 
-  if (
-    route.params.list === ListType.CONFERENCEWEEKS_PLANNED &&
-    data.procedures.length === 0
-  ) {
+  if (data.procedures.length === 0) {
     return <NoConferenceWeekData />;
   }
   let segmentedData: SegmentedData[];
