@@ -46,4 +46,5 @@ export interface WomDeputyListQueryVariables {
   filterTerm?: string | null;
   filterIds?: string[] | null;
   votedProcedureIds: string[];
+  period: number;
 }
