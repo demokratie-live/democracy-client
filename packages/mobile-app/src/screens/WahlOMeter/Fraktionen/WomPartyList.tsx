@@ -21,6 +21,7 @@ import {
 import { VOTED_PARTY_PROCEDURES } from './graphql/queries/proceduresByIdHavingVoteResults';
 import { WomPartyChart } from './WomPartyChart';
 import { WomPartyContext } from './context';
+import { ParlamentContext } from '../../../context/Parlament';
 
 const Container = styled.View`
   background-color: #fff;
@@ -43,6 +44,7 @@ interface Props {
 }
 
 const WomPartyList: React.FC<Props> = ({ onProcedureListItemClick }) => {
+  const { parlament } = useContext(ParlamentContext);
   const { party } = useContext(WomPartyContext);
   const { getLocalVoteSelection } = useContext(LocalVotesContext);
 
@@ -56,7 +58,7 @@ const WomPartyList: React.FC<Props> = ({ onProcedureListItemClick }) => {
     VOTED_PARTY_PROCEDURES,
     {
       returnPartialData: true,
-      variables: { offset: 0, pageSize: 10 },
+      variables: { offset: 0, pageSize: 10, period: parlament.period },
     },
   );
 
