@@ -7,8 +7,14 @@ export const WOM_DEPUTY_LIST = gql`
     $filterTerm: String
     $filterIds: [String!]
     $votedProcedureIds: [String!]!
+    $period: Int!
   ) {
-    deputies(limit: $limit, filterTerm: $filterTerm, filterIds: $filterIds) {
+    deputies(
+      period: $period
+      limit: $limit
+      filterTerm: $filterTerm
+      filterIds: $filterIds
+    ) {
       hasMore
       data {
         _id

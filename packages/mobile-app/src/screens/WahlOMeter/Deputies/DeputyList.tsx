@@ -13,9 +13,11 @@ import {
 import { useNavigation } from '@react-navigation/core';
 import { LocalVotesContext } from '../../../context/LocalVotes';
 import { MatchesBar } from './MatchBar';
+import { ParlamentContext } from '../../../context/Parlament';
 
 export const WomDeputyList: React.FC = () => {
   const navigation = useNavigation();
+  const { parlament } = useContext(ParlamentContext);
   const { localVotes } = useContext(LocalVotesContext);
   const { favorizedDeputies } = useContext(FavorizedDeputiesContext);
   const { data } = useQuery<WomDeputyListQuery, WomDeputyListQueryVariables>(
@@ -25,6 +27,7 @@ export const WomDeputyList: React.FC = () => {
         limit: Math.min(favorizedDeputies.length, 100),
         filterIds: favorizedDeputies,
         votedProcedureIds: localVotes.map(({ procedureId }) => procedureId),
+        period: parlament.period,
       },
     },
   );

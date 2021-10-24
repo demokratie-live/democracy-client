@@ -81,8 +81,8 @@ const parlaments: Parlaments = {
       },
       wom: {
         institution: true,
-        deputies: false,
         fractions: true,
+        deputies: true,
       },
       deputies: true,
     },
