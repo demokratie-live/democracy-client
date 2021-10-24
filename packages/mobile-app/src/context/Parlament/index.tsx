@@ -47,8 +47,8 @@ const parlaments: Parlaments = {
     screens: {
       procedures: {
         inVote: true,
-        top100: false,
-        past: false,
+        past: true,
+        top100: true,
       },
       deputies: true,
     },
@@ -77,6 +77,7 @@ const parlaments: Parlaments = {
     period: 18,
     screens: {
       procedures: {
+        top100: true,
         all: true,
       },
       wom: {
