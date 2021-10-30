@@ -83,39 +83,38 @@ export const getNavStateForProcedure = ({
 }: Args): PartialState<NavigationState> => {
   return {
     type: 'stack',
-    index: 0,
+    index: 1,
     routes: [
       {
         name: 'Sidebar',
         state: {
           type: 'drawer',
           index: 0,
-          routeNames: ['Bundestag', 'WahlOMeter', 'Settings', 'Introduction'],
+          history: [
+            {
+              type: 'route',
+            },
+          ],
           routes: [
             {
               name: 'Bundestag',
               state: {
                 type: 'stack',
-                routeNames: [
-                  'TabView',
-                  'Procedure',
-                  'Voting',
-                  'Filter',
-                  'Search',
-                ],
-                index: 1,
+                index: 0,
                 routes: [
                   {
                     name: 'TabView',
                     state: {
                       type: 'tab',
-                      routeNames: [
-                        'Sitzungswoche',
-                        'Vergangen',
-                        'Top 100',
-                        'DEV',
+                      index: 2,
+                      history: [
+                        {
+                          type: 'route',
+                        },
+                        {
+                          type: 'route',
+                        },
                       ],
-                      index: 1,
                       routes: [
                         {
                           name: 'Sitzungswoche',
@@ -135,19 +134,7 @@ export const getNavStateForProcedure = ({
                             list: 'TOP100',
                           },
                         },
-                        {
-                          name: 'DEV',
-                          params: {
-                            list: 'PREPARATION',
-                          },
-                        },
                       ],
-                    },
-                  },
-                  {
-                    name: 'Procedure',
-                    params: {
-                      procedureId,
                     },
                   },
                 ],
@@ -157,13 +144,31 @@ export const getNavStateForProcedure = ({
               name: 'WahlOMeter',
             },
             {
+              name: 'Abgeordnete',
+            },
+            {
               name: 'Settings',
             },
             {
-              name: 'Introduction',
-              params: {},
+              name: 'Faq',
+            },
+            {
+              name: 'About',
+            },
+            {
+              name: 'Credentials',
+            },
+            {
+              name: 'Donate',
             },
           ],
+        },
+      },
+      {
+        name: 'Procedure',
+        params: {
+          procedureId: procedureId,
+          title: 'Antrag',
         },
       },
     ],
