@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
-export type ParlamentIdentifier = 'BT-20' | 'BT-19' | 'BT-18';
+export type ParlamentIdentifier = 'BT-20' | 'BT-19'; // | 'BT-18';
 type Institutions = 'Bundestag';
 
 interface ParlamentProceduresScreen {
@@ -71,23 +71,23 @@ const parlaments: Parlaments = {
       deputies: true,
     },
   },
-  'BT-18': {
-    identifier: 'BT-18',
-    institution: 'Bundestag',
-    period: 18,
-    screens: {
-      procedures: {
-        top100: true,
-        all: true,
-      },
-      wom: {
-        institution: true,
-        fractions: true,
-        deputies: true,
-      },
-      deputies: true,
-    },
-  },
+  // 'BT-18': {
+  //   identifier: 'BT-18',
+  //   institution: 'Bundestag',
+  //   period: 18,
+  //   screens: {
+  //     procedures: {
+  //       top100: true,
+  //       all: true,
+  //     },
+  //     wom: {
+  //       institution: true,
+  //       fractions: true,
+  //       deputies: true,
+  //     },
+  //     deputies: true,
+  //   },
+  // },
 };
 
 const defaults: ParlamentInterface = {
