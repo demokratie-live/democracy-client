@@ -41,6 +41,7 @@ const getInitialFavorizedDeputies = async () => {
           limit: 100,
           offset: 0,
           filterConstituency: constituency,
+          period: 20,
         },
       })
       .then(({ data }) => {
