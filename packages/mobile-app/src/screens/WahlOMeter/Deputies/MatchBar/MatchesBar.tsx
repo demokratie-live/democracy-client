@@ -63,11 +63,11 @@ export const MatchesBar: React.FC<MatchesBarProps> = ({ decisions }) => {
           height={20}
           data={[
             {
-              value: barChartData.matches.value,
+              value: barChartData.matches.value || 1,
               color: theme.colors.vote.wom.match,
             },
             {
-              value: barChartData.missmatches.value,
+              value: barChartData.missmatches.value || 1,
               color: theme.colors.vote.wom.missmatch,
             },
           ]}
