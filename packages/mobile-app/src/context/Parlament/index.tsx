@@ -50,6 +50,11 @@ const parlaments: Parlaments = {
         past: true,
         top100: true,
       },
+      wom: {
+        institution: true,
+        fractions: true,
+        deputies: true,
+      },
       deputies: true,
     },
   },
