@@ -16,14 +16,35 @@ import { client } from '../Apollo';
 
 export type FavorizedDeputiesStore = string[];
 
-const STORAGEE_KEY = 'FAVORIZED_DEPUTIES';
+const STORAGE_KEY = 'FAVORIZED_DEPUTIES';
+const LP_INITIAL_STATE_STORAGE_KEY = 'LP_INITIAL_STATE';
+
+const checkInitialState = async (period: number) => {
+  const lpInitalStates = await AsyncStorage.getItem(
+    LP_INITIAL_STATE_STORAGE_KEY,
+  ).then(data => (data ? (JSON.parse(data) as number[]) : undefined));
+  return !!lpInitalStates?.includes(period);
+};
+
+const getInitialStates = async () => {
+  const lpInitalStates = await AsyncStorage.getItem(
+    LP_INITIAL_STATE_STORAGE_KEY,
+  ).then(data => (data ? (JSON.parse(data) as number[]) : undefined));
+  return lpInitalStates || [];
+};
+
+const addInitialState = async (period: number) => {
+  const lpInitialStaqtes = await getInitialStates();
+  const data = JSON.stringify([...lpInitialStaqtes, period]);
+  await AsyncStorage.setItem(LP_INITIAL_STATE_STORAGE_KEY, data);
+};
 
 const saveFavorizedDeputies = (ids: FavorizedDeputiesStore): Promise<void> => {
   const data = JSON.stringify(ids);
-  return AsyncStorage.setItem(STORAGEE_KEY, data);
+  return AsyncStorage.setItem(STORAGE_KEY, data);
 };
 
-const getInitialFavorizedDeputies = async () => {
+const getInitialFavorizedDeputies = async ({ period }: { period: number }) => {
   let initialDeputies = [
     '519324',
     '523750',
@@ -41,7 +62,7 @@ const getInitialFavorizedDeputies = async () => {
           limit: 100,
           offset: 0,
           filterConstituency: constituency,
-          period: 20,
+          period,
         },
       })
       .then(({ data }) => {
@@ -57,19 +78,31 @@ const getInitialFavorizedDeputies = async () => {
 };
 
 export const getFavorizedDeputies = async () => {
-  const favorizedDeputies = await AsyncStorage.getItem(
-    STORAGEE_KEY,
-  ).then(data => (data ? (JSON.parse(data) as string[]) : undefined));
+  const favorizedDeputies = await AsyncStorage.getItem(STORAGE_KEY).then(data =>
+    data ? (JSON.parse(data) as string[]) : undefined,
+  );
 
   let initialDeputies: string[] = [];
 
   if (!favorizedDeputies) {
-    initialDeputies = await getInitialFavorizedDeputies();
-    saveFavorizedDeputies(initialDeputies);
+    initialDeputies = [...(await getInitialFavorizedDeputies({ period: 19 }))];
+    await saveFavorizedDeputies(initialDeputies);
+  }
+
+  if (!(await checkInitialState(20))) {
+    initialDeputies = [
+      ...initialDeputies,
+      ...(await getInitialFavorizedDeputies({ period: 20 })),
+    ];
+    await addInitialState(20);
+    await saveFavorizedDeputies([
+      ...initialDeputies,
+      ...(favorizedDeputies || []),
+    ]);
   }
 
   return (favorizedDeputies
-    ? favorizedDeputies
+    ? [...favorizedDeputies, ...initialDeputies]
     : initialDeputies) as FavorizedDeputiesStore;
 };
 
