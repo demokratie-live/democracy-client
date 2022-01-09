@@ -33,39 +33,10 @@ Innerhalb unserer Software haben wir einen Mechanismus implementiert, der die gg
 Solltest Du Diskrepanzen zwischen dem Beschlusstext und unserer Ergebnisaufzeichnung feststellen, bitten wir Dich, diese an [prototyping@democracy-deutschland.de](mailto:prototyping@democracy-deutschland.de) zu reporten. `,
   },
   {
-    title: 'Wo ist der Reiter Sitzungswoche?',
+    title: 'Wie finde ich Gesetze der vergangenen 19. Legislaturperiode ?',
     text:
-      'In der Bundestagswahl-Version der App haben wir den Reiter "Sitzungswoche" durch "Empfohlen" ersetzt. Da die letzte Sitzungswoche des 19. Bundestages Ende Juni stattfand, wäre dieser Bereich bis zur nächsten Sitzungswoche des 20. Bundestages nach der Wahl leer geblieben. ',
-  },
-  {
-    title: 'Welche Vorgänge zeigt ihr in Empfohlen?',
-    text:
-      'Unter "Empfohlen" findest Du eine – nach Themenkategorien sortierte – Liste an besonders interessanten Gesetzentwürfen und Anträgen der endenden 19. Legislaturperiode des Bundestages. Diese Liste wurde von DEMOCRACY Deutschland e.V. redaktionell zusammengestellt. ',
-  },
-  {
-    title: 'Wie habt ihr die Empfehlungen ausgewählt?',
-    text: `DEMOCRACY Deutschland e.V. hat sich beim Erstellen der Empfehlungen an folgenden Kriterien orientiert:
-
-1. _Inhaltliche / thematische Breite_: Unsere Empfehlungen bilden ein breites Spektrum politischer Inhalte ab. Für die Kategorien haben wir uns am [ZDF-Parlameter](https://parlameter.zdf.de/) orientiert. Innerhalb der Kategorien porträtieren wir die größtmögliche inhaltliche Variation an politischen Positionen.
-2. _Verständlichkeit / Zugänglichkeit_: Für die meisten Gesetze, die wir ausgewählt haben, liegen Zusammenfassungen des Bundestages vor. Bei Anträgen, ohne Inhaltszusammenfassungen, haben wir uns daran orientiert, dass der Titel den Inhalt passend beschreibt.
-3. _Fraktionelle Ausgeglichenheit_: Wir haben so ausgewählt, dass alle Fraktionen quantitativ gleichmäßig berücksichtigt werden. Dabei haben wir sowohl die eigenen Vorgänge der Fraktionen sowie das Stimmverhalten mit Vorgängen anderer Fraktionen berücksichtigt.
-4. _Öffentliche Aufmerksamkeit_: Die gewählten Gesetzentwürfe und Anträge haben in den Medien und der allgemeinen politischen Debatte viel Aufmerksamkeit erhalten, als sie zur Abstimmung standen. `,
-  },
-  {
-    title: 'Wie sehe ich alle Gesetze der vergangenen Legislaturperiode?',
-    text: `In der Bundestagswahl-Version der App haben wir den Reiter "Vergangen" durch "Alle" ersetzt, da die letzte Sitzungswoche des 19. Bundestages Ende Juni stattfand. Dort werden sämtliche Vorgänge der endenden 19. Legislaturperiode chronologisch nach Sitzungswochen gruppiert, angezeigt. 
-      
-      Ein konkretes Thema findest Du auch über die Suche. `,
-  },
-  {
-    title: 'Habt ihr die App zur Bundestagswahl verändert?',
-    text: `Ja. Der neue Reiter "Empfohlen" soll Dir Stoff für den faktenbasierten Wahlhelfer (Wahl-O-Meter) liefern, anstatt Dich mit einem leeren Sitzungswochen-Reiter und den langen Listen "Top 100" und "Vergangen" zu überfordern. 
-Außerdem enthält die neue Version eine Abgeordnetensuche, womit Du jeden Politiker auf Anhieb finden kannst, sowie den ersten retrospektiven Kandidatenckeck, der Dein Abstimmungsverhalten mit den Handlungen aller Kandidaten des Bundestages abgleicht.`,
-  },
-  {
-    title: 'Gibt es nach der Wahl wieder die bekannte Version der App?',
-    text:
-      'Ja und Nein. Nach der Bundestagswahl am 26. September 2021 wird die App um eine neue Liste mit der 20. Legislaturperiode ergänzt. Dort wird aus "Empfohlen" wieder "Sitzungswoche", um bei den aktuellen Abstimmungen des Bundestages auf dem Laufenden bleiben zu können. Die alten Abstimmungen, Listen und der Wahl-O-Meter aus der vergangenen 19. Legislaturperiode bleiben Dir selbstverständlich erhalten und können in den Einstellungen ein- und ausgeblendet werden. ',
+      `Sämtliche Vorgänge der vergangen 19. Legislaturperiode findest Du unter LP 19 Vorgänge im Side-Menu. 
+      Falls Dein Side-Menu die 19. Legislaturperiode nicht anzeigt, kannst Du sie in den App-Einstellungen unter Legislaturperioden aktivieren. `,
   },
   {
     title: 'Gebt ihr meine Abstimmungsdaten an Dritte weiter?',
@@ -96,10 +67,10 @@ Finanziell unterstützen kannst Du via [https://www.democracy-deutschland.de/#!d
     text: `[Spenden und Daueraufträge](https://www.democracy-deutschland.de/#!donate) sind nur eine Möglichkeit, uns zu unterstützen. Hier haben wir eine Liste von Tätigkeiten aufgeführt, die Du sofort angehen kannst, wenn Du bei DEMOCRACY mithelfen möchtest.
 
 **LEVEL 1 – Für Einsteiger**
-- Benutze DEMOCRACY und hol Dir Deine faktenbasierte Wahlhilfe zur Bundestagswahl 2021
+- Benutze DEMOCRACY, stimme regelmäßig app und zeig Deinen Vertretern, was Du willst
 - Sprich mit Deinen Freunden über uns
-- Teile unsere [Wahl-O-Meter-Erklärfilm](https://www.youtube.com/watch?v=uWwQquy_MD0) mit Deinen Freunden im Sozialen Netzwerk Deiner Wahl
-- Kommentiere, like und teile DEMOCRACY-Beiträge in Social Media.
+- Teile unseren [Erklärfilm](https://www.youtube.com/watch?v=DFXcnRdXA7k) mit Deinen Freunden im Sozialen Netzwerk Deiner Wahl
+- Kommentiere, like und teile DEMOCRACY-Beiträge in Social Media
 - Bewerte DEMOCRACY im App- bzw. PlayStore mit bis zu 5 Sternen
 - Entwickler-Special: Gib uns einen [Stern auf Github](https://github.com/demokratie-live/democracy-client)
 
