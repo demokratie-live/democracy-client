@@ -22,7 +22,6 @@ import { Vote, VoteVariables } from './graphql/mutation/__generated__/vote';
 import { VoteSelection } from '../../../../../../__generated__/globalTypes';
 import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { BundestagRootStackParamList } from '../../../../../routes/Sidebar/Bundestag';
 import { PROCEDURE } from '../../graphql/query/Procedure';
 import { LocalVotesContext } from '../../../../../context/LocalVotes';
 import { ConstituencyContext } from '../../../../../context/Constituency';
@@ -34,6 +33,7 @@ import { SEARCH_PROCEDURES } from '../../../Search/graphql/query/searchProcedure
 import { SearchContext } from '../../../../../context/Search';
 
 import { NotificationsContext } from '../../../../../context/NotificationPermission';
+import { RootStackParamList } from '../../../../../routes';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -101,7 +101,7 @@ const BalloutBox: React.FC<Props> = ({
   const { term } = useContext(SearchContext);
   const constituencies = constituency ? [constituency] : [];
   const navigation = useNavigation<
-    StackNavigationProp<BundestagRootStackParamList, 'Voting'>
+    StackNavigationProp<RootStackParamList, 'Voting'>
   >();
   let searchRefetchQuery: PureQueryOptions[] = [];
   if (term) {

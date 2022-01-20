@@ -44,14 +44,14 @@ export const pieChartData = ({
   return [
     {
       label: 'Übereinstimmungen',
-      percent: pieData.matches / pieData.count,
+      percent: pieData.matches / pieData.count || 0,
       value: pieData.matches,
       total: pieData.count,
       color: '#f5a623',
     },
     {
       label: 'Differenzen',
-      percent: pieData.diffs / pieData.count,
+      percent: pieData.diffs / pieData.count || 0,
       value: pieData.diffs,
       total: pieData.count,
       color: '#b1b3b4',

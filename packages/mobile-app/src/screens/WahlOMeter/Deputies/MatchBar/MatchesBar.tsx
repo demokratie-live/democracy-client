@@ -55,7 +55,7 @@ export const MatchesBar: React.FC<MatchesBarProps> = ({ decisions }) => {
     setWidth(nativeEvent.layout.width);
   };
 
-  return (
+  return barChartData.matches.value + barChartData.matches.value > 0 ? (
     <S.Wrapper onLayout={handleOnLayout}>
       <S.BarWrapper width="100%" height={20}>
         <Bar
@@ -75,5 +75,5 @@ export const MatchesBar: React.FC<MatchesBarProps> = ({ decisions }) => {
         />
       </S.BarWrapper>
     </S.Wrapper>
-  );
+  ) : null;
 };
