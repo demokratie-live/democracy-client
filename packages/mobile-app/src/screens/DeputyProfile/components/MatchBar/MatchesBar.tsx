@@ -52,8 +52,8 @@ export const MatchesBar: React.FC<MatchesBarProps> = ({ decisions }) => {
   }, {} as BarData);
 
   const barWidth = Math.min(width - 28 * 2, 464);
-
-  return (
+  console.log(barChartData);
+  return barChartData.matches.value + barChartData.matches.value > 0 ? (
     <S.Wrapper>
       <S.BarWrapper width={barWidth} height={30}>
         <Bar
@@ -61,11 +61,11 @@ export const MatchesBar: React.FC<MatchesBarProps> = ({ decisions }) => {
           height={30}
           data={[
             {
-              value: barChartData.matches.value || 1,
+              value: barChartData.matches.value,
               color: theme.colors.vote.wom.match,
             },
             {
-              value: barChartData.missmatches.value || 1,
+              value: barChartData.missmatches.value,
               color: theme.colors.vote.wom.missmatch,
             },
           ]}
@@ -76,5 +76,5 @@ export const MatchesBar: React.FC<MatchesBarProps> = ({ decisions }) => {
         <ChartLegend data={preparedData} />
       </S.ChartLegendWrapper>
     </S.Wrapper>
-  );
+  ) : null;
 };

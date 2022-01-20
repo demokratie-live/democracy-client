@@ -23,7 +23,11 @@ import { Code } from '../screens/modals/Verification/Code';
 import { SmsDonate } from '../screens/modals/Verification/Donate';
 import SyncVotes from '../screens/Settings/SyncVotes';
 import CaptureSyncVotes from '../screens/Settings/SyncVotes/Capture';
-import { Procedure, VoteVerification } from '../screens/Bundestag';
+import {
+  OutcomePushs,
+  Procedure,
+  VoteVerification,
+} from '../screens/Bundestag';
 import { VoteSelection } from '../../__generated__/globalTypes';
 import { MemberProfil } from '../screens/WahlOMeter/MemberProfil';
 
@@ -49,6 +53,7 @@ export type RootStackParamList = {
     procedureObjId: string;
   };
   MemberProfil: undefined;
+  OutcomePush: { finishAction: () => void; title: string; procedureId: string };
   Procedure: { procedureId: string; title: string };
 };
 
@@ -270,6 +275,13 @@ const Navigation = () => {
             name="Procedure"
             component={Procedure}
             options={({ route }) => ({ title: route.params.title || '' })}
+          />
+          <RootStack.Screen
+            name="OutcomePush"
+            component={OutcomePushs}
+            options={{
+              headerShown: false,
+            }}
           />
         </RootStack.Navigator>
       </NavigationContainer>
