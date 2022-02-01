@@ -96,7 +96,7 @@ const parlaments: Parlaments = {
 };
 
 const defaults: ParlamentInterface = {
-  parlament: parlaments['BT-19'],
+  parlament: parlaments['BT-20'],
   setParlament: () => {
     throw new Error('ParlamentContext: setParlament function is not defined');
   },
