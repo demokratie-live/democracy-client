@@ -139,6 +139,7 @@ class VotesLocal {
     }
 
     // Delete Data, Add Index
+    // @ts-ignore
     delete data.d;
     data.i = index;
 

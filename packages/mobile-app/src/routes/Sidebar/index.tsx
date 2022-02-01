@@ -17,6 +17,7 @@ import CredentialsRootNavigation from './Credentials';
 import DonateRootNavigation from './Donate';
 import { AvatarIcon } from '@democracy-deutschland/ui';
 import AbgeordneteRootNavigation from './Abgeordnete';
+import { DevScreen } from '../../screens/Development';
 
 export type SidebarParamList = {
   Bundestag: undefined;
@@ -27,6 +28,7 @@ export type SidebarParamList = {
   Credentials: undefined;
   Donate: undefined;
   Abgeordnete: undefined;
+  Development: undefined;
 };
 
 const SidebarDrawer = createDrawerNavigator<SidebarParamList>();
@@ -134,6 +136,16 @@ export const SidebarNavigation = () => {
         name={'Donate'}
         component={DonateRootNavigation}
       />
+      {process.env.NODE_ENV === 'development' && (
+        <SidebarDrawer.Screen
+          options={{
+            drawerLabel: 'Development',
+            gestureEnabled: true,
+          }}
+          name={'Development'}
+          component={DevScreen}
+        />
+      )}
     </SidebarDrawer.Navigator>
   );
 };
