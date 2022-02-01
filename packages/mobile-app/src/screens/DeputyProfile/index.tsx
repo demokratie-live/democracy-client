@@ -33,7 +33,8 @@ import {
   GetDeputyProcedures_deputy_procedures,
 } from './graphql/query/__generated__/GetDeputyProcedures';
 import * as S from './Foldable.styled';
-import { AbgeordneteRootStackParamList } from '../../routes/Sidebar/Abgeordnete';
+import { RootStackParamList } from '../../routes';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 const MemberImageWrapper = styled.View`
   width: 100%;
@@ -65,10 +66,7 @@ export interface Contacts {
   username?: string;
 }
 
-type DeputyScreenRouteProp = RouteProp<
-  AbgeordneteRootStackParamList,
-  'DeputyProfile'
->;
+type DeputyScreenRouteProp = RouteProp<RootStackParamList, 'DeputyProfile'>;
 
 type Props = {
   route: DeputyScreenRouteProp;
@@ -77,7 +75,7 @@ type Props = {
 export const DeputyProfil: React.FC<Props> = ({ route }) => {
   const [showProcedures, setShowProcedures] = useState(true);
   const { localVotes } = useContext(LocalVotesContext);
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const { data, previousData } = useQuery<GetDeputy, GetDeputyVariables>(
     GET_DEPUTY,
     {
@@ -300,7 +298,7 @@ export const DeputyProfil: React.FC<Props> = ({ route }) => {
         return (
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate('Procedure', {
+              navigation.push('Procedure', {
                 procedureId: item.procedure.procedureId,
                 title: item.procedure.type,
               })

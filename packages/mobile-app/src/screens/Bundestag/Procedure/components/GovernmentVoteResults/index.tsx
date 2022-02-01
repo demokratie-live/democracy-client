@@ -4,6 +4,7 @@ import Carousel from 'react-native-snap-carousel';
 
 // Components
 import BarChart from './BarChart';
+
 import PartyChart from './PartyChart';
 
 // GraphQL
@@ -71,7 +72,6 @@ const SwiperStyled = styled(Carousel).attrs({
 interface Props {
   voteResults: Procedure_procedure_voteResults;
   currentStatus: string | null;
-  procedureId: string;
   voted: boolean;
 }
 
