@@ -13,7 +13,6 @@ import { Procedure, VoteVerification } from '../../../screens/Bundestag';
 import { VoteSelection } from '../../../../__generated__/globalTypes';
 import { theme } from '../../../styles';
 import { BurgerMenuButton } from '../../../components/MenuButton';
-import { DeputyProfil } from '../../../screens/DeputyProfile';
 import { Abgeordnete } from '../../../screens/Abgeordnete';
 
 export type WahlOMeterStackParamList = {
@@ -24,7 +23,6 @@ export type WahlOMeterStackParamList = {
     procedureId: string;
     procedureObjId: string;
   };
-  DeputyProfile: { id: string };
   EditDeputyList: { editMode: boolean };
 };
 
@@ -78,13 +76,6 @@ const WahlOMeterNavigation = () => {
         component={VoteVerification}
         options={{
           title: 'Wahlurne',
-        }}
-      />
-      <WahlOMeterStack.Screen
-        name="DeputyProfile"
-        component={DeputyProfil}
-        options={{
-          title: '',
         }}
       />
       <WahlOMeterStack.Screen

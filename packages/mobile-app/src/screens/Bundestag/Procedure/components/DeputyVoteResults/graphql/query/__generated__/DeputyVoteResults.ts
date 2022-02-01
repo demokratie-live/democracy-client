@@ -11,6 +11,7 @@ import { VoteSelection } from "./../../../../../../../../../__generated__/global
 
 export interface DeputyVoteResults_procedure_voteResults_deputyVotes_deputy {
   __typename: "Deputy";
+  webId: string;
   imgURL: string;
   name: string;
   party: string | null;
@@ -40,5 +41,5 @@ export interface DeputyVoteResults {
 
 export interface DeputyVoteResultsVariables {
   procedureId: string;
-  constituencies: string[];
+  webIds: string[];
 }
