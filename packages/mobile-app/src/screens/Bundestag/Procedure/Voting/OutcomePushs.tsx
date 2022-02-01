@@ -6,7 +6,6 @@ import SvgIconAppIos from '@democracy-deutschland/mobile-ui/src/components/Icons
 import SvgNewMarker from '@democracy-deutschland/mobile-ui/src/components/Icons/Newmarker';
 import { Dimensions, Switch, View } from 'react-native';
 import { NotificationsContext } from '../../../../context/NotificationPermission';
-import { BundestagRootStackParamList } from '../../../../routes/Sidebar/Bundestag';
 import { TOGGLE_NOTIFICATION } from '../../../Bundestag/Procedure/graphql/muatation/toggleNotification';
 import { PROCEDURE } from '../../../Bundestag/Procedure/graphql/query/Procedure';
 import { useMutation } from '@apollo/client';
@@ -16,10 +15,11 @@ import {
 } from '../../../Bundestag/Procedure/graphql/muatation/__generated__/ToggleNotification';
 import { defaultNotificationData } from '../../../modals/Introduction/PushInstructions/data';
 import { NotificationBox } from '../../../modals/Introduction/PushInstructions/NotificationBox';
+import { RootStackParamList } from '../../../../routes';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 
-type RoutePropOP = RouteProp<BundestagRootStackParamList, 'OutcomePush'>;
+type RoutePropOP = RouteProp<RootStackParamList, 'OutcomePush'>;
 
 const ScrollView = styled.ScrollView.attrs({
   contentContainerStyle: {
