@@ -29,6 +29,7 @@ export const Abgeordnete: React.FC = () => {
   const [searchTerm, setSearchTerm] = React.useState('');
   const navigation = useNavigation();
   const { favorizedDeputies } = useContext(FavorizedDeputiesContext);
+
   // const { constituency } = useContext(ConstituencyContext);
   // const { isVerified } = useContext(InitialStateContext);
 

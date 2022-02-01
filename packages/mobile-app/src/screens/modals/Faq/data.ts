@@ -34,8 +34,7 @@ Solltest Du Diskrepanzen zwischen dem Beschlusstext und unserer Ergebnisaufzeich
   },
   {
     title: 'Wie finde ich Gesetze der vergangenen 19. Legislaturperiode ?',
-    text:
-      `Sämtliche Vorgänge der vergangen 19. Legislaturperiode findest Du unter LP 19 Vorgänge im Side-Menu. 
+    text: `Sämtliche Vorgänge der vergangen 19. Legislaturperiode findest Du unter LP 19 Vorgänge im Side-Menu. 
       Falls Dein Side-Menu die 19. Legislaturperiode nicht anzeigt, kannst Du sie in den App-Einstellungen unter Legislaturperioden aktivieren. `,
   },
   {

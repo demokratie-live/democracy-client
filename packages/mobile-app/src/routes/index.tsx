@@ -30,6 +30,7 @@ import {
 } from '../screens/Bundestag';
 import { VoteSelection } from '../../__generated__/globalTypes';
 import { MemberProfil } from '../screens/WahlOMeter/MemberProfil';
+import { DeputyProfil } from '../screens/DeputyProfile';
 
 export type RootStackParamList = {
   Sidebar: undefined;
@@ -55,6 +56,7 @@ export type RootStackParamList = {
   MemberProfil: undefined;
   OutcomePush: { finishAction: () => void; title: string; procedureId: string };
   Procedure: { procedureId: string; title: string };
+  DeputyProfile: { id: string };
 };
 
 const RootStack = createStackNavigator<RootStackParamList>();
@@ -66,7 +68,7 @@ const Navigation = () => {
     getStateFromPath: path => {
       return getNavInitStateForProcedure({
         // TODO make this deeplinking more save
-        procedureId: path.substring(path.length - 6),
+        procedureId: path.substr(path.length - 6),
       });
     },
   });
@@ -281,6 +283,13 @@ const Navigation = () => {
             component={OutcomePushs}
             options={{
               headerShown: false,
+            }}
+          />
+          <RootStack.Screen
+            name="DeputyProfile"
+            component={DeputyProfil}
+            options={{
+              title: '',
             }}
           />
         </RootStack.Navigator>
