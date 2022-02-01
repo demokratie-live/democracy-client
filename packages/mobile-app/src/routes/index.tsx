@@ -66,7 +66,7 @@ const Navigation = () => {
     getStateFromPath: path => {
       return getNavInitStateForProcedure({
         // TODO make this deeplinking more save
-        procedureId: path.substr(path.length - 6),
+        procedureId: path.substring(path.length - 6),
       });
     },
   });
