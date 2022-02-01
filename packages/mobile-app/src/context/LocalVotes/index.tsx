@@ -12,6 +12,7 @@ interface LocalVotesInterface {
     procedureId: string,
   ) => ChainEntry['selection'] | undefined;
   updateLocalVotesStore: () => Promise<void>;
+  deleteAllLocalVotes: () => Promise<boolean>;
 }
 
 const defaults: LocalVotesInterface = {
@@ -27,6 +28,11 @@ const defaults: LocalVotesInterface = {
   updateLocalVotesStore: () => {
     throw new Error(
       'LocalVotesContext: updateLocalVotesStore function is not defined',
+    );
+  },
+  deleteAllLocalVotes: () => {
+    throw new Error(
+      'LocalVotesContext: deleteAllLocalVotes function is not defined',
     );
   },
 };
@@ -72,6 +78,10 @@ export const LocalVotesProvider: FC = ({ children }) => {
     });
   };
 
+  const deleteAllLocalVotes = () => {
+    return VotesLocal.reset();
+  };
+
   return (
     <LocalVotesContext.Provider
       value={{
@@ -79,6 +89,7 @@ export const LocalVotesProvider: FC = ({ children }) => {
         setLocalVote,
         getLocalVoteSelection,
         updateLocalVotesStore,
+        deleteAllLocalVotes,
       }}>
       {children}
     </LocalVotesContext.Provider>

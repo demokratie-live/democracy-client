@@ -53,7 +53,7 @@ export const MatchesBar: React.FC<MatchesBarProps> = ({ decisions }) => {
 
   const barWidth = Math.min(width - 28 * 2, 464);
   console.log(barChartData);
-  return barChartData.matches.value + barChartData.matches.value > 0 ? (
+  return barChartData.matches.value + barChartData.missmatches.value > 0 ? (
     <S.Wrapper>
       <S.BarWrapper width={barWidth} height={30}>
         <Bar
