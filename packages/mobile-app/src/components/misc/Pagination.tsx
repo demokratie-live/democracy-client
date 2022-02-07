@@ -17,7 +17,7 @@ export const CarouselPagination: React.FC<PaginationProps> = ({
       activeDotIndex={active}
       containerStyle={{
         paddingTop: 10,
-        paddingBottom: 20,
+        paddingBottom: 18,
       }}
       dotStyle={{
         width: 10,
