@@ -56,6 +56,7 @@ const TextLighGrey = styled(Text)`
 const Decision = styled.Text<{ decision: string | null }>`
   font-size: 21px;
   padding-top: 14px;
+  padding-bottom: 3px;
   color: ${({ decision }) => {
     switch (decision) {
       case 'YES':

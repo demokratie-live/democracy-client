@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Dimensions, ScaledSize } from 'react-native';
+import { Dimensions, ScaledSize, View } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 
 import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Folding';
@@ -118,7 +118,7 @@ export const DeputyVoteResultSlider: React.FC<Props> = ({
       )) || [];
 
     return (
-      <>
+      <View style={{ marginBottom: -18, marginTop: 10 }}>
         <SwiperStyled
           data={screens}
           renderItem={renderItem}
@@ -127,7 +127,7 @@ export const DeputyVoteResultSlider: React.FC<Props> = ({
           onSnapToItem={setActiveSlide}
         />
         <CarouselPagination length={screens.length} active={activeSlide} />
-      </>
+      </View>
     );
   };
 
