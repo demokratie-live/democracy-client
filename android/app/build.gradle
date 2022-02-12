@@ -130,6 +130,23 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
+    flavorDimensions "default"
+
+    productFlavors {
+        prod {
+            minSdkVersion rootProject.ext.minSdkVersion
+            applicationId "de.democracydeutschland.app"
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            resValue "string", "build_config_package", "com.myapp"
+        }
+        internal {
+            minSdkVersion rootProject.ext.minSdkVersion
+            applicationId "de.democracydeutschland.app.internal"
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            resValue "string", "build_config_package", "com.myapp"
+        }
+    }
+
     defaultConfig {
         applicationId "de.democracydeutschland.app"
         minSdkVersion rootProject.ext.minSdkVersion
