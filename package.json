@@ -17,11 +17,14 @@
   },
   "dependencies": {
     "@democracy-deutschland/ui": "^0.0.5-alpha.1",
+    "@react-navigation/native": "^6.0.8",
     "d3-array": "^3.1.1",
     "d3-scale": "^4.0.2",
     "d3-shape": "^3.1.0",
     "react": "17.0.2",
     "react-native": "0.67.2",
+    "react-native-safe-area-context": "^3.3.2",
+    "react-native-screens": "^3.11.1",
     "react-native-svg": "^12.1.1",
     "styled-components": "^5.3.3"
   },
