@@ -1,0 +1,6 @@
+{
+  "compilerOptions": {
+    "isolatedModules": false
+  },
+  "exclude": ["environments.ts"]
+}
