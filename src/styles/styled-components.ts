@@ -1,6 +1,6 @@
 import * as styledComponents from 'styled-components/native';
-import {ThemeInterface} from './theme';
-import {DefaultTheme} from '@democracy-deutschland/ui';
+import { ThemeInterface } from './theme';
+import { DefaultTheme } from '@democracy-deutschland/ui';
 
 const {
   default: styled,
@@ -10,4 +10,4 @@ const {
   ThemeInterface & DefaultTheme
 >;
 
-export {css, ThemeProvider, styled};
+export { css, ThemeProvider, styled };

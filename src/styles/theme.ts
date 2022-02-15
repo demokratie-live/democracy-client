@@ -1,4 +1,4 @@
-import {lightTheme, DefaultTheme} from '@democracy-deutschland/ui';
+import { lightTheme, DefaultTheme } from '@democracy-deutschland/ui';
 
 export interface ThemeInterface {
   oldColors: {
@@ -58,4 +58,4 @@ const myTheme: ThemeInterface = {
 
 type TheTheme = ThemeInterface & DefaultTheme;
 
-export const theme: TheTheme = {...myTheme, ...lightTheme};
+export const theme: TheTheme = { ...myTheme, ...lightTheme };

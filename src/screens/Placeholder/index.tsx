@@ -1,14 +1,14 @@
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import React, {useState} from 'react';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import React, { useState } from 'react';
 import * as S from './Placeholder.styles';
-import {RootStackParamList} from '../../routes';
-import {Text, TouchableOpacity} from 'react-native';
+import { RootStackParamList } from '../../routes';
+import { Text, TouchableOpacity } from 'react-native';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 export const PlaceholderScreen: React.FC<Props> = ({
   route: {
-    params: {title},
+    params: { title },
   },
 }) => {
   const [showHello, setShowHello] = useState(false);
