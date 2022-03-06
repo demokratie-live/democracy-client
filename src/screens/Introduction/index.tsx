@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { useNavigation, RouteProp } from '@react-navigation/core';
 import styled from 'styled-components/native';
 
@@ -12,6 +12,8 @@ import { useRecoilValue } from 'recoil';
 import { initialState } from '../../api/state/initialState';
 import { Pager } from './components/Pager';
 import { Slide, slidesData } from './components';
+import { PushInstructions } from './PushInstructions';
+import { NotificationsContext } from '../../api/state/notificationPermission';
 
 /**
  * TODO: Reenable NotificationContext
@@ -31,7 +33,7 @@ type Props = {
 const Introduction: FC<Props> = ({ route }) => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { isVerified, setLastStartWithVersion } = useRecoilValue(initialState);
-  // const { notificationSettings, hasPermissions } = useContext(NotificationsContext);
+  const { notificationSettings, hasPermissions } = useContext(NotificationsContext);
   let { lastStartWithVersion, done } = {
     lastStartWithVersion: '',
     done: undefined,
@@ -66,9 +68,9 @@ const Introduction: FC<Props> = ({ route }) => {
     />
   ));
 
-  // if (!notificationSettings.outcomePushs || !notificationSettings.enabled || !hasPermissions) {
-  //   slideScreens.push(<PushInstructions key="push-instructions" finishAction={finishAction} />);
-  // }
+  if (!notificationSettings.outcomePushs || !notificationSettings.enabled || !hasPermissions) {
+    slideScreens.push(<PushInstructions key="push-instructions" finishAction={finishAction} />);
+  }
 
   // if (slideScreens.length === 0) {
   //   setLastStartWithVersion(getVersion());

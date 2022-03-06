@@ -1,13 +1,13 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { NotificationBox } from './NotificationBox';
 import { defaultNotificationData } from './data';
-import { useNavigation } from '@react-navigation/core';
 import { Dimensions, Switch, View } from 'react-native';
 // import { NotificationsContext } from '../../../../context/NotificationPermission';
 import styled from 'styled-components/native';
 import { Button } from '../../../components/Button';
 import SvgIconappios from '../../../components/Icons/IconAppIos';
 import SvgNewmarker from '../../../components/Icons/Newmarker';
+import { NotificationsContext } from '../../../api/state/notificationPermission';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 
@@ -59,6 +59,11 @@ const Highlight = styled.Text`
   color: #000;
 `;
 
+const ActivateButton = styled(Button)`
+  marginHorizontal: 18,
+  width: DEVICE_WIDTH - 36,
+`;
+
 export interface Notification {
   title: string;
   text: string;
@@ -71,9 +76,8 @@ interface Props {
 }
 
 export const PushInstructions: React.FC<Props> = ({ alreadyKnown = false, finishAction }) => {
-  const navigation = useNavigation();
   const [pushActive, setPushActive] = useState(true);
-  // const { requestToken, update: updateNotificationSettings } = useContext(NotificationsContext);
+  const { requestToken, update: updateNotificationSettings } = useContext(NotificationsContext);
 
   const notification = {
     title: defaultNotificationData.outcomePushs.title,
@@ -82,20 +86,12 @@ export const PushInstructions: React.FC<Props> = ({ alreadyKnown = false, finish
   };
 
   const pressActivate = () => {
-    // requestToken();
-    if (!alreadyKnown) {
-      // navigation.reset({
-      //   index: 0,
-      //   routes: [{ name: 'Sidebar' }],
-      // });
-    }
-    // updateNotificationSettings({
-    //   enabled: true,
-    //   outcomePushs: true,
-    // });
-    if (!alreadyKnown) {
-      finishAction();
-    }
+    requestToken();
+    updateNotificationSettings({
+      enabled: true,
+      outcomePushs: true,
+    });
+    finishAction();
   };
 
   return (
@@ -119,7 +115,7 @@ export const PushInstructions: React.FC<Props> = ({ alreadyKnown = false, finish
         )}
         <View>
           <NotificationBox
-            icon={require('@democracy-deutschland/mobile-ui/src/components/Introduction/assets/icon.logo.png')}
+            icon={require('./assets/icon.logo.png')}
             owner="DEMOCRACY"
             title={notification.title}
             text={notification.text}
@@ -136,11 +132,7 @@ export const PushInstructions: React.FC<Props> = ({ alreadyKnown = false, finish
           <SwitchText>Bundestagsergebnisse immer automatisch erhalten</SwitchText>
           <Switch value={pushActive} onValueChange={setPushActive} />
         </SwitchWrapper>
-        <Button
-          style={{
-            marginHorizontal: 18,
-            width: DEVICE_WIDTH - 36,
-          }}
+        <ActivateButton
           backgroundColor="blue"
           textColor="white"
           text="Aktivieren"

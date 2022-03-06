@@ -55,11 +55,17 @@ export const useInitialState = () => {
       .catch(console.error);
   };
 
-  setInitialState({
-    verificationQueryRunning,
-    lastStartWithVersion: lastStartVersion,
-    setLastStartWithVersion,
-    isVerified,
-    refetchMe,
+  useEffect(() => {
+    setInitialState({
+      verificationQueryRunning,
+      lastStartWithVersion: lastStartVersion,
+      setLastStartWithVersion,
+      isVerified,
+      refetchMe,
+    });
   });
+
+  return {
+    lastStartWithVersion: lastStartVersion,
+  };
 };

@@ -76,6 +76,8 @@ PODS:
   - glog (0.3.5)
   - libevent (2.1.12)
   - OpenSSL-Universal (1.1.180)
+  - Permission-Notifications (3.3.0):
+    - RNPermissions
   - RCT-Folly (2021.06.28.00-v2):
     - boost
     - DoubleConversion
@@ -274,6 +276,8 @@ PODS:
   - React-jsinspector (0.67.2)
   - React-logger (0.67.2):
     - glog
+  - react-native-notifications (4.2.3):
+    - React-Core
   - react-native-safe-area-context (3.3.2):
     - React-Core
   - React-perflogger (0.67.2)
@@ -345,6 +349,8 @@ PODS:
     - React-Core
   - RNDeviceInfo (8.4.9):
     - React-Core
+  - RNPermissions (3.3.0):
+    - React-Core
   - RNScreens (3.11.1):
     - React-Core
     - React-RCTImage
@@ -385,6 +391,7 @@ DEPENDENCIES:
   - FlipperKit/SKIOSNetworkPlugin (= 0.99.0)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - OpenSSL-Universal (= 1.1.180)
+  - Permission-Notifications (from `../node_modules/react-native-permissions/ios/Notifications`)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
@@ -399,6 +406,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
+  - react-native-notifications (from `../node_modules/react-native-notifications`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -414,6 +422,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
+  - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSha256 (from `../node_modules/react-native-sha256`)
   - RNSVG (from `../node_modules/react-native-svg`)
@@ -449,6 +458,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/React/FBReactNativeSpec"
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
+  Permission-Notifications:
+    :path: "../node_modules/react-native-permissions/ios/Notifications"
   RCT-Folly:
     :podspec: "../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
   RCTRequired:
@@ -473,6 +484,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   React-logger:
     :path: "../node_modules/react-native/ReactCommon/logger"
+  react-native-notifications:
+    :path: "../node_modules/react-native-notifications"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   React-perflogger:
@@ -503,6 +516,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/async-storage"
   RNDeviceInfo:
     :path: "../node_modules/react-native-device-info"
+  RNPermissions:
+    :path: "../node_modules/react-native-permissions"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   RNSha256:
@@ -532,6 +547,7 @@ SPEC CHECKSUMS:
   glog: 85ecdd10ee8d8ec362ef519a6a45ff9aa27b2e85
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: 1aa4f6a6ee7256b83db99ec1ccdaa80d10f9af9b
+  Permission-Notifications: ae00347c7a9efdfaa1a0138e59e37c8f0f3ede0b
   RCT-Folly: 803a9cfd78114b2ec0f140cfa6fa2a6bafb2d685
   RCTRequired: cd47794163052d2b8318c891a7a14fcfaccc75ab
   RCTTypeSafety: 393bb40b3e357b224cde53d3fec26813c52428b1
@@ -544,6 +560,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 52beb652bbc61201bd70cbe4f0b8edb607e8da4f
   React-jsinspector: 595f76eba2176ebd8817a1fffd47b84fbdab9383
   React-logger: 23de8ea0f44fa00ee77e96060273225607fd4d78
+  react-native-notifications: fdfe19615150e7c02c70b72aecd6efb658f51448
   react-native-safe-area-context: 584dc04881deb49474363f3be89e4ca0e854c057
   React-perflogger: 3c9bb7372493e49036f07a82c44c8cf65cbe88db
   React-RCTActionSheet: 052606483045a408693aa7e864410b4a052f541a
@@ -559,12 +576,13 @@ SPEC CHECKSUMS:
   ReactCommon: d98c6c96b567f9b3a15f9fd4cc302c1eda8e3cf2
   RNCAsyncStorage: b03032fdbdb725bea0bd9e5ec5a7272865ae7398
   RNDeviceInfo: 4944cf8787b9c5bffaf301fda68cc1a2ec003341
+  RNPermissions: bcd846e8f5a7f39e921cc7ca7172e2de0e698b6f
   RNScreens: 4d83613b50b74ed277026375dc0810893b0c347f
   RNSha256: bf2c90a9e0cec6dcbcc4100e4e19715ae7feaa34
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   Yoga: 9b6696970c3289e8dea34b3eda93f23e61fb8121
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: e2cb59d0bbb1a0d3fe7e5509f439e60b66611966
+PODFILE CHECKSUM: c4e444107680dee3c3f0b903c20127dcb70f6024
 
 COCOAPODS: 1.11.2

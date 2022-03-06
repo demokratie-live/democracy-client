@@ -8206,6 +8206,16 @@ react-native-linear-gradient@^2.5.6:
   resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.5.6.tgz#96215cbc5ec7a01247a20890888aa75b834d44a0"
   integrity sha512-HDwEaXcQIuXXCV70O+bK1rizFong3wj+5Q/jSyifKFLg0VWF95xh8XQgfzXwtq0NggL9vNjPKXa016KuFu+VFg==
 
+react-native-notifications@^4.2.3:
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/react-native-notifications/-/react-native-notifications-4.2.3.tgz#51e8b9797935531fcc9afd09795e78b24a43b6c0"
+  integrity sha512-hrBUG60Tl/OSwet2Q3G1fyOYPoqxWcU6ZrIgjfLrRksgJX85bGaof4OWUDZykHZdimJM1+dNCV39YOS1ek9GRw==
+
+react-native-permissions@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-3.3.0.tgz#f63b7f91457dd2b11991ca46ebe4262a8eb1f73c"
+  integrity sha512-F0Yjcp0V340lQW2ibg1lTGmStsMoWsBtosSCRIZOatOQAsNMp77zL6SdYcIGwJUBMVDX3BMraB4AX4Ph3cW1NA==
+
 react-native-safe-area-context@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-3.3.2.tgz#9549a2ce580f2374edb05e49d661258d1b8bcaed"

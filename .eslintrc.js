@@ -30,6 +30,7 @@ module.exports = {
     'no-empty-function': 'off',
     '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/no-unsafe-assignment': 'off',
+    '@typescript-eslint/no-floating-promises': 'off',
     'react/display-name': 'off',
     'react/prop-types': 'off',
     'prettier/prettier': 'error',

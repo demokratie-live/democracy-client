@@ -1,17 +1,19 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 import { uniqBy } from 'lodash';
-import { TypedTypePolicies } from '../../__generated__/graphql';
+import {
+  DeputyProcedure,
+  Procedure,
+  TypedTypePolicies,
+  VoteResult,
+} from '../../__generated__/graphql';
 
 export const typePolicies: TypedTypePolicies = {
   Query: {
     fields: {
       procedures: {
         keyArgs: ['listTypes', 'sort', 'filter', 'period'],
-        merge(existing = [], incoming: any[]) {
+        merge(existing: Procedure[] = [], incoming: Procedure[]) {
           return uniqBy([...existing, ...incoming], procedure => {
-            return procedure.procedureId || procedure.__ref;
+            return procedure.procedureId;
           });
         },
       },
@@ -32,21 +34,23 @@ export const typePolicies: TypedTypePolicies = {
     },
   },
   Procedure: {
+    keyFields: ['procedureId'],
     fields: {
       voteResults: {
-        merge(existing, incoming, { mergeObjects }) {
+        merge(existing: VoteResult, incoming: VoteResult, { mergeObjects }) {
           return mergeObjects(existing, incoming);
         },
       },
     },
   },
   Deputy: {
+    keyFields: ['webId'],
     fields: {
       procedures: {
         keyArgs: ['procedureIds'],
-        merge(existing = [], incoming: any[]) {
+        merge(existing: DeputyProcedure[] = [], incoming: DeputyProcedure[]) {
           return uniqBy([...existing, ...incoming], deputyProcedure => {
-            return deputyProcedure.procedure.procedureId || deputyProcedure.procedure.__ref;
+            return deputyProcedure.procedure.procedureId;
           });
         },
       },

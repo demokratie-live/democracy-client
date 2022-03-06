@@ -9,6 +9,11 @@ project 'DemocracyNative',
 'Prod.Debug' => :debug,
 'Prod.Release' => :release
 
+
+# react-native-permissions
+permissions_path = '../node_modules/react-native-permissions/ios'
+pod 'Permission-Notifications', :path => "#{permissions_path}/Notifications"
+
 target 'DemocracyNative' do
   config = use_native_modules!
 
