@@ -1,13 +1,16 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { PlaceholderScreen } from '../screens/Placeholder';
 import Introduction from '../screens/Introduction';
 import { useInitialState } from '../api/state/initialState';
 import { getVersion } from 'react-native-device-info';
+import { SidebarNavigation } from './Sidebar';
+import { PlaceholderScreen } from '../screens/Placeholder';
 
 export type RootStackParamList = {
-  Home: { title: string };
+  Sidebar: undefined;
   Introduction: { done?: string; lastStartWithVersion?: string };
+  VerificationStart: undefined;
+  PlaceholderScreen: { title: string };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -21,14 +24,18 @@ export const Routes: React.FC = () => {
 
   return (
     <Stack.Navigator
-      initialRouteName={lastStartWithVersion !== getVersion() ? 'Introduction' : 'Home'}
+      initialRouteName={lastStartWithVersion !== getVersion() ? 'Introduction' : 'Sidebar'}
+      screenOptions={{
+        headerShown: false,
+      }}
     >
       <Stack.Screen
         name="Introduction"
         initialParams={{ lastStartWithVersion: '', done: 'SET_LAST_START_VERSION' }}
         component={Introduction}
       />
-      <Stack.Screen name="Home" initialParams={{ title: 'Home' }} component={PlaceholderScreen} />
+      <Stack.Screen name="Sidebar" component={SidebarNavigation} />
+      <Stack.Screen name="PlaceholderScreen" component={PlaceholderScreen} />
     </Stack.Navigator>
   );
 };

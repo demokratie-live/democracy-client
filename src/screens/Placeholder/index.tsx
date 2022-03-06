@@ -4,12 +4,10 @@ import * as S from './Placeholder.styles';
 import { RootStackParamList } from '../../routes';
 import { Text, TouchableOpacity } from 'react-native';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
+type Props = NativeStackScreenProps<RootStackParamList, 'PlaceholderScreen'>;
 
 export const PlaceholderScreen: React.FC<Props> = ({
-  route: {
-    params: { title },
-  },
+  route: { params: { title } = { title: 'Placeholder' } },
 }) => {
   const [showHello, setShowHello] = useState(false);
   return (

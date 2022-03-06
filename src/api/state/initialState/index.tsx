@@ -12,7 +12,7 @@ interface InitialStateInterface {
 }
 
 const defaults: InitialStateInterface = {
-  lastStartWithVersion: '',
+  lastStartWithVersion: undefined,
   isVerified: false,
   verificationQueryRunning: true,
   setLastStartWithVersion: () => {
@@ -67,5 +67,7 @@ export const useInitialState = () => {
 
   return {
     lastStartWithVersion: lastStartVersion,
+    isVerified,
+    verificationQueryRunning,
   };
 };

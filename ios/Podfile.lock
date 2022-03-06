@@ -349,7 +349,13 @@ PODS:
     - React-Core
   - RNDeviceInfo (8.4.9):
     - React-Core
+  - RNGestureHandler (2.3.0):
+    - React-Core
   - RNPermissions (3.3.0):
+    - React-Core
+  - RNRate (1.2.9):
+    - React-Core
+  - RNReanimated (1.13.4):
     - React-Core
   - RNScreens (3.11.1):
     - React-Core
@@ -422,7 +428,10 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
+  - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNPermissions (from `../node_modules/react-native-permissions`)
+  - RNRate (from `../node_modules/react-native-rate`)
+  - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSha256 (from `../node_modules/react-native-sha256`)
   - RNSVG (from `../node_modules/react-native-svg`)
@@ -516,8 +525,14 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/async-storage"
   RNDeviceInfo:
     :path: "../node_modules/react-native-device-info"
+  RNGestureHandler:
+    :path: "../node_modules/react-native-gesture-handler"
   RNPermissions:
     :path: "../node_modules/react-native-permissions"
+  RNRate:
+    :path: "../node_modules/react-native-rate"
+  RNReanimated:
+    :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   RNSha256:
@@ -576,7 +591,10 @@ SPEC CHECKSUMS:
   ReactCommon: d98c6c96b567f9b3a15f9fd4cc302c1eda8e3cf2
   RNCAsyncStorage: b03032fdbdb725bea0bd9e5ec5a7272865ae7398
   RNDeviceInfo: 4944cf8787b9c5bffaf301fda68cc1a2ec003341
+  RNGestureHandler: 77d59828d40838c9fabb76a12d2d0a80c006906f
   RNPermissions: bcd846e8f5a7f39e921cc7ca7172e2de0e698b6f
+  RNRate: 94f57c773e155ca0d0aeeba9c10a32bce9030daf
+  RNReanimated: c1b56d030d1616239861534d9adb531f8cffab68
   RNScreens: 4d83613b50b74ed277026375dc0810893b0c347f
   RNSha256: bf2c90a9e0cec6dcbcc4100e4e19715ae7feaa34
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
