@@ -5,7 +5,7 @@ const STORAGE_KEY = 'Parlament';
 
 export const parlamentState = atom<ParlamentIdentifier | undefined>({
   key: 'parlamentState',
-  default: undefined,
+  default: 'BT-20',
   effects: [localStorageEffect(STORAGE_KEY)],
 });
 

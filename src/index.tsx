@@ -7,6 +7,7 @@ import { client } from './api/apollo';
 import { useInitialState } from './api/state/initialState';
 import { NotificationsProvider } from './api/state/notificationPermission';
 import { Routes } from './routes';
+import { navigationTheme } from './routes/styles';
 import { theme } from './styles/theme';
 
 const AppEntry = () => {
@@ -14,7 +15,7 @@ const AppEntry = () => {
   return (
     <ThemeProvider theme={theme}>
       <NotificationsProvider>
-        <NavigationContainer>
+        <NavigationContainer theme={navigationTheme}>
           <Routes />
         </NavigationContainer>
       </NotificationsProvider>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import { AvatarIcon } from '@democracy-deutschland/ui';
+import { AvatarIcon, lightTheme } from '@democracy-deutschland/ui';
 import { Sidebar } from './components/Sidebar';
 import { Government } from '../../components/Icons';
 import SvgWahlOMeter from '../../components/Icons/WahlOMeter';
@@ -10,6 +10,8 @@ import SvgFaqAndSupport from '../../components/Icons/FaqAndSupport';
 import SvgAbout from '../../components/Icons/About';
 import SvgLaw from '../../components/Icons/Law';
 import { PlaceholderScreen } from '../../screens/Placeholder';
+import { CredentialsScreen } from '../../screens/Credentials';
+import { AboutScreen } from '../../screens/About';
 
 export type SidebarParamList = {
   Bundestag: undefined;
@@ -31,6 +33,12 @@ export const SidebarNavigation = () => {
       initialRouteName="Bundestag"
       drawerContent={props => <Sidebar {...props} />}
       screenOptions={{
+        headerStyle: {
+          backgroundColor: lightTheme.colors.primary,
+          elevation: 0,
+          shadowOpacity: 0,
+        },
+        headerTintColor: lightTheme.colors.text.secondary,
         drawerType: 'back',
         overlayColor: 'rgba(0, 0, 0, 0.5)',
         drawerLabelStyle: {
@@ -107,18 +115,17 @@ export const SidebarNavigation = () => {
           drawerIcon: ({ color, size }) => <SvgAbout width={size} height={size} color={color} />,
         }}
         name={'About'}
-        component={PlaceholderScreen}
-        // component={AboutRootNavigation}
+        component={AboutScreen}
       />
       <SidebarDrawer.Screen
         options={{
           drawerLabel: 'Mehr/Rechtliches',
           gestureEnabled: true,
           drawerIcon: ({ color, size }) => <SvgLaw width={size} height={size} color={color} />,
+          title: 'Rechtliches',
         }}
         name={'Credentials'}
-        component={PlaceholderScreen}
-        // component={CredentialsRootNavigation}
+        component={CredentialsScreen}
       />
       <SidebarDrawer.Screen
         options={{

@@ -45,6 +45,7 @@
     "react-native-device-info": "^8.4.9",
     "react-native-gesture-handler": "^2.3.0",
     "react-native-linear-gradient": "^2.5.6",
+    "react-native-markdown-view": "https://github.com/Benjamin-Dobell/react-native-markdown-view",
     "react-native-notifications": "^4.2.3",
     "react-native-permissions": "^3.3.0",
     "react-native-rate": "^1.2.9",

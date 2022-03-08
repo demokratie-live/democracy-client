@@ -10,10 +10,7 @@ import {
   DrawerDescriptorMap,
 } from '@react-navigation/drawer/lib/typescript/src/types';
 import styled from 'styled-components/native';
-
-const Space = styled.View`
-  padding-bottom: 18px;
-`;
+import { Space } from '../../../components/Space';
 
 type Props = Omit<DrawerNavigationOptions, 'contentContainerStyle' | 'style'> & {
   state: DrawerNavigationState<ParamListBase>;
@@ -62,7 +59,7 @@ export default function DrawerItemList({
 
     return (
       <View key={route.key}>
-        {showCategoryLabel && <Space />}
+        {showCategoryLabel && <Space space={18} />}
         <DrawerItem
           label={label !== undefined ? label : title !== undefined ? title : route.name}
           icon={drawerIcon}
