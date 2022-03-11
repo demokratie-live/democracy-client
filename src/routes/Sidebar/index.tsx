@@ -12,6 +12,7 @@ import SvgLaw from '../../components/Icons/Law';
 import { PlaceholderScreen } from '../../screens/Placeholder';
 import { CredentialsScreen } from '../../screens/Credentials';
 import { AboutScreen } from '../../screens/About';
+import { FaqScreen } from '../../screens/Faq';
 
 export type SidebarParamList = {
   Bundestag: undefined;
@@ -104,8 +105,7 @@ export const SidebarNavigation = () => {
           ),
         }}
         name={'Faq'}
-        component={PlaceholderScreen}
-        // component={FaqRootNavigation}
+        component={FaqScreen}
       />
       <SidebarDrawer.Screen
         options={{

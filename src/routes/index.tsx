@@ -8,7 +8,7 @@ import { PlaceholderScreen } from '../screens/Placeholder';
 
 export type RootStackParamList = {
   Sidebar: undefined;
-  Introduction: { done?: string; lastStartWithVersion?: string };
+  Introduction?: { done?: string; lastStartWithVersion?: string };
   VerificationStart: undefined;
   PlaceholderScreen: { title: string };
 };

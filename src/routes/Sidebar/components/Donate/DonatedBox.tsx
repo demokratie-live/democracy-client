@@ -47,7 +47,6 @@ class DonatedBox extends Component<Props> {
   }
 
   render() {
-    console.log('this.props', this.props);
     const {
       target,
       occupied,
