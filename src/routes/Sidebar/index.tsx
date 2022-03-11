@@ -13,6 +13,8 @@ import { PlaceholderScreen } from '../../screens/Placeholder';
 import { CredentialsScreen } from '../../screens/Credentials';
 import { AboutScreen } from '../../screens/About';
 import { FaqScreen } from '../../screens/Faq';
+import { SettingsScreen } from '../../screens/Settings';
+import { DonateScreen } from '../../screens/Donate';
 
 export type SidebarParamList = {
   Bundestag: undefined;
@@ -92,8 +94,7 @@ export const SidebarNavigation = () => {
           drawerIcon: ({ color, size }) => <SvgSettings width={size} height={size} color={color} />,
         }}
         name="Settings"
-        component={PlaceholderScreen}
-        // component={SettingsRootNavigation}
+        component={SettingsScreen}
       />
       <SidebarDrawer.Screen
         options={{
@@ -133,8 +134,7 @@ export const SidebarNavigation = () => {
           gestureEnabled: true,
         }}
         name={'Donate'}
-        component={PlaceholderScreen}
-        // component={DonateRootNavigation}
+        component={DonateScreen}
       />
     </SidebarDrawer.Navigator>
   );

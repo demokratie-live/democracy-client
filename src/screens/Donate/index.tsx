@@ -29,11 +29,11 @@ import {
   donateList3Head,
   donateList3Text,
 } from './content';
-import Folding from '@democracy-deutschland/mobile-ui/src/components/shared/Folding';
-import { DONATION_STATUS } from './graphql/query/donationStatus';
+import { DonationDatum, DonationStatus, DONATION_STATUS } from './graphql/query/donationStatus';
 import { useQuery } from '@apollo/client';
-import { MadeWithLove } from '../../../components/MadeWithLove';
-import { styled } from '../../../styles';
+import styled from 'styled-components/native';
+import { MadeWithLove } from '../../components/MadeWithLove';
+import Folding from '../../components/Folding';
 
 const ScrollWrapper = styled.ScrollView.attrs({
   scrollIndicatorInsets: { right: 1 }, // TODO do cleanfix when there is a correct solution (already closed but not solved without workaround) https://github.com/facebook/react-native/issues/26610
@@ -51,13 +51,13 @@ const Wrapper = styled.View`
 const Headline = styled.Text`
   font-weight: bold;
   font-size: 15px;
-  color: ${({ theme }) => theme.textColors.secondary};
+  color: ${({ theme }) => theme.colors.text.seperator};
   padding-bottom: 6px;
 `;
 
 const Text = styled.Text`
   font-size: 15px;
-  color: ${({ theme }) => theme.textColors.secondary};
+  color: ${({ theme }) => theme.colors.text.seperator};
 `;
 
 const TextLink = styled.Text`
@@ -68,7 +68,7 @@ const TextLink = styled.Text`
 
 const Version = styled.Text`
   font-size: 15px;
-  color: ${({ theme }) => theme.textColors.secondary};
+  color: ${({ theme }) => theme.colors.text.seperator};
   padding-top: 28px;
   padding-bottom: 11px;
   text-align: center;
@@ -82,35 +82,29 @@ const DefinitionListWrapper = styled.View`
 const DefinitionListTitle = styled.Text`
   width: 30%;
   font-weight: 600;
-  color: ${({ theme }) => theme.textColors.secondary};
+  color: ${({ theme }) => theme.colors.text.seperator};
 `;
 
 const DefinitionListDescription = styled.Text`
   width: 70%;
-  color: ${({ theme }) => theme.textColors.secondary};
+  color: ${({ theme }) => theme.colors.text.seperator};
 `;
 
-interface Props {
-  // navigator: PropTypes.instanceOf(Navigator).isRequired,
-  onClose?: () => void;
-  donationStatus: any;
-}
-
-export const DonateScreen: React.FC<Props> = () => {
-  const { data } = useQuery(DONATION_STATUS);
-  const [donationStatus, setDonationStatus] = useState<any>({});
+export const DonateScreen: React.FC = () => {
+  const { data } = useQuery<{ donationStatus: DonationStatus } | undefined>(DONATION_STATUS);
+  const [donationStatus, setDonationStatus] = useState<DonationStatus>();
 
   useEffect(() => {
-    if (!donationStatus.result && data) {
+    if (!donationStatus?.result && data) {
       setDonationStatus(data.donationStatus);
     }
   }, [data, donationStatus]);
 
-  const renderEntryHeadline = (entry: any) => (
-    <EntryHeader key={entry.id} title={entry.text_description} style={{ marginTop: 18 }} />
-  );
+  const renderEntryHeadline = (entry: DonationDatum) => {
+    return <EntryHeader key={entry.id} title={entry.text_description} style={{ marginTop: 18 }} />;
+  };
 
-  const renderEntry = (entry: any) => (
+  const renderEntry = (entry: DonationDatum) => (
     <Entry
       key={entry.id}
       target={entry.max}
@@ -121,8 +115,8 @@ export const DonateScreen: React.FC<Props> = () => {
     />
   );
 
-  const renderDonationEntries = (entries: any) =>
-    entries.map((entry: any) => {
+  const renderDonationEntries = (entries: DonationDatum[]) =>
+    entries.map(entry => {
       switch (entry.type) {
         case 0:
           return renderEntryHeadline(entry);
@@ -154,7 +148,7 @@ export const DonateScreen: React.FC<Props> = () => {
               occupied={donationStatus.result.donation_value}
             />
           </Wrapper>
-          <Folding title="Details zum Finanzierungsbedarf" opened>
+          <Folding title="Details zum Finanzierungsbedarf">
             <Entry
               target={donationStatus.result.donation_value_goal}
               occupied={donationStatus.result.donation_value}

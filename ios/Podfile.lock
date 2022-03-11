@@ -351,6 +351,8 @@ PODS:
     - React-Core
   - RNGestureHandler (2.3.0):
     - React-Core
+  - RNKeychain (8.0.0):
+    - React-Core
   - RNPermissions (3.3.0):
     - React-Core
   - RNRate (1.2.9):
@@ -362,8 +364,8 @@ PODS:
     - React-RCTImage
   - RNSha256 (1.4.7):
     - React
-  - RNSVG (12.1.1):
-    - React
+  - RNSVG (12.3.0):
+    - React-Core
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -429,6 +431,7 @@ DEPENDENCIES:
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNKeychain (from `../node_modules/react-native-keychain`)
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNRate (from `../node_modules/react-native-rate`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
@@ -527,6 +530,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-device-info"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNKeychain:
+    :path: "../node_modules/react-native-keychain"
   RNPermissions:
     :path: "../node_modules/react-native-permissions"
   RNRate:
@@ -592,12 +597,13 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: b03032fdbdb725bea0bd9e5ec5a7272865ae7398
   RNDeviceInfo: 4944cf8787b9c5bffaf301fda68cc1a2ec003341
   RNGestureHandler: 77d59828d40838c9fabb76a12d2d0a80c006906f
+  RNKeychain: 4f63aada75ebafd26f4bc2c670199461eab85d94
   RNPermissions: bcd846e8f5a7f39e921cc7ca7172e2de0e698b6f
   RNRate: 94f57c773e155ca0d0aeeba9c10a32bce9030daf
   RNReanimated: c1b56d030d1616239861534d9adb531f8cffab68
   RNScreens: 4d83613b50b74ed277026375dc0810893b0c347f
   RNSha256: bf2c90a9e0cec6dcbcc4100e4e19715ae7feaa34
-  RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
+  RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
   Yoga: 9b6696970c3289e8dea34b3eda93f23e61fb8121
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { styled } from '../../../styles';
+import styled from 'styled-components/native';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -30,7 +30,7 @@ const DueDate = styled.Text`
 
 const Description = styled.Text`
   font-size: 13px;
-  color: ${({ theme }) => theme.textColors.tertiary};
+  color: ${({ theme }) => theme.colors.text.seperator};
 `;
 
 interface Props {
@@ -41,13 +41,7 @@ interface Props {
   occupied: number;
 }
 
-const Entry: React.FC<Props> = ({
-  money,
-  description,
-  occupied,
-  target,
-  dueDate = '',
-}) => (
+const Entry: React.FC<Props> = ({ money, description, occupied, target, dueDate = '' }) => (
   <Wrapper>
     <FillBox width={(occupied / target) * 100} />
     <Text>

@@ -4,8 +4,6 @@ import DrawerItemList from './DrawerItemList';
 import { useNavigation, CompositeNavigationProp } from '@react-navigation/core';
 import { DrawerNavigationProp, DrawerItem } from '@react-navigation/drawer';
 import { useQuery } from '@apollo/client';
-import { DONATION_STATUS } from './Donate/graphql/query/donationStatus';
-import DonatedBox from './Donate/DonatedBox';
 import { Parlaments } from './Parlaments/Parlaments';
 import { RootStackParamList } from '../..';
 import { SidebarParamList } from '..';
@@ -15,6 +13,8 @@ import { useInitialState } from '../../../api/state/initialState';
 import { RestDonation } from '../../../api/apollo/@types/restDonation';
 import { Background } from './Background';
 import { Header } from './Header';
+import { DONATION_STATUS } from '../../../screens/Donate/graphql/query/donationStatus';
+import DonatedBox from '../../../screens/Donate/DonatedBox';
 
 const SafeAreaView = styled.SafeAreaView`
   flex: 1;

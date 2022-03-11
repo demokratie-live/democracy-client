@@ -34,10 +34,10 @@ const Introduction: FC<Props> = ({ route }) => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { isVerified, setLastStartWithVersion } = useRecoilValue(initialState);
   const { notificationSettings, hasPermissions } = useContext(NotificationsContext);
-  let { lastStartWithVersion, done } = {
+  let { lastStartWithVersion, done }: { lastStartWithVersion: string; done?: string } = {
     lastStartWithVersion: '',
     done: undefined,
-  } as IntroductionScreenRouteProp['params'];
+  };
   if (route && route.params) {
     lastStartWithVersion = route.params.lastStartWithVersion || '';
     done = route.params.done;

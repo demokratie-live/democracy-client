@@ -5,11 +5,16 @@ import { useInitialState } from '../api/state/initialState';
 import { getVersion } from 'react-native-device-info';
 import { SidebarNavigation } from './Sidebar';
 import { PlaceholderScreen } from '../screens/Placeholder';
+import { SyncVotesScreen } from '../screens/SyncVotes';
+import { lightTheme } from '@democracy-deutschland/ui';
 
 export type RootStackParamList = {
   Sidebar: undefined;
   Introduction?: { done?: string; lastStartWithVersion?: string };
   VerificationStart: undefined;
+  Constituency: undefined;
+  SyncVotes: undefined;
+  SyncVotesCapture: undefined;
   PlaceholderScreen: { title: string };
 };
 
@@ -27,6 +32,10 @@ export const Routes: React.FC = () => {
       initialRouteName={lastStartWithVersion !== getVersion() ? 'Introduction' : 'Sidebar'}
       screenOptions={{
         headerShown: false,
+        headerStyle: {
+          backgroundColor: lightTheme.colors.primary,
+        },
+        headerTintColor: lightTheme.colors.text.secondary,
       }}
     >
       <Stack.Screen
@@ -35,6 +44,14 @@ export const Routes: React.FC = () => {
         component={Introduction}
       />
       <Stack.Screen name="Sidebar" component={SidebarNavigation} />
+      <Stack.Screen name="Constituency" component={PlaceholderScreen} />
+      <Stack.Screen name="VerificationStart" component={PlaceholderScreen} />
+      <Stack.Screen
+        name="SyncVotes"
+        component={SyncVotesScreen}
+        options={{ headerShown: true, title: 'Stimmen übertragen' }}
+      />
+      <Stack.Screen name="SyncVotesCapture" component={PlaceholderScreen} />
       <Stack.Screen name="PlaceholderScreen" component={PlaceholderScreen} />
     </Stack.Navigator>
   );
