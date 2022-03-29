@@ -7,6 +7,7 @@ import { SidebarNavigation } from './Sidebar';
 import { PlaceholderScreen } from '../screens/Placeholder';
 import { SyncVotesScreen } from '../screens/SyncVotes';
 import { lightTheme } from '@democracy-deutschland/ui';
+import { SyncVotesCaptureScreen } from '../screens/SyncVotesCapture';
 
 export type RootStackParamList = {
   Sidebar: undefined;
@@ -51,7 +52,11 @@ export const Routes: React.FC = () => {
         component={SyncVotesScreen}
         options={{ headerShown: true, title: 'Stimmen übertragen' }}
       />
-      <Stack.Screen name="SyncVotesCapture" component={PlaceholderScreen} />
+      <Stack.Screen
+        name="SyncVotesCapture"
+        component={SyncVotesCaptureScreen}
+        options={{ headerShown: true, title: 'Stimmen empfangen' }}
+      />
       <Stack.Screen name="PlaceholderScreen" component={PlaceholderScreen} />
     </Stack.Navigator>
   );

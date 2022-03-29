@@ -1,14 +1,15 @@
-import React, { useState, useEffect, useContext } from 'react';
-// eslint-disable-next-line import/namespace
-import { RNCamera, BarCodeReadEvent } from 'react-native-camera';
+import React, { useState, useEffect } from 'react';
 import { Bar as BarCmp } from 'react-native-progress';
-import { styled, theme as appTheme } from '../../../../styles';
-import { SyncObj } from '..';
-import VotesLocal, { Chain } from '../../../../lib/VotesLocal';
+import { SyncObj } from '../SyncVotes';
 import { Alert, ActivityIndicator } from 'react-native';
-import { RootStackParamList } from '../../../../routes';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { LocalVotesContext } from '../../../../context/LocalVotes';
+import styled from 'styled-components/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../routes';
+import VotesLocal, { Chain } from '../../lib/VotesLocal';
+import { RNCamera, BarCodeReadEvent } from 'react-native-camera';
+import { lightTheme } from '@democracy-deutschland/ui';
+import { useSetRecoilState } from 'recoil';
+import { votesLocalState } from '../../api/state/votesLocal';
 
 const Container = styled.View`
   flex: 1;
@@ -30,7 +31,7 @@ const Text = styled.Text`
   padding-bottom: 18px;
   text-align: center;
   font-weight: bold;
-  color: ${({ theme }) => theme.textColors.tertiary};
+  color: ${({ theme }) => theme.colors.text.tertiary};
 `;
 
 const SpinnerContainer = styled.View`
@@ -44,41 +45,36 @@ const SpinnerContainer = styled.View`
 const Spinner = styled(ActivityIndicator)``;
 
 const TextRed = styled(Text)`
-  color: ${({ theme }) => theme.textColors.warn};
+  color: ${({ theme }) => theme.colors.text.danger};
 `;
 
 const Camera = styled(RNCamera)`
   flex: 1;
 `;
 
-type ScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  'SyncVotesCapture'
->;
+type ScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'SyncVotesCapture'>;
 
 interface Props {
   navigation: ScreenNavigationProp;
 }
 
-const CaptureSyncVotes: React.FC<Props> = ({ navigation }) => {
+export const SyncVotesCaptureScreen: React.FC<Props> = ({ navigation }) => {
   const [data, setData] = useState<SyncObj[]>([]);
   const [allCaptured, setAllCaptured] = useState<boolean>(false);
   const [syncComplete, setSyncComplete] = useState<boolean>(false);
   const [identifier, setIdentifier] = useState<string>();
-  const { updateLocalVotesStore } = useContext(LocalVotesContext);
+  const setVotesLocal = useSetRecoilState(votesLocalState);
+
   const handleBarcode = (event: BarCodeReadEvent) => {
     try {
       const qrData: SyncObj = JSON.parse(event.data);
       if (data.length === 0 && qrData.meta.identifier) {
         setIdentifier(qrData.meta.identifier);
-      } else if (
-        identifier !== qrData.meta.identifier ||
-        !qrData.meta.identifier
-      ) {
+      } else if (identifier !== qrData.meta.identifier || !qrData.meta.identifier) {
         throw new Error('identifier do not matching');
       }
       const current = qrData?.meta?.current;
-      const captured = data.some(({ meta }: any) => meta.current === current);
+      const captured = data.some(({ meta }) => meta.current === current);
       if (!captured) {
         setData([...data, qrData]);
       }
@@ -99,7 +95,7 @@ const CaptureSyncVotes: React.FC<Props> = ({ navigation }) => {
         (prev, dataArray) => {
           return {
             ...prev,
-            d: [...prev.d, ...dataArray.procedures],
+            d: [...(prev.d || []), ...dataArray.procedures],
           };
         },
         {
@@ -108,10 +104,10 @@ const CaptureSyncVotes: React.FC<Props> = ({ navigation }) => {
         },
       );
       VotesLocal.mergeKeychains(votesData)
-        .then(updateLocalVotesStore)
+        .then(setVotesLocal)
         .then(() => setSyncComplete(true));
     }
-  }, [allCaptured, data, updateLocalVotesStore]);
+  }, [allCaptured, data, setVotesLocal]);
 
   useEffect(() => {
     if (syncComplete) {
@@ -126,8 +122,7 @@ const CaptureSyncVotes: React.FC<Props> = ({ navigation }) => {
       {
         <>
           <Text>
-            Scanne den QR-Code auf Deinem alten Gerät, bis die Übertragung
-            abgeschlossen ist
+            Scanne den QR-Code auf Deinem alten Gerät, bis die Übertragung abgeschlossen ist
           </Text>
           <Camera captureAudio={false} onBarCodeRead={handleBarcode} />
           <Bar
@@ -138,19 +133,14 @@ const CaptureSyncVotes: React.FC<Props> = ({ navigation }) => {
           />
           {data.length > 0 && (
             <SpinnerContainer>
-              <Spinner size="large" color={appTheme.oldColors.headerText} />
+              <Spinner size="large" color={lightTheme.colors.text.primary} />
             </SpinnerContainer>
           )}
         </>
       }
       <DescriptionContainer>
-        <TextRed>
-          Die Übertragung erfolgt einmalig und kann nicht rückgängig gemacht
-          werden
-        </TextRed>
+        <TextRed>Die Übertragung erfolgt einmalig und kann nicht rückgängig gemacht werden</TextRed>
       </DescriptionContainer>
     </Container>
   );
 };
-
-export default CaptureSyncVotes;

@@ -75,8 +75,6 @@ export const SyncVotesScreen = () => {
       ? Dimensions.get('window').width
       : Dimensions.get('window').height) - 36;
 
-  console.log({ dataLoadingStatus });
-
   useEffect(() => {
     VotesLocal.readKeychain().then(data => {
       if (data.d && data.d.length > 0) {

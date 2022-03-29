@@ -58,7 +58,6 @@ export const SidebarNavigation = () => {
         // component={BundestagRootNavigation}
         options={{
           drawerLabel: 'hide/Bundestag',
-          gestureEnabled: true,
           drawerIcon: ({ color, size }) => <Government width={size} height={size} color={color} />,
           unmountOnBlur: true,
         }}
@@ -66,7 +65,6 @@ export const SidebarNavigation = () => {
       <SidebarDrawer.Screen
         options={{
           drawerLabel: 'hide/Wahl-O-Meter',
-          gestureEnabled: true,
           drawerIcon: ({ color, size }) => (
             <SvgWahlOMeter width={size} height={size} color={color} />
           ),
@@ -79,7 +77,6 @@ export const SidebarNavigation = () => {
       <SidebarDrawer.Screen
         options={{
           drawerLabel: 'hide/Abgeordnete',
-          gestureEnabled: true,
           drawerIcon: ({ color, size }) => <AvatarIcon width={size} height={size} fill={color} />,
           unmountOnBlur: true,
         }}
@@ -90,7 +87,6 @@ export const SidebarNavigation = () => {
       <SidebarDrawer.Screen
         options={{
           drawerLabel: 'Mehr/Settings',
-          gestureEnabled: true,
           drawerIcon: ({ color, size }) => <SvgSettings width={size} height={size} color={color} />,
         }}
         name="Settings"
@@ -100,7 +96,6 @@ export const SidebarNavigation = () => {
         options={{
           title: 'FAQ',
           drawerLabel: 'Mehr/FAQ & Support',
-          gestureEnabled: true,
           drawerIcon: ({ color, size }) => (
             <SvgFaqAndSupport width={size} height={size} color={color} />
           ),
@@ -112,7 +107,6 @@ export const SidebarNavigation = () => {
         options={{
           title: 'About',
           drawerLabel: 'Mehr/Über DEMOCRACY',
-          gestureEnabled: true,
           drawerIcon: ({ color, size }) => <SvgAbout width={size} height={size} color={color} />,
         }}
         name={'About'}
@@ -121,7 +115,6 @@ export const SidebarNavigation = () => {
       <SidebarDrawer.Screen
         options={{
           drawerLabel: 'Mehr/Rechtliches',
-          gestureEnabled: true,
           drawerIcon: ({ color, size }) => <SvgLaw width={size} height={size} color={color} />,
           title: 'Rechtliches',
         }}
@@ -131,7 +124,6 @@ export const SidebarNavigation = () => {
       <SidebarDrawer.Screen
         options={{
           drawerLabel: 'hide/Donate',
-          gestureEnabled: true,
         }}
         name={'Donate'}
         component={DonateScreen}
