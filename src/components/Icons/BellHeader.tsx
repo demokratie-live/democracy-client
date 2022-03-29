@@ -9,11 +9,7 @@ const SvgBellHeader = (props: SvgProps) => (
         id="bell-header_svg__a"
       />
     </Defs>
-    <Use
-      fill={props.color}
-      fillRule="nonzero"
-      xlinkHref="#bell-header_svg__a"
-    />
+    <Use fill={props.color} fillRule="nonzero" xlinkHref="#bell-header_svg__a" />
   </Svg>
 );
 

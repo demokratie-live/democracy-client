@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Platform, Linking, View, Image, TouchableOpacity } from 'react-native';
+import { Platform, View, Image, TouchableOpacity } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 
 // Components
@@ -34,6 +34,7 @@ import { useQuery } from '@apollo/client';
 import styled from 'styled-components/native';
 import { MadeWithLove } from '../../components/MadeWithLove';
 import Folding from '../../components/Folding';
+import { linking } from '../../lib/linking';
 
 const ScrollWrapper = styled.ScrollView.attrs({
   scrollIndicatorInsets: { right: 1 }, // TODO do cleanfix when there is a correct solution (already closed but not solved without workaround) https://github.com/facebook/react-native/issues/26610
@@ -168,7 +169,7 @@ export const DonateScreen: React.FC = () => {
             style={{
               alignItems: 'center',
             }}
-            onPress={() => Linking.openURL('https://donorbox.org/democracy-app')}
+            onPress={linking('https://donorbox.org/democracy-app')}
           >
             <Image source={require('./assets/DonateButton.png')} />
           </TouchableOpacity>
@@ -195,11 +196,11 @@ export const DonateScreen: React.FC = () => {
           </DefinitionListWrapper>
           <Text>
             <Text>{donate3Text1}</Text>
-            <TextLink onPress={() => Linking.openURL(donate3Link1)}>{donate3Text2}</TextLink>
+            <TextLink onPress={linking(donate3Link1)}>{donate3Text2}</TextLink>
             <Text>{donate3Text3}</Text>
-            <TextLink onPress={() => Linking.openURL(donate3Link2)}>{donate3Text4}</TextLink>
+            <TextLink onPress={linking(donate3Link2)}>{donate3Text4}</TextLink>
             <Text>{donate3Text5}</Text>
-            <TextLink onPress={() => Linking.openURL(donate3Link3)}>{donate3Text6}</TextLink>
+            <TextLink onPress={linking(donate3Link3)}>{donate3Text6}</TextLink>
             <Text>{donate3Text7}</Text>
           </Text>
           <Version>{version}</Version>

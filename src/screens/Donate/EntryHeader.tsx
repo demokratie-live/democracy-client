@@ -1,4 +1,5 @@
 import React from 'react';
+import { StyleProp, ViewStyle } from 'react-native';
 import styled from 'styled-components/native';
 
 const Wrapper = styled.View`
@@ -16,7 +17,7 @@ const Title = styled.Text`
 
 interface Props {
   title: string;
-  style?: any; // StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>;
 }
 
 export const EntryHeader: React.FC<Props> = ({ title, style = {} }) => (

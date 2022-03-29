@@ -1,26 +1,11 @@
 import * as React from 'react';
-import {
-  Svg,
-  SvgProps,
-  Defs,
-  LinearGradient,
-  Stop,
-  Path,
-  G,
-  Circle,
-  Use,
-} from 'react-native-svg';
+import { Svg, SvgProps, Defs, LinearGradient, Stop, Path, G, Circle, Use } from 'react-native-svg';
 /* SVGR has dropped some elements not supported by react-native-svg: filter */
 
 const SvgDemocracyBubble = (props: SvgProps) => (
   <Svg width="1em" height="1em" viewBox="0 0 512 512" {...props}>
     <Defs>
-      <LinearGradient
-        x1="50%"
-        y1="0%"
-        x2="50%"
-        y2="100%"
-        id="democracy-bubble_svg__a">
+      <LinearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="democracy-bubble_svg__a">
         <Stop stopColor="#C8C8C8" offset="0%" />
         <Stop stopColor="#979797" offset="100%" />
       </LinearGradient>
@@ -35,13 +20,7 @@ const SvgDemocracyBubble = (props: SvgProps) => (
         stroke={props.color}
         fill={props.color}
       />
-      <Circle
-        stroke="url(#democracy-bubble_svg__a)"
-        fill="#4F81BD"
-        cx={255}
-        cy={255}
-        r={210.061}
-      />
+      <Circle stroke="url(#democracy-bubble_svg__a)" fill="#4F81BD" cx={255} cy={255} r={210.061} />
       <Use fill={props.color} xlinkHref="#democracy-bubble_svg__c" />
       <Use fill="#FFF" xlinkHref="#democracy-bubble_svg__c" />
     </G>

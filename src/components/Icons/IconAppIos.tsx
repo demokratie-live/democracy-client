@@ -1,25 +1,11 @@
 import * as React from 'react';
-import {
-  Svg,
-  SvgProps,
-  Defs,
-  LinearGradient,
-  Stop,
-  Path,
-  G,
-  Use,
-} from 'react-native-svg';
+import { Svg, SvgProps, Defs, LinearGradient, Stop, Path, G, Use } from 'react-native-svg';
 /* SVGR has dropped some elements not supported by react-native-svg: filter */
 
 const SvgIconappios = (props: SvgProps) => (
   <Svg width="1em" height="1em" viewBox="0 0 512 512" {...props}>
     <Defs>
-      <LinearGradient
-        x1="0%"
-        y1="0%"
-        x2="100%"
-        y2="100%"
-        id="icon_app_ios_svg__a">
+      <LinearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="icon_app_ios_svg__a">
         <Stop stopColor="#5AAFF2" offset="0%" />
         <Stop stopColor="#3E86BE" offset="100%" />
       </LinearGradient>

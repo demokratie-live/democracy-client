@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { StyleProp, TextStyle, ViewStyle } from 'react-native';
 import styled from 'styled-components/native';
 
 const Wrapper = styled.View`
@@ -32,9 +33,9 @@ const Description = styled.Text`
 interface Props {
   target: number;
   occupied: number;
-  style?: any;
-  moneyTextStyle?: any;
-  descriptionTextStyle?: any;
+  style?: StyleProp<ViewStyle>;
+  moneyTextStyle?: StyleProp<TextStyle>;
+  descriptionTextStyle?: StyleProp<TextStyle>;
 }
 
 class DonatedBox extends Component<Props> {

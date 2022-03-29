@@ -6,8 +6,7 @@ Wenn Du Interesse daran hast, dass das Projekt nachhaltig Bestand hat, bitten wi
 `;
 export const donateHintMonthly =
   '* Diese Darstellung kann nur monatliche Spenden (Daueraufträge) berücksichtigen.\n';
-export const donate2Head =
-  'Spendenkonto für Daueraufträge oder einmalige Spenden';
+export const donate2Head = 'Spendenkonto für Daueraufträge oder einmalige Spenden';
 export const donateList1Head = 'Kontoinhaber:';
 export const donateList1Text = 'DEMOCRACY Deutschland e.V.';
 export const donateList2Head = 'IBAN:';

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Svg, { Path } from 'react-native-svg';
+import Svg, { Path, PathProps } from 'react-native-svg';
 
 interface Props {
-  childProps: any;
+  childProps: PathProps;
 }
 
 class GermanySvgComponent extends Component<Props> {

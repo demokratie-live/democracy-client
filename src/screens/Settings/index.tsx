@@ -1,5 +1,5 @@
 import React, { useContext, ReactNode } from 'react';
-import { SectionList, Switch, Button, Linking, Alert } from 'react-native';
+import { SectionList, Switch, Button, Alert } from 'react-native';
 
 // GraphQL
 import { ListItem } from './components/ListItem';
@@ -16,6 +16,7 @@ import { constituencyState } from '../../api/state/constituency';
 import { initialState } from '../../api/state/initialState';
 import { NotificationsContext } from '../../api/state/notificationPermission';
 import { Segment } from '../../components/Segment.index';
+import { linking } from '../../lib/linking';
 
 const Wrapper = styled.View`
   background-color: ${({ theme }) => theme.colors.background.secondary};
@@ -86,7 +87,7 @@ export const SettingsScreen: React.FC = () => {
         [
           {
             text: 'Aktivieren',
-            onPress: () => Linking.openURL(`app-settings://notification/${getBundleId()}`),
+            onPress: linking(`app-settings://notification/${getBundleId()}`),
           },
           {
             text: 'Später',

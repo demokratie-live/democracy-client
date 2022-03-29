@@ -9,11 +9,7 @@ const SvgIncreaseArrow = (props: SvgProps) => (
         id="increase-arrow_svg__a"
       />
     </Defs>
-    <Use
-      fill={props.color}
-      fillRule="nonzero"
-      xlinkHref="#increase-arrow_svg__a"
-    />
+    <Use fill={props.color} fillRule="nonzero" xlinkHref="#increase-arrow_svg__a" />
   </Svg>
 );
 

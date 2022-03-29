@@ -11,16 +11,7 @@ import SvgWahlOMeter from '../../../../components/Icons/WahlOMeter';
 
 export type ListsProps = SidebarProps;
 
-export const Parlaments: React.FC<ListsProps> = ({
-  drawerActiveTintColor,
-  drawerInactiveTintColor,
-  drawerActiveBackgroundColor,
-  drawerInactiveBackgroundColor,
-  drawerLabelStyle,
-  drawerItemStyle,
-  navigation,
-  state,
-}) => {
+export const Parlaments: React.FC<ListsProps> = ({ navigation, state }) => {
   const [parlament, setParlament] = useRecoilState(parlamentState);
   const drawerItemProps = {
     activeTintColor: '#fff',

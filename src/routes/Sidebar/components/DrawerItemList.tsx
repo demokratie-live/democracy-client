@@ -9,7 +9,6 @@ import {
   DrawerNavigationHelpers,
   DrawerDescriptorMap,
 } from '@react-navigation/drawer/lib/typescript/src/types';
-import styled from 'styled-components/native';
 import { Space } from '../../../components/Space';
 
 type Props = Omit<DrawerNavigationOptions, 'contentContainerStyle' | 'style'> & {
@@ -25,13 +24,7 @@ export default function DrawerItemList({
   state,
   navigation,
   descriptors,
-  drawerActiveTintColor,
-  drawerInactiveTintColor,
-  drawerActiveBackgroundColor,
   drawerInactiveBackgroundColor,
-  drawerItemStyle,
-  drawerLabelStyle,
-  ...props
 }: Props) {
   let preCategory = '';
   return state.routes.map((route, i) => {

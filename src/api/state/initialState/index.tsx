@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
-import { useMeQuery } from '../../../__generated__/graphql';
+import { MeQuery, useMeQuery } from '../../../__generated__/graphql';
 import { atom, useSetRecoilState } from 'recoil';
+import { ApolloQueryResult } from '@apollo/client';
 
 interface InitialStateInterface {
   lastStartWithVersion: string | undefined;
   isVerified: boolean;
   verificationQueryRunning: boolean;
   setLastStartWithVersion: (version: string) => void;
-  refetchMe: () => void;
+  refetchMe: () => Promise<ApolloQueryResult<MeQuery>>;
 }
 
 const defaults: InitialStateInterface = {

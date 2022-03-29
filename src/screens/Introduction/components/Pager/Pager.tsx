@@ -44,7 +44,7 @@ export interface PageProps {
 export const Pager: FC<Props> = props => {
   const [currentDot, setCurrentDot] = useState(0);
   const [pageWidth, setPageWidth] = useState(0);
-  const scrollView = useRef<ScrollView>();
+  const scrollView = useRef<ScrollView>(null);
 
   const { children } = props;
   const length = children.length;
@@ -83,7 +83,7 @@ export const Pager: FC<Props> = props => {
   return (
     <>
       <ScrollView
-        ref={scrollView as any}
+        ref={scrollView}
         scrollEventThrottle={300}
         onLayout={onLayout}
         horizontal
