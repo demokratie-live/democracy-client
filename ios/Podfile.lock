@@ -76,7 +76,7 @@ PODS:
   - glog (0.3.5)
   - libevent (2.1.12)
   - OpenSSL-Universal (1.1.180)
-  - Permission-Notifications (3.3.0):
+  - Permission-Notifications (3.3.1):
     - RNPermissions
   - RCT-Folly (2021.06.28.00-v2):
     - boost
@@ -276,9 +276,9 @@ PODS:
   - React-jsinspector (0.67.2)
   - React-logger (0.67.2):
     - glog
-  - react-native-notifications (4.2.3):
+  - react-native-notifications (4.2.4):
     - React-Core
-  - react-native-safe-area-context (3.3.2):
+  - react-native-safe-area-context (3.4.1):
     - React-Core
   - React-perflogger (0.67.2)
   - React-RCTActionSheet (0.67.2):
@@ -347,19 +347,19 @@ PODS:
     - React-perflogger (= 0.67.2)
   - RNCAsyncStorage (1.12.1):
     - React-Core
-  - RNDeviceInfo (8.4.9):
+  - RNDeviceInfo (8.7.0):
     - React-Core
-  - RNGestureHandler (2.3.0):
+  - RNGestureHandler (2.3.2):
     - React-Core
   - RNKeychain (8.0.0):
     - React-Core
-  - RNPermissions (3.3.0):
+  - RNPermissions (3.3.1):
     - React-Core
   - RNRate (1.2.9):
     - React-Core
   - RNReanimated (1.13.4):
     - React-Core
-  - RNScreens (3.11.1):
+  - RNScreens (3.13.1):
     - React-Core
     - React-RCTImage
   - RNSha256 (1.4.7):
@@ -567,7 +567,7 @@ SPEC CHECKSUMS:
   glog: 85ecdd10ee8d8ec362ef519a6a45ff9aa27b2e85
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: 1aa4f6a6ee7256b83db99ec1ccdaa80d10f9af9b
-  Permission-Notifications: ae00347c7a9efdfaa1a0138e59e37c8f0f3ede0b
+  Permission-Notifications: 4b21cfdd5e8aab2cbb1f117aaa17b44e1f5736c4
   RCT-Folly: 803a9cfd78114b2ec0f140cfa6fa2a6bafb2d685
   RCTRequired: cd47794163052d2b8318c891a7a14fcfaccc75ab
   RCTTypeSafety: 393bb40b3e357b224cde53d3fec26813c52428b1
@@ -580,8 +580,8 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 52beb652bbc61201bd70cbe4f0b8edb607e8da4f
   React-jsinspector: 595f76eba2176ebd8817a1fffd47b84fbdab9383
   React-logger: 23de8ea0f44fa00ee77e96060273225607fd4d78
-  react-native-notifications: fdfe19615150e7c02c70b72aecd6efb658f51448
-  react-native-safe-area-context: 584dc04881deb49474363f3be89e4ca0e854c057
+  react-native-notifications: 3de8ef9cd800e5db0225d9aa46b228d2b94ce51e
+  react-native-safe-area-context: 9e40fb181dac02619414ba1294d6c2a807056ab9
   React-perflogger: 3c9bb7372493e49036f07a82c44c8cf65cbe88db
   React-RCTActionSheet: 052606483045a408693aa7e864410b4a052f541a
   React-RCTAnimation: 08d4cac13222bb1348c687a0158dfd3b577cdb63
@@ -595,13 +595,13 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 2450b43df7ffe8e805a0b3dcb2abd4282f1f1836
   ReactCommon: d98c6c96b567f9b3a15f9fd4cc302c1eda8e3cf2
   RNCAsyncStorage: b03032fdbdb725bea0bd9e5ec5a7272865ae7398
-  RNDeviceInfo: 4944cf8787b9c5bffaf301fda68cc1a2ec003341
-  RNGestureHandler: 77d59828d40838c9fabb76a12d2d0a80c006906f
+  RNDeviceInfo: 36286df381fcaf1933ff9d2d3c34ba2abeb2d8d8
+  RNGestureHandler: 6e757e487a4834e7280e98e9bac66d2d9c575e9c
   RNKeychain: 4f63aada75ebafd26f4bc2c670199461eab85d94
-  RNPermissions: bcd846e8f5a7f39e921cc7ca7172e2de0e698b6f
+  RNPermissions: 34d678157c800b25b22a488e4d8babb57456e796
   RNRate: 94f57c773e155ca0d0aeeba9c10a32bce9030daf
   RNReanimated: c1b56d030d1616239861534d9adb531f8cffab68
-  RNScreens: 4d83613b50b74ed277026375dc0810893b0c347f
+  RNScreens: 40a2cb40a02a609938137a1e0acfbf8fc9eebf19
   RNSha256: bf2c90a9e0cec6dcbcc4100e4e19715ae7feaa34
   RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
   Yoga: 9b6696970c3289e8dea34b3eda93f23e61fb8121
