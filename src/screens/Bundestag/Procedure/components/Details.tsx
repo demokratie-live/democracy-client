@@ -34,7 +34,7 @@ const DefTitle = styled.Text`
 `;
 
 const DefTitleSeperated = styled(DefTitle)`
-  padding-top: ${({ theme }) => theme.spaces.default}px;
+  padding-top: ${({ theme }) => theme.spaces.default};
 `;
 
 const DefTitleRight = styled(DefTitle)`

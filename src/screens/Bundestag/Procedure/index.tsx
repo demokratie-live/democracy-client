@@ -78,7 +78,6 @@ export const ProcedureScreen: FC<Props> = ({ route, navigation }) => {
       constituencies,
     },
   });
-
   const share = ({
     type,
     procedureId,

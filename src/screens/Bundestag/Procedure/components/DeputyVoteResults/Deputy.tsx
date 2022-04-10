@@ -20,7 +20,7 @@ const InfoIcon = styled(SvgInfo).attrs(() => ({
   height: 18,
   color: 'rgb(199, 199, 204)',
 }))`
-  margin-left: ${({ theme }) => theme.spaces.small}px;
+  margin-left: ${({ theme }) => theme.spaces.small};
 `;
 
 const DeputyDetailsWrapper = styled.View`

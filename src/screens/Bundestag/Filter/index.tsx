@@ -10,7 +10,7 @@ import { useInitialState } from '../../../api/state/initialState';
 import { FilterEntry } from '../../../api/hooks/useListFilter/initData';
 
 const Save = styled.TouchableOpacity`
-  margin-right: ${({ theme }) => theme.spaces.small}px;
+  margin-right: ${({ theme }) => theme.spaces.small};
 `;
 
 const SaveText = styled.Text`
@@ -29,7 +29,7 @@ const ListRowMain = styled.View`
 `;
 
 const ListRowSub = styled.View`
-  padding-left: ${({ theme }) => theme.spaces.default}px;
+  padding-left: ${({ theme }) => theme.spaces.default};
 `;
 
 const Row = styled.TouchableOpacity`
