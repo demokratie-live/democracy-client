@@ -1,10 +1,5 @@
 import { uniqBy } from 'lodash';
-import {
-  DeputyProcedure,
-  Procedure,
-  TypedTypePolicies,
-  VoteResult,
-} from '../../__generated__/graphql';
+import { Procedure, TypedTypePolicies } from '../../__generated__/graphql';
 
 export const typePolicies: TypedTypePolicies = {
   Query: {
@@ -12,9 +7,10 @@ export const typePolicies: TypedTypePolicies = {
       procedures: {
         keyArgs: ['listTypes', 'sort', 'filter', 'period'],
         merge(existing: Procedure[] = [], incoming: Procedure[]) {
-          return uniqBy([...existing, ...incoming], procedure => {
-            return procedure.procedureId;
-          });
+          return uniqBy(
+            [...existing, ...incoming],
+            procedure => procedure.procedureId ?? (procedure as unknown as { __ref: string }).__ref,
+          );
         },
       },
       // deputies: {
@@ -33,29 +29,29 @@ export const typePolicies: TypedTypePolicies = {
       },
     },
   },
-  Procedure: {
-    keyFields: ['procedureId'],
-    fields: {
-      voteResults: {
-        merge(existing: VoteResult, incoming: VoteResult, { mergeObjects }) {
-          return mergeObjects(existing, incoming);
-        },
-      },
-    },
-  },
-  Deputy: {
-    keyFields: ['webId'],
-    fields: {
-      procedures: {
-        keyArgs: ['procedureIds'],
-        merge(existing: DeputyProcedure[] = [], incoming: DeputyProcedure[]) {
-          return uniqBy([...existing, ...incoming], deputyProcedure => {
-            return deputyProcedure.procedure.procedureId;
-          });
-        },
-      },
-    },
-  },
+  // Procedure: {
+  //   keyFields: ['procedureId'],
+  //   fields: {
+  //     voteResults: {
+  //       merge(existing: VoteResult, incoming: VoteResult, { mergeObjects }) {
+  //         return mergeObjects(existing, incoming);
+  //       },
+  //     },
+  //   },
+  // },
+  // Deputy: {
+  //   keyFields: ['webId'],
+  //   fields: {
+  //     procedures: {
+  //       keyArgs: ['procedureIds'],
+  //       merge(existing: DeputyProcedure[] = [], incoming: DeputyProcedure[]) {
+  //         return uniqBy([...existing, ...incoming], deputyProcedure => {
+  //           return deputyProcedure.procedure.procedureId;
+  //         });
+  //       },
+  //     },
+  //   },
+  // },
   // VoteResult: {
   //   fields: {
   //     partyVotes: {

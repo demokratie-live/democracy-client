@@ -61,6 +61,7 @@ export const List = () => {
       period: parlament.period,
     },
   });
+
   useEffect(() => {
     setHasMore(true);
   }, [proceduresFilter]);
