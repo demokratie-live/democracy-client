@@ -115,7 +115,7 @@ export const PushInstructions: React.FC<Props> = ({ alreadyKnown = false, finish
         )}
         <View>
           <NotificationBox
-            icon={require('./assets/icon.logo.png')}
+            icon={require('../components/assets/icon.logo.png')}
             owner="DEMOCRACY"
             title={notification.title}
             text={notification.text}

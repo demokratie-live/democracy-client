@@ -311,4 +311,4 @@ const constituencies: {
   '99': require('./constituencies/99.tsx'),
 };
 
-export default (key: string) => constituencies[key];
+export const getConstituencySvgs = (key: string) => constituencies[key];

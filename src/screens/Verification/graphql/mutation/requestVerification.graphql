@@ -1,0 +1,6 @@
+mutation RequestVerification($code: String!, $newPhoneHash: String!, $newUser: Boolean) {
+  requestVerification(code: $code, newPhoneHash: $newPhoneHash, newUser: $newUser) {
+    reason
+    succeeded
+  }
+}

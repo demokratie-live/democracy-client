@@ -1,0 +1,17 @@
+query DeputyVoteResults($procedureId: ID!, $webIds: [String!]!) {
+  procedure(id: $procedureId) {
+    procedureId
+    voteResults {
+      deputyVotes(webIds: $webIds) {
+        deputy {
+          webId
+          imgURL
+          name
+          party
+          constituency
+        }
+        decision
+      }
+    }
+  }
+}

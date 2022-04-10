@@ -245,12 +245,7 @@ class VotesLocal {
   };
 
   // Convert a Data Object to a Chain Object
-  private static convertToKeychain = ({
-    procedureId,
-    selection,
-    time,
-    constituency,
-  }: ChainEntry) => {
+  static convertToKeychain = ({ procedureId, selection, time, constituency }: ChainEntry) => {
     let s: ChainEntryRaw['s'];
     switch (selection) {
       case 'YES':

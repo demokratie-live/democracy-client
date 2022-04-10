@@ -70,5 +70,6 @@ export const useInitialState = () => {
     lastStartWithVersion: lastStartVersion,
     isVerified,
     verificationQueryRunning,
+    refetchMe,
   };
 };

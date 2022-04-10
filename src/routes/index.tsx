@@ -8,15 +8,34 @@ import { PlaceholderScreen } from '../screens/Placeholder';
 import { SyncVotesScreen } from '../screens/SyncVotes';
 import { lightTheme } from '@democracy-deutschland/ui';
 import { SyncVotesCaptureScreen } from '../screens/SyncVotesCapture';
+import { VoteSelection } from '../__generated__/graphql';
 
 export type RootStackParamList = {
   Sidebar: undefined;
   Introduction?: { done?: string; lastStartWithVersion?: string };
   VerificationStart: undefined;
-  Constituency: undefined;
+  Constituency?: { goBack?: boolean };
   SyncVotes: undefined;
   SyncVotesCapture: undefined;
   PlaceholderScreen: { title: string };
+  Search: undefined;
+  Filter: undefined;
+  Procedure: { procedureId: string; title: string };
+  Voting: {
+    selection: VoteSelection.Yes | VoteSelection.Abstination | VoteSelection.No;
+    procedureId: string;
+    procedureObjId: string;
+    title: string;
+  };
+  DeputyProfile: { id: string };
+  Pdf: { url: string; title: string };
+  PushInstructions: undefined;
+  NotificationInstruction: { done: () => void; title?: string };
+  OutcomePush: { finishAction: () => void; title: string; procedureId: string };
+  SmsCodeInput: { procedureId?: string };
+  SmsDonate: undefined;
+  Donate: undefined;
+  PhoneNumberInput: { procedureId?: string };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -58,6 +77,14 @@ export const Routes: React.FC = () => {
         options={{ headerShown: true, title: 'Stimmen empfangen' }}
       />
       <Stack.Screen name="PlaceholderScreen" component={PlaceholderScreen} />
+      <Stack.Screen
+        name="Search"
+        options={{
+          title: 'Suche',
+        }}
+        component={PlaceholderScreen}
+      />
+      <Stack.Screen name="Filter" component={PlaceholderScreen} />
     </Stack.Navigator>
   );
 };

@@ -4,7 +4,7 @@ import { HeadLogo } from './HeadLogo';
 import { ActivityIndicator } from 'react-native';
 import { useRecoilValue } from 'recoil';
 import { constituencyState } from '../../../api/state/constituency';
-import constituencies from '../../../components/svgs/constituencies';
+import { getConstituencySvgs } from '../../../components/svgs/constituencies';
 
 const Container = styled.TouchableOpacity`
   flex-direction: row;
@@ -33,7 +33,7 @@ export const Header: React.FC<Props> = ({ onPress, label }) => {
   const { constituency } = useRecoilValue(constituencyState);
 
   const getConstituency = (wk: string) => {
-    const DynComp = constituencies(wk).default;
+    const DynComp = getConstituencySvgs(wk).default;
     return (
       <DynComp
         width={60}

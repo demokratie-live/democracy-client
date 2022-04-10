@@ -1,39 +1,31 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { Notifications, Registered, RegistrationError } from 'react-native-notifications';
-import { useQuery, useMutation } from '@apollo/client';
-import { NOTIFICATION_SETTINGS } from './graphql/query/NotificationSettings';
-import {
-  NotificationSettings_notificationSettings,
-  NotificationSettings,
-} from './graphql/query/__generated__/NotificationSettings';
-import {
-  UpdateNotificationSettings,
-  UpdateNotificationSettingsVariables,
-} from './graphql/mutation/__generated__/UpdateNotificationSettings';
-import { UPDATE_NOTIFICATION_SETTINGS } from './graphql/mutation/UpdateNotificationSettings';
-import { ExecutionResult } from 'graphql';
 import { Platform, EmitterSubscription } from 'react-native';
-import { AddToken, AddTokenVariables } from './graphql/mutation/__generated__/AddToken';
-import { ADD_TOKEN } from './graphql/mutation/AddToken';
 import AsyncStorage from '@react-native-community/async-storage';
 import { checkNotifications } from 'react-native-permissions';
 import { useAppState } from '../../../screens/Introduction/PushInstructions/useAppState';
+import {
+  NotificationSettings,
+  NotificationSettingsDocument,
+  UpdateNotificationSettingsMutationVariables,
+  useAddTokenMutation,
+  useNotificationSettingsQuery,
+  useUpdateNotificationSettingsMutation,
+} from '../../../__generated__/graphql';
 
 interface NotificationsInterface {
   hasPermissions: boolean;
   alreadyDenied: boolean;
   outcomePushsDenied: boolean;
   notificationSettings: Pick<
-    NotificationSettings_notificationSettings,
+    NotificationSettings,
     | 'conferenceWeekPushs'
     | 'enabled'
     | 'voteConferenceWeekPushs'
     | 'voteTOP100Pushs'
     | 'outcomePushs'
   >;
-  update: (
-    options: UpdateNotificationSettingsVariables,
-  ) => Promise<ExecutionResult<UpdateNotificationSettings>> | void;
+  update: (options: UpdateNotificationSettingsMutationVariables) => void;
   requestToken: () => void;
   setOutcomePushsDenied: (value: boolean) => void;
 }
@@ -69,13 +61,10 @@ export const NotificationsProvider: React.FC = ({ children }) => {
   const [notificationSettings, setNotificationSettings] = useState<
     NotificationsInterface['notificationSettings']
   >(defaults.notificationSettings);
-  const { data } = useQuery<NotificationSettings>(NOTIFICATION_SETTINGS);
+  const { data } = useNotificationSettingsQuery();
 
-  const [updateSettings] = useMutation<
-    UpdateNotificationSettings,
-    UpdateNotificationSettingsVariables
-  >(UPDATE_NOTIFICATION_SETTINGS);
-  const [sendToken] = useMutation<AddToken, AddTokenVariables>(ADD_TOKEN);
+  const [updateSettings] = useUpdateNotificationSettingsMutation();
+  const [sendToken] = useAddTokenMutation();
 
   const { appState } = useAppState();
 
@@ -165,33 +154,31 @@ export const NotificationsProvider: React.FC = ({ children }) => {
     }
   }, [hasPermissions]);
 
-  const update = (options: UpdateNotificationSettingsVariables) => {
-    if (options) {
-      return updateSettings({
-        variables: options,
-        refetchQueries: [
-          {
-            query: NOTIFICATION_SETTINGS,
-          },
-        ],
-        update: (proxy, { data: updateData }) => {
-          if (updateData && updateData.updateNotificationSettings) {
-            const notificationCacheData = proxy.readQuery<NotificationSettings>({
-              query: NOTIFICATION_SETTINGS,
-            });
-            if (notificationCacheData) {
-              proxy.writeQuery<NotificationSettings>({
-                query: NOTIFICATION_SETTINGS,
-                data: {
-                  ...notificationCacheData,
-                  ...options,
-                },
-              });
-            }
-          }
+  const update = (options: UpdateNotificationSettingsMutationVariables) => {
+    updateSettings({
+      variables: options,
+      refetchQueries: [
+        {
+          query: NotificationSettingsDocument,
         },
-      });
-    }
+      ],
+      update: (proxy, { data: updateData }) => {
+        if (updateData && updateData.updateNotificationSettings) {
+          const notificationCacheData = proxy.readQuery<NotificationSettings>({
+            query: NotificationSettingsDocument,
+          });
+          if (notificationCacheData) {
+            proxy.writeQuery<NotificationSettings>({
+              query: NotificationSettingsDocument,
+              data: {
+                ...notificationCacheData,
+                ...options,
+              },
+            });
+          }
+        }
+      },
+    });
   };
 
   return (

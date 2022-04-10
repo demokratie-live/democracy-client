@@ -1,0 +1,21 @@
+query PartyChartData($procedureIds: [String!], $period: Int!, $pageSize: Int, $offset: Int) {
+  partyChartProcedures: proceduresByIdHavingVoteResults(
+    procedureIds: $procedureIds
+    pageSize: $pageSize
+    offset: $offset
+    period: $period
+  ) {
+    total
+    procedures {
+      _id
+      procedureId
+      voteResults {
+        governmentDecision
+        partyVotes {
+          party
+          main
+        }
+      }
+    }
+  }
+}

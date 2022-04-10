@@ -15,6 +15,7 @@ import { AboutScreen } from '../../screens/About';
 import { FaqScreen } from '../../screens/Faq';
 import { SettingsScreen } from '../../screens/Settings';
 import { DonateScreen } from '../../screens/Donate';
+import { BundestagTabViewNavigation } from '../Bundestag';
 
 export type SidebarParamList = {
   Bundestag: undefined;
@@ -54,8 +55,7 @@ export const SidebarNavigation = () => {
     >
       <SidebarDrawer.Screen
         name="Bundestag"
-        component={PlaceholderScreen}
-        // component={BundestagRootNavigation}
+        component={BundestagTabViewNavigation}
         options={{
           drawerLabel: 'hide/Bundestag',
           drawerIcon: ({ color, size }) => <Government width={size} height={size} color={color} />,

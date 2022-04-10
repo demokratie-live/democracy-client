@@ -8,6 +8,9 @@ generates:
       - "typescript-operations"
       - "typescript-react-apollo"
       - typescript-apollo-client-helpers
+    config:
+      scalars: 
+        Date: string
   ./graphql.schema.json:
     plugins:
       - "introspection"

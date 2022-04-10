@@ -1,0 +1,9 @@
+query NotificationSettings {
+  notificationSettings {
+    enabled
+    conferenceWeekPushs
+    voteConferenceWeekPushs
+    voteTOP100Pushs
+    outcomePushs
+  }
+}

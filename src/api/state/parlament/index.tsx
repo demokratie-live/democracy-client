@@ -3,7 +3,7 @@ import { localStorageEffect } from '../effects/localStorageEffect';
 
 const STORAGE_KEY = 'Parlament';
 
-export const parlamentState = atom<ParlamentIdentifier | undefined>({
+export const parlamentState = atom<ParlamentIdentifier>({
   key: 'parlamentState',
   default: 'BT-20',
   effects: [localStorageEffect(STORAGE_KEY)],

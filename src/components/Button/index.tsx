@@ -42,7 +42,6 @@ export interface Props {
   textColor: keyof typeof TextColors;
   backgroundColor?: keyof typeof BackgroundColors;
   disabled?: boolean;
-  // style?: any; // TODO improve typescript
   testID?: string;
 }
 

@@ -1,3 +1,4 @@
 /*.*
 src/components/svgs/constituencies/*.tsx
 src/__generated__/graphql.tsx
+src/screens/Bundestag/Procedure/Voting/components/Constituency.tsx

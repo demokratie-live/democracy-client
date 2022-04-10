@@ -1,0 +1,5 @@
+mutation ToggleNotification($procedureId: String!) {
+  toggleNotification(procedureId: $procedureId) {
+    notify
+  }
+}
