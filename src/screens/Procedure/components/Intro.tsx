@@ -62,8 +62,8 @@ export const Intro: React.FC<Props> = ({
         title={title}
         isIntro
         subline={subline}
-        voteDate={new Date(voteDate || '')}
-        endDate={new Date(voteEnd || '')}
+        voteDate={voteDate}
+        endDate={voteEnd}
         voted={voted}
         votes={communityVotes ? communityVotes.total || 0 : 0}
         govermentChart={{

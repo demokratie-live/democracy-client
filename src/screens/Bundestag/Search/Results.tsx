@@ -160,7 +160,7 @@ export const Results: React.FC = () => {
                 {title === 'Ergebnisse' && isProcedureGuard(item) && (
                   <ListItem
                     {...item}
-                    voteDate={new Date(item.voteDate || '')}
+                    voteDate={item.voteDate ? new Date(item.voteDate) : undefined}
                     subline={
                       item.sessionTOPHeading
                         ? item.sessionTOPHeading

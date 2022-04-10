@@ -183,8 +183,8 @@ export const List = () => {
         <ListItem
           title={title}
           subline={subline}
-          voteDate={new Date(voteDate || '')}
-          endDate={new Date(voteEnd || '')}
+          voteDate={voteDate ? new Date(voteDate) : undefined}
+          endDate={voteEnd ? new Date(voteEnd) : undefined}
           voted={voted}
           votes={communityVotes ? communityVotes.total || 0 : 0}
           govermentChart={{

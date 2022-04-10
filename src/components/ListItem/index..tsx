@@ -58,7 +58,7 @@ export interface Props {
   subline?: string | null;
   voted: boolean;
   votes: number;
-  voteDate: Date;
+  voteDate?: Date;
   endDate?: Date;
   communityVotes: Slice[];
   govermentChart?: {

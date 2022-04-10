@@ -240,8 +240,8 @@ export const ProcedureScreen: FC<Props> = ({ route, navigation }) => {
     <Container testID="ProcedureScrollView">
       <Intro
         {...data.procedure}
-        voteDate={new Date(data.procedure.voteDate || '')}
-        voteEnd={new Date(data.procedure.voteEnd || '')}
+        voteDate={data.procedure.voteDate ? new Date(data.procedure.voteDate) : undefined}
+        voteEnd={data.procedure.voteEnd ? new Date(data.procedure.voteEnd) : undefined}
         sessionTOPHeading={data.procedure.sessionTOPHeading ?? undefined}
         votedGovernment={data.procedure.votedGovernment ?? false}
       />
