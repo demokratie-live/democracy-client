@@ -54,7 +54,7 @@ type Props = {
   navigation: FilterScreenNavigationProp;
 };
 
-export const Filter: React.FC<Props> = ({ navigation }) => {
+export const FilterScreen: React.FC<Props> = ({ navigation }) => {
   const { isVerified } = useInitialState();
   const [filter, setFilter] = useState(filterData);
   const [data, setData] = useState<FilterData[]>(filter);

@@ -9,7 +9,7 @@ import { SyncVotesScreen } from '../screens/SyncVotes';
 import { lightTheme } from '@democracy-deutschland/ui';
 import { SyncVotesCaptureScreen } from '../screens/SyncVotesCapture';
 import { VoteSelection } from '../__generated__/graphql';
-import { ProcedureScreen } from '../screens/Bundestag';
+import { FilterScreen, ProcedureScreen } from '../screens/Bundestag';
 
 export type RootStackParamList = {
   Sidebar: undefined;
@@ -85,7 +85,7 @@ export const Routes: React.FC = () => {
         }}
         component={PlaceholderScreen}
       />
-      <Stack.Screen name="Filter" component={PlaceholderScreen} />
+      <Stack.Screen name="Filter" component={FilterScreen} options={{ headerShown: true }} />
       <Stack.Screen
         name="Procedure"
         component={ProcedureScreen}
