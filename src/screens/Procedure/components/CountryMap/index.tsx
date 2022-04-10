@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { CountryMap as CountryMapCmp } from '@democracy-deutschland/ui';
-import { useCountryMapConstituenciesQuery } from '../../../../../__generated__/graphql';
+import { useCountryMapConstituenciesQuery } from '../../../../__generated__/graphql';
 
 const Container = styled.View`
   align-items: center;

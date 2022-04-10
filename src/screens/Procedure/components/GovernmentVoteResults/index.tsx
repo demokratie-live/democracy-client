@@ -6,10 +6,10 @@ import PartyChart from './PartyChart';
 import ChartLegend from '../Charts/ChartLegend';
 import PieChart from '../Charts/PieChart';
 import styled from 'styled-components/native';
-import { ProcedureQuery } from '../../../../../__generated__/graphql';
-import { useInitialState } from '../../../../../api/state/initialState';
-import Folding from '../../../../../components/Folding';
-import { CarouselPagination } from '../../../../../components/Pagination';
+import { ProcedureQuery } from '../../../../__generated__/graphql';
+import { useInitialState } from '../../../../api/state/initialState';
+import Folding from '../../../../components/Folding';
+import { CarouselPagination } from '../../../../components/Pagination';
 
 const ScrollView = styled.ScrollView.attrs(() => ({
   horizontal: true,

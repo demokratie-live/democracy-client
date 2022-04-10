@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 
 import BarChartComponent, { BarChartData } from './BarChart/Component';
 import ChartLegend, { ChartLegendData } from '../Charts/ChartLegend';
-import { VoteResult } from '../../../../../__generated__/graphql';
+import { VoteResult } from '../../../../__generated__/graphql';
 
 const Wrapper = styled.View`
   align-items: center;

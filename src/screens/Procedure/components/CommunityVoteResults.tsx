@@ -5,13 +5,13 @@ import PieChart from './Charts/PieChart';
 import ChartLegend from './Charts/ChartLegend';
 import styled from 'styled-components/native';
 import { useRecoilValue } from 'recoil';
-import { constituencyState } from '../../../../api/state/constituency';
-import { useInitialState } from '../../../../api/state/initialState';
-import Folding from '../../../../components/Folding';
-import { CarouselPagination } from '../../../../components/Pagination';
-import { CommunityConstituencyVotes, CommunityVotes } from '../../../../__generated__/graphql';
-import GermanySvgComponent from '../../../../components/svgs/GermanySVG';
-import { getConstituencySvgs } from '../../../../components/svgs/constituencies';
+import { constituencyState } from '../../../api/state/constituency';
+import { useInitialState } from '../../../api/state/initialState';
+import Folding from '../../../components/Folding';
+import { CarouselPagination } from '../../../components/Pagination';
+import { CommunityConstituencyVotes, CommunityVotes } from '../../../__generated__/graphql';
+import GermanySvgComponent from '../../../components/svgs/GermanySVG';
+import { getConstituencySvgs } from '../../../components/svgs/constituencies';
 
 const MAX_WIDTH = Math.min(380, Dimensions.get('window').width, Dimensions.get('window').height);
 

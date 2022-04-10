@@ -1,10 +1,10 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/core';
 import { Avatar } from '@democracy-deutschland/ui';
-import { RootStackParamList } from '../../../../../routes';
+import { RootStackParamList } from '../../../../routes';
 import styled from 'styled-components/native';
-import SvgInfo from '../../../../../components/Icons/Info';
-import { DeputyVoteResultsQuery } from '../../../../../__generated__/graphql';
+import SvgInfo from '../../../../components/Icons/Info';
+import { DeputyVoteResultsQuery } from '../../../../__generated__/graphql';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { PartyProps } from '@democracy-deutschland/ui/dist/Atoms/PartyLogo/old';
 

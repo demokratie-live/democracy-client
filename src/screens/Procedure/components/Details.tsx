@@ -2,6 +2,7 @@ import React from 'react';
 import m from 'moment';
 import { View } from 'react-native';
 import styled from 'styled-components/native';
+import { formatDateToDDMMYY } from '../../../lib/formatDate';
 
 const Wrapper = styled.View`
   padding-horizontal: 11px;
@@ -67,7 +68,7 @@ const renderType = (type: string) => {
 interface Props {
   subjectGroups: string[] | null;
   submissionDate: string;
-  dateVote: string;
+  dateVote?: string;
   abstract: string | null;
   procedureId: string;
   currentStatus: string | null;
@@ -103,8 +104,8 @@ export const Details: React.FC<Props> = ({
           <HeadRightDescr>
             {type && <DefDescr>{renderType(type)}</DefDescr>}
             <DefDescr selectable={true}>{procedureId}</DefDescr>
-            <DefDescr>{submissionDate && m(submissionDate).format('DD.MM.YY')}</DefDescr>
-            {dateVote && <DefDescr>{m(dateVote).format('DD.MM.YY')}</DefDescr>}
+            <DefDescr>{submissionDate && formatDateToDDMMYY(submissionDate)}</DefDescr>
+            {dateVote && <DefDescr>{formatDateToDDMMYY(dateVote)}</DefDescr>}
           </HeadRightDescr>
         </HeadRight>
       </Head>

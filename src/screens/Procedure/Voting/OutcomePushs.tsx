@@ -1,18 +1,15 @@
 import React, { useState, useContext } from 'react';
 import { useRoute, RouteProp } from '@react-navigation/core';
 import { Switch, View } from 'react-native';
-import { RootStackParamList } from '../../../../routes';
+import { RootStackParamList } from '../../../routes';
 import styled from 'styled-components/native';
-import {
-  ProcedureDocument,
-  useToggleNotificationMutation,
-} from '../../../../__generated__/graphql';
-import { NotificationsContext } from '../../../../api/state/notificationPermission';
-import { defaultNotificationData } from '../../../Introduction/PushInstructions/data';
-import SvgNewmarker from '../../../../components/Icons/Newmarker';
-import SvgIconappios from '../../../../components/Icons/IconAppIos';
-import { NotificationBox } from '../../../Introduction/PushInstructions/NotificationBox';
-import { Button } from '../../../../components/Button';
+import { ProcedureDocument, useToggleNotificationMutation } from '../../../__generated__/graphql';
+import { NotificationsContext } from '../../../api/state/notificationPermission';
+import { defaultNotificationData } from '../../Introduction/PushInstructions/data';
+import SvgNewmarker from '../../../components/Icons/Newmarker';
+import SvgIconappios from '../../../components/Icons/IconAppIos';
+import { NotificationBox } from '../../Introduction/PushInstructions/NotificationBox';
+import { Button } from '../../../components/Button';
 
 type RoutePropOP = RouteProp<RootStackParamList, 'OutcomePush'>;
 
@@ -125,7 +122,7 @@ export const OutcomePushs: React.FC<Props> = ({ finishAction }) => {
         </Subtitle>
       </View>
       <NotificationBox
-        icon={require('../../../Introduction/components/assets/icon.logo.png')}
+        icon={require('../../Introduction/components/assets/icon.logo.png')}
         owner="DEMOCRACY"
         title={notification.title}
         text={notification.text}

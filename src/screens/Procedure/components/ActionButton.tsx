@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { ImageSourcePropType, Text, Platform, ViewStyle } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import SvgShareIos from '../../../../components/Icons/ShareIos';
-import SvgShare from '../../../../components/Icons/Share';
-import SvgBell from '../../../../components/Icons/Bell';
-import SvgBellSlash from '../../../../components/Icons/BellSlash';
-import { theme } from '../../../../styles/theme';
+import SvgShareIos from '../../../components/Icons/ShareIos';
+import SvgShare from '../../../components/Icons/Share';
+import SvgBell from '../../../components/Icons/Bell';
+import SvgBellSlash from '../../../components/Icons/BellSlash';
+import { theme } from '../../../styles/theme';
 
 // Pick<Slice, 'percent' | 'large'>
 const VoteIconButtonWrapper = styled.TouchableOpacity<

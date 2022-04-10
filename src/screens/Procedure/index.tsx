@@ -9,18 +9,18 @@ import { History } from './components/History';
 import { CommunityVoteResults } from './components/CommunityVoteResults';
 import { GovernmentVoteResults } from './components/GovernmentVoteResults';
 import PrepareActions from './PrepareActions';
-import { MenuButton } from '../../../components/MenuButton';
-import { RootStackParamList } from '../../../routes';
+import { MenuButton } from '../../components/MenuButton';
+import { RootStackParamList } from '../../routes';
 import { CountryMap } from './components/CountryMap';
 import { DeputyVoteResultSlider } from './components/DeputyVoteResults';
 import styled from 'styled-components/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import SvgShareIosHeader from '../../../components/Icons/ShareIosHeader';
-import SvgShare from '../../../components/Icons/Share';
-import { NotificationsContext } from '../../../api/state/notificationPermission';
-import { useInitialState } from '../../../api/state/initialState';
+import SvgShareIosHeader from '../../components/Icons/ShareIosHeader';
+import SvgShare from '../../components/Icons/Share';
+import { NotificationsContext } from '../../api/state/notificationPermission';
+import { useInitialState } from '../../api/state/initialState';
 import { useRecoilValue } from 'recoil';
-import { constituencyState } from '../../../api/state/constituency';
+import { constituencyState } from '../../api/state/constituency';
 import {
   Procedure,
   ProcedureDocument,
@@ -28,14 +28,14 @@ import {
   ProcedureQueryVariables,
   useProcedureQuery,
   useToggleNotificationMutation,
-} from '../../../__generated__/graphql';
-import { getShareLink } from '../../../lib/shareLink';
-import SvgBellHeader from '../../../components/Icons/BellHeader';
-import SvgBellFilledHeader from '../../../components/Icons/BellFilledHeader';
-import { Centered } from '../../../components/Centered';
-import { Button } from '../../../components/Button';
-import { ListLoading } from '../../../components/ListLoading';
-import Folding from '../../../components/Folding';
+} from '../../__generated__/graphql';
+import { getShareLink } from '../../lib/shareLink';
+import SvgBellHeader from '../../components/Icons/BellHeader';
+import SvgBellFilledHeader from '../../components/Icons/BellFilledHeader';
+import { Centered } from '../../components/Centered';
+import { Button } from '../../components/Button';
+import { ListLoading } from '../../components/ListLoading';
+import Folding from '../../components/Folding';
 
 const Container = styled.ScrollView.attrs({
   scrollIndicatorInsets: { right: 1 }, // TODO do cleanfix when there is a correct solution (already closed but not solved without workaround) https://github.com/facebook/react-native/issues/26610
@@ -249,7 +249,7 @@ export const ProcedureScreen: FC<Props> = ({ route, navigation }) => {
         <Details
           subjectGroups={subjectGroups}
           submissionDate={String(submissionDate)}
-          dateVote={String(voteDate)}
+          dateVote={voteDate ?? undefined}
           abstract={abstract || null}
           procedureId={procedureId}
           currentStatus={currentStatus || null}

@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/core';
-import { linking } from '../../../../lib/linking';
-import SvgDocument from '../../../../components/Icons/Document';
-import SvgDownload from '../../../../components/Icons/Download';
+import { linking } from '../../../lib/linking';
+import SvgDocument from '../../../components/Icons/Document';
+import SvgDownload from '../../../components/Icons/Download';
 import { MaterialTopTabNavigationProp } from '@react-navigation/material-top-tabs';
-import { BundestagTopTabParamList } from '../../../../routes/Bundestag';
+import { BundestagTopTabParamList } from '../../../routes/Bundestag';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { SidebarParamList } from '../../../../routes/Sidebar';
+import { SidebarParamList } from '../../../routes/Sidebar';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { CompositeNavigationProp } from '@react-navigation/native';
-import { RootStackParamList } from '../../../../routes';
+import { RootStackParamList } from '../../../routes';
 
 const Container = styled.View`
   flex-direction: row;

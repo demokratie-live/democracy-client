@@ -3,11 +3,11 @@ import React from 'react';
 // components
 import Constituency from './Constituency';
 import PieChart from '../../components/Charts/PieChart';
-import { RootStackParamList } from '../../../../../routes';
+import { RootStackParamList } from '../../../../routes';
 import styled from 'styled-components/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Space } from '../../../../../components/Space';
-import { ButtonNext } from '../../../../Verification/Start';
+import { Space } from '../../../../components/Space';
+import { ButtonNext } from '../../../Verification/Start';
 import { useNavigation } from '@react-navigation/native';
 
 const Wrapper = styled.View<Pick<Props, 'noButton'>>`

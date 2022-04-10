@@ -1,11 +1,11 @@
 import React from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components/native';
-import { localVoteState } from '../../../../api/state/votesLocal';
-import { ListItem } from '../../../../components/ListItem/index.';
-import { communityVoteData } from '../../../../lib/PieChartCommunityData';
-import { pieChartGovernmentData } from '../../../../lib/PieChartGovernmentData';
-import { CommunityVotes, VoteResult } from '../../../../__generated__/graphql';
+import { localVoteState } from '../../../api/state/votesLocal';
+import { ListItem } from '../../../components/ListItem/index.';
+import { communityVoteData } from '../../../lib/PieChartCommunityData';
+import { pieChartGovernmentData } from '../../../lib/PieChartGovernmentData';
+import { CommunityVotes, VoteResult } from '../../../__generated__/graphql';
 
 const Container = styled.View`
   padding-top: 18px;

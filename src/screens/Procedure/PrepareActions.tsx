@@ -4,24 +4,24 @@ import VoteButton from './components/VoteButton';
 import ActionButton from './components/ActionButton';
 import { Alert } from 'react-native';
 import { useNavigation, CompositeNavigationProp } from '@react-navigation/core';
-import { SidebarParamList } from '../../../routes/Sidebar';
+import { SidebarParamList } from '../../routes/Sidebar';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { RootStackParamList } from '../../../routes';
+import { RootStackParamList } from '../../routes';
 import styled from 'styled-components/native';
 import { MaterialTopTabNavigationProp } from '@react-navigation/material-top-tabs';
-import { BundestagTopTabParamList } from '../../../routes/Bundestag';
+import { BundestagTopTabParamList } from '../../routes/Bundestag';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useRecoilValue } from 'recoil';
-import { constituencyState } from '../../../api/state/constituency';
-import { localVoteState } from '../../../api/state/votesLocal';
+import { constituencyState } from '../../api/state/constituency';
+import { localVoteState } from '../../api/state/votesLocal';
 import {
   ProcedureDocument,
   ProcedureQuery,
   ProcedureQueryVariables,
   useToggleNotificationMutation,
   VoteSelection,
-} from '../../../__generated__/graphql';
-import SvgLock from '../../../components/Icons/Lock';
+} from '../../__generated__/graphql';
+import SvgLock from '../../components/Icons/Lock';
 
 const SegmentWrapper = styled.View`
   padding-vertical: 14px;

@@ -12,19 +12,19 @@ import styled from 'styled-components/native';
 import VoteButton from '../../components/VoteButton';
 import { PureQueryOptions } from '@apollo/client';
 import { useNavigation } from '@react-navigation/core';
-import { RootStackParamList } from '../../../../../routes';
+import { RootStackParamList } from '../../../../routes';
 import {
   ProcedureDocument,
   SearchProceduresDocument,
   useProcedureLazyQuery,
   useVoteMutation,
   VoteSelection,
-} from '../../../../../__generated__/graphql';
-import { NotificationsContext } from '../../../../../api/state/notificationPermission';
+} from '../../../../__generated__/graphql';
+import { NotificationsContext } from '../../../../api/state/notificationPermission';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { localVoteState } from '../../../../../api/state/votesLocal';
-import { constituencyState } from '../../../../../api/state/constituency';
-import { searchTermState } from '../../../../../api/state/search';
+import { localVoteState } from '../../../../api/state/votesLocal';
+import { constituencyState } from '../../../../api/state/constituency';
+import { searchTermState } from '../../../../api/state/search';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 const Wrapper = styled.View`

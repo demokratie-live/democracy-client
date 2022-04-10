@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { Lock } from '../../../../components/Icons';
+import { Lock } from '../../../components/Icons';
 
 const VoteIconButtonWrapper = styled.TouchableOpacity<
   Pick<Props, 'selection' | 'voteSelection' | 'voted'>

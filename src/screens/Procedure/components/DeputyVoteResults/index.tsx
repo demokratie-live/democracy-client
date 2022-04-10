@@ -3,12 +3,12 @@ import { Dimensions, ScaledSize, View } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import { DeputyVoteResult } from './Deputy';
 import styled from 'styled-components/native';
-import { ProcedureQuery, useDeputyVoteResultsQuery } from '../../../../../__generated__/graphql';
-import { useInitialState } from '../../../../../api/state/initialState';
+import { ProcedureQuery, useDeputyVoteResultsQuery } from '../../../../__generated__/graphql';
+import { useInitialState } from '../../../../api/state/initialState';
 import { useRecoilValue } from 'recoil';
-import { favorizedDeputiesState } from '../../../../../api/state/favorizedDeputies';
-import { CarouselPagination } from '../../../../../components/Pagination';
-import Folding from '../../../../../components/Folding';
+import { favorizedDeputiesState } from '../../../../api/state/favorizedDeputies';
+import { CarouselPagination } from '../../../../components/Pagination';
+import Folding from '../../../../components/Folding';
 
 const SwiperStyled = styled(Carousel as new () => Carousel<JSX.Element>).attrs({
   paginationStyle: { bottom: 14 },
