@@ -20,4 +20,6 @@ declare module 'styled-components' {
     fontSizes: typeof fontSizes;
     spaces: typeof spaces;
   }
+
+  export type Theme = DefaultTheme;
 }

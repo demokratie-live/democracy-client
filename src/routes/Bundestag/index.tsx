@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import styled from 'styled-components/native';
+import styled, { ThemeContext } from 'styled-components/native';
 import Svg, { Circle } from 'react-native-svg';
 import { ListType } from '../../__generated__/graphql';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -46,6 +46,7 @@ interface Props {
 
 export const BundestagTabViewNavigation: React.FC<Props> = ({ navigation }) => {
   const { active: hasFilters } = useListFilter();
+  const theme = useContext(ThemeContext);
   const parlamentIdentifier = useRecoilValue(parlamentState);
 
   useEffect(() => {
@@ -84,17 +85,17 @@ export const BundestagTabViewNavigation: React.FC<Props> = ({ navigation }) => {
 
   return (
     <TabNavigation.Navigator
-      // tabBarOptions={{
-      //   scrollEnabled: false,
-      //   indicatorStyle: {
-      //     backgroundColor: '#fff',
-      //   },
-      //   activeTintColor: 'rgb(255,255,255)',
-      //   inactiveTintColor: theme.colors.text.primary,
-      //   style: {
-      //     backgroundColor: '#4494D3',
-      //   },
-      // }}
+      screenOptions={{
+        tabBarScrollEnabled: false,
+        tabBarIndicatorStyle: {
+          backgroundColor: theme.colors.text.primary,
+        },
+        tabBarActiveTintColor: theme.colors.text.secondary,
+        tabBarInactiveTintColor: theme.colors.text.secondary,
+        tabBarStyle: {
+          backgroundColor: theme.colors.primary,
+        },
+      }}
       initialRouteName={'Sitzungswoche'}
     >
       {parlament.screens.procedures.recomended ? (
