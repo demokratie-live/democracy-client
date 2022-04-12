@@ -134,7 +134,7 @@ const PrepareActions: React.FC<Props> = ({
   // active,
   title,
 }) => {
-  const { constituency } = useRecoilValue(constituencyState);
+  const constituency = useRecoilValue(constituencyState);
   const constituencies = constituency ? [constituency] : [];
   const voteSelection = useRecoilValue(localVoteState(procedureId))?.selection;
   const [toggleNotification] = useToggleNotificationMutation({

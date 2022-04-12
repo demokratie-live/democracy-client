@@ -50,7 +50,7 @@ interface List {
 
 export const SettingsScreen: React.FC = () => {
   const navigation = useNavigation<ScreenNavigationProp>();
-  const { constituency } = useRecoilValue(constituencyState);
+  const constituency = useRecoilValue(constituencyState);
   const { isVerified } = useRecoilValue(initialState);
   const {
     hasPermissions,

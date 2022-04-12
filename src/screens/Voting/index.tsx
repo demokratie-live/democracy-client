@@ -4,18 +4,18 @@ import BallotBox from './components/BallotBox';
 import { NoConstituency } from './components/NoConstituency';
 import Fade from './components/Animations/Fade';
 import { RouteProp } from '@react-navigation/core';
-import ChartLegend from '../components/Charts/ChartLegend';
+import ChartLegend from '../Procedure/components/Charts/ChartLegend';
 import styled from 'styled-components/native';
-import { RootStackParamList } from '../../../routes';
+import { RootStackParamList } from '../../routes';
 import { useRecoilValue } from 'recoil';
-import { parlaments, parlamentState } from '../../../api/state/parlament';
-import { constituencyState } from '../../../api/state/constituency';
-import { LocalVote, localVotesState } from '../../../api/state/votesLocal';
-import { PartyChartDataQuery, usePartyChartDataQuery } from '../../../__generated__/graphql';
+import { parlaments, parlamentState } from '../../api/state/parlament';
+import { constituencyState } from '../../api/state/constituency';
+import { LocalVote, localVotesState } from '../../api/state/votesLocal';
+import { PartyChartDataQuery, usePartyChartDataQuery } from '../../__generated__/graphql';
 import { BarChart, ChartLegendData, WomPartyChartData } from '@democracy-deutschland/ui';
-import { theme } from '../../../styles/theme';
-import { Centered } from '../../../components/Centered';
-import { NoVotesPlaceholder } from '../../../components/NoVotesPlaceholder';
+import { theme } from '../../styles/theme';
+import { Centered } from '../../components/Centered';
+import { NoVotesPlaceholder } from '../../components/NoVotesPlaceholder';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -82,12 +82,12 @@ interface Props {
   route: VoteVerificationScreenRouteProp;
 }
 
-export const VoteVerification: React.FC<Props> = ({ route }) => {
+export const VotingScreen: React.FC<Props> = ({ route }) => {
   const parlamentIdentifier = useRecoilValue(parlamentState);
   const parlament = parlaments[parlamentIdentifier];
   const [showWarning, setShowWarning] = useState(true);
   const [selectedParty, setSelectedParty] = useState(0);
-  const { constituency } = useRecoilValue(constituencyState);
+  const constituency = useRecoilValue(constituencyState);
   const localVotes = useRecoilValue(localVotesState);
   const { data: proceduresData } = usePartyChartDataQuery({
     fetchPolicy: 'cache-and-network',

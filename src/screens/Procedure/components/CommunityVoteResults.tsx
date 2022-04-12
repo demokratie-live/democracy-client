@@ -57,7 +57,7 @@ interface Props {
 }
 
 export const CommunityVoteResults: React.FC<Props> = ({ voteResults, voted, countryMap }) => {
-  const { constituency: myConstituency } = useRecoilValue(constituencyState);
+  const myConstituency = useRecoilValue(constituencyState);
   const { isVerified } = useInitialState();
   const [activeSlide, setActiveSlide] = useState<number>(0);
   const [width, setWidth] = useState<number>(380);

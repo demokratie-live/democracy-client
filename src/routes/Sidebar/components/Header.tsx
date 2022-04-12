@@ -30,7 +30,7 @@ interface Props {
 }
 
 export const Header: React.FC<Props> = ({ onPress, label }) => {
-  const { constituency } = useRecoilValue(constituencyState);
+  const constituency = useRecoilValue(constituencyState);
 
   const getConstituency = (wk: string) => {
     const DynComp = getConstituencySvgs(wk).default;

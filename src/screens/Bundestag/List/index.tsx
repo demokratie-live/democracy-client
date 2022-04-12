@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, ListRenderItem, SectionList } from 'react-native';
+import { Text, ListRenderItem, SectionList, SectionListProps } from 'react-native';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/core';
 import { Segment } from './Components/Segment';
 import { communityVoteData } from '../../../lib/PieChartCommunityData';
@@ -35,6 +35,8 @@ export interface SegmentedData {
   data: ProceduresListQuery['procedures'];
 }
 
+type Item = ProceduresListQuery['procedures'][0];
+
 const Container = styled.View`
   flex: 1;
   background-color: ${({ theme }) => theme.colors.background.primary};
@@ -43,7 +45,7 @@ const Container = styled.View`
 export const List = () => {
   const localVotes = useRecoilValue(localVotesState);
   const { proceduresFilter } = useListFilter();
-  const { constituency } = useRecoilValue(constituencyState);
+  const constituency = useRecoilValue(constituencyState);
   const parlamentIdentifier = useRecoilValue(parlamentState);
   const parlament = parlaments[parlamentIdentifier];
   const constituencies = constituency ? [constituency] : [];
@@ -130,7 +132,7 @@ export const List = () => {
     }, []);
   }
 
-  const renderItem: ListRenderItem<ProceduresListQuery['procedures'][0]> = ({
+  const renderItem: ListRenderItem<Item> = ({
     item: {
       procedureId,
       title,
@@ -197,14 +199,16 @@ export const List = () => {
     );
   };
 
+  const renderSectionHeader: SectionListProps<Item, SegmentedData>['renderSectionHeader'] = ({
+    section,
+  }) => (route.params.list !== 'TOP100' && section.title ? <Segment text={section.title} /> : null);
+
   return (
     <Container>
-      <SectionList
+      <SectionList<Item, SegmentedData>
         sections={segmentedData}
         stickySectionHeadersEnabled
-        renderSectionHeader={({ section }) =>
-          route.params.list !== 'TOP100' ? <Segment text={section.title} /> : null
-        }
+        renderSectionHeader={renderSectionHeader}
         testID="ListView"
         renderItem={renderItem}
         keyExtractor={({ procedureId }) => procedureId}

@@ -70,7 +70,7 @@ const ShareComponent = Platform.OS === 'ios' ? SvgShareIosHeader : SvgShare;
 export const ProcedureScreen: FC<Props> = ({ route, navigation }) => {
   const { notificationSettings, hasPermissions } = useContext(NotificationsContext);
   const { isVerified } = useInitialState();
-  const { constituency } = useRecoilValue(constituencyState);
+  const constituency = useRecoilValue(constituencyState);
   const constituencies = useMemo(() => (constituency ? [constituency] : []), [constituency]);
   const { data, loading, error, refetch } = useProcedureQuery({
     variables: {

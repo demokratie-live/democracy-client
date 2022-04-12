@@ -18,7 +18,6 @@ import SvgLens from '../../components/Icons/Lens';
 import { parlaments } from '../../api/state/parlament';
 import { Recommended } from '../../screens/Bundestag/Recomended';
 import { List } from '../../screens/Bundestag';
-import { PlaceholderScreen } from '../../screens/Placeholder';
 
 export type BundestagTopTabParamList = {
   Empfohlen: undefined;
@@ -139,8 +138,7 @@ export const BundestagTabViewNavigation: React.FC<Props> = ({ navigation }) => {
       {parlament.screens.procedures.all ? (
         <TabNavigation.Screen
           name="Vergangen"
-          // component={List}
-          component={PlaceholderScreen}
+          component={List}
           initialParams={{ list: ListType.Past }}
           options={{
             tabBarTestID: 'tabBarPastItem',

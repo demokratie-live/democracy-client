@@ -10,6 +10,9 @@ import { lightTheme } from '@democracy-deutschland/ui';
 import { SyncVotesCaptureScreen } from '../screens/SyncVotesCapture';
 import { VoteSelection } from '../__generated__/graphql';
 import { FilterScreen, ProcedureScreen } from '../screens/Bundestag';
+import { PdfScreen } from '../screens/Pdf';
+import { VotingScreen } from '../screens/Voting';
+import { ConstituencyScreen } from '../screens/Constituency';
 
 export type RootStackParamList = {
   Sidebar: undefined;
@@ -65,7 +68,11 @@ export const Routes: React.FC = () => {
         component={Introduction}
       />
       <Stack.Screen name="Sidebar" component={SidebarNavigation} />
-      <Stack.Screen name="Constituency" component={PlaceholderScreen} />
+      <Stack.Screen
+        name="Constituency"
+        component={ConstituencyScreen}
+        options={{ headerShown: true }}
+      />
       <Stack.Screen name="VerificationStart" component={PlaceholderScreen} />
       <Stack.Screen
         name="SyncVotes"
@@ -90,6 +97,18 @@ export const Routes: React.FC = () => {
         name="Procedure"
         component={ProcedureScreen}
         options={({ route }) => ({ title: route.params.title || '', headerShown: true })}
+      />
+      <Stack.Screen
+        name="Pdf"
+        component={PdfScreen}
+        options={({ route }) => ({ title: route.params.title, headerShown: true })}
+      />
+      <Stack.Screen
+        name="Voting"
+        component={VotingScreen}
+        options={{
+          title: 'Wahlurne',
+        }}
       />
     </Stack.Navigator>
   );

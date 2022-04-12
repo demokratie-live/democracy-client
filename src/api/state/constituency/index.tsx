@@ -3,14 +3,8 @@ import { localStorageEffect } from '../effects/localStorageEffect';
 
 const STORAGE_KEY_CONSTITUENCY = 'Constituency';
 
-interface ConstituencyState {
-  constituency?: string;
-}
-
-const defaults: ConstituencyState = {};
-
-export const constituencyState = atom<ConstituencyState>({
+export const constituencyState = atom<string | undefined>({
   key: 'constituencyState',
-  default: defaults,
+  default: undefined,
   effects: [localStorageEffect(STORAGE_KEY_CONSTITUENCY)],
 });

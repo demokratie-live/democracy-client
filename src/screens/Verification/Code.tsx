@@ -51,7 +51,7 @@ interface Props {
 export const Code: React.FC<Props> = ({ route }) => {
   const { countdown, setExpireTime, setResendTime, phoneNumber } = useContext(VerificationContext);
   const { proceduresFilter } = useListFilter();
-  const { constituency } = useRecoilValue(constituencyState);
+  const constituency = useRecoilValue(constituencyState);
   const navigation = useNavigation<DevPlaceholderNavigationProps>();
   const [requestCode] = useRequestSmsCodeMutation();
   const [requestVerification] = useRequestVerificationMutation();

@@ -45,7 +45,7 @@ const Title = styled.Text`
 const Subline = styled.Text`
   padding-top: 8px;
   font-size: 15px;
-  color: ${({ theme }) => theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.tertiary};
 `;
 
 const PaddingRight = styled.View`
