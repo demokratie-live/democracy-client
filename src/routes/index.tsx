@@ -13,6 +13,7 @@ import { FilterScreen, ProcedureScreen } from '../screens/Bundestag';
 import { PdfScreen } from '../screens/Pdf';
 import { VotingScreen } from '../screens/Voting';
 import { ConstituencyScreen } from '../screens/Constituency';
+import { SearchScreen } from '../screens/Search';
 
 export type RootStackParamList = {
   Sidebar: undefined;
@@ -89,8 +90,9 @@ export const Routes: React.FC = () => {
         name="Search"
         options={{
           title: 'Suche',
+          headerShown: true,
         }}
-        component={PlaceholderScreen}
+        component={SearchScreen}
       />
       <Stack.Screen name="Filter" component={FilterScreen} options={{ headerShown: true }} />
       <Stack.Screen
