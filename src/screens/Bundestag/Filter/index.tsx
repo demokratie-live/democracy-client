@@ -5,9 +5,11 @@ import Checkbox from './components/Checkbox';
 import styled from 'styled-components/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../routes';
-import { FilterData, filterData } from '../../../api/hooks/useListFilter/initData';
+import { FilterData } from '../../../api/hooks/useListFilter/initData';
 import { useInitialState } from '../../../api/state/initialState';
 import { FilterEntry } from '../../../api/hooks/useListFilter/initData';
+import { useRecoilState } from 'recoil';
+import { filterState } from '../../../api/state/filter';
 
 const Save = styled.TouchableOpacity`
   margin-right: ${({ theme }) => theme.spaces.small};
@@ -56,7 +58,7 @@ type Props = {
 
 export const FilterScreen: React.FC<Props> = ({ navigation }) => {
   const { isVerified } = useInitialState();
-  const [filter, setFilter] = useState(filterData);
+  const [filter, setFilter] = useRecoilState(filterState);
   const [data, setData] = useState<FilterData[]>(filter);
 
   useEffect(() => {

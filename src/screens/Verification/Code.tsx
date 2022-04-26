@@ -56,7 +56,7 @@ export const Code: React.FC<Props> = ({ route }) => {
   const [requestCode] = useRequestSmsCodeMutation();
   const [requestVerification] = useRequestVerificationMutation();
   const [code, setCode] = useState('');
-
+  console.log(proceduresFilter);
   const showNotification = (message: string) => {
     Alert.alert('Verifikationsfehler', message);
   };

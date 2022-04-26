@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import { ProcedureFilter } from '../../../__generated__/graphql';
-import { FilterData, filterData, FilterEntry } from './initData';
+import { filterState } from '../../state/filter';
+import { FilterData, FilterEntry } from './initData';
 
 export const useListFilter = () => {
-  const [filter, setFilter] = useState(filterData);
+  const [filter, setFilter] = useRecoilState(filterState);
   const [proceduresFilter, setProceduresFilter] = useState<ProcedureFilter>({});
 
   const formatFilterdata = (data: FilterEntry[]) => {
@@ -15,7 +17,7 @@ export const useListFilter = () => {
     }, []);
   };
 
-  const getFilterPrepared = (rawData: FilterData[]) => {
+  const getFilterPrepared = useCallback((rawData: FilterData[]) => {
     const filters: ProcedureFilter = {};
     rawData.forEach(({ name, data }) => {
       switch (name) {
@@ -41,18 +43,17 @@ export const useListFilter = () => {
     });
 
     return filters;
-  };
+  }, []);
 
-  const onSetFilter = (rawData: FilterData[]) => {
-    setFilter(rawData);
-    setProceduresFilter(getFilterPrepared(rawData));
-  };
+  useEffect(() => {
+    setFilter(filter);
+    setProceduresFilter(getFilterPrepared(filter));
+  }, [filter, getFilterPrepared, setFilter]);
 
   const active = Object.keys(getFilterPrepared(filter)).length !== 0;
 
   return {
     filter,
-    setFilter: onSetFilter,
     proceduresFilter,
     active,
   };
