@@ -72,15 +72,13 @@ export const Results: React.FC = () => {
   const [term, setTerm] = useRecoilState(searchTermState);
   const history = useRecoilValue(searchHistoryState);
   const { data: mostSearchedTerms, loading: loadingMostSearched } = useMostSearchedQuery();
-  const [
-    executeSearch,
-    { data: searchData, loading: loadingSearchProcedures, error: searchError },
-  ] = useSearchProceduresLazyQuery({
-    variables: {
-      term,
-      period: parlament.period,
-    },
-  });
+  const [executeSearch, { data: searchData, loading: loadingSearchProcedures }] =
+    useSearchProceduresLazyQuery({
+      variables: {
+        term,
+        period: parlament.period,
+      },
+    });
 
   useEffect(() => {
     if (term.length > 0) {
@@ -92,9 +90,6 @@ export const Results: React.FC = () => {
   }, [term, executeSearch, executeFinishSearch]);
 
   // TODO handle errors
-  if (searchError) {
-    // Alert.alert(JSON.stringify(searchError));
-  }
 
   const loading = (loadingMostSearched && history.size === 0) || loadingSearchProcedures;
 

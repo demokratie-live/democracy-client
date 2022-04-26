@@ -25,7 +25,7 @@ export const SearchHeader: React.FC = () => {
 
   // throttle to handle android endless changing error
   const onChangeText = (text: string) => {
-    if (typeof term === 'string') {
+    if (typeof text === 'string') {
       setTerm(text);
     }
   };
