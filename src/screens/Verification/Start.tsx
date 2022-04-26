@@ -22,7 +22,7 @@ const ScrollView = styled.ScrollView.attrs(() => ({
 
 const Text = styled.Text`
   font-size: 15px;
-  color: ${({ theme }) => theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.tertiary};
 `;
 
 const TextLink = styled.Text`

@@ -1,5 +1,4 @@
 import React from 'react';
-import m from 'moment';
 import { View } from 'react-native';
 import styled from 'styled-components/native';
 import { formatDateToDDMMYY } from '../../../lib/formatDate';
@@ -44,7 +43,7 @@ const DefTitleRight = styled(DefTitle)`
 
 const DefDescr = styled.Text`
   font-size: 14px;
-  color: ${({ theme }) => theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.tertiary};
 `;
 
 const Content = styled.View`
