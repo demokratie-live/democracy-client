@@ -47,7 +47,7 @@ const TextCenter = styled.Text`
   align-content: center;
   justify-content: space-between;
   flex: 1;
-  color: ${({ theme }) => theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.tertiary};
   font-size: 17px;
   padding-top: 50px;
   font-family: ${Platform.OS === 'ios' ? 'HelveticaNeue-Light' : 'sans-serif-light'};
@@ -76,7 +76,7 @@ export const SmsDonate: React.FC = () => {
   });
 
   const onClose = () => {
-    refetchMe();
+    navigation.popToTop();
   };
 
   const onDonate = () => {

@@ -52,6 +52,7 @@ export const List = () => {
   const route = useRoute<ListScreenRouteProp>();
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [hasMore, setHasMore] = useState(true);
+  console.log(parlament.period);
   const { loading, data, error, fetchMore, networkStatus, refetch } = useProceduresListQuery({
     fetchPolicy: 'network-only',
     errorPolicy: 'all',

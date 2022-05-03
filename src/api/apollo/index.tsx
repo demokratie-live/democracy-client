@@ -29,7 +29,7 @@ const httpLink = new HttpLink({
   uri: graphQlUri,
 });
 
-const errorLink = onError(({ graphQLErrors, networkError }) => {
+const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
   if (graphQLErrors) {
     graphQLErrors.forEach(({ message, locations, path }) => {
       console.log(
@@ -48,7 +48,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   }
   if (networkError) {
     const { message, name } = networkError;
-    console.log(`[Network error]: ${JSON.stringify(networkError)}`, message, name);
+    console.log(`[Network error]: ${JSON.stringify(networkError)}`, message, name, operation);
   }
 });
 

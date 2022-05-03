@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components/native';
-import { Alert, Platform, Dimensions } from 'react-native';
+import { Alert, Platform, Dimensions, KeyboardAvoidingView } from 'react-native';
 import Description from './Components/Description';
-import PhonenumberInput from './Components/PhonenumberInput';
+import { PhonenumberInput } from './Components/PhonenumberInput';
 import { useNavigation } from '@react-navigation/core';
 import { ButtonNext } from './Start';
 import { useInitialState } from '../../api/state/initialState';
@@ -12,13 +12,14 @@ import { VerificationContext } from '../../api/state/Verification';
 import { useRequestSmsCodeMutation } from '../../__generated__/graphql';
 import SvgDemocracyBubble from '../../components/Icons/DemocracyBubble';
 
-const Container = styled.KeyboardAvoidingView.attrs(() => ({
-  behavior: Platform.OS === 'ios' ? 'padding' : undefined,
+const Container = styled(KeyboardAvoidingView).attrs(() => ({
+  behavior: Platform.OS === 'ios' ? 'padding' : 'height',
+  enabled: true,
   keyboardVerticalOffset: 100,
-  // enabled: true,
 }))`
-  background-color: #fff;
   flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 const ScrollView = styled.ScrollView.attrs(() => ({
@@ -28,13 +29,15 @@ const ScrollView = styled.ScrollView.attrs(() => ({
     justifyContent: 'space-around',
     flex: 1,
   },
-}))``;
+}))`
+  flex: 1;
+`;
 
 const DEVICE_HEIGT = Dimensions.get('window').height;
 
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
-export const PhoneNumber: React.FC = () => {
+export const PhoneNumberScreen: React.FC = () => {
   const { refetchMe } = useInitialState();
   const navigation = useNavigation<NavigationProps>();
   const { phoneNumber, setPhoneNumber, setExpireTime, setResendTime } =
@@ -64,28 +67,31 @@ export const PhoneNumber: React.FC = () => {
         {
           text: 'Ja',
           onPress: () => {
+            console.log('HIER', preparedPhoneNumber);
             setPhoneNumber(preparedPhoneNumber);
             requestCode({
               variables: { newPhone: preparedPhoneNumber },
-            }).then(({ data }) => {
-              if (
-                data &&
-                !data.requestCode.succeeded &&
-                data.requestCode.expireTime &&
-                data.requestCode.resendTime
-              ) {
-                setExpireTime(data.requestCode.expireTime);
-                setResendTime(data.requestCode.resendTime);
-                showNotification(data.requestCode.reason || '');
-                refetchMe();
-              } else if (data && data.requestCode.expireTime && data.requestCode.resendTime) {
-                // TODO: Navigate to Code Input if aut_code_expires is not yet expired
-                // Contains a Date (String)
-                setExpireTime(data.requestCode.expireTime);
-                setResendTime(data.requestCode.resendTime);
-                navigation.push('SmsCodeInput', {});
-              }
-            });
+            })
+              .then(({ data }) => {
+                if (
+                  data &&
+                  !data.requestCode.succeeded &&
+                  data.requestCode.expireTime &&
+                  data.requestCode.resendTime
+                ) {
+                  setExpireTime(data.requestCode.expireTime);
+                  setResendTime(data.requestCode.resendTime);
+                  showNotification(data.requestCode.reason || '');
+                  refetchMe();
+                } else if (data && data.requestCode.expireTime && data.requestCode.resendTime) {
+                  // TODO: Navigate to Code Input if aut_code_expires is not yet expired
+                  // Contains a Date (String)
+                  setExpireTime(data.requestCode.expireTime);
+                  setResendTime(data.requestCode.resendTime);
+                  navigation.push('SmsCodeInput', {});
+                }
+              })
+              .catch(console.error);
           },
         },
       ],

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components/native';
-import { Keyboard, Alert, Platform, Dimensions } from 'react-native';
+import { Keyboard, Alert, Dimensions } from 'react-native';
 import { sha256 } from 'react-native-sha256';
 import AsyncStorage from '@react-native-community/async-storage';
 import Description from './Components/Description';
@@ -20,21 +20,14 @@ import {
   useRequestVerificationMutation,
 } from '../../__generated__/graphql';
 import SvgDemocracyBubble from '../../components/Icons/DemocracyBubble';
+import { parlaments, parlamentState } from '../../api/state/parlament';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-const Container = styled.KeyboardAvoidingView.attrs(() => ({
-  behavior: Platform.OS === 'ios' ? 'padding' : undefined,
-  keyboardVerticalOffset: 100,
-  // enabled: true,
-}))`
-  background-color: #fff;
-  flex: 1;
-`;
-
-const ScrollView = styled.ScrollView.attrs(() => ({
+const Container = styled(KeyboardAwareScrollView).attrs(() => ({
   contentContainerStyle: {
     alignItems: 'center',
     justifyContent: 'space-around',
-    flex: 1,
+    height: 400,
   },
 }))``;
 
@@ -48,7 +41,7 @@ interface Props {
   route: RouteProps;
 }
 
-export const Code: React.FC<Props> = ({ route }) => {
+export const SmsCodeInput: React.FC<Props> = ({ route }) => {
   const { countdown, setExpireTime, setResendTime, phoneNumber } = useContext(VerificationContext);
   const { proceduresFilter } = useListFilter();
   const constituency = useRecoilValue(constituencyState);
@@ -56,7 +49,9 @@ export const Code: React.FC<Props> = ({ route }) => {
   const [requestCode] = useRequestSmsCodeMutation();
   const [requestVerification] = useRequestVerificationMutation();
   const [code, setCode] = useState('');
-  console.log(proceduresFilter);
+  const parlamentIdentifier = useRecoilValue(parlamentState);
+  const parlament = parlaments[parlamentIdentifier];
+
   const showNotification = (message: string) => {
     Alert.alert('Verifikationsfehler', message);
   };
@@ -81,6 +76,7 @@ export const Code: React.FC<Props> = ({ route }) => {
         refetchQueries.push({
           query: ProceduresListDocument,
           variables: {
+            period: parlament.period,
             listTypes: [list],
             pageSize: 10,
             filter: proceduresFilter,
@@ -150,23 +146,21 @@ export const Code: React.FC<Props> = ({ route }) => {
 
   return (
     <Container>
-      <ScrollView keyboardShouldPersistTaps="always">
-        {DEVICE_HEIGT > 500 && <SvgDemocracyBubble width="125" height="125" color="#000" />}
-        <Description text={`Bitte gib Deinen Code ein für\n${phoneNumber}`} />
-        <CodeInput
-          onChange={code => {
-            onChangeCode(code);
-          }}
-          code={code}
-        />
-        <ButtonNext
-          text={buttonTitle}
-          onPress={sendNumber}
-          disabled={countdown === undefined || countdown > 0}
-          textColor="white"
-          backgroundColor="blue"
-        />
-      </ScrollView>
+      {DEVICE_HEIGT > 500 && <SvgDemocracyBubble width="125" height="125" color="#000" />}
+      <Description text={`Bitte gib Deinen Code ein für\n${phoneNumber}`} />
+      <CodeInput
+        onChange={code => {
+          onChangeCode(code);
+        }}
+        code={code}
+      />
+      <ButtonNext
+        text={buttonTitle}
+        onPress={sendNumber}
+        disabled={countdown === undefined || countdown > 0}
+        textColor="white"
+        backgroundColor="blue"
+      />
     </Container>
   );
 };

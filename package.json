@@ -44,6 +44,7 @@
     "react-native-camera": "^4.2.1",
     "react-native-device-info": "^8.4.9",
     "react-native-gesture-handler": "^2.3.0",
+    "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-keychain": "^8.0.0",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-markdown-view": "https://github.com/Benjamin-Dobell/react-native-markdown-view",

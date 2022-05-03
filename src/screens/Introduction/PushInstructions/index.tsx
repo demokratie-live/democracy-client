@@ -8,6 +8,9 @@ import { Button } from '../../../components/Button';
 import SvgIconappios from '../../../components/Icons/IconAppIos';
 import SvgNewmarker from '../../../components/Icons/Newmarker';
 import { NotificationsContext } from '../../../api/state/notificationPermission';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../../routes';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 
@@ -70,13 +73,14 @@ export interface Notification {
   description: string;
 }
 
+type ScreenNavigationProps = NativeStackNavigationProp<RootStackParamList, 'Sidebar'>;
 interface Props {
-  finishAction: () => void;
   alreadyKnown?: boolean;
 }
 
-export const PushInstructions: React.FC<Props> = ({ alreadyKnown = false, finishAction }) => {
+export const PushInstructions: React.FC<Props> = ({ alreadyKnown = false }) => {
   const [pushActive, setPushActive] = useState(true);
+  const navigation = useNavigation<ScreenNavigationProps>();
   const { requestToken, update: updateNotificationSettings } = useContext(NotificationsContext);
 
   const notification = {
@@ -91,7 +95,13 @@ export const PushInstructions: React.FC<Props> = ({ alreadyKnown = false, finish
       enabled: true,
       outcomePushs: true,
     });
-    finishAction();
+    navigation.reset({
+      routes: [
+        {
+          name: 'Sidebar',
+        },
+      ],
+    });
   };
 
   return (

@@ -16,6 +16,7 @@ import { FaqScreen } from '../../screens/Faq';
 import { SettingsScreen } from '../../screens/Settings';
 import { DonateScreen } from '../../screens/Donate';
 import { BundestagTabViewNavigation } from '../Bundestag';
+import { DevScreen } from './DevScreen';
 
 export type SidebarParamList = {
   Bundestag: undefined;
@@ -27,6 +28,7 @@ export type SidebarParamList = {
   Donate: undefined;
   Abgeordnete: undefined;
   Development: undefined;
+  DEV: undefined;
 };
 
 const SidebarDrawer = createDrawerNavigator<SidebarParamList>();
@@ -128,6 +130,9 @@ export const SidebarNavigation = () => {
         name={'Donate'}
         component={DonateScreen}
       />
+      {process.env.NODE_ENV === 'development' && (
+        <SidebarDrawer.Screen name="DEV" component={DevScreen} />
+      )}
     </SidebarDrawer.Navigator>
   );
 };

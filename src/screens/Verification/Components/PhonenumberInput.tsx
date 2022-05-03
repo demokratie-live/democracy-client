@@ -58,5 +58,3 @@ export const PhonenumberInput: React.FC<Props> = ({ phoneNumber = '', onChange }
     </Container>
   );
 };
-
-export default PhonenumberInput;

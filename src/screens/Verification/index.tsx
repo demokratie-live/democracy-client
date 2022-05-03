@@ -4,10 +4,8 @@ import React from 'react';
 // import { RootStackParamList } from '../../../routes';
 import { VerificationStart } from './Start';
 
-const Verification = () => {
+export const VerificationScreen = () => {
   // const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   return <VerificationStart />;
 };
-
-export default Verification;

@@ -14,6 +14,10 @@ import { PdfScreen } from '../screens/Pdf';
 import { VotingScreen } from '../screens/Voting';
 import { ConstituencyScreen } from '../screens/Constituency';
 import { SearchScreen } from '../screens/Search';
+import { VerificationScreen } from '../screens/Verification';
+import { PhoneNumberScreen } from '../screens/Verification/PhoneNumber';
+import { SmsCodeInput } from '../screens/Verification/Code';
+import { SmsDonate } from '../screens/Verification/Donate';
 
 export type RootStackParamList = {
   Sidebar: undefined;
@@ -47,7 +51,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const Routes: React.FC = () => {
   const { lastStartWithVersion } = useInitialState();
-
+  console.log({ lastStartWithVersion });
   if (lastStartWithVersion === undefined) {
     return null;
   }
@@ -74,7 +78,26 @@ export const Routes: React.FC = () => {
         component={ConstituencyScreen}
         options={{ headerShown: true }}
       />
-      <Stack.Screen name="VerificationStart" component={PlaceholderScreen} />
+      <Stack.Screen
+        name="VerificationStart"
+        component={VerificationScreen}
+        options={{ headerShown: true, title: 'Verifizieren' }}
+      />
+      <Stack.Screen
+        name="PhoneNumberInput"
+        component={PhoneNumberScreen}
+        options={{ headerShown: true, title: 'Telefonnummer' }}
+      />
+      <Stack.Screen
+        name="SmsCodeInput"
+        component={SmsCodeInput}
+        options={{ headerShown: true, title: 'Code Eingeben' }}
+      />
+      <Stack.Screen
+        name="SmsDonate"
+        component={SmsDonate}
+        options={{ title: 'Spenden', headerBackButtonMenuEnabled: false }}
+      />
       <Stack.Screen
         name="SyncVotes"
         component={SyncVotesScreen}
@@ -109,6 +132,7 @@ export const Routes: React.FC = () => {
         name="Voting"
         component={VotingScreen}
         options={{
+          headerShown: true,
           title: 'Wahlurne',
         }}
       />

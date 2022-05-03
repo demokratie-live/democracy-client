@@ -69,20 +69,26 @@ const Introduction: FC<Props> = ({ route }) => {
   ));
 
   if (!notificationSettings.outcomePushs || !notificationSettings.enabled || !hasPermissions) {
-    slideScreens.push(<PushInstructions key="push-instructions" finishAction={finishAction} />);
+    slideScreens.push(<PushInstructions key="push-instructions" />);
   }
-
-  // if (slideScreens.length === 0) {
-  //   setLastStartWithVersion(getVersion());
-  //   navigation.reset({
-  //     index: 0,
-  //     routes: [{ name: 'Sidebar' }],
-  //   });
-  // }
 
   return (
     <SafeAreaView testID="Introduction">
-      <Pager nextButton nextText="Verstanden" finishText="Später" finishAction={finishAction}>
+      <Pager
+        nextButton
+        nextText="Verstanden"
+        finishText="Später"
+        finishAction={() => {
+          setLastStartWithVersion(getVersion());
+          navigation.reset({
+            routes: [
+              {
+                name: 'Sidebar',
+              },
+            ],
+          });
+        }}
+      >
         {slideScreens}
       </Pager>
     </SafeAreaView>
