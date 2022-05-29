@@ -286,9 +286,9 @@ PODS:
     - React-Core
   - react-native-camera/RN (4.2.1):
     - React-Core
-  - react-native-notifications (4.2.4):
+  - react-native-notifications (4.3.1):
     - React-Core
-  - react-native-pager-view (5.4.15):
+  - react-native-pager-view (5.4.24):
     - React-Core
   - react-native-pdf (6.5.0):
     - React-Core
@@ -361,9 +361,9 @@ PODS:
     - React-perflogger (= 0.67.2)
   - RNCAsyncStorage (1.7.1):
     - React
-  - RNDeviceInfo (8.7.0):
+  - RNDeviceInfo (8.7.1):
     - React-Core
-  - RNGestureHandler (2.3.2):
+  - RNGestureHandler (2.4.2):
     - React-Core
   - RNKeychain (8.0.0):
     - React-Core
@@ -608,8 +608,8 @@ SPEC CHECKSUMS:
   React-logger: 23de8ea0f44fa00ee77e96060273225607fd4d78
   react-native-blob-util: a5d3561045ed98cfb2fb80cbbff600fae0e8edee
   react-native-camera: 3eae183c1d111103963f3dd913b65d01aef8110f
-  react-native-notifications: 3de8ef9cd800e5db0225d9aa46b228d2b94ce51e
-  react-native-pager-view: b1914469643f40042e65d78cbf3d3dfebd6fb0d9
+  react-native-notifications: 33ec77006f7987bb22de8f1665889abc633b9196
+  react-native-pager-view: 95d0418c3c74279840abec6926653d32447bafb6
   react-native-pdf: de35db0d8f1e5d37e65e887554f7d4bd062af56b
   react-native-safe-area-context: 9e40fb181dac02619414ba1294d6c2a807056ab9
   React-perflogger: 3c9bb7372493e49036f07a82c44c8cf65cbe88db
@@ -625,8 +625,8 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 2450b43df7ffe8e805a0b3dcb2abd4282f1f1836
   ReactCommon: d98c6c96b567f9b3a15f9fd4cc302c1eda8e3cf2
   RNCAsyncStorage: 44395cb9c7c1523104c2b499eb426ef7aff82bca
-  RNDeviceInfo: 36286df381fcaf1933ff9d2d3c34ba2abeb2d8d8
-  RNGestureHandler: 6e757e487a4834e7280e98e9bac66d2d9c575e9c
+  RNDeviceInfo: aad3c663b25752a52bf8fce93f2354001dd185aa
+  RNGestureHandler: 61628a2c859172551aa2100d3e73d1e57878392f
   RNKeychain: 4f63aada75ebafd26f4bc2c670199461eab85d94
   RNPermissions: 34d678157c800b25b22a488e4d8babb57456e796
   RNRate: 94f57c773e155ca0d0aeeba9c10a32bce9030daf
