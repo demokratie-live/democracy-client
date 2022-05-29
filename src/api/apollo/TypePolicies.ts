@@ -1,5 +1,5 @@
 import { uniqBy } from 'lodash';
-import { Procedure, TypedTypePolicies } from '../../__generated__/graphql';
+import { Procedure, TypedTypePolicies, VoteResult } from '../../__generated__/graphql';
 
 export const typePolicies: TypedTypePolicies = {
   Query: {
@@ -29,16 +29,16 @@ export const typePolicies: TypedTypePolicies = {
       },
     },
   },
-  // Procedure: {
-  //   keyFields: ['procedureId'],
-  //   fields: {
-  //     voteResults: {
-  //       merge(existing: VoteResult, incoming: VoteResult, { mergeObjects }) {
-  //         return mergeObjects(existing, incoming);
-  //       },
-  //     },
-  //   },
-  // },
+  Procedure: {
+    keyFields: ['procedureId'],
+    fields: {
+      voteResults: {
+        merge(existing: VoteResult, incoming: VoteResult, { mergeObjects }) {
+          return mergeObjects(existing, incoming);
+        },
+      },
+    },
+  },
   // Deputy: {
   //   keyFields: ['webId'],
   //   fields: {

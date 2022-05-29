@@ -8,8 +8,6 @@ import { SidebarParamList } from '../../routes/Sidebar';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { RootStackParamList } from '../../routes';
 import styled from 'styled-components/native';
-import { MaterialTopTabNavigationProp } from '@react-navigation/material-top-tabs';
-import { BundestagTopTabParamList } from '../../routes/Bundestag';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useRecoilValue } from 'recoil';
 import { constituencyState } from '../../api/state/constituency';
@@ -112,14 +110,8 @@ interface Props {
 }
 
 type DetailScreenNavigationProps = CompositeNavigationProp<
-  MaterialTopTabNavigationProp<
-    BundestagTopTabParamList,
-    'Empfohlen' | 'Sitzungswoche' | 'Top 100' | 'Vergangen'
-  >,
-  CompositeNavigationProp<
-    DrawerNavigationProp<SidebarParamList, 'Bundestag'>,
-    NativeStackNavigationProp<RootStackParamList, 'Sidebar'>
-  >
+  NativeStackNavigationProp<RootStackParamList, 'Sidebar'>,
+  DrawerNavigationProp<SidebarParamList, 'Bundestag'>
 >;
 
 const PrepareActions: React.FC<Props> = ({
@@ -137,6 +129,7 @@ const PrepareActions: React.FC<Props> = ({
   const constituency = useRecoilValue(constituencyState);
   const constituencies = constituency ? [constituency] : [];
   const voteSelection = useRecoilValue(localVoteState(procedureId))?.selection;
+  const voteSelectionData = useRecoilValue(localVoteState(procedureId));
   const [toggleNotification] = useToggleNotificationMutation({
     variables: {
       procedureId,

@@ -1,15 +1,21 @@
 import { atom, AtomEffect, selector, selectorFamily } from 'recoil';
 import VotesLocal, { Chain, ChainEntry, ChainEntryRaw } from '../../../lib/VotesLocal';
 
-export const localVotesEffect: AtomEffect<Chain> = ({ onSet }) => {
+export const localVotesEffect: AtomEffect<Chain> = ({ onSet, setSelf }) => {
+  VotesLocal.readKeychain().then(chain => {
+    setSelf(chain);
+  });
   onSet((newValue, _, isReset) => {
-    isReset ? VotesLocal.reset() : VotesLocal.writeKeychain(newValue);
+    isReset
+      ? VotesLocal.reset()
+      : VotesLocal.writeKeychain(newValue).catch(err => {
+          console.error('SET KEYSTORE', err);
+        });
   });
 };
 
 export const votesLocalState = atom<Chain>({
   key: 'votesLocalState',
-  default: VotesLocal.readKeychain(),
   effects: [localVotesEffect],
 });
 
@@ -35,7 +41,7 @@ export const localVoteState = selectorFamily<LocalVote | undefined, string>({
           time: new Date(),
         });
         const dataIndex = localVotes.d?.findIndex(({ i }) => i === procedureId);
-        if (!dataIndex) {
+        if (!dataIndex || dataIndex === -1) {
           set(votesLocalState, { ...localVotes, d: [...(localVotes.d || []), newVote] });
         } else {
           set(votesLocalState, {
@@ -51,7 +57,6 @@ export const localVotesState = selector<LocalVote[]>({
   key: 'localVotesState',
   get: ({ get }) => {
     const localVotes = get(votesLocalState);
-
     return localVotes.d?.map(transformLocalVote) || ([] as LocalVote[]);
   },
 });

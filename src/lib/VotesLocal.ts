@@ -122,8 +122,10 @@ class VotesLocal {
     // Split Data into packages to avoid error on 65k
     // https://github.com/oblador/react-native-keychain/issues/184
     const index = [];
-    while (data.d && data.d.length > 0) {
-      const set = data.d.splice(0, VotesLocal.KEYCHAIN_MAXSIZE);
+
+    for (let i = 0; i < (data.d?.length || 0); i += VotesLocal.KEYCHAIN_MAXSIZE) {
+      // while (data.d && data.d.length > 0) {
+      const set = data.d?.slice(i, VotesLocal.KEYCHAIN_MAXSIZE);
       const setServiceId: number = index.length;
       const setService = `${VotesLocal.KEYCHAIN_VOTES_SERVICE}${setServiceId}`;
       // Write Bucket
@@ -134,13 +136,20 @@ class VotesLocal {
     }
 
     // Delete Data, Add Index
-    delete data.d;
-    data.i = index;
+    const { d, ...dataClean } = data;
+    const indexData = {
+      ...dataClean,
+      i: index,
+    };
 
     // Write Index
-    return await Keychain.setGenericPassword(VotesLocal.KEYCHAIN_INDEX_KEY, JSON.stringify(data), {
-      service: VotesLocal.KEYCHAIN_INDEX_SERVICE,
-    });
+    return await Keychain.setGenericPassword(
+      VotesLocal.KEYCHAIN_INDEX_KEY,
+      JSON.stringify(indexData),
+      {
+        service: VotesLocal.KEYCHAIN_INDEX_SERVICE,
+      },
+    );
   };
 
   static mergeKeychains = async (newChain: Chain): Promise<Chain> => {
@@ -240,7 +249,7 @@ class VotesLocal {
       procedureId: i,
       selection,
       time: new Date(t),
-      constituency: c,
+      constituency: c || null,
     };
   };
 
@@ -261,7 +270,7 @@ class VotesLocal {
         s = null;
         break;
     }
-    return { i: procedureId, s, t: time.toISOString(), c: constituency };
+    return { i: procedureId, s, t: time.toISOString(), c: constituency || '' };
   };
 
   // Get the VoteData for given procedureId

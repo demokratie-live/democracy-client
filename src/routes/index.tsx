@@ -51,7 +51,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const Routes: React.FC = () => {
   const { lastStartWithVersion } = useInitialState();
-  console.log({ lastStartWithVersion });
+
   if (lastStartWithVersion === undefined) {
     return null;
   }
@@ -67,12 +67,12 @@ export const Routes: React.FC = () => {
         headerTintColor: lightTheme.colors.text.secondary,
       }}
     >
+      <Stack.Screen name="Sidebar" component={SidebarNavigation} />
       <Stack.Screen
         name="Introduction"
         initialParams={{ lastStartWithVersion: '', done: 'SET_LAST_START_VERSION' }}
         component={Introduction}
       />
-      <Stack.Screen name="Sidebar" component={SidebarNavigation} />
       <Stack.Screen
         name="Constituency"
         component={ConstituencyScreen}
