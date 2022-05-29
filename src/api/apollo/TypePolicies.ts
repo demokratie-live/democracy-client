@@ -1,5 +1,11 @@
 import { uniqBy } from 'lodash';
-import { Procedure, TypedTypePolicies, VoteResult } from '../../__generated__/graphql';
+import {
+  DeputyProcedure,
+  PartyVote,
+  Procedure,
+  TypedTypePolicies,
+  VoteResult,
+} from '../../__generated__/graphql';
 
 export const typePolicies: TypedTypePolicies = {
   Query: {
@@ -39,39 +45,35 @@ export const typePolicies: TypedTypePolicies = {
       },
     },
   },
-  // Deputy: {
-  //   keyFields: ['webId'],
-  //   fields: {
-  //     procedures: {
-  //       keyArgs: ['procedureIds'],
-  //       merge(existing: DeputyProcedure[] = [], incoming: DeputyProcedure[]) {
-  //         return uniqBy([...existing, ...incoming], deputyProcedure => {
-  //           return deputyProcedure.procedure.procedureId;
-  //         });
-  //       },
-  //     },
-  //   },
-  // },
-  // VoteResult: {
-  //   fields: {
-  //     partyVotes: {
-  //       merge(
-  //         existing: Procedure_procedure_voteResults_partyVotes[] = [],
-  //         incoming: Procedure_procedure_voteResults_partyVotes[],
-  //         { mergeObjects },
-  //       ) {
-  //         if (existing.length === 0) {
-  //           return incoming;
-  //         }
-  //         return incoming.map(partyVote => {
-  //           const existingPartyVote = existing.find(({ party }) => partyVote.party === party);
-  //           if (!existingPartyVote) {
-  //             return partyVote;
-  //           }
-  //           return mergeObjects(existingPartyVote, partyVote);
-  //         });
-  //       },
-  //     },
-  //   },
-  // },
+  Deputy: {
+    keyFields: ['webId'],
+    fields: {
+      procedures: {
+        keyArgs: ['procedureIds'],
+        merge(existing: DeputyProcedure[] = [], incoming: DeputyProcedure[]) {
+          return uniqBy([...existing, ...incoming], deputyProcedure => {
+            return deputyProcedure.procedure.procedureId;
+          });
+        },
+      },
+    },
+  },
+  VoteResult: {
+    fields: {
+      partyVotes: {
+        merge(existing: PartyVote[] = [], incoming: PartyVote[], { mergeObjects }) {
+          if (existing.length === 0) {
+            return incoming;
+          }
+          return incoming.map(partyVote => {
+            const existingPartyVote = existing.find(({ party }) => partyVote.party === party);
+            if (!existingPartyVote) {
+              return partyVote;
+            }
+            return mergeObjects(existingPartyVote, partyVote);
+          });
+        },
+      },
+    },
+  },
 };
