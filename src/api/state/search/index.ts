@@ -9,7 +9,7 @@ export const searchTermState = atom<string>({
 });
 
 export const searchHistoryState = atom<Set<string>>({
-  key: 'searchTermState',
+  key: 'searchHistoryState',
   default: new Set(),
   effects: [localStorageEffect(STORAGE_KEY_CONSTITUENCY)],
 });

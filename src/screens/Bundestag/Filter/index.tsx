@@ -63,7 +63,7 @@ export const FilterScreen: React.FC<Props> = ({ navigation }) => {
 
   useEffect(() => {
     if (!isVerified && data.findIndex(({ name }) => name === 'activity') !== -1) {
-      setData(data.filter(({ name }) => name !== 'activity'));
+      setData(d => d.filter(({ name }) => name !== 'activity'));
     }
   }, [data, setData, isVerified]);
 

@@ -107,6 +107,7 @@ export const Results: React.FC = () => {
         //   passProps: { ...item },
         // });
       } else if (typeof item === 'string') {
+        console.log('setTerm 5', item);
         setTerm(item);
         // this.props.addToSearchHistory({
         //   variables: {

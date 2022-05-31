@@ -14,6 +14,8 @@ export const SearchHeader: React.FC = () => {
   const setHistory = useSetRecoilState(searchHistoryState);
   const [executeFinishSearch] = useFinishSearchMutation();
 
+  console.log('SearchHeader', term);
+
   const finishSearch = () => {
     setHistory(prev => new Set([term, ...prev]));
     executeFinishSearch({
@@ -26,6 +28,7 @@ export const SearchHeader: React.FC = () => {
   // throttle to handle android endless changing error
   const onChangeText = (text: string) => {
     if (typeof text === 'string') {
+      console.log('setTerm 4', text);
       setTerm(text);
     }
   };

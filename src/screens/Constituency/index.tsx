@@ -71,6 +71,7 @@ export const ConstituencyScreen: React.FC<Props> = ({ route }) => {
   const [term, setTerm] = useState('');
 
   const onChangePlz = (newTerm: string) => {
+    console.log('setTerm 3', newTerm);
     setTerm(newTerm);
   };
 
