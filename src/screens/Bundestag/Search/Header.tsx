@@ -16,7 +16,6 @@ export const SearchHeader: React.FC = () => {
   const [executeFinishSearch] = useFinishSearchMutation();
 
   const finishSearch = () => {
-    console.log('finishSearch', term);
     addToHistory(prev => new Set([term, ...prev]));
     executeFinishSearch({
       variables: {

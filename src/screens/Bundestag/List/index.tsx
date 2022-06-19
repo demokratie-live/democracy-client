@@ -23,7 +23,7 @@ import {
 } from '../../../__generated__/graphql';
 import { pieChartGovernmentData } from '../../../lib/PieChartGovernmentData';
 import { Row } from '../../../components/Row';
-import { ListItem } from '../../../components/ListItem/index.';
+import { ListItem } from '../../../components/ListItem';
 
 type ListScreenRouteProp = RouteProp<
   BundestagTopTabParamList,
@@ -52,7 +52,6 @@ export const List = () => {
   const route = useRoute<ListScreenRouteProp>();
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [hasMore, setHasMore] = useState(true);
-  console.log(parlament.period);
   const { loading, data, error, fetchMore, networkStatus, refetch } = useProceduresListQuery({
     fetchPolicy: 'network-only',
     errorPolicy: 'all',

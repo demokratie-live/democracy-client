@@ -67,7 +67,6 @@ export const PhoneNumberScreen: React.FC = () => {
         {
           text: 'Ja',
           onPress: () => {
-            console.log('HIER', preparedPhoneNumber);
             setPhoneNumber(preparedPhoneNumber);
             requestCode({
               variables: { newPhone: preparedPhoneNumber },

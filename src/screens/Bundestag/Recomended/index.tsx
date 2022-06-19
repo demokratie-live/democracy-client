@@ -12,16 +12,12 @@ import { SidebarParamList } from '../../../routes/Sidebar';
 import { useRecommendedProceduresQuery } from '../../../__generated__/graphql';
 import { Segment } from '../List/Components/Segment';
 import { Divider } from './styled';
-import { BundestagTopTabParamList } from '../../../routes/Bundestag';
 import { theme } from '../../../styles/theme';
 import { useRecoilValue } from 'recoil';
 
 type ScreenNavigationProp = CompositeNavigationProp<
-  NativeStackNavigationProp<BundestagTopTabParamList, 'Empfohlen'>,
-  CompositeNavigationProp<
-    DrawerNavigationProp<SidebarParamList, 'Bundestag'>,
-    NativeStackNavigationProp<RootStackParamList>
-  >
+  DrawerNavigationProp<SidebarParamList, 'Bundestag'>,
+  NativeStackNavigationProp<RootStackParamList>
 >;
 
 export const Recommended = () => {

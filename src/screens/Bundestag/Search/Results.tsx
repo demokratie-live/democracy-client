@@ -9,7 +9,7 @@ import { searchHistoryState, searchTermState } from '../../../api/state/search';
 import { parlaments, parlamentState } from '../../../api/state/parlament';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Row } from '../../../components/Row';
-import { ListItem } from '../../../components/ListItem/index.';
+import { ListItem } from '../../../components/ListItem';
 import { pieChartGovernmentData } from '../../../lib/PieChartGovernmentData';
 import { communityVoteData } from '../../../lib/PieChartCommunityData';
 import {

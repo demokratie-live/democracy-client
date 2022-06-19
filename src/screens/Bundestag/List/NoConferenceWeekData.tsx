@@ -12,8 +12,6 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../routes';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { SidebarParamList } from '../../../routes/Sidebar';
-import { MaterialTopTabNavigationProp } from '@react-navigation/material-top-tabs';
-import { BundestagTopTabParamList } from '../../../routes/Bundestag';
 
 const Container = styled.ScrollView.attrs({
   flex: 1,
@@ -41,11 +39,8 @@ const IconWrapper = styled.View`
 `;
 
 type ScreenNavigationProps = CompositeNavigationProp<
-  MaterialTopTabNavigationProp<BundestagTopTabParamList, 'Sitzungswoche'>,
-  CompositeNavigationProp<
-    DrawerNavigationProp<SidebarParamList, 'Bundestag'>,
-    NativeStackNavigationProp<RootStackParamList, 'Sidebar'>
-  >
+  DrawerNavigationProp<SidebarParamList, 'Bundestag'>,
+  NativeStackNavigationProp<RootStackParamList, 'Sidebar'>
 >;
 
 export const NoConferenceWeekData = () => {

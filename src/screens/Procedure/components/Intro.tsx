@@ -2,7 +2,7 @@ import React from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components/native';
 import { localVoteState } from '../../../api/state/votesLocal';
-import { ListItem } from '../../../components/ListItem/index.';
+import { ListItem } from '../../../components/ListItem';
 import { communityVoteData } from '../../../lib/PieChartCommunityData';
 import { pieChartGovernmentData } from '../../../lib/PieChartGovernmentData';
 import { CommunityVotes, VoteResult } from '../../../__generated__/graphql';

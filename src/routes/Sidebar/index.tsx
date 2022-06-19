@@ -9,7 +9,6 @@ import SvgSettings from '../../components/Icons/Settings';
 import SvgFaqAndSupport from '../../components/Icons/FaqAndSupport';
 import SvgAbout from '../../components/Icons/About';
 import SvgLaw from '../../components/Icons/Law';
-import { PlaceholderScreen } from '../../screens/Placeholder';
 import { CredentialsScreen } from '../../screens/Credentials';
 import { AboutScreen } from '../../screens/About';
 import { FaqScreen } from '../../screens/Faq';
@@ -17,6 +16,8 @@ import { SettingsScreen } from '../../screens/Settings';
 import { DonateScreen } from '../../screens/Donate';
 import { BundestagTabViewNavigation } from '../Bundestag';
 import { DevScreen } from './DevScreen';
+import { AbgeordneteScreen } from '../../screens/Abgeordnete';
+import { WahlOMeterNavigation } from '../WahlOMeter';
 
 export type SidebarParamList = {
   Bundestag: undefined;
@@ -26,7 +27,7 @@ export type SidebarParamList = {
   About: undefined;
   Credentials: undefined;
   Donate: undefined;
-  Abgeordnete: undefined;
+  Abgeordnete: { editMode: boolean };
   Development: undefined;
   DEV: undefined;
 };
@@ -73,8 +74,7 @@ export const SidebarNavigation = () => {
           unmountOnBlur: true,
         }}
         name="WahlOMeter"
-        component={PlaceholderScreen}
-        // component={WahlOMeterNavigation}
+        component={WahlOMeterNavigation}
       />
       <SidebarDrawer.Screen
         options={{
@@ -83,8 +83,7 @@ export const SidebarNavigation = () => {
           unmountOnBlur: true,
         }}
         name="Abgeordnete"
-        component={PlaceholderScreen}
-        // component={AbgeordneteRootNavigation}
+        component={AbgeordneteScreen}
       />
       <SidebarDrawer.Screen
         options={{

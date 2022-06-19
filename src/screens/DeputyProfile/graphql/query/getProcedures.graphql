@@ -1,0 +1,19 @@
+query GetDeputyProcedures($id: String!, $limit: Int, $offset: Int) {
+  deputy(id: $id) {
+    _id
+    webId
+    procedures(pageSize: $limit, offset: $offset) {
+      decision
+      procedure {
+        procedureId
+        title
+        subjectGroups
+        voted
+        type
+        activityIndex {
+          activityIndex
+        }
+      }
+    }
+  }
+}

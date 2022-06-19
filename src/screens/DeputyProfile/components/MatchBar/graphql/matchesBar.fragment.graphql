@@ -1,0 +1,8 @@
+fragment DeputyMatchBar on Deputy {
+  matchesBar: procedures(procedureIds: $votedProcedureIds) {
+    decision
+    procedure {
+      procedureId
+    }
+  }
+}

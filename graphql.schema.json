@@ -2409,32 +2409,32 @@
           {
             "name": "HOT",
             "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "Use procedures Query param listTypes instead of type"
           },
           {
             "name": "IN_VOTE",
             "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "Use procedures Query param listTypes instead of type"
           },
           {
             "name": "PAST",
             "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "Use procedures Query param listTypes instead of type"
           },
           {
             "name": "PREPARATION",
             "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "Use procedures Query param listTypes instead of type"
           },
           {
             "name": "VOTING",
             "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "Use procedures Query param listTypes instead of type"
           }
         ],
         "possibleTypes": null

@@ -18,6 +18,7 @@ import { VerificationScreen } from '../screens/Verification';
 import { PhoneNumberScreen } from '../screens/Verification/PhoneNumber';
 import { SmsCodeInput } from '../screens/Verification/Code';
 import { SmsDonate } from '../screens/Verification/Donate';
+import { DeputyProfilScreen } from '../screens/DeputyProfile';
 
 export type RootStackParamList = {
   Sidebar: undefined;
@@ -37,6 +38,7 @@ export type RootStackParamList = {
     title: string;
   };
   DeputyProfile: { id: string };
+  MemberProfil: undefined;
   Pdf: { url: string; title: string };
   PushInstructions: undefined;
   NotificationInstruction: { done: () => void; title?: string };
@@ -45,6 +47,7 @@ export type RootStackParamList = {
   SmsDonate: undefined;
   Donate: undefined;
   PhoneNumberInput: { procedureId?: string };
+  EditDeputyList: { editMode: boolean };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -135,6 +138,11 @@ export const Routes: React.FC = () => {
           headerShown: true,
           title: 'Wahlurne',
         }}
+      />
+      <Stack.Screen
+        name="DeputyProfile"
+        component={DeputyProfilScreen}
+        options={{ headerShown: true }}
       />
     </Stack.Navigator>
   );

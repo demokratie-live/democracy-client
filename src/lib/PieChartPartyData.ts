@@ -3,8 +3,8 @@ import { PartyVote, VoteResult } from '../__generated__/graphql';
 
 interface Props {
   votedGovernment?: boolean | null;
-  voteResults?: VoteResult | null;
-  partyVotes?: PartyVote[] | null;
+  voteResults?: Pick<VoteResult, 'yes' | 'abstination' | 'no'> | null;
+  partyVotes?: Pick<PartyVote, 'deviants' | 'party'>[] | null;
   selectedParty: string;
 }
 
