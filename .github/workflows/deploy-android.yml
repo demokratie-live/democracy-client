@@ -1,6 +1,12 @@
 name: Deploy Android
 
 on:
+  workflow_dispatch:
+    branches:
+      - internal
+      - alpha
+      - beta
+      - master
   push:
     branches:
       - internal
