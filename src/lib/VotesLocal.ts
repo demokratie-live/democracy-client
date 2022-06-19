@@ -136,7 +136,7 @@ class VotesLocal {
     }
 
     // Delete Data, Add Index
-    const { d, ...dataClean } = data;
+    const { d: _d, ...dataClean } = data;
     const indexData = {
       ...dataClean,
       i: index,

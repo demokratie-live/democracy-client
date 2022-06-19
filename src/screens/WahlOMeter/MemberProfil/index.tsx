@@ -13,6 +13,7 @@ import {
   VoteSelection,
 } from '../../../__generated__/graphql';
 import Folding from '../../../components/Folding';
+import { PartyProps } from '@democracy-deutschland/ui/dist/Atoms/PartyLogo/old';
 
 const ScrollWrapper = styled.ScrollView.attrs({
   contentContainerStyle: {
@@ -159,7 +160,7 @@ export const MemberProfil = () => {
           <MemberImageWrapper>
             <Avatar
               partyLogo={{
-                party: party as any,
+                party: party as PartyProps['party'],
                 width: 200,
               }}
               profileImage={{

@@ -23,6 +23,7 @@ import {
   useGetDeputyQuery,
   VoteSelection,
 } from '../../__generated__/graphql';
+import { PartyProps } from '@democracy-deutschland/ui/dist/Atoms/PartyLogo/old';
 
 const MemberImageWrapper = styled.View`
   width: 100%;
@@ -223,7 +224,7 @@ export const DeputyProfilScreen: React.FC<Props> = ({ route }) => {
           <MemberImageWrapper>
             <Avatar
               partyLogo={{
-                party: party as any,
+                party: party as PartyProps['party'],
                 width: 200,
               }}
               profileImage={{
