@@ -37,7 +37,6 @@ export type RootStackParamList = {
     title: string;
   };
   DeputyProfile: { id: string };
-  MemberProfil: undefined;
   Pdf: { url: string; title: string };
   PushInstructions: undefined;
   NotificationInstruction: { done: () => void; title?: string };

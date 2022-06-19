@@ -1,6 +1,13 @@
 import { LocalVote } from '../../../../api/state/votesLocal';
 import { VoteSelection } from '../../../../__generated__/graphql';
-import { ChartData } from '../../../WahlOMeter/Wahlkreis/VotedProceduresWrapper';
+
+interface ChartData {
+  votedProcedures: {
+    procedureId: string;
+    decision: VoteSelection;
+  }[];
+  localVotes: LocalVote[];
+}
 
 // Filtered Array of procedures voted local
 export const getMatchingProcedures = ({ votedProcedures, localVotes }: ChartData) =>
