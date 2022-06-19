@@ -20,6 +20,7 @@ import { SmsDonate } from '../screens/Verification/Donate';
 import { DeputyProfilScreen } from '../screens/DeputyProfile';
 import { OutcomePushs } from '../screens/OutcomePushs';
 import { PushInstructions } from '../screens/Introduction/PushInstructions';
+import { NotificationInstructionScreen } from '../screens/NotificationInstruction';
 
 export type RootStackParamList = {
   Sidebar: undefined;
@@ -133,6 +134,11 @@ export const Routes: React.FC = () => {
         name="PushInstructions"
         component={PushInstructions}
         options={{ headerShown: true, title: 'Push Benachrichtigungen' }}
+      />
+      <Stack.Screen
+        name="NotificationInstruction"
+        component={NotificationInstructionScreen}
+        options={{ headerShown: true, title: 'Benachrichtigungen erhalten' }}
       />
       <Stack.Screen
         name="OutcomePush"
