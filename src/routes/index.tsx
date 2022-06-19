@@ -19,6 +19,7 @@ import { SmsCodeInput } from '../screens/Verification/Code';
 import { SmsDonate } from '../screens/Verification/Donate';
 import { DeputyProfilScreen } from '../screens/DeputyProfile';
 import { OutcomePushs } from '../screens/OutcomePushs';
+import { PushInstructions } from '../screens/Introduction/PushInstructions';
 
 export type RootStackParamList = {
   Sidebar: undefined;
@@ -127,6 +128,11 @@ export const Routes: React.FC = () => {
         name="Pdf"
         component={PdfScreen}
         options={({ route }) => ({ title: route.params.title, headerShown: true })}
+      />
+      <Stack.Screen
+        name="PushInstructions"
+        component={PushInstructions}
+        options={{ headerShown: true, title: 'Push Benachrichtigungen' }}
       />
       <Stack.Screen
         name="OutcomePush"
