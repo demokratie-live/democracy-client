@@ -73,15 +73,14 @@ export const SmsDonate: React.FC = () => {
     return () => {
       refetchMe?.();
     };
-  });
+  }, [refetchMe]);
 
   const onClose = () => {
     navigation.popToTop();
   };
 
   const onDonate = () => {
-    navigation.navigate('Donate');
-    refetchMe();
+    navigation.navigate('Donate', { done: () => navigation.popToTop() });
   };
 
   return (

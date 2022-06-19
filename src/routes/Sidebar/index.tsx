@@ -13,7 +13,6 @@ import { CredentialsScreen } from '../../screens/Credentials';
 import { AboutScreen } from '../../screens/About';
 import { FaqScreen } from '../../screens/Faq';
 import { SettingsScreen } from '../../screens/Settings';
-import { DonateScreen } from '../../screens/Donate';
 import { BundestagTabViewNavigation } from '../Bundestag';
 import { DevScreen } from './DevScreen';
 import { AbgeordneteScreen } from '../../screens/Abgeordnete';
@@ -26,7 +25,6 @@ export type SidebarParamList = {
   Faq: undefined;
   About: undefined;
   Credentials: undefined;
-  Donate: undefined;
   Abgeordnete: { editMode: boolean };
   Development: undefined;
   DEV: undefined;
@@ -121,13 +119,6 @@ export const SidebarNavigation = () => {
         }}
         name={'Credentials'}
         component={CredentialsScreen}
-      />
-      <SidebarDrawer.Screen
-        options={{
-          drawerLabel: 'hide/Donate',
-        }}
-        name={'Donate'}
-        component={DonateScreen}
       />
       {process.env.NODE_ENV === 'development' && (
         <SidebarDrawer.Screen name="DEV" component={DevScreen} />

@@ -21,6 +21,8 @@ import { DeputyProfilScreen } from '../screens/DeputyProfile';
 import { OutcomePushs } from '../screens/OutcomePushs';
 import { PushInstructions } from '../screens/Introduction/PushInstructions';
 import { NotificationInstructionScreen } from '../screens/NotificationInstruction';
+import { DonateScreen } from '../screens/Donate';
+import { Button } from 'react-native';
 
 export type RootStackParamList = {
   Sidebar: undefined;
@@ -45,7 +47,7 @@ export type RootStackParamList = {
   OutcomePush: { finishAction: () => void; title: string; procedureId: string };
   SmsCodeInput: { procedureId?: string };
   SmsDonate: undefined;
-  Donate: undefined;
+  Donate?: { done: () => void };
   PhoneNumberInput: { procedureId?: string };
   EditDeputyList: { editMode: boolean };
 };
@@ -68,6 +70,7 @@ export const Routes: React.FC = () => {
           backgroundColor: lightTheme.colors.primary,
         },
         headerTintColor: lightTheme.colors.text.secondary,
+        headerBackTitleVisible: false,
       }}
     >
       <Stack.Screen name="Sidebar" component={SidebarNavigation} />
@@ -145,6 +148,21 @@ export const Routes: React.FC = () => {
         component={OutcomePushs}
         options={{
           headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name={'Donate'}
+        component={DonateScreen}
+        options={({ route }) => {
+          console.log('route.params?.done', route.params?.done);
+          if (route.params?.done) {
+            return {
+              headerShown: true,
+              headerBackVisible: false,
+              headerLeft: () => <Button onPress={route.params?.done} title="Fertig" color="#fff" />,
+            };
+          }
+          return { headerShown: true };
         }}
       />
       <Stack.Screen
