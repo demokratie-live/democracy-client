@@ -4,7 +4,6 @@ import Introduction from '../screens/Introduction';
 import { useInitialState } from '../api/state/initialState';
 import { getVersion } from 'react-native-device-info';
 import { SidebarNavigation } from './Sidebar';
-import { PlaceholderScreen } from '../screens/Placeholder';
 import { SyncVotesScreen } from '../screens/SyncVotes';
 import { lightTheme } from '@democracy-deutschland/ui';
 import { SyncVotesCaptureScreen } from '../screens/SyncVotesCapture';
@@ -28,7 +27,6 @@ export type RootStackParamList = {
   Constituency?: { goBack?: boolean };
   SyncVotes: undefined;
   SyncVotesCapture: undefined;
-  PlaceholderScreen: { title: string };
   Search: undefined;
   Filter: undefined;
   Procedure: { procedureId: string; title: string };
@@ -112,7 +110,6 @@ export const Routes: React.FC = () => {
         component={SyncVotesCaptureScreen}
         options={{ headerShown: true, title: 'Stimmen empfangen' }}
       />
-      <Stack.Screen name="PlaceholderScreen" component={PlaceholderScreen} />
       <Stack.Screen
         name="Search"
         options={{
