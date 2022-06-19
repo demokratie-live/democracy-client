@@ -156,7 +156,7 @@ const BalloutBox: React.FC<Props> = ({ selection, procedureId, procedureObjId, t
             useNativeDriver: true,
           }).stop();
           if (isDraggable) {
-            Animated.event([null, { dx: pan.x }])(e, gestureState);
+            Animated.event([null, { dx: pan.x }], { useNativeDriver: false })(e, gestureState);
           }
         },
         onPanResponderRelease: (e, gesture) => {
