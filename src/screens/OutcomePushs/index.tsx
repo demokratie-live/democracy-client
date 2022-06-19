@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useRoute, RouteProp } from '@react-navigation/core';
-import { Switch, View } from 'react-native';
+import { Dimensions, Switch, View } from 'react-native';
 import { RootStackParamList } from '../../routes';
 import styled from 'styled-components/native';
 import { ProcedureDocument, useToggleNotificationMutation } from '../../__generated__/graphql';
@@ -11,7 +11,9 @@ import SvgIconappios from '../../components/Icons/IconAppIos';
 import { NotificationBox } from '../Introduction/PushInstructions/NotificationBox';
 import { Button } from '../../components/Button';
 
-type RoutePropOP = RouteProp<RootStackParamList, 'OutcomePush'>;
+const DEVICE_WIDTH = Dimensions.get('window').width;
+
+type RouteProps = RouteProp<RootStackParamList, 'OutcomePush'>;
 
 const ScrollView = styled.ScrollView.attrs({
   contentContainerStyle: {
@@ -48,6 +50,11 @@ const SwitchText = styled.Text`
   padding-right: 18px;
 `;
 
+const ToggleButton = styled(Button)`
+  margin-horizontal: 18px;
+  width: ${DEVICE_WIDTH - 36}px;
+`;
+
 export interface Notification {
   title: string;
   text: string;
@@ -59,7 +66,7 @@ interface Props {
 }
 
 export const OutcomePushs: React.FC<Props> = ({ finishAction }) => {
-  const route = useRoute<RoutePropOP>();
+  const route = useRoute<RouteProps>();
 
   const [toggleNotification] = useToggleNotificationMutation({
     variables: {
@@ -132,7 +139,7 @@ export const OutcomePushs: React.FC<Props> = ({ finishAction }) => {
         <Switch value={pushActive} onValueChange={setPushActive} />
       </SwitchWrapper>
       {pushActive && (
-        <Button
+        <ToggleButton
           backgroundColor="blue"
           textColor="white"
           text="Aktivieren"
@@ -140,7 +147,7 @@ export const OutcomePushs: React.FC<Props> = ({ finishAction }) => {
         />
       )}
       {!pushActive && (
-        <Button
+        <ToggleButton
           backgroundColor="red"
           textColor="white"
           text="Nicht mehr anzeigen"

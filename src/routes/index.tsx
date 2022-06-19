@@ -19,6 +19,7 @@ import { PhoneNumberScreen } from '../screens/Verification/PhoneNumber';
 import { SmsCodeInput } from '../screens/Verification/Code';
 import { SmsDonate } from '../screens/Verification/Donate';
 import { DeputyProfilScreen } from '../screens/DeputyProfile';
+import { OutcomePushs } from '../screens/OutcomePushs';
 
 export type RootStackParamList = {
   Sidebar: undefined;
@@ -130,6 +131,13 @@ export const Routes: React.FC = () => {
         name="Pdf"
         component={PdfScreen}
         options={({ route }) => ({ title: route.params.title, headerShown: true })}
+      />
+      <Stack.Screen
+        name="OutcomePush"
+        component={OutcomePushs}
+        options={{
+          headerShown: false,
+        }}
       />
       <Stack.Screen
         name="Voting"
