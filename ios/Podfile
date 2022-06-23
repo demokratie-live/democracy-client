@@ -10,12 +10,13 @@ project 'DemocracyNative',
 'Prod.Release' => :release
 
 
-# react-native-permissions
-permissions_path = '../node_modules/react-native-permissions/ios'
-pod 'Permission-Notifications', :path => "#{permissions_path}/Notifications"
 
 target 'DemocracyNative' do
   config = use_native_modules!
+  
+  # react-native-permissions
+  permissions_path = '../node_modules/react-native-permissions/ios'
+  pod 'Permission-Notifications', :path => "#{permissions_path}/Notifications"
 
   use_react_native!(
     :path => config[:reactNativePath],
@@ -37,5 +38,10 @@ target 'DemocracyNative' do
   post_install do |installer|
     react_native_post_install(installer)
     __apply_Xcode_12_5_M1_post_install_workaround(installer)
+    # installer.pods_project.targets.each do |target|
+    #   if target.name == "React-Core-60309c9c-AccessibilityResources"
+    #     target.remove_from_project
+    #   end
+    # end
   end
 end
