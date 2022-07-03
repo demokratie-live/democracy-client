@@ -16,11 +16,11 @@ const Edit = styled.TouchableOpacity`
 
 type ScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Sidebar'>;
 
-const Plus = styled(PlusIcon)`
-  width: 17px;
-  height: 17px;
-  fill: ${({ theme }) => theme.colors.text.tertiary};
-`;
+const Plus = styled(PlusIcon).attrs(({ theme }) => ({
+  fill: theme.colors.text.secondary,
+  width: 17,
+  height: 17,
+}))``;
 
 export const DeputiesScreen: React.FC = () => {
   const navigation = useNavigation<ScreenNavigationProp>();
@@ -30,7 +30,7 @@ export const DeputiesScreen: React.FC = () => {
     if (isFocused) {
       navigation.getParent()?.setOptions({
         headerRight: () => (
-          <Edit onPress={() => navigation.navigate('EditDeputyList', { editMode: true })}>
+          <Edit onPress={() => navigation.navigate('AbgeordneteEdit', { editMode: true })}>
             <Plus />
           </Edit>
         ),

@@ -23,6 +23,7 @@ import { PushInstructions } from '../screens/Introduction/PushInstructions';
 import { NotificationInstructionScreen } from '../screens/NotificationInstruction';
 import { DonateScreen } from '../screens/Donate';
 import { Button } from 'react-native';
+import { AbgeordneteScreen } from '../screens/Abgeordnete';
 
 export type RootStackParamList = {
   Sidebar: undefined;
@@ -49,7 +50,7 @@ export type RootStackParamList = {
   SmsDonate: undefined;
   Donate?: { done: () => void };
   PhoneNumberInput: { procedureId?: string };
-  EditDeputyList: { editMode: boolean };
+  AbgeordneteEdit: { editMode: boolean };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -176,6 +177,11 @@ export const Routes: React.FC = () => {
       <Stack.Screen
         name="DeputyProfile"
         component={DeputyProfilScreen}
+        options={{ headerShown: true }}
+      />
+      <Stack.Screen
+        name="AbgeordneteEdit"
+        component={AbgeordneteScreen}
         options={{ headerShown: true }}
       />
     </Stack.Navigator>
