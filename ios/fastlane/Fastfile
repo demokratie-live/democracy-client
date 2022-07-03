@@ -115,7 +115,8 @@ platform :ios do
 
     upload_to_testflight(
       api_key: api_key,
-      app_identifier: app_identifier
+      app_identifier: app_identifier,
+      skip_waiting_for_build_processing: true
     )
 
     delete_keychain(name: "temporary_keychain")
