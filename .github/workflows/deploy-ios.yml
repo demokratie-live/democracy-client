@@ -1,18 +1,13 @@
 name: Deploy iOS
 
 on:
-  workflow_dispatch:
-    branches:
-      - internal
-      - alpha
-      - beta
-      - master
-  push:
-    branches:
-      - internal
-      - alpha
-      - beta
-      - master
+  workflow_dispatch
+  # push:
+  #   branches:
+  #     - internal
+  #     - alpha
+  #     - beta
+  #     - master
 
 jobs:
   build-ios:
