@@ -8,7 +8,7 @@ import { NotificationsContext } from '../../api/state/notificationPermission';
 import { defaultNotificationData } from '../Introduction/PushInstructions/data';
 import SvgIconappios from '../../components/Icons/IconAppIos';
 import { NotificationBox } from '../Introduction/PushInstructions/NotificationBox';
-import { Button } from '../../components/Button';
+import { Button } from '@democracy-deutschland/ui';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 
@@ -49,10 +49,7 @@ const SwitchText = styled.Text`
   padding-right: 18px;
 `;
 
-const ToggleButton = styled(Button)`
-  margin-horizontal: 18px;
-  width: ${DEVICE_WIDTH - 36}px;
-`;
+const ToggleButton = styled(Button)``;
 
 export interface Notification {
   title: string;
@@ -132,20 +129,14 @@ export const OutcomePushs: React.FC<Props> = ({ finishAction }) => {
         <Switch value={pushActive} onValueChange={setPushActive} />
       </SwitchWrapper>
       {pushActive && (
-        <ToggleButton
-          backgroundColor="blue"
-          textColor="white"
-          text="Aktivieren"
-          onPress={pressActivate}
-        />
+        <ToggleButton variant="primary" onPress={pressActivate}>
+          Aktivieren
+        </ToggleButton>
       )}
       {!pushActive && (
-        <ToggleButton
-          backgroundColor="red"
-          textColor="white"
-          text="Nicht mehr anzeigen"
-          onPress={pressDenie}
-        />
+        <ToggleButton variant="danger" onPress={pressDenie}>
+          Nicht mehr anzeigen
+        </ToggleButton>
       )}
 
       {!pushActive && (
@@ -154,7 +145,11 @@ export const OutcomePushs: React.FC<Props> = ({ finishAction }) => {
         </Subtitle>
       )}
 
-      {pushActive && <Button textColor="blue" text="Überspringen" onPress={doneAction} />}
+      {pushActive && (
+        <Button variant="secondary" onPress={doneAction}>
+          Überspringen
+        </Button>
+      )}
     </ScrollView>
   );
 };
