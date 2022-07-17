@@ -51,14 +51,14 @@ const WarnTextWrapper = styled.View`
   align-items: center;
   justify-content: center;
   padding-vertical: 11px;
-  padding-horizontal: 11px;
+  padding-horizontal: 18px;
   background-color: rgb(255, 255, 255);
   opacity: 0.9;
 `;
 
 const WarnText = styled.Text`
   text-align: center;
-  color: rgb(0, 0, 0);
+  color: ${({ theme }) => theme.colors.text.tertiary};
   font-size: 13px;
 `;
 
@@ -101,7 +101,7 @@ export const VotingScreen: React.FC<Props> = ({ route }) => {
 
   const onLayout = (event: LayoutChangeEvent) => {
     const { width: newWidth } = event.nativeEvent.layout;
-    setChartDimensions(newWidth);
+    setChartDimensions(newWidth - 36);
   };
 
   const onScroll = () => {
