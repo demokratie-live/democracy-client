@@ -28,9 +28,10 @@ const Number = styled.TextInput.attrs(() => ({
 interface Props {
   code: string;
   onChange: (code: string) => void;
+  disabled?: boolean;
 }
 
-export const CodeInput: React.FC<Props> = ({ code, onChange }) => {
+export const CodeInput: React.FC<Props> = ({ code, onChange, disabled = false }) => {
   const onChangeText = (text: string) => {
     const formattedCode = text.replace(/[^0-9]/g, '');
     onChange(formattedCode);
@@ -39,6 +40,7 @@ export const CodeInput: React.FC<Props> = ({ code, onChange }) => {
   return (
     <Container>
       <Number
+        editable={!disabled}
         multiline={false}
         autoFocus
         onChangeText={onChangeText}

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components/native';
-import { Keyboard, Alert, Dimensions } from 'react-native';
+import { Keyboard, Alert, Dimensions, ActivityIndicator } from 'react-native';
 import { sha256 } from 'react-native-sha256';
 import AsyncStorage from '@react-native-community/async-storage';
 import Description from './Components/Description';
@@ -47,7 +47,7 @@ export const SmsCodeInput: React.FC<Props> = ({ route }) => {
   const constituency = useRecoilValue(constituencyState);
   const navigation = useNavigation<DevPlaceholderNavigationProps>();
   const [requestCode] = useRequestSmsCodeMutation();
-  const [requestVerification] = useRequestVerificationMutation();
+  const [requestVerification, { loading }] = useRequestVerificationMutation();
   const [code, setCode] = useState('');
   const parlamentIdentifier = useRecoilValue(parlamentState);
   const parlament = parlaments[parlamentIdentifier];
@@ -149,18 +149,23 @@ export const SmsCodeInput: React.FC<Props> = ({ route }) => {
       {DEVICE_HEIGT > 500 && <SvgIconappios width={100} height={100} />}
       <Description text={`Bitte gib Deinen Code ein für\n${phoneNumber}`} />
       <CodeInput
+        disabled={loading}
         onChange={code => {
           onChangeCode(code);
         }}
         code={code}
       />
-      <ButtonNext
-        onPress={sendNumber}
-        disabled={countdown === undefined || countdown > 0}
-        variant="primary"
-      >
-        {buttonTitle}
-      </ButtonNext>
+      {loading ? (
+        <ActivityIndicator />
+      ) : (
+        <ButtonNext
+          onPress={sendNumber}
+          disabled={countdown === undefined || countdown > 0}
+          variant="primary"
+        >
+          {buttonTitle}
+        </ButtonNext>
+      )}
     </Container>
   );
 };

@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.5.9",
-    "@democracy-deutschland/ui": "0.0.5-alpha.5",
+    "@democracy-deutschland/ui": "0.0.5-alpha.6",
     "@react-native-community/async-storage": "1.7.1",
     "@react-navigation/drawer": "^6.3.1",
     "@react-navigation/material-top-tabs": "^6.1.1",

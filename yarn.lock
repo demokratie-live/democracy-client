@@ -775,10 +775,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@democracy-deutschland/ui@0.0.5-alpha.5":
-  version "0.0.5-alpha.5"
-  resolved "https://registry.yarnpkg.com/@democracy-deutschland/ui/-/ui-0.0.5-alpha.5.tgz#325d27b798f8b3935bfa064a35964048757da75f"
-  integrity sha512-WTs1Ws08OLq7eNqcc2sKsHVsoA8u+xFZ9aMLs+DxkKLk2yJed9llguzLDJYOmtl85VSxnC6I/E9ZKMqxCAycqA==
+"@democracy-deutschland/ui@0.0.5-alpha.6":
+  version "0.0.5-alpha.6"
+  resolved "https://registry.yarnpkg.com/@democracy-deutschland/ui/-/ui-0.0.5-alpha.6.tgz#478e48ab07d0a4d72be5570973181a057a749780"
+  integrity sha512-2sw92/TmXv3QfBqEWr771mC6b2FivzuneGE4tHj8ab36zamqm7Qyl5F4PyhAYBc9diAi3buDRz+wlFWBmUcCTQ==
   dependencies:
     react-content-loader "^6.0.3"
 
