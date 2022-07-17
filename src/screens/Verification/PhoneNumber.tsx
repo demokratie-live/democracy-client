@@ -104,13 +104,13 @@ export const PhoneNumberScreen: React.FC = () => {
         <Description text="Bitte gib Deine aktuelle Handynummer ein" />
         <PhonenumberInput phoneNumber={phoneNumberInputValue} onChange={setPhoneNumberInputValue} />
         <ButtonNext
-          text="CODE ANFORDERN"
           onPress={sendNumber}
           disabled={phoneNumberInputValue.length < 9}
-          textColor="white"
-          backgroundColor="blue"
+          variant="primary"
           testID="VerificationCodeButton"
-        />
+        >
+          CODE ANFORDERN
+        </ButtonNext>
       </ScrollView>
     </Container>
   );

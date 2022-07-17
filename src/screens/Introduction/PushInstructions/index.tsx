@@ -2,14 +2,13 @@ import React, { useContext, useState } from 'react';
 import { NotificationBox } from './NotificationBox';
 import { defaultNotificationData } from './data';
 import { Dimensions, Switch, View } from 'react-native';
-// import { NotificationsContext } from '../../../../context/NotificationPermission';
 import styled from 'styled-components/native';
-import { Button } from '../../../components/Button';
 import SvgIconappios from '../../../components/Icons/IconAppIos';
 import { NotificationsContext } from '../../../api/state/notificationPermission';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../routes';
+import { Button } from '@democracy-deutschland/ui';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 
@@ -61,7 +60,9 @@ const Highlight = styled.Text`
   color: #000;
 `;
 
-const ActivateButton = styled(Button)``;
+const ActivateButton = styled(Button)`
+  margin-horizontal: ${({ theme }) => theme.spaces.default};
+`;
 
 export interface Notification {
   title: string;
@@ -132,13 +133,16 @@ export const PushInstructions: React.FC<Props> = ({ alreadyKnown = false }) => {
           <SwitchText>Bundestagsergebnisse immer automatisch erhalten</SwitchText>
           <Switch value={pushActive} onValueChange={setPushActive} />
         </SwitchWrapper>
-        <ActivateButton
+        {/* <ActivateButton
           backgroundColor="blue"
           textColor="white"
           text="Aktivieren"
           onPress={pressActivate}
           disabled={!pushActive}
-        />
+        /> */}
+        <ActivateButton variant="primary" onPress={pressActivate} disabled={!pushActive}>
+          Aktivieren
+        </ActivateButton>
       </ScrollView>
     </Wrapper>
   );

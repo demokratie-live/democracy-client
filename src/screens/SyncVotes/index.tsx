@@ -4,7 +4,7 @@ import QRCode from 'react-native-qrcode-svg';
 import { useNavigation } from '@react-navigation/core';
 import styled from 'styled-components/native';
 import VotesLocal, { ChainEntryRaw } from '../../lib/VotesLocal';
-import { Button } from '../../components/Button';
+import { Button } from '@democracy-deutschland/ui';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../routes';
 
@@ -148,13 +148,13 @@ export const SyncVotesScreen = () => {
         text="Tippe auf dem neuen Gerät den Button Stimmen empfangen und richte es auf diesen Bildschirm, um den QR-Code zu scannen"
       />
       <Button
-        text="Stimmen empfangen"
-        textColor="white"
-        backgroundColor="blue"
+        variant="primary"
         onPress={() => {
           navigation.navigate('SyncVotesCapture');
         }}
-      />
+      >
+        Stimmen empfangen
+      </Button>
     </Container>
   );
 };

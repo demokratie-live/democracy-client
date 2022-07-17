@@ -155,12 +155,12 @@ export const SmsCodeInput: React.FC<Props> = ({ route }) => {
         code={code}
       />
       <ButtonNext
-        text={buttonTitle}
         onPress={sendNumber}
         disabled={countdown === undefined || countdown > 0}
-        textColor="white"
-        backgroundColor="blue"
-      />
+        variant="primary"
+      >
+        {buttonTitle}
+      </ButtonNext>
     </Container>
   );
 };

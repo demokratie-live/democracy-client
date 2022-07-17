@@ -80,12 +80,9 @@ export const NoConstituency: React.FC<Props> = ({ noButton }) => {
       </Text>
       <Space space={18} />
       {!noButton && (
-        <ButtonNext
-          text={'Wahlkreis einstellen'.toUpperCase()}
-          textColor="white"
-          backgroundColor="blue"
-          onPress={navigateToSelectConstituency}
-        />
+        <ButtonNext variant="primary" onPress={navigateToSelectConstituency}>
+          {'Wahlkreis einstellen'.toUpperCase()}
+        </ButtonNext>
       )}
     </Wrapper>
   );

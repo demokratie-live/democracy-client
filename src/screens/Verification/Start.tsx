@@ -1,9 +1,8 @@
-// TODO move this to mobile-ui library
 import React, { useContext } from 'react';
 import Description from './Components/Description';
 import { useNavigation } from '@react-navigation/core';
 import styled from 'styled-components/native';
-import { Button } from '../../components/Button';
+import { Button } from '@democracy-deutschland/ui';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../routes';
 import { VerificationContext } from '../../api/state/Verification';
@@ -37,7 +36,7 @@ export const Space = styled.View`
 `;
 
 export const ButtonNext = styled(Button)`
-  margin-horizontal: 18px;
+  margin: ${({ theme }) => theme.spaces.default};
 `;
 
 export const VerificationStart: React.FC = () => {
@@ -97,26 +96,21 @@ Zu unserer `}
         </Text>
       </Folding>
       {authCodeExpires && (
-        <ButtonNext
-          onPress={() => navigation.push('SmsCodeInput', {})}
-          text="CODE EINGEBEN"
-          textColor="white"
-          backgroundColor="blue"
-        />
+        <ButtonNext onPress={() => navigation.push('SmsCodeInput', {})} variant="primary">
+          CODE EINGEBEN
+        </ButtonNext>
       )}
 
       <ButtonNext
         testID="StartVerificationButton"
         onPress={() => navigation.push('PhoneNumberInput', {})}
-        text={`${
-          authCodeExpires
-            ? `Neuen Code senden${countdown ? ` (${countdown})` : ''}`
-            : 'VERIFIZIEREN'
-        } `}
         disabled={countdown > 0}
-        textColor="white"
-        backgroundColor={authCodeExpires ? 'lightBlue' : 'blue'}
-      />
+        variant="primary"
+      >
+        {authCodeExpires
+          ? `Neuen Code senden${countdown ? ` (${countdown})` : ''}`
+          : 'VERIFIZIEREN'}
+      </ButtonNext>
     </ScrollView>
   );
 };
