@@ -43,7 +43,6 @@ export { default as Mail } from './Mail';
 export { default as Menu } from './Menu';
 export { default as Mobile } from './Mobile';
 export { default as Network } from './Network';
-export { default as Newmarker } from './Newmarker';
 export { default as Paragraph } from './Paragraph';
 export { default as Pen } from './Pen';
 export { default as Phone } from './Phone';

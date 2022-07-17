@@ -6,7 +6,6 @@ import styled from 'styled-components/native';
 import { ProcedureDocument, useToggleNotificationMutation } from '../../__generated__/graphql';
 import { NotificationsContext } from '../../api/state/notificationPermission';
 import { defaultNotificationData } from '../Introduction/PushInstructions/data';
-import SvgNewmarker from '../../components/Icons/Newmarker';
 import SvgIconappios from '../../components/Icons/IconAppIos';
 import { NotificationBox } from '../Introduction/PushInstructions/NotificationBox';
 import { Button } from '../../components/Button';
@@ -115,12 +114,6 @@ export const OutcomePushs: React.FC<Props> = ({ finishAction }) => {
   return (
     <ScrollView>
       <View style={{ paddingTop: 36, alignItems: 'center' }}>
-        <SvgNewmarker
-          width={58}
-          height={35}
-          color="#f568c4"
-          style={{ position: 'absolute', left: 0, top: 36 }}
-        />
         <SvgIconappios width={73} height={73} />
         <Headline>Ergebnisse erhalten</Headline>
         <Subtitle>

@@ -8,7 +8,6 @@ import { RootStackParamList } from '../../routes';
 import { NotificationsContext } from '../../api/state/notificationPermission';
 import { useRecoilValue } from 'recoil';
 import { initialState } from '../../api/state/initialState';
-import SvgNewmarker from '../../components/Icons/Newmarker';
 import { Button } from '../../components/Button';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
@@ -91,12 +90,6 @@ export const NotificationInstructionScreen: React.FC = () => {
     <Wrapper>
       <ScrollView>
         <HeaderWrapper>
-          <SvgNewmarker
-            width={58}
-            height={35}
-            color="#f568c4"
-            style={{ position: 'absolute', left: 18 }}
-          />
           <Image source={require('../Introduction/components/assets/icon.beobachte.png')} />
           <Headline>Du hast die Glocke aktiviert</Headline>
           <Subtitle>

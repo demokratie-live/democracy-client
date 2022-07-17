@@ -6,7 +6,6 @@ import { Dimensions, Switch, View } from 'react-native';
 import styled from 'styled-components/native';
 import { Button } from '../../../components/Button';
 import SvgIconappios from '../../../components/Icons/IconAppIos';
-import SvgNewmarker from '../../../components/Icons/Newmarker';
 import { NotificationsContext } from '../../../api/state/notificationPermission';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -106,12 +105,6 @@ export const PushInstructions: React.FC<Props> = ({ alreadyKnown = false }) => {
       <ScrollView>
         {!alreadyKnown && (
           <>
-            <SvgNewmarker
-              width={58}
-              height={35}
-              color="#f568c4"
-              style={{ position: 'absolute', left: 18 }}
-            />
             <SvgIconappios width={73} height={73} />
             <Headline>Ergebnisse erhalten</Headline>
             <Subtitle>
