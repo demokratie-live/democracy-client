@@ -45,7 +45,6 @@ const Container = styled.ScrollView.attrs({
 
 const HaderRightWrapper = styled.View`
   flex-direction: row;
-  padding-right: 11px;
 `;
 
 const DetailsContainer = styled.View`

@@ -30,7 +30,7 @@ const VoteResultNumber = styled.Text`
   padding-top: 1px;
 `;
 const VoteResultLabel = styled.Text`
-  color: rgb(142, 142, 147);
+  color: ${({ theme }) => theme.colors.text.tertiary}
   font-size: 12px;
   padding-top: 6px;
 `;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Platform, ImageSourcePropType } from 'react-native';
+import { ImageSourcePropType } from 'react-native';
 import styled from 'styled-components/native';
 
 const ContainerHead = styled.View``;
@@ -19,14 +19,12 @@ const TextHead = styled.Text`
   color: #000;
   font-size: 22px;
   padding-top: 15px;
-  /* font-family: ${Platform.OS === 'ios' ? 'HelveticaNeue-Thin' : 'sans-serif-light'}; */
 `;
 
 const TextSub = styled.Text`
   color: ${({ theme }) => theme.colors.text.secondary};
   font-size: 15px;
   padding-top: 1px;
-  /* font-family: ${Platform.OS === 'ios' ? 'HelveticaNeue-Thin' : 'sans-serif-light'}; */
   text-align: center;
   margin-bottom: 18px;
 `;

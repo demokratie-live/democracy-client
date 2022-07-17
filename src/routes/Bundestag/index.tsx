@@ -88,7 +88,7 @@ export const BundestagTabViewNavigation: React.FC<Props> = ({ navigation }) => {
       screenOptions={{
         tabBarScrollEnabled: false,
         tabBarIndicatorStyle: {
-          backgroundColor: theme.colors.text.primary,
+          backgroundColor: theme.colors.text.secondary,
         },
         tabBarActiveTintColor: theme.colors.text.secondary,
         tabBarInactiveTintColor: theme.colors.text.secondary,

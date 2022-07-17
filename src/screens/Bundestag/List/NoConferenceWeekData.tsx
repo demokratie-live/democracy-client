@@ -27,7 +27,7 @@ const Text = styled.Text`
 `;
 
 const TextGrey = styled(Text)`
-  color: ${({ theme }) => theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.tertiary};
 `;
 
 const Bold = styled.Text`

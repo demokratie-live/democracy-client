@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Platform, View, Image, TouchableOpacity } from 'react-native';
-import DeviceInfo from 'react-native-device-info';
+import { Platform, View, Image } from 'react-native';
 
 // Components
 import DonatedBox from './DonatedBox';
@@ -36,9 +35,7 @@ import { MadeWithLove } from '../../components/MadeWithLove';
 import Folding from '../../components/Folding';
 import { linking } from '../../lib/linking';
 
-const ScrollWrapper = styled.ScrollView.attrs({
-  scrollIndicatorInsets: { right: 1 }, // TODO do cleanfix when there is a correct solution (already closed but not solved without workaround) https://github.com/facebook/react-native/issues/26610
-})`
+const ScrollWrapper = styled.ScrollView`
   flex: 1;
   background-color: #ffffff;
 `;
@@ -67,14 +64,6 @@ const TextLink = styled.Text`
   text-decoration: underline;
 `;
 
-const Version = styled.Text`
-  font-size: 15px;
-  color: ${({ theme }) => theme.colors.text.seperator};
-  padding-top: 28px;
-  padding-bottom: 11px;
-  text-align: center;
-`;
-
 const DefinitionListWrapper = styled.View`
   flex-direction: row;
   padding-vertical: 3px;
@@ -90,6 +79,10 @@ const DefinitionListDescription = styled.Text`
   width: 70%;
   color: ${({ theme }) => theme.colors.text.seperator};
 `;
+
+const AppleDonateButton = styled.TouchableOpacity``;
+
+const MadeWithHeartWrapper = styled.View``;
 
 export const DonateScreen: React.FC = () => {
   const { data } = useQuery<{ donationStatus: DonationStatus } | undefined>(DONATION_STATUS);
@@ -129,11 +122,6 @@ export const DonateScreen: React.FC = () => {
       }
     });
 
-  const version = `Version: ${DeviceInfo.getReadableVersion()
-    .split('.')
-    .slice(0, 3)
-    .join('.')} (${DeviceInfo.getBuildNumber()})`;
-
   return (
     <ScrollWrapper>
       {donationStatus && donationStatus.result && (
@@ -165,15 +153,9 @@ export const DonateScreen: React.FC = () => {
       )}
       {Platform.OS === 'ios' ? (
         <Wrapper>
-          <TouchableOpacity
-            style={{
-              alignItems: 'center',
-            }}
-            onPress={linking('https://donorbox.org/democracy-app')}
-          >
+          <AppleDonateButton onPress={linking('https://donorbox.org/democracy-app')}>
             <Image source={require('./assets/DonateButton.png')} />
-          </TouchableOpacity>
-          <Version>{version}</Version>
+          </AppleDonateButton>
         </Wrapper>
       ) : (
         <Wrapper>
@@ -203,10 +185,11 @@ export const DonateScreen: React.FC = () => {
             <TextLink onPress={linking(donate3Link3)}>{donate3Text6}</TextLink>
             <Text>{donate3Text7}</Text>
           </Text>
-          <Version>{version}</Version>
         </Wrapper>
       )}
-      <MadeWithLove />
+      <MadeWithHeartWrapper>
+        <MadeWithLove />
+      </MadeWithHeartWrapper>
     </ScrollWrapper>
   );
 };

@@ -3,15 +3,26 @@ import { CompositeNavigationProp } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import deepmerge from 'deepmerge';
 import React, { ComponentProps } from 'react';
-import { Linking, Text } from 'react-native';
+import { Linking, Platform, Text } from 'react-native';
 import { getBuildNumber, getVersion } from 'react-native-device-info';
 import { MarkdownView } from 'react-native-markdown-view';
 import styled from 'styled-components/native';
-import SvgDemocracyBubble from '../../components/Icons/DemocracyBubble';
+import Folding from '../../components/Folding';
+import SvgIconappios from '../../components/Icons/IconAppIos';
+import SvgMail from '../../components/Icons/Mail';
+import SvgPhone from '../../components/Icons/Phone';
+import SvgPlanet from '../../components/Icons/Planet';
 import { MadeWithLove } from '../../components/MadeWithLove';
 import { Space } from '../../components/Space';
+import { linking } from '../../lib/linking';
 import { RootStackParamList } from '../../routes';
 import { SidebarParamList } from '../../routes/Sidebar';
+import { credentialsData } from './data';
+
+const phoneNumber =
+  Platform.OS === 'ios' ? `telprompt:${'+4917647040213'}` : `tel:${'+4917647040213'}`;
+const email = `mailto:${'contact@democracy-deutschland.de'}`;
+const website = 'https://www.democracy-deutschland.de/';
 
 const Wrapper = styled.ScrollView.attrs({
   scrollIndicatorInsets: { right: 1 }, // TODO do cleanfix when there is a correct solution (already closed but not solved without workaround) https://github.com/facebook/react-native/issues/26610
@@ -26,14 +37,21 @@ const HeaderWrapper = styled.View`
   align-items: center;
 `;
 
-const QuotWrapper = styled.View`
+const ContactWrapper = styled.View`
+  width: 100%;
+  align-self: center;
   flex-direction: row;
+  justify-content: space-between;
+  max-width: 300px;
 `;
 
-const Quot = styled.Text`
-  font-size: 100px;
-  color: #4494d3;
-  top: -18px;
+const IconWrapper = styled.TouchableOpacity`
+  width: 65px;
+  height: 65px;
+  border-width: 2px;
+  border-radius: 33px;
+  justify-content: center;
+  align-items: center;
 `;
 
 interface MarkdownProps {
@@ -80,7 +98,7 @@ export const AboutScreen: React.FC<Props> = () => {
     <Wrapper>
       <Content>
         <HeaderWrapper>
-          <SvgDemocracyBubble width="125" height="125" color="#000" />
+          <SvgIconappios width={100} height={100} />
           <Text
             style={{
               paddingTop: 18,
@@ -88,7 +106,6 @@ export const AboutScreen: React.FC<Props> = () => {
           >
             Version {getVersion()} ({getBuildNumber()})
           </Text>
-          <Text>Made with ❤ by DEMOCRACY Deutschland e.V.</Text>
         </HeaderWrapper>
         <Markdown
           styles={{
@@ -97,39 +114,11 @@ export const AboutScreen: React.FC<Props> = () => {
             },
           }}
         >
-          {`[DEMOCRACY Deutschland e.V.](https://www.democracy-deutschland.de) ist ein gemeinnütziger Verein, der mit seiner gleichnamigen App _DEMOCRACY_ Demokratie direkter und repräsentativer machen will. 
-
-Als crowd-finanzierte und politisch unabhängige Plattform informiert die App über die aktuellen Bundestagsabstimmungen und ermöglicht den Nutzern eine eigene direkte Abstimmung.        
-`}
+          {
+            '[DEMOCRACY Deutschland e.V.](https://www.democracy-deutschland.de) ist ein gemeinnütziger Verein, der sich mit seiner gleichnamigen App und Bildungsarbeit für Demokratie – als politische Selbstbestimmung durch die Bevölkerung – einsetzt.'
+          }
         </Markdown>
-        <QuotWrapper>
-          <Quot>❝</Quot>
-          <Markdown
-            style={{
-              paddingRight: 100,
-            }}
-            styles={{
-              paragraph: {
-                fontSize: 15,
-              },
-            }}
-          >
-            {`Mit DEMOCRACY wollen wir eine öffentliche Infrastruktur zur Verfügung stellen, die das Funktionieren einer lebendigen Demokratie begünstigt.
 
-Der Weisheit letzter Schluss liegt für uns in der solidarischen Kooperation (Gemeinschaftlichkeit) zum Vorteil aller (Gemeinnützigkeit). 
-
-Deshalb ist es für uns selbstverständlich, nicht nur alle Abstimmungsergebnisse anonymisiert, sondern auch unseren Source-Code offen zu legen (Transparenz). 
-
-Und weil Profitinteressen die Idee nur korrumpieren würden, haben wir uns auch äußerlich eine Rechtsform gegeben, die eine Verfremdung oder Bereicherungsabsicht per Satzung für immer ausschließt. 
-
-DEMOCRACY ist und bleibt spendenfinanziert. 
-
-Alle entstehenden Nutzerdaten sind gerade keine handelbaren Wirtschaftsgüter, sondern im Sinne des Grundgesetzes zu schützen. Datenverkauf und Werbefinanzierung finden bei unserem Vorhaben keinen Platz.
-
-_Marius Krüger im September 2017_
-`}
-          </Markdown>
-        </QuotWrapper>
         <Markdown
           styles={{
             paragraph: {
@@ -137,11 +126,7 @@ _Marius Krüger im September 2017_
             },
           }}
         >
-          {`Nach wie vor gilt unser größter Dank den 542 Unterstützerinnen und Unterstützern unserer initialen [Crowdfunding-Kampagne](https://www.startnext.com/democracy), ohne die es nicht möglich gewesen wäre, DEMOCRACY überhaupt umzusetzen.
-
-Neben den initialen Projektunterstützungen ziehen wir unseren Hut vor den zahlreichen [Paten und Patinnen](https://www.democracy-deutschland.de/#!donate), die mit ihrer regelmäßigen Spende mithelfen, die kühne Vision einer unabhängigen und nachhaltigen Crowdfinanzierung von DEMOCRACY bereits jetzt zu realisieren.
- 
-Unsere Arbeit ist und bleibt unabhängig, überparteilich, allgemeinnützig und nicht-kommerziell – von Menschen für Menschen.
+          {`Unsere Arbeit ist und bleibt unabhängig, überparteilich, allgemeinnützig und nicht-kommerziell – von Menschen für Menschen.
 
 Für mehr Informationen:
 [democracy-deutschland.de](https://www.democracy-deutschland.de)
@@ -149,6 +134,24 @@ Für mehr Informationen:
         </Markdown>
         <Space space={18} />
       </Content>
+      {credentialsData.map(({ title, text, opened }) => (
+        <Folding title={title} key={title} opened={opened}>
+          <Markdown>{text}</Markdown>
+        </Folding>
+      ))}
+      <Space space={36} />
+      <ContactWrapper>
+        <IconWrapper onPress={linking(phoneNumber)}>
+          <SvgPhone color="#000" width={30} height={30} />
+        </IconWrapper>
+        <IconWrapper onPress={linking(email)}>
+          <SvgMail color="#000" width={30} height={30} />
+        </IconWrapper>
+        <IconWrapper onPress={linking(website)}>
+          <SvgPlanet color="#000" width={30} height={30} />
+        </IconWrapper>
+      </ContactWrapper>
+      <Space space={36} />
       <MadeWithLove />
     </Wrapper>
   );

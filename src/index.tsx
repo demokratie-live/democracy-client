@@ -1,6 +1,7 @@
 import { ApolloProvider } from '@apollo/client';
 import { NavigationContainer } from '@react-navigation/native';
 import React, { Suspense } from 'react';
+import { StatusBar } from 'react-native';
 import { RecoilRoot } from 'recoil';
 import { ThemeProvider } from 'styled-components/native';
 import { client } from './api/apollo';
@@ -15,6 +16,7 @@ const AppEntry = () => {
   useInitialState();
   return (
     <ThemeProvider theme={theme}>
+      <StatusBar barStyle={'light-content'} />
       <NotificationsProvider>
         <NavigationContainer theme={navigationTheme}>
           <VerificationProvider>

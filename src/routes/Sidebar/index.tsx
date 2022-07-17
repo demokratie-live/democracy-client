@@ -8,8 +8,6 @@ import SvgWahlOMeter from '../../components/Icons/WahlOMeter';
 import SvgSettings from '../../components/Icons/Settings';
 import SvgFaqAndSupport from '../../components/Icons/FaqAndSupport';
 import SvgAbout from '../../components/Icons/About';
-import SvgLaw from '../../components/Icons/Law';
-import { CredentialsScreen } from '../../screens/Credentials';
 import { AboutScreen } from '../../screens/About';
 import { FaqScreen } from '../../screens/Faq';
 import { SettingsScreen } from '../../screens/Settings';
@@ -24,7 +22,6 @@ export type SidebarParamList = {
   Settings: undefined;
   Faq: undefined;
   About: undefined;
-  Credentials: undefined;
   Abgeordnete: { editMode: boolean };
   Development: undefined;
   DEV: undefined;
@@ -44,8 +41,8 @@ export const SidebarNavigation = () => {
           shadowOpacity: 0,
         },
         headerTintColor: lightTheme.colors.text.secondary,
-        drawerType: 'back',
-        overlayColor: 'rgba(0, 0, 0, 0.5)',
+        drawerType: 'slide',
+        overlayColor: 'rgba(0, 0, 0, 0.1)',
         drawerLabelStyle: {
           color: '#fff',
         },
@@ -85,7 +82,8 @@ export const SidebarNavigation = () => {
       />
       <SidebarDrawer.Screen
         options={{
-          drawerLabel: 'Mehr/Settings',
+          title: 'Einstellungen',
+          drawerLabel: 'Mehr/Einstellungen',
           drawerIcon: ({ color, size }) => <SvgSettings width={size} height={size} color={color} />,
         }}
         name="Settings"
@@ -93,7 +91,7 @@ export const SidebarNavigation = () => {
       />
       <SidebarDrawer.Screen
         options={{
-          title: 'FAQ',
+          title: 'FAQ & Support',
           drawerLabel: 'Mehr/FAQ & Support',
           drawerIcon: ({ color, size }) => (
             <SvgFaqAndSupport width={size} height={size} color={color} />
@@ -104,21 +102,12 @@ export const SidebarNavigation = () => {
       />
       <SidebarDrawer.Screen
         options={{
-          title: 'About',
+          title: 'Über DEMOCRACY',
           drawerLabel: 'Mehr/Über DEMOCRACY',
           drawerIcon: ({ color, size }) => <SvgAbout width={size} height={size} color={color} />,
         }}
         name={'About'}
         component={AboutScreen}
-      />
-      <SidebarDrawer.Screen
-        options={{
-          drawerLabel: 'Mehr/Rechtliches',
-          drawerIcon: ({ color, size }) => <SvgLaw width={size} height={size} color={color} />,
-          title: 'Rechtliches',
-        }}
-        name={'Credentials'}
-        component={CredentialsScreen}
       />
       {process.env.NODE_ENV === 'development' && (
         <SidebarDrawer.Screen name="DEV" component={DevScreen} />

@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { HeadLogo } from './HeadLogo';
 import { ActivityIndicator } from 'react-native';
 import { useRecoilValue } from 'recoil';
 import { constituencyState } from '../../../api/state/constituency';
 import { getConstituencySvgs } from '../../../components/svgs/constituencies';
+import SvgIconappios from '../../../components/Icons/IconAppIos';
 
 const Container = styled.TouchableOpacity`
   flex-direction: row;
   padding-top: 16px;
   padding-left: 16px;
-  padding-bottom: 8px;
+  padding-bottom: 16px;
 `;
 
 const HeadTextWrapper = styled.View`
@@ -44,7 +44,7 @@ export const Header: React.FC<Props> = ({ onPress, label }) => {
   };
   return (
     <Container onPress={onPress}>
-      {!constituency && label !== 'verbindet…' && <HeadLogo />}
+      {!constituency && label !== 'verbindet…' && <SvgIconappios width={45} height={45} />}
       {!constituency && label === 'verbindet…' && <ActivityIndicator size="large" />}
       {!!constituency && getConstituency(constituency)}
       <HeadTextWrapper>

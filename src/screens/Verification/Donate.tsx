@@ -34,7 +34,6 @@ const TextHead = styled.Text`
   font-size: 22px;
   padding-top: 25px;
   text-align: center;
-  font-family: ${Platform.OS === 'ios' ? 'HelveticaNeue-Light' : 'sans-serif-light'};
 `;
 
 const TextCenterNormal = styled.Text``;
@@ -50,7 +49,6 @@ const TextCenter = styled.Text`
   color: ${({ theme }) => theme.colors.text.tertiary};
   font-size: 17px;
   padding-top: 50px;
-  font-family: ${Platform.OS === 'ios' ? 'HelveticaNeue-Light' : 'sans-serif-light'};
   text-align: center;
   padding-bottom: 18px;
 `;
@@ -90,7 +88,7 @@ export const SmsDonate: React.FC = () => {
       }}
     >
       <Container>
-        <SvgIconappios width={75} height={75} />
+        <SvgIconappios width={100} height={100} />
         <TextHead>{'Deine Verifikation\nwar erfolgreich!'}</TextHead>
         <TextCenter>
           <TextCenterNormal>

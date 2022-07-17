@@ -62,10 +62,7 @@ const Highlight = styled.Text`
   color: #000;
 `;
 
-const ActivateButton = styled(Button)`
-  marginHorizontal: 18,
-  width: DEVICE_WIDTH - 36,
-`;
+const ActivateButton = styled(Button)``;
 
 export interface Notification {
   title: string;

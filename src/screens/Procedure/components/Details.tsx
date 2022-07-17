@@ -30,7 +30,7 @@ const HeadRightDescr = styled.View`
 
 const DefTitle = styled.Text`
   font-size: 14px;
-  color: rgba(68, 148, 211, 0.9);
+  color: ${({ theme }) => theme.colors.text.colored};
 `;
 
 const DefTitleSeperated = styled(DefTitle)`

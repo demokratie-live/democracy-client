@@ -22,7 +22,6 @@ import SvgYoutube from '../../components/Icons/Youtube';
 import { MadeWithLove } from '../../components/MadeWithLove';
 import { linking } from '../../lib/linking';
 import { Button } from '@democracy-deutschland/ui';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const phoneNumber =
   Platform.OS === 'ios' ? `telprompt:${'+4917647040213'}` : `tel:${'+4917647040213'}`;
@@ -75,7 +74,11 @@ const IconWrapper = styled.TouchableOpacity`
 `;
 
 const Spacer = styled.View`
-  padding-bottom: 36px;
+  padding-bottom: 18px;
+`;
+
+const ReViewTutorial = styled.TouchableOpacity`
+  margin-top: 18px;
 `;
 
 interface MarkdownProps {
@@ -173,9 +176,9 @@ Bitte gib uns möglichst viele Informationen zu den von Dir gefunden Fehlern ode
           <SvgDiscord color="#000" width={30} height={30} />
         </IconWrapper>
       </SocialMediaWrapper>
-      <TouchableOpacity onPress={() => navigation.navigate('Introduction')}>
+      <ReViewTutorial onPress={() => navigation.navigate('Introduction')}>
         <Button variant="primary">Tutorial erneut ansehen</Button>
-      </TouchableOpacity>
+      </ReViewTutorial>
       <Spacer />
       <MadeWithLove />
     </Wrapper>

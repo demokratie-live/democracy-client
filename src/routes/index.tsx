@@ -155,15 +155,18 @@ export const Routes: React.FC = () => {
         name={'Donate'}
         component={DonateScreen}
         options={({ route }) => {
-          console.log('route.params?.done', route.params?.done);
           if (route.params?.done) {
             return {
+              title: 'Spenden',
               headerShown: true,
               headerBackVisible: false,
               headerLeft: () => <Button onPress={route.params?.done} title="Fertig" color="#fff" />,
             };
           }
-          return { headerShown: true };
+          return {
+            title: 'Spenden',
+            headerShown: true,
+          };
         }}
       />
       <Stack.Screen

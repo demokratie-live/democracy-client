@@ -44,7 +44,7 @@ const DecisionText = styled.Text`
 `;
 
 const RepresentativeText = styled.Text`
-  color: ${({ theme }) => theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.tertiary};
   text-align: center;
   font-size: 12px;
 `;

@@ -52,7 +52,7 @@ const VoteButtonWrapper = styled.View`
 const VoteButtonLabel = styled.Text`
   padding-top: 11px;
   font-size: 12px;
-  color: ${({ theme }) => theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.tertiary};
 `;
 
 const Title = styled.Text`

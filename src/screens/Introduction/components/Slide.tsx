@@ -28,11 +28,10 @@ const TextHead = styled.Text`
   color: #000;
   font-size: 22px;
   padding-top: 15px;
-  font-family: ${Platform.OS === 'ios' ? 'HelveticaNeue-Thin' : 'sans-serif-light'};
 `;
 
 const TextSub = styled.Text`
-  color: ${({ theme }) => theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.tertiary};
   font-size: 15px;
   padding-top: 1px;
   text-align: center;
@@ -90,7 +89,6 @@ const TextVerify = styled.Text`
   font-size: 22px;
   text-align: center;
   padding-top: 6px;
-  font-family: ${Platform.OS === 'ios' ? 'HelveticaNeue-Thin' : 'sans-serif-light'};
 `;
 
 const ImageCircle = styled.Image``;

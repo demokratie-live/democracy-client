@@ -20,7 +20,6 @@ import { NoVotesPlaceholder } from '../../components/NoVotesPlaceholder';
 const Wrapper = styled.View`
   flex: 1;
   background-color: #fff;
-  margin-horizontal: 18px;
 `;
 
 const ScrollWrapper = styled.ScrollView.attrs({
@@ -52,6 +51,7 @@ const WarnTextWrapper = styled.View`
   align-items: center;
   justify-content: center;
   padding-vertical: 11px;
+  padding-horizontal: 11px;
   background-color: rgb(255, 255, 255);
   opacity: 0.9;
 `;

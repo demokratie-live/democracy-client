@@ -16,7 +16,7 @@ import { getConstituencySvgs } from '../../../components/svgs/constituencies';
 const MAX_WIDTH = Math.min(380, Dimensions.get('window').width, Dimensions.get('window').height);
 
 const RepresentativeText = styled.Text`
-  color: ${({ theme }) => theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.tertiary};
   text-align: center;
   font-size: 12px;
   padding-bottom: 18px;

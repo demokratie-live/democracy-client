@@ -66,8 +66,6 @@ export const Results: React.FC = () => {
   const history = useRecoilValue(searchHistoryState);
   const { data: mostSearchedTerms, loading: loadingMostSearched } = useMostSearchedQuery();
 
-  console.log('ResultsScreen', history);
-
   const parlament = parlaments[parlamentIdentifier];
 
   const [
@@ -105,7 +103,6 @@ export const Results: React.FC = () => {
           title: item.type || item.procedureId,
         });
       } else if (typeof item === 'string') {
-        console.log('setTerm 2', item);
         setTerm(item);
       }
     };

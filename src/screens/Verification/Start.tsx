@@ -8,9 +8,9 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../routes';
 import { VerificationContext } from '../../api/state/Verification';
 import { Centered } from '../../components/Centered';
-import { DemocracyBubble } from '../../components/Icons';
 import Folding from '../../components/Folding';
 import { linking } from '../../lib/linking';
+import SvgIconappios from '../../components/Icons/IconAppIos';
 
 const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: {
@@ -47,7 +47,7 @@ export const VerificationStart: React.FC = () => {
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic">
       <Centered>
-        <DemocracyBubble width="125" height="125" color="#000" />
+        <SvgIconappios width={100} height={100} />
       </Centered>
       <Space />
       <Description

@@ -20,7 +20,7 @@ const BackgroundImage = styled.Image.attrs(() => ({
 
 const Overlay = styled.View`
   position: absolute;
-  background-color: ${({ theme }) => `${theme.colors.background.pushBox}33`};
+  background-color: ${({ theme }) => `${theme.colors.text.colored}33`};
 
   width: 100%;
   height: 100%;

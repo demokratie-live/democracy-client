@@ -14,7 +14,6 @@ export { default as Camera } from './Camera';
 export { default as Chat } from './Chat';
 export { default as Checkmark } from './Checkmark';
 export { default as ConferenceWeekPlaceholder } from './ConferenceWeekPlaceholder';
-export { default as DemocracyBubble } from './DemocracyBubble';
 export { default as Discord } from './Discord';
 export { default as Document } from './Document';
 export { default as Download } from './Download';

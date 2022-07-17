@@ -19,9 +19,9 @@ import {
   useRequestSmsCodeMutation,
   useRequestVerificationMutation,
 } from '../../__generated__/graphql';
-import SvgDemocracyBubble from '../../components/Icons/DemocracyBubble';
 import { parlaments, parlamentState } from '../../api/state/parlament';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import SvgIconappios from '../../components/Icons/IconAppIos';
 
 const Container = styled(KeyboardAwareScrollView).attrs(() => ({
   contentContainerStyle: {
@@ -146,7 +146,7 @@ export const SmsCodeInput: React.FC<Props> = ({ route }) => {
 
   return (
     <Container>
-      {DEVICE_HEIGT > 500 && <SvgDemocracyBubble width="125" height="125" color="#000" />}
+      {DEVICE_HEIGT > 500 && <SvgIconappios width={100} height={100} />}
       <Description text={`Bitte gib Deinen Code ein für\n${phoneNumber}`} />
       <CodeInput
         onChange={code => {

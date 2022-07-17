@@ -20,7 +20,7 @@ export const CarouselPagination: React.FC<PaginationProps> = ({ length, active =
         width: 10,
         height: 10,
         borderRadius: 5,
-        backgroundColor: theme.colors.background.primary,
+        backgroundColor: theme.colors.text.colored,
       }}
       inactiveDotOpacity={0.4}
       inactiveDotScale={0.8}
