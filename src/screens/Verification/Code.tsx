@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components/native';
 import { Keyboard, Alert, Dimensions, ActivityIndicator } from 'react-native';
 import { sha256 } from 'react-native-sha256';
@@ -51,6 +51,10 @@ export const SmsCodeInput: React.FC<Props> = ({ route }) => {
   const [code, setCode] = useState('');
   const parlamentIdentifier = useRecoilValue(parlamentState);
   const parlament = parlaments[parlamentIdentifier];
+
+  useEffect(() => {
+    navigation.setOptions({ headerBackVisible: !loading });
+  }, [loading, navigation]);
 
   const showNotification = (message: string) => {
     Alert.alert('Verifikationsfehler', message);
