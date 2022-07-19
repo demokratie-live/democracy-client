@@ -25,11 +25,13 @@ interface CollapseIconProps extends SvgProps {
   open: boolean;
 }
 
-export const CollapseIcon = styled(SvgArrow).attrs(() => ({
-  color: 'rgb(151, 151, 151)',
-  width: 20,
-  height: 20,
-}))<CollapseIconProps>`
+export const CollapseIcon = styled(SvgArrow).attrs(
+  ({ color, width, height }: { color?: string; width?: number; height?: number }) => ({
+    color: color ?? 'rgb(151, 151, 151)',
+    width: width ?? 20,
+    height: height ?? 20,
+  }),
+)<CollapseIconProps>`
   align-self: flex-start;
   transform: ${({ open }) => (open ? 'rotate(0deg)' : 'rotate(180deg)')};
 `;
