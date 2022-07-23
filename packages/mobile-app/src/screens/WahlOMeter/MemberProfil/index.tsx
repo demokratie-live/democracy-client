@@ -183,7 +183,7 @@ export const MemberProfil = () => {
             />
           </MemberImageWrapper>
           <Text>{name}</Text>
-          <TextLighGrey>Direktkadidat WK {constituency}</TextLighGrey>
+          <TextLighGrey>Direktkandidat WK {constituency}</TextLighGrey>
           <TextGrey>{job}</TextGrey>
           <Chart
             totalProcedures={totalProcedures || 0}
