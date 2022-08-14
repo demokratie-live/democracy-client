@@ -123,73 +123,75 @@ export const DonateScreen: React.FC = () => {
     });
 
   return (
-    <ScrollWrapper>
-      {donationStatus && donationStatus.result && (
-        <View>
-          <Wrapper>
-            <Headline>{donate1Head}</Headline>
-            <Text>{donate1Text}</Text>
-            {/* <Text style={{ marginBottom: 21 }}>
+    <>
+      <ScrollWrapper>
+        {donationStatus && donationStatus.result && (
+          <View>
+            <Wrapper>
+              <Headline>{donate1Head}</Headline>
+              <Text>{donate1Text}</Text>
+              {/* <Text style={{ marginBottom: 21 }}>
               Spendenstand vom {donationStatus.result.donation_date}
             </Text> */}
-            <DonatedBox
-              target={donationStatus.result.donation_value_goal}
-              occupied={donationStatus.result.donation_value}
-            />
-          </Wrapper>
-          <Folding title="Details zum Finanzierungsbedarf">
-            <Entry
-              target={donationStatus.result.donation_value_goal}
-              occupied={donationStatus.result.donation_value}
-              money={`${donationStatus.result.donation_value}€ von ${donationStatus.result.donation_value_goal}€`}
-              description="min. Finanzierungsziel/Monat"
-            />
-            {renderDonationEntries(donationStatus.result.donation_data)}
-          </Folding>
+              <DonatedBox
+                target={donationStatus.result.donation_value_goal}
+                occupied={donationStatus.result.donation_value}
+              />
+            </Wrapper>
+            <Folding title="Details zum Finanzierungsbedarf">
+              <Entry
+                target={donationStatus.result.donation_value_goal}
+                occupied={donationStatus.result.donation_value}
+                money={`${donationStatus.result.donation_value}€ von ${donationStatus.result.donation_value_goal}€`}
+                description="min. Finanzierungsziel/Monat"
+              />
+              {renderDonationEntries(donationStatus.result.donation_data)}
+            </Folding>
+            <Wrapper>
+              <Text>{donateHintMonthly}</Text>
+            </Wrapper>
+          </View>
+        )}
+        {Platform.OS === 'ios' ? (
           <Wrapper>
-            <Text>{donateHintMonthly}</Text>
+            <AppleDonateButton onPress={linking('https://donorbox.org/democracy-app')}>
+              <Image source={require('./assets/DonateButton.png')} />
+            </AppleDonateButton>
           </Wrapper>
-        </View>
-      )}
-      {Platform.OS === 'ios' ? (
-        <Wrapper>
-          <AppleDonateButton onPress={linking('https://donorbox.org/democracy-app')}>
-            <Image source={require('./assets/DonateButton.png')} />
-          </AppleDonateButton>
-        </Wrapper>
-      ) : (
-        <Wrapper>
-          <Headline>{donate2Head}</Headline>
-          <DefinitionListWrapper style={{ paddingTop: 18 }}>
-            <DefinitionListTitle>{donateList1Head}</DefinitionListTitle>
-            <DefinitionListDescription>{donateList1Text}</DefinitionListDescription>
-          </DefinitionListWrapper>
-          <DefinitionListWrapper>
-            <DefinitionListTitle>{donateList2Head}</DefinitionListTitle>
-            <DefinitionListDescription selectable={true}>
-              {donateList2Text}
-            </DefinitionListDescription>
-          </DefinitionListWrapper>
-          <DefinitionListWrapper style={{ paddingBottom: 18 }}>
-            <DefinitionListTitle>{donateList3Head}</DefinitionListTitle>
-            <DefinitionListDescription selectable={true}>
-              {donateList3Text}
-            </DefinitionListDescription>
-          </DefinitionListWrapper>
-          <Text>
-            <Text>{donate3Text1}</Text>
-            <TextLink onPress={linking(donate3Link1)}>{donate3Text2}</TextLink>
-            <Text>{donate3Text3}</Text>
-            <TextLink onPress={linking(donate3Link2)}>{donate3Text4}</TextLink>
-            <Text>{donate3Text5}</Text>
-            <TextLink onPress={linking(donate3Link3)}>{donate3Text6}</TextLink>
-            <Text>{donate3Text7}</Text>
-          </Text>
-        </Wrapper>
-      )}
+        ) : (
+          <Wrapper>
+            <Headline>{donate2Head}</Headline>
+            <DefinitionListWrapper style={{ paddingTop: 18 }}>
+              <DefinitionListTitle>{donateList1Head}</DefinitionListTitle>
+              <DefinitionListDescription>{donateList1Text}</DefinitionListDescription>
+            </DefinitionListWrapper>
+            <DefinitionListWrapper>
+              <DefinitionListTitle>{donateList2Head}</DefinitionListTitle>
+              <DefinitionListDescription selectable={true}>
+                {donateList2Text}
+              </DefinitionListDescription>
+            </DefinitionListWrapper>
+            <DefinitionListWrapper style={{ paddingBottom: 18 }}>
+              <DefinitionListTitle>{donateList3Head}</DefinitionListTitle>
+              <DefinitionListDescription selectable={true}>
+                {donateList3Text}
+              </DefinitionListDescription>
+            </DefinitionListWrapper>
+            <Text>
+              <Text>{donate3Text1}</Text>
+              <TextLink onPress={linking(donate3Link1)}>{donate3Text2}</TextLink>
+              <Text>{donate3Text3}</Text>
+              <TextLink onPress={linking(donate3Link2)}>{donate3Text4}</TextLink>
+              <Text>{donate3Text5}</Text>
+              <TextLink onPress={linking(donate3Link3)}>{donate3Text6}</TextLink>
+              <Text>{donate3Text7}</Text>
+            </Text>
+          </Wrapper>
+        )}
+      </ScrollWrapper>
       <MadeWithHeartWrapper>
         <MadeWithLove />
       </MadeWithHeartWrapper>
-    </ScrollWrapper>
+    </>
   );
 };
