@@ -44,7 +44,7 @@ export type RootStackParamList = {
   DeputyProfile: { id: string };
   Pdf: { url: string; title: string };
   PushInstructions: undefined;
-  NotificationInstruction: { done: () => void; title?: string };
+  NotificationInstruction: { title?: string };
   OutcomePush: { finishAction: () => void; title: string; procedureId: string };
   SmsCodeInput: { procedureId?: string };
   SmsDonate: undefined;
