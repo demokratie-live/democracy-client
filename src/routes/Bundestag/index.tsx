@@ -18,6 +18,7 @@ import SvgLens from '../../components/Icons/Lens';
 import { parlaments } from '../../api/state/parlament';
 import { Recommended } from '../../screens/Bundestag/Recomended';
 import { List } from '../../screens/Bundestag';
+import { tabNavigationScreenOptions } from '../styles';
 
 export type BundestagTopTabParamList = {
   Empfohlen: undefined;
@@ -85,17 +86,7 @@ export const BundestagTabViewNavigation: React.FC<Props> = ({ navigation }) => {
 
   return (
     <TabNavigation.Navigator
-      screenOptions={{
-        tabBarScrollEnabled: false,
-        tabBarIndicatorStyle: {
-          backgroundColor: theme.colors.text.secondary,
-        },
-        tabBarActiveTintColor: theme.colors.text.secondary,
-        tabBarInactiveTintColor: theme.colors.text.secondary,
-        tabBarStyle: {
-          backgroundColor: theme.colors.primary,
-        },
-      }}
+      screenOptions={tabNavigationScreenOptions(theme)}
       initialRouteName={'Sitzungswoche'}
     >
       {parlament.screens.procedures.recomended ? (
