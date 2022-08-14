@@ -185,7 +185,7 @@ export const Routes: React.FC = () => {
       <Stack.Screen
         name="AbgeordneteEdit"
         component={AbgeordneteScreen}
-        options={{ headerShown: true }}
+        options={{ headerShown: true, title: 'Abgeordnete' }}
       />
     </Stack.Navigator>
   );
