@@ -67,6 +67,7 @@ export const SidebarNavigation = () => {
             <SvgWahlOMeter width={size} height={size} color={color} />
           ),
           unmountOnBlur: true,
+          title: 'Wahl-O-Meter',
         }}
         name="WahlOMeter"
         component={WahlOMeterNavigation}
