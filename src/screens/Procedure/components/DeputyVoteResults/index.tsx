@@ -9,6 +9,7 @@ import { useRecoilValue } from 'recoil';
 import { favorizedDeputiesState } from '../../../../api/state/favorizedDeputies';
 import { CarouselPagination } from '../../../../components/Pagination';
 import Folding from '../../../../components/Folding';
+import { DeputyVoteResultPlaceholder } from './DeputyPlaceholder';
 
 const SwiperStyled = styled(Carousel as new () => Carousel<JSX.Element>).attrs({
   paginationStyle: { bottom: 14 },
@@ -100,9 +101,22 @@ export const DeputyVoteResultSlider: React.FC<Props> = ({ voteResults, voted, pr
     const renderItem = ({ item }: { item: JSX.Element; index: number }) => item;
 
     const screens =
-      data?.procedure?.voteResults?.deputyVotes.map(deputy => (
-        <DeputyVoteResult key="deputy" {...deputy} />
-      )) || [];
+      (data?.procedure?.voteResults?.deputyVotes || []).length > 0
+        ? [
+            ...(data?.procedure?.voteResults?.deputyVotes.map(deputy => (
+              <DeputyVoteResult key="deputy" {...deputy} />
+            )) ?? []),
+            <DeputyVoteResultPlaceholder
+              key="addNewDeputy"
+              label="weitere Abgeordnete hinzufügen"
+            />,
+          ]
+        : [
+            <DeputyVoteResultPlaceholder
+              key="addNewDeputy"
+              label="Abgeordnetenergebnis anzeigen"
+            />,
+          ];
 
     return (
       <View style={{ marginBottom: -18, marginTop: 10 }}>
