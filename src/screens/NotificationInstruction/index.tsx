@@ -8,14 +8,20 @@ import { RootStackParamList } from '../../routes';
 import { NotificationsContext } from '../../api/state/notificationPermission';
 import { useRecoilValue } from 'recoil';
 import { initialState } from '../../api/state/initialState';
-import { Button } from '../../components/Button';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Button } from '@democracy-deutschland/ui';
 
 const Wrapper = styled.SafeAreaView`
   flex: 1;
 `;
 
-const ScrollView = styled.ScrollView.attrs({})``;
+const ScrollView = styled.ScrollView.attrs({
+  contentContainer: {
+    paddingVertical: 200,
+  },
+})`
+  padding-top: 18px;
+`;
 
 const HeaderWrapper = styled.View`
   align-items: center;
@@ -28,7 +34,7 @@ const Headline = styled.Text`
 `;
 
 const Subtitle = styled.Text`
-  color: ${({ theme }) => theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.tertiary};
   font-size: 15px;
   padding-top: 14px;
   padding-bottom: 52px;
@@ -48,6 +54,11 @@ const SwitchText = styled.Text`
   font-size: 17px;
   flex: 1;
   padding-right: 18px;
+`;
+
+const ActionButton = styled(Button)`
+  margin-bottom: 18px;
+  margin-horizontal: 36px;
 `;
 
 type RouteProps = RouteProp<RootStackParamList, 'NotificationInstruction'>;
@@ -109,20 +120,17 @@ export const NotificationInstructionScreen: React.FC = () => {
           <SwitchText>Bundestagsergebnis erhalten</SwitchText>
           <Switch value={pushActive} onValueChange={setPushActive} />
         </SwitchWrapper>
-        <Button
-          backgroundColor="blue"
-          textColor="white"
-          text="Aktivieren"
-          onPress={pressActivate}
-          disabled={!pushActive}
-        />
-        <Button
-          textColor="red"
-          text="Später"
+        <ActionButton variant="primary" onPress={pressActivate} disabled={!pushActive}>
+          Aktivieren
+        </ActionButton>
+        <ActionButton
+          variant="danger-secondary"
           onPress={() => {
             navigation.goBack();
           }}
-        />
+        >
+          Später
+        </ActionButton>
       </ScrollView>
     </Wrapper>
   );
