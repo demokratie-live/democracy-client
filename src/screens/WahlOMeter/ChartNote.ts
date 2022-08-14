@@ -5,8 +5,9 @@ const ChartNote = styled.Text`
   font-size: 13px;
   color: #4a4a4a;
   text-align: center;
-  padding-vertical: 18px;
-  padding-horizontal: 18px;
+  padding-top: 36px;
+  padding-bottom: ${({ theme }) => theme.spaces.default};
+  padding-horizontal: ${({ theme }) => theme.spaces.default};
 `;
 
 export default ChartNote;
