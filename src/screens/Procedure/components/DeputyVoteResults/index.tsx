@@ -10,6 +10,7 @@ import { favorizedDeputiesState } from '../../../../api/state/favorizedDeputies'
 import { CarouselPagination } from '../../../../components/Pagination';
 import Folding from '../../../../components/Folding';
 import { DeputyVoteResultPlaceholder } from './DeputyPlaceholder';
+import { parlamentState } from '../../../../api/state/parlament';
 
 const SwiperStyled = styled(Carousel as new () => Carousel<JSX.Element>).attrs({
   paginationStyle: { bottom: 14 },
@@ -26,7 +27,8 @@ interface Props {
 export const DeputyVoteResultSlider: React.FC<Props> = ({ voteResults, voted, procedureId }) => {
   const [activeSlide, setActiveSlide] = useState<number>(0);
   const { isVerified } = useInitialState();
-  const favorizedDeputies = useRecoilValue(favorizedDeputiesState);
+  const parlamentIdentifier = useRecoilValue(parlamentState);
+  const favorizedDeputies = useRecoilValue(favorizedDeputiesState(parlamentIdentifier));
   const { data } = useDeputyVoteResultsQuery({
     variables: {
       webIds: [...favorizedDeputies],

@@ -18,7 +18,7 @@ export const WomDeputyList: React.FC = () => {
   const parlamentIdentifier = useRecoilValue(parlamentState);
   const parlament = parlaments[parlamentIdentifier];
   const localVotes = useRecoilValue(localVotesState);
-  const favorizedDeputies = useRecoilValue(favorizedDeputiesState);
+  const favorizedDeputies = useRecoilValue(favorizedDeputiesState(parlamentIdentifier));
   const { data } = useWomDeputyListQueryQuery({
     variables: {
       limit: Math.min(favorizedDeputies.length, 100),

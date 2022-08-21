@@ -33,7 +33,7 @@ const Row = styled.TouchableOpacity`
   padding-vertical: 12px;
   padding-horizontal: 12px;
   border-bottom-color: #bcbbc1;
-  border-bottom-width: 0.5;
+  border-bottom-width: 0.5px;
   align-items: center;
 `;
 

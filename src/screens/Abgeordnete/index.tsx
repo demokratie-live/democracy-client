@@ -12,6 +12,7 @@ import {
 } from '../../api/state/favorizedDeputies';
 import { theme } from '../../styles/theme';
 import { SidebarParamList } from '../../routes/Sidebar';
+import { parlamentState } from '../../api/state/parlament';
 
 const Wrapper = styled.View`
   background-color: ${({ theme }) => theme.colors.background.primary};
@@ -35,7 +36,8 @@ export const AbgeordneteScreen: React.FC = () => {
   const [editMode, setEditMode] = useRecoilState(favorizedDeputiesEditModeState);
   const [searchTerm, setSearchTerm] = React.useState('');
   const navigation = useNavigation();
-  const favorizedDeputies = useRecoilValue(favorizedDeputiesState);
+  const parlamentIdentifier = useRecoilValue(parlamentState);
+  const favorizedDeputies = useRecoilValue(favorizedDeputiesState(parlamentIdentifier));
 
   // const { constituency } = useContext(ConstituencyContext);
   // const { isVerified } = useContext(InitialStateContext);
