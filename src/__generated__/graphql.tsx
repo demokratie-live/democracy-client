@@ -536,6 +536,15 @@ export enum VotedTimeSpan {
   Period = 'Period'
 }
 
+export type GetDeputiesForNewConstituencyQueryVariables = Exact<{
+  filterConstituency?: InputMaybe<Scalars['String']>;
+  excludeIds?: InputMaybe<Array<Scalars['String']> | Scalars['String']>;
+  period?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type GetDeputiesForNewConstituencyQuery = { __typename?: 'Query', deputies: { __typename?: 'DeputiesResult', data: Array<{ __typename?: 'Deputy', webId: string }> } };
+
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -804,6 +813,49 @@ export const ListItemDataFragmentDoc = gql`
   }
 }
     `;
+export const GetDeputiesForNewConstituencyDocument = gql`
+    query GetDeputiesForNewConstituency($filterConstituency: String, $excludeIds: [String!], $period: Int) {
+  deputies(
+    filterConstituency: $filterConstituency
+    excludeIds: $excludeIds
+    period: $period
+  ) {
+    data {
+      webId
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetDeputiesForNewConstituencyQuery__
+ *
+ * To run a query within a React component, call `useGetDeputiesForNewConstituencyQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetDeputiesForNewConstituencyQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetDeputiesForNewConstituencyQuery({
+ *   variables: {
+ *      filterConstituency: // value for 'filterConstituency'
+ *      excludeIds: // value for 'excludeIds'
+ *      period: // value for 'period'
+ *   },
+ * });
+ */
+export function useGetDeputiesForNewConstituencyQuery(baseOptions?: Apollo.QueryHookOptions<GetDeputiesForNewConstituencyQuery, GetDeputiesForNewConstituencyQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetDeputiesForNewConstituencyQuery, GetDeputiesForNewConstituencyQueryVariables>(GetDeputiesForNewConstituencyDocument, options);
+      }
+export function useGetDeputiesForNewConstituencyLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetDeputiesForNewConstituencyQuery, GetDeputiesForNewConstituencyQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetDeputiesForNewConstituencyQuery, GetDeputiesForNewConstituencyQueryVariables>(GetDeputiesForNewConstituencyDocument, options);
+        }
+export type GetDeputiesForNewConstituencyQueryHookResult = ReturnType<typeof useGetDeputiesForNewConstituencyQuery>;
+export type GetDeputiesForNewConstituencyLazyQueryHookResult = ReturnType<typeof useGetDeputiesForNewConstituencyLazyQuery>;
+export type GetDeputiesForNewConstituencyQueryResult = Apollo.QueryResult<GetDeputiesForNewConstituencyQuery, GetDeputiesForNewConstituencyQueryVariables>;
 export const MeDocument = gql`
     query Me {
   me {
