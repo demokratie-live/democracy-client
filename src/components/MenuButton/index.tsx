@@ -2,8 +2,7 @@ import styled from 'styled-components/native';
 
 // TODO move to storybook
 export const MenuButton = styled.TouchableOpacity`
-  padding-vertical: 11px;
-  padding-horizontal: 11px;
+  padding-left: ${({ theme }) => theme.spaces.default};
 `;
 
 export const BurgerMenuButton = styled(MenuButton)`
