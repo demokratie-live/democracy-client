@@ -86,7 +86,6 @@ export const NotificationInstructionScreen: React.FC = () => {
   const pressActivate = () => {
     requestToken();
     navigation.goBack();
-    route.params.done();
     updateNotificationSettings({
       enabled: true,
       outcomePushs: true,

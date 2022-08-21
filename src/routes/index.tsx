@@ -142,7 +142,7 @@ export const Routes: React.FC = () => {
       <Stack.Screen
         name="NotificationInstruction"
         component={NotificationInstructionScreen}
-        options={{ headerShown: true, title: 'Benachrichtigungen erhalten' }}
+        options={{ title: 'Benachrichtigungen erhalten' }}
       />
       <Stack.Screen
         name="OutcomePush"
