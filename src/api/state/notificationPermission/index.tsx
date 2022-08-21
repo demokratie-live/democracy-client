@@ -76,6 +76,12 @@ export const NotificationsProvider: React.FC = ({ children }) => {
       } else if (alreadyDenied && status === 'granted') {
         setAlreadyDenied(false);
         setHasPermissions(true);
+      } else if (status === 'granted') {
+        setAlreadyDenied(false);
+        setHasPermissions(true);
+      } else if (status === 'blocked') {
+        setAlreadyDenied(true);
+        setHasPermissions(false);
       }
     });
   }, [appState, alreadyDenied]);
