@@ -83,7 +83,7 @@ export const Routes: React.FC = () => {
       <Stack.Screen
         name="Constituency"
         component={ConstituencyScreen}
-        options={{ headerShown: true }}
+        options={{ headerShown: true, title: 'Wahlkreissuche' }}
       />
       <Stack.Screen
         name="VerificationStart"
