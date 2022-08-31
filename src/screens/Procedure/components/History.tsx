@@ -30,7 +30,7 @@ const Icon = styled.View<IconProps>`
 const State = styled.Text`
   font-size: 13px;
   padding-left: 14px;
-  color: ${({ theme }) => theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.tertiary};
 `;
 
 const Line = styled.View`

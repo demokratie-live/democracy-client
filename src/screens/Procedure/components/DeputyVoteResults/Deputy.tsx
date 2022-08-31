@@ -47,7 +47,7 @@ const Text = styled.Text`
 `;
 
 const TextLighGrey = styled(Text)`
-  color: ${({ theme }) => theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.tertiary};
 `;
 
 const Decision = styled.Text<{ decision: string | null }>`
