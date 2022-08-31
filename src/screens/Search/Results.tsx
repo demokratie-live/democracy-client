@@ -18,6 +18,7 @@ import { Row } from '../../components/Row';
 import { ListItem } from '../../components/ListItem';
 import { pieChartGovernmentData } from '../../lib/PieChartGovernmentData';
 import { communityVoteData } from '../../lib/PieChartCommunityData';
+import SvgIconappios from '../../components/Icons/IconAppIos';
 
 const isProcedureGuard = (searchItem: string | Procedure): searchItem is Procedure => {
   return typeof searchItem !== 'string' && searchItem.procedureId !== undefined;
@@ -50,11 +51,12 @@ const NoResultsWrapper = styled.View`
   align-items: center;
 `;
 
-const NoResultsImage = styled.Image.attrs(() => ({
-  source: require('./assets/search_no_results.png'),
-  opacity: 0.2,
-}))`
-  margin-top: 18px;
+const NoResultsImage = styled(SvgIconappios).attrs({
+  width: 160,
+  height: 160,
+  color: '#D8D8D8',
+})`
+  margin-top: ${({ theme }) => theme.spaces.default};
 `;
 
 type Procedure = SearchProceduresQuery['searchProceduresAutocomplete']['procedures'][0];
