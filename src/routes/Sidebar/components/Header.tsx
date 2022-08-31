@@ -4,7 +4,7 @@ import { ActivityIndicator } from 'react-native';
 import { useRecoilValue } from 'recoil';
 import { constituencyState } from '../../../api/state/constituency';
 import { getConstituencySvgs } from '../../../components/svgs/constituencies';
-import SvgIconappios from '../../../components/Icons/IconAppIos';
+import { AppLogo } from '../../../components/AppLogo';
 
 const Container = styled.TouchableOpacity`
   flex-direction: row;
@@ -44,7 +44,7 @@ export const Header: React.FC<Props> = ({ onPress, label }) => {
   };
   return (
     <Container onPress={onPress}>
-      {!constituency && label !== 'verbindet…' && <SvgIconappios width={45} height={45} />}
+      {!constituency && label !== 'verbindet…' && <AppLogo width={45} height={45} />}
       {!constituency && label === 'verbindet…' && <ActivityIndicator size="large" />}
       {!!constituency && getConstituency(constituency)}
       <HeadTextWrapper>

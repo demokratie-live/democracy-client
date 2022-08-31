@@ -8,8 +8,8 @@ import styled from 'styled-components/native';
 import { useInitialState } from '../../api/state/initialState';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../routes';
-import SvgIconappios from '../../components/Icons/IconAppIos';
 import { Button } from '../../components/Button';
+import { AppLogo } from '../../components/AppLogo';
 
 const Container = styled.ScrollView.attrs(() => ({
   contentContainerStyle: {
@@ -88,7 +88,7 @@ export const SmsDonate: React.FC = () => {
       }}
     >
       <Container>
-        <SvgIconappios width={100} height={100} />
+        <AppLogo />
         <TextHead>{'Deine Verifikation\nwar erfolgreich!'}</TextHead>
         <TextCenter>
           <TextCenterNormal>

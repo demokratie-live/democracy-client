@@ -3,13 +3,13 @@ import { NotificationBox } from './NotificationBox';
 import { defaultNotificationData } from './data';
 import { Dimensions, Switch, View } from 'react-native';
 import styled from 'styled-components/native';
-import SvgIconappios from '../../../components/Icons/IconAppIos';
 import { NotificationsContext } from '../../../api/state/notificationPermission';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../routes';
 import { Button } from '@democracy-deutschland/ui';
 import { Headline } from '../../../components/Headline';
+import { AppLogo } from '../../../components/AppLogo';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 
@@ -101,7 +101,7 @@ export const PushInstructions: React.FC<Props> = ({ alreadyKnown = false }) => {
       <ScrollView>
         {!alreadyKnown && (
           <>
-            <SvgIconappios width={73} height={73} />
+            <AppLogo />
             <Headline>Ergebnisse erhalten</Headline>
             <Subtitle>
               Werde nach Deiner Abstimmung automatisch über das offizielle Ergebnis des Bundestages

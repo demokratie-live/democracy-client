@@ -6,10 +6,10 @@ import styled from 'styled-components/native';
 import { ProcedureDocument, useToggleNotificationMutation } from '../../__generated__/graphql';
 import { NotificationsContext } from '../../api/state/notificationPermission';
 import { defaultNotificationData } from '../Introduction/PushInstructions/data';
-import SvgIconappios from '../../components/Icons/IconAppIos';
 import { NotificationBox } from '../Introduction/PushInstructions/NotificationBox';
 import { Button } from '@democracy-deutschland/ui';
 import { Headline } from '../../components/Headline';
+import { AppLogo } from '../../components/AppLogo';
 
 type RouteProps = RouteProp<RootStackParamList, 'OutcomePush'>;
 
@@ -104,7 +104,7 @@ export const OutcomePushs: React.FC<Props> = ({ finishAction }) => {
   return (
     <ScrollView>
       <View style={{ paddingTop: 36, alignItems: 'center' }}>
-        <SvgIconappios width={73} height={73} />
+        <AppLogo />
         <Headline>Ergebnisse erhalten</Headline>
         <Subtitle>
           Werde nach Deiner Abstimmung automatisch über das offizielle Ergebnis des Bundestages

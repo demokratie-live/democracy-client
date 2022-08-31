@@ -1,7 +1,7 @@
 import React from 'react';
 import { ImageSourcePropType } from 'react-native';
 import styled from 'styled-components/native';
-import SvgIconappios from '../../../components/Icons/IconAppIos';
+import { AppLogo } from '../../../components/AppLogo';
 
 interface Props {
   icon?: ImageSourcePropType;
@@ -48,7 +48,7 @@ export const NotificationBox: React.FC<Props> = ({ title, text, icon, owner }) =
     <Wrapper>
       {(!!icon || !!owner) && (
         <Head>
-          <SvgIconappios width={20} height={20} />
+          <AppLogo width={20} height={20} />
           {!!owner && <Owner>{owner}</Owner>}
         </Head>
       )}

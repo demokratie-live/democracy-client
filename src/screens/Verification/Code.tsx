@@ -21,7 +21,7 @@ import {
 } from '../../__generated__/graphql';
 import { parlaments, parlamentState } from '../../api/state/parlament';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import SvgIconappios from '../../components/Icons/IconAppIos';
+import { AppLogo } from '../../components/AppLogo';
 
 const Container = styled(KeyboardAwareScrollView).attrs(() => ({
   contentContainerStyle: {
@@ -150,7 +150,7 @@ export const SmsCodeInput: React.FC<Props> = ({ route }) => {
 
   return (
     <Container>
-      {DEVICE_HEIGT > 500 && <SvgIconappios width={100} height={100} />}
+      {DEVICE_HEIGT > 500 && <AppLogo />}
       <Description text={`Bitte gib Deinen Code ein für\n${phoneNumber}`} />
       <CodeInput
         disabled={loading}

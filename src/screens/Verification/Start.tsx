@@ -9,7 +9,7 @@ import { VerificationContext } from '../../api/state/Verification';
 import { Centered } from '../../components/Centered';
 import Folding from '../../components/Folding';
 import { linking } from '../../lib/linking';
-import SvgIconappios from '../../components/Icons/IconAppIos';
+import { AppLogo } from '../../components/AppLogo';
 
 const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: {
@@ -46,7 +46,7 @@ export const VerificationStart: React.FC = () => {
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic">
       <Centered>
-        <SvgIconappios width={100} height={100} />
+        <AppLogo />
       </Centered>
       <Space />
       <Description

@@ -18,7 +18,7 @@ import { Row } from '../../components/Row';
 import { ListItem } from '../../components/ListItem';
 import { pieChartGovernmentData } from '../../lib/PieChartGovernmentData';
 import { communityVoteData } from '../../lib/PieChartCommunityData';
-import SvgIconappios from '../../components/Icons/IconAppIos';
+import { AppLogo } from '../../components/AppLogo';
 
 const isProcedureGuard = (searchItem: string | Procedure): searchItem is Procedure => {
   return typeof searchItem !== 'string' && searchItem.procedureId !== undefined;
@@ -51,7 +51,7 @@ const NoResultsWrapper = styled.View`
   align-items: center;
 `;
 
-const NoResultsImage = styled(SvgIconappios).attrs({
+const NoResultsImage = styled(AppLogo).attrs({
   width: 160,
   height: 160,
   color: '#D8D8D8',
