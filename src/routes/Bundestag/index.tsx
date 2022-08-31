@@ -32,7 +32,7 @@ const TabNavigation = createMaterialTopTabNavigator<BundestagTopTabParamList>();
 
 const HaderRightWrapper = styled.View`
   flex-direction: row;
-  padding-right: 11px;
+  margin-right: ${({ theme }) => theme.spaces.default};
 `;
 
 type ScreenNavigationProp = CompositeNavigationProp<
