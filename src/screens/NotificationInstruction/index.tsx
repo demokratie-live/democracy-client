@@ -58,7 +58,7 @@ const SwitchText = styled.Text`
 
 const ActionButton = styled(Button)`
   margin-bottom: 18px;
-  margin-horizontal: 36px;
+  margin-horizontal: ${({ theme }) => theme.spaces.default};
 `;
 
 type RouteProps = RouteProp<RootStackParamList, 'NotificationInstruction'>;
