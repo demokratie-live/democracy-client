@@ -9,6 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../routes';
 import { Button } from '@democracy-deutschland/ui';
+import { Headline } from '../../../components/Headline';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 
@@ -25,12 +26,6 @@ const ScrollView = styled.ScrollView.attrs({
     marginBottom: 40,
   },
 })``;
-
-const Headline = styled.Text`
-  color: #000;
-  font-size: 22px;
-  margin-vertical: 18px;
-`;
 
 const Subtitle = styled.Text`
   color: ${({ theme }) => theme.colors.text.tertiary};

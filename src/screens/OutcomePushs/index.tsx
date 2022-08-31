@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useRoute, RouteProp } from '@react-navigation/core';
-import { Dimensions, Switch, View } from 'react-native';
+import { Switch, View } from 'react-native';
 import { RootStackParamList } from '../../routes';
 import styled from 'styled-components/native';
 import { ProcedureDocument, useToggleNotificationMutation } from '../../__generated__/graphql';
@@ -9,8 +9,7 @@ import { defaultNotificationData } from '../Introduction/PushInstructions/data';
 import SvgIconappios from '../../components/Icons/IconAppIos';
 import { NotificationBox } from '../Introduction/PushInstructions/NotificationBox';
 import { Button } from '@democracy-deutschland/ui';
-
-const DEVICE_WIDTH = Dimensions.get('window').width;
+import { Headline } from '../../components/Headline';
 
 type RouteProps = RouteProp<RootStackParamList, 'OutcomePush'>;
 
@@ -22,12 +21,6 @@ const ScrollView = styled.ScrollView.attrs({
     marginHorizontal: 18,
   },
 })``;
-
-const Headline = styled.Text`
-  color: #000;
-  font-size: 25px;
-  margin-vertical: 18px;
-`;
 
 const Subtitle = styled.Text`
   color: ${({ theme }) => theme.colors.text.tertiary};

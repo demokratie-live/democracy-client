@@ -10,6 +10,7 @@ import { useRecoilValue } from 'recoil';
 import { initialState } from '../../api/state/initialState';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Button } from '@democracy-deutschland/ui';
+import { Headline } from '../../components/Headline';
 
 const Wrapper = styled.SafeAreaView`
   flex: 1;
@@ -25,12 +26,6 @@ const ScrollView = styled.ScrollView.attrs({
 
 const HeaderWrapper = styled.View`
   align-items: center;
-`;
-
-const Headline = styled.Text`
-  color: #000;
-  font-size: 22px;
-  margin-vertical: 18px;
 `;
 
 const Subtitle = styled.Text`
