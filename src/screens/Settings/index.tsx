@@ -15,7 +15,7 @@ import { useRecoilValue } from 'recoil';
 import { constituencyState } from '../../api/state/constituency';
 import { initialState } from '../../api/state/initialState';
 import { NotificationsContext } from '../../api/state/notificationPermission';
-import { Segment } from '../../components/Segment.index';
+import { Segment } from '../../components/Segment/index';
 import { linking } from '../../lib/linking';
 
 const Wrapper = styled.View`

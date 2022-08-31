@@ -37,7 +37,7 @@ export interface Parlament {
   screens: ParlamentScreens;
 }
 
-export type Parlaments = {
+type Parlaments = {
   [parlament in ParlamentIdentifier]: Parlament;
 };
 

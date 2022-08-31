@@ -12,6 +12,7 @@
     "lint": "yarn lint:ts && yarn lint:es",
     "lint:ts": "tsc --noEmit",
     "lint:es": "eslint .",
+    "lint:exports": "ts-unused-exports ./tsconfig.json --excludePathsFromReport=__generated__",
     "format": "prettier --check ./src",
     "pods": "cd ios && pod install && cd ..",
     "codegen": "graphql-codegen --config codegen.yml"
@@ -109,6 +110,7 @@
     "prettier": "^2.5.1",
     "react-test-renderer": "17.0.2",
     "ts-jest": "^27.1.3",
+    "ts-unused-exports": "^8.0.0",
     "typescript": "^4.6.2"
   },
   "resolutions": {
