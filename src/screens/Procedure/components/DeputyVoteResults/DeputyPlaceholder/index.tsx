@@ -7,6 +7,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import DeputyAvatarPlaceholder from './components/DeputyAvatarPlaceholder';
 
 const Wrapper = styled.TouchableOpacity`
+  flex: 1;
   width: 100%;
   align-items: center;
 `;
@@ -20,7 +21,9 @@ const DeputyDetailsWrapper = styled.View`
   flex-direction: row;
   align-items: center;
   margin-top: ${({ theme }) => theme.spaces.default};
-  margin-bottom: ${({ theme }) => theme.spaces.default};
+  margin-bottom: ${({ theme }) => theme.spaces.small};
+  bottom: 0;
+  position: absolute;
 `;
 
 const PlusWrapper = styled.View`
@@ -52,7 +55,7 @@ export const DeputyVoteResultPlaceholder: React.FC<Props> = ({ label }) => {
       }}
     >
       <MemberImageWrapper>
-        <DeputyAvatarPlaceholder />
+        <DeputyAvatarPlaceholder width={210} height={268} />
       </MemberImageWrapper>
       <DeputyDetailsWrapper>
         <PlusWrapper>
