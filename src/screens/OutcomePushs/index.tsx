@@ -42,6 +42,10 @@ const SwitchText = styled.Text`
   padding-right: 18px;
 `;
 
+const SkipButton = styled(Button)`
+  height: 72px;
+`;
+
 const ToggleButton = styled(Button)``;
 
 export interface Notification {
@@ -139,9 +143,9 @@ export const OutcomePushs: React.FC<Props> = ({ finishAction }) => {
       )}
 
       {pushActive && (
-        <Button variant="secondary" onPress={doneAction}>
+        <SkipButton variant="secondary" onPress={doneAction}>
           Überspringen
-        </Button>
+        </SkipButton>
       )}
     </ScrollView>
   );
