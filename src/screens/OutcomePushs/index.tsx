@@ -30,7 +30,7 @@ const Headline = styled.Text`
 `;
 
 const Subtitle = styled.Text`
-  color: #9b9b9b;
+  color: ${({ theme }) => theme.colors.text.tertiary};
   font-size: 15px;
   margin-top: 18px;
   margin-bottom: 18px;
