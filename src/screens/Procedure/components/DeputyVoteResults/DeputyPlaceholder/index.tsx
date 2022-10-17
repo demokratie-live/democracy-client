@@ -10,6 +10,7 @@ const Wrapper = styled.TouchableOpacity`
   flex: 1;
   width: 100%;
   align-items: center;
+  min-height: 310px;
 `;
 
 const MemberImageWrapper = styled.View`
