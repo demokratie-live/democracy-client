@@ -33,6 +33,7 @@ export const SidebarNavigation = () => {
   return (
     <SidebarDrawer.Navigator
       initialRouteName="Bundestag"
+      useLegacyImplementation
       drawerContent={props => <Sidebar {...props} />}
       screenOptions={{
         headerStyle: {

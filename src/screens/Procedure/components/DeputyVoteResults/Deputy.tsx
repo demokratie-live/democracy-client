@@ -7,9 +7,9 @@ import SvgInfo from '../../../../components/Icons/Info';
 import { DeputyVoteResultsQuery } from '../../../../__generated__/graphql';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { PartyProps } from '@democracy-deutschland/ui/dist/Atoms/PartyLogo/old';
+import { useWindowDimensions } from 'react-native';
 
-const Wrapper = styled.View`
-  width: 100%;
+const Wrapper = styled.View<{ width: number }>`
   align-items: center;
 `;
 
@@ -93,9 +93,10 @@ export const DeputyVoteResult: React.FC<Props> = ({
   deputy: { constituency, name, party, webId, imgURL },
 }) => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const { width } = useWindowDimensions();
 
   return (
-    <Wrapper key={webId}>
+    <Wrapper width={width} key={webId}>
       <MemberImageWrapper
         onPress={() => {
           navigation.push('DeputyProfile', { id: webId });

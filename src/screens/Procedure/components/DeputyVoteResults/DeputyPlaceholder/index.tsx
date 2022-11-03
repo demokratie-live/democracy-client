@@ -5,10 +5,11 @@ import { RootStackParamList } from '../../../../../routes';
 import styled from 'styled-components/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import DeputyAvatarPlaceholder from './components/DeputyAvatarPlaceholder';
+import { useWindowDimensions } from 'react-native';
 
-const Wrapper = styled.TouchableOpacity`
+const Wrapper = styled.TouchableOpacity<{ width: number }>`
   flex: 1;
-  width: 100%;
+  width: ${({ width }) => width}px;
   align-items: center;
   min-height: 310px;
 `;
@@ -48,9 +49,11 @@ interface Props {
 
 export const DeputyVoteResultPlaceholder: React.FC<Props> = ({ label }) => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const { width } = useWindowDimensions();
 
   return (
     <Wrapper
+      width={width}
       onPress={() => {
         navigation.push('AbgeordneteEdit', { editMode: true });
       }}
