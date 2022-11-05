@@ -44,7 +44,6 @@
     "react-dom": "^17.0.2",
     "react-native": "0.70.4",
     "react-native-blob-util": "^0.15.0",
-    "react-native-camera": "^4.2.1",
     "react-native-device-info": "^8.4.9",
     "react-native-gesture-handler": "^2.3.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
@@ -64,6 +63,7 @@
     "react-native-sha256": "^1.4.7",
     "react-native-svg": "^12.3.0",
     "react-native-tab-view": "^3.1.1",
+    "react-native-vision-camera": "^2.15.2",
     "recoil": "^0.7.2",
     "speakingurl": "^14.0.1",
     "styled-components": "^5.3.3"

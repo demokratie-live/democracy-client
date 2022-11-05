@@ -6,10 +6,14 @@ import styled from 'styled-components/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../routes';
 import VotesLocal, { Chain } from '../../lib/VotesLocal';
-import { RNCamera, BarCodeReadEvent } from 'react-native-camera';
 import { lightTheme } from '@democracy-deutschland/ui';
 import { useSetRecoilState } from 'recoil';
 import { votesLocalState } from '../../api/state/votesLocal';
+import {
+  Camera as RNCamera,
+  useCameraDevices,
+  useFrameProcessor,
+} from 'react-native-vision-camera';
 
 const Container = styled.View`
   flex: 1;
@@ -65,23 +69,32 @@ export const SyncVotesCaptureScreen: React.FC<Props> = ({ navigation }) => {
   const [identifier, setIdentifier] = useState<string>();
   const setVotesLocal = useSetRecoilState(votesLocalState);
 
-  const handleBarcode = (event: BarCodeReadEvent) => {
-    try {
-      const qrData: SyncObj = JSON.parse(event.data);
-      if (data.length === 0 && qrData.meta.identifier) {
-        setIdentifier(qrData.meta.identifier);
-      } else if (identifier !== qrData.meta.identifier || !qrData.meta.identifier) {
-        throw new Error('identifier do not matching');
-      }
-      const current = qrData?.meta?.current;
-      const captured = data.some(({ meta }) => meta.current === current);
-      if (!captured) {
-        setData([...data, qrData]);
-      }
-    } catch (_e) {
-      // Do nothing
-    }
-  };
+  const devices = useCameraDevices();
+  const device = devices.back;
+  const frameProcessor = useFrameProcessor(frame => {
+    'worklet';
+    console.log(frame);
+    // const isHotdog = detectIsHotdog(frame)
+    // console.log(isHotdog ? "Hotdog!" : "Not Hotdog.")
+  }, []);
+
+  // const handleBarcode = (event: BarCodeReadEvent) => {
+  //   try {
+  //     const qrData: SyncObj = JSON.parse(event.data);
+  //     if (data.length === 0 && qrData.meta.identifier) {
+  //       setIdentifier(qrData.meta.identifier);
+  //     } else if (identifier !== qrData.meta.identifier || !qrData.meta.identifier) {
+  //       throw new Error('identifier do not matching');
+  //     }
+  //     const current = qrData?.meta?.current;
+  //     const captured = data.some(({ meta }) => meta.current === current);
+  //     if (!captured) {
+  //       setData([...data, qrData]);
+  //     }
+  //   } catch (_e) {
+  //     // Do nothing
+  //   }
+  // };
 
   useEffect(() => {
     if (data.length > 0 && data.length === data[0].meta.sum) {
@@ -117,6 +130,8 @@ export const SyncVotesCaptureScreen: React.FC<Props> = ({ navigation }) => {
     }
   }, [navigation, syncComplete]);
 
+  if (!device) return null;
+
   return (
     <Container>
       {
@@ -124,7 +139,7 @@ export const SyncVotesCaptureScreen: React.FC<Props> = ({ navigation }) => {
           <Text>
             Scanne den QR-Code auf Deinem alten Gerät, bis die Übertragung abgeschlossen ist
           </Text>
-          <Camera captureAudio={false} onBarCodeRead={handleBarcode} />
+          <Camera device={device} isActive={true} frameProcessor={frameProcessor} />
           <Bar
             progress={data[0] ? data.length / data[0].meta.sum : 0}
             indeterminate={data.length === 0}
