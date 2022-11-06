@@ -309,6 +309,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.0'
 }
 
+apply plugin: 'com.google.gms.google-services'
+
 if (isNewArchitectureEnabled()) {
     // If new architecture is enabled, we let you build RN from source
     // Otherwise we fallback to a prebuilt .aar bundled in the NPM package.

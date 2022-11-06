@@ -116,6 +116,7 @@ export const NotificationsProvider: React.FC = ({ children }) => {
     subscriptions.push(
       Notifications.events().registerRemoteNotificationsRegistered((event: Registered) => {
         const token = event.deviceToken || (event as unknown as string);
+        console.log('heha', token);
         AsyncStorage.setItem('push-token', token);
         sendToken({
           variables: {
@@ -133,6 +134,12 @@ export const NotificationsProvider: React.FC = ({ children }) => {
           console.error(event);
         },
       ),
+    );
+
+    subscriptions.push(
+      Notifications.events().registerRemoteNotificationsRegistrationDenied(() => {
+        console.error('Error');
+      }),
     );
 
     // request code for android on app start

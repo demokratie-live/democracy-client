@@ -66,3 +66,6 @@ buck-out/
 # DEMOCRACY
 google-services.json
 *.p8
+*.p12
+*.pem
+*.pkey
