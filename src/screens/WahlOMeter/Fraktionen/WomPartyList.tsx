@@ -72,6 +72,7 @@ const WomPartyList: React.FC<WomPartyListProps> = ({ onProcedureListItemClick })
     procedurListData.procedurecForWomPartyList.procedures
       ? procedurListData.procedurecForWomPartyList.procedures
       : [];
+
   return (
     <Container>
       <FlatList<VotedPartyProceduresQuery['procedurecForWomPartyList']['procedures'][0]>
