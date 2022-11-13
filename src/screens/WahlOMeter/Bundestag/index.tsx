@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import { Dimensions } from 'react-native';
 
@@ -14,6 +14,7 @@ import { RootStackParamList } from '../../../routes';
 import PieChart from '../../Procedure/components/Charts/PieChart';
 import { ChartLegend } from '@democracy-deutschland/ui';
 import { LocalVote } from '../../../api/state/votesLocal';
+import { useNavigation } from '@react-navigation/native';
 
 const Wrapper = styled.View`
   padding-top: 18px;
@@ -81,64 +82,59 @@ const pieChartData = ({
 
 type ScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Sidebar'>;
 
-interface Props {
-  navigation: ScreenNavigationProp;
-}
+export const BundestagScreen = () => {
+  const navigation = useNavigation<ScreenNavigationProp>();
 
-class BundestagScreen extends PureComponent<Props> {
-  render() {
-    const { navigation } = this.props;
-    return (
-      <VotedProceduresWrapper
-        onProcedureListItemClick={({ item }) =>
-          navigation.navigate('Procedure', {
-            procedureId: item.procedureId,
-            title: item.type || item.procedureId,
-          })
-        }
-      >
-        {({ totalProcedures, chartData }) => {
-          const matchingProcedures = getMatchingProcedures(chartData);
-          const preparedData = pieChartData({
-            ...chartData,
-            matchingProcedures,
-          });
+  return (
+    <VotedProceduresWrapper
+      onProcedureListItemClick={({ item }) =>
+        navigation.navigate('Procedure', {
+          procedureId: item.procedureId,
+          title: item.type || item.procedureId,
+        })
+      }
+    >
+      {({ totalProcedures, chartData }) => {
+        const matchingProcedures = getMatchingProcedures(chartData);
+        const preparedData = pieChartData({
+          ...chartData,
+          matchingProcedures,
+        });
 
-          if (matchingProcedures.length > 0) {
-            return (
-              <Wrapper>
-                <Header
-                  totalProcedures={totalProcedures}
-                  votedProceduresCount={matchingProcedures.length}
-                />
-                <ChartWrapper>
-                  <PieChart
-                    data={preparedData}
-                    // colorScale={['#EAA844', '#B1B3B4']}
-                    label="Bundestag"
-                    subLabel="Wahl-O-Meter"
-                    showPercentage
-                  />
-                </ChartWrapper>
-                <ChartLegend data={preparedData} />
-                <ChartNote>
-                  Hohe Übereinstimmungen Ihrer Stellungnahmen mit dem Bundestag bedeuten eine
-                  inhaltliche Nähe zu den Regierungsfraktionen
-                </ChartNote>
-                <Segment text="Abstimmungen" />
-              </Wrapper>
-            );
-          }
+        if (matchingProcedures.length > 0) {
           return (
-            <>
-              <NoVotesPlaceholder subline="Bundestag" />
+            <Wrapper>
+              <Header
+                totalProcedures={totalProcedures}
+                votedProceduresCount={matchingProcedures.length}
+              />
+              <ChartWrapper>
+                <PieChart
+                  data={preparedData}
+                  // colorScale={['#EAA844', '#B1B3B4']}
+                  label="Bundestag"
+                  subLabel="Wahl-O-Meter"
+                  showPercentage
+                />
+              </ChartWrapper>
+              <ChartLegend data={preparedData} />
+              <ChartNote>
+                Hohe Übereinstimmungen Ihrer Stellungnahmen mit dem Bundestag bedeuten eine
+                inhaltliche Nähe zu den Regierungsfraktionen
+              </ChartNote>
               <Segment text="Abstimmungen" />
-            </>
+            </Wrapper>
           );
-        }}
-      </VotedProceduresWrapper>
-    );
-  }
-}
+        }
+        return (
+          <>
+            <NoVotesPlaceholder subline="Bundestag" />
+            <Segment text="Abstimmungen" />
+          </>
+        );
+      }}
+    </VotedProceduresWrapper>
+  );
+};
 
 export default BundestagScreen;
