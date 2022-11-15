@@ -73,7 +73,7 @@ interface Props {
 export const PushInstructions: React.FC<Props> = ({ alreadyKnown = false }) => {
   const [pushActive, setPushActive] = useState(true);
   const navigation = useNavigation<ScreenNavigationProps>();
-  const { requestToken, update: updateNotificationSettings } = useContext(NotificationsContext);
+  const { update: updateNotificationSettings } = useContext(NotificationsContext);
 
   const notification = {
     title: defaultNotificationData.outcomePushs.title,
@@ -82,7 +82,7 @@ export const PushInstructions: React.FC<Props> = ({ alreadyKnown = false }) => {
   };
 
   const pressActivate = () => {
-    requestToken();
+    // requestToken();
     updateNotificationSettings({
       enabled: true,
       outcomePushs: true,

@@ -9587,11 +9587,6 @@ react-native-linear-gradient@^2.5.6:
     react-native-tabular-grid-markdown-view "0.1.x"
     simple-markdown "0.6.x"
 
-react-native-notifications@^4.3.2:
-  version "4.3.2"
-  resolved "https://registry.yarnpkg.com/react-native-notifications/-/react-native-notifications-4.3.2.tgz#43b5fa6b2dbd49e38eadca8b8d102394a9ac7929"
-  integrity sha512-QGzlO9ON2nyk1G8y1JIwv9kqpu8OQYSmqsmSzl/rXtXwCWx/WDFNb5rkBtAZQKuebtK2/Vczhfk4khraRmJj0Q==
-
 react-native-pager-view@^5.4.15:
   version "5.4.25"
   resolved "https://registry.yarnpkg.com/react-native-pager-view/-/react-native-pager-view-5.4.25.tgz#cd639d5387a7f3d5581b55a33c5faa1cbc200f97"

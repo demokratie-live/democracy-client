@@ -10,7 +10,6 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.config.ReactFeatureFlags;
 import com.facebook.soloader.SoLoader;
 import de.democracydeutschland.app.newarchitecture.MainApplicationReactNativeHost;
-import com.wix.reactnativenotifications.RNNotificationsPackage;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 

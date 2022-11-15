@@ -305,12 +305,7 @@ dependencies {
         implementation jscFlavor
     }
     androidTestImplementation('com.wix:detox:+')
-
-    implementation project(':react-native-notifications')
-    implementation 'com.google.firebase:firebase-core:16.0.0'
 }
-
-apply plugin: 'com.google.gms.google-services'
 
 if (isNewArchitectureEnabled()) {
     // If new architecture is enabled, we let you build RN from source

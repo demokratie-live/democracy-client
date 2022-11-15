@@ -308,8 +308,6 @@ PODS:
     - glog
   - react-native-blob-util (0.15.0):
     - React-Core
-  - react-native-notifications (4.3.2):
-    - React-Core
   - react-native-pager-view (5.4.25):
     - React-Core
   - react-native-pdf (6.6.2):
@@ -489,7 +487,6 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - react-native-blob-util (from `../node_modules/react-native-blob-util`)
-  - react-native-notifications (from `../node_modules/react-native-notifications`)
   - react-native-pager-view (from `../node_modules/react-native-pager-view`)
   - react-native-pdf (from `../node_modules/react-native-pdf`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
@@ -586,8 +583,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   react-native-blob-util:
     :path: "../node_modules/react-native-blob-util"
-  react-native-notifications:
-    :path: "../node_modules/react-native-notifications"
   react-native-pager-view:
     :path: "../node_modules/react-native-pager-view"
   react-native-pdf:
@@ -683,7 +678,6 @@ SPEC CHECKSUMS:
   React-jsinspector: 1d5a9e84e419a57cabc23249aec3d837d1b03a80
   React-logger: f8071ad48248781d5afdb8a07f778758529d3019
   react-native-blob-util: a5d3561045ed98cfb2fb80cbbff600fae0e8edee
-  react-native-notifications: f3215821dfd74234f8f3910e2fe37e19fa8673b0
   react-native-pager-view: da490aa1f902c9a5aeecf0909cc975ad0e92e53e
   react-native-pdf: 33c622cbdf776a649929e8b9d1ce2d313347c4fa
   react-native-safe-area-context: 9e40fb181dac02619414ba1294d6c2a807056ab9
