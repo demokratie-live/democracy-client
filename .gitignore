@@ -69,3 +69,4 @@ google-services.json
 *.p12
 *.pem
 *.pkey
+/ios/GoogleService-Info.plist
