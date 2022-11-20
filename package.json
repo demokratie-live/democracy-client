@@ -14,7 +14,7 @@
     "lint:es": "eslint .",
     "lint:exports": "ts-unused-exports ./tsconfig.json --excludePathsFromReport=__generated__",
     "format": "prettier --check ./src",
-    "pods": "cd ios && pod install && cd ..",
+    "pods": "pod install --project-directory=ios/",
     "codegen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
