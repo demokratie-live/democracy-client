@@ -20,6 +20,7 @@
   "dependencies": {
     "@apollo/client": "^3.5.9",
     "@democracy-deutschland/ui": "0.0.7-alpha.4",
+    "@notifee/react-native": "^7.1.0",
     "@react-native-community/async-storage": "1.7.1",
     "@react-native-firebase/app": "^16.4.4",
     "@react-native-firebase/messaging": "^16.4.6",

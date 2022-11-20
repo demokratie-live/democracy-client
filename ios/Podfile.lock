@@ -511,6 +511,11 @@ PODS:
     - React-Core
   - RNKeychain (8.0.0):
     - React-Core
+  - RNNotifee (7.1.0):
+    - React-Core
+    - RNNotifee/NotifeeCore (= 7.1.0)
+  - RNNotifee/NotifeeCore (7.1.0):
+    - React-Core
   - RNPermissions (3.6.1):
     - React-Core
   - RNRate (1.2.9):
@@ -633,6 +638,7 @@ DEPENDENCIES:
   - "RNFBMessaging (from `../node_modules/@react-native-firebase/messaging`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNKeychain (from `../node_modules/react-native-keychain`)
+  - "RNNotifee (from `../node_modules/@notifee/react-native`)"
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNRate (from `../node_modules/react-native-rate`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
@@ -765,6 +771,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-gesture-handler"
   RNKeychain:
     :path: "../node_modules/react-native-keychain"
+  RNNotifee:
+    :path: "../node_modules/@notifee/react-native"
   RNPermissions:
     :path: "../node_modules/react-native-permissions"
   RNRate:
@@ -854,6 +862,7 @@ SPEC CHECKSUMS:
   RNFBMessaging: f7a90ac199e1bc771e9e09058ed0354efd047182
   RNGestureHandler: 62232ba8f562f7dea5ba1b3383494eb5bf97a4d3
   RNKeychain: 4f63aada75ebafd26f4bc2c670199461eab85d94
+  RNNotifee: 8527a2b9ffc6d0abfd907027e22962a809e39eee
   RNPermissions: dcdb7b99796bbeda6975a6e79ad519c41b251b1c
   RNRate: 94f57c773e155ca0d0aeeba9c10a32bce9030daf
   RNReanimated: 2a91e85fcd343f8af3c58d3425b99fdd285590a5
