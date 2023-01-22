@@ -24,6 +24,7 @@ import { NotificationInstructionScreen } from '../screens/NotificationInstructio
 import { DonateScreen } from '../screens/Donate';
 import { Button } from 'react-native';
 import { AbgeordneteScreen } from '../screens/Abgeordnete';
+import { useNotifee } from '../api/hooks/useNotifee';
 // import { useRoutePushNotifications } from '../api/state/notifications/PushNotification';
 
 export type RootStackParamList = {
@@ -59,6 +60,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 export const Routes: React.FC = () => {
   const { lastStartWithVersion } = useInitialState();
   // useRoutePushNotifications();
+  useNotifee();
 
   if (lastStartWithVersion === undefined) {
     return null;

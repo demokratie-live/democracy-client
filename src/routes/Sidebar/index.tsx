@@ -111,9 +111,9 @@ export const SidebarNavigation = () => {
         name={'About'}
         component={AboutScreen}
       />
-      {process.env.NODE_ENV === 'development' && (
-        <SidebarDrawer.Screen name="DEV" component={DevScreen} />
-      )}
+      {/* {process.env.NODE_ENV === 'development' && ( */}
+      <SidebarDrawer.Screen name="DEV" component={DevScreen} />
+      {/* )} */}
     </SidebarDrawer.Navigator>
   );
 };
