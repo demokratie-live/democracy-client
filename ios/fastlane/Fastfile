@@ -103,7 +103,8 @@ platform :ios do
     build_app(
       workspace: "DemocracyNative.xcworkspace", 
       scheme: scheme_name,
-      clean: true,
+      xcargs: "-allowProvisioningUpdates",
+      clean: false,
     )
 
     # upload_to_browserstack_app_live(
