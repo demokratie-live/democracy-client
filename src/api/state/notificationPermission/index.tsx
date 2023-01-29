@@ -1,14 +1,11 @@
 import React, { createContext, useState, useEffect } from 'react';
-// import { Notifications, Registered, RegistrationError } from 'react-native-notifications';
-import { Platform, EmitterSubscription } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { checkNotifications } from 'react-native-permissions';
 import { useAppState } from '../../../screens/Introduction/PushInstructions/useAppState';
 import {
   NotificationSettings,
   NotificationSettingsDocument,
   UpdateNotificationSettingsMutationVariables,
-  useAddTokenMutation,
   useNotificationSettingsQuery,
   useUpdateNotificationSettingsMutation,
 } from '../../../__generated__/graphql';
@@ -64,7 +61,6 @@ export const NotificationsProvider: React.FC = ({ children }) => {
   const { data } = useNotificationSettingsQuery();
 
   const [updateSettings] = useUpdateNotificationSettingsMutation();
-  const [sendToken] = useAddTokenMutation();
 
   const { appState } = useAppState();
 
@@ -106,66 +102,9 @@ export const NotificationsProvider: React.FC = ({ children }) => {
     }
   }, [data]);
 
-  // register notification events
-  // useEffect(() => {
-  //   const subscriptions: EmitterSubscription[] = [];
-  //   // Notifications.isRegisteredForRemoteNotifications().then(value => {
-  //   //   setHasPermissions(value);
-  //   // });
-
-  //   subscriptions.push(
-  //     Notifications.events().registerRemoteNotificationsRegistered((event: Registered) => {
-  //       const token = event.deviceToken || (event as unknown as string);
-  //       console.log('heha', token);
-  //       AsyncStorage.setItem('push-token', token);
-  //       sendToken({
-  //         variables: {
-  //           os: Platform.OS,
-  //           token,
-  //         },
-  //       });
-  //       setHasPermissions(true);
-  //     }),
-  //   );
-
-  //   subscriptions.push(
-  //     Notifications.events().registerRemoteNotificationsRegistrationFailed(
-  //       (event: RegistrationError) => {
-  //         console.error(event);
-  //       },
-  //     ),
-  //   );
-
-  //   subscriptions.push(
-  //     Notifications.events().registerRemoteNotificationsRegistrationDenied(() => {
-  //       console.error('Error');
-  //     }),
-  //   );
-
-  //   // request code for android on app start
-  //   if (Platform.OS === 'android') {
-  //     Notifications.registerRemoteNotifications();
-  //   } else {
-  //     // if token already send send again
-  //     AsyncStorage.getItem('push-token').then(
-  //       token => !!token && Notifications.registerRemoteNotifications(),
-  //     );
-  //   }
-  //   return () => {
-  //     subscriptions.forEach(subscription => subscription.remove());
-  //   };
-  // }, [sendToken]);
-
   const requestToken = () => {
     // Notifications.registerRemoteNotifications();
   };
-
-  // resend token when neccessary
-  // useEffect(() => {
-  //   if (Platform.OS === 'ios' && hasPermissions) {
-  //     AsyncStorage.getItem('push-token').then(token => !token && requestToken());
-  //   }
-  // }, [hasPermissions]);
 
   const update = (options: UpdateNotificationSettingsMutationVariables) => {
     updateSettings({

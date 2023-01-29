@@ -47,7 +47,7 @@ export type RootStackParamList = {
   Pdf: { url: string; title: string };
   PushInstructions: undefined;
   NotificationInstruction: { title?: string };
-  OutcomePush: { finishAction: () => void; title: string; procedureId: string };
+  OutcomePush: { finishAction?: () => void; title?: string; procedureId?: string };
   SmsCodeInput: { procedureId?: string };
   SmsDonate: undefined;
   Donate?: { done: () => void };

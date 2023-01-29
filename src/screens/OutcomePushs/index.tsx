@@ -55,16 +55,13 @@ export interface Notification {
 }
 
 interface Props {
-  finishAction: () => void;
+  finishAction?: () => void;
 }
 
 export const OutcomePushs: React.FC<Props> = ({ finishAction }) => {
   const route = useRoute<RouteProps>();
 
   const [toggleNotification] = useToggleNotificationMutation({
-    variables: {
-      procedureId: route.params.procedureId,
-    },
     refetchQueries: [
       {
         query: ProcedureDocument,
@@ -91,18 +88,24 @@ export const OutcomePushs: React.FC<Props> = ({ finishAction }) => {
   const doneAction = route.params.finishAction ? route.params.finishAction : finishAction;
 
   const pressActivate = () => {
-    toggleNotification();
+    if (route.params.procedureId) {
+      toggleNotification({
+        variables: {
+          procedureId: route.params.procedureId,
+        },
+      });
+    }
     requestToken();
     updateNotificationSettings({
       enabled: true,
       outcomePushs: true,
     });
-    doneAction();
+    doneAction?.();
   };
 
   const pressDenie = () => {
     setOutcomePushsDenied(true);
-    doneAction();
+    doneAction?.();
   };
 
   return (

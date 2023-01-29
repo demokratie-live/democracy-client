@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components/native';
 import { Keyboard, Alert, Dimensions, ActivityIndicator } from 'react-native';
 import { sha256 } from 'react-native-sha256';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Description from './Components/Description';
 import CodeInput from './Components/CodeInput';
 import { useNavigation, RouteProp } from '@react-navigation/core';

@@ -1,4 +1,4 @@
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { atom, atomFamily } from 'recoil';
 import { localStorageEffect } from '../effects/localStorageEffect';
 import { ParlamentIdentifier } from '../parlament';

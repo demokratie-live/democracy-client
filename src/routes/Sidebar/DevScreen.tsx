@@ -1,4 +1,4 @@
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react';
 import { Alert, Button, Text } from 'react-native';
 import { useNotifee } from '../../api/hooks/useNotifee';

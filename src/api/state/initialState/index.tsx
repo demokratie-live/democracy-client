@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MeQuery, useMeQuery } from '../../../__generated__/graphql';
 import { atom, useSetRecoilState } from 'recoil';
 import { ApolloQueryResult } from '@apollo/client';
