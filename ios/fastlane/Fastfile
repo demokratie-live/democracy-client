@@ -64,12 +64,7 @@ platform :ios do
         timeout: 3600,
         unlock: true,
       )
-      match_nuke({
-        type: "appstore",
-        readonly: false,
-        app_identifier: ios_bundle_ids,
-        safe_remove_certs: true
-      })
+      
       match(
         type: "appstore",
         app_identifier: ios_bundle_ids,
