@@ -522,9 +522,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DemocracyNative/DemocracyNative.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 267;
-				DEVELOPMENT_TEAM = A4B84UJD7M;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = A4B84UJD7M;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = DemocracyNative/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -540,6 +542,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp";
 				PRODUCT_NAME = DemocracyNative;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore de.democracy-deutschland.clientapp";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -554,9 +557,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DemocracyNative/DemocracyNative.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 267;
-				DEVELOPMENT_TEAM = A4B84UJD7M;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = A4B84UJD7M;
 				INFOPLIST_FILE = DemocracyNative/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -571,6 +576,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp";
 				PRODUCT_NAME = DemocracyNative;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore de.democracy-deutschland.clientapp";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -774,10 +780,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-internal";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DemocracyNative/DemocracyNative.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development: App DEMOCRACY Deutschland e.V. (3J2DSPPM92)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: App DEMOCRACY Deutschland e.V. (3J2DSPPM92)";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 267;
-				DEVELOPMENT_TEAM = A4B84UJD7M;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = A4B84UJD7M;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = DemocracyNative/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -793,6 +801,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.internal";
 				PRODUCT_NAME = DemocracyNative;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development de.democracy-deutschland.clientapp.internal";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -892,10 +901,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-internal";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DemocracyNative/DemocracyNative.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development: App DEMOCRACY Deutschland e.V. (3J2DSPPM92)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: App DEMOCRACY Deutschland e.V. (3J2DSPPM92)";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 267;
-				DEVELOPMENT_TEAM = A4B84UJD7M;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = A4B84UJD7M;
 				INFOPLIST_FILE = DemocracyNative/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -910,6 +921,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "de.democracy-deutschland.clientapp.internal";
 				PRODUCT_NAME = DemocracyNative;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development de.democracy-deutschland.clientapp.internal";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

@@ -95,7 +95,7 @@ jobs:
       - name: Fastlane
         uses: maierj/fastlane-action@v3.0.0
         with:
-          lane: 'ios beta'
+          lane: 'ios deploy --env internal'
           subdirectory: 'ios'
         env:
           TRAVIS_BRANCH: ${{ github.ref }}
@@ -103,3 +103,4 @@ jobs:
           MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          CI: true
