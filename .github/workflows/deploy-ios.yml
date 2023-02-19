@@ -88,6 +88,7 @@ jobs:
         run: |
           brew install gnupg@1.4
           echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 ios/AuthKey_3Q9U495BMY.p8.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 ios/GoogleService-Info.plist.gpg
 
       - name: Fix match prompt issue
         run: echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config

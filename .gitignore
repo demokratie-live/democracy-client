@@ -70,3 +70,4 @@ google-services.json
 *.pem
 *.pkey
 /ios/GoogleService-Info.plist
+*.zip
