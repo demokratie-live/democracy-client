@@ -15,7 +15,6 @@ type ScreenNavigationProp = CompositeNavigationProp<
 >;
 
 const onMessageReceived = async (message: FirebaseMessagingTypes.RemoteMessage) => {
-  console.log('onMessageReceived', message);
   await notifee.displayNotification({
     title: message.data?.title,
     body: message.data?.message,
@@ -42,13 +41,12 @@ export const useNotifee = () => {
         },
       });
     }
-    console.log('token', token);
   }, [token, sendToken]);
 
   // Register the device with FCM
   // Get the token
   useEffect(() => {
-    messaging().getToken().then(setToken);
+    getToken();
   }, []);
 
   useEffect(() => {
@@ -56,14 +54,7 @@ export const useNotifee = () => {
   }, []);
 
   useEffect(() => {
-    // notifee.onBackgroundEvent(async ({ type, detail }) => {
-    //   console.log('onBackgroundEvent', { type, detail });
-    // });
-  }, []);
-
-  useEffect(() => {
     const onMessage = messaging().onMessage(onMessageReceived);
-    // messaging().setBackgroundMessageHandler(onMessageReceived);
     return () => {
       onMessage();
     };
@@ -71,7 +62,6 @@ export const useNotifee = () => {
 
   useEffect(() => {
     notifee.onForegroundEvent(({ type, detail }) => {
-      console.log('onForegroundEvent', type);
       switch (type) {
         case EventType.DISMISSED:
           console.log('User dismissed notification', detail.notification);
@@ -98,10 +88,7 @@ export const useNotifee = () => {
           break;
       }
     });
-  }, []);
-
-  // Save the token
-  //   await postToApi('/users/1234/tokens', { token });
+  }, [navigate]);
 
   const register = () => {
     messaging().registerDeviceForRemoteMessages();
@@ -114,13 +101,24 @@ export const useNotifee = () => {
       console.log('Permission status:', authorizationStatus);
     }
   };
-  console.log({ permissionStatus });
+
+  const deleteToken = async () => {
+    await messaging()
+      .deleteToken()
+      .then(() => setToken(undefined));
+  };
+
+  const getToken = () => {
+    messaging().getToken().then(setToken);
+  };
 
   useEffect(() => {
     register();
   }, []);
   return {
     token,
+    deleteToken,
+    getToken,
     requestPermissions,
   };
 };

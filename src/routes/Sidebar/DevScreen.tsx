@@ -5,7 +5,7 @@ import { useNotifee } from '../../api/hooks/useNotifee';
 import VotesLocal from '../../lib/VotesLocal';
 
 export const DevScreen: React.FC = () => {
-  const { token } = useNotifee();
+  const { token, deleteToken, getToken } = useNotifee();
   return (
     <>
       <Button
@@ -24,6 +24,13 @@ export const DevScreen: React.FC = () => {
         title="Delete local votes"
         onPress={() => {
           VotesLocal.reset();
+          Alert.alert('local votes deleted');
+        }}
+      />
+      <Button
+        title="Reset Token"
+        onPress={() => {
+          deleteToken().then(getToken);
           Alert.alert('local votes deleted');
         }}
       />
