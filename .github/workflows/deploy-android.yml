@@ -26,7 +26,7 @@ jobs:
       - run: yarn install --frozen-lockfile
 
       # install fastlane dependencies
-      - run: gem install bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)"
+      - run: sudo gem install bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)"
         working-directory: android
 
       - run: bundle install
@@ -42,9 +42,7 @@ jobs:
           # echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 android/my-release-key.keystore.gpg
           echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 android/app/google-services.json.gpg
           echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 android/democracy2-release-key.keystore.gpg
-
-      - name: Fix match prompt issue
-        run: echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 android/key.json.gpg
 
       - name: Fastlane
         uses: maierj/fastlane-action@v3.0.0
@@ -52,9 +50,7 @@ jobs:
           lane: 'internal --env internal'
           subdirectory: 'android'
         env:
-          TRAVIS_BRANCH: ${{ github.ref }}
-          TRAVIS: 'true'
           MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
-          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          ANDROID_PASS: ${{ secrets.ANDROID_PASS }}
           CI: true
