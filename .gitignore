@@ -71,3 +71,4 @@ google-services.json
 *.pkey
 /ios/GoogleService-Info.plist
 *.zip
+/android/key.json
