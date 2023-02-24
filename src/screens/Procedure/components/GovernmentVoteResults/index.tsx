@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Dimensions, ScaledSize } from 'react-native';
-import Carousel from 'react-native-snap-carousel';
+import React, { useState } from 'react';
+import { ScrollViewProps, useWindowDimensions } from 'react-native';
 import BarChart from './BarChart';
 import PartyChart from './PartyChart';
 import ChartLegend from '../Charts/ChartLegend';
@@ -9,21 +8,23 @@ import styled from 'styled-components/native';
 import { ProcedureQuery } from '../../../../__generated__/graphql';
 import { useInitialState } from '../../../../api/state/initialState';
 import Folding from '../../../../components/Folding';
-import { CarouselPagination } from '../../../../components/Pagination';
+import { Pagination } from '@democracy-deutschland/ui';
 
-const ScrollView = styled.ScrollView.attrs(() => ({
-  horizontal: true,
-  pagingEnabled: true,
-  showsHorizontalScrollIndicator: true,
-}))``;
+const ScrollView = styled.ScrollView.attrs(
+  (): ScrollViewProps => ({
+    horizontal: true,
+    pagingEnabled: true,
+    showsHorizontalScrollIndicator: false,
+    contentContainerStyle: {
+      alignContent: 'center',
+    },
+  }),
+)``;
 
-const PieChartWrapper = styled.View`
+const PieChartWrapper = styled.View<{ width: number }>`
   align-self: center;
   padding-top: 9px;
   padding-horizontal: 36px;
-  width: 100%;
-  max-width: ${() =>
-    Math.min(380, Dimensions.get('window').width, Dimensions.get('window').height)}px;
 `;
 
 const DecisionTextView = styled.View`
@@ -45,6 +46,7 @@ const DecisionText = styled.Text`
 
 const RepresentativeText = styled.Text`
   color: ${({ theme }) => theme.colors.text.tertiary};
+  padding-top: ${({ theme }) => theme.spaces.small};
   text-align: center;
   font-size: 12px;
 `;
@@ -52,12 +54,6 @@ const RepresentativeText = styled.Text`
 const RepresentativeTextBlack = styled(RepresentativeText)`
   color: #000;
 `;
-
-const SwiperStyled = styled(Carousel as new () => Carousel<JSX.Element>).attrs({
-  paginationStyle: { bottom: 14 },
-})`
-  max-height: 400px;
-` as React.ComponentType as new <T>() => Carousel<T>;
 
 interface Props {
   voteResults: ProcedureQuery['procedure']['voteResults'];
@@ -68,23 +64,7 @@ interface Props {
 export const GovernmentVoteResults: React.FC<Props> = ({ voteResults, currentStatus, voted }) => {
   const [activeSlide, setActiveSlide] = useState<number>(0);
   const { isVerified } = useInitialState();
-
-  const [width, setWidth] = useState<number>(380);
-
-  const onChange = ({ screen }: { window: ScaledSize; screen: ScaledSize }) => {
-    setWidth(screen.width);
-  };
-
-  useEffect(() => {
-    setWidth(Dimensions.get('screen').width);
-  }, []);
-
-  useEffect(() => {
-    const listener = Dimensions.addEventListener('change', onChange);
-    return () => {
-      listener.remove();
-    };
-  });
+  const { width } = useWindowDimensions();
 
   // FIXME Sollte nur im falle von Fehlerhaften Daten vom server ausgelöst werden.
   // https://github.com/demokratie-live/democracy-client/issues/714
@@ -172,7 +152,7 @@ export const GovernmentVoteResults: React.FC<Props> = ({ voteResults, currentSta
     }
 
     const screens = [
-      <PieChartWrapper key="pieChart">
+      <PieChartWrapper width={width} key="pieChart">
         <PieChart
           data={dataPieChart}
           subLabel={voteResults.namedVote ? 'Abgeordnete' : 'Fraktionen'}
@@ -181,14 +161,18 @@ export const GovernmentVoteResults: React.FC<Props> = ({ voteResults, currentSta
         />
         <ChartLegend data={dataPieChart} />
       </PieChartWrapper>,
-      <PartyChart
-        key="partyChart"
-        width={width}
-        chartData={dataPartyChart}
-        colors={partyColors}
-        showPercentage
-      />,
-      <BarChart key="barChart" data={voteResults} legendData={dataPieChart} />,
+      <PieChartWrapper width={width} key="partyChart">
+        <PartyChart
+          key="partyChart"
+          width={width - 38}
+          chartData={dataPartyChart}
+          colors={partyColors}
+          showPercentage
+        />
+      </PieChartWrapper>,
+      <PieChartWrapper width={width} key="barChart">
+        <BarChart key="barChart" data={voteResults} legendData={dataPieChart} />
+      </PieChartWrapper>,
     ];
 
     if (voteResults.decisionText) {
@@ -200,18 +184,17 @@ export const GovernmentVoteResults: React.FC<Props> = ({ voteResults, currentSta
       );
     }
 
-    const renderItem = ({ item }: { item: JSX.Element; index: number }) => item;
+    const onMomentumScrollEnd: ScrollViewProps['onMomentumScrollEnd'] = ({ nativeEvent }) => {
+      const index = Math.round(nativeEvent.contentOffset.x / width);
+      if (index !== activeSlide) {
+        setActiveSlide(index);
+      }
+    };
 
     return (
       <>
-        <SwiperStyled
-          data={screens}
-          renderItem={renderItem}
-          sliderWidth={width}
-          itemWidth={Math.min(width, 380)}
-          onSnapToItem={setActiveSlide}
-        />
-        <CarouselPagination length={screens.length} active={activeSlide} />
+        <ScrollView onMomentumScrollEnd={onMomentumScrollEnd}>{screens}</ScrollView>
+        <Pagination active={activeSlide} length={screens.length} />
       </>
     );
   };

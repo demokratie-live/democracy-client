@@ -10,7 +10,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../routes';
 import { VerificationContext } from '../../api/state/Verification';
 import { useRequestSmsCodeMutation } from '../../__generated__/graphql';
-import SvgIconappios from '../../components/Icons/IconAppIos';
+import { AppLogo } from '../../components/AppLogo';
 
 const Container = styled(KeyboardAvoidingView).attrs(() => ({
   behavior: Platform.OS === 'ios' ? 'padding' : 'height',
@@ -100,7 +100,7 @@ export const PhoneNumberScreen: React.FC = () => {
   return (
     <Container>
       <ScrollView>
-        {DEVICE_HEIGT > 500 && <SvgIconappios width={100} height={100} />}
+        {DEVICE_HEIGT > 500 && <AppLogo />}
         <Description text="Bitte gib Deine aktuelle Handynummer ein" />
         <PhonenumberInput phoneNumber={phoneNumberInputValue} onChange={setPhoneNumberInputValue} />
         <ButtonNext

@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ApolloLink } from '@apollo/client';
 import { setContext } from 'apollo-link-context';
 import jwtDecode from 'jwt-decode';

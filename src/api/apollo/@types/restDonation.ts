@@ -1,4 +1,4 @@
-export interface DonationData {
+interface DonationData {
   id: number;
   order: number;
   type: number;
@@ -11,7 +11,7 @@ export interface DonationData {
   percentage: number;
 }
 
-export interface Result {
+interface Result {
   donation_date: string;
   donation_paten: number;
   donation_paten_goal: number;

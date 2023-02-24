@@ -5,6 +5,7 @@ import { StatusBar } from 'react-native';
 import { RecoilRoot } from 'recoil';
 import { ThemeProvider } from 'styled-components/native';
 import { client } from './api/apollo';
+import { useHideBootsplash } from './api/hooks/useHideBootsplash';
 import { useInitialState } from './api/state/initialState';
 import { NotificationsProvider } from './api/state/notificationPermission';
 import { VerificationProvider } from './api/state/Verification';
@@ -14,6 +15,7 @@ import { theme } from './styles/theme';
 
 const AppEntry = () => {
   useInitialState();
+  useHideBootsplash();
   return (
     <ThemeProvider theme={theme}>
       <StatusBar barStyle={'light-content'} />

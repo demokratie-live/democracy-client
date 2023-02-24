@@ -1,5 +1,6 @@
 import { uniqBy } from 'lodash';
 import {
+  DeputiesResult,
   DeputyProcedure,
   PartyVote,
   Procedure,
@@ -19,17 +20,20 @@ export const typePolicies: TypedTypePolicies = {
           );
         },
       },
-      // deputies: {
-      //   keyArgs: ['filterTerm', 'excludeIds', 'filterIds', 'filterConstituency', 'period'],
-      //   merge(existing = { data: [] }, incoming: Deputies_deputies) {
-      //     return {
-      //       ...incoming,
-      //       data: uniqBy([...existing.data, ...incoming.data], deputy => {
-      //         return deputy.__ref;
-      //       }),
-      //     };
-      //   },
-      // },
+      deputies: {
+        keyArgs: ['filterTerm', 'excludeIds', 'filterIds', 'filterConstituency', 'period'],
+        merge(
+          existing: DeputiesResult = { data: [], hasMore: true, total: 0 },
+          incoming: DeputiesResult,
+        ) {
+          return {
+            ...incoming,
+            data: uniqBy([...existing.data, ...incoming.data], deputy => {
+              return (deputy as unknown as { __ref: string }).__ref;
+            }),
+          };
+        },
+      },
       deputy: {
         keyArgs: ['id', 'votedProcedureIds'],
       },

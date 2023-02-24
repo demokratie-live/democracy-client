@@ -9,6 +9,7 @@ import { RootStackParamList } from '../../routes';
 import { useRecoilState } from 'recoil';
 import { constituencyState } from '../../api/state/constituency';
 import { getConstituencySvgs } from '../../components/svgs/constituencies';
+import { useAddNewFavorizedDeputies } from './hooks/useAddNewFavorizedDeputies';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -33,7 +34,7 @@ const Row = styled.TouchableOpacity`
   padding-vertical: 12px;
   padding-horizontal: 12px;
   border-bottom-color: #bcbbc1;
-  border-bottom-width: 0.5;
+  border-bottom-width: 0.5px;
   align-items: center;
 `;
 
@@ -69,6 +70,7 @@ export const ConstituencyScreen: React.FC<Props> = ({ route }) => {
   const navigation = useNavigation();
   const [constituency, setConstituency] = useRecoilState(constituencyState);
   const [term, setTerm] = useState('');
+  const setNewFavorizedDeputies = useAddNewFavorizedDeputies();
 
   const onChangePlz = (newTerm: string) => {
     setTerm(newTerm);
@@ -103,6 +105,7 @@ export const ConstituencyScreen: React.FC<Props> = ({ route }) => {
           text: 'Ja',
           onPress: () => {
             setConstituency(item.number);
+            setNewFavorizedDeputies(item.number);
             route.params && route.params.goBack ? navigation.goBack() : undefined;
           },
         },

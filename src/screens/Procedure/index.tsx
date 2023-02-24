@@ -114,9 +114,6 @@ export const ProcedureScreen: FC<Props> = ({ route, navigation }) => {
   const clickBell = useCallback(() => {
     if (!notificationSettings.enabled || !notificationSettings.outcomePushs || !hasPermissions) {
       navigation.navigate('NotificationInstruction', {
-        done: () => {
-          toggleNotification();
-        },
         title: data?.procedure.title,
       });
     } else {
@@ -126,6 +123,7 @@ export const ProcedureScreen: FC<Props> = ({ route, navigation }) => {
             toggleNotification: {
               __typename: 'Procedure',
               notify: !data.procedure.notify,
+              procedureId: data.procedure.procedureId,
             },
           },
           update: (proxy, { data: mutationData }) => {

@@ -18,6 +18,7 @@ import { parlaments, parlamentState } from '../../../api/state/parlament';
 import { localVotesState } from '../../../api/state/votesLocal';
 import { usePartyChartDataQuery } from '../../../__generated__/graphql';
 import { ListLoading } from '../../../components/ListLoading';
+import NoVotesPlaceholder from '../NoVotesPlaceholder';
 
 const MAX_WIDTH = Math.min(380, Dimensions.get('window').width, Dimensions.get('window').height);
 
@@ -159,7 +160,12 @@ export const WomPartyChart: React.FC = () => {
 
   const preparedData = partyChartData();
   if (!preparedData[selectedPartyIndex]) {
-    return null;
+    return (
+      <>
+        <NoVotesPlaceholder subline="Fraktionen" />
+        <Segment text="Abstimmungen" />
+      </>
+    );
   }
   if (!womParty) {
     setWomParty(preparedData[selectedPartyIndex].party);

@@ -1,7 +1,7 @@
 import { atom, AtomEffect, selector, selectorFamily } from 'recoil';
 import VotesLocal, { Chain, ChainEntry, ChainEntryRaw } from '../../../lib/VotesLocal';
 
-export const localVotesEffect: AtomEffect<Chain> = ({ onSet, setSelf }) => {
+const localVotesEffect: AtomEffect<Chain> = ({ onSet, setSelf }) => {
   VotesLocal.readKeychain().then(chain => {
     setSelf(chain);
   });

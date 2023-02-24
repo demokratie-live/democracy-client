@@ -238,6 +238,7 @@ const PrepareActions: React.FC<Props> = ({
                 toggleNotification({
                   optimisticResponse: {
                     toggleNotification: {
+                      procedureId,
                       __typename: 'Procedure',
                       notify: !notify,
                     },

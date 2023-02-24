@@ -36,7 +36,7 @@ const ButtonText = styled.Text<TextProps>`
   padding-horizontal: 11px;
 `;
 
-export interface Props {
+interface Props {
   text: string;
   onPress: () => void;
   textColor: keyof typeof TextColors;

@@ -11,11 +11,11 @@
       {
         "kind": "OBJECT",
         "name": "ActivityIndex",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "active",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -27,7 +27,7 @@
           },
           {
             "name": "activityIndex",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -50,11 +50,11 @@
       {
         "kind": "OBJECT",
         "name": "Auth",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "token",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -87,11 +87,11 @@
       {
         "kind": "OBJECT",
         "name": "CodeResult",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "allowNewUser",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -103,7 +103,7 @@
           },
           {
             "name": "expireTime",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -115,7 +115,7 @@
           },
           {
             "name": "reason",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -127,7 +127,7 @@
           },
           {
             "name": "resendTime",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -139,7 +139,7 @@
           },
           {
             "name": "succeeded",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -162,11 +162,11 @@
       {
         "kind": "OBJECT",
         "name": "CommunityConstituencyVotes",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "abstination",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -182,7 +182,7 @@
           },
           {
             "name": "constituency",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -198,7 +198,7 @@
           },
           {
             "name": "no",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -214,7 +214,7 @@
           },
           {
             "name": "total",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -230,7 +230,7 @@
           },
           {
             "name": "yes",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -253,11 +253,11 @@
       {
         "kind": "OBJECT",
         "name": "CommunityVotes",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "abstination",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -273,7 +273,7 @@
           },
           {
             "name": "constituencies",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -297,7 +297,7 @@
           },
           {
             "name": "no",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -313,7 +313,7 @@
           },
           {
             "name": "total",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -329,7 +329,7 @@
           },
           {
             "name": "yes",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -352,11 +352,11 @@
       {
         "kind": "OBJECT",
         "name": "ConferenceWeek",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "calendarWeek",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -372,7 +372,7 @@
           },
           {
             "name": "end",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -388,7 +388,7 @@
           },
           {
             "name": "start",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -421,11 +421,11 @@
       {
         "kind": "OBJECT",
         "name": "DeputiesResult",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "data",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -449,7 +449,7 @@
           },
           {
             "name": "hasMore",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -465,7 +465,7 @@
           },
           {
             "name": "total",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -488,11 +488,11 @@
       {
         "kind": "OBJECT",
         "name": "Deputy",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "_id",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -508,7 +508,7 @@
           },
           {
             "name": "biography",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -520,7 +520,7 @@
           },
           {
             "name": "constituency",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -532,7 +532,7 @@
           },
           {
             "name": "contact",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -544,7 +544,7 @@
           },
           {
             "name": "directCandidate",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -556,7 +556,7 @@
           },
           {
             "name": "imgURL",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -572,7 +572,7 @@
           },
           {
             "name": "job",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -584,7 +584,7 @@
           },
           {
             "name": "name",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -600,7 +600,7 @@
           },
           {
             "name": "party",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -612,7 +612,7 @@
           },
           {
             "name": "period",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -628,11 +628,11 @@
           },
           {
             "name": "procedures",
-            "description": null,
+            "description": "",
             "args": [
               {
                 "name": "offset",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -644,7 +644,7 @@
               },
               {
                 "name": "pageSize",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -656,7 +656,7 @@
               },
               {
                 "name": "procedureIds",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "LIST",
                   "name": null,
@@ -697,7 +697,7 @@
           },
           {
             "name": "totalProcedures",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -709,7 +709,7 @@
           },
           {
             "name": "webId",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -732,11 +732,11 @@
       {
         "kind": "OBJECT",
         "name": "DeputyContact",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "address",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -748,7 +748,7 @@
           },
           {
             "name": "email",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -760,7 +760,7 @@
           },
           {
             "name": "links",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -791,11 +791,11 @@
       {
         "kind": "OBJECT",
         "name": "DeputyLink",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "URL",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -811,7 +811,7 @@
           },
           {
             "name": "name",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -827,7 +827,7 @@
           },
           {
             "name": "username",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -846,11 +846,11 @@
       {
         "kind": "OBJECT",
         "name": "DeputyProcedure",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "decision",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -866,7 +866,7 @@
           },
           {
             "name": "procedure",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -889,11 +889,11 @@
       {
         "kind": "OBJECT",
         "name": "DeputyVote",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "decision",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -909,7 +909,7 @@
           },
           {
             "name": "deputy",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -932,11 +932,11 @@
       {
         "kind": "OBJECT",
         "name": "Deviants",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "abstination",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -952,7 +952,7 @@
           },
           {
             "name": "no",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -968,7 +968,7 @@
           },
           {
             "name": "notVoted",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -980,7 +980,7 @@
           },
           {
             "name": "yes",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1003,11 +1003,11 @@
       {
         "kind": "OBJECT",
         "name": "Device",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "notificationSettings",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -1026,11 +1026,11 @@
       {
         "kind": "OBJECT",
         "name": "Document",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "editor",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1046,7 +1046,7 @@
           },
           {
             "name": "number",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1062,7 +1062,7 @@
           },
           {
             "name": "type",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1078,7 +1078,7 @@
           },
           {
             "name": "url",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1121,44 +1121,44 @@
       {
         "kind": "ENUM",
         "name": "ListType",
-        "description": null,
+        "description": "",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
           {
             "name": "CONFERENCEWEEKS_PLANNED",
-            "description": null,
+            "description": "",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "HOT",
-            "description": null,
+            "description": "",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "IN_VOTE",
-            "description": null,
+            "description": "",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "PAST",
-            "description": null,
+            "description": "",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "PREPARATION",
-            "description": null,
+            "description": "",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "TOP100",
-            "description": null,
+            "description": "",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -1168,15 +1168,15 @@
       {
         "kind": "OBJECT",
         "name": "Mutation",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "addToken",
-            "description": null,
+            "description": "",
             "args": [
               {
                 "name": "os",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -1192,7 +1192,7 @@
               },
               {
                 "name": "token",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -1221,11 +1221,11 @@
           },
           {
             "name": "finishSearch",
-            "description": null,
+            "description": "",
             "args": [
               {
                 "name": "term",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -1254,11 +1254,11 @@
           },
           {
             "name": "increaseActivity",
-            "description": null,
+            "description": "",
             "args": [
               {
                 "name": "procedureId",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -1283,11 +1283,11 @@
           },
           {
             "name": "requestCode",
-            "description": null,
+            "description": "",
             "args": [
               {
                 "name": "newPhone",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -1303,7 +1303,7 @@
               },
               {
                 "name": "oldPhoneHash",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "String",
@@ -1328,11 +1328,11 @@
           },
           {
             "name": "requestVerification",
-            "description": null,
+            "description": "",
             "args": [
               {
                 "name": "code",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -1348,7 +1348,7 @@
               },
               {
                 "name": "newPhoneHash",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -1364,7 +1364,7 @@
               },
               {
                 "name": "newUser",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Boolean",
@@ -1389,11 +1389,11 @@
           },
           {
             "name": "signUp",
-            "description": null,
+            "description": "",
             "args": [
               {
                 "name": "deviceHashEncrypted",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -1418,11 +1418,11 @@
           },
           {
             "name": "toggleNotification",
-            "description": null,
+            "description": "",
             "args": [
               {
                 "name": "procedureId",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -1447,11 +1447,11 @@
           },
           {
             "name": "updateNotificationSettings",
-            "description": null,
+            "description": "",
             "args": [
               {
                 "name": "conferenceWeekPushs",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Boolean",
@@ -1463,7 +1463,7 @@
               },
               {
                 "name": "disableUntil",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Date",
@@ -1475,7 +1475,7 @@
               },
               {
                 "name": "enabled",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Boolean",
@@ -1487,7 +1487,7 @@
               },
               {
                 "name": "newPreperation",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Boolean",
@@ -1499,7 +1499,7 @@
               },
               {
                 "name": "newVote",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Boolean",
@@ -1511,7 +1511,7 @@
               },
               {
                 "name": "outcomePushs",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Boolean",
@@ -1523,7 +1523,7 @@
               },
               {
                 "name": "outcomePushsEnableOld",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Boolean",
@@ -1535,7 +1535,7 @@
               },
               {
                 "name": "procedures",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "LIST",
                   "name": null,
@@ -1551,7 +1551,7 @@
               },
               {
                 "name": "tags",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "LIST",
                   "name": null,
@@ -1567,7 +1567,7 @@
               },
               {
                 "name": "voteConferenceWeekPushs",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Boolean",
@@ -1579,7 +1579,7 @@
               },
               {
                 "name": "voteTOP100Pushs",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Boolean",
@@ -1600,11 +1600,11 @@
           },
           {
             "name": "vote",
-            "description": null,
+            "description": "",
             "args": [
               {
                 "name": "constituency",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "String",
@@ -1616,7 +1616,7 @@
               },
               {
                 "name": "procedure",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -1632,7 +1632,7 @@
               },
               {
                 "name": "selection",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -1668,11 +1668,11 @@
       {
         "kind": "OBJECT",
         "name": "NotificationSettings",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "conferenceWeekPushs",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1684,7 +1684,7 @@
           },
           {
             "name": "disableUntil",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1696,7 +1696,7 @@
           },
           {
             "name": "enabled",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1708,7 +1708,7 @@
           },
           {
             "name": "newPreperation",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1720,7 +1720,7 @@
           },
           {
             "name": "newVote",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1732,7 +1732,7 @@
           },
           {
             "name": "outcomePushs",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1744,7 +1744,7 @@
           },
           {
             "name": "procedures",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -1760,7 +1760,7 @@
           },
           {
             "name": "tags",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -1776,7 +1776,7 @@
           },
           {
             "name": "voteConferenceWeekPushs",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1788,7 +1788,7 @@
           },
           {
             "name": "voteTOP100Pushs",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1807,11 +1807,11 @@
       {
         "kind": "OBJECT",
         "name": "PartyVote",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "deviants",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1827,7 +1827,7 @@
           },
           {
             "name": "main",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1843,7 +1843,7 @@
           },
           {
             "name": "party",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1866,11 +1866,11 @@
       {
         "kind": "OBJECT",
         "name": "Procedure",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "_id",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1886,7 +1886,7 @@
           },
           {
             "name": "abstract",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1898,7 +1898,7 @@
           },
           {
             "name": "activityIndex",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1914,11 +1914,11 @@
           },
           {
             "name": "communityVotes",
-            "description": null,
+            "description": "",
             "args": [
               {
                 "name": "constituencies",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "LIST",
                   "name": null,
@@ -1947,7 +1947,7 @@
           },
           {
             "name": "completed",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1959,7 +1959,7 @@
           },
           {
             "name": "currentStatus",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1971,7 +1971,7 @@
           },
           {
             "name": "currentStatusHistory",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1995,7 +1995,7 @@
           },
           {
             "name": "importantDocuments",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -2019,7 +2019,7 @@
           },
           {
             "name": "list",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -2031,7 +2031,7 @@
           },
           {
             "name": "listType",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "ENUM",
@@ -2043,7 +2043,7 @@
           },
           {
             "name": "notify",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2055,7 +2055,7 @@
           },
           {
             "name": "period",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2067,7 +2067,7 @@
           },
           {
             "name": "procedureId",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -2083,7 +2083,7 @@
           },
           {
             "name": "sessionTOPHeading",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2095,7 +2095,7 @@
           },
           {
             "name": "subjectGroups",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -2119,7 +2119,7 @@
           },
           {
             "name": "submissionDate",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2131,7 +2131,7 @@
           },
           {
             "name": "tags",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -2155,7 +2155,7 @@
           },
           {
             "name": "title",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -2171,7 +2171,7 @@
           },
           {
             "name": "type",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -2187,7 +2187,7 @@
           },
           {
             "name": "verified",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2199,7 +2199,7 @@
           },
           {
             "name": "voteDate",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2211,7 +2211,7 @@
           },
           {
             "name": "voteEnd",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2223,7 +2223,7 @@
           },
           {
             "name": "voteResults",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -2235,7 +2235,7 @@
           },
           {
             "name": "voteWeek",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2247,7 +2247,7 @@
           },
           {
             "name": "voteYear",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2259,7 +2259,7 @@
           },
           {
             "name": "voted",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -2275,7 +2275,7 @@
           },
           {
             "name": "votedGovernment",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2287,7 +2287,7 @@
           },
           {
             "name": "votes",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -2310,12 +2310,12 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "ProcedureFilter",
-        "description": null,
+        "description": "",
         "fields": null,
         "inputFields": [
           {
             "name": "activity",
-            "description": null,
+            "description": "",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -2335,7 +2335,7 @@
           },
           {
             "name": "status",
-            "description": null,
+            "description": "",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -2355,7 +2355,7 @@
           },
           {
             "name": "subjectGroups",
-            "description": null,
+            "description": "",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -2375,7 +2375,7 @@
           },
           {
             "name": "type",
-            "description": null,
+            "description": "",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -2401,38 +2401,38 @@
       {
         "kind": "ENUM",
         "name": "ProcedureType",
-        "description": null,
+        "description": "",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
           {
             "name": "HOT",
-            "description": null,
+            "description": "",
             "isDeprecated": true,
             "deprecationReason": "Use procedures Query param listTypes instead of type"
           },
           {
             "name": "IN_VOTE",
-            "description": null,
+            "description": "",
             "isDeprecated": true,
             "deprecationReason": "Use procedures Query param listTypes instead of type"
           },
           {
             "name": "PAST",
-            "description": null,
+            "description": "",
             "isDeprecated": true,
             "deprecationReason": "Use procedures Query param listTypes instead of type"
           },
           {
             "name": "PREPARATION",
-            "description": null,
+            "description": "",
             "isDeprecated": true,
             "deprecationReason": "Use procedures Query param listTypes instead of type"
           },
           {
             "name": "VOTING",
-            "description": null,
+            "description": "",
             "isDeprecated": true,
             "deprecationReason": "Use procedures Query param listTypes instead of type"
           }
@@ -2442,12 +2442,12 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "ProcedureWOMFilter",
-        "description": null,
+        "description": "",
         "fields": null,
         "inputFields": [
           {
             "name": "subjectGroups",
-            "description": null,
+            "description": "",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -2477,11 +2477,11 @@
       {
         "kind": "OBJECT",
         "name": "ProceduresHavingVoteResults",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "procedures",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -2505,7 +2505,7 @@
           },
           {
             "name": "total",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -2528,15 +2528,15 @@
       {
         "kind": "OBJECT",
         "name": "Query",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "activityIndex",
-            "description": null,
+            "description": "",
             "args": [
               {
                 "name": "procedureId",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -2561,11 +2561,11 @@
           },
           {
             "name": "communityVotes",
-            "description": null,
+            "description": "",
             "args": [
               {
                 "name": "constituencies",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "LIST",
                   "name": null,
@@ -2585,7 +2585,7 @@
               },
               {
                 "name": "procedure",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -2610,7 +2610,7 @@
           },
           {
             "name": "currentConferenceWeek",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -2626,11 +2626,11 @@
           },
           {
             "name": "deputies",
-            "description": null,
+            "description": "",
             "args": [
               {
                 "name": "excludeIds",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "LIST",
                   "name": null,
@@ -2650,7 +2650,7 @@
               },
               {
                 "name": "filterConstituency",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "String",
@@ -2662,7 +2662,7 @@
               },
               {
                 "name": "filterIds",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "LIST",
                   "name": null,
@@ -2682,7 +2682,7 @@
               },
               {
                 "name": "filterTerm",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "String",
@@ -2694,7 +2694,7 @@
               },
               {
                 "name": "limit",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -2706,7 +2706,7 @@
               },
               {
                 "name": "offset",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -2718,7 +2718,7 @@
               },
               {
                 "name": "period",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -2743,11 +2743,11 @@
           },
           {
             "name": "deputiesOfConstituency",
-            "description": null,
+            "description": "",
             "args": [
               {
                 "name": "constituency",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -2763,7 +2763,7 @@
               },
               {
                 "name": "directCandidate",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Boolean",
@@ -2775,7 +2775,7 @@
               },
               {
                 "name": "period",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -2808,11 +2808,11 @@
           },
           {
             "name": "deputy",
-            "description": null,
+            "description": "",
             "args": [
               {
                 "name": "id",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -2837,7 +2837,7 @@
           },
           {
             "name": "me",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -2849,7 +2849,7 @@
           },
           {
             "name": "mostSearched",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -2873,7 +2873,7 @@
           },
           {
             "name": "notificationSettings",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -2885,7 +2885,7 @@
           },
           {
             "name": "notifiedProcedures",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -2909,11 +2909,11 @@
           },
           {
             "name": "procedure",
-            "description": null,
+            "description": "",
             "args": [
               {
                 "name": "id",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -2942,11 +2942,11 @@
           },
           {
             "name": "procedures",
-            "description": null,
+            "description": "",
             "args": [
               {
                 "name": "filter",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "ProcedureFilter",
@@ -2958,7 +2958,7 @@
               },
               {
                 "name": "listTypes",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "LIST",
                   "name": null,
@@ -2978,7 +2978,7 @@
               },
               {
                 "name": "offset",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -2990,7 +2990,7 @@
               },
               {
                 "name": "pageSize",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -3002,7 +3002,7 @@
               },
               {
                 "name": "period",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -3014,7 +3014,7 @@
               },
               {
                 "name": "sort",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "String",
@@ -3026,7 +3026,7 @@
               },
               {
                 "name": "type",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "ENUM",
                   "name": "ProcedureType",
@@ -3059,11 +3059,11 @@
           },
           {
             "name": "proceduresById",
-            "description": null,
+            "description": "",
             "args": [
               {
                 "name": "ids",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -3087,7 +3087,7 @@
               },
               {
                 "name": "offset",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -3099,7 +3099,7 @@
               },
               {
                 "name": "pageSize",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -3132,11 +3132,11 @@
           },
           {
             "name": "proceduresByIdHavingVoteResults",
-            "description": null,
+            "description": "",
             "args": [
               {
                 "name": "filter",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "ProcedureWOMFilter",
@@ -3148,7 +3148,7 @@
               },
               {
                 "name": "offset",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -3160,7 +3160,7 @@
               },
               {
                 "name": "pageSize",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -3172,7 +3172,7 @@
               },
               {
                 "name": "period",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -3184,7 +3184,7 @@
               },
               {
                 "name": "procedureIds",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "LIST",
                   "name": null,
@@ -3204,7 +3204,7 @@
               },
               {
                 "name": "timespan",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "ENUM",
                   "name": "VotedTimeSpan",
@@ -3229,11 +3229,11 @@
           },
           {
             "name": "proceduresWithVoteResults",
-            "description": null,
+            "description": "",
             "args": [
               {
                 "name": "procedureIds",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -3278,11 +3278,11 @@
           },
           {
             "name": "recommendedProcedures",
-            "description": null,
+            "description": "",
             "args": [
               {
                 "name": "period",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -3307,11 +3307,11 @@
           },
           {
             "name": "searchProcedures",
-            "description": null,
+            "description": "",
             "args": [
               {
                 "name": "term",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -3348,11 +3348,11 @@
           },
           {
             "name": "searchProceduresAutocomplete",
-            "description": null,
+            "description": "",
             "args": [
               {
                 "name": "period",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -3364,7 +3364,7 @@
               },
               {
                 "name": "term",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -3393,11 +3393,11 @@
           },
           {
             "name": "showRecommendations",
-            "description": null,
+            "description": "",
             "args": [
               {
                 "name": "period",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -3422,7 +3422,7 @@
           },
           {
             "name": "voteStatistic",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -3434,7 +3434,7 @@
           },
           {
             "name": "votedProcedures",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -3458,11 +3458,11 @@
           },
           {
             "name": "votes",
-            "description": null,
+            "description": "",
             "args": [
               {
                 "name": "constituencies",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "LIST",
                   "name": null,
@@ -3482,7 +3482,7 @@
               },
               {
                 "name": "procedure",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -3514,11 +3514,11 @@
       {
         "kind": "OBJECT",
         "name": "RecommendationGroup",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "procedures",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -3542,7 +3542,7 @@
           },
           {
             "name": "title",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -3565,11 +3565,11 @@
       {
         "kind": "OBJECT",
         "name": "RecommendedProceduresResult",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "data",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -3593,7 +3593,7 @@
           },
           {
             "name": "hasMore",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -3609,7 +3609,7 @@
           },
           {
             "name": "total",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -3632,11 +3632,11 @@
       {
         "kind": "OBJECT",
         "name": "Schema",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "query",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -3655,11 +3655,11 @@
       {
         "kind": "OBJECT",
         "name": "SearchProcedures",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "autocomplete",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -3683,7 +3683,7 @@
           },
           {
             "name": "procedures",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -3714,11 +3714,11 @@
       {
         "kind": "OBJECT",
         "name": "SearchTerm",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "term",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -3751,11 +3751,11 @@
       {
         "kind": "OBJECT",
         "name": "TokenResult",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "succeeded",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -3774,11 +3774,11 @@
       {
         "kind": "OBJECT",
         "name": "User",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "_id",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -3794,7 +3794,7 @@
           },
           {
             "name": "deviceHash",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -3806,7 +3806,7 @@
           },
           {
             "name": "verified",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -3829,11 +3829,11 @@
       {
         "kind": "OBJECT",
         "name": "VerificationResult",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "reason",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -3845,7 +3845,7 @@
           },
           {
             "name": "succeeded",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -3868,11 +3868,11 @@
       {
         "kind": "OBJECT",
         "name": "Vote",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "_id",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -3888,7 +3888,7 @@
           },
           {
             "name": "voteResults",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -3900,7 +3900,7 @@
           },
           {
             "name": "voted",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -3923,11 +3923,11 @@
       {
         "kind": "OBJECT",
         "name": "VoteResult",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "abstination",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -3943,7 +3943,7 @@
           },
           {
             "name": "decisionText",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -3955,11 +3955,11 @@
           },
           {
             "name": "deputyVotes",
-            "description": null,
+            "description": "",
             "args": [
               {
                 "name": "constituencies",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "LIST",
                   "name": null,
@@ -3979,7 +3979,7 @@
               },
               {
                 "name": "directCandidate",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Boolean",
@@ -3991,7 +3991,7 @@
               },
               {
                 "name": "webIds",
-                "description": null,
+                "description": "",
                 "type": {
                   "kind": "LIST",
                   "name": null,
@@ -4032,7 +4032,7 @@
           },
           {
             "name": "governmentDecision",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -4048,7 +4048,7 @@
           },
           {
             "name": "namedVote",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -4064,7 +4064,7 @@
           },
           {
             "name": "no",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -4080,7 +4080,7 @@
           },
           {
             "name": "notVote",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -4092,7 +4092,7 @@
           },
           {
             "name": "notVoted",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -4104,7 +4104,7 @@
           },
           {
             "name": "partyVotes",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -4128,7 +4128,7 @@
           },
           {
             "name": "procedureId",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -4144,7 +4144,7 @@
           },
           {
             "name": "yes",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -4167,32 +4167,32 @@
       {
         "kind": "ENUM",
         "name": "VoteSelection",
-        "description": null,
+        "description": "",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
           {
             "name": "ABSTINATION",
-            "description": null,
+            "description": "",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "NO",
-            "description": null,
+            "description": "",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "NOTVOTED",
-            "description": null,
+            "description": "",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "YES",
-            "description": null,
+            "description": "",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -4202,11 +4202,11 @@
       {
         "kind": "OBJECT",
         "name": "VoteStatistic",
-        "description": null,
+        "description": "",
         "fields": [
           {
             "name": "proceduresCount",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -4222,7 +4222,7 @@
           },
           {
             "name": "votedProcedures",
-            "description": null,
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -4245,50 +4245,50 @@
       {
         "kind": "ENUM",
         "name": "VotedTimeSpan",
-        "description": null,
+        "description": "",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
           {
             "name": "CurrentQuarter",
-            "description": null,
+            "description": "",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "CurrentSittingWeek",
-            "description": null,
+            "description": "",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "CurrentYear",
-            "description": null,
+            "description": "",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "LastQuarter",
-            "description": null,
+            "description": "",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "LastSittingWeek",
-            "description": null,
+            "description": "",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "LastYear",
-            "description": null,
+            "description": "",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "Period",
-            "description": null,
+            "description": "",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -5209,15 +5209,13 @@
         "description": "Marks an element of a GraphQL schema as no longer supported.",
         "isRepeatable": false,
         "locations": [
-          "ARGUMENT_DEFINITION",
           "ENUM_VALUE",
-          "FIELD_DEFINITION",
-          "INPUT_FIELD_DEFINITION"
+          "FIELD_DEFINITION"
         ],
         "args": [
           {
             "name": "reason",
-            "description": "Explains why this element was deprecated, usually also including a suggestion for how to access supported similar data. Formatted using the Markdown syntax, as specified by [CommonMark](https://commonmark.org/).",
+            "description": "Explains why this element was deprecated, usually also including a suggestion for how to access supported similar data. Formatted using the Markdown syntax (as specified by [CommonMark](https://commonmark.org/).",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -5276,32 +5274,6 @@
               "ofType": {
                 "kind": "SCALAR",
                 "name": "Boolean",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ]
-      },
-      {
-        "name": "specifiedBy",
-        "description": "Exposes a URL that specifies the behavior of this scalar.",
-        "isRepeatable": false,
-        "locations": [
-          "SCALAR"
-        ],
-        "args": [
-          {
-            "name": "url",
-            "description": "The URL that specifies the behavior of this scalar.",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
                 "ofType": null
               }
             },

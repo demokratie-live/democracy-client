@@ -4,7 +4,7 @@ import DrawerItemList from './DrawerItemList';
 import { useNavigation, CompositeNavigationProp } from '@react-navigation/core';
 import { DrawerNavigationProp, DrawerItem } from '@react-navigation/drawer';
 import { useQuery } from '@apollo/client';
-import { Parlaments } from './Parlaments/Parlaments';
+import { ParlamentsNavi } from './Parlaments/Parlaments';
 import { RootStackParamList } from '../..';
 import { SidebarParamList } from '..';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -81,7 +81,7 @@ export const Sidebar: React.FC<SidebarProps> = props => {
       <SafeAreaView>
         <Header onPress={handleHeaderClick} label={headerLabel} testID="HeaderButton" />
         <NaviList>
-          <Parlaments {...props} />
+          <ParlamentsNavi {...props} />
           <DrawerItemList {...props} />
           <DrawerItem
             label="⭐️  App Bewerten"

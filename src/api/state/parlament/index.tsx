@@ -30,7 +30,7 @@ interface ParlamentScreens {
   wom?: false | ParlamentWomScreen;
   deputies?: boolean;
 }
-interface Parlament {
+export interface Parlament {
   identifier: ParlamentIdentifier;
   institution: Institutions;
   period: number;

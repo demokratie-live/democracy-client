@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { SectionList, View, Alert } from 'react-native';
 import { Segment } from '../List/Components/Segment';
 import Checkbox from './components/Checkbox';
@@ -11,9 +11,7 @@ import { FilterEntry } from '../../../api/hooks/useListFilter/initData';
 import { useRecoilState } from 'recoil';
 import { filterState } from '../../../api/state/filter';
 
-const Save = styled.TouchableOpacity`
-  margin-right: ${({ theme }) => theme.spaces.small};
-`;
+const Save = styled.TouchableOpacity``;
 
 const SaveText = styled.Text`
   color: #fff;
@@ -62,39 +60,44 @@ export const FilterScreen: React.FC<Props> = ({ navigation }) => {
   const [data, setData] = useState<FilterData[]>(filter);
 
   useEffect(() => {
-    if (!isVerified && data.findIndex(({ name }) => name === 'activity') !== -1) {
+    if (!isVerified) {
       setData(d => d.filter(({ name }) => name !== 'activity'));
+    } else if (isVerified && !data.some(({ name }) => name === 'activity')) {
+      setData(d => [...filter.filter(({ name }) => name === 'activity'), ...d]);
     }
-  }, [data, setData, isVerified]);
+  }, [data, setData, isVerified, filter]);
 
-  const getValue = ({ type, subType }: { type: string; subType?: string }) => {
-    const filterCategory = data.find(({ name }) => {
-      return name === type;
-    });
-    if (filterCategory) {
-      if (subType) {
-        const filterEntry = filterCategory.data.find(
-          ({ name, title }) => subType === name || subType === title,
-        );
-        if (filterEntry) {
-          return filterEntry.value;
+  const getValue = useCallback(
+    ({ type, subType }: { type: string; subType?: string }) => {
+      const filterCategory = data.find(({ name }) => {
+        return name === type;
+      });
+      if (filterCategory) {
+        if (subType) {
+          const filterEntry = filterCategory.data.find(
+            ({ name, title }) => subType === name || subType === title,
+          );
+          if (filterEntry) {
+            return filterEntry.value;
+          }
+          return false;
         }
-        return false;
+        const someFalse = filterCategory.data.some(({ value }) => !value);
+        if (!someFalse) {
+          return true;
+        }
+        const someTrue = filterCategory.data.some(({ value }) => value);
+        if (!someTrue) {
+          return false;
+        }
+        return 'mixed';
       }
-      const someFalse = filterCategory.data.some(({ value }) => !value);
-      if (!someFalse) {
-        return true;
-      }
-      const someTrue = filterCategory.data.some(({ value }) => value);
-      if (!someTrue) {
-        return false;
-      }
-      return 'mixed';
-    }
-    return false;
-  };
+      return false;
+    },
+    [data],
+  );
 
-  const onSave = () => {
+  const onSave = useCallback(() => {
     const saveError = data.find(({ name }) => !getValue({ type: name }));
     if (saveError) {
       let indefiniteArticle;
@@ -118,15 +121,17 @@ export const FilterScreen: React.FC<Props> = ({ navigation }) => {
     }
     setFilter(data);
     navigation.goBack();
-  };
+  }, [data, getValue, navigation, setFilter]);
 
-  navigation.setOptions({
-    headerRight: () => (
-      <Save onPress={onSave}>
-        <SaveText>Speichern</SaveText>
-      </Save>
-    ),
-  });
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Save onPress={onSave}>
+          <SaveText>Speichern</SaveText>
+        </Save>
+      ),
+    });
+  }, [navigation, onSave]);
 
   const onChange = ({
     type,

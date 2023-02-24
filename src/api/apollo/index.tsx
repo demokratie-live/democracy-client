@@ -2,7 +2,7 @@ import { RestLink } from 'apollo-link-rest';
 import { onError } from '@apollo/client/link/error';
 import { authLinkMiddleware, authLinkAfterware } from './Auth';
 import { ANDROID_SERVER, GRAPHQL_SERVER_LOCAL, GRAPHQL_URL } from '../config';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { versionLinkMiddleware } from './Version';
 import { ApolloClient, InMemoryCache, ApolloLink, HttpLink } from '@apollo/client';
 import { typePolicies } from './TypePolicies';

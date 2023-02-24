@@ -1,8 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components/native';
 import { Keyboard, Alert, Dimensions, ActivityIndicator } from 'react-native';
 import { sha256 } from 'react-native-sha256';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Description from './Components/Description';
 import CodeInput from './Components/CodeInput';
 import { useNavigation, RouteProp } from '@react-navigation/core';
@@ -21,7 +21,7 @@ import {
 } from '../../__generated__/graphql';
 import { parlaments, parlamentState } from '../../api/state/parlament';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import SvgIconappios from '../../components/Icons/IconAppIos';
+import { AppLogo } from '../../components/AppLogo';
 
 const Container = styled(KeyboardAwareScrollView).attrs(() => ({
   contentContainerStyle: {
@@ -51,6 +51,10 @@ export const SmsCodeInput: React.FC<Props> = ({ route }) => {
   const [code, setCode] = useState('');
   const parlamentIdentifier = useRecoilValue(parlamentState);
   const parlament = parlaments[parlamentIdentifier];
+
+  useEffect(() => {
+    navigation.setOptions({ headerBackVisible: !loading });
+  }, [loading, navigation]);
 
   const showNotification = (message: string) => {
     Alert.alert('Verifikationsfehler', message);
@@ -146,7 +150,7 @@ export const SmsCodeInput: React.FC<Props> = ({ route }) => {
 
   return (
     <Container>
-      {DEVICE_HEIGT > 500 && <SvgIconappios width={100} height={100} />}
+      {DEVICE_HEIGT > 500 && <AppLogo />}
       <Description text={`Bitte gib Deinen Code ein für\n${phoneNumber}`} />
       <CodeInput
         disabled={loading}

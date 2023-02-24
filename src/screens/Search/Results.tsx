@@ -13,11 +13,12 @@ import { RootStackParamList } from '../../routes';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { parlaments, parlamentState } from '../../api/state/parlament';
 import { searchHistoryState, searchTermState } from '../../api/state/search';
-import { Segment } from '../../components/Segment.index';
+import { Segment } from '../../components/Segment/index';
 import { Row } from '../../components/Row';
 import { ListItem } from '../../components/ListItem';
 import { pieChartGovernmentData } from '../../lib/PieChartGovernmentData';
 import { communityVoteData } from '../../lib/PieChartCommunityData';
+import { AppLogo } from '../../components/AppLogo';
 
 const isProcedureGuard = (searchItem: string | Procedure): searchItem is Procedure => {
   return typeof searchItem !== 'string' && searchItem.procedureId !== undefined;
@@ -50,11 +51,12 @@ const NoResultsWrapper = styled.View`
   align-items: center;
 `;
 
-const NoResultsImage = styled.Image.attrs(() => ({
-  source: require('./assets/search_no_results.png'),
-  opacity: 0.2,
-}))`
-  margin-top: 18px;
+const NoResultsImage = styled(AppLogo).attrs({
+  width: 160,
+  height: 160,
+  color: '#D8D8D8',
+})`
+  margin-top: ${({ theme }) => theme.spaces.default};
 `;
 
 type Procedure = SearchProceduresQuery['searchProceduresAutocomplete']['procedures'][0];

@@ -7,7 +7,7 @@ import ChartLegend from '../Charts/ChartLegend';
 
 const Wrapper = styled.View`
   align-items: center;
-  margin-horizontal: 18px;
+  /* margin-horizontal: 18px; */
 `;
 
 interface Props {
@@ -26,21 +26,15 @@ interface Props {
 
 const PartyChartGov: React.FC<Props> = ({ chartData, width, ...props }) => {
   const [partyChartSelected, setPartyChartSelected] = useState(0);
-  const [chartWidth, setChartDimensions] = useState(width);
-
-  const onLayout = (event: LayoutChangeEvent) => {
-    const { width: newWidth } = event.nativeEvent.layout;
-    setChartDimensions(newWidth);
-  };
 
   return (
-    <Wrapper {...{ onLayout }}>
+    <Wrapper>
       <BarChart
         data={chartData.map(item => ({ ...item, deviants: item.values }))}
         {...props}
         setSelectedParty={setPartyChartSelected}
         selectedParty={partyChartSelected}
-        width={chartWidth}
+        width={width}
         height={315}
       />
       <ChartLegend data={chartData[partyChartSelected].values} />

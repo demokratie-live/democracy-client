@@ -292,10 +292,15 @@ export type ProcedureFilter = {
 };
 
 export enum ProcedureType {
+  /** @deprecated Use procedures Query param listTypes instead of type */
   Hot = 'HOT',
+  /** @deprecated Use procedures Query param listTypes instead of type */
   InVote = 'IN_VOTE',
+  /** @deprecated Use procedures Query param listTypes instead of type */
   Past = 'PAST',
+  /** @deprecated Use procedures Query param listTypes instead of type */
   Preparation = 'PREPARATION',
+  /** @deprecated Use procedures Query param listTypes instead of type */
   Voting = 'VOTING'
 }
 
@@ -536,6 +541,15 @@ export enum VotedTimeSpan {
   Period = 'Period'
 }
 
+export type GetDeputiesForNewConstituencyQueryVariables = Exact<{
+  filterConstituency?: InputMaybe<Scalars['String']>;
+  excludeIds?: InputMaybe<Array<Scalars['String']> | Scalars['String']>;
+  period?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type GetDeputiesForNewConstituencyQuery = { __typename?: 'Query', deputies: { __typename?: 'DeputiesResult', data: Array<{ __typename?: 'Deputy', webId: string }> } };
+
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -610,26 +624,6 @@ export type RecommendedProceduresQueryVariables = Exact<{ [key: string]: never; 
 
 export type RecommendedProceduresQuery = { __typename?: 'Query', recommendedProcedures: { __typename?: 'RecommendedProceduresResult', total: number, hasMore: boolean, data: Array<{ __typename?: 'RecommendationGroup', title: string, procedures: Array<{ __typename?: 'Procedure', _id: string, title: string, procedureId: string, sessionTOPHeading?: string | null, subjectGroups: Array<string>, voteDate?: string | null, voteEnd?: string | null, list?: ListType | null, type: string, voteWeek?: number | null, voteYear?: number | null, votedGovernment?: boolean | null, voted: boolean, activityIndex: { __typename?: 'ActivityIndex', activityIndex: number }, voteResults?: { __typename?: 'VoteResult', yes: number, abstination: number, no: number, governmentDecision: VoteSelection } | null, communityVotes?: { __typename?: 'CommunityVotes', yes: number, abstination: number, no: number, total: number } | null }> }> } };
 
-export type FinishSearchMutationVariables = Exact<{
-  term: Scalars['String'];
-}>;
-
-
-export type FinishSearchMutation = { __typename?: 'Mutation', finishSearch: { __typename?: 'SearchTerm', term: string } };
-
-export type MostSearchedQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type MostSearchedQuery = { __typename?: 'Query', mostSearched: Array<{ __typename?: 'SearchTerm', term: string }> };
-
-export type SearchProceduresQueryVariables = Exact<{
-  term: Scalars['String'];
-  period: Scalars['Int'];
-}>;
-
-
-export type SearchProceduresQuery = { __typename?: 'Query', searchProceduresAutocomplete: { __typename?: 'SearchProcedures', autocomplete: Array<string>, procedures: Array<{ __typename?: 'Procedure', _id: string, title: string, procedureId: string, sessionTOPHeading?: string | null, subjectGroups: Array<string>, tags: Array<string>, abstract?: string | null, voteDate?: string | null, votedGovernment?: boolean | null, submissionDate?: string | null, completed?: boolean | null, voted: boolean, type: string, voteResults?: { __typename?: 'VoteResult', yes: number, abstination: number, no: number, governmentDecision: VoteSelection } | null, communityVotes?: { __typename?: 'CommunityVotes', yes: number, abstination: number, no: number, total: number } | null }> } };
-
 export type DeputyMatchBarFragment = { __typename?: 'Deputy', matchesBar: Array<{ __typename?: 'DeputyProcedure', decision: VoteSelection, procedure: { __typename?: 'Procedure', procedureId: string } }> };
 
 export type GetDeputyQueryVariables = Exact<{
@@ -669,7 +663,7 @@ export type ToggleNotificationMutationVariables = Exact<{
 }>;
 
 
-export type ToggleNotificationMutation = { __typename?: 'Mutation', toggleNotification?: { __typename?: 'Procedure', notify?: boolean | null } | null };
+export type ToggleNotificationMutation = { __typename?: 'Mutation', toggleNotification?: { __typename?: 'Procedure', notify?: boolean | null, procedureId: string } | null };
 
 export type ProcedureQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -678,6 +672,26 @@ export type ProcedureQueryVariables = Exact<{
 
 
 export type ProcedureQuery = { __typename?: 'Query', procedure: { __typename?: 'Procedure', _id: string, procedureId: string, title: string, sessionTOPHeading?: string | null, tags: Array<string>, abstract?: string | null, voteDate?: string | null, voteEnd?: string | null, notify?: boolean | null, list?: ListType | null, type: string, subjectGroups: Array<string>, submissionDate?: string | null, currentStatus?: string | null, currentStatusHistory: Array<string>, voted: boolean, votedGovernment?: boolean | null, importantDocuments: Array<{ __typename?: 'Document', editor: string, type: string, url: string, number: string }>, communityVotes?: { __typename?: 'CommunityVotes', yes: number, abstination: number, no: number, total: number, constituencies: Array<{ __typename?: 'CommunityConstituencyVotes', yes: number, abstination: number, no: number, constituency: string, total: number }> } | null, voteResults?: { __typename?: 'VoteResult', yes: number, abstination: number, no: number, notVoted?: number | null, decisionText?: string | null, namedVote: boolean, governmentDecision: VoteSelection, partyVotes: Array<{ __typename?: 'PartyVote', main: VoteSelection, party: string, deviants: { __typename?: 'Deviants', yes: number, abstination: number, no: number, notVoted?: number | null } }> } | null } };
+
+export type FinishSearchMutationVariables = Exact<{
+  term: Scalars['String'];
+}>;
+
+
+export type FinishSearchMutation = { __typename?: 'Mutation', finishSearch: { __typename?: 'SearchTerm', term: string } };
+
+export type MostSearchedQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MostSearchedQuery = { __typename?: 'Query', mostSearched: Array<{ __typename?: 'SearchTerm', term: string }> };
+
+export type SearchProceduresQueryVariables = Exact<{
+  term: Scalars['String'];
+  period: Scalars['Int'];
+}>;
+
+
+export type SearchProceduresQuery = { __typename?: 'Query', searchProceduresAutocomplete: { __typename?: 'SearchProcedures', autocomplete: Array<string>, procedures: Array<{ __typename?: 'Procedure', _id: string, title: string, procedureId: string, sessionTOPHeading?: string | null, subjectGroups: Array<string>, tags: Array<string>, abstract?: string | null, voteDate?: string | null, votedGovernment?: boolean | null, submissionDate?: string | null, completed?: boolean | null, voted: boolean, type: string, voteResults?: { __typename?: 'VoteResult', yes: number, abstination: number, no: number, governmentDecision: VoteSelection } | null, communityVotes?: { __typename?: 'CommunityVotes', yes: number, abstination: number, no: number, total: number } | null }> } };
 
 export type RequestSmsCodeMutationVariables = Exact<{
   newPhone: Scalars['String'];
@@ -737,33 +751,6 @@ export type VotedPartyProceduresQueryVariables = Exact<{
 
 
 export type VotedPartyProceduresQuery = { __typename?: 'Query', procedurecForWomPartyList: { __typename?: 'ProceduresHavingVoteResults', total: number, procedures: Array<{ __typename?: 'Procedure', _id: string, procedureId: string, sessionTOPHeading?: string | null, title: string, tags: Array<string>, voteDate?: string | null, votedGovernment?: boolean | null, submissionDate?: string | null, completed?: boolean | null, subjectGroups: Array<string>, voted: boolean, type: string, voteResults?: { __typename?: 'VoteResult', governmentDecision: VoteSelection, yes: number, abstination: number, no: number, notVoted?: number | null, partyVotes: Array<{ __typename?: 'PartyVote', party: string, main: VoteSelection, deviants: { __typename?: 'Deviants', yes: number, no: number, abstination: number, notVoted?: number | null } }> } | null, communityVotes?: { __typename?: 'CommunityVotes', yes: number, abstination: number, no: number, total: number } | null }> } };
-
-export type GetDeputyProfileQueryVariables = Exact<{
-  constituency: Scalars['String'];
-  directCandidate?: InputMaybe<Scalars['Boolean']>;
-}>;
-
-
-export type GetDeputyProfileQuery = { __typename?: 'Query', deputiesOfConstituency: Array<{ __typename?: 'Deputy', _id: string, name: string, imgURL: string, party?: string | null, job?: string | null, biography?: string | null, totalProcedures?: number | null, procedures: Array<{ __typename?: 'DeputyProcedure', decision: VoteSelection, procedure: { __typename?: 'Procedure', procedureId: string } }>, contact?: { __typename?: 'DeputyContact', address?: string | null, email?: string | null, links: Array<{ __typename?: 'DeputyLink', name: string, URL: string, username?: string | null }> } | null }> };
-
-export type DeputyChartDataQueryVariables = Exact<{
-  constituency: Scalars['String'];
-  directCandidate?: InputMaybe<Scalars['Boolean']>;
-  procedureIds: Array<Scalars['String']> | Scalars['String'];
-}>;
-
-
-export type DeputyChartDataQuery = { __typename?: 'Query', chartData: Array<{ __typename?: 'Deputy', _id: string, totalProcedures?: number | null, party?: string | null, imgURL: string, name: string, procedures: Array<{ __typename?: 'DeputyProcedure', decision: VoteSelection, procedure: { __typename?: 'Procedure', procedureId: string } }> }> };
-
-export type DeputyProceduresQueryVariables = Exact<{
-  constituency: Scalars['String'];
-  directCandidate?: InputMaybe<Scalars['Boolean']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  pageSize?: InputMaybe<Scalars['Int']>;
-}>;
-
-
-export type DeputyProceduresQuery = { __typename?: 'Query', deputyProcedures: Array<{ __typename?: 'Deputy', _id: string, totalProcedures?: number | null, procedures: Array<{ __typename?: 'DeputyProcedure', decision: VoteSelection, procedure: { __typename?: 'Procedure', _id: string, procedureId: string, sessionTOPHeading?: string | null, title: string, subjectGroups: Array<string>, voteDate?: string | null, votedGovernment?: boolean | null, submissionDate?: string | null, completed?: boolean | null, voted: boolean, type: string, voteResults?: { __typename?: 'VoteResult', governmentDecision: VoteSelection, yes: number, abstination: number, no: number, notVoted?: number | null, partyVotes: Array<{ __typename?: 'PartyVote', party: string, main: VoteSelection, deviants: { __typename?: 'Deviants', yes: number, no: number, abstination: number, notVoted?: number | null } }> } | null, communityVotes?: { __typename?: 'CommunityVotes', yes: number, abstination: number, no: number, total: number } | null } }> }> };
 
 export type ListItemDataFragment = { __typename?: 'Procedure', _id: string, procedureId: string, sessionTOPHeading?: string | null, title: string, tags: Array<string>, voteDate?: string | null, votedGovernment?: boolean | null, submissionDate?: string | null, completed?: boolean | null, subjectGroups: Array<string>, voted: boolean, type: string, voteResults?: { __typename?: 'VoteResult', governmentDecision: VoteSelection, yes: number, abstination: number, no: number, notVoted?: number | null, partyVotes: Array<{ __typename?: 'PartyVote', party: string, main: VoteSelection }> } | null, communityVotes?: { __typename?: 'CommunityVotes', yes: number, abstination: number, no: number, total: number } | null };
 
@@ -831,6 +818,49 @@ export const ListItemDataFragmentDoc = gql`
   }
 }
     `;
+export const GetDeputiesForNewConstituencyDocument = gql`
+    query GetDeputiesForNewConstituency($filterConstituency: String, $excludeIds: [String!], $period: Int) {
+  deputies(
+    filterConstituency: $filterConstituency
+    excludeIds: $excludeIds
+    period: $period
+  ) {
+    data {
+      webId
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetDeputiesForNewConstituencyQuery__
+ *
+ * To run a query within a React component, call `useGetDeputiesForNewConstituencyQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetDeputiesForNewConstituencyQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetDeputiesForNewConstituencyQuery({
+ *   variables: {
+ *      filterConstituency: // value for 'filterConstituency'
+ *      excludeIds: // value for 'excludeIds'
+ *      period: // value for 'period'
+ *   },
+ * });
+ */
+export function useGetDeputiesForNewConstituencyQuery(baseOptions?: Apollo.QueryHookOptions<GetDeputiesForNewConstituencyQuery, GetDeputiesForNewConstituencyQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetDeputiesForNewConstituencyQuery, GetDeputiesForNewConstituencyQueryVariables>(GetDeputiesForNewConstituencyDocument, options);
+      }
+export function useGetDeputiesForNewConstituencyLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetDeputiesForNewConstituencyQuery, GetDeputiesForNewConstituencyQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetDeputiesForNewConstituencyQuery, GetDeputiesForNewConstituencyQueryVariables>(GetDeputiesForNewConstituencyDocument, options);
+        }
+export type GetDeputiesForNewConstituencyQueryHookResult = ReturnType<typeof useGetDeputiesForNewConstituencyQuery>;
+export type GetDeputiesForNewConstituencyLazyQueryHookResult = ReturnType<typeof useGetDeputiesForNewConstituencyLazyQuery>;
+export type GetDeputiesForNewConstituencyQueryResult = Apollo.QueryResult<GetDeputiesForNewConstituencyQuery, GetDeputiesForNewConstituencyQueryVariables>;
 export const MeDocument = gql`
     query Me {
   me {
@@ -1270,136 +1300,6 @@ export function useRecommendedProceduresLazyQuery(baseOptions?: Apollo.LazyQuery
 export type RecommendedProceduresQueryHookResult = ReturnType<typeof useRecommendedProceduresQuery>;
 export type RecommendedProceduresLazyQueryHookResult = ReturnType<typeof useRecommendedProceduresLazyQuery>;
 export type RecommendedProceduresQueryResult = Apollo.QueryResult<RecommendedProceduresQuery, RecommendedProceduresQueryVariables>;
-export const FinishSearchDocument = gql`
-    mutation FinishSearch($term: String!) {
-  finishSearch(term: $term) {
-    term
-  }
-}
-    `;
-export type FinishSearchMutationFn = Apollo.MutationFunction<FinishSearchMutation, FinishSearchMutationVariables>;
-
-/**
- * __useFinishSearchMutation__
- *
- * To run a mutation, you first call `useFinishSearchMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useFinishSearchMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [finishSearchMutation, { data, loading, error }] = useFinishSearchMutation({
- *   variables: {
- *      term: // value for 'term'
- *   },
- * });
- */
-export function useFinishSearchMutation(baseOptions?: Apollo.MutationHookOptions<FinishSearchMutation, FinishSearchMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<FinishSearchMutation, FinishSearchMutationVariables>(FinishSearchDocument, options);
-      }
-export type FinishSearchMutationHookResult = ReturnType<typeof useFinishSearchMutation>;
-export type FinishSearchMutationResult = Apollo.MutationResult<FinishSearchMutation>;
-export type FinishSearchMutationOptions = Apollo.BaseMutationOptions<FinishSearchMutation, FinishSearchMutationVariables>;
-export const MostSearchedDocument = gql`
-    query MostSearched {
-  mostSearched {
-    term
-  }
-}
-    `;
-
-/**
- * __useMostSearchedQuery__
- *
- * To run a query within a React component, call `useMostSearchedQuery` and pass it any options that fit your needs.
- * When your component renders, `useMostSearchedQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useMostSearchedQuery({
- *   variables: {
- *   },
- * });
- */
-export function useMostSearchedQuery(baseOptions?: Apollo.QueryHookOptions<MostSearchedQuery, MostSearchedQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<MostSearchedQuery, MostSearchedQueryVariables>(MostSearchedDocument, options);
-      }
-export function useMostSearchedLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MostSearchedQuery, MostSearchedQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<MostSearchedQuery, MostSearchedQueryVariables>(MostSearchedDocument, options);
-        }
-export type MostSearchedQueryHookResult = ReturnType<typeof useMostSearchedQuery>;
-export type MostSearchedLazyQueryHookResult = ReturnType<typeof useMostSearchedLazyQuery>;
-export type MostSearchedQueryResult = Apollo.QueryResult<MostSearchedQuery, MostSearchedQueryVariables>;
-export const SearchProceduresDocument = gql`
-    query SearchProcedures($term: String!, $period: Int!) {
-  searchProceduresAutocomplete(term: $term, period: $period) {
-    procedures {
-      _id
-      title
-      procedureId
-      sessionTOPHeading
-      subjectGroups
-      tags
-      abstract
-      voteDate
-      votedGovernment
-      submissionDate
-      completed
-      voted
-      type
-      voteResults {
-        yes
-        abstination
-        no
-        governmentDecision
-      }
-      communityVotes {
-        yes
-        abstination
-        no
-        total
-      }
-    }
-    autocomplete
-  }
-}
-    `;
-
-/**
- * __useSearchProceduresQuery__
- *
- * To run a query within a React component, call `useSearchProceduresQuery` and pass it any options that fit your needs.
- * When your component renders, `useSearchProceduresQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useSearchProceduresQuery({
- *   variables: {
- *      term: // value for 'term'
- *      period: // value for 'period'
- *   },
- * });
- */
-export function useSearchProceduresQuery(baseOptions: Apollo.QueryHookOptions<SearchProceduresQuery, SearchProceduresQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<SearchProceduresQuery, SearchProceduresQueryVariables>(SearchProceduresDocument, options);
-      }
-export function useSearchProceduresLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SearchProceduresQuery, SearchProceduresQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<SearchProceduresQuery, SearchProceduresQueryVariables>(SearchProceduresDocument, options);
-        }
-export type SearchProceduresQueryHookResult = ReturnType<typeof useSearchProceduresQuery>;
-export type SearchProceduresLazyQueryHookResult = ReturnType<typeof useSearchProceduresLazyQuery>;
-export type SearchProceduresQueryResult = Apollo.QueryResult<SearchProceduresQuery, SearchProceduresQueryVariables>;
 export const GetDeputyDocument = gql`
     query GetDeputy($id: String!, $votedProcedureIds: [String!]!) {
   deputy(id: $id) {
@@ -1608,6 +1508,7 @@ export const ToggleNotificationDocument = gql`
     mutation ToggleNotification($procedureId: String!) {
   toggleNotification(procedureId: $procedureId) {
     notify
+    procedureId
   }
 }
     `;
@@ -1728,6 +1629,136 @@ export function useProcedureLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<
 export type ProcedureQueryHookResult = ReturnType<typeof useProcedureQuery>;
 export type ProcedureLazyQueryHookResult = ReturnType<typeof useProcedureLazyQuery>;
 export type ProcedureQueryResult = Apollo.QueryResult<ProcedureQuery, ProcedureQueryVariables>;
+export const FinishSearchDocument = gql`
+    mutation FinishSearch($term: String!) {
+  finishSearch(term: $term) {
+    term
+  }
+}
+    `;
+export type FinishSearchMutationFn = Apollo.MutationFunction<FinishSearchMutation, FinishSearchMutationVariables>;
+
+/**
+ * __useFinishSearchMutation__
+ *
+ * To run a mutation, you first call `useFinishSearchMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useFinishSearchMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [finishSearchMutation, { data, loading, error }] = useFinishSearchMutation({
+ *   variables: {
+ *      term: // value for 'term'
+ *   },
+ * });
+ */
+export function useFinishSearchMutation(baseOptions?: Apollo.MutationHookOptions<FinishSearchMutation, FinishSearchMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<FinishSearchMutation, FinishSearchMutationVariables>(FinishSearchDocument, options);
+      }
+export type FinishSearchMutationHookResult = ReturnType<typeof useFinishSearchMutation>;
+export type FinishSearchMutationResult = Apollo.MutationResult<FinishSearchMutation>;
+export type FinishSearchMutationOptions = Apollo.BaseMutationOptions<FinishSearchMutation, FinishSearchMutationVariables>;
+export const MostSearchedDocument = gql`
+    query MostSearched {
+  mostSearched {
+    term
+  }
+}
+    `;
+
+/**
+ * __useMostSearchedQuery__
+ *
+ * To run a query within a React component, call `useMostSearchedQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMostSearchedQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMostSearchedQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMostSearchedQuery(baseOptions?: Apollo.QueryHookOptions<MostSearchedQuery, MostSearchedQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MostSearchedQuery, MostSearchedQueryVariables>(MostSearchedDocument, options);
+      }
+export function useMostSearchedLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MostSearchedQuery, MostSearchedQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MostSearchedQuery, MostSearchedQueryVariables>(MostSearchedDocument, options);
+        }
+export type MostSearchedQueryHookResult = ReturnType<typeof useMostSearchedQuery>;
+export type MostSearchedLazyQueryHookResult = ReturnType<typeof useMostSearchedLazyQuery>;
+export type MostSearchedQueryResult = Apollo.QueryResult<MostSearchedQuery, MostSearchedQueryVariables>;
+export const SearchProceduresDocument = gql`
+    query SearchProcedures($term: String!, $period: Int!) {
+  searchProceduresAutocomplete(term: $term, period: $period) {
+    procedures {
+      _id
+      title
+      procedureId
+      sessionTOPHeading
+      subjectGroups
+      tags
+      abstract
+      voteDate
+      votedGovernment
+      submissionDate
+      completed
+      voted
+      type
+      voteResults {
+        yes
+        abstination
+        no
+        governmentDecision
+      }
+      communityVotes {
+        yes
+        abstination
+        no
+        total
+      }
+    }
+    autocomplete
+  }
+}
+    `;
+
+/**
+ * __useSearchProceduresQuery__
+ *
+ * To run a query within a React component, call `useSearchProceduresQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSearchProceduresQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSearchProceduresQuery({
+ *   variables: {
+ *      term: // value for 'term'
+ *      period: // value for 'period'
+ *   },
+ * });
+ */
+export function useSearchProceduresQuery(baseOptions: Apollo.QueryHookOptions<SearchProceduresQuery, SearchProceduresQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SearchProceduresQuery, SearchProceduresQueryVariables>(SearchProceduresDocument, options);
+      }
+export function useSearchProceduresLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SearchProceduresQuery, SearchProceduresQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SearchProceduresQuery, SearchProceduresQueryVariables>(SearchProceduresDocument, options);
+        }
+export type SearchProceduresQueryHookResult = ReturnType<typeof useSearchProceduresQuery>;
+export type SearchProceduresLazyQueryHookResult = ReturnType<typeof useSearchProceduresLazyQuery>;
+export type SearchProceduresQueryResult = Apollo.QueryResult<SearchProceduresQuery, SearchProceduresQueryVariables>;
 export const RequestSmsCodeDocument = gql`
     mutation RequestSmsCode($newPhone: String!, $oldPhoneHash: String) {
   requestCode(newPhone: $newPhone, oldPhoneHash: $oldPhoneHash) {
@@ -1996,192 +2027,6 @@ export function useVotedPartyProceduresLazyQuery(baseOptions?: Apollo.LazyQueryH
 export type VotedPartyProceduresQueryHookResult = ReturnType<typeof useVotedPartyProceduresQuery>;
 export type VotedPartyProceduresLazyQueryHookResult = ReturnType<typeof useVotedPartyProceduresLazyQuery>;
 export type VotedPartyProceduresQueryResult = Apollo.QueryResult<VotedPartyProceduresQuery, VotedPartyProceduresQueryVariables>;
-export const GetDeputyProfileDocument = gql`
-    query GetDeputyProfile($constituency: String!, $directCandidate: Boolean) {
-  deputiesOfConstituency(
-    constituency: $constituency
-    directCandidate: $directCandidate
-  ) {
-    _id
-    name
-    imgURL
-    party
-    job
-    biography
-    totalProcedures
-    procedures {
-      decision
-      procedure {
-        procedureId
-      }
-    }
-    contact {
-      address
-      email
-      links {
-        name
-        URL
-        username
-      }
-    }
-  }
-}
-    `;
-
-/**
- * __useGetDeputyProfileQuery__
- *
- * To run a query within a React component, call `useGetDeputyProfileQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetDeputyProfileQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetDeputyProfileQuery({
- *   variables: {
- *      constituency: // value for 'constituency'
- *      directCandidate: // value for 'directCandidate'
- *   },
- * });
- */
-export function useGetDeputyProfileQuery(baseOptions: Apollo.QueryHookOptions<GetDeputyProfileQuery, GetDeputyProfileQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetDeputyProfileQuery, GetDeputyProfileQueryVariables>(GetDeputyProfileDocument, options);
-      }
-export function useGetDeputyProfileLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetDeputyProfileQuery, GetDeputyProfileQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetDeputyProfileQuery, GetDeputyProfileQueryVariables>(GetDeputyProfileDocument, options);
-        }
-export type GetDeputyProfileQueryHookResult = ReturnType<typeof useGetDeputyProfileQuery>;
-export type GetDeputyProfileLazyQueryHookResult = ReturnType<typeof useGetDeputyProfileLazyQuery>;
-export type GetDeputyProfileQueryResult = Apollo.QueryResult<GetDeputyProfileQuery, GetDeputyProfileQueryVariables>;
-export const DeputyChartDataDocument = gql`
-    query DeputyChartData($constituency: String!, $directCandidate: Boolean, $procedureIds: [String!]!) {
-  chartData: deputiesOfConstituency(
-    constituency: $constituency
-    directCandidate: $directCandidate
-  ) {
-    _id
-    totalProcedures
-    party
-    imgURL
-    name
-    procedures(procedureIds: $procedureIds) {
-      decision
-      procedure {
-        procedureId
-      }
-    }
-  }
-}
-    `;
-
-/**
- * __useDeputyChartDataQuery__
- *
- * To run a query within a React component, call `useDeputyChartDataQuery` and pass it any options that fit your needs.
- * When your component renders, `useDeputyChartDataQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useDeputyChartDataQuery({
- *   variables: {
- *      constituency: // value for 'constituency'
- *      directCandidate: // value for 'directCandidate'
- *      procedureIds: // value for 'procedureIds'
- *   },
- * });
- */
-export function useDeputyChartDataQuery(baseOptions: Apollo.QueryHookOptions<DeputyChartDataQuery, DeputyChartDataQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<DeputyChartDataQuery, DeputyChartDataQueryVariables>(DeputyChartDataDocument, options);
-      }
-export function useDeputyChartDataLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DeputyChartDataQuery, DeputyChartDataQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<DeputyChartDataQuery, DeputyChartDataQueryVariables>(DeputyChartDataDocument, options);
-        }
-export type DeputyChartDataQueryHookResult = ReturnType<typeof useDeputyChartDataQuery>;
-export type DeputyChartDataLazyQueryHookResult = ReturnType<typeof useDeputyChartDataLazyQuery>;
-export type DeputyChartDataQueryResult = Apollo.QueryResult<DeputyChartDataQuery, DeputyChartDataQueryVariables>;
-export const DeputyProceduresDocument = gql`
-    query DeputyProcedures($constituency: String!, $directCandidate: Boolean, $offset: Int, $pageSize: Int) {
-  deputyProcedures: deputiesOfConstituency(
-    constituency: $constituency
-    directCandidate: $directCandidate
-  ) {
-    _id
-    totalProcedures
-    procedures(offset: $offset, pageSize: $pageSize) {
-      decision
-      procedure {
-        _id
-        procedureId
-        sessionTOPHeading
-        title
-        subjectGroups
-        voteDate
-        votedGovernment
-        submissionDate
-        completed
-        voted
-        type
-        voteResults {
-          governmentDecision
-          yes
-          abstination
-          no
-          notVoted
-          partyVotes {
-            party
-            main
-            ...DeviantsPartyVote
-          }
-        }
-        communityVotes {
-          yes
-          abstination
-          no
-          total
-        }
-      }
-    }
-  }
-}
-    ${DeviantsPartyVoteFragmentDoc}`;
-
-/**
- * __useDeputyProceduresQuery__
- *
- * To run a query within a React component, call `useDeputyProceduresQuery` and pass it any options that fit your needs.
- * When your component renders, `useDeputyProceduresQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useDeputyProceduresQuery({
- *   variables: {
- *      constituency: // value for 'constituency'
- *      directCandidate: // value for 'directCandidate'
- *      offset: // value for 'offset'
- *      pageSize: // value for 'pageSize'
- *   },
- * });
- */
-export function useDeputyProceduresQuery(baseOptions: Apollo.QueryHookOptions<DeputyProceduresQuery, DeputyProceduresQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<DeputyProceduresQuery, DeputyProceduresQueryVariables>(DeputyProceduresDocument, options);
-      }
-export function useDeputyProceduresLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DeputyProceduresQuery, DeputyProceduresQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<DeputyProceduresQuery, DeputyProceduresQueryVariables>(DeputyProceduresDocument, options);
-        }
-export type DeputyProceduresQueryHookResult = ReturnType<typeof useDeputyProceduresQuery>;
-export type DeputyProceduresLazyQueryHookResult = ReturnType<typeof useDeputyProceduresLazyQuery>;
-export type DeputyProceduresQueryResult = Apollo.QueryResult<DeputyProceduresQuery, DeputyProceduresQueryVariables>;
 export const ProceduresByIdHavingVoteResultsDocument = gql`
     query ProceduresByIdHavingVoteResults($procedureIds: [String!], $pageSize: Int, $offset: Int, $period: Int!) {
   proceduresByIdHavingVoteResults3: proceduresByIdHavingVoteResults(

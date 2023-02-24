@@ -33,6 +33,7 @@ export const SidebarNavigation = () => {
   return (
     <SidebarDrawer.Navigator
       initialRouteName="Bundestag"
+      useLegacyImplementation
       drawerContent={props => <Sidebar {...props} />}
       screenOptions={{
         headerStyle: {
@@ -67,6 +68,7 @@ export const SidebarNavigation = () => {
             <SvgWahlOMeter width={size} height={size} color={color} />
           ),
           unmountOnBlur: true,
+          title: 'Wahl-O-Meter',
         }}
         name="WahlOMeter"
         component={WahlOMeterNavigation}
@@ -109,9 +111,9 @@ export const SidebarNavigation = () => {
         name={'About'}
         component={AboutScreen}
       />
-      {process.env.NODE_ENV === 'development' && (
-        <SidebarDrawer.Screen name="DEV" component={DevScreen} />
-      )}
+      {/* {process.env.NODE_ENV === 'development' && ( */}
+      <SidebarDrawer.Screen name="DEV" component={DevScreen} />
+      {/* )} */}
     </SidebarDrawer.Navigator>
   );
 };

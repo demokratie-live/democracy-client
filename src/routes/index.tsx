@@ -24,6 +24,8 @@ import { NotificationInstructionScreen } from '../screens/NotificationInstructio
 import { DonateScreen } from '../screens/Donate';
 import { Button } from 'react-native';
 import { AbgeordneteScreen } from '../screens/Abgeordnete';
+import { useNotifee } from '../api/hooks/useNotifee';
+// import { useRoutePushNotifications } from '../api/state/notifications/PushNotification';
 
 export type RootStackParamList = {
   Sidebar: undefined;
@@ -44,8 +46,8 @@ export type RootStackParamList = {
   DeputyProfile: { id: string };
   Pdf: { url: string; title: string };
   PushInstructions: undefined;
-  NotificationInstruction: { done: () => void; title?: string };
-  OutcomePush: { finishAction: () => void; title: string; procedureId: string };
+  NotificationInstruction: { title?: string };
+  OutcomePush: { finishAction?: () => void; title?: string; procedureId?: string };
   SmsCodeInput: { procedureId?: string };
   SmsDonate: undefined;
   Donate?: { done: () => void };
@@ -57,6 +59,8 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const Routes: React.FC = () => {
   const { lastStartWithVersion } = useInitialState();
+  // useRoutePushNotifications();
+  useNotifee();
 
   if (lastStartWithVersion === undefined) {
     return null;
@@ -83,7 +87,7 @@ export const Routes: React.FC = () => {
       <Stack.Screen
         name="Constituency"
         component={ConstituencyScreen}
-        options={{ headerShown: true }}
+        options={{ headerShown: true, title: 'Wahlkreissuche' }}
       />
       <Stack.Screen
         name="VerificationStart"
@@ -142,7 +146,7 @@ export const Routes: React.FC = () => {
       <Stack.Screen
         name="NotificationInstruction"
         component={NotificationInstructionScreen}
-        options={{ headerShown: true, title: 'Benachrichtigungen erhalten' }}
+        options={{ title: 'Benachrichtigungen erhalten' }}
       />
       <Stack.Screen
         name="OutcomePush"
@@ -185,7 +189,7 @@ export const Routes: React.FC = () => {
       <Stack.Screen
         name="AbgeordneteEdit"
         component={AbgeordneteScreen}
-        options={{ headerShown: true }}
+        options={{ headerShown: true, title: 'Abgeordnete' }}
       />
     </Stack.Navigator>
   );

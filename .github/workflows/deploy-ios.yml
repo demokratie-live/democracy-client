@@ -1,34 +1,85 @@
 name: Deploy iOS
 
 on:
-  workflow_dispatch
-  # push:
-  #   branches:
-  #     - internal
-  #     - alpha
-  #     - beta
-  #     - master
+  workflow_dispatch:
+  push:
+    branches:
+      - internal
+      - alpha
+      - beta
+      - master
 
 jobs:
-  build-ios:
-    name: Deploy iOS
-    runs-on: macos-latest
+  install-packages:
+    name: Install packages
+    runs-on: macos-12
     steps:
+      - name: Select Xcode version
+        run: sudo xcode-select -s '/Applications/Xcode_14.2.app'
+
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup NodeJS
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: "14.x"
+          cache: 'yarn'
+          node-version: 16
 
-      - run: yarn install
+      - run: yarn install --frozen-lockfile
 
-      - run: pod install
+      - uses: actions/cache@v3
+        id: pods-cache
+        with:
+          path: ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+
+      - name: install pods
+        if: steps.pods-cache.outputs.cache-hit != 'true'
+        run: pod install
+        working-directory: ios
+
+  build-ios:
+    name: Deploy iOS
+    needs:
+      - install-packages
+    runs-on: macos-12
+    steps:
+      - name: Select Xcode version
+        run: sudo xcode-select -s '/Applications/Xcode_14.2.app'
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          cache: 'yarn'
+          node-version: 16
+
+      - run: yarn install --frozen-lockfile
+
+      - uses: actions/cache@v3
+        id: pods-cache
+        with:
+          path: ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+
+      - name: install pods
+        if: steps.pods-cache.outputs.cache-hit != 'true'
+        run: pod install
         working-directory: ios
 
       # install fastlane dependencies
-      - run: gem install bundler
+      - run: gem install bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)"
+        working-directory: ios
+
+      - run: bundle install
+        working-directory: ios
 
       - run: bundle update fastlane
         working-directory: ios
@@ -37,22 +88,20 @@ jobs:
         run: |
           brew install gnupg@1.4
           echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 ios/AuthKey_3Q9U495BMY.p8.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 ios/GoogleService-Info.plist.gpg
 
       - name: Fix match prompt issue
         run: echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 
-      - uses: actions/setup-ruby@v1
-        with:
-          ruby-version: "2.x"
-
       - name: Fastlane
-        uses: maierj/fastlane-action@v2.0.1
+        uses: maierj/fastlane-action@v3.0.0
         with:
-          lane: "ios beta"
-          subdirectory: "ios"
+          lane: 'ios deploy --env internal'
+          subdirectory: 'ios'
         env:
           TRAVIS_BRANCH: ${{ github.ref }}
-          TRAVIS: "true"
+          TRAVIS: 'true'
           MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          CI: true

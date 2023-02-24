@@ -1,16 +1,15 @@
 import React, { useState, useContext } from 'react';
 import { useRoute, RouteProp } from '@react-navigation/core';
-import { Dimensions, Switch, View } from 'react-native';
+import { Switch, View } from 'react-native';
 import { RootStackParamList } from '../../routes';
 import styled from 'styled-components/native';
 import { ProcedureDocument, useToggleNotificationMutation } from '../../__generated__/graphql';
 import { NotificationsContext } from '../../api/state/notificationPermission';
 import { defaultNotificationData } from '../Introduction/PushInstructions/data';
-import SvgIconappios from '../../components/Icons/IconAppIos';
 import { NotificationBox } from '../Introduction/PushInstructions/NotificationBox';
 import { Button } from '@democracy-deutschland/ui';
-
-const DEVICE_WIDTH = Dimensions.get('window').width;
+import { Headline } from '../../components/Headline';
+import { AppLogo } from '../../components/AppLogo';
 
 type RouteProps = RouteProp<RootStackParamList, 'OutcomePush'>;
 
@@ -23,14 +22,8 @@ const ScrollView = styled.ScrollView.attrs({
   },
 })``;
 
-const Headline = styled.Text`
-  color: #000;
-  font-size: 25px;
-  margin-vertical: 18px;
-`;
-
 const Subtitle = styled.Text`
-  color: #9b9b9b;
+  color: ${({ theme }) => theme.colors.text.tertiary};
   font-size: 15px;
   margin-top: 18px;
   margin-bottom: 18px;
@@ -49,6 +42,10 @@ const SwitchText = styled.Text`
   padding-right: 18px;
 `;
 
+const SkipButton = styled(Button)`
+  height: 72px;
+`;
+
 const ToggleButton = styled(Button)``;
 
 export interface Notification {
@@ -58,16 +55,13 @@ export interface Notification {
 }
 
 interface Props {
-  finishAction: () => void;
+  finishAction?: () => void;
 }
 
 export const OutcomePushs: React.FC<Props> = ({ finishAction }) => {
   const route = useRoute<RouteProps>();
 
   const [toggleNotification] = useToggleNotificationMutation({
-    variables: {
-      procedureId: route.params.procedureId,
-    },
     refetchQueries: [
       {
         query: ProcedureDocument,
@@ -94,24 +88,30 @@ export const OutcomePushs: React.FC<Props> = ({ finishAction }) => {
   const doneAction = route.params.finishAction ? route.params.finishAction : finishAction;
 
   const pressActivate = () => {
-    toggleNotification();
+    if (route.params.procedureId) {
+      toggleNotification({
+        variables: {
+          procedureId: route.params.procedureId,
+        },
+      });
+    }
     requestToken();
     updateNotificationSettings({
       enabled: true,
       outcomePushs: true,
     });
-    doneAction();
+    doneAction?.();
   };
 
   const pressDenie = () => {
     setOutcomePushsDenied(true);
-    doneAction();
+    doneAction?.();
   };
 
   return (
     <ScrollView>
       <View style={{ paddingTop: 36, alignItems: 'center' }}>
-        <SvgIconappios width={73} height={73} />
+        <AppLogo />
         <Headline>Ergebnisse erhalten</Headline>
         <Subtitle>
           Werde nach Deiner Abstimmung automatisch über das offizielle Ergebnis des Bundestages
@@ -146,9 +146,9 @@ export const OutcomePushs: React.FC<Props> = ({ finishAction }) => {
       )}
 
       {pushActive && (
-        <Button variant="secondary" onPress={doneAction}>
+        <SkipButton variant="secondary" onPress={doneAction}>
           Überspringen
-        </Button>
+        </SkipButton>
       )}
     </ScrollView>
   );

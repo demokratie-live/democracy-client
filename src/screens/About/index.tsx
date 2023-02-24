@@ -7,8 +7,8 @@ import { Linking, Platform, Text } from 'react-native';
 import { getBuildNumber, getVersion } from 'react-native-device-info';
 import { MarkdownView } from 'react-native-markdown-view';
 import styled from 'styled-components/native';
+import { AppLogo } from '../../components/AppLogo';
 import Folding from '../../components/Folding';
-import SvgIconappios from '../../components/Icons/IconAppIos';
 import SvgMail from '../../components/Icons/Mail';
 import SvgPhone from '../../components/Icons/Phone';
 import SvgPlanet from '../../components/Icons/Planet';
@@ -98,7 +98,7 @@ export const AboutScreen: React.FC<Props> = () => {
     <Wrapper>
       <Content>
         <HeaderWrapper>
-          <SvgIconappios width={100} height={100} />
+          <AppLogo />
           <Text
             style={{
               paddingTop: 18,

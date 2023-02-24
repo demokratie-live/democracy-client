@@ -37,7 +37,7 @@ export const DeputyListController: React.FC<DeputyListControllerProps> = ({
   const navigation = useNavigation<ScreenNavigationProp>();
   const parlamentIdentifier = useRecoilValue(parlamentState);
   const parlament = parlaments[parlamentIdentifier];
-  const setFavorizedDeputy = useSetRecoilState(favorizedDeputiesState);
+  const setFavorizedDeputy = useSetRecoilState(favorizedDeputiesState(parlamentIdentifier));
   const { data, fetchMore, loading, refetch } = useDeputiesQuery({
     variables: {
       limit: 10,

@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Dimensions, ScaledSize } from 'react-native';
-import Carousel from 'react-native-snap-carousel';
+import {
+  ActivityIndicator,
+  Dimensions,
+  ScaledSize,
+  ScrollViewProps,
+  useWindowDimensions,
+  View,
+} from 'react-native';
 import PieChart from './Charts/PieChart';
 import ChartLegend from './Charts/ChartLegend';
 import styled from 'styled-components/native';
@@ -8,10 +14,21 @@ import { useRecoilValue } from 'recoil';
 import { constituencyState } from '../../../api/state/constituency';
 import { useInitialState } from '../../../api/state/initialState';
 import Folding from '../../../components/Folding';
-import { CarouselPagination } from '../../../components/Pagination';
 import { CommunityConstituencyVotes, CommunityVotes } from '../../../__generated__/graphql';
 import GermanySvgComponent from '../../../components/svgs/GermanySVG';
 import { getConstituencySvgs } from '../../../components/svgs/constituencies';
+import { Pagination } from '@democracy-deutschland/ui';
+
+const ScrollView = styled.ScrollView.attrs(
+  (): ScrollViewProps => ({
+    horizontal: true,
+    pagingEnabled: true,
+    showsHorizontalScrollIndicator: false,
+    contentContainerStyle: {
+      alignContent: 'center',
+    },
+  }),
+)``;
 
 const MAX_WIDTH = Math.min(380, Dimensions.get('window').width, Dimensions.get('window').height);
 
@@ -19,8 +36,8 @@ const RepresentativeText = styled.Text`
   color: ${({ theme }) => theme.colors.text.tertiary};
   text-align: center;
   font-size: 12px;
-  padding-bottom: 18px;
-  padding-horizontal: 24px;
+  padding-vertical: ${({ theme }) => theme.spaces.small};
+  padding-horizontal: ${({ theme }) => theme.spaces.default};
 `;
 
 const CommunitySegmentText = styled.Text`
@@ -30,10 +47,9 @@ const CommunitySegmentText = styled.Text`
   padding-bottom: 16px;
 `;
 
-const PieChartWrapper = styled.View`
+const PieChartWrapper = styled.View<{ width: number }>`
   align-self: center;
   padding-horizontal: 36px;
-  width: 100%;
   max-width: ${MAX_WIDTH}px;
 `;
 
@@ -42,13 +58,6 @@ const SvgWrapper = styled.View`
   top: 8px;
   right: 22px;
 `;
-
-const SwiperStyled = styled(Carousel as new () => Carousel<JSX.Element>).attrs({
-  paddingTop: 10,
-  paginationStyle: { bottom: 14 },
-})`
-  max-height: 430px;
-` as React.ComponentType as new <T>() => Carousel<T>;
 
 interface Props {
   voteResults: CommunityVotes;
@@ -60,22 +69,7 @@ export const CommunityVoteResults: React.FC<Props> = ({ voteResults, voted, coun
   const myConstituency = useRecoilValue(constituencyState);
   const { isVerified } = useInitialState();
   const [activeSlide, setActiveSlide] = useState<number>(0);
-  const [width, setWidth] = useState<number>(380);
-
-  useEffect(() => {
-    setWidth(Dimensions.get('screen').width);
-  }, []);
-
-  const onChange = ({ screen }: { window: ScaledSize; screen: ScaledSize }) => {
-    setWidth(screen.width);
-  };
-
-  useEffect(() => {
-    const listener = Dimensions.addEventListener('change', onChange);
-    return () => {
-      listener.remove();
-    };
-  });
+  const { width } = useWindowDimensions();
 
   const renderCommuntiyResult = (comunnityResults: CommunityVotes | CommunityConstituencyVotes) => {
     if (
@@ -113,7 +107,7 @@ export const CommunityVoteResults: React.FC<Props> = ({ voteResults, voted, coun
         : null;
 
       return (
-        <PieChartWrapper key={myConstituency ? 'goverment' : 'constituency'}>
+        <PieChartWrapper width={width} key={myConstituency ? 'goverment' : 'constituency'}>
           <CommunitySegmentText>
             {!isConstituencyChart ? 'Deutschland' : `Wahlkreis ${myConstituency || ''}`}
           </CommunitySegmentText>
@@ -146,20 +140,19 @@ export const CommunityVoteResults: React.FC<Props> = ({ voteResults, voted, coun
   if (myConstituency && voteResults.constituencies[0]) {
     screens.push(renderCommuntiyResult(voteResults.constituencies[0]));
   }
-  screens.push(countryMap);
+  screens.push(<View style={{ width }}>{countryMap}</View>);
 
-  const renderItem = ({ item }: { item: JSX.Element; index: number }) => item;
+  const onMomentumScrollEnd: ScrollViewProps['onMomentumScrollEnd'] = ({ nativeEvent }) => {
+    const index = Math.round(nativeEvent.contentOffset.x / width);
+    if (index !== activeSlide) {
+      setActiveSlide(index);
+    }
+  };
 
   return (
     <Folding title="Communityergebnis" opened={!isVerified || voted} paddingHorizontal={0}>
-      <SwiperStyled
-        data={screens}
-        renderItem={renderItem}
-        sliderWidth={width}
-        itemWidth={MAX_WIDTH}
-        onSnapToItem={setActiveSlide}
-      />
-      <CarouselPagination length={screens.length} active={activeSlide} />
+      <ScrollView onMomentumScrollEnd={onMomentumScrollEnd}>{screens}</ScrollView>
+      <Pagination active={activeSlide} length={screens.length} />
       <RepresentativeText>
         Dieses Ergebnis wurde nicht auf seine Repräsentativität überprüft.
       </RepresentativeText>
