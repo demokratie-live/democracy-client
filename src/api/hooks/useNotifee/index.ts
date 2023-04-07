@@ -108,8 +108,9 @@ export const useNotifee = () => {
       .then(() => setToken(undefined));
   };
 
-  const getToken = () => {
-    messaging().getToken().then(setToken);
+  const getToken = async () => {
+    console.log('GET_TOKEN!');
+    await messaging().getToken().then(setToken);
   };
 
   useEffect(() => {
