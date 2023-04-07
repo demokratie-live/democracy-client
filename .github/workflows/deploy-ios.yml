@@ -9,6 +9,10 @@ on:
       - beta
       - master
 
+concurrency:
+  group: deploy-ios
+  cancel-in-progress: false
+
 jobs:
   install-packages:
     name: Install packages

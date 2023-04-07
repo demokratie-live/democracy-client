@@ -9,6 +9,10 @@ on:
       - beta
       - master
 
+concurrency:
+  group: deploy-android
+  cancel-in-progress: false
+
 jobs:
   build-android:
     name: Deploy Android
