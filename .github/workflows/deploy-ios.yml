@@ -14,41 +14,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  install-packages:
-    name: Install packages
-    runs-on: macos-12
-    steps:
-      - name: Select Xcode version
-        run: sudo xcode-select -s '/Applications/Xcode_14.2.app'
-
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Setup NodeJS
-        uses: actions/setup-node@v3
-        with:
-          cache: 'yarn'
-          node-version: 16
-
-      - run: yarn install --frozen-lockfile
-
-      - uses: actions/cache@v3
-        id: pods-cache
-        with:
-          path: ios/Pods
-          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-pods-
-
-      - name: install pods
-        if: steps.pods-cache.outputs.cache-hit != 'true'
-        run: pod install
-        working-directory: ios
-
   build-ios:
     name: Deploy iOS
-    needs:
-      - install-packages
     runs-on: macos-12
     steps:
       - name: Select Xcode version
@@ -65,16 +32,7 @@ jobs:
 
       - run: yarn install --frozen-lockfile
 
-      - uses: actions/cache@v3
-        id: pods-cache
-        with:
-          path: ios/Pods
-          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-pods-
-
       - name: install pods
-        if: steps.pods-cache.outputs.cache-hit != 'true'
         run: pod install
         working-directory: ios
 
