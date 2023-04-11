@@ -29,8 +29,6 @@ const VotesIndex = styled(VotesIndexCmp)``;
 const ChartWrapper = styled.View`
   flex-direction: row;
   justify-content: flex-end;
-  /* min-width: 45px; */
-  padding-top: 18px;
 `;
 
 const VoteDate = styled(VoteDateCmp)`
@@ -39,6 +37,7 @@ const VoteDate = styled(VoteDateCmp)`
 
 const Title = styled.Text`
   font-size: 17px;
+  min-height: 61px;
   color: #030303;
 `;
 

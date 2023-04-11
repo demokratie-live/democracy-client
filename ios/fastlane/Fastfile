@@ -15,28 +15,22 @@
 
 default_platform(:ios)
 
-setup_travis
+# print("P TRAVIS_BRANCH" + ENV["TRAVIS_BRANCH"])
 
-package = load_json(json_path: "../package.json")
-
-version_number = package["version"]
-
-print("P TRAVIS_BRANCH" + ENV["TRAVIS_BRANCH"])
-
-scheme_name = "Internal"
-app_identifier = "de.democracy-deutschland.clientapp.internal"
-if ENV["TRAVIS_BRANCH"] == 'refs/heads/alpha'
-  scheme_name = "Alpha"
-  app_identifier = "de.democracy-deutschland.clientapp.alpha"
-end
-if ENV["TRAVIS_BRANCH"] == 'refs/heads/internal'
-  scheme_name = "Internal"
-  app_identifier = "de.democracy-deutschland.clientapp.internal"
-end
-if ENV["TRAVIS_BRANCH"] == 'refs/heads/master'
-  scheme_name = "client"
-  app_identifier = "de.democracy-deutschland.clientapp"
-end
+# scheme_name = "Internal"
+# app_identifier = ENV['BUNDLE_IDENTIFIER']
+# if ENV["TRAVIS_BRANCH"] == 'refs/heads/alpha'
+#   scheme_name = "Alpha"
+#   app_identifier = "de.democracy-deutschland.clientapp.alpha"
+# end
+# if ENV["TRAVIS_BRANCH"] == 'refs/heads/internal'
+#   scheme_name = "Internal"
+#   app_identifier = ENV['BUNDLE_IDENTIFIER']
+# end
+# if ENV["TRAVIS_BRANCH"] == 'refs/heads/master'
+#   scheme_name = "client"
+#   app_identifier = "de.democracy-deutschland.clientapp"
+# end
 
 api_key = app_store_connect_api_key(
     key_id: "3Q9U495BMY",
@@ -47,40 +41,52 @@ api_key = app_store_connect_api_key(
   )
 
 platform :ios do
-  desc "Installs the certificates locally"
-    private_lane :install_certificates do
-    if ENV['TRAVIS']
-      tmp_keychain = "temporary_keychain"
-      create_keychain(
-        name: tmp_keychain,
-        password: tmp_keychain,
-        default_keychain: true,
-        timeout: 3600,
-        unlock: true,
-      )
-      match(
-        type: "appstore",
-        keychain_name: tmp_keychain,
-        keychain_password: tmp_keychain,
-        readonly: true,
-        skip_confirmation: true,
-      )
-    else	
-      match(
-        type: "appstore"
-      )
-    end
+
+  desc "Get certificates"
+  lane :certificates do
+    sync_code_signing(
+      type: "development",
+      app_identifier: ENV['BUNDLE_IDENTIFIER'],
+      readonly: true
+    )
+
+    # You can repeate the sync_code_signing with other types of certificates such as appstore and adhoc
+    sync_code_signing(
+      type: "appstore",
+      app_identifier: ENV['BUNDLE_IDENTIFIER'],
+      readonly: true
+    )
+  end
+
+  desc "Generate new certificates"
+  lane :generate_new_certificates do
+    sync_code_signing(
+      type: "development",
+      app_identifier: ENV['BUNDLE_IDENTIFIER'],
+      readonly: false
+    )
+    sync_code_signing(
+      type: "appstore",
+      app_identifier: ENV['BUNDLE_IDENTIFIER'],
+      readonly: false
+    )
   end
 
   desc "Push a new beta build to TestFlight"
-  lane :beta do
-    install_certificates
+  lane :deploy do
+    setup_ci if ENV['CI']
+    
+    certificates
+
+    package = load_json(json_path: "../package.json")
+    
+    version_number = package["version"]
 
     # handle build_number
     build_number = latest_testflight_build_number(
       api_key: api_key,
       version: version_number,
-      app_identifier: app_identifier
+      app_identifier: ENV['BUNDLE_IDENTIFIER']
     ).to_i
     build_number_local = get_build_number(xcodeproj: "DemocracyNative.xcodeproj").to_i
 
@@ -102,23 +108,13 @@ platform :ios do
 
     build_app(
       workspace: "DemocracyNative.xcworkspace", 
-      scheme: scheme_name,
-      clean: true,
+      scheme: ENV['SCHEME_NAME'],
     )
-
-    # upload_to_browserstack_app_live(
-    #   browserstack_username: ENV["BROWSERSTACK_USERNAME"],
-    #   browserstack_access_key: ENV["BROWSERSTACK_ACCESS_KEY"],
-    # )
-
-    # TODO Add deliver
 
     upload_to_testflight(
       api_key: api_key,
-      app_identifier: app_identifier,
-      skip_waiting_for_build_processing: true
+      app_identifier: ENV['BUNDLE_IDENTIFIER'],
+      skip_waiting_for_build_processing: false
     )
-
-    delete_keychain(name: "temporary_keychain")
   end
 end

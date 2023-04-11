@@ -24,7 +24,8 @@ import { NotificationInstructionScreen } from '../screens/NotificationInstructio
 import { DonateScreen } from '../screens/Donate';
 import { Button } from 'react-native';
 import { AbgeordneteScreen } from '../screens/Abgeordnete';
-import { useRoutePushNotifications } from '../api/state/notifications/PushNotification';
+import { useNotifee } from '../api/hooks/useNotifee';
+// import { useRoutePushNotifications } from '../api/state/notifications/PushNotification';
 
 export type RootStackParamList = {
   Sidebar: undefined;
@@ -46,7 +47,7 @@ export type RootStackParamList = {
   Pdf: { url: string; title: string };
   PushInstructions: undefined;
   NotificationInstruction: { title?: string };
-  OutcomePush: { finishAction: () => void; title: string; procedureId: string };
+  OutcomePush: { finishAction?: () => void; title?: string; procedureId?: string };
   SmsCodeInput: { procedureId?: string };
   SmsDonate: undefined;
   Donate?: { done: () => void };
@@ -58,7 +59,8 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const Routes: React.FC = () => {
   const { lastStartWithVersion } = useInitialState();
-  useRoutePushNotifications();
+  // useRoutePushNotifications();
+  useNotifee();
 
   if (lastStartWithVersion === undefined) {
     return null;

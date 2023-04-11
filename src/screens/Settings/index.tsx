@@ -17,6 +17,7 @@ import { initialState } from '../../api/state/initialState';
 import { NotificationsContext } from '../../api/state/notificationPermission';
 import { Segment } from '../../components/Segment/index';
 import { linking } from '../../lib/linking';
+import { useNotifee } from '../../api/hooks/useNotifee';
 
 const Wrapper = styled.View`
   background-color: ${({ theme }) => theme.colors.background.secondary};
@@ -59,6 +60,7 @@ export const SettingsScreen: React.FC = () => {
     update: updateNotificationSettings,
     requestToken,
   } = useContext(NotificationsContext);
+  const { requestPermissions } = useNotifee();
 
   const navigateTo = (screen: string) => () => {
     switch (screen) {
@@ -79,7 +81,7 @@ export const SettingsScreen: React.FC = () => {
 
   const handleActivate = () => {
     if (!alreadyDenied) {
-      requestToken();
+      requestPermissions();
     } else {
       Alert.alert(
         'Benachrichtigungen',

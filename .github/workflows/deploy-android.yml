@@ -1,0 +1,60 @@
+name: Deploy Android
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - internal
+      - alpha
+      - beta
+      - master
+
+concurrency:
+  group: deploy-android
+  cancel-in-progress: false
+
+jobs:
+  build-android:
+    name: Deploy Android
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          cache: 'yarn'
+          node-version: 16
+
+      - run: yarn install --frozen-lockfile
+
+      # install fastlane dependencies
+      - run: sudo gem install bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)"
+        working-directory: android
+
+      - run: bundle install
+        working-directory: android
+
+      - run: bundle update fastlane
+        working-directory: android
+
+      - run: sudo apt-get install -y gnupg1
+
+      - name: Encrypt GPG secure files
+        run: |
+          # echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 android/my-release-key.keystore.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 android/app/google-services.json.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 android/democracy2-release-key.keystore.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 android/key.json.gpg
+
+      - name: Fastlane
+        uses: maierj/fastlane-action@v3.0.0
+        with:
+          lane: 'internal --env internal'
+          subdirectory: 'android'
+        env:
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+          ANDROID_PASS: ${{ secrets.ANDROID_PASS }}
+          CI: true

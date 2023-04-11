@@ -1,9 +1,11 @@
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react';
-import { Alert, Button } from 'react-native';
+import { Alert, Button, Text } from 'react-native';
+import { useNotifee } from '../../api/hooks/useNotifee';
 import VotesLocal from '../../lib/VotesLocal';
 
 export const DevScreen: React.FC = () => {
+  const { token, deleteToken, getToken } = useNotifee();
   return (
     <>
       <Button
@@ -25,6 +27,14 @@ export const DevScreen: React.FC = () => {
           Alert.alert('local votes deleted');
         }}
       />
+      <Button
+        title="Reset Token"
+        onPress={() => {
+          deleteToken().then(getToken);
+          Alert.alert('local votes deleted');
+        }}
+      />
+      <Text selectable>{token}</Text>
     </>
   );
 };

@@ -17,6 +17,11 @@ target 'DemocracyNative' do
 
   # Flags change depending on the env values.
   flags = get_default_flags()
+ 
+  pod 'Firebase', :modular_headers => true
+  pod 'FirebaseCore', :modular_headers => true
+  pod 'GoogleUtilities', :modular_headers => true
+  $RNFirebaseAsStaticFramework = true
   
   # react-native-permissions
   permissions_path = '../node_modules/react-native-permissions/ios'

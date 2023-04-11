@@ -10,6 +10,7 @@ import { RootStackParamList } from '../../../routes';
 import { Button } from '@democracy-deutschland/ui';
 import { Headline } from '../../../components/Headline';
 import { AppLogo } from '../../../components/AppLogo';
+import { useNotifee } from '../../../api/hooks/useNotifee';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 
@@ -73,7 +74,8 @@ interface Props {
 export const PushInstructions: React.FC<Props> = ({ alreadyKnown = false }) => {
   const [pushActive, setPushActive] = useState(true);
   const navigation = useNavigation<ScreenNavigationProps>();
-  const { requestToken, update: updateNotificationSettings } = useContext(NotificationsContext);
+  const { update: updateNotificationSettings } = useContext(NotificationsContext);
+  const { requestPermissions } = useNotifee();
 
   const notification = {
     title: defaultNotificationData.outcomePushs.title,
@@ -82,7 +84,7 @@ export const PushInstructions: React.FC<Props> = ({ alreadyKnown = false }) => {
   };
 
   const pressActivate = () => {
-    requestToken();
+    // requestToken();
     updateNotificationSettings({
       enabled: true,
       outcomePushs: true,
@@ -135,7 +137,13 @@ export const PushInstructions: React.FC<Props> = ({ alreadyKnown = false }) => {
           onPress={pressActivate}
           disabled={!pushActive}
         /> */}
-        <ActivateButton variant="primary" onPress={pressActivate} disabled={!pushActive}>
+        <ActivateButton
+          variant="primary"
+          onPress={() => {
+            requestPermissions();
+          }}
+          disabled={!pushActive}
+        >
           Aktivieren
         </ActivateButton>
       </ScrollView>
