@@ -20,10 +20,13 @@ const ScrollView = styled.ScrollView.attrs(
       alignContent: 'center',
     },
   }),
-)``;
+)`
+  padding-bottom: ${({ theme }) => theme.spaces.small};
+`;
 
 const Pagination = styled(PaginationCmp)`
   margin-top: ${({ theme }) => theme.spaces.small};
+  margin-bottom: ${({ theme }) => theme.spaces.small};
 `;
 
 interface Props {

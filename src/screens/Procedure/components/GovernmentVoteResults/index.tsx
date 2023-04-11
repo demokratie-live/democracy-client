@@ -19,7 +19,9 @@ const ScrollView = styled.ScrollView.attrs(
       alignContent: 'center',
     },
   }),
-)``;
+)`
+  padding-bottom: ${({ theme }) => theme.spaces.small};
+`;
 
 const PieChartWrapper = styled.View<{ width: number }>`
   align-self: center;
@@ -46,7 +48,7 @@ const DecisionText = styled.Text`
 
 const RepresentativeText = styled.Text`
   color: ${({ theme }) => theme.colors.text.tertiary};
-  padding-top: ${({ theme }) => theme.spaces.small};
+  padding-top: ${({ theme }) => theme.spaces.default};
   text-align: center;
   font-size: 12px;
 `;

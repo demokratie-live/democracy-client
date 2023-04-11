@@ -28,7 +28,9 @@ const ScrollView = styled.ScrollView.attrs(
       alignContent: 'center',
     },
   }),
-)``;
+)`
+  padding-bottom: ${({ theme }) => theme.spaces.small};
+`;
 
 const MAX_WIDTH = Math.min(380, Dimensions.get('window').width, Dimensions.get('window').height);
 
@@ -36,7 +38,8 @@ const RepresentativeText = styled.Text`
   color: ${({ theme }) => theme.colors.text.tertiary};
   text-align: center;
   font-size: 12px;
-  padding-vertical: ${({ theme }) => theme.spaces.small};
+  padding-top: ${({ theme }) => theme.spaces.default};
+  padding-bottom: ${({ theme }) => theme.spaces.small};
   padding-horizontal: ${({ theme }) => theme.spaces.default};
 `;
 
