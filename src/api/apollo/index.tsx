@@ -8,6 +8,7 @@ import { ApolloClient, InMemoryCache, ApolloLink, HttpLink } from '@apollo/clien
 import { typePolicies } from './TypePolicies';
 import { NativeModules, Platform } from 'react-native';
 import { isEmulatorSync } from 'react-native-device-info';
+import { applicationIdLinkMiddleware } from './ApplicationId';
 
 const cache = new InMemoryCache({
   typePolicies,
@@ -59,6 +60,7 @@ const restLink = new RestLink({
 const link = ApolloLink.from([
   errorLink,
   versionLinkMiddleware,
+  applicationIdLinkMiddleware,
   authLinkMiddleware,
   authLinkAfterware,
   restLink,

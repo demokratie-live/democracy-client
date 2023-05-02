@@ -132,13 +132,11 @@ export const Results: React.FC = () => {
     sectionData = [
       {
         title: 'Zuletzt gesucht',
-        data: [...history],
+        data: [...Array.from(history)],
       },
       {
         title: 'Meistgesucht',
-        data: mostSearchedTerms
-          ? mostSearchedTerms.mostSearched.map(({ term: value }) => value)
-          : [],
+        data: mostSearchedTerms?.mostSearched.map(({ term: value }) => value) ?? [],
       },
     ];
   } else {
