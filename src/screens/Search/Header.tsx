@@ -15,10 +15,11 @@ export const SearchHeader: React.FC = () => {
   const [executeFinishSearch] = useFinishSearchMutation();
 
   const finishSearch = () => {
-    setHistory(prev => new Set([term, ...Array.from(prev)]));
+    const termClean = term.trim();
+    setHistory(prev => (termClean ? new Set([termClean, ...Array.from(prev)]) : prev));
     executeFinishSearch({
       variables: {
-        term,
+        term: termClean,
       },
     });
   };
