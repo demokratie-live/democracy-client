@@ -41,11 +41,13 @@ const Row = styled.TouchableOpacity`
 
 const TitleMain = styled.Text`
   font-size: 17px;
+  color: ${({ theme }) => theme.colors.text.primary};
 `;
 
 const TitleSub = styled.Text`
   flex: 0.98;
   font-size: 15px;
+  color: ${({ theme }) => theme.colors.text.primary};
 `;
 
 type FilterScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Filter'>;

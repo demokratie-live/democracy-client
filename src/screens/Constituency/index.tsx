@@ -20,6 +20,7 @@ const FlatListWrapper = styled.View``;
 
 const Title = styled.Text`
   font-size: 17px;
+  color: ${({ theme }) => theme.colors.text.primary};
 `;
 
 const Plz = styled.Text.attrs({
