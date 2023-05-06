@@ -50,6 +50,7 @@ const SwitchText = styled.Text`
   font-size: 17px;
   flex: 1;
   padding-right: 18px;
+  color: ${({ theme }) => theme.colors.text.tertiary};
 `;
 
 const Highlight = styled.Text`
@@ -84,7 +85,7 @@ export const PushInstructions: React.FC<Props> = ({ alreadyKnown = false }) => {
   };
 
   const pressActivate = () => {
-    // requestToken();
+    requestPermissions();
     updateNotificationSettings({
       enabled: true,
       outcomePushs: true,
@@ -140,7 +141,7 @@ export const PushInstructions: React.FC<Props> = ({ alreadyKnown = false }) => {
         <ActivateButton
           variant="primary"
           onPress={() => {
-            requestPermissions();
+            pressActivate();
           }}
           disabled={!pushActive}
         >

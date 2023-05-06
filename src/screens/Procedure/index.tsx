@@ -36,6 +36,7 @@ import { Centered } from '../../components/Centered';
 import { Button } from '../../components/Button';
 import { ListLoading } from '../../components/ListLoading';
 import Folding from '../../components/Folding';
+import { useNotifee } from '../../api/hooks/useNotifee';
 
 const Container = styled.ScrollView.attrs({
   scrollIndicatorInsets: { right: 1 }, // TODO do cleanfix when there is a correct solution (already closed but not solved without workaround) https://github.com/facebook/react-native/issues/26610
@@ -67,7 +68,8 @@ type Props = {
 const ShareComponent = Platform.OS === 'ios' ? SvgShareIosHeader : SvgShare;
 
 export const ProcedureScreen: FC<Props> = ({ route, navigation }) => {
-  const { notificationSettings, hasPermissions } = useContext(NotificationsContext);
+  const { notificationSettings } = useContext(NotificationsContext);
+  const { authorized: pushAuthorized } = useNotifee();
   const { isVerified } = useInitialState();
   const constituency = useRecoilValue(constituencyState);
   const constituencies = useMemo(() => (constituency ? [constituency] : []), [constituency]);
@@ -112,7 +114,7 @@ export const ProcedureScreen: FC<Props> = ({ route, navigation }) => {
   });
 
   const clickBell = useCallback(() => {
-    if (!notificationSettings.enabled || !notificationSettings.outcomePushs || !hasPermissions) {
+    if (!notificationSettings.enabled || !notificationSettings.outcomePushs || !pushAuthorized) {
       navigation.navigate('NotificationInstruction', {
         title: data?.procedure.title,
       });
@@ -157,7 +159,7 @@ export const ProcedureScreen: FC<Props> = ({ route, navigation }) => {
   }, [
     constituencies,
     data,
-    hasPermissions,
+    pushAuthorized,
     navigation,
     notificationSettings.enabled,
     notificationSettings.outcomePushs,

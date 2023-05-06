@@ -26,6 +26,7 @@ import { localVoteState } from '../../../api/state/votesLocal';
 import { constituencyState } from '../../../api/state/constituency';
 import { searchTermState } from '../../../api/state/search';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNotifee } from '../../../api/hooks/useNotifee';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -78,8 +79,8 @@ interface Props {
 }
 
 const BalloutBox: React.FC<Props> = ({ selection, procedureId, procedureObjId, title }) => {
-  const { notificationSettings, hasPermissions, outcomePushsDenied } =
-    useContext(NotificationsContext);
+  const { notificationSettings, outcomePushsDenied } = useContext(NotificationsContext);
+  const { authorized: pushAuthorized } = useNotifee();
   const setLocalVote = useSetRecoilState(localVoteState(procedureId));
   const term = useRecoilValue(searchTermState);
   const constituency = useRecoilValue(constituencyState);
@@ -189,7 +190,7 @@ const BalloutBox: React.FC<Props> = ({ selection, procedureId, procedureObjId, t
                   if (
                     (!notificationSettings.outcomePushs ||
                       !notificationSettings.enabled ||
-                      !hasPermissions) &&
+                      !pushAuthorized) &&
                     !outcomePushsDenied
                   ) {
                     navigation.replace('OutcomePush', {
@@ -231,7 +232,7 @@ const BalloutBox: React.FC<Props> = ({ selection, procedureId, procedureObjId, t
       procedureId,
       notificationSettings.outcomePushs,
       notificationSettings.enabled,
-      hasPermissions,
+      pushAuthorized,
       outcomePushsDenied,
       navigation,
       title,

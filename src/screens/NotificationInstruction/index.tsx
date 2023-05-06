@@ -11,6 +11,7 @@ import { initialState } from '../../api/state/initialState';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Button } from '@democracy-deutschland/ui';
 import { Headline } from '../../components/Headline';
+import { useNotifee } from '../../api/hooks/useNotifee';
 
 const Wrapper = styled.SafeAreaView`
   flex: 1;
@@ -69,8 +70,9 @@ export const NotificationInstructionScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProps>();
   const [pushActive, setPushActive] = useState(true);
-  const { requestToken, update: updateNotificationSettings } = useContext(NotificationsContext);
+  const { update: updateNotificationSettings } = useContext(NotificationsContext);
   const { isVerified } = useRecoilValue(initialState);
+  const { requestPermissions } = useNotifee();
 
   const notification = {
     title: defaultNotificationData.outcomePushs.title,
@@ -79,7 +81,7 @@ export const NotificationInstructionScreen: React.FC = () => {
   };
 
   const pressActivate = () => {
-    requestToken();
+    requestPermissions();
     navigation.goBack();
     updateNotificationSettings({
       enabled: true,

@@ -11,8 +11,6 @@ import {
 } from '../../../__generated__/graphql';
 
 interface NotificationsInterface {
-  hasPermissions: boolean;
-  alreadyDenied: boolean;
   outcomePushsDenied: boolean;
   notificationSettings: Pick<
     NotificationSettings,
@@ -23,13 +21,10 @@ interface NotificationsInterface {
     | 'outcomePushs'
   >;
   update: (options: UpdateNotificationSettingsMutationVariables) => void;
-  requestToken: () => void;
   setOutcomePushsDenied: (value: boolean) => void;
 }
 
 const defaults: NotificationsInterface = {
-  hasPermissions: false,
-  alreadyDenied: false,
   outcomePushsDenied: false,
   notificationSettings: {
     conferenceWeekPushs: false,
@@ -41,9 +36,6 @@ const defaults: NotificationsInterface = {
   update: () => {
     throw new Error('NotificationsContext: update function is not defined');
   },
-  requestToken: () => {
-    throw new Error('NotificationsContext: requestToken function is not defined');
-  },
   setOutcomePushsDenied: () => {
     throw new Error('NotificationsContext: setOutcomePushsDenied function is not defined');
   },
@@ -52,7 +44,6 @@ const defaults: NotificationsInterface = {
 export const NotificationsContext = createContext<NotificationsInterface>(defaults);
 
 export const NotificationsProvider: React.FC = ({ children }) => {
-  const [hasPermissions, setHasPermissions] = useState(defaults.hasPermissions);
   const [alreadyDenied, setAlreadyDenied] = useState(false);
   const [outcomePushsDenied, setOutcomePushsDenied] = useState(false);
   const [notificationSettings, setNotificationSettings] = useState<
@@ -68,16 +59,12 @@ export const NotificationsProvider: React.FC = ({ children }) => {
     checkNotifications?.().then(({ status }) => {
       if (!alreadyDenied && status === 'blocked') {
         setAlreadyDenied(true);
-        setHasPermissions(false);
       } else if (alreadyDenied && status === 'granted') {
         setAlreadyDenied(false);
-        setHasPermissions(true);
       } else if (status === 'granted') {
         setAlreadyDenied(false);
-        setHasPermissions(true);
       } else if (status === 'blocked') {
         setAlreadyDenied(true);
-        setHasPermissions(false);
       }
     });
   }, [appState, alreadyDenied]);
@@ -136,11 +123,8 @@ export const NotificationsProvider: React.FC = ({ children }) => {
   return (
     <NotificationsContext.Provider
       value={{
-        hasPermissions,
-        alreadyDenied,
         notificationSettings,
         update,
-        requestToken,
         outcomePushsDenied,
         setOutcomePushsDenied,
       }}

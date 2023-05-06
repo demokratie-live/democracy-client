@@ -14,6 +14,7 @@ import { Pager } from './components/Pager';
 import { Slide, slidesData } from './components';
 import { PushInstructions } from './PushInstructions';
 import { NotificationsContext } from '../../api/state/notificationPermission';
+import { useNotifee } from '../../api/hooks/useNotifee';
 
 /**
  * TODO: Reenable NotificationContext
@@ -33,7 +34,8 @@ type Props = {
 const Introduction: FC<Props> = ({ route }) => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { isVerified, setLastStartWithVersion } = useRecoilValue(initialState);
-  const { notificationSettings, hasPermissions } = useContext(NotificationsContext);
+  const { notificationSettings } = useContext(NotificationsContext);
+  const { authorized } = useNotifee();
   let { lastStartWithVersion, done }: { lastStartWithVersion: string; done?: string } = {
     lastStartWithVersion: '',
     done: undefined,
@@ -68,7 +70,7 @@ const Introduction: FC<Props> = ({ route }) => {
     />
   ));
 
-  if (!notificationSettings.outcomePushs || !notificationSettings.enabled || !hasPermissions) {
+  if (!notificationSettings.outcomePushs || !notificationSettings.enabled || !authorized) {
     slideScreens.push(<PushInstructions key="push-instructions" />);
   }
 

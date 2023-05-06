@@ -54,14 +54,9 @@ export const SettingsScreen: React.FC = () => {
   const navigation = useNavigation<ScreenNavigationProp>();
   const constituency = useRecoilValue(constituencyState);
   const { isVerified } = useRecoilValue(initialState);
-  const {
-    hasPermissions,
-    alreadyDenied,
-    notificationSettings,
-    update: updateNotificationSettings,
-    requestToken,
-  } = useContext(NotificationsContext);
-  const { requestPermissions } = useNotifee();
+  const { notificationSettings, update: updateNotificationSettings } =
+    useContext(NotificationsContext);
+  const { requestPermissions, alreadyDenied, authorized } = useNotifee();
 
   const navigateTo = (screen: string) => () => {
     switch (screen) {
@@ -133,7 +128,7 @@ export const SettingsScreen: React.FC = () => {
   listData[0].data.push({
     title: 'Benachrichtigungen',
     onPress: navigateTo('notifications-settings'),
-    component: hasPermissions ? (
+    component: authorized ? (
       <Switch
         value={!!notificationSettings.enabled}
         onValueChange={value => {
@@ -147,7 +142,7 @@ export const SettingsScreen: React.FC = () => {
     ),
   });
 
-  if (hasPermissions && notificationSettings.enabled) {
+  if (authorized && notificationSettings.enabled) {
     listData.push(
       {
         title: 'Individuelle Benachrichtungen',

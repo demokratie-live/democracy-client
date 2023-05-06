@@ -10,6 +10,7 @@ import { NotificationBox } from '../Introduction/PushInstructions/NotificationBo
 import { Button } from '@democracy-deutschland/ui';
 import { Headline } from '../../components/Headline';
 import { AppLogo } from '../../components/AppLogo';
+import { useNotifee } from '../../api/hooks/useNotifee';
 
 type RouteProps = RouteProp<RootStackParamList, 'OutcomePush'>;
 
@@ -40,6 +41,7 @@ const SwitchText = styled.Text`
   font-size: 17px;
   flex: 1;
   padding-right: 18px;
+  color: ${({ theme }) => theme.colors.text.primary};
 `;
 
 const SkipButton = styled(Button)`
@@ -73,11 +75,9 @@ export const OutcomePushs: React.FC<Props> = ({ finishAction }) => {
   });
 
   const [pushActive, setPushActive] = useState(true);
-  const {
-    requestToken,
-    update: updateNotificationSettings,
-    setOutcomePushsDenied,
-  } = useContext(NotificationsContext);
+  const { update: updateNotificationSettings, setOutcomePushsDenied } =
+    useContext(NotificationsContext);
+  const { requestPermissions, alreadyDenied, authorized } = useNotifee();
 
   const notification = {
     title: defaultNotificationData.outcomePushs.title,
@@ -95,7 +95,7 @@ export const OutcomePushs: React.FC<Props> = ({ finishAction }) => {
         },
       });
     }
-    requestToken();
+    requestPermissions();
     updateNotificationSettings({
       enabled: true,
       outcomePushs: true,

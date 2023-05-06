@@ -8,6 +8,7 @@ import { MaterialTopTabNavigationProp } from '@react-navigation/material-top-tab
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { ListType, useAddTokenMutation } from '../../../__generated__/graphql';
 import { Platform } from 'react-native';
+import { PermissionsAndroid } from 'react-native';
 
 type ScreenNavigationProp = CompositeNavigationProp<
   MaterialTopTabNavigationProp<BundestagTopTabParamList>,
@@ -27,9 +28,9 @@ messaging().setBackgroundMessageHandler(onMessageReceived);
 export const useNotifee = () => {
   const { navigate } = useNavigation<ScreenNavigationProp>();
   const [token, setToken] = useState<string>();
-  const [permissionStatus, setPermissionStatus] =
-    useState<FirebaseMessagingTypes.AuthorizationStatus>();
+  const [authorized, setAuthorized] = useState<boolean>();
   const [sendToken] = useAddTokenMutation();
+  const [alreadyDenied, setAlreadyDenied] = useState<boolean>();
 
   // save token to database
   useEffect(() => {
@@ -50,8 +51,14 @@ export const useNotifee = () => {
   }, []);
 
   useEffect(() => {
-    messaging().hasPermission().then(setPermissionStatus);
-  }, []);
+    messaging()
+      .hasPermission()
+      .then(status => {
+        console.log('Permission status:', status);
+        setAuthorized(status === messaging.AuthorizationStatus.AUTHORIZED);
+        setAlreadyDenied(status === messaging.AuthorizationStatus.DENIED);
+      });
+  }, [token]);
 
   useEffect(() => {
     const onMessage = messaging().onMessage(onMessageReceived);
@@ -97,8 +104,12 @@ export const useNotifee = () => {
   const requestPermissions = async () => {
     const authorizationStatus = await messaging().requestPermission();
 
-    if (authorizationStatus) {
+    if (Platform.OS === 'android') {
+      PermissionsAndroid.request('android.permission.RECEIVE_WAP_PUSH');
+    }
+    if (authorizationStatus === messaging.AuthorizationStatus.AUTHORIZED) {
       console.log('Permission status:', authorizationStatus);
+      getToken();
     }
   };
 
@@ -110,16 +121,24 @@ export const useNotifee = () => {
 
   const getToken = async () => {
     console.log('GET_TOKEN!');
-    await messaging().getToken().then(setToken);
+    await messaging()
+      .getToken()
+      .then(token => {
+        console.log('GET_TOKEN!', token);
+        setToken(token);
+      });
   };
 
   useEffect(() => {
     register();
   }, []);
+
   return {
     token,
     deleteToken,
     getToken,
     requestPermissions,
+    authorized,
+    alreadyDenied,
   };
 };
