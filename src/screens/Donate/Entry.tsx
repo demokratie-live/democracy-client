@@ -22,10 +22,12 @@ const Text = styled.Text`
 
 const Money = styled.Text`
   font-size: 17px;
+  color: ${({ theme }) => theme.colors.text.primary};
 `;
 
 const DueDate = styled.Text`
   font-size: 11px;
+  color: ${({ theme }) => theme.colors.text.primary};
 `;
 
 const Description = styled.Text`

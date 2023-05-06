@@ -19,6 +19,7 @@ const Headline = styled.Text`
   flex: 1;
   font-size: 17px;
   margin-right: 10px;
+  color: ${({ theme }) => theme.colors.text.primary};
 `;
 
 interface CollapseIconProps extends SvgProps {

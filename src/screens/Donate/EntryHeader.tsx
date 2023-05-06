@@ -13,6 +13,7 @@ const Wrapper = styled.View`
 
 const Title = styled.Text`
   font-size: 13px;
+  color: ${({ theme }) => theme.colors.text.primary};
 `;
 
 interface Props {

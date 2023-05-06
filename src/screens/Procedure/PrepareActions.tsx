@@ -57,6 +57,7 @@ const VoteButtonLabel = styled.Text`
 
 const Title = styled.Text`
   font-size: 18px;
+  color: ${({ theme }) => theme.colors.text.primary};
 `;
 
 const TitleAddition = styled.Text`

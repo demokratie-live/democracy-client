@@ -22,6 +22,7 @@ const FillBox = styled.View<{ width: number }>`
 
 const Money = styled.Text`
   font-size: 17px;
+  color: ${({ theme }) => theme.colors.text.primary};
 `;
 
 const Description = styled.Text`

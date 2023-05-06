@@ -36,11 +36,13 @@ const ServiceWrapper = styled.View`
 const Domain = styled.Text`
   font-size: 12px;
   padding-top: 5px;
+  color: ${({ theme }) => theme.colors.text.primary};
 `;
 
 const Username = styled.Text`
   font-size: 12px;
   padding-top: 5px;
+  color: ${({ theme }) => theme.colors.text.primary};
 `;
 
 interface Props {
