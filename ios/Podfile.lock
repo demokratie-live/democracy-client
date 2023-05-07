@@ -555,10 +555,6 @@ PODS:
   - RNSVG (12.4.4):
     - React-Core
   - SocketRocket (0.6.0)
-  - VisionCamera (2.15.2):
-    - React
-    - React-callinvoker
-    - React-Core
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -645,7 +641,6 @@ DEPENDENCIES:
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSha256 (from `../node_modules/react-native-sha256`)
   - RNSVG (from `../node_modules/react-native-svg`)
-  - VisionCamera (from `../node_modules/react-native-vision-camera`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -785,8 +780,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-sha256"
   RNSVG:
     :path: "../node_modules/react-native-svg"
-  VisionCamera:
-    :path: "../node_modules/react-native-vision-camera"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -870,10 +863,9 @@ SPEC CHECKSUMS:
   RNSha256: 80bea5b2e7005f813f6438cb41e573b3d531146c
   RNSVG: ecd661f380a07ba690c9c5929c475a44f432d674
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
-  VisionCamera: 4cfd685b1e671fea4aa0400905ab397f0e972210
   Yoga: 99caf8d5ab45e9d637ee6e0174ec16fbbb01bcfc
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
 PODFILE CHECKSUM: 5aa92cb27c722e8a4556d41d4a936f02971d1aa7
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.12.1
