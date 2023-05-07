@@ -1,5 +1,6 @@
 import * as Keychain from 'react-native-keychain';
 import DeviceInfo from 'react-native-device-info';
+import { z } from 'zod';
 
 export interface ChainEntry {
   procedureId: string;
@@ -8,12 +9,16 @@ export interface ChainEntry {
   constituency: string | null;
 }
 
-export interface ChainEntryRaw {
-  i: string;
-  s: null | 1 | 2 | 3;
-  t: string;
-  c: string | null;
-}
+export const ChainEntryRawZod = z.object({
+  i: z.string(),
+  s: z.union([z.literal(1), z.literal(2), z.literal(3), z.null()]),
+  t: z.string(),
+  c: z.union([z.string(), z.null()]),
+});
+
+export const ChainEntryRawZodArray = z.array(ChainEntryRawZod);
+
+export type ChainEntryRaw = z.infer<typeof ChainEntryRawZod>;
 
 export interface Chain {
   v: number;

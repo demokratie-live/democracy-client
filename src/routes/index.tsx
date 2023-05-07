@@ -6,7 +6,6 @@ import { getVersion } from 'react-native-device-info';
 import { SidebarNavigation } from './Sidebar';
 import { SyncVotesScreen } from '../screens/SyncVotes';
 import { lightTheme } from '@democracy-deutschland/ui';
-import { SyncVotesCaptureScreen } from '../screens/SyncVotesCapture';
 import { VoteSelection } from '../__generated__/graphql';
 import { FilterScreen, ProcedureScreen } from '../screens/Bundestag';
 import { PdfScreen } from '../screens/Pdf';
@@ -33,7 +32,6 @@ export type RootStackParamList = {
   VerificationStart: undefined;
   Constituency?: { goBack?: boolean };
   SyncVotes: undefined;
-  SyncVotesCapture: undefined;
   Search: undefined;
   Filter: undefined;
   Procedure: { procedureId: string; title: string };
@@ -113,11 +111,6 @@ export const Routes: React.FC = () => {
         name="SyncVotes"
         component={SyncVotesScreen}
         options={{ headerShown: true, title: 'Stimmen übertragen' }}
-      />
-      <Stack.Screen
-        name="SyncVotesCapture"
-        component={SyncVotesCaptureScreen}
-        options={{ headerShown: true, title: 'Stimmen empfangen' }}
       />
       <Stack.Screen
         name="Search"
