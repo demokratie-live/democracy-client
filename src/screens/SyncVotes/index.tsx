@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, Share, TextInput } from 'react-native';
+import { Alert, Share } from 'react-native';
 import styled from 'styled-components/native';
 import VotesLocal, { ChainEntryRaw, ChainEntryRawZodArray } from '../../lib/VotesLocal';
 import { Button } from '@democracy-deutschland/ui';
@@ -23,6 +23,14 @@ export interface SyncObj {
     v: number;
   };
 }
+
+const VoteTextArea = styled.TextInput`
+  width: 100%;
+  height: 200px;
+  border-color: black;
+  border-width: 1px;
+  color: ${({ theme }) => theme.colors.text.primary};
+`;
 
 export const SyncVotesScreen = () => {
   const [showTextField, setShowTextField] = useState<boolean>(false);
@@ -60,14 +68,15 @@ export const SyncVotesScreen = () => {
         {!showTextField ? 'Abstimmungsdaten Einfügen' : 'Abbrechen'}
       </Button>
       {showTextField ? (
-        <TextInput
+        <VoteTextArea
           style={{ borderColor: 'black', borderWidth: 1, width: '100%', height: 200 }}
           multiline
           onChangeText={setText}
           placeholder='{"data": "..."}'
+          placeholderTextColor="grey"
         >
           {text}
-        </TextInput>
+        </VoteTextArea>
       ) : null}
 
       {showTextField ? (
