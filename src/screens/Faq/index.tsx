@@ -2,7 +2,7 @@ import React, { ComponentProps } from 'react';
 import { faqData } from './data';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { MarkdownView } from 'react-native-markdown-view';
-import { Linking, Platform, Text } from 'react-native';
+import { Linking, Platform } from 'react-native';
 import styled from 'styled-components/native';
 import deepmerge from 'deepmerge';
 import { CompositeNavigationProp } from '@react-navigation/core';
