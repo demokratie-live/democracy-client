@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { SectionList, View, Alert } from 'react-native';
 import { Segment } from '../List/Components/Segment';
 import Checkbox from './components/Checkbox';
@@ -60,11 +60,17 @@ export const FilterScreen: React.FC<Props> = ({ navigation }) => {
   const { isVerified } = useInitialState();
   const [filter, setFilter] = useRecoilState(filterState);
   const [data, setData] = useState<FilterData[]>(filter);
+  const dataPrefiltered = useRef<'isVerified' | 'isNotVerified'>();
 
   useEffect(() => {
-    if (!isVerified) {
+    if (!isVerified && dataPrefiltered.current !== 'isNotVerified') {
+      dataPrefiltered.current = 'isNotVerified';
       setData(d => d.filter(({ name }) => name !== 'activity'));
-    } else if (isVerified && !data.some(({ name }) => name === 'activity')) {
+    } else if (
+      isVerified &&
+      !data.some(({ name }) => name === 'activity') &&
+      dataPrefiltered.current !== 'isVerified'
+    ) {
       setData(d => [...filter.filter(({ name }) => name === 'activity'), ...d]);
     }
   }, [data, setData, isVerified, filter]);
