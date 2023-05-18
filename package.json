@@ -69,7 +69,8 @@
     "recoil": "^0.7.2",
     "speakingurl": "^14.0.1",
     "styled-components": "^5.3.3",
-    "zod": "^3.21.4"
+    "zod": "^3.21.4",
+    "zustand": "^4.3.8"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
