@@ -15,17 +15,18 @@ const cache = new InMemoryCache({
 });
 
 let graphQlUri = GRAPHQL_URL;
-if (process.env.NODE_ENV === 'development' && GRAPHQL_SERVER_LOCAL) {
+if (process.env.NODE_ENV === 'development' && true) {
   // extract democracy api hostname from package bundler url
   const scriptURL = (NativeModules.SourceCode as { scriptURL: string }).scriptURL;
   const address = scriptURL.split('://')[1].split('/')[0];
   const hostname = address.split(':')[0];
   graphQlUri = `http://${hostname}:3000`;
   if (Platform.OS === 'android' && !isEmulatorSync()) {
-    graphQlUri = `http://${ANDROID_SERVER}:3000`;
+    // graphQlUri = `http://${ANDROID_SERVER}:3000`;
   }
 }
 
+console.log('graphQlUri', graphQlUri);
 const httpLink = new HttpLink({
   uri: graphQlUri,
 });

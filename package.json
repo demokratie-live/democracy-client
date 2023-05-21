@@ -22,6 +22,7 @@
     "@democracy-deutschland/ui": "0.0.7-alpha.4",
     "@notifee/react-native": "^7.1.0",
     "@react-native-async-storage/async-storage": "^1.17.11",
+    "@react-native-community/push-notification-ios": "^1.11.0",
     "@react-native-firebase/app": "^16.4.4",
     "@react-native-firebase/messaging": "^16.4.6",
     "@react-navigation/drawer": "^6.3.1",

@@ -1,11 +1,21 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Alert, Button, Text } from 'react-native';
 import { useNotifee } from '../../api/hooks/useNotifee';
 import VotesLocal from '../../lib/VotesLocal';
+import { NotifeeButton } from './DevScreen/NotifeeButton';
+import messaging from '@react-native-firebase/messaging';
 
 export const DevScreen: React.FC = () => {
   const { token, deleteToken, getToken } = useNotifee();
+  const [apnToken, setApnToken] = React.useState<string | null>(null);
+
+  useEffect(() => {
+    messaging()
+      .getAPNSToken()
+      .then(token => setApnToken(token));
+  }, []);
+
   return (
     <>
       <Button
@@ -34,7 +44,11 @@ export const DevScreen: React.FC = () => {
           Alert.alert('local votes deleted');
         }}
       />
+      <Text>Token:</Text>
       <Text selectable>{token}</Text>
+      <Text>APN Token:</Text>
+      <Text selectable>{apnToken}</Text>
+      <NotifeeButton />
     </>
   );
 };
