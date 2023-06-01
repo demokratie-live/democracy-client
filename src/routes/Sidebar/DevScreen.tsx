@@ -1,10 +1,15 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect } from 'react';
-import { Alert, Button, Text } from 'react-native';
+import { Alert, Button } from 'react-native';
 import { useNotifee } from '../../api/hooks/useNotifee';
 import VotesLocal from '../../lib/VotesLocal';
 import { NotifeeButton } from './DevScreen/NotifeeButton';
 import messaging from '@react-native-firebase/messaging';
+import styled from 'styled-components/native';
+
+const Text = styled.Text`
+  color: ${({ theme }) => theme.colors.text.primary};
+`;
 
 export const DevScreen: React.FC = () => {
   const { token, deleteToken, getToken } = useNotifee();
