@@ -27,32 +27,21 @@ const onMessageReceived = async (message: FirebaseMessagingTypes.RemoteMessage) 
 messaging().setBackgroundMessageHandler(onMessageReceived);
 
 export const useNotifee = () => {
-  const {
-    token,
-    setToken,
-    authorized,
-    setAuthorized,
-    alreadyDenied,
-    setAlreadyDenied,
-    sent,
-    setSent,
-  } = usePushNotificatoinStore();
+  const { token, setToken, authorized, setAuthorized, alreadyDenied, setAlreadyDenied, setSent } =
+    usePushNotificatoinStore();
   const [sendToken] = useAddTokenMutation();
 
   useEffect(() => {
     if (token) {
-      if (!sent) {
-        console.log(token);
-        sendToken({
-          variables: {
-            os: Platform.OS,
-            token,
-          },
-        });
-        setSent(true);
-      }
+      sendToken({
+        variables: {
+          os: Platform.OS,
+          token,
+        },
+      });
+      setSent(true);
     }
-  }, [token, sendToken, sent, setSent]);
+  }, [token, sendToken, setSent]);
 
   useEffect(() => {
     notifee.getNotificationSettings().then(settings => {
