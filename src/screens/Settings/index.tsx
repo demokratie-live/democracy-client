@@ -1,5 +1,5 @@
 import React, { useContext, ReactNode } from 'react';
-import { SectionList, Switch, Button, Alert } from 'react-native';
+import { SectionList, Switch, Button, Alert, Platform } from 'react-native';
 
 // GraphQL
 import { ListItem } from './components/ListItem';
@@ -76,7 +76,7 @@ export const SettingsScreen: React.FC = () => {
   };
 
   const handleActivate = () => {
-    if (!alreadyDenied) {
+    if (!alreadyDenied || Platform.OS === 'android') {
       requestPermissions();
     } else {
       Alert.alert(
@@ -116,11 +116,12 @@ export const SettingsScreen: React.FC = () => {
           onPress: navigateTo('constituency'),
           arrow: true,
         },
-        {
-          title: 'Stimmen übertragen',
-          onPress: navigateTo('SyncVotes'),
-          arrow: true,
-        },
+        // disable in reason of camera issues
+        // {
+        //   title: 'Stimmen übertragen',
+        //   onPress: navigateTo('SyncVotes'),
+        //   arrow: true,
+        // },
       ],
     },
   ];
