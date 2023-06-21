@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   ActivityIndicator,
   Dimensions,
-  ScaledSize,
   ScrollViewProps,
   useWindowDimensions,
   View,
@@ -74,7 +73,10 @@ export const CommunityVoteResults: React.FC<Props> = ({ voteResults, voted, coun
   const [activeSlide, setActiveSlide] = useState<number>(0);
   const { width } = useWindowDimensions();
 
-  const renderCommuntiyResult = (comunnityResults: CommunityVotes | CommunityConstituencyVotes) => {
+  const renderCommuntiyResult = (
+    comunnityResults: CommunityVotes | CommunityConstituencyVotes,
+    key: string,
+  ) => {
     if (
       comunnityResults &&
       (comunnityResults.yes || comunnityResults.no || comunnityResults.abstination)
@@ -110,7 +112,7 @@ export const CommunityVoteResults: React.FC<Props> = ({ voteResults, voted, coun
         : null;
 
       return (
-        <PieChartWrapper width={width} key={myConstituency ? 'goverment' : 'constituency'}>
+        <PieChartWrapper width={width} key={key}>
           <CommunitySegmentText>
             {!isConstituencyChart ? 'Deutschland' : `Wahlkreis ${myConstituency || ''}`}
           </CommunitySegmentText>
@@ -139,11 +141,15 @@ export const CommunityVoteResults: React.FC<Props> = ({ voteResults, voted, coun
     return null;
   }
 
-  const screens = [renderCommuntiyResult(voteResults)];
+  const screens = [renderCommuntiyResult(voteResults, 'communityAll')];
   if (myConstituency && voteResults.constituencies[0]) {
-    screens.push(renderCommuntiyResult(voteResults.constituencies[0]));
+    screens.push(renderCommuntiyResult(voteResults.constituencies[0], 'communityConstituency'));
   }
-  screens.push(<View style={{ width }}>{countryMap}</View>);
+  screens.push(
+    <View style={{ width }} key="countryMap">
+      {countryMap}
+    </View>,
+  );
 
   const onMomentumScrollEnd: ScrollViewProps['onMomentumScrollEnd'] = ({ nativeEvent }) => {
     const index = Math.round(nativeEvent.contentOffset.x / width);
