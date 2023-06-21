@@ -1286,10 +1286,10 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
-"@democracy-deutschland/ui@0.0.7-alpha.4":
-  version "0.0.7-alpha.4"
-  resolved "https://registry.yarnpkg.com/@democracy-deutschland/ui/-/ui-0.0.7-alpha.4.tgz#688562314ec512351904d5d39be3e12143bbc4e1"
-  integrity sha512-30w9PLXodyzk9VJ0fGf/uOreFF9cKmLh/CakIfBZR/HkG8Ibidcdz+7jlz59E5ngTod+R2qfAsyMNXlMq5J4Yw==
+"@democracy-deutschland/ui@0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@democracy-deutschland/ui/-/ui-0.0.7.tgz#1458eebf8a4af2f8b20c8ccdda8abd79c0eb58aa"
+  integrity sha512-mnUr9mWi7wY4jMY9tmgmHvbz5hKuWXQuI8TPslCFa8cl2cfr78drvNW6yVsTnI7Tu8dSS4YOGryw+BhKP1zZqw==
   dependencies:
     react-content-loader "^6.0.3"
 
