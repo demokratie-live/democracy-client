@@ -1,6 +1,6 @@
 import messaging, { FirebaseMessagingTypes } from '@react-native-firebase/messaging';
 import notifee, { AuthorizationStatus, EventType } from '@notifee/react-native';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { CompositeNavigationProp, useNavigation } from '@react-navigation/native';
 import { BundestagTopTabParamList } from '../../../routes/Bundestag';
 import { RootStackParamList } from '../../../routes';
@@ -16,7 +16,6 @@ type ScreenNavigationProp = CompositeNavigationProp<
 >;
 
 const onMessageReceived = async (message: FirebaseMessagingTypes.RemoteMessage) => {
-  console.log('onMessageReceived', message);
   await notifee.displayNotification({
     title: message.data?.title,
     body: message.data?.message,
@@ -103,15 +102,6 @@ export const useNotifee = () => {
   };
 };
 
-export const notifeeBootstrap = async () => {
-  const initialNotification = await notifee.getInitialNotification();
-  console.log({ initialNotification });
-  if (initialNotification) {
-    console.log('Notification caused application to open', initialNotification.notification);
-    console.log('Press action used to open the app', initialNotification.pressAction);
-  }
-};
-
 export const useInitNotifee = () => {
   const { navigate } = useNavigation<ScreenNavigationProp>();
 
@@ -122,31 +112,44 @@ export const useInitNotifee = () => {
     };
   }, []);
 
-  useEffect(() => {
-    notifee.onForegroundEvent(({ type, detail }) => {
-      switch (type) {
-        case EventType.DISMISSED:
-          console.warn('User dismissed notification', detail.notification);
+  const onNotificationPress = useCallback(
+    (data: { procedureId: string; action: string }) => {
+      switch (data?.action) {
+        case 'procedure':
+          navigate('Procedure', {
+            procedureId: data?.procedureId,
+            title: '',
+          });
           break;
-        case EventType.PRESS:
-          switch (detail.notification?.data?.action) {
-            case 'procedure':
-              navigate('Procedure', {
-                procedureId: detail.notification?.data?.procedureId as string,
-                title: '',
-              });
-              break;
-            case 'procedureBulk':
-              navigate('Sitzungswoche', { list: ListType.ConferenceweeksPlanned });
-              break;
-
-            default:
-              break;
-          }
+        case 'procedureBulk':
+          navigate('Sitzungswoche', { list: ListType.ConferenceweeksPlanned });
           break;
-        case EventType.DELIVERED:
+        default:
           break;
       }
+    },
+    [navigate],
+  );
+
+  // Android only
+  useEffect(() => {
+    messaging().onNotificationOpenedApp(remoteMessage => {
+      onNotificationPress({
+        procedureId: remoteMessage?.data?.procedureId as string,
+        action: remoteMessage?.data?.action as string,
+      });
     });
-  }, [navigate]);
+  }, [navigate, onNotificationPress]);
+
+  // iOS only
+  useEffect(() => {
+    notifee.onForegroundEvent(({ type, detail }) => {
+      if (type === EventType.PRESS) {
+        onNotificationPress({
+          procedureId: detail?.notification?.data?.procedureId as string,
+          action: detail?.notification?.data?.action as string,
+        });
+      }
+    });
+  }, [onNotificationPress]);
 };

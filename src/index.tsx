@@ -1,6 +1,6 @@
 import { ApolloProvider } from '@apollo/client';
 import { NavigationContainer } from '@react-navigation/native';
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense } from 'react';
 import { StatusBar } from 'react-native';
 import { RecoilRoot } from 'recoil';
 import { ThemeProvider } from 'styled-components/native';
@@ -12,7 +12,6 @@ import { VerificationProvider } from './api/state/Verification';
 import { Routes } from './routes';
 import { navigationTheme } from './routes/styles';
 import { theme } from './styles/theme';
-import { notifeeBootstrap } from './api/hooks/useNotifee';
 
 const AppEntry = () => {
   useInitialState();
@@ -34,18 +33,6 @@ const AppEntry = () => {
 };
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    notifeeBootstrap()
-      .then(() => {
-        setLoading(false);
-      })
-      .catch(console.error);
-  });
-
-  if (loading) return null;
-
   return (
     <ApolloProvider client={client}>
       <RecoilRoot>
