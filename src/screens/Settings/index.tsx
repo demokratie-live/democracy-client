@@ -116,12 +116,11 @@ export const SettingsScreen: React.FC = () => {
           onPress: navigateTo('constituency'),
           arrow: true,
         },
-        // disable in reason of camera issues
-        // {
-        //   title: 'Stimmen übertragen',
-        //   onPress: navigateTo('SyncVotes'),
-        //   arrow: true,
-        // },
+        {
+          title: 'Stimmen übertragen',
+          onPress: navigateTo('SyncVotes'),
+          arrow: true,
+        },
       ],
     },
   ];

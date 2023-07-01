@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Alert, Share } from 'react-native';
 import styled from 'styled-components/native';
 import VotesLocal, { ChainEntryRaw, ChainEntryRawZodArray } from '../../lib/VotesLocal';
-import { Button } from '@democracy-deutschland/ui';
+import { Button as UiButton } from '@democracy-deutschland/ui';
 import { useSetRecoilState } from 'recoil';
 import { votesLocalState } from '../../api/state/votesLocal';
 
@@ -13,6 +13,25 @@ const Container = styled.ScrollView.attrs({
     paddingVertical: 18,
   },
 })``;
+
+const Headline = styled.Text`
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 18px;
+`;
+
+const Text = styled.Text`
+  font-size: 16px;
+  margin-bottom: 18px;
+`;
+
+const Intro = styled(Text)`
+  text-align: center;
+`;
+
+const Button = styled(UiButton)`
+  margin-bottom: 18px;
+`;
 
 export interface SyncObj {
   procedures: ChainEntryRaw[];
@@ -31,8 +50,6 @@ const VoteTextArea = styled.TextInput`
   border-width: 1px;
   color: ${({ theme }) => theme.colors.text.primary};
 `;
-
-const Text = styled.Text``;
 
 export const SyncVotesScreen = () => {
   const [showTextField, setShowTextField] = useState<boolean>(false);
@@ -60,40 +77,46 @@ export const SyncVotesScreen = () => {
 
   return (
     <Container>
-      <Text>So überträgst Du Deine lokalen Stimmen auf ein andres Gerät:</Text>
-      <Text>------- AUF DEINEM BISHERIGEN GERÄT -------</Text>
-      <Text>
-        {
-          '1. Tippe auf den Button "STIMMEN KOPIEREN" und exportiere Deine lokalen Stimmen in Textform'
-        }
-      </Text>
-      <Text>
-        2. Wähle eine der angebotenen Möglichkeiten, z.B. durch Mail an Dich selbst, Deine
-        Abstimmungsdaten zu sichern
-      </Text>
       {!showTextField ? (
-        <Button variant="primary" onPress={shareVotes}>
-          Stimmen kopieren
-        </Button>
-      ) : null}
+        <>
+          <Intro>So überträgst Du Deine lokalen Stimmen auf ein andres Gerät:</Intro>
+          <Headline>AUF DEINEM BISHERIGEN GERÄT</Headline>
+          <Text>
+            {
+              '1. Tippe auf den Button "STIMMEN KOPIEREN" und exportiere Deine lokalen Stimmen in Textform'
+            }
+          </Text>
+          <Text>
+            2. Wähle eine der angebotenen Möglichkeiten, z.B. durch Mail an Dich selbst, Deine
+            Abstimmungsdaten zu sichern
+          </Text>
+          <Button variant="primary" onPress={shareVotes}>
+            Stimmen kopieren
+          </Button>
 
-      <Text>------- AUF DEINEM ANDEREN GERÄT -------</Text>
-      <Text>
-        1. Kopiere den auf Deinem alten Gerät gesicherten Text in die Zwischenablage Deines neuen
-        Geräts
-      </Text>
-      <Text>2. Öffne DEMOCRACY auf Deinem neuen Gerät</Text>
-      <Text>
-        {
-          '3. Tippe auf Menu > Einstellungen > Stimmen übertragen und wähle "ABSTIMMUNGSDATEN EINFÜGEN"'
-        }
-      </Text>
-      <Text>
-        {'4. Füge den gesamten Text {"283063":… in das Dialogfeld ein und wähle "SPEICHERN"'}
-      </Text>
+          <Headline>AUF DEINEM ANDEREN GERÄT</Headline>
+          <Text>
+            1. Kopiere den auf Deinem alten Gerät gesicherten Text in die Zwischenablage Deines
+            neuen Geräts
+          </Text>
+          <Text>2. Öffne DEMOCRACY auf Deinem neuen Gerät</Text>
+          <Text>
+            {
+              '3. Tippe auf Menu > Einstellungen > Stimmen übertragen und wähle "ABSTIMMUNGSDATEN EINFÜGEN"'
+            }
+          </Text>
+          <Text>
+            {'4. Füge den gesamten Text {"283063":… in das Dialogfeld ein und wähle "SPEICHERN"'}
+          </Text>
+        </>
+      ) : null}
 
       {showTextField ? (
         <>
+          <Headline>Stimmen Einfügen</Headline>
+          <Text>
+            {'Füge den gesamten Text {{"283063":…} in das Dialogfeld ein und wähle "SPEICHERN"'}
+          </Text>
           <VoteTextArea
             style={{ borderColor: 'black', borderWidth: 1, width: '100%', height: 200 }}
             multiline
