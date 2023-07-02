@@ -23,6 +23,7 @@ const Headline = styled.Text`
 
 const Text = styled.Text`
   color: ${({ theme }) => theme.colors.text.primary};
+  width: 100%;
   font-size: 16px;
   margin-bottom: 18px;
 `;
