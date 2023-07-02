@@ -1,5 +1,6 @@
 import { uniqBy } from 'lodash';
 import {
+  CommunityVotes,
   DeputiesResult,
   DeputyProcedure,
   PartyVote,
@@ -44,6 +45,11 @@ export const typePolicies: TypedTypePolicies = {
     fields: {
       voteResults: {
         merge(existing: VoteResult, incoming: VoteResult, { mergeObjects }) {
+          return mergeObjects(existing, incoming);
+        },
+      },
+      communityVotes: {
+        merge(existing: CommunityVotes, incoming: CommunityVotes, { mergeObjects }) {
           return mergeObjects(existing, incoming);
         },
       },
