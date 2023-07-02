@@ -133,23 +133,39 @@ export const useInitNotifee = () => {
 
   // Android only
   useEffect(() => {
-    messaging().onNotificationOpenedApp(remoteMessage => {
-      onNotificationPress({
-        procedureId: remoteMessage?.data?.procedureId as string,
-        action: remoteMessage?.data?.action as string,
+    if (Platform.OS === 'android') {
+      messaging().onNotificationOpenedApp(remoteMessage => {
+        onNotificationPress({
+          procedureId: remoteMessage?.data?.procedureId as string,
+          action: remoteMessage?.data?.action as string,
+        });
       });
-    });
+
+      messaging()
+        .getInitialNotification()
+        .then(async notification => {
+          if (notification) {
+            onNotificationPress({
+              procedureId: notification?.data?.procedureId as string,
+              action: notification?.data?.action as string,
+            });
+          }
+          await new Promise(resolve => setTimeout(resolve, 100));
+        });
+    }
   }, [navigate, onNotificationPress]);
 
   // iOS only
   useEffect(() => {
-    notifee.onForegroundEvent(({ type, detail }) => {
-      if (type === EventType.PRESS) {
-        onNotificationPress({
-          procedureId: detail?.notification?.data?.procedureId as string,
-          action: detail?.notification?.data?.action as string,
-        });
-      }
-    });
+    if (Platform.OS === 'ios') {
+      notifee.onForegroundEvent(({ type, detail }) => {
+        if (type === EventType.PRESS) {
+          onNotificationPress({
+            procedureId: detail?.notification?.data?.procedureId as string,
+            action: detail?.notification?.data?.action as string,
+          });
+        }
+      });
+    }
   }, [onNotificationPress]);
 };
