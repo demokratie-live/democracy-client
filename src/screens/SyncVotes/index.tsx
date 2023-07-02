@@ -15,12 +15,14 @@ const Container = styled.ScrollView.attrs({
 })``;
 
 const Headline = styled.Text`
+  color: ${({ theme }) => theme.colors.text.primary};
   font-size: 18px;
   font-weight: 500;
   margin-bottom: 18px;
 `;
 
 const Text = styled.Text`
+  color: ${({ theme }) => theme.colors.text.primary};
   font-size: 16px;
   margin-bottom: 18px;
 `;
