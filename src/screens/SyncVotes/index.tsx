@@ -95,15 +95,10 @@ export const SyncVotesScreen = () => {
           </Button>
 
           <Headline>AUF DEINEM ANDEREN GERÄT</Headline>
-          <Text>
-            1. Kopiere den auf Deinem alten Gerät gesicherten Text in die Zwischenablage Deines
-            neuen Geräts
-          </Text>
+          <Text>1. Kopiere den gesicherten Text in die Zwischenablage Deines neuen Geräts</Text>
           <Text>2. Öffne DEMOCRACY auf Deinem neuen Gerät</Text>
           <Text>
-            {
-              '3. Tippe auf Menu > Einstellungen > Stimmen übertragen und wähle "ABSTIMMUNGSDATEN EINFÜGEN"'
-            }
+            {'3. Tippe auf Menu > Einstellungen > Stimmen übertragen und wähle "STIMMEN EINFÜGEN"'}
           </Text>
           <Text>
             {'4. Füge den gesamten Text {"283063":… in das Dialogfeld ein und wähle "SPEICHERN"'}
