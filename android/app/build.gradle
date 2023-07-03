@@ -146,13 +146,11 @@ android {
             minSdkVersion rootProject.ext.minSdkVersion
             applicationId "de.democracydeutschland.app"
             targetSdkVersion rootProject.ext.targetSdkVersion
-            resValue "string", "build_config_package", "com.myapp"
         }
         internal {
             minSdkVersion rootProject.ext.minSdkVersion
-            applicationId "de.democracydeutschland.app.internal"
+            applicationIdSuffix ".internal"
             targetSdkVersion rootProject.ext.targetSdkVersion
-            resValue "string", "build_config_package", "com.myapp"
         }
     }
 
