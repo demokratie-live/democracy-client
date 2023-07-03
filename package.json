@@ -6,7 +6,7 @@
     "start": "react-native start",
     "ios:production": "react-native run-ios",
     "ios:internal": "react-native run-ios --scheme=Internal --configuration=Internal.Debug",
-    "android:production": "react-native run-android --variant=productionDebug",
+    "android:production": "react-native run-android --variant=masterDebug",
     "android:internal": "ENVFILE=.env.internal react-native run-android --variant=internalDebug",
     "test": "jest",
     "lint": "yarn lint:ts && yarn lint:es",

@@ -2,8 +2,8 @@ apply plugin: "com.android.application"
 apply plugin: 'com.google.gms.google-services'
 
 project.ext.envConfigFiles = [
-   release: ".env.production",
-   debug: ".env.production",
+   masterRelease: ".env.production",
+   masterDebug: ".env.production",
    internalRelease: ".env.internal",
    internalDebug: ".env.internal"
 ]
@@ -151,7 +151,7 @@ android {
     flavorDimensions "default"
 
     productFlavors {
-        production {
+        master {
             minSdkVersion rootProject.ext.minSdkVersion
             applicationId "de.democracydeutschland.app"
             targetSdkVersion rootProject.ext.targetSdkVersion
