@@ -48,10 +48,20 @@ jobs:
           echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 android/democracy2-release-key.keystore.gpg
           echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 android/key.json.gpg
 
+      - name: Extract branch name
+        shell: bash
+        run: |
+          if [[ ${{ github.ref }} == 'refs/heads/master' ]]; then
+            echo "lane=production" >> $GITHUB_OUTPUT
+          else
+            echo "lane=internal" >> $GITHUB_OUTPUT
+          fi
+        id: extract_branch
+
       - name: Fastlane
         uses: maierj/fastlane-action@v3.0.0
         with:
-          lane: 'internal --env internal'
+          lane: 'internal --env ${{ steps.extract_branch.outputs.lane }}'
           subdirectory: 'android'
         env:
           MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}

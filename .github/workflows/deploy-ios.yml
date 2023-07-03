@@ -55,10 +55,20 @@ jobs:
       - name: Fix match prompt issue
         run: echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 
+      - name: Extract branch name
+        shell: bash
+        run: |
+          if [[ ${{ github.ref }} == 'refs/heads/master' ]]; then
+            echo "lane=production" >> $GITHUB_OUTPUT
+          else
+            echo "lane=internal" >> $GITHUB_OUTPUT
+          fi
+        id: extract_branch
+
       - name: Fastlane
         uses: maierj/fastlane-action@v3.0.0
         with:
-          lane: 'ios deploy --env internal'
+          lane: 'ios deploy --env ${{ steps.extract_branch.outputs.lane }}'
           subdirectory: 'ios'
         env:
           TRAVIS_BRANCH: ${{ github.ref }}
