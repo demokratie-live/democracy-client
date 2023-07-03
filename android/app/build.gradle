@@ -2,8 +2,8 @@ apply plugin: "com.android.application"
 apply plugin: 'com.google.gms.google-services'
 
 project.ext.envConfigFiles = [
-   productionDebug: ".env.production",
-   productionRelease: ".env.production",
+   release: ".env.production",
+   debug: ".env.production",
    internalRelease: ".env.internal",
    internalDebug: ".env.internal"
 ]
