@@ -1,6 +1,15 @@
 apply plugin: "com.android.application"
 apply plugin: 'com.google.gms.google-services'
 
+project.ext.envConfigFiles = [
+   productionDebug: ".env.production",
+   productionRelease: ".env.production",
+   internalRelease: ".env.internal",
+   internalDebug: ".env.internal"
+]
+
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+
 import com.android.build.OutputFile
 import org.apache.tools.ant.taskdefs.condition.Os
 
@@ -146,11 +155,13 @@ android {
             minSdkVersion rootProject.ext.minSdkVersion
             applicationId "de.democracydeutschland.app"
             targetSdkVersion rootProject.ext.targetSdkVersion
+            resValue "string", "build_config_package", "de.democracydeutschland.app"
         }
         internal {
             minSdkVersion rootProject.ext.minSdkVersion
             applicationIdSuffix ".internal"
             targetSdkVersion rootProject.ext.targetSdkVersion
+            resValue "string", "build_config_package", "de.democracydeutschland.app"
         }
     }
 
@@ -244,6 +255,7 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
+            matchingFallbacks = ['debug', 'release']
         }
         release {
             // Caution! In production, you need to generate your own keystore file.

@@ -1,4 +1,6 @@
-const GRAPHQL_URL = 'https://internal.api.democracy-app.de';
+import Config from 'react-native-config';
+
+const GRAPHQL_URL = Config.GRAPHQL_URL; // 'https://internal.api.democracy-app.de';
 const GRAPHQL_SERVER_LOCAL = false;
 const ANDROID_SERVER = '192.168.0.166';
 
