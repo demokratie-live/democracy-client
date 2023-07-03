@@ -151,7 +151,7 @@ android {
     flavorDimensions "default"
 
     productFlavors {
-        prod {
+        production {
             minSdkVersion rootProject.ext.minSdkVersion
             applicationId "de.democracydeutschland.app"
             targetSdkVersion rootProject.ext.targetSdkVersion
