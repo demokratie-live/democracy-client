@@ -529,6 +529,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = A4B84UJD7M;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = DemocracyNative/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -543,8 +544,12 @@
 				PRODUCT_NAME = DemocracyNative;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development de.democracy-deutschland.clientapp";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -563,6 +568,7 @@
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = A4B84UJD7M;
 				INFOPLIST_FILE = DemocracyNative/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -577,7 +583,11 @@
 				PRODUCT_NAME = DemocracyNative;
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore de.democracy-deutschland.clientapp";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development de.democracy-deutschland.clientapp";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -788,6 +798,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = A4B84UJD7M;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = DemocracyNative/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -802,8 +813,12 @@
 				PRODUCT_NAME = DemocracyNative;
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore de.democracy-deutschland.clientapp.internal";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development de.democracy-deutschland.clientapp.internal";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Internal.Debug;
@@ -908,6 +923,7 @@
 				DEVELOPMENT_TEAM = A4B84UJD7M;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = A4B84UJD7M;
 				INFOPLIST_FILE = DemocracyNative/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -922,7 +938,11 @@
 				PRODUCT_NAME = DemocracyNative;
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore de.democracy-deutschland.clientapp.internal";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development de.democracy-deutschland.clientapp.internal";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Internal.Release;
