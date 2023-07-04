@@ -1,11 +1,11 @@
-import React, { useContext, ReactNode } from 'react';
+import React, { useContext, ReactNode, useCallback } from 'react';
 import { SectionList, Switch, Button, Alert, Platform } from 'react-native';
 
 // GraphQL
 import { ListItem } from './components/ListItem';
 import { useNavigation } from '@react-navigation/core';
 import { getBundleId } from 'react-native-device-info';
-import styled from 'styled-components/native';
+import styled, { useTheme } from 'styled-components/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { CompositeNavigationProp } from '@react-navigation/native';
 import { SidebarParamList } from '../../routes/Sidebar';
@@ -18,6 +18,7 @@ import { NotificationsContext } from '../../api/state/notificationPermission';
 import { Segment } from '../../components/Segment/index';
 import { linking } from '../../lib/linking';
 import { useNotifee } from '../../api/hooks/useNotifee';
+import { useDevModeStore } from '../../api/state/dev';
 
 const Wrapper = styled.View`
   background-color: ${({ theme }) => theme.colors.background.secondary};
@@ -51,29 +52,43 @@ interface List {
 }
 
 export const SettingsScreen: React.FC = () => {
+  const { toggleDevMode } = useDevModeStore();
   const navigation = useNavigation<ScreenNavigationProp>();
   const constituency = useRecoilValue(constituencyState);
   const { isVerified } = useRecoilValue(initialState);
   const { notificationSettings, update: updateNotificationSettings } =
     useContext(NotificationsContext);
   const { requestPermissions, alreadyDenied, authorized } = useNotifee();
+  const { colors } = useTheme();
 
-  const navigateTo = (screen: string) => () => {
-    switch (screen) {
-      case 'constituency':
-        navigation.navigate('Constituency');
-        break;
-      case 'verificate':
-        navigation.navigate('VerificationStart');
-        break;
-      case 'SyncVotes':
-        navigation.navigate('SyncVotes');
-        break;
+  const navigateTo = useCallback(
+    (screen: string) => () => {
+      switch (screen) {
+        case 'constituency':
+          navigation.navigate('Constituency');
+          break;
+        case 'verificate':
+          navigation.navigate('VerificationStart');
+          break;
+        case 'SyncVotes':
+          navigation.navigate('SyncVotes');
+          break;
 
-      default:
-        break;
-    }
-  };
+        default:
+          break;
+      }
+    },
+    [navigation],
+  );
+
+  // set right header button
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Button onPress={toggleDevMode} title="DevMode" color={colors.text.colored} />
+      ),
+    });
+  }, [colors.text.colored, navigateTo, navigation, toggleDevMode]);
 
   const handleActivate = () => {
     if (!alreadyDenied || Platform.OS === 'android') {

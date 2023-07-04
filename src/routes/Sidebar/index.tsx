@@ -1,7 +1,7 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import { AvatarIcon, lightTheme } from '@democracy-deutschland/ui';
+import { lightTheme } from '@democracy-deutschland/ui';
 import { Sidebar } from './components/Sidebar';
 import { Government } from '../../components/Icons';
 import SvgWahlOMeter from '../../components/Icons/WahlOMeter';
@@ -15,6 +15,7 @@ import { BundestagTabViewNavigation } from '../Bundestag';
 import { DevScreen } from './DevScreen';
 import { AbgeordneteScreen } from '../../screens/Abgeordnete';
 import { WahlOMeterNavigation } from '../WahlOMeter';
+import { useDevModeStore } from '../../api/state/dev';
 
 export type SidebarParamList = {
   Bundestag: undefined;
@@ -30,6 +31,8 @@ export type SidebarParamList = {
 const SidebarDrawer = createDrawerNavigator<SidebarParamList>();
 
 export const SidebarNavigation = () => {
+  const { devMode } = useDevModeStore();
+  console.log('devMode', devMode);
   return (
     <SidebarDrawer.Navigator
       initialRouteName="Bundestag"
@@ -76,7 +79,6 @@ export const SidebarNavigation = () => {
       <SidebarDrawer.Screen
         options={{
           drawerLabel: 'hide/Abgeordnete',
-          drawerIcon: ({ color, size }) => <AvatarIcon width={size} height={size} fill={color} />,
           unmountOnBlur: true,
         }}
         name="Abgeordnete"
@@ -111,9 +113,7 @@ export const SidebarNavigation = () => {
         name={'About'}
         component={AboutScreen}
       />
-      {/* {process.env.NODE_ENV === 'development' && ( */}
-      <SidebarDrawer.Screen name="DEV" component={DevScreen} />
-      {/* )} */}
+      {devMode ? <SidebarDrawer.Screen name="DEV" component={DevScreen} /> : null}
     </SidebarDrawer.Navigator>
   );
 };

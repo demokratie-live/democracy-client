@@ -26,27 +26,61 @@ export const DevScreen: React.FC = () => {
       <Button
         title="Delete auth"
         onPress={() => {
-          AsyncStorage.removeItem('auth_refreshToken');
-          AsyncStorage.removeItem('auth_token');
-          AsyncStorage.removeItem('auth_phoneHash');
-          AsyncStorage.removeItem('verification_code_resend_time');
-          AsyncStorage.removeItem('verification_code_expire_time');
-          AsyncStorage.removeItem('verification_tmp_phone_number');
-          Alert.alert('auth deleted');
+          Alert.alert('Are you sure?', 'This will delete all auth data', [
+            {
+              text: 'Cancel',
+              style: 'cancel',
+            },
+            {
+              text: 'Delete',
+              onPress: () => {
+                AsyncStorage.removeItem('auth_refreshToken');
+                AsyncStorage.removeItem('auth_token');
+                AsyncStorage.removeItem('auth_phoneHash');
+                AsyncStorage.removeItem('verification_code_resend_time');
+                AsyncStorage.removeItem('verification_code_expire_time');
+                AsyncStorage.removeItem('verification_tmp_phone_number');
+                Alert.alert('auth deleted');
+              },
+            },
+          ]);
         }}
       />
       <Button
         title="Delete local votes"
         onPress={() => {
-          VotesLocal.reset();
-          Alert.alert('local votes deleted');
+          // alert to confirm deletion
+          Alert.alert('Are you sure?', 'This will delete all local votes', [
+            {
+              text: 'Cancel',
+              style: 'cancel',
+            },
+            {
+              text: 'Delete',
+              onPress: () => {
+                VotesLocal.reset();
+                Alert.alert('local votes deleted');
+              },
+            },
+          ]);
         }}
       />
       <Button
         title="Reset Token"
         onPress={() => {
-          deleteToken().then(getToken);
-          Alert.alert('local votes deleted');
+          Alert.alert('Are you sure?', 'This will delete the token', [
+            {
+              text: 'Cancel',
+              style: 'cancel',
+            },
+            {
+              text: 'Delete',
+              onPress: () => {
+                deleteToken();
+                Alert.alert('token deleted');
+              },
+            },
+          ]);
         }}
       />
       <Text>Token:</Text>
