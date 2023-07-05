@@ -12,7 +12,7 @@ import { AboutScreen } from '../../screens/About';
 import { FaqScreen } from '../../screens/Faq';
 import { SettingsScreen } from '../../screens/Settings';
 import { BundestagTabViewNavigation } from '../Bundestag';
-import { DevScreen } from './DevScreen';
+import { DevScreen } from '../../screens/DevScreen';
 import { AbgeordneteScreen } from '../../screens/Abgeordnete';
 import { WahlOMeterNavigation } from '../WahlOMeter';
 import { useDevModeStore } from '../../api/state/dev';
@@ -32,7 +32,7 @@ const SidebarDrawer = createDrawerNavigator<SidebarParamList>();
 
 export const SidebarNavigation = () => {
   const { devMode } = useDevModeStore();
-  console.log('devMode', devMode);
+
   return (
     <SidebarDrawer.Navigator
       initialRouteName="Bundestag"

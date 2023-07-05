@@ -12,6 +12,7 @@ import { VerificationProvider } from './api/state/Verification';
 import { Routes } from './routes';
 import { navigationTheme } from './routes/styles';
 import { theme } from './styles/theme';
+import { migrateAsyncStorageData } from './api/state/migration/01-native-async-storage';
 
 const AppEntry = () => {
   useInitialState();
@@ -33,6 +34,17 @@ const AppEntry = () => {
 };
 
 const App = () => {
+  const [isMigrationDone, setIsMigraionDone] = React.useState<boolean>(false);
+  React.useMemo(() => {
+    migrateAsyncStorageData().then(() => {
+      setIsMigraionDone(true);
+    });
+  }, []);
+
+  if (!isMigrationDone) {
+    return null;
+  }
+
   return (
     <ApolloProvider client={client}>
       <RecoilRoot>

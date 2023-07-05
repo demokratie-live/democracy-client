@@ -1,9 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect } from 'react';
 import { Alert, Button } from 'react-native';
-import { useNotifee } from '../../api/hooks/useNotifee';
-import VotesLocal from '../../lib/VotesLocal';
-import { NotifeeButton } from './DevScreen/NotifeeButton';
+import { useNotifee } from '../api/hooks/useNotifee';
+import VotesLocal from '../lib/VotesLocal';
+import { NotifeeButton } from '../routes/Sidebar/DevScreen/NotifeeButton';
 import messaging from '@react-native-firebase/messaging';
 import styled from 'styled-components/native';
 
@@ -78,6 +78,24 @@ export const DevScreen: React.FC = () => {
               onPress: () => {
                 deleteToken();
                 Alert.alert('token deleted');
+              },
+            },
+          ]);
+        }}
+      />
+      <Button
+        title="Delete all AsyncStorage data"
+        onPress={() => {
+          Alert.alert('Are you sure?', 'This will delete the token', [
+            {
+              text: 'Cancel',
+              style: 'cancel',
+            },
+            {
+              text: 'Delete',
+              onPress: () => {
+                AsyncStorage.clear();
+                Alert.alert('AsyncStorage cleared');
               },
             },
           ]);

@@ -72,3 +72,4 @@ google-services.json
 /ios/GoogleService-Info.plist
 *.zip
 /android/key.json
+/.env

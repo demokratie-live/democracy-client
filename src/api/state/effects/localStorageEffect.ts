@@ -15,11 +15,9 @@ export const localStorageEffect =
       }
     });
 
-    onSet((newValue, _, isReset) => {
+    onSet(newValue => {
       const dataToSave = objectHandler?.save?.(newValue) ?? newValue;
-      isReset
-        ? AsyncStorage.removeItem(key)
-        : AsyncStorage.setItem(key, JSON.stringify(dataToSave));
+      AsyncStorage.setItem(key, JSON.stringify(dataToSave));
     });
   };
 
@@ -32,7 +30,7 @@ export const localStorageToStringEffect =
       }
     });
 
-    onSet((newValue, _, isReset) => {
-      isReset ? AsyncStorage.removeItem(key) : AsyncStorage.setItem(key, JSON.stringify(newValue));
+    onSet(newValue => {
+      AsyncStorage.setItem(key, JSON.stringify(newValue));
     });
   };
