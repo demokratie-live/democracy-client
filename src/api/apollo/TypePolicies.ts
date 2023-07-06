@@ -60,9 +60,18 @@ export const typePolicies: TypedTypePolicies = {
     fields: {
       procedures: {
         keyArgs: ['procedureIds'],
-        merge(existing: DeputyProcedure[] = [], incoming: DeputyProcedure[]) {
-          return uniqBy([...existing, ...incoming], deputyProcedure => {
-            return deputyProcedure.procedure.procedureId;
+        merge(existing: DeputyProcedure[] = [], incoming: DeputyProcedure[], { mergeObjects }) {
+          if (existing.length === 0) {
+            return incoming;
+          }
+          return [...existing, ...incoming].map(deputyProcedure => {
+            const existingDeputyProcedure = existing.find(
+              ({ procedure }) => deputyProcedure.procedure.procedureId === procedure.procedureId,
+            );
+            if (!existingDeputyProcedure) {
+              return deputyProcedure;
+            }
+            return mergeObjects(existingDeputyProcedure, deputyProcedure);
           });
         },
       },

@@ -39,9 +39,6 @@ export const AbgeordneteScreen: React.FC = () => {
   const parlamentIdentifier = useRecoilValue(parlamentState);
   const favorizedDeputies = useRecoilValue(favorizedDeputiesState(parlamentIdentifier));
 
-  // const { constituency } = useContext(ConstituencyContext);
-  // const { isVerified } = useContext(InitialStateContext);
-
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
