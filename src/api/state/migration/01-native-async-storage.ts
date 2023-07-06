@@ -18,6 +18,9 @@ export const migrateAsyncStorageData = async () => {
   // get all values from deprecated AsyncStorage
   const values = await DeprecatedAsyncStorage.multiGet(keys);
 
+  if (values.length === 0) {
+    return;
+  }
   // set all values to new AsyncStorage
   await AsyncStorage.multiSet(values);
 
