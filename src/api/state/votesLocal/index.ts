@@ -5,12 +5,10 @@ const localVotesEffect: AtomEffect<Chain> = ({ onSet, setSelf }) => {
   VotesLocal.readKeychain().then(chain => {
     setSelf(chain);
   });
-  onSet((newValue, _, isReset) => {
-    isReset
-      ? VotesLocal.reset()
-      : VotesLocal.writeKeychain(newValue).catch(err => {
-          console.error('SET KEYSTORE', err);
-        });
+  onSet(newValue => {
+    VotesLocal.writeKeychain(newValue).catch(err => {
+      console.error('SET KEYSTORE ERROR', err);
+    });
   });
 };
 

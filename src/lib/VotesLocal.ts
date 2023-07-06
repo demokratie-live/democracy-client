@@ -130,12 +130,12 @@ class VotesLocal {
 
     for (let i = 0; i < (data.d?.length || 0); i += VotesLocal.KEYCHAIN_MAXSIZE) {
       // while (data.d && data.d.length > 0) {
-      const set = data.d?.slice(i, VotesLocal.KEYCHAIN_MAXSIZE);
+      const set = data.d?.slice(i, i + VotesLocal.KEYCHAIN_MAXSIZE);
       const setServiceId: number = index.length;
-      const setService = `${VotesLocal.KEYCHAIN_VOTES_SERVICE}${setServiceId}`;
+      const service = `${VotesLocal.KEYCHAIN_VOTES_SERVICE}${setServiceId}`;
       // Write Bucket
       await Keychain.setGenericPassword(VotesLocal.KEYCHAIN_VOTES_KEY, JSON.stringify(set), {
-        service: setService,
+        service: service,
       });
       index.push(setServiceId);
     }
