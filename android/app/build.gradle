@@ -4,6 +4,8 @@ apply plugin: 'com.google.gms.google-services'
 project.ext.envConfigFiles = [
    masterRelease: ".env.production",
    masterDebug: ".env.production",
+   release: ".env.production",
+   debug: ".env.production",
    internalRelease: ".env.internal",
    internalDebug: ".env.internal"
 ]
