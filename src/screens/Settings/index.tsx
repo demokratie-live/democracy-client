@@ -1,5 +1,5 @@
 import React, { useContext, ReactNode, useCallback } from 'react';
-import { SectionList, Switch, Button, Alert, Platform } from 'react-native';
+import { SectionList, Switch, Button, Alert, Platform, Touchable } from 'react-native';
 
 // GraphQL
 import { ListItem } from './components/ListItem';
@@ -19,6 +19,7 @@ import { Segment } from '../../components/Segment/index';
 import { linking } from '../../lib/linking';
 import { useNotifee } from '../../api/hooks/useNotifee';
 import { useDevModeStore } from '../../api/state/dev';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Wrapper = styled.View`
   background-color: ${({ theme }) => theme.colors.background.secondary};
@@ -29,6 +30,14 @@ const Text = styled.Text`
   font-size: 17px;
   margin-right: auto;
   color: ${({ theme }) => theme.colors.text.primary};
+`;
+
+// invisible button to toggle dev mode
+const DevModeButton = styled(TouchableOpacity)`
+  padding: 10px;
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
 `;
 
 type ScreenNavigationProp = CompositeNavigationProp<
@@ -84,9 +93,7 @@ export const SettingsScreen: React.FC = () => {
   // set right header button
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => (
-        <Button onPress={toggleDevMode} title="DevMode" color={colors.text.colored} />
-      ),
+      headerRight: () => <DevModeButton onPress={toggleDevMode} />,
     });
   }, [colors.text.colored, navigateTo, navigation, toggleDevMode]);
 
