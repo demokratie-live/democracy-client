@@ -33,11 +33,12 @@ const Text = styled.Text`
 `;
 
 // invisible button to toggle dev mode
-const DevModeButton = styled(TouchableOpacity)`
+const DevModeButton = styled(TouchableOpacity)<{ devMode: boolean }>`
   padding: 10px;
   margin-right: 10px;
   width: 20px;
   height: 20px;
+  background-color: ${({ theme, devMode }) => (devMode ? 'red' : 'transparent')};
 `;
 
 type ScreenNavigationProp = CompositeNavigationProp<
@@ -61,7 +62,7 @@ interface List {
 }
 
 export const SettingsScreen: React.FC = () => {
-  const { toggleDevMode } = useDevModeStore();
+  const { devMode, toggleDevMode } = useDevModeStore();
   const navigation = useNavigation<ScreenNavigationProp>();
   const constituency = useRecoilValue(constituencyState);
   const { isVerified } = useRecoilValue(initialState);
@@ -93,9 +94,9 @@ export const SettingsScreen: React.FC = () => {
   // set right header button
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => <DevModeButton onPress={toggleDevMode} />,
+      headerRight: () => <DevModeButton devMode={devMode} onPress={toggleDevMode} />,
     });
-  }, [colors.text.colored, navigateTo, navigation, toggleDevMode]);
+  }, [colors.text.colored, navigateTo, navigation, toggleDevMode, devMode]);
 
   const handleActivate = () => {
     if (!alreadyDenied || Platform.OS === 'android') {
