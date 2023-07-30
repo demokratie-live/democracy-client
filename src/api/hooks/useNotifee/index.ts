@@ -60,22 +60,11 @@ export const useNotifee = () => {
   };
 
   const getFirebaseToken = async () => {
-    // Register the device with FCM
-    await messaging().registerDeviceForRemoteMessages();
-
     // Get the token
     const generatedToken = await messaging().getToken();
 
     return generatedToken;
   };
-
-  useEffect(() => {
-    async function fetchData() {
-      const generatedToken = await getFirebaseToken();
-      setToken(generatedToken);
-    }
-    fetchData();
-  }, [setToken]);
 
   const deleteToken = async () => {
     await messaging()

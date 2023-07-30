@@ -12,7 +12,6 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		487BE9571AB3562857BD38AA /* libPods-DemocracyNative-DemocracyNativeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BA21FE940165B667B74219 /* libPods-DemocracyNative-DemocracyNativeTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		C32B0E3329240B2400A8BB0A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C32B0E3229240B2400A8BB0A /* GoogleService-Info.plist */; };
 		C362DD472917DCB300D51E9E /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C362DD462917DCB300D51E9E /* BootSplash.storyboard */; };
 		C3AA6073297D94E30078999B /* push.aiff in Resources */ = {isa = PBXBuildFile; fileRef = C3AA6072297D94E30078999B /* push.aiff */; };
 		C3BC0C5C2905A71C005915A5 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = C3BC0C5B2905A71C005915A5 /* AppDelegate.mm */; };
@@ -46,7 +45,6 @@
 		A2BA21FE940165B667B74219 /* libPods-DemocracyNative-DemocracyNativeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DemocracyNative-DemocracyNativeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A95B6AC8017DEF3E40D25BF1 /* Pods-DemocracyNative-DemocracyNativeTests.internal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DemocracyNative-DemocracyNativeTests.internal.debug.xcconfig"; path = "Target Support Files/Pods-DemocracyNative-DemocracyNativeTests/Pods-DemocracyNative-DemocracyNativeTests.internal.debug.xcconfig"; sourceTree = "<group>"; };
 		C0A881CF5CF3F2B244570E2A /* Pods-DemocracyNative.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DemocracyNative.debug.xcconfig"; path = "Target Support Files/Pods-DemocracyNative/Pods-DemocracyNative.debug.xcconfig"; sourceTree = "<group>"; };
-		C32B0E3229240B2400A8BB0A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C33778C32916D7A300FBE14C /* DemocracyNative.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = DemocracyNative.entitlements; path = DemocracyNative/DemocracyNative.entitlements; sourceTree = "<group>"; };
 		C362DD462917DCB300D51E9E /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = DemocracyNative/BootSplash.storyboard; sourceTree = "<group>"; };
 		C3AA6072297D94E30078999B /* push.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = push.aiff; sourceTree = "<group>"; };
@@ -130,7 +128,6 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				C32B0E3229240B2400A8BB0A /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* DemocracyNative */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* DemocracyNativeTests */,
@@ -265,7 +262,6 @@
 			files = (
 				C3AA6073297D94E30078999B /* push.aiff in Resources */,
 				C362DD472917DCB300D51E9E /* BootSplash.storyboard in Resources */,
-				C32B0E3329240B2400A8BB0A /* GoogleService-Info.plist in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);

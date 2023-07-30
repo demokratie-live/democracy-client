@@ -69,7 +69,7 @@ google-services.json
 *.p12
 *.pem
 *.pkey
-/ios/GoogleService-Info.plist
+/ios/GoogleService-Info.*plist
 *.zip
 /android/key.json
 /.env

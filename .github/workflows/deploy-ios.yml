@@ -46,15 +46,6 @@ jobs:
       - run: bundle update fastlane
         working-directory: ios
 
-      - name: Encrypt GPG secure files
-        run: |
-          brew install gnupg@1.4
-          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 ios/AuthKey_3Q9U495BMY.p8.gpg
-          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 ios/GoogleService-Info.plist.gpg
-
-      - name: Fix match prompt issue
-        run: echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-
       - name: Extract branch name
         shell: bash
         run: |
@@ -64,6 +55,15 @@ jobs:
             echo "lane=internal" >> $GITHUB_OUTPUT
           fi
         id: extract_branch
+
+      - name: Encrypt GPG secure files
+        run: |
+          brew install gnupg@1.4
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 ios/AuthKey_3Q9U495BMY.p8.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 -o ios/GoogleService-Info.${{ steps.extract_branch.outputs.lane }}.plist ios/GoogleService-Info.${{ steps.extract_branch.outputs.lane }}.plist.gpg
+
+      - name: Fix match prompt issue
+        run: echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 
       - name: Fastlane
         uses: maierj/fastlane-action@v3.0.0
