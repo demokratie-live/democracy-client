@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === 'development' && GRAPHQL_SERVER_LOCAL) {
   const hostname = address.split(':')[0];
   graphQlUri = `http://${hostname}:3000`;
 }
-
+console.log('GRAPHQL_URL', graphQlUri);
 const httpLink = new HttpLink({
   uri: graphQlUri,
 });
