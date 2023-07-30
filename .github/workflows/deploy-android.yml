@@ -10,7 +10,7 @@ on:
       - master
 
 concurrency:
-  group: deploy-android
+  group: deploy-android-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:

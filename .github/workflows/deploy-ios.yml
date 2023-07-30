@@ -10,7 +10,7 @@ on:
       - master
 
 concurrency:
-  group: deploy-ios
+  group: deploy-ios-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
