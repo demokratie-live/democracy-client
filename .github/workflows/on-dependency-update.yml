@@ -1,0 +1,34 @@
+name: On Dependency Update
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      # Run only on the default branch
+      - 'master' # or "master"
+    paths:
+      # Run only if one of these files have changed
+      - 'yarn.lock'
+      - 'ios/Podfile.lock'
+      - 'Gemfile.lock'
+
+jobs:
+  rebuild-android-cache:
+    name: Rebuild Android Cache
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Rebuild cache
+        uses: ./.github/actions/install-dependencies
+
+  rebuild-ios-cache:
+    name: Rebuild iOS Cache
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Rebuild cache
+        uses: ./.github/actions/install-dependencies
