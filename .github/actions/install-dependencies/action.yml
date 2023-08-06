@@ -1,0 +1,50 @@
+name: Install dependencies
+description: Install React Native dependencies (NodeJS packages/Gems/Cocoapods) with caching for each.
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version-file: '.node-version'
+
+    - name: Cache node_modules
+      id: modules-cache
+      uses: actions/cache@v3
+      with:
+        path: ./node_modules
+        key: ${{ runner.os }}-modules-${{ hashFiles('yarn.lock') }}
+        # key: ${{ runner.os }}-modules-${{ hashFiles('package-lock.json') }}
+
+    - name: Install node_modules if necessary
+      if: steps.modules-cache.outputs.cache-hit != 'true'
+      shell: bash
+      run: yarn install --frozen-lockfile
+
+    - name: Get platform name [ios/android] by githubs value "runner.os"
+      id: get_platform
+      shell: bash
+      run: echo "platform=$(if [ ${{ runner.os }} == 'macOS' ]; then echo 'ios'; else echo 'android'; fi)" >> $GITHUB_OUTPUT
+
+    # Detects .ruby-version automatically
+    - name: Setup Ruby + Cache Gems
+      uses: ruby/setup-ruby@v1
+      with:
+        # Manually caching gems isn't trivial and the recommendation is always
+        # to rely on this action's bundler-cache option.
+        bundler-cache: true
+        working-directory: ${{ steps.get_platform.outputs.platform }}
+
+    - name: Cache Pods
+      if: runner.os == 'macOS'
+      uses: actions/cache@v3
+      id: pods-cache
+      with:
+        path: ./ios/Pods
+        key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile.lock') }}
+
+    - name: Install pods
+      if: runner.os == 'macOS'
+      shell: bash
+      run: cd ios && bundle exec pod install && cd ..
