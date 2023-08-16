@@ -9,10 +9,11 @@ import { useHideBootsplash } from './api/hooks/useHideBootsplash';
 import { useInitialState } from './api/state/initialState';
 import { NotificationsProvider } from './api/state/notificationPermission';
 import { VerificationProvider } from './api/state/Verification';
-import { Routes } from './routes';
+import { RootStackParamList, Routes } from './routes';
 import { navigationTheme } from './routes/styles';
 import { theme } from './styles/theme';
 import { migrateAsyncStorageData } from './api/state/migration/01-native-async-storage';
+import { getEnvironment } from './lib/getEnvironment';
 
 const AppEntry = () => {
   useInitialState();
@@ -21,7 +22,39 @@ const AppEntry = () => {
     <ThemeProvider theme={theme}>
       <StatusBar barStyle={'light-content'} />
       <NotificationsProvider>
-        <NavigationContainer theme={navigationTheme}>
+        <NavigationContainer<RootStackParamList>
+          theme={navigationTheme}
+          linking={{
+            prefixes: [
+              'https://democracy-app.de',
+              `democracy${getEnvironment() === 'internal' ? '-internal' : ''}://`,
+            ],
+            config: {
+              screens: {
+                Sidebar: {
+                  screens: {
+                    Bundestag: {
+                      screens: {
+                        Sitzungswoche: {
+                          path: '',
+                        },
+                        Vergangen: {
+                          path: 'vergangen/',
+                        },
+                        'Top 100': {
+                          path: 'top-100/',
+                        },
+                      },
+                    },
+                    Procedure: {
+                      path: ':type/:procedureId/:title?',
+                    },
+                  },
+                },
+              },
+            },
+          }}
+        >
           <VerificationProvider>
             <Suspense fallback={null}>
               <Routes />
