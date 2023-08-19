@@ -14,6 +14,7 @@ import { navigationTheme } from './routes/styles';
 import { theme } from './styles/theme';
 import { migrateAsyncStorageData } from './api/state/migration/01-native-async-storage';
 import { getEnvironment } from './lib/getEnvironment';
+import { ASSOCIATED_DOMAINS } from './api/config';
 
 const AppEntry = () => {
   useInitialState();
@@ -26,9 +27,7 @@ const AppEntry = () => {
           theme={navigationTheme}
           linking={{
             prefixes: [
-              'https://democracy-app.de',
-              'https://internal.democracy-app.de',
-              'https://ba4f-2a02-908-13d1-ca00-00-88cd.ngrok-free.app',
+              ...ASSOCIATED_DOMAINS,
               `democracy${getEnvironment() === 'internal' ? '-internal' : ''}://`,
             ],
             config: {
