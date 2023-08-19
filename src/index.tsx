@@ -27,6 +27,8 @@ const AppEntry = () => {
           linking={{
             prefixes: [
               'https://democracy-app.de',
+              'https://internal.democracy-app.de',
+              'https://ba4f-2a02-908-13d1-ca00-00-88cd.ngrok-free.app',
               `democracy${getEnvironment() === 'internal' ? '-internal' : ''}://`,
             ],
             config: {

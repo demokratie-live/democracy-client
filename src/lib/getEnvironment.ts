@@ -1,3 +1,5 @@
+import DeviceInfo from 'react-native-device-info';
+
 export const getEnvironment = () => {
   switch (DeviceInfo.getBundleId()) {
     case 'de.democracy-deutschland.clientapp.internal':
