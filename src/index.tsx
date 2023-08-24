@@ -31,7 +31,11 @@ const AppEntry = () => {
               `democracy${getEnvironment() === 'internal' ? '-internal' : ''}://`,
             ],
             config: {
+              initialRouteName: 'Sidebar',
               screens: {
+                Procedure: {
+                  path: ':type/:procedureId/:web-title?',
+                },
                 Sidebar: {
                   screens: {
                     Bundestag: {
@@ -46,9 +50,6 @@ const AppEntry = () => {
                           path: 'top-100/',
                         },
                       },
-                    },
-                    Procedure: {
-                      path: ':type/:procedureId/:title?',
                     },
                   },
                 },
