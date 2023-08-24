@@ -57,7 +57,6 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const Routes: React.FC = () => {
   const { lastStartWithVersion } = useInitialState();
-  // useRoutePushNotifications();
   useNotifee();
   useInitNotifee();
   if (lastStartWithVersion === undefined) {
