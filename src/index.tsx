@@ -27,7 +27,7 @@ const AppEntry = () => {
           theme={navigationTheme}
           linking={{
             prefixes: [
-              ...ASSOCIATED_DOMAINS,
+              ...ASSOCIATED_DOMAINS.map(domain => `https://${domain}`),
               `democracy${getEnvironment() === 'internal' ? '-internal' : ''}://`,
             ],
             config: {
