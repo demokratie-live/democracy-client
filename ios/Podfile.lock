@@ -1,6 +1,6 @@
 PODS:
   - boost (1.76.0)
-  - BVLinearGradient (2.8.1):
+  - BVLinearGradient (2.6.2):
     - React-Core
   - CocoaAsyncSocket (7.6.5)
   - DoubleConversion (1.1.6)
@@ -190,7 +190,7 @@ PODS:
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
   - OpenSSL-Universal (1.1.1100)
-  - Permission-Notifications (3.8.4):
+  - Permission-Notifications (3.6.1):
     - RNPermissions
   - PromisesObjC (2.2.0)
   - RCT-Folly (2021.07.22.00):
@@ -427,7 +427,7 @@ PODS:
     - React-Core
   - react-native-pager-view (5.4.25):
     - React-Core
-  - react-native-pdf (6.7.1):
+  - react-native-pdf (6.6.2):
     - React-Core
   - react-native-safe-area-context (3.4.1):
     - React-Core
@@ -497,7 +497,7 @@ PODS:
     - React-jsi (= 0.70.6)
     - React-logger (= 0.70.6)
     - React-perflogger (= 0.70.6)
-  - RNBootSplash (4.7.5):
+  - RNBootSplash (4.3.2):
     - React-Core
   - RNCAsyncStorage (1.17.11):
     - React-Core
@@ -513,18 +513,18 @@ PODS:
     - FirebaseCoreExtension (= 10.3.0)
     - React-Core
     - RNFBApp
-  - RNGestureHandler (2.12.1):
+  - RNGestureHandler (2.12.0):
     - React-Core
-  - RNKeychain (8.1.2):
+  - RNKeychain (8.0.0):
     - React-Core
-  - RNNotifee (7.8.0):
+  - RNNotifee (7.7.1):
     - React-Core
-    - RNNotifee/NotifeeCore (= 7.8.0)
-  - RNNotifee/NotifeeCore (7.8.0):
+    - RNNotifee/NotifeeCore (= 7.7.1)
+  - RNNotifee/NotifeeCore (7.7.1):
     - React-Core
-  - RNPermissions (3.8.4):
+  - RNPermissions (3.6.1):
     - React-Core
-  - RNRate (1.2.12):
+  - RNRate (1.2.9):
     - React-Core
   - RNReanimated (2.17.0):
     - DoubleConversion
@@ -553,12 +553,12 @@ PODS:
     - React-RCTText
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNScreens (3.24.0):
+  - RNScreens (3.13.1):
     - React-Core
     - React-RCTImage
-  - RNSha256 (1.4.9):
+  - RNSha256 (1.4.8):
     - React-Core
-  - RNSVG (12.5.1):
+  - RNSVG (12.4.4):
     - React-Core
   - SocketRocket (0.6.0)
   - Yoga (1.14.0)
@@ -797,7 +797,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   boost: a7c83b31436843459a1961bfd74b96033dc77234
-  BVLinearGradient: 421743791a59d259aec53f4c58793aad031da2ca
+  BVLinearGradient: 34a999fda29036898a09c6a6b728b0b4189e1a44
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
   FBLazyVector: 48289402952f4f7a4e235de70a9a590aa0b79ef4
@@ -827,7 +827,7 @@ SPEC CHECKSUMS:
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
-  Permission-Notifications: e06c4b115105e9aed6ed8d03c9894c23c1051731
+  Permission-Notifications: 150484ae586eb9be4e32217582a78350a9bb31c3
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
   RCT-Folly: 0080d0a6ebf2577475bda044aa59e2ca1f909cda
   RCTRequired: e1866f61af7049eb3d8e08e8b133abd38bc1ca7a
@@ -847,7 +847,7 @@ SPEC CHECKSUMS:
   react-native-blob-util: a5d3561045ed98cfb2fb80cbbff600fae0e8edee
   react-native-config: 86038147314e2e6d10ea9972022aa171e6b1d4d8
   react-native-pager-view: da490aa1f902c9a5aeecf0909cc975ad0e92e53e
-  react-native-pdf: 7c0e91ada997bac8bac3bb5bea5b6b81f5a3caae
+  react-native-pdf: 33c622cbdf776a649929e8b9d1ce2d313347c4fa
   react-native-safe-area-context: 9e40fb181dac02619414ba1294d6c2a807056ab9
   React-perflogger: 8c79399b0500a30ee8152d0f9f11beae7fc36595
   React-RCTActionSheet: 7316773acabb374642b926c19aef1c115df5c466
@@ -861,21 +861,21 @@ SPEC CHECKSUMS:
   React-RCTVibration: c75ceef7aa60a33b2d5731ebe5800ddde40cefc4
   React-runtimeexecutor: 15437b576139df27635400de0599d9844f1ab817
   ReactCommon: 349be31adeecffc7986a0de875d7fb0dcf4e251c
-  RNBootSplash: 85f6b879c080e958afdb4c62ee04497b05fd7552
+  RNBootSplash: 5f346163977573d6b2aeba1b25df9d2245c0d73c
   RNCAsyncStorage: 8616bd5a58af409453ea4e1b246521bb76578d60
   RNCPushNotificationIOS: 64218f3c776c03d7408284a819b2abfda1834bc8
   RNDeviceInfo: aad3c663b25752a52bf8fce93f2354001dd185aa
   RNFBApp: 1ee535dcb7773ca612d3a2e53a1f78f8f2fb6abf
   RNFBMessaging: 04ecf12bae7543cd8df145f1b26d89d867594be7
-  RNGestureHandler: c0d04458598fcb26052494ae23dda8f8f5162b13
-  RNKeychain: a65256b6ca6ba6976132cc4124b238a5b13b3d9c
-  RNNotifee: f3c01b391dd8e98e67f539f9a35a9cbcd3bae744
-  RNPermissions: f1b49dd05fa9b83993cd05a9ee115247944d8f1a
-  RNRate: ef3bcff84f39bb1d1e41c5593d3eea4aab2bd73a
+  RNGestureHandler: dec4645026e7401a0899f2846d864403478ff6a5
+  RNKeychain: 4f63aada75ebafd26f4bc2c670199461eab85d94
+  RNNotifee: 05692d7bb42b6c718a3906aeb8431c48ff2e8097
+  RNPermissions: dcdb7b99796bbeda6975a6e79ad519c41b251b1c
+  RNRate: 94f57c773e155ca0d0aeeba9c10a32bce9030daf
   RNReanimated: bec7736122a268883bdede07f1bf9cf4b40158db
-  RNScreens: b21dc57dfa2b710c30ec600786a3fc223b1b92e7
-  RNSha256: a6bc3640a34eb41907e363828b9ec742c274298d
-  RNSVG: d7d7bc8229af3842c9cfc3a723c815a52cdd1105
+  RNScreens: 40a2cb40a02a609938137a1e0acfbf8fc9eebf19
+  RNSha256: 80bea5b2e7005f813f6438cb41e573b3d531146c
+  RNSVG: ecd661f380a07ba690c9c5929c475a44f432d674
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
   Yoga: 99caf8d5ab45e9d637ee6e0174ec16fbbb01bcfc
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
