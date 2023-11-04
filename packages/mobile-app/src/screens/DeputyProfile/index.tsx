@@ -248,7 +248,7 @@ export const DeputyProfil: React.FC<Props> = ({ route }) => {
           </MemberImageWrapper>
           <Text>{name}</Text>
           {constituency ? (
-            <TextLighGrey>Direktkadidat WK {constituency}</TextLighGrey>
+            <TextLighGrey>Direktkandidat WK {constituency}</TextLighGrey>
           ) : null}
           <TextGrey>{job}</TextGrey>
           <Chart
