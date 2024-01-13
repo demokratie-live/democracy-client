@@ -641,7 +641,7 @@ export type GetDeputyProceduresQueryVariables = Exact<{
 }>;
 
 
-export type GetDeputyProceduresQuery = { __typename?: 'Query', deputy?: { __typename?: 'Deputy', _id: string, webId: string, procedures: Array<{ __typename?: 'DeputyProcedure', decision: VoteSelection, procedure: { __typename?: 'Procedure', procedureId: string, title: string, subjectGroups: Array<string>, voted: boolean, type: string, activityIndex: { __typename?: 'ActivityIndex', activityIndex: number } } }> } | null };
+export type GetDeputyProceduresQuery = { __typename?: 'Query', deputy?: { __typename?: 'Deputy', _id: string, webId: string, procedures: Array<{ __typename?: 'DeputyProcedure', decision: VoteSelection, procedure: { __typename?: 'Procedure', procedureId: string, title: string, subjectGroups: Array<string>, voted: boolean, type: string, voteDate?: string | null, activityIndex: { __typename?: 'ActivityIndex', activityIndex: number } } }> } | null };
 
 export type CountryMapConstituenciesQueryVariables = Exact<{
   procedureId: Scalars['ID'];
@@ -1373,6 +1373,7 @@ export const GetDeputyProceduresDocument = gql`
         subjectGroups
         voted
         type
+        voteDate
         activityIndex {
           activityIndex
         }

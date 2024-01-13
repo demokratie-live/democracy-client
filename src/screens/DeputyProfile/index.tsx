@@ -291,7 +291,8 @@ export const DeputyProfilScreen: React.FC<Props> = ({ route }) => {
             }
           >
             <ProcedureListItem
-              date={new Date()}
+              // TODO: Fix new Date() in ProcedureListItem
+              date={item.procedure.voteDate ? new Date(item.procedure.voteDate) : new Date()}
               title={item.procedure.title}
               subtitle={item.procedure.subjectGroups.join(', ')}
               voted={item.procedure.voted}

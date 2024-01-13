@@ -10,6 +10,7 @@ query GetDeputyProcedures($id: String!, $limit: Int, $offset: Int) {
         subjectGroups
         voted
         type
+        voteDate
         activityIndex {
           activityIndex
         }
