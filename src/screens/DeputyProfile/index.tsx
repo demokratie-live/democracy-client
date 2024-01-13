@@ -235,7 +235,7 @@ export const DeputyProfilScreen: React.FC<Props> = ({ route }) => {
             />
           </MemberImageWrapper>
           <Text>{name}</Text>
-          {constituency ? <TextLighGrey>Direktkadidat WK {constituency}</TextLighGrey> : null}
+          {constituency ? <TextLighGrey>Direktkandidat WK {constituency}</TextLighGrey> : null}
           <TextGrey>{job}</TextGrey>
           <Chart
             totalProcedures={totalProcedures || 0}
