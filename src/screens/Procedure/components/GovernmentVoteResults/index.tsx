@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ScrollViewProps, useWindowDimensions } from 'react-native';
+import { Dimensions, ScrollViewProps, useWindowDimensions } from 'react-native';
 import BarChart from './BarChart';
 import PartyChart from './PartyChart';
 import ChartLegend from '../Charts/ChartLegend';
@@ -29,10 +29,9 @@ const PieChartWrapper = styled.View<{ width: number }>`
   padding-horizontal: 36px;
 `;
 
-const DecisionTextView = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
+const DecisionTextView = styled.ScrollView`
+  height: 400px;
+  width: ${Dimensions.get('window').width}px;
   padding-horizontal: 25px;
   padding-bottom: 20px;
 `;
