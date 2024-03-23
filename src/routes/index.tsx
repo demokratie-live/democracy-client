@@ -2,7 +2,6 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Introduction from '../screens/Introduction';
 import { useInitialState } from '../api/state/initialState';
-import { getVersion } from 'react-native-device-info';
 import { SidebarNavigation } from './Sidebar';
 import { SyncVotesScreen } from '../screens/SyncVotes';
 import { lightTheme } from '@democracy-deutschland/ui';
@@ -65,7 +64,7 @@ export const Routes: React.FC = () => {
 
   return (
     <Stack.Navigator
-      initialRouteName={lastStartWithVersion !== getVersion() ? 'Introduction' : 'Sidebar'}
+      initialRouteName="Sidebar"
       screenOptions={{
         headerShown: false,
         headerStyle: {
