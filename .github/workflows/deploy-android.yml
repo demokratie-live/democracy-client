@@ -53,3 +53,12 @@ jobs:
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
           ANDROID_PASS: ${{ secrets.ANDROID_PASS }}
           CI: true
+
+      - run: find ${{ github.workspace }}/android/app/build/outputs
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: assets
+          path: |
+            ${{ github.workspace }}/android/app/build/outputs/bundle
