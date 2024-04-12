@@ -65,7 +65,7 @@ const Introduction: FC<Props> = ({ route }) => {
       isNew={slide.isNew}
       nextSlide={
         // TODO fix android next button click. does not work correctly
-        i + 1 === Object.keys(slidesData).length ? finishAction : undefined
+        i + 1 >= Object.keys(slidesData).length ? finishAction : undefined
       }
     />
   ));
