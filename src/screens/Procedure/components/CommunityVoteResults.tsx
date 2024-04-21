@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import {
-  ActivityIndicator,
-  Dimensions,
-  ScrollViewProps,
-  useWindowDimensions,
-  View,
-} from 'react-native';
+import { ActivityIndicator, ScrollViewProps, useWindowDimensions } from 'react-native';
 import PieChart from './Charts/PieChart';
 import ChartLegend from './Charts/ChartLegend';
 import styled from 'styled-components/native';
@@ -17,21 +11,7 @@ import { CommunityConstituencyVotes, CommunityVotes } from '../../../__generated
 import GermanySvgComponent from '../../../components/svgs/GermanySVG';
 import { getConstituencySvgs } from '../../../components/svgs/constituencies';
 import { Pagination } from '@democracy-deutschland/ui';
-
-const ScrollView = styled.ScrollView.attrs(
-  (): ScrollViewProps => ({
-    horizontal: true,
-    pagingEnabled: true,
-    showsHorizontalScrollIndicator: false,
-    contentContainerStyle: {
-      alignContent: 'center',
-    },
-  }),
-)`
-  padding-bottom: ${({ theme }) => theme.spaces.small};
-`;
-
-const MAX_WIDTH = Math.min(380, Dimensions.get('window').width, Dimensions.get('window').height);
+import { PieChartWrapper, ScrollView } from './Charts';
 
 const RepresentativeText = styled.Text`
   color: ${({ theme }) => theme.colors.text.tertiary};
@@ -47,12 +27,6 @@ const CommunitySegmentText = styled.Text`
   font-size: 12px;
   padding-top: 8px;
   padding-bottom: 16px;
-`;
-
-const PieChartWrapper = styled.View<{ width: number }>`
-  align-self: center;
-  padding-horizontal: 36px;
-  max-width: ${MAX_WIDTH}px;
 `;
 
 const SvgWrapper = styled.View`
@@ -146,9 +120,9 @@ export const CommunityVoteResults: React.FC<Props> = ({ voteResults, voted, coun
     screens.push(renderCommuntiyResult(voteResults.constituencies[0], 'communityConstituency'));
   }
   screens.push(
-    <View style={{ width }} key="countryMap">
+    <PieChartWrapper width={width} key="countryMap">
       {countryMap}
-    </View>,
+    </PieChartWrapper>,
   );
 
   const onMomentumScrollEnd: ScrollViewProps['onMomentumScrollEnd'] = ({ nativeEvent }) => {

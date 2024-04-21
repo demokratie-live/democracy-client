@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import Svg, { Path, Circle, Text, G } from 'react-native-svg';
 import styled from 'styled-components/native';
-import { LayoutChangeEvent } from 'react-native';
-
-const Wrapper = styled.View`
-  width: 100%;
-`;
+import { Dimensions } from 'react-native';
+import { Wrapper } from '.';
 
 const SvgStyled = styled(Svg).attrs({})``;
 
@@ -25,13 +22,12 @@ interface Props {
 export const PieChart: React.FC<Props> = ({ data, label, subLabel, showPercentage }) => {
   const [svgWidth, setSvgWidth] = useState(0);
 
-  const onLayout = ({
-    nativeEvent: {
-      layout: { width },
-    },
-  }: LayoutChangeEvent) => {
-    if (svgWidth !== width) {
-      setSvgWidth(width);
+  const onLayout = () => {
+    const { width, height } = Dimensions.get('screen');
+    const size = Math.min(...[width, height].filter(v => v));
+
+    if (svgWidth !== size - size * 0.3) {
+      setSvgWidth(size - size * 0.3);
     }
   };
 

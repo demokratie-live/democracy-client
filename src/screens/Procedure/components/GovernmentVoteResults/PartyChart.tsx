@@ -1,6 +1,6 @@
 import { BarChart } from '@democracy-deutschland/ui';
 import React, { useState } from 'react';
-import { LayoutChangeEvent } from 'react-native';
+import { Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 
 import ChartLegend from '../Charts/ChartLegend';
@@ -11,7 +11,6 @@ const Wrapper = styled.View`
 `;
 
 interface Props {
-  width: number;
   chartData: {
     party: string;
     values: {
@@ -24,17 +23,26 @@ interface Props {
   showPercentage: boolean;
 }
 
-const PartyChartGov: React.FC<Props> = ({ chartData, width, ...props }) => {
+const PartyChartGov: React.FC<Props> = ({ chartData, ...props }) => {
   const [partyChartSelected, setPartyChartSelected] = useState(0);
+  const [svgWidth, setSvgWidth] = useState(0);
 
+  const onLayout = () => {
+    const { width, height } = Dimensions.get('screen');
+    const size = Math.min(...[width, height].filter(v => v));
+
+    if (svgWidth !== size - size * 0.3) {
+      setSvgWidth(size - size * 0.3);
+    }
+  };
   return (
-    <Wrapper>
+    <Wrapper onLayout={onLayout}>
       <BarChart
         data={chartData.map(item => ({ ...item, deviants: item.values }))}
         {...props}
         setSelectedParty={setPartyChartSelected}
         selectedParty={partyChartSelected}
-        width={width}
+        width={svgWidth}
         height={315}
       />
       <ChartLegend data={chartData[partyChartSelected].values} />

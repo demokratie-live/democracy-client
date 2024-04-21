@@ -9,31 +9,14 @@ import { ProcedureQuery } from '../../../../__generated__/graphql';
 import { useInitialState } from '../../../../api/state/initialState';
 import Folding from '../../../../components/Folding';
 import { Pagination } from '@democracy-deutschland/ui';
-
-const ScrollView = styled.ScrollView.attrs(
-  (): ScrollViewProps => ({
-    horizontal: true,
-    pagingEnabled: true,
-    showsHorizontalScrollIndicator: false,
-    contentContainerStyle: {
-      alignContent: 'center',
-    },
-  }),
-)`
-  padding-bottom: ${({ theme }) => theme.spaces.small};
-`;
-
-const PieChartWrapper = styled.View<{ width: number }>`
-  align-self: center;
-  padding-top: 9px;
-  padding-horizontal: 36px;
-`;
+import { PieChartWrapper, ScrollView } from '../Charts';
 
 const DecisionTextView = styled.ScrollView`
-  height: 400px;
+  max-height: 400px;
   width: ${Dimensions.get('window').width}px;
   padding-horizontal: 25px;
   padding-bottom: 20px;
+  max-width: 600px;
 `;
 
 const DecisionTextHeadline = styled.Text`
@@ -66,6 +49,8 @@ export const GovernmentVoteResults: React.FC<Props> = ({ voteResults, currentSta
   const [activeSlide, setActiveSlide] = useState<number>(0);
   const { isVerified } = useInitialState();
   const { width } = useWindowDimensions();
+
+  const pieChartSize = Math.min(width);
 
   // FIXME Sollte nur im falle von Fehlerhaften Daten vom server ausgelöst werden.
   // https://github.com/demokratie-live/democracy-client/issues/714
@@ -153,7 +138,7 @@ export const GovernmentVoteResults: React.FC<Props> = ({ voteResults, currentSta
     }
 
     const screens = [
-      <PieChartWrapper width={width} key="pieChart">
+      <PieChartWrapper width={pieChartSize} key="pieChart">
         <PieChart
           data={dataPieChart}
           subLabel={voteResults.namedVote ? 'Abgeordnete' : 'Fraktionen'}
@@ -162,26 +147,27 @@ export const GovernmentVoteResults: React.FC<Props> = ({ voteResults, currentSta
         />
         <ChartLegend data={dataPieChart} />
       </PieChartWrapper>,
-      <PieChartWrapper width={width} key="partyChart">
+      <PieChartWrapper width={pieChartSize} key="partyChart">
         <PartyChart
           key="partyChart"
-          width={width - 38}
           chartData={dataPartyChart}
           colors={partyColors}
           showPercentage
         />
       </PieChartWrapper>,
-      <PieChartWrapper width={width} key="barChart">
+      <PieChartWrapper width={pieChartSize} key="barChart">
         <BarChart key="barChart" data={voteResults} legendData={dataPieChart} />
       </PieChartWrapper>,
     ];
 
     if (voteResults.decisionText) {
       screens.push(
-        <DecisionTextView key="decisionText">
-          <DecisionTextHeadline>Beschlusstext</DecisionTextHeadline>
-          <DecisionText>{voteResults.decisionText}</DecisionText>
-        </DecisionTextView>,
+        <PieChartWrapper width={pieChartSize} key="decisionText">
+          <DecisionTextView key="decisionText">
+            <DecisionTextHeadline>Beschlusstext</DecisionTextHeadline>
+            <DecisionText>{voteResults.decisionText}</DecisionText>
+          </DecisionTextView>
+        </PieChartWrapper>,
       );
     }
 

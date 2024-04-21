@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import styled from 'styled-components/native';
 import { CountryMap as CountryMapCmp } from '@democracy-deutschland/ui';
 import { useCountryMapConstituenciesQuery } from '../../../../__generated__/graphql';
+import { Dimensions, View } from 'react-native';
 
 const Container = styled.View`
   align-items: center;
@@ -13,6 +14,23 @@ interface Props {
 }
 
 export const CountryMap: React.FC<Props> = ({ procedureId }) => {
+  const [containerWidth, setContainerWidth] = React.useState(0);
+
+  useLayoutEffect(() => {
+    const onContainerLayout = () => {
+      const { width, height } = Dimensions.get('screen');
+      setContainerWidth(Math.min(width, height));
+    };
+
+    onContainerLayout();
+
+    const resizeListener = Dimensions.addEventListener('change', onContainerLayout);
+
+    return () => {
+      resizeListener.remove();
+    };
+  }, []);
+
   const { data } = useCountryMapConstituenciesQuery({
     variables: {
       procedureId,
@@ -29,7 +47,7 @@ export const CountryMap: React.FC<Props> = ({ procedureId }) => {
         data={{
           procedure: { ...data.procedure, communityVotes: data.procedure.communityVotes },
         }}
-        width={380}
+        width={containerWidth}
       />
     </Container>
   );
