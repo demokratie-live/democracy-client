@@ -1,6 +1,6 @@
 {
   "name": "democracynative",
-  "version": "1.5.9",
+  "version": "1.5.10",
   "private": true,
   "scripts": {
     "start": "react-native start",
