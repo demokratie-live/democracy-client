@@ -1,5 +1,7 @@
-import { Text } from 'react-native';
+import { Redirect } from "expo-router";
+import { currentLegislaturPeriod } from "../data/legislaturPeriods";
 
-export default function Page() {
-  return <Text>Top-level page 🚀</Text>;
-}
+const Index = () => {
+  return <Redirect href={`/(sidebar)/${currentLegislaturPeriod}/procedures`} />;
+};
+export default Index;
