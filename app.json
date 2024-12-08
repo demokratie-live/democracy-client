@@ -15,13 +15,18 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "de.democracy-deutschland.clientapp.internal"
+      "bundleIdentifier": "de.democracy-deutschland.clientapp.internal",
+      "entitlements": {
+        "aps-environment": "development"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "de.democracydeutschland.app.internal",
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "favicon": "./assets/favicon.png"
