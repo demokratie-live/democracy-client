@@ -2,6 +2,7 @@
   "name": "democracy",
   "version": "1.0.0",
   "main": "expo-router/entry",
+  "packageManager": "yarn@1.22.19",
   "scripts": {
     "start": "expo start",
     "android": "expo run:android",
