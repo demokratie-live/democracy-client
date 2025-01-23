@@ -1,6 +1,12 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true
-  }
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@types/*": ["src/types/*"]
+    },
+    "types": []
+  },
+  "include": ["src", "src/types/styled.d.ts"]
 }

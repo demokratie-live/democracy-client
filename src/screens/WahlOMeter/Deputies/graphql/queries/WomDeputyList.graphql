@@ -1,0 +1,20 @@
+query WomDeputyListQuery(
+  $limit: Int
+  $filterTerm: String
+  $filterIds: [String!]
+  $votedProcedureIds: [String!]!
+  $period: Int!
+) {
+  deputies(period: $period, limit: $limit, filterTerm: $filterTerm, filterIds: $filterIds) {
+    hasMore
+    data {
+      _id
+      name
+      party
+      webId
+      imgURL
+      constituency
+      ...DeputyMatchBar
+    }
+  }
+}

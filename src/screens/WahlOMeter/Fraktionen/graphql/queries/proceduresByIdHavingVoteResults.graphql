@@ -1,0 +1,18 @@
+query VotedPartyProcedures($procedureIds: [String!], $pageSize: Int, $offset: Int, $period: Int!) {
+  procedurecForWomPartyList: proceduresByIdHavingVoteResults(
+    procedureIds: $procedureIds
+    pageSize: $pageSize
+    offset: $offset
+    period: $period
+  ) {
+    total
+    procedures {
+      ...ListItemData
+      voteResults {
+        partyVotes {
+          ...DeviantsPartyVote
+        }
+      }
+    }
+  }
+}

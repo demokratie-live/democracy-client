@@ -1,0 +1,11 @@
+query GetDeputiesForNewConstituency(
+  $filterConstituency: String
+  $excludeIds: [String!]
+  $period: Int
+) {
+  deputies(filterConstituency: $filterConstituency, excludeIds: $excludeIds, period: $period) {
+    data {
+      webId
+    }
+  }
+}

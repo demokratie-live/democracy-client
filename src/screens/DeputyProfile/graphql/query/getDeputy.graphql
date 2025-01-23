@@ -1,0 +1,29 @@
+query GetDeputy($id: String!, $votedProcedureIds: [String!]!) {
+  deputy(id: $id) {
+    _id
+    webId
+    name
+    imgURL
+    party
+    job
+    biography
+    totalProcedures
+    constituency
+    procedures {
+      decision
+      procedure {
+        procedureId
+      }
+    }
+    contact {
+      address
+      email
+      links {
+        name
+        URL
+        username
+      }
+    }
+    ...DeputyMatchBar
+  }
+}

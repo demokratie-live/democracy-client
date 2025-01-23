@@ -1,0 +1,8 @@
+fragment DeviantsPartyVote on PartyVote {
+  deviants {
+    yes
+    no
+    abstination
+    notVoted
+  }
+}
