@@ -14,9 +14,8 @@ import { List } from "../../../screens/Bundestag";
 import { ListType } from "../../../__generated__/graphql";
 import { tabNavigationScreenOptions } from "../../../screens/Bundestag/styles";
 import { useRouter, useNavigation } from "expo-router";
-import { RootStackParamList } from "src/app/_layout";
+import { RootStackParamList } from "../../../app/_layout";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { CompositeNavigationProp } from "@react-navigation/core";
 
 export type BundestagTopTabParamList = {
   Empfohlen: undefined;

@@ -7,8 +7,6 @@ const Procedure: FC = (props) => {
     procedureId: string;
   }>();
 
-  console.log("Procedure route", { props, params });
-
   return <ProcedureScreen procedureId={params.procedureId} />;
 };
 
