@@ -1,3 +1,4 @@
+import "../lib/wdyr";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { client } from "../api/apollo";
 import { ApolloProvider } from "@apollo/client";
