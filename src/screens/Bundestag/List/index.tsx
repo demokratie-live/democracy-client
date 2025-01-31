@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import {
   Text,
   ListRenderItem,
@@ -75,6 +75,121 @@ export const List: React.FC<ListProps> = ({ route }) => {
     setHasMore(true);
   }, [proceduresFilter]);
 
+  const segmentedData: SegmentedData[] = useMemo(() => {
+    if (data && ListType.Top100 === route.params.list) {
+      return [
+        {
+          title: "",
+          data: data.procedures,
+        },
+      ];
+    } else if (data) {
+      return data.procedures.reduce<SegmentedData[]>((prev, procedure) => {
+        const { voteWeek, voteYear } = procedure;
+        const segment =
+          voteWeek && voteYear ? `KW ${voteWeek}/${voteYear}` : "";
+        const index = prev.findIndex(({ title }) => title === segment);
+        if (index !== -1) {
+          return Object.assign([...prev], {
+            [index]: { title: segment, data: [...prev[index].data, procedure] },
+          });
+        }
+        return [
+          ...prev,
+          {
+            title: segment,
+            data: [procedure],
+          },
+        ];
+      }, []);
+    } else {
+      return [];
+    }
+  }, [data, route.params.list]);
+
+  const handleProcedurePress = useCallback(
+    (procedureId: string) => {
+      router.push(`procedure/${procedureId}`);
+    },
+    [router]
+  );
+
+  const renderItem: ListRenderItem<Item> = useCallback(
+    ({
+      item: {
+        procedureId,
+        title,
+        sessionTOPHeading,
+        subjectGroups,
+        voteDate,
+        voteEnd,
+        voted: votedServer,
+        type,
+        voteResults,
+        votedGovernment,
+        communityVotes,
+      },
+      index,
+    }) => {
+      // If no session top headings available use subject groups
+      let subline = null;
+      if (sessionTOPHeading) {
+        subline = sessionTOPHeading;
+      } else if (subjectGroups) {
+        subline = subjectGroups.join(", ");
+      }
+
+      const govSlices = pieChartGovernmentData({
+        voteResults,
+        votedGovernment,
+      });
+
+      const localSelection = localVotes.find(
+        (localVote) => localVote.procedureId === procedureId
+      )?.selection;
+      const voted = votedServer || !!localSelection;
+
+      const communityVoteSlices = communityVoteData({
+        communityVotes,
+        localSelection,
+        voted,
+      });
+
+      return (
+        <Row
+          onPress={() => handleProcedurePress(procedureId)}
+          testID={`ListItem-${route.params.list}-${index}`}
+        >
+          <ListItem
+            title={title}
+            subline={subline}
+            voteDate={voteDate ? new Date(voteDate) : undefined}
+            endDate={voteEnd ? new Date(voteEnd) : undefined}
+            voted={voted}
+            votes={communityVotes ? communityVotes.total || 0 : 0}
+            govermentChart={{
+              votes: govSlices,
+              large: true,
+            }}
+            communityVotes={communityVoteSlices}
+          />
+        </Row>
+      );
+    },
+    [localVotes, route.params.list, handleProcedurePress]
+  );
+
+  const renderSectionHeader: SectionListProps<
+    Item,
+    SegmentedData
+  >["renderSectionHeader"] = useCallback(
+    ({ section }: { section: SegmentedData }) =>
+      route.params.list !== "TOP100" && section.title ? (
+        <Segment text={section.title} />
+      ) : null,
+    [route.params.list]
+  );
+
   if (loading) {
     return (
       <Container>
@@ -109,113 +224,6 @@ export const List: React.FC<ListProps> = ({ route }) => {
   if (data.procedures.length === 0) {
     return <NoConferenceWeekData />;
   }
-  let segmentedData: SegmentedData[];
-
-  // Do not sort top 100 list
-  if (ListType.Top100 === route.params.list) {
-    segmentedData = [
-      {
-        title: "",
-        data: data.procedures,
-      },
-    ];
-  } else {
-    segmentedData = data.procedures.reduce<SegmentedData[]>(
-      (prev, procedure) => {
-        const { voteWeek, voteYear } = procedure;
-        const segment =
-          voteWeek && voteYear ? `KW ${voteWeek}/${voteYear}` : "";
-        const index = prev.findIndex(({ title }) => title === segment);
-        if (index !== -1) {
-          return Object.assign([...prev], {
-            [index]: { title: segment, data: [...prev[index].data, procedure] },
-          });
-        }
-        return [
-          ...prev,
-          {
-            title: segment,
-            data: [procedure],
-          },
-        ];
-      },
-      []
-    );
-  }
-
-  const handleProcedurePress = (procedureId: string, title?: string) => {
-    router.push(`procedure/${procedureId}`);
-  };
-
-  const renderItem: ListRenderItem<Item> = ({
-    item: {
-      procedureId,
-      title,
-      sessionTOPHeading,
-      subjectGroups,
-      voteDate,
-      voteEnd,
-      voted: votedServer,
-      type,
-      voteResults,
-      votedGovernment,
-      communityVotes,
-    },
-    index,
-  }) => {
-    // If no session top headings available use subject groups
-    let subline = null;
-    if (sessionTOPHeading) {
-      subline = sessionTOPHeading;
-    } else if (subjectGroups) {
-      subline = subjectGroups.join(", ");
-    }
-
-    const govSlices = pieChartGovernmentData({
-      voteResults,
-      votedGovernment,
-    });
-
-    const localSelection = localVotes.find(
-      (localVote) => localVote.procedureId === procedureId
-    )?.selection;
-    const voted = votedServer || !!localSelection;
-
-    const communityVoteSlices = communityVoteData({
-      communityVotes,
-      localSelection,
-      voted,
-    });
-
-    return (
-      <Row
-        onPress={() => handleProcedurePress(procedureId, type || procedureId)}
-        testID={`ListItem-${route.params.list}-${index}`}
-      >
-        <ListItem
-          title={title}
-          subline={subline}
-          voteDate={voteDate ? new Date(voteDate) : undefined}
-          endDate={voteEnd ? new Date(voteEnd) : undefined}
-          voted={voted}
-          votes={communityVotes ? communityVotes.total || 0 : 0}
-          govermentChart={{
-            votes: govSlices,
-            large: true,
-          }}
-          communityVotes={communityVoteSlices}
-        />
-      </Row>
-    );
-  };
-
-  const renderSectionHeader: SectionListProps<
-    Item,
-    SegmentedData
-  >["renderSectionHeader"] = ({ section }) =>
-    route.params.list !== "TOP100" && section.title ? (
-      <Segment text={section.title} />
-    ) : null;
 
   return (
     <Container>
