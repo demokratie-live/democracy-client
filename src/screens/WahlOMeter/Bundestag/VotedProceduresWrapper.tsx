@@ -1,21 +1,22 @@
-import React, { ReactElement } from 'react';
-import styled from 'styled-components/native';
-import unionBy from 'lodash.unionby';
-import { FlatList } from 'react-native';
-import { LocalVote, localVotesState } from '../../../api/state/votesLocal';
-import { useRecoilValue } from 'recoil';
-import { parlaments, parlamentState } from '../../../api/state/parlament';
+import React, { ReactElement } from "react";
+import styled from "styled-components/native";
+import unionBy from "lodash.unionby";
+import { FlatList } from "react-native";
+import { LocalVote, localVotesState } from "../../../api/state/votesLocal";
+import { useRecoilValue } from "recoil";
+import { ParlamentIdentifier, parlaments } from "../../../api/state/parlament";
 import {
   PartyChartDataQuery,
   ProceduresByIdHavingVoteResultsQuery,
   usePartyChartDataQuery,
   useProceduresByIdHavingVoteResultsQuery,
-} from '../../../__generated__/graphql';
-import { ListLoading } from '../../../components/ListLoading';
-import { Row } from '../../../components/Row';
-import { ListItem } from '../../../components/ListItem';
-import { pieChartGovernmentData } from '../../../lib/PieChartGovernmentData';
-import { communityVoteData } from '../../../lib/PieChartCommunityData';
+} from "../../../__generated__/graphql";
+import { ListLoading } from "../../../components/ListLoading";
+import { Row } from "../../../components/Row";
+import { ListItem } from "../../../components/ListItem";
+import { pieChartGovernmentData } from "../../../lib/PieChartGovernmentData";
+import { communityVoteData } from "../../../lib/PieChartCommunityData";
+import { useLegislaturePeriodStore } from "src/api/state/legislaturePeriod";
 
 const Container = styled.View`
   background-color: #fff;
@@ -42,17 +43,22 @@ interface Props {
   children: JSX.Element | ((props: ChildProps) => ReactElement);
 }
 
-const VotedProceduresWrapper: React.FC<Props> = ({ onProcedureListItemClick, children }) => {
-  const parlamentIdentifier = useRecoilValue(parlamentState);
+const VotedProceduresWrapper: React.FC<Props> = ({
+  onProcedureListItemClick,
+  children,
+}) => {
+  const { legislaturePeriod } = useLegislaturePeriodStore();
+  const parlamentIdentifier = `BT-${legislaturePeriod}` as ParlamentIdentifier;
   const parlament = parlaments[parlamentIdentifier];
   const localVotes = useRecoilValue(localVotesState);
-  const { data: proceduresDataNew, previousData: proceduresDataPrev } = usePartyChartDataQuery({
-    variables: {
-      procedureIds: localVotes.map(({ procedureId }) => procedureId),
-      pageSize: 999999,
-      period: parlament.period,
-    },
-  });
+  const { data: proceduresDataNew, previousData: proceduresDataPrev } =
+    usePartyChartDataQuery({
+      variables: {
+        procedureIds: localVotes.map(({ procedureId }) => procedureId),
+        pageSize: 999999,
+        period: parlament.period,
+      },
+    });
 
   const proceduresData = proceduresDataNew?.partyChartProcedures
     ? proceduresDataNew
@@ -98,17 +104,19 @@ const VotedProceduresWrapper: React.FC<Props> = ({ onProcedureListItemClick, chi
   return (
     <Container>
       <FlatList<
-        | 'chart'
-        | ProceduresByIdHavingVoteResultsQuery['proceduresByIdHavingVoteResults3']['procedures'][0]
+        | "chart"
+        | ProceduresByIdHavingVoteResultsQuery["proceduresByIdHavingVoteResults3"]["procedures"][0]
       >
-        data={['chart', ...listData]}
+        data={["chart", ...listData]}
         renderItem={({ item }) => {
           const localSelection =
-            item !== 'chart'
-              ? localVotes.find(localVote => localVote.procedureId === item.procedureId)?.selection
+            item !== "chart"
+              ? localVotes.find(
+                  (localVote) => localVote.procedureId === item.procedureId
+                )?.selection
               : undefined;
           const voted = !!localSelection;
-          return item === 'chart' ? (
+          return item === "chart" ? (
             (children as (props: ChildProps) => ReactElement)({
               totalProcedures,
               chartData: {
@@ -122,7 +130,9 @@ const VotedProceduresWrapper: React.FC<Props> = ({ onProcedureListItemClick, chi
                 {...item}
                 voteDate={item.voteDate ? new Date(item.voteDate) : undefined}
                 subline={
-                  item.sessionTOPHeading ? item.sessionTOPHeading : item.subjectGroups.join(', ')
+                  item.sessionTOPHeading
+                    ? item.sessionTOPHeading
+                    : item.subjectGroups.join(", ")
                 }
                 votes={item.communityVotes ? item.communityVotes.total || 0 : 0}
                 govermentChart={{
@@ -142,13 +152,17 @@ const VotedProceduresWrapper: React.FC<Props> = ({ onProcedureListItemClick, chi
             </Row>
           );
         }}
-        ListFooterComponent={() => (networkStatus === 3 ? <ListLoading /> : null)}
+        ListFooterComponent={() =>
+          networkStatus === 3 ? <ListLoading /> : null
+        }
         onEndReached={() => {
           hasMore &&
             listData.length > 0 &&
             fetchMore({
               variables: {
-                offset: procedurListData.proceduresByIdHavingVoteResults3.procedures.length,
+                offset:
+                  procedurListData.proceduresByIdHavingVoteResults3.procedures
+                    .length,
               },
               updateQuery: (prev, { fetchMoreResult }) => {
                 if (!fetchMoreResult) {
@@ -156,25 +170,27 @@ const VotedProceduresWrapper: React.FC<Props> = ({ onProcedureListItemClick, chi
                 }
                 if (
                   hasMore &&
-                  fetchMoreResult.proceduresByIdHavingVoteResults3.procedures.length === 0
+                  fetchMoreResult.proceduresByIdHavingVoteResults3.procedures
+                    .length === 0
                 ) {
                   hasMore = false;
                 }
-                prev.proceduresByIdHavingVoteResults3.procedures;
+
                 return Object.assign({}, prev, {
                   proceduresByIdHavingVoteResults3: {
                     ...prev.proceduresByIdHavingVoteResults3,
                     procedures: unionBy(
                       prev.proceduresByIdHavingVoteResults3.procedures,
-                      fetchMoreResult.proceduresByIdHavingVoteResults3.procedures,
-                      '_id',
+                      fetchMoreResult.proceduresByIdHavingVoteResults3
+                        .procedures,
+                      "_id"
                     ),
                   },
                 });
               },
             });
         }}
-        keyExtractor={item => (item === 'chart' ? item : item.procedureId)}
+        keyExtractor={(item) => (item === "chart" ? item : item.procedureId)}
       />
     </Container>
   );

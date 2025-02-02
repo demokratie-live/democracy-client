@@ -12,6 +12,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../../app/_layout";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { SidebarParamList } from "../../../app/(sidebar)/_layout";
+import { router } from "expo-router";
 
 const Container = styled.ScrollView.attrs({
   flex: 1,
@@ -22,7 +23,8 @@ const Container = styled.ScrollView.attrs({
 const Text = styled.Text`
   font-size: 15px;
   text-align: center;
-  padding-horizontal: 18px;
+  padding-left: 18px;
+  padding-right: 18px;
   padding-bottom: 11px;
 `;
 
@@ -60,8 +62,8 @@ export const NoConferenceWeekData = () => {
         <TextGrey>
           {`Die nächste Sitzungswoche findet gemäß Sitzungswochenkalender in KW ${data.currentConferenceWeek.calendarWeek}
 (`}
-          {dateFormat(data.currentConferenceWeek.start, "dd.mm.yyyy")} –{" "}
-          {dateFormat(data.currentConferenceWeek.end, "dd.mm.yyyy")}
+          {dateFormat(data.currentConferenceWeek?.start, "dd.mm.yyyy")} –{" "}
+          {dateFormat(data.currentConferenceWeek?.end, "dd.mm.yyyy")}
           {`)
 statt.`}
         </TextGrey>
@@ -71,7 +73,7 @@ statt.`}
         !notificationSettings.conferenceWeekPushs) && (
         <Button
           title="Benachrichtigen"
-          onPress={() => navigation.navigate("Settings")}
+          onPress={() => router.push("/Settings")}
         />
       )}
     </Container>

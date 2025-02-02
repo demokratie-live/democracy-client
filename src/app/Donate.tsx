@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { DonateScreen } from "../screens/Donate";
+import { DonateScreen } from "src/screens/Donate";
 
 const Donate: FC = (props) => {
   return <DonateScreen />;

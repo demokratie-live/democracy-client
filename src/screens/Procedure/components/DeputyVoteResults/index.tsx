@@ -11,8 +11,9 @@ import { useRecoilValue } from "recoil";
 import { favorizedDeputiesState } from "../../../../api/state/favorizedDeputies";
 import Folding from "../../../../components/Folding";
 import { DeputyVoteResultPlaceholder } from "./DeputyPlaceholder";
-import { parlamentState } from "../../../../api/state/parlament";
+import { ParlamentIdentifier } from "../../../../api/state/parlament";
 import { Pagination as PaginationCmp } from "@democracy-deutschland/ui";
+import { useLegislaturePeriodStore } from "src/api/state/legislaturePeriod";
 
 const ScrollView = styled.ScrollView.attrs(
   (): ScrollViewProps => ({
@@ -48,7 +49,8 @@ export const DeputyVoteResultSlider: React.FC<Props> = ({
 }) => {
   const [activeSlide, setActiveSlide] = useState<number>(0);
   const { isVerified } = useInitialState();
-  const parlamentIdentifier = useRecoilValue(parlamentState);
+  const { legislaturePeriod } = useLegislaturePeriodStore();
+  const parlamentIdentifier = `BT-${legislaturePeriod}` as ParlamentIdentifier;
   const favorizedDeputies = useRecoilValue(
     favorizedDeputiesState(parlamentIdentifier)
   );

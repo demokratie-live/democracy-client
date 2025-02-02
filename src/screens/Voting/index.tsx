@@ -6,7 +6,7 @@ import Fade from "./components/Animations/Fade";
 import ChartLegend from "../Procedure/components/Charts/ChartLegend";
 import styled from "styled-components/native";
 import { useRecoilValue } from "recoil";
-import { parlaments, parlamentState } from "../../api/state/parlament";
+import { ParlamentIdentifier, parlaments } from "../../api/state/parlament";
 import { constituencyState } from "../../api/state/constituency";
 import { LocalVote, localVotesState } from "../../api/state/votesLocal";
 import {
@@ -22,6 +22,7 @@ import { theme } from "../../styles/theme";
 import { Centered } from "../../components/Centered";
 import { NoVotesPlaceholder } from "../../components/NoVotesPlaceholder";
 import { VoteStackParamList } from "../../app/(vote)/_layout";
+import { useLegislaturePeriodStore } from "src/api/state/legislaturePeriod";
 
 const Wrapper = styled.View`
   flex: 1;
@@ -40,7 +41,8 @@ const ScrollWrapper = styled.ScrollView.attrs({
 
 const Title = styled.Text`
   padding-top: 9px;
-  padding-horizontal: 18px;
+  padding-left: 18px;
+  padding-right: 18px;
   font-size: 34px;
   padding-bottom: 9px;
 `;
@@ -56,8 +58,11 @@ const WarnWrapper = styled.View`
 const WarnTextWrapper = styled.View`
   align-items: center;
   justify-content: center;
-  padding-vertical: 11px;
-  padding-horizontal: 18px;
+
+  padding-top: 11px;
+  padding-bottom: 11px;
+  padding-left: 18px;
+  padding-right: 18px;
   background-color: rgb(255, 255, 255);
   opacity: 0.9;
 `;
@@ -77,7 +82,8 @@ const BalloutBoxWrapper = styled.View`
 
 const Description = styled.Text`
   color: ${({ theme }) => theme.colors.text.tertiary};
-  padding-horizontal: 18px;
+  padding-left: 18px;
+  padding-right: 18px;
   margin-bottom: 18px;
   text-align: center;
 `;
@@ -89,7 +95,8 @@ export const VotingScreen: React.FC<Props> = ({
   procedureId,
   title,
 }) => {
-  const parlamentIdentifier = useRecoilValue(parlamentState);
+  const { legislaturePeriod } = useLegislaturePeriodStore();
+  const parlamentIdentifier = `BT-${legislaturePeriod}` as ParlamentIdentifier;
   const parlament = parlaments[parlamentIdentifier];
   const [showWarning, setShowWarning] = useState(true);
   const [selectedParty, setSelectedParty] = useState(0);

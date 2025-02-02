@@ -11,7 +11,7 @@ import {
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../app/_layout";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { parlaments, parlamentState } from "../../api/state/parlament";
+import { ParlamentIdentifier, parlaments } from "../../api/state/parlament";
 import { searchHistoryState, searchTermState } from "../../api/state/search";
 import { Segment } from "../../components/Segment/index";
 import { Row } from "../../components/Row";
@@ -19,6 +19,7 @@ import { ListItem } from "../../components/ListItem";
 import { pieChartGovernmentData } from "../../lib/PieChartGovernmentData";
 import { communityVoteData } from "../../lib/PieChartCommunityData";
 import { AppLogo } from "../../components/AppLogo";
+import { useLegislaturePeriodStore } from "src/api/state/legislaturePeriod";
 
 const isProcedureGuard = (
   searchItem: string | Procedure
@@ -72,7 +73,9 @@ interface SegmentData {
 export const Results: React.FC = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const parlamentIdentifier = useRecoilValue(parlamentState);
+  const { legislaturePeriod } = useLegislaturePeriodStore();
+  console.log("Results", { legislaturePeriod });
+  const parlamentIdentifier = `BT-${legislaturePeriod}` as ParlamentIdentifier;
   const parlament = parlaments[parlamentIdentifier];
   const [executeFinishSearch] = useFinishSearchMutation();
   const [term, setTerm] = useRecoilState(searchTermState);
@@ -85,7 +88,7 @@ export const Results: React.FC = () => {
   ] = useSearchProceduresLazyQuery({
     variables: {
       term,
-      period: parlament.period,
+      period: parlament?.period,
     },
   });
 

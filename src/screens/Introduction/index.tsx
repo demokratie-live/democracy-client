@@ -15,6 +15,7 @@ import { Slide, slidesData } from "./components";
 import { PushInstructions } from "./PushInstructions";
 import { NotificationsContext } from "../../api/state/notificationPermission";
 import { useNotificationPermission } from "./useNotificationPermission";
+import { router } from "expo-router";
 
 /**
  * TODO: Reenable NotificationContext
@@ -80,13 +81,7 @@ export const IntroductionScreen: FC = () => {
         finishText="Später"
         finishAction={() => {
           setLastStartWithVersion(getVersion());
-          navigation.reset({
-            routes: [
-              {
-                name: "Sidebar",
-              },
-            ],
-          });
+          router.back();
         }}
       >
         {slideScreens}

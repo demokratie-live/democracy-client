@@ -8,7 +8,7 @@ import { useInitialState } from "../../api/state/initialState";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Button } from "../../components/Button";
 import { AppLogo } from "../../components/AppLogo";
-import { useNavigation } from "expo-router";
+import { router, useNavigation } from "expo-router";
 import { VerificationStackParamList } from "../../app/(verification)/_layout";
 
 const Container = styled.ScrollView.attrs(() => ({
@@ -81,7 +81,7 @@ export const SmsDonate: React.FC = () => {
   };
 
   const onDonate = () => {
-    navigation.replace("SmsDonate");
+    router.replace("/Donate");
   };
 
   return (

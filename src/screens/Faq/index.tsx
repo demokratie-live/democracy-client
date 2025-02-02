@@ -23,6 +23,7 @@ import { linking } from "../../lib/linking";
 import { Button } from "@democracy-deutschland/ui";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { SidebarParamList } from "../../app/(sidebar)/_layout";
+import { router, useNavigation } from "expo-router";
 
 const phoneNumber =
   Platform.OS === "ios"
@@ -118,16 +119,8 @@ const Markdown: React.FC<MarkdownProps> = ({ children, styles = {} }) => {
   );
 };
 
-type FaqScreenNavigationProp = CompositeNavigationProp<
-  DrawerNavigationProp<SidebarParamList, "Faq">,
-  NativeStackNavigationProp<RootStackParamList>
->;
-
-type Props = {
-  navigation: FaqScreenNavigationProp;
-};
-
-export const FaqScreen: React.FC<Props> = ({ navigation }) => {
+export const FaqScreen: React.FC = () => {
+  const navigation = useNavigation();
   return (
     <Wrapper>
       <Headline>Hier beantworten wir häufig gestellte Fragen</Headline>
@@ -186,7 +179,7 @@ Bitte gib uns möglichst viele Informationen zu den von Dir gefunden Fehlern ode
         </IconWrapper>
       </SocialMediaWrapper>
       <ReViewTutorial>
-        <TouchableOpacity onPress={() => navigation.navigate("Introduction")}>
+        <TouchableOpacity onPress={() => router.push("/Introduction")}>
           <Button variant="primary">Tutorial erneut ansehen</Button>
         </TouchableOpacity>
       </ReViewTutorial>

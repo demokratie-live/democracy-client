@@ -5,14 +5,13 @@ import {
   SectionList,
   SectionListProps,
 } from "react-native";
-import { RouteProp } from "@react-navigation/core";
 
 import { Segment } from "./Components/Segment";
 import { communityVoteData } from "../../../lib/PieChartCommunityData";
 import { NoConferenceWeekData } from "./NoConferenceWeekData";
 import styled from "styled-components/native";
 import { localVotesState } from "../../../api/state/votesLocal";
-import { parlaments, parlamentState } from "../../../api/state/parlament";
+import { ParlamentIdentifier, parlaments } from "../../../api/state/parlament";
 import { useRecoilValue } from "recoil";
 import { useListFilter } from "../../../api/hooks/useListFilter";
 import { constituencyState } from "../../../api/state/constituency";
@@ -28,7 +27,7 @@ import { pieChartGovernmentData } from "../../../lib/PieChartGovernmentData";
 import { Row } from "../../../components/Row";
 import { ListItem } from "../../../components/ListItem";
 import { useRouter } from "expo-router";
-import { BundestagTopTabParamList } from "../../../app/(sidebar)/[legislaturePeriod]";
+import { useLegislaturePeriodStore } from "src/api/state/legislaturePeriod";
 
 export interface SegmentedData {
   title: string;
@@ -43,19 +42,18 @@ const Container = styled.View`
 `;
 
 interface ListProps {
-  route: RouteProp<
-    BundestagTopTabParamList,
-    "Sitzungswoche" | "Vergangen" | "Top 100"
-  >;
+  list: ListType;
 }
 
-export const List: React.FC<ListProps> = ({ route }) => {
+export const List: React.FC<ListProps> = ({ list }) => {
   const router = useRouter();
   const localVotes = useRecoilValue(localVotesState);
   const { proceduresFilter } = useListFilter();
   const constituency = useRecoilValue(constituencyState);
-  const parlamentIdentifier = useRecoilValue(parlamentState);
+  const { legislaturePeriod } = useLegislaturePeriodStore();
+  const parlamentIdentifier = `BT-${legislaturePeriod}` as ParlamentIdentifier;
   const parlament = parlaments[parlamentIdentifier];
+
   const constituencies = constituency ? [constituency] : [];
   const [hasMore, setHasMore] = useState(true);
   const { loading, data, error, fetchMore, networkStatus, refetch } =
@@ -63,11 +61,11 @@ export const List: React.FC<ListProps> = ({ route }) => {
       fetchPolicy: "network-only",
       errorPolicy: "all",
       variables: {
-        listTypes: [route.params.list],
+        listTypes: [list],
         pageSize: 10,
         filter: proceduresFilter,
         constituencies,
-        period: parlament.period,
+        period: parlament?.period,
       },
     });
 
@@ -76,7 +74,7 @@ export const List: React.FC<ListProps> = ({ route }) => {
   }, [proceduresFilter]);
 
   const segmentedData: SegmentedData[] = useMemo(() => {
-    if (data && ListType.Top100 === route.params.list) {
+    if (data && ListType.Top100 === list) {
       return [
         {
           title: "",
@@ -105,11 +103,11 @@ export const List: React.FC<ListProps> = ({ route }) => {
     } else {
       return [];
     }
-  }, [data, route.params.list]);
+  }, [data, list]);
 
   const handleProcedurePress = useCallback(
     (procedureId: string) => {
-      router.push(`procedure/${procedureId}`);
+      router.push(`/procedure/${procedureId}`);
     },
     [router]
   );
@@ -158,7 +156,7 @@ export const List: React.FC<ListProps> = ({ route }) => {
       return (
         <Row
           onPress={() => handleProcedurePress(procedureId)}
-          testID={`ListItem-${route.params.list}-${index}`}
+          testID={`ListItem-${list}-${index}`}
         >
           <ListItem
             title={title}
@@ -176,7 +174,7 @@ export const List: React.FC<ListProps> = ({ route }) => {
         </Row>
       );
     },
-    [localVotes, route.params.list, handleProcedurePress]
+    [localVotes, list, handleProcedurePress]
   );
 
   const renderSectionHeader: SectionListProps<
@@ -184,10 +182,10 @@ export const List: React.FC<ListProps> = ({ route }) => {
     SegmentedData
   >["renderSectionHeader"] = useCallback(
     ({ section }: { section: SegmentedData }) =>
-      route.params.list !== "TOP100" && section.title ? (
+      list !== "TOP100" && section.title ? (
         <Segment text={section.title} />
       ) : null,
-    [route.params.list]
+    [list]
   );
 
   if (loading) {
@@ -206,7 +204,7 @@ export const List: React.FC<ListProps> = ({ route }) => {
           <Button
             onPress={() => {
               refetch({
-                listTypes: [route.params.list],
+                listTypes: [list],
                 pageSize: 10,
                 filter: proceduresFilter,
                 constituencies,

@@ -1,12 +1,15 @@
 import React from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { useRecoilValue } from "recoil";
-import { parlaments, parlamentState } from "../../api/state/parlament";
+import {
+  ParlamentIdentifier,
+  parlaments,
+} from "../../../../api/state/parlament";
 import { useTheme } from "styled-components/native";
-import BundestagScreen from "../../screens/WahlOMeter/Bundestag";
-import { WomPartyScreen } from "../../screens/WahlOMeter/Fraktionen";
-import { DeputiesScreen } from "../../screens/WahlOMeter/Deputies";
-import { tabNavigationScreenOptions } from "../../screens/Bundestag/styles";
+import BundestagScreen from "../../../../screens/WahlOMeter/Bundestag";
+import { WomPartyScreen } from "../../../../screens/WahlOMeter/Fraktionen";
+import { DeputiesScreen } from "../../../../screens/WahlOMeter/Deputies";
+import { tabNavigationScreenOptions } from "../../../../screens/Bundestag/styles";
+import { useLegislaturePeriodStore } from "src/api/state/legislaturePeriod";
 
 export type TopTabParamList = {
   Bundestag: undefined;
@@ -22,7 +25,8 @@ interface Props {
 
 export const WahlOMeterNavigation: React.FC<Props> = () => {
   const theme = useTheme();
-  const parlamentIdentifier = useRecoilValue(parlamentState);
+  const { legislaturePeriod } = useLegislaturePeriodStore();
+  const parlamentIdentifier = `BT-${legislaturePeriod}` as ParlamentIdentifier;
   const parlament = parlaments[parlamentIdentifier];
   const wom = parlament.screens.wom ? parlament.screens.wom : undefined;
 

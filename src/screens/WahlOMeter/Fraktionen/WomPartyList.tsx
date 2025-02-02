@@ -1,24 +1,25 @@
-import React, { useContext } from 'react';
-import styled from 'styled-components/native';
-import unionBy from 'lodash.unionby';
+import React, { useContext } from "react";
+import styled from "styled-components/native";
+import unionBy from "lodash.unionby";
 
 // GraphQL
-import { FlatList, Text } from 'react-native';
-import { WomPartyChart } from './WomPartyChart';
-import { WomPartyContext } from './context';
-import { useRecoilValue } from 'recoil';
-import { parlaments, parlamentState } from '../../../api/state/parlament';
-import { localVotesState } from '../../../api/state/votesLocal';
-import { ListLoading } from '../../../components/ListLoading';
-import { Row } from '../../../components/Row';
-import { ListItem } from '../../../components/ListItem';
-import { pieChartPartyData } from '../../../lib/PieChartPartyData';
-import { communityVoteData } from '../../../lib/PieChartCommunityData';
+import { FlatList, Text } from "react-native";
+import { WomPartyChart } from "./WomPartyChart";
+import { WomPartyContext } from "./context";
+import { useRecoilValue } from "recoil";
+import { ParlamentIdentifier, parlaments } from "../../../api/state/parlament";
+import { localVotesState } from "../../../api/state/votesLocal";
+import { ListLoading } from "../../../components/ListLoading";
+import { Row } from "../../../components/Row";
+import { ListItem } from "../../../components/ListItem";
+import { pieChartPartyData } from "../../../lib/PieChartPartyData";
+import { communityVoteData } from "../../../lib/PieChartCommunityData";
 import {
   useVotedPartyProceduresQuery,
   VotedPartyProceduresDocument,
   VotedPartyProceduresQuery,
-} from '../../../__generated__/graphql';
+} from "../../../__generated__/graphql";
+import { useLegislaturePeriodStore } from "src/api/state/legislaturePeriod";
 
 const Container = styled.View`
   background-color: #fff;
@@ -36,8 +37,11 @@ export interface WomPartyListProps {
   }) => void;
 }
 
-const WomPartyList: React.FC<WomPartyListProps> = ({ onProcedureListItemClick }) => {
-  const parlamentIdentifier = useRecoilValue(parlamentState);
+const WomPartyList: React.FC<WomPartyListProps> = ({
+  onProcedureListItemClick,
+}) => {
+  const { legislaturePeriod } = useLegislaturePeriodStore();
+  const parlamentIdentifier = `BT-${legislaturePeriod}` as ParlamentIdentifier;
   const parlament = parlaments[parlamentIdentifier];
   const { party } = useContext(WomPartyContext);
   const localVotes = useRecoilValue(localVotesState);
@@ -75,12 +79,14 @@ const WomPartyList: React.FC<WomPartyListProps> = ({ onProcedureListItemClick })
 
   return (
     <Container>
-      <FlatList<VotedPartyProceduresQuery['procedurecForWomPartyList']['procedures'][0]>
+      <FlatList<
+        VotedPartyProceduresQuery["procedurecForWomPartyList"]["procedures"][0]
+      >
         ListHeaderComponent={WomPartyChart}
         data={listData}
         renderItem={({ item }) => {
           const localSelection = localVotes.find(
-            localVote => localVote.procedureId === item.procedureId,
+            (localVote) => localVote.procedureId === item.procedureId
           )?.selection;
           const voted = !!localSelection;
           return (
@@ -89,7 +95,9 @@ const WomPartyList: React.FC<WomPartyListProps> = ({ onProcedureListItemClick })
                 {...item}
                 voteDate={item.voteDate ? new Date(item.voteDate) : undefined}
                 subline={
-                  item.sessionTOPHeading ? item.sessionTOPHeading : item.subjectGroups.join(', ')
+                  item.sessionTOPHeading
+                    ? item.sessionTOPHeading
+                    : item.subjectGroups.join(", ")
                 }
                 votes={item.communityVotes ? item.communityVotes.total || 0 : 0}
                 govermentChart={{
@@ -111,32 +119,39 @@ const WomPartyList: React.FC<WomPartyListProps> = ({ onProcedureListItemClick })
             </Row>
           );
         }}
-        ListFooterComponent={() => (networkStatus === 3 ? <ListLoading /> : null)}
+        ListFooterComponent={() =>
+          networkStatus === 3 ? <ListLoading /> : null
+        }
         onEndReached={() => {
           if (hasMore && listData.length > 0) {
             fetchMore({
               query: VotedPartyProceduresDocument,
               variables: {
-                offset: procedurListData.procedurecForWomPartyList.procedures.length,
+                offset:
+                  procedurListData.procedurecForWomPartyList.procedures.length,
               },
               updateQuery: (prev, { fetchMoreResult }) => {
                 if (!prev) {
-                  throw new Error('prev is undefined');
+                  throw new Error("prev is undefined");
                 }
                 if (!fetchMoreResult) {
                   return prev;
                 }
-                if (hasMore && fetchMoreResult.procedurecForWomPartyList.procedures.length === 0) {
+                if (
+                  hasMore &&
+                  fetchMoreResult.procedurecForWomPartyList.procedures
+                    .length === 0
+                ) {
                   hasMore = false;
                 }
-                prev.procedurecForWomPartyList.procedures;
+
                 return Object.assign({}, prev, {
                   procedurecForWomPartyList: {
                     ...prev.procedurecForWomPartyList,
                     procedures: unionBy(
                       prev.procedurecForWomPartyList.procedures,
                       fetchMoreResult.procedurecForWomPartyList.procedures,
-                      '_id',
+                      "_id"
                     ),
                   },
                 });
@@ -144,7 +159,7 @@ const WomPartyList: React.FC<WomPartyListProps> = ({ onProcedureListItemClick })
             });
           }
         }}
-        keyExtractor={item => item.procedureId}
+        keyExtractor={(item) => item.procedureId}
       />
     </Container>
   );

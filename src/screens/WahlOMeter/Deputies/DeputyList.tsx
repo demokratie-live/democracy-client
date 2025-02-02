@@ -6,15 +6,16 @@ import React from "react";
 
 import { MatchesBar } from "./MatchBar";
 import { useRecoilValue } from "recoil";
-import { parlaments, parlamentState } from "../../../api/state/parlament";
+import { ParlamentIdentifier, parlaments } from "../../../api/state/parlament";
 import { favorizedDeputiesState } from "../../../api/state/favorizedDeputies";
 import { localVotesState } from "../../../api/state/votesLocal";
 import { useWomDeputyListQueryQuery } from "../../../__generated__/graphql";
-import { useRouter } from "expo-router";
+import { router } from "expo-router";
+import { useLegislaturePeriodStore } from "src/api/state/legislaturePeriod";
 
 export const WomDeputyList: React.FC = () => {
-  const router = useRouter();
-  const parlamentIdentifier = useRecoilValue(parlamentState);
+  const { legislaturePeriod } = useLegislaturePeriodStore();
+  const parlamentIdentifier = `BT-${legislaturePeriod}` as ParlamentIdentifier;
   const parlament = parlaments[parlamentIdentifier];
   const localVotes = useRecoilValue(localVotesState);
   const favorizedDeputies = useRecoilValue(
@@ -71,7 +72,7 @@ export const WomDeputyList: React.FC = () => {
 
   const deputiesData = deputies.map((d) => ({
     ...d,
-    onPress: () => router.push(`DeputyProfile/${d.id}`),
+    onPress: () => router.push(`/DeputyProfile/${d.id}`),
   }));
 
   return (

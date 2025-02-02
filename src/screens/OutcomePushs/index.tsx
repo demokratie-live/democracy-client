@@ -12,7 +12,7 @@ import { Button } from "@democracy-deutschland/ui";
 import { Headline } from "../../components/Headline";
 import { AppLogo } from "../../components/AppLogo";
 import * as Notifications from "expo-notifications";
-import { useLocalSearchParams, useNavigation } from "expo-router";
+import { useGlobalSearchParams, useNavigation } from "expo-router";
 import { VoteStackParamList } from "../../app/(vote)/_layout";
 
 const ScrollView = styled.ScrollView.attrs({
@@ -59,7 +59,7 @@ export interface Notification {
 
 export const OutcomePushs: React.FC = () => {
   const navigation = useNavigation();
-  const params = useLocalSearchParams<VoteStackParamList["OutcomePush"]>();
+  const params = useGlobalSearchParams<VoteStackParamList["OutcomePush"]>();
   console.log("OutcomePushs Params", params);
 
   const [toggleNotification] = useToggleNotificationMutation({

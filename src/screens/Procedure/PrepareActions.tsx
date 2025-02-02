@@ -20,7 +20,7 @@ import {
 } from "../../__generated__/graphql";
 import SvgLock from "../../components/Icons/Lock";
 import { SidebarParamList } from "../../app/(sidebar)/_layout";
-import { useNavigation, useRouter } from "expo-router";
+import { router, useNavigation, useRouter } from "expo-router";
 
 const SegmentWrapper = styled.View`
   padding-vertical: 14px;
@@ -153,7 +153,7 @@ const PrepareActions: React.FC<Props> = ({
   };
 
   const verify = () => {
-    navigation.navigate("(verification)");
+    router.push("/(verification)/VerificationStart");
   };
 
   const voted = votedServer || !!voteSelection;

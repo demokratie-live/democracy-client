@@ -1,26 +1,31 @@
-import React, { useContext, useState } from 'react';
-import { Dimensions } from 'react-native';
-import Header from '../Header';
-import ChartNote from '../ChartNote';
-import { ChartData } from '../Bundestag/VotedProceduresWrapper';
-import { Segment } from '../../Bundestag/List/Components/Segment';
-import { WomPartyContext } from './context';
+import React, { useContext, useState } from "react";
+import { Dimensions } from "react-native";
+import Header from "../Header";
+import ChartNote from "../ChartNote";
+import { ChartData } from "../Bundestag/VotedProceduresWrapper";
+import { Segment } from "../../Bundestag/List/Components/Segment";
+import { WomPartyContext } from "./context";
 import {
   BarChart,
   BarChartProps,
   ChartLegend,
   ChartLegendData,
   WomPartyChartData,
-} from '@democracy-deutschland/ui';
-import styled from 'styled-components/native';
-import { useRecoilValue } from 'recoil';
-import { parlaments, parlamentState } from '../../../api/state/parlament';
-import { localVotesState } from '../../../api/state/votesLocal';
-import { usePartyChartDataQuery } from '../../../__generated__/graphql';
-import { ListLoading } from '../../../components/ListLoading';
-import NoVotesPlaceholder from '../NoVotesPlaceholder';
+} from "@democracy-deutschland/ui";
+import styled from "styled-components/native";
+import { useRecoilValue } from "recoil";
+import { ParlamentIdentifier, parlaments } from "../../../api/state/parlament";
+import { localVotesState } from "../../../api/state/votesLocal";
+import { usePartyChartDataQuery } from "../../../__generated__/graphql";
+import { ListLoading } from "../../../components/ListLoading";
+import NoVotesPlaceholder from "../NoVotesPlaceholder";
+import { useLegislaturePeriodStore } from "src/api/state/legislaturePeriod";
 
-const MAX_WIDTH = Math.min(380, Dimensions.get('window').width, Dimensions.get('window').height);
+const MAX_WIDTH = Math.min(
+  380,
+  Dimensions.get("window").width,
+  Dimensions.get("window").height
+);
 
 const Wrapper = styled.View`
   padding-top: 18px;
@@ -36,7 +41,8 @@ const ChartWrapper = styled.View`
 // interface Props {}
 
 export const WomPartyChart: React.FC = () => {
-  const parlamentIdentifier = useRecoilValue(parlamentState);
+  const { legislaturePeriod } = useLegislaturePeriodStore();
+  const parlamentIdentifier = `BT-${legislaturePeriod}` as ParlamentIdentifier;
   const parlament = parlaments[parlamentIdentifier];
   const localVotes = useRecoilValue(localVotesState);
   const [selectedPartyIndex, setSelectedPartyIndex] = useState(0);
@@ -58,9 +64,13 @@ export const WomPartyChart: React.FC = () => {
   }
 
   // Filtered Array of procedures voted local
-  const getMatchingProcedures = ({ votedProcedures, localVotes }: ChartData) => {
-    return votedProcedures.partyChartProcedures.procedures.filter(({ procedureId }) =>
-      localVotes.find(({ procedureId: pid }) => pid === procedureId),
+  const getMatchingProcedures = ({
+    votedProcedures,
+    localVotes,
+  }: ChartData) => {
+    return votedProcedures.partyChartProcedures.procedures.filter(
+      ({ procedureId }) =>
+        localVotes.find(({ procedureId: pid }) => pid === procedureId)
     );
   };
 
@@ -69,7 +79,7 @@ export const WomPartyChart: React.FC = () => {
     localVotes,
   });
 
-  const partyChartData = (): BarChartProps['data'] => {
+  const partyChartData = (): BarChartProps["data"] => {
     const chartData = matchingProcedures.reduce<{
       [party: string]: { diffs: number; matches: number };
     }>((prev, { voteResults, procedureId: itemProcedureId }) => {
@@ -77,10 +87,12 @@ export const WomPartyChart: React.FC = () => {
         return prev;
       }
       const { partyVotes } = voteResults;
-      const userVote = localVotes.find(({ procedureId: pid }) => pid === itemProcedureId);
+      const userVote = localVotes.find(
+        ({ procedureId: pid }) => pid === itemProcedureId
+      );
       const me = userVote ? userVote.selection : undefined;
       partyVotes.forEach(({ party, main }) => {
-        if (party === 'fraktionslos') {
+        if (party === "fraktionslos") {
           return prev;
         }
         let matched = false;
@@ -125,35 +137,37 @@ export const WomPartyChart: React.FC = () => {
       return prev;
     }, {});
     return Object.keys(chartData)
-      .map(key => ({
+      .map((key) => ({
         party: key,
         deviants: [
           {
-            label: 'Übereinstimmungen',
+            label: "Übereinstimmungen",
             value: chartData[key].matches,
-            color: '#f5a623',
+            color: "#f5a623",
           },
           {
-            label: 'Differenzen',
+            label: "Differenzen",
             value: chartData[key].diffs,
-            color: '#b1b3b4',
+            color: "#b1b3b4",
           },
         ],
       }))
       .sort((a, b) => b.deviants[0].value - a.deviants[0].value);
   };
 
-  const prepareCharLegendData = (preparedData: WomPartyChartData[]): ChartLegendData[] => {
+  const prepareCharLegendData = (
+    preparedData: WomPartyChartData[]
+  ): ChartLegendData[] => {
     return [
       {
-        label: 'Übereinstimmungen',
+        label: "Übereinstimmungen",
         value: preparedData[selectedPartyIndex].deviants[0].value,
-        color: '#f5a623',
+        color: "#f5a623",
       },
       {
-        label: 'Differenzen',
+        label: "Differenzen",
         value: preparedData[selectedPartyIndex].deviants[1].value,
-        color: '#b1b3b4',
+        color: "#b1b3b4",
       },
     ];
   };
@@ -178,7 +192,10 @@ export const WomPartyChart: React.FC = () => {
 
   return (
     <Wrapper>
-      <Header totalProcedures={totalProcedures} votedProceduresCount={matchingProcedures.length} />
+      <Header
+        totalProcedures={totalProcedures}
+        votedProceduresCount={matchingProcedures.length}
+      />
       <ChartWrapper>
         <BarChart
           width={MAX_WIDTH - 36}
@@ -189,8 +206,9 @@ export const WomPartyChart: React.FC = () => {
         />
         <ChartLegend data={prepareCharLegendData(preparedData)} />
         <ChartNote>
-          Hohe Übereinstimmungen Ihrer Stellungnahmen mit mehreren Parteien bedeuten nicht
-          zwangsläufig eine inhaltliche Nähe dieser Parteien zueinander
+          Hohe Übereinstimmungen Ihrer Stellungnahmen mit mehreren Parteien
+          bedeuten nicht zwangsläufig eine inhaltliche Nähe dieser Parteien
+          zueinander
         </ChartNote>
       </ChartWrapper>
 

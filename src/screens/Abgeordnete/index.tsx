@@ -1,19 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/core";
 import { SearchBar, PlusIcon } from "@democracy-deutschland/ui";
-
 import { DeputyListController } from "./DeputyListController";
 import styled from "styled-components/native";
-import { useRecoilState, useRecoilValue } from "recoil";
-import {
-  favorizedDeputiesEditModeState,
-  favorizedDeputiesState,
-} from "../../api/state/favorizedDeputies";
+import { useRecoilValue } from "recoil";
+import { favorizedDeputiesState } from "../../api/state/favorizedDeputies";
 import { theme } from "../../styles/theme";
-import { parlamentState } from "../../api/state/parlament";
+import { ParlamentIdentifier } from "../../api/state/parlament";
 import { SidebarParamList } from "../../app/(sidebar)/_layout";
-import { useLocalSearchParams } from "expo-router";
 
 const Wrapper = styled.View`
   background-color: ${({ theme }) => theme.colors.background.primary};
@@ -32,15 +27,20 @@ const EditText = styled.Text`
 
 type RouteProps = RouteProp<SidebarParamList, "Abgeordnete">;
 
-export const AbgeordneteScreen: React.FC = () => {
-  const searchParams = useLocalSearchParams<SidebarParamList["Abgeordnete"]>();
+interface Props {
+  parlamentIdentifier: ParlamentIdentifier;
+  initialEditMode?: true;
+}
+
+export const AbgeordneteScreen: React.FC<Props> = ({
+  parlamentIdentifier,
+  initialEditMode,
+}) => {
   const route = useRoute<RouteProps>();
-  const [editMode, setEditMode] = useRecoilState(
-    favorizedDeputiesEditModeState
-  );
+  const [editMode, setEditMode] = useState<boolean>(!!initialEditMode);
   const [searchTerm, setSearchTerm] = React.useState("");
   const navigation = useNavigation();
-  const parlamentIdentifier = useRecoilValue(parlamentState);
+
   const favorizedDeputies = useRecoilValue(
     favorizedDeputiesState(parlamentIdentifier)
   );
@@ -50,12 +50,12 @@ export const AbgeordneteScreen: React.FC = () => {
       headerRight: () => (
         <Edit
           onPress={() =>
-            !searchParams.editMode
+            !initialEditMode
               ? setEditMode((curEditMode) => !curEditMode)
               : navigation.goBack()
           }
         >
-          {!!searchParams.editMode || editMode ? (
+          {editMode ? (
             <EditText>Fertig</EditText>
           ) : (
             <PlusIcon
@@ -83,7 +83,7 @@ export const AbgeordneteScreen: React.FC = () => {
         }}
       />
       <DeputyListController
-        editMode={editMode || !!searchParams.editMode}
+        editMode={editMode || !!editMode}
         searchTerm={searchTerm}
         favorizedDeputies={favorizedDeputies}
       />

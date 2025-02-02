@@ -35,7 +35,7 @@ export const DeputiesScreen: React.FC = () => {
     if (isFocused) {
       navigation.getParent()?.setOptions({
         headerRight: () => (
-          <Edit onPress={() => router.push("Deputies")}>
+          <Edit onPress={() => router.push(`/DeputiesEdit`)}>
             <Plus />
           </Edit>
         ),
@@ -45,7 +45,7 @@ export const DeputiesScreen: React.FC = () => {
         headerRight: null,
       });
     }
-  }, [isFocused, navigation]);
+  }, [isFocused, navigation, router]);
 
   return (
     <Wrapper>

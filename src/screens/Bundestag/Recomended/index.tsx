@@ -24,6 +24,8 @@ export const Recommended = () => {
     data: s.procedures,
   }));
 
+  console.log("recommendedProcedures");
+
   return (
     <SectionList
       sections={sectionListData}
@@ -36,7 +38,7 @@ export const Recommended = () => {
         )?.selection;
         return (
           <TouchableOpacity
-            onPress={() => router.push(`procedure/${item.procedureId}`)}
+            onPress={() => router.push(`/procedure/${item.procedureId}`)}
           >
             <ProcedureListItem
               date={new Date(item.voteDate || "")}

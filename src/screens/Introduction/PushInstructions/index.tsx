@@ -10,6 +10,7 @@ import { Button } from "@democracy-deutschland/ui";
 import { Headline } from "../../../components/Headline";
 import { AppLogo } from "../../../components/AppLogo";
 import { RootStackParamList } from "../../../app/_layout";
+import { router } from "expo-router";
 
 const DEVICE_WIDTH = Dimensions.get("window").width;
 
@@ -92,13 +93,7 @@ export const PushInstructions: React.FC<Props> = ({ alreadyKnown = false }) => {
       enabled: true,
       outcomePushs: true,
     });
-    navigation.reset({
-      routes: [
-        {
-          name: "Sidebar",
-        },
-      ],
-    });
+    router.back();
   };
 
   return (

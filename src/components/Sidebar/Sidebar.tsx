@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components/native";
 import DrawerItemList from "./DrawerItemList";
-import { useNavigation, CompositeNavigationProp } from "@react-navigation/core";
+import { CompositeNavigationProp } from "@react-navigation/core";
 import { DrawerNavigationProp, DrawerItem } from "@react-navigation/drawer";
 import { useQuery } from "@apollo/client";
 import { ParlamentsNavi } from "./Parlaments/Parlaments";
@@ -15,6 +15,8 @@ import { RestDonation } from "../../api/apollo/@types/restDonation";
 import { DONATION_STATUS } from "../../screens/Donate/graphql/query/donationStatus";
 import DonatedBox from "../../screens/Donate/DonatedBox";
 import { rateApp } from "../../lib/rateApp";
+import { router } from "expo-router";
+import { useDevModeStore } from "src/api/state/dev";
 
 const SafeAreaView = styled.SafeAreaView`
   flex: 1;
@@ -50,10 +52,10 @@ const NaviList = styled.ScrollView`
 export type SidebarProps = React.ComponentProps<typeof DrawerItemList>;
 
 export const Sidebar: React.FC<SidebarProps> = (props) => {
-  const navigation = useNavigation<SidebarNavigationProps>();
   const { isVerified, verificationQueryRunning } = useInitialState();
   const { data } = useQuery<{ donationStatus: RestDonation }>(DONATION_STATUS);
   const [donationStatus, setDonationStatus] = useState<RestDonation>();
+  const { devMode } = useDevModeStore();
 
   useEffect(() => {
     if (!donationStatus?.result && data) {
@@ -63,9 +65,9 @@ export const Sidebar: React.FC<SidebarProps> = (props) => {
 
   const handleHeaderClick = () => {
     if (isVerified) {
-      navigation.navigate("Settings");
+      router.push("/Settings");
     } else {
-      navigation.navigate("(verification)");
+      router.push("/(verification)/VerificationStart");
     }
   };
 
@@ -92,11 +94,18 @@ export const Sidebar: React.FC<SidebarProps> = (props) => {
             onPress={rateApp}
             labelStyle={{ fontSize: 16, color: "#ddd" }}
           />
+          {devMode && (
+            <DrawerItem
+              label="🛠  Dev-Modus"
+              onPress={() => router.push("/DevScreen")}
+              labelStyle={{ fontSize: 16, color: "#ddd" }}
+            />
+          )}
         </NaviList>
       </SafeAreaView>
       {donationStatus && donationStatus.result && (
         <DonateBoxWrapper>
-          <DonationTouch onPress={() => navigation.navigate("Donate")}>
+          <DonationTouch onPress={() => router.push("/Donate")}>
             <DonatedBox
               style={{ backgroundColor: "#4494d390" }}
               descriptionTextStyle={{ color: "#fff" }}

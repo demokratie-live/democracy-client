@@ -2,23 +2,21 @@ import {
   DeputyList,
   DeputyListRenderItemProps,
 } from "@democracy-deutschland/ui";
-import { useNavigation, CompositeNavigationProp } from "@react-navigation/core";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import unionBy from "lodash.unionby";
 import React, { useEffect } from "react";
 import { ActivityIndicator } from "react-native";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components/native";
 import { favorizedDeputiesState } from "../../api/state/favorizedDeputies";
-import { parlaments, parlamentState } from "../../api/state/parlament";
-import { RootStackParamList } from "../../app/_layout";
+import { ParlamentIdentifier, parlaments } from "../../api/state/parlament";
 import {
   useDeputiesQuery,
   useFavouriteDeputiesQuery,
 } from "../../__generated__/graphql";
 import { SidebarParamList } from "../../app/(sidebar)/_layout";
 import { useRouter } from "expo-router";
+import { useLegislaturePeriodStore } from "src/api/state/legislaturePeriod";
 
 const Spinner = styled(ActivityIndicator)``;
 
@@ -33,11 +31,6 @@ export type DeputyListNavigationProps = DrawerNavigationProp<
   "Abgeordnete"
 >;
 
-type ScreenNavigationProp = CompositeNavigationProp<
-  DrawerNavigationProp<SidebarParamList, "Abgeordnete">,
-  NativeStackNavigationProp<RootStackParamList>
->;
-
 export const DeputyListController: React.FC<DeputyListControllerProps> = ({
   editMode,
   searchTerm,
@@ -45,8 +38,8 @@ export const DeputyListController: React.FC<DeputyListControllerProps> = ({
   ...props
 }) => {
   const router = useRouter();
-  const navigation = useNavigation<ScreenNavigationProp>();
-  const parlamentIdentifier = useRecoilValue(parlamentState);
+  const { legislaturePeriod } = useLegislaturePeriodStore();
+  const parlamentIdentifier = `BT-${legislaturePeriod}` as ParlamentIdentifier;
   const parlament = parlaments[parlamentIdentifier];
   const setFavorizedDeputy = useSetRecoilState(
     favorizedDeputiesState(parlamentIdentifier)
@@ -128,7 +121,7 @@ export const DeputyListController: React.FC<DeputyListControllerProps> = ({
     ...d,
     onPress: () =>
       !editMode
-        ? router.push(`DeputyProfile/${d.id}`)
+        ? router.push(`/DeputyProfile/${d.id}`)
         : [...favorizedDeputies].includes(d.id)
         ? removeFavorizedDeputy(d.id)
         : addFavorizedDeputy(d.id),

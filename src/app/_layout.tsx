@@ -1,4 +1,4 @@
-import "../lib/wdyr";
+// import "../lib/wdyr";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { client } from "../api/apollo";
 import { ApolloProvider } from "@apollo/client";
@@ -49,7 +49,14 @@ export default function Layout() {
                 >
                   <Stack.Screen
                     name="(sidebar)"
-                    options={{ headerShown: false, title: "Bundestag" }}
+                    options={{ headerShown: false }}
+                  />
+                  <Stack.Screen name="Filter" />
+                  <Stack.Screen name="Search" options={{ title: "Suche" }} />
+                  <Stack.Screen name="Donate" options={{ title: "Spenden" }} />
+                  <Stack.Screen
+                    name="(verification)"
+                    options={{ title: "Verifizieren" }}
                   />
                 </Stack>
               </GestureHandlerRootView>

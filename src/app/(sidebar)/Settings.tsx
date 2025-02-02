@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { SettingsScreen } from "../screens/Settings";
+import { SettingsScreen } from "src/screens/Settings";
 
 const Settings: FC = () => {
   return <SettingsScreen />;

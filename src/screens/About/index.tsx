@@ -94,17 +94,7 @@ const Markdown: React.FC<MarkdownProps> = ({
   );
 };
 
-// type AboutScreenNavigationProp = DrawerNavigationProp<SidebarParamList, 'About'>;
-type AboutScreenNavigationProp = CompositeNavigationProp<
-  DrawerNavigationProp<SidebarParamList, "About">,
-  NativeStackNavigationProp<RootStackParamList>
->;
-
-type Props = {
-  navigation: AboutScreenNavigationProp;
-};
-
-export const AboutScreen: React.FC<Props> = () => {
+export const AboutScreen: React.FC = () => {
   return (
     <Wrapper>
       <Content>

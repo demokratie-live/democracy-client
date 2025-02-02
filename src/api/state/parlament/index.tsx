@@ -1,16 +1,5 @@
-import { atom } from 'recoil';
-import { localStorageEffect } from '../effects/localStorageEffect';
-
-const STORAGE_KEY = 'Parlament';
-
-export const parlamentState = atom<ParlamentIdentifier>({
-  key: 'parlamentState',
-  default: 'BT-20',
-  effects: [localStorageEffect(STORAGE_KEY)],
-});
-
-export type ParlamentIdentifier = 'BT-20' | 'BT-19'; // | 'BT-18';
-type Institutions = 'Bundestag';
+export type ParlamentIdentifier = "BT-20" | "BT-19";
+type Institutions = "Bundestag";
 
 interface ParlamentProceduresScreen {
   inVote?: boolean;
@@ -33,6 +22,7 @@ interface ParlamentScreens {
 export interface Parlament {
   identifier: ParlamentIdentifier;
   institution: Institutions;
+  mainScreen: "Sitzungswoche" | "Top100" | "Empfohlen";
   period: number;
   screens: ParlamentScreens;
 }
@@ -42,9 +32,10 @@ type Parlaments = {
 };
 
 export const parlaments: Parlaments = {
-  'BT-20': {
-    identifier: 'BT-20',
-    institution: 'Bundestag',
+  "BT-20": {
+    identifier: "BT-20",
+    institution: "Bundestag",
+    mainScreen: "Sitzungswoche",
     period: 20,
     screens: {
       procedures: {
@@ -60,9 +51,10 @@ export const parlaments: Parlaments = {
       deputies: true,
     },
   },
-  'BT-19': {
-    identifier: 'BT-19',
-    institution: 'Bundestag',
+  "BT-19": {
+    identifier: "BT-19",
+    institution: "Bundestag",
+    mainScreen: "Empfohlen",
     period: 19,
     screens: {
       procedures: {
