@@ -12,7 +12,6 @@ import { useNavigation } from "@react-navigation/core";
 import { ButtonNext } from "./Start";
 import { useInitialState } from "../../api/state/initialState";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../../app/_layout";
 import { VerificationContext } from "../../api/state/Verification";
 import { useRequestSmsCodeMutation } from "../../__generated__/graphql";
 import { AppLogo } from "../../components/AppLogo";

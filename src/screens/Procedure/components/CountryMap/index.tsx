@@ -1,8 +1,8 @@
-import React, { useLayoutEffect } from 'react';
-import styled from 'styled-components/native';
-import { CountryMap as CountryMapCmp } from '@democracy-deutschland/ui';
-import { useCountryMapConstituenciesQuery } from '../../../../__generated__/graphql';
-import { Dimensions, View } from 'react-native';
+import React, { useLayoutEffect } from "react";
+import styled from "styled-components/native";
+import { CountryMap as CountryMapCmp } from "@democracy-deutschland/ui";
+import { useCountryMapConstituenciesQuery } from "../../../../__generated__/graphql";
+import { Dimensions } from "react-native";
 
 const Container = styled.View`
   align-items: center;
@@ -18,13 +18,16 @@ export const CountryMap: React.FC<Props> = ({ procedureId }) => {
 
   useLayoutEffect(() => {
     const onContainerLayout = () => {
-      const { width, height } = Dimensions.get('screen');
+      const { width, height } = Dimensions.get("screen");
       setContainerWidth(Math.min(width, height));
     };
 
     onContainerLayout();
 
-    const resizeListener = Dimensions.addEventListener('change', onContainerLayout);
+    const resizeListener = Dimensions.addEventListener(
+      "change",
+      onContainerLayout
+    );
 
     return () => {
       resizeListener.remove();
@@ -45,7 +48,10 @@ export const CountryMap: React.FC<Props> = ({ procedureId }) => {
     <Container>
       <CountryMapCmp
         data={{
-          procedure: { ...data.procedure, communityVotes: data.procedure.communityVotes },
+          procedure: {
+            ...data.procedure,
+            communityVotes: data.procedure.communityVotes,
+          },
         }}
         width={containerWidth}
       />

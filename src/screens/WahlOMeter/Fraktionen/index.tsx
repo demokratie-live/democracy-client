@@ -20,10 +20,10 @@ interface Props {
   navigation: ScreenNavigationProp;
 }
 
-export const WomPartyScreen: React.FC<Props> = ({}) => {
+export const WomPartyScreen: React.FC<Props> = () => {
   const router = useRouter();
   const onProcedureListItemClick: WomPartyListProps["onProcedureListItemClick"] =
-    ({ item }) => router.push(`procedure/${item.procedureId}`);
+    ({ item }) => router.push(`/procedure/${item.procedureId}`);
   return (
     <Container>
       <WomPartyProvider>

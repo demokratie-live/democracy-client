@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components/native";
 import DrawerItemList from "./DrawerItemList";
-import { CompositeNavigationProp } from "@react-navigation/core";
-import { DrawerNavigationProp, DrawerItem } from "@react-navigation/drawer";
+import { DrawerItem } from "@react-navigation/drawer";
 import { useQuery } from "@apollo/client";
 import { ParlamentsNavi } from "./Parlaments/Parlaments";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Background } from "./Background";
 import { Header } from "./Header";
-import { RootStackParamList } from "../../app/_layout";
-import { SidebarParamList } from "../../app/(sidebar)/_layout";
 import { useInitialState } from "../../api/state/initialState";
 import { RestDonation } from "../../api/apollo/@types/restDonation";
 import { DONATION_STATUS } from "../../screens/Donate/graphql/query/donationStatus";
@@ -25,10 +21,6 @@ const SafeAreaView = styled.SafeAreaView`
 const Container = styled.View`
   flex: 1;
 `;
-type SidebarNavigationProps = CompositeNavigationProp<
-  NativeStackNavigationProp<RootStackParamList, "Sidebar">,
-  DrawerNavigationProp<SidebarParamList>
->;
 
 const DonateBoxWrapper = styled.View`
   height: 68px;

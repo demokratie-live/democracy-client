@@ -1,5 +1,5 @@
 import React, { FC, useContext } from "react";
-import { useNavigation, useRoute } from "@react-navigation/core";
+import { useNavigation } from "@react-navigation/core";
 import styled from "styled-components/native";
 
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";

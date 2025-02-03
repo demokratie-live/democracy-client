@@ -56,9 +56,7 @@ type FilterScreenNavigationProp = NativeStackNavigationProp<
   "Filter"
 >;
 
-type Props = {};
-
-export const FilterScreen: React.FC<Props> = () => {
+export const FilterScreen: React.FC = () => {
   const navigation = useNavigation<FilterScreenNavigationProp>();
   const { isVerified } = useInitialState();
   const [filter, setFilter] = useRecoilState(filterState);

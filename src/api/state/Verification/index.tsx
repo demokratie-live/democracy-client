@@ -53,9 +53,9 @@ export const VerificationProvider: FC<PropsWithChildren> = ({ children }) => {
     AsyncStorage.getItem("verification_code_expire_time").then((value) =>
       value ? setExpireTimeValue(new Date(value)) : undefined
     );
-    AsyncStorage.getItem("verification_tmp_phone_number").then((value) => {
-      value ? setPhoneNumberValue(value) : "";
-    });
+    AsyncStorage.getItem("verification_tmp_phone_number").then((value) =>
+      value ? setPhoneNumberValue(value) : ""
+    );
   }, []);
 
   useEffect(() => {

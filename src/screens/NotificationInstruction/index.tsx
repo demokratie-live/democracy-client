@@ -76,7 +76,7 @@ export const NotificationInstructionScreen: React.FC = () => {
   const [pushActive, setPushActive] = useState(true);
   const { update: updateNotificationSettings } =
     useContext(NotificationsContext);
-  const { isVerified, setLastStartWithVersion } = useRecoilValue(initialState);
+  const { isVerified } = useRecoilValue(initialState);
   const requestPermissions = async () => {
     await Notifications.requestPermissionsAsync();
   };

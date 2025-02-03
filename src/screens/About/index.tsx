@@ -1,6 +1,3 @@
-import { DrawerNavigationProp } from "@react-navigation/drawer";
-import { CompositeNavigationProp } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import deepmerge from "deepmerge";
 import React, { ComponentProps, PropsWithChildren } from "react";
 import { Linking, Platform, Text } from "react-native";
@@ -15,9 +12,7 @@ import SvgPlanet from "../../components/Icons/Planet";
 import { MadeWithLove } from "../../components/MadeWithLove";
 import { Space } from "../../components/Space";
 import { linking } from "../../lib/linking";
-import { RootStackParamList } from "../../app/_layout";
 import { credentialsData } from "./data";
-import { SidebarParamList } from "../../app/(sidebar)/_layout";
 
 const phoneNumber =
   Platform.OS === "ios"

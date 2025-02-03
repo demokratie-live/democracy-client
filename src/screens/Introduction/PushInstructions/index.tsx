@@ -4,12 +4,9 @@ import { defaultNotificationData } from "./data";
 import { Dimensions, Switch, View } from "react-native";
 import styled from "styled-components/native";
 import { NotificationsContext } from "../../../api/state/notificationPermission";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Button } from "@democracy-deutschland/ui";
 import { Headline } from "../../../components/Headline";
 import { AppLogo } from "../../../components/AppLogo";
-import { RootStackParamList } from "../../../app/_layout";
 import { router } from "expo-router";
 
 const DEVICE_WIDTH = Dimensions.get("window").width;
@@ -67,17 +64,12 @@ export interface Notification {
   description: string;
 }
 
-type ScreenNavigationProps = NativeStackNavigationProp<
-  RootStackParamList,
-  "Sidebar"
->;
 interface Props {
   alreadyKnown?: boolean;
 }
 
 export const PushInstructions: React.FC<Props> = ({ alreadyKnown = false }) => {
   const [pushActive, setPushActive] = useState(true);
-  const navigation = useNavigation<ScreenNavigationProps>();
   const { update: updateNotificationSettings } =
     useContext(NotificationsContext);
 

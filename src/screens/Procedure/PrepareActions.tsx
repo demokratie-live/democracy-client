@@ -20,7 +20,7 @@ import {
 } from "../../__generated__/graphql";
 import SvgLock from "../../components/Icons/Lock";
 import { SidebarParamList } from "../../app/(sidebar)/_layout";
-import { router, useNavigation, useRouter } from "expo-router";
+import { router, useNavigation } from "expo-router";
 
 const SegmentWrapper = styled.View`
   padding-vertical: 14px;

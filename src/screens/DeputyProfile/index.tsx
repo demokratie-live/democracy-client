@@ -9,7 +9,7 @@ import ContactBox from "./components/ContactBox";
 // Components
 import Chart from "./Chart";
 // GraphQL
-import { RouteProp, useNavigation } from "@react-navigation/core";
+import { useNavigation } from "@react-navigation/core";
 import { Avatar, ProcedureListItem } from "@democracy-deutschland/ui";
 import { MatchesBar } from "./components/MatchBar";
 import { getMatchingProcedures } from "./components/MatchBar/MatchesBar.utils";

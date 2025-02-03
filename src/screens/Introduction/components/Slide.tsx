@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import React from 'react';
+import React from "react";
 
-import { Dimensions, Platform, Image, ImageSourcePropType } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
-import styled from 'styled-components/native';
-import { PageProps } from './Pager';
+import { Dimensions, Platform, Image, ImageSourcePropType } from "react-native";
+import LinearGradient from "react-native-linear-gradient";
+import styled from "styled-components/native";
+import { PageProps } from "./Pager";
 
 const Container = styled.View`
   flex: 1;
   align-items: center;
   background: #fff;
   padding-top: ${() => {
-    return Platform.OS === 'ios' ? 24 : 8;
+    return Platform.OS === "ios" ? 24 : 8;
   }}px;
   padding-left: 18px;
   padding-right: 18px;
@@ -94,14 +94,14 @@ const TextVerify = styled.Text`
 const ImageCircle = styled.Image``;
 
 export const NewMarker = styled.Image.attrs({
-  source: require('./assets/icon.new.png'),
+  source: require("./assets/icon.new.png"),
 })`
   position: absolute;
   top: 28px;
   left: 18px;
 `;
 
-export interface Slide {
+export interface SlideProps {
   head: {
     image: ImageSourcePropType;
     title: string;
@@ -117,12 +117,19 @@ export interface Slide {
   verify?: () => void;
 }
 
-export interface Props extends Slide, PageProps {
+export interface Props extends SlideProps, PageProps {
   nextSlide?: () => void;
 }
 
-export const Slide: React.FC<Props> = ({ head, images, isNew, nextSlide, verify, nextPage }) => {
-  const circleImage = images.circle || require('./assets/icon.touch.png');
+export const Slide: React.FC<Props> = ({
+  head,
+  images,
+  isNew,
+  nextSlide,
+  verify,
+  nextPage,
+}) => {
+  const circleImage = images.circle || require("./assets/icon.touch.png");
 
   const handleNextSlide = () => {
     if (nextPage && !nextSlide) {
@@ -147,12 +154,12 @@ export const Slide: React.FC<Props> = ({ head, images, isNew, nextSlide, verify,
       </ContainerText>
       <ContainerImages>
         {images.left && (
-          <ImageTranspContainer style={{ alignSelf: 'flex-start' }}>
+          <ImageTranspContainer style={{ alignSelf: "flex-start" }}>
             <ImageLeft source={images.left} />
           </ImageTranspContainer>
         )}
         {images.right && (
-          <ImageTranspContainer style={{ alignSelf: 'flex-end' }}>
+          <ImageTranspContainer style={{ alignSelf: "flex-end" }}>
             <ImageRight source={images.right} />
           </ImageTranspContainer>
         )}
@@ -169,12 +176,12 @@ export const Slide: React.FC<Props> = ({ head, images, isNew, nextSlide, verify,
         </ContainerCenterImage>
       </ContainerImages>
       <LinearGradient
-        colors={['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 1)']}
+        colors={["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 1)"]}
         locations={[0, 0.5]}
         style={{
           height: 35,
-          width: Dimensions.get('window').width,
-          position: 'absolute',
+          width: Dimensions.get("window").width,
+          position: "absolute",
           bottom: 0,
         }}
       />

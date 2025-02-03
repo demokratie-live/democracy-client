@@ -67,7 +67,7 @@ export const AbgeordneteScreen: React.FC<Props> = ({
         </Edit>
       ),
     });
-  }, [navigation, route, editMode, setEditMode]);
+  }, [navigation, route, editMode, setEditMode, initialEditMode]);
 
   if (!favorizedDeputies) {
     return null;

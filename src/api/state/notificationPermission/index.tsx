@@ -99,10 +99,6 @@ export const NotificationsProvider: React.FC<PropsWithChildren> = ({
     }
   }, [data]);
 
-  const requestToken = () => {
-    // Notifications.registerRemoteNotifications();
-  };
-
   const update = (options: UpdateNotificationSettingsMutationVariables) => {
     console.log("Updating notification settings", options);
     updateSettings({

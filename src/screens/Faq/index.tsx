@@ -1,13 +1,9 @@
 import React, { ComponentProps, PropsWithChildren } from "react";
 import { faqData } from "./data";
-import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { MarkdownView } from "react-native-markdown-view";
 import { Linking, Platform } from "react-native";
 import styled from "styled-components/native";
 import deepmerge from "deepmerge";
-import { CompositeNavigationProp } from "@react-navigation/core";
-import { RootStackParamList } from "../../app/_layout";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import Folding from "../../components/Folding";
 import SvgDiscord from "../../components/Icons/Discord";
 import SvgFacebook from "../../components/Icons/Facebook";
@@ -22,8 +18,7 @@ import { MadeWithLove } from "../../components/MadeWithLove";
 import { linking } from "../../lib/linking";
 import { Button } from "@democracy-deutschland/ui";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { SidebarParamList } from "../../app/(sidebar)/_layout";
-import { router, useNavigation } from "expo-router";
+import { router } from "expo-router";
 
 const phoneNumber =
   Platform.OS === "ios"
@@ -120,7 +115,6 @@ const Markdown: React.FC<MarkdownProps> = ({ children, styles = {} }) => {
 };
 
 export const FaqScreen: React.FC = () => {
-  const navigation = useNavigation();
   return (
     <Wrapper>
       <Headline>Hier beantworten wir häufig gestellte Fragen</Headline>
