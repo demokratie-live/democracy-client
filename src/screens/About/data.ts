@@ -7,11 +7,11 @@ interface Credentials {
 export const credentialsData: Credentials[] = [
   {
     opened: true,
-    title: 'Impressum',
+    title: "Impressum",
     text: `**Angaben gemäß § 5 TMG**
 DEMOCRACY Deutschland e.V. (gemeinnützig)
-Industriestraße 10
-37079 Göttingen
+Am Klausberge 12
+37075 Göttingen
 
 **Vertreten durch**
 Marius Krüger
@@ -27,16 +27,16 @@ Registergericht: Amtsgericht Göttingen
 Registernummer: VR 201924`,
   },
   {
-    title: 'Datenschutzerklärung',
+    title: "Datenschutzerklärung",
     text: `**1. Präambel – Vorwort**
-Der gemeinnützige Verein DEMOCRACY Deutschland e.V. treibt mit seiner gleichnamigen App DEMOCRACY die Entwicklung einer öffentlichen Beteiligungsinfrastruktur voran, die das Funktionieren einer lebendigen Demokratie begünstigen soll. Als Nutzer informiert Sie die App DEMOCRACY dafür über die aktuellen Bundestagsabstimmungen und ermöglicht Ihnen eine eigene direkte Abstimmung. Aus Sicht des DEMOCRACY Deutschland e.V. sind die dabei entstehenden Nutzerdaten keine handelbaren Wirtschaftsgüter, sondern im Sinne des Grundgesetzes zu schützen. Die Aufrechterhaltung des Abstimmungsgeheimnis ist insofern zentraler Bestandteil der DNA des DEMOCRACY Deutschland e.V. .Um mit DEMOCRACY die politische Einflussnahme der BürgerInnen dennoch nachhaltig zu verbessern, benötigen wir – der DEMOCRACY Deutschland e.V., Industriestr. 10, 37079 Göttingen, Betreiber der App "DEMOCRACY" – einige Ihrer Daten. Diese Richtlinie erklärt Ihnen insofern, welche Informationen wir wie sammeln und verwenden, auch um den gesetzlichen Anforderungen nachzukommen.
+Der gemeinnützige Verein DEMOCRACY Deutschland e.V. treibt mit seiner gleichnamigen App DEMOCRACY die Entwicklung einer öffentlichen Beteiligungsinfrastruktur voran, die das Funktionieren einer lebendigen Demokratie begünstigen soll. Als Nutzer informiert Sie die App DEMOCRACY dafür über die aktuellen Bundestagsabstimmungen und ermöglicht Ihnen eine eigene direkte Abstimmung. Aus Sicht des DEMOCRACY Deutschland e.V. sind die dabei entstehenden Nutzerdaten keine handelbaren Wirtschaftsgüter, sondern im Sinne des Grundgesetzes zu schützen. Die Aufrechterhaltung des Abstimmungsgeheimnis ist insofern zentraler Bestandteil der DNA des DEMOCRACY Deutschland e.V. .Um mit DEMOCRACY die politische Einflussnahme der BürgerInnen dennoch nachhaltig zu verbessern, benötigen wir – der DEMOCRACY Deutschland e.V., Am Klausberge 12, 37075 Göttingen, Betreiber der App "DEMOCRACY" – einige Ihrer Daten. Diese Richtlinie erklärt Ihnen insofern, welche Informationen wir wie sammeln und verwenden, auch um den gesetzlichen Anforderungen nachzukommen.
 
 Wir vom DEMOCRACY Deutschland e.V. sind der Überzeugung, dass die Vermeidung (Konzept der Datenvermeidung) und der Schutz Ihrer Daten (Konzept des Datenschutzes) langfristig wichtig für Ihre Informationelle Selbstbestimmung sind – das heißt: Bei uns entscheiden Sie, welche Daten Sie preisgeben. Bitte nehmen Sie sich etwas Zeit für diese Datenschutzrichtlinie, bevor Sie unsere Webseite oder App benutzen.
 
 **2. Verantwortlich im Sinne der Datenschutzgesetze ist der:**
 DEMOCRACY Deutschland e.V.
-Industriestr. 10
-37079 Göttingen
+Am Klausberge 12
+37075 Göttingen
 
 Sollten Sie Fragen oder Anregungen zum Datenschutz haben, können Sie sich gerne auch per E-Mail an uns wenden. Die entsprechende E-Mail Adresse finden Sie im Impressum.
 
@@ -126,8 +126,8 @@ Wenn Sie der Ansicht sein sollten, dass die Verarbeitung Ihrer personenbezogenen
 Wir behalten es uns vor, diese Datenschutzerklärung notwendigen Änderungen zu unterziehen. Die aktuelle Fassung der Datenschutzerklärung können Sie stets unter [https://www.democracy-deutschland.de/#!datenschutz](https://www.democracy-deutschland.de/#!datenschutz) abrufen. Wir werden Sie hierüber informieren.`,
   },
   {
-    title: 'Nutzungsbedingungen',
-    text: `Wir, der DEMOCRACY Deutschland e.V., Industriestr. 10, 37075 Göttingen, Deutschland (im Folgenden auch „wir“/”uns”), haben die Applikation DEMOCRACY (nachfolgend „DEMOCRACY“ oder „App“) entwickelt, die unter www.democracy-deutschland.de und weiteren Domains heruntergeladen oder online genutzt werden kann. 
+    title: "Nutzungsbedingungen",
+    text: `Wir, der DEMOCRACY Deutschland e.V., Am Klausberge 12, 37075 Göttingen, Deutschland (im Folgenden auch „wir“/”uns”), haben die Applikation DEMOCRACY (nachfolgend „DEMOCRACY“ oder „App“) entwickelt, die unter www.democracy-deutschland.de und weiteren Domains heruntergeladen oder online genutzt werden kann. 
 Die App DEMOCRACY ermöglicht den Nutzern, vergangene, aktuelle und zukünftige Abstimmungen des Deutschen Bundestages zu beobachten und sich anhand der offiziellen Parlamentsinformationen über Anträge und Gesetzgebungsverfahren einschließlich der Abstimmungsergebnisse zu informieren. Registrierte Nutzer können zusätzlich als virtuelle Bundestagsabgeordnete selbst über die Vorgänge abstimmen. Mit der Funktion Wahl-⦻-Meter kann der registrierte Nutzer sein individuelles Abstimmungsverhalten mit den offiziellen Resultaten des Bundestages vergleichen.
 
 
