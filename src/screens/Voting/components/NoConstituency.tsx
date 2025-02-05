@@ -24,6 +24,7 @@ const PieChartWrapper = styled.View`
   right: 18px;
   bottom: 0px;
   width: 100px;
+  height: 100px;
 `;
 
 const Text = styled.Text`
@@ -75,7 +76,7 @@ export const NoConstituency: React.FC<Props> = ({ noButton }) => {
       <ImageWrapper>
         <Constituency width={249} height={155} />
         <PieChartWrapper>
-          <PieChart data={pieChartData} showPercentage={false} />
+          <PieChart data={pieChartData} showPercentage={false} size={100} />
         </PieChartWrapper>
       </ImageWrapper>
       <Space space={18} />

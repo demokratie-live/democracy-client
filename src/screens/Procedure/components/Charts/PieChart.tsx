@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import Svg, { Path, Circle, Text, G } from 'react-native-svg';
-import styled from 'styled-components/native';
-import { Dimensions } from 'react-native';
-import { Wrapper } from '.';
+import React, { useState } from "react";
+import Svg, { Path, Circle, Text, G } from "react-native-svg";
+import styled from "styled-components/native";
+import { Dimensions } from "react-native";
+import { Wrapper } from ".";
 
 const SvgStyled = styled(Svg).attrs({})``;
 
@@ -17,19 +17,31 @@ interface Props {
   label?: string;
   subLabel?: string;
   showPercentage?: boolean;
+  size?: number; // added optional property "size"
 }
 
-export const PieChart: React.FC<Props> = ({ data, label, subLabel, showPercentage }) => {
+export const PieChart: React.FC<Props> = ({
+  data,
+  label,
+  subLabel,
+  showPercentage,
+  size,
+}) => {
   const [svgWidth, setSvgWidth] = useState(0);
 
   const onLayout = () => {
-    const { width, height } = Dimensions.get('screen');
-    const size = Math.min(...[width, height].filter(v => v));
-
-    if (svgWidth !== size - size * 0.3) {
-      setSvgWidth(size - size * 0.3);
+    if (!size) {
+      const { width, height } = Dimensions.get("screen");
+      const computedSize = Math.min(...[width, height].filter((v) => v));
+      const newSize = computedSize - computedSize * 0.3;
+      if (svgWidth !== newSize) {
+        setSvgWidth(newSize);
+      }
     }
   };
+
+  // use provided size or fallback to computed svgWidth
+  const chartWidth = size || svgWidth;
 
   const getCoordinatesForPercent = (percent: number) => {
     const percentageEnshured = percent ? percent : 0;
@@ -44,27 +56,36 @@ export const PieChart: React.FC<Props> = ({ data, label, subLabel, showPercentag
    * source: https://hackernoon.com/a-simple-pie-chart-in-svg-dbdd653b6936
    */
   return (
-    <Wrapper onLayout={onLayout}>
+    <Wrapper onLayout={!size ? onLayout : undefined}>
       {
         // TODO This is a hack - rerendering should be controlled somewhere else
-        svgWidth !== 0 && (
-          <SvgStyled viewBox="-100 -100 200 200" width={svgWidth} height={svgWidth}>
+        chartWidth !== 0 && (
+          <SvgStyled
+            viewBox="-100 -100 200 200"
+            width={chartWidth}
+            height={chartWidth}
+          >
             <G transform="rotate(-90)">
               {data.map(({ percent, label: sliceLabel, color }) => {
                 if (percent === 0) {
                   return null;
                 }
                 // destructuring assignment sets the two variables at once
-                const [startX, startY] = getCoordinatesForPercent(cumulativePercent);
+                const [startX, startY] =
+                  getCoordinatesForPercent(cumulativePercent);
 
-                const [labelX, labelY] = getCoordinatesForPercent(cumulativePercent + percent / 2);
+                const [labelX, labelY] = getCoordinatesForPercent(
+                  cumulativePercent + percent / 2
+                );
 
                 // each slice starts where the last slice ended, so keep a cumulative percent
                 cumulativePercent += percent;
 
                 // End coordinates - half circle for 100% (which is the labelX&Y)
                 const [endX, endY] =
-                  percent === 1 ? [labelX, labelY] : getCoordinatesForPercent(cumulativePercent);
+                  percent === 1
+                    ? [labelX, labelY]
+                    : getCoordinatesForPercent(cumulativePercent);
 
                 // if the slice is more than 50%, take the large arc (the long way around)
                 // if the slice is 100%, take the small arc, since two halfs are drawn
@@ -74,9 +95,11 @@ export const PieChart: React.FC<Props> = ({ data, label, subLabel, showPercentag
                 const pathData = [
                   `M ${startX} ${startY}`, // Move
                   `A 100 100 0 ${largeArcFlag} 1 ${endX} ${endY}`, // Arc
-                  percent === 1 ? `A 100 100 0 ${largeArcFlag} 1 ${startX} ${startY}` : '', // Second half for 100%
-                  'L 0 0', // Line
-                ].join(' ');
+                  percent === 1
+                    ? `A 100 100 0 ${largeArcFlag} 1 ${startX} ${startY}`
+                    : "", // Second half for 100%
+                  "L 0 0", // Line
+                ].join(" ");
 
                 // create a <path>
                 return (
@@ -85,13 +108,15 @@ export const PieChart: React.FC<Props> = ({ data, label, subLabel, showPercentag
                     {showPercentage && percent > 0.05 && (
                       <Text
                         textAnchor="middle"
-                        transform={`rotate(90, ${labelX * 0.7}, ${labelY * 0.7})`}
+                        transform={`rotate(90, ${labelX * 0.7}, ${
+                          labelY * 0.7
+                        })`}
                         fontSize="10"
                         x={labelX * 0.7}
                         y={labelY * 0.7}
                         fill="#fff"
                       >
-                        {`${(percent * 100).toFixed(0).replace('.', ',')}%`}
+                        {`${(percent * 100).toFixed(0).replace(".", ",")}%`}
                       </Text>
                     )}
                   </G>
@@ -110,7 +135,13 @@ export const PieChart: React.FC<Props> = ({ data, label, subLabel, showPercentag
               </Text>
             )}
             {subLabel && (
-              <Text letterSpacing="0.01em" fill="#4a4a4a" y="5%" fontSize="7" textAnchor="middle">
+              <Text
+                letterSpacing="0.01em"
+                fill="#4a4a4a"
+                y="5%"
+                fontSize="7"
+                textAnchor="middle"
+              >
                 {subLabel}
               </Text>
             )}
