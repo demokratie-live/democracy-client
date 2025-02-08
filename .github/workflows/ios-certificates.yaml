@@ -1,0 +1,42 @@
+name: 🔑 Recreate Certificates
+
+on:
+  workflow_dispatch:
+    inputs:
+      match_type:
+        type: choice
+        description: "Select the match type (development or appstore)"
+        required: true
+        default: development
+        options:
+          - development
+          - appstore
+
+jobs:
+  recreate-certificates:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Encrypt GPG secure files
+        run: |
+          brew install gnupg@1.4
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 deploy/ios/AuthKey_3Q9U495BMY.p8.gpg
+
+      - name: Run Fastlane certificate recreation
+        run: fastlane ios generate_new_certificates
+        working-directory: ${{ github.workspace }}/deploy/ios
+        env:
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          MATCH_TYPE: ${{ github.event.inputs.match_type }}
+          CI: true
+          MATCH_FORCE: "true"

@@ -36,7 +36,7 @@ yarn-error.*
 *.tsbuildinfo
 
 # CUSTOM
-ios
 android
 google-services.json
 push-test.sh
+/ios

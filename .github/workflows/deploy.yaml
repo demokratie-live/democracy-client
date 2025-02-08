@@ -1,0 +1,63 @@
+name: 🚀 Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  APP_VARIANT: internal
+  CI: true
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          #   - platform: android
+          #     os: ubuntu-latest
+          - platform: ios
+            os: macos-latest
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Cache Yarn dependencies
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Encrypt GPG secure files
+        run: |
+          brew install gnupg@1.4
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 google-services.json.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 deploy/ios/AuthKey_3Q9U495BMY.p8.gpg
+
+      - name: Build Expo app prebuild for ${{ matrix.platform }}
+        if: steps.expo-prebuild-cache.outputs.cache-hit != 'true'
+        run: yarn expo prebuild
+
+      - name: Fastlane
+        run: |
+          fastlane ios deploy
+        working-directory: ${{ github.workspace }}/deploy/ios
+        env:
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          MATCH_TYPE: appstore
+          MATCH_FORCE: "true"
+          FASTLANE_TEAM_ID: A4B84UJD7M

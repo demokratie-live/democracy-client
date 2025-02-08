@@ -54,7 +54,7 @@ export default {
       supportsTablet: true,
       bundleIdentifier: getBundleIdentifier(),
       entitlements: {
-        "aps-environment": "development",
+        "aps-environment": process.env.CI ? "production" : "development",
       },
     },
     android: {
@@ -65,7 +65,23 @@ export default {
       package: getPackage(),
       googleServicesFile: "./google-services.json",
     },
-    plugins: ["expo-router"],
+    plugins: [
+      "expo-router",
+      [
+        "expo-build-properties",
+        {
+          ios: {
+            deploymentTarget: "15.5",
+          },
+        },
+      ],
+      [
+        "expo-notifications",
+        {
+          enableBackgroundRemoteNotifications: true,
+        },
+      ],
+    ],
     experiments: {
       typedRoutes: true,
     },
