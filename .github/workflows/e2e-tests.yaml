@@ -1,0 +1,127 @@
+name: 🧪 E2E Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  APP_VARIANT: internal
+  CI: true
+
+jobs:
+  e2e-test:
+    name: Run ${{ matrix.test }} on ${{ matrix.platform }}
+    strategy:
+      matrix:
+        include:
+          # - platform: android
+          #   os: macos-latest
+          #   test: smoke
+          # - platform: android
+          #   os: macos-latest
+          #   test: verification
+          - platform: ios
+            os: macos-latest
+            test: smoke
+          # - platform: ios
+          #   os: macos-latest
+          #   test: verification
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Cache Yarn dependencies
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Install Maestro
+        run: |
+          curl -Ls "https://get.maestro.mobile.dev" | bash
+          export PATH="$PATH":"$HOME/.maestro/bin"
+
+      - name: Decrypt GPG secure files
+        run: |
+          brew install gnupg@1.4
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 google-services.json.gpg
+
+      - name: Build Expo app prebuild
+        run: yarn expo prebuild --platform ${{ matrix.platform }}
+
+      - name: Cache iOS build
+        uses: actions/cache@v4
+        if: matrix.platform == 'ios'
+        with:
+          path: |
+            ios/build
+            ~/Library/Developer/Xcode/DerivedData
+          key: ${{ runner.os }}-ios-build-${{ hashFiles('ios/**/*.pbxproj', 'ios/Podfile.lock', 'src/**/*.tsx', 'src/**/*.ts') }}
+          restore-keys: |
+            ${{ runner.os }}-ios-build-
+
+      - name: Setup iOS Simulator
+        if: matrix.platform == 'ios'
+        run: |
+          DEVICE_ID=$(xcrun xctrace list devices | grep -m 1 "iPhone" | awk '{print $NF}' | tr -d '()')
+          xcrun simctl boot $DEVICE_ID || true
+
+      # - name: Setup Android Emulator
+      #   if: matrix.platform == 'android'
+      #   uses: reactivecircus/android-emulator-runner@v2
+      #   with:
+      #     api-level: 31
+      #     script: echo "Emulator started"
+
+      - name: Build iOS App
+        if: matrix.platform == 'ios'
+        run: |
+          xcodebuild -workspace DEMOCRACYInternal.xcworkspace -scheme DEMOCRACYInternal -configuration Release -sdk iphonesimulator -derivedDataPath build | xcbeautify
+        working-directory: ${{ github.workspace }}/ios
+
+      # - name: Install iOS App
+      #   if: matrix.platform == 'ios'
+      #   run: |
+      #     DEVICE_ID=$(xcrun xctrace list devices | grep -m 1 "iPhone" | awk '{print $NF}' | tr -d '()')
+      #     xcrun simctl install $DEVICE_ID ios/build/Build/Products/Release-iphonesimulator/DEMOCRACYInternal.app
+
+      # - name: Launch iOS App
+      #   if: matrix.platform == 'ios'
+      #   run: |
+      #     DEVICE_ID=$(xcrun xctrace list devices | grep -m 1 "iPhone" | awk '{print $NF}' | tr -d '()')
+      #     xcrun simctl launch $DEVICE_ID de.democracy-deutschland.clientapp.internal
+
+      # - name: Build and Run Android App
+      #   if: matrix.platform == 'android'
+      #   run: yarn android
+
+      # - name: Wait for App to be ready
+      #   run: sleep 30
+
+      # - name: Run Maestro Tests
+      #   run: |
+      #     export PATH="$PATH":"$HOME/.maestro/bin"
+      #     yarn test:e2e:${{ matrix.test }}
+
+      # - name: Upload Test Results
+      #   if: always()
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: maestro-${{ matrix.test }}-${{ matrix.platform }}
+      #     path: |
+      #       .maestro/test-results
+      #       .maestro/logs
