@@ -1,0 +1,71 @@
+default_platform(:android)
+
+internalVersionCode = google_play_track_version_codes(package_name: ENV["PACKAGE_NAME"], track: 'internal')
+version_code = [internalVersionCode].max[0].to_i + 1
+
+store_password = prompt(text: "Signing Store Password: ", secure_text: true, ci_input: ENV['ANDROID_PASS'])
+key_password = prompt(text: "Alias Key Password: ", secure_text: true, ci_input: ENV['ANDROID_PASS'])
+releaseFilePath = File.join(Dir.pwd, "..", "democracy2-release-key.keystore")
+key_alias = "democracy2-key-alias"
+
+if ENV["TRAVIS_BRANCH"] == 'refs/heads/refactor'
+  store_password = prompt(text: "Signing Store Password: ", secure_text: true, ci_input: ENV['ANDROID_KEYSTORE_PASSWORD'])
+  key_password = prompt(text: "Alias Key Password: ", secure_text: true, ci_input: ENV['ANDROID_KEYSTORE_PASSWORD'])
+  releaseFilePath = File.join(Dir.pwd, "..", "my-release-key.keystore")
+  key_alias = "my-key-alias"
+end
+
+platform :android do
+  desc "Runs all the tests"
+
+  increment_version_code(
+    gradle_file_path: "../../android/app/build.gradle",
+    version_code: version_code
+  )
+
+  gradle(
+    task: 'clean',
+    project_dir: "../../android"
+
+  )
+
+  lane :test do
+    gradle(
+      task: "test",
+      project_dir: "../../android"
+    )
+  end
+
+  private_lane :build do
+
+    gradle(
+      task: 'bundle',
+      project_dir: "../../android",
+      build_type: 'Release',
+      print_command: false,
+      properties: {
+        "android.injected.signing.store.file" => releaseFilePath,
+        "android.injected.signing.store.password" => store_password,
+        "android.injected.signing.key.alias" => key_alias,
+        "android.injected.signing.key.password" => key_password,
+      }
+    )
+  end
+
+  desc "Submit a new Internal Build to Play Store"
+  lane :internal do
+
+    build
+
+    supply(
+     package_name: ENV["PACKAGE_NAME"],
+     track: 'internal',
+     track_promote_to: 'internal',
+     skip_upload_metadata: true,
+     skip_upload_changelogs: true,
+     skip_upload_images: true,
+     skip_upload_screenshots: true
+    )
+
+    end
+end

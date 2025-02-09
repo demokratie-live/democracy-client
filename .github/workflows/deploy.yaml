@@ -11,11 +11,12 @@ env:
 
 jobs:
   build:
+    name: Build & Deploy ${{ matrix.platform }}
     strategy:
       matrix:
         include:
-          #   - platform: android
-          #     os: ubuntu-latest
+          - platform: android
+            os: ubuntu-latest
           - platform: ios
             os: macos-latest
     runs-on: ${{ matrix.os }}
@@ -40,17 +41,26 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: Encrypt GPG secure files
+      - name: iOS Encrypt GPG secure files
+        if: ${{ matrix.platform == 'ios' }}
         run: |
           brew install gnupg@1.4
           echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 google-services.json.gpg
           echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 deploy/ios/AuthKey_3Q9U495BMY.p8.gpg
 
+      - name: Android Encrypt GPG secure files
+        if: ${{ matrix.platform == 'android' }}
+        run: |
+          sudo apt-get install -y gnupg1
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 google-services.json.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 deploy/android/key.json.gpg
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 deploy/android/democracy2-release-key.keystore.gpg
+
       - name: Build Expo app prebuild for ${{ matrix.platform }}
-        if: steps.expo-prebuild-cache.outputs.cache-hit != 'true'
         run: yarn expo prebuild
 
-      - name: Fastlane
+      - name: iOS Fastlane
+        if: ${{ matrix.platform == 'ios' }}
         run: |
           fastlane ios deploy
         working-directory: ${{ github.workspace }}/deploy/ios
@@ -61,3 +71,21 @@ jobs:
           MATCH_TYPE: appstore
           MATCH_FORCE: "true"
           FASTLANE_TEAM_ID: A4B84UJD7M
+
+      - name: Setup Ruby + Cache Gems
+        uses: ruby/setup-ruby@v1
+        if: ${{ matrix.platform == 'android' }}
+        with:
+          bundler-cache: true
+          working-directory: deploy/android
+
+      - name: Android Fastlane
+        if: ${{ matrix.platform == 'android' }}
+        run: |
+          bundle exec fastlane android internal --env internal
+        working-directory: ${{ github.workspace }}/deploy/android
+        env:
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          ANDROID_PASS: ${{ secrets.ANDROID_PASS }}
