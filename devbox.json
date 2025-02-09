@@ -1,0 +1,12 @@
+{
+  "packages": ["nodejs@22", "yarn@1.22.19", "fastlane@latest", "ruby@3.3"],
+  "shell": {
+    "init_hook": [
+      "echo 'Welcome to devbox!' > /dev/null",
+      "export SDKROOT=$(xcrun --show-sdk-path)"
+    ],
+    "scripts": {
+      "test": ["echo \"Error: no test specified\" && exit 1"]
+    }
+  }
+}
