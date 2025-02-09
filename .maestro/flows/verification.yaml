@@ -1,0 +1,20 @@
+appId: de.democracy-deutschland.clientapp.internal
+---
+- launchApp
+- assertVisible: "Es liegen derzeit noch keine Abstimmungsdaten vor."
+- swipe:
+    start: 0, 200
+    end: 300, 400
+- assertVisible: "unverifizierter Nutzer"
+- tapOn: "unverifizierter Nutzer"
+- assertVisible: "VERIFIZIEREN"
+- tapOn: 
+    id: "StartVerificationButton"
+- assertVisible: "Bitte gib Deine aktuelle Handynummer ein"
+- inputText: "1234567890"
+- tapOn: "CODE ANFORDERN"
+- tapOn: "Ja"
+- inputText: "000000"
+- assertVisible: "Deine Verifikation war erfolgreich!"
+- tapOn: "Später"
+- assertVisible: "verifizierter Nutzer"

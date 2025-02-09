@@ -1,0 +1,4 @@
+appId: de.democracy-deutschland.clientapp.internal
+---
+- launchApp
+- assertVisible: "Es liegen derzeit noch keine Abstimmungsdaten vor."

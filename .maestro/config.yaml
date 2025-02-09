@@ -1,0 +1,5 @@
+# Configuration for Maestro tests
+max_retries: 2
+device_type: "ios"
+env:
+  APP_ID: "de.democracy-deutschland.clientapp.internal"
