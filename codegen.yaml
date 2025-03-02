@@ -1,0 +1,16 @@
+overwrite: true
+schema: "https://internal.api.democracy-app.de"
+documents: "src/**/*.graphql"
+generates:
+  src/__generated__/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+      - typescript-apollo-client-helpers
+    config:
+      scalars:
+        Date: string
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"
