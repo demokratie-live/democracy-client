@@ -1,9 +1,7 @@
 name: 🚀 Deploy
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 env:
   APP_VARIANT: internal
