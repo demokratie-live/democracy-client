@@ -29,6 +29,7 @@ import {
   VoteSelection,
 } from "../../__generated__/graphql";
 import { PartyProps } from "@democracy-deutschland/ui/dist/Atoms/PartyLogo/old";
+import { useRouter } from "expo-router";
 
 const MemberImageWrapper = styled.View`
   width: 100%;
@@ -63,6 +64,7 @@ export interface Contacts {
 type Props = RootStackParamList["DeputyProfile/[id]"];
 
 export const DeputyProfilScreen: React.FC<Props> = ({ id }) => {
+  const router = useRouter();
   const [showProcedures, setShowProcedures] = useState(true);
   const localVotes = useRecoilValue(localVotesState);
   const navigation =
@@ -216,6 +218,7 @@ export const DeputyProfilScreen: React.FC<Props> = ({ id }) => {
 
   return (
     <FlatList<FlatListData>
+      style={{ backgroundColor: "white" }}
       onEndReached={() => {
         !proceduresLoading &&
           showProcedures &&
@@ -294,10 +297,7 @@ export const DeputyProfilScreen: React.FC<Props> = ({ id }) => {
         return (
           <TouchableOpacity
             onPress={() =>
-              navigation.push("Procedure", {
-                procedureId: item.procedure.procedureId,
-                title: item.procedure.type,
-              })
+              router.push(`/procedure/${item.procedure.procedureId}`)
             }
           >
             <ProcedureListItem
