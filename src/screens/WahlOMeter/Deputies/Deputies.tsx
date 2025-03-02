@@ -48,7 +48,7 @@ export const DeputiesScreen: React.FC = () => {
   }, [isFocused, navigation, router]);
 
   return (
-    <Wrapper>
+    <Wrapper style={{ backgroundColor: "#fff" }}>
       <WomDeputyList />
     </Wrapper>
   );
