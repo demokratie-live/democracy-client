@@ -617,7 +617,7 @@ export type ProceduresListQueryVariables = Exact<{
 }>;
 
 
-export type ProceduresListQuery = { __typename?: 'Query', procedures: Array<{ __typename?: 'Procedure', _id: string, title: string, procedureId: string, sessionTOPHeading?: string | null, subjectGroups: Array<string>, voteDate?: string | null, voteEnd?: string | null, list?: ListType | null, type: string, voteWeek?: number | null, voteYear?: number | null, votedGovernment?: boolean | null, voted: boolean, activityIndex: { __typename?: 'ActivityIndex', activityIndex: number }, voteResults?: { __typename?: 'VoteResult', yes: number, abstination: number, no: number, governmentDecision: VoteSelection } | null, communityVotes?: { __typename?: 'CommunityVotes', yes: number, abstination: number, no: number, total: number } | null }> };
+export type ProceduresListQuery = { __typename?: 'Query', procedures: Array<{ __typename?: 'Procedure', _id: string, title: string, procedureId: string, sessionTOPHeading?: string | null, subjectGroups: Array<string>, voteDate?: string | null, voteEnd?: string | null, list?: ListType | null, type: string, voteWeek?: number | null, voteYear?: number | null, votedGovernment?: boolean | null, voted: boolean, activityIndex: { __typename?: 'ActivityIndex', activityIndex: number }, voteResults?: { __typename?: 'VoteResult', yes: number, abstination: number, no: number, notVoted?: number | null, governmentDecision: VoteSelection } | null, communityVotes?: { __typename?: 'CommunityVotes', yes: number, abstination: number, no: number, total: number } | null }> };
 
 export type RecommendedProceduresQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1187,6 +1187,7 @@ export const ProceduresListDocument = gql`
       yes
       abstination
       no
+      notVoted
       governmentDecision
     }
     communityVotes(constituencies: $constituencies) {

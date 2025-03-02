@@ -35,6 +35,7 @@ query ProceduresList(
       yes
       abstination
       no
+      notVoted
       governmentDecision
     }
     communityVotes(constituencies: $constituencies) {

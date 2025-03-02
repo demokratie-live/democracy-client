@@ -1,29 +1,29 @@
-import { Slice } from '../components/PieChart';
+import { Slice } from "../components/PieChart";
 
 interface Props {
-  decision?: 'YES' | 'ABSTINATION' | 'NOTVOTED' | 'NO' | null;
-  colorSchema: 'GOVERNMENT' | 'COMMUNITY';
+  decision?: "YES" | "ABSTINATION" | "NOTVOTED" | "NO" | null;
+  colorSchema: "GOVERNMENT" | "COMMUNITY";
 }
 
 const colorSchemas = {
   GOVERNMENT: {
-    YES: '#99C93E',
-    ABSTINATION: '#4CB0D8',
-    NO: '#D43194',
-    NOTVOTED: '#B1B3B4',
+    YES: "#99C93E",
+    ABSTINATION: "#4CB0D8",
+    NO: "#D43194",
+    NOTVOTED: "#B1B3B4",
   },
   COMMUNITY: {
     voted: {
-      YES: '#16C063',
-      ABSTINATION: '#2882E4',
-      NO: '#EC3E31',
-      NOTVOTED: '#d8d8d8',
+      YES: "#16C063",
+      ABSTINATION: "#2882E4",
+      NO: "#EC3E31",
+      NOTVOTED: "#d8d8d8",
     },
     notVoted: {
-      YES: '#C7C7CC',
-      ABSTINATION: '#D8D8D8',
-      NO: '#B0AFB7',
-      NOTVOTED: '#d8d8d8',
+      YES: "#C7C7CC",
+      ABSTINATION: "#D8D8D8",
+      NO: "#B0AFB7",
+      NOTVOTED: "#d8d8d8",
     },
   },
 };
@@ -32,8 +32,8 @@ const getColor = ({
   decision,
   colorSchema,
 }: {
-  decision: 'YES' | 'ABSTINATION' | 'NOTVOTED' | 'NO';
-  colorSchema: Props['colorSchema'];
+  decision: "YES" | "ABSTINATION" | "NOTVOTED" | "NO";
+  colorSchema: Props["colorSchema"];
 }): string => {
   let colors: {
     YES: string;
@@ -41,8 +41,8 @@ const getColor = ({
     NO: string;
     NOTVOTED: string;
   };
-  if (colorSchema === 'COMMUNITY') {
-    if (decision === 'NOTVOTED') {
+  if (colorSchema === "COMMUNITY") {
+    if (decision === "NOTVOTED") {
       colors = colorSchemas[colorSchema].notVoted;
     } else {
       colors = colorSchemas[colorSchema].voted;
@@ -55,7 +55,7 @@ const getColor = ({
 
 export const pieChartFull = ({ decision, colorSchema }: Props): Slice[] => {
   switch (decision) {
-    case 'YES':
+    case "YES":
       return [
         {
           color: getColor({ decision, colorSchema }),
@@ -63,7 +63,7 @@ export const pieChartFull = ({ decision, colorSchema }: Props): Slice[] => {
           large: true,
         },
       ];
-    case 'NO':
+    case "NO":
       return [
         {
           color: getColor({ decision, colorSchema }),
@@ -71,7 +71,7 @@ export const pieChartFull = ({ decision, colorSchema }: Props): Slice[] => {
           large: true,
         },
       ];
-    case 'ABSTINATION':
+    case "ABSTINATION":
       return [
         {
           color: getColor({ decision, colorSchema }),
@@ -79,7 +79,7 @@ export const pieChartFull = ({ decision, colorSchema }: Props): Slice[] => {
           large: true,
         },
       ];
-    case 'NOTVOTED':
+    case "NOTVOTED":
       return [
         {
           color: getColor({ decision, colorSchema }),
@@ -90,7 +90,7 @@ export const pieChartFull = ({ decision, colorSchema }: Props): Slice[] => {
     default:
       return [
         {
-          color: '#d8d8d8',
+          color: "#d8d8d8",
           percent: (1 || 0) / 1,
         },
       ];

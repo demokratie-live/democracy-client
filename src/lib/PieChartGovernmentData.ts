@@ -1,10 +1,13 @@
-import { Slice } from '../components/PieChart';
-import { VoteResult } from '../__generated__/graphql';
+import { Slice } from "../components/PieChart";
+import { VoteResult } from "../__generated__/graphql";
 
 interface Props {
   votedGovernment?: boolean | null;
-  voteResults?: Pick<VoteResult, 'yes' | 'abstination' | 'no'> | null;
-  largeDecision?: 'YES' | 'ABSTINATION' | 'NOTVOTED' | 'NO' | null;
+  voteResults?: Pick<
+    VoteResult,
+    "yes" | "abstination" | "no" | "notVoted"
+  > | null;
+  largeDecision?: "YES" | "ABSTINATION" | "NOTVOTED" | "NO" | null;
 }
 
 export const pieChartGovernmentData = ({
@@ -14,22 +17,30 @@ export const pieChartGovernmentData = ({
 }: Props): Slice[] | undefined => {
   if (votedGovernment && voteResults) {
     const sumVotes =
-      (voteResults.yes || 0) + (voteResults.abstination || 0) + (voteResults.no || 0);
+      (voteResults.yes || 0) +
+      (voteResults.abstination || 0) +
+      (voteResults.no || 0) +
+      (voteResults.notVoted || 0);
     return [
       {
-        color: '#99C93E',
+        color: "#99C93E",
         percent: (voteResults.yes || 0) / sumVotes,
-        large: largeDecision === 'YES',
+        large: largeDecision === "YES",
       },
       {
-        color: '#4CB0D8',
+        color: "#4CB0D8",
         percent: (voteResults.abstination || 0) / sumVotes,
-        large: largeDecision === 'ABSTINATION',
+        large: largeDecision === "ABSTINATION",
       },
       {
-        color: '#D43194',
+        color: "#D43194",
         percent: (voteResults.no || 0) / sumVotes,
-        large: largeDecision === 'NO',
+        large: largeDecision === "NO",
+      },
+      {
+        color: "#B1B3B4",
+        percent: (voteResults.notVoted || 0) / sumVotes,
+        large: largeDecision === "NOTVOTED",
       },
     ];
   }

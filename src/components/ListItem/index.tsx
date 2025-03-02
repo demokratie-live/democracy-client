@@ -1,7 +1,10 @@
-import { VoteDate as VoteDateCmp, VotesIndex as VotesIndexCmp } from '@democracy-deutschland/ui';
-import React from 'react';
-import styled from 'styled-components/native';
-import { PieChart, Slice } from '../PieChart';
+import {
+  VoteDate as VoteDateCmp,
+  VotesIndex as VotesIndexCmp,
+} from "@democracy-deutschland/ui";
+import React from "react";
+import styled from "styled-components/native";
+import { PieChart, Slice } from "../PieChart";
 
 // import ActivityIndex from './ActivityIndex';
 // import DemocracyIconComponent from '../../iconfont/DemocracyFont';
@@ -84,6 +87,7 @@ const ListItem: React.FC<Props> = ({
 }) => {
   // TODO title length function: handle subline line length by https://facebook.github.io/react-native/docs/text#ontextlayout on title
   // const [titleLines, setTitleLines] = useState(2);
+
   return (
     <ListItemWrapper>
       {/* <StatusIcon
@@ -115,7 +119,11 @@ const ListItem: React.FC<Props> = ({
         <ChartWrapper>
           {!!govermentChart && !!govermentChart.votes && (
             <PaddingRight>
-              <PieChart data={govermentChart.votes} size={20} large={govermentChart.large} />
+              <PieChart
+                data={govermentChart.votes}
+                size={20}
+                large={govermentChart.large}
+              />
             </PaddingRight>
           )}
           <PieChart data={communityVotes} size={20} />
