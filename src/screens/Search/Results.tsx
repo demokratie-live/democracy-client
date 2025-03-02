@@ -20,6 +20,7 @@ import { pieChartGovernmentData } from "../../lib/PieChartGovernmentData";
 import { communityVoteData } from "../../lib/PieChartCommunityData";
 import { AppLogo } from "../../components/AppLogo";
 import { useLegislaturePeriodStore } from "src/api/state/legislaturePeriod";
+import { useRouter } from "expo-router";
 
 const isProcedureGuard = (
   searchItem: string | Procedure
@@ -71,8 +72,7 @@ interface SegmentData {
 }
 
 export const Results: React.FC = () => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const router = useRouter();
   const { legislaturePeriod } = useLegislaturePeriodStore();
   console.log("Results", { legislaturePeriod });
   const parlamentIdentifier = `BT-${legislaturePeriod}` as ParlamentIdentifier;
@@ -110,10 +110,7 @@ export const Results: React.FC = () => {
     ({ item, section }: { item: string | Procedure; section: string }) =>
     () => {
       if (section === "Ergebnisse" && isProcedureGuard(item)) {
-        navigation.navigate("Procedure", {
-          procedureId: item.procedureId,
-          title: item.type || item.procedureId,
-        });
+        router.push(`/procedure/${item.procedureId}`);
         // this.props.navigateTo({
         //   screen: 'democracy.Detail',
         //   title: 'Abstimmung'.toUpperCase(),
