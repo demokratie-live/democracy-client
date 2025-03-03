@@ -56,6 +56,22 @@ export default {
       entitlements: {
         "aps-environment": process.env.CI ? "production" : "development",
       },
+      infoPlist: process.env.CI
+        ? {}
+        : {
+            NSAppTransportSecurity: {
+              NSAllowsArbitraryLoads: false,
+              NSExceptionDomains: {
+                localhost: {
+                  NSExceptionAllowsInsecureHTTPLoads: true,
+                },
+                "democracy-api.local.democracy-app.de": {
+                  NSIncludesSubdomains: true,
+                  NSExceptionAllowsInsecureHTTPLoads: true,
+                },
+              },
+            },
+          },
     },
     android: {
       adaptiveIcon: {
