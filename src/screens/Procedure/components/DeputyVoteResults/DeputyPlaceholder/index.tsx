@@ -1,11 +1,9 @@
 import React from "react";
-import { useNavigation } from "@react-navigation/core";
 import { PlusIcon } from "@democracy-deutschland/ui";
-import { RootStackParamList } from "../../../../../app/_layout";
 import styled from "styled-components/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import DeputyAvatarPlaceholder from "./components/DeputyAvatarPlaceholder";
 import { useWindowDimensions } from "react-native";
+import { useRouter } from "expo-router";
 
 const Wrapper = styled.TouchableOpacity<{ width: number }>`
   flex: 1;
@@ -48,15 +46,14 @@ interface Props {
 }
 
 export const DeputyVoteResultPlaceholder: React.FC<Props> = ({ label }) => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const router = useRouter();
   const { width } = useWindowDimensions();
 
   return (
     <Wrapper
       width={width}
       onPress={() => {
-        navigation.push("Deputies", { editMode: true });
+        router.push(`/DeputiesEdit`);
       }}
     >
       <MemberImageWrapper>

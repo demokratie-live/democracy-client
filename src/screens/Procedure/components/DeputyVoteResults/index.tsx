@@ -54,6 +54,7 @@ export const DeputyVoteResultSlider: React.FC<Props> = ({
   const favorizedDeputies = useRecoilValue(
     favorizedDeputiesState(parlamentIdentifier)
   );
+
   const { data } = useDeputyVoteResultsQuery({
     variables: {
       webIds: [...favorizedDeputies],
@@ -113,7 +114,7 @@ export const DeputyVoteResultSlider: React.FC<Props> = ({
       (data?.procedure?.voteResults?.deputyVotes || []).length > 0
         ? [
             ...(data?.procedure?.voteResults?.deputyVotes.map((deputy) => (
-              <DeputyVoteResult key="deputy" {...deputy} />
+              <DeputyVoteResult key={deputy.deputy.webId} {...deputy} />
             )) ?? []),
             <DeputyVoteResultPlaceholder
               key="addNewDeputy"

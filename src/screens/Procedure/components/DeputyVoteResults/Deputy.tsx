@@ -1,13 +1,11 @@
 import React from "react";
-import { useNavigation } from "@react-navigation/core";
 import { Avatar } from "@democracy-deutschland/ui";
-import { RootStackParamList } from "../../../../app/_layout";
 import styled from "styled-components/native";
 import SvgInfo from "../../../../components/Icons/Info";
 import { DeputyVoteResultsQuery } from "../../../../__generated__/graphql";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { PartyProps } from "@democracy-deutschland/ui/dist/Atoms/PartyLogo/old";
 import { useWindowDimensions } from "react-native";
+import { useRouter } from "expo-router";
 
 const Wrapper = styled.View<{ width: number }>`
   align-items: center;
@@ -92,15 +90,14 @@ export const DeputyVoteResult: React.FC<Props> = ({
   decision,
   deputy: { constituency, name, party, webId, imgURL },
 }) => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const router = useRouter();
   const { width } = useWindowDimensions();
 
   return (
     <Wrapper width={width} key={webId}>
       <MemberImageWrapper
         onPress={() => {
-          navigation.push("DeputyProfile/[id]", { id: webId });
+          router.push(`/DeputyProfile/${webId}`);
         }}
       >
         {party ? (
@@ -122,9 +119,7 @@ export const DeputyVoteResult: React.FC<Props> = ({
           <Text>{name}</Text>
           <TextLighGrey>Direktkandidat WK {constituency}</TextLighGrey>
         </NameWrapper>
-        <InfoIconButton
-          onPress={() => navigation.push("DeputyProfile/[id]", { id: webId })}
-        >
+        <InfoIconButton onPress={() => router.push(`/DeputyProfile/${webId}`)}>
           <InfoIcon />
         </InfoIconButton>
       </DeputyDetailsWrapper>
