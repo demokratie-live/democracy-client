@@ -102,7 +102,6 @@ const SidebarNavigation = () => {
         }}
         name={"About"}
       />
-      {devMode ? <Drawer.Screen name="DEV" /> : null}
     </Drawer>
   );
 };
