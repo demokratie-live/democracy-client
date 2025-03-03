@@ -13,8 +13,8 @@ jobs:
     strategy:
       matrix:
         include:
-          # - platform: android
-          #   os: ubuntu-latest
+          - platform: android
+            os: ubuntu-latest
           - platform: ios
             os: macos-latest
     runs-on: ${{ matrix.os }}
