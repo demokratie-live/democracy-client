@@ -87,3 +87,4 @@ jobs:
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
           ANDROID_PASS: ${{ secrets.ANDROID_PASS }}
+          ANDROID_PROJECT_PATH: ${{ github.workspace }}

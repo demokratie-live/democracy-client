@@ -1,5 +1,8 @@
 default_platform(:android)
 
+# Define project path with fallback to relative path
+project_path = ENV["ANDROID_PROJECT_PATH"] || "../.."
+
 internalVersionCode = google_play_track_version_codes(package_name: ENV["PACKAGE_NAME"], track: 'internal')
 version_code = [internalVersionCode].max[0].to_i + 1
 
@@ -19,28 +22,26 @@ platform :android do
   desc "Runs all the tests"
 
   increment_version_code(
-    gradle_file_path: "../../android/app/build.gradle",
+    gradle_file_path: File.join(project_path, "android/app/build.gradle"),
     version_code: version_code
   )
 
   gradle(
     task: 'clean',
-    project_dir: "../../android"
-
+    project_dir: File.join(project_path, "android")
   )
 
   lane :test do
     gradle(
       task: "test",
-      project_dir: "../../android"
+      project_dir: File.join(project_path, "android")
     )
   end
 
   private_lane :build do
-
     gradle(
       task: 'bundle',
-      project_dir: "../../android",
+      project_dir: File.join(project_path, "android"),
       build_type: 'Release',
       print_command: false,
       properties: {
@@ -54,7 +55,6 @@ platform :android do
 
   desc "Submit a new Internal Build to Play Store"
   lane :internal do
-
     build
 
     supply(
@@ -66,6 +66,5 @@ platform :android do
      skip_upload_images: true,
      skip_upload_screenshots: true
     )
-
-    end
+  end
 end
