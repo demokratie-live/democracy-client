@@ -26,11 +26,6 @@ platform :android do
     version_code: version_code
   )
 
-  gradle(
-    task: 'clean',
-    project_dir: File.join(project_path, "android")
-  )
-
   lane :test do
     gradle(
       task: "test",
