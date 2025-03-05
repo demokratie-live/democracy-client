@@ -30,9 +30,9 @@ const RepresentativeText = styled.Text`
 `;
 
 const CommunitySegmentText = styled.Text`
+  align-self: flex-start;
   color: rgb(142, 142, 147);
   font-size: 12px;
-  padding-top: 8px;
   padding-bottom: 16px;
 `;
 

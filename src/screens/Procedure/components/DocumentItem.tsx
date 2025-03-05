@@ -27,8 +27,9 @@ const Text = styled.Text`
 `;
 
 const DownloadButton = styled.TouchableOpacity`
-  padding-top: 11px;
   margin-left: auto;
+  align-self: flex-end;
+  padding bottom: 2px
 `;
 
 type ScreenNavigationProps = CompositeNavigationProp<
@@ -60,7 +61,7 @@ export const DocumentItem: React.FC<Props> = ({
       </ViewerButton>
 
       <DownloadButton onPress={linking(url)}>
-        <SvgDownload width={18} height={18} color="red" />
+        <SvgDownload width={14} height={14} color="#848484" />
       </DownloadButton>
     </Container>
   );

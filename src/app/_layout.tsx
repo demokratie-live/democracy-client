@@ -58,6 +58,48 @@ export default function Layout() {
                     name="(verification)"
                     options={{ title: "Verifizieren" }}
                   />
+                  <Stack.Screen
+                    name="(vote)"
+                    options={{ title: "Zur Wahlurne" }}
+                  />
+                  <Stack.Screen
+                    name="DeputiesEdit"
+                    options={{ title: "Abgeordnete" }}
+                  />
+                  <Stack.Screen
+                    name="Constituency"
+                    options={{ title: "Wahlkreis" }}
+                  />
+                  <Stack.Screen
+                    name="Introduction"
+                    options={{ title: "Tutorial" }}
+                  />
+                  <Stack.Screen
+                    name="SyncVotes"
+                    options={{ title: "Stimen Synchronisieren" }}
+                  />
+                  <Stack.Screen
+                    name="Procedure"
+                    options={{ title: "Verfahren" }}
+                  />
+                  <Stack.Screen
+                    name="DeputyProfile/[id]"
+                    options={{ title: "Abgeordnete" }}
+                  />
+                  <Stack.Screen name="Pdf" options={{ title: "PDF" }} />
+                  <Stack.Screen
+                    name="PushInstructions"
+                    options={{ title: "Push Benachrichtigungen" }}
+                  />
+                  <Stack.Screen
+                    name="NotificationInstruction"
+                    options={{ title: "Push Benachrichtigungen" }}
+                  />
+                  <Stack.Screen
+                    name="legislaturPeriod"
+                    options={{ title: "Legislaturperiode" }}
+                  />
+                  <Stack.Screen name="index" options={{ title: "DEMOCRACY" }} />
                 </Stack>
               </GestureHandlerRootView>
             </NotificationsProvider>

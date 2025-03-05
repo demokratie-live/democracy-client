@@ -64,6 +64,10 @@ export const ParlamentDrawerItem: React.FC<ParlamentProps> = ({
     labelStyle: {
       color: "#fff",
     },
+    style: {
+      borderRadius: 0,
+      marginTop: 4,
+    },
   };
 
   const isFocused = (

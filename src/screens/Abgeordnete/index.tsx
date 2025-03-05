@@ -16,13 +16,13 @@ const Wrapper = styled.View`
 `;
 
 const Edit = styled.TouchableOpacity`
-  margin-right: ${({ theme }) => theme.spaces.small};
+  margin-right: 0;
 `;
 
 const EditText = styled.Text`
   color: #fff;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
 `;
 
 type RouteProps = RouteProp<SidebarParamList, "Abgeordnete">;

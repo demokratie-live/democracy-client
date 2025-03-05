@@ -1,9 +1,12 @@
-import * as React from 'react';
-import { Svg, SvgProps, Path } from 'react-native-svg';
+import * as React from "react";
+import { Svg, SvgProps, Path, G } from "react-native-svg";
 
 const SvgDownload = (props: SvgProps) => (
-  <Svg viewBox="0 0 50 50" width="1em" height="1em" {...props}>
-    <Path d="M25 3a2 2 0 100 4 2 2 0 000-4zm0 6a2 2 0 100 4 2 2 0 000-4zm-.219 5.969A2 2 0 0023 17v17.188l-3.594-3.594a2 2 0 00-1.437-.625 2 2 0 00-1.375 3.437l6.75 6.719a2 2 0 00.093.156l.157.125a2 2 0 003.093-.312l6.72-6.688a2 2 0 10-2.813-2.812L27 34.187V17a2 2 0 00-2.031-2.031 2 2 0 00-.188 0zM2 33v11.906C2 46.59 3.41 48 5.094 48h39.812C46.59 48 48 46.59 48 44.906V33h-4v11H6V33H2z" />
+  <Svg width="18px" height="18px" viewBox="0 0 18 18" {...props}>
+    <G fill={props.color} fillRule="nonzero" stroke="none" strokeWidth={1}>
+      <Path d="M17 8a1 1 0 00-1 1v6a1 1 0 01-1 1H3a1 1 0 01-1-1V3a1 1 0 011-1h6a1 1 0 100-2H3a3 3 0 00-3 3v12a3 3 0 003 3h12a3 3 0 003-3V9a1 1 0 00-1-1z" />
+      <Path d="M13 2h1.58L8.29 8.28a1 1 0 000 1.42 1 1 0 001.42 0L16 3.42V5a1 1 0 002 0V1a1 1 0 00-1-1h-4a1 1 0 000 2z" />
+    </G>
   </Svg>
 );
 

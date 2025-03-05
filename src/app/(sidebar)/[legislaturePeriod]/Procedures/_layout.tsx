@@ -73,7 +73,7 @@ export default function BundestagTabViewNavigation() {
                   width="8"
                   height="8"
                   viewBox="0 0 10 10"
-                  style={{ position: "absolute", top: 8, right: 7 }}
+                  style={{ position: "absolute", top: -2, right: -3 }}
                 >
                   <Circle cx="5" cy="5" r="5" fill="#d0021b" />
                 </Svg>

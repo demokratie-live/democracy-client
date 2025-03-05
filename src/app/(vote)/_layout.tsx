@@ -16,12 +16,16 @@ export type VoteStackParamList = {
 
 export default function VoteLayout() {
   const params = useGlobalSearchParams<VoteStackParamList["Voting"]>();
-  console.log("VoteLayout", params);
+
   return (
     <VerificationProvider>
       <Stack initialRouteName="Voting" screenOptions={{ headerShown: true }}>
-        <Stack.Screen name="Voting" initialParams={params} />
-        <Stack.Screen name="OutcomePush" />
+        <Stack.Screen
+          name="Voting"
+          initialParams={params}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen name="OutcomePush" options={{ headerShown: false }} />
       </Stack>
     </VerificationProvider>
   );
