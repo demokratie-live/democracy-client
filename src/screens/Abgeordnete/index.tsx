@@ -56,9 +56,10 @@ export const AbgeordneteScreen: React.FC<Props> = ({
           }
         >
           {editMode ? (
-            <EditText>Fertig</EditText>
+            <EditText style={{ marginRight: 10 }}>Fertig</EditText>
           ) : (
             <PlusIcon
+              style={{ marginRight: 10 }}
               width={17}
               height={17}
               fill={theme.colors.text.secondary}

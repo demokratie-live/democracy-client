@@ -1,9 +1,9 @@
-import React from 'react';
-import { SearchBar } from '@democracy-deutschland/ui';
-import styled from 'styled-components/native';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { searchHistoryState, searchTermState } from '../../api/state/search';
-import { useFinishSearchMutation } from '../../__generated__/graphql';
+import React from "react";
+import { SearchBar } from "@democracy-deutschland/ui";
+import styled from "styled-components/native";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { searchHistoryState, searchTermState } from "../../api/state/search";
+import { useFinishSearchMutation } from "../../__generated__/graphql";
 
 const Wrapper = styled.View`
   background-color: ${({ theme }) => theme.colors.background.secondary};
@@ -16,7 +16,9 @@ export const SearchHeader: React.FC = () => {
 
   const finishSearch = () => {
     const termClean = term.trim();
-    setHistory(prev => (termClean ? new Set([termClean, ...Array.from(prev)]) : prev));
+    setHistory((prev) =>
+      termClean ? new Set([termClean, ...Array.from(prev)]) : prev
+    );
     executeFinishSearch({
       variables: {
         term: termClean,
@@ -26,7 +28,7 @@ export const SearchHeader: React.FC = () => {
 
   // throttle to handle android endless changing error
   const onChangeText = (text: string) => {
-    if (typeof text === 'string') {
+    if (typeof text === "string") {
       setTerm(text);
     }
   };
@@ -34,10 +36,11 @@ export const SearchHeader: React.FC = () => {
     <Wrapper>
       <SearchBar
         textInput={{
-          placeholder: 'Suche',
+          placeholder: "Suche",
           onSubmitEditing: finishSearch,
           onChangeText: onChangeText,
           value: term,
+          autoFocus: true,
         }}
       />
       {/* <SearchBar2

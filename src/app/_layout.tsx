@@ -76,7 +76,7 @@ export default function Layout() {
                   />
                   <Stack.Screen
                     name="SyncVotes"
-                    options={{ title: "Stimen Synchronisieren" }}
+                    options={{ title: "Stimmen übertragen" }}
                   />
                   <Stack.Screen
                     name="Procedure"
