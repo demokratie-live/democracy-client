@@ -29,7 +29,7 @@ const Text = styled.Text`
 const DownloadButton = styled.TouchableOpacity`
   margin-left: auto;
   align-self: flex-end;
-  padding bottom: 2px
+  padding-bottom: 2px;
 `;
 
 type ScreenNavigationProps = CompositeNavigationProp<
