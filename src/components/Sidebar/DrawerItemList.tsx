@@ -78,7 +78,10 @@ export default function DrawerItemList({
             color: "#fff",
           }}
           inactiveBackgroundColor={drawerInactiveBackgroundColor}
-          style={{}}
+          style={{
+            borderRadius: 0,
+            marginTop: 4,
+          }}
           onPress={handleClick}
         />
       </View>
