@@ -3,7 +3,10 @@ import { PartyVote, VoteResult } from "../__generated__/graphql";
 
 interface Props {
   votedGovernment?: boolean | null;
-  voteResults?: Pick<VoteResult, "yes" | "abstination" | "no"> | null;
+  voteResults?: Pick<
+    VoteResult,
+    "yes" | "abstination" | "no" | "notVoted"
+  > | null;
   partyVotes?: Pick<PartyVote, "deviants" | "party">[] | null;
   selectedParty: string;
 }
@@ -18,10 +21,11 @@ export const pieChartPartyData = ({
     const sumVotes =
       (voteResults.yes || 0) +
       (voteResults.abstination || 0) +
-      (voteResults.no || 0);
+      (voteResults.no || 0) +
+      (voteResults.notVoted || 0);
     return partyVotes.reduce<Slice[]>((prev, party) => {
       if (party.party === selectedParty) {
-        const { abstination, no, yes } = party.deviants;
+        const { abstination, no, yes, notVoted } = party.deviants;
         return [
           {
             color: "#99C93E",
@@ -49,6 +53,15 @@ export const pieChartPartyData = ({
           {
             color: "#D43194",
             percent: (voteResults.no - no || 0) / sumVotes,
+          },
+          {
+            color: "#B1B3B4",
+            percent: (notVoted || 0) / sumVotes,
+            large: true,
+          },
+          {
+            color: "#B1B3B4",
+            percent: ((voteResults.notVoted ?? 0) - (notVoted ?? 0)) / sumVotes,
           },
         ];
       }
