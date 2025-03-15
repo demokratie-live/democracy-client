@@ -1,4 +1,4 @@
-export type ParlamentIdentifier = "BT-20" | "BT-19";
+export type ParlamentIdentifier = "BT-21" | "BT-20" | "BT-19";
 type Institutions = "Bundestag";
 
 interface ParlamentProceduresScreen {
@@ -32,6 +32,25 @@ type Parlaments = {
 };
 
 export const parlaments: Parlaments = {
+  "BT-21": {
+    identifier: "BT-21",
+    institution: "Bundestag",
+    mainScreen: "Sitzungswoche",
+    period: 21,
+    screens: {
+      procedures: {
+        inVote: true,
+        past: true,
+        top100: true,
+      },
+      wom: {
+        institution: true,
+        fractions: true,
+        deputies: true,
+      },
+      deputies: true,
+    },
+  },
   "BT-20": {
     identifier: "BT-20",
     institution: "Bundestag",
