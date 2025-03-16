@@ -1,15 +1,12 @@
 import React, { useEffect } from "react";
 import styled from "styled-components/native";
 import { SectionList } from "react-native";
-import { useNavigation } from "@react-navigation/core";
 import {
   SearchProceduresQuery,
   useFinishSearchMutation,
   useMostSearchedQuery,
   useSearchProceduresLazyQuery,
 } from "../../__generated__/graphql";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../../app/_layout";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { ParlamentIdentifier, parlaments } from "../../api/state/parlament";
 import { searchHistoryState, searchTermState } from "../../api/state/search";
