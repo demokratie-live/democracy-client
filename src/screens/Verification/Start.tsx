@@ -17,6 +17,7 @@ const ScrollView = styled.ScrollView.attrs(() => ({
   },
 }))`
   background-color: #fff;
+  flex: 1;
 `;
 
 const Text = styled.Text`

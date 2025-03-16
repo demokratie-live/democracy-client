@@ -17,6 +17,8 @@ import { AppLogo } from "../../components/AppLogo";
 import { VerificationStackParamList } from "../../app/(verification)/_layout";
 
 const Container = styled.View`
+  background-color: #fff;
+  flex: 1;
   justify-content: space-between;
   align-items: center;
   padding-horizontal: 20px;

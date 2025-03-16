@@ -8,7 +8,7 @@ import { useRouter } from "expo-router";
 
 const Container = styled.View`
   background-color: #fff;
-  flex-grow: 1;
+  flex: 1;
 `;
 
 type ScreenNavigationProp = NativeStackNavigationProp<

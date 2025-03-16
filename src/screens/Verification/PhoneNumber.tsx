@@ -22,6 +22,7 @@ const Container = styled(KeyboardAvoidingView).attrs(() => ({
   enabled: true,
   keyboardVerticalOffset: 100,
 }))`
+  background-color: #fff;
   flex: 1;
   flex-direction: column;
   justify-content: space-between;
