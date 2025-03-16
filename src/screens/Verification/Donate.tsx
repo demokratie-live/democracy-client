@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 
 import { Platform } from "react-native";
 import DeviceInfo from "react-native-device-info";
-import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 import { useInitialState } from "../../api/state/initialState";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
