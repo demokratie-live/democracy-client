@@ -1,0 +1,61 @@
+name: ✨ Code Quality Checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Set default permissions to read-only
+permissions:
+  contents: read
+
+env:
+  CI: true
+
+jobs:
+  lint:
+    name: 🧹 Code Linting
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🛎️ Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🌟 Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "yarn"
+
+      - name: 📦 Cache Yarn dependencies
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: 🧶 Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: 🔍 Run ESLint
+        run: yarn lint
+
+      - name: 🏆 Run TypeScript checks
+        run: yarn lint:ts
+
+  results:
+    name: 🎉 Lint Results
+    runs-on: ubuntu-latest
+    needs: lint
+    if: always()
+
+    steps:
+      - name: 🎯 Check Lint Status
+        if: needs.lint.result != 'success'
+        run: exit 1
+
+      - name: 🚀 All checks passed!
+        if: needs.lint.result == 'success'
+        run: echo "✅ All lint checks passed successfully! 🎊"
