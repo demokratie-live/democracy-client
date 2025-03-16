@@ -30,7 +30,7 @@ const facebook = "https://www.facebook.com/democracygermany/";
 const twitter = "https://twitter.com/democracy_de";
 const instagram = "https://www.instagram.com/democracy_app/";
 const youtube = "https://www.youtube.com/channel/UC2R4cGTq1LjFZ2DvDaVhDyg";
-const discord = "https://discord.gg/Pdu3ZEV";
+const discord = "https://discord.gg/ZWcFrEc";
 const website = "https://www.democracy-deutschland.de/";
 
 const Wrapper = styled.ScrollView.attrs({
