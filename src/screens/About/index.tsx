@@ -9,6 +9,7 @@ import Folding from "../../components/Folding";
 import SvgMail from "../../components/Icons/Mail";
 import SvgPhone from "../../components/Icons/Phone";
 import SvgPlanet from "../../components/Icons/Planet";
+import SvgDiscord from "../../components/Icons/Discord";
 import { MadeWithLove } from "../../components/MadeWithLove";
 import { Space } from "../../components/Space";
 import { linking } from "../../lib/linking";
@@ -20,6 +21,7 @@ const phoneNumber =
     : `tel:${"+4917647040213"}`;
 const email = `mailto:${"contact@democracy-deutschland.de"}`;
 const website = "https://www.democracy-deutschland.de/";
+const discord = "https://discord.gg/ZWcFrEc";
 
 const Wrapper = styled.ScrollView.attrs({
   scrollIndicatorInsets: { right: 1 }, // TODO do cleanfix when there is a correct solution (already closed but not solved without workaround) https://github.com/facebook/react-native/issues/26610
@@ -145,6 +147,9 @@ Für mehr Informationen:
         </IconWrapper>
         <IconWrapper onPress={linking(website)}>
           <SvgPlanet color="#000" width={30} height={30} />
+        </IconWrapper>
+        <IconWrapper onPress={linking(discord)}>
+          <SvgDiscord color="#000" width={30} height={30} />
         </IconWrapper>
       </ContactWrapper>
       <Space space={36} />
