@@ -33,9 +33,8 @@ Innerhalb unserer Software haben wir einen Mechanismus implementiert, der die gg
 Solltest Du Diskrepanzen zwischen dem Beschlusstext und unserer Ergebnisaufzeichnung feststellen, bitten wir Dich, diese an [prototyping@democracy-deutschland.de](mailto:prototyping@democracy-deutschland.de) zu reporten. `,
   },
   {
-    title: 'Wie finde ich Gesetze der vergangenen 19. Legislaturperiode ?',
-    text: `Sämtliche Vorgänge der vergangen 19. Legislaturperiode findest Du unter LP 19 Vorgänge im Side-Menu. 
-      Falls Dein Side-Menu die 19. Legislaturperiode nicht anzeigt, kannst Du sie in den App-Einstellungen unter Legislaturperioden aktivieren. `,
+    title: 'Wie finde ich Gesetze der vergangenen 19. und 20. Legislaturperiode?',
+    text: `Sämtliche Vorgänge der vergangenen 19. und 20. Legislaturperiode findest Du unter LP 19 und LP 20 Vorgänge im Side-Menu.`,
   },
   {
     title: 'Gebt ihr meine Abstimmungsdaten an Dritte weiter?',
