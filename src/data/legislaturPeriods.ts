@@ -5,6 +5,9 @@ export const legislaturPeriods = [
   {
     value: "20",
   },
+  {
+    value: "21",
+  },
 ] as const;
 
-export const currentLegislaturPeriod = legislaturPeriods[1].value;
+export const currentLegislaturPeriod = legislaturPeriods[2].value;
