@@ -1,0 +1,7 @@
+{
+  "tasks": {
+    "build": "yarn install && yarn codegen",
+    "test": "yarn install && yarn lint && yarn lint:ts && yarn test:e2e && yarn test:e2e:smoke && yarn test:e2e:verification",
+    "launch": "yarn install && yarn ios"
+  }
+}
