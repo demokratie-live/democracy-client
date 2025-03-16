@@ -20,6 +20,7 @@ import { useLegislaturePeriodStore } from "src/api/state/legislaturePeriod";
 
 const Container = styled.View`
   background-color: #fff;
+  flex: 1;
 `;
 
 export interface ChartData {

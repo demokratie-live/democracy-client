@@ -85,37 +85,31 @@ export const SmsDonate: React.FC = () => {
   };
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-      }}
-    >
-      <Container>
-        <AppLogo />
-        <TextHead>{"Deine Verifikation\nwar erfolgreich!"}</TextHead>
-        <TextCenter>
-          <TextCenterNormal>
-            {
-              "Das Versenden Deiner Bestätigungs-\nSMS hat das Projekt DEMOCRACY\nDeutschland "
-            }
-          </TextCenterNormal>
-          <TextCenterBold>7,2 Cent</TextCenterBold>
-          <TextCenterNormal>
-            {
-              " gekostet.\n\nJede Spende hilft dem DEMOCRACY\nDeutschland e.V. erfolgreich seine\nunabhängige, überparteiliche und\nallgemeinnützige demokratische\nArbeit voranzubringen."
-            }
-          </TextCenterNormal>
-        </TextCenter>
-        <ButtonContainer>
-          <Button onPress={onClose} textColor="red" text="Später" />
-          <Button
-            onPress={onDonate}
-            textColor="white"
-            backgroundColor="blue"
-            text="SPENDEN"
-          />
-        </ButtonContainer>
-      </Container>
-    </SafeAreaView>
+    <Container>
+      <AppLogo />
+      <TextHead>{"Deine Verifikation\nwar erfolgreich!"}</TextHead>
+      <TextCenter>
+        <TextCenterNormal>
+          {
+            "Das Versenden Deiner Bestätigungs-\nSMS hat das Projekt DEMOCRACY\nDeutschland "
+          }
+        </TextCenterNormal>
+        <TextCenterBold>7,2 Cent</TextCenterBold>
+        <TextCenterNormal>
+          {
+            " gekostet.\n\nJede Spende hilft dem DEMOCRACY\nDeutschland e.V. erfolgreich seine\nunabhängige, überparteiliche und\nallgemeinnützige demokratische\nArbeit voranzubringen."
+          }
+        </TextCenterNormal>
+      </TextCenter>
+      <ButtonContainer>
+        <Button onPress={onClose} textColor="red" text="Später" />
+        <Button
+          onPress={onDonate}
+          textColor="white"
+          backgroundColor="blue"
+          text="SPENDEN"
+        />
+      </ButtonContainer>
+    </Container>
   );
 };
