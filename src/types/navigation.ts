@@ -17,7 +17,7 @@ export type AppRoutes = {
 // Make types available for expo-router
 declare global {
   namespace ReactNavigation {
-    interface TypedRoutes extends AppRoutes {}
+    type TypedRoutes = AppRoutes;
   }
 }
 

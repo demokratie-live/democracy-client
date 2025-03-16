@@ -5,7 +5,6 @@ import SvgWahlOMeter from "../../components/Icons/WahlOMeter";
 import SvgSettings from "../../components/Icons/Settings";
 import SvgFaqAndSupport from "../../components/Icons/FaqAndSupport";
 import SvgAbout from "../../components/Icons/About";
-import { useDevModeStore } from "../../api/state/dev";
 import { Drawer } from "expo-router/drawer";
 import { Sidebar } from "src/components/Sidebar/Sidebar";
 import { lightTheme } from "@democracy-deutschland/ui";
@@ -22,8 +21,6 @@ export type SidebarParamList = {
 };
 
 const SidebarNavigation = () => {
-  const { devMode } = useDevModeStore();
-
   return (
     <Drawer
       // initialRouteName="Bundestag"
