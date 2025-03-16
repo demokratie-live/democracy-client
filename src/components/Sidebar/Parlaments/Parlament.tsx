@@ -1,7 +1,7 @@
 import { ParlamentIdentifier, parlaments } from "src/api/state/parlament";
 import * as S from "./Parlaments.styled";
 import { CollapseIcon } from "src/screens/DeputyProfile/Foldable.styled";
-import { router } from "expo-router";
+import { router, useSegments } from "expo-router";
 import { DrawerItem } from "@react-navigation/drawer";
 import SvgGovernment from "src/components/Icons/Government";
 import SvgWahlOMeter from "src/components/Icons/WahlOMeter";
@@ -12,14 +12,13 @@ import { useLegislaturePeriodStore } from "src/api/state/legislaturePeriod";
 interface ParlamentProps {
   parlamentKey: string;
   parlaments: typeof parlaments;
-  currentTap?: string;
 }
 
 export const ParlamentDrawerItem: React.FC<ParlamentProps> = ({
   parlamentKey,
   parlaments,
-  currentTap,
 }) => {
+  const segments = useSegments();
   const { legislaturePeriod, setLegislaturePeriod } =
     useLegislaturePeriodStore();
   const [isOpen, setIsOpen] = useState(
@@ -72,8 +71,13 @@ export const ParlamentDrawerItem: React.FC<ParlamentProps> = ({
 
   const isFocused = (
     name: string,
-    { parlamentIdentifier }: { parlamentIdentifier: ParlamentIdentifier }
+    {
+      parlamentIdentifier,
+      currentTap,
+    }: { parlamentIdentifier: ParlamentIdentifier; currentTap?: string }
   ) => {
+    console.log(`Checking focus for ${name}, currentTap is ${currentTap}`);
+
     const focusedName = currentTap;
     return (
       name === focusedName && parlamentIdentifier === `BT-${legislaturePeriod}`
@@ -104,6 +108,7 @@ export const ParlamentDrawerItem: React.FC<ParlamentProps> = ({
             )}
             focused={isFocused("Procedures", {
               parlamentIdentifier: parl.identifier,
+              currentTap: segments.at(-2),
             })}
             {...drawerItemProps}
           />
@@ -118,6 +123,7 @@ export const ParlamentDrawerItem: React.FC<ParlamentProps> = ({
             )}
             focused={isFocused("WahlOMeter", {
               parlamentIdentifier: parl.identifier,
+              currentTap: segments.at(-2),
             })}
             {...drawerItemProps}
           />
@@ -132,6 +138,7 @@ export const ParlamentDrawerItem: React.FC<ParlamentProps> = ({
             )}
             focused={isFocused("Deputies", {
               parlamentIdentifier: parl.identifier,
+              currentTap: segments.at(-1),
             })}
             {...drawerItemProps}
           />

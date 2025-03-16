@@ -6,6 +6,7 @@ export default function Deputies() {
   const { legislaturePeriod } = useLegislaturePeriodStore();
   return (
     <AbgeordneteScreen
+      key={legislaturePeriod}
       parlamentIdentifier={`BT-${legislaturePeriod}` as ParlamentIdentifier}
     />
   );
