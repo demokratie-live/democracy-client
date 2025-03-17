@@ -3,7 +3,15 @@ default_platform(:android)
 # Define project path with fallback to relative path
 project_path = ENV["ANDROID_PROJECT_PATH"] || "../.."
 
-internalVersionCode = google_play_track_version_codes(package_name: ENV["PACKAGE_NAME"], track: 'internal')
+validate_play_store_json_key(
+  json_key: File.join(Dir.pwd, "..", "key.json")
+)
+
+internalVersionCode = google_play_track_version_codes(
+  package_name: ENV["PACKAGE_NAME"], 
+  track: 'internal',
+  json_key: File.join(Dir.pwd, "..", "key.json")
+)
 version_code = [internalVersionCode].max[0].to_i + 1
 
 store_password = prompt(text: "Signing Store Password: ", secure_text: true, ci_input: ENV['ANDROID_PASS'])
