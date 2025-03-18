@@ -28,6 +28,21 @@ const getAppIcon = () => {
   return "./assets/icons/icon.png";
 };
 
+const getGraphqlUrl = () => {
+  if (APP_VARIANT === "internal") {
+    return process.env.GRAPHQL_URL || "https://internal.api.democracy-app.de";
+  }
+  return process.env.GRAPHQL_URL || "https://api.democracy-app.de";
+};
+
+const getAssociatedDomains = () => {
+  const domains = process.env.ASSOCIATED_DOMAINS;
+  if (domains) {
+    return domains.split(",");
+  }
+  return ["internal.democracy-app.de"];
+};
+
 export default {
   expo: {
     name: getAppName(),
@@ -100,6 +115,11 @@ export default {
     ],
     experiments: {
       typedRoutes: true,
+    },
+    extra: {
+      graphqlUrl: getGraphqlUrl(),
+      appVariant: APP_VARIANT || "internal",
+      associatedDomains: getAssociatedDomains(),
     },
   },
 };

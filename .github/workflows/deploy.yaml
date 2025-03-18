@@ -2,10 +2,20 @@ name: 🚀 Deploy
 
 on:
   workflow_dispatch:
+    inputs:
+      APP_VARIANT:
+        description: "App variant to deploy"
+        required: true
+        default: "internal"
+        type: choice
+        options:
+          - internal
+          - production
 
 env:
-  APP_VARIANT: internal
   CI: true
+  APP_VARIANT: ${{ github.event.inputs.APP_VARIANT }}
+  GRAPHQL_URL: ${{ github.event.inputs.APP_VARIANT == 'production' && 'https://api.democracy-app.de' || 'https://internal.api.democracy-app.de' }}
 
 jobs:
   build:
@@ -60,7 +70,7 @@ jobs:
       - name: iOS Fastlane
         if: ${{ matrix.platform == 'ios' }}
         run: |
-          fastlane ios deploy
+          fastlane ios deploy --env ${{ github.event.inputs.APP_VARIANT }}
         working-directory: ${{ github.workspace }}/deploy/ios
         env:
           MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
@@ -80,7 +90,7 @@ jobs:
       - name: Android Fastlane
         if: ${{ matrix.platform == 'android' }}
         run: |
-          bundle exec fastlane android internal --env internal
+          bundle exec fastlane android internal --env ${{ github.event.inputs.APP_VARIANT }}
         working-directory: ${{ github.workspace }}/deploy/android
         env:
           MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}

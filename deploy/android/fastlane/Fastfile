@@ -7,8 +7,13 @@ validate_play_store_json_key(
   json_key: File.join(Dir.pwd, "..", "key.json")
 )
 
+# Determine package name based on APP_VARIANT
+package_name = ENV["APP_VARIANT"] == "production" ? 
+  "de.democracydeutschland.app" : 
+  "de.democracydeutschland.app.internal"
+
 internalVersionCode = google_play_track_version_codes(
-  package_name: ENV["PACKAGE_NAME"], 
+  package_name: package_name, 
   track: 'internal',
   json_key: File.join(Dir.pwd, "..", "key.json")
 )
@@ -61,7 +66,7 @@ platform :android do
     build
 
     supply(
-     package_name: ENV["PACKAGE_NAME"],
+     package_name: package_name,
      track: 'internal',
      track_promote_to: 'internal',
      skip_upload_metadata: true,

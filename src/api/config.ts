@@ -1,8 +1,22 @@
-import Config from 'react-native-config';
+import Constants from "expo-constants";
 
-const GRAPHQL_URL = Config.GRAPHQL_URL ?? 'https://api.democracy-app.de';
+const extra = Constants.expoConfig?.extra || {};
+const APP_VARIANT = extra.appVariant || "internal";
+const GRAPHQL_URL =
+  extra.graphqlUrl ||
+  (APP_VARIANT === "internal"
+    ? "https://internal.api.democracy-app.de"
+    : "https://api.democracy-app.de");
+
 const GRAPHQL_SERVER_LOCAL = false;
-const ANDROID_SERVER = '192.168.0.166';
-const ASSOCIATED_DOMAINS = Config.ASSOCIATED_DOMAINS?.split(',') ?? ['internal.democracy-app.de'];
+const ANDROID_SERVER = "192.168.0.166";
+const ASSOCIATED_DOMAINS = extra.associatedDomains || [
+  "internal.democracy-app.de",
+];
 
-export { GRAPHQL_URL, GRAPHQL_SERVER_LOCAL, ANDROID_SERVER, ASSOCIATED_DOMAINS };
+export {
+  GRAPHQL_URL,
+  GRAPHQL_SERVER_LOCAL,
+  ANDROID_SERVER,
+  ASSOCIATED_DOMAINS,
+};
