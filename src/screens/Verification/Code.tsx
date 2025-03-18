@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components/native";
-import { Keyboard, Alert, Dimensions, ActivityIndicator } from "react-native";
+import { Keyboard, Alert, Dimensions, ActivityIndicator, KeyboardAvoidingView } from "react-native";
 import { sha256 } from "react-native-sha256";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Description from "./Components/Description";
@@ -16,7 +16,10 @@ import {
 import { AppLogo } from "../../components/AppLogo";
 import { VerificationStackParamList } from "../../app/(verification)/_layout";
 
-const Container = styled.View`
+const Container = styled(KeyboardAvoidingView).attrs(() => ({
+  behavior: "padding",
+  keyboardVerticalOffset: 100,
+}))`
   background-color: #fff;
   flex: 1;
   justify-content: space-between;
