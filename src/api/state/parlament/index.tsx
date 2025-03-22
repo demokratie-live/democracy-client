@@ -58,7 +58,6 @@ export const parlaments: Parlaments = {
     period: 20,
     screens: {
       procedures: {
-        inVote: true,
         past: true,
         top100: true,
       },
