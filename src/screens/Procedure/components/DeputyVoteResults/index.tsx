@@ -7,8 +7,7 @@ import {
   useDeputyVoteResultsQuery,
 } from "../../../../__generated__/graphql";
 import { useInitialState } from "../../../../api/state/initialState";
-import { useRecoilValue } from "recoil";
-import { favorizedDeputiesState } from "../../../../api/state/favorizedDeputies";
+import { useFavorizedDeputiesStore } from "../../../../api/state/favorizedDeputies";
 import Folding from "../../../../components/Folding";
 import { DeputyVoteResultPlaceholder } from "./DeputyPlaceholder";
 import { ParlamentIdentifier } from "../../../../api/state/parlament";
@@ -51,8 +50,8 @@ export const DeputyVoteResultSlider: React.FC<Props> = ({
   const { isVerified } = useInitialState();
   const { legislaturePeriod } = useLegislaturePeriodStore();
   const parlamentIdentifier = `BT-${legislaturePeriod}` as ParlamentIdentifier;
-  const favorizedDeputies = useRecoilValue(
-    favorizedDeputiesState(parlamentIdentifier)
+  const favorizedDeputies = useFavorizedDeputiesStore((state) =>
+    state.getDeputies(parlamentIdentifier)
   );
 
   const { data } = useDeputyVoteResultsQuery({

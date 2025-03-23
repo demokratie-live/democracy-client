@@ -4,11 +4,11 @@ import { RouteProp, useNavigation, useRoute } from "@react-navigation/core";
 import { SearchBar, PlusIcon } from "@democracy-deutschland/ui";
 import { DeputyListController } from "./DeputyListController";
 import styled from "styled-components/native";
-import { useRecoilValue } from "recoil";
-import { favorizedDeputiesState } from "../../api/state/favorizedDeputies";
+import { useFavorizedDeputiesStore } from "../../api/state/favorizedDeputies";
 import { theme } from "../../styles/theme";
 import { ParlamentIdentifier } from "../../api/state/parlament";
 import { SidebarParamList } from "../../app/(sidebar)/_layout";
+import { useLegislaturePeriodStore } from "src/api/state/legislaturePeriod";
 
 const Wrapper = styled.View`
   background-color: ${({ theme }) => theme.colors.background.primary};
@@ -40,9 +40,12 @@ export const AbgeordneteScreen: React.FC<Props> = ({
   const [editMode, setEditMode] = useState<boolean>(!!initialEditMode);
   const [searchTerm, setSearchTerm] = React.useState("");
   const navigation = useNavigation();
+  const { legislaturePeriod } = useLegislaturePeriodStore();
+  const actualParlamentIdentifier =
+    parlamentIdentifier || (`BT-${legislaturePeriod}` as ParlamentIdentifier);
 
-  const favorizedDeputies = useRecoilValue(
-    favorizedDeputiesState(parlamentIdentifier)
+  const favorizedDeputies = useFavorizedDeputiesStore((state) =>
+    state.getDeputies(actualParlamentIdentifier)
   );
 
   React.useLayoutEffect(() => {
@@ -87,6 +90,7 @@ export const AbgeordneteScreen: React.FC<Props> = ({
         editMode={editMode || !!editMode}
         searchTerm={searchTerm}
         favorizedDeputies={favorizedDeputies}
+        parlamentIdentifier={actualParlamentIdentifier}
       />
     </Wrapper>
   );

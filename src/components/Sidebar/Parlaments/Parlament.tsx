@@ -40,17 +40,12 @@ export const ParlamentDrawerItem: React.FC<ParlamentProps> = ({
       setLegislaturePeriod(String(parl.period));
       switch (route.name) {
         case "Procedures":
-          console.log(
-            "router.push",
-            `/(sidebar)/${parl.period}/${route.name}/${parl.mainScreen}`
-          );
           router.push(
             `/(sidebar)/${parl.period}/${route.name}/${parl.mainScreen}`
           );
           break;
         case "WahlOMeter":
         case "Deputies":
-          console.log("router.push", `/(sidebar)/${parl.period}/${route.name}`);
           router.push(`/(sidebar)/${parl.period}/${route.name}`);
           break;
       }
@@ -76,8 +71,6 @@ export const ParlamentDrawerItem: React.FC<ParlamentProps> = ({
       currentTap,
     }: { parlamentIdentifier: ParlamentIdentifier; currentTap?: string }
   ) => {
-    console.log(`Checking focus for ${name}, currentTap is ${currentTap}`);
-
     const focusedName = currentTap;
     return (
       name === focusedName && parlamentIdentifier === `BT-${legislaturePeriod}`
