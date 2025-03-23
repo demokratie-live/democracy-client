@@ -15,7 +15,6 @@ import {
 } from "../../__generated__/graphql";
 import { SidebarParamList } from "../../app/(sidebar)/_layout";
 import { useRouter } from "expo-router";
-import { useLegislaturePeriodStore } from "src/api/state/legislaturePeriod";
 
 const Spinner = styled(ActivityIndicator)``;
 

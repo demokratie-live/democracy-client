@@ -12,6 +12,8 @@ interface FavorizedDeputiesStore {
   setDeputies: (parlamentId: ParlamentIdentifier, deputies: string[]) => void;
   addDeputy: (parlamentId: ParlamentIdentifier, deputyId: string) => void;
   removeDeputy: (parlamentId: ParlamentIdentifier, deputyId: string) => void;
+  recoilMigrationCompleted: boolean;
+  setRecoilMigrationCompleted: (value: boolean) => void;
 }
 
 // Initialize with default values for known parlaments
@@ -69,15 +71,37 @@ export const useFavorizedDeputiesStore = create<FavorizedDeputiesStore>()(
           };
         });
       },
+      recoilMigrationCompleted: false,
+      setRecoilMigrationCompleted: (value) => {
+        set(() => ({
+          recoilMigrationCompleted: value,
+        }));
+      },
     }),
     {
       name: STORAGE_KEY,
       storage: createJSONStorage(() => AsyncStorage),
       // Initialize storage with AsyncStorage values
-      onRehydrateStorage: () => {
-        return (state) => {
-          if (!state)
-            console.log("Failed to rehydrate favorized deputies state");
+      onRehydrateStorage(state) {
+        return async (newState, error) => {
+          if (!newState?.recoilMigrationCompleted) {
+            const recoilDeputies = await AsyncStorage.getItem(STORAGE_KEY);
+            if (!recoilDeputies) {
+              state?.setRecoilMigrationCompleted(true);
+              return;
+            }
+            const parsedRecoilDeputies = JSON.parse(recoilDeputies) as string[];
+            if (!Array.isArray(parsedRecoilDeputies)) {
+              state?.setRecoilMigrationCompleted(true);
+              return;
+            }
+            state.setDeputies("BT-19", parsedRecoilDeputies);
+            state.setDeputies("BT-20", parsedRecoilDeputies);
+            state?.setRecoilMigrationCompleted(true);
+          }
+          if (error) {
+            console.error("Rehydration error:", error);
+          }
         };
       },
     }
