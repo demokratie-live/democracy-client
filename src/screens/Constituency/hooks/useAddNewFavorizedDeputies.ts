@@ -1,6 +1,5 @@
-import { useSetRecoilState } from "recoil";
 import { client } from "../../../api/apollo";
-import { favorizedDeputiesState } from "../../../api/state/favorizedDeputies";
+import { useFavorizedDeputiesStore } from "../../../api/state/favorizedDeputies";
 import { ParlamentIdentifier, parlaments } from "../../../api/state/parlament";
 import {
   GetDeputiesForNewConstituencyDocument,
@@ -12,9 +11,7 @@ import { useLegislaturePeriodStore } from "src/api/state/legislaturePeriod";
 export const useAddNewFavorizedDeputies = () => {
   const { legislaturePeriod } = useLegislaturePeriodStore();
   const parlamentIdentifier = `BT-${legislaturePeriod}` as ParlamentIdentifier;
-  const setFavorizedDeputy = useSetRecoilState(
-    favorizedDeputiesState(parlamentIdentifier)
-  );
+  const { setDeputies, getDeputies } = useFavorizedDeputiesStore();
 
   const parlament = parlaments[parlamentIdentifier];
 
@@ -32,7 +29,10 @@ export const useAddNewFavorizedDeputies = () => {
       })
       .then(({ data }) => {
         const deputyIds = data.deputies.data.map(({ webId }) => webId);
-        setFavorizedDeputy((ids) => [...new Set([...ids, ...deputyIds])]);
+        const currentDeputies = getDeputies(parlamentIdentifier);
+        setDeputies(parlamentIdentifier, [
+          ...new Set([...currentDeputies, ...deputyIds]),
+        ]);
       });
   };
   return setNewFavorizedDeputies;

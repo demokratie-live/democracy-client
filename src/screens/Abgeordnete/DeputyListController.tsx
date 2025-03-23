@@ -6,9 +6,8 @@ import { DrawerNavigationProp } from "@react-navigation/drawer";
 import unionBy from "lodash.unionby";
 import React, { useEffect } from "react";
 import { ActivityIndicator } from "react-native";
-import { useSetRecoilState } from "recoil";
 import styled from "styled-components/native";
-import { favorizedDeputiesState } from "../../api/state/favorizedDeputies";
+import { useFavorizedDeputiesStore } from "../../api/state/favorizedDeputies";
 import { ParlamentIdentifier, parlaments } from "../../api/state/parlament";
 import {
   useDeputiesQuery,
@@ -24,6 +23,7 @@ interface DeputyListControllerProps {
   editMode: boolean;
   searchTerm?: string;
   favorizedDeputies: string[];
+  parlamentIdentifier: ParlamentIdentifier;
 }
 
 export type DeputyListNavigationProps = DrawerNavigationProp<
@@ -35,15 +35,12 @@ export const DeputyListController: React.FC<DeputyListControllerProps> = ({
   editMode,
   searchTerm,
   favorizedDeputies,
+  parlamentIdentifier,
   ...props
 }) => {
   const router = useRouter();
-  const { legislaturePeriod } = useLegislaturePeriodStore();
-  const parlamentIdentifier = `BT-${legislaturePeriod}` as ParlamentIdentifier;
   const parlament = parlaments[parlamentIdentifier];
-  const setFavorizedDeputy = useSetRecoilState(
-    favorizedDeputiesState(parlamentIdentifier)
-  );
+  const { addDeputy, removeDeputy } = useFavorizedDeputiesStore();
   const { data, fetchMore, loading, refetch } = useDeputiesQuery({
     variables: {
       limit: 10,
@@ -106,15 +103,11 @@ export const DeputyListController: React.FC<DeputyListControllerProps> = ({
   unionBy(deputies, (deputy) => deputy.id);
 
   const removeFavorizedDeputy = (id: string) => {
-    setFavorizedDeputy((ids) => {
-      return ids.filter((idx) => idx !== id);
-    });
+    removeDeputy(parlamentIdentifier, id);
   };
 
   const addFavorizedDeputy = (id: string) => {
-    setFavorizedDeputy((ids) => {
-      return [...ids, id];
-    });
+    addDeputy(parlamentIdentifier, id);
   };
 
   const deputiesData = deputies.map((d) => ({
