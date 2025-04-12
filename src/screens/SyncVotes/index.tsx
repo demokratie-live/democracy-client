@@ -82,7 +82,7 @@ export const SyncVotesScreen = () => {
     <Container>
       {!showTextField ? (
         <>
-          <Intro>So überträgst Du Deine lokalen Stimmen auf ein andres Gerät:</Intro>
+          <Intro>So überträgst Du Deine lokalen Stimmen auf ein anderes Gerät:</Intro>
           <Headline>AUF DEINEM BISHERIGEN GERÄT</Headline>
           <Text>
             {
@@ -104,14 +104,14 @@ export const SyncVotesScreen = () => {
             {'3. Tippe auf Menu > Einstellungen > Stimmen übertragen und wähle "STIMMEN EINFÜGEN"'}
           </Text>
           <Text>
-            {'4. Füge den gesamten Text {"283063":… in das Dialogfeld ein und wähle "SPEICHERN"'}
+            {'4. Füge den gesamten Text {"283063":…} in das Dialogfeld ein und wähle "SPEICHERN"'}
           </Text>
         </>
       ) : null}
 
       {showTextField ? (
         <>
-          <Headline>Stimmen Einfügen</Headline>
+          <Headline>Stimmen einfügen</Headline>
           <Text>
             {'Füge den gesamten Text {{"283063":…} in das Dialogfeld ein und wähle "SPEICHERN"'}
           </Text>
@@ -133,7 +133,7 @@ export const SyncVotesScreen = () => {
         </>
       ) : (
         <Button variant="primary" onPress={() => setShowTextField(v => !v)}>
-          Stimmen Einfügen
+          Stimmen einfügen
         </Button>
       )}
     </Container>
