@@ -62,7 +62,7 @@ export const DeputyVoteResultSlider: React.FC<Props> = ({
   });
   const { width } = useWindowDimensions();
 
-  // FIXME Sollte nur im falle von Fehlerhaften Daten vom server ausgelöst werden.
+  // FIXME Sollte nur im Falle von fehlerhaften Daten vom Server ausgelöst werden.
   // https://github.com/demokratie-live/democracy-client/issues/714
   if (voteResults.partyVotes.length === 0) {
     return null;

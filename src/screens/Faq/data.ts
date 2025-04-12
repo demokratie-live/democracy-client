@@ -8,7 +8,7 @@ export const faqData: Faq[] = [
     title: 'Was ist der Wahl-O-Meter?',
     text: `Der Wahl-O-Meter ist ein Analysetool zur persönlichen Repräsentationsmessung innerhalb der DEMOCRACY App.
 
-Im Unterschied zum zukunftsorientierten Wahl-O-Mat von der Bundeszentrale für politische Bildung, der in Vorbereitung auf eine anstehende Wahl die eigenen Stellungnahmen zu vordefinierten Fragen mit den Wahlversprechen der verschiedenen Parteien abgleicht, vergleicht der Wahl-O-Meter retrospektiv das tatsächliche Abstimmungsverhalten der Parteien und Politiker in den Parlamenten mit Deinen Präferenzen. In Anlehnung an die bekannte Bezeichnung des Wahl-O-Mats ("Wahl-Automat"), werden vom Wahl-O-Meter (meter = messen) also die tatsächlichen Handlungen der Poltiker in den Fokus genommen, sodass Du Deine du deine Wahlentscheidung nicht nur auf Wahlversprechen, sondern auf das gesicherte Handeln von Politikern und Parteien stützen kannst.
+Im Unterschied zum zukunftsorientierten Wahl-O-Mat von der Bundeszentrale für politische Bildung, der in Vorbereitung auf eine anstehende Wahl die eigenen Stellungnahmen zu vordefinierten Fragen mit den Wahlversprechen der verschiedenen Parteien abgleicht, vergleicht der Wahl-O-Meter retrospektiv das tatsächliche Abstimmungsverhalten der Parteien und Politiker in den Parlamenten mit Deinen Präferenzen. In Anlehnung an die bekannte Bezeichnung des Wahl-O-Mats ("Wahl-Automat"), werden vom Wahl-O-Meter (meter = messen) also die tatsächlichen Handlungen der Politiker in den Fokus genommen, sodass Du Deine du deine Wahlentscheidung nicht nur auf Wahlversprechen, sondern auf das gesicherte Handeln von Politikern und Parteien stützen kannst.
 
 Mathematisch bildet der Wahl-O-Meter dafür die Mittelwerte der eigenen Zustimmungen, Ablehnungen und neutralen Antworten innerhalb der DEMOCRACY App mit den Zustimmungen, Ablehnungen und neutralen Antworten jeder Partei / jedes Abgeordneten und sortiert diese Mittelwerte absteigend. 
 
@@ -45,7 +45,7 @@ Unserer Meinung nach sind Nutzerdaten gerade keine handelbaren Wirtschaftsgüter
   {
     title: 'Wie stellt ihr meine Stimmanonymität sicher?',
     text: `Wahlgeheimnis bedeutet, dass während und nach einer Wahl keine Information bekannt werden darf, die darauf schließen lässt, was ein Wähler gewählt hat. Im Konkreten geht es also um die Trennung von Person und Stimme in Urnenbuch und Auszählung. Die Aufrechterhaltung dieses Abstimmungs- bzw. Wahlgeheimnis ist zentraler Bestandteil der DNA der DEMOCRACY App.
-Unser Konzept sieht daher vor, jede Deiner Abstimmungsentscheidungen (Ja, Enthaltung, Nein als Stimme) von Deinen personenbezogenen Identifikationsdaten ( – dem Urnenbuch) zu trennen. DEMOCRACY speichert insofern lediglich eine Quittung Deiner Abstimmungsentscheidung lokal auf Deinem Handy, an den Server werden ausschließlich anonymisierte und nicht kommerziell nutzbare Daten übersendet. 
+Unser Konzept sieht daher vor, jede Deiner Abstimmungsentscheidungen (Ja, Enthaltung, Nein als Stimme) von Deinen personenbezogenen Identifikationsdaten (– dem Urnenbuch) zu trennen. DEMOCRACY speichert insofern lediglich eine Quittung Deiner Abstimmungsentscheidung lokal auf Deinem Handy, an den Server werden ausschließlich anonymisierte und nicht kommerziell nutzbare Daten übersendet. 
 
 Das vollständige Konzept zur Stimmanonymisierung kannst du hier nachlesen:
 [https://github.com/demokratie-live/democracy-docu/wiki/Stimmanonymität](https://github.com/demokratie-live/democracy-docu/wiki/Stimmanonymität)`,
