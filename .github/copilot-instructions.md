@@ -1,6 +1,6 @@
 # DEMOCRACY Client - GitHub Copilot Instructions
 
-Always reference these instructions first and fallback to search or bash commands only when you encounter unexpected information that does not match the info here.
+**ALWAYS FOLLOW THESE INSTRUCTIONS FIRST.** Only use additional search and context gathering if the information here is incomplete or found to be in error.
 
 ## Project Overview
 
