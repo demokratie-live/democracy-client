@@ -78,6 +78,86 @@ yarn doctor
 
 **CRITICAL**: Always run both `yarn lint` and `yarn lint:ts` before committing. The CI pipeline (`.github/workflows/lint.yaml`) will fail if these don't pass.
 
+## Technical Debt Reduction & Best Practices
+
+**PRIORITY**: When making changes, always prioritize reducing technical debt and implementing software design best practices. This is essential for long-term maintainability and code quality.
+
+### Code Quality Standards
+
+**TypeScript Best Practices**:
+- Maintain strict TypeScript configuration (`"strict": true` in tsconfig.json)
+- Use proper type definitions instead of `any`
+- Leverage type inference where possible, explicit types where needed
+- Keep auto-generated types in `src/__generated__/` up-to-date with `yarn codegen`
+
+**Component Architecture**:
+- **Prefer composition over inheritance** for React components
+- **Single Responsibility Principle**: Each component should have one clear purpose
+- **Extract reusable logic** into custom hooks in `src/hooks/`
+- **Use TypeScript interfaces** for component props and data structures
+
+### Migration Priorities (Technical Debt Reduction)
+
+**ONGOING MIGRATION - Expo Router Implementation**:
+- **PREFER**: New screens in `src/app/` directory (Expo Router)
+- **AVOID**: Adding new screens to `src/screens/` (legacy structure)
+- **WHEN MODIFYING**: Consider migrating legacy screens from `src/screens/` to `src/app/`
+- **FILE-BASED ROUTING**: Follow Expo Router conventions for new navigation structure
+
+**State Management Consolidation**:
+- **PRIORITY**: Reduce complexity by consolidating state management patterns
+- **PREFER**: Apollo Client cache for server state, Zustand for client state
+- **AVOID**: Adding new Recoil atoms unless absolutely necessary
+- **WHEN MODIFYING**: Consider migrating Recoil state to Zustand or Apollo cache
+
+### Architecture Guidelines
+
+**Component Organization**:
+```
+src/components/
+├── Button/           # Feature-specific components
+├── Icons/           # Reusable UI components  
+├── ListItem/        # Complex components with sub-components
+└── [ComponentName]/  # One directory per major component
+```
+
+**API Layer Structure**:
+```
+src/api/
+├── apollo/          # Apollo Client configuration
+├── hooks/           # Custom API hooks (useQuery, useMutation wrappers)
+└── state/           # Client-side state management
+```
+
+**Best Practices for New Code**:
+1. **GraphQL Integration**: Use typed hooks from `src/__generated__/graphql.tsx`
+2. **Error Handling**: Implement proper error boundaries and loading states
+3. **Performance**: Use React.memo, useMemo, useCallback for optimization
+4. **Accessibility**: Include proper accessibility props (accessibilityLabel, etc.)
+5. **Testing**: Write E2E tests for new user flows in `.maestro/flows/`
+
+### Code Review Checklist
+
+When implementing changes, ensure:
+- [ ] TypeScript strict mode compliance (no `any` types)
+- [ ] Proper error handling for async operations
+- [ ] Consistent naming conventions (camelCase for variables, PascalCase for components)
+- [ ] GraphQL queries use generated types from codegen
+- [ ] New screens use Expo Router (`src/app/`) instead of legacy structure
+- [ ] State management follows established patterns (Apollo for server, Zustand for client)
+- [ ] Components are properly typed with TypeScript interfaces
+- [ ] Accessibility considerations are implemented
+- [ ] Performance optimizations are applied where appropriate
+
+### Legacy Code Improvement
+
+**When modifying existing code**:
+1. **Upgrade patterns**: Convert class components to functional components with hooks
+2. **Improve types**: Replace `any` types with proper TypeScript definitions
+3. **Extract logic**: Move business logic from components to custom hooks
+4. **Update imports**: Use proper module resolution with TypeScript paths
+5. **Migrate routing**: Convert React Navigation screens to Expo Router when possible
+
 ## Testing
 
 ### End-to-End Testing with Maestro
