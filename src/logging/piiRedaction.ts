@@ -33,6 +33,24 @@ const ALLOWED_ATTRIBUTES = new Set([
   'method',
   'url_path', // Only path, not full URL
   'user_agent_platform',
+  // HTTP Request logging specific attributes
+  'operation_name',
+  'operation_type',
+  'variables_count',
+  'has_variables',
+  'has_data',
+  'has_errors',
+  'error_count',
+  'error_index',
+  'error_message',
+  'error_path',
+  'error_extensions',
+  'error_name',
+  'network_error',
+  'status_code',
+  'request_id',
+  'cache_hit',
+  'response_size',
 ]);
 
 /**

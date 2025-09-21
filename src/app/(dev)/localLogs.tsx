@@ -134,7 +134,14 @@ const EmptyText = styled.Text`
 `;
 
 export default function LocalLogsScreen() {
-  const { isEnabled, isLoading, setEnabled, loadInitialState } = useLoggingStore();
+  const { 
+    isEnabled, 
+    isRequestLoggingEnabled,
+    isLoading, 
+    setEnabled, 
+    setRequestLoggingEnabled,
+    loadInitialState 
+  } = useLoggingStore();
   const [logs, setLogs] = useState<LogEntry[]>([]);
   const [refreshing, setRefreshing] = useState(false);
 
@@ -190,6 +197,10 @@ export default function LocalLogsScreen() {
       }
     }
   }, [isEnabled, logService, setEnabled]);
+
+  const toggleRequestLogging = useCallback(async () => {
+    await setRequestLoggingEnabled(!isRequestLoggingEnabled);
+  }, [isRequestLoggingEnabled, setRequestLoggingEnabled]);
 
   const handleShare = useCallback(async () => {
     try {
@@ -281,9 +292,26 @@ export default function LocalLogsScreen() {
           />
         </ToggleRow>
 
+        {isEnabled && (
+          <ToggleRow>
+            <View style={{ flex: 1 }}>
+              <ToggleText>HTTP Request Logging</ToggleText>
+              <Description style={{ marginBottom: 0 }}>
+                Log all GraphQL and REST API requests
+              </Description>
+            </View>
+            <Switch
+              value={isRequestLoggingEnabled}
+              onValueChange={toggleRequestLogging}
+              disabled={isLoading}
+            />
+          </ToggleRow>
+        )}
+
         <Description>
           When enabled, app events are logged to local files on your device. 
-          No data is sent to servers automatically. You can view, share, or delete 
+          {isRequestLoggingEnabled && isEnabled && '\n\nHTTP request logging includes API calls, response times, and error details (sensitive data is automatically redacted).'}
+          {' '}No data is sent to servers automatically. You can view, share, or delete 
           logs manually. Logs are automatically cleaned up after 14 days.
         </Description>
 

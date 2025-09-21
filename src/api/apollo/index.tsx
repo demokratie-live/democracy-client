@@ -13,6 +13,7 @@ import {
 import { typePolicies } from "./TypePolicies";
 import { NativeModules } from "react-native";
 import { applicationIdLinkMiddleware } from "./ApplicationId";
+import { requestLoggingLink, restRequestLoggingLink } from "../../logging/requestLogging";
 
 const cache = new InMemoryCache({
   typePolicies,
@@ -66,6 +67,8 @@ const restLink = new RestLink({
 
 const link = ApolloLink.from([
   errorLink,
+  requestLoggingLink,        // Add request logging before other links
+  restRequestLoggingLink,    // Add REST request logging
   versionLinkMiddleware,
   applicationIdLinkMiddleware,
   authLinkMiddleware,
