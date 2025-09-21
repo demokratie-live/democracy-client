@@ -4,6 +4,7 @@ import { Alert, Button } from "react-native";
 import VotesLocal from "../lib/VotesLocal";
 import styled from "styled-components/native";
 import * as Notifications from "expo-notifications";
+import { router } from "expo-router";
 
 const Text = styled.Text`
   color: ${({ theme }) => theme.colors.text.primary};
@@ -24,6 +25,10 @@ const DevScreen: React.FC = () => {
 
   return (
     <>
+      <Button
+        title="Local Logging"
+        onPress={() => router.push("/(dev)/localLogs")}
+      />
       <Button
         title="Delete auth"
         onPress={() => {

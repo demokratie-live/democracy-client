@@ -8,7 +8,8 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import styled from 'styled-components/native';
-import { getLogService, LogEntry } from '../logging';
+import { useLoggingStore } from '../../api/state/logging';
+import { getLogService, LogEntry } from '../../logging';
 
 const Container = styled.View`
   flex: 1;
@@ -132,14 +133,9 @@ const EmptyText = styled.Text`
   text-align: center;
 `;
 
-interface Props {
-  onBack?: () => void;
-}
-
-export const DevLogsScreen: React.FC<Props> = ({ onBack }) => {
-  const [enabled, setEnabled] = useState(false);
+export default function LocalLogsScreen() {
+  const { isEnabled, isLoading, setEnabled, loadInitialState } = useLoggingStore();
   const [logs, setLogs] = useState<LogEntry[]>([]);
-  const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
   const logService = getLogService();
@@ -155,17 +151,14 @@ export const DevLogsScreen: React.FC<Props> = ({ onBack }) => {
 
   // Load initial state
   useEffect(() => {
-    setEnabled(logService.isEnabled());
-    if (logService.isEnabled()) {
-      loadLogs();
-    }
-  }, [logService, loadLogs]);
+    loadInitialState();
+  }, [loadInitialState]);
 
   // Set up polling for logs when enabled
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
     
-    if (enabled) {
+    if (isEnabled) {
       loadLogs();
       interval = setInterval(loadLogs, 2000); // Refresh every 2 seconds
     } else {
@@ -177,32 +170,26 @@ export const DevLogsScreen: React.FC<Props> = ({ onBack }) => {
         clearInterval(interval);
       }
     };
-  }, [enabled, loadLogs]);
+  }, [isEnabled, loadLogs]);
 
   const toggleLogging = useCallback(async () => {
-    if (enabled) {
-      setLoading(true);
+    if (isEnabled) {
       try {
         await logService.stop();
-        setEnabled(false);
+        await setEnabled(false);
         setLogs([]);
       } catch (_error) {
         Alert.alert('Error', 'Failed to stop logging');
-      } finally {
-        setLoading(false);
       }
     } else {
-      setLoading(true);
       try {
         await logService.start();
-        setEnabled(true);
+        await setEnabled(true);
       } catch (_error) {
         Alert.alert('Error', 'Failed to start logging');
-      } finally {
-        setLoading(false);
       }
     }
-  }, [enabled, logService]);
+  }, [isEnabled, logService, setEnabled]);
 
   const handleShare = useCallback(async () => {
     try {
@@ -264,13 +251,13 @@ export const DevLogsScreen: React.FC<Props> = ({ onBack }) => {
     </LogItem>
   );
 
-  if (loading) {
+  if (isLoading) {
     return (
       <Container>
         <LoadingContainer>
           <ActivityIndicator size="large" />
           <Text style={{ marginTop: 16, textAlign: 'center' }}>
-            {enabled ? 'Stopping logging...' : 'Starting logging...'}
+            {isEnabled ? 'Stopping logging...' : 'Starting logging...'}
           </Text>
         </LoadingContainer>
       </Container>
@@ -288,9 +275,9 @@ export const DevLogsScreen: React.FC<Props> = ({ onBack }) => {
             </Description>
           </View>
           <Switch
-            value={enabled}
+            value={isEnabled}
             onValueChange={toggleLogging}
-            disabled={loading}
+            disabled={isLoading}
           />
         </ToggleRow>
 
@@ -300,7 +287,7 @@ export const DevLogsScreen: React.FC<Props> = ({ onBack }) => {
           logs manually. Logs are automatically cleaned up after 14 days.
         </Description>
 
-        {enabled && (
+        {isEnabled && (
           <ButtonRow>
             <ActionButton onPress={handleShare}>
               <ButtonText>Share Logs</ButtonText>
@@ -312,7 +299,7 @@ export const DevLogsScreen: React.FC<Props> = ({ onBack }) => {
         )}
       </Header>
 
-      {enabled && (
+      {isEnabled && (
         <>
           <LogsHeader>
             <LogsTitle>Recent Logs</LogsTitle>
@@ -345,4 +332,4 @@ export const DevLogsScreen: React.FC<Props> = ({ onBack }) => {
       )}
     </Container>
   );
-};
+}

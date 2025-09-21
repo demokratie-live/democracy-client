@@ -4,19 +4,16 @@ import { resourceFromAttributes } from '@opentelemetry/resources';
 import { Platform } from 'react-native';
 import Share from 'react-native-share';
 import RNFS from 'react-native-fs';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { LogService, LogConfig, LogEntry } from './types';
 import { FileLogExporter } from './FileLogExporter';
-
-const STORAGE_KEY_LOGGING_ENABLED = 'local_logging_enabled';
+import { useLoggingStore } from '../api/state/logging';
 
 export class OTelLogService implements LogService {
   private provider: LoggerProvider | null = null;
   private logger: logsAPI.Logger | null = null;
   private fileExporter: FileLogExporter | null = null;
   private config: LogConfig;
-  private isLoggingEnabled = false;
 
   constructor() {
     // Default configuration
@@ -26,8 +23,6 @@ export class OTelLogService implements LogService {
       retentionDays: 14,
       logDirectory: this.getLogDirectory(),
     };
-    
-    this.loadEnabledState();
   }
 
   private getLogDirectory(): string {
@@ -36,25 +31,6 @@ export class OTelLogService implements LogService {
       : RNFS.DocumentDirectoryPath;
     
     return `${baseDir}/Logs`;
-  }
-
-  private async loadEnabledState(): Promise<void> {
-    try {
-      const enabled = await AsyncStorage.getItem(STORAGE_KEY_LOGGING_ENABLED);
-      this.isLoggingEnabled = enabled === 'true';
-    } catch (error) {
-      console.error('Failed to load logging enabled state:', error);
-      this.isLoggingEnabled = false;
-    }
-  }
-
-  private async saveEnabledState(enabled: boolean): Promise<void> {
-    try {
-      await AsyncStorage.setItem(STORAGE_KEY_LOGGING_ENABLED, enabled.toString());
-      this.isLoggingEnabled = enabled;
-    } catch (error) {
-      console.error('Failed to save logging enabled state:', error);
-    }
   }
 
   async start(): Promise<void> {
@@ -92,9 +68,6 @@ export class OTelLogService implements LogService {
       // Get logger
       this.logger = logsAPI.logs.getLogger('democracy-client');
 
-      // Save enabled state
-      await this.saveEnabledState(true);
-
       // Log startup
       this.log('INFO', 'Local logging started');
     } catch (error) {
@@ -121,9 +94,6 @@ export class OTelLogService implements LogService {
       this.provider = null;
       this.logger = null;
       this.fileExporter = null;
-
-      // Save enabled state
-      await this.saveEnabledState(false);
     } catch (error) {
       console.error('Failed to stop logging:', error);
       throw error;
@@ -131,7 +101,9 @@ export class OTelLogService implements LogService {
   }
 
   isEnabled(): boolean {
-    return this.isLoggingEnabled && this.provider !== null;
+    // Get state from Zustand store
+    const isEnabled = useLoggingStore.getState().isEnabled;
+    return isEnabled && this.provider !== null;
   }
 
   log(level: string, message: string, attributes?: Record<string, any>): void {
