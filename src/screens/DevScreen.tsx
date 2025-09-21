@@ -1,17 +1,19 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { useEffect } from "react";
-import { Alert, Button } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Alert, Button, Modal } from "react-native";
 import VotesLocal from "../lib/VotesLocal";
 import styled from "styled-components/native";
 import * as Notifications from "expo-notifications";
+import { DevLogsScreen } from "./DevLogsScreen";
 
 const Text = styled.Text`
   color: ${({ theme }) => theme.colors.text.primary};
 `;
 
 const DevScreen: React.FC = () => {
-  const [token, setToken] = React.useState<string | null>(null);
-  const [apnToken, setApnToken] = React.useState<string | null>(null);
+  const [token, setToken] = useState<string | null>(null);
+  const [apnToken, setApnToken] = useState<string | null>(null);
+  const [showLogsScreen, setShowLogsScreen] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -24,6 +26,10 @@ const DevScreen: React.FC = () => {
 
   return (
     <>
+      <Button
+        title="Local Logging"
+        onPress={() => setShowLogsScreen(true)}
+      />
       <Button
         title="Delete auth"
         onPress={() => {
@@ -88,6 +94,15 @@ const DevScreen: React.FC = () => {
       <Text selectable>{token}</Text>
       <Text>APN Token:</Text>
       <Text selectable>{apnToken}</Text>
+
+      <Modal
+        visible={showLogsScreen}
+        animationType="slide"
+        presentationStyle="pageSheet"
+        onRequestClose={() => setShowLogsScreen(false)}
+      >
+        <DevLogsScreen onBack={() => setShowLogsScreen(false)} />
+      </Modal>
     </>
   );
 };
