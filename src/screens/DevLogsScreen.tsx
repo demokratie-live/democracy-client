@@ -144,6 +144,15 @@ export const DevLogsScreen: React.FC<Props> = ({ onBack }) => {
 
   const logService = getLogService();
 
+  const loadLogs = useCallback(async () => {
+    try {
+      const logEntries = await logService.getLogs();
+      setLogs(logEntries);
+    } catch (error) {
+      console.error('Failed to load logs:', error);
+    }
+  }, [logService]);
+
   // Load initial state
   useEffect(() => {
     setEnabled(logService.isEnabled());
@@ -169,15 +178,6 @@ export const DevLogsScreen: React.FC<Props> = ({ onBack }) => {
       }
     };
   }, [enabled, loadLogs]);
-
-  const loadLogs = useCallback(async () => {
-    try {
-      const logEntries = await logService.getLogs();
-      setLogs(logEntries);
-    } catch (error) {
-      console.error('Failed to load logs:', error);
-    }
-  }, [logService]);
 
   const toggleLogging = useCallback(async () => {
     if (enabled) {
