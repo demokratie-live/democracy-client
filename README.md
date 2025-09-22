@@ -72,6 +72,10 @@ A mobile application that brings the German Bundestag to citizens' smartphones, 
 - Run linter: `yarn lint`
 - Run doctor for Expo issues: `yarn doctor`
 
+### Dependency Resolutions (ANSI Tooling)
+
+We pin `wrap-ansi@7.0.0`, `string-width@4.2.3`, and `strip-ansi@6.0.1` to avoid a CommonJS/ESM interop runtime error ("TypeError: stringWidth is not a function") triggered in the Expo CLI table renderer when a newer ESM-only `string-width` version is hoisted. Details and an upgrade checklist live in [`docs/DEPENDENCY-RESOLUTIONS.md`](./docs/DEPENDENCY-RESOLUTIONS.md).
+
 ## Testing
 
 The project uses Maestro for end-to-end testing. See [Testing Documentation](./docs/TESTING.md) for more information.

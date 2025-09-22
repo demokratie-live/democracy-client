@@ -93,6 +93,9 @@
   },
   "private": true,
   "resolutions": {
-    "@types/react": "~18.3.12"
+    "@types/react": "~18.3.12",
+    "wrap-ansi": "7.0.0",
+    "string-width": "4.2.3",
+    "strip-ansi": "6.0.1"
   }
 }
