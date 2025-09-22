@@ -167,7 +167,7 @@ export default function LocalLogsScreen() {
     
     if (isEnabled) {
       loadLogs();
-      interval = setInterval(loadLogs, 2000); // Refresh every 2 seconds
+      interval = setInterval(loadLogs, 10000); // Refresh every 10 seconds
     } else {
       setLogs([]);
     }
