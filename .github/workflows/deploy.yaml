@@ -27,6 +27,7 @@ jobs:
             os: ubuntu-latest
           - platform: ios
             os: macos-latest
+            xcode: "latest-stable"
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -48,6 +49,12 @@ jobs:
 
       - name: Install dependencies
         run: yarn
+
+      - name: Select Xcode ${{ matrix.xcode }}
+        if: ${{ matrix.platform == 'ios' }}
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: ${{ matrix.xcode }}
 
       - name: iOS Encrypt GPG secure files
         if: ${{ matrix.platform == 'ios' }}
