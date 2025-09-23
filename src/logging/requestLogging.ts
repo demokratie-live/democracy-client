@@ -1,7 +1,29 @@
 import { ApolloLink, Operation, NextLink, FetchResult } from '@apollo/client';
 import { Observable } from '@apollo/client/utilities';
-import { useLoggingStore } from '../api/state/logging';
-import { Logger } from './index';
+import { getLogService } from './index';
+
+/**
+ * Gets the current request logging state from the log service and store
+ */
+function isRequestLoggingEnabled(): boolean {
+  try {
+    // Check if basic logging is enabled first
+    const logService = getLogService();
+    if (!logService.isEnabled()) {
+      return false;
+    }
+
+    // Check request logging state from store
+    // We need to import the store dynamically to avoid circular dependencies
+    const { useLoggingStore } = require('../api/state/logging');
+    const { isRequestLoggingEnabled } = useLoggingStore.getState();
+    
+    return isRequestLoggingEnabled;
+  } catch (error) {
+    console.error('Failed to check request logging state:', error);
+    return false;
+  }
+}
 
 /**
  * Sanitizes URLs by removing sensitive query parameters and tokens
@@ -59,13 +81,12 @@ function sanitizeBody(body: any): any {
  */
 export const requestLoggingLink = new ApolloLink((operation: Operation, forward: NextLink) => {
   return new Observable<FetchResult>((observer) => {
-    const { isRequestLoggingEnabled, isEnabled } = useLoggingStore.getState();
-    
-    // Only log if both general logging and request logging are enabled
-    if (!isEnabled || !isRequestLoggingEnabled) {
+    // Check if request logging is enabled
+    if (!isRequestLoggingEnabled()) {
       return forward(operation).subscribe(observer);
     }
 
+    const { Logger } = require('./index');
     const startTime = Date.now();
     const operationName = operation.operationName || 'UnnamedOperation';
     const variables = sanitizeBody(operation.variables);
@@ -139,12 +160,12 @@ export const requestLoggingLink = new ApolloLink((operation: Operation, forward:
  */
 export const restRequestLoggingLink = new ApolloLink((operation: Operation, forward: NextLink) => {
   return new Observable<FetchResult>((observer) => {
-    const { isRequestLoggingEnabled, isEnabled } = useLoggingStore.getState();
-    
-    if (!isEnabled || !isRequestLoggingEnabled) {
+    // Check if request logging is enabled
+    if (!isRequestLoggingEnabled()) {
       return forward(operation).subscribe(observer);
     }
 
+    const { Logger } = require('./index');
     const startTime = Date.now();
     
     // Check if this is a REST operation

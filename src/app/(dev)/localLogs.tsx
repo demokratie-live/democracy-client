@@ -167,7 +167,7 @@ export default function LocalLogsScreen() {
     
     if (isEnabled) {
       loadLogs();
-      interval = setInterval(loadLogs, 10000); // Refresh every 10 seconds
+      interval = setInterval(loadLogs, 2000); // Refresh every 2 seconds
     } else {
       setLogs([]);
     }
@@ -192,6 +192,20 @@ export default function LocalLogsScreen() {
       try {
         await logService.start();
         await setEnabled(true);
+        
+        // Test basic logging immediately
+        setTimeout(() => {
+          const { Logger } = require('../../logging');
+          Logger.info('Logging system test', {
+            action: 'test_logging',
+            screen: 'dev_logs',
+            timestamp: Date.now()
+          });
+          Logger.debug('Debug test message', {
+            action: 'test_debug',
+            feature: 'logging'
+          });
+        }, 1000);
       } catch (_error) {
         Alert.alert('Error', 'Failed to start logging');
       }
@@ -200,7 +214,42 @@ export default function LocalLogsScreen() {
 
   const toggleRequestLogging = useCallback(async () => {
     await setRequestLoggingEnabled(!isRequestLoggingEnabled);
+    
+    // Test request logging if being enabled
+    if (!isRequestLoggingEnabled) {
+      setTimeout(() => {
+        const { Logger } = require('../../logging');
+        Logger.info('Request logging enabled', {
+          action: 'request_logging_enabled',
+          screen: 'dev_logs'
+        });
+      }, 500);
+    }
   }, [isRequestLoggingEnabled, setRequestLoggingEnabled]);
+
+  const handleTestLogging = useCallback(() => {
+    const { Logger } = require('../../logging');
+    Logger.info('Manual test log entry', {
+      action: 'manual_test',
+      screen: 'dev_logs',
+      timestamp: Date.now(),
+      test_id: Math.random().toString(36).substr(2, 9)
+    });
+    
+    Logger.warn('Test warning message', {
+      action: 'test_warning',
+      feature: 'manual_test'
+    });
+    
+    Logger.error('Test error message', {
+      action: 'test_error',
+      error_code: 999,
+      feature: 'manual_test'
+    });
+    
+    // Trigger a reload after a short delay
+    setTimeout(loadLogs, 1500);
+  }, [loadLogs]);
 
   const handleShare = useCallback(async () => {
     try {
@@ -322,6 +371,14 @@ export default function LocalLogsScreen() {
             </ActionButton>
             <ActionButton variant="danger" onPress={handleClear}>
               <ButtonText>Clear Logs</ButtonText>
+            </ActionButton>
+          </ButtonRow>
+        )}
+
+        {isEnabled && (
+          <ButtonRow>
+            <ActionButton onPress={handleTestLogging}>
+              <ButtonText>Test Logging</ButtonText>
             </ActionButton>
           </ButtonRow>
         )}

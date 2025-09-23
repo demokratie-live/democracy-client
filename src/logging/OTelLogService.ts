@@ -7,13 +7,13 @@ import RNFS from 'react-native-fs';
 
 import { LogService, LogConfig, LogEntry } from './types';
 import { FileLogExporter } from './FileLogExporter';
-import { useLoggingStore } from '../api/state/logging';
 
 export class OTelLogService implements LogService {
   private provider: LoggerProvider | null = null;
   private logger: logsAPI.Logger | null = null;
   private fileExporter: FileLogExporter | null = null;
   private config: LogConfig;
+  private _isEnabled = false; // Internal enabled state
 
   constructor() {
     // Default configuration
@@ -68,6 +68,9 @@ export class OTelLogService implements LogService {
       // Get logger
       this.logger = logsAPI.logs.getLogger('democracy-client');
 
+      // Mark as enabled
+      this._isEnabled = true;
+
       // Log startup
       this.log('INFO', 'Local logging started');
     } catch (error) {
@@ -94,6 +97,7 @@ export class OTelLogService implements LogService {
       this.provider = null;
       this.logger = null;
       this.fileExporter = null;
+      this._isEnabled = false;
     } catch (error) {
       console.error('Failed to stop logging:', error);
       throw error;
@@ -101,9 +105,7 @@ export class OTelLogService implements LogService {
   }
 
   isEnabled(): boolean {
-    // Get state from Zustand store
-    const isEnabled = useLoggingStore.getState().isEnabled;
-    return isEnabled && this.provider !== null;
+    return this._isEnabled && this.provider !== null;
   }
 
   log(level: string, message: string, attributes?: Record<string, any>): void {
