@@ -1,5 +1,5 @@
-import { LocalVote } from '../../../../api/state/votesLocal';
-import { VoteSelection } from '../../../../__generated__/graphql';
+import { LocalVote } from "../../../../api/state/localVotesStore";
+import { VoteSelection } from "../../../../__generated__/graphql";
 
 interface ChartData {
   votedProcedures: {
@@ -10,9 +10,12 @@ interface ChartData {
 }
 
 // Filtered Array of procedures voted local
-export const getMatchingProcedures = ({ votedProcedures, localVotes }: ChartData) =>
+export const getMatchingProcedures = ({
+  votedProcedures,
+  localVotes,
+}: ChartData) =>
   votedProcedures.filter(({ procedureId }) =>
-    localVotes.find(({ procedureId: pid }) => pid === procedureId),
+    localVotes.find(({ procedureId: pid }) => pid === procedureId)
   );
 
 export const pieChartData = ({
@@ -27,7 +30,9 @@ export const pieChartData = ({
 }) => {
   // Pie Chart Data Preparation
   const pieDataRaw = matchingProcedures.map(({ decision, procedureId }) => {
-    const userVote = localVotes.find(({ procedureId: pid }) => pid === procedureId);
+    const userVote = localVotes.find(
+      ({ procedureId: pid }) => pid === procedureId
+    );
     return {
       deputy: decision,
       me: userVote ? userVote.selection : undefined,
@@ -41,22 +46,22 @@ export const pieChartData = ({
         return { ...pre, diffs: pre.diffs + 1, count: pre.count + 1 };
       }
     },
-    { matches: 0, diffs: 0, count: 0 },
+    { matches: 0, diffs: 0, count: 0 }
   );
   return [
     {
-      label: 'Übereinstimmungen',
+      label: "Übereinstimmungen",
       percent: pieData.matches / pieData.count,
       value: pieData.matches,
       total: pieData.count,
-      color: '#f5a623',
+      color: "#f5a623",
     },
     {
-      label: 'Differenzen',
+      label: "Differenzen",
       percent: pieData.diffs / pieData.count,
       value: pieData.diffs,
       total: pieData.count,
-      color: '#b1b3b4',
+      color: "#b1b3b4",
     },
   ];
 };

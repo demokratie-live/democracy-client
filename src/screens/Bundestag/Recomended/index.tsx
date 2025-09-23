@@ -1,18 +1,17 @@
 import { ProcedureListItem } from "@democracy-deutschland/ui";
 import React from "react";
 import { SectionList, TouchableOpacity } from "react-native";
-import { localVotesState } from "../../../api/state/votesLocal";
+import { useLocalVotes } from "../../../api/state/localVotesStore";
 import { ListLoading } from "../../../components/ListLoading";
 import { useRecommendedProceduresQuery } from "../../../__generated__/graphql";
 import { Segment } from "../List/Components/Segment";
 import { Divider } from "./styled";
 import { theme } from "../../../styles/theme";
-import { useRecoilValue } from "recoil";
 import { useRouter } from "expo-router";
 
 export const Recommended = () => {
   const router = useRouter();
-  const localVotes = useRecoilValue(localVotesState);
+  const localVotes = useLocalVotes();
   const { data } = useRecommendedProceduresQuery();
 
   if (!data || !data?.recommendedProcedures.data) {

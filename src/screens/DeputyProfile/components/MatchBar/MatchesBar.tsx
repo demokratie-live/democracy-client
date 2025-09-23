@@ -1,12 +1,11 @@
-import React from 'react';
-import { Bar, ChartLegend } from '@democracy-deutschland/ui';
-import * as S from './MatchesBar.styled';
-import { getMatchingProcedures, pieChartData } from './MatchesBar.utils';
-import { useWindowDimensions } from 'react-native';
-import { useRecoilValue } from 'recoil';
-import { localVotesState } from '../../../../api/state/votesLocal';
-import { DeputyMatchBarFragment } from '../../../../__generated__/graphql';
-import { theme } from '../../../../styles/theme';
+import React from "react";
+import { Bar, ChartLegend } from "@democracy-deutschland/ui";
+import * as S from "./MatchesBar.styled";
+import { getMatchingProcedures, pieChartData } from "./MatchesBar.utils";
+import { useWindowDimensions } from "react-native";
+import { useLocalVotes } from "../../../../api/state/localVotesStore";
+import { DeputyMatchBarFragment } from "../../../../__generated__/graphql";
+import { theme } from "../../../../styles/theme";
 
 interface PreparedData {
   label: string;
@@ -22,12 +21,12 @@ interface BarData {
 }
 
 export interface MatchesBarProps {
-  decisions: DeputyMatchBarFragment['matchesBar'];
+  decisions: DeputyMatchBarFragment["matchesBar"];
 }
 
 export const MatchesBar: React.FC<MatchesBarProps> = ({ decisions }) => {
   const { width } = useWindowDimensions();
-  const localVotes = useRecoilValue(localVotesState);
+  const localVotes = useLocalVotes();
   const votedProcedures = decisions.map(({ procedure, decision }) => ({
     procedureId: procedure.procedureId,
     decision,
@@ -46,7 +45,8 @@ export const MatchesBar: React.FC<MatchesBarProps> = ({ decisions }) => {
   });
 
   const barChartData = preparedData.reduce<BarData>((prev, renderer) => {
-    prev[renderer.label === 'Differenzen' ? 'missmatches' : 'matches'] = renderer;
+    prev[renderer.label === "Differenzen" ? "missmatches" : "matches"] =
+      renderer;
     return prev;
   }, {} as BarData);
 

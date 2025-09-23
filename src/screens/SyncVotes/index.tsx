@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
-import { Alert, Share } from 'react-native';
-import styled from 'styled-components/native';
-import VotesLocal, { ChainEntryRaw, ChainEntryRawZodArray } from '../../lib/VotesLocal';
-import { Button as UiButton } from '@democracy-deutschland/ui';
-import { useSetRecoilState } from 'recoil';
-import { votesLocalState } from '../../api/state/votesLocal';
+import React, { useState } from "react";
+import { Alert, Share } from "react-native";
+import styled from "styled-components/native";
+import VotesLocal, {
+  ChainEntryRaw,
+  ChainEntryRawZodArray,
+} from "../../lib/VotesLocal";
+import { Button as UiButton } from "@democracy-deutschland/ui";
+import { useLocalVotesStore } from "../../api/state/localVotesStore";
 
 const Container = styled.ScrollView.attrs({
   contentContainerStyle: {
-    alignItems: 'center',
+    alignItems: "center",
     paddingHorizontal: 18,
     paddingVertical: 18,
   },
@@ -56,10 +58,16 @@ const VoteTextArea = styled.TextInput`
 
 export const SyncVotesScreen = () => {
   const [showTextField, setShowTextField] = useState<boolean>(false);
-  const [text, setText] = useState('');
-  const setVotesLocal = useSetRecoilState(votesLocalState);
+  const [text, setText] = useState("");
+  const { hydrate } = useLocalVotesStore.getState();
+  const refreshLocalVotes = async () => {
+    // Force reload chain after merge
+    await hydrate();
+  };
   const shareVotes = () => {
-    VotesLocal.readKeychain().then(data => Share.share({ message: JSON.stringify(data.d) }));
+    VotesLocal.readKeychain().then((data) =>
+      Share.share({ message: JSON.stringify(data.d) })
+    );
   };
 
   const onSave = () => {
@@ -67,22 +75,26 @@ export const SyncVotesScreen = () => {
       const data = JSON.parse(text) as ChainEntryRaw[];
 
       if (ChainEntryRawZodArray.parse(data)) {
-        VotesLocal.mergeKeychains({ v: 1, d: data }).then(setVotesLocal);
+        VotesLocal.mergeKeychains({ v: 1, d: data }).then(() => {
+          void refreshLocalVotes();
+        });
         setShowTextField(false);
-        Alert.alert('Abstimmungsergebnisse erfolgreich gespeichert');
+        Alert.alert("Abstimmungsergebnisse erfolgreich gespeichert");
       }
     } catch (e) {
-      Alert.alert('Daten nicht valide. Bitte wiederhole den Vorgang.');
-      console.log('Validation Error: ', e);
+      Alert.alert("Daten nicht valide. Bitte wiederhole den Vorgang.");
+      console.log("Validation Error: ", e);
     }
-    setText('');
+    setText("");
   };
 
   return (
     <Container>
       {!showTextField ? (
         <>
-          <Intro>So überträgst Du Deine lokalen Stimmen auf ein anderes Gerät:</Intro>
+          <Intro>
+            So überträgst Du Deine lokalen Stimmen auf ein anderes Gerät:
+          </Intro>
           <Headline>AUF DEINEM BISHERIGEN GERÄT</Headline>
           <Text>
             {
@@ -90,21 +102,28 @@ export const SyncVotesScreen = () => {
             }
           </Text>
           <Text>
-            2. Wähle eine der angebotenen Möglichkeiten, z.B. durch Mail an Dich selbst, Deine
-            Abstimmungsdaten zu sichern
+            2. Wähle eine der angebotenen Möglichkeiten, z.B. durch Mail an Dich
+            selbst, Deine Abstimmungsdaten zu sichern
           </Text>
           <Button variant="primary" onPress={shareVotes}>
             Stimmen kopieren
           </Button>
 
           <Headline>AUF DEINEM NEUEN GERÄT</Headline>
-          <Text>1. Kopiere den gesicherten Text in die Zwischenablage Deines neuen Geräts</Text>
+          <Text>
+            1. Kopiere den gesicherten Text in die Zwischenablage Deines neuen
+            Geräts
+          </Text>
           <Text>2. Öffne DEMOCRACY auf Deinem neuen Gerät</Text>
           <Text>
-            {'3. Tippe auf Menu > Einstellungen > Stimmen übertragen und wähle "STIMMEN EINFÜGEN"'}
+            {
+              '3. Tippe auf Menu > Einstellungen > Stimmen übertragen und wähle "STIMMEN EINFÜGEN"'
+            }
           </Text>
           <Text>
-            {'4. Füge den gesamten Text {"283063":…} in das Dialogfeld ein und wähle "SPEICHERN"'}
+            {
+              '4. Füge den gesamten Text {"283063":…} in das Dialogfeld ein und wähle "SPEICHERN"'
+            }
           </Text>
         </>
       ) : null}
@@ -113,10 +132,17 @@ export const SyncVotesScreen = () => {
         <>
           <Headline>Stimmen einfügen</Headline>
           <Text>
-            {'Füge den gesamten Text {{"283063":…} in das Dialogfeld ein und wähle "SPEICHERN"'}
+            {
+              'Füge den gesamten Text {{"283063":…} in das Dialogfeld ein und wähle "SPEICHERN"'
+            }
           </Text>
           <VoteTextArea
-            style={{ borderColor: 'black', borderWidth: 1, width: '100%', height: 200 }}
+            style={{
+              borderColor: "black",
+              borderWidth: 1,
+              width: "100%",
+              height: 200,
+            }}
             multiline
             onChangeText={setText}
             placeholder='{"data": "..."}'
@@ -127,12 +153,15 @@ export const SyncVotesScreen = () => {
           <Button variant="primary" onPress={onSave}>
             Speichern
           </Button>
-          <Button variant="danger-secondary" onPress={() => setShowTextField(v => !v)}>
+          <Button
+            variant="danger-secondary"
+            onPress={() => setShowTextField((v) => !v)}
+          >
             Abbrechen
           </Button>
         </>
       ) : (
-        <Button variant="primary" onPress={() => setShowTextField(v => !v)}>
+        <Button variant="primary" onPress={() => setShowTextField((v) => !v)}>
           Stimmen einfügen
         </Button>
       )}

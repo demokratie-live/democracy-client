@@ -10,7 +10,7 @@ import styled from "styled-components/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useRecoilValue } from "recoil";
 import { constituencyState } from "../../api/state/constituency";
-import { localVoteState } from "../../api/state/votesLocal";
+import { useLocalVotesStore } from "../../api/state/localVotesStore";
 import {
   ProcedureDocument,
   ProcedureQuery,
@@ -128,7 +128,9 @@ const PrepareActions: React.FC<Props> = ({
 }) => {
   const constituency = useRecoilValue(constituencyState);
   const constituencies = constituency ? [constituency] : [];
-  const voteSelection = useRecoilValue(localVoteState(procedureId))?.selection;
+  const voteSelection = useLocalVotesStore(
+    (s) => s.getLocalVote(procedureId)?.selection
+  );
   const [toggleNotification] = useToggleNotificationMutation({
     variables: {
       procedureId,

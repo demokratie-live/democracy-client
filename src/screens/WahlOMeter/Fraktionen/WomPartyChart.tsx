@@ -13,9 +13,8 @@ import {
   WomPartyChartData,
 } from "@democracy-deutschland/ui";
 import styled from "styled-components/native";
-import { useRecoilValue } from "recoil";
 import { ParlamentIdentifier, parlaments } from "../../../api/state/parlament";
-import { localVotesState } from "../../../api/state/votesLocal";
+import { useLocalVotes } from "../../../api/state/localVotesStore";
 import { usePartyChartDataQuery } from "../../../__generated__/graphql";
 import { ListLoading } from "../../../components/ListLoading";
 import NoVotesPlaceholder from "../NoVotesPlaceholder";
@@ -44,7 +43,7 @@ export const WomPartyChart: React.FC = () => {
   const { legislaturePeriod } = useLegislaturePeriodStore();
   const parlamentIdentifier = `BT-${legislaturePeriod}` as ParlamentIdentifier;
   const parlament = parlaments[parlamentIdentifier];
-  const localVotes = useRecoilValue(localVotesState);
+  const localVotes = useLocalVotes();
   const [selectedPartyIndex, setSelectedPartyIndex] = useState(0);
   const { setWomParty, party: womParty } = useContext(WomPartyContext);
   const { data: proceduresData } = usePartyChartDataQuery({

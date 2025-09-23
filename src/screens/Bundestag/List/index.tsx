@@ -10,7 +10,7 @@ import { Segment } from "./Components/Segment";
 import { communityVoteData } from "../../../lib/PieChartCommunityData";
 import { NoConferenceWeekData } from "./NoConferenceWeekData";
 import styled from "styled-components/native";
-import { localVotesState } from "../../../api/state/votesLocal";
+import { useLocalVotes } from "../../../api/state/localVotesStore";
 import { ParlamentIdentifier, parlaments } from "../../../api/state/parlament";
 import { useRecoilValue } from "recoil";
 import { useListFilter } from "../../../api/hooks/useListFilter";
@@ -47,7 +47,7 @@ interface ListProps {
 
 export const List: React.FC<ListProps> = ({ list }) => {
   const router = useRouter();
-  const localVotes = useRecoilValue(localVotesState);
+  const localVotes = useLocalVotes();
   const { proceduresFilter } = useListFilter();
   const constituency = useRecoilValue(constituencyState);
   const { legislaturePeriod } = useLegislaturePeriodStore();

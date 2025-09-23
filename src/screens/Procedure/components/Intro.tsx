@@ -1,11 +1,10 @@
-import React from 'react';
-import { useRecoilValue } from 'recoil';
-import styled from 'styled-components/native';
-import { localVoteState } from '../../../api/state/votesLocal';
-import { ListItem } from '../../../components/ListItem';
-import { communityVoteData } from '../../../lib/PieChartCommunityData';
-import { pieChartGovernmentData } from '../../../lib/PieChartGovernmentData';
-import { CommunityVotes, VoteResult } from '../../../__generated__/graphql';
+import React from "react";
+import styled from "styled-components/native";
+import { useLocalVotesStore } from "../../../api/state/localVotesStore";
+import { ListItem } from "../../../components/ListItem";
+import { communityVoteData } from "../../../lib/PieChartCommunityData";
+import { pieChartGovernmentData } from "../../../lib/PieChartGovernmentData";
+import { CommunityVotes, VoteResult } from "../../../__generated__/graphql";
 
 const Container = styled.View`
   padding-top: 18px;
@@ -17,8 +16,11 @@ interface Props {
   voteDate?: Date;
   voteEnd?: Date;
   voted: boolean;
-  voteResults?: Pick<VoteResult, 'yes' | 'abstination' | 'no'> | null;
-  communityVotes?: Pick<CommunityVotes, 'yes' | 'total' | 'abstination' | 'no'> | null;
+  voteResults?: Pick<VoteResult, "yes" | "abstination" | "no"> | null;
+  communityVotes?: Pick<
+    CommunityVotes,
+    "yes" | "total" | "abstination" | "no"
+  > | null;
   sessionTOPHeading?: string;
   subjectGroups: string[];
   votedGovernment?: boolean;
@@ -41,9 +43,11 @@ export const Intro: React.FC<Props> = ({
   if (sessionTOPHeading) {
     subline = sessionTOPHeading;
   } else if (subjectGroups) {
-    subline = subjectGroups.join(', ');
+    subline = subjectGroups.join(", ");
   }
-  const localSelection = useRecoilValue(localVoteState(procedureId))?.selection;
+  const localSelection = useLocalVotesStore(
+    (state) => state.getLocalVote(procedureId)?.selection
+  );
 
   const communityVoteSlices = communityVoteData({
     communityVotes,
