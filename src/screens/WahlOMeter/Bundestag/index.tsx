@@ -11,7 +11,7 @@ import { Segment } from "../../Bundestag/List/Components/Segment";
 import { PartyChartDataQuery } from "../../../__generated__/graphql";
 import PieChart from "../../Procedure/components/Charts/PieChart";
 import { ChartLegend } from "@democracy-deutschland/ui";
-import { LocalVote } from "../../../api/state/votesLocal";
+import { LocalVote } from "../../../api/state/localVotesStore";
 import { useRouter } from "expo-router";
 
 const Wrapper = styled.View`

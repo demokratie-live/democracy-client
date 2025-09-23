@@ -6,9 +6,8 @@ import unionBy from "lodash.unionby";
 import { FlatList, Text } from "react-native";
 import { WomPartyChart } from "./WomPartyChart";
 import { WomPartyContext } from "./context";
-import { useRecoilValue } from "recoil";
 import { ParlamentIdentifier, parlaments } from "../../../api/state/parlament";
-import { localVotesState } from "../../../api/state/votesLocal";
+import { useLocalVotes } from "../../../api/state/localVotesStore";
 import { ListLoading } from "../../../components/ListLoading";
 import { Row } from "../../../components/Row";
 import { ListItem } from "../../../components/ListItem";
@@ -45,7 +44,7 @@ const WomPartyList: React.FC<WomPartyListProps> = ({
   const parlamentIdentifier = `BT-${legislaturePeriod}` as ParlamentIdentifier;
   const parlament = parlaments[parlamentIdentifier];
   const { party } = useContext(WomPartyContext);
-  const localVotes = useRecoilValue(localVotesState);
+  const localVotes = useLocalVotes();
 
   const {
     data: procedurListDataNew,

@@ -25,8 +25,8 @@ import {
   VoteSelection,
 } from "../../../__generated__/graphql";
 import { NotificationsContext } from "../../../api/state/notificationPermission";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { localVoteState } from "../../../api/state/votesLocal";
+import { useRecoilValue } from "recoil";
+import { useLocalVotesStore } from "../../../api/state/localVotesStore";
 import { constituencyState } from "../../../api/state/constituency";
 import { searchTermState } from "../../../api/state/search";
 import { useNotificationPermission } from "../../Introduction/useNotificationPermission";
@@ -89,7 +89,7 @@ const BalloutBox: React.FC<Props> = ({ selection, procedureId, title }) => {
   const { notificationSettings, outcomePushsDenied } =
     useContext(NotificationsContext);
   const pushAuthorized = useNotificationPermission();
-  const setLocalVote = useSetRecoilState(localVoteState(procedureId));
+  const setLocalVote = useLocalVotesStore((s) => s.setLocalVote);
   const term = useRecoilValue(searchTermState);
   const constituency = useRecoilValue(constituencyState);
   const constituencies = useMemo(

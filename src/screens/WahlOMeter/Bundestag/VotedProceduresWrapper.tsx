@@ -2,8 +2,8 @@ import React, { ReactElement } from "react";
 import styled from "styled-components/native";
 import unionBy from "lodash.unionby";
 import { FlatList } from "react-native";
-import { LocalVote, localVotesState } from "../../../api/state/votesLocal";
-import { useRecoilValue } from "recoil";
+import { LocalVote } from "../../../api/state/localVotesStore";
+import { useLocalVotes } from "../../../api/state/localVotesStore";
 import { ParlamentIdentifier, parlaments } from "../../../api/state/parlament";
 import {
   PartyChartDataQuery,
@@ -51,7 +51,7 @@ const VotedProceduresWrapper: React.FC<Props> = ({
   const { legislaturePeriod } = useLegislaturePeriodStore();
   const parlamentIdentifier = `BT-${legislaturePeriod}` as ParlamentIdentifier;
   const parlament = parlaments[parlamentIdentifier];
-  const localVotes = useRecoilValue(localVotesState);
+  const localVotes = useLocalVotes();
   const { data: proceduresDataNew, previousData: proceduresDataPrev } =
     usePartyChartDataQuery({
       variables: {

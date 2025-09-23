@@ -8,7 +8,8 @@ import styled from "styled-components/native";
 import { useRecoilValue } from "recoil";
 import { ParlamentIdentifier, parlaments } from "../../api/state/parlament";
 import { constituencyState } from "../../api/state/constituency";
-import { LocalVote, localVotesState } from "../../api/state/votesLocal";
+import { LocalVote } from "../../api/state/localVotesStore";
+import { useLocalVotes } from "../../api/state/localVotesStore";
 import {
   PartyChartDataQuery,
   usePartyChartDataQuery,
@@ -101,7 +102,7 @@ export const VotingScreen: React.FC<Props> = ({
   const [showWarning, setShowWarning] = useState(true);
   const [selectedParty, setSelectedParty] = useState(0);
   const constituency = useRecoilValue(constituencyState);
-  const localVotes = useRecoilValue(localVotesState);
+  const localVotes = useLocalVotes();
   const { data: proceduresData } = usePartyChartDataQuery({
     fetchPolicy: "cache-and-network",
     variables: {

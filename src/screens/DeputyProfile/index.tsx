@@ -16,8 +16,7 @@ import { getMatchingProcedures } from "./components/MatchBar/MatchesBar.utils";
 import * as S from "./Foldable.styled";
 import { RootStackParamList } from "../../app/_layout";
 import styled from "styled-components/native";
-import { useRecoilValue } from "recoil";
-import { localVotesState } from "../../api/state/votesLocal";
+import { useLocalVotes } from "../../api/state/localVotesStore";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import WomHeader from "../WahlOMeter/Header";
 import ChartLegend from "../Procedure/components/Charts/ChartLegend";
@@ -66,7 +65,7 @@ type Props = RootStackParamList["DeputyProfile/[id]"];
 export const DeputyProfilScreen: React.FC<Props> = ({ id }) => {
   const router = useRouter();
   const [showProcedures, setShowProcedures] = useState(true);
-  const localVotes = useRecoilValue(localVotesState);
+  const localVotes = useLocalVotes();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { data, previousData } = useGetDeputyQuery({
