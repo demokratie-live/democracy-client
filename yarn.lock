@@ -2102,6 +2102,47 @@
   dependencies:
     semver "^7.3.5"
 
+"@opentelemetry/api-logs@0.205.0", "@opentelemetry/api-logs@^0.205.0":
+  version "0.205.0"
+  resolved "https://registry.yarnpkg.com/@opentelemetry/api-logs/-/api-logs-0.205.0.tgz#7d334958c0eaa0725a1fe51aadc9b39ed7d4b6f2"
+  integrity sha512-wBlPk1nFB37Hsm+3Qy73yQSobVn28F4isnWIBvKpd5IUH/eat8bwcL02H9yzmHyyPmukeccSl2mbN5sDQZYnPg==
+  dependencies:
+    "@opentelemetry/api" "^1.3.0"
+
+"@opentelemetry/api@^1.3.0", "@opentelemetry/api@^1.9.0":
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/@opentelemetry/api/-/api-1.9.0.tgz#d03eba68273dc0f7509e2a3d5cba21eae10379fe"
+  integrity sha512-3giAOQvZiH5F9bMlMiv8+GSPMeqg0dbaeo58/0SlA9sxSqZhnUtxzX9/2FzyhS9sWQf5S0GJE0AKBrFqjpeYcg==
+
+"@opentelemetry/core@2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@opentelemetry/core/-/core-2.1.0.tgz#5539f04eb9e5245e000b0c3f77bdfaa07557e3a7"
+  integrity sha512-RMEtHsxJs/GiHHxYT58IY57UXAQTuUnZVco6ymDEqTNlJKTimM4qPUPVe8InNFyBjhHBEAx4k3Q8LtNayBsbUQ==
+  dependencies:
+    "@opentelemetry/semantic-conventions" "^1.29.0"
+
+"@opentelemetry/resources@2.1.0", "@opentelemetry/resources@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@opentelemetry/resources/-/resources-2.1.0.tgz#11772e732af4f27953cf55567a6630d8b4d8282d"
+  integrity sha512-1CJjf3LCvoefUOgegxi8h6r4B/wLSzInyhGP2UmIBYNlo4Qk5CZ73e1eEyWmfXvFtm1ybkmfb2DqWvspsYLrWw==
+  dependencies:
+    "@opentelemetry/core" "2.1.0"
+    "@opentelemetry/semantic-conventions" "^1.29.0"
+
+"@opentelemetry/sdk-logs@^0.205.0":
+  version "0.205.0"
+  resolved "https://registry.yarnpkg.com/@opentelemetry/sdk-logs/-/sdk-logs-0.205.0.tgz#4a302b1507e753d2c4d9bddb5243aecf5eb7156b"
+  integrity sha512-nyqhNQ6eEzPWQU60Nc7+A5LIq8fz3UeIzdEVBQYefB4+msJZ2vuVtRuk9KxPMw1uHoHDtYEwkr2Ct0iG29jU8w==
+  dependencies:
+    "@opentelemetry/api-logs" "0.205.0"
+    "@opentelemetry/core" "2.1.0"
+    "@opentelemetry/resources" "2.1.0"
+
+"@opentelemetry/semantic-conventions@^1.29.0":
+  version "1.37.0"
+  resolved "https://registry.yarnpkg.com/@opentelemetry/semantic-conventions/-/semantic-conventions-1.37.0.tgz#aa2b4fa0b910b66a050c5ddfcac1d262e91a321a"
+  integrity sha512-JD6DerIKdJGmRp4jQyX5FlrQjA4tjOw1cvfsPAZXfOOEErMUHjPcPSICS+6WnM0nB0efSFARh0KAZss+bvExOA==
+
 "@peculiar/asn1-schema@^2.3.13", "@peculiar/asn1-schema@^2.3.8":
   version "2.3.15"
   resolved "https://registry.yarnpkg.com/@peculiar/asn1-schema/-/asn1-schema-2.3.15.tgz#e926bfdeed51945a06f38be703499e7d8341a5d3"
@@ -3009,6 +3050,11 @@ ansi-escapes@^4.2.1, ansi-escapes@^4.3.0, ansi-escapes@^4.3.1, ansi-escapes@^4.3
   dependencies:
     type-fest "^0.21.3"
 
+ansi-regex@^4.1.0:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-4.1.1.tgz#164daac87ab2d6f6db3a29875e2d1766582dabed"
+  integrity sha512-ILlv4k/3f6vfQ4OoP2AGvirOktlQ98ZEL1k9FaQjxa3L1abBgbuTDAdPOpvbGncC0BTVQrl+OM8xZGK6tWXt7g==
+
 ansi-regex@^5.0.0, ansi-regex@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-5.0.1.tgz#082cb2c89c9fe8659a311a53bd6a4dc5301db304"
@@ -3461,7 +3507,7 @@ balanced-match@^1.0.0:
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.2.tgz#e83e3a7e3f300b34cb9d87f615fa0cbf357690ee"
   integrity sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==
 
-base-64@0.1.0:
+base-64@0.1.0, base-64@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/base-64/-/base-64-0.1.0.tgz#780a99c84e7d600260361511c4877613bf24f6bb"
   integrity sha512-Y5gU45svrR5tI2Vt/X9GPd3L0HNIKzGu202EjxrXMpuc2V2CiKgemAbUUsqYmZJvPtCXoUKjNZwBJzsNScUbXA==
@@ -8138,6 +8184,14 @@ react-native-drawer-layout@^4.1.2:
   dependencies:
     use-latest-callback "^0.2.1"
 
+react-native-fs@^2.20.0:
+  version "2.20.0"
+  resolved "https://registry.yarnpkg.com/react-native-fs/-/react-native-fs-2.20.0.tgz#05a9362b473bfc0910772c0acbb73a78dbc810f6"
+  integrity sha512-VkTBzs7fIDUiy/XajOSNk0XazFE9l+QlMAce7lGuebZcag5CnjszB+u4BdqzwaQOdcYb5wsJIsqq4kxInIRpJQ==
+  dependencies:
+    base-64 "^0.1.0"
+    utf8 "^3.0.0"
+
 react-native-gesture-handler@~2.20.2:
   version "2.20.2"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-2.20.2.tgz#73844c8e9c417459c2f2981bc4d8f66ba8a5ee66"
@@ -8232,6 +8286,11 @@ react-native-sha256@^1.4.10:
   version "1.4.10"
   resolved "https://registry.yarnpkg.com/react-native-sha256/-/react-native-sha256-1.4.10.tgz#b4c9990430849ee29a00dfd606fd92f08e003dc7"
   integrity sha512-x12owcA1jQZ1GMUX2xg2+4IOVJciZChcyNvolt6IjLdAFtu1tttDF9aHsCTW1J1SbLGSoYCo/UTAoNZay/YAsg==
+
+react-native-share@^12.2.0:
+  version "12.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-12.2.0.tgz#d7011825bf79631858de459873ee2618235031d6"
+  integrity sha512-f6MB9BsKa9xVvu0DKbxq5jw4IyYHqQeqUlCNkD8eAFoJx6SD31ObPAn7SQ6NG9AOuhCy6aYuSJYJvx25DaoMZQ==
 
 react-native-svg@15.8.0:
   version "15.8.0"
@@ -9754,6 +9813,11 @@ use-sync-external-store@^1.2.2:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.4.0.tgz#adbc795d8eeb47029963016cefdf89dc799fcebc"
   integrity sha512-9WXSPC5fMv61vaupRkCKCxsPxBocVnwakBEkMIHHpkTTg6icbJtg6jzgtLDm4bl3cSHAca52rYWih0k4K3PfHw==
+
+utf8@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/utf8/-/utf8-3.0.0.tgz#f052eed1364d696e769ef058b183df88c87f69d1"
+  integrity sha512-E8VjFIQ/TyQgp+TZfS6l8yp/xWppSAHzidGiRrqe4bK4XP9pTRyKFgGJpO3SN7zdX4DeomTrwaseCHovfpFcqQ==
 
 util-deprecate@^1.0.1:
   version "1.0.2"
