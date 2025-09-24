@@ -80,12 +80,22 @@ We pin `wrap-ansi@7.0.0`, `string-width@4.2.3`, and `strip-ansi@6.0.1` to avoid 
 
 The project uses Maestro for end-to-end testing. See [Testing Documentation](./docs/TESTING.md) for more information.
 
-Run tests with:
+Run tests locally with:
 
 ```bash
 yarn test:e2e          # Run all E2E tests
 yarn test:e2e:smoke    # Run smoke tests only
 yarn test:e2e:verification  # Run verification flow tests only
+```
+
+### Manual E2E Testing on GitHub Actions
+
+E2E tests can be manually triggered on any branch through GitHub Actions:
+1. Go to **Actions** → **🧪 E2E Tests** workflow
+2. Click **Run workflow** and select test type and platform
+3. Tests will run on the selected branch
+
+This is useful for testing feature branches before merging.
 ```
 
 ## Deployment

@@ -49,4 +49,18 @@ When writing new tests:
 
 ## CI/CD Integration
 
-E2E tests are integrated into the GitHub Actions workflow to ensure automated testing on each pull request and deploy.
+E2E tests are integrated into the GitHub Actions workflow to ensure automated testing on each push to main branch and can be manually triggered on any branch.
+
+### Manual E2E Test Execution
+
+You can manually trigger E2E tests on any branch using GitHub Actions:
+
+1. Go to the **Actions** tab in the GitHub repository
+2. Select the **🧪 E2E Tests** workflow
+3. Click **Run workflow**
+4. Choose your options:
+   - **Test type**: `smoke`, `verification`, or `all`
+   - **Platform**: `ios`, `android`, or `both` (currently only iOS is fully supported)
+5. Click **Run workflow** to start the tests
+
+This allows for testing feature branches and specific scenarios without waiting for merge to main.
