@@ -2,7 +2,7 @@ name: 🧪 E2E Tests
 
 on:
   push:
-    branches: [main, copilot/fix-09ebd978-bbd0-4c56-983d-b3e9ca6dda0f]  # Temporarily added this branch for testing
+    branches: [main]
   workflow_dispatch:
     inputs:
       test_type:
@@ -29,8 +29,95 @@ env:
   CI: true
 
 jobs:
-  e2e-test:
-    name: Run ${{ matrix.test }} on ${{ matrix.platform }}
+  # Job for automatic push triggers (only iOS smoke test)
+  e2e-test-auto:
+    name: Run smoke on ios (auto)
+    runs-on: macos-latest
+    if: github.event_name == 'push'
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Cache Yarn dependencies
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Install Maestro
+        run: |
+          curl -Ls "https://get.maestro.mobile.dev" | bash
+          export PATH="$PATH":"$HOME/.maestro/bin"
+
+      - name: Decrypt GPG secure files
+        run: |
+          brew install gnupg@1.4
+          echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 google-services.json.gpg
+
+      - name: Build Expo app prebuild
+        run: yarn expo prebuild --platform ios
+
+      - name: Cache iOS build
+        uses: actions/cache@v4
+        with:
+          path: |
+            ios/build
+            ~/Library/Developer/Xcode/DerivedData
+          key: ${{ runner.os }}-ios-build-${{ hashFiles('ios/**/*.pbxproj', 'ios/Podfile.lock', 'src/**/*.tsx', 'src/**/*.ts') }}
+          restore-keys: |
+            ${{ runner.os }}-ios-build-
+
+      - name: Setup iOS Simulator
+        run: |
+          DEVICE_ID=$(xcrun xctrace list devices | grep -m 1 "iPhone" | awk '{print $NF}' | tr -d '()')
+          xcrun simctl boot $DEVICE_ID || true
+
+      - name: Build iOS App
+        run: |
+          xcodebuild -workspace DEMOCRACYInternal.xcworkspace -scheme DEMOCRACYInternal -configuration Release -sdk iphonesimulator -derivedDataPath build | xcbeautify
+        working-directory: ${{ github.workspace }}/ios
+
+      - name: Install iOS App
+        run: |
+          DEVICE_ID=$(xcrun xctrace list devices | grep -m 1 "iPhone" | awk '{print $NF}' | tr -d '()')
+          xcrun simctl install $DEVICE_ID ios/build/Build/Products/Release-iphonesimulator/DEMOCRACYInternal.app
+
+      - name: Launch iOS App
+        run: |
+          DEVICE_ID=$(xcrun xctrace list devices | grep -m 1 "iPhone" | awk '{print $NF}' | tr -d '()')
+          xcrun simctl launch $DEVICE_ID de.democracy-deutschland.clientapp.internal
+
+      - name: Wait for App to be ready
+        run: sleep 30
+
+      - name: Run Maestro Tests
+        run: |
+          export PATH="$PATH":"$HOME/.maestro/bin"
+          yarn test:e2e:smoke
+
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: maestro-smoke-ios-auto
+          path: |
+            .maestro/test-results
+            .maestro/logs
+
+  # Job for manual workflow dispatch triggers
+  e2e-test-manual:
+    name: Run ${{ matrix.test }} on ${{ matrix.platform }} (manual)
     strategy:
       matrix:
         include:
@@ -51,10 +138,9 @@ jobs:
           #   test: verification
     runs-on: ${{ matrix.os }}
     if: |
-      (github.event_name == 'push' && matrix.test == 'smoke' && matrix.platform == 'ios') ||
-      (github.event_name == 'workflow_dispatch' && 
-        ((inputs.test_type == 'all') || (inputs.test_type == matrix.test)) &&
-        ((inputs.platform == 'both') || (inputs.platform == matrix.platform)))
+      github.event_name == 'workflow_dispatch' && 
+      ((inputs.test_type == 'all') || (inputs.test_type == matrix.test)) &&
+      ((inputs.platform == 'both') || (inputs.platform == matrix.platform))
 
     steps:
       - name: Checkout repository
