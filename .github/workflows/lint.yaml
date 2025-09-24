@@ -22,28 +22,25 @@ jobs:
       - name: 🛎️ Checkout repository
         uses: actions/checkout@v4
 
-      - name: 🌟 Set up Node.js
+      - name: 🌟 Set up Node.js with pnpm
         uses: actions/setup-node@v4
         with:
           node-version: "22"
-          cache: "yarn"
+          cache: "pnpm"
 
-      - name: 📦 Cache Yarn dependencies
-        uses: actions/cache@v4
+      - name: 📦 Install pnpm
+        uses: pnpm/action-setup@v2
         with:
-          path: node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+          version: 9
 
-      - name: 🧶 Install dependencies
-        run: yarn install --frozen-lockfile
+      - name: 📦 Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: 🔍 Run ESLint
-        run: yarn lint
+        run: pnpm lint
 
       - name: 🏆 Run TypeScript checks
-        run: yarn lint:ts
+        run: pnpm lint:ts
 
   results:
     name: 🎉 Lint Results

@@ -17,13 +17,13 @@ curl -Ls "https://get.maestro.mobile.dev" | bash
 
 Run all tests:
 ```bash
-yarn test:e2e
+pnpm test:e2e
 ```
 
 Run specific test flows:
 ```bash
-yarn test:e2e:smoke      # Run smoke tests
-yarn test:e2e:verification   # Run verification flow tests
+pnpm test:e2e:smoke      # Run smoke tests
+pnpm test:e2e:verification   # Run verification flow tests
 ```
 
 ## Test Flows

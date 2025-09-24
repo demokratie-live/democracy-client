@@ -25,7 +25,7 @@ A mobile application that brings the German Bundestag to citizens' smartphones, 
 ### Prerequisites
 
 - Node.js
-- Yarn package manager (v1.22.19+)
+- pnpm package manager (v9.0.0+) - Install via `corepack enable` or `npm install -g pnpm`
 - iOS development environment (for iOS)
   - Xcode
   - CocoaPods
@@ -45,36 +45,36 @@ A mobile application that brings the German Bundestag to citizens' smartphones, 
 2. Install dependencies:
 
    ```bash
-   yarn install
+   pnpm install
    ```
 
 3. Generate GraphQL types:
 
    ```bash
-   yarn codegen
+   pnpm codegen
    ```
 
 4. Start the development server:
 
    ```bash
-   yarn start
+   pnpm start
    ```
 
 5. Run on specific platforms:
    ```bash
-   yarn ios     # Run on iOS simulator
-   yarn android # Run on Android emulator
+   pnpm ios     # Run on iOS simulator
+   pnpm android # Run on Android emulator
    ```
 
 ## Development
 
-- Run type checking: `yarn lint:ts`
-- Run linter: `yarn lint`
-- Run doctor for Expo issues: `yarn doctor`
+- Run type checking: `pnpm lint:ts`
+- Run linter: `pnpm lint`
+- Run doctor for Expo issues: `pnpm doctor`
 
-### Dependency Resolutions (ANSI Tooling)
+### Dependency Overrides (ANSI Tooling)
 
-We pin `wrap-ansi@7.0.0`, `string-width@4.2.3`, and `strip-ansi@6.0.1` to avoid a CommonJS/ESM interop runtime error ("TypeError: stringWidth is not a function") triggered in the Expo CLI table renderer when a newer ESM-only `string-width` version is hoisted. Details and an upgrade checklist live in [`docs/DEPENDENCY-RESOLUTIONS.md`](./docs/DEPENDENCY-RESOLUTIONS.md).
+We pin `wrap-ansi@7.0.0`, `string-width@4.2.3`, and `strip-ansi@6.0.1` via pnpm overrides to avoid a CommonJS/ESM interop runtime error ("TypeError: stringWidth is not a function") triggered in the Expo CLI table renderer when a newer ESM-only `string-width` version is hoisted. Details and an upgrade checklist live in [`docs/DEPENDENCY-RESOLUTIONS.md`](./docs/DEPENDENCY-RESOLUTIONS.md).
 
 ## Testing
 
