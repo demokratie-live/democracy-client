@@ -2,7 +2,7 @@ name: 🧪 E2E Tests
 
 on:
   push:
-    branches: [main]
+    branches: [main, copilot/fix-09ebd978-bbd0-4c56-983d-b3e9ca6dda0f]  # Temporarily added this branch for testing
   workflow_dispatch:
     inputs:
       test_type:
