@@ -96,7 +96,6 @@ E2E tests can be manually triggered on any branch through GitHub Actions:
 3. Tests will run on the selected branch
 
 This is useful for testing feature branches before merging.
-```
 
 ## Deployment
 
