@@ -11,18 +11,14 @@ import { DrawerNavigationOptions, DrawerItem } from "@react-navigation/drawer";
 import { View } from "react-native";
 
 import { Space } from "../Space";
-import {
-  DrawerDescriptorMap,
-  DrawerNavigationHelpers,
-} from "@react-navigation/drawer/lib/typescript/commonjs/src/types";
 
 type Props = Omit<
   DrawerNavigationOptions,
   "contentContainerStyle" | "style"
 > & {
   state: DrawerNavigationState<ParamListBase>;
-  navigation: DrawerNavigationHelpers;
-  descriptors: DrawerDescriptorMap;
+  navigation: any; // TODO: Fix proper type when @react-navigation/drawer exports are updated
+  descriptors: any; // TODO: Fix proper type when @react-navigation/drawer exports are updated
 };
 
 /**
