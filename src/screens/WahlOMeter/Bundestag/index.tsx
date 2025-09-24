@@ -96,7 +96,7 @@ export const BundestagScreen = () => {
         })
       }
     >
-      {({ totalProcedures, chartData }: { totalProcedures: number; chartData: ChartData }) => {
+      {({ totalProcedures, chartData }) => {
         const matchingProcedures = getMatchingProcedures(chartData);
         const preparedData = pieChartData({
           ...chartData,

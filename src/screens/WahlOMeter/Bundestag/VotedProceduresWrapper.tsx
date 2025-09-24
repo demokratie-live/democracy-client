@@ -41,7 +41,7 @@ interface Props {
       type?: string;
     };
   }) => void;
-  children: React.ReactElement | ((props: ChildProps) => ReactElement);
+  children: JSX.Element | ((props: ChildProps) => ReactElement);
 }
 
 const VotedProceduresWrapper: React.FC<Props> = ({

@@ -61,7 +61,7 @@ export const FilterScreen: React.FC = () => {
   const { isVerified } = useInitialState();
   const [filter, setFilter] = useRecoilState(filterState);
   const [data, setData] = useState<FilterData[]>(filter);
-  const dataPrefiltered = useRef<"isVerified" | "isNotVerified" | undefined>(undefined);
+  const dataPrefiltered = useRef<"isVerified" | "isNotVerified">();
 
   useEffect(() => {
     if (!isVerified && dataPrefiltered.current !== "isNotVerified") {
