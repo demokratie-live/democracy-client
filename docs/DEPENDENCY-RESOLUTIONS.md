@@ -1,13 +1,15 @@
-# Dependency Resolutions: ANSI Width Tooling (wrap-ansi / string-width / strip-ansi)
+# Dependency Overrides: ANSI Width Tooling (wrap-ansi / string-width / strip-ansi)
 
-We explicitly pin the following transitive dependencies via the `resolutions` field in `package.json`:
+We explicitly pin the following transitive dependencies via the `pnpm.overrides` field in `package.json`:
 
 ```json
 {
-  "resolutions": {
-    "wrap-ansi": "7.0.0",
-    "string-width": "4.2.3",
-    "strip-ansi": "6.0.1"
+  "pnpm": {
+    "overrides": {
+      "wrap-ansi": "7.0.0",
+      "string-width": "4.2.3",
+      "strip-ansi": "6.0.1"
+    }
   }
 }
 ```
@@ -45,9 +47,9 @@ We can drop these pins when all upstream tooling that depends on `wrap-ansi@7` m
 2. Depend on `wrap-ansi@8+` (which is ESM-aware) together with compatible `string-width@5+` / `strip-ansi@7+`.
 
 ### Revalidation Checklist (future upgrade)
-- Remove the three entries from `resolutions`.
-- `rm -rf node_modules yarn.lock && yarn install`.
-- Run: `yarn start` (ensure Expo CLI launches without the TypeError).
+- Remove the three entries from `pnpm.overrides`.
+- `rm -rf node_modules pnpm-lock.yaml && pnpm install`.
+- Run: `pnpm start` (ensure Expo CLI launches without the TypeError).
 - Manually exercise any scripts that render tabular / colorized CLI output.
 - If no regression, keep the upgrade and update this doc.
 

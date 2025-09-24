@@ -32,21 +32,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Set up Node.js with pnpm
         uses: actions/setup-node@v4
         with:
           node-version: "22"
+          cache: "pnpm"
 
-      - name: Cache Yarn dependencies
-        uses: actions/cache@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
         with:
-          path: node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+          version: 9
 
       - name: Install dependencies
-        run: yarn
+        run: pnpm install --frozen-lockfile
 
       - name: Install Maestro
         run: |
@@ -59,7 +57,7 @@ jobs:
           echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 google-services.json.gpg
 
       - name: Build Expo app prebuild
-        run: yarn expo prebuild --platform ${{ matrix.platform }}
+        run: pnpm expo prebuild --platform ${{ matrix.platform }}
 
       - name: Cache iOS build
         uses: actions/cache@v4
@@ -105,7 +103,7 @@ jobs:
 
       # - name: Build and Run Android App
       #   if: matrix.platform == 'android'
-      #   run: yarn android
+      #   run: pnpm android
 
       # - name: Wait for App to be ready
       #   run: sleep 30
@@ -113,7 +111,7 @@ jobs:
       # - name: Run Maestro Tests
       #   run: |
       #     export PATH="$PATH":"$HOME/.maestro/bin"
-      #     yarn test:e2e:${{ matrix.test }}
+      #     pnpm test:e2e:${{ matrix.test }}
 
       # - name: Upload Test Results
       #   if: always()

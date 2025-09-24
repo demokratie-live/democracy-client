@@ -2,8 +2,9 @@
   "name": "democracy",
   "version": "1.0.0",
   "main": "expo-router/entry",
-  "packageManager": "yarn@1.22.19",
+  "packageManager": "pnpm@9.0.0",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "start": "expo start",
     "android": "expo run:android",
     "ios": "expo run:ios",
@@ -20,14 +21,19 @@
     "@apollo/client": "^3.12.6",
     "@democracy-deutschland/ui": "^0.0.7",
     "@react-native-async-storage/async-storage": "1.23.1",
+    "@react-navigation/core": "^7.12.4",
     "@react-navigation/drawer": "^7.0.19",
     "@react-navigation/material-top-tabs": "^7.1.0",
+    "@react-navigation/native": "^7.1.17",
+    "@react-navigation/native-stack": "^7.3.26",
+    "@react-navigation/routers": "^7.5.1",
     "apollo-link-context": "^1.0.20",
     "apollo-link-rest": "^0.9.0",
     "d3-array": "^3.2.4",
     "d3-scale": "^4.0.2",
     "d3-shape": "^3.2.0",
     "dateformat": "^5.0.3",
+    "deepmerge": "^4.3.1",
     "expo": "~52.0.47",
     "expo-application": "~6.0.1",
     "expo-build-properties": "~0.13.3",
@@ -92,10 +98,12 @@
     "typescript": "^5.7.3"
   },
   "private": true,
-  "resolutions": {
-    "@types/react": "~18.3.12",
-    "wrap-ansi": "7.0.0",
-    "string-width": "4.2.3",
-    "strip-ansi": "6.0.1"
+  "pnpm": {
+    "overrides": {
+      "@types/react": "~18.3.12",
+      "wrap-ansi": "7.0.0",
+      "string-width": "4.2.3",
+      "strip-ansi": "6.0.1"
+    }
   }
 }
