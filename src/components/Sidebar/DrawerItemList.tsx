@@ -6,23 +6,19 @@ import {
   DrawerActions,
   DrawerNavigationState,
   ParamListBase,
-} from "@react-navigation/routers";
+} from "@react-navigation/native";
 import { DrawerNavigationOptions, DrawerItem } from "@react-navigation/drawer";
 import { View } from "react-native";
 
 import { Space } from "../Space";
-import {
-  DrawerDescriptorMap,
-  DrawerNavigationHelpers,
-} from "@react-navigation/drawer/lib/typescript/commonjs/src/types";
 
 type Props = Omit<
   DrawerNavigationOptions,
   "contentContainerStyle" | "style"
 > & {
   state: DrawerNavigationState<ParamListBase>;
-  navigation: DrawerNavigationHelpers;
-  descriptors: DrawerDescriptorMap;
+  navigation: any; // We'll use a more generic type
+  descriptors: any; // We'll use a more generic type
 };
 
 /**

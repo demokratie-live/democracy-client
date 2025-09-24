@@ -31,11 +31,9 @@ export default function PushNotifications() {
 
     return () => {
       notificationListener.current &&
-        Notifications.removeNotificationSubscription(
-          notificationListener.current
-        );
+        notificationListener.current.remove();
       responseListener.current &&
-        Notifications.removeNotificationSubscription(responseListener.current);
+        responseListener.current.remove();
     };
   }, []);
 
