@@ -65,7 +65,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   name: getAppName(),
   slug: "DEMOCRACY",
   scheme: "democracy",
-  version: "1.5.11",
+  version: "1.5.12",
   orientation: "portrait",
   icon: getAppIcon(),
   userInterfaceStyle: "light",
