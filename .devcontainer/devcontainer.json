@@ -1,7 +1,26 @@
 {
-  "tasks": {
-    "build": "yarn install && yarn codegen",
-    "test": "yarn install && yarn lint && yarn lint:ts && yarn test:e2e && yarn test:e2e:smoke && yarn test:e2e:verification",
-    "launch": "yarn install && yarn ios"
+  "name": "democracy-client",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:20",
+  "postCreateCommand": "pnpm install --frozen-lockfile",
+  "customizations": {
+    "vscode": {
+      "tasks": [
+        {
+          "label": "pnpm: build",
+          "type": "shell",
+          "command": "pnpm install --frozen-lockfile && pnpm codegen"
+        },
+        {
+          "label": "pnpm: test",
+          "type": "shell",
+          "command": "pnpm lint && pnpm lint:ts && pnpm test:e2e && pnpm test:e2e:smoke && pnpm test:e2e:verification"
+        },
+        {
+          "label": "pnpm: launch ios",
+          "type": "shell",
+          "command": "pnpm ios"
+        }
+      ]
+    }
   }
 }

@@ -9,6 +9,7 @@ End-to-end tests are implemented using Maestro, a mobile UI testing framework.
 ### Setup
 
 1. Install Maestro:
+
    ```bash
    curl -Ls "https://get.maestro.mobile.dev" | bash
    ```
@@ -20,14 +21,16 @@ End-to-end tests are implemented using Maestro, a mobile UI testing framework.
 ### Running Tests
 
 Run all tests:
+
 ```bash
-yarn test:e2e
+pnpm test:e2e
 ```
 
 Run specific test flows:
+
 ```bash
-yarn test:e2e:smoke      # Run smoke tests
-yarn test:e2e:verification   # Run verification flow tests
+pnpm test:e2e:smoke      # Run smoke tests
+pnpm test:e2e:verification   # Run verification flow tests
 ```
 
 ### Test Flows
@@ -42,6 +45,7 @@ Tests are located in the `.maestro/flows/` directory and are organized by featur
 ### Writing Tests
 
 When writing new tests:
+
 1. Create a new `.yaml` file in the `.maestro/flows/` directory
 2. Define test steps using Maestro's YAML syntax
 3. Add appropriate assertions to verify the functionality
