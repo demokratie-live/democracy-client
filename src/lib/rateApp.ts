@@ -1,4 +1,5 @@
-import * as StoreReview from 'expo-store-review';
+import { Linking } from "react-native";
+import * as StoreReview from "expo-store-review";
 
 export const rateApp = async () => {
   try {
@@ -8,11 +9,14 @@ export const rateApp = async () => {
     } else {
       // Fallback to opening the store review page
       const storeUrl = await StoreReview.storeUrl();
+
       if (storeUrl) {
-        await StoreReview.requestReview();
+        await Linking.openURL(storeUrl);
+      } else {
+        console.warn("Store review URL is unavailable.");
       }
     }
   } catch (error) {
-    console.warn('Error requesting app review:', error);
+    console.warn("Error requesting app review:", error);
   }
 };
