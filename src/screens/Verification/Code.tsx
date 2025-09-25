@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components/native";
 import { Keyboard, Alert, Dimensions, ActivityIndicator, KeyboardAvoidingView } from "react-native";
-import { sha256 } from "react-native-sha256";
+import { digestStringAsync, CryptoDigestAlgorithm } from "expo-crypto";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Description from "./Components/Description";
 import CodeInput from "./Components/CodeInput";
@@ -55,7 +55,7 @@ export const SmsCodeInputScreen: React.FC = () => {
   const onChangeCode = async (newCode: string) => {
     setCode(newCode);
     if (newCode.length === 6) {
-      const phoneNumberHash = await sha256(phoneNumber);
+      const phoneNumberHash = await digestStringAsync(CryptoDigestAlgorithm.SHA256, phoneNumber);
       const res = await requestVerification({
         variables: {
           code: newCode,

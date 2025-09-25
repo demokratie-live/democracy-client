@@ -8,7 +8,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ApolloLink } from "@apollo/client";
 import { setContext } from "apollo-link-context";
 import { jwtDecode } from "jwt-decode";
-import { sha256 } from "react-native-sha256";
+import { digestStringAsync, CryptoDigestAlgorithm } from "expo-crypto";
 import DeviceInfo from "react-native-device-info";
 
 interface JwtObject {
@@ -40,7 +40,7 @@ export const authLinkMiddleware = setContext(async (_, { headers }) => {
     }
   }
   // No (valid) Token present - login
-  const deviceHash = await sha256(await DeviceInfo.getUniqueId());
+  const deviceHash = await digestStringAsync(CryptoDigestAlgorithm.SHA256, await DeviceInfo.getUniqueId());
   const phoneHash = await AsyncStorage.getItem("auth_phoneHash");
   const newHeaders = {
     ...headers,
