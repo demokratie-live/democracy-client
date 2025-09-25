@@ -37,3 +37,6 @@ expo-env.d.ts
 google-services.json
 key.json
 report.xml
+# Test artifacts and screenshots
+artifacts/
+/*.png

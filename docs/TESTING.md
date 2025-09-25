@@ -31,12 +31,14 @@ Run specific test flows:
 ```bash
 pnpm test:e2e:smoke      # Run smoke tests
 pnpm test:e2e:verification   # Run verification flow tests
+pnpm test:e2e:rating   # Run rating flow tests
 ```
 
 ### Test Flows
 
 - `smoke.yaml`: Basic app launch and navigation tests
 - `verification.yaml`: Tests the phone verification flow
+- `rating.yaml`: Opens the drawer and exercises the in-app rating entry point
 
 ### Test Structure
 

@@ -187,11 +187,12 @@ export PATH="$PATH":"$HOME/.maestro/bin"
 
 ```bash
 # All E2E tests - NEVER CANCEL, timeout: 15+ minutes
-pnpm test:e2e
+devbox run -- pnpm test:e2e
 
 # Specific test flows - NEVER CANCEL, timeout: 5+ minutes each
-pnpm test:e2e:smoke        # Basic app functionality
-pnpm test:e2e:verification # Phone verification flow
+devbox run -- pnpm test:e2e:smoke        # Basic app functionality
+devbox run -- pnpm test:e2e:verification # Phone verification flow
+devbox run -- pnpm test:e2e:rating       # In-app rating flow
 ```
 
 **Test Files Location**: `.maestro/flows/`

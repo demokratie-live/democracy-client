@@ -1,0 +1,14 @@
+appId: de.democracy-deutschland.clientapp.internal
+---
+- launchApp
+- waitForAnimationToEnd
+- assertVisible: "Es liegen derzeit noch keine Abstimmungsdaten vor."
+- swipe:
+    start: 0, 300
+    end: 300, 300
+- waitForAnimationToEnd
+- assertVisible: "⭐️  App Bewerten"
+- tapOn: "⭐️  App Bewerten"
+- takeScreenshot: artifacts/maestro/rating/rating_after_tap
+- waitForAnimationToEnd
+- tapOn: "Später"
