@@ -24,7 +24,7 @@ on:
           - android
           - both
 
-# Set default permissions to read-only
+# Set minimal required permissions (contents: read-only). Note: GitHub Actions default permissions are broader.
 permissions:
   contents: read
 
