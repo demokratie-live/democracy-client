@@ -1,7 +1,6 @@
-import React, { PropsWithChildren } from "react";
-import { Linking, Platform, StyleSheet, Text } from "react-native";
+import React from "react";
+import { Platform, Text } from "react-native";
 import { getBuildNumber, getVersion } from "react-native-device-info";
-import Markdown from "react-native-markdown-display";
 import styled from "styled-components/native";
 import { AppLogo } from "../../components/AppLogo";
 import Folding from "../../components/Folding";
@@ -13,6 +12,7 @@ import { MadeWithLove } from "../../components/MadeWithLove";
 import { Space } from "../../components/Space";
 import { linking } from "../../lib/linking";
 import { credentialsData } from "./data";
+import { CustomMarkdown } from "../../components/CustomMarkdown";
 
 const phoneNumber =
   Platform.OS === "ios"
@@ -53,36 +53,6 @@ const IconWrapper = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
 `;
-
-interface MarkdownProps extends PropsWithChildren {
-  style?: StyleSheet.NamedStyles<any>;
-}
-
-const CustomMarkdown: React.FC<MarkdownProps> = ({
-  children,
-  style = {},
-}) => {
-  const markdownStyles = {
-    paragraph: {
-      color: "#555",
-    },
-    ...style,
-  };
-
-  return (
-    <Markdown
-      style={markdownStyles}
-      onLinkPress={(url) => {
-        Linking.openURL(url).catch((error) =>
-          console.warn("An error occurred: ", error)
-        );
-        return false;
-      }}
-    >
-      {children}
-    </Markdown>
-  );
-};
 
 export const AboutScreen: React.FC = () => {
   return (
