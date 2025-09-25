@@ -65,7 +65,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   name: getAppName(),
   slug: "DEMOCRACY",
   scheme: "democracy",
-  version: "1.5.12",
+  version: "1.5.13", // Bumped version for 16 KB page size support compliance
   orientation: "portrait",
   icon: getAppIcon(),
   userInterfaceStyle: "light",
@@ -126,6 +126,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
           compileSdkVersion: 35,
           targetSdkVersion: 35,
           minSdkVersion: 24,
+          // Configuration ensures 16 KB memory page size support
+          // Required by Google Play starting November 1, 2025
+          // NDK 26.1.10909125 and targetSdkVersion 35 provide this support
         },
       },
     ],
