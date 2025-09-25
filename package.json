@@ -59,7 +59,7 @@
     "react-native-gesture-handler": "~2.20.2",
     "react-native-keychain": "^9.2.2",
     "react-native-linear-gradient": "^2.8.3",
-    "react-native-markdown-view": "https://github.com/Benjamin-Dobell/react-native-markdown-view",
+    "react-native-markdown-display": "^7.0.2",
     "react-native-pager-view": "6.5.1",
     "react-native-pdf": "^6.7.6",
     "react-native-rate": "^1.2.12",

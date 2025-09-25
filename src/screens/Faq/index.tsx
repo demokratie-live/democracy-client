@@ -1,9 +1,8 @@
-import React, { ComponentProps, PropsWithChildren } from "react";
+import React, { PropsWithChildren } from "react";
 import { faqData } from "./data";
-import { MarkdownView } from "react-native-markdown-view";
+import Markdown from "react-native-markdown-display";
 import { Linking, Platform } from "react-native";
 import styled from "styled-components/native";
-import deepmerge from "deepmerge";
 import Folding from "../../components/Folding";
 import SvgDiscord from "../../components/Icons/Discord";
 import SvgFacebook from "../../components/Icons/Facebook";
@@ -84,33 +83,32 @@ const ReViewTutorial = styled.View`
 `;
 
 interface MarkdownProps extends PropsWithChildren {
-  styles?: ComponentProps<typeof MarkdownView>["styles"];
+  style?: any;
 }
 
-const Markdown: React.FC<MarkdownProps> = ({ children, styles = {} }) => {
-  const markdownStyles = deepmerge(
-    {
-      paragraph: {
-        color: "#555",
-        ...(styles.paragraph || []),
-      },
+const CustomMarkdown: React.FC<MarkdownProps> = ({ children, style = {} }) => {
+  const markdownStyles = {
+    body: {
+      paddingHorizontal: 18,
     },
-    styles
-  );
+    paragraph: {
+      color: "#555",
+    },
+    ...style,
+  };
 
   return (
-    // @ts-ignore
-    <MarkdownView
-      style={{ paddingHorizontal: 18 }}
-      styles={markdownStyles}
+    <Markdown
+      style={markdownStyles}
       onLinkPress={(url: string) => {
         Linking.openURL(url).catch((error) =>
           console.warn("An error occurred: ", error)
         );
+        return false;
       }}
     >
       {children}
-    </MarkdownView>
+    </Markdown>
   );
 };
 
@@ -120,12 +118,12 @@ export const FaqScreen: React.FC = () => {
       <Headline>Hier beantworten wir häufig gestellte Fragen</Headline>
       {faqData.map(({ title, text }) => (
         <Folding title={title} key={title}>
-          <Markdown>{text}</Markdown>
+          <CustomMarkdown>{text}</CustomMarkdown>
         </Folding>
       ))}
       <Spacer />
-      <Markdown
-        styles={{
+      <CustomMarkdown
+        style={{
           paragraph: {
             fontSize: 15,
           },
@@ -137,7 +135,7 @@ Du möchtest einen Fehler melden?
 Bitte gib uns möglichst viele Informationen zu den von Dir gefunden Fehlern oder Verbesserungsvorschlägen.
 
 Übermittele uns daher immer einen Screenshot, eine kurze Fehlerbeschreibung sowie Deine Plattform (iOS/Android) und Deine Gerätebezeichnung (z.B. iPhone SE), damit wir Dir schnellstmöglich helfen können. 
-`}</Markdown>
+`}</CustomMarkdown>
       <Spacer />
       <ContactWrapper>
         <IconWrapper onPress={linking(phoneNumber)}>
