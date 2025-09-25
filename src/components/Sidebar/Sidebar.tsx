@@ -83,7 +83,7 @@ export const Sidebar: React.FC<SidebarProps> = (props) => {
           <DrawerItemList {...props} />
           <DrawerItem
             label="⭐️  App Bewerten"
-            onPress={rateApp}
+            onPress={() => rateApp()}
             labelStyle={{ fontSize: 16, color: "#ddd" }}
           />
           {devMode && (
