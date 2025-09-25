@@ -4,7 +4,7 @@
   "main": "expo-router/entry",
   "packageManager": "pnpm@9.0.0",
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
+    "preinstall": "npx only-allow@1.1.1 pnpm",
     "start": "expo start",
     "android": "expo run:android",
     "ios": "expo run:ios",
