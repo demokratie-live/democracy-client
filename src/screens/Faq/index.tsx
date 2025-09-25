@@ -1,7 +1,6 @@
-import React, { PropsWithChildren } from "react";
+import React from "react";
 import { faqData } from "./data";
-import Markdown from "react-native-markdown-display";
-import { Linking, Platform, StyleSheet } from "react-native";
+import { Platform } from "react-native";
 import styled from "styled-components/native";
 import Folding from "../../components/Folding";
 import SvgDiscord from "../../components/Icons/Discord";
@@ -18,6 +17,7 @@ import { linking } from "../../lib/linking";
 import { Button } from "@democracy-deutschland/ui";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { router } from "expo-router";
+import { CustomMarkdown } from "../../components/CustomMarkdown";
 
 const phoneNumber =
   Platform.OS === "ios"
@@ -82,47 +82,18 @@ const ReViewTutorial = styled.View`
   margin-horizontal: 36px;
 `;
 
-interface MarkdownProps extends PropsWithChildren {
-  style?: StyleSheet.NamedStyles<any>;
-}
-
-const CustomMarkdown: React.FC<MarkdownProps> = ({ children, style = {} }) => {
-  const markdownStyles = {
-    body: {
-      paddingHorizontal: 18,
-    },
-    paragraph: {
-      color: "#555",
-    },
-    ...style,
-  };
-
-  return (
-    <Markdown
-      style={markdownStyles}
-      onLinkPress={(url: string) => {
-        Linking.openURL(url).catch((error) =>
-          console.warn("An error occurred: ", error)
-        );
-        return false;
-      }}
-    >
-      {children}
-    </Markdown>
-  );
-};
-
 export const FaqScreen: React.FC = () => {
   return (
     <Wrapper>
       <Headline>Hier beantworten wir häufig gestellte Fragen</Headline>
       {faqData.map(({ title, text }) => (
         <Folding title={title} key={title}>
-          <CustomMarkdown>{text}</CustomMarkdown>
+          <CustomMarkdown bodyStyle={{ paddingHorizontal: 18 }}>{text}</CustomMarkdown>
         </Folding>
       ))}
       <Spacer />
       <CustomMarkdown
+        bodyStyle={{ paddingHorizontal: 18 }}
         style={{
           paragraph: {
             fontSize: 15,
