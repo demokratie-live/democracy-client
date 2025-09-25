@@ -1,8 +1,7 @@
-import deepmerge from "deepmerge";
-import React, { ComponentProps, PropsWithChildren } from "react";
+import React, { PropsWithChildren } from "react";
 import { Linking, Platform, Text } from "react-native";
 import { getBuildNumber, getVersion } from "react-native-device-info";
-import { MarkdownView } from "react-native-markdown-view";
+import Markdown from "react-native-markdown-display";
 import styled from "styled-components/native";
 import { AppLogo } from "../../components/AppLogo";
 import Folding from "../../components/Folding";
@@ -56,38 +55,34 @@ const IconWrapper = styled.TouchableOpacity`
 `;
 
 interface MarkdownProps extends PropsWithChildren {
-  styles?: ComponentProps<typeof MarkdownView>["styles"];
-  style?: ComponentProps<typeof MarkdownView>["style"];
+  style?: any;
+  containerStyle?: any;
 }
 
-const Markdown: React.FC<MarkdownProps> = ({
+const CustomMarkdown: React.FC<MarkdownProps> = ({
   children,
-  styles = {},
   style = {},
+  containerStyle = {},
 }) => {
-  const markdownStyles = deepmerge(
-    {
-      paragraph: {
-        color: "#555",
-        ...(styles.paragraph || []),
-      },
+  const markdownStyles = {
+    paragraph: {
+      color: "#555",
     },
-    styles
-  );
+    ...style,
+  };
 
   return (
-    // @ts-ignore
-    <MarkdownView
-      styles={markdownStyles}
-      style={style}
+    <Markdown
+      style={markdownStyles}
       onLinkPress={(url) => {
         Linking.openURL(url).catch((error) =>
           console.warn("An error occurred: ", error)
         );
+        return false;
       }}
     >
       {children}
-    </MarkdownView>
+    </Markdown>
   );
 };
 
@@ -105,8 +100,8 @@ export const AboutScreen: React.FC = () => {
             Version {getVersion()} ({getBuildNumber()})
           </Text>
         </HeaderWrapper>
-        <Markdown
-          styles={{
+        <CustomMarkdown
+          style={{
             paragraph: {
               fontSize: 15,
             },
@@ -115,10 +110,10 @@ export const AboutScreen: React.FC = () => {
           {
             "[DEMOCRACY Deutschland e.V.](https://www.democracy-deutschland.de) ist ein gemeinnütziger Verein, der sich mit seiner gleichnamigen App und Bildungsarbeit für Demokratie – als politische Selbstbestimmung durch die Bevölkerung – einsetzt."
           }
-        </Markdown>
+        </CustomMarkdown>
 
-        <Markdown
-          styles={{
+        <CustomMarkdown
+          style={{
             paragraph: {
               fontSize: 15,
             },
@@ -129,12 +124,12 @@ export const AboutScreen: React.FC = () => {
 Für mehr Informationen:
 [democracy-deutschland.de](https://www.democracy-deutschland.de)
 `}
-        </Markdown>
+        </CustomMarkdown>
         <Space space={18} />
       </Content>
       {credentialsData.map(({ title, text, opened }) => (
         <Folding title={title} key={title} opened={opened}>
-          <Markdown>{text}</Markdown>
+          <CustomMarkdown>{text}</CustomMarkdown>
         </Folding>
       ))}
       <Space space={36} />
