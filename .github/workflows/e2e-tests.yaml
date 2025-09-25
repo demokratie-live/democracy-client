@@ -24,6 +24,10 @@ on:
           - android
           - both
 
+# Set default permissions to read-only
+permissions:
+  contents: read
+
 env:
   APP_VARIANT: internal
   CI: true
