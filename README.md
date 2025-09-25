@@ -79,9 +79,9 @@ The project uses Maestro for end-to-end testing. See [Testing Documentation](./d
 Run tests with:
 
 ```bash
-yarn test:e2e          # Run all E2E tests
-yarn test:e2e:smoke    # Run smoke tests only
-yarn test:e2e:verification  # Run verification flow tests only
+pnpm test:e2e          # Run all E2E tests
+pnpm test:e2e:smoke    # Run smoke tests only
+pnpm test:e2e:verification  # Run verification flow tests only
 ```
 
 ## Deployment

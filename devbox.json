@@ -1,7 +1,7 @@
 {
   "packages": [
     "nodejs@22",
-    "yarn@1.22.19",
+    "pnpm@9",
     "fastlane@latest",
     "ruby@3.3",
     "maestro@latest"
@@ -12,9 +12,7 @@
       "export SDKROOT=$(xcrun --show-sdk-path)"
     ],
     "scripts": {
-      "test": [
-        "echo \"Error: no test specified\" && exit 1"
-      ]
+      "test": ["echo \"Error: no test specified\" && exit 1"]
     }
   }
 }
