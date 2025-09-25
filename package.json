@@ -97,13 +97,5 @@
     "expo-doctor": "^1.12.4",
     "typescript": "^5.7.3"
   },
-  "private": true,
-  "pnpm": {
-    "overrides": {
-      "@types/react": "~18.3.12",
-      "wrap-ansi": "7.0.0",
-      "string-width": "4.2.3",
-      "strip-ansi": "6.0.1"
-    }
-  }
+  "private": true
 }
