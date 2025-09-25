@@ -1,12 +1,10 @@
 import React, { PropsWithChildren } from "react";
-import { Linking, StyleSheet } from "react-native";
+import { Linking, StyleProp, StyleSheet, ViewStyle } from "react-native";
 import Markdown from "react-native-markdown-display";
 
 interface CustomMarkdownProps extends PropsWithChildren {
   style?: StyleSheet.NamedStyles<any>;
-  bodyStyle?: {
-    paddingHorizontal?: number;
-  };
+  bodyStyle?: StyleProp<ViewStyle>;
 }
 
 export const CustomMarkdown: React.FC<CustomMarkdownProps> = ({ 
@@ -17,7 +15,7 @@ export const CustomMarkdown: React.FC<CustomMarkdownProps> = ({
   const markdownStyles = {
     body: {
       paddingHorizontal: 0,
-      ...bodyStyle,
+      ...(bodyStyle as object),
     },
     paragraph: {
       color: "#555",
