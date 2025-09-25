@@ -95,7 +95,7 @@ jobs:
       - name: Install iOS App
         run: |
           DEVICE_ID=$(xcrun xctrace list devices | grep -m 1 "iPhone" | awk '{print $NF}' | tr -d '()')
-          xcrun simctl install $DEVICE_ID ios/build/Build/Products/Release-iphonesimulator/DEMOCRACYInternal.app
+          xcrun simctl install $DEVICE_ID ${{ github.workspace }}/ios/build/Build/Products/Release-iphonesimulator/DEMOCRACYInternal.app
 
       - name: Launch iOS App
         run: |
