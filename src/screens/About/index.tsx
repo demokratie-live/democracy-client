@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from "react";
-import { Linking, Platform, Text } from "react-native";
+import { Linking, Platform, StyleSheet, Text } from "react-native";
 import { getBuildNumber, getVersion } from "react-native-device-info";
 import Markdown from "react-native-markdown-display";
 import styled from "styled-components/native";
@@ -55,14 +55,12 @@ const IconWrapper = styled.TouchableOpacity`
 `;
 
 interface MarkdownProps extends PropsWithChildren {
-  style?: any;
-  containerStyle?: any;
+  style?: StyleSheet.NamedStyles<any>;
 }
 
 const CustomMarkdown: React.FC<MarkdownProps> = ({
   children,
   style = {},
-  containerStyle = {},
 }) => {
   const markdownStyles = {
     paragraph: {

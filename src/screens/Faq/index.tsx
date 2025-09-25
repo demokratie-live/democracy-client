@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from "react";
 import { faqData } from "./data";
 import Markdown from "react-native-markdown-display";
-import { Linking, Platform } from "react-native";
+import { Linking, Platform, StyleSheet } from "react-native";
 import styled from "styled-components/native";
 import Folding from "../../components/Folding";
 import SvgDiscord from "../../components/Icons/Discord";
@@ -83,7 +83,7 @@ const ReViewTutorial = styled.View`
 `;
 
 interface MarkdownProps extends PropsWithChildren {
-  style?: any;
+  style?: StyleSheet.NamedStyles<any>;
 }
 
 const CustomMarkdown: React.FC<MarkdownProps> = ({ children, style = {} }) => {
