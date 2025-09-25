@@ -1,16 +1,18 @@
-import DeviceInfo from 'react-native-device-info';
-import Rate, { AndroidMarket } from 'react-native-rate';
+import * as StoreReview from 'expo-store-review';
 
-export const rateApp = () => {
-  const options = {
-    AppleAppID: '1341311162',
-    GooglePackageName: DeviceInfo.getBundleId(),
-    preferredAndroidMarket: AndroidMarket.Google,
-    preferInApp: true,
-  };
-  Rate.rate(options, success => {
-    if (success) {
-      // this technically only tells us if the user successfully went to the Review Page. Whether they actually did anything, we do not know.
+export const rateApp = async () => {
+  try {
+    if (await StoreReview.hasAction()) {
+      // Use the in-app review API when available
+      await StoreReview.requestReview();
+    } else {
+      // Fallback to opening the store review page
+      const storeUrl = await StoreReview.storeUrl();
+      if (storeUrl) {
+        await StoreReview.requestReview();
+      }
     }
-  });
+  } catch (error) {
+    console.warn('Error requesting app review:', error);
+  }
 };
