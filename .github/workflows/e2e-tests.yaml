@@ -137,21 +137,33 @@ jobs:
           #   os: macos-latest
           #   test: verification
     runs-on: ${{ matrix.os }}
-    if: |
-      github.event_name == 'workflow_dispatch' && 
-      ((inputs.test_type == 'all') || (inputs.test_type == matrix.test)) &&
-      ((inputs.platform == 'both') || (inputs.platform == matrix.platform))
+    if: github.event_name == 'workflow_dispatch'
 
     steps:
+      - name: Check if this test should run
+        id: should_run
+        run: |
+          should_run="false"
+          if [[ "${{ inputs.test_type }}" == "all" || "${{ inputs.test_type }}" == "${{ matrix.test }}" ]]; then
+            if [[ "${{ inputs.platform }}" == "both" || "${{ inputs.platform }}" == "${{ matrix.platform }}" ]]; then
+              should_run="true"
+            fi
+          fi
+          echo "should_run=$should_run" >> $GITHUB_OUTPUT
+          echo "Test: ${{ matrix.test }}, Platform: ${{ matrix.platform }}, Should run: $should_run"
+
       - name: Checkout repository
+        if: steps.should_run.outputs.should_run == 'true'
         uses: actions/checkout@v4
 
       - name: Set up Node.js
+        if: steps.should_run.outputs.should_run == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: "22"
 
       - name: Cache Yarn dependencies
+        if: steps.should_run.outputs.should_run == 'true'
         uses: actions/cache@v4
         with:
           path: node_modules
@@ -160,24 +172,28 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies
+        if: steps.should_run.outputs.should_run == 'true'
         run: yarn
 
       - name: Install Maestro
+        if: steps.should_run.outputs.should_run == 'true'
         run: |
           curl -Ls "https://get.maestro.mobile.dev" | bash
           export PATH="$PATH":"$HOME/.maestro/bin"
 
       - name: Decrypt GPG secure files
+        if: steps.should_run.outputs.should_run == 'true'
         run: |
           brew install gnupg@1.4
           echo ${{ secrets.SUPER_SECRET_PASSWORD }} | gpg1 --no-tty --passphrase-fd 0 google-services.json.gpg
 
       - name: Build Expo app prebuild
+        if: steps.should_run.outputs.should_run == 'true'
         run: yarn expo prebuild --platform ${{ matrix.platform }}
 
       - name: Cache iOS build
+        if: steps.should_run.outputs.should_run == 'true' && matrix.platform == 'ios'
         uses: actions/cache@v4
-        if: matrix.platform == 'ios'
         with:
           path: |
             ios/build
@@ -187,50 +203,52 @@ jobs:
             ${{ runner.os }}-ios-build-
 
       - name: Setup iOS Simulator
-        if: matrix.platform == 'ios'
+        if: steps.should_run.outputs.should_run == 'true' && matrix.platform == 'ios'
         run: |
           DEVICE_ID=$(xcrun xctrace list devices | grep -m 1 "iPhone" | awk '{print $NF}' | tr -d '()')
           xcrun simctl boot $DEVICE_ID || true
 
       # - name: Setup Android Emulator
-      #   if: matrix.platform == 'android'
+      #   if: steps.should_run.outputs.should_run == 'true' && matrix.platform == 'android'
       #   uses: reactivecircus/android-emulator-runner@v2
       #   with:
       #     api-level: 31
       #     script: echo "Emulator started"
 
       - name: Build iOS App
-        if: matrix.platform == 'ios'
+        if: steps.should_run.outputs.should_run == 'true' && matrix.platform == 'ios'
         run: |
           xcodebuild -workspace DEMOCRACYInternal.xcworkspace -scheme DEMOCRACYInternal -configuration Release -sdk iphonesimulator -derivedDataPath build | xcbeautify
         working-directory: ${{ github.workspace }}/ios
 
       - name: Install iOS App
-        if: matrix.platform == 'ios'
+        if: steps.should_run.outputs.should_run == 'true' && matrix.platform == 'ios'
         run: |
           DEVICE_ID=$(xcrun xctrace list devices | grep -m 1 "iPhone" | awk '{print $NF}' | tr -d '()')
           xcrun simctl install $DEVICE_ID ios/build/Build/Products/Release-iphonesimulator/DEMOCRACYInternal.app
 
       - name: Launch iOS App
-        if: matrix.platform == 'ios'
+        if: steps.should_run.outputs.should_run == 'true' && matrix.platform == 'ios'
         run: |
           DEVICE_ID=$(xcrun xctrace list devices | grep -m 1 "iPhone" | awk '{print $NF}' | tr -d '()')
           xcrun simctl launch $DEVICE_ID de.democracy-deutschland.clientapp.internal
 
       # - name: Build and Run Android App
-      #   if: matrix.platform == 'android'
+      #   if: steps.should_run.outputs.should_run == 'true' && matrix.platform == 'android'
       #   run: yarn android
 
       - name: Wait for App to be ready
+        if: steps.should_run.outputs.should_run == 'true'
         run: sleep 30
 
       - name: Run Maestro Tests
+        if: steps.should_run.outputs.should_run == 'true'
         run: |
           export PATH="$PATH":"$HOME/.maestro/bin"
           yarn test:e2e:${{ matrix.test }}
 
       - name: Upload Test Results
-        if: always()
+        if: always() && steps.should_run.outputs.should_run == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: maestro-${{ matrix.test }}-${{ matrix.platform }}
