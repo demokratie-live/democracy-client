@@ -13,6 +13,7 @@ import {
 import { typePolicies } from "./TypePolicies";
 import { NativeModules } from "react-native";
 import { applicationIdLinkMiddleware } from "./ApplicationId";
+import { RetryLink } from "@apollo/client/link/retry";
 
 const cache = new InMemoryCache({
   typePolicies,
@@ -60,11 +61,46 @@ const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
   }
 });
 
+const retryLink = new RetryLink({
+  delay: {
+    initial: 500,
+    max: 5000,
+    jitter: true,
+  },
+  attempts: (count, operation, error) => {
+    if (count >= 5) {
+      return false;
+    }
+
+    if (!error) {
+      return false;
+    }
+
+    if (error instanceof Error && !("statusCode" in (error as object))) {
+      // Network-level failures from fetch (e.g., offline)
+      return true;
+    }
+
+    const statusCode = (error as { statusCode?: number }).statusCode;
+
+    if (!statusCode) {
+      return false;
+    }
+
+    if (statusCode >= 500 && statusCode < 600) {
+      return true;
+    }
+
+    return false;
+  },
+});
+
 const restLink = new RestLink({
   uri: "https://democracy-deutschland.de/api.php", // ?call=donation_status
 });
 
 const link = ApolloLink.from([
+  retryLink,
   errorLink,
   versionLinkMiddleware,
   applicationIdLinkMiddleware,

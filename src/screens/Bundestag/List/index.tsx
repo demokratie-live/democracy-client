@@ -33,6 +33,7 @@ export const List: React.FC<ListProps> = ({ list }) => {
     error,
     hasMore,
     networkStatus,
+    nextRetryInSeconds,
     handleRefresh,
     handleEndReached,
   } = useProceduresList(list);
@@ -61,7 +62,10 @@ export const List: React.FC<ListProps> = ({ list }) => {
   if (isRetrying) {
     return (
       <Container>
-        <RetryState remainingAttempts={remainingAttempts} />
+        <RetryState
+          remainingAttempts={remainingAttempts}
+          nextRetryInSeconds={nextRetryInSeconds}
+        />
       </Container>
     );
   }

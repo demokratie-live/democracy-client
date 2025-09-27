@@ -29,12 +29,13 @@ interface UseProceduresListResult {
   error: ApolloError | undefined;
   hasMore: boolean;
   networkStatus?: number;
+  nextRetryInSeconds: number | null;
   handleManualRefetch: () => Promise<ApolloQueryResult<ProceduresListQuery>>;
   handleRefresh: () => Promise<ApolloQueryResult<ProceduresListQuery>>;
   handleEndReached: () => Promise<void>;
 }
 
-const MAX_RETRY_ATTEMPTS = 3;
+const MAX_RETRY_ATTEMPTS = 5;
 const BASE_RETRY_DELAY_MS = 1500;
 
 export const useProceduresList = (list: ListType): UseProceduresListResult => {
@@ -61,9 +62,12 @@ export const useProceduresList = (list: ListType): UseProceduresListResult => {
   );
 
   const retryTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const retryIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const nextRetryTimestampRef = useRef<number | null>(null);
   const latestQueryVariablesRef = useRef(queryVariables);
   const [retryAttempt, setRetryAttempt] = useState(0);
   const [isRetryScheduled, setIsRetryScheduled] = useState(false);
+  const [retryCountdownMs, setRetryCountdownMs] = useState<number | null>(null);
   const [hasMore, setHasMore] = useState(true);
 
   const clearRetryTimeout = useCallback(() => {
@@ -72,6 +76,46 @@ export const useProceduresList = (list: ListType): UseProceduresListResult => {
       retryTimeoutRef.current = null;
     }
   }, []);
+
+  const clearRetryInterval = useCallback(() => {
+    if (retryIntervalRef.current) {
+      clearInterval(retryIntervalRef.current);
+      retryIntervalRef.current = null;
+    }
+  }, []);
+
+  const clearRetryScheduling = useCallback(() => {
+    clearRetryTimeout();
+    clearRetryInterval();
+    nextRetryTimestampRef.current = null;
+    setRetryCountdownMs(null);
+  }, [clearRetryInterval, clearRetryTimeout, setRetryCountdownMs]);
+
+  const startRetryCountdown = useCallback(
+    (delay: number) => {
+      clearRetryInterval();
+      nextRetryTimestampRef.current = Date.now() + delay;
+      setRetryCountdownMs(delay);
+      retryIntervalRef.current = setInterval(() => {
+        if (!nextRetryTimestampRef.current) {
+          setRetryCountdownMs(null);
+          clearRetryInterval();
+          return;
+        }
+
+        const remaining = nextRetryTimestampRef.current - Date.now();
+
+        if (remaining <= 0) {
+          setRetryCountdownMs(0);
+          clearRetryInterval();
+          return;
+        }
+
+        setRetryCountdownMs(remaining);
+      }, 250);
+    },
+    [clearRetryInterval, setRetryCountdownMs]
+  );
 
   const { loading, data, error, fetchMore, networkStatus, refetch } =
     useProceduresListQuery({
@@ -90,17 +134,27 @@ export const useProceduresList = (list: ListType): UseProceduresListResult => {
         if (prev || retryAttempt >= MAX_RETRY_ATTEMPTS) {
           return prev;
         }
-        clearRetryTimeout();
+        clearRetryScheduling();
         const delay = BASE_RETRY_DELAY_MS * (retryAttempt + 1);
+        startRetryCountdown(delay);
         retryTimeoutRef.current = setTimeout(() => {
           setIsRetryScheduled(false);
+          clearRetryScheduling();
           setRetryAttempt((attempt) => attempt + 1);
           void refetch(latestQueryVariablesRef.current);
         }, delay);
         return true;
       });
     }
-  }, [clearRetryTimeout, data, error, loading, refetch, retryAttempt]);
+  }, [
+    clearRetryScheduling,
+    data,
+    error,
+    loading,
+    refetch,
+    retryAttempt,
+    startRetryCountdown,
+  ]);
 
   useEffect(() => {
     if (data) {
@@ -110,19 +164,19 @@ export const useProceduresList = (list: ListType): UseProceduresListResult => {
       if (isRetryScheduled) {
         setIsRetryScheduled(false);
       }
-      clearRetryTimeout();
+      clearRetryScheduling();
     }
-  }, [clearRetryTimeout, data, isRetryScheduled, retryAttempt]);
+  }, [clearRetryScheduling, data, isRetryScheduled, retryAttempt]);
 
-  useEffect(() => () => clearRetryTimeout(), [clearRetryTimeout]);
+  useEffect(() => () => clearRetryScheduling(), [clearRetryScheduling]);
 
   useEffect(() => {
     setHasMore(true);
     setRetryAttempt(0);
     setIsRetryScheduled(false);
-    clearRetryTimeout();
+    clearRetryScheduling();
   }, [
-    clearRetryTimeout,
+    clearRetryScheduling,
     constituencies,
     list,
     parlament?.period,
@@ -132,9 +186,9 @@ export const useProceduresList = (list: ListType): UseProceduresListResult => {
   const handleManualRefetch = useCallback(() => {
     setRetryAttempt(0);
     setIsRetryScheduled(false);
-    clearRetryTimeout();
+    clearRetryScheduling();
     return refetch(latestQueryVariablesRef.current);
-  }, [clearRetryTimeout, refetch]);
+  }, [clearRetryScheduling, refetch]);
 
   const handleRefresh = useCallback(() => {
     setHasMore(true);
@@ -205,6 +259,10 @@ export const useProceduresList = (list: ListType): UseProceduresListResult => {
 
   const remainingAttempts = Math.max(0, MAX_RETRY_ATTEMPTS - retryAttempt);
   const procedures = data?.procedures ?? [];
+  const nextRetryInSeconds =
+    retryCountdownMs !== null
+      ? Math.max(0, Math.ceil(retryCountdownMs / 1000))
+      : null;
 
   return {
     procedures,
@@ -215,6 +273,7 @@ export const useProceduresList = (list: ListType): UseProceduresListResult => {
     error,
     hasMore,
     networkStatus,
+    nextRetryInSeconds,
     handleManualRefetch,
     handleRefresh,
     handleEndReached,

@@ -6,19 +6,33 @@ import { ListLoading } from "../../../../components/ListLoading";
 
 interface RetryStateProps {
   remainingAttempts: number;
+  nextRetryInSeconds: number | null;
 }
 
 export const RetryState: React.FC<RetryStateProps> = ({
   remainingAttempts,
-}) => (
-  <Centered>
-    <ListLoading />
-    <RetryMessage>Verbindung wird wiederhergestellt…</RetryMessage>
-    <RetryHint>
-      Automatischer Versuch in Kürze. Verbleibende Versuche: {remainingAttempts}
-    </RetryHint>
-  </Centered>
-);
+  nextRetryInSeconds,
+}) => {
+  const countdownSeconds =
+    typeof nextRetryInSeconds === "number"
+      ? Math.max(nextRetryInSeconds, 1)
+      : null;
+  const countdownCopy =
+    countdownSeconds !== null
+      ? `Nächster Versuch in ${countdownSeconds}s.`
+      : "Nächster Versuch in Kürze.";
+
+  return (
+    <Centered>
+      <ListLoading />
+      <RetryMessage>Verbindung wird wiederhergestellt…</RetryMessage>
+      <RetryHint>
+        {countdownCopy} Verbleibende{" "}
+        {remainingAttempts === 1 ? "Versuch" : "Versuche"}: {remainingAttempts}
+      </RetryHint>
+    </Centered>
+  );
+};
 
 const RetryMessage = styled.Text`
   margin-top: 16px;

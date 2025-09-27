@@ -1,5 +1,5 @@
 import React from "react";
-import { Text } from "react-native";
+import styled from "styled-components/native";
 
 import { Button } from "../../../../components/Button";
 import { Centered } from "../../../../components/Centered";
@@ -10,7 +10,11 @@ interface ErrorStateProps {
 
 export const ErrorState: React.FC<ErrorStateProps> = ({ onRetry }) => (
   <Centered>
-    <Text>Verbindungsfehler</Text>
+    <Title>Server nicht erreichbar</Title>
+    <Description>
+      Wir konnten keine Verbindung zu DEMOCRACY herstellen. Prüfe deine
+      Internetverbindung oder versuche es in ein paar Sekunden erneut.
+    </Description>
     <Button
       onPress={onRetry}
       text="Nochmal versuchen"
@@ -19,3 +23,16 @@ export const ErrorState: React.FC<ErrorStateProps> = ({ onRetry }) => (
     />
   </Centered>
 );
+
+const Title = styled.Text`
+  margin-bottom: 8px;
+  text-align: center;
+  color: ${({ theme }) => theme.colors.text.primary};
+  font-weight: 600;
+`;
+
+const Description = styled.Text`
+  margin-bottom: 16px;
+  text-align: center;
+  color: ${({ theme }) => theme.colors.text.secondary};
+`;
