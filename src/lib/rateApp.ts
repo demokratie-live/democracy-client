@@ -1,5 +1,6 @@
 import { Linking } from "react-native";
 import * as StoreReview from "expo-store-review";
+import { STORE_REVIEW_URL } from "../api/config";
 
 export const rateApp = async () => {
   try {
@@ -12,6 +13,8 @@ export const rateApp = async () => {
 
       if (storeUrl) {
         await Linking.openURL(storeUrl);
+      } else if (STORE_REVIEW_URL) {
+        await Linking.openURL(STORE_REVIEW_URL);
       } else {
         console.warn("Store review URL is unavailable.");
       }
