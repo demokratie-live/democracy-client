@@ -143,5 +143,10 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     graphqlUrl: getGraphqlUrl(),
     appVariant: APP_VARIANT || "internal",
     associatedDomains: getAssociatedDomains(),
+    storeReviewUrl: {
+      ios: "https://apps.apple.com/de/app/democracy/id1341311162",
+      android:
+        "https://play.google.com/store/apps/details?id=de.democracydeutschland.app&hl=de&pli=1",
+    },
   },
 });
