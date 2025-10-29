@@ -89,22 +89,25 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       "aps-environment": process.env.CI ? "production" : "development",
     },
     icon: getIosAppIcons(),
-    infoPlist: process.env.CI
-      ? {}
-      : {
-          NSAppTransportSecurity: {
-            NSAllowsArbitraryLoads: false,
-            NSExceptionDomains: {
-              localhost: {
-                NSExceptionAllowsInsecureHTTPLoads: true,
-              },
-              "democracy-api.local.democracy-app.de": {
-                NSIncludesSubdomains: true,
-                NSExceptionAllowsInsecureHTTPLoads: true,
+    infoPlist: {
+      UIDesignRequiresCompatibility: true,
+      ...(process.env.CI
+        ? {}
+        : {
+            NSAppTransportSecurity: {
+              NSAllowsArbitraryLoads: false,
+              NSExceptionDomains: {
+                localhost: {
+                  NSExceptionAllowsInsecureHTTPLoads: true,
+                },
+                "democracy-api.local.democracy-app.de": {
+                  NSIncludesSubdomains: true,
+                  NSExceptionAllowsInsecureHTTPLoads: true,
+                },
               },
             },
-          },
-        },
+          }),
+    },
   },
   android: {
     adaptiveIcon: {
