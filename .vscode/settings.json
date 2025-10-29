@@ -1,4 +1,3 @@
 {
-  "editor.formatOnSave": true,
-  "typescript.tsserver.log": "verbose"
+  "editor.formatOnSave": true
 }
