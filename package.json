@@ -1,6 +1,6 @@
 {
   "name": "democracy",
-  "version": "1.0.0",
+  "version": "1.5.13",
   "main": "expo-router/entry",
   "packageManager": "pnpm@9.0.0",
   "scripts": {

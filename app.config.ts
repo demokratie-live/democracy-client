@@ -1,5 +1,6 @@
 import { ConfigContext, ExpoConfig } from "expo/config";
 import { IOSIcons } from "@expo/config-types";
+import packageJson from "./package.json";
 const APP_VARIANT = process.env.APP_VARIANT;
 
 const getBundleIdentifier = () => {
@@ -65,7 +66,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   name: getAppName(),
   slug: "DEMOCRACY",
   scheme: "democracy",
-  version: "1.5.12",
+  version: packageJson.version,
   orientation: "portrait",
   icon: getAppIcon(),
   userInterfaceStyle: "light",
