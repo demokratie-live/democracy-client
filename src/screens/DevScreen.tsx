@@ -14,12 +14,12 @@ const DevScreen: React.FC = () => {
   const [apnToken, setApnToken] = React.useState<string | null>(null);
 
   useEffect(() => {
-    (async () => {
-      const { data } = await Notifications.getExpoPushTokenAsync();
-      setToken(data);
-      const apnToken = await Notifications.getDevicePushTokenAsync();
-      setApnToken(apnToken.data);
-    })();
+    Notifications.getExpoPushTokenAsync()
+      .then(({ data }) => setToken(data))
+      .catch((e) => setToken(`Error: ${e}`));
+    Notifications.getDevicePushTokenAsync()
+      .then(({ data }) => setApnToken(typeof data === "string" ? data : JSON.stringify(data)))
+      .catch((e) => setApnToken(`Error: ${e}`));
   }, []);
 
   return (
