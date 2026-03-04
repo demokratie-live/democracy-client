@@ -86,6 +86,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ios: {
     supportsTablet: true,
     bundleIdentifier: getBundleIdentifier(),
+    associatedDomains: getAssociatedDomains().map((d) => `applinks:${d}`),
     entitlements: {
       "aps-environment": process.env.CI ? "production" : "development",
     },

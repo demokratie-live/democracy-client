@@ -1,0 +1,11 @@
+appId: de.democracy-deutschland.clientapp.internal
+---
+# Deep Link: Prozedur via URL-Scheme öffnen
+# Testet denselben Navigationspfad, der auch vom Push-Notification-Handler genutzt wird.
+# Voraussetzung: Eine gültige procedureId aus der API (hier: 20-15822 als Beispiel).
+- launchApp:
+    clearState: true
+- openLink: "democracy://procedure/20-15822"
+- waitForAnimationToEnd
+- assertVisible:
+    id: "ProcedureScrollView"

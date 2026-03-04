@@ -14,12 +14,13 @@ const DevScreen: React.FC = () => {
   const [apnToken, setApnToken] = React.useState<string | null>(null);
 
   useEffect(() => {
-    Notifications.getExpoPushTokenAsync()
-      .then(({ data }) => setToken(data))
-      .catch((e) => setToken(`Error: ${e}`));
     Notifications.getDevicePushTokenAsync()
-      .then(({ data }) => setApnToken(typeof data === "string" ? data : JSON.stringify(data)))
-      .catch((e) => setApnToken(`Error: ${e}`));
+      .then(({ data }) => {
+        const tokenStr = typeof data === "string" ? data : JSON.stringify(data);
+        setToken(tokenStr);
+        setApnToken(tokenStr);
+      })
+      .catch((e) => setToken(`Error: ${e}`));
   }, []);
 
   return (
@@ -84,10 +85,8 @@ const DevScreen: React.FC = () => {
           ]);
         }}
       />
-      <Text>Token:</Text>
+      <Text>Device Token (APNs/FCM):</Text>
       <Text selectable>{token}</Text>
-      <Text>APN Token:</Text>
-      <Text selectable>{apnToken}</Text>
     </>
   );
 };
