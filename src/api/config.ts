@@ -10,6 +10,7 @@ const GRAPHQL_URL =
     : "https://api.democracy-app.de");
 
 const GRAPHQL_SERVER_LOCAL = false;
+const E2E_FIXTURES = extra.e2eFixtures === true;
 const ANDROID_SERVER = "192.168.0.166";
 const ASSOCIATED_DOMAINS = extra.associatedDomains || [
   "internal.democracy-app.de",
@@ -25,6 +26,7 @@ const STORE_REVIEW_URL =
 export {
   GRAPHQL_URL,
   GRAPHQL_SERVER_LOCAL,
+  E2E_FIXTURES,
   ANDROID_SERVER,
   ASSOCIATED_DOMAINS,
   STORE_REVIEW_URL_IOS,

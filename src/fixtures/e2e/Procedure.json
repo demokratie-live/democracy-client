@@ -1,0 +1,111 @@
+{
+  "procedure": {
+    "__typename": "Procedure",
+    "_id": "6912eeff795a2fbca4f55c7b",
+    "procedureId": "327971",
+    "title": "Gesetz zur weiteren Digitalisierung der Zwangsvollstreckung",
+    "sessionTOPHeading": "Digitalisierung der Zwangsvollstreckung",
+    "tags": [
+      "Abgabenordnung",
+      "Arbeitsgerichtsgesetz",
+      "Elektronischer Rechtsverkehr",
+      "Gerichtskostengesetz",
+      "Gerichtsvollzieher",
+      "Zivilprozessordnung",
+      "Zwangsvollstreckung"
+    ],
+    "abstract": "Bezug: Wiedervorlage des Gesetzentwurfs auf BR-Drs 124/24 (GESTA 20. WP C086) in erweiterter Fassung",
+    "voteDate": "2026-03-19T00:00:00.000Z",
+    "voteEnd": null,
+    "notify": false,
+    "list": "IN_VOTE",
+    "type": "Gesetzgebung",
+    "subjectGroups": [
+      "Medien, Kommunikation und Informationstechnik",
+      "Recht"
+    ],
+    "submissionDate": "2025-11-07T00:00:00.000Z",
+    "currentStatus": "Überwiesen",
+    "currentStatusHistory": [],
+    "voted": false,
+    "votedGovernment": false,
+    "importantDocuments": [
+      {
+        "__typename": "Document",
+        "editor": "BR",
+        "type": "Gesetzentwurf",
+        "url": "https://dserver.bundestag.de/brd/2025/0643-25.pdf",
+        "number": "643/25"
+      },
+      {
+        "__typename": "Document",
+        "editor": "BT",
+        "type": "Gesetzentwurf",
+        "url": "https://dserver.bundestag.de/btd/21/037/2103737.pdf",
+        "number": "21/3737"
+      }
+    ],
+    "communityVotes": {
+      "__typename": "CommunityVotes",
+      "yes": 245,
+      "abstination": 12,
+      "no": 89,
+      "total": 346,
+      "constituencies": []
+    },
+    "voteResults": {
+      "__typename": "VoteResult",
+      "yes": 412,
+      "abstination": 23,
+      "no": 187,
+      "notVoted": 14,
+      "decisionText": "Angenommen",
+      "namedVote": false,
+      "governmentDecision": "Dafür",
+      "partyVotes": [
+        {
+          "__typename": "PartyVote",
+          "main": "YES",
+          "party": "Union",
+          "deviants": { "__typename": "Deviants", "yes": 0, "abstination": 0, "no": 2, "notVoted": 1 }
+        },
+        {
+          "__typename": "PartyVote",
+          "main": "YES",
+          "party": "SPD",
+          "deviants": { "__typename": "Deviants", "yes": 0, "abstination": 1, "no": 0, "notVoted": 0 }
+        },
+        {
+          "__typename": "PartyVote",
+          "main": "NO",
+          "party": "AfD",
+          "deviants": { "__typename": "Deviants", "yes": 3, "abstination": 0, "no": 0, "notVoted": 2 }
+        },
+        {
+          "__typename": "PartyVote",
+          "main": "YES",
+          "party": "Grüne",
+          "deviants": { "__typename": "Deviants", "yes": 0, "abstination": 0, "no": 0, "notVoted": 1 }
+        },
+        {
+          "__typename": "PartyVote",
+          "main": "ABSTINATION",
+          "party": "FDP",
+          "deviants": { "__typename": "Deviants", "yes": 2, "abstination": 0, "no": 1, "notVoted": 0 }
+        },
+        {
+          "__typename": "PartyVote",
+          "main": "NO",
+          "party": "Die Linke",
+          "deviants": { "__typename": "Deviants", "yes": 0, "abstination": 2, "no": 0, "notVoted": 1 }
+        },
+        {
+          "__typename": "PartyVote",
+          "main": "YES",
+          "party": "BSW",
+          "deviants": { "__typename": "Deviants", "yes": 0, "abstination": 0, "no": 0, "notVoted": 0 }
+        }
+      ]
+    }
+  }
+}

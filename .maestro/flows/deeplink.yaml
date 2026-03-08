@@ -1,11 +1,16 @@
 appId: de.democracy-deutschland.clientapp.internal
 ---
-# Deep Link: Prozedur via URL-Scheme öffnen
-# Testet denselben Navigationspfad, der auch vom Push-Notification-Handler genutzt wird.
-# Voraussetzung: Eine gültige procedureId aus der API (hier: 20-15822 als Beispiel).
+# Deep Link: Prozedur direkt via URL-Scheme öffnen.
+# Verwendet die standardkonforme triple-slash-Form, damit Expo Router den Pfad eindeutig auflöst.
 - launchApp:
     clearState: true
-- openLink: "democracy://procedure/20-15822"
+- extendedWaitUntil:
+    visible:
+      id: "ConferenceWeekRouteScreen"
+    timeout: 15000
+- openLink: "democracy:///procedure/327971?e2e=deeplink"
 - waitForAnimationToEnd
-- assertVisible:
-    id: "ProcedureScrollView"
+- extendedWaitUntil:
+    visible:
+      id: "E2EMarker-deeplink"
+    timeout: 10000

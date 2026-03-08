@@ -1,0 +1,16 @@
+appId: de.democracy-deutschland.clientapp.internal
+---
+# Notification Routing: Sitzungswoche-Abstimmungs-Benachrichtigung mit Prozedur-ID.
+# Verifiziert die Notification-Route plus den eindeutigen Detail-Marker.
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible:
+      id: "ConferenceWeekRouteScreen"
+    timeout: 15000
+- openLink: "democracy:///notification?category=conferenceWeekVote&procedureId=327971&e2e=notification-sitzungswoche-vote"
+- waitForAnimationToEnd
+- extendedWaitUntil:
+    visible:
+      id: "E2EMarker-notification-sitzungswoche-vote"
+    timeout: 10000

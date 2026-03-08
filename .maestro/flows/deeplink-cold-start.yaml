@@ -1,0 +1,16 @@
+appId: de.democracy-deutschland.clientapp.internal
+---
+# Cold-Start Deep Link: App beenden und via Deep Link neu starten.
+# Testet ob Expo Router Deep Links beim Kaltstart korrekt auflöst.
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible:
+      id: "ConferenceWeekRouteScreen"
+    timeout: 15000
+- stopApp
+- openLink: "democracy:///procedure/327971?e2e=deeplink-cold-start"
+- extendedWaitUntil:
+    visible:
+      id: "E2EMarker-deeplink-cold-start"
+    timeout: 15000

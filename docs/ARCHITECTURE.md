@@ -86,6 +86,35 @@ These variants are configured through environment variables and the app.config.t
 
 - **End-to-End Testing**: Using Maestro for testing complete user flows
 - **Type Checking**: TypeScript for static analysis
+- **Visual Regression**: Screenshot comparison with pixelmatch for UI stability
+
+### Push Notification Routing Architecture
+
+Push notifications route through a three-layer pipeline:
+
+1. **Entry Layer**: `src/hooks/useNotificationDeepLink.ts` (production push tap handling), `src/app/notification.tsx` (URL scheme routing), or `src/app/(dev)/pushNotificationTest.tsx` (E2E notification pipeline testing)
+2. **Routing Logic**: `src/lib/notificationRouting.ts` — pure function mapping `category` + `procedureId` to navigation targets
+3. **Application**: `applyNotificationRoute()` executes navigation via Expo Router
+
+Categories: `top100`, `conferenceWeek`, `conferenceWeekVote`, `outcome`
+
+### E2E Fixture Mode (FixtureLink)
+
+When `E2E_FIXTURES=true` is set at build time, Apollo Client uses a custom `FixtureLink` (`src/api/apollo/FixtureLink.ts`) instead of the production network stack. This provides deterministic GraphQL responses from JSON fixtures in `src/fixtures/e2e/`.
+
+The fixture link chain replaces the production chain:
+- **Production**: errorLink → versionLink → appIdLink → authMiddleware → authAfterware → restLink → httpLink
+- **E2E Fixtures**: errorLink → fixtureLink
+
+Fixtures are loaded via conditional `require()` guarded by `__DEV__ && E2E_FIXTURES`. Since `__DEV__` is a compile-time constant that is `false` in production, Metro eliminates the entire fixture branch (including all JSON imports) from production bundles.
+
+Dev screens (`src/app/(dev)/`) are gated by `_layout.tsx` which redirects to `/` in production builds, preventing deep-link access to test-only screens.
+
+See [TESTING.md](TESTING.md#push-notification-e2e-fixture-mode) for usage details.
+
+### E2EMarker Verification Pattern
+
+E2E test flows pass an `e2e` query parameter through deep links. Target screens render an invisible `View` with `testID={E2EMarker-${e2e}}`, which Maestro asserts. This proves that the exact production routing logic ran, not just that any screen appeared.
 
 ## Performance Considerations
 

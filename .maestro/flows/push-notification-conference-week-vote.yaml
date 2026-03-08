@@ -1,0 +1,21 @@
+appId: de.democracy-deutschland.clientapp.internal
+---
+# Push Notification E2E: Sitzungswoche-Abstimmungs-Benachrichtigung mit Prozedur-ID.
+# Plant eine lokale Notification via expo-notifications für die conferenceWeekVote-Kategorie
+# und verifiziert, dass die Prozedur-Detailseite via Sitzungswoche korrekt angesteuert wird.
+- launchApp:
+    clearState: true
+    permissions:
+      notifications: allow
+- extendedWaitUntil:
+    visible:
+      id: "ConferenceWeekRouteScreen"
+    timeout: 15000
+- takeScreenshot: artifacts/maestro/push-notification/conference-week-vote/01-home-screen
+- openLink: "democracy:///pushNotificationTest?category=conferenceWeekVote&procedureId=327971&e2e=push-conference-week-vote"
+- waitForAnimationToEnd
+- extendedWaitUntil:
+    visible:
+      id: "E2EMarker-push-conference-week-vote-via-notification"
+    timeout: 10000
+- takeScreenshot: artifacts/maestro/push-notification/conference-week-vote/02-procedure-detail

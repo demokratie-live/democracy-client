@@ -1,0 +1,21 @@
+appId: de.democracy-deutschland.clientapp.internal
+---
+# Push Notification E2E: Sitzungswoche-Bulk-Benachrichtigung.
+# Plant eine lokale Notification via expo-notifications für die conferenceWeek-Kategorie
+# und verifiziert, dass die Sitzungswoche-Liste korrekt angesteuert wird.
+- launchApp:
+    clearState: true
+    permissions:
+      notifications: allow
+- extendedWaitUntil:
+    visible:
+      id: "ConferenceWeekRouteScreen"
+    timeout: 15000
+- takeScreenshot: artifacts/maestro/push-notification/conference-week/01-home-screen
+- openLink: "democracy:///pushNotificationTest?category=conferenceWeek&e2e=push-conference-week"
+- waitForAnimationToEnd
+- extendedWaitUntil:
+    visible:
+      id: "E2EMarker-push-conference-week-via-notification"
+    timeout: 10000
+- takeScreenshot: artifacts/maestro/push-notification/conference-week/02-conference-week-list

@@ -1,0 +1,21 @@
+appId: de.democracy-deutschland.clientapp.internal
+---
+# Push Notification E2E: TOP100-Benachrichtigung mit Prozedur-ID.
+# Plant eine lokale Notification via expo-notifications und verifiziert,
+# dass die Daten die Pipeline überleben und korrekt geroutet werden.
+- launchApp:
+    clearState: true
+    permissions:
+      notifications: allow
+- extendedWaitUntil:
+    visible:
+      id: "ConferenceWeekRouteScreen"
+    timeout: 15000
+- takeScreenshot: artifacts/maestro/push-notification/top100/01-home-screen
+- openLink: "democracy:///pushNotificationTest?category=top100&procedureId=327971&e2e=push-top100"
+- waitForAnimationToEnd
+- extendedWaitUntil:
+    visible:
+      id: "E2EMarker-push-top100-via-notification"
+    timeout: 10000
+- takeScreenshot: artifacts/maestro/push-notification/top100/02-procedure-detail

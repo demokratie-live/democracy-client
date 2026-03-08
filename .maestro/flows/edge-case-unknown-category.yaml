@@ -1,0 +1,16 @@
+appId: de.democracy-deutschland.clientapp.internal
+---
+# Edge Case: Unbekannte Notification-Kategorie mit procedureId.
+# Erwartet Fallback zur Prozedur-Detailseite.
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible:
+      id: "ConferenceWeekRouteScreen"
+    timeout: 15000
+- openLink: "democracy:///notification?category=unknownCategory&procedureId=327971&e2e=edge-unknown-category"
+- waitForAnimationToEnd
+- extendedWaitUntil:
+    visible:
+      id: "E2EMarker-edge-unknown-category"
+    timeout: 10000
