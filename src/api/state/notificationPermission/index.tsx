@@ -4,15 +4,14 @@ import React, {
   useEffect,
   PropsWithChildren,
 } from "react";
-import { Platform } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as Notifications from "expo-notifications";
 import { useAppState } from "../../../screens/Introduction/PushInstructions/useAppState";
+import { usePermissionStatus } from "../../../hooks/usePermissionStatus";
+import { useDeviceTokenRegistration } from "../../../hooks/useDeviceTokenRegistration";
 import {
   NotificationSettings,
   NotificationSettingsDocument,
   UpdateNotificationSettingsMutationVariables,
-  useAddTokenMutation,
   useNotificationSettingsQuery,
   useUpdateNotificationSettingsMutation,
 } from "../../../__generated__/graphql";
@@ -56,7 +55,6 @@ export const NotificationsContext =
 export const NotificationsProvider: React.FC<PropsWithChildren> = ({
   children,
 }) => {
-  const [alreadyDenied, setAlreadyDenied] = useState(false);
   const [outcomePushsDenied, setOutcomePushsDenied] = useState(false);
   const [notificationSettings, setNotificationSettings] = useState<
     NotificationsInterface["notificationSettings"]
@@ -64,36 +62,12 @@ export const NotificationsProvider: React.FC<PropsWithChildren> = ({
   const { data } = useNotificationSettingsQuery();
 
   const [updateSettings] = useUpdateNotificationSettingsMutation();
-  const [addToken] = useAddTokenMutation();
 
   const { appState } = useAppState();
+  const permissionStatus = usePermissionStatus(appState);
 
-  // Register device token with backend whenever permission is granted
-  useEffect(() => {
-    Notifications.getPermissionsAsync().then(({ status }) => {
-      if (status === "granted") {
-        Notifications.getDevicePushTokenAsync()
-          .then(({ data: token }) => {
-            addToken({ variables: { token, os: Platform.OS } });
-          })
-          .catch(() => undefined);
-      }
-    });
-  }, [appState, addToken]);
-
-  useEffect(() => {
-    Notifications.getPermissionsAsync().then(({ status }) => {
-      if (!alreadyDenied && status === "denied") {
-        setAlreadyDenied(true);
-      } else if (alreadyDenied && status === "granted") {
-        setAlreadyDenied(false);
-      } else if (status === "granted") {
-        setAlreadyDenied(false);
-      } else if (status === "denied") {
-        setAlreadyDenied(true);
-      }
-    });
-  }, [appState, alreadyDenied]);
+  // Register device token with backend when permission is granted
+  useDeviceTokenRegistration(permissionStatus);
 
   useEffect(() => {
     AsyncStorage.getItem("PUSH_OUTCOME_DENIED").then((value) => {
