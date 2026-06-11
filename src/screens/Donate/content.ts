@@ -10,9 +10,9 @@ export const donate2Head = 'Spendenkonto für Daueraufträge oder einmalige Spen
 export const donateList1Head = 'Kontoinhaber:';
 export const donateList1Text = 'DEMOCRACY Deutschland e.V.';
 export const donateList2Head = 'IBAN:';
-export const donateList2Text = 'DE33 5003 1000 1049 7560 00';
+export const donateList2Text = 'DE83 2605 0001 0056 1290 91';
 export const donateList3Head = 'BIC:';
-export const donateList3Text = 'TRODDEF1';
+export const donateList3Text = 'NOLADE21GOE';
 export const donate3Text1 =
   'Für den Verein DEMOCRACY Deutschland e.V. ist mit Bescheid des Finanzamt Göttingen vom 23.08.2017 die Einhaltung der satzungsmäßigen Voraussetzungen nach den §§ 51, 59, 60 und 61 AO festgestellt worden (';
 export const donate3Text2 = 'Nachweis der Gemeinnützigkeit';
