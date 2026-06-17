@@ -10,6 +10,12 @@ import { lightTheme } from "@democracy-deutschland/ui";
 import { VerificationProvider } from "../api/state/Verification";
 import { NotificationsProvider } from "../api/state/notificationPermission";
 import { VoteStackParamList } from "./(vote)/_layout";
+import { useNotificationDeepLink } from "../hooks/useNotificationDeepLink";
+
+function NotificationDeepLinkHandler() {
+  useNotificationDeepLink();
+  return null;
+}
 
 export type RootStackParamList = {
   Sidebar: undefined;
@@ -38,6 +44,7 @@ export default function Layout() {
           <ApolloProvider client={client}>
             <NotificationsProvider>
               <GestureHandlerRootView style={{ flex: 1 }}>
+                <NotificationDeepLinkHandler />
                 <Stack
                   screenOptions={{
                     headerStyle: {

@@ -1,4 +1,8 @@
 appId: de.democracy-deutschland.clientapp.internal
 ---
 - launchApp
+- extendedWaitUntil:
+    visible:
+      id: "NoConferenceWeekData"
+    timeout: 10000
 - assertVisible: "Es liegen derzeit noch keine Abstimmungsdaten vor."

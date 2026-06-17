@@ -1,0 +1,16 @@
+appId: de.democracy-deutschland.clientapp.internal
+---
+# Notification Routing: TOP100-Benachrichtigung mit Prozedur-ID.
+# Verifiziert die echte Notification-Entry-Route und einen eindeutigen Marker auf der Detailroute.
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible:
+      id: "ConferenceWeekRouteScreen"
+    timeout: 15000
+- openLink: "democracy:///notification?category=top100&procedureId=327971&e2e=notification-top100"
+- waitForAnimationToEnd
+- extendedWaitUntil:
+    visible:
+      id: "E2EMarker-notification-top100"
+    timeout: 10000

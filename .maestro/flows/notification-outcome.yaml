@@ -1,0 +1,16 @@
+appId: de.democracy-deutschland.clientapp.internal
+---
+# Notification Routing: Outcome-Benachrichtigung mit Prozedur-ID.
+# Verifiziert die Notification-Route direkt zur Prozedur-Detailseite.
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible:
+      id: "ConferenceWeekRouteScreen"
+    timeout: 15000
+- openLink: "democracy:///notification?category=outcome&procedureId=327971&e2e=notification-outcome"
+- waitForAnimationToEnd
+- extendedWaitUntil:
+    visible:
+      id: "E2EMarker-notification-outcome"
+    timeout: 10000

@@ -8,8 +8,8 @@ export type AppRoutes = {
   };
 
   // Define the procedure detail route
-  "/procedures/[id]": {
-    id: string;
+  "/procedure/[procedureId]": {
+    procedureId: string;
     title?: string;
   };
 };

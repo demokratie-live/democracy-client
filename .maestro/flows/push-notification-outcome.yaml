@@ -1,0 +1,21 @@
+appId: de.democracy-deutschland.clientapp.internal
+---
+# Push Notification E2E: Outcome-Benachrichtigung mit Prozedur-ID.
+# Plant eine lokale Notification via expo-notifications für die outcome-Kategorie
+# und verifiziert, dass die Prozedur-Detailseite direkt angesteuert wird.
+- launchApp:
+    clearState: true
+    permissions:
+      notifications: allow
+- extendedWaitUntil:
+    visible:
+      id: "ConferenceWeekRouteScreen"
+    timeout: 15000
+- takeScreenshot: artifacts/maestro/push-notification/outcome/01-home-screen
+- openLink: "democracy:///pushNotificationTest?category=outcome&procedureId=327971&e2e=push-outcome"
+- waitForAnimationToEnd
+- extendedWaitUntil:
+    visible:
+      id: "E2EMarker-push-outcome-via-notification"
+    timeout: 10000
+- takeScreenshot: artifacts/maestro/push-notification/outcome/02-procedure-detail

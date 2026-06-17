@@ -1,0 +1,18 @@
+appId: de.democracy-deutschland.clientapp.internal
+---
+# Edge case: top100 notification WITHOUT procedureId
+# Expected: navigates to Top100 list screen (kind: list, no drill-in)
+- launchApp:
+    clearState: true
+    permissions:
+      notifications: allow
+- extendedWaitUntil:
+    visible:
+      id: "ConferenceWeekRouteScreen"
+    timeout: 15000
+- openLink:
+    link: "democracy:///notification?category=top100&e2e=edge-top100-list-only"
+- extendedWaitUntil:
+    visible:
+      id: "E2EMarker-edge-top100-list-only"
+    timeout: 10000

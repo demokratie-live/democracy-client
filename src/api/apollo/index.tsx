@@ -1,7 +1,7 @@
 import { RestLink } from "apollo-link-rest";
 import { onError } from "@apollo/client/link/error";
 import { authLinkMiddleware, authLinkAfterware } from "./Auth";
-import { GRAPHQL_SERVER_LOCAL, GRAPHQL_URL } from "../config";
+import { GRAPHQL_SERVER_LOCAL, GRAPHQL_URL, E2E_FIXTURES } from "../config";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { versionLinkMiddleware } from "./Version";
 import {
@@ -64,15 +64,21 @@ const restLink = new RestLink({
   uri: "https://democracy-deutschland.de/api.php", // ?call=donation_status
 });
 
-const link = ApolloLink.from([
-  errorLink,
-  versionLinkMiddleware,
-  applicationIdLinkMiddleware,
-  authLinkMiddleware,
-  authLinkAfterware,
-  restLink,
-  httpLink,
-]);
+// __DEV__ is a compile-time constant — Metro eliminates this entire branch
+// (including the require and fixture JSON) in production builds.
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const link =
+  __DEV__ && E2E_FIXTURES
+    ? ApolloLink.from([errorLink, require("./FixtureLink").fixtureLink])
+  : ApolloLink.from([
+      errorLink,
+      versionLinkMiddleware,
+      applicationIdLinkMiddleware,
+      authLinkMiddleware,
+      authLinkAfterware,
+      restLink,
+      httpLink,
+    ]);
 
 export const client = new ApolloClient({
   cache,

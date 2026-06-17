@@ -1,0 +1,16 @@
+appId: de.democracy-deutschland.clientapp.internal
+---
+# Notification Routing: Sitzungswoche-Bulk-Benachrichtigung.
+# Der Marker unterscheidet echte Notification-Navigation vom normalen App-Start auf derselben Liste.
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible:
+      id: "ConferenceWeekRouteScreen"
+    timeout: 15000
+- openLink: "democracy:///notification?category=conferenceWeek&e2e=notification-conference-week"
+- waitForAnimationToEnd
+- extendedWaitUntil:
+    visible:
+      id: "E2EMarker-notification-conference-week"
+    timeout: 10000

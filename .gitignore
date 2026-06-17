@@ -40,3 +40,5 @@ report.xml
 # Test artifacts and screenshots
 artifacts/
 /*.png
+# Internal planning/research artifacts (not user documentation)
+docs/plan/

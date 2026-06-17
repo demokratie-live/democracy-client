@@ -86,6 +86,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ios: {
     supportsTablet: true,
     bundleIdentifier: getBundleIdentifier(),
+    associatedDomains: getAssociatedDomains().map((d) => `applinks:${d}`),
     entitlements: {
       "aps-environment": process.env.CI ? "production" : "development",
     },
@@ -146,6 +147,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   extra: {
     graphqlUrl: getGraphqlUrl(),
     appVariant: APP_VARIANT || "internal",
+    e2eFixtures: process.env.E2E_FIXTURES === "true",
     associatedDomains: getAssociatedDomains(),
     storeReviewUrl: {
       ios: "https://apps.apple.com/de/app/democracy/id1341311162",

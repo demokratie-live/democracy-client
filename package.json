@@ -12,11 +12,16 @@
     "codegen": "graphql-codegen --config codegen.yaml",
     "lint": "eslint .",
     "lint:ts": "tsc --noEmit",
+    "test": "jest",
     "doctor": "expo-doctor",
-    "test:e2e": "maestro test .maestro/flows/",
-    "test:e2e:smoke": "maestro test .maestro/flows/smoke.yaml",
-    "test:e2e:verification": "maestro test .maestro/flows/verification.yaml",
-    "test:e2e:rating": "maestro test .maestro/flows/rating.yaml"
+    "e2e:ios:doctor": "bash scripts/e2e/run-ios.sh --doctor",
+    "e2e:ios:prepare": "bash scripts/e2e/run-ios.sh --prepare-only",
+    "test:e2e": "bash scripts/e2e/run-ios.sh .maestro/flows/",
+    "test:e2e:smoke": "bash scripts/e2e/run-ios.sh .maestro/flows/smoke.yaml",
+    "test:e2e:verification": "bash scripts/e2e/run-ios.sh .maestro/flows/verification.yaml",
+    "test:e2e:rating": "bash scripts/e2e/run-ios.sh .maestro/flows/rating.yaml",
+    "test:e2e:push-notification": "E2E_FIXTURES=true bash scripts/e2e/run-ios.sh .maestro/flows/push-notification-top100.yaml .maestro/flows/push-notification-conference-week.yaml .maestro/flows/push-notification-conference-week-vote.yaml .maestro/flows/push-notification-outcome.yaml",
+    "push:notification:device": "node scripts/push-test.mjs"
   },
   "dependencies": {
     "@apollo/client": "^3.12.6",
@@ -87,8 +92,10 @@
     "@graphql-codegen/typescript-operations": "2.5.6",
     "@graphql-codegen/typescript-react-apollo": "^3.3.6",
     "@types/dateformat": "^5.0.3",
+    "@types/jest": "^30.0.0",
     "@types/lodash": "^4.17.14",
     "@types/lodash.unionby": "^4.8.9",
+
     "@types/react": "~18.3.12",
     "@types/speakingurl": "^13.0.6",
     "@types/styled-components-react-native": "^5.1.3",
@@ -96,6 +103,7 @@
     "eslint": "^8.57.0",
     "eslint-config-expo": "~8.0.1",
     "expo-doctor": "^1.12.4",
+    "jest-expo": "^55.0.9",
     "typescript": "^5.7.3"
   },
   "private": true

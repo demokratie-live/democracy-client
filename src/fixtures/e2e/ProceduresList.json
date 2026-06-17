@@ -1,0 +1,86 @@
+{
+  "procedures": [
+    {
+      "__typename": "Procedure",
+      "_id": "6912eeff795a2fbca4f55c7b",
+      "title": "Gesetz zur weiteren Digitalisierung der Zwangsvollstreckung",
+      "procedureId": "327971",
+      "sessionTOPHeading": "Digitalisierung der Zwangsvollstreckung",
+      "subjectGroups": ["Medien, Kommunikation und Informationstechnik", "Recht"],
+      "voteDate": "2026-03-19T00:00:00.000Z",
+      "voteEnd": null,
+      "list": "IN_VOTE",
+      "type": "Gesetzgebung",
+      "voteWeek": 12,
+      "voteYear": 2026,
+      "activityIndex": { "__typename": "ActivityIndex", "activityIndex": 42 },
+      "votedGovernment": false,
+      "voted": false,
+      "voteResults": {
+        "__typename": "VoteResult",
+        "yes": 412,
+        "abstination": 23,
+        "no": 187,
+        "notVoted": 14,
+        "governmentDecision": "Dafür"
+      },
+      "communityVotes": {
+        "__typename": "CommunityVotes",
+        "yes": 245,
+        "abstination": 12,
+        "no": 89,
+        "total": 346
+      }
+    },
+    {
+      "__typename": "Procedure",
+      "_id": "69465933b9c0b4db3f4a824d",
+      "title": "Zweites Gesetz zur Weiterentwicklung der Treibhausgasminderungs-Quote",
+      "procedureId": "329519",
+      "sessionTOPHeading": "Treibhausgasminderungs-Quote",
+      "subjectGroups": ["Umwelt"],
+      "voteDate": "2026-03-19T00:00:00.000Z",
+      "voteEnd": null,
+      "list": "IN_VOTE",
+      "type": "Gesetzgebung",
+      "voteWeek": 12,
+      "voteYear": 2026,
+      "activityIndex": { "__typename": "ActivityIndex", "activityIndex": 18 },
+      "votedGovernment": false,
+      "voted": false,
+      "voteResults": null,
+      "communityVotes": {
+        "__typename": "CommunityVotes",
+        "yes": 134,
+        "abstination": 8,
+        "no": 67,
+        "total": 209
+      }
+    },
+    {
+      "__typename": "Procedure",
+      "_id": "69a696c3fbee8ccac064886f",
+      "title": "Klimageld - Sofort und sozial gerecht",
+      "procedureId": "323515",
+      "sessionTOPHeading": "Klimageld",
+      "subjectGroups": ["Umwelt", "Öffentliche Finanzen, Steuern und Abgaben"],
+      "voteDate": "2026-03-20T00:00:00.000Z",
+      "voteEnd": null,
+      "list": "IN_VOTE",
+      "type": "Antrag",
+      "voteWeek": 12,
+      "voteYear": 2026,
+      "activityIndex": { "__typename": "ActivityIndex", "activityIndex": 85 },
+      "votedGovernment": false,
+      "voted": false,
+      "voteResults": null,
+      "communityVotes": {
+        "__typename": "CommunityVotes",
+        "yes": 312,
+        "abstination": 5,
+        "no": 41,
+        "total": 358
+      }
+    }
+  ]
+}

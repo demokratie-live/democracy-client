@@ -1,0 +1,17 @@
+appId: de.democracy-deutschland.clientapp.internal
+---
+# Edge Case: Outcome-Kategorie ohne procedureId.
+# Erwartet dass die App graceful handled (kein Crash, keine Navigation).
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible:
+      id: "ConferenceWeekRouteScreen"
+    timeout: 15000
+- openLink: "democracy:///notification?category=outcome&e2e=edge-missing-procedureid"
+# notification.tsx stays mounted as an opaque Stack screen when route is null,
+# so ConferenceWeekRouteScreen may not be visible. Use a timing wait instead.
+- waitForAnimationToEnd
+# Verify no E2EMarker was set (route should be null without procedureId)
+- assertNotVisible:
+    id: "E2EMarker-edge-missing-procedureid"

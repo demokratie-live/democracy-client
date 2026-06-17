@@ -1,0 +1,21 @@
+appId: de.democracy-deutschland.clientapp.internal
+---
+# Edge case: conferenceWeek with procedureId (bulk push — procedureId should be IGNORED)
+# Expected: navigates to Sitzungswoche list only, NOT to procedure detail
+- launchApp:
+    clearState: true
+    permissions:
+      notifications: allow
+- extendedWaitUntil:
+    visible:
+      id: "ConferenceWeekRouteScreen"
+    timeout: 15000
+- openLink:
+    link: "democracy:///notification?category=conferenceWeek&procedureId=327971&e2e=edge-cw-ignores-procedureid"
+- extendedWaitUntil:
+    visible:
+      id: "E2EMarker-edge-cw-ignores-procedureid"
+    timeout: 10000
+# Verify we stayed on the conference week list, NOT on a procedure detail
+- assertVisible:
+    id: "ConferenceWeekRouteScreen"
