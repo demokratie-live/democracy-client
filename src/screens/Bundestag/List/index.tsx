@@ -1,40 +1,18 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
-import {
-  Text,
-  ListRenderItem,
-  SectionList,
-  SectionListProps,
-} from "react-native";
-
-import { Segment } from "./Components/Segment";
-import { communityVoteData } from "../../../lib/PieChartCommunityData";
-import { NoConferenceWeekData } from "./NoConferenceWeekData";
+import React, { useCallback } from "react";
+import { SectionList, SectionListProps } from "react-native";
 import styled from "styled-components/native";
-import { useLocalVotes } from "../../../api/state/localVotesStore";
-import { ParlamentIdentifier, parlaments } from "../../../api/state/parlament";
-import { useRecoilValue } from "recoil";
-import { useListFilter } from "../../../api/hooks/useListFilter";
-import { constituencyState } from "../../../api/state/constituency";
+
 import { ListLoading } from "../../../components/ListLoading";
-import { Centered } from "../../../components/Centered";
-import { Button } from "../../../components/Button";
+import { ListType } from "../../../__generated__/graphql";
+import { NoConferenceWeekData } from "./NoConferenceWeekData";
+import { ErrorState } from "./Components/ErrorState";
+import { RetryState } from "./Components/RetryState";
+import { Segment } from "./Components/Segment";
+import { SegmentedData, useProceduresList } from "./hooks/useProceduresList";
 import {
-  ListType,
-  ProceduresListQuery,
-  useProceduresListQuery,
-} from "../../../__generated__/graphql";
-import { pieChartGovernmentData } from "../../../lib/PieChartGovernmentData";
-import { Row } from "../../../components/Row";
-import { ListItem } from "../../../components/ListItem";
-import { useRouter } from "expo-router";
-import { useLegislaturePeriodStore } from "src/api/state/legislaturePeriod";
-
-export interface SegmentedData {
-  title: string;
-  data: ProceduresListQuery["procedures"];
-}
-
-type Item = ProceduresListQuery["procedures"][0];
+  ProcedureListItem,
+  useProceduresListItemRenderer,
+} from "./hooks/useProceduresListItemRenderer";
 
 const Container = styled.View`
   flex: 1;
@@ -46,139 +24,24 @@ interface ListProps {
 }
 
 export const List: React.FC<ListProps> = ({ list }) => {
-  const router = useRouter();
-  const localVotes = useLocalVotes();
-  const { proceduresFilter } = useListFilter();
-  const constituency = useRecoilValue(constituencyState);
-  const { legislaturePeriod } = useLegislaturePeriodStore();
-  const parlamentIdentifier = `BT-${legislaturePeriod}` as ParlamentIdentifier;
-  const parlament = parlaments[parlamentIdentifier];
+  const {
+    procedures,
+    segmentedData,
+    loading,
+    isRetrying,
+    remainingAttempts,
+    error,
+    hasMore,
+    networkStatus,
+    nextRetryInSeconds,
+    handleRefresh,
+    handleEndReached,
+  } = useProceduresList(list);
 
-  const constituencies = constituency ? [constituency] : [];
-  const [hasMore, setHasMore] = useState(true);
-  const { loading, data, error, fetchMore, networkStatus, refetch } =
-    useProceduresListQuery({
-      fetchPolicy: "network-only",
-      errorPolicy: "all",
-      variables: {
-        listTypes: [list],
-        pageSize: 10,
-        filter: proceduresFilter,
-        constituencies,
-        period: parlament?.period,
-      },
-    });
-
-  useEffect(() => {
-    setHasMore(true);
-  }, [proceduresFilter]);
-
-  const segmentedData: SegmentedData[] = useMemo(() => {
-    if (data && ListType.Top100 === list) {
-      return [
-        {
-          title: "",
-          data: data.procedures,
-        },
-      ];
-    } else if (data) {
-      return data.procedures.reduce<SegmentedData[]>((prev, procedure) => {
-        const { voteWeek, voteYear } = procedure;
-        const segment =
-          voteWeek && voteYear ? `KW ${voteWeek}/${voteYear}` : "";
-        const index = prev.findIndex(({ title }) => title === segment);
-        if (index !== -1) {
-          return Object.assign([...prev], {
-            [index]: { title: segment, data: [...prev[index].data, procedure] },
-          });
-        }
-        return [
-          ...prev,
-          {
-            title: segment,
-            data: [procedure],
-          },
-        ];
-      }, []);
-    } else {
-      return [];
-    }
-  }, [data, list]);
-
-  const handleProcedurePress = useCallback(
-    (procedureId: string) => {
-      router.push(`/procedure/${procedureId}`);
-    },
-    [router]
-  );
-
-  const renderItem: ListRenderItem<Item> = useCallback(
-    ({
-      item: {
-        procedureId,
-        title,
-        sessionTOPHeading,
-        subjectGroups,
-        voteDate,
-        voteEnd,
-        voted: votedServer,
-        type,
-        voteResults,
-        votedGovernment,
-        communityVotes,
-      },
-      index,
-    }) => {
-      // If no session top headings available use subject groups
-      let subline = null;
-      if (sessionTOPHeading) {
-        subline = sessionTOPHeading;
-      } else if (subjectGroups) {
-        subline = subjectGroups.join(", ");
-      }
-
-      const govSlices = pieChartGovernmentData({
-        voteResults,
-        votedGovernment,
-      });
-
-      const localSelection = localVotes.find(
-        (localVote) => localVote.procedureId === procedureId
-      )?.selection;
-      const voted = votedServer || !!localSelection;
-
-      const communityVoteSlices = communityVoteData({
-        communityVotes,
-        localSelection,
-        voted,
-      });
-
-      return (
-        <Row
-          onPress={() => handleProcedurePress(procedureId)}
-          testID={`ListItem-${list}-${index}`}
-        >
-          <ListItem
-            title={title}
-            subline={subline}
-            voteDate={voteDate ? new Date(voteDate) : undefined}
-            endDate={voteEnd ? new Date(voteEnd) : undefined}
-            voted={voted}
-            votes={communityVotes ? communityVotes.total || 0 : 0}
-            govermentChart={{
-              votes: govSlices,
-              large: true,
-            }}
-            communityVotes={communityVoteSlices}
-          />
-        </Row>
-      );
-    },
-    [localVotes, list, handleProcedurePress]
-  );
+  const renderItem = useProceduresListItemRenderer(list);
 
   const renderSectionHeader: SectionListProps<
-    Item,
+    ProcedureListItem,
     SegmentedData
   >["renderSectionHeader"] = useCallback(
     ({ section }: { section: SegmentedData }) =>
@@ -196,36 +59,36 @@ export const List: React.FC<ListProps> = ({ list }) => {
     );
   }
 
-  if (error || !data) {
+  if (isRetrying) {
     return (
       <Container>
-        <Centered>
-          <Text>Verbindungsfehler</Text>
-          <Button
-            onPress={() => {
-              refetch({
-                listTypes: [list],
-                pageSize: 10,
-                filter: proceduresFilter,
-                constituencies,
-              });
-            }}
-            text="Nochmal versuchen"
-            textColor="blue"
-            backgroundColor="transparent"
-          />
-        </Centered>
+        <RetryState
+          remainingAttempts={remainingAttempts}
+          nextRetryInSeconds={nextRetryInSeconds}
+        />
       </Container>
     );
   }
 
-  if (data.procedures.length === 0) {
+  if (error) {
+    return (
+      <Container>
+        <ErrorState
+          onRetry={() => {
+            void handleRefresh();
+          }}
+        />
+      </Container>
+    );
+  }
+
+  if (procedures.length === 0) {
     return <NoConferenceWeekData />;
   }
 
   return (
     <Container>
-      <SectionList<Item, SegmentedData>
+      <SectionList<ProcedureListItem, SegmentedData>
         sections={segmentedData}
         stickySectionHeadersEnabled
         renderSectionHeader={renderSectionHeader}
@@ -235,22 +98,11 @@ export const List: React.FC<ListProps> = ({ list }) => {
         refreshing={networkStatus === 4}
         ListFooterComponent={() => (hasMore ? <ListLoading /> : null)}
         onRefresh={() => {
-          setHasMore(true);
-          refetch();
+          void handleRefresh();
         }}
         onEndReachedThreshold={0.5}
         onEndReached={() => {
-          !loading &&
-            hasMore &&
-            fetchMore({
-              variables: {
-                offset: data.procedures.length,
-              },
-            }).then(({ data: fetchMoreData }) => {
-              if (fetchMoreData.procedures.length === 0) {
-                setHasMore(false);
-              }
-            });
+          void handleEndReached();
         }}
       />
     </Container>
