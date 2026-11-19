@@ -4,6 +4,7 @@ import * as Application from "expo-application";
 import Constants from "expo-constants";
 import { PaymentIntent, PaymentSheet, PaymentSheetError, PlatformPay, useStripe } from "@stripe/stripe-react-native";
 import { DonationApiError, donationRequest, newIdempotencyKey } from "../../api/donations/client";
+import { invalidateDonationConfig } from "../../api/donations/useDonationConfig";
 import {
   MonthlyDonationCreatedSchema,
   OneTimeDonationResponseSchema,
@@ -46,6 +47,8 @@ export interface DonationInput {
   coverFees: boolean;
   email: string | null;
   config: DonationConfig;
+  /** false, wenn der Spenden-Screen inzwischen verlassen wurde – dann kein Zahlungsfenster öffnen. */
+  isActive?: () => boolean;
 }
 
 const isInternalVariant = (Constants.expoConfig?.extra?.appVariant ?? "internal") === "internal";
@@ -56,6 +59,12 @@ const platform = Platform.OS === "android" ? "android" : "ios";
 
 const GENERIC_ERROR = "Die Spende konnte nicht abgeschlossen werden. Bitte versuche es erneut.";
 const EMAIL_REQUIRED = "Für eine monatliche Spende brauchen wir Deine E-Mail-Adresse.";
+const KEYCHAIN_ERROR =
+  "Dein Gerät konnte die Daten Deiner Dauerspende gerade nicht lesen. Bitte versuche es gleich noch einmal.";
+const AMOUNT_CHANGED =
+  "Der Betrag hat sich geändert (neue Gebührensätze). Bitte schließe das Fenster und prüfe den Betrag erneut.";
+/** Zahlungsarten, die nach der Bestätigung erst Tage später eingehen. */
+const DELAYED_METHODS = new Set(["SepaDebit"]);
 
 /**
  * Apple Pay zeigt bei Dauerspenden „monatlich" samt Verwaltungslink an (iOS 16+). Ohne Login-Link
@@ -81,7 +90,15 @@ export const usePaymentSheetDonation = () => {
   const { initPaymentSheet, presentPaymentSheet, retrievePaymentIntent } = useStripe();
 
   const donate = useCallback(
-    async ({ interval, amountCents, chargedAmountCents, coverFees, email, config }: DonationInput): Promise<DonationOutcome> => {
+    async ({
+      interval,
+      amountCents,
+      chargedAmountCents,
+      coverFees,
+      email,
+      config,
+      isActive = () => true,
+    }: DonationInput): Promise<DonationOutcome> => {
       const monthly = interval === "monthly";
       if (monthly && !email) return { status: "failed", message: EMAIL_REQUIRED };
 
@@ -90,15 +107,20 @@ export const usePaymentSheetDonation = () => {
       Keyboard.dismiss();
 
       // Vorhandenen Schlüssel wiederverwenden: Der Server ersetzt eine unbezahlte Dauerspende und
-      // sperrt eine zweite aktive (409). Ist der Keychain nicht lesbar, gilt ein neuer Schlüssel.
+      // sperrt eine zweite aktive (409). Ist der Keychain nicht lesbar, abbrechen – ein neuer Schlüssel
+      // würde die Sperre umgehen und den alten überschreiben.
       let donorKey: string | null = null;
       if (monthly) {
-        donorKey = await loadDonorKey().catch(() => null);
-        donorKey ??= generateDonorKey();
+        try {
+          donorKey = (await loadDonorKey()) ?? generateDonorKey();
+        } catch {
+          return { status: "failed", message: KEYCHAIN_ERROR };
+        }
       }
 
       let clientSecret: string | null = null;
       let nextChargeAt: string | null = null;
+      let methodType: string | null = null;
 
       const { error: initError } = await initPaymentSheet({
         merchantDisplayName: config.merchantDisplayName,
@@ -144,6 +166,7 @@ export const usePaymentSheetDonation = () => {
             setupFutureUsage: monthly ? "OffSession" : undefined,
           },
           confirmHandler: async (paymentMethod, _shouldSavePaymentMethod, intentCreationCallback) => {
+            methodType = paymentMethod.paymentMethodType;
             const body: DonationRequestBody = {
               amountCents,
               coverFees,
@@ -154,6 +177,7 @@ export const usePaymentSheetDonation = () => {
             };
             // Neuer Idempotency-Key je Bezahlversuch; Wiederholung nur bei Netzwerkfehlern mit demselben Key.
             const idempotencyKey = newIdempotencyKey();
+            let serverAmount: number | null = null;
             try {
               if (monthly && donorKey) {
                 const response = await donationRequest("/monthly", {
@@ -170,6 +194,7 @@ export const usePaymentSheetDonation = () => {
                 });
                 clientSecret = response.clientSecret;
                 nextChargeAt = response.currentPeriodEnd ?? null;
+                serverAmount = response.chargedAmountCents;
               } else {
                 const response = await donationRequest("/one-time", {
                   method: "POST",
@@ -178,6 +203,16 @@ export const usePaymentSheetDonation = () => {
                   schema: OneTimeDonationResponseSchema,
                 });
                 clientSecret = response.clientSecret;
+                serverAmount = response.chargedAmountCents;
+              }
+              // Verbindlich rechnet der Server. Weicht sein Betrag von der Anzeige ab (veraltete Gebühren
+              // im Config-Cache), nicht bezahlen lassen – der angelegte Intent verfällt unbestätigt.
+              if (serverAmount !== chargedAmountCents) {
+                invalidateDonationConfig();
+                intentCreationCallback({
+                  error: { code: "Failed", message: AMOUNT_CHANGED, localizedMessage: AMOUNT_CHANGED },
+                });
+                return;
               }
               intentCreationCallback({ clientSecret });
             } catch (error) {
@@ -192,6 +227,8 @@ export const usePaymentSheetDonation = () => {
         return { status: "failed", message: initError.localizedMessage ?? GENERIC_ERROR };
       }
 
+      // Während Schlüssel und Zahlungsfenster vorbereitet wurden, kann der Screen verlassen worden sein.
+      if (!isActive()) return { status: "canceled" };
       const { error: presentError } = await presentPaymentSheet();
       if (presentError) {
         if (presentError.code === PaymentSheetError.Canceled) return { status: "canceled" };
@@ -202,8 +239,13 @@ export const usePaymentSheetDonation = () => {
       // SEPA-Lastschriften sind nach der Bestätigung zunächst „processing" (FR-010: „wird eingezogen").
       let status: "succeeded" | "processing" = "succeeded";
       if (clientSecret) {
-        const { paymentIntent } = await retrievePaymentIntent(clientSecret);
-        if (paymentIntent?.status === PaymentIntent.Status.Processing) status = "processing";
+        const { paymentIntent } = await retrievePaymentIntent(clientSecret).catch(() => ({ paymentIntent: null }));
+        if (paymentIntent) {
+          if (paymentIntent.status === PaymentIntent.Status.Processing) status = "processing";
+        } else if (methodType && DELAYED_METHODS.has(methodType)) {
+          // Status nicht abrufbar: Lastschriften sicherheitshalber als „wird eingezogen" anzeigen.
+          status = "processing";
+        }
       }
       return { status, chargedAmountCents, interval, nextChargeAt };
     },

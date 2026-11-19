@@ -41,7 +41,7 @@ ignoriert Objekte ohne diese Markierung (z. B. bestehende DonorBox-Zahlungen im 
 
 | Objekt | Wesentliche Felder | Metadaten |
 |---|---|---|
-| **Customer** | `email`, `preferred_locales=["de"]`; Wiederverwendung bei gleicher E-Mail (`customers.list({email})`, gefiltert auf `source`) | `source` |
+| **Customer** | `email`, `preferred_locales=["de"]`. Dauerspende: **einer je Spender-Schlüssel** (`kind: monthly`), nie per E-Mail wiederverwendet. Einzelspende: Wiederverwendung bei gleicher E-Mail nur unter `kind: one_time` (`customers.list({email})`) | `source`, `kind` |
 | **PaymentIntent** (einmalig) | `amount` (Cent, inkl. Aufschlag), `currency=eur`, `customer` (falls E-Mail), `payment_method_configuration` = Zahlungsprofil-ID, `description="Spende an DEMOCRACY Deutschland e.V."`, `statement_descriptor_suffix="SPENDE"` | `source`, `interval=one_time`, `base_amount`, `cover_fees`, `platform`, `app_version` |
 | **Subscription** (monatlich) | `items[0].price_data{currency=eur, product=STRIPE_DONATION_PRODUCT_ID, unit_amount, recurring.interval=month}`, `payment_behavior=default_incomplete`, `payment_settings.save_default_payment_method=on_subscription`; keine `payment_method_types` → Stripe nutzt das Standardprofil | `source`, `interval=monthly`, `base_amount`, `cover_fees`, `platform`, `app_version`, `subscriber_id` |
 | **Invoice** | von Billing erzeugt; Footer-Text „Spende ohne Gegenleistung" | erbt Subscription-Bezug |
@@ -106,7 +106,7 @@ active ──(Folgeabbuchung fehlgeschlagen)▶ past_due                 „Zahl
 past_due ──(Retry erfolgreich)─────────▶ active
 past_due ──(alle Retries erfolglos)────▶ canceled                  „beendet"   → E-Mail
 active ──(Kündigung)───────────────────▶ active + cancel_at_period_end  „gekündigt, läuft bis …"
-active + cancel_at_period_end ─(Periodenende)▶ canceled            „beendet"   → E-Mail
+active + cancel_at_period_end ─(Periodenende)▶ canceled            „beendet"   → keine 2. E-Mail (Kündigung wurde schon bestätigt)
 past_due ──(Kündigung)─────────────────▶ canceled (sofort)
 ```
 

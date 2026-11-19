@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { useFocusEffect } from "expo-router";
 import * as WebBrowser from "expo-web-browser";
-import { deleteDonorKey, loadDonorKey } from "../../lib/donorKey";
+import { deleteDonorKeyIfUnchanged, loadDonorKey } from "../../lib/donorKey";
 import { DonationApiError, donationRequest, newIdempotencyKey } from "./client";
 import { MonthlyDonationStatusSchema, PortalSessionSchema, type MonthlyDonationStatus } from "./types";
 
@@ -14,10 +14,19 @@ import { MonthlyDonationStatusSchema, PortalSessionSchema, type MonthlyDonationS
 /** Muss zu `PORTAL_RETURN_URL` in democracy-api (routes/manage.ts) passen. */
 const PORTAL_RETURN_URL = "democracy://donate/manage";
 const GENERIC_ERROR = "Das hat leider nicht geklappt. Bitte versuche es später erneut.";
+const KEYCHAIN_ERROR = "Deine Dauerspende konnte auf diesem Gerät gerade nicht geladen werden. Bitte versuche es erneut.";
 
-/** Dauerspende läuft (ggf. mit Zahlungsproblem oder vorgemerkter Kündigung) – eine neue ist gesperrt. */
+/** Nur die ausdrückliche Antwort „keine Dauerspende zu diesem Schlüssel" – keine beliebige 404. */
+const isNotFound = (error: unknown) =>
+  error instanceof DonationApiError && error.status === 404 && error.code === "not_found";
+
+/** Dauerspende läuft noch (ggf. mit Zahlungsproblem oder vorgemerkter Kündigung) – Karte anzeigen. */
 export const isOngoing = (status: MonthlyDonationStatus | null): status is MonthlyDonationStatus =>
   status?.status === "active" || status?.status === "past_due";
+
+/** Eine neue Dauerspende ist gesperrt, solange die bestehende läuft und nicht schon gekündigt ist. */
+export const blocksNewMonthly = (status: MonthlyDonationStatus | null): boolean =>
+  isOngoing(status) && !status.cancelAtPeriodEnd;
 
 type Action = "update" | "cancel" | "portal";
 
@@ -34,9 +43,9 @@ export const useMonthlyDonation = () => {
   const [busy, setBusy] = useState<Action | null>(null);
 
   /** Gibt die Fehlermeldung zurück (oder null, wenn die Dauerspende nicht mehr existiert). */
-  const handleError = useCallback(async (error: unknown): Promise<string | null> => {
-    if (error instanceof DonationApiError && error.status === 404) {
-      await deleteDonorKey().catch(() => undefined);
+  const handleError = useCallback(async (error: unknown, donorKey: string): Promise<string | null> => {
+    if (isNotFound(error)) {
+      await deleteDonorKeyIfUnchanged(donorKey).catch(() => undefined);
       setState({ loading: false, status: null, error: null });
       return null;
     }
@@ -46,7 +55,14 @@ export const useMonthlyDonation = () => {
   }, []);
 
   const refresh = useCallback(async () => {
-    const donorKey = await loadDonorKey().catch(() => null);
+    let donorKey: string | null;
+    try {
+      donorKey = await loadDonorKey();
+    } catch {
+      // Lesefehler ≠ „kein Schlüssel": sonst entfiele die Sperre gegen eine zweite Dauerspende.
+      setState({ loading: false, status: null, error: KEYCHAIN_ERROR });
+      return;
+    }
     if (!donorKey) {
       setState({ loading: false, status: null, error: null });
       return;
@@ -56,7 +72,7 @@ export const useMonthlyDonation = () => {
       const status = await donationRequest("/monthly", { donorKey, schema: MonthlyDonationStatusSchema });
       setState({ loading: false, status, error: null });
     } catch (error) {
-      await handleError(error);
+      await handleError(error, donorKey);
     }
   }, [handleError]);
 
@@ -71,14 +87,14 @@ export const useMonthlyDonation = () => {
   const run = useCallback(
     async (action: Action, request: (donorKey: string) => Promise<MonthlyDonationStatus | null>) => {
       const donorKey = await loadDonorKey().catch(() => null);
-      if (!donorKey) return GENERIC_ERROR;
+      if (!donorKey) return KEYCHAIN_ERROR;
       setBusy(action);
       try {
         const status = await request(donorKey);
         if (status) setState({ loading: false, status, error: null });
         return null;
       } catch (error) {
-        return (await handleError(error)) ?? GENERIC_ERROR;
+        return (await handleError(error, donorKey)) ?? GENERIC_ERROR;
       } finally {
         setBusy(null);
       }

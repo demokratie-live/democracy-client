@@ -42,7 +42,12 @@ export const saveDonorKey = async (key: string): Promise<void> => {
   });
 };
 
-/** Bei `404` vom Server (Dauerspende beendet und Zuordnung gelöscht). */
-export const deleteDonorKey = async (): Promise<void> => {
+/**
+ * Bei `404 not_found` vom Server (Dauerspende beendet und Zuordnung gelöscht) – aber nur, wenn noch
+ * derselbe Schlüssel gespeichert ist. Sonst könnte eine langsame Statusabfrage einen Schlüssel löschen,
+ * der inzwischen für eine neue Dauerspende gespeichert wurde.
+ */
+export const deleteDonorKeyIfUnchanged = async (expected: string): Promise<void> => {
+  if ((await loadDonorKey()) !== expected) return;
   await Keychain.resetGenericPassword({ service: SERVICE });
 };

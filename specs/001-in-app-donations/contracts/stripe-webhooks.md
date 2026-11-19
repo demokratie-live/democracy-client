@@ -9,9 +9,11 @@ Verarbeitungsregeln:
    `parent.subscription_details.metadata`) → ignorieren, `200`, ohne Eintrag in der DB. Ausnahme:
    konto-weite Alarme (`charge.refunded`, `charge.dispute.created`, `mandate.updated`) werden
    unabhängig von der Herkunft verarbeitet (nur Log, betrifft auch DonorBox-Zahlungen).
-3. Event-ID in `donation_webhook_events` einfügen; Duplikat → sofort `200` (Idempotenz).
-4. Fehler in der Verarbeitung → Event-Eintrag wieder entfernen, `500` (Stripe wiederholt), Log an
-   Discord-Logger (nur Event-ID, Typ, Fehlercode).
+3. Event-ID in `donation_webhook_events` als `processing` einfügen. Schon `done` → `200` (Duplikat);
+   noch `processing` → `409` (Stripe stellt später erneut zu); eine seit über 5 Minuten hängende
+   Verarbeitung (Pod beendet) wird übernommen. Nach Erfolg `done`.
+4. Fehler in der Verarbeitung → Event-Eintrag wieder entfernen, `500` (Stripe wiederholt), Log-Eintrag
+   (nur Event-ID, Typ, Fehlercode). Abweichende `api_version` → `400` vor jeder Verarbeitung.
 
 | Event | Bedingung | Aktion |
 |---|---|---|

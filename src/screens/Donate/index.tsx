@@ -18,7 +18,7 @@ import styled from 'styled-components/native';
 import { MadeWithLove } from '../../components/MadeWithLove';
 import Folding from '../../components/Folding';
 import { useDonationConfig } from '../../api/donations/useDonationConfig';
-import { isOngoing, useMonthlyDonation } from '../../api/donations/useMonthlyDonation';
+import { blocksNewMonthly, isOngoing, useMonthlyDonation } from '../../api/donations/useMonthlyDonation';
 
 const ScrollWrapper = styled.ScrollView`
   flex: 1;
@@ -143,7 +143,7 @@ export const DonateScreen: React.FC = () => {
         {publishableKey && (
           <StripeDonationProvider publishableKey={publishableKey}>
             <FormCard>
-              <DonationForm config={config} onCompleted={showThanks} monthlyBlocked={Boolean(ongoingMonthly)} />
+              <DonationForm config={config} onCompleted={showThanks} monthlyBlocked={blocksNewMonthly(monthlyStatus)} />
             </FormCard>
           </StripeDonationProvider>
         )}

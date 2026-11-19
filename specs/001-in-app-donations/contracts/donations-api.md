@@ -89,8 +89,9 @@ Legt nach Bestätigung im PaymentSheet (`confirmHandler`) einen PaymentIntent an
 
 ## POST /monthly
 
-Legt Customer (bzw. verwendet ihn wieder) und Subscription an und verknüpft sie mit dem
-Spender-Schlüssel. Der Client erzeugt den Schlüssel **vor** dem Aufruf und speichert ihn erst nach
+Legt Customer und Subscription an und verknüpft sie mit dem Spender-Schlüssel. **Ein Customer je
+Schlüssel**: Ein bekannter Schlüssel nutzt seinen Customer (E-Mail wird aktualisiert), ein neuer bekommt
+einen neuen – nie per E-Mail einen bestehenden Customer übernehmen (unbestätigte E-Mail, Portalzugang). Der Client erzeugt den Schlüssel **vor** dem Aufruf und speichert ihn erst nach
 `200` dauerhaft in der Keychain.
 
 **Headers**: `Authorization: DonorKey …`, `Idempotency-Key: …`
@@ -125,11 +126,17 @@ Stripe übergeben: Die erste Rechnung bestätigt das PaymentSheet selbst; `save_
 
 **Fehler**: wie `/one-time`, zusätzlich `400 email_required`,
 `409 subscription_exists` (aktuelle Subscription des Schlüssels ist `active` oder `past_due` –
-auch während die erste SEPA-Lastschrift noch eingezogen wird).
+auch während die erste SEPA-Lastschrift noch eingezogen wird – und **nicht** schon zum Periodenende
+gekündigt; eine gekündigte, noch laufende Dauerspende blockiert keine neue),
+`409 idempotency_conflict` (ein paralleler Request mit demselben Schlüssel war schneller; die hier
+angelegte Subscription wird sofort wieder gekündigt).
 
 **Retry-Verhalten**: Ist die aktuelle Subscription des Schlüssels `incomplete` (z. B. erste Karte
-abgelehnt), kündigt der Server sie und legt eine neue an (`200`). Der Client verwendet dafür denselben Spender-Schlüssel, aber einen neuen
-`Idempotency-Key`.
+abgelehnt), kündigt der Server sie und legt eine neue an (`200`). Der Client verwendet dafür denselben
+Spender-Schlüssel, aber einen neuen `Idempotency-Key`. Wiederholt der Client nach einem
+Netzwerkfehler **denselben** Request (gleicher `Idempotency-Key`), kündigt der Server nichts und liefert
+dieselbe Subscription (Subscription-Metadatum `request_id`). Die Zuordnung Schlüssel → Subscription
+wird nur per Vergleichen-und-Setzen geändert.
 
 ---
 

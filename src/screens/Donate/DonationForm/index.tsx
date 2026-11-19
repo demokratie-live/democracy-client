@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigation } from "expo-router";
 import styled from "styled-components/native";
 import type { DonationConfig, DonationInterval } from "../../../api/donations/types";
 import { chargedAmountCents, feeSurchargeCents } from "../../../lib/donationFees";
@@ -64,6 +65,7 @@ interface Props {
 
 export const DonationForm: React.FC<Props> = ({ config, onCompleted, monthlyBlocked = false }) => {
   const { donate } = usePaymentSheetDonation();
+  const navigation = useNavigation();
   const [interval, setInterval] = useState<DonationInterval>(config.defaultInterval);
   const [amountCents, setAmountCents] = useState<number | null>(config.presets[config.defaultInterval][0] ?? null);
   const [coverFees, setCoverFees] = useState(false);
@@ -113,6 +115,8 @@ export const DonationForm: React.FC<Props> = ({ config, onCompleted, monthlyBloc
       coverFees,
       email: trimmedEmail || null,
       config,
+      // Wurde der Screen während der Vorbereitung verlassen, öffnet sich kein Zahlungsfenster mehr.
+      isActive: () => navigation.isFocused(),
     });
     setBusy(false);
     if (outcome.status === "failed") setError(outcome.message);
@@ -154,7 +158,8 @@ export const DonationForm: React.FC<Props> = ({ config, onCompleted, monthlyBloc
       {error && <ErrorText accessibilityLiveRegion="polite">{error}</ErrorText>}
       {blocked && (
         <Hint testID="donate-hint-monthly-exists">
-          Du hast bereits eine Dauerspende. Betrag ändern oder kündigen kannst Du oben unter „Dauerspende verwalten".
+          Du hast bereits eine Dauerspende. Den Betrag ändern oder kündigen kannst Du oben unter „Dauerspende
+          verwalten". Nach einer Kündigung kannst Du hier direkt eine neue einrichten.
         </Hint>
       )}
       <DonateButton

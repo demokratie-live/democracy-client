@@ -100,7 +100,8 @@ export const ThankYou: React.FC<Props> = ({
       </TextCenter>
       <ButtonContainer>
         <Button
-          onPress={() => router.back()}
+          // Sonderfall: Ersetzte der Danke-Screen den Startbildschirm, gibt es kein „zurück".
+          onPress={() => (router.canGoBack() ? router.back() : router.replace("/"))}
           textColor="white"
           backgroundColor="blue"
           text="FERTIG"

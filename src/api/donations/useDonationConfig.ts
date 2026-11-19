@@ -40,6 +40,11 @@ export const FALLBACK_DONATION_CONFIG: DonationConfig = {
 
 let cache: { config: DonationConfig; fetchedAt: number } | null = null;
 
+/** Erzwingt beim nächsten Öffnen ein Neuladen (z. B. wenn der Server einen anderen Betrag berechnet). */
+export const invalidateDonationConfig = () => {
+  cache = null;
+};
+
 interface DonationConfigState {
   config: DonationConfig;
   loading: boolean;
