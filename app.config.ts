@@ -140,8 +140,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         },
       },
     ],
-    // Xcode 27 verlangt iOS ≥ 15.0 auch für Pod-Targets (siehe plugins/withPodsDeploymentTarget.js)
-    ["./plugins/withPodsDeploymentTarget", { deploymentTarget: "15.5" }],
+    // Xcode 27: Pod-Mindestversion ≥ 15.0 und fmt mit C++17 (siehe plugins/withXcodePodsCompatibility.js)
+    ["./plugins/withXcodePodsCompatibility", { deploymentTarget: "15.5" }],
     [
       "expo-notifications",
       {
