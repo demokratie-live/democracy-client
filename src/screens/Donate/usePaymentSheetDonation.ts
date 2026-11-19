@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { Platform } from "react-native";
+import { Keyboard, Platform } from "react-native";
 import * as Application from "expo-application";
 import Constants from "expo-constants";
 import { PaymentIntent, PaymentSheet, PaymentSheetError, PlatformPay, useStripe } from "@stripe/stripe-react-native";
@@ -84,6 +84,10 @@ export const usePaymentSheetDonation = () => {
     async ({ interval, amountCents, chargedAmountCents, coverFees, email, config }: DonationInput): Promise<DonationOutcome> => {
       const monthly = interval === "monthly";
       if (monthly && !email) return { status: "failed", message: EMAIL_REQUIRED };
+
+      // Fokus aus E-Mail-/Betragsfeld nehmen: iOS gibt ihn sonst nach dem Schließen des Zahlungsfensters
+      // zurück, und die Tastatur blitzt kurz auf, bevor der Danke-Screen erscheint.
+      Keyboard.dismiss();
 
       // Vorhandenen Schlüssel wiederverwenden: Der Server ersetzt eine unbezahlte Dauerspende und
       // sperrt eine zweite aktive (409). Ist der Keychain nicht lesbar, gilt ein neuer Schlüssel.
