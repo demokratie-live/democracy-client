@@ -97,6 +97,10 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     icon: getIosAppIcons(),
     infoPlist: {
       UIDesignRequiresCompatibility: true,
+      // Die App ist deutschsprachig. Ohne diese Angabe zeigen native SDKs (z. B. das Stripe-
+      // Zahlungsfenster) und iOS-Systemdialoge der App ihre englischen Texte.
+      CFBundleDevelopmentRegion: "de",
+      CFBundleLocalizations: ["de"],
       ...(process.env.CI
         ? {}
         : {

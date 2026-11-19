@@ -30,7 +30,7 @@ export class DonationApiError extends Error {
 }
 
 const NETWORK_ERROR_MESSAGE =
-  "Keine Verbindung zum Server. Bitte prüfe deine Internetverbindung und versuche es erneut.";
+  "Keine Verbindung zum Server. Bitte prüfe Deine Internetverbindung und versuche es erneut.";
 const INVALID_RESPONSE_MESSAGE =
   "Unerwartete Antwort vom Server. Bitte versuche es später erneut.";
 

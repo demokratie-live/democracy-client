@@ -11,21 +11,25 @@ import { DonateButton } from "./DonateButton";
 import { EmailField } from "./EmailField";
 import { IntervalToggle } from "./IntervalToggle";
 
-const Headline = styled.Text`
-  font-weight: bold;
-  font-size: 15px;
-  color: #333;
-  margin-bottom: 10px;
-`;
+/**
+ * Spendenformular im schlanken Signal-Stil: Rhythmus, Betrags-Raster, Gebührenübernahme, E-Mail,
+ * ein großer Button. Zahlungsart und alles Weitere erfragt das Stripe-Zahlungsfenster.
+ */
 
 const Section = styled.View`
-  margin-top: 14px;
+  margin-top: 16px;
 `;
 
 const Hint = styled.Text`
   font-size: 14px;
+  line-height: 20px;
   color: #b05c00;
-  margin-top: 8px;
+  margin-top: 10px;
+`;
+
+const HintLink = styled.Text`
+  color: #4494d3;
+  text-decoration-line: underline;
 `;
 
 const ErrorText = styled.Text`
@@ -35,10 +39,11 @@ const ErrorText = styled.Text`
 `;
 
 const Info = styled.Text`
-  font-size: 13px;
-  color: #777;
-  margin-top: 14px;
-  line-height: 18px;
+  font-size: 12px;
+  line-height: 17px;
+  color: #8a8a8a;
+  margin-top: 12px;
+  text-align: center;
 `;
 
 const Link = styled.Text`
@@ -57,9 +62,11 @@ export type CompletedDonation = Extract<DonationOutcome, { status: "succeeded" |
 interface Props {
   config: DonationConfig;
   onCompleted: (donation: CompletedDonation) => void;
+  /** Klappt die Bankverbindung auf (FR-001a: Hinweis bei Beträgen unter dem Mindestbetrag) */
+  onShowBankTransfer: () => void;
 }
 
-export const DonationForm: React.FC<Props> = ({ config, onCompleted }) => {
+export const DonationForm: React.FC<Props> = ({ config, onCompleted, onShowBankTransfer }) => {
   const { donate } = usePaymentSheetDonation();
   const [interval, setInterval] = useState<DonationInterval>(config.defaultInterval);
   const [amountCents, setAmountCents] = useState<number | null>(config.presets[config.defaultInterval][0] ?? null);
@@ -109,7 +116,6 @@ export const DonationForm: React.FC<Props> = ({ config, onCompleted }) => {
 
   return (
     <>
-      <Headline>Direkt in der App spenden</Headline>
       <IntervalToggle value={interval} onChange={changeInterval} disabled={busy} />
       <Section>
         <AmountPicker
@@ -122,13 +128,13 @@ export const DonationForm: React.FC<Props> = ({ config, onCompleted }) => {
         {belowMin && (
           <Hint testID="donate-hint-min">
             In der App ab {formatEuroShort(config.minAmountCents)}. Kleinere Beträge gerne per Dauerauftrag oder
-            Überweisung – das ist für uns gebührenfrei (Bankverbindung unten).
+            Überweisung – das ist für uns gebührenfrei. <HintLink onPress={onShowBankTransfer}>Bankverbindung</HintLink>
           </Hint>
         )}
         {aboveMax && (
           <Hint testID="donate-hint-max">
-            Für Spenden über {formatEuroShort(config.maxAmountCents)} nutze bitte die Überweisung (Bankverbindung
-            unten).
+            Für Spenden über {formatEuroShort(config.maxAmountCents)} nutze bitte die Überweisung.{" "}
+            <HintLink onPress={onShowBankTransfer}>Bankverbindung</HintLink>
           </Hint>
         )}
       </Section>
@@ -140,8 +146,8 @@ export const DonationForm: React.FC<Props> = ({ config, onCompleted }) => {
       {error && <ErrorText accessibilityLiveRegion="polite">{error}</ErrorText>}
       <DonateButton label={buttonLabel} onPress={submit} disabled={!amountValid || !emailValid} busy={busy} />
       <Info>
-        Empfänger: {config.merchantDisplayName}, gemeinnützig – deine Spende ist steuerlich absetzbar. Die Zahlung
-        wickelt Stripe ab. <Link onPress={linking(config.legal.privacyUrl)}>Datenschutz</Link>
+        Empfänger: {config.merchantDisplayName} · gemeinnützig, Deine Spende ist steuerlich absetzbar · Zahlung über
+        Stripe · <Link onPress={linking(config.legal.privacyUrl)}>Datenschutz</Link>
       </Info>
     </>
   );

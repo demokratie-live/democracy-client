@@ -6,23 +6,15 @@ import { formatEuro } from "../../../lib/formatEuro";
 const Row = styled.View`
   flex-direction: row;
   align-items: center;
-  margin-top: 14px;
-`;
-
-const Texts = styled.View`
-  flex: 1;
-  padding-right: 12px;
+  justify-content: space-between;
+  margin-top: 16px;
 `;
 
 const Label = styled.Text`
+  flex: 1;
   font-size: 15px;
   color: #333;
-`;
-
-const Hint = styled.Text`
-  font-size: 13px;
-  color: #777;
-  margin-top: 2px;
+  padding-right: 12px;
 `;
 
 interface Props {
@@ -34,19 +26,17 @@ interface Props {
 
 /** FR-001b: freiwillige Übernahme der Zahlungsgebühr – standardmäßig aus, Aufschlag sichtbar. */
 export const CoverFeesToggle: React.FC<Props> = ({ value, onChange, surchargeCents, disabled }) => {
-  const label = surchargeCents > 0 ? `Zahlungsgebühr übernehmen (+${formatEuro(surchargeCents)})` : "Zahlungsgebühr übernehmen";
+  const label =
+    surchargeCents > 0 ? `Zahlungsgebühr übernehmen (+${formatEuro(surchargeCents)})` : "Zahlungsgebühr übernehmen";
   return (
     <Row>
-      <Texts>
-        <Label>{label}</Label>
-        <Hint>Dann kommt deine Spende vollständig bei DEMOCRACY an.</Hint>
-      </Texts>
+      <Label>{label}</Label>
       <Switch
         value={value}
         onValueChange={onChange}
         disabled={disabled}
         trackColor={{ true: "#4494d3", false: "#d6d6d6" }}
-        accessibilityLabel={label}
+        accessibilityLabel={`${label}, damit Deine Spende vollständig bei DEMOCRACY ankommt`}
         testID="donate-cover-fees"
       />
     </Row>
