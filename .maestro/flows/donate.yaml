@@ -1,0 +1,34 @@
+appId: de.democracy-deutschland.clientapp.internal
+# In-App-Spenden (specs/001-in-app-donations, quickstart V8/V9): Spenden-Screen öffnen,
+# Mindestbetrag-Hinweis, Betrag wählen, Stripe-Zahlungsfenster öffnen und wieder schließen.
+# Voraussetzung: internal-Build gegen eine API mit DONATIONS_ENABLED=true (Stripe-Testmodus).
+---
+- launchApp
+- waitForAnimationToEnd
+- swipe:
+    start: 0, 300
+    end: 300, 300
+- waitForAnimationToEnd
+- tapOn:
+    id: "sidebar-donate"
+- waitForAnimationToEnd
+- assertVisible: "Direkt in der App spenden"
+- assertVisible:
+    id: "donate-iban"
+- tapOn:
+    id: "donate-interval-one_time"
+- tapOn:
+    id: "donate-amount-custom"
+- inputText: "3"
+- assertVisible:
+    id: "donate-hint-min"
+- eraseText: 3
+- inputText: "10"
+- hideKeyboard
+# Intl setzt ein geschütztes Leerzeichen vor „€" – daher Regex mit „.“
+- assertVisible: "10,00.€ spenden"
+- tapOn:
+    id: "donate-submit"
+- waitForAnimationToEnd
+- assertVisible: "(Karte|Card)"
+- takeScreenshot: artifacts/maestro/donate/payment_sheet
