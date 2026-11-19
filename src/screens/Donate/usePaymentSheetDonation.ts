@@ -82,7 +82,13 @@ export const usePaymentSheetDonation = () => {
         },
         appearance: { primaryButton: { colors: { background: "#4494d3" } } },
         intentConfiguration: {
-          mode: { amount: chargedAmountCents, currencyCode: "EUR" },
+          // capture_method muss exakt zum PaymentIntent passen (das SDK prüft das vor dem Bestätigen);
+          // der Server setzt ihn ausdrücklich auf automatic_async (Stripe-Standard seit 2024).
+          mode: {
+            amount: chargedAmountCents,
+            currencyCode: "EUR",
+            captureMethod: PaymentSheet.CaptureMethod.AutomaticAsync,
+          },
           confirmHandler: async (paymentMethod, _shouldSavePaymentMethod, intentCreationCallback) => {
             try {
               const response = await donationRequest("/one-time", {
@@ -109,12 +115,14 @@ export const usePaymentSheetDonation = () => {
         },
       });
       if (initError) {
+        if (__DEV__) console.warn("[donations] initPaymentSheet", JSON.stringify(initError));
         return { status: "failed", message: initError.localizedMessage ?? GENERIC_ERROR };
       }
 
       const { error: presentError } = await presentPaymentSheet();
       if (presentError) {
         if (presentError.code === PaymentSheetError.Canceled) return { status: "canceled" };
+        if (__DEV__) console.warn("[donations] presentPaymentSheet", JSON.stringify(presentError));
         return { status: "failed", message: presentError.localizedMessage ?? GENERIC_ERROR };
       }
 
