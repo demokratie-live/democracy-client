@@ -80,11 +80,11 @@ export const BankTransfer: React.FC<Props> = ({ config }) => (
     </DefinitionListWrapper>
     <Text>
       <Text>{donate3Text1}</Text>
-      <TextLink onPress={linking(config.legal.nonprofitProofUrl)}>{donate3Text2}</TextLink>
+      <TextLink accessibilityRole="link" onPress={linking(config.legal.nonprofitProofUrl)}>{donate3Text2}</TextLink>
       <Text>{donate3Text3}</Text>
-      <TextLink onPress={linking(donate3Link2)}>{donate3Text4}</TextLink>
+      <TextLink accessibilityRole="link" onPress={linking(donate3Link2)}>{donate3Text4}</TextLink>
       <Text>{donate3Text5}</Text>
-      <TextLink onPress={linking(config.legal.simplifiedReceiptUrl)}>{donate3Text6}</TextLink>
+      <TextLink accessibilityRole="link" onPress={linking(config.legal.simplifiedReceiptUrl)}>{donate3Text6}</TextLink>
       <Text>{donate3Text7}</Text>
     </Text>
   </>

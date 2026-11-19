@@ -4,6 +4,7 @@ import type { DonationConfig, DonationInterval } from "../../../api/donations/ty
 import { chargedAmountCents, feeSurchargeCents } from "../../../lib/donationFees";
 import { formatEuro, formatEuroShort } from "../../../lib/formatEuro";
 import { linking } from "../../../lib/linking";
+import { useAnnounce } from "../useAnnounce";
 import { usePaymentSheetDonation, type DonationOutcome } from "../usePaymentSheetDonation";
 import { AmountPicker } from "./AmountPicker";
 import { CoverFeesToggle } from "./CoverFeesToggle";
@@ -71,6 +72,7 @@ export const DonationForm: React.FC<Props> = ({ config, onCompleted, monthlyBloc
   const [error, setError] = useState<string | null>(null);
 
   const intervalTouched = useRef(false);
+  useAnnounce(error);
 
   const changeInterval = (next: DonationInterval, byUser = true) => {
     intervalTouched.current ||= byUser;
@@ -163,7 +165,9 @@ export const DonationForm: React.FC<Props> = ({ config, onCompleted, monthlyBloc
       />
       <Info>
         Empfänger: {config.merchantDisplayName}, gemeinnützig – Deine Spende ist steuerlich absetzbar. Die Zahlung
-        wickelt Stripe ab. <Link onPress={linking(config.legal.privacyUrl)}>Datenschutz</Link>
+        wickelt Stripe ab. <Link accessibilityRole="link" onPress={linking(config.legal.privacyUrl)}>
+          Datenschutz
+        </Link>
       </Info>
     </>
   );

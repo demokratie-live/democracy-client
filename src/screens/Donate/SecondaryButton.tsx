@@ -4,7 +4,9 @@ import styled from "styled-components/native";
 
 const Container = styled.TouchableOpacity<{ inactive: boolean }>`
   margin-top: 12px;
-  height: 46px;
+  min-height: 46px;
+  padding-vertical: 10px;
+  padding-horizontal: 12px;
   border-radius: 6px;
   border-width: 1px;
   border-color: ${({ inactive }) => (inactive ? "#c8c8c8" : "#4494d3")};

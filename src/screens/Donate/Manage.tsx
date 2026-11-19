@@ -13,6 +13,7 @@ import { CoverFeesToggle } from "./DonationForm/CoverFeesToggle";
 import { DonateButton } from "./DonationForm/DonateButton";
 import { statusLine } from "./MonthlyCard";
 import { SecondaryButton } from "./SecondaryButton";
+import { useAnnounce } from "./useAnnounce";
 
 /**
  * T054: Dauerspende verwalten – Status, Betrag ändern, Zahlungsart (Stripe-Kundenportal), kündigen.
@@ -107,6 +108,7 @@ export const ManageMonthlyDonation: React.FC = () => {
   const [coverFees, setCoverFees] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
+  useAnnounce(notice ?? actionError);
 
   // Formular mit dem aktuellen Betrag vorbelegen (auch nach dem Speichern).
   useEffect(() => {
@@ -268,6 +270,8 @@ export const ManageMonthlyDonation: React.FC = () => {
                 onPress={confirmCancel}
                 disabled={busy !== null}
                 accessibilityRole="button"
+                accessibilityLabel="Dauerspende kündigen"
+                accessibilityState={{ disabled: busy !== null, busy: busy === "cancel" }}
                 testID="donate-manage-cancel"
               >
                 {busy === "cancel" ? <ActivityIndicator /> : <CancelText>Dauerspende kündigen</CancelText>}

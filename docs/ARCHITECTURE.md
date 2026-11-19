@@ -73,6 +73,33 @@ The application uses a combination of state management solutions:
 3. Token is attached to GraphQL requests using Apollo Link Context
 4. Protected routes check for valid authentication
 
+### In-App Donations (specs/001-in-app-donations)
+
+Donations are a deliberately separate module so that payment data never touches accounts or votes.
+
+- **Transport:** plain REST against `democracy-api` under `/donations/v1` (`src/api/donations/client.ts`),
+  **not** GraphQL and **without** the app's auth headers (no device hash, no phone hash, no JWT). The
+  server mounts the router before its auth middleware and logs no IPs for these paths.
+- **Payment UI:** Stripe PaymentSheet in deferred-intent mode (`src/screens/Donate/usePaymentSheetDonation.ts`).
+  The sheet collects the payment method; only after confirmation does the server create the
+  PaymentIntent (one-time) or the Billing subscription (monthly). Card data never reaches our servers.
+  Available payment methods come from the account's default Stripe payment method configuration.
+- **Donor key (monthly):** 32 random bytes (`expo-crypto`), base64url, stored in the keychain
+  (`react-native-keychain`, service `de.democracy.donorKey`, `THIS_DEVICE_ONLY`) only after the server
+  created the subscription (`src/lib/donorKey.ts`). Sent as `Authorization: DonorKey …` to the
+  management endpoints; the server stores only its SHA-256 hash. No link to the DEMOCRACY account.
+  On another device, donors manage their subscription via the Stripe customer portal (email login link).
+- **Screens/routes:** `Donate` (form, funding status, bank transfer, "Deine Dauerspende" card),
+  `DonateThanks`, `DonateManage` (status, amount, payment method via portal in the in-app browser, cancel).
+  Deep links `democracy://stripe-redirect…` and `democracy://donate/manage` are consumed in
+  `src/app/+native-intent.tsx` without navigation.
+- **Config & kill switch:** `GET /donations/v1/config` (publishable key, presets, fees, legal URLs). If it is
+  unreachable or `enabled: false`, the app shows only funding status and bank details
+  (`useDonationConfig` fallback). Fee preview uses the same integer formula as the server
+  (`src/lib/donationFees.ts`); the server's amount is authoritative.
+- **Docs:** server runbook in `democracy-api/docs/DONATIONS.md`; build notes in `docs/deployment/IOS.md`
+  and `docs/deployment/ANDROID.md`.
+
 ## App Variants
 
 The application supports different build variants:
@@ -84,7 +111,7 @@ These variants are configured through environment variables and the app.config.t
 
 ## Testing Strategy
 
-- **End-to-End Testing**: Using Maestro for testing complete user flows
+- **End-to-End Testing**: Using Maestro for testing complete user flows (donations: `.maestro/flows/donate.yaml`, `donate-manage.yaml`)
 - **Type Checking**: TypeScript for static analysis
 
 ## Performance Considerations
