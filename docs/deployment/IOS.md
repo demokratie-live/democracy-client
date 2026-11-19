@@ -72,6 +72,35 @@ After testing in TestFlight:
    bundle exec fastlane ios release
    ```
 
+## In-App Donations (Apple Pay)
+
+Required for `specs/001-in-app-donations` (Stripe PaymentSheet with Apple Pay). DEMOCRACY Deutschland e.V.
+is approved by Apple as a nonprofit (App Review Guideline 3.2.1(vi)); offering Apple Pay is mandatory.
+
+1. **Merchant ID** – Apple Developer → Certificates, Identifiers & Profiles → Identifiers → Merchant IDs:
+   create `merchant.de.democracy-deutschland.clientapp` (description "DEMOCRACY Donations").
+   The ID is configured in `app.config.ts` (`APPLE_PAY_MERCHANT_ID`) and used by both variants.
+2. **App IDs** – enable the *Apple Pay Payment Processing* capability for
+   `de.democracy-deutschland.clientapp` **and** `de.democracy-deutschland.clientapp.internal`
+   and assign the merchant ID.
+3. **Payment Processing Certificate** – Stripe Dashboard → Settings → Payment methods → Apple Pay →
+   *iOS certificates* → *Add new application* → download Stripe's CSR → upload it in the Apple
+   Developer portal for the merchant ID → upload the resulting `.cer` back to Stripe.
+   Repeat once for test mode and once for live mode if Stripe asks for it.
+4. **Profiles** – regenerate the provisioning profiles so they contain the new entitlement
+   (`com.apple.developer.in-app-payments`):
+
+   ```bash
+   cd deploy/ios
+   bundle exec fastlane ios generate_new_certificates
+   ```
+
+5. **Verify** – `npx expo config --type introspect` must list the merchant ID under
+   `com.apple.developer.in-app-payments`; a development build must show Apple Pay in the donation sheet.
+6. **App Review** – mention the nonprofit approval in the review notes and explain how to test donations
+   (internal build uses Stripe test mode). Update the App Privacy section (email address, payment info
+   processed by Stripe).
+
 ## Troubleshooting
 
 ### Common Issues

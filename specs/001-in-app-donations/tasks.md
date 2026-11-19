@@ -36,14 +36,14 @@ im Runbook `democracy-api/docs/DONATIONS.md`.
 
 **Purpose**: Branches, Abhängigkeiten, externe Konten im Testmodus
 
-- [ ] T001 Branch `feat/001-in-app-donations` von `main` in `democracy-api/` anlegen
-- [ ] T002 [P] Abhängigkeiten `stripe`, `nodemailer`, `express-rate-limit` und `@types/nodemailer` (dev) in `democracy-api/package.json` hinzufügen
-- [ ] T003 [P] `npx expo install @stripe/stripe-react-native expo-web-browser` (ergibt 0.38.6 bzw. SDK-52-Version) in `democracy-client/package.json`
-- [ ] T004 [P] Neue Variablen in `democracy-api/.env.example` dokumentieren: `STRIPE_SECRET_KEY`, `STRIPE_PUBLISHABLE_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_DONATION_PRODUCT_ID`, `STRIPE_PORTAL_LOGIN_URL`, `DONATIONS_ENABLED`, `DONATION_MIN_CENTS`, `DONATION_MAX_CENTS`, `DONATION_PRESETS_ONE_TIME`, `DONATION_PRESETS_MONTHLY`, `DONATION_METHODS_ONE_TIME`, `DONATION_METHODS_MONTHLY`, `SMTP_URL`, `DONATION_MAIL_FROM`, `DONATION_MAIL_REPLY_TO`
+- [X] T001 Branch `feat/001-in-app-donations` von `main` in `democracy-api/` anlegen
+- [X] T002 [P] Abhängigkeiten `stripe`, `nodemailer`, `express-rate-limit` in `democracy-api/package.json` hinzufügen (exakt gepinnt: stripe 23.1.0 / API `2026-10-28.endive`, nodemailer 10.3.1 inkl. eigener Typen – `@types/nodemailer` entfällt, express-rate-limit 8.7.3)
+- [X] T003 [P] `npx expo install @stripe/stripe-react-native expo-web-browser` (ergibt 0.38.6 bzw. SDK-52-Version) in `democracy-client/package.json`
+- [X] T004 [P] Neue Variablen in `democracy-api/.env.example` dokumentieren: `STRIPE_SECRET_KEY`, `STRIPE_PUBLISHABLE_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_DONATION_PRODUCT_ID`, `STRIPE_PORTAL_LOGIN_URL`, `DONATIONS_ENABLED`, `DONATION_MIN_CENTS`, `DONATION_MAX_CENTS`, `DONATION_PRESETS_ONE_TIME`, `DONATION_PRESETS_MONTHLY`, `DONATION_METHODS_ONE_TIME`, `DONATION_METHODS_MONTHLY`, `SMTP_URL`, `DONATION_MAIL_FROM`, `DONATION_MAIL_REPLY_TO`
 - [ ] T005 Stripe-Testmodus einrichten und in `democracy-api/docs/DONATIONS.md` festhalten: Product „Monatliche Spende an DEMOCRACY", Restricted Key (Customers, PaymentIntents, Subscriptions, Invoices, PaymentMethods lesen, Billing Portal), Webhook-Endpoint mit Events aus `contracts/stripe-webhooks.md`, Customer Portal (Zahlungsart, Rechnungen, Kündigen an; Tarifwechsel aus; Login-Link an), Billing Smart Retries + Kündigung nach letztem Versuch + Mahnmails an, Stripe-Erfolgsbelege aus, SEPA-Vorabankündigungen an, Radar-Regel „Block if CVC fails", Branding, Stripe Link aus, PayPal-Konto verknüpfen
 - [ ] T006 [P] Apple: Merchant ID `merchant.de.democracy-deutschland.clientapp` anlegen, Apple-Pay-Capability für `de.democracy-deutschland.clientapp` und `.internal`, Apple-Pay-Zertifikat über Stripe-CSR, Profile per fastlane match neu erzeugen; dokumentieren in `democracy-client/docs/deployment/IOS.md`
 - [ ] T007 [P] Google Pay: Testumgebung nutzen, Production-Zugang (Integrationstyp „Gateway") in der Google Pay & Wallet Console für `de.democracydeutschland.app` beantragen; dokumentieren in `democracy-client/docs/deployment/ANDROID.md`
-- [ ] T008 [P] Config-Plugin `["@stripe/stripe-react-native", { merchantIdentifier: "merchant.de.democracy-deutschland.clientapp", enableGooglePay: true }]` in `democracy-client/app.config.ts` ergänzen und `expo prebuild --clean` lokal prüfen
+- [X] T008 [P] Config-Plugin `["@stripe/stripe-react-native", { merchantIdentifier: "merchant.de.democracy-deutschland.clientapp", enableGooglePay: true }]` in `democracy-client/app.config.ts` ergänzen und `expo prebuild --clean` lokal prüfen
 - [ ] T009 Spike O8 im Testmodus: (a) PayPal mit `setupFutureUsage: OffSession` im PaymentSheet 0.38.6, (b) Subscription mit SEPA-Erstzahlung im Status `processing` (Test Clock, kein `incomplete_expired`), (c) `confirmation_secret` der ersten Rechnung im `confirmHandler`; Ergebnis in `democracy-client/specs/001-in-app-donations/research.md` (R2/R3) eintragen
 
 ---

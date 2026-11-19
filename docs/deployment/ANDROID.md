@@ -74,6 +74,22 @@ bundle exec fastlane android beta
 
 The fastlane setup is integrated with GitHub Actions for automated builds and deployments. See the `.github/workflows` directory for the workflow configurations.
 
+## In-App Donations (Google Pay)
+
+Required for `specs/001-in-app-donations` (Stripe PaymentSheet with Google Pay). Google Play allows
+"tax exempt donations" outside Google Play Billing (Payments policy, section 3).
+
+1. **Manifest** – handled by the Stripe config plugin in `app.config.ts`
+   (`enableGooglePay: true` → `com.google.android.gms.wallet.api.enabled`).
+2. **Test environment** – internal builds run Google Pay with `testEnv: true`; no approval needed.
+3. **Production access** – Google Pay & Wallet Console (pay.google.com/business/console) → register the
+   business (DEMOCRACY Deutschland e.V.) → *Google Pay API* → integrate app `de.democracydeutschland.app`
+   with integration type **Gateway** (gateway: Stripe) → submit screenshots of the donation flow
+   (amount, payment sheet, Google Pay sheet, confirmation) → wait for approval.
+   Until approved, production builds can ship with Google Pay disabled (card, SEPA and PayPal still work).
+4. **Play Console** – update the *Data safety* form (email address, payment info processed by Stripe)
+   and keep the Freistellungsbescheid ready in case review asks for proof of tax-exempt status.
+
 ## Troubleshooting
 
 ### Common Issues

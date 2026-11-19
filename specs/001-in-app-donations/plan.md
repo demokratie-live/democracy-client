@@ -27,8 +27,9 @@ Server Node.js ≥ 22.23 (ESM, tsup)
 - Client: `@stripe/stripe-react-native@0.38.6` (neu, Expo-Config-Plugin), `expo-web-browser`
   (neu, für Kundenportal), vorhanden: `react-native-keychain`, `expo-crypto`, `expo-router`,
   `styled-components`, `zod`
-- Server: `stripe` (stripe-node, API-Version gepinnt ≥ `2025-03-31.basil`), `nodemailer`,
-  `express-rate-limit` (alle neu); vorhanden: `express`, `mongoose`, `winston`
+- Server: `stripe@23.1.0` (API-Version `2026-10-28.endive`, ≥ „basil" wie benötigt),
+  `nodemailer@10.3.1`, `express-rate-limit@8.7.3` (alle neu, exakt gepinnt); vorhanden: `express`,
+  `mongoose`, `winston`
 
 **Storage**: Stripe (Source of Truth); MongoDB-Collections `donation_subscribers`,
 `donation_webhook_events` (lokal in `democracy-api`, TTL-Indizes)

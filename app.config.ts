@@ -2,6 +2,7 @@ import { ConfigContext, ExpoConfig } from "expo/config";
 import { IOSIcons } from "@expo/config-types";
 import packageJson from "./package.json";
 const APP_VARIANT = process.env.APP_VARIANT;
+const APPLE_PAY_MERCHANT_ID = "merchant.de.democracy-deutschland.clientapp";
 
 const getBundleIdentifier = () => {
   if (APP_VARIANT === "internal") {
@@ -139,6 +140,15 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         enableBackgroundRemoteNotifications: true,
       },
     ],
+    [
+      // In-App-Spenden (specs/001-in-app-donations): Apple-Pay-Entitlement und Google-Pay-Meta-Data.
+      // Die Merchant ID gilt für production und internal (gleiches Apple-Team).
+      "@stripe/stripe-react-native",
+      {
+        merchantIdentifier: APPLE_PAY_MERCHANT_ID,
+        enableGooglePay: true,
+      },
+    ],
   ],
   experiments: {
     typedRoutes: true,
@@ -146,6 +156,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   extra: {
     graphqlUrl: getGraphqlUrl(),
     appVariant: APP_VARIANT || "internal",
+    applePayMerchantId: APPLE_PAY_MERCHANT_ID,
     associatedDomains: getAssociatedDomains(),
     storeReviewUrl: {
       ios: "https://apps.apple.com/de/app/democracy/id1341311162",
