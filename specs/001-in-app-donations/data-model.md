@@ -114,14 +114,14 @@ Validierungsregeln:
 
 - Neue Dauerspende für einen Schlüssel, dessen aktuelle Subscription `active` oder `past_due` ist →
   `409 subscription_exists` (App zeigt „Dauerspende verwalten").
-- Ist die aktuelle Subscription `incomplete` und die PaymentIntent ihrer ersten Rechnung **nicht**
-  `processing` (erste Zahlung gescheitert, abgebrochen oder unbestätigt), wird sie gekündigt und
-  durch die neue ersetzt (`stripeSubscriptionId` überschrieben). So bleibt ein erneuter Versuch im
-  selben Zahlungsdialog möglich, ohne doppelte Dauerspende.
-- Ist die erste Zahlung `processing` (SEPA/PayPal wird eingezogen), sind neue Dauerspende und
-  Kündigung gesperrt (`409 subscription_pending` bzw. `409 payment_pending`); die App zeigt
-  „Deine erste Spende wird gerade eingezogen". So wird eine laufende Lastschrift nie verwaist
-  oder doppelt.
+- Ist die aktuelle Subscription `incomplete` (erste Zahlung gescheitert, abgebrochen oder
+  unbestätigt), wird sie gekündigt (→ `incomplete_expired`, Rechnung `void`) und durch die neue
+  ersetzt (`stripeSubscriptionId` überschrieben). So bleibt ein erneuter Versuch im selben
+  Zahlungsdialog möglich, ohne doppelte Dauerspende.
+- Wird die erste Zahlung noch eingezogen (SEPA: PaymentIntent `processing`), ist die Subscription
+  laut Spike T009 bereits `active` – die Regeln für `active` gelten (zweite Dauerspende → `409
+  subscription_exists`; Kündigung zum Periodenende, die erste Lastschrift läuft durch).
+  `GET /monthly` meldet diesen Zustand als `firstPaymentPending: true`.
 - Webhooks zu einer Subscription wirken nur auf den `DonationSubscriber`, dessen
   `stripeSubscriptionId` mit ihr übereinstimmt (ersetzte Subscriptions ändern nichts mehr).
 - Betrag in `[minAmountCents, maxAmountCents]`; E-Mail Pflicht bei monatlich, Format-Prüfung

@@ -290,4 +290,22 @@ in der Auth-Middleware zusätzlich die Client-IP (`src/express/auth/index.ts:129
 | O5 | Google-Pay-Production-Zugang | Dev | Android-Release |
 | O6 | Apple Merchant ID + Apple-Pay-Zertifikat (über Stripe-CSR) | Dev | iOS-Build |
 | O7 | Datenschutzerklärung + Store-Datenschutzangaben aktualisieren | Verein | Release |
-| O8 | Spike: PayPal-Wiederkehrend im PaymentSheet 0.38.6; SEPA-Erstzahlung + Subscription-Status | Dev | US2 PayPal/SEPA |
+| O8 | Spike: Serverseite erledigt (R12); App-Seite (PaymentSheet, Rückleitung, Apple Pay) offen | Dev | US1/US2 App |
+
+## R12. Spike T009 – Ergebnisse Serverseite (2026-11-19)
+
+Durchgeführt per Stripe CLI in der Test-Sandbox „Test-Modus" (Konto DEMOCRACY) mit Testuhr; alle
+Spike-Objekte (`metadata.source=democracy-spike`) wurden danach mit der Testuhr gelöscht.
+
+| # | Prüfung | Ergebnis | Konsequenz |
+|---|---|---|---|
+| A | PaymentIntent mit `payment_method_configuration` „Donation Test" | `card, giropay, sepa_debit, sofort, paypal` | **Giropay und Sofort im Profil ausschalten** (sonst in der App; Giropay eingestellt, Sofort Auslaufmodell) |
+| B | dito mit `setup_future_usage=off_session` | `card, sepa_debit, sofort, paypal` | PayPal für wiederkehrende Zahlungen im Testmodus verfügbar; Live hängt an der PayPal-Freigabe – vor Livegang prüfen |
+| C | Subscription `default_incomplete`, ohne `payment_method_types` | `latest_invoice.confirmation_secret` vorhanden (`type=payment_intent`); Rechnungs-PI: `card, paypal, sepa_debit`, `setup_future_usage=off_session` | Abo nutzt das Standardprofil wie erwartet; App muss `setupFutureUsage: OffSession` setzen |
+| D | Erste Zahlung per SEPA | PI `processing`, Subscription **sofort `active`**; nach 25 h (Testuhr) PI `succeeded` | Kein `incomplete_expired`; die Sperren `subscription_pending`/`payment_pending` entfallen (data-model §5), stattdessen `firstPaymentPending` in `GET /monthly` |
+| E | Erste Zahlung per Karte | `active`, `default_payment_method` gespeichert; nach 32 Tagen 2 bezahlte Rechnungen | Automatische Folgeabbuchung (off-session) funktioniert |
+| F | `incomplete`-Subscription kündigen | Status `incomplete_expired`, Rechnung `void` | Ersetzen beim Retry sauber; Webhook-Handler behandelt `incomplete_expired` ohne Mail |
+
+**Noch offen (App-Seite, mit dem Spendenformular in Phase 3):** PaymentSheet 0.38.6 im
+Deferred-Intent-Modus auf Gerät/Simulator (Zahlungsarten-Anzeige inkl. PayPal bei `OffSession`,
+SEPA-Mandat), Rückleitung über `+native-intent.tsx`, Apple Pay (braucht T006).

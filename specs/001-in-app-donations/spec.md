@@ -183,8 +183,9 @@ den Einzelzahlungen abgleichen.
 - Erneuter Versuch nach gescheiterter Zahlung (andere Karte/Zahlungsart): möglich, ohne
   Doppelbuchung und ohne doppelte Dauerspende.
 - Die erste Abbuchung einer Dauerspende wird noch eingezogen (z. B. SEPA, einige Werktage): Die
-  App zeigt „Deine erste Spende wird gerade eingezogen"; eine weitere Dauerspende oder die
-  Kündigung ist erst danach möglich, damit keine Lastschrift doppelt oder ohne Dauerspende läuft.
+  Dauerspende ist bereits aktiv; die App zeigt zusätzlich „Deine erste Spende wird gerade
+  eingezogen". Eine zweite Dauerspende ist nicht möglich (es gibt schon eine); eine Kündigung wirkt
+  zum Periodenende, die erste Lastschrift läuft regulär durch.
 - SEPA-Lastschrift wird nachträglich zurückgegeben (bis 8 Wochen, von der Spender:in
   veranlasst): Die Spende wird in der Spendenübersicht als zurückgebucht sichtbar und der Verein
   benachrichtigt; eine Dauerspende läuft weiter, bis sie gekündigt wird.

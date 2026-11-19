@@ -77,6 +77,8 @@ export const MonthlyDonationStatusSchema = z.object({
   coverFees: z.boolean(),
   currentPeriodEnd: z.string().nullable(),
   paymentMethod: z.object({ type: z.string(), label: z.string() }).nullable(),
+  /** true, solange die erste Zahlung noch eingezogen wird (SEPA). Die Dauerspende ist dann schon aktiv. */
+  firstPaymentPending: z.boolean(),
   lastPaymentError: z.object({ message: z.string(), at: z.string() }).nullable(),
 });
 export type MonthlyDonationStatus = z.infer<typeof MonthlyDonationStatusSchema>;

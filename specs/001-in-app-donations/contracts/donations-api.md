@@ -115,13 +115,11 @@ Spender-Schlüssel. Der Client erzeugt den Schlüssel **vor** dem Aufruf und spe
 ```
 
 **Fehler**: wie `/one-time`, zusätzlich `400 email_required`,
-`409 subscription_exists` (aktuelle Subscription des Schlüssels ist `active` oder `past_due`),
-`409 subscription_pending` (aktuelle Subscription ist `incomplete`, ihre erste Zahlung wird noch
-eingezogen – `processing`).
+`409 subscription_exists` (aktuelle Subscription des Schlüssels ist `active` oder `past_due` –
+auch während die erste SEPA-Lastschrift noch eingezogen wird).
 
-**Retry-Verhalten**: Ist die aktuelle Subscription des Schlüssels `incomplete` und ihre erste
-Zahlung nicht `processing` (z. B. erste Karte abgelehnt), kündigt der Server sie und legt eine neue
-an (`200`). Der Client verwendet dafür denselben Spender-Schlüssel, aber einen neuen
+**Retry-Verhalten**: Ist die aktuelle Subscription des Schlüssels `incomplete` (z. B. erste Karte
+abgelehnt), kündigt der Server sie und legt eine neue an (`200`). Der Client verwendet dafür denselben Spender-Schlüssel, aber einen neuen
 `Idempotency-Key`.
 
 ---
@@ -141,12 +139,14 @@ an (`200`). Der Client verwendet dafür denselben Spender-Schlüssel, aber einen
   "coverFees": true,
   "currentPeriodEnd": "2026-12-19T10:00:00Z",
   "paymentMethod": { "type": "sepa_debit", "label": "SEPA •••• 3000" },
+  "firstPaymentPending": false,
   "lastPaymentError": null
 }
 ```
 
 `status` ∈ `incomplete | active | past_due | canceled | incomplete_expired`.
 `lastPaymentError`: `{ "message": "Karte abgelaufen", "at": "…" }` oder `null`.
+`firstPaymentPending`: `true`, solange die erste Zahlung noch eingezogen wird (SEPA `processing`).
 
 **404 not_found**: kein Eintrag zum Schlüssel → App löscht den lokalen Schlüssel.
 
@@ -166,8 +166,8 @@ an (`200`). Der Client verwendet dafür denselben Spender-Schlüssel, aber einen
 
 ## DELETE /monthly
 
-Kündigt: `active` → `cancel_at_period_end=true`; `past_due` und `incomplete` ohne laufende Zahlung
-→ sofort. `409 payment_pending`, solange die erste Zahlung `processing` ist.
+Kündigt: `active` → `cancel_at_period_end=true` (auch wenn die erste Lastschrift noch läuft – sie
+wird regulär eingezogen); `past_due` und `incomplete` → sofort.
 
 **Headers**: `Authorization: DonorKey …`
 

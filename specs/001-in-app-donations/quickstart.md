@@ -59,7 +59,7 @@ GRAPHQL_URL=http://<lokale-IP>:3000 APP_VARIANT=internal pnpm ios   # bzw. pnpm 
 | V19 | Privacy (SC-007, FR-006) | Proxy-Mitschnitt der Donation-Requests; Mongo-Inspektion; Ingress- und API-Logs (internal-Cluster) nach Testspenden durchsuchen | keine `x-token`/Device-Header; keine User-/Device-IDs in `donation_*` oder Stripe-Metadaten; **keine** `/donations`-Zeilen im Ingress-Log, keine IPs/E-Mails in API-Logs |
 | V20 | Export (US5) | Stripe-Dashboard → Berichte → Saldo-Änderungen, Filter `metadata.source` | Brutto, Gebühr, Netto je Zahlung |
 | V21 | Retry Dauerspende (US2-3) | „monatlich" 5 €, Karte `4000 0000 0000 0002`, im selben Sheet dann SEPA-Test-IBAN | genau **eine** Subscription nicht-`canceled`; die erste ist gekündigt, `donation_subscribers` zeigt auf die zweite; keine „beendet"-Mail |
-| V22 | Erste Lastschrift läuft (Edge Case, data-model §5) | „monatlich" per SEPA-Test-IBAN mit verzögerter Bestätigung, vor Zahlungseingang erneut „monatlich" wählen bzw. kündigen | App zeigt „Deine erste Spende wird gerade eingezogen"; API `409 subscription_pending` / `409 payment_pending`; keine zweite Subscription |
+| V22 | Erste Lastschrift läuft (Edge Case, data-model §5) | „monatlich" per SEPA-Test-IBAN, vor Zahlungseingang erneut „monatlich" wählen bzw. kündigen | Dauerspende `active` mit `firstPaymentPending: true`, App zeigt „Deine erste Spende wird gerade eingezogen"; zweite Dauerspende → `409 subscription_exists`; Kündigung zum Periodenende, erste Lastschrift wird trotzdem eingezogen |
 
 ## Automatisierte Prüfungen
 
