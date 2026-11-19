@@ -173,8 +173,8 @@ im Runbook `democracy-api/docs/DONATIONS.md`.
 
 **Independent Test**: quickstart V20.
 
-- [ ] T061 [P] [US5] Monatsexport beschreiben (Stripe-Bericht „Saldo-Änderungen"/„Auszahlungsabgleich", Filter `metadata.source`, Spalten Brutto/Gebühr/Netto, `metadata.interval`, `metadata.cover_fees` für SC-002a, Erfolgsquote für SC-004) in `democracy-api/docs/DONATIONS.md`
-- [ ] T062 [P] [US5] Handler `charge.refunded`, `charge.dispute.created`, `mandate.updated` → `logger.warn` (Discord-Alarm an Kassenwart, nur Stripe-IDs); keine Mail an Spender:in, Dauerspende bleibt unverändert; in `democracy-api/src/donations/webhook.ts`
+- [X] T061 [P] [US5] Monatsexport beschreiben (Stripe-Bericht „Saldo-Änderungen"/„Auszahlungsabgleich", Filter `metadata.source`, Spalten Brutto/Gebühr/Netto, `metadata.interval`, `metadata.cover_fees` für SC-002a, Erfolgsquote für SC-004) in `democracy-api/docs/DONATIONS.md` — *dazu Metadaten am Rechnungs-PaymentIntent (`invoice.paid`); Spalten beim ersten Export gegenprüfen*
+- [X] T062 [P] [US5] Handler `charge.refunded`, `charge.dispute.created`, `mandate.updated` → `logger.warn` (Discord-Alarm an Kassenwart, nur Stripe-IDs); keine Mail an Spender:in, Dauerspende bleibt unverändert; in `democracy-api/src/donations/webhook.ts` — *umgesetzt in `handlers/accountAlerts.ts`; kein Discord-Transport im Logger → Alarm über Stripe-E-Mail-Benachrichtigungen (docs/DONATIONS.md §5)*
 
 ---
 
