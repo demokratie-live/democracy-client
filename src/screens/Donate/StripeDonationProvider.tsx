@@ -13,7 +13,7 @@ import { StripeProvider } from "@stripe/stripe-react-native";
 
 export const STRIPE_RETURN_URL = "democracy://stripe-redirect";
 
-const merchantIdentifier: string | undefined = Constants.expoConfig?.extra?.applePayMerchantId;
+const merchantIdentifier: string | undefined = Constants.expoConfig?.extra?.applePayMerchantId || undefined;
 
 interface Props {
   publishableKey: string;

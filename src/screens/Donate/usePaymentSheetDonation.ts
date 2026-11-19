@@ -36,6 +36,8 @@ export interface DonationInput {
 }
 
 const isInternalVariant = (Constants.expoConfig?.extra?.appVariant ?? "internal") === "internal";
+// Ohne Merchant ID (lokale Builds vor T006) wird Apple Pay nicht angeboten
+const applePayAvailable = Boolean(Constants.expoConfig?.extra?.applePayMerchantId);
 const appVersion = Application.nativeApplicationVersion ?? undefined;
 const platform = Platform.OS === "android" ? "android" : "ios";
 
@@ -63,7 +65,7 @@ export const usePaymentSheetDonation = () => {
         returnURL: STRIPE_RETURN_URL,
         allowsDelayedPaymentMethods: true,
         paymentMethodOrder: ["apple_pay", "google_pay", "sepa_debit", "paypal", "card"],
-        applePay: { merchantCountryCode: config.merchantCountryCode },
+        applePay: applePayAvailable ? { merchantCountryCode: config.merchantCountryCode } : undefined,
         googlePay: {
           merchantCountryCode: config.merchantCountryCode,
           currencyCode: "EUR",

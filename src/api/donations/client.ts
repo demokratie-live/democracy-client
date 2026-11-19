@@ -1,3 +1,4 @@
+import Constants from "expo-constants";
 import * as Crypto from "expo-crypto";
 import type { z } from "zod";
 import { GRAPHQL_URL } from "../config";
@@ -11,7 +12,9 @@ import { DonationConfigSchema, DonationErrorBodySchema } from "./types";
  * mit Nutzerkonto oder Abstimmungen verknüpfbar sein.
  */
 
-export const DONATIONS_API_URL = `${GRAPHQL_URL.replace(/\/+$/, "")}/donations/v1`;
+// Optional getrennt konfigurierbar (app.config.ts `extra.donationsApiUrl`, z. B. lokaler Testserver)
+const configuredDonationsUrl: string | null = Constants.expoConfig?.extra?.donationsApiUrl || null;
+export const DONATIONS_API_URL = (configuredDonationsUrl ?? `${GRAPHQL_URL}/donations/v1`).replace(/\/+$/, "");
 
 const TIMEOUT_MS = 20_000;
 
