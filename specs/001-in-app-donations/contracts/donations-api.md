@@ -37,7 +37,6 @@ Allgemein:
   "minAmountCents": 500,
   "maxAmountCents": 100000,
   "presets": { "one_time": [1000, 2500, 5000, 10000], "monthly": [500, 1000, 1500, 2500] },
-  "paymentMethodTypes": { "one_time": ["card", "sepa_debit", "paypal"], "monthly": ["card", "sepa_debit"] },
   "fees": { "cardPct": 1.5, "cardFixedCents": 25, "sepaFixedCents": 35, "billingPct": 0.7 },
   "portalLoginUrl": "https://billing.stripe.com/p/login/…",
   "bankTransfer": { "holder": "DEMOCRACY Deutschland e.V.", "iban": "DE83 2605 0001 0056 1290 91", "bic": "NOLADE21GOE" },
@@ -73,8 +72,9 @@ Legt nach Bestätigung im PaymentSheet (`confirmHandler`) einen PaymentIntent an
 
 - `amountCents`: gewählter Betrag ohne Aufschlag, `min ≤ x ≤ max`.
 - `email`: optional.
-- Server prüft den Typ von `paymentMethodId` gegen `paymentMethodTypes.one_time` und berechnet
-  den belasteten Betrag (Gebührenformel, siehe research.md R4) selbst.
+- Server legt den PaymentIntent mit dem Stripe-Zahlungsprofil an (`payment_method_configuration`);
+  Stripe lehnt Zahlungsarten ab, die im Profil nicht aktiv sind (→ `400 payment_method_not_allowed`).
+  Den belasteten Betrag (Gebührenformel, siehe research.md R4) berechnet der Server selbst.
 
 **200**
 

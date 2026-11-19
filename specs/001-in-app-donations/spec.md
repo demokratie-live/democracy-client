@@ -221,8 +221,8 @@ den Einzelzahlungen abgleichen.
 - **FR-002**: Nutzer:innen MÜSSEN zwischen „einmalig" und „monatlich" wählen können.
 - **FR-003**: Das System MUSS folgende Zahlungsarten anbieten: Apple Pay (iOS), Google Pay
   (Android), Kredit-/Debitkarte, SEPA-Lastschrift und PayPal, jeweils für einmalige und
-  monatliche Spenden. Welche Zahlungsarten für welchen Rhythmus aktiv sind, MUSS ohne App-Update
-  steuerbar sein (z. B. PayPal monatlich erst nach PayPal-Freigabe).
+  monatliche Spenden. Welche Zahlungsarten aktiv sind, MUSS der Verein ohne App-Update und ohne
+  Deployment im Dashboard des Zahlungsdienstleisters steuern können.
 - **FR-004**: Die Zahlung MUSS auf iOS und Android innerhalb der App abgeschlossen werden können,
   einschließlich Bankbestätigungen (3-D Secure) und SEPA-Mandat. Auf iOS MUSS Apple Pay angeboten
   werden (Voraussetzung der Apple-Freigabe als gemeinnützige Organisation).

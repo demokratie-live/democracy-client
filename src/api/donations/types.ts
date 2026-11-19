@@ -3,13 +3,13 @@ import { z } from "zod";
 /**
  * Schemas gemäß specs/001-in-app-donations/contracts/donations-api.md.
  * Beträge sind immer Integer in Cent, Währung immer EUR.
+ *
+ * Zahlungsarten kommen nicht aus dieser Konfiguration: Das Stripe-SDK nutzt das Standard-
+ * Zahlungsprofil des Kontos (im Stripe-Dashboard gepflegt), der Server dasselbe Profil.
  */
 
 export const DonationIntervalSchema = z.enum(["one_time", "monthly"]);
 export type DonationInterval = z.infer<typeof DonationIntervalSchema>;
-
-export const PaymentMethodTypeSchema = z.enum(["card", "sepa_debit", "paypal"]);
-export type PaymentMethodType = z.infer<typeof PaymentMethodTypeSchema>;
 
 const Cents = z.number().int().nonnegative();
 
@@ -30,10 +30,6 @@ export const DonationConfigSchema = z.object({
   minAmountCents: Cents,
   maxAmountCents: Cents,
   presets: z.object({ one_time: z.array(Cents), monthly: z.array(Cents) }),
-  paymentMethodTypes: z.object({
-    one_time: z.array(PaymentMethodTypeSchema),
-    monthly: z.array(PaymentMethodTypeSchema),
-  }),
   fees: DonationFeesSchema,
   portalLoginUrl: z.string().url().nullable(),
   bankTransfer: z.object({ holder: z.string(), iban: z.string(), bic: z.string() }),

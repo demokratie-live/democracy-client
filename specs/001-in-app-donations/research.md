@@ -111,12 +111,21 @@ Kosten je Abbuchung (€, Standardkarte, PayPal unter Annahme Gemeinnützigkeits
 | 10 € monatlich | 0,47 | 0,42 | 0,69 | – |
 | 25 € monatlich | 0,80 | 0,53 | 1,05 | – |
 
-- **Decision**: Zahlungsarten v1 = Apple Pay (iOS), Google Pay (Android), Karte, SEPA-Lastschrift,
-  PayPal (einmalig; monatlich nach PayPal-Freigabe). Gesteuert über die Server-Konfiguration:
-  explizite Listen `payment_method_types` je Rhythmus (`card`, `sepa_debit`, `paypal`; Apple Pay/
-  Google Pay laufen als `card`), die Client (`intentConfiguration.paymentMethodTypes`) und Server
-  (Intent-/Subscription-Anlage) identisch verwenden – so passen Sheet und Intent immer zusammen.
-  Reihenfolge im Sheet: Wallet → SEPA → PayPal → Karte. Stripe Link aus (unnötige Komplexität).
+- **Decision** (geändert 2026-11-19, Entscheidung Verein): Zahlungsarten v1 = Apple Pay (iOS),
+  Google Pay (Android), Karte, SEPA-Lastschrift, PayPal. Gesteuert über ein **Stripe-Zahlungsprofil**
+  (Payment Method Configuration), das der Verein im Dashboard pflegt – Test: „Donation Test"
+  `pmc_1LBwvYLGpvKcZpqce4bG1PuO`, Live: eigenes Profil. Der Server übergibt die Profil-ID
+  (`STRIPE_PAYMENT_METHOD_CONFIGURATION_ID`) bei PaymentIntents. Technische Randbedingungen:
+  das App-SDK 0.38.6 kann keine Profil-ID übergeben und die Subscription-API nimmt keine an – beide
+  nutzen das **Standardprofil** des Kontos. Das Spendenprofil **muss daher in Test und Live das
+  Standardprofil sein** (kontoeigenes Standardprofil; das von DonorBox verwaltete Plattform-Profil
+  ist davon getrennt). Klarna und Link im Profil ausschalten. Reihenfolge im Sheet: Wallet → SEPA →
+  PayPal → Karte.
+- **Folge**: Zahlungsarten lassen sich nicht mehr je Rhythmus getrennt steuern. Ob Stripe PayPal für
+  monatliche Spenden vor der PayPal-Freigabe wiederkehrender Zahlungen automatisch ausblendet oder
+  die Zahlung scheitert, prüft der Spike T009; notfalls Freigabe vor dem Livegang einholen.
+- **Verworfen**: explizite `payment_method_types` je Rhythmus in der Server-Konfiguration
+  (ursprünglicher Plan) – Verein bevorzugt die Steuerung im Dashboard ohne Deployment.
   **Mindestbetrag 5 €** (Clarification), Höchstbetrag 1.000 € (Missbrauchs-/Rücklastschriftrisiko;
   größere Spenden per Überweisung).
 - **Gebührenübernahme (FR-001b)**: Aufschlag = Brutto-Hochrechnung auf Basis des teureren aus

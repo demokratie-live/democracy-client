@@ -28,7 +28,6 @@ export const FALLBACK_DONATION_CONFIG: DonationConfig = {
   minAmountCents: 500,
   maxAmountCents: 100000,
   presets: { one_time: [1000, 2500, 5000, 10000], monthly: [500, 1000, 1500, 2500] },
-  paymentMethodTypes: { one_time: [], monthly: [] },
   fees: { cardPct: 1.5, cardFixedCents: 25, sepaFixedCents: 35, billingPct: 0.7 },
   portalLoginUrl: null,
   bankTransfer: { holder: donateList1Text, iban: donateList2Text, bic: donateList3Text },

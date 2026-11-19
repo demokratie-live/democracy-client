@@ -182,8 +182,8 @@ im Client-Repo. Der Server wird zuerst ausgerollt (Constitution, Entwicklungswor
 | 6 Release | Datenschutzerklärung, Store-Labels, Review-Notes, Google-Pay-Production, Live-Keys, DonorBox-Button entfernen | SC-006, Monitoring |
 
 MVP = Phasen 0–2 (einmalige Spenden). Dauerspenden (3–4) folgen im selben Release, da
-Patenschaften das Hauptziel sind; Phasen sind einzeln auslieferbar (Kill-Switch,
-`paymentMethodTypes`).
+Patenschaften das Hauptziel sind; Phasen sind einzeln auslieferbar (Kill-Switch, Zahlungsarten im
+Stripe-Zahlungsprofil).
 
 ## Rollout
 

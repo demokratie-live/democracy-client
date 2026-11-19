@@ -42,8 +42,8 @@ ignoriert Objekte ohne diese Markierung (z. B. bestehende DonorBox-Zahlungen im 
 | Objekt | Wesentliche Felder | Metadaten |
 |---|---|---|
 | **Customer** | `email`, `preferred_locales=["de"]`; Wiederverwendung bei gleicher E-Mail (`customers.list({email})`, gefiltert auf `source`) | `source` |
-| **PaymentIntent** (einmalig) | `amount` (Cent, inkl. Aufschlag), `currency=eur`, `customer` (falls E-Mail), `payment_method_types` aus Config, `description="Spende an DEMOCRACY Deutschland e.V."`, `statement_descriptor_suffix="SPENDE"` | `source`, `interval=one_time`, `base_amount`, `cover_fees`, `platform`, `app_version` |
-| **Subscription** (monatlich) | `items[0].price_data{currency=eur, product=STRIPE_DONATION_PRODUCT_ID, unit_amount, recurring.interval=month}`, `payment_behavior=default_incomplete`, `payment_settings.save_default_payment_method=on_subscription` | `source`, `interval=monthly`, `base_amount`, `cover_fees`, `platform`, `app_version`, `subscriber_id` |
+| **PaymentIntent** (einmalig) | `amount` (Cent, inkl. Aufschlag), `currency=eur`, `customer` (falls E-Mail), `payment_method_configuration` = Zahlungsprofil-ID, `description="Spende an DEMOCRACY Deutschland e.V."`, `statement_descriptor_suffix="SPENDE"` | `source`, `interval=one_time`, `base_amount`, `cover_fees`, `platform`, `app_version` |
+| **Subscription** (monatlich) | `items[0].price_data{currency=eur, product=STRIPE_DONATION_PRODUCT_ID, unit_amount, recurring.interval=month}`, `payment_behavior=default_incomplete`, `payment_settings.save_default_payment_method=on_subscription`; keine `payment_method_types` → Stripe nutzt das Standardprofil | `source`, `interval=monthly`, `base_amount`, `cover_fees`, `platform`, `app_version`, `subscriber_id` |
 | **Invoice** | von Billing erzeugt; Footer-Text „Spende ohne Gegenleistung" | erbt Subscription-Bezug |
 
 Beträge immer als Integer in Cent. `base_amount` = gewählter Spendenbetrag, `amount`/`unit_amount`
@@ -69,7 +69,7 @@ Aus Umgebungsvariablen/ConfigMap des API-Deployments, nicht aus der DB. Ausgelie
 | `presets.one_time` / `presets.monthly` | `[1000, 2500, 5000, 10000]` / `[500, 1000, 1500, 2500]` (Cent) | FR-001 |
 | `defaultInterval` | `monthly` | Annahme der Spec |
 | `minAmountCents` / `maxAmountCents` | `500` / `100000` | FR-001, Edge Cases |
-| `paymentMethodTypes.one_time` / `.monthly` | `[card, sepa_debit, paypal]` / `[card, sepa_debit]` | FR-003; `paypal` monatlich nach PayPal-Freigabe ergänzen |
+| `stripe.paymentMethodConfigurationId` (nur Server, nicht in `/config`) | `pmc_…` (Test: „Donation Test") | FR-003; Zahlungsarten im Stripe-Dashboard steuern; Profil muss Standardprofil sein |
 | `fees` | `{cardPct: 1.5, cardFixedCents: 25, sepaFixedCents: 35, billingPct: 0.7}` | Gebührenübernahme (FR-001b) |
 | `portalLoginUrl` | `https://billing.stripe.com/p/login/…` | Verwaltung ohne Gerät (FR-017) |
 | `bankTransfer` | Kontoinhaber, IBAN, BIC | Alternative (FR-012); App hat Fallback-Werte |
