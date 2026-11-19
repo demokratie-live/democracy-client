@@ -43,16 +43,19 @@ export const useMonthlyDonation = () => {
   const [busy, setBusy] = useState<Action | null>(null);
 
   /** Gibt die Fehlermeldung zurück (oder null, wenn die Dauerspende nicht mehr existiert). */
-  const handleError = useCallback(async (error: unknown, donorKey: string): Promise<string | null> => {
+  const handleError = useCallback(
+    async (error: unknown, donorKey: string, requestStartedAt: number): Promise<string | null> => {
     if (isNotFound(error)) {
-      await deleteDonorKeyIfUnchanged(donorKey).catch(() => undefined);
+      await deleteDonorKeyIfUnchanged(donorKey, requestStartedAt).catch(() => undefined);
       setState({ loading: false, status: null, error: null });
       return null;
     }
     const message = messageOf(error);
     setState((previous) => ({ ...previous, loading: false, error: message }));
     return message;
-  }, []);
+    },
+    [],
+  );
 
   const refresh = useCallback(async () => {
     let donorKey: string | null;
@@ -68,11 +71,12 @@ export const useMonthlyDonation = () => {
       return;
     }
     setState((previous) => ({ ...previous, loading: true, error: null }));
+    const requestStartedAt = Date.now();
     try {
       const status = await donationRequest("/monthly", { donorKey, schema: MonthlyDonationStatusSchema });
       setState({ loading: false, status, error: null });
     } catch (error) {
-      await handleError(error, donorKey);
+      await handleError(error, donorKey, requestStartedAt);
     }
   }, [handleError]);
 
@@ -89,12 +93,13 @@ export const useMonthlyDonation = () => {
       const donorKey = await loadDonorKey().catch(() => null);
       if (!donorKey) return KEYCHAIN_ERROR;
       setBusy(action);
+      const requestStartedAt = Date.now();
       try {
         const status = await request(donorKey);
         if (status) setState({ loading: false, status, error: null });
         return null;
       } catch (error) {
-        return (await handleError(error, donorKey)) ?? GENERIC_ERROR;
+        return (await handleError(error, donorKey, requestStartedAt)) ?? GENERIC_ERROR;
       } finally {
         setBusy(null);
       }

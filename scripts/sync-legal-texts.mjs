@@ -11,14 +11,20 @@
  * - interne Links (/datenschutz/) → absolute Website-URLs
  * - Backticks und `${` für das Template-Literal maskiert
  *
- * Aufruf: node scripts/sync-legal-texts.mjs [Pfad zum Website-Repo]
+ * Texte mit offenen Entwurfsmarkern ([OFFEN: …], [PRÜFEN: …]) werden nicht übernommen, damit sie in
+ * keinem Build erscheinen – außer ausdrücklich mit --allow-drafts.
+ *
+ * Aufruf: node scripts/sync-legal-texts.mjs [--allow-drafts] [Pfad zum Website-Repo]
  */
 import fs from "node:fs";
 import path from "node:path";
 
 // Kanonische Adresse (www und Pfade ohne Schrägstrich leiten zweimal weiter)
 const SITE = "https://democracy-deutschland.de";
-const websiteRepo = path.resolve(process.argv[2] ?? path.join(process.cwd(), "..", "democracy-deutschland.de"));
+const args = process.argv.slice(2);
+const allowDrafts = args.includes("--allow-drafts");
+const repoArg = args.find((arg) => !arg.startsWith("--"));
+const websiteRepo = path.resolve(repoArg ?? path.join(process.cwd(), "..", "democracy-deutschland.de"));
 const target = path.join(process.cwd(), "src/screens/About/data.ts");
 
 const ENTRIES = [
@@ -37,15 +43,26 @@ const toAppMarkdown = (markdown) =>
     .replace(/\$\{/g, "\\${")
     .trimEnd();
 
-let source = fs.readFileSync(target, "utf-8");
+const normalize = (text) => text.replace(/\r\n?/g, "\n");
+
+let source = normalize(fs.readFileSync(target, "utf-8"));
 for (const { title, file } of ENTRIES) {
-  const markdown = fs.readFileSync(path.join(websiteRepo, "content/legal", file), "utf-8");
+  const markdown = normalize(fs.readFileSync(path.join(websiteRepo, "content/legal", file), "utf-8"));
+  const drafts = markdown.match(/\[(OFFEN|PRÜFEN):/g) ?? [];
+  if (drafts.length > 0 && !allowDrafts) {
+    throw new Error(`${file} enthält ${drafts.length} offene Entwurfsmarker – erst klären oder --allow-drafts`);
+  }
   const start = source.indexOf(`    title: "${title}",\n    text: \``);
   if (start === -1) throw new Error(`Eintrag „${title}" nicht gefunden in ${target}`);
   const textStart = source.indexOf("`", start) + 1;
-  // Ende: das erste nicht maskierte Backtick nach dem Textanfang
+  // Ende: das erste nicht maskierte Backtick (gerade Anzahl Backslashes davor) nach dem Textanfang
   let end = textStart;
-  while (end < source.length && !(source[end] === "`" && source[end - 1] !== "\\")) end += 1;
+  const escaped = (index) => {
+    let count = 0;
+    for (let i = index - 1; i >= textStart && source[i] === "\\"; i -= 1) count += 1;
+    return count % 2 === 1;
+  };
+  while (end < source.length && !(source[end] === "`" && !escaped(end))) end += 1;
   if (end >= source.length) throw new Error(`Textende von „${title}" nicht gefunden`);
   source = source.slice(0, textStart) + toAppMarkdown(markdown) + source.slice(end);
 }

@@ -49,6 +49,8 @@ export interface DonationInput {
   config: DonationConfig;
   /** false, wenn der Spenden-Screen inzwischen verlassen wurde – dann kein Zahlungsfenster öffnen. */
   isActive?: () => boolean;
+  /** Gebühren haben sich geändert: Konfiguration neu laden, damit die Anzeige wieder stimmt. */
+  onConfigStale?: () => void;
 }
 
 const isInternalVariant = (Constants.expoConfig?.extra?.appVariant ?? "internal") === "internal";
@@ -98,6 +100,7 @@ export const usePaymentSheetDonation = () => {
       email,
       config,
       isActive = () => true,
+      onConfigStale,
     }: DonationInput): Promise<DonationOutcome> => {
       const monthly = interval === "monthly";
       if (monthly && !email) return { status: "failed", message: EMAIL_REQUIRED };
@@ -174,6 +177,7 @@ export const usePaymentSheetDonation = () => {
               paymentMethodId: paymentMethod.id,
               platform,
               appVersion,
+              expectedChargedAmountCents: chargedAmountCents,
             };
             // Neuer Idempotency-Key je Bezahlversuch; Wiederholung nur bei Netzwerkfehlern mit demselben Key.
             const idempotencyKey = newIdempotencyKey();
@@ -205,10 +209,11 @@ export const usePaymentSheetDonation = () => {
                 clientSecret = response.clientSecret;
                 serverAmount = response.chargedAmountCents;
               }
-              // Verbindlich rechnet der Server. Weicht sein Betrag von der Anzeige ab (veraltete Gebühren
-              // im Config-Cache), nicht bezahlen lassen – der angelegte Intent verfällt unbestätigt.
+              // Der Server prüft den angezeigten Betrag schon vor dem Anlegen (409 amount_changed). Diese
+              // Prüfung bleibt als zweite Sicherung (z. B. gegen einen Server ohne diese Prüfung).
               if (serverAmount !== chargedAmountCents) {
                 invalidateDonationConfig();
+                onConfigStale?.();
                 intentCreationCallback({
                   error: { code: "Failed", message: AMOUNT_CHANGED, localizedMessage: AMOUNT_CHANGED },
                 });
@@ -216,6 +221,10 @@ export const usePaymentSheetDonation = () => {
               }
               intentCreationCallback({ clientSecret });
             } catch (error) {
+              if (error instanceof DonationApiError && error.code === "amount_changed") {
+                invalidateDonationConfig();
+                onConfigStale?.();
+              }
               const message = error instanceof DonationApiError ? error.message : GENERIC_ERROR;
               intentCreationCallback({ error: { code: "Failed", message, localizedMessage: message } });
             }

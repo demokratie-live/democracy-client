@@ -53,6 +53,8 @@ export interface DonationRequestBody {
   paymentMethodId: string;
   platform: "ios" | "android";
   appVersion?: string;
+  /** Angezeigter Gesamtbetrag; weicht der Server ab → 409 amount_changed, bevor etwas angelegt wird. */
+  expectedChargedAmountCents?: number;
 }
 
 export const OneTimeDonationResponseSchema = z.object({

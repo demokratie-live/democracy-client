@@ -58,7 +58,7 @@ const MadeWithHeartWrapper = styled.View``;
 export const DonateScreen: React.FC = () => {
   const { data } = useQuery<{ donationStatus: DonationStatus } | undefined>(DONATION_STATUS);
   const [donationStatus, setDonationStatus] = useState<DonationStatus>();
-  const { config } = useDonationConfig();
+  const { config, reload: reloadConfig } = useDonationConfig();
   const { status: monthlyStatus } = useMonthlyDonation();
   const ongoingMonthly = isOngoing(monthlyStatus) ? monthlyStatus : null;
 
@@ -143,7 +143,8 @@ export const DonateScreen: React.FC = () => {
         {publishableKey && (
           <StripeDonationProvider publishableKey={publishableKey}>
             <FormCard>
-              <DonationForm config={config} onCompleted={showThanks} monthlyBlocked={blocksNewMonthly(monthlyStatus)} />
+              <DonationForm config={config} onCompleted={showThanks} monthlyBlocked={blocksNewMonthly(monthlyStatus)}
+                onConfigStale={reloadConfig} />
             </FormCard>
           </StripeDonationProvider>
         )}

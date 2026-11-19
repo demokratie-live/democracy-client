@@ -92,23 +92,25 @@ Required for `specs/001-in-app-donations` (Stripe PaymentSheet with Google Pay).
 
 ## Data safety (Play Console) – draft (T071)
 
-Based on the rewritten privacy policy (November 2026) and the code as of 2026-11-19. Items marked
-**[CHECK]** need a decision before submission.
+Based on the code as of 2026-11-19 and the rewritten privacy policy. Items marked **[CHECK]** need a
+decision before submission.
 
-- **Data shared with third parties:** phone number (SMS provider, as processor – usually not "shared"
-  in Play's sense **[CHECK]**), payment info and email for donations (Stripe, PayPal/Google as
-  payment processors).
-- **Data collected:**
-  - Personal info → Phone number: account verification, required for voting, processed ephemerally
-    by the SMS provider; stored as hash.
-  - Personal info → Email address: donations only, optional (required for monthly donations).
-  - Financial info → Payment info, Purchase history: donations via Stripe.
-  - App info and performance: none (no crash or analytics SDK).
+- **Data collected** (all for *App functionality*; donation data additionally *Fraud prevention* by Stripe):
+  - Personal info → **Phone number:** verification, required for voting; sent to the SMS provider,
+    stored by us as unsalted (reversible) hash. Retention at the SMS provider **[CHECK]**.
+  - Personal info → **Email address**, **Name:** donations only (email optional for one-time, required
+    for monthly; name for SEPA).
+  - Financial info → **Payment info**, **Purchase history:** donations via Stripe.
   - Device or other IDs: hashed device ID for the account.
-  - App activity → In-app search history: stored without user reference **[CHECK]**.
-  - Personal info → Political or religious beliefs: vote choice, only aggregated **[CHECK with legal review]**.
+  - Personal info → **Political or religious beliefs:** vote choice (aggregated; see privacy policy 8.3)
+    **[CHECK with legal review]**.
+  - App info and performance: none of our own (no crash or analytics SDK). Firebase Messaging is part
+    of the Android build (expo-notifications); whether it generates an FCM token at startup **[CHECK]**.
+- **Shared with third parties:** none in Play's sense beyond service providers/processors (SMS
+  provider, Stripe as payment processor) **[CHECK]**.
 - **Security practices:** data encrypted in transit (HTTPS/TLS) – yes; users can request deletion –
-  yes, via contact@democracy-deutschland.de.
+  yes, currently only via contact@democracy-deutschland.de (Play also requires a web link for account
+  deletion requests **[CHECK]**).
 - **Privacy policy URL:** https://democracy-deutschland.de/datenschutz/
 
 ## Troubleshooting

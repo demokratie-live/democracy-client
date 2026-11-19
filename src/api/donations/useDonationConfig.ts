@@ -67,7 +67,7 @@ export const useDonationConfig = () => {
     }
     setState((previous) => ({ ...previous, loading: true }));
     try {
-      const config = await fetchDonationConfig();
+      const config = await fetchDonationConfig(force);
       cache = { config, fetchedAt: Date.now() };
       setState({ config, loading: false, isFallback: false });
     } catch {

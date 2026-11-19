@@ -103,23 +103,30 @@ is approved by Apple as a nonprofit (App Review Guideline 3.2.1(vi)); offering A
 
 ## App Privacy (App Store Connect) – draft (T071)
 
-Based on the rewritten privacy policy (website `content/legal/datenschutz.md`, November 2026) and
-the code as of 2026-11-19. Items marked **[CHECK]** need a decision before submission.
+Based on the code as of 2026-11-19 and the rewritten privacy policy (website
+`content/legal/datenschutz.md`). Apple's "linked to you" means linked to the user's **identity**
+(email, name, account …), not only to the DEMOCRACY account. Items marked **[CHECK]** need a
+decision before submission.
+
+> **Release risk – account deletion (guideline 5.1.1(v)):** The app creates an account (device hash,
+> after verification the phone number). Apple requires that apps supporting account creation also let
+> users initiate deletion **within the app**. There is no in-app deletion yet (only by email). Expect a
+> rejection of the next submission until this exists. **[CHECK]**
 
 - **Tracking:** No. No advertising ID, no third-party analytics, no data brokers.
-- **Data collected** (all purpose: *App Functionality*):
-  | Apple category | What | Linked to the user? |
-  |---|---|---|
-  | Contact Info → Phone Number | verification via SMS (stored only as hash) | Yes (account) |
-  | Identifiers → Device ID | SHA-256 hash of the device ID for the account | Yes (account) |
-  | Contact Info → Email Address | donations (optional one-time, required monthly) | No (donations are not linked to the DEMOCRACY account) |
-  | Financial Info → Payment Info | entered in the Stripe PaymentSheet (card, SEPA, wallets) | No |
-  | Purchases → Purchase History | donation history at Stripe | No |
-  | Search History | search terms, stored without user reference | No **[CHECK: purpose – App Functionality or Analytics?]** |
-  | Sensitive Info (political opinion) | vote choice, only added to aggregated counts | No **[CHECK with legal review]** |
-- **Not collected:** location, contacts, health, browsing history, diagnostics/crash data (no SDK),
-  usage data for analytics, advertising data.
-- **Data deletion:** on request via contact@democracy-deutschland.de (no in-app deletion yet).
+- **Data collected:**
+  | Apple category | What | Linked to you | Purpose |
+  |---|---|---|---|
+  | Contact Info → Phone Number | verification via SMS provider (stored as unsalted SHA-256 hash, reversible) | Yes | App Functionality |
+  | Identifiers → Device ID | SHA-256 of the device ID for the account | Yes | App Functionality |
+  | Contact Info → Email Address | donations (optional one-time, required monthly), stored at Stripe | Yes | App Functionality |
+  | Contact Info → Name | SEPA direct debit (collected in the Stripe PaymentSheet) | Yes | App Functionality |
+  | Financial Info → Payment Info | card/SEPA/wallet data entered in the Stripe PaymentSheet | Yes | App Functionality |
+  | Purchases → Purchase History | donation history at Stripe (customer with email) | Yes | App Functionality |
+  | Sensitive Info (political opinion) | vote choice – aggregated, but participation and choice are written in one DB operation (see privacy policy 8.3) | **[CHECK with legal review]** | App Functionality |
+  | Identifiers / Diagnostics via Stripe SDK | device and connection data for fraud prevention (Stripe Radar) | **[CHECK Stripe's App Store privacy guidance]** | Fraud Prevention |
+- **Not collected:** location, contacts, health, browsing history, search history (search terms are
+  currently not stored), crash/diagnostic data of our own (no SDK), advertising data.
 - **Privacy policy URL:** https://democracy-deutschland.de/datenschutz/
 
 ## Troubleshooting

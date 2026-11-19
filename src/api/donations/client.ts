@@ -47,6 +47,8 @@ interface RequestOptions<T> {
   /** Spender-Schlüssel (base64url) für Verwaltungsendpunkte. */
   donorKey?: string;
   idempotencyKey?: string;
+  /** HTTP-Cache des Geräts umgehen (z. B. nach geänderten Gebühren). */
+  noCache?: boolean;
   schema: z.ZodType<T>;
 }
 
@@ -62,12 +64,14 @@ const fetchWithTimeout = async (url: string, init: RequestInit) => {
 
 export async function donationRequest<T>(
   path: string,
-  { method = "GET", body, donorKey, idempotencyKey, schema }: RequestOptions<T>,
+  { method = "GET", body, donorKey, idempotencyKey, noCache, schema }: RequestOptions<T>,
 ): Promise<T> {
   const headers: Record<string, string> = { Accept: "application/json" };
   if (body !== undefined) headers["Content-Type"] = "application/json";
   if (idempotencyKey) headers["Idempotency-Key"] = idempotencyKey;
   if (donorKey) headers.Authorization = `DonorKey ${donorKey}`;
+  // Status einer Dauerspende nie aus dem Geräte-Cache; Konfiguration nur auf ausdrücklichen Wunsch.
+  if (noCache || donorKey) headers["Cache-Control"] = "no-cache";
 
   const init: RequestInit = {
     method,
@@ -116,5 +120,5 @@ export async function donationRequest<T>(
   return parsed.data;
 }
 
-export const fetchDonationConfig = () =>
-  donationRequest("/config", { schema: DonationConfigSchema });
+export const fetchDonationConfig = (noCache = false) =>
+  donationRequest("/config", { noCache, schema: DonationConfigSchema });

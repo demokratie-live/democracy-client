@@ -61,9 +61,11 @@ interface Props {
   onCompleted: (donation: CompletedDonation) => void;
   /** Auf diesem Gerät läuft schon eine Dauerspende (T055) – eine zweite ist gesperrt. */
   monthlyBlocked?: boolean;
+  /** Die Gebühren haben sich geändert – Konfiguration neu laden. */
+  onConfigStale?: () => void;
 }
 
-export const DonationForm: React.FC<Props> = ({ config, onCompleted, monthlyBlocked = false }) => {
+export const DonationForm: React.FC<Props> = ({ config, onCompleted, monthlyBlocked = false, onConfigStale }) => {
   const { donate } = usePaymentSheetDonation();
   const navigation = useNavigation();
   const [interval, setInterval] = useState<DonationInterval>(config.defaultInterval);
@@ -117,6 +119,7 @@ export const DonationForm: React.FC<Props> = ({ config, onCompleted, monthlyBloc
       config,
       // Wurde der Screen während der Vorbereitung verlassen, öffnet sich kein Zahlungsfenster mehr.
       isActive: () => navigation.isFocused(),
+      onConfigStale,
     });
     setBusy(false);
     if (outcome.status === "failed") setError(outcome.message);
