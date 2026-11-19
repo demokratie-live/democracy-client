@@ -66,7 +66,7 @@ Aus Umgebungsvariablen/ConfigMap des API-Deployments, nicht aus der DB. Ausgelie
 |---|---|---|
 | `enabled` | `true` | Kill-Switch (FR-013) |
 | `publishableKey` | `pk_test_…` (internal) / `pk_live_…` (production) | Stage-abhängig, nie Secret Key |
-| `presets.one_time` / `presets.monthly` | `[1000, 2500, 5000, 10000, 25000]` / `[500, 1000, 1500, 2500, 5000]` (Cent; 5 Vorschläge + „Eigener Betrag" = 3×2-Raster) | FR-001 |
+| `presets.one_time` / `presets.monthly` | `[1000, 2500, 5000, 10000]` / `[500, 1000, 1500, 2500]` (Cent) | FR-001 |
 | `defaultInterval` | `monthly` | Annahme der Spec |
 | `minAmountCents` / `maxAmountCents` | `500` / `100000` | FR-001, Edge Cases |
 | `stripe.paymentMethodConfigurationId` (nur Server, nicht in `/config`) | `pmc_…` (Test: „Donation Test") | FR-003; Zahlungsarten im Stripe-Dashboard steuern; Profil muss Standardprofil sein |

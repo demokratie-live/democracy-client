@@ -3,6 +3,7 @@ import styled from "styled-components/native";
 import type { DonationConfig } from "../../api/donations/types";
 import { linking } from "../../lib/linking";
 import {
+  donate2Head,
   donate3Link2,
   donate3Text1,
   donate3Text2,
@@ -14,15 +15,20 @@ import {
   donateList1Head,
   donateList2Head,
   donateList3Head,
-  donateStandingOrderText,
 } from "./content";
 
 /**
  * Bankverbindung für Überweisung und Dauerauftrag – auf beiden Plattformen sichtbar (FR-012) und
  * Fallback, wenn In-App-Zahlungen deaktiviert oder nicht erreichbar sind (FR-013).
- * Werte aus `GET /donations/v1/config`, ersatzweise aus dem App-Bundle. Die Überschrift liefert die
- * umgebende Klappbox (content.ts `donate2Head`).
+ * Werte aus `GET /donations/v1/config`, ersatzweise aus dem App-Bundle.
  */
+
+const Headline = styled.Text`
+  font-weight: bold;
+  font-size: 15px;
+  color: ${({ theme }) => theme.colors.text.seperator};
+  padding-bottom: 6px;
+`;
 
 const Text = styled.Text`
   font-size: 15px;
@@ -57,8 +63,8 @@ interface Props {
 
 export const BankTransfer: React.FC<Props> = ({ config }) => (
   <>
-    <Text>{donateStandingOrderText}</Text>
-    <DefinitionListWrapper style={{ paddingTop: 14 }}>
+    <Headline>{donate2Head}</Headline>
+    <DefinitionListWrapper style={{ paddingTop: 18 }}>
       <DefinitionListTitle>{donateList1Head}</DefinitionListTitle>
       <DefinitionListDescription selectable>{config.bankTransfer.holder}</DefinitionListDescription>
     </DefinitionListWrapper>

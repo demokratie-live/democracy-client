@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { View } from 'react-native';
 import { router } from 'expo-router';
 
 // Components
@@ -9,7 +10,7 @@ import { BankTransfer } from './BankTransfer';
 import { DonationForm, type CompletedDonation } from './DonationForm';
 import { StripeDonationProvider } from './StripeDonationProvider';
 
-import { donate1Head, donate1Text, donate2Head, donateHintMonthly } from './content';
+import { donate1Head, donate1Text, donateHintMonthly } from './content';
 import { DonationDatum, DonationStatus, DONATION_STATUS } from './graphql/query/donationStatus';
 import { useQuery } from '@apollo/client';
 import styled from 'styled-components/native';
@@ -17,54 +18,37 @@ import { MadeWithLove } from '../../components/MadeWithLove';
 import Folding from '../../components/Folding';
 import { useDonationConfig } from '../../api/donations/useDonationConfig';
 
-/**
- * Spenden-Screen (specs/001-in-app-donations), schlank nach Signal-Vorbild:
- * kurze Einleitung mit Spendenstand → Spendenformular → eingeklappt: Finanzierungsdetails und
- * Bankverbindung. Ohne aktive In-App-Zahlung (Kill-Switch, Server nicht erreichbar) ist die
- * Bankverbindung aufgeklappt (FR-012/FR-013).
- */
-
 const ScrollWrapper = styled.ScrollView`
   flex: 1;
   background-color: #ffffff;
 `;
 
-const Intro = styled.View`
+const Wrapper = styled.View`
+  flex: 1;
   padding-top: 18px;
   padding-horizontal: 18px;
 `;
 
 const Headline = styled.Text`
   font-weight: bold;
-  font-size: 17px;
+  font-size: 15px;
   color: ${({ theme }) => theme.colors.text.seperator};
   padding-bottom: 6px;
 `;
 
 const Text = styled.Text`
   font-size: 15px;
-  line-height: 21px;
   color: ${({ theme }) => theme.colors.text.seperator};
 `;
 
-const ProgressWrapper = styled.View`
-  margin-top: 14px;
-`;
-
-const FormWrapper = styled.View`
-  padding-horizontal: 18px;
-  padding-top: 20px;
-  padding-bottom: 8px;
-`;
-
-const Hint = styled.Text`
-  font-size: 13px;
-  color: ${({ theme }) => theme.colors.text.seperator};
-  padding-top: 8px;
-`;
-
-const Spacer = styled.View`
-  height: 18px;
+const FormCard = styled.View`
+  margin-top: 18px;
+  margin-horizontal: 18px;
+  padding: 16px;
+  border-radius: 8px;
+  border-width: 1px;
+  border-color: #e3e3e3;
+  background-color: #fff;
 `;
 
 const MadeWithHeartWrapper = styled.View``;
@@ -82,9 +66,6 @@ export const DonateScreen: React.FC = () => {
 
   // FR-013: Ohne aktive Konfiguration (Kill-Switch, Server nicht erreichbar) nur Finanzierungsstand + Bankverbindung.
   const publishableKey = config.enabled ? config.publishableKey : null;
-  // Jeder Tipp auf „Bankverbindung" im Formular klappt die Box (neu) auf – auch nach manuellem Zuklappen.
-  const [bankTransferRequests, setBankTransferRequests] = useState(0);
-  const showBankTransfer = bankTransferRequests > 0 || !publishableKey;
 
   const showThanks = (donation: CompletedDonation) => {
     router.replace({
@@ -129,47 +110,40 @@ export const DonateScreen: React.FC = () => {
   return (
     <>
       <ScrollWrapper keyboardShouldPersistTaps="handled" testID="donate-screen">
-        <Intro>
-          <Headline>{donate1Head}</Headline>
-          <Text>{donate1Text}</Text>
-          {donationStatus?.result && (
-            <ProgressWrapper>
+        {donationStatus && donationStatus.result && (
+          <View>
+            <Wrapper>
+              <Headline>{donate1Head}</Headline>
+              <Text>{donate1Text}</Text>
               <DonatedBox
                 target={donationStatus.result.donation_value_goal}
                 occupied={donationStatus.result.donation_value}
               />
-            </ProgressWrapper>
-          )}
-        </Intro>
-
+            </Wrapper>
+            <Folding title="Details zum Finanzierungsbedarf">
+              <Entry
+                target={donationStatus.result.donation_value_goal}
+                occupied={donationStatus.result.donation_value}
+                money={`${donationStatus.result.donation_value}€ von ${donationStatus.result.donation_value_goal}€`}
+                description="min. Finanzierungsziel/Monat"
+              />
+              {renderDonationEntries(donationStatus.result.donation_data)}
+            </Folding>
+            <Wrapper>
+              <Text>{donateHintMonthly}</Text>
+            </Wrapper>
+          </View>
+        )}
         {publishableKey && (
           <StripeDonationProvider publishableKey={publishableKey}>
-            <FormWrapper>
-              <DonationForm
-                config={config}
-                onCompleted={showThanks}
-                onShowBankTransfer={() => setBankTransferRequests(count => count + 1)}
-              />
-            </FormWrapper>
+            <FormCard>
+              <DonationForm config={config} onCompleted={showThanks} />
+            </FormCard>
           </StripeDonationProvider>
         )}
-
-        {donationStatus?.result && (
-          <Folding title="Details zum Finanzierungsbedarf">
-            <Entry
-              target={donationStatus.result.donation_value_goal}
-              occupied={donationStatus.result.donation_value}
-              money={`${donationStatus.result.donation_value}€ von ${donationStatus.result.donation_value_goal}€`}
-              description="min. Finanzierungsziel/Monat"
-            />
-            {renderDonationEntries(donationStatus.result.donation_data)}
-            <Hint>{donateHintMonthly}</Hint>
-          </Folding>
-        )}
-        <Folding key={`bank-${bankTransferRequests}`} title={donate2Head} opened={showBankTransfer}>
+        <Wrapper style={{ paddingBottom: 18 }}>
           <BankTransfer config={config} />
-        </Folding>
-        <Spacer />
+        </Wrapper>
       </ScrollWrapper>
       <MadeWithHeartWrapper>
         <MadeWithLove />

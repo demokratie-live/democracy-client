@@ -12,23 +12,16 @@ appId: de.democracy-deutschland.clientapp.internal
 - tapOn:
     id: "sidebar-donate"
 - waitForAnimationToEnd
+- assertVisible: "Direkt in der App spenden"
 - assertVisible:
-    id: "donate-submit"
+    id: "donate-iban"
 - tapOn:
     id: "donate-interval-one_time"
-- tapOn:
-    id: "donate-amount-own"
 - tapOn:
     id: "donate-amount-custom"
 - inputText: "3"
 - assertVisible:
     id: "donate-hint-min"
-# Hinweis-Link klappt die Bankverbindung auf (FR-001a)
-- tapOn: "Bankverbindung"
-- assertVisible:
-    id: "donate-iban"
-- tapOn:
-    id: "donate-amount-custom"
 - eraseText: 3
 - inputText: "10"
 - hideKeyboard

@@ -2,38 +2,28 @@ import React, { useState } from "react";
 import styled from "styled-components/native";
 import { formatEuroShort, parseEuroInput } from "../../../lib/formatEuro";
 
-/**
- * Betragsauswahl im Signal-Stil: Raster mit drei gleich breiten Kacheln je Zeile – die Vorschläge
- * aus der Server-Konfiguration plus „Eigener Betrag". Die eigene Eingabe erscheint erst, wenn diese
- * Kachel gewählt ist.
- */
-
-const Grid = styled.View`
+const Presets = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
   margin-horizontal: -4px;
 `;
 
-const Cell = styled.View`
-  width: 33.333%;
-  padding: 4px;
-`;
-
-const Tile = styled.TouchableOpacity<{ selected: boolean }>`
-  height: 56px;
-  border-radius: 8px;
+const Preset = styled.TouchableOpacity<{ selected: boolean }>`
+  min-width: 70px;
+  margin: 4px;
+  padding-vertical: 10px;
+  padding-horizontal: 14px;
+  border-radius: 6px;
   border-width: 1px;
   border-color: ${({ selected }) => (selected ? "#4494d3" : "#d6d6d6")};
-  background-color: ${({ selected }) => (selected ? "#4494d3" : "#fff")};
+  background-color: ${({ selected }) => (selected ? "#eaf3fb" : "#fff")};
   align-items: center;
-  justify-content: center;
 `;
 
-const TileText = styled.Text<{ selected: boolean; small?: boolean }>`
-  font-size: ${({ small }) => (small ? 14 : 18)}px;
-  font-weight: 600;
-  color: ${({ selected }) => (selected ? "#fff" : "#333")};
-  text-align: center;
+const PresetText = styled.Text<{ selected: boolean }>`
+  font-size: 16px;
+  font-weight: ${({ selected }) => (selected ? "700" : "400")};
+  color: #333;
 `;
 
 const CustomRow = styled.View`
@@ -41,20 +31,20 @@ const CustomRow = styled.View`
   align-items: center;
   margin-top: 8px;
   border-width: 1px;
-  border-color: #4494d3;
-  border-radius: 8px;
-  padding-horizontal: 14px;
+  border-color: #d6d6d6;
+  border-radius: 6px;
+  padding-horizontal: 12px;
 `;
 
 const CustomInput = styled.TextInput`
   flex: 1;
-  font-size: 18px;
-  padding-vertical: 12px;
+  font-size: 16px;
+  padding-vertical: 10px;
   color: #333;
 `;
 
 const Suffix = styled.Text`
-  font-size: 18px;
+  font-size: 16px;
   color: #777;
 `;
 
@@ -66,18 +56,11 @@ interface Props {
 }
 
 export const AmountPicker: React.FC<Props> = ({ presets, valueCents, onChange, disabled }) => {
-  const [customMode, setCustomMode] = useState(false);
   const [customText, setCustomText] = useState("");
 
   const choosePreset = (cents: number) => {
-    setCustomMode(false);
     setCustomText("");
     onChange(cents);
-  };
-
-  const chooseCustom = () => {
-    setCustomMode(true);
-    onChange(parseEuroInput(customText));
   };
 
   const changeCustom = (text: string) => {
@@ -87,58 +70,39 @@ export const AmountPicker: React.FC<Props> = ({ presets, valueCents, onChange, d
 
   return (
     <>
-      <Grid accessibilityRole="radiogroup" accessibilityLabel="Betrag auswählen">
+      <Presets accessibilityRole="radiogroup" accessibilityLabel="Betrag auswählen">
         {presets.map((cents) => {
-          const selected = !customMode && valueCents === cents;
+          const selected = customText === "" && valueCents === cents;
           return (
-            <Cell key={cents}>
-              <Tile
-                selected={selected}
-                disabled={disabled}
-                onPress={() => choosePreset(cents)}
-                accessibilityRole="radio"
-                accessibilityState={{ selected, disabled }}
-                accessibilityLabel={formatEuroShort(cents)}
-                testID={`donate-amount-${cents}`}
-              >
-                <TileText selected={selected}>{formatEuroShort(cents)}</TileText>
-              </Tile>
-            </Cell>
+            <Preset
+              key={cents}
+              selected={selected}
+              disabled={disabled}
+              onPress={() => choosePreset(cents)}
+              accessibilityRole="radio"
+              accessibilityState={{ selected, disabled }}
+              accessibilityLabel={formatEuroShort(cents)}
+              testID={`donate-amount-${cents}`}
+            >
+              <PresetText selected={selected}>{formatEuroShort(cents)}</PresetText>
+            </Preset>
           );
         })}
-        <Cell>
-          <Tile
-            selected={customMode}
-            disabled={disabled}
-            onPress={chooseCustom}
-            accessibilityRole="radio"
-            accessibilityState={{ selected: customMode, disabled }}
-            accessibilityLabel="Eigener Betrag"
-            testID="donate-amount-own"
-          >
-            <TileText selected={customMode} small>
-              {"Eigener\nBetrag"}
-            </TileText>
-          </Tile>
-        </Cell>
-      </Grid>
-      {customMode && (
-        <CustomRow>
-          <CustomInput
-            value={customText}
-            onChangeText={changeCustom}
-            editable={!disabled}
-            autoFocus
-            placeholder="Betrag"
-            placeholderTextColor="#9b9b9b"
-            keyboardType="decimal-pad"
-            returnKeyType="done"
-            accessibilityLabel="Eigener Betrag in Euro"
-            testID="donate-amount-custom"
-          />
-          <Suffix>€</Suffix>
-        </CustomRow>
-      )}
+      </Presets>
+      <CustomRow>
+        <CustomInput
+          value={customText}
+          onChangeText={changeCustom}
+          editable={!disabled}
+          placeholder="Anderer Betrag"
+          placeholderTextColor="#9b9b9b"
+          keyboardType="decimal-pad"
+          returnKeyType="done"
+          accessibilityLabel="Anderer Betrag in Euro"
+          testID="donate-amount-custom"
+        />
+        <Suffix>€</Suffix>
+      </CustomRow>
     </>
   );
 };

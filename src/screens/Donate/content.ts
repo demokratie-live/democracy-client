@@ -1,11 +1,12 @@
 export const donate1Head = 'Unterstütze DEMOCRACY';
-export const donate1Text =
-  'Unsere Arbeit ist unabhängig, überparteilich, allgemeinnützig und nicht-kommerziell – von Menschen für Menschen. Hilf mit, dass DEMOCRACY nachhaltig Bestand hat.';
-export const donateStandingOrderText =
-  'Ein Dauerauftrag ist für uns gebührenfrei – Pate/in kannst Du so schon ab 1 € monatlich werden.';
+export const donate1Text = `Unsere Arbeit ist unabhängig, überparteilich, allgemeinnützig und nicht-kommerziell –
+von Menschen für Menschen.
+
+Wenn Du Interesse daran hast, dass das Projekt nachhaltig Bestand hat, bitten wir Dich an der unabhängigen Crowd-Finanzierung von DEMOCRACY mitzuwirken – direkt hier in der App oder per Dauerauftrag. Pate/in kannst Du per Dauerauftrag schon ab 1 € monatlich werden; das ist für uns gebührenfrei.
+`;
 export const donateHintMonthly =
   '* Diese Darstellung kann nur monatliche Spenden (Daueraufträge) berücksichtigen.\n';
-export const donate2Head = 'Lieber per Überweisung oder Dauerauftrag?';
+export const donate2Head = 'Lieber per Überweisung oder Dauerauftrag? (gebührenfrei)';
 export const donateList1Head = 'Kontoinhaber:';
 export const donateList1Text = 'DEMOCRACY Deutschland e.V.';
 export const donateList2Head = 'IBAN:';

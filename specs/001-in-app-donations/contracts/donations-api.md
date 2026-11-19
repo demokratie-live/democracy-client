@@ -36,7 +36,7 @@ Allgemein:
   "defaultInterval": "monthly",
   "minAmountCents": 500,
   "maxAmountCents": 100000,
-  "presets": { "one_time": [1000, 2500, 5000, 10000, 25000], "monthly": [500, 1000, 1500, 2500, 5000] },
+  "presets": { "one_time": [1000, 2500, 5000, 10000], "monthly": [500, 1000, 1500, 2500] },
   "fees": { "cardPct": 1.5, "cardFixedCents": 25, "sepaFixedCents": 35, "billingPct": 0.7 },
   "portalLoginUrl": "https://billing.stripe.com/p/login/…",
   "bankTransfer": { "holder": "DEMOCRACY Deutschland e.V.", "iban": "DE83 2605 0001 0056 1290 91", "bic": "NOLADE21GOE" },
