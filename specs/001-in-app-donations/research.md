@@ -240,6 +240,10 @@ Kosten je Abbuchung (€, Standardkarte, PayPal unter Annahme Gemeinnützigkeits
   SHA-256(IP + täglicher Salt), nur im Arbeitsspeicher, siehe R10), Mindestbetrag 5 €,
   Deferred Intents (Intent erst bei Bestätigung), Stripe-Radar-Standardregeln plus Regel „Block if
   CVC check fails", Monitoring fehlgeschlagener Zahlungen über den bestehenden Discord-Logger.
+- **Bekannte Grenze**: Das Rate-Limit zählt pro Pod im Speicher; Produktion läuft mit 10 Replicas
+  (Repo `infrastructure`), im ungünstigsten Fall also bis zu 10× so viele Versuche. Bewusst kein
+  gemeinsamer Speicher (sonst müssten IP-Hashes persistiert werden); Radar und Mindestbetrag sind
+  der Hauptschutz.
 - **Rationale**: Unauthentifizierte Zahlungsendpunkte sind ein bekanntes Ziel; Signal hat dafür
   2026 eigene „Donation Permits" eingeführt (für uns zu aufwendig). App Attest/Play Integrity erst,
   falls Missbrauch auftritt.

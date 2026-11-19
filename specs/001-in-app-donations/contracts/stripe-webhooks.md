@@ -5,11 +5,13 @@ Endpunkt: `POST /donations/v1/stripe-webhook` (je ein Endpoint im Stripe-Test- u
 Verarbeitungsregeln:
 
 1. Signatur prüfen (`stripe.webhooks.constructEvent`), sonst `400`.
-2. Event-ID in `donation_webhook_events` einfügen; Duplikat → sofort `200` (Idempotenz).
-3. Objekt ohne `metadata.source = "democracy-app"` (bei Invoices: über die Subscription) →
-   ignorieren, `200`.
+2. Events ohne Handler und Objekte ohne `metadata.source = "democracy-app"` (bei Invoices:
+   `parent.subscription_details.metadata`) → ignorieren, `200`, ohne Eintrag in der DB. Ausnahme:
+   konto-weite Alarme (`charge.refunded`, `charge.dispute.created`, `mandate.updated`) werden
+   unabhängig von der Herkunft verarbeitet (nur Log, betrifft auch DonorBox-Zahlungen).
+3. Event-ID in `donation_webhook_events` einfügen; Duplikat → sofort `200` (Idempotenz).
 4. Fehler in der Verarbeitung → Event-Eintrag wieder entfernen, `500` (Stripe wiederholt), Log an
-   Discord-Logger.
+   Discord-Logger (nur Event-ID, Typ, Fehlercode).
 
 | Event | Bedingung | Aktion |
 |---|---|---|
