@@ -90,6 +90,27 @@ Required for `specs/001-in-app-donations` (Stripe PaymentSheet with Google Pay).
 4. **Play Console** – update the *Data safety* form (email address, payment info processed by Stripe)
    and keep the Freistellungsbescheid ready in case review asks for proof of tax-exempt status.
 
+## Data safety (Play Console) – draft (T071)
+
+Based on the rewritten privacy policy (November 2026) and the code as of 2026-11-19. Items marked
+**[CHECK]** need a decision before submission.
+
+- **Data shared with third parties:** phone number (SMS provider, as processor – usually not "shared"
+  in Play's sense **[CHECK]**), payment info and email for donations (Stripe, PayPal/Google as
+  payment processors).
+- **Data collected:**
+  - Personal info → Phone number: account verification, required for voting, processed ephemerally
+    by the SMS provider; stored as hash.
+  - Personal info → Email address: donations only, optional (required for monthly donations).
+  - Financial info → Payment info, Purchase history: donations via Stripe.
+  - App info and performance: none (no crash or analytics SDK).
+  - Device or other IDs: hashed device ID for the account.
+  - App activity → In-app search history: stored without user reference **[CHECK]**.
+  - Personal info → Political or religious beliefs: vote choice, only aggregated **[CHECK with legal review]**.
+- **Security practices:** data encrypted in transit (HTTPS/TLS) – yes; users can request deletion –
+  yes, via contact@democracy-deutschland.de.
+- **Privacy policy URL:** https://democracy-deutschland.de/datenschutz/
+
 ## Troubleshooting
 
 ### Common Issues

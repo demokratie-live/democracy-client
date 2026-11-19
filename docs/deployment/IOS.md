@@ -101,6 +101,27 @@ is approved by Apple as a nonprofit (App Review Guideline 3.2.1(vi)); offering A
    (internal build uses Stripe test mode). Update the App Privacy section (email address, payment info
    processed by Stripe).
 
+## App Privacy (App Store Connect) – draft (T071)
+
+Based on the rewritten privacy policy (website `content/legal/datenschutz.md`, November 2026) and
+the code as of 2026-11-19. Items marked **[CHECK]** need a decision before submission.
+
+- **Tracking:** No. No advertising ID, no third-party analytics, no data brokers.
+- **Data collected** (all purpose: *App Functionality*):
+  | Apple category | What | Linked to the user? |
+  |---|---|---|
+  | Contact Info → Phone Number | verification via SMS (stored only as hash) | Yes (account) |
+  | Identifiers → Device ID | SHA-256 hash of the device ID for the account | Yes (account) |
+  | Contact Info → Email Address | donations (optional one-time, required monthly) | No (donations are not linked to the DEMOCRACY account) |
+  | Financial Info → Payment Info | entered in the Stripe PaymentSheet (card, SEPA, wallets) | No |
+  | Purchases → Purchase History | donation history at Stripe | No |
+  | Search History | search terms, stored without user reference | No **[CHECK: purpose – App Functionality or Analytics?]** |
+  | Sensitive Info (political opinion) | vote choice, only added to aggregated counts | No **[CHECK with legal review]** |
+- **Not collected:** location, contacts, health, browsing history, diagnostics/crash data (no SDK),
+  usage data for analytics, advertising data.
+- **Data deletion:** on request via contact@democracy-deutschland.de (no in-app deletion yet).
+- **Privacy policy URL:** https://democracy-deutschland.de/datenschutz/
+
 ## Troubleshooting
 
 ### Common Issues

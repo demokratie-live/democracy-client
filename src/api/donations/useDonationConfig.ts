@@ -32,7 +32,7 @@ export const FALLBACK_DONATION_CONFIG: DonationConfig = {
   portalLoginUrl: null,
   bankTransfer: { holder: donateList1Text, iban: donateList2Text, bic: donateList3Text },
   legal: {
-    privacyUrl: "https://www.democracy-deutschland.de/datenschutz",
+    privacyUrl: "https://democracy-deutschland.de/datenschutz/",
     nonprofitProofUrl: donate3Link1,
     simplifiedReceiptUrl: donate3Link3,
   },
