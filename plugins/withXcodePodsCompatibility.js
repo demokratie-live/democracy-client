@@ -17,12 +17,8 @@ module.exports = function withXcodePodsCompatibility(config, { deploymentTarget 
     const contents = cfg.modResults.contents;
     if (contents.includes(MARKER)) return cfg;
 
-    const hook = "post_install do |installer|";
-    if (!contents.includes(hook)) {
-      throw new Error("withXcodePodsCompatibility: post_install-Hook im Podfile nicht gefunden");
-    }
     const snippet = [
-      hook,
+      "",
       `    ${MARKER}`,
       "    installer.pods_project.targets.each do |target|",
       "      target.build_configurations.each do |build_configuration|",
@@ -35,7 +31,16 @@ module.exports = function withXcodePodsCompatibility(config, { deploymentTarget 
       "      end",
       "    end",
     ].join("\n");
-    cfg.modResults.contents = contents.replace(hook, snippet);
+
+    // Nach react_native_post_install einfügen – React Native setzt dort CLANG_CXX_LANGUAGE_STANDARD
+    // für alle Pods auf c++20 und würde die fmt-Anpassung sonst überschreiben.
+    const rnCall = contents.indexOf("react_native_post_install(");
+    const rnCallEnd = rnCall >= 0 ? contents.indexOf("\n    )\n", rnCall) : -1;
+    if (rnCallEnd < 0) {
+      throw new Error("withXcodePodsCompatibility: react_native_post_install(...) im Podfile nicht gefunden");
+    }
+    const insertAt = rnCallEnd + "\n    )\n".length - 1;
+    cfg.modResults.contents = contents.slice(0, insertAt) + snippet + contents.slice(insertAt);
     return cfg;
   });
 };
