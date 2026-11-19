@@ -4,6 +4,7 @@ import { router } from "expo-router";
 import styled from "styled-components/native";
 import { AppLogo } from "../../components/AppLogo";
 import { Button } from "../../components/Button";
+import { formatLongDate } from "../../lib/formatDate";
 import { formatEuro } from "../../lib/formatEuro";
 
 /**
@@ -62,7 +63,6 @@ interface Props {
   nextChargeAt?: Date | null;
 }
 
-const longDate = new Intl.DateTimeFormat("de-DE", { day: "numeric", month: "long", year: "numeric" });
 
 export const ThankYou: React.FC<Props> = ({
   status,
@@ -89,7 +89,7 @@ export const ThankYou: React.FC<Props> = ({
         <TextBold>{amount}</TextBold>
         <TextNormal>{outcome}</TextNormal>
         {interval === "monthly" && nextChargeAt && (
-          <TextNormal>{` Die nächste Abbuchung ist am ${longDate.format(nextChargeAt)}.`}</TextNormal>
+          <TextNormal>{` Die nächste Abbuchung ist am ${formatLongDate(nextChargeAt)}.`}</TextNormal>
         )}
         <TextNormal>
           {

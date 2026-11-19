@@ -9,6 +9,7 @@ import { EntryHeader } from './EntryHeader';
 import { BankTransfer } from './BankTransfer';
 import { DonationForm, type CompletedDonation } from './DonationForm';
 import { StripeDonationProvider } from './StripeDonationProvider';
+import { MonthlyCard } from './MonthlyCard';
 
 import { donate1Head, donate1Text, donateHintMonthly } from './content';
 import { DonationDatum, DonationStatus, DONATION_STATUS } from './graphql/query/donationStatus';
@@ -17,6 +18,7 @@ import styled from 'styled-components/native';
 import { MadeWithLove } from '../../components/MadeWithLove';
 import Folding from '../../components/Folding';
 import { useDonationConfig } from '../../api/donations/useDonationConfig';
+import { isOngoing, useMonthlyDonation } from '../../api/donations/useMonthlyDonation';
 
 const ScrollWrapper = styled.ScrollView`
   flex: 1;
@@ -57,6 +59,8 @@ export const DonateScreen: React.FC = () => {
   const { data } = useQuery<{ donationStatus: DonationStatus } | undefined>(DONATION_STATUS);
   const [donationStatus, setDonationStatus] = useState<DonationStatus>();
   const { config } = useDonationConfig();
+  const { status: monthlyStatus } = useMonthlyDonation();
+  const ongoingMonthly = isOngoing(monthlyStatus) ? monthlyStatus : null;
 
   useEffect(() => {
     if (!donationStatus?.result && data) {
@@ -135,10 +139,11 @@ export const DonateScreen: React.FC = () => {
             </Wrapper>
           </View>
         )}
+        {ongoingMonthly && <MonthlyCard status={ongoingMonthly} />}
         {publishableKey && (
           <StripeDonationProvider publishableKey={publishableKey}>
             <FormCard>
-              <DonationForm config={config} onCompleted={showThanks} />
+              <DonationForm config={config} onCompleted={showThanks} monthlyBlocked={Boolean(ongoingMonthly)} />
             </FormCard>
           </StripeDonationProvider>
         )}

@@ -19,9 +19,10 @@ Verarbeitungsregeln:
 | `payment_intent.payment_failed` | `interval=one_time`, vorher `processing` (SEPA) | E-Mail „Lastschrift nicht erfolgreich" |
 | `invoice.paid` | Subscription mit `source` | Bestätigungs-E-Mail inkl. Verwaltungslink (`portalLoginUrl`); erste Rechnung: Willkommenstext |
 | `invoice.payment_failed` | Subscription mit `source` | nur Log; Mahn-E-Mail versendet Stripe (Billing-Einstellung) |
-| `customer.subscription.updated` | `cancel_at_period_end` wechselt auf `true` | E-Mail „Kündigung bestätigt, letzte Abbuchung war …" |
+| `customer.subscription.updated` | `cancel_at_period_end` wechselt auf `true` (bzw. `cancel_at` wird gesetzt) – aus der App oder dem Kundenportal | E-Mail „Kündigung bestätigt" mit Enddatum |
 | `customer.subscription.updated` | Status wechselt auf `incomplete_expired` | `endedAt/deleteAt` setzen, keine E-Mail |
-| `customer.subscription.deleted` | Subscription hatte mindestens eine bezahlte Rechnung (`invoices.list({ subscription, status: "paid", limit: 1 })`) | `endedAt/deleteAt` setzen; E-Mail „Dauerspende beendet" |
+| `customer.subscription.deleted` | Subscription hatte mindestens eine bezahlte Rechnung (`invoices.list({ subscription, status: "paid", limit: 1 })`) und die Kündigung war **nicht** vorgemerkt (sofort beendet, z. B. `past_due` oder Mahnlauf) | `endedAt/deleteAt` setzen; E-Mail „Dauerspende beendet" |
+| `customer.subscription.deleted` | Kündigung war zum Periodenende vorgemerkt (`cancel_at_period_end` bzw. `ended_at - canceled_at > 60 s`) | nur `endedAt/deleteAt`; keine zweite Mail – die Bestätigung mit Enddatum kam schon |
 | `customer.subscription.deleted` | nie bezahlt (ersetzte oder abgebrochene `incomplete`-Subscription) | nur `endedAt/deleteAt`, falls noch aktuelle Subscription des Subscribers; keine E-Mail |
 | `charge.refunded` | – | Log (Info an Kassenwart) |
 | `charge.dispute.created` | – | Alarm an Kassenwart (SEPA-Rückgabe oder Kartenanfechtung); keine E-Mail an Spender:in, Dauerspende läuft weiter |

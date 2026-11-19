@@ -1,0 +1,38 @@
+appId: de.democracy-deutschland.clientapp.internal
+# Dauerspende verwalten (specs/001-in-app-donations, quickstart V14–V16, T056):
+# Verwalten öffnen, Kündigungsdialog abbrechen, dann kündigen.
+# Voraussetzung: internal-Build gegen die Testumgebung, auf diesem Gerät läuft bereits eine
+# Dauerspende (vorher z. B. per donate.yaml + Testkarte 4242 eingerichtet).
+---
+- launchApp
+- waitForAnimationToEnd
+- swipe:
+    start: 0, 300
+    end: 300, 300
+- waitForAnimationToEnd
+- tapOn:
+    id: "sidebar-donate"
+- waitForAnimationToEnd
+- assertVisible:
+    id: "donate-monthly-card"
+- tapOn:
+    id: "donate-monthly-manage"
+- waitForAnimationToEnd
+- assertVisible: "Deine Dauerspende"
+- assertVisible: ".*monatlich"
+- assertVisible:
+    id: "donate-manage-portal"
+# Kündigen in höchstens 3 Interaktionen (Verwalten → Kündigen → Bestätigen); erst abbrechen
+- tapOn:
+    id: "donate-manage-cancel"
+- assertVisible: "Dauerspende kündigen?"
+- tapOn: "Abbrechen"
+- assertVisible:
+    id: "donate-manage-cancel"
+- tapOn:
+    id: "donate-manage-cancel"
+- tapOn: "Kündigen"
+- waitForAnimationToEnd
+- assertVisible: ".*Kündigung ist angekommen.*"
+- assertVisible: "Gekündigt.*"
+- takeScreenshot: artifacts/maestro/donate/manage_canceled

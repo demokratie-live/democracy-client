@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components/native";
 import type { DonationConfig, DonationInterval } from "../../../api/donations/types";
 import { chargedAmountCents, feeSurchargeCents } from "../../../lib/donationFees";
@@ -57,9 +57,11 @@ export type CompletedDonation = Extract<DonationOutcome, { status: "succeeded" |
 interface Props {
   config: DonationConfig;
   onCompleted: (donation: CompletedDonation) => void;
+  /** Auf diesem Gerät läuft schon eine Dauerspende (T055) – eine zweite ist gesperrt. */
+  monthlyBlocked?: boolean;
 }
 
-export const DonationForm: React.FC<Props> = ({ config, onCompleted }) => {
+export const DonationForm: React.FC<Props> = ({ config, onCompleted, monthlyBlocked = false }) => {
   const { donate } = usePaymentSheetDonation();
   const [interval, setInterval] = useState<DonationInterval>(config.defaultInterval);
   const [amountCents, setAmountCents] = useState<number | null>(config.presets[config.defaultInterval][0] ?? null);
@@ -68,11 +70,21 @@ export const DonationForm: React.FC<Props> = ({ config, onCompleted }) => {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const changeInterval = (next: DonationInterval) => {
+  const intervalTouched = useRef(false);
+
+  const changeInterval = (next: DonationInterval, byUser = true) => {
+    intervalTouched.current ||= byUser;
     setInterval(next);
     setAmountCents(config.presets[next][0] ?? null);
     setError(null);
   };
+
+  // Läuft schon eine Dauerspende, starten wir mit „einmalig" – solange noch nichts angetippt wurde.
+  useEffect(() => {
+    if (monthlyBlocked && !intervalTouched.current) changeInterval("one_time", false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [monthlyBlocked]);
+  const blocked = monthlyBlocked && interval === "monthly";
 
   const belowMin = amountCents !== null && amountCents < config.minAmountCents;
   const aboveMax = amountCents !== null && amountCents > config.maxAmountCents;
@@ -89,7 +101,7 @@ export const DonationForm: React.FC<Props> = ({ config, onCompleted }) => {
       : `${formatEuro(charged)} spenden`;
 
   const submit = async () => {
-    if (!amountValid || !emailValid || busy) return;
+    if (!amountValid || !emailValid || busy || blocked) return;
     setBusy(true);
     setError(null);
     const outcome = await donate({
@@ -138,7 +150,17 @@ export const DonationForm: React.FC<Props> = ({ config, onCompleted }) => {
       <EmailField value={email} onChange={setEmail} required={interval === "monthly"} disabled={busy} />
       {trimmedEmail !== "" && !emailValid && <Hint>Bitte prüfe die E-Mail-Adresse.</Hint>}
       {error && <ErrorText accessibilityLiveRegion="polite">{error}</ErrorText>}
-      <DonateButton label={buttonLabel} onPress={submit} disabled={!amountValid || !emailValid} busy={busy} />
+      {blocked && (
+        <Hint testID="donate-hint-monthly-exists">
+          Du hast bereits eine Dauerspende. Betrag ändern oder kündigen kannst Du oben unter „Dauerspende verwalten".
+        </Hint>
+      )}
+      <DonateButton
+        label={buttonLabel}
+        onPress={submit}
+        disabled={!amountValid || !emailValid || blocked}
+        busy={busy}
+      />
       <Info>
         Empfänger: {config.merchantDisplayName}, gemeinnützig – Deine Spende ist steuerlich absetzbar. Die Zahlung
         wickelt Stripe ab. <Link onPress={linking(config.legal.privacyUrl)}>Datenschutz</Link>

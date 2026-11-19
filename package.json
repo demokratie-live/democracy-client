@@ -17,7 +17,8 @@
     "test:e2e:smoke": "maestro test .maestro/flows/smoke.yaml",
     "test:e2e:verification": "maestro test .maestro/flows/verification.yaml",
     "test:e2e:rating": "maestro test .maestro/flows/rating.yaml",
-    "test:e2e:donate": "maestro test .maestro/flows/donate.yaml"
+    "test:e2e:donate": "maestro test .maestro/flows/donate.yaml",
+    "test:e2e:donate-manage": "maestro test .maestro/flows/donate-manage.yaml"
   },
   "dependencies": {
     "@apollo/client": "^3.12.6",

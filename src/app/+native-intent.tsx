@@ -23,5 +23,8 @@ export async function redirectSystemPath({
     }
     return "";
   }
+  // Rücksprung aus dem Stripe-Kundenportal: Den fängt der In-App-Browser ab
+  // (WebBrowser.openAuthSessionAsync); der Router soll nicht zusätzlich navigieren.
+  if (path.includes("donate/manage")) return "";
   return path;
 }

@@ -22,10 +22,11 @@ interface Props {
   onPress: () => void;
   disabled: boolean;
   busy: boolean;
+  testID?: string;
 }
 
 /** FR-011: Während eines laufenden Vorgangs deaktiviert – Mehrfachtippen löst keine zweite Zahlung aus. */
-export const DonateButton: React.FC<Props> = ({ label, onPress, disabled, busy }) => (
+export const DonateButton: React.FC<Props> = ({ label, onPress, disabled, busy, testID = "donate-submit" }) => (
   <Container
     inactive={disabled || busy}
     disabled={disabled || busy}
@@ -33,7 +34,7 @@ export const DonateButton: React.FC<Props> = ({ label, onPress, disabled, busy }
     accessibilityRole="button"
     accessibilityLabel={label}
     accessibilityState={{ disabled: disabled || busy, busy }}
-    testID="donate-submit"
+    testID={testID}
   >
     {busy ? <ActivityIndicator color="#fff" /> : <Label>{label}</Label>}
   </Container>

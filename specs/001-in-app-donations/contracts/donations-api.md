@@ -137,6 +137,10 @@ abgelehnt), kündigt der Server sie und legt eine neue an (`200`). Der Client ve
 
 **Headers**: `Authorization: DonorKey …`
 
+Die Verwaltungsendpunkte (`GET/PATCH/DELETE /monthly`, `POST /monthly/portal-session`) laufen ohne
+Rate-Limit (ein gültiger 256-Bit-Schlüssel ist nicht erratbar) und **auch bei `DONATIONS_ENABLED=false`**:
+Kündigen muss immer möglich sein.
+
 **200**
 
 ```json
@@ -155,7 +159,9 @@ abgelehnt), kündigt der Server sie und legt eine neue an (`200`). Der Client ve
 
 `status` ∈ `incomplete | active | past_due | canceled | incomplete_expired`.
 `lastPaymentError`: `{ "message": "Karte abgelaufen", "at": "…" }` oder `null`.
-`firstPaymentPending`: `true`, solange die erste Zahlung noch eingezogen wird (SEPA `processing`).
+`firstPaymentPending`: `true`, solange die erste Zahlung noch eingezogen wird (Subscription `active`,
+erste Rechnung noch `open` – SEPA). `currentPeriodEnd` ist bei vorgemerkter Kündigung das Enddatum.
+`lastPaymentError.message` ist deutsch (z. B. „Die Karte ist abgelaufen."), nie Stripes Originaltext.
 
 **404 not_found**: kein Eintrag zum Schlüssel → App löscht den lokalen Schlüssel.
 
@@ -193,6 +199,9 @@ Die App öffnet die URL im In-App-Browser (`expo-web-browser`), Rücksprung per
 **Headers**: `Authorization: DonorKey …`
 
 **200**: `{ "url": "https://billing.stripe.com/p/session/…" }`
+
+Stripe akzeptiert das App-Schema als `return_url` (geprüft 2026-11-19). Auf Android landet der
+Rücksprung zusätzlich als Deep Link in der App; `+native-intent.tsx` verwirft ihn ohne Navigation.
 
 ---
 

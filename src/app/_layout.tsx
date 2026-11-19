@@ -26,7 +26,8 @@ export type RootStackParamList = {
   PushInstructions: undefined;
   NotificationInstruction: { title?: string; procedureId?: string };
   Donate?: { done: () => void };
-  DonateThanks: { status: string; interval: string; amount: string; mail: string };
+  DonateThanks: { status: string; interval: string; amount: string; mail: string; next: string };
+  DonateManage: undefined;
   Deputies: { editMode: boolean };
   legislaturPeriod: { number: number };
 };
@@ -59,6 +60,7 @@ export default function Layout() {
                     name="DonateThanks"
                     options={{ title: "Danke", headerBackVisible: false, gestureEnabled: false }}
                   />
+                  <Stack.Screen name="DonateManage" options={{ title: "Dauerspende" }} />
                   <Stack.Screen
                     name="(verification)"
                     options={{ title: "Verifizieren" }}

@@ -136,19 +136,19 @@ im Runbook `democracy-api/docs/DONATIONS.md`.
 
 ### Tests for User Story 3
 
-- [ ] T047 [P] [US3] Integrationstests `GET/PATCH/DELETE /monthly` und `POST /monthly/portal-session` (`404 not_found`, `409 not_active`, Kündigung aktiv vs. `past_due`) in `democracy-api/src/donations/__tests__/manage.integ.ts`
+- [X] T047 [P] [US3] Integrationstests `GET/PATCH/DELETE /monthly` und `POST /monthly/portal-session` (`404 not_found`, `409 not_active`, Kündigung aktiv vs. `past_due`) in `democracy-api/src/donations/__tests__/manage.test.ts`
 
 ### Implementation for User Story 3
 
-- [ ] T048 [US3] `GET /monthly` (Status-Mapping, `cancelAtPeriodEnd`, `currentPeriodEnd`, PaymentMethod-Label, `firstPaymentPending` = erste Rechnung offen mit PaymentIntent `processing`, `lastPaymentError` aus letzter Rechnung) in `democracy-api/src/donations/routes/monthly.ts`
-- [ ] T049 [US3] `PATCH /monthly` (neuer `price_data`, `proration_behavior: "none"`, Metadaten `base_amount`/`cover_fees` aktualisieren) in `democracy-api/src/donations/routes/monthly.ts`
-- [ ] T050 [US3] `DELETE /monthly` (`active` → `cancel_at_period_end: true`, auch wenn die erste Lastschrift noch läuft; `past_due` und `incomplete` → sofort kündigen) in `democracy-api/src/donations/routes/monthly.ts`
-- [ ] T051 [US3] `POST /monthly/portal-session` (`billingPortal.sessions.create` mit `configuration: STRIPE_PORTAL_CONFIGURATION_ID`, `return_url: "democracy://donate/manage"`) in `democracy-api/src/donations/routes/monthly.ts`
-- [ ] T052 [US3] Handler `customer.subscription.updated` (Wechsel auf `cancel_at_period_end: true` → Mail „Kündigung bestätigt") und Vorlage in `democracy-api/src/donations/webhook.ts` / `democracy-api/src/donations/mail/templates.ts`
-- [ ] T053 [P] [US3] Hook `useMonthlyDonation` (GET/PATCH/DELETE/Portal, bei `404` lokalen Schlüssel löschen) in `democracy-client/src/api/donations/useMonthlyDonation.ts`
-- [ ] T054 [US3] Verwaltungs-Screen (Status, Betrag ändern, „Zahlungsart ändern" via `WebBrowser.openAuthSessionAsync(portalUrl)`, Kündigen mit Bestätigungsdialog, max. 3 Interaktionen; bei `firstPaymentPending` Hinweis „Deine erste Spende wird gerade eingezogen“) in `democracy-client/src/screens/Donate/Manage.tsx` und Route `democracy-client/src/app/DonateManage.tsx`
-- [ ] T055 [US3] Karte „Deine Dauerspende" auf dem Spenden-Screen bei vorhandenem Schlüssel; neue Dauerspende gesperrt (Umgang mit `409 subscription_exists`) in `democracy-client/src/screens/Donate/index.tsx`
-- [ ] T056 [US3] Maestro-Flow `democracy-client/.maestro/flows/donate-manage.yaml` (Verwalten öffnen, Kündigungsdialog abbrechen/bestätigen im Testmodus)
+- [X] T048 [US3] `GET /monthly` (Status-Mapping, `cancelAtPeriodEnd`, `currentPeriodEnd`, PaymentMethod-Label, `firstPaymentPending` = erste Rechnung offen mit PaymentIntent `processing`, `lastPaymentError` aus letzter Rechnung) in `democracy-api/src/donations/routes/monthly.ts` — *umgesetzt in `routes/manage.ts` (T048–T051)*
+- [X] T049 [US3] `PATCH /monthly` (neuer `price_data`, `proration_behavior: "none"`, Metadaten `base_amount`/`cover_fees` aktualisieren) in `democracy-api/src/donations/routes/monthly.ts`
+- [X] T050 [US3] `DELETE /monthly` (`active` → `cancel_at_period_end: true`, auch wenn die erste Lastschrift noch läuft; `past_due` und `incomplete` → sofort kündigen) in `democracy-api/src/donations/routes/monthly.ts`
+- [X] T051 [US3] `POST /monthly/portal-session` (`billingPortal.sessions.create` mit `configuration: STRIPE_PORTAL_CONFIGURATION_ID`, `return_url: "democracy://donate/manage"`) in `democracy-api/src/donations/routes/monthly.ts`
+- [X] T052 [US3] Handler `customer.subscription.updated` (Wechsel auf `cancel_at_period_end: true` → Mail „Kündigung bestätigt") und Vorlage in `democracy-api/src/donations/webhook.ts` / `democracy-api/src/donations/mail/templates.ts`
+- [X] T053 [P] [US3] Hook `useMonthlyDonation` (GET/PATCH/DELETE/Portal, bei `404` lokalen Schlüssel löschen) in `democracy-client/src/api/donations/useMonthlyDonation.ts`
+- [X] T054 [US3] Verwaltungs-Screen (Status, Betrag ändern, „Zahlungsart ändern" via `WebBrowser.openAuthSessionAsync(portalUrl)`, Kündigen mit Bestätigungsdialog, max. 3 Interaktionen; bei `firstPaymentPending` Hinweis „Deine erste Spende wird gerade eingezogen“) in `democracy-client/src/screens/Donate/Manage.tsx` und Route `democracy-client/src/app/DonateManage.tsx`
+- [X] T055 [US3] Karte „Deine Dauerspende" auf dem Spenden-Screen bei vorhandenem Schlüssel; neue Dauerspende gesperrt (Umgang mit `409 subscription_exists`) in `democracy-client/src/screens/Donate/index.tsx`
+- [X] T056 [US3] Maestro-Flow `democracy-client/.maestro/flows/donate-manage.yaml` (Verwalten öffnen, Kündigungsdialog abbrechen/bestätigen im Testmodus) — *geschrieben, noch nicht ausgeführt (Maestro nicht installiert)*
 
 **Checkpoint**: Kündigung in ≤ 3 Interaktionen; Verwaltung nach Neuinstallation per E-Mail-Link.
 
