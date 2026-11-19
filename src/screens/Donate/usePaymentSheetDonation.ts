@@ -82,12 +82,14 @@ export const usePaymentSheetDonation = () => {
         },
         appearance: { primaryButton: { colors: { background: "#4494d3" } } },
         intentConfiguration: {
-          // capture_method muss exakt zum PaymentIntent passen (das SDK prüft das vor dem Bestätigen);
-          // der Server setzt ihn ausdrücklich auf automatic_async (Stripe-Standard seit 2024).
+          // capture_method muss exakt zum PaymentIntent passen (das SDK prüft das vor dem Bestätigen).
+          // stripe-ios in SDK 0.38.6 liest „automatic_async" als „unknown" ein und lehnt es immer ab –
+          // daher legt der Server PaymentIntents ausdrücklich mit „automatic" an. Nach einem SDK-Update
+          // (mit dem nächsten Expo-Upgrade) kann auf automatic_async umgestellt werden.
           mode: {
             amount: chargedAmountCents,
             currencyCode: "EUR",
-            captureMethod: PaymentSheet.CaptureMethod.AutomaticAsync,
+            captureMethod: PaymentSheet.CaptureMethod.Automatic,
           },
           confirmHandler: async (paymentMethod, _shouldSavePaymentMethod, intentCreationCallback) => {
             try {

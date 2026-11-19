@@ -306,6 +306,15 @@ Spike-Objekte (`metadata.source=democracy-spike`) wurden danach mit der Testuhr 
 | E | Erste Zahlung per Karte | `active`, `default_payment_method` gespeichert; nach 32 Tagen 2 bezahlte Rechnungen | Automatische Folgeabbuchung (off-session) funktioniert |
 | F | `incomplete`-Subscription kündigen | Status `incomplete_expired`, Rechnung `void` | Ersetzen beim Retry sauber; Webhook-Handler behandelt `incomplete_expired` ohne Mail |
 
+**App-Seite, erster Gerätetest (2026-11-19, iPhone XS, internal-Build):** Das PaymentSheet von
+stripe-react-native 0.38.6 prüft vor dem Bestätigen u. a. `capture_method` des PaymentIntents gegen die
+`intentConfiguration`. stripe-ios dieser Version liest `automatic_async` – den API-Standard seit 2024 –
+als `unknown` ein und lehnt jede solche Zahlung mit „An error occurred in PaymentSheet" ab, ohne sie an
+Stripe zu senden. **Entscheidung:** Der Server legt PaymentIntents ausdrücklich mit
+`capture_method: automatic` an, die App setzt `captureMethod: Automatic`. **Phase 4 prüfen:** Die
+PaymentIntents von Abo-Rechnungen müssen ebenfalls `automatic` haben, sonst scheitert die Dauerspende
+genauso. Mit dem nächsten Expo-/SDK-Upgrade kann auf `automatic_async` umgestellt werden.
+
 **Noch offen (App-Seite, mit dem Spendenformular in Phase 3):** PaymentSheet 0.38.6 im
 Deferred-Intent-Modus auf Gerät/Simulator (Zahlungsarten-Anzeige inkl. PayPal bei `OffSession`,
 SEPA-Mandat), Rückleitung über `+native-intent.tsx`, Apple Pay (braucht T006).
