@@ -318,3 +318,18 @@ genauso. Mit dem nächsten Expo-/SDK-Upgrade kann auf `automatic_async` umgestel
 **Noch offen (App-Seite, mit dem Spendenformular in Phase 3):** PaymentSheet 0.38.6 im
 Deferred-Intent-Modus auf Gerät/Simulator (Zahlungsarten-Anzeige inkl. PayPal bei `OffSession`,
 SEPA-Mandat), Rückleitung über `+native-intent.tsx`, Apple Pay (braucht T006).
+**Nachtrag 2026-11-19 (Phase 4):**
+
+- Rechnungs-PaymentIntents von Subscriptions haben `capture_method: automatic` (lässt sich auch nicht
+  ändern: „cannot be used when modifying a PaymentIntent that was created by an invoice"). Passt zum
+  `captureMethod: Automatic` der App – kein Sonderfall für monatlich.
+- **Webhook-API-Version:** Das Konto steht wegen DonorBox auf `2020-03-02`. Webhooks in dieser Version
+  haben kein `invoice.parent` → Dauerspenden-Mails wären still ausgeblieben. Der Server lehnt Events mit
+  abweichender `api_version` jetzt mit `400` ab und loggt einen Fehler; Endpoints werden mit
+  `2026-10-28.endive` angelegt, lokal `stripe listen --latest` (docs/DONATIONS.md §2.4).
+- E2E gegen die Testumgebung (Testserver + `stripe listen --latest` + Mailpit): Anlegen + Karte →
+  Subscription `active`, Standard-Zahlungsart gesetzt, Willkommensmail mit nächster Abbuchung und
+  Login-Link; zweiter Versuch mit demselben Schlüssel → `409`; unbezahlte Subscription wird beim
+  Retry ersetzt (`incomplete_expired`, keine Mail); Kündigung → Mail „beendet", danach neue
+  Dauerspende mit demselben Schlüssel möglich.
+

@@ -66,6 +66,8 @@ export const MonthlyDonationCreatedSchema = z.object({
   clientSecret: z.string(),
   subscriptionId: z.string(),
   chargedAmountCents: Cents,
+  /** Ende der ersten Periode = nächste Abbuchung (ISO 8601) */
+  currentPeriodEnd: z.string().nullable().optional(),
 });
 export type MonthlyDonationCreated = z.infer<typeof MonthlyDonationCreatedSchema>;
 

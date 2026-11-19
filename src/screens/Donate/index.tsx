@@ -75,6 +75,7 @@ export const DonateScreen: React.FC = () => {
         interval: donation.interval,
         amount: String(donation.chargedAmountCents),
         mail: donation.emailProvided ? '1' : '0',
+        next: donation.nextChargeAt ?? '',
       },
     });
   };

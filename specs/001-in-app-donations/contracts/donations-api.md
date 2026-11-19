@@ -111,8 +111,17 @@ Spender-Schlüssel. Der Client erzeugt den Schlüssel **vor** dem Aufruf und spe
 **200**
 
 ```json
-{ "clientSecret": "pi_…_secret_…", "subscriptionId": "sub_…", "chargedAmountCents": 539 }
+{
+  "clientSecret": "pi_…_secret_…",
+  "subscriptionId": "sub_…",
+  "chargedAmountCents": 539,
+  "currentPeriodEnd": "2026-12-19T12:04:03.000Z"
+}
 ```
+
+`currentPeriodEnd` = nächste Abbuchung (Danke-Screen). `paymentMethodId` wird validiert, aber nicht an
+Stripe übergeben: Die erste Rechnung bestätigt das PaymentSheet selbst; `save_default_payment_method:
+"on_subscription"` macht die Zahlungsart danach zur Standard-Zahlungsart.
 
 **Fehler**: wie `/one-time`, zusätzlich `400 email_required`,
 `409 subscription_exists` (aktuelle Subscription des Schlüssels ist `active` oder `past_due` –

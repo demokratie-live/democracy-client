@@ -1,6 +1,6 @@
 appId: de.democracy-deutschland.clientapp.internal
 # In-App-Spenden (specs/001-in-app-donations, quickstart V8/V9): Spenden-Screen öffnen,
-# Mindestbetrag-Hinweis, Betrag wählen, Stripe-Zahlungsfenster öffnen und wieder schließen.
+# Monatlich nur mit E-Mail, Mindestbetrag-Hinweis, Betrag wählen, Stripe-Zahlungsfenster öffnen.
 # Voraussetzung: internal-Build gegen eine API mit DONATIONS_ENABLED=true (Stripe-Testmodus).
 ---
 - launchApp
@@ -15,6 +15,20 @@ appId: de.democracy-deutschland.clientapp.internal
 - assertVisible: "Direkt in der App spenden"
 - assertVisible:
     id: "donate-iban"
+# Monatlich: ohne E-Mail ist der Button deaktiviert (FR-007, T046)
+- tapOn:
+    id: "donate-interval-monthly"
+- assertVisible:
+    id: "donate-submit"
+    enabled: false
+- tapOn:
+    id: "donate-email"
+- inputText: "pate@example.org"
+- hideKeyboard
+- assertVisible:
+    id: "donate-submit"
+    enabled: true
+- assertVisible: ".*monatlich spenden"
 - tapOn:
     id: "donate-interval-one_time"
 - tapOn:

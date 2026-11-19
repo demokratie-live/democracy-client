@@ -58,9 +58,19 @@ interface Props {
   chargedAmountCents: number;
   /** Nur anzeigen, wenn wirklich eine Bestätigungsmail verschickt wird (E-Mail angegeben) */
   confirmationMailed: boolean;
+  /** Dauerspende: nächster Abbuchungstermin (T045) */
+  nextChargeAt?: Date | null;
 }
 
-export const ThankYou: React.FC<Props> = ({ status, interval, chargedAmountCents, confirmationMailed }) => {
+const longDate = new Intl.DateTimeFormat("de-DE", { day: "numeric", month: "long", year: "numeric" });
+
+export const ThankYou: React.FC<Props> = ({
+  status,
+  interval,
+  chargedAmountCents,
+  confirmationMailed,
+  nextChargeAt,
+}) => {
   const amount = formatEuro(chargedAmountCents);
   const subject = interval === "monthly" ? "Deine monatliche Spende über " : "Deine Spende über ";
   const outcome =
@@ -78,6 +88,9 @@ export const ThankYou: React.FC<Props> = ({ status, interval, chargedAmountCents
         <TextNormal>{subject}</TextNormal>
         <TextBold>{amount}</TextBold>
         <TextNormal>{outcome}</TextNormal>
+        {interval === "monthly" && nextChargeAt && (
+          <TextNormal>{` Die nächste Abbuchung ist am ${longDate.format(nextChargeAt)}.`}</TextNormal>
+        )}
         <TextNormal>
           {
             "\n\nJede Spende hilft dem DEMOCRACY Deutschland e.V., seine unabhängige, überparteiliche und gemeinnützige demokratische Arbeit voranzubringen."
