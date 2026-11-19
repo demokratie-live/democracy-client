@@ -2,11 +2,11 @@ export const donate1Head = 'Unterstütze DEMOCRACY';
 export const donate1Text = `Unsere Arbeit ist unabhängig, überparteilich, allgemeinnützig und nicht-kommerziell –
 von Menschen für Menschen.
 
-Wenn Du Interesse daran hast, dass das Projekt nachhaltig Bestand hat, bitten wir Dich an der unabhängigen Crowd-Finanzierung von DEMOCRACY per Dauerauftrag mitzuwirken. Pate/in kannst Du schon ab 1€ monatlich werden.
+Wenn Du Interesse daran hast, dass das Projekt nachhaltig Bestand hat, bitten wir Dich an der unabhängigen Crowd-Finanzierung von DEMOCRACY mitzuwirken – direkt hier in der App oder per Dauerauftrag. Pate/in kannst Du per Dauerauftrag schon ab 1 € monatlich werden; das ist für uns gebührenfrei.
 `;
 export const donateHintMonthly =
   '* Diese Darstellung kann nur monatliche Spenden (Daueraufträge) berücksichtigen.\n';
-export const donate2Head = 'Spendenkonto für Daueraufträge oder einmalige Spenden';
+export const donate2Head = 'Lieber per Überweisung oder Dauerauftrag? (gebührenfrei)';
 export const donateList1Head = 'Kontoinhaber:';
 export const donateList1Text = 'DEMOCRACY Deutschland e.V.';
 export const donateList2Head = 'IBAN:';
@@ -23,7 +23,7 @@ export const donate3Text4 = 'Satzung';
 export const donate3Link2 =
   'https://www.democracy-deutschland.de/files/download/Satzung_DEMOCRACY.pdf';
 export const donate3Text5 =
-  '). Deine Spenden sind daher steuerlich abzugsfähig. Für Spenden unter 200€ jährlich genügt der Zahlungsnachweis (z.B. Kontoauszug) zusammen mit unserem ';
+  '). Deine Spenden sind daher steuerlich abzugsfähig. Für Spenden bis 300 € genügt der Zahlungsnachweis (z. B. Kontoauszug) zusammen mit unserem ';
 export const donate3Text6 = 'Vereinfachten Zuwendungsnachweis';
 export const donate3Link3 =
   'https://www.democracy-deutschland.de/files/download/Vereinfachter_Zuwendungsnachweis.pdf';

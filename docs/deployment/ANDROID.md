@@ -74,6 +74,45 @@ bundle exec fastlane android beta
 
 The fastlane setup is integrated with GitHub Actions for automated builds and deployments. See the `.github/workflows` directory for the workflow configurations.
 
+## In-App Donations (Google Pay)
+
+Required for `specs/001-in-app-donations` (Stripe PaymentSheet with Google Pay). Google Play allows
+"tax exempt donations" outside Google Play Billing (Payments policy, section 3).
+
+1. **Manifest** – handled by the Stripe config plugin in `app.config.ts`
+   (`enableGooglePay: true` → `com.google.android.gms.wallet.api.enabled`).
+2. **Test environment** – internal builds run Google Pay with `testEnv: true`; no approval needed.
+3. **Production access** – Google Pay & Wallet Console (pay.google.com/business/console) → register the
+   business (DEMOCRACY Deutschland e.V.) → *Google Pay API* → integrate app `de.democracydeutschland.app`
+   with integration type **Gateway** (gateway: Stripe) → submit screenshots of the donation flow
+   (amount, payment sheet, Google Pay sheet, confirmation) → wait for approval.
+   Until approved, production builds can ship with Google Pay disabled (card, SEPA and PayPal still work).
+4. **Play Console** – update the *Data safety* form (email address, payment info processed by Stripe)
+   and keep the Freistellungsbescheid ready in case review asks for proof of tax-exempt status.
+
+## Data safety (Play Console) – draft (T071)
+
+Based on the code as of 2026-11-19 and the rewritten privacy policy. Items marked **[CHECK]** need a
+decision before submission.
+
+- **Data collected** (all for *App functionality*; donation data additionally *Fraud prevention* by Stripe):
+  - Personal info → **Phone number:** verification, required for voting; sent to the SMS provider,
+    stored by us as unsalted (reversible) hash. Retention at the SMS provider **[CHECK]**.
+  - Personal info → **Email address**, **Name:** donations only (email optional for one-time, required
+    for monthly; name for SEPA).
+  - Financial info → **Payment info**, **Purchase history:** donations via Stripe.
+  - Device or other IDs: hashed device ID for the account.
+  - Personal info → **Political or religious beliefs:** vote choice (aggregated; see privacy policy 8.3)
+    **[CHECK with legal review]**.
+  - App info and performance: none of our own (no crash or analytics SDK). Firebase Messaging is part
+    of the Android build (expo-notifications); whether it generates an FCM token at startup **[CHECK]**.
+- **Shared with third parties:** none in Play's sense beyond service providers/processors (SMS
+  provider, Stripe as payment processor) **[CHECK]**.
+- **Security practices:** data encrypted in transit (HTTPS/TLS) – yes; users can request deletion –
+  yes, currently only via contact@democracy-deutschland.de (Play also requires a web link for account
+  deletion requests **[CHECK]**).
+- **Privacy policy URL:** https://democracy-deutschland.de/datenschutz/
+
 ## Troubleshooting
 
 ### Common Issues

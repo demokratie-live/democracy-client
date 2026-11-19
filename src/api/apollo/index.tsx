@@ -64,13 +64,16 @@ const restLink = new RestLink({
   uri: "https://democracy-deutschland.de/api.php", // ?call=donation_status
 });
 
+// restLink steht VOR den Auth-/Header-Links: Die REST-Abfrage des Spendenstands an die Website darf
+// keine Gerätekennung, Telefon-Hashes oder Tokens mitsenden (Trennung von Spenden und Konto). Andere
+// Operationen reicht der RestLink unverändert weiter.
 const link = ApolloLink.from([
   errorLink,
+  restLink,
   versionLinkMiddleware,
   applicationIdLinkMiddleware,
   authLinkMiddleware,
   authLinkAfterware,
-  restLink,
   httpLink,
 ]);
 

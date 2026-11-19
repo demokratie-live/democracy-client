@@ -32,6 +32,7 @@ Run specific test flows:
 pnpm test:e2e:smoke      # Run smoke tests
 pnpm test:e2e:verification   # Run verification flow tests
 pnpm test:e2e:rating   # Run rating flow tests
+pnpm test:e2e:donate   # Run in-app donation flow tests (needs DONATIONS_ENABLED=true, Stripe test mode)
 ```
 
 ### Test Flows
@@ -39,6 +40,7 @@ pnpm test:e2e:rating   # Run rating flow tests
 - `smoke.yaml`: Basic app launch and navigation tests
 - `verification.yaml`: Tests the phone verification flow
 - `rating.yaml`: Opens the drawer and exercises the in-app rating entry point
+- `donate.yaml`: Opens the donation screen, checks the minimum-amount hint and the bank details, and opens the Stripe payment sheet for a one-time donation
 
 ### Test Structure
 

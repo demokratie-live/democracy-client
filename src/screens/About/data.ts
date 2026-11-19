@@ -4,6 +4,11 @@ interface Credentials {
   opened?: boolean;
 }
 
+/**
+ * Datenschutzerklärung und Nutzungsbedingungen: Die Neufassung (November 2026) liegt im Website-Repo
+ * (democracy-deutschland.de, content/legal/*.md). Nach Freigabe mit `node scripts/sync-legal-texts.mjs`
+ * hierher übernehmen – das Skript verweigert Texte mit offenen [OFFEN]-/[PRÜFEN]-Markern.
+ */
 export const credentialsData: Credentials[] = [
   {
     opened: true,

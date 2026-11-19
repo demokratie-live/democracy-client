@@ -97,7 +97,7 @@ export const Sidebar: React.FC<SidebarProps> = (props) => {
       </SafeAreaView>
       {donationStatus && donationStatus.result && (
         <DonateBoxWrapper>
-          <DonationTouch onPress={() => router.push("/Donate")}>
+          <DonationTouch onPress={() => router.push("/Donate")} testID="sidebar-donate">
             <DonatedBox
               style={{ backgroundColor: "#4494d390" }}
               descriptionTextStyle={{ color: "#fff" }}

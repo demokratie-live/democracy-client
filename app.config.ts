@@ -2,6 +2,9 @@ import { ConfigContext, ExpoConfig } from "expo/config";
 import { IOSIcons } from "@expo/config-types";
 import packageJson from "./package.json";
 const APP_VARIANT = process.env.APP_VARIANT;
+const APPLE_PAY_MERCHANT_ID = "merchant.de.democracy-deutschland.clientapp";
+// Lokale Geräte-Builds, solange Merchant ID/Zertifikat fehlen (T006): DISABLE_APPLE_PAY=true
+const APPLE_PAY_ENABLED = process.env.DISABLE_APPLE_PAY !== "true";
 
 const getBundleIdentifier = () => {
   if (APP_VARIANT === "internal") {
@@ -86,17 +89,25 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ios: {
     supportsTablet: true,
     bundleIdentifier: getBundleIdentifier(),
+    // Nur für lokale Geräte-Builds (expo run:ios --device); CI signiert über fastlane match.
+    ...(process.env.APPLE_TEAM_ID ? { appleTeamId: process.env.APPLE_TEAM_ID } : {}),
     entitlements: {
       "aps-environment": process.env.CI ? "production" : "development",
     },
     icon: getIosAppIcons(),
     infoPlist: {
       UIDesignRequiresCompatibility: true,
+      // Die App ist deutschsprachig. Ohne diese Angabe zeigen native SDKs (z. B. das Stripe-
+      // Zahlungsfenster) und iOS-Systemdialoge der App ihre englischen Texte.
+      CFBundleDevelopmentRegion: "de",
+      CFBundleLocalizations: ["de"],
       ...(process.env.CI
         ? {}
         : {
             NSAppTransportSecurity: {
               NSAllowsArbitraryLoads: false,
+              // Entwicklung: HTTP zu Geräten im lokalen Netz (z. B. lokaler Spenden-Testserver)
+              NSAllowsLocalNetworking: true,
               NSExceptionDomains: {
                 localhost: {
                   NSExceptionAllowsInsecureHTTPLoads: true,
@@ -133,10 +144,21 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         },
       },
     ],
+    // Xcode 27: Pod-Mindestversion ≥ 15.0 und fmt mit C++17 (siehe plugins/withXcodePodsCompatibility.js)
+    ["./plugins/withXcodePodsCompatibility", { deploymentTarget: "15.5" }],
     [
       "expo-notifications",
       {
         enableBackgroundRemoteNotifications: true,
+      },
+    ],
+    [
+      // In-App-Spenden (specs/001-in-app-donations): Apple-Pay-Entitlement und Google-Pay-Meta-Data.
+      // Die Merchant ID gilt für production und internal (gleiches Apple-Team).
+      "@stripe/stripe-react-native",
+      {
+        merchantIdentifier: APPLE_PAY_ENABLED ? APPLE_PAY_MERCHANT_ID : [],
+        enableGooglePay: true,
       },
     ],
   ],
@@ -146,6 +168,10 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   extra: {
     graphqlUrl: getGraphqlUrl(),
     appVariant: APP_VARIANT || "internal",
+    // Leerer String statt null: Expo serialisiert null in `extra` als {}
+    applePayMerchantId: APPLE_PAY_ENABLED ? APPLE_PAY_MERCHANT_ID : "",
+    // Optional: Spenden-API getrennt von GraphQL (lokaler Testserver), sonst `${graphqlUrl}/donations/v1`
+    donationsApiUrl: process.env.DONATIONS_API_URL || "",
     associatedDomains: getAssociatedDomains(),
     storeReviewUrl: {
       ios: "https://apps.apple.com/de/app/democracy/id1341311162",
