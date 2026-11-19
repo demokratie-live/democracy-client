@@ -7,7 +7,7 @@ import DonatedBox from './DonatedBox';
 import Entry from './Entry';
 import { EntryHeader } from './EntryHeader';
 import { BankTransfer } from './BankTransfer';
-import { DonationForm } from './DonationForm';
+import { DonationForm, type CompletedDonation } from './DonationForm';
 import { StripeDonationProvider } from './StripeDonationProvider';
 
 import { donate1Head, donate1Text, donateHintMonthly } from './content';
@@ -17,7 +17,6 @@ import styled from 'styled-components/native';
 import { MadeWithLove } from '../../components/MadeWithLove';
 import Folding from '../../components/Folding';
 import { useDonationConfig } from '../../api/donations/useDonationConfig';
-import type { DonationOutcome } from './usePaymentSheetDonation';
 
 const ScrollWrapper = styled.ScrollView`
   flex: 1;
@@ -68,10 +67,15 @@ export const DonateScreen: React.FC = () => {
   // FR-013: Ohne aktive Konfiguration (Kill-Switch, Server nicht erreichbar) nur Finanzierungsstand + Bankverbindung.
   const publishableKey = config.enabled ? config.publishableKey : null;
 
-  const showThanks = (outcome: Extract<DonationOutcome, { status: 'succeeded' | 'processing' }>) => {
+  const showThanks = (donation: CompletedDonation) => {
     router.replace({
       pathname: '/DonateThanks',
-      params: { status: outcome.status, interval: outcome.interval, amount: String(outcome.chargedAmountCents) },
+      params: {
+        status: donation.status,
+        interval: donation.interval,
+        amount: String(donation.chargedAmountCents),
+        mail: donation.emailProvided ? '1' : '0',
+      },
     });
   };
 

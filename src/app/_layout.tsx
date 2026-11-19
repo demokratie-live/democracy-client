@@ -26,7 +26,7 @@ export type RootStackParamList = {
   PushInstructions: undefined;
   NotificationInstruction: { title?: string; procedureId?: string };
   Donate?: { done: () => void };
-  DonateThanks: { status: string; interval: string; amount: string };
+  DonateThanks: { status: string; interval: string; amount: string; mail: string };
   Deputies: { editMode: boolean };
   legislaturPeriod: { number: number };
 };

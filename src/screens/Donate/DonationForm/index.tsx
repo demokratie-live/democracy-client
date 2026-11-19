@@ -49,9 +49,14 @@ const Link = styled.Text`
 // Pragmatische Prüfung wie auf dem Server (democracy-api validation.ts)
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+export type CompletedDonation = Extract<DonationOutcome, { status: "succeeded" | "processing" }> & {
+  /** true, wenn in der App eine E-Mail angegeben wurde – dann kommt eine Bestätigungsmail */
+  emailProvided: boolean;
+};
+
 interface Props {
   config: DonationConfig;
-  onCompleted: (outcome: Extract<DonationOutcome, { status: "succeeded" | "processing" }>) => void;
+  onCompleted: (donation: CompletedDonation) => void;
 }
 
 export const DonationForm: React.FC<Props> = ({ config, onCompleted }) => {
@@ -97,7 +102,9 @@ export const DonationForm: React.FC<Props> = ({ config, onCompleted }) => {
     });
     setBusy(false);
     if (outcome.status === "failed") setError(outcome.message);
-    if (outcome.status === "succeeded" || outcome.status === "processing") onCompleted(outcome);
+    if (outcome.status === "succeeded" || outcome.status === "processing") {
+      onCompleted({ ...outcome, emailProvided: trimmedEmail !== "" });
+    }
   };
 
   return (
