@@ -40,7 +40,7 @@ im Runbook `democracy-api/docs/DONATIONS.md`.
 - [X] T002 [P] Abhängigkeiten `stripe`, `nodemailer`, `express-rate-limit` in `democracy-api/package.json` hinzufügen (exakt gepinnt: stripe 23.1.0 / API `2026-10-28.endive`, nodemailer 10.3.1 inkl. eigener Typen – `@types/nodemailer` entfällt, express-rate-limit 8.7.3)
 - [X] T003 [P] `npx expo install @stripe/stripe-react-native expo-web-browser` (ergibt 0.38.6 bzw. SDK-52-Version) in `democracy-client/package.json`
 - [X] T004 [P] Neue Variablen in `democracy-api/.env.example` dokumentieren: `STRIPE_SECRET_KEY`, `STRIPE_PUBLISHABLE_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_DONATION_PRODUCT_ID`, `STRIPE_PORTAL_LOGIN_URL`, `DONATIONS_ENABLED`, `DONATION_MIN_CENTS`, `DONATION_MAX_CENTS`, `DONATION_PRESETS_ONE_TIME`, `DONATION_PRESETS_MONTHLY`, `STRIPE_PAYMENT_METHOD_CONFIGURATION_ID` (ersetzt die zunächst geplanten `DONATION_METHODS_*`), `SMTP_URL`, `DONATION_MAIL_FROM`, `DONATION_MAIL_REPLY_TO`
-- [X] T005 Stripe-Testmodus einrichten und in `democracy-api/docs/DONATIONS.md` festhalten: Product „Monatliche Spende an DEMOCRACY", Restricted Key (Customers, PaymentIntents, Subscriptions, Invoices, PaymentMethods lesen, Billing Portal), Webhook-Endpoint mit Events aus `contracts/stripe-webhooks.md`, Customer Portal (Zahlungsart, Rechnungen, Kündigen an; Tarifwechsel aus; Login-Link an), Billing Smart Retries + Kündigung nach letztem Versuch + Mahnmails an, Stripe-Erfolgsbelege aus, SEPA-Vorabankündigungen an, Radar-Regel „Block if CVC fails", Branding, Zahlungsprofil „Donation Test" als Standardprofil mit Karte/Wallets/SEPA/PayPal an und Klarna/Link aus, PayPal-Konto verknüpfen — **Stand 2026-11-19:** Test-Umgebung = Sandbox „Test-Modus" des Kontos DEMOCRACY (CLI-Profil `democracy`): Product `prod_VelcsPtIRfzAjq`, Zahlungsprofil „Donation Test" `pmc_1LBwvYLGpvKcZpqce4bG1PuO` (Standardprofil, Klarna/Link aus), Restricted Key (Rechte geprüft), Webhook lokal per `stripe listen`, Portal-Konfiguration `bpc_1UdSNXLGpvKcZpqcJ10Y76O7` mit Login-Link. Kontoweite Einstellungen (Billing-Mails/Retries, Branding, Radar) bewusst erst im Live-Setup (T068), da sie auch DonorBox betreffen
+- [X] T005 Stripe-Testmodus einrichten und in `democracy-api/docs/DONATIONS.md` festhalten: Product „Monatliche Spende an DEMOCRACY", Restricted Key (Customers, PaymentIntents, Subscriptions, Invoices, PaymentMethods lesen, Billing Portal), Webhook-Endpoint mit Events aus `contracts/stripe-webhooks.md`, Customer Portal (Zahlungsart, Rechnungen, Kündigen an; Tarifwechsel aus; Login-Link an), Billing Smart Retries + Kündigung nach letztem Versuch + Mahnmails an, Stripe-Erfolgsbelege aus, SEPA-Vorabankündigungen an, Radar-Regel „Block if CVC fails", Branding, Zahlungsprofil „Donation Test" als Standardprofil mit Karte/Wallets/SEPA/PayPal an und Klarna/Link aus, PayPal-Konto verknüpfen — **Stand 2026-11-19:** Test-Umgebung = Sandbox „Test-Modus" des Kontos DEMOCRACY (CLI-Profil `democracy`): Product `prod_VelcsPtIRfzAjq`, Zahlungsprofil „Donation Test" `pmc_1LBwvYLGpvKcZpqce4bG1PuO` (Standardprofil, Klarna/Link aus), Restricted Key (Rechte geprüft), Webhook lokal per `stripe listen`, Portal-Konfiguration `bpc_1UdSNXLGpvKcZpqcJ10Y76O7` mit Login-Link. Kontoweite Einstellungen (Billing-Mails/Retries, Branding, Radar) bewusst erst im Live-Setup (T066), da sie auch DonorBox betreffen
 - [ ] T006 [P] Apple: Merchant ID `merchant.de.democracy-deutschland.clientapp` anlegen, Apple-Pay-Capability für `de.democracy-deutschland.clientapp` und `.internal`, Apple-Pay-Zertifikat über Stripe-CSR, Profile per fastlane match neu erzeugen; dokumentieren in `democracy-client/docs/deployment/IOS.md`
 - [ ] T007 [P] Google Pay: Testumgebung nutzen, Production-Zugang (Integrationstyp „Gateway") in der Google Pay & Wallet Console für `de.democracydeutschland.app` beantragen; dokumentieren in `democracy-client/docs/deployment/ANDROID.md`
 - [X] T008 [P] Config-Plugin `["@stripe/stripe-react-native", { merchantIdentifier: "merchant.de.democracy-deutschland.clientapp", enableGooglePay: true }]` in `democracy-client/app.config.ts` ergänzen und `expo prebuild --clean` lokal prüfen
@@ -178,16 +178,27 @@ im Runbook `democracy-api/docs/DONATIONS.md`.
 
 ---
 
-## Phase 8: Polish, Compliance & Release
+## Phase 8: Polish & Release
 
-- [ ] T063 Datenschutzerklärung um Spenden ergänzen (Stripe als Auftragsverarbeiter, PayPal, Apple/Google Pay, Datenkategorien, Rechtsgrundlagen Art. 6 Abs. 1 b/c, Aufbewahrung 8/10 Jahre, Löschung) in `democracy-deutschland.de/content/legal/datenschutz.md`; Link in `/config` → `legal.privacyUrl`
-- [ ] T064 [P] App-Store-Datenschutzangaben, Play-„Datensicherheit" und Review-Notes (Nonprofit-Freigabe, Testanweisung) in `democracy-client/docs/deployment/IOS.md` und `democracy-client/docs/deployment/ANDROID.md` dokumentieren und in den Konsolen umsetzen
-- [ ] T065 [P] VoiceOver-/TalkBack-Durchgang für alle Spenden-Screens; Befunde in `democracy-client/src/screens/Donate/` beheben
-- [ ] T066 [P] Spendenmodul in `democracy-client/docs/ARCHITECTURE.md` beschreiben (REST ohne Auth-Header, Datentrennung, Spender-Schlüssel)
-- [ ] T067 Quality Gates (Constitution VI): `pnpm lint` und `pnpm lint:ts` in `democracy-client/`, `pnpm lint` und `pnpm test` in `democracy-api/` fehlerfrei; Validierungsmatrix V1–V22 aus `quickstart.md` auf iOS und Android (internal) durchlaufen, inkl. V19 (keine `/donations`-Zeilen im Ingress-Log); Ergebnisse in `democracy-client/specs/001-in-app-donations/checklists/release.md`
-- [ ] T068 Live-Setup gemäß `democracy-api/docs/DONATIONS.md`: Live-Zahlungsprofil als Standardprofil, Live-Portal-Konfiguration, Billing-Mails/Smart Retries, Branding, Radar-Regel (kontoweit, Auswirkung auf DonorBox prüfen), Live-Product, Live-Restricted-Key, Live-Webhook, Portal, Radar, Secrets in Production; Deploy mit `DONATIONS_ENABLED=false`; je Plattform und Zahlungsart eine echte Spende durch den Vorstand
-- [ ] T069 Store-Einreichung beider Apps; nach Freigabe `DONATIONS_ENABLED=true`; erste Woche Monitoring (Discord-Alarme, Stripe-Dashboard, fehlgeschlagene Zahlungen)
-- [ ] T070 [P] Organisatorisch (O3/O4), Ergebnis in `democracy-api/docs/DONATIONS.md`: Stripe-Nonprofit-Rabatt beantragen (Freistellungsbescheid, Nachweis ≥ 80 % Spendenvolumen); PayPal-Tarif prüfen (10-€-Spende: 0,50 € = Gemeinnützigkeitstarif) und Gültigkeit bei Stripe-Verknüpfung bestätigen lassen; PayPal-Freigabe für wiederkehrende Zahlungen beantragen (Zahlungsarten steuert das Stripe-Zahlungsprofil, siehe research.md R4)
+- [ ] T063 [P] VoiceOver-/TalkBack-Durchgang für alle Spenden-Screens; Befunde in `democracy-client/src/screens/Donate/` beheben
+- [ ] T064 [P] Spendenmodul in `democracy-client/docs/ARCHITECTURE.md` beschreiben (REST ohne Auth-Header, Datentrennung, Spender-Schlüssel)
+- [ ] T065 Quality Gates (Constitution VI): `pnpm lint` und `pnpm lint:ts` in `democracy-client/`, `pnpm lint` und `pnpm test` in `democracy-api/` fehlerfrei; Validierungsmatrix V1–V22 aus `quickstart.md` auf iOS und Android (internal) durchlaufen, inkl. V19 (keine `/donations`-Zeilen im Ingress-Log); Ergebnisse in `democracy-client/specs/001-in-app-donations/checklists/release.md`
+- [ ] T066 Live-Setup gemäß `democracy-api/docs/DONATIONS.md`: Live-Zahlungsprofil als Standardprofil, Live-Portal-Konfiguration, Billing-Mails/Smart Retries, Branding, Radar-Regel (kontoweit, Auswirkung auf DonorBox prüfen), Live-Product, Live-Restricted-Key, Live-Webhook, Portal, Radar, Secrets in Production; Deploy mit `DONATIONS_ENABLED=false`; je Plattform und Zahlungsart eine echte Spende durch den Vorstand
+- [ ] T067 Store-Einreichung beider Apps; nach Freigabe `DONATIONS_ENABLED=true`; erste Woche Monitoring (Discord-Alarme, Stripe-Dashboard, fehlgeschlagene Zahlungen)
+- [ ] T068 [P] Organisatorisch (O3/O4), Ergebnis in `democracy-api/docs/DONATIONS.md`: Stripe-Nonprofit-Rabatt beantragen (Freistellungsbescheid, Nachweis ≥ 80 % Spendenvolumen); PayPal-Tarif prüfen (10-€-Spende: 0,50 € = Gemeinnützigkeitstarif) und Gültigkeit bei Stripe-Verknüpfung bestätigen lassen; PayPal-Freigabe für wiederkehrende Zahlungen beantragen (Zahlungsarten steuert das Stripe-Zahlungsprofil, siehe research.md R4)
+
+---
+
+## Phase 9: Rechtstexte & Store-Datenschutzangaben
+
+**Purpose**: Datenschutzerklärung und Store-Angaben an die Spendenfunktion anpassen (FR-022, Constitution
+Prinzip I). Auf Wunsch des Vereins als eigene Phase am Ende geführt, **muss aber vor der Store-Einreichung
+(Phase 8) abgeschlossen sein**.
+
+- [ ] T069 Datenschutzerklärung: neuer Abschnitt „5. Spenden" in `democracy-deutschland.de/content/legal/datenschutz.md` (nachfolgende Abschnitte umnummerieren) – 5.1 Überweisung/Dauerauftrag (Kontoauszugsdaten, Zuwendungsbestätigungen, Aufbewahrung § 147 AO 8/10 Jahre); 5.2 Spenden in der App: Datenkategorien (Betrag, Rhythmus, E-Mail optional/Pflicht bei Dauerspende, bei SEPA Name/IBAN, App-Plattform/-Version), Empfänger Stripe (Auftragsverarbeiter bzw. eigene Verantwortlichkeit für Betrugsprävention, Drittlandübermittlung USA/Data Privacy Framework), PayPal, Apple Pay/Google Pay, Bestätigungsmails (Mailanbieter aus O1), Trennung von Konto/Abstimmungen und keine IP-Protokollierung von Spenden-Anfragen, Gerätekennungs-Hash (Löschung 90 Tage nach Ende), Rechtsgrundlagen Art. 6 Abs. 1 b/c/f DSGVO, Verwaltung/Kündigung; Link in `/config` → `legal.privacyUrl`
+- [ ] T070 [P] Nebenbefunde in `democracy-deutschland.de/content/legal/datenschutz.md`: Abschnitt „Server Log Files" um die Logs der App-API ergänzen, Google-Analytics-Abschnitt prüfen (wird GA noch genutzt? „Google Inc." veraltet), Anrede vereinheitlichen (Sie)
+- [ ] T071 [P] App-Store-Datenschutzangaben („App Privacy": Kontaktinfo/E-Mail, Zahlungsinformationen über Stripe-SDK, kein Tracking), Play-„Datensicherheit" und Review-Notes (Nonprofit-Freigabe, Testanweisung internal-Build) in `democracy-client/docs/deployment/IOS.md` und `democracy-client/docs/deployment/ANDROID.md` dokumentieren und in den Konsolen umsetzen
+- [ ] T072 Juristische Abnahme der Texte aus T069–T071 durch Datenschutzbeauftragte/Rechtsberatung; Veröffentlichung der Datenschutzerklärung vor der Store-Einreichung, Ergebnis in `democracy-api/docs/DONATIONS.md`
 
 ---
 
@@ -202,7 +213,8 @@ im Runbook `democracy-api/docs/DONATIONS.md`.
 - **US3 (Phase 5)**: nach US2 (braucht Dauerspenden und `DonationSubscriber`)
 - **US4 (Phase 6)**: Vorlagen-Basis aus T028/T041; T057/T059 blockieren Livegang, nicht die Entwicklung
 - **US5 (Phase 7)**: nach Phase 2, unabhängig
-- **Release (Phase 8)**: nach den gewünschten Stories; T063 und T064 vor Store-Einreichung
+- **Release (Phase 8)**: nach den gewünschten Stories; die Store-Einreichung erst nach Abschluss von Phase 9 (Rechtstexte)
+- **Rechtstexte (Phase 9)**: unabhängig von der Entwicklung; spätestens vor der Store-Einreichung abschließen
 
 ### Within Each User Story
 
